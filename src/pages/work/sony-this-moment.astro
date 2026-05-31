@@ -1,0 +1,93 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// === Sony — This Moment — faithful rebuild of monuments.cc/portfolio/sony-this-moment ===
+// Real campaign stills pulled from the live site into /public/case-studies/sony-this-moment.
+const g = Array.from({ length: 9 }, (_, i) => `/case-studies/sony-this-moment/gallery/tm-${String(i + 1).padStart(2, '0')}.jpg`);
+const meta = [
+  { k: 'Client', v: 'Sony Audio' },
+  { k: 'Agency', v: 'Art of Visuals' },
+  { k: 'Production', v: 'MGX Creative' },
+  { k: 'Director', v: 'Daniel Malikyar' },
+  { k: 'Creative Direction', v: 'DJ Ramirez' },
+  { k: 'Stills', v: 'Claire LeJune' },
+];
+---
+<Base title="Sony — This Moment — monuments">
+  <article class="bc-page">
+
+    <!-- HERO (full-bleed image) -->
+    <header class="bc-hero">
+      <img class="bc-hero-img" src={g[8]} alt="Sony — This Moment campaign" />
+      <div class="bc-hero-inner">
+        <p class="bc-hero-eyebrow">Sony Audio · Creative Direction</p>
+        <h1 class="bc-hero-title">This Moment</h1>
+        <p class="bc-hero-lede">This moment is for you.</p>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <section class="bc-intro fade">
+      <p>Feeling overwhelmed shouldn't be the norm, but it's a feeling we can all relate to. When the world gets noisy, headphones aren't just a piece of tech — they're a device for creating an environment, a moment of peace and serenity no matter where you are or what may be happening around you.</p>
+    </section>
+
+    <!-- CAMPAIGN SHOT -->
+    <figure class="bc-shot fade">
+      <img src={g[0]} alt="Sony — This Moment, a moment of peace" loading="lazy" />
+    </figure>
+
+    <!-- INSIGHT QUOTE -->
+    <section class="bc-quote fade">
+      <p>True creativity flourishes when given <span class="bc-quote-em">the space to breathe</span> and align with the natural flow of inspiration.</p>
+      <p class="bc-quote-attr">The idea behind the campaign.</p>
+    </section>
+
+    <!-- CAMPAIGN PAIR -->
+    <div class="bc-duo fade">
+      <img src={g[1]} alt="Sony — This Moment" loading="lazy" />
+      <img src={g[2]} alt="Sony — This Moment" loading="lazy" />
+    </div>
+
+    <!-- EXECUTION -->
+    <section class="bc-exec fade">
+      <h2 class="bc-exec-h">Trusting the process.</h2>
+      <div class="bc-exec-b">
+        <p>Sony partnered with Art of Visuals to craft a campaign that underscores the value of taking time, trusting the process, and rediscovering inspiration. This initiative encourages creators to embrace moments of pause — demonstrating that true creativity flourishes when given the space to breathe.</p>
+        <p>As the creative director on this project, I helped shape the story, wrote the briefs, directed the stills, and made sure everything on set matched Sony's brand guides. I also worked closely with the production team through post — giving feedback on edits and prepping files for delivery. We cut the videos down from one minute to 30- and 15-second ads, and the stills ran as display advertising.</p>
+      </div>
+    </section>
+
+    <!-- SECOND SHOT -->
+    <figure class="bc-shot fade">
+      <img src={g[3]} alt="Sony — This Moment, on set" loading="lazy" />
+    </figure>
+
+    <!-- CAMPAIGN PAIR 2 -->
+    <div class="bc-duo fade">
+      <img src={g[4]} alt="Sony — This Moment" loading="lazy" />
+      <img src={g[5]} alt="Sony — This Moment" loading="lazy" />
+    </div>
+
+    <!-- FINAL SHOT -->
+    <figure class="bc-shot fade">
+      <img src={g[7]} alt="Sony — This Moment" loading="lazy" />
+    </figure>
+
+    <!-- META -->
+    <div class="bc-meta fade">
+      {meta.map((m) => (
+        <div class="cs-meta-item">
+          <span class="cs-meta-k">{m.k}</span>
+          <span class="cs-meta-v">{m.v}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- NEXT -->
+    <a class="cs-next" href="/work/sony-flow-state">
+      <span class="cs-next-k">Next project</span>
+      <span class="cs-next-t">Sony — Flow State <span class="cs-next-arrow">→</span></span>
+    </a>
+
+  </article>
+</Base>
