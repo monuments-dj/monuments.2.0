@@ -6,6 +6,19 @@ const testimonials = [
   { quote: "The cultural insight they brought to the campaign was unlike anything we'd seen from a local partner. Monuments understands what a city needs to feel about its brand.", name: "Brand Partner", role: "Marketing Lead" },
   { quote: "DJ doesn't just execute. He makes you rethink what the work could be. We came in with a brief and left with a better brief.", name: "Agency Partner", role: "Creative Director" },
 ];
+
+// Home "Recent Work" reel — fill-in-the-blank headline ("Built to ___"),
+// the centred item drives the word. Section pins; vertical scroll scrubs the
+// filmstrip horizontally; a monument builds brick-by-brick as a progress meter.
+// Images are FIRST-PASS placeholders (galaxy pool + real Blue Cross); DJ swaps a hero per project.
+const reel = [
+  { brand: "AC Boise",    word: "be remembered", slug: "ac-boise",         img: "/galaxy/gx-04.jpg" },
+  { brand: "Turnstile",   word: "say something", slug: "turnstile",        img: "/galaxy/gx-09.jpg" },
+  { brand: "Blue Cross",  word: "create change", slug: "blue-cross",       img: "/case-studies/blue-cross/bc-24.jpg" },
+  { brand: "Sony",        word: "be relevant",   slug: "sony-this-moment", img: "/galaxy/gx-15.jpg" },
+  { brand: "Flashpoint",  word: "be remembered", slug: "flashpoint",       img: "/galaxy/gx-21.jpg" },
+  { brand: "Photography", word: "say something", slug: "photography",      img: "/galaxy/gx-27.jpg" },
+];
 ---
 <Base title="HOME - monuments" loader={true}>
   <section class="hero">
@@ -89,56 +102,30 @@ const testimonials = [
     </div>
   </section>
 
-  <section class="work fade">
-    <div class="work-header">
-      <div class="work-label">Featured Work</div>
-      <div class="work-view-links">
-        <a href="/work">Interactive Portfolio</a>
-        <a href="/work">Full Portfolio</a>
+  <section class="rwork" id="homeReel" aria-label="Recent work">
+    <div class="rwork-pin" id="rworkPin">
+      <div class="rwork-stage">
+        <div class="rwork-top">
+          <span class="rwork-eyebrow">Recent Work</span>
+          <h2 class="rwork-headline">Built to <span class="rwork-blank"><span class="rwork-word" id="reelWord">{reel[0].word}</span></span></h2>
+        </div>
+
+        <div class="rwork-viewport" id="reelViewport">
+          <div class="rwork-track" id="reelTrack">
+            {reel.map((p, i) => (
+              <a class="rwork-item" href={`/work/${p.slug}`} data-word={p.word} data-idx={i}>
+                <div class="rwork-item-media"><img src={p.img} alt={`${p.brand} — built to ${p.word}`} loading="lazy" /></div>
+                <div class="rwork-item-cap"><span class="b">{p.brand}</span> <span class="w">{p.word}</span></div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div class="rwork-foot">
+          <svg class="rwork-bricks" id="reelBricks" viewBox="0 0 240 116" preserveAspectRatio="xMidYMax meet" aria-hidden="true"></svg>
+          <a href="/work" class="rwork-all">See all work <span aria-hidden="true">→</span></a>
+        </div>
       </div>
-    </div>
-    <p class="work-intro">Good ideas are easy. Making them real takes finesse, experience, and a willingness to throw away the good to get to the great.</p>
-    <div class="work-grid">
-      <a href="/work/turnstile" class="work-card">
-        <div class="work-card-inner"></div>
-        <div class="work-card-gradient"></div>
-        <div class="work-card-info">
-          <div class="work-card-tags"><span class="work-tag">Branding</span><span class="work-tag">Creative Direction</span></div>
-          <div class="work-card-name">Turnstile Audio</div>
-        </div>
-      </a>
-      <a href="/work/photography" class="work-card">
-        <div class="work-card-inner"></div>
-        <div class="work-card-gradient"></div>
-        <div class="work-card-info">
-          <div class="work-card-tags"><span class="work-tag">Photography</span></div>
-          <div class="work-card-name">Photography</div>
-        </div>
-      </a>
-      <a href="/work/blue-cross" class="work-card">
-        <div class="work-card-inner"></div>
-        <div class="work-card-gradient"></div>
-        <div class="work-card-info">
-          <div class="work-card-tags"><span class="work-tag">Creative Direction</span><span class="work-tag">Photography</span></div>
-          <div class="work-card-name">Blue Cross</div>
-        </div>
-      </a>
-      <a href="/work/flashpoint" class="work-card wide">
-        <div class="work-card-inner"></div>
-        <div class="work-card-gradient"></div>
-        <div class="work-card-info">
-          <div class="work-card-tags"><span class="work-tag">Branding</span><span class="work-tag">Creative Direction</span></div>
-          <div class="work-card-name">Flashpoint</div>
-        </div>
-      </a>
-      <a href="/work/sony-this-moment" class="work-card">
-        <div class="work-card-inner"></div>
-        <div class="work-card-gradient"></div>
-        <div class="work-card-info">
-          <div class="work-card-tags"><span class="work-tag">Creative Direction</span><span class="work-tag">Video</span></div>
-          <div class="work-card-name">Sony "This Moment"</div>
-        </div>
-      </a>
     </div>
   </section>
 
@@ -434,6 +421,114 @@ const testimonials = [
         es.forEach((e) => cta.classList.toggle('on', e.isIntersecting));
       }, { threshold: 0.2 });
       io.observe(cta);
+    })();
+  </script>
+
+  <!-- Recent Work reel: section pins, vertical scroll scrubs the filmstrip; centre item drives the "Built to ___" headline; a monument builds brick-by-brick (scroll-reactive progress). -->
+  <script is:inline>
+    (function () {
+      const section = document.getElementById('homeReel');
+      if (!section) return;
+      const pin = document.getElementById('rworkPin');
+      const track = document.getElementById('reelTrack');
+      const viewport = document.getElementById('reelViewport');
+      const wordEl = document.getElementById('reelWord');
+      const svg = document.getElementById('reelBricks');
+      const items = track ? Array.from(track.querySelectorAll('.rwork-item')) : [];
+      if (!pin || !track || !viewport || !svg || !items.length) return;
+      const N = items.length;
+
+      // ---- Build a monument out of bricks (wide base -> narrow cap), placed bottom-up ----
+      const SVGNS = 'http://www.w3.org/2000/svg';
+      const rows = [7, 7, 5, 5, 3, 3, 1];          // bottom -> top
+      const bw = 22, bh = 11, hg = 3, vg = 3, baseY = 112, vbW = 240;
+      const bricks = [];
+      rows.forEach((n, r) => {
+        const rowW = n * bw + (n - 1) * hg;
+        const x0 = (vbW - rowW) / 2;
+        const y = baseY - bh - r * (bh + vg);
+        for (let i = 0; i < n; i++) {
+          const rect = document.createElementNS(SVGNS, 'rect');
+          rect.setAttribute('x', (x0 + i * (bw + hg)).toFixed(1));
+          rect.setAttribute('y', y.toFixed(1));
+          rect.setAttribute('width', bw); rect.setAttribute('height', bh); rect.setAttribute('rx', '1.5');
+          rect.setAttribute('class', 'rwork-brick');
+          svg.appendChild(rect); bricks.push(rect);
+        }
+      });
+      const TOTAL = bricks.length;
+      let placed = -1;
+      function build(p) {
+        const want = Math.round(p * TOTAL);
+        if (want === placed) return;
+        for (let i = 0; i < TOTAL; i++) bricks[i].classList.toggle('on', i < want);
+        placed = want;
+      }
+
+      // ---- Native fallback (touch / reduced-motion): swipeable strip, no pin/scrub ----
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const coarse = window.matchMedia('(pointer: coarse)').matches;
+      if (reduce || coarse) {
+        section.classList.add('rwork-native');
+        items[0].classList.add('is-center');
+        build(1);
+        return;
+      }
+
+      // ---- Measure pin height + scrub geometry ----
+      // Use getBoundingClientRect deltas, not offsetLeft: a position:sticky ancestor
+      // nulls offsetParent (offsetLeft -> 0). Rect deltas are invariant to the
+      // track's translate and its centering padding.
+      let step = 0, scrollable = 0, pinExtra = 0;
+      function measure() {
+        const r0 = items[0].getBoundingClientRect();
+        const itemW = r0.width;
+        step = N > 1 ? (items[1].getBoundingClientRect().left - r0.left) : itemW;
+        if (!step) step = itemW + 40;                  // safety net
+        const padX = Math.max((viewport.clientWidth - itemW) / 2, 0);
+        track.style.paddingLeft = padX + 'px';
+        track.style.paddingRight = padX + 'px';
+        scrollable = step * (N - 1);
+        pinExtra = Math.max(scrollable * 1.15, 1);     // vertical scroll distance to scrub the full list
+        pin.style.height = (window.innerHeight + pinExtra) + 'px';
+      }
+      measure();
+      window.addEventListener('resize', measure, { passive: true });
+      window.addEventListener('load', measure);
+
+      // ---- Scrub loop: scroll position -> horizontal translate + centre + brick build ----
+      let energy = 0, curWord = items[0].dataset.word, curCenter = 0, t = 0;
+      items[0].classList.add('is-center');
+
+      function frame() {
+        t += 16;
+        const top = pin.getBoundingClientRect().top;
+        let p = -top / pinExtra; p = p < 0 ? 0 : (p > 1 ? 1 : p);
+        track.style.transform = 'translate3d(' + (-(p * scrollable)).toFixed(2) + 'px,0,0)';
+
+        const ci = Math.round(p * (N - 1));
+        if (ci !== curCenter) {
+          curCenter = ci;
+          items.forEach((x, i) => x.classList.toggle('is-center', i === ci));
+          const w = items[ci].dataset.word;
+          if (wordEl && w && w !== curWord) {
+            curWord = w;
+            wordEl.classList.add('swap');
+            setTimeout(() => { wordEl.textContent = w; wordEl.classList.remove('swap'); }, 200);
+          }
+        }
+
+        build(p);
+
+        // velocity -> subtle "settle" jitter on the monument (peaks while scrolling)
+        const lv = (window.lenis && typeof window.lenis.velocity === 'number') ? window.lenis.velocity : 0;
+        const tgt = Math.min(Math.abs(lv) / 45, 1);
+        energy += (tgt - energy) * 0.1;
+        svg.style.transform = 'translateY(' + (Math.sin(t * 0.03) * energy * 3).toFixed(2) + 'px)';
+
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
     })();
   </script>
 </Base>

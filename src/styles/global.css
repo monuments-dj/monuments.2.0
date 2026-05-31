@@ -855,103 +855,22 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 }
 .wp-card:hover .wp-card-title { color: var(--accent); }
 
-/* ===== Overlay variants — title persistent, services reveal on hover ===== */
-/* Slide — services slide up on hover */
-.ov-slide .wp-card-overlay { background: linear-gradient(to top, rgba(13,15,20,0.82), transparent 58%); }
-.ov-slide .wp-card-tags { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; }
-.ov-slide .wp-card:hover .wp-card-tags { opacity: 1; transform: none; }
-
-/* Wipe — accent panel wipes up behind the text */
-.ov-wipe .wp-card-overlay { background: linear-gradient(to top, rgba(13,15,20,0.55), transparent 52%); }
-.ov-wipe .wp-card-overlay::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--accent); transform: scaleY(0); transform-origin: bottom; transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
-.ov-wipe .wp-card:hover .wp-card-overlay::before { transform: scaleY(1); }
-.ov-wipe .wp-card-tags { opacity: 0; transition: opacity 0.3s ease 0.12s; }
-.ov-wipe .wp-card:hover .wp-card-tags { opacity: 1; }
-.ov-wipe .wp-card:hover .wp-card-title { color: #fff; }
-
-/* Duotone — greyscale image snaps to colour on hover */
-.ov-duotone .wp-card-media img { filter: grayscale(1) contrast(1.04); transition: filter 0.5s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
-.ov-duotone .wp-card:hover .wp-card-media img { filter: grayscale(0); }
-.ov-duotone .wp-card-overlay { background: linear-gradient(to top, rgba(13,15,20,0.82), transparent 58%); }
-.ov-duotone .wp-card-tags { opacity: 0; transform: translateY(6px); transition: opacity 0.35s ease, transform 0.35s ease; }
-.ov-duotone .wp-card:hover .wp-card-tags { opacity: 1; transform: none; }
-
-/* Glitch — quick RGB shudder on hover */
-@keyframes cardGlitch {
-  0%, 100% { transform: scale(1.05); filter: none; }
-  20% { transform: scale(1.05) translate(-4px, 2px); filter: drop-shadow(3px 0 0 rgba(255,0,90,0.6)) drop-shadow(-3px 0 0 rgba(0,210,255,0.6)); }
-  40% { transform: scale(1.05) translate(4px, -2px); }
-  60% { transform: scale(1.05) translate(-2px, -1px); filter: drop-shadow(-3px 0 0 rgba(255,0,90,0.6)) drop-shadow(3px 0 0 rgba(0,210,255,0.6)); }
-  80% { transform: scale(1.05) translate(2px, 1px); }
-}
-.ov-glitch .wp-card-overlay { background: linear-gradient(to top, rgba(13,15,20,0.82), transparent 58%); }
-.ov-glitch .wp-card:hover .wp-card-media img { animation: cardGlitch 0.5s steps(3) both; }
-.ov-glitch .wp-card-tags { opacity: 0; transition: opacity 0.3s ease; }
-.ov-glitch .wp-card:hover .wp-card-tags { opacity: 1; }
-
-/* Stamp — service tags spring in, staggered */
-.ov-stamp .wp-card-overlay { background: linear-gradient(to top, rgba(13,15,20,0.82), transparent 58%); }
-.ov-stamp .wp-card-tags span { opacity: 0; transform: scale(0.6); transition: opacity 0.25s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.ov-stamp .wp-card:hover .wp-card-tags span { opacity: 1; transform: scale(1); }
-.ov-stamp .wp-card:hover .wp-card-tags span:nth-child(2) { transition-delay: 0.09s; }
-
-/* Lift — card rises with a growing shadow */
-.ov-lift .wp-card { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-.ov-lift .wp-card-media { transition: box-shadow 0.4s ease; }
-.ov-lift .wp-card:hover { transform: translateY(-10px); }
-.ov-lift .wp-card:hover .wp-card-media { box-shadow: 0 28px 50px rgba(0,0,0,0.28); }
-.ov-lift .wp-card-overlay { background: linear-gradient(to top, rgba(13,15,20,0.82), transparent 58%); }
-.ov-lift .wp-card-tags { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; }
-.ov-lift .wp-card:hover .wp-card-tags { opacity: 1; transform: none; }
-
-/* Flood — accent colour floods in a circle from the bottom */
-.ov-flood .wp-card-overlay { background: linear-gradient(to top, rgba(13,15,20,0.5), transparent 50%); }
-.ov-flood .wp-card-overlay::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--accent); clip-path: circle(0% at 50% 100%); transition: clip-path 0.55s cubic-bezier(0.16, 1, 0.3, 1); }
-.ov-flood .wp-card:hover .wp-card-overlay::before { clip-path: circle(160% at 50% 100%); }
-.ov-flood .wp-card-tags { opacity: 0; transition: opacity 0.3s ease 0.12s; }
-.ov-flood .wp-card:hover .wp-card-tags { opacity: 1; }
-.ov-flood .wp-card:hover .wp-card-title { color: #fff; }
-
-/* Invert — image colour-inverts on hover */
-.ov-invert .wp-card-media img { transition: filter 0.45s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
-.ov-invert .wp-card:hover .wp-card-media img { filter: invert(1) hue-rotate(180deg); }
-.ov-invert .wp-card-overlay { background: linear-gradient(to top, rgba(13,15,20,0.82), transparent 58%); }
-.ov-invert .wp-card-tags { opacity: 0; transition: opacity 0.3s ease; }
-.ov-invert .wp-card:hover .wp-card-tags { opacity: 1; }
-
-/* Frame — inset border draws in on hover */
-.ov-frame .wp-card-overlay { z-index: 2; background: linear-gradient(to top, rgba(13,15,20,0.82), transparent 58%); }
-.ov-frame .wp-card-media::after { content: ''; position: absolute; inset: 14px; z-index: 1; border: 1px solid rgba(240,238,233,0.75); opacity: 0; transform: scale(1.05); transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; }
-.ov-frame .wp-card:hover .wp-card-media::after { opacity: 1; transform: none; }
-.ov-frame .wp-card-tags { opacity: 0; transform: translateY(6px); transition: opacity 0.35s ease, transform 0.35s ease; }
-.ov-frame .wp-card:hover .wp-card-tags { opacity: 1; transform: none; }
-
-/* Skew — image skews + zooms, tags slide in from the side */
-.ov-skew .wp-card-media img { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-.ov-skew .wp-card:hover .wp-card-media img { transform: scale(1.08) skewX(-2deg); }
-.ov-skew .wp-card-overlay { background: linear-gradient(to top, rgba(13,15,20,0.82), transparent 58%); }
-.ov-skew .wp-card-tags { opacity: 0; transform: translateX(-10px); transition: opacity 0.35s ease, transform 0.35s ease; }
-.ov-skew .wp-card:hover .wp-card-tags { opacity: 1; transform: none; }
-
-/* Temporary floating preview switcher */
-.ov-switcher {
-  position: fixed; left: 50%; bottom: 76px; transform: translateX(-50%); z-index: 2000;
-  display: flex; flex-wrap: wrap; gap: 4px; align-items: center; justify-content: center;
-  padding: 8px 12px; border-radius: 22px; max-width: 92vw;
-  background: rgba(13,15,20,0.92); box-shadow: 0 12px 34px rgba(0,0,0,0.3); backdrop-filter: blur(8px);
-}
-.ov-switcher span { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(240,238,233,0.4); padding: 0 8px; }
-.ov-switcher button { border: none; background: transparent; color: rgba(240,238,233,0.6); cursor: pointer; font-family: 'Inter', sans-serif; font-size: 12px; padding: 7px 13px; border-radius: 999px; transition: background 0.2s, color 0.2s; }
-.ov-switcher button:hover { color: var(--white); }
-.ov-switcher button.on { background: var(--white); color: var(--black); }
+/* ===== Work-card hover — "Focus" (baked-in default; DJ's pick from the v2 round).
+   Photo sits sharp, softens out-of-focus on hover so the caption pops forward.
+   The temporary switcher + 24 other variants were removed once chosen — see git
+   history (pre-"bake in Focus" commit) to revisit any of them. ===== */
+.ov-focus .wp-card-media img { filter: blur(0) brightness(1); transition: filter 0.55s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+.ov-focus .wp-card:hover .wp-card-media img { filter: blur(4px) brightness(0.8); }
+.ov-focus .wp-card-overlay { background: linear-gradient(to top, rgba(13,15,20,0.82), transparent 58%); }
+.ov-focus .wp-card-tags { opacity: 0; transform: translateY(6px); transition: opacity 0.35s ease, transform 0.35s ease; }
+.ov-focus .wp-card:hover .wp-card-tags { opacity: 1; transform: none; }
 .wp-card:hover .wp-card-title { color: var(--accent); }
 
 /* ---- List view (rows + hover filmstrip) ---- */
 .wp-list { display: none; padding: 0 100px 140px; }
 .work-page.view-list .wp-list { display: block; }
 .work-page.view-list .wp-grid,
-.work-page.view-list .wp-cols,
-.work-page.view-list .ov-switcher { display: none; }
+.work-page.view-list .wp-cols { display: none; }
 .wp-row { display: block; text-decoration: none; color: inherit; padding: 30px 0; border-top: 1px solid rgba(20,21,25,0.14); }
 .wp-row:last-child { border-bottom: 1px solid rgba(20,21,25,0.14); }
 .wp-row.hide { display: none; }
@@ -973,9 +892,18 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 /* Work page is light, with a floating-thumbnail header */
 .work-page { background: var(--white); color: #1a1a1a; position: relative; }
 
-.galaxy { position: relative; min-height: 72vh; overflow: hidden; perspective: 1200px; display: flex; align-items: center; justify-content: center; padding: 120px 24px; background: #e7e3db; }
+.galaxy { position: relative; min-height: 72vh; overflow: hidden; perspective: 1200px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 24px; background: #e7e3db; }
 .galaxy-field { position: absolute; inset: 0; z-index: 1; pointer-events: none; transform-style: preserve-3d; opacity: 0; transition: opacity 0.7s ease; }
 .galaxy.gx-ready .galaxy-field { opacity: 1; }
+/* Readability scrim — a soft pool of the page bg behind the centred text, so the
+   headline reads cleanly while photos keep drifting/visible at the edges. */
+.galaxy::before {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: radial-gradient(ellipse 62% 48% at 50% 50%,
+    rgba(231,227,219,0.94) 0%, rgba(231,227,219,0.86) 32%,
+    rgba(231,227,219,0.5) 56%, rgba(231,227,219,0) 74%);
+}
+.galaxy-head { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; }
 .gx-img {
   position: absolute; width: clamp(96px, 12vw, 165px); height: auto; display: block; border-radius: 2px;
   box-shadow: 0 16px 38px rgba(0, 0, 0, 0.16); will-change: transform;
@@ -989,7 +917,16 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
   position: relative; z-index: 3; text-align: center;
   font-family: 'Inter', sans-serif; font-weight: 600;
   font-size: clamp(44px, 8vw, 132px); line-height: 0.98; letter-spacing: -0.03em; color: #141519;
+  text-shadow: 0 1px 26px rgba(231,227,219,0.85);
 }
+.galaxy-sub {
+  position: relative; z-index: 3; text-align: center; max-width: 440px;
+  margin: 24px auto 0; font-size: clamp(15px, 1.45vw, 19px); font-weight: 400; line-height: 1.55;
+  color: rgba(20,21,25,0.66); text-shadow: 0 1px 20px rgba(231,227,219,0.9);
+  opacity: 0; animation: gxSubIn 0.9s ease forwards 0.66s;
+}
+@keyframes gxSubIn { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .galaxy-sub { opacity: 1; animation: none; } }
 
 @media (max-width: 860px) {
   .hero-type { left: 50%; transform: translate(-50%, -52%); }
@@ -1305,3 +1242,77 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 .now-link-t { font-size: 12px; font-weight: 500; }
 .now-link-s { font-size: 10px; color: rgba(240,238,233,0.5); }
 @media (max-width: 860px) { .now-dock { top: auto; bottom: 84px; transform: translateX(calc(100% - 44px)); } .now-dock.open { transform: translateX(0); } .now-panel { width: 300px; } }
+
+/* ============================================================
+   HOME — "Recent Work" reel (namespaced .rwork-* to avoid the
+   showreel's .reel). Section PINS; vertical scroll scrubs the
+   filmstrip horizontally; centre item scales + drives the
+   "Built to ___" headline; a monument builds brick-by-brick as
+   a scroll-reactive progress meter. JS in index.astro.
+   ============================================================ */
+.rwork { background: var(--white); color: #141519; position: relative; }
+.rwork-pin { position: relative; height: 240vh; }        /* JS overrides to fit the scrub distance */
+.rwork-stage {
+  position: sticky; top: 0; height: 100vh; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(18px, 3vh, 44px);
+}
+.rwork-top { padding: 0 24px; text-align: center; }
+.rwork-eyebrow { display: block; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gray-mid); margin-bottom: 16px; }
+.rwork-headline {
+  font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: -0.03em; line-height: 1.02;
+  font-size: clamp(30px, 5.2vw, 76px); color: #141519;
+}
+.rwork-blank { display: inline-block; position: relative; }
+.rwork-word { display: inline-block; color: var(--accent); transition: opacity 0.26s ease, transform 0.26s cubic-bezier(0.16,1,0.3,1); }
+.rwork-word.swap { opacity: 0; transform: translateY(0.32em); }
+
+.rwork-viewport { width: 100%; overflow: hidden; }
+.rwork-track { display: flex; align-items: center; gap: 40px; width: max-content; will-change: transform; }
+
+.rwork-item { flex: 0 0 auto; text-decoration: none; color: inherit; }
+/* Card sized by viewport HEIGHT so the pinned stage always fits (no clip). */
+.rwork-item-media {
+  position: relative; aspect-ratio: 4 / 5; height: clamp(260px, 44vh, 440px); width: auto;
+  overflow: hidden; border-radius: 3px; background: #e7e3db;
+  transform: scale(0.82); transform-origin: center center; opacity: 0.62;
+  transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), opacity 0.45s ease, box-shadow 0.45s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+.rwork-item-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rwork-item.is-center .rwork-item-media { transform: scale(1); opacity: 1; box-shadow: 0 30px 60px rgba(0,0,0,0.20); }
+
+.rwork-item-cap { margin-top: 16px; text-align: center; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.3s ease, opacity 0.3s ease; opacity: 0.5; }
+.rwork-item-cap .b { color: #141519; font-weight: 500; }
+.rwork-item-cap .w { color: var(--gray-mid); }
+.rwork-item.is-center .rwork-item-cap { opacity: 1; }
+.rwork-item.is-center .rwork-item-cap .w { color: var(--accent); }
+
+.rwork-foot { display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 0 24px; }
+.rwork-bricks { width: 150px; height: 72px; display: block; color: var(--accent); overflow: visible; }
+.rwork-brick {
+  fill: var(--accent); opacity: 0; transform: translateY(7px);
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.rwork-brick.on { opacity: 1; transform: translateY(0); }
+.rwork-all {
+  font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #141519; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px; transition: gap 0.3s ease, color 0.2s ease;
+}
+.rwork-all span { transition: transform 0.3s ease; }
+.rwork-all:hover { color: var(--accent); }
+.rwork-all:hover span { transform: translateX(5px); }
+
+@media (max-width: 860px) {
+  .rwork-track { gap: 22px; }
+  .rwork-item-media { height: auto; width: clamp(180px, 62vw, 280px); }
+}
+
+/* Native fallback — touch devices + reduced-motion: no pin/scrub, just a
+   swipeable horizontal strip so every item is still reachable. */
+.rwork.rwork-native .rwork-pin { height: auto !important; }
+.rwork.rwork-native .rwork-stage { position: static; height: auto; padding: 84px 0; }
+.rwork.rwork-native .rwork-viewport { overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; }
+.rwork.rwork-native .rwork-track { padding: 10px 24px; }
+.rwork.rwork-native .rwork-item { scroll-snap-align: center; }
+.rwork.rwork-native .rwork-item-media { transform: none; opacity: 1; }
+.rwork.rwork-native .rwork-item-cap { opacity: 1; }
