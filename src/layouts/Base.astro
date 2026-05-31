@@ -1,0 +1,245 @@
+---
+import '../styles/global.css';
+import Loader from '../components/Loader.astro';
+import Nav from '../components/Nav.astro';
+import Menu from '../components/Menu.astro';
+import Footer from '../components/Footer.astro';
+
+const { title = 'monuments', loader = false } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  {loader && <Loader />}
+  <Menu />
+  <Nav />
+
+  <slot />
+
+  <Footer />
+
+  <div class="now-dock" id="nowDock">
+    <button class="now-tab" id="nowTab" type="button" aria-label="Open Fresh Finds" aria-expanded="false">
+      <span class="now-tab-dot"></span>
+      <span class="now-tab-label">Fresh Finds</span>
+    </button>
+    <div class="now-panel">
+      <div class="now-panel-head">
+        <span class="now-dot"></span>
+        <span class="now-title">Now</span>
+        <button class="now-close" id="nowClose" type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="now-body">
+        <iframe class="now-spotify" src="https://open.spotify.com/embed/playlist/1z9z44SkYwQ1ev36j4PYzw?utm_source=generator&theme=0" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Currently listening"></iframe>
+        <div class="now-links">
+          <a class="now-link" href="http://linkedin.com/in/djthecd/" target="_blank" rel="noopener"><span class="now-link-t">LinkedIn</span><span class="now-link-s">Latest post →</span></a>
+          <a class="now-link" href="http://instagram.com/djthecd" target="_blank" rel="noopener"><span class="now-link-t">Instagram</span><span class="now-link-s">Latest post →</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global behaviors shared by every page: loader, menu toggle, scroll-in fades. -->
+  <script is:inline>
+    // Intro loader with faux progress bar
+    (function () {
+      let pct = 0;
+      const bar = document.getElementById('loader-bar');
+      const pctEl = document.getElementById('loader-pct');
+      const loader = document.getElementById('loader');
+      if (!loader) return;
+      if (sessionStorage.getItem('m-loaded')) { loader.remove(); document.body.classList.add('loaded'); return; }
+
+      document.body.style.overflow = 'hidden';
+      const loaderInterval = setInterval(() => {
+        pct += Math.random() * 18;
+        if (pct >= 100) {
+          pct = 100;
+          clearInterval(loaderInterval);
+          bar.style.width = '100%';
+          pctEl.textContent = '100%';
+          setTimeout(() => {
+            loader.classList.add('done');         // curtain slides up
+            document.body.classList.add('loaded'); // triggers hero entrance
+            document.body.style.overflow = '';
+            sessionStorage.setItem('m-loaded', '1'); // only show the loader once per session
+          }, 400);
+        }
+        bar.style.width = pct + '%';
+        pctEl.textContent = Math.floor(pct) + '%';
+      }, 120);
+    })();
+
+    // Fullscreen menu toggle (referenced by inline onclick handlers)
+    function toggleMenu() {
+      const menu = document.getElementById('fullscreen-menu');
+      const open = menu.classList.toggle('open');
+      document.body.classList.toggle('menu-open', open);
+      const btn = document.querySelector('.nav-menu-btn');
+      if (btn) { btn.classList.remove('pop'); void btn.offsetWidth; btn.classList.add('pop'); }
+      // patches pop in, staggered, a beat after the menu opens (invites play)
+      const patches = document.querySelectorAll('.patch');
+      if (open) patches.forEach((p, i) => setTimeout(() => p.classList.add('in'), 220 + i * 120));
+      else patches.forEach((p) => p.classList.remove('in'));
+    }
+
+    // Reveal-on-scroll for any .fade element
+    (function () {
+      const faders = document.querySelectorAll('.fade');
+      if (!faders.length) return;
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.06 });
+      faders.forEach(el => obs.observe(el));
+    })();
+
+    // Footer: parallax drift + typewriter wordmark
+    (function () {
+      const footer = document.querySelector('footer');
+      if (!footer) return;
+      const top = footer.querySelector('.footer-top');
+      const wm = footer.querySelector('.footer-wordmark');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Typewriter: type "Monuments", backspace it, then type the tagline — replays on scroll-in
+      if (wm) {
+        wm.textContent = '';
+        wm.setAttribute('aria-label', 'Monuments — built to be remembered');
+        const txt = document.createElement('span'); txt.className = 'fw-text'; txt.setAttribute('aria-hidden', 'true');
+        const caret = document.createElement('span'); caret.className = 'fw-caret'; caret.setAttribute('aria-hidden', 'true');
+        wm.append(txt, caret);
+        const WORDS = ['Monuments', 'Built', 'To be', 'Remembered'];
+        let tTimer = null, running = false;
+        const reset = () => { running = false; if (tTimer) clearTimeout(tTimer); txt.textContent = ''; };
+        const run = () => {
+          if (running) return; running = true;
+          if (reduce) { txt.textContent = WORDS[WORDS.length - 1]; return; }
+          let wi = 0;
+          const back = () => {
+            const n = txt.textContent.length;
+            if (n > 0) { txt.textContent = txt.textContent.slice(0, n - 1); tTimer = setTimeout(back, 70); }
+            else { wi++; tTimer = setTimeout(typeWord, 240); }
+          };
+          const typeWord = () => {
+            const word = WORDS[wi]; let i = 0;
+            const step = () => {
+              txt.textContent = word.slice(0, i);
+              if (i++ < word.length) tTimer = setTimeout(step, 95);
+              else if (wi < WORDS.length - 1) tTimer = setTimeout(back, 850); // hold, then backspace (last word stays + caret blinks)
+            };
+            step();
+          };
+          typeWord();
+        };
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((es) => {
+            es.forEach((e) => { if (e.isIntersecting) run(); else reset(); });
+          }, { threshold: 0.25 });
+          io.observe(footer);
+        } else { run(); }
+      }
+
+      // Parallax: footer content rises into place, wordmark deeper than the links
+      if (!reduce) {
+        let ticking = false;
+        const apply = () => {
+          const r = footer.getBoundingClientRect();
+          const vh = window.innerHeight;
+          const range = (r.height * 0.75) || vh;
+          let p = (vh - r.top) / range;
+          p = Math.max(0, Math.min(1, p));
+          const ease = 1 - Math.pow(1 - p, 2);
+          if (top) top.style.transform = 'translate3d(0,' + ((1 - ease) * 48).toFixed(1) + 'px,0)';
+          if (wm) wm.style.transform = 'translate3d(0,' + ((1 - ease) * 104).toFixed(1) + 'px,0)';
+          ticking = false;
+        };
+        const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(apply); } };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        apply();
+      }
+    })();
+
+    // "Fresh Finds" side dock — click the tab to pop out
+    (function () {
+      const dock = document.getElementById('nowDock');
+      const tab = document.getElementById('nowTab');
+      const closeBtn = document.getElementById('nowClose');
+      if (!dock || !tab) return;
+      tab.addEventListener('click', () => {
+        const open = dock.classList.toggle('open');
+        tab.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      if (closeBtn) closeBtn.addEventListener('click', () => { dock.classList.remove('open'); tab.setAttribute('aria-expanded', 'false'); });
+    })();
+
+    // Draggable menu patches
+    (function () {
+      document.querySelectorAll('.patch').forEach((p) => {
+        let down = false, sx = 0, sy = 0, ox = 0, oy = 0;
+        p.addEventListener('pointerdown', (e) => {
+          down = true; sx = e.clientX; sy = e.clientY; ox = p.offsetLeft; oy = p.offsetTop;
+          p.style.left = ox + 'px'; p.style.top = oy + 'px'; p.style.right = 'auto'; p.style.bottom = 'auto'; p.style.zIndex = '20';
+          try { p.setPointerCapture(e.pointerId); } catch (_) {}
+        });
+        p.addEventListener('pointermove', (e) => { if (!down) return; p.style.left = (ox + e.clientX - sx) + 'px'; p.style.top = (oy + e.clientY - sy) + 'px'; });
+        const up = () => { down = false; };
+        p.addEventListener('pointerup', up);
+        p.addEventListener('pointercancel', up);
+      });
+    })();
+
+    // Global play-button cursor over .video-hover elements (triangle leads, ring lags = delay effect)
+    (function () {
+      if (window.matchMedia('(hover: none)').matches) return;
+      const targets = document.querySelectorAll('.video-hover');
+      if (!targets.length) return;
+      const layer = document.createElement('div'); layer.className = 'vplay'; layer.setAttribute('aria-hidden', 'true');
+      const ring = document.createElement('span'); ring.className = 'vplay-ring';
+      const tri = document.createElement('span'); tri.className = 'vplay-tri';
+      tri.innerHTML = '<svg viewBox="0 0 24 24"><path class="vp-play" d="M8 5v14l11-7z" fill="currentColor"/><g class="vp-pause" fill="currentColor"><rect x="7" y="4.5" width="3.6" height="15" rx="1"/><rect x="13.4" y="4.5" width="3.6" height="15" rx="1"/></g></svg>';
+      layer.appendChild(ring); layer.appendChild(tri); document.body.appendChild(layer);
+
+      let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+      let rx = mx, ry = my, tx = mx, ty = my, vis = 0, target = 0, active = null;
+
+      targets.forEach((el) => {
+        el.addEventListener('pointerenter', (e) => { active = el; target = 1; mx = e.clientX; my = e.clientY; rx = tx = mx; ry = ty = my; });
+        el.addEventListener('pointermove', (e) => { mx = e.clientX; my = e.clientY; });
+        el.addEventListener('pointerleave', () => { if (active === el) { active = null; target = 0; } });
+      });
+
+      (function frame() {
+        rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;   // ring trails (slower)
+        tx += (mx - tx) * 0.30; ty += (my - ty) * 0.30;   // play triangle leads (faster)
+        vis += (target - vis) * 0.2;
+        const s = 0.4 + vis * 0.6;
+        ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px) translate(-50%,-50%) scale(' + s + ')';
+        tri.style.transform = 'translate(' + tx + 'px,' + ty + 'px) translate(-50%,-50%) scale(' + s + ')';
+        layer.style.opacity = vis;
+        if (active) layer.classList.toggle('playing', active.dataset.playing === 'true');
+        requestAnimationFrame(frame);
+      })();
+    })();
+  </script>
+
+  <!-- Lenis smooth scroll (momentum) — exposed on window.lenis for scroll-reactive effects -->
+  <script>
+    import Lenis from 'lenis';
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const lenis = new Lenis({ duration: 1.1, smoothWheel: true, touchMultiplier: 1.4 });
+      window.lenis = lenis;
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
+  </script>
+</body>
+</html>

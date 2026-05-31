@@ -1,0 +1,278 @@
+---
+import Base from '../layouts/Base.astro';
+
+// 100 imported photos, two sizes each: /gallery/thumb (lanes) + /gallery/full (lightbox).
+const TOTAL = 100;
+const ids = Array.from({ length: TOTAL }, (_, i) => `p-${String(i + 1).padStart(3, '0')}.jpg`);
+
+// Placeholder photography categories — /photography has its OWN set (separate from /work).
+// Rename these / reorganize once you sort photos into category folders in Dropbox.
+const catNames = ['Brand', 'Editorial', 'Food', 'Motion', 'Non-Profit'];
+const per = Math.ceil(TOTAL / catNames.length);
+const cats = catNames.map((name, ci) => ({
+  name,
+  slug: name.toLowerCase().replace(/\s+/g, '-'),
+  items: ids.slice(ci * per, (ci + 1) * per).map((id, idx) => ({ id, n: ci * per + idx + 1 })),
+}));
+---
+<Base title="PHOTOGRAPHY - monuments">
+  <div class="pg-page" id="pgPage" data-mode="hover">
+    <header class="pg-cover">
+      <span class="pg-eyebrow">Selected photography</span>
+      <h1 class="pg-title">Photography</h1>
+      <p class="pg-sub">A growing archive — hover a row to wander, click to enlarge.</p>
+      <button class="pg-cue" id="pgCue" type="button" aria-label="Scroll to gallery"><span>Scroll</span><i></i></button>
+    </header>
+
+    {cats.map((cat) => (
+      <section class="pg-block fade" data-cat={cat.slug}>
+        <div class="pg-head">
+          <h2 class="pg-head-title">{cat.name}</h2>
+          <span class="pg-head-meta">{String(cat.items.length).padStart(2, '0')} works</span>
+          <div class="pg-nav">
+            <button class="pg-arrow" type="button" data-dir="-1" aria-label="Scroll left">‹</button>
+            <button class="pg-arrow" type="button" data-dir="1" aria-label="Scroll right">›</button>
+          </div>
+        </div>
+        <div class="pg-lane">
+          <div class="pg-track">
+            {cat.items.map((it) => (
+              <button class="pg-item" type="button" data-full={`/gallery/full/${it.id}`} data-cat={cat.slug} aria-label={`View ${cat.name} ${it.n}`}>
+                <img src={`/gallery/thumb/${it.id}`} alt="" loading="lazy" draggable="false" />
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <footer class="pg-outro">
+      <p class="pg-outro-lead">More in the archive.</p>
+      <a class="pg-outro-cta" href="/contact">Inquire about prints →</a>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="pg-lightbox" id="pgLightbox" aria-hidden="true">
+      <button class="pg-lb-close" id="pgLbClose" aria-label="Close">✕</button>
+      <div class="pg-lb-strip" id="pgLbStrip">
+        <div class="pg-lb-track" id="pgLbTrack"></div>
+      </div>
+      <div class="pg-lb-bar">
+        <button class="pg-lb-arrow" id="pgLbPrev" aria-label="Previous">←</button>
+        <span class="pg-lb-counter" id="pgLbCounter"></span>
+        <button class="pg-lb-arrow" id="pgLbNext" aria-label="Next">→</button>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      const page = document.getElementById('pgPage');
+      if (!page) return;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const lanes = Array.from(document.querySelectorAll('.pg-block')).map((block) => ({
+        el: block.querySelector('.pg-lane'), block, dir: 1, hover: false, dragging: false, dragged: false, idle: 0,
+      })).filter((L) => L.el);
+
+      // --- Auto-slide loop (ping-pong at ends); active per mode ---
+      const SPEED = 1.15;  // faster autoscroll
+      function pause(L, ms) { L.idle = performance.now() + (ms || 1600); }  // pause auto after user input
+      function frame(t) {
+        const mode = page.dataset.mode;
+        if (!reduce && mode !== 'manual') {
+          for (const L of lanes) {
+            if (L.dragging || t < L.idle) continue;
+            if (mode === 'hover' && !L.hover) continue;
+            const max = L.el.scrollWidth - L.el.clientWidth;
+            if (max <= 1) continue;
+            let x = L.el.scrollLeft + SPEED * L.dir;
+            if (x >= max) { x = max; L.dir = -1; }
+            else if (x <= 0) { x = 0; L.dir = 1; }
+            L.el.scrollLeft = x;
+          }
+        }
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+
+      // --- Hover tracking + mouse drag-to-pan ---
+      lanes.forEach((L) => {
+        const el = L.el;
+        el.addEventListener('mouseenter', () => { L.hover = true; });
+        el.addEventListener('mouseleave', () => { L.hover = false; });
+        let downX = 0, startScroll = 0, down = false, lastX = 0, vel = 0, momRaf = 0, captured = false;
+        el.addEventListener('pointerdown', (e) => {
+          if (e.pointerType !== 'mouse') return;      // touch uses native scroll
+          cancelAnimationFrame(momRaf);
+          down = true; L.dragging = true; L.dragged = false; captured = false;
+          downX = e.clientX; lastX = e.clientX; vel = 0; startScroll = el.scrollLeft;
+        });
+        el.addEventListener('pointermove', (e) => {
+          if (!down) return;
+          const dx = e.clientX - downX;
+          if (Math.abs(dx) > 6) {                       // only a real drag captures the pointer (taps click through to the lightbox)
+            L.dragged = true;
+            if (!captured) { captured = true; el.classList.add('dragging'); try { el.setPointerCapture(e.pointerId); } catch (_) {} }
+          }
+          vel = e.clientX - lastX; lastX = e.clientX;
+          el.scrollLeft = startScroll - dx;
+        });
+        const up = () => {
+          if (!down) return;
+          down = false; el.classList.remove('dragging'); pause(L, 2600);
+          setTimeout(() => { L.dragging = false; }, 30);
+          const max = el.scrollWidth - el.clientWidth;
+          let v = -vel * 1.5;                           // throw harder/further -> glides longer
+          (function glide() {
+            if (Math.abs(v) < 0.4) return;
+            let x = el.scrollLeft + v;
+            if (x <= 0) { x = 0; v = 0; } else if (x >= max) { x = max; v = 0; }
+            el.scrollLeft = x; v *= 0.94;               // friction / weight
+            momRaf = requestAnimationFrame(glide);
+          })();
+        };
+        el.addEventListener('pointerup', up);
+        el.addEventListener('pointercancel', up);
+
+        // horizontal trackpad swipe -> scroll the lane; vertical wheel always scrolls the page (buttery)
+        el.addEventListener('wheel', (e) => {
+          if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return; // vertical -> let Lenis scroll the page
+          const max = el.scrollWidth - el.clientWidth;
+          if ((e.deltaX < 0 && el.scrollLeft <= 0) || (e.deltaX > 0 && el.scrollLeft >= max - 1)) return;
+          e.preventDefault(); e.stopPropagation();
+          el.scrollLeft += e.deltaX; pause(L, 1000);
+        }, { passive: false });
+
+        // fwd / back arrows
+        L.block.querySelectorAll('.pg-arrow').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            el.scrollBy({ left: (+btn.dataset.dir) * Math.min(el.clientWidth * 0.8, 640), behavior: 'smooth' });
+            pause(L, 2200);
+          });
+        });
+      });
+
+      // --- Lightbox: seamless-scroll filmstrip (auto-drift pauses on hover; grab + momentum) ---
+      const items = Array.from(document.querySelectorAll('.pg-item'));
+      const lb = document.getElementById('pgLightbox');
+      const strip = document.getElementById('pgLbStrip');
+      const track = document.getElementById('pgLbTrack');
+      const lbCount = document.getElementById('pgLbCounter');
+      const lbReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let lbList = [], lbDir = 1, lbHover = false, lbBusy = false, lbRaf = 0;
+
+      function lbCentered() {
+        const c = strip.scrollLeft + strip.clientWidth / 2; let best = 0, bd = Infinity;
+        for (let i = 0; i < track.children.length; i++) {
+          const ph = track.children[i], m = ph.offsetLeft + ph.offsetWidth / 2, d = Math.abs(m - c);
+          if (d < bd) { bd = d; best = i; }
+        }
+        return best;
+      }
+      function lbSetCounter() { if (lbList.length) lbCount.textContent = (lbCentered() + 1) + ' / ' + lbList.length; }
+      function lbCenterOn(i, smooth) {
+        i = Math.max(0, Math.min(track.children.length - 1, i));
+        const ph = track.children[i]; if (!ph) return;
+        const left = ph.offsetLeft - (strip.clientWidth - ph.offsetWidth) / 2;
+        if (smooth) strip.scrollTo({ left, behavior: 'smooth' }); else strip.scrollLeft = left;
+      }
+      function lbNudge(dir) { lbBusy = true; lbCenterOn(lbCentered() + dir, true); setTimeout(() => { lbBusy = false; }, 650); }
+      strip.addEventListener('scroll', lbSetCounter, { passive: true });
+
+      function lbOpen(item) {
+        const cat = item.dataset.cat;
+        lbList = items.filter((it) => it.dataset.cat === cat);
+        track.innerHTML = '';
+        lbList.forEach((it) => {
+          const sl = document.createElement('div'); sl.className = 'pg-lb-slide';
+          const im = document.createElement('img'); im.className = 'pg-lb-photo'; im.src = it.dataset.full; im.alt = ''; im.draggable = false;
+          sl.appendChild(im); track.appendChild(sl);
+        });
+        lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden'; if (window.lenis) window.lenis.stop();
+        lbBusy = true; lbDir = 1; // hold drift while images load + slides settle
+        const ci = lbList.indexOf(item);
+        const recenter = () => { lbCenterOn(ci, false); lbSetCounter(); };
+        recenter();
+        requestAnimationFrame(recenter);
+        const clickedImg = track.children[ci] && track.children[ci].querySelector('img');
+        if (clickedImg && !clickedImg.complete) clickedImg.addEventListener('load', recenter, { once: true });
+        setTimeout(recenter, 250);
+        setTimeout(() => { recenter(); lbBusy = false; }, 720);
+      }
+      function lbClose() { lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; if (window.lenis) window.lenis.start(); }
+
+      items.forEach((item) => {
+        const L = lanes.find((x) => x.el.contains(item));
+        item.addEventListener('click', (e) => { if (L && L.dragged) { e.preventDefault(); return; } lbOpen(item); });
+      });
+      document.getElementById('pgLbClose').addEventListener('click', lbClose);
+      document.getElementById('pgLbPrev').addEventListener('click', () => lbNudge(-1));
+      document.getElementById('pgLbNext').addEventListener('click', () => lbNudge(1));
+      window.addEventListener('keydown', (e) => {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape') lbClose();
+        else if (e.key === 'ArrowRight') lbNudge(1);
+        else if (e.key === 'ArrowLeft') lbNudge(-1);
+      });
+
+      // gentle auto-drift; pauses while you hover the photos or interact
+      strip.addEventListener('pointerenter', () => { lbHover = true; });
+      strip.addEventListener('pointerleave', () => { lbHover = false; });
+      (function lbFrame() {
+        if (lb.classList.contains('open') && !lbHover && !lbBusy && !lbReduce) {
+          const max = strip.scrollWidth - strip.clientWidth;
+          if (max > 2) {
+            let x = strip.scrollLeft + 0.45 * lbDir;
+            if (x >= max) { x = max; lbDir = -1; } else if (x <= 0) { x = 0; lbDir = 1; }
+            strip.scrollLeft = x;
+          }
+        }
+        requestAnimationFrame(lbFrame);
+      })();
+
+      // grab + weighted momentum (same decay feel as the lanes)
+      (function () {
+        let down = false, sx = 0, ss = 0, lx = 0, v = 0, captured = false;
+        strip.addEventListener('pointerdown', (e) => {
+          if (e.pointerType !== 'mouse') return;
+          cancelAnimationFrame(lbRaf); down = true; lbBusy = true; captured = false;
+          sx = e.clientX; lx = e.clientX; v = 0; ss = strip.scrollLeft;
+        });
+        strip.addEventListener('pointermove', (e) => {
+          if (!down) return;
+          const dx = e.clientX - sx;
+          if (!captured && Math.abs(dx) > 6) { captured = true; strip.classList.add('dragging'); try { strip.setPointerCapture(e.pointerId); } catch (_) {} }
+          v = e.clientX - lx; lx = e.clientX; strip.scrollLeft = ss - dx;
+        });
+        const up = () => {
+          if (!down) return; down = false; strip.classList.remove('dragging');
+          const max = strip.scrollWidth - strip.clientWidth;
+          let vel = -v * 1.6;
+          (function glide() {
+            if (Math.abs(vel) < 0.4) { lbBusy = false; return; }
+            let x = strip.scrollLeft + vel;
+            if (x <= 0) { x = 0; vel = 0; } else if (x >= max) { x = max; vel = 0; }
+            strip.scrollLeft = x; vel *= 0.94; lbRaf = requestAnimationFrame(glide);
+          })();
+        };
+        strip.addEventListener('pointerup', up);
+        strip.addEventListener('pointercancel', up);
+        strip.addEventListener('wheel', (e) => {
+          const d = Math.abs(e.deltaX) >= Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+          e.preventDefault(); strip.scrollLeft += d;
+        }, { passive: false });
+      })();
+
+      // scroll cue -> jump to the first gallery block
+      const cue = document.getElementById('pgCue');
+      if (cue) cue.addEventListener('click', () => {
+        const first = document.querySelector('.pg-block');
+        if (!first) return;
+        const y = first.getBoundingClientRect().top + window.scrollY - 30;
+        if (window.lenis) window.lenis.scrollTo(y); else window.scrollTo({ top: y, behavior: 'smooth' });
+      });
+
+    })();
+  </script>
+</Base>

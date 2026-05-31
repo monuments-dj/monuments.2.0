@@ -1,0 +1,439 @@
+---
+import Base from '../layouts/Base.astro';
+
+const testimonials = [
+  { quote: "We love working with DJ and Tess. We thought we were hiring a production company and got a creative director. The thinking they bring to the room changes the whole project.", name: "AC Boise", role: "Creative Partner" },
+  { quote: "The cultural insight they brought to the campaign was unlike anything we'd seen from a local partner. Monuments understands what a city needs to feel about its brand.", name: "Brand Partner", role: "Marketing Lead" },
+  { quote: "DJ doesn't just execute. He makes you rethink what the work could be. We came in with a brief and left with a better brief.", name: "Agency Partner", role: "Creative Director" },
+];
+---
+<Base title="HOME - monuments" loader={true}>
+  <section class="hero">
+    <div class="hero-video-wrap">
+      <iframe id="heroVideo"
+        src="https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=1&loop=1&playlist=VMubUUZ2tdU&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
+        frameborder="0"
+        allow="autoplay; encrypted-media">
+      </iframe>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-type" id="hero-type">
+      <div class="hero-type-inner" id="hero-tilt">
+        <span class="hero-word">Sight</span>
+        <span class="hero-word">Sound</span>
+        <span class="hero-word">and
+          <span class="hero-word-sub">The Creative<br>Portfolio<br>of DJ Ramirez</span>
+        </span>
+        <span class="hero-word">Emotion</span>
+      </div>
+    </div>
+    <div class="hero-bottom">
+      <div class="hero-bottom-left">
+        <p class="hero-eyebrow">Creative Direction. Integrated Content</p>
+        <p class="hero-desc">I help brands and agencies shout into the void of culture without losing their voice. Part agency partner, part brainstorm machine, part creative mercenary.</p>
+        <a href="/contact" class="hero-cta">Lets Chat</a>
+      </div>
+      <a href="/work" class="hero-see-work">See The Work</a>
+    </div>
+  </section>
+
+  <section class="trusted fade">
+    <div class="trusted-top">
+      <div class="trusted-left">
+        <h2 class="trusted-title">Trusted By The Best</h2>
+        <p class="trusted-body">I've worked with global brands to craft campaigns that drive results. Satisfying clients, uncovering insights, moving product, and winning awards along the way.</p>
+        <a href="/contact" class="trusted-cta">Let's Talk</a>
+      </div>
+      <img class="trusted-m" src="https://monuments.cc/wp-content/uploads/2023/12/logo-01.png" alt="M">
+    </div>
+    <div class="logo-grid">
+      <div class="logo-cell"><img src="/logos/sony.png" alt="Sony"></div>
+      <div class="logo-cell"><img src="/logos/intel.png" alt="Intel"></div>
+      <div class="logo-cell"><img src="/logos/adorama.png" alt="Adorama"></div>
+      <div class="logo-cell"><img src="/logos/msi.png" alt="MSI"></div>
+      <div class="logo-cell"><img src="/logos/lexar.png" alt="Lexar"></div>
+      <div class="logo-cell"><img src="/logos/flashpoint.png" alt="Flashpoint"></div>
+      <div class="logo-cell"><img src="/logos/against.png" alt="Against"></div>
+      <div class="logo-cell"><img src="/logos/art-of-visuals.png" alt="Art of Visuals"></div>
+    </div>
+  </section>
+
+  <section class="showreel">
+    <div class="reel-stage">
+      <div class="reel-zoom" id="reelZoom">
+        <div class="reel" id="reel" data-playing="true">
+          <div class="reel-frame">
+            <iframe id="reelVideo"
+              src="https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
+              frameborder="0" allow="autoplay; encrypted-media; fullscreen" title="Showreel"></iframe>
+          </div>
+          <div class="reel-controls">
+            <button class="reel-ctrl reel-play" id="reelPlay" type="button" aria-label="Play or pause">
+              <svg class="ic-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+            </button>
+            <button class="reel-ctrl reel-audio" id="reelAudio" type="button" aria-pressed="false" aria-label="Sound on or off">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 9v6h4l5 4V5L8 9z"/>
+                <path class="reel-wave" d="M16.5 8.5a5 5 0 0 1 0 7"/>
+                <line class="reel-slash" x1="3.5" y1="3.5" x2="20.5" y2="20.5"/>
+              </svg>
+            </button>
+            <button class="reel-ctrl reel-fs" id="reelFs" type="button" aria-label="Fullscreen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="reel-cap">Showreel</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="work fade">
+    <div class="work-header">
+      <div class="work-label">Featured Work</div>
+      <div class="work-view-links">
+        <a href="/work">Interactive Portfolio</a>
+        <a href="/work">Full Portfolio</a>
+      </div>
+    </div>
+    <p class="work-intro">Good ideas are easy. Making them real takes finesse, experience, and a willingness to throw away the good to get to the great.</p>
+    <div class="work-grid">
+      <a href="/work/turnstile" class="work-card">
+        <div class="work-card-inner"></div>
+        <div class="work-card-gradient"></div>
+        <div class="work-card-info">
+          <div class="work-card-tags"><span class="work-tag">Branding</span><span class="work-tag">Creative Direction</span></div>
+          <div class="work-card-name">Turnstile Audio</div>
+        </div>
+      </a>
+      <a href="/work/photography" class="work-card">
+        <div class="work-card-inner"></div>
+        <div class="work-card-gradient"></div>
+        <div class="work-card-info">
+          <div class="work-card-tags"><span class="work-tag">Photography</span></div>
+          <div class="work-card-name">Photography</div>
+        </div>
+      </a>
+      <a href="/work/blue-cross" class="work-card">
+        <div class="work-card-inner"></div>
+        <div class="work-card-gradient"></div>
+        <div class="work-card-info">
+          <div class="work-card-tags"><span class="work-tag">Creative Direction</span><span class="work-tag">Photography</span></div>
+          <div class="work-card-name">Blue Cross</div>
+        </div>
+      </a>
+      <a href="/work/flashpoint" class="work-card wide">
+        <div class="work-card-inner"></div>
+        <div class="work-card-gradient"></div>
+        <div class="work-card-info">
+          <div class="work-card-tags"><span class="work-tag">Branding</span><span class="work-tag">Creative Direction</span></div>
+          <div class="work-card-name">Flashpoint</div>
+        </div>
+      </a>
+      <a href="/work/sony-this-moment" class="work-card">
+        <div class="work-card-inner"></div>
+        <div class="work-card-gradient"></div>
+        <div class="work-card-info">
+          <div class="work-card-tags"><span class="work-tag">Creative Direction</span><span class="work-tag">Video</span></div>
+          <div class="work-card-name">Sony "This Moment"</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="testimonials fade" data-tm="1">
+    <span class="tm-eyebrow">Client Words</span>
+
+    <!-- V1 — drifting marquee of quote cards -->
+    <div class="tm-v tm-v1">
+      <div class="tm-marquee">
+        <div class="tm-marquee-track">
+          {[...testimonials, ...testimonials].map((t) => (
+            <figure class="tm-card">
+              <blockquote class="tm-card-quote">{t.quote}</blockquote>
+              <figcaption class="tm-card-meta"><span class="tm-card-name">{t.name}</span><span class="tm-card-role">{t.role}</span></figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- V2 — big rotating statement -->
+    <div class="tm-v tm-v2">
+      <blockquote class="tm-statement" id="tmStatement">{testimonials[0].quote}</blockquote>
+      <div class="tm-statement-foot">
+        <div class="tm-statement-meta"><span id="tmStName">{testimonials[0].name}</span><span id="tmStRole">{testimonials[0].role}</span></div>
+        <div class="tm-dots" id="tmDots">
+          {testimonials.map((t, i) => (
+            <button type="button" class={i === 0 ? 'on' : ''} data-i={i} data-quote={t.quote} data-name={t.name} data-role={t.role} aria-label={`Testimonial ${i + 1}`}></button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- V3 — stacked editorial list -->
+    <div class="tm-v tm-v3">
+      {testimonials.map((t, i) => (
+        <figure class="tm-row">
+          <span class="tm-row-num">{String(i + 1).padStart(2, '0')}</span>
+          <blockquote class="tm-row-quote">{t.quote}</blockquote>
+          <figcaption class="tm-row-meta"><span class="tm-row-name">{t.name}</span><span class="tm-row-role">{t.role}</span></figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <!-- V4 — Spotlight card -->
+    <div class="tm-v tm-v4">
+      <figure class="tm-spotlight">
+        <span class="tm-sp-mark" aria-hidden="true">&ldquo;</span>
+        <blockquote class="tm-sp-quote">{testimonials[0].quote}</blockquote>
+        <figcaption class="tm-sp-meta"><span>{testimonials[0].name}</span><span>{testimonials[0].role}</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- V5 — Split -->
+    <div class="tm-v tm-v5">
+      <div class="tm-split">
+        <div class="tm-split-l"><span class="tm-split-num">01</span><span class="tm-split-name">{testimonials[0].name}</span><span class="tm-split-role">{testimonials[0].role}</span></div>
+        <blockquote class="tm-split-q">{testimonials[0].quote}</blockquote>
+      </div>
+    </div>
+
+    <!-- V6 — Ticker -->
+    <div class="tm-v tm-v6">
+      <div class="tm-ticker"><div class="tm-ticker-track">
+        {[...testimonials, ...testimonials, ...testimonials].map((t) => (<span class="tm-tick">{t.quote.split('. ')[0]}. <em>— {t.name}</em></span>))}
+      </div></div>
+    </div>
+
+    <!-- V7 — Oversized mark -->
+    <div class="tm-v tm-v7">
+      <div class="tm-omark"><span class="tm-omark-glyph" aria-hidden="true">&rdquo;</span><blockquote class="tm-omark-q">{testimonials[0].quote}</blockquote><div class="tm-omark-meta">{testimonials[0].name} — {testimonials[0].role}</div></div>
+    </div>
+
+    <!-- V8 — Grid -->
+    <div class="tm-v tm-v8">
+      <div class="tm-grid">
+        {testimonials.map((t) => (<figure class="tm-gcard"><blockquote>{t.quote}</blockquote><figcaption><span class="tm-gname">{t.name}</span><span class="tm-grole">{t.role}</span></figcaption></figure>))}
+      </div>
+    </div>
+
+    <!-- V9 — Vertical drift -->
+    <div class="tm-v tm-v9">
+      <div class="tm-vdrift"><div class="tm-vdrift-track">
+        {[...testimonials, ...testimonials].map((t) => (<figure class="tm-vcard"><blockquote>{t.quote}</blockquote><figcaption>{t.name} · {t.role}</figcaption></figure>))}
+      </div></div>
+    </div>
+
+    <!-- V10 — Minimal -->
+    <div class="tm-v tm-v10">
+      <div class="tm-min"><blockquote class="tm-min-q">{testimonials[0].quote}</blockquote><div class="tm-min-meta">{testimonials[0].name}, {testimonials[0].role}</div></div>
+    </div>
+
+    <!-- V11 — Accent block -->
+    <div class="tm-v tm-v11">
+      <div class="tm-accent"><blockquote class="tm-accent-q">{testimonials[0].quote}</blockquote><div class="tm-accent-meta"><span>{testimonials[0].name}</span><span>{testimonials[0].role}</span></div></div>
+    </div>
+
+    <!-- V12 — Scroll-snap carousel -->
+    <div class="tm-v tm-v12">
+      <div class="tm-snap">
+        {testimonials.map((t) => (<figure class="tm-snap-item"><blockquote>{t.quote}</blockquote><figcaption><span class="tm-snap-name">{t.name}</span><span class="tm-snap-role">{t.role}</span></figcaption></figure>))}
+      </div>
+    </div>
+
+    <!-- V13 — Numbered editorial -->
+    <div class="tm-v tm-v13">
+      <div class="tm-num"><span class="tm-num-big" aria-hidden="true">01</span><blockquote class="tm-num-q">{testimonials[0].quote}</blockquote><div class="tm-num-meta">{testimonials[0].name} — {testimonials[0].role}</div></div>
+    </div>
+
+    <!-- TEMP: layout switcher -->
+    <div class="tm-switcher" id="tmSwitcher">
+      <span>Testimonials</span>
+      <button type="button" data-tm="1" class="on">Marquee</button>
+      <button type="button" data-tm="2">Statement</button>
+      <button type="button" data-tm="3">List</button>
+      <button type="button" data-tm="4">Spotlight</button>
+      <button type="button" data-tm="5">Split</button>
+      <button type="button" data-tm="6">Ticker</button>
+      <button type="button" data-tm="7">Mark</button>
+      <button type="button" data-tm="8">Grid</button>
+      <button type="button" data-tm="9">Column</button>
+      <button type="button" data-tm="10">Minimal</button>
+      <button type="button" data-tm="11">Accent</button>
+      <button type="button" data-tm="12">Swipe</button>
+      <button type="button" data-tm="13">Numbered</button>
+    </div>
+  </section>
+
+  <section class="collab fade">
+    <div class="collab-img">
+      <img src="https://monuments.cc/wp-content/uploads/2026/05/332D1704-05BD-4A55-8B6A-62C948489863_1_102_o-1024x679.jpeg" alt="Monuments team">
+    </div>
+    <div class="collab-text">
+      <p class="collab-eyebrow">Rooted in collaboration</p>
+      <h2 class="collab-title">The best work is bigger than any one person.</h2>
+      <p class="collab-body">From films and photography to campaigns and brand partnerships, everything we do is rooted in collaboration. The right people, the right energy, moving toward something that matters.<br><br>We're not here to be another vendor or a line item. We show up as a creative partner, working alongside you to build something that lasts.</p>
+      <a href="/about" class="collab-link">About Monuments</a>
+    </div>
+  </section>
+
+  <section class="bottom-cta fade">
+    <h2 class="bottom-cta-title">let's build something<br>great, <span class="cta-reveal"><span class="cta-reveal-inner">together.</span></span></h2>
+    <a href="/contact" class="btn-solid">Get In Touch</a>
+  </section>
+
+  <!-- Home-only behaviors: hero parallax + testimonial carousel -->
+  <script is:inline>
+    // Hero perspective tilt — the whole headline block tilts toward the cursor as one rigid unit
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const inner = document.getElementById('hero-tilt');
+      if (!inner) return;
+      let mx = 0, my = 0, cx = 0, cy = 0;
+      const MAX_Y = 20.8;  // deg of left/right tilt (rotateY) — +30% intensity
+      const MAX_X = 14.3;  // deg of up/down tilt (rotateX) — +30% intensity
+      const SHIFT = 28.6;  // px the block drifts as a whole — +30% intensity
+
+      document.addEventListener('mousemove', (e) => {
+        mx = (e.clientX / window.innerWidth - 0.5) * 2;   // -1..1
+        my = (e.clientY / window.innerHeight - 0.5) * 2;  // -1..1
+      });
+
+      function tick() {
+        cx += (mx - cx) * 0.09;
+        cy += (my - cy) * 0.09;
+        const ry = cx * MAX_Y;       // horizontal mouse -> rotate around Y
+        const rx = -cy * MAX_X;      // vertical mouse -> rotate around X
+        const tx = cx * SHIFT;
+        const ty = cy * SHIFT * 0.5;
+        inner.style.transform =
+          `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, 0) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+
+    // Testimonials — layout toggle (Marquee / Statement / List) + Statement auto-rotate
+    (function () {
+      const sw = document.getElementById('tmSwitcher');
+      const sec = document.querySelector('.testimonials');
+      if (sw && sec) sw.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
+        sec.dataset.tm = b.dataset.tm;
+        sw.querySelectorAll('button').forEach((x) => x.classList.remove('on'));
+        b.classList.add('on');
+      }));
+
+      const dots = Array.from(document.querySelectorAll('#tmDots button'));
+      const stEl = document.getElementById('tmStatement');
+      const nmEl = document.getElementById('tmStName');
+      const rlEl = document.getElementById('tmStRole');
+      if (!dots.length || !stEl) return;
+      let i = 0, timer = 0;
+      function show(n) {
+        i = n; const d = dots[i];
+        stEl.style.opacity = '0';
+        setTimeout(() => { stEl.textContent = d.dataset.quote; nmEl.textContent = d.dataset.name; rlEl.textContent = d.dataset.role; stEl.style.opacity = '1'; }, 280);
+        dots.forEach((x) => x.classList.remove('on')); d.classList.add('on');
+      }
+      function next() { show((i + 1) % dots.length); }
+      dots.forEach((d) => d.addEventListener('click', () => { show(+d.dataset.i); clearInterval(timer); timer = setInterval(next, 5000); }));
+      timer = setInterval(next, 5000);
+    })();
+
+    // Showreel: scroll-zoom — a small 16:9 video grows up to a full-width 16:9 frame, then holds (interactable)
+    (function () {
+      const section = document.querySelector('.showreel');
+      const zoom = document.getElementById('reelZoom');
+      if (!section || !zoom) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { zoom.style.transform = 'scale(1)'; return; }
+      const MIN = 0.4;
+      let ticking = false;
+      function update() {
+        const r = section.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const range = r.height - vh;
+        let p = range > 0 ? (-r.top) / range : 0;
+        p = Math.max(0, Math.min(1, p));
+        const zp = Math.min(1, p / 0.6); // reach full-width by 60% of the scroll, then hold
+        const e = 1 - Math.pow(1 - zp, 3); // ease-out cubic
+        zoom.style.transform = 'scale(' + (MIN + (1 - MIN) * e).toFixed(3) + ')';
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+      window.addEventListener('resize', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+      update();
+    })();
+
+    // YouTube control: hero (start 6s, loop ending 15s early) + reel (audio toggle)
+    (function () {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+      let hero, reel;
+      window.onYouTubeIframeAPIReady = function () {
+        if (document.getElementById('heroVideo')) {
+          hero = new YT.Player('heroVideo', {
+            events: {
+              onReady: (e) => { e.target.mute(); e.target.seekTo(6, true); e.target.playVideo(); },
+              onStateChange: (e) => { if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(6, true); e.target.playVideo(); } }
+            }
+          });
+          setInterval(() => {
+            if (hero && hero.getDuration) {
+              const d = hero.getDuration(), t = hero.getCurrentTime();
+              if (d > 21 && t >= d - 15) hero.seekTo(6, true);
+            }
+          }, 500);
+        }
+        if (document.getElementById('reelVideo')) {
+          const reelEl = document.getElementById('reel');
+          const frame = reelEl ? reelEl.querySelector('.reel-frame') : null;
+          const audioBtn = document.getElementById('reelAudio');
+          const setSound = (on) => { if (audioBtn) audioBtn.setAttribute('aria-pressed', on ? 'true' : 'false'); };
+          reel = new YT.Player('reelVideo', {
+            events: {
+              onReady: (e) => { e.target.mute(); e.target.seekTo(6, true); e.target.playVideo(); setSound(false); },
+              onStateChange: (e) => {
+                if (reelEl) reelEl.dataset.playing = (e.data === YT.PlayerState.PLAYING) ? 'true' : 'false';
+                if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(6, true); e.target.playVideo(); }
+              }
+            }
+          });
+          const playToggle = () => {
+            if (!reel || !reel.getPlayerState) return;
+            if (reel.getPlayerState() === 1) { reel.pauseVideo(); }
+            else { reel.playVideo(); reel.unMute(); setSound(true); } // play auto-unmutes the audio
+          };
+          if (reelEl) reelEl.addEventListener('click', (ev) => { if (ev.target.closest('.reel-controls')) return; playToggle(); });
+          const playBtn = document.getElementById('reelPlay');
+          if (playBtn) playBtn.addEventListener('click', (ev) => { ev.stopPropagation(); playToggle(); });
+          if (audioBtn) audioBtn.addEventListener('click', (ev) => {
+            ev.stopPropagation();
+            if (!reel || !reel.isMuted) return;
+            if (reel.isMuted()) { reel.unMute(); setSound(true); } else { reel.mute(); setSound(false); }
+          });
+          const fsBtn = document.getElementById('reelFs');
+          if (fsBtn) fsBtn.addEventListener('click', (ev) => {
+            ev.stopPropagation();
+            if (document.fullscreenElement) { document.exitFullscreen(); return; }
+            const el = frame || reelEl;
+            if (el && el.requestFullscreen) el.requestFullscreen();
+            else if (el && el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+          });
+        }
+      };
+    })();
+
+    // CTA: replay the reveal every time it scrolls into view
+    (function () {
+      const cta = document.querySelector('.bottom-cta');
+      if (!cta || !('IntersectionObserver' in window)) return;
+      const io = new IntersectionObserver((es) => {
+        es.forEach((e) => cta.classList.toggle('on', e.isIntersecting));
+      }, { threshold: 0.2 });
+      io.observe(cta);
+    })();
+  </script>
+</Base>

@@ -1,0 +1,114 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// === Case-study template (Turnstile = the reference build) ===
+// Content pulled from monuments.cc/portfolio/turnstile/. To add a study, copy this
+// structure (hero → meta → overview → brief → approach → visuals → outcome → credits → next).
+const meta = [
+  { k: 'Client', v: 'Adorama' },
+  { k: 'Agency', v: 'Art of Visuals' },
+  { k: 'Role', v: 'Creative Direction' },
+  { k: 'Services', v: 'Brand Identity · Logo · Positioning' },
+  { k: 'Timeline', v: 'Two weeks' },
+];
+const objectives = [
+  "Capture Turnstile's ethos of precision, quality, and affordability.",
+  'Design something understated but undeniably cool — a nod to classics like Neumann and Shure.',
+  'Speak to both the budget-conscious and the seasoned pro, united by a love of great sound at a fair price.',
+];
+---
+<Base title="Turnstile Audio — monuments">
+  <article class="cs-page">
+
+    <!-- HERO (full-bleed header) -->
+    <header class="cs-hero">
+      <p class="cs-hero-eyebrow">Brand Development</p>
+      <h1 class="cs-hero-title">Turnstile Audio</h1>
+      <p class="cs-hero-lede">Crafting a brand that hits all the right notes.</p>
+    </header>
+
+    <!-- META -->
+    <div class="cs-meta">
+      {meta.map((m) => (
+        <div class="cs-meta-item">
+          <span class="cs-meta-k">{m.k}</span>
+          <span class="cs-meta-v">{m.v}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- OVERVIEW -->
+    <section class="cs-section fade">
+      <p class="cs-kicker">Overview</p>
+      <p class="cs-lead">Turnstile Audio makes top-notch recording gear for creators who want pro-quality sound without the hefty price tag — built by engineers obsessed with the best experience and the most value. The mission: high-end recording, accessible to everyone.</p>
+    </section>
+
+    <!-- THE BRIEF -->
+    <section class="cs-cols fade">
+      <h2 class="cs-cols-h">The Brief</h2>
+      <div>
+        <div class="cs-body">
+          <p>When Turnstile Audio approached me, they wanted a brand identity that struck the perfect balance: clean, simple, and inspired by the legendary audio brands of the past, but fresh enough to stand out in today's market.</p>
+          <p>They didn't want flashy — they wanted timeless. Something that communicated quality and craftsmanship without overcomplicating things, and felt welcoming to both up-and-coming creators and seasoned pros alike.</p>
+        </div>
+        <ul class="cs-list">
+          {objectives.map((o) => <li>{o}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section class="cs-cols fade">
+      <h2 class="cs-cols-h">Approach</h2>
+      <div>
+        <div class="cs-body">
+          <p>We took a deep dive into the world of vintage audio brands — what made them iconic and enduring. With that inspiration, we built an identity for Turnstile that was confident, modern, and a little nostalgic, all without trying too hard.</p>
+        </div>
+        <div class="cs-points">
+          <div>
+            <p class="cs-point-h">Logo Design</p>
+            <p class="cs-point-b">Simple, but it packs a punch. Sleek geometric shapes and clean typography — something that says "we mean business" without being loud about it. The result feels professional and dependable, built to last just like Turnstile's gear.</p>
+          </div>
+          <div>
+            <p class="cs-point-h">Typography &amp; Color</p>
+            <p class="cs-point-b">Sharp, straightforward type — a sans-serif that reads trustworthy without feeling stiff. Neutral tones with a few metallic accents for a sleek, high-end vibe. Let the gear be the star; the brand quietly amplifies the message.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISUALS -->
+    <section class="fade">
+      <div class="cs-panel">
+        <div class="cs-panel-inner"><img src="/case-studies/turnstile/logo.png" alt="Turnstile Audio logo" loading="lazy" /></div>
+      </div>
+      <figure class="cs-figure">
+        <img src="/case-studies/turnstile/colors.png" alt="Turnstile Audio color palette" loading="lazy" />
+        <figcaption class="cs-figure-cap">Palette — neutral tones with metallic accents.</figcaption>
+      </figure>
+    </section>
+
+    <!-- OUTCOME -->
+    <section class="cs-cols fade">
+      <h2 class="cs-cols-h">Outcome</h2>
+      <div class="cs-body">
+        <p>The new Turnstile Audio identity hit all the right notes. The fresh, understated design resonated with emerging creators and seasoned pros alike, positioning Turnstile as the go-to choice for high-quality, affordable audio gear.</p>
+        <p>The launch drove engagement, sparked buzz on social, and boosted initial sales — proof that a simple, thoughtful brand can make a big impact. By blending a nod to audio legends with a modern twist, we built a brand that strikes the perfect chord with creators everywhere.</p>
+      </div>
+    </section>
+
+    <!-- CREDITS -->
+    <div class="cs-credits">
+      <div class="cs-meta-item"><span class="cs-meta-k">Agency</span><span class="cs-meta-v">Art of Visuals</span></div>
+      <div class="cs-meta-item"><span class="cs-meta-k">Client</span><span class="cs-meta-v">Adorama</span></div>
+      <div class="cs-meta-item"><span class="cs-meta-k">Creative Director</span><span class="cs-meta-v">DJ Ramirez</span></div>
+    </div>
+
+    <!-- NEXT -->
+    <a class="cs-next" href="/work/sony-flow-state">
+      <span class="cs-next-k">Next project</span>
+      <span class="cs-next-t">Sony — Flow State <span class="cs-next-arrow">→</span></span>
+    </a>
+
+  </article>
+</Base>

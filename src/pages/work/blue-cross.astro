@@ -1,0 +1,75 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// === Modern case-study variant — image-led (Blue Cross campaign) ===
+// Content from monuments.cc/portfolio/blue-cross-2/.
+const meta = [
+  { k: 'Client', v: 'Blue Cross of Idaho' },
+  { k: 'Agency', v: 'OMEK' },
+  { k: 'Role', v: 'Creative Direction' },
+  { k: 'Services', v: 'Creative Direction · Consulting' },
+  { k: 'Timeline', v: '2020 — 2024' },
+];
+---
+<Base title="Blue Cross — monuments">
+  <article class="bc-page">
+
+    <!-- HERO (full-bleed image) -->
+    <header class="bc-hero">
+      <img class="bc-hero-img" src="/case-studies/blue-cross/bc-22.jpg" alt="Blue Cross of Idaho campaign" />
+      <div class="bc-hero-inner">
+        <p class="bc-hero-eyebrow">Creative Direction</p>
+        <h1 class="bc-hero-title">Blue Cross</h1>
+        <p class="bc-hero-lede">A campaign built on the people behind the coverage.</p>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <section class="bc-intro fade">
+      <p>Blue Cross needed a campaign that authentically represented their most valued asset — their customers. The goal: highlight the diversity and individuality of real people in a relatable, human way, capturing everyday moments across a variety of settings.</p>
+    </section>
+
+    <!-- CAMPAIGN SHOT -->
+    <figure class="bc-shot fade">
+      <img src="/case-studies/blue-cross/bc-24.jpg" alt="Blue Cross campaign — everyday moment" loading="lazy" />
+    </figure>
+
+    <!-- INSIGHT QUOTE -->
+    <section class="bc-quote fade">
+      <p>Health insurance isn't just about coverage — it's about <span class="bc-quote-em">knowing and caring for people as individuals.</span></p>
+      <p class="bc-quote-attr">The insight that anchored the campaign.</p>
+    </section>
+
+    <!-- CAMPAIGN PAIR -->
+    <div class="bc-duo fade">
+      <img src="/case-studies/blue-cross/bc-2.jpg" alt="Blue Cross campaign" loading="lazy" />
+      <img src="/case-studies/blue-cross/bc-28.jpg" alt="Blue Cross campaign" loading="lazy" />
+    </div>
+
+    <!-- EXECUTION -->
+    <section class="bc-exec fade">
+      <h2 class="bc-exec-h">Real people, real places.</h2>
+      <div class="bc-exec-b">
+        <p>In partnership with OMEK, I led creative direction and assisted in execution — from initial concept through final image selection. Over the course of a week, we captured authentic moments across a range of locations: local shops, homes, and the outdoors, each chosen to reflect the personal connection Blue Cross has with its customers.</p>
+        <p>By showing everyday people in familiar settings, the brand could communicate trust, reliability, and genuine human connection — the things that build real loyalty in healthcare. The campaign launched in 2020 and has continued to evolve through 2024, with licensing extended on the strength of its success.</p>
+      </div>
+    </section>
+
+    <!-- META -->
+    <div class="bc-meta fade">
+      {meta.map((m) => (
+        <div class="cs-meta-item">
+          <span class="cs-meta-k">{m.k}</span>
+          <span class="cs-meta-v">{m.v}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- NEXT -->
+    <a class="cs-next" href="/work/waffle-me-up">
+      <span class="cs-next-k">Next project</span>
+      <span class="cs-next-t">Waffle Me Up <span class="cs-next-arrow">→</span></span>
+    </a>
+
+  </article>
+</Base>

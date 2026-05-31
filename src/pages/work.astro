@@ -1,0 +1,311 @@
+---
+import Base from '../layouts/Base.astro';
+
+const U = 'https://monuments.cc/wp-content/uploads/';
+
+// Small thumbnails cycled through the floating galaxy.
+const thumbs = [
+  U + '2023/08/waffle-me-up-boise11-300x200.jpg',
+  U + '2024/10/Ad_1-300x200.jpg',
+  U + '2024/10/ONE00098-Edit-1-300x414.jpg',
+  U + '2023/12/B512B9E5-1FF2-48BD-B3AA-CDB03095E46B-300x169.jpg',
+  U + '2023/08/waffle-me-up-boise10-300x200.jpg',
+  U + '2024/10/DC9C9A41-A762-4948-8DF5-1AF9B06EEB56_1_105_c-300x449.jpeg',
+  U + '2024/11/dj-ramirez-creative-clothing_designer3-300x391.png',
+  U + '2024/10/Blue-Cross-Of-Idaho22-300x200.jpg',
+];
+const GX_COUNT = 18;
+// Floating header galaxy now pulls from DJ's real photo library (resized spread in /public/galaxy)
+const galaxy = Array.from({ length: 29 }, (_, i) => `/galaxy/gx-${String(i + 1).padStart(2, '0')}.jpg`);
+
+const projects = [
+  { slug: 'turnstile',          title: 'Turnstile Audio',         tagline: 'Sound, redefined',          feeling: 'Bold',      industry: 'Audio',      tags: ['Branding', 'Creative Direction'],    cats: 'branding creative-direction',    img: U + '2023/08/sound.webp' },
+  { slug: 'waffle-me-up',       title: 'Waffle Me Up',            tagline: 'A taste worth the wait',    feeling: 'Warm',      industry: 'Food & Bev', tags: ['Branding', 'Photography'],           cats: 'branding photography',           img: U + '2023/08/waffle-me-up-boise11-scaled.jpg' },
+  { slug: 'flashpoint',         title: 'Flashpoint',              tagline: 'The decisive moment',       feeling: 'Sharp',     industry: 'Retail',     tags: ['Branding', 'Creative Direction'],    cats: 'branding creative-direction',    img: U + '2024/10/Ad_1-scaled.jpg' },
+  { slug: 'blue-cross',         title: 'Blue Cross of Idaho',     tagline: 'Care, made human',          feeling: 'Trusted',   industry: 'Healthcare', tags: ['Creative Direction', 'Photography'], cats: 'creative-direction photography', img: U + '2024/10/Blue-Cross-Of-Idaho22-scaled.jpg' },
+  { slug: 'sony-this-moment',   title: 'Sony — This Moment',      tagline: 'Every frame, a feeling',    feeling: 'Cinematic', industry: 'Technology', tags: ['Creative Direction', 'Video'],       cats: 'creative-direction video',       img: U + '2024/10/ONE00098-Edit-1-scaled.jpg' },
+  { slug: 'sony-flow-state',    title: 'Sony — Flow State',       tagline: 'In the zone',               feeling: 'Focused',   industry: 'Technology', tags: ['Creative Direction', 'Video'],       cats: 'creative-direction video',       img: U + '2024/10/AOV-X-Sony-Select-22-scaled.jpg' },
+  { slug: 'sony-xperia-summer', title: 'Sony — Summer w/ Xperia', tagline: 'A summer in motion',        feeling: 'Vivid',     industry: 'Technology', tags: ['Creative Direction', 'Photography'], cats: 'creative-direction photography', img: U + '2024/10/DC9C9A41-A762-4948-8DF5-1AF9B06EEB56_1_105_c.jpeg' },
+  { slug: 'photography',        title: 'Photography',             tagline: 'Light, shadow, story',      feeling: 'Raw',       industry: 'Editorial',  tags: ['Photography'],                       cats: 'photography',                    img: U + '2023/12/B512B9E5-1FF2-48BD-B3AA-CDB03095E46B-scaled.jpg' },
+  { slug: 'clothing-merch',     title: 'Clothing & Merch',        tagline: 'Wear the work',             feeling: 'Street',    industry: 'Apparel',    tags: ['Branding', 'Apparel'],               cats: 'branding',                       img: U + '2024/11/dj-ramirez-creative-clothing_designer3.png' },
+];
+
+const filters = [
+  { label: 'All', value: 'all' },
+  { label: 'Branding', value: 'branding' },
+  { label: 'Creative Direction', value: 'creative-direction' },
+  { label: 'Photography', value: 'photography' },
+  { label: 'Video', value: 'video' },
+];
+---
+<Base title="WORK - monuments">
+  <div class="work-page view-grid">
+    <header class="galaxy" id="galaxy">
+      <div class="galaxy-field" data-particles="container" aria-hidden="true">
+        {Array.from({ length: GX_COUNT }).map((_, i) => (
+          <img class="gx-img" data-particles="image" src={galaxy[i % galaxy.length]} alt="" loading="eager" />
+        ))}
+      </div>
+      <h1 class="hero-float-title">
+        <span class="gx-word" style="--tx:-40px;--ty:0px;--delay:0s">A</span>
+        <span class="gx-word" style="--tx:0px;--ty:-40px;--delay:0.1s">portfolio</span>
+        <span class="gx-word" style="--tx:0px;--ty:40px;--delay:0.2s">built</span><br>
+        <span class="gx-word" style="--tx:40px;--ty:0px;--delay:0.3s">to</span>
+        <span class="gx-word" style="--tx:0px;--ty:-40px;--delay:0.4s">move</span>
+        <span class="gx-word" style="--tx:0px;--ty:40px;--delay:0.5s">people.</span>
+      </h1>
+    </header>
+
+    <div class="wp-controls">
+      <div class="wp-filter" role="tablist" aria-label="Filter projects">
+        {filters.map((f, idx) => (
+          <button type="button" data-filter={f.value} class={idx === 0 ? 'active' : ''}>{f.label}</button>
+        ))}
+      </div>
+      <div class="wp-controls-right">
+        <div class="wp-cols" role="group" aria-label="Column layout">
+          <button type="button" data-cols="2" class="on" aria-label="Two columns"><i></i><i></i></button>
+          <button type="button" data-cols="4" aria-label="Four columns"><i></i><i></i><i></i><i></i></button>
+        </div>
+        <div class="wp-view" role="group" aria-label="View layout">
+          <button type="button" data-view="grid" class="on" aria-label="Grid view"><span class="wp-view-grid"><i></i><i></i><i></i><i></i></span></button>
+          <button type="button" data-view="list" aria-label="List view"><span class="wp-view-list"><i></i><i></i><i></i></span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="wp-grid ov-duotone cols-2" id="wp-grid">
+      {projects.map((p) => (
+        <a class="wp-card fade" href={`/work/${p.slug}`} data-cats={p.cats}>
+          <div class="wp-card-media">
+            <img src={p.img} alt={p.title} loading="lazy" />
+            <div class="wp-card-overlay">
+              <div class="wp-card-tags">{p.tags.map((t) => <span>{t}</span>)}</div>
+              <h3 class="wp-card-title">{p.title}</h3>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="wp-list" id="wp-list">
+      {projects.map((p) => (
+        <a class="wp-row" href={`/work/${p.slug}`} data-cats={p.cats}>
+          <div class="wp-row-head">
+            <div class="wp-row-main">
+              <h3 class="wp-row-title">{p.title}</h3>
+              <p class="wp-row-tagline">{p.tagline}</p>
+            </div>
+            <div class="wp-row-meta">
+              <span><em>Feeling</em>{p.feeling}</span>
+              <span><em>Industry</em>{p.industry}</span>
+            </div>
+            <span class="wp-row-arrow" aria-hidden="true">↗</span>
+          </div>
+          <div class="wp-strip" data-lenis-prevent>
+            {thumbs.map((t) => <img src={t} alt="" loading="lazy" />)}
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="wp-cursor" id="wpCursor" aria-hidden="true">View Project</div>
+
+    <div class="ov-switcher" id="ovSwitcher">
+      <span>Hover</span>
+      <button type="button" data-ov="ov-slide">Slide</button>
+      <button type="button" data-ov="ov-wipe">Wipe</button>
+      <button type="button" data-ov="ov-duotone" class="on">Duotone</button>
+      <button type="button" data-ov="ov-glitch">Glitch</button>
+      <button type="button" data-ov="ov-stamp">Stamp</button>
+      <button type="button" data-ov="ov-lift">Lift</button>
+      <button type="button" data-ov="ov-flood">Flood</button>
+      <button type="button" data-ov="ov-invert">Invert</button>
+      <button type="button" data-ov="ov-frame">Frame</button>
+      <button type="button" data-ov="ov-skew">Skew</button>
+    </div>
+  </div>
+
+  <script is:inline>
+    // Floating image "galaxy" — ported from the reference's Particles component.
+    // Perpetual drift + Lenis scroll-velocity momentum + depth-scale + infinite wrap.
+    (function () {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const galaxy = document.getElementById('galaxy');
+      if (!galaxy) return;
+      const field = galaxy.querySelector('[data-particles="container"]');
+      const imgs = Array.from(galaxy.querySelectorAll('[data-particles="image"]'));
+      if (!imgs.length) return;
+
+      const cfg = { speed: 0.069, ease: 0.1, scaleEase: 0.25, scrollMult: 0.035, scaleMin: 0.5, scaleMax: 1.4 };
+      const srcs = [...new Set(imgs.map((im) => im.src))];
+      const rnd = (n) => Math.floor(Math.random() * n);
+      const rand = (min, max) => min + Math.random() * (max - min);
+      const lerp = (a, b, t) => (1 - t) * a + t * b;
+
+      let containerH = 0, offsetH = 0;
+      const st = { current: 0, target: 0, last: 0 };
+      let dirSign = 1, direction = 'down';
+
+      // Ease the drift down to ~20% while the cursor is over the header
+      let speedFactor = 1, targetFactor = 1;
+      galaxy.addEventListener('mouseenter', () => { targetFactor = 0.2; });
+      galaxy.addEventListener('mouseleave', () => { targetFactor = 1; });
+
+      function layout() {
+        const rect = field.getBoundingClientRect();
+        containerH = field.clientHeight;
+        offsetH = containerH * 0.1;
+        const mobile = window.innerWidth < 700;
+        imgs.forEach((im, n) => {
+          if (im._init === undefined) {
+            im._init = true;
+            im._x = rnd(96);
+            im._y = rnd(100);
+            im._sp = rand(0.6, 1.45);                   // random parallax speed (wider)
+            im._z = Math.round(rand(-260, 260));        // random depth (wider)
+            im._rot = rand(-11, 11).toFixed(2);         // random tilt (wider)
+            im._baseScale = rand(0.62, 1.5);            // persistent per-image size — some bigger, some smaller
+            im.src = srcs[rnd(srcs.length)];            // random image (not sequential)
+          }
+          im.style.opacity = im._z < 0 ? Math.max(0.5, 1 + im._z / 250) : 1;
+          im.style.left = (mobile ? ((n % 4) * 25 + (im._x % 20)) : im._x) + '%';
+          im.style.top = im._y + '%';
+          im.style.transform = `translate3d(0,0,0) rotate(${im._rot}deg)`;
+          const r = im.getBoundingClientRect();
+          im._extra = 0; im._h = r.height; im._top = r.top - rect.top; im._scale = 1;
+        });
+      }
+
+      let lastT = 0;
+      function tick(t) {
+        const dt = lastT ? Math.min(64, t - lastT) : 16; lastT = t;
+        const vel = (window.lenis && window.lenis.velocity) || 0;
+        if (vel) { st.target += vel * cfg.scrollMult; dirSign = Math.sign(vel) || dirSign; }
+        speedFactor = lerp(speedFactor, targetFactor, 0.04);
+        st.target += cfg.speed * dt * dirSign * speedFactor;
+        st.current = lerp(st.current, st.target, cfg.ease);
+        direction = st.current < st.last ? 'down' : 'up';
+        imgs.forEach((im) => {
+          let pos = -st.current * im._sp - im._extra;
+          const bottom = pos + im._top + im._h;
+          if (direction === 'up' && bottom < -offsetH) im._extra -= containerH + offsetH;
+          if (direction === 'down' && bottom > containerH + offsetH) im._extra += containerH;
+          pos = -st.current * im._sp - im._extra;
+          const l = Math.max(0, Math.min(1, (pos + im._top) / containerH));
+          const target = cfg.scaleMin + l * (cfg.scaleMax - cfg.scaleMin);
+          im._scale = lerp(im._scale, target, cfg.scaleEase);
+          im.style.transform = `translate3d(0, ${pos.toFixed(1)}px, ${im._z}px) scale(${(im._scale * im._baseScale).toFixed(3)}) rotate(${im._rot}deg)`;
+        });
+        st.last = st.current;
+        requestAnimationFrame(tick);
+      }
+
+      layout();
+      if (reduce) return; // static field if reduced motion
+      galaxy.classList.add('gx-ready');
+      requestAnimationFrame(tick);
+      let rt;
+      window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(layout, 200); }, { passive: true });
+    })();
+
+    // Category filter (grid cards + list rows) with a reorder animation
+    (function () {
+      const page = document.querySelector('.work-page');
+      const grid = document.getElementById('wp-grid');
+      if (!grid || !page) return;
+      const btns = document.querySelectorAll('.wp-filter button');
+      const items = Array.from(document.querySelectorAll('.wp-card, .wp-row'));
+      btns.forEach((b) => b.addEventListener('click', () => {
+        const f = b.dataset.filter;
+        btns.forEach((x) => x.classList.remove('active'));
+        b.classList.add('active');
+        grid.classList.toggle('filtered', f !== 'all');
+        page.classList.add('wp-switching');                 // fade the current set out
+        setTimeout(() => {
+          items.forEach((c) => {
+            const show = f === 'all' || c.dataset.cats.split(' ').includes(f);
+            c.classList.toggle('hide', !show);
+          });
+          const vis = items.filter((c) => !c.classList.contains('hide'));
+          vis.forEach((c, i) => { c.style.animationDelay = (Math.min(i, 14) * 0.03) + 's'; });
+          page.classList.remove('wp-switching');
+          page.classList.remove('wp-entering'); void page.offsetWidth; page.classList.add('wp-entering'); // staggered rebuild
+        }, 230);
+      }));
+    })();
+
+    // Cursor-following "View Project" badge over work cards
+    (function () {
+      const cur = document.getElementById('wpCursor');
+      if (!cur) return;
+      const cards = document.querySelectorAll('.wp-card');
+      if (!cards.length) return;
+      let tx = 0, ty = 0, cx = 0, cy = 0;
+      function loop() {
+        cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18;
+        cur.style.left = cx.toFixed(1) + 'px'; cur.style.top = cy.toFixed(1) + 'px';
+        requestAnimationFrame(loop);
+      }
+      cards.forEach((card) => {
+        card.addEventListener('mouseenter', (e) => { tx = cx = e.clientX; ty = cy = e.clientY; cur.classList.add('show'); });
+        card.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+        card.addEventListener('mouseleave', () => { cur.classList.remove('show'); });
+      });
+      loop();
+    })();
+
+    // Randomize portfolio order on load (cards are still opacity:0 here, so no flicker)
+    (function () {
+      const grid = document.getElementById('wp-grid');
+      if (!grid) return;
+      const cards = Array.from(grid.children);
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+      }
+      cards.forEach((c) => grid.appendChild(c));
+    })();
+
+    // Column-count toggle (2 / 4)
+    (function () {
+      const grid = document.getElementById('wp-grid');
+      if (!grid) return;
+      const btns = document.querySelectorAll('.wp-cols button');
+      btns.forEach((b) => b.addEventListener('click', () => {
+        grid.classList.remove('cols-2', 'cols-4');
+        grid.classList.add('cols-' + b.dataset.cols);
+        btns.forEach((x) => x.classList.remove('on'));
+        b.classList.add('on');
+      }));
+    })();
+
+    // View toggle (grid / list)
+    (function () {
+      const page = document.querySelector('.work-page');
+      if (!page) return;
+      const btns = document.querySelectorAll('.wp-view button');
+      btns.forEach((b) => b.addEventListener('click', () => {
+        const v = b.dataset.view;
+        page.classList.toggle('view-grid', v === 'grid');
+        page.classList.toggle('view-list', v === 'list');
+        btns.forEach((x) => x.classList.remove('on'));
+        b.classList.add('on');
+      }));
+    })();
+
+    // Overlay-style switcher (temporary preview tool)
+    (function () {
+      const grid = document.getElementById('wp-grid');
+      const sw = document.getElementById('ovSwitcher');
+      if (!grid || !sw) return;
+      const variants = ['ov-slide', 'ov-wipe', 'ov-duotone', 'ov-glitch', 'ov-stamp', 'ov-lift', 'ov-flood', 'ov-invert', 'ov-frame', 'ov-skew'];
+      sw.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
+        variants.forEach((v) => grid.classList.remove(v));
+        grid.classList.add(b.dataset.ov);
+        sw.querySelectorAll('button').forEach((x) => x.classList.remove('on'));
+        b.classList.add('on');
+      }));
+    })();
+  </script>
+</Base>
