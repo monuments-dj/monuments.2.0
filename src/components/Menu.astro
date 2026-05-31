@@ -53,10 +53,55 @@ const links = [
       </g>
     </svg></span>
     <span class="patch patch-story"><span class="ps-line">No Risk</span><span class="ps-line">No Story</span></span>
-    <span class="patch patch-digital"><svg class="patch-icon" viewBox="0 0 24 24" fill="none" stroke="#0d0f14" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><polygon points="12,7 14,12 12,17 10,12" fill="#0d0f14" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="#0d0f14" stroke="none"/></svg>Digital Native</span>
+    <span class="patch patch-digital"><svg class="pdn-svg" viewBox="0 0 140 96" aria-hidden="true">
+      <defs>
+        <path id="dnTop" d="M30,44 A44,34 0 0 1 110,44" />
+        <path id="dnBot" d="M32,54 A42,32 0 0 0 108,54" />
+        <pattern id="dnCheck" width="4" height="4" patternUnits="userSpaceOnUse">
+          <rect width="4" height="4" fill="#f4efe2"/>
+          <rect width="2" height="2" fill="#1a1a1a"/>
+          <rect x="2" y="2" width="2" height="2" fill="#1a1a1a"/>
+        </pattern>
+      </defs>
+      <text class="pdn-arc" text-anchor="middle"><textPath href="#dnTop" startOffset="50%">DIGITAL</textPath></text>
+      <text class="pdn-arc" text-anchor="middle"><textPath href="#dnBot" startOffset="50%">NATIVE</textPath></text>
+      <!-- crossed flag poles -->
+      <g stroke="#1a1a1a" stroke-width="2.2" stroke-linecap="round">
+        <line x1="60" y1="66" x2="78" y2="34" />
+        <line x1="80" y1="66" x2="62" y2="34" />
+      </g>
+      <!-- green flag (left pole top) -->
+      <path d="M62,34 q-10,-1 -17,4 q4,4 0,11 q9,-5 17,-3 z" fill="#2f8f4e" stroke="#1a1a1a" stroke-width="1"/>
+      <!-- checkered flag (right pole top) -->
+      <path d="M78,34 q10,-1 17,4 q-4,4 0,11 q-9,-5 -17,-3 z" fill="url(#dnCheck)" stroke="#1a1a1a" stroke-width="1"/>
+    </svg></span>
     <span class="patch patch-vibes"><svg class="patch-icon" viewBox="0 0 24 24" fill="none" stroke="#14181f" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8.5 14a4.5 4.5 0 0 0 7 0" stroke-linecap="round"/><circle cx="9" cy="10" r="0.8" fill="#14181f" stroke="none"/><circle cx="15" cy="10" r="0.8" fill="#14181f" stroke="none"/></svg>Good<br>Vibes</span>
     <span class="patch patch-emmy"><svg class="patch-icon" viewBox="0 0 24 24" fill="none" stroke="#14181f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12v4a6 6 0 0 1-12 0V4z"/><path d="M6 5H4a2.5 2.5 0 0 0 2.6 3.6"/><path d="M18 5h2a2.5 2.5 0 0 1-2.6 3.6"/><line x1="12" y1="14" x2="12" y2="17"/><path d="M8.5 20h7l-1-3h-5z"/></svg>Emmy<br>Award<br>Winning</span>
-    <span class="patch patch-camera"><svg class="patch-icon" viewBox="0 0 24 24" fill="none" stroke="#14181f" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1.6" fill="#14181f" stroke="none"/><path d="M9.2 6.6a6 6 0 0 0-2.6 2.6" stroke-linecap="round"/></svg>Good at<br>camera<br>stuff</span>
+    <span class="patch patch-camera"><svg class="pcam-svg" viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <path id="camTop" d="M21,50 A29,29 0 0 1 79,50" />
+        <path id="camBot" d="M23,53 A27,27 0 0 0 77,53" />
+      </defs>
+      <text class="pcam-arc" text-anchor="middle"><textPath href="#camTop" startOffset="50%">GOOD AT</textPath></text>
+      <text class="pcam-arc" text-anchor="middle"><textPath href="#camBot" startOffset="50%">CAMERA STUFF</textPath></text>
+      <!-- clapperboard -->
+      <g transform="rotate(-7 47 54)">
+        <rect x="34" y="50" width="26" height="17" rx="1.5" fill="#ece3cf"/>
+        <path d="M34,50 l3,-6 l6,2 l-3,6 z M43,46 l6,2 l-3,6 l-6,-2 z M52,49 l6,2 l-2,5 l-6,-2 z" fill="#1d2f4a"/>
+        <path d="M34,50 l24,0" stroke="#1d2f4a" stroke-width="1"/>
+        <line x1="37" y1="58" x2="57" y2="58" stroke="#1d2f4a" stroke-width="1.3"/>
+        <line x1="37" y1="62" x2="57" y2="62" stroke="#1d2f4a" stroke-width="1.3"/>
+      </g>
+      <!-- film reel -->
+      <g>
+        <circle cx="64" cy="55" r="11" fill="#ece3cf" stroke="#1d2f4a" stroke-width="1"/>
+        <circle cx="64" cy="55" r="3" fill="#1d2f4a"/>
+        <circle cx="64" cy="48" r="2.2" fill="#1d2f4a"/>
+        <circle cx="64" cy="62" r="2.2" fill="#1d2f4a"/>
+        <circle cx="57.5" cy="55" r="2.2" fill="#1d2f4a"/>
+        <circle cx="70.5" cy="55" r="2.2" fill="#1d2f4a"/>
+      </g>
+    </svg></span>
     <span class="patch patch-idaho">
       <span class="pi-top">Outdoor Tradition</span>
       <span class="pi-mid">
