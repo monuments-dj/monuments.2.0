@@ -11,3 +11,6 @@ node_modules/
 npm-debug.log*
 # macOS
 .DS_Store
+
+# Personal Claude permissions (machine-local)
+.claude/settings.local.json
