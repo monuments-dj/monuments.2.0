@@ -1,0 +1,116 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// === Flashpoint — faithful rebuild of monuments.cc/portfolio/flashpoint ===
+// Real assets pulled from the live site into /public/case-studies/flashpoint.
+const gallery = Array.from({ length: 8 }, (_, i) => `/case-studies/flashpoint/gallery/fp-${String(i + 1).padStart(2, '0')}.jpg`);
+const services = ['Brand Identity', 'Logo Design', 'Brand Positioning', 'Packaging Design', 'Product Design', 'Messaging'];
+const tags = ['Full Rebrand'];
+const credits = [
+  { k: 'Agency', v: 'Art of Visuals' },
+  { k: 'Client', v: 'Adorama' },
+  { k: 'Art Director', v: 'Dannie Nicholson' },
+  { k: 'Creative Direction', v: 'DJ Ramirez' },
+];
+---
+<Base title="Flashpoint — monuments">
+  <article class="cs2">
+
+    <!-- HERO -->
+    <header class="cs2-hero">
+      <div class="cs2-hero-bg" style={`background-image:url(${gallery[0]})`}></div>
+      <div class="cs2-hero-scrim"></div>
+      <div class="cs2-hero-inner">
+        <h1 class="cs2-hero-title">Flash<br>point</h1>
+        <div class="cs2-hero-foot">
+          <div class="cs2-tags">{tags.map((t) => <span class="cs2-tag">{t}</span>)}</div>
+          <a class="cs2-allwork" href="/work">All Work <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </header>
+
+    <!-- INTRO: services sidebar + lead -->
+    <section class="cs2-intro fade">
+      <aside class="cs2-side">
+        <h2 class="cs2-side-h">Imagine, illuminate, create — a full rebrand for Flashpoint.</h2>
+        <ul class="cs2-services">{services.map((s) => <li>{s}</li>)}</ul>
+      </aside>
+      <div class="cs2-intro-body">
+        <p>Flashpoint, a private label under Adorama, offers top-quality lighting and photography gear at affordable prices, catering to both pros and enthusiasts. Despite its strong reputation, the brand needed a fresh look to stay relevant in the fast-changing photography industry. As Creative Director, DJ led the project, working closely with his team at Art of Visuals to revamp Flashpoint's identity.</p>
+        <p class="cs2-intro-kick">Together, they crafted a modern, cohesive image that reinforced Flashpoint's standing as a trusted leader in the photography world.</p>
+      </div>
+    </section>
+
+    <!-- FEATURE CARD (packaging) -->
+    <section class="cs2-logo fade">
+      <div class="cs2-logo-card">
+        <img src={gallery[3]} alt="Flashpoint packaging system" />
+      </div>
+      <div class="cs2-logo-aside">
+        <p class="cs2-logo-note">A confident new system — packaging, product, and messaging pulled into one voice that says innovation, quality, and value.</p>
+      </div>
+    </section>
+
+    <!-- PHOTO GRID -->
+    <section class="cs2-gallery">
+      <div class="cs2-gallery-badge" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><defs><path id="fpBadge" d="M50,50 m-34,0 a34,34 0 1,1 68,0 a34,34 0 1,1 -68,0" /></defs>
+          <text><textPath href="#fpBadge" startOffset="0%">IMAGINE · ILLUMINATE · CREATE · </textPath></text>
+        </svg>
+      </div>
+      <div class="cs2-grid">
+        {gallery.map((src, i) => <figure class={`cs2-cell c-${i % 6}`}><img src={src} alt="" loading="lazy" /></figure>)}
+      </div>
+    </section>
+
+    <!-- IMAGINE / ILLUMINATE / CREATE -->
+    <section class="cs2-cdd fade">
+      <h2 class="cs2-cdd-head"><span class="on">Imagine</span> <span>Illuminate</span> <span>Create</span></h2>
+      <div class="cs2-cdd-cols">
+        <div class="cs2-cdd-col">
+          <p>The primary objective was to revitalize Flashpoint's market presence, ensuring that it became synonymous with innovation, quality, and value in the world of photography.</p>
+          <p>This was a top-to-bottom effort: a fresh brand image, sharper messaging, and a visual identity that could carry across every surface — from the box on the shelf to the billboard on the street.</p>
+        </div>
+        <div class="cs2-cdd-col">
+          <p class="cs2-obj-h">The work spanned</p>
+          <ul class="cs2-obj">
+            <li>A fresh brand image and updated messaging.</li>
+            <li>A redesigned website for improved user experience.</li>
+            <li>Revamped packaging reflecting the updated visual identity.</li>
+            <li>Powerful out-of-home (OOH) advertising campaigns.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CREDITS -->
+    <div class="cs2-credits fade">
+      {credits.map((c) => <div><span>{c.k}</span>{c.v}</div>)}
+    </div>
+
+    <!-- PRODUCT GRID -->
+    <section class="cs2-products">
+      <span class="cs2-check" aria-hidden="true">LIGHT IT UP</span>
+      <div class="cs2-prod-grid">
+        {gallery.slice(0, 6).map((src) => <figure class="cs2-prod"><img src={src} alt="" loading="lazy" /></figure>)}
+      </div>
+    </section>
+
+    <!-- NEXT PROJECT -->
+    <a class="cs2-next" href="/work/sony-this-moment">
+      <div class="cs2-next-bg" style={`background-image:url(${gallery[2]})`}></div>
+      <div class="cs2-next-scrim"></div>
+      <div class="cs2-next-inner">
+        <span class="cs2-next-k">Next project</span>
+        <span class="cs2-next-t">Sony — This Moment <span aria-hidden="true">→</span></span>
+      </div>
+    </a>
+
+    <!-- CTA -->
+    <section class="cs2-cta">
+      <p>Let's build something great together.</p>
+      <a href="/contact" class="cs2-cta-link">Let's Talk <span aria-hidden="true">↗</span></a>
+    </section>
+
+  </article>
+</Base>
