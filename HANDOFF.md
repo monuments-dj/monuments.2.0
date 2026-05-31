@@ -77,3 +77,8 @@ Master imagery lives in DJ's Dropbox: `~/Library/CloudStorage/Dropbox/Monuments/
 ## Notes
 - DJ gives precise designer feedback, iterates fast, is cost-conscious (estimate effort
   before big tasks), and can't watch video — describe/screenshot instead.
+- The fullscreen menu has playful easter eggs: 6 draggable patches that wiggle, and trail
+  particles — the AI patch spews binary, Good Vibes rains smileys when shaken, the Emmy
+  drops a giant trophy on shake, and "Good at camera stuff" plops film gear (🎬📷🎥) on
+  drag. Trail logic lives in `Base.astro` (`spawnTrail` / `spawnFallingProp`). Keep the
+  spirit — DJ loves leaving these for people to find.
