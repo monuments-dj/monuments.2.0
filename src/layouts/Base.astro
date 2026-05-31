@@ -181,23 +181,26 @@ const { title = 'monuments', loader = false } = Astro.props;
       if (closeBtn) closeBtn.addEventListener('click', () => { dock.classList.remove('open'); tab.setAttribute('aria-expanded', 'false'); });
     })();
 
-    // Draggable menu patches (+ binary-code trail when dragging the AI patch)
+    // Trail particles: binary off the AI patch, smileys off Good Vibes
+    function randBit() { return Math.random() < 0.5 ? '0' : '1'; }
+    function spawnTrail(x, y, text, cls) {
+      const b = document.createElement('span');
+      b.className = cls; b.textContent = text;
+      b.style.left = (x + (Math.random() * 18 - 9)) + 'px';
+      b.style.top = (y + (Math.random() * 18 - 9)) + 'px';
+      b.style.setProperty('--bx', (Math.random() * 28 - 14).toFixed(0) + 'px');
+      b.style.setProperty('--by', (16 + Math.random() * 22).toFixed(0) + 'px');
+      document.body.appendChild(b);
+      setTimeout(() => b.remove(), 950);
+    }
+
+    // Draggable menu patches (AI patch trails binary, Good Vibes trails smileys)
     (function () {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const spawnBit = (x, y) => {
-        const b = document.createElement('span');
-        b.className = 'bit-trail';
-        b.textContent = Math.random() < 0.5 ? '0' : '1';
-        b.style.left = (x + (Math.random() * 18 - 9)) + 'px';
-        b.style.top = (y + (Math.random() * 18 - 9)) + 'px';
-        b.style.setProperty('--bx', (Math.random() * 26 - 13).toFixed(0) + 'px');
-        b.style.setProperty('--by', (16 + Math.random() * 22).toFixed(0) + 'px');
-        document.body.appendChild(b);
-        setTimeout(() => b.remove(), 950);
-      };
       document.querySelectorAll('.patch').forEach((p) => {
         const isAI = p.classList.contains('patch-ai');
-        let down = false, sx = 0, sy = 0, ox = 0, oy = 0, lastBit = 0;
+        const isVibes = p.classList.contains('patch-vibes');
+        let down = false, sx = 0, sy = 0, ox = 0, oy = 0, lastT = 0;
         p.addEventListener('pointerdown', (e) => {
           down = true; sx = e.clientX; sy = e.clientY; ox = p.offsetLeft; oy = p.offsetTop;
           p.style.left = ox + 'px'; p.style.top = oy + 'px'; p.style.right = 'auto'; p.style.bottom = 'auto'; p.style.zIndex = '20';
@@ -206,7 +209,10 @@ const { title = 'monuments', loader = false } = Astro.props;
         p.addEventListener('pointermove', (e) => {
           if (!down) return;
           p.style.left = (ox + e.clientX - sx) + 'px'; p.style.top = (oy + e.clientY - sy) + 'px';
-          if (isAI && !reduce) { const t = Date.now(); if (t - lastBit > 42) { lastBit = t; spawnBit(e.clientX, e.clientY); spawnBit(e.clientX, e.clientY); } }
+          if (reduce) return;
+          const t = Date.now();
+          if (isAI && t - lastT > 42) { lastT = t; spawnTrail(e.clientX, e.clientY, randBit(), 'bit-trail'); spawnTrail(e.clientX, e.clientY, randBit(), 'bit-trail'); }
+          else if (isVibes && t - lastT > 75) { lastT = t; spawnTrail(e.clientX, e.clientY, '🙂', 'smiley-trail'); }
         });
         const up = () => { down = false; };
         p.addEventListener('pointerup', up);
@@ -214,14 +220,14 @@ const { title = 'monuments', loader = false } = Astro.props;
       });
     })();
 
-    // Patches: every once in a while, one gives a little wiggle/pulse (only while the menu is open)
+    // Patches: every once in a while, one gives a little wiggle/pulse (menu open; AI handled separately)
     (function () {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const menu = document.getElementById('fullscreen-menu');
       if (!menu) return;
       const tick = () => {
         if (menu.classList.contains('open')) {
-          const ps = [...document.querySelectorAll('.patch.in:not(.wiggle)')];
+          const ps = [...document.querySelectorAll('.patch.in:not(.patch-ai):not(.wiggle)')];
           if (ps.length) {
             const p = ps[Math.floor(Math.random() * ps.length)];
             p.classList.add('wiggle');
@@ -231,6 +237,25 @@ const { title = 'monuments', loader = false } = Astro.props;
         setTimeout(tick, 2400 + Math.random() * 3000);
       };
       setTimeout(tick, 2400 + Math.random() * 3000);
+    })();
+
+    // AI/robot patch: every once in a while it wiggles + spews a few 0s/1s (also on drag, above)
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const menu = document.getElementById('fullscreen-menu');
+      const ai = document.querySelector('.patch-ai');
+      if (!menu || !ai) return;
+      const tick = () => {
+        if (menu.classList.contains('open') && ai.classList.contains('in')) {
+          ai.classList.add('wiggle');
+          setTimeout(() => ai.classList.remove('wiggle'), 850);
+          const r = ai.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+          const n = 4 + Math.floor(Math.random() * 4);
+          for (let i = 0; i < n; i++) setTimeout(() => spawnTrail(cx + (Math.random() * 30 - 15), cy + (Math.random() * 22 - 11), randBit(), 'bit-trail'), i * 100);
+        }
+        setTimeout(tick, 4200 + Math.random() * 3800);
+      };
+      setTimeout(tick, 3200 + Math.random() * 2800);
     })();
 
     // Global play-button cursor over .video-hover elements (triangle leads, ring lags = delay effect)
