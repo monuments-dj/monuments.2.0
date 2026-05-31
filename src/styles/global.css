@@ -224,6 +224,13 @@ nav a {
 .patch-emmy { --rot: 4deg; width: 123px; height: 123px; background: linear-gradient(140deg, #f6dc80 0%, #d8aa30 55%, #b07d09 100%); clip-path: polygon(50.0% 0.0%, 57.8% 10.8%, 69.1% 3.8%, 72.2% 16.7%, 85.4% 14.6%, 83.3% 27.8%, 96.2% 30.9%, 89.2% 42.2%, 100.0% 50.0%, 89.2% 57.8%, 96.2% 69.1%, 83.3% 72.2%, 85.4% 85.4%, 72.2% 83.3%, 69.1% 96.2%, 57.8% 89.2%, 50.0% 100.0%, 42.2% 89.2%, 30.9% 96.2%, 27.8% 83.3%, 14.6% 85.4%, 16.7% 72.2%, 3.8% 69.1%, 10.8% 57.8%, 0.0% 50.0%, 10.8% 42.2%, 3.8% 30.9%, 16.7% 27.8%, 14.6% 14.6%, 27.8% 16.7%, 30.9% 3.8%, 42.2% 10.8%); font-size: 10.5px; letter-spacing: 0.03em; line-height: 1.08; top: 80%; left: 4%; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.38)); }
 .patch-emmy::after { border-radius: 50%; inset: 13px; border-color: rgba(20,24,31,0.42); }
 .patch-camera { --rot: -6deg; width: 96px; height: 96px; border-radius: 50%; background: #5fa99d; font-size: 9.5px; letter-spacing: 0.02em; top: 91%; right: 4%; }
+/* State patches — silhouettes via clip-path, so people know it's Boise + LA. */
+.patch-idaho { --rot: -7deg; width: 70px; height: 92px; background: #cc6b4a; font-size: 9px; letter-spacing: 0.04em; top: 2%; left: 33%;
+  clip-path: polygon(14% 0, 30% 0, 30% 40%, 100% 48%, 88% 100%, 14% 100%); }
+.patch-california { --rot: 5deg; width: 80px; height: 100px; background: #f0b63f; font-size: 9px; letter-spacing: 0.04em; top: 52%; left: 26%;
+  clip-path: polygon(8% 0, 52% 0, 100% 64%, 82% 100%, 62% 100%, 0 30%); }
+.patch-idaho::after, .patch-california::after { display: none; }  /* dashed ring can't follow a silhouette */
+.patch-star { font-size: 13px; line-height: 1; color: #14181f; margin-bottom: 1px; }
 .patch-icon { width: 18px; height: 18px; }
 /* Occasional life — one patch wiggles + pulses now and then */
 @keyframes patchWiggle {

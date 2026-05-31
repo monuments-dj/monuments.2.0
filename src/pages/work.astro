@@ -64,8 +64,8 @@ const filters = [
       </div>
       <div class="wp-controls-right">
         <div class="wp-cols" role="group" aria-label="Column layout">
-          <button type="button" data-cols="2" class="on" aria-label="Two columns"><i></i><i></i></button>
-          <button type="button" data-cols="4" aria-label="Four columns"><i></i><i></i><i></i><i></i></button>
+          <button type="button" data-cols="2" aria-label="Two columns"><i></i><i></i></button>
+          <button type="button" data-cols="4" class="on" aria-label="Four columns"><i></i><i></i><i></i><i></i></button>
         </div>
         <div class="wp-view" role="group" aria-label="View layout">
           <button type="button" data-view="grid" class="on" aria-label="Grid view"><span class="wp-view-grid"><i></i><i></i><i></i><i></i></span></button>
@@ -74,7 +74,7 @@ const filters = [
       </div>
     </div>
 
-    <div class="wp-grid ov-focus cols-2" id="wp-grid">
+    <div class="wp-grid ov-focus cols-4" id="wp-grid">
       {projects.map((p) => (
         <a class="wp-card fade" href={`/work/${p.slug}`} data-cats={p.cats}>
           <div class="wp-card-media">
