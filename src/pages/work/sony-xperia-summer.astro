@@ -1,0 +1,122 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// === Sony — Summer w/ Xperia — faithful rebuild of monuments.cc/portfolio/sonys-summer-with-xperia ===
+// Real campaign stills pulled from the live site into /public/case-studies/sony-xperia-summer.
+const g = Array.from({ length: 14 }, (_, i) => `/case-studies/sony-xperia-summer/gallery/xp-${String(i + 1).padStart(2, '0')}.jpg`);
+const meta = [
+  { k: 'Client', v: 'Sony Xperia' },
+  { k: 'Agency', v: 'Art of Visuals' },
+  { k: 'Director / Creative Director', v: 'DJ Ramirez' },
+  { k: 'DP', v: 'Komin Kovatonic' },
+  { k: 'Stills', v: 'DJ Ramirez' },
+];
+---
+<Base title="Sony — Summer w/ Xperia — monuments">
+  <article class="bc-page">
+
+    <!-- HERO (full-bleed image) -->
+    <header class="bc-hero">
+      <img class="bc-hero-img" src={g[0]} alt="Sony — Summer with Xperia campaign" />
+      <div class="bc-hero-inner">
+        <p class="bc-hero-eyebrow">Sony Xperia · Directing, Photo + Strategy</p>
+        <h1 class="bc-hero-title">Summer<br>w/ Xperia</h1>
+        <p class="bc-hero-lede">A summer in motion, shot on the Xperia 5 IV.</p>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <section class="bc-intro fade">
+      <p>Sony wanted to show off the Xperia 5 IV's pro-level camera features in real-life settings that would resonate with everyday creators. Our mission was to capture the magic of summer through the lens of Xperia, demonstrating how the phone could handle any moment thrown its way.</p>
+    </section>
+
+    <!-- SHOT -->
+    <figure class="bc-shot fade">
+      <img src={g[1]} alt="Summer with Xperia — golden hour" loading="lazy" />
+    </figure>
+
+    <!-- STRATEGY -->
+    <section class="bc-exec fade">
+      <h2 class="bc-exec-h">The ultimate adventure companion.</h2>
+      <div class="bc-exec-b">
+        <p>We developed a strategy focused on positioning the Xperia 5 IV as a phone that could keep up with any journey. From the start, our goal was to showcase how the Xperia's advanced camera features made it perfect for capturing everyday life moments. In collaboration with Art of Visuals, we launched Summer with Xperia — a series of videos highlighting the phone's cinema-quality capabilities.</p>
+        <p>Sony sent over the Xperia 5 IV early, giving me time to test the camera, work out any bugs, and understand its strengths so we could maximize its potential in each shot.</p>
+      </div>
+    </section>
+
+    <!-- CAMPAIGN PAIR -->
+    <div class="bc-duo fade">
+      <img src={g[2]} alt="Summer with Xperia" loading="lazy" />
+      <img src={g[3]} alt="Summer with Xperia" loading="lazy" />
+    </div>
+
+    <!-- PLANNING & DIRECTION -->
+    <section class="bc-exec fade">
+      <h2 class="bc-exec-h">Scripted to feel like a real summer.</h2>
+      <div class="bc-exec-b">
+        <p>Together with the team, I scripted and directed each shoot, focusing on scenes that felt true to a real summer: beach sunsets, road trips, and unexpected adventures. The goal was to show how easily the Xperia could capture beautiful, spontaneous moments.</p>
+        <p>Each video emphasized the Xperia 5 IV's high-res imaging and vivid colors, showcasing the phone's ability to create a cinematic feel without any extra equipment.</p>
+      </div>
+    </section>
+
+    <!-- CAMPAIGN PAIR 2 -->
+    <div class="bc-duo fade">
+      <img src={g[4]} alt="Summer with Xperia" loading="lazy" />
+      <img src={g[5]} alt="Summer with Xperia" loading="lazy" />
+    </div>
+
+    <!-- INSIGHT QUOTE -->
+    <section class="bc-quote fade">
+      <p>We transformed the Xperia 5 IV from a smartphone into <span class="bc-quote-em">a storytelling device</span> — a summer staple for creators worldwide.</p>
+      <p class="bc-quote-attr">The campaign impact.</p>
+    </section>
+
+    <!-- SHOT -->
+    <figure class="bc-shot fade">
+      <img src={g[7]} alt="Summer with Xperia" loading="lazy" />
+    </figure>
+
+    <!-- EARLY BIRD -->
+    <section class="bc-exec fade">
+      <h2 class="bc-exec-h">The early bird gets the phone.</h2>
+      <div class="bc-exec-b">
+        <p>Before launch, Sony provided us with early access to the Xperia 5 IV to experience its functionality firsthand. This early look gave us valuable time to test the camera's full range — identifying its strengths, pinpointing areas to troubleshoot, and aligning our strategy with the Xperia's standout qualities.</p>
+        <p>While directing the campaign, I kept my camera close, shooting behind-the-scenes and capturing the Xperia 5 IV in action. I snapped everything — from the phone handling to those perfect golden-hour shots to candid moments. For me, it was about capturing the vibe of the season.</p>
+      </div>
+    </section>
+
+    <!-- CAMPAIGN PAIR 3 -->
+    <div class="bc-duo fade">
+      <img src={g[8]} alt="Summer with Xperia" loading="lazy" />
+      <img src={g[9]} alt="Summer with Xperia" loading="lazy" />
+    </div>
+
+    <!-- CAMPAIGN PAIR 4 -->
+    <div class="bc-duo fade">
+      <img src={g[10]} alt="Summer with Xperia" loading="lazy" />
+      <img src={g[12]} alt="Summer with Xperia" loading="lazy" />
+    </div>
+
+    <!-- FINAL SHOT -->
+    <figure class="bc-shot fade">
+      <img src={g[13]} alt="Summer with Xperia" loading="lazy" />
+    </figure>
+
+    <!-- META -->
+    <div class="bc-meta fade">
+      {meta.map((m) => (
+        <div class="cs-meta-item">
+          <span class="cs-meta-k">{m.k}</span>
+          <span class="cs-meta-v">{m.v}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- NEXT -->
+    <a class="cs-next" href="/work/clothing-merch">
+      <span class="cs-next-k">Next project</span>
+      <span class="cs-next-t">Clothing &amp; Merch <span class="cs-next-arrow">→</span></span>
+    </a>
+
+  </article>
+</Base>
