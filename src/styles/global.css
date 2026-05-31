@@ -233,14 +233,14 @@ nav a {
 .pi-top { font-size: 8.5px; }
 .pi-bot { font-size: 11px; letter-spacing: 0.12em; }
 .pi-mid { display: flex; align-items: center; gap: 2px; }
-.pi-script { font-family: 'Yellowtail', cursive; text-transform: none; font-weight: 400; font-size: 32px; line-height: 0.8; color: #1c2f4a; }
+.pi-script { font-family: 'Snell Roundhand', 'Brush Script MT', cursive; text-transform: none; font-weight: 400; font-size: 32px; line-height: 0.8; color: #1c2f4a; }
 .pi-moose { width: 22px; height: 17px; margin-bottom: -3px; }
 
 /* Los Angeles — round baseball, navy ring, red laces, Los Angeles script, skyline + palms */
 .patch-california { --rot: 5deg; width: 124px; height: 124px; border-radius: 50%; background: #fbfaf6;
   border: 4px solid #16294a; gap: 0; padding: 0; top: 56%; left: 24%; }
 .patch-california::after { inset: 4px; border: 1.5px solid rgba(22,41,74,0.5); border-radius: 50%; }
-.pc-script { font-family: 'Yellowtail', cursive; text-transform: none; font-weight: 400; font-size: 27px; line-height: 0.9; color: #16294a; position: relative; z-index: 1; margin-top: -6px; }
+.pc-script { font-family: 'Snell Roundhand', 'Brush Script MT', cursive; text-transform: none; font-weight: 400; font-size: 27px; line-height: 0.9; color: #16294a; position: relative; z-index: 1; margin-top: -6px; }
 .pc-city { position: absolute; left: 14%; right: 14%; bottom: 26px; width: 72%; height: auto; z-index: 1; }
 .patch-icon { width: 18px; height: 18px; }
 /* Occasional life — one patch wiggles + pulses now and then */
