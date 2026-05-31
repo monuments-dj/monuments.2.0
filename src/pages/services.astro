@@ -1,9 +1,83 @@
 ---
 import Base from '../layouts/Base.astro';
+
+// Three ways to work together — DJ's approved service framing.
+const services = [
+  {
+    n: '01',
+    t: 'Embedded Creative Partner',
+    d: "Plug senior creative thinking into your agency's infrastructure. I work inside your process, not around it — the extra brain in the room when the brief gets hard.",
+  },
+  {
+    n: '02',
+    t: 'Brand Consulting',
+    d: 'For brands that have lost the thread. Listening first, no production overhead. We find what you actually stand for, then say it like you mean it.',
+  },
+  {
+    n: '03',
+    t: 'Project Work',
+    d: "The brief is locked? Good — let's build it right. Scope changes, timelines move, budgets flex. The thinking doesn't.",
+  },
+];
+
+const caps = [
+  'Creative Direction', 'Brand Strategy', 'Campaign Development',
+  'Integrated Content', 'Photography Direction', 'Positioning',
+];
 ---
-<Base title="SERVICES - monuments">
-  <section class="page-stub">
-    <h1>Services</h1>
-    <p>Coming soon</p>
-  </section>
+<Base title="SERVICES — monuments">
+  <article class="ip">
+
+    <!-- HERO -->
+    <header class="ip-hero fade">
+      <span class="ip-eyebrow">Services</span>
+      <h1 class="ip-title">We come in at the<br><span class="acc">thinking layer.</span></h1>
+      <p class="ip-lead">Strategy, creative direction, and integrated content — plugged in at the senior level. For brands that have lost the thread, and the agencies that need more firepower in the room.</p>
+    </header>
+
+    <!-- THREE WAYS -->
+    <section class="band band-slate">
+      <p class="band-kicker fade">Three ways to work together</p>
+      <div class="sv-list">
+        {services.map((s) => (
+          <a class="sv-row fade" href="/contact">
+            <span class="sv-n">{s.n}</span>
+            <div class="sv-main">
+              <h2 class="sv-t">{s.t}</h2>
+              <p class="sv-d">{s.d}</p>
+            </div>
+            <span class="sv-arrow" aria-hidden="true">→</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- CAPABILITIES -->
+    <section class="band band-cream">
+      <p class="band-kicker fade">What that looks like</p>
+      <div class="sv-caps fade">
+        {caps.map((c) => <span class="sv-cap">{c}</span>)}
+      </div>
+    </section>
+
+    <!-- FOCUS QUOTE -->
+    <section class="band band-sand sv-focus">
+      <blockquote class="sv-focus-q fade">
+        <p>A man who chases two rabbits <span class="acc">doesn't eat.</span></p>
+        <span class="sv-focus-sub">One brief. One room. The right thinking, all the way through.</span>
+      </blockquote>
+    </section>
+
+    <!-- CTA -->
+    <section class="band band-black ip-cta">
+      <div class="fade">
+        <h2 class="ip-cta-h">Big campaign or a single shoot.<br><span class="acc">Either way, the thinking comes with it.</span></h2>
+        <div class="ip-cta-row">
+          <a href="/work" class="ip-btn ip-btn-ghost">See the Work <span aria-hidden="true">→</span></a>
+          <a href="/contact" class="ip-btn ip-btn-solid">Let's Talk <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+  </article>
 </Base>

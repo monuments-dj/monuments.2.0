@@ -1,9 +1,74 @@
 ---
 import Base from '../layouts/Base.astro';
+
+// Stats / proof — pulled from monuments.cc + DJ's approved copy.
+const stats = [
+  { n: '10+', l: 'years directing brand & campaign work' },
+  { n: '2M+', l: 'audience scaled at Art of Visuals' },
+  { n: '$100K', l: 'photo series for a NW healthcare system' },
+  { n: '01', l: 'pro soccer team, launched from scratch' },
+];
 ---
-<Base title="ABOUT - monuments">
-  <section class="page-stub">
-    <h1>About</h1>
-    <p>Coming soon</p>
-  </section>
+<Base title="ABOUT — monuments">
+  <article class="ip">
+
+    <!-- HERO -->
+    <header class="ip-hero fade">
+      <span class="ip-eyebrow">About — DJ Ramirez</span>
+      <h1 class="ip-title">A decade in<br>the <span class="acc">hard rooms.</span></h1>
+      <p class="ip-lead">DJ Ramirez has spent a decade in rooms where the brief was wrong, the timeline was tight, and the stakes were real. He's learned to love those rooms.</p>
+    </header>
+
+    <!-- WHO -->
+    <section class="band band-sand">
+      <div class="ab-who fade">
+        <p class="band-kicker">Who</p>
+        <p class="ab-who-lead">Creative Director, based between <strong>Los Angeles</strong> and <strong>Boise</strong>. Monuments plugs in at the senior level — strategy, creative direction, integrated content — for brands that want to show up in culture and mean it, and the agencies that serve them.</p>
+      </div>
+    </section>
+
+    <!-- MANIFESTO QUOTE -->
+    <section class="band band-slate ab-quote-band">
+      <blockquote class="ab-quote fade">
+        <span class="ab-quote-mark" aria-hidden="true">“</span>
+        <p>I shoot but I'm not a shooter. I direct but it's not the point. The point is the story. The moment. <span class="acc">Always has been.</span></p>
+        <cite>DJ Ramirez — Creative Director</cite>
+      </blockquote>
+    </section>
+
+    <!-- PROOF / STATS -->
+    <section class="band band-cream">
+      <p class="band-kicker fade">Selected proof</p>
+      <div class="ab-stats fade">
+        {stats.map((s) => (
+          <div class="ab-stat">
+            <span class="ab-stat-n">{s.n}</span>
+            <span class="ab-stat-l">{s.l}</span>
+          </div>
+        ))}
+      </div>
+      <p class="ab-brands fade">Campaign work for <strong>Sony</strong>, <strong>Intel</strong>, and <strong>Adorama</strong> — among others.</p>
+    </section>
+
+    <!-- PHILOSOPHY -->
+    <section class="band band-sand">
+      <div class="ab-philo fade">
+        <p class="band-kicker">How I think</p>
+        <p class="ab-philo-big">A man who chases two rabbits doesn't eat.</p>
+        <p class="ab-philo-body">Figure out your box. Make it worth being in. The work that lasts comes from taking something ordinary and examining it like it's the first time you've seen it.</p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="band band-black ip-cta">
+      <div class="fade">
+        <h2 class="ip-cta-h">Big campaign or a single shoot.<br><span class="acc">Either way, the thinking comes with it.</span></h2>
+        <div class="ip-cta-row">
+          <a href="/work" class="ip-btn ip-btn-ghost">See the Work <span aria-hidden="true">→</span></a>
+          <a href="/contact" class="ip-btn ip-btn-solid">Let's Talk <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+  </article>
 </Base>

@@ -1,9 +1,73 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="CONTACT - monuments">
-  <section class="page-stub">
-    <h1>Contact</h1>
-    <p>monuments.cc@gmail.com</p>
-  </section>
+<Base title="CONTACT — monuments">
+  <article class="ip">
+
+    <!-- HERO -->
+    <header class="ip-hero fade">
+      <span class="ip-eyebrow">Contact</span>
+      <h1 class="ip-title">Let's <span class="acc">talk.</span></h1>
+      <p class="ip-lead">Building partnerships with agencies and brands in LA and Boise. Come with a brief, a budget range, and what you've tried.</p>
+    </header>
+
+    <!-- GRID: details + form -->
+    <section class="band band-sand">
+      <div class="ct-grid">
+
+        <aside class="ct-side fade">
+          <p class="band-kicker">Not ready for a form?</p>
+          <p class="ct-side-lead">Cool. Reach out direct.</p>
+          <a class="ct-email" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
+          <div class="ct-locations">
+            <div><span class="ct-loc-k">Based in</span><span class="ct-loc-v">Los Angeles</span></div>
+            <div><span class="ct-loc-k">& in</span><span class="ct-loc-v">Boise</span></div>
+          </div>
+        </aside>
+
+        <form class="ct-form fade" id="ctForm" novalidate>
+          <div class="ct-field">
+            <input id="ctName" type="text" required autocomplete="name" placeholder=" " />
+            <label for="ctName">Name</label>
+          </div>
+          <div class="ct-field">
+            <input id="ctCompany" type="text" autocomplete="organization" placeholder=" " />
+            <label for="ctCompany">Company</label>
+          </div>
+          <div class="ct-field">
+            <textarea id="ctProject" rows="4" required placeholder=" "></textarea>
+            <label for="ctProject">What are you working on?</label>
+          </div>
+          <div class="ct-field">
+            <input id="ctSource" type="text" placeholder=" " />
+            <label for="ctSource">How did you find us?</label>
+          </div>
+          <button type="submit" class="ip-btn ip-btn-solid ct-submit">Send it <span aria-hidden="true">→</span></button>
+          <p class="ct-note">Opens in your email app. Prefer to send yourself? <a href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a></p>
+        </form>
+
+      </div>
+    </section>
+
+  </article>
+
+  <script is:inline>
+    (function () {
+      const f = document.getElementById('ctForm');
+      if (!f) return;
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const g = (id) => (document.getElementById(id)?.value || '').trim();
+        const name = g('ctName'), company = g('ctCompany'), proj = g('ctProject'), src = g('ctSource');
+        const subject = encodeURIComponent('New project inquiry' + (name ? ' — ' + name : '') + (company ? ', ' + company : ''));
+        const body = encodeURIComponent(
+          'Name: ' + name + '\n' +
+          'Company: ' + company + '\n\n' +
+          "What they're working on:\n" + proj + '\n\n' +
+          'How they found us: ' + src
+        );
+        window.location.href = 'mailto:monuments.cc@gmail.com?subject=' + subject + '&body=' + body;
+      });
+    })();
+  </script>
 </Base>
