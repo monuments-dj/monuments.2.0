@@ -7,17 +7,19 @@ const testimonials = [
   { quote: "DJ doesn't just execute. He makes you rethink what the work could be. We came in with a brief and left with a better brief.", name: "Agency Partner", role: "Creative Director" },
 ];
 
-// Home "Recent Work" reel — fill-in-the-blank headline ("Built to ___"),
-// the centred item drives the word. Section pins; vertical scroll scrubs the
-// filmstrip horizontally; a monument builds brick-by-brick as a progress meter.
-// Images are FIRST-PASS placeholders (galaxy pool + real Blue Cross); DJ swaps a hero per project.
+// Home "Recent Work" reel — headline "Built ___", the centred item fills the
+// tail (carries its own preposition so "Built to…" and "Built for…" both work).
+// Section pins; vertical scroll scrubs the filmstrip horizontally; a monument
+// builds brick-by-brick as a progress meter.
+// `tail` = per-project line (DJ-approved). Flashpoint + Photography lines are my
+// placeholders — DJ to confirm. Images first-pass (galaxy pool + real Blue Cross).
 const reel = [
-  { brand: "AC Boise",    word: "be remembered", slug: "ac-boise",         img: "/galaxy/gx-04.jpg" },
-  { brand: "Turnstile",   word: "say something", slug: "turnstile",        img: "/galaxy/gx-09.jpg" },
-  { brand: "Blue Cross",  word: "create change", slug: "blue-cross",       img: "/case-studies/blue-cross/bc-24.jpg" },
-  { brand: "Sony",        word: "be relevant",   slug: "sony-this-moment", img: "/galaxy/gx-15.jpg" },
-  { brand: "Flashpoint",  word: "be remembered", slug: "flashpoint",       img: "/galaxy/gx-21.jpg" },
-  { brand: "Photography", word: "say something", slug: "photography",      img: "/galaxy/gx-27.jpg" },
+  { brand: "AC Boise",    tail: "to start a movement", slug: "ac-boise",         img: "/galaxy/gx-04.jpg" },
+  { brand: "Turnstile",   tail: "to take it to 11",    slug: "turnstile",        img: "/galaxy/gx-09.jpg" },
+  { brand: "Blue Cross",  tail: "for life",            slug: "blue-cross",       img: "/case-studies/blue-cross/bc-24.jpg" },
+  { brand: "Sony Xperia", tail: "to chase the sun",    slug: "sony-this-moment", img: "/galaxy/gx-15.jpg" },
+  { brand: "Flashpoint",  tail: "to shape the light",  slug: "flashpoint",       img: "/galaxy/gx-21.jpg" },
+  { brand: "Photography", tail: "to look closer",      slug: "photography",      img: "/galaxy/gx-27.jpg" },
 ];
 ---
 <Base title="HOME - monuments" loader={true}>
@@ -107,15 +109,15 @@ const reel = [
       <div class="rwork-stage">
         <div class="rwork-top">
           <span class="rwork-eyebrow">Recent Work</span>
-          <h2 class="rwork-headline">Built to <span class="rwork-blank"><span class="rwork-word" id="reelWord">{reel[0].word}</span></span></h2>
+          <h2 class="rwork-headline">Built <span class="rwork-blank"><span class="rwork-word" id="reelWord">{reel[0].tail}</span></span></h2>
         </div>
 
         <div class="rwork-viewport" id="reelViewport">
           <div class="rwork-track" id="reelTrack">
             {reel.map((p, i) => (
-              <a class="rwork-item" href={`/work/${p.slug}`} data-word={p.word} data-idx={i}>
-                <div class="rwork-item-media"><img src={p.img} alt={`${p.brand} — built to ${p.word}`} loading="lazy" /></div>
-                <div class="rwork-item-cap"><span class="b">{p.brand}</span> <span class="w">{p.word}</span></div>
+              <a class="rwork-item" href={`/work/${p.slug}`} data-tail={p.tail} data-idx={i}>
+                <div class="rwork-item-media"><img src={p.img} alt={`${p.brand} — built ${p.tail}`} loading="lazy" /></div>
+                <div class="rwork-item-cap"><span class="b">{p.brand}</span> <span class="w">{p.tail}</span></div>
               </a>
             ))}
           </div>
@@ -497,7 +499,7 @@ const reel = [
       window.addEventListener('load', measure);
 
       // ---- Scrub loop: scroll position -> horizontal translate + centre + brick build ----
-      let energy = 0, curWord = items[0].dataset.word, curCenter = 0, t = 0;
+      let energy = 0, curWord = items[0].dataset.tail, curCenter = 0, t = 0;
       items[0].classList.add('is-center');
 
       function frame() {
@@ -510,7 +512,7 @@ const reel = [
         if (ci !== curCenter) {
           curCenter = ci;
           items.forEach((x, i) => x.classList.toggle('is-center', i === ci));
-          const w = items[ci].dataset.word;
+          const w = items[ci].dataset.tail;
           if (wordEl && w && w !== curWord) {
             curWord = w;
             wordEl.classList.add('swap');
