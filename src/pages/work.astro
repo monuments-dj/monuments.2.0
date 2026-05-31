@@ -26,7 +26,7 @@ const projects = [
   { slug: 'sony-this-moment',   title: 'Sony — This Moment',      tagline: 'Every frame, a feeling',    feeling: 'Cinematic', industry: 'Technology', tags: ['Creative Direction', 'Video'],       cats: 'creative-direction video',       img: U + '2024/10/ONE00098-Edit-1-scaled.jpg' },
   { slug: 'sony-flow-state',    title: 'Sony — Flow State',       tagline: 'In the zone',               feeling: 'Focused',   industry: 'Technology', tags: ['Creative Direction', 'Video'],       cats: 'creative-direction video',       img: U + '2024/10/AOV-X-Sony-Select-22-scaled.jpg' },
   { slug: 'sony-xperia-summer', title: 'Sony — Summer w/ Xperia', tagline: 'A summer in motion',        feeling: 'Vivid',     industry: 'Technology', tags: ['Creative Direction', 'Photography'], cats: 'creative-direction photography', img: U + '2024/10/DC9C9A41-A762-4948-8DF5-1AF9B06EEB56_1_105_c.jpeg' },
-  { slug: 'photography',        title: 'Photography',             tagline: 'Light, shadow, story',      feeling: 'Raw',       industry: 'Editorial',  tags: ['Photography'],                       cats: 'photography',                    img: U + '2023/12/B512B9E5-1FF2-48BD-B3AA-CDB03095E46B-scaled.jpg' },
+  { slug: 'photography',        title: 'Photography',             tagline: 'Light, shadow, story',      feeling: 'Raw',       industry: 'Editorial',  tags: ['Photography'],                       cats: 'photography',                    img: U + '2023/12/B512B9E5-1FF2-48BD-B3AA-CDB03095E46B-scaled.jpg', href: '/photography' },
   { slug: 'clothing-merch',     title: 'Clothing & Merch',        tagline: 'Wear the work',             feeling: 'Street',    industry: 'Apparel',    tags: ['Branding', 'Apparel'],               cats: 'branding',                       img: U + '2024/11/dj-ramirez-creative-clothing_designer3.png' },
 ];
 
@@ -76,7 +76,7 @@ const filters = [
 
     <div class="wp-grid ov-focus cols-4" id="wp-grid">
       {projects.map((p) => (
-        <a class="wp-card fade" href={`/work/${p.slug}`} data-cats={p.cats}>
+        <a class="wp-card fade" href={p.href ?? `/work/${p.slug}`} data-cats={p.cats}>
           <div class="wp-card-media">
             <img src={p.img} alt={p.title} loading="lazy" />
             <div class="wp-card-overlay">
@@ -90,7 +90,7 @@ const filters = [
 
     <div class="wp-list" id="wp-list">
       {projects.map((p) => (
-        <a class="wp-row" href={`/work/${p.slug}`} data-cats={p.cats}>
+        <a class="wp-row" href={p.href ?? `/work/${p.slug}`} data-cats={p.cats}>
           <div class="wp-row-head">
             <div class="wp-row-main">
               <h3 class="wp-row-title">{p.title}</h3>

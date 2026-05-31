@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// === Clothing & Merch — faithful rebuild of monuments.cc/portfolio/clothing-merch ===
+// Real apparel designs pulled from the live site into /public/case-studies/clothing-merch.
+const g = Array.from({ length: 18 }, (_, i) => `/case-studies/clothing-merch/gallery/cm-${String(i + 1).padStart(2, '0')}.jpg`);
+const meta = [
+  { k: 'Client', v: 'Mixed' },
+  { k: 'Creative Director', v: 'DJ Ramirez' },
+  { k: 'Services', v: 'Design · Print · Fulfill' },
+];
+---
+<Base title="Clothing & Merch — monuments">
+  <article class="bc-page">
+
+    <!-- HERO (full-bleed image) -->
+    <header class="bc-hero">
+      <img class="bc-hero-img" src={g[0]} alt="Apparel design" />
+      <div class="bc-hero-inner">
+        <p class="bc-hero-eyebrow">Creative Direction / Design</p>
+        <h1 class="bc-hero-title">Apparel<br>Design</h1>
+        <p class="bc-hero-lede">Merch worth wearing — a meaningful extension of the brand.</p>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <section class="bc-intro fade">
+      <p>For a range of clients, I've had the chance to design clothing and merch that connects with their brand story, brings their community closer, and feels genuinely wearable. From concept to production, I make sure each piece reflects not just a logo or a message, but a meaningful extension of the brand itself.</p>
+    </section>
+
+    <!-- INSIGHT QUOTE -->
+    <section class="bc-quote fade">
+      <p>By blending design with purpose, I've helped clients turn their merch lines into <span class="bc-quote-em">lasting symbols of their identity.</span></p>
+      <p class="bc-quote-attr">Design · Print · Fulfill.</p>
+    </section>
+
+    <!-- GALLERY GRID -->
+    <section class="cs2-products">
+      <span class="cs2-check" aria-hidden="true">WEAR THE WORK</span>
+      <div class="cs2-prod-grid">
+        {g.map((src) => <figure class="cs2-prod"><img src={src} alt="" loading="lazy" /></figure>)}
+      </div>
+    </section>
+
+    <!-- EXECUTION -->
+    <section class="bc-exec fade">
+      <h2 class="bc-exec-h">Everyday, limited-edition, and functional.</h2>
+      <div class="bc-exec-b">
+        <p>I dive into understanding each audience and what kind of wearables would resonate — whether it's everyday apparel, limited-edition pieces, or functional gear. Every line starts with the people who'll wear it.</p>
+      </div>
+    </section>
+
+    <!-- META -->
+    <div class="bc-meta fade">
+      {meta.map((m) => (
+        <div class="cs-meta-item">
+          <span class="cs-meta-k">{m.k}</span>
+          <span class="cs-meta-v">{m.v}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- NEXT -->
+    <a class="cs-next" href="/work/turnstile">
+      <span class="cs-next-k">Next project</span>
+      <span class="cs-next-t">Turnstile Audio <span class="cs-next-arrow">→</span></span>
+    </a>
+
+  </article>
+</Base>
