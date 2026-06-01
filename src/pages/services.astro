@@ -1,43 +1,63 @@
 ---
 import Base from '../layouts/Base.astro';
 
-// Three ways to work together — DJ's approved service framing.
+// Services, built from the source-of-truth brief. Creative direction leads;
+// production is assumed, never the pitch. Studio "we" voice. No em dashes.
 const services = [
   {
     n: '01',
-    t: 'Embedded Creative Partner',
-    d: "Plug senior creative thinking into your agency's infrastructure. I work inside your process, not around it — the extra brain in the room when the brief gets hard.",
+    t: 'Creative Direction',
+    d: "The reason brands bring us in. We set the idea, the look, and the story, then protect it through every decision that follows. Everything else serves this.",
   },
   {
     n: '02',
-    t: 'Brand Consulting',
-    d: 'For brands that have lost the thread. Listening first, no production overhead. We find what you actually stand for, then say it like you mean it.',
+    t: 'Direction',
+    d: "We direct commercials, brand films, and campaigns from first concept to final cut. One point of view, carried the whole way through.",
   },
   {
     n: '03',
-    t: 'Project Work',
-    d: "The brief is locked? Good — let's build it right. Scope changes, timelines move, budgets flex. The thinking doesn't.",
+    t: 'Brand Campaigns',
+    d: "Not one-off clips. We concept and produce multi-asset campaigns with a through-line that holds across every placement.",
+  },
+  {
+    n: '04',
+    t: 'Creative Consulting',
+    d: "Sometimes you don't need a crew, you need a sharper point of view. We help brands and teams clarify what they're making and why.",
+  },
+  {
+    n: '05',
+    t: 'End-to-End Production',
+    d: "Full production and post, scaled to the job. The capability is assumed. We bring it so the idea never gets watered down on the way out.",
   },
 ];
 
+// Craft that comes standard. Table stakes, not the headline.
 const caps = [
-  'Creative Direction', 'Brand Strategy', 'Campaign Development',
-  'Integrated Content', 'Photography Direction', 'Positioning',
+  'Concept & Story', 'Commercials', 'Brand Films', 'Multi-Asset Campaigns',
+  'Casting & Crew', 'Post & Finish', 'Color & Sound', 'Delivery',
 ];
 ---
-<Base title="SERVICES — monuments">
+<Base title="SERVICES · monuments">
   <article class="ip">
 
     <!-- HERO -->
     <header class="ip-hero fade">
-      <span class="ip-eyebrow">Services</span>
+      <span class="ip-eyebrow">What we do</span>
       <h1 class="ip-title">We come in at the<br><span class="acc">thinking layer.</span></h1>
-      <p class="ip-lead">Strategy, creative direction, and integrated content — plugged in at the senior level. For brands that have lost the thread, and the agencies that need more firepower in the room.</p>
+      <p class="ip-lead">Creative direction and direction first. Production is assumed. We lead brand campaigns and films from the idea all the way to delivery, built for brands that need a point of view, not just a crew.</p>
     </header>
 
-    <!-- THREE WAYS -->
+    <!-- POSITIONING -->
+    <section class="band band-sand">
+      <div class="sv-pos fade">
+        <p class="band-kicker">How to think about us</p>
+        <p class="sv-pos-lead">Monuments is a boutique studio. Selective and senior, with a team that scales around the work. Big brand or a single film, the same level of thinking shows up either way.</p>
+      </div>
+    </section>
+
+    <!-- THE FIVE -->
     <section class="band band-slate">
-      <p class="band-kicker fade">Three ways to work together</p>
+      <p class="band-kicker fade">What we do</p>
       <div class="sv-list">
         {services.map((s) => (
           <a class="sv-row fade" href="/contact">
@@ -54,7 +74,7 @@ const caps = [
 
     <!-- CAPABILITIES -->
     <section class="band band-cream">
-      <p class="band-kicker fade">What that looks like</p>
+      <p class="band-kicker fade">Comes standard</p>
       <div class="sv-caps fade">
         {caps.map((c) => <span class="sv-cap">{c}</span>)}
       </div>
@@ -64,17 +84,17 @@ const caps = [
     <section class="band band-sand sv-focus">
       <blockquote class="sv-focus-q fade">
         <p>A man who chases two rabbits <span class="acc">doesn't eat.</span></p>
-        <span class="sv-focus-sub">One brief. One room. The right thinking, all the way through.</span>
+        <span class="sv-focus-sub">One idea, led all the way through. That is the whole job.</span>
       </blockquote>
     </section>
 
     <!-- CTA -->
     <section class="band band-black ip-cta">
       <div class="fade">
-        <h2 class="ip-cta-h">Big campaign or a single shoot.<br><span class="acc">Either way, the thinking comes with it.</span></h2>
+        <h2 class="ip-cta-h">Got something worth making?<br><span class="acc">Let's start the conversation.</span></h2>
         <div class="ip-cta-row">
           <a href="/work" class="ip-btn ip-btn-ghost">See the Work <span aria-hidden="true">→</span></a>
-          <a href="/contact" class="ip-btn ip-btn-solid">Let's Talk <span aria-hidden="true">→</span></a>
+          <a href="/contact" class="ip-btn ip-btn-solid">Start a Project <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>

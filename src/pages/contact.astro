@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="CONTACT — monuments">
+<Base title="CONTACT · monuments">
   <article class="ip">
 
     <!-- HERO -->
@@ -59,7 +59,7 @@ import Base from '../layouts/Base.astro';
         e.preventDefault();
         const g = (id) => (document.getElementById(id)?.value || '').trim();
         const name = g('ctName'), company = g('ctCompany'), proj = g('ctProject'), src = g('ctSource');
-        const subject = encodeURIComponent('New project inquiry' + (name ? ' — ' + name : '') + (company ? ', ' + company : ''));
+        const subject = encodeURIComponent('New project inquiry' + (name ? ', ' + name : '') + (company ? ', ' + company : ''));
         const body = encodeURIComponent(
           'Name: ' + name + '\n' +
           'Company: ' + company + '\n\n' +

@@ -7,13 +7,13 @@ const testimonials = [
   { quote: "DJ doesn't just execute. He makes you rethink what the work could be. We came in with a brief and left with a better brief.", name: "Agency Partner", role: "Creative Director" },
 ];
 
-// Home "Recent Work" reel — headline "Built ___", the centred item fills the
+// Home "Recent Work" reel, headline "Built ___", the centred item fills the
 // tail (carries its own preposition so "Built to…" and "Built for…" both work).
 // Section pins; vertical scroll scrubs the filmstrip horizontally; a monument
 // builds brick-by-brick as a progress meter.
 // `tail` = per-project line (DJ-approved). Flashpoint + Photography lines are my
-// placeholders — DJ to confirm. Images first-pass (galaxy pool + real Blue Cross).
-// Real case studies only — each links to an existing /work/<slug> page and uses
+// placeholders, DJ to confirm. Images first-pass (galaxy pool + real Blue Cross).
+// Real case studies only, each links to an existing /work/<slug> page and uses
 // a real hero image pulled from that project's own folder. No placeholders.
 const reel = [
   { brand: "Turnstile",   tail: "to take it to 11",    slug: "turnstile",          img: "/case-studies/turnstile/bts/bts-01.jpg" },
@@ -119,7 +119,7 @@ const reel = [
           <div class="rwork-track" id="reelTrack">
             {reel.map((p, i) => (
               <a class="rwork-item" href={`/work/${p.slug}`} data-tail={p.tail} data-idx={i}>
-                <div class="rwork-item-media"><img src={p.img} alt={`${p.brand} — built ${p.tail}`} loading="lazy" /></div>
+                <div class="rwork-item-media"><img src={p.img} alt={`${p.brand}, built ${p.tail}`} loading="lazy" /></div>
                 <div class="rwork-item-cap"><span class="b">{p.brand}</span> <span class="w">{p.tail}</span></div>
               </a>
             ))}
@@ -137,7 +137,7 @@ const reel = [
   <section class="testimonials fade" data-tm="1">
     <span class="tm-eyebrow">Client Words</span>
 
-    <!-- V1 — drifting marquee of quote cards -->
+    <!-- V1, drifting marquee of quote cards -->
     <div class="tm-v tm-v1">
       <div class="tm-marquee">
         <div class="tm-marquee-track">
@@ -151,7 +151,7 @@ const reel = [
       </div>
     </div>
 
-    <!-- V2 — big rotating statement -->
+    <!-- V2, big rotating statement -->
     <div class="tm-v tm-v2">
       <blockquote class="tm-statement" id="tmStatement">{testimonials[0].quote}</blockquote>
       <div class="tm-statement-foot">
@@ -164,7 +164,7 @@ const reel = [
       </div>
     </div>
 
-    <!-- V3 — stacked editorial list -->
+    <!-- V3, stacked editorial list -->
     <div class="tm-v tm-v3">
       {testimonials.map((t, i) => (
         <figure class="tm-row">
@@ -175,7 +175,7 @@ const reel = [
       ))}
     </div>
 
-    <!-- V4 — Spotlight card -->
+    <!-- V4, Spotlight card -->
     <div class="tm-v tm-v4">
       <figure class="tm-spotlight">
         <span class="tm-sp-mark" aria-hidden="true">&ldquo;</span>
@@ -184,7 +184,7 @@ const reel = [
       </figure>
     </div>
 
-    <!-- V5 — Split -->
+    <!-- V5, Split -->
     <div class="tm-v tm-v5">
       <div class="tm-split">
         <div class="tm-split-l"><span class="tm-split-num">01</span><span class="tm-split-name">{testimonials[0].name}</span><span class="tm-split-role">{testimonials[0].role}</span></div>
@@ -192,52 +192,52 @@ const reel = [
       </div>
     </div>
 
-    <!-- V6 — Ticker -->
+    <!-- V6, Ticker -->
     <div class="tm-v tm-v6">
       <div class="tm-ticker"><div class="tm-ticker-track">
-        {[...testimonials, ...testimonials, ...testimonials].map((t) => (<span class="tm-tick">{t.quote.split('. ')[0]}. <em>— {t.name}</em></span>))}
+        {[...testimonials, ...testimonials, ...testimonials].map((t) => (<span class="tm-tick">{t.quote.split('. ')[0]}. <em>,  {t.name}</em></span>))}
       </div></div>
     </div>
 
-    <!-- V7 — Oversized mark -->
+    <!-- V7, Oversized mark -->
     <div class="tm-v tm-v7">
-      <div class="tm-omark"><span class="tm-omark-glyph" aria-hidden="true">&rdquo;</span><blockquote class="tm-omark-q">{testimonials[0].quote}</blockquote><div class="tm-omark-meta">{testimonials[0].name} — {testimonials[0].role}</div></div>
+      <div class="tm-omark"><span class="tm-omark-glyph" aria-hidden="true">&rdquo;</span><blockquote class="tm-omark-q">{testimonials[0].quote}</blockquote><div class="tm-omark-meta">{testimonials[0].name}, {testimonials[0].role}</div></div>
     </div>
 
-    <!-- V8 — Grid -->
+    <!-- V8, Grid -->
     <div class="tm-v tm-v8">
       <div class="tm-grid">
         {testimonials.map((t) => (<figure class="tm-gcard"><blockquote>{t.quote}</blockquote><figcaption><span class="tm-gname">{t.name}</span><span class="tm-grole">{t.role}</span></figcaption></figure>))}
       </div>
     </div>
 
-    <!-- V9 — Vertical drift -->
+    <!-- V9, Vertical drift -->
     <div class="tm-v tm-v9">
       <div class="tm-vdrift"><div class="tm-vdrift-track">
         {[...testimonials, ...testimonials].map((t) => (<figure class="tm-vcard"><blockquote>{t.quote}</blockquote><figcaption>{t.name} · {t.role}</figcaption></figure>))}
       </div></div>
     </div>
 
-    <!-- V10 — Minimal -->
+    <!-- V10, Minimal -->
     <div class="tm-v tm-v10">
       <div class="tm-min"><blockquote class="tm-min-q">{testimonials[0].quote}</blockquote><div class="tm-min-meta">{testimonials[0].name}, {testimonials[0].role}</div></div>
     </div>
 
-    <!-- V11 — Accent block -->
+    <!-- V11, Accent block -->
     <div class="tm-v tm-v11">
       <div class="tm-accent"><blockquote class="tm-accent-q">{testimonials[0].quote}</blockquote><div class="tm-accent-meta"><span>{testimonials[0].name}</span><span>{testimonials[0].role}</span></div></div>
     </div>
 
-    <!-- V12 — Scroll-snap carousel -->
+    <!-- V12, Scroll-snap carousel -->
     <div class="tm-v tm-v12">
       <div class="tm-snap">
         {testimonials.map((t) => (<figure class="tm-snap-item"><blockquote>{t.quote}</blockquote><figcaption><span class="tm-snap-name">{t.name}</span><span class="tm-snap-role">{t.role}</span></figcaption></figure>))}
       </div>
     </div>
 
-    <!-- V13 — Numbered editorial -->
+    <!-- V13, Numbered editorial -->
     <div class="tm-v tm-v13">
-      <div class="tm-num"><span class="tm-num-big" aria-hidden="true">01</span><blockquote class="tm-num-q">{testimonials[0].quote}</blockquote><div class="tm-num-meta">{testimonials[0].name} — {testimonials[0].role}</div></div>
+      <div class="tm-num"><span class="tm-num-big" aria-hidden="true">01</span><blockquote class="tm-num-q">{testimonials[0].quote}</blockquote><div class="tm-num-meta">{testimonials[0].name}, {testimonials[0].role}</div></div>
     </div>
 
     <!-- TEMP: layout switcher -->
@@ -278,15 +278,15 @@ const reel = [
 
   <!-- Home-only behaviors: hero parallax + testimonial carousel -->
   <script is:inline>
-    // Hero perspective tilt — the whole headline block tilts toward the cursor as one rigid unit
+    // Hero perspective tilt, the whole headline block tilts toward the cursor as one rigid unit
     (function () {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const inner = document.getElementById('hero-tilt');
       if (!inner) return;
       let mx = 0, my = 0, cx = 0, cy = 0;
-      const MAX_Y = 20.8;  // deg of left/right tilt (rotateY) — +30% intensity
-      const MAX_X = 14.3;  // deg of up/down tilt (rotateX) — +30% intensity
-      const SHIFT = 28.6;  // px the block drifts as a whole — +30% intensity
+      const MAX_Y = 20.8;  // deg of left/right tilt (rotateY), +30% intensity
+      const MAX_X = 14.3;  // deg of up/down tilt (rotateX), +30% intensity
+      const SHIFT = 28.6;  // px the block drifts as a whole, +30% intensity
 
       document.addEventListener('mousemove', (e) => {
         mx = (e.clientX / window.innerWidth - 0.5) * 2;   // -1..1
@@ -307,7 +307,7 @@ const reel = [
       tick();
     })();
 
-    // Testimonials — layout toggle (Marquee / Statement / List) + Statement auto-rotate
+    // Testimonials, layout toggle (Marquee / Statement / List) + Statement auto-rotate
     (function () {
       const sw = document.getElementById('tmSwitcher');
       const sec = document.querySelector('.testimonials');
@@ -334,7 +334,7 @@ const reel = [
       timer = setInterval(next, 5000);
     })();
 
-    // Showreel: scroll-zoom — a small 16:9 video grows up to a full-width 16:9 frame, then holds (interactable)
+    // Showreel: scroll-zoom, a small 16:9 video grows up to a full-width 16:9 frame, then holds (interactable)
     (function () {
       const section = document.querySelector('.showreel');
       const zoom = document.getElementById('reelZoom');

@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-// === Flashpoint — faithful rebuild of monuments.cc/portfolio/flashpoint ===
+// === Flashpoint, faithful rebuild of monuments.cc/portfolio/flashpoint ===
 // Real assets pulled from the live site into /public/case-studies/flashpoint.
 const gallery = Array.from({ length: 8 }, (_, i) => `/case-studies/flashpoint/gallery/fp-${String(i + 1).padStart(2, '0')}.jpg`);
 const services = ['Brand Identity', 'Logo Design', 'Brand Positioning', 'Packaging Design', 'Product Design', 'Messaging'];
@@ -13,7 +13,7 @@ const credits = [
   { k: 'Creative Direction', v: 'DJ Ramirez' },
 ];
 ---
-<Base title="Flashpoint — monuments">
+<Base title="Flashpoint · monuments">
   <article class="cs2">
 
     <!-- HERO -->
@@ -32,7 +32,7 @@ const credits = [
     <!-- INTRO: services sidebar + lead -->
     <section class="cs2-intro fade">
       <aside class="cs2-side">
-        <h2 class="cs2-side-h">Imagine, illuminate, create — a full rebrand for Flashpoint.</h2>
+        <h2 class="cs2-side-h">Imagine, illuminate, create, a full rebrand for Flashpoint.</h2>
         <ul class="cs2-services">{services.map((s) => <li>{s}</li>)}</ul>
       </aside>
       <div class="cs2-intro-body">
@@ -47,7 +47,7 @@ const credits = [
         <img src={gallery[3]} alt="Flashpoint packaging system" />
       </div>
       <div class="cs2-logo-aside">
-        <p class="cs2-logo-note">A confident new system — packaging, product, and messaging pulled into one voice that says innovation, quality, and value.</p>
+        <p class="cs2-logo-note">A confident new system, packaging, product, and messaging pulled into one voice that says innovation, quality, and value.</p>
       </div>
     </section>
 
@@ -69,7 +69,7 @@ const credits = [
       <div class="cs2-cdd-cols">
         <div class="cs2-cdd-col">
           <p>The primary objective was to revitalize Flashpoint's market presence, ensuring that it became synonymous with innovation, quality, and value in the world of photography.</p>
-          <p>This was a top-to-bottom effort: a fresh brand image, sharper messaging, and a visual identity that could carry across every surface — from the box on the shelf to the billboard on the street.</p>
+          <p>This was a top-to-bottom effort: a fresh brand image, sharper messaging, and a visual identity that could carry across every surface, from the box on the shelf to the billboard on the street.</p>
         </div>
         <div class="cs2-cdd-col">
           <p class="cs2-obj-h">The work spanned</p>
@@ -102,7 +102,7 @@ const credits = [
       <div class="cs2-next-scrim"></div>
       <div class="cs2-next-inner">
         <span class="cs2-next-k">Next project</span>
-        <span class="cs2-next-t">Sony — This Moment <span aria-hidden="true">→</span></span>
+        <span class="cs2-next-t">Sony: This Moment <span aria-hidden="true">→</span></span>
       </div>
     </a>
 

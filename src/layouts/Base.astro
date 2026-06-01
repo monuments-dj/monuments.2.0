@@ -109,10 +109,10 @@ const { title = 'monuments', loader = false } = Astro.props;
       const wm = footer.querySelector('.footer-wordmark');
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Typewriter: type "Monuments", backspace it, then type the tagline — replays on scroll-in
+      // Typewriter: type "Monuments", backspace it, then type the tagline, replays on scroll-in
       if (wm) {
         wm.textContent = '';
-        wm.setAttribute('aria-label', 'Monuments — built to be remembered');
+        wm.setAttribute('aria-label', 'Monuments, built to be remembered');
         const txt = document.createElement('span'); txt.className = 'fw-text'; txt.setAttribute('aria-hidden', 'true');
         const caret = document.createElement('span'); caret.className = 'fw-caret'; caret.setAttribute('aria-hidden', 'true');
         wm.append(txt, caret);
@@ -168,7 +168,7 @@ const { title = 'monuments', loader = false } = Astro.props;
       }
     })();
 
-    // "Fresh Finds" side dock — click the tab to pop out
+    // "Fresh Finds" side dock, click the tab to pop out
     (function () {
       const dock = document.getElementById('nowDock');
       const tab = document.getElementById('nowTab');
@@ -224,7 +224,7 @@ const { title = 'monuments', loader = false } = Astro.props;
       setTimeout(() => b.remove(), 2100);
     }
 
-    // Draggable menu patches (AI patch trails binary; Good Vibes trails smileys — shake it hard for a downpour)
+    // Draggable menu patches (AI patch trails binary; Good Vibes trails smileys, shake it hard for a downpour)
     (function () {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       document.querySelectorAll('.patch').forEach((p) => {
@@ -332,7 +332,7 @@ const { title = 'monuments', loader = false } = Astro.props;
     })();
   </script>
 
-  <!-- Lenis smooth scroll (momentum) — exposed on window.lenis for scroll-reactive effects -->
+  <!-- Lenis smooth scroll (momentum), exposed on window.lenis for scroll-reactive effects -->
   <script>
     import Lenis from 'lenis';
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-// === Blue Cross of Idaho — image-led case study (robust build) ===
+// === Blue Cross of Idaho, image-led case study (robust build) ===
 // Content from monuments.cc/portfolio/blue-cross-2/. Pulls the full campaign set
 // (23 stills) from /public/case-studies/blue-cross/gallery/.
 const meta = [
@@ -9,7 +9,7 @@ const meta = [
   { k: 'Agency', v: 'OMEK' },
   { k: 'Role', v: 'Creative Direction' },
   { k: 'Services', v: 'Creative Direction · Consulting' },
-  { k: 'Timeline', v: '2020 — 2024' },
+  { k: 'Timeline', v: '2020-2024' },
 ];
 // All campaign stills (real filenames in the gallery folder).
 const nums = [2, 3, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28];
@@ -21,7 +21,7 @@ const pairL = gallery[0];         // bci-02
 const pairR = gallery[22];        // bci-28
 const rest = gallery.filter((g) => ![heroImg, featA, pairL, pairR].includes(g));
 ---
-<Base title="Blue Cross — monuments">
+<Base title="Blue Cross · monuments">
   <article class="bc-page">
 
     <!-- HERO (full-bleed image) -->
@@ -33,23 +33,23 @@ const rest = gallery.filter((g) => ![heroImg, featA, pairL, pairR].includes(g));
         <p class="bc-hero-lede">A campaign built on the people behind the coverage.</p>
       </div>
       <div class="bc-hero-meta">
-        <span>100+ images</span><span>2020 — 2024</span><span>Statewide</span>
+        <span>100+ images</span><span>2020-2024</span><span>Statewide</span>
       </div>
     </header>
 
     <!-- INTRO -->
     <section class="bc-intro fade">
-      <p>Blue Cross needed a campaign that authentically represented their most valued asset — their customers. The goal: highlight the diversity and individuality of real people in a relatable, human way, capturing everyday moments across a variety of settings.</p>
+      <p>Blue Cross needed a campaign that authentically represented their most valued asset, their customers. The goal: highlight the diversity and individuality of real people in a relatable, human way, capturing everyday moments across a variety of settings.</p>
     </section>
 
     <!-- FEATURE SHOT -->
     <figure class="bc-shot fade">
-      <img src={featA} alt="Blue Cross campaign — everyday moment" loading="lazy" />
+      <img src={featA} alt="Blue Cross campaign, everyday moment" loading="lazy" />
     </figure>
 
     <!-- INSIGHT QUOTE -->
     <section class="bc-quote fade">
-      <p>Health insurance isn't just about coverage — it's about <span class="bc-quote-em">knowing and caring for people as individuals.</span></p>
+      <p>Health insurance isn't just about coverage, it's about <span class="bc-quote-em">knowing and caring for people as individuals.</span></p>
       <p class="bc-quote-attr">The insight that anchored the campaign.</p>
     </section>
 
@@ -63,8 +63,8 @@ const rest = gallery.filter((g) => ![heroImg, featA, pairL, pairR].includes(g));
     <section class="bc-exec fade">
       <h2 class="bc-exec-h">Real people, real places.</h2>
       <div class="bc-exec-b">
-        <p>In partnership with OMEK, I led creative direction and assisted in execution — from initial concept through final image selection. Over the course of a week, we captured authentic moments across a range of locations: local shops, homes, and the outdoors, each chosen to reflect the personal connection Blue Cross has with its customers.</p>
-        <p>By showing everyday people in familiar settings, the brand could communicate trust, reliability, and genuine human connection — the things that build real loyalty in healthcare. The campaign launched in 2020 and has continued to evolve through 2024, with licensing extended on the strength of its success.</p>
+        <p>In partnership with OMEK, I led creative direction and assisted in execution, from initial concept through final image selection. Over the course of a week, we captured authentic moments across a range of locations: local shops, homes, and the outdoors, each chosen to reflect the personal connection Blue Cross has with its customers.</p>
+        <p>By showing everyday people in familiar settings, the brand could communicate trust, reliability, and genuine human connection, the things that build real loyalty in healthcare. The campaign launched in 2020 and has continued to evolve through 2024, with licensing extended on the strength of its success.</p>
       </div>
     </section>
 
