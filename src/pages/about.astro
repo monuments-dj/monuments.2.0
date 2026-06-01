@@ -1,69 +1,111 @@
 ---
 import Base from '../layouts/Base.astro';
 
-// Stats / proof — pulled from monuments.cc + DJ's approved copy.
+// Animated counters — real proof points (monuments.cc + approved copy).
 const stats = [
-  { n: '10+', l: 'years directing brand & campaign work' },
-  { n: '2M+', l: 'audience scaled at Art of Visuals' },
-  { n: '$100K', l: 'photo series for a NW healthcare system' },
-  { n: '01', l: 'pro soccer team, launched from scratch' },
+  { to: 10,  suffix: '+',  label: 'years directing brand & campaign work' },
+  { to: 2,   suffix: 'M+', label: 'audience scaled at Art of Visuals' },
+  { to: 100, prefix: '$', suffix: 'K', label: 'photo series for NW healthcare' },
+  { to: 1,   prefix: '', suffix: '', label: 'pro soccer team launched from scratch', alt: '01' },
 ];
+
+// The process — what justifies senior-level engagement.
+const process = [
+  { n: '01', t: 'Listen', d: 'Before a single deliverable, we find what you actually stand for. Most brands are too close to see it. That gap is where the work begins.' },
+  { n: '02', t: 'Frame', d: 'Strategy and creative direction, set at the senior level. We decide what the work needs to say and how it should feel — then lock the thinking.' },
+  { n: '03', t: 'Build', d: 'Big campaign or a single shoot, the craft is the same. Integrated content, made with people who have done it at scale.' },
+  { n: '04', t: 'Stand', d: 'Work that lasts past the launch. We hand you something worth remembering — and the reasons it works.' },
+];
+
+const credits = ['Sony', 'Intel', 'Adorama', 'Art of Visuals', 'Blue Cross of Idaho'];
 ---
 <Base title="ABOUT — monuments">
-  <article class="ip">
+  <article class="abx">
 
     <!-- HERO -->
-    <header class="ip-hero fade">
-      <span class="ip-eyebrow">About — DJ Ramirez</span>
-      <h1 class="ip-title">A decade in<br>the <span class="acc">hard rooms.</span></h1>
-      <p class="ip-lead">DJ Ramirez has spent a decade in rooms where the brief was wrong, the timeline was tight, and the stakes were real. He's learned to love those rooms.</p>
+    <header class="abx-hero">
+      <div class="abx-hero-imgs" aria-hidden="true">
+        <div class="abx-hero-img a" style="background-image:url(/galaxy/gx-07.jpg)"></div>
+        <div class="abx-hero-img b" style="background-image:url(/galaxy/gx-18.jpg)"></div>
+      </div>
+      <div class="abx-hero-inner fade">
+        <span class="abx-eyebrow">About — Monuments</span>
+        <h1 class="abx-title">A decade in<br>the <span class="acc">hard rooms.</span></h1>
+        <p class="abx-lead">DJ Ramirez has spent a decade in rooms where the brief was wrong, the timeline was tight, and the stakes were real. He's learned to love those rooms.</p>
+      </div>
+      <div class="abx-scrollcue" aria-hidden="true"><span></span></div>
     </header>
 
-    <!-- WHO -->
-    <section class="band band-sand">
-      <div class="ab-who fade">
-        <p class="band-kicker">Who</p>
-        <p class="ab-who-lead">Creative Director, based between <strong>Los Angeles</strong> and <strong>Boise</strong>. Monuments plugs in at the senior level — strategy, creative direction, integrated content — for brands that want to show up in culture and mean it, and the agencies that serve them.</p>
-      </div>
+    <!-- COUNTERS -->
+    <section class="abx-counters" id="abxCounters">
+      {stats.map((s) => (
+        <div class="abx-counter fade">
+          <span class="abx-counter-n" data-to={s.to} data-prefix={s.prefix ?? ''} data-suffix={s.suffix ?? ''} data-alt={s.alt ?? ''}>{s.prefix ?? ''}0{s.suffix ?? ''}</span>
+          <span class="abx-counter-l">{s.label}</span>
+        </div>
+      ))}
     </section>
 
-    <!-- MANIFESTO QUOTE -->
-    <section class="band band-slate ab-quote-band">
-      <blockquote class="ab-quote fade">
-        <span class="ab-quote-mark" aria-hidden="true">“</span>
+    <!-- WHO — text + team image, two-col -->
+    <section class="abx-who">
+      <div class="abx-who-text fade">
+        <p class="abx-kicker">Who we are</p>
+        <p class="abx-who-lead">A creative agency led by CD <strong>DJ Ramirez</strong>, based between <strong>Los Angeles</strong> and <strong>Boise</strong>. We plug in at the senior level — strategy, creative direction, integrated content — for brands that want to show up in culture and mean it, and the agencies that serve them.</p>
+        <p class="abx-who-body">DJ leads as Creative Director. Tess keeps the operation moving. A trusted network of makers comes in when the work calls for it.</p>
+      </div>
+      <figure class="abx-who-fig fade">
+        <img src="/about/team.jpg" alt="The Monuments team" loading="lazy" />
+        <figcaption>DJ &amp; Tess — Monuments</figcaption>
+      </figure>
+    </section>
+
+    <!-- MANIFESTO QUOTE (parallax) -->
+    <section class="abx-quote">
+      <div class="abx-quote-bg" data-par aria-hidden="true" style="background-image:url(/galaxy/gx-22.jpg)"></div>
+      <blockquote class="fade">
         <p>I shoot but I'm not a shooter. I direct but it's not the point. The point is the story. The moment. <span class="acc">Always has been.</span></p>
         <cite>DJ Ramirez — Creative Director</cite>
       </blockquote>
     </section>
 
-    <!-- PROOF / STATS -->
-    <section class="band band-cream">
-      <p class="band-kicker fade">Selected proof</p>
-      <div class="ab-stats fade">
-        {stats.map((s) => (
-          <div class="ab-stat">
-            <span class="ab-stat-n">{s.n}</span>
-            <span class="ab-stat-l">{s.l}</span>
+    <!-- PROCESS / building blocks -->
+    <section class="abx-process">
+      <div class="abx-process-head fade">
+        <p class="abx-kicker">How we work</p>
+        <h2 class="abx-process-h">We come in at the thinking layer.</h2>
+      </div>
+      <div class="abx-steps">
+        {process.map((p) => (
+          <div class="abx-step fade">
+            <span class="abx-step-n">{p.n}</span>
+            <div class="abx-step-body">
+              <h3 class="abx-step-t">{p.t}</h3>
+              <p class="abx-step-d">{p.d}</p>
+            </div>
           </div>
         ))}
       </div>
-      <p class="ab-brands fade">Campaign work for <strong>Sony</strong>, <strong>Intel</strong>, and <strong>Adorama</strong> — among others.</p>
     </section>
 
     <!-- PHILOSOPHY -->
-    <section class="band band-sand">
-      <div class="ab-philo fade">
-        <p class="band-kicker">How I think</p>
-        <p class="ab-philo-big">A man who chases two rabbits doesn't eat.</p>
-        <p class="ab-philo-body">Figure out your box. Make it worth being in. The work that lasts comes from taking something ordinary and examining it like it's the first time you've seen it.</p>
+    <section class="abx-philo">
+      <p class="abx-philo-big fade">A man who chases two rabbits <span class="acc">doesn't eat.</span></p>
+      <p class="abx-philo-body fade">Figure out your box. Make it worth being in. The work that lasts comes from taking something ordinary and examining it like it's the first time you've seen it.</p>
+    </section>
+
+    <!-- CREDITS marquee -->
+    <section class="abx-credits fade">
+      <p class="abx-kicker">Trusted with the work</p>
+      <div class="abx-credits-row">
+        {credits.map((c) => <span class="abx-credit">{c}</span>)}
       </div>
     </section>
 
     <!-- CTA -->
-    <section class="band band-black ip-cta">
+    <section class="abx-cta">
       <div class="fade">
-        <h2 class="ip-cta-h">Big campaign or a single shoot.<br><span class="acc">Either way, the thinking comes with it.</span></h2>
-        <div class="ip-cta-row">
+        <h2 class="abx-cta-h">Big campaign or a single shoot.<br><span class="acc">Either way, the thinking comes with it.</span></h2>
+        <div class="abx-cta-row">
           <a href="/work" class="ip-btn ip-btn-ghost">See the Work <span aria-hidden="true">→</span></a>
           <a href="/contact" class="ip-btn ip-btn-solid">Let's Talk <span aria-hidden="true">→</span></a>
         </div>
@@ -71,4 +113,49 @@ const stats = [
     </section>
 
   </article>
+
+  <script is:inline>
+    (function () {
+      // Count-up on scroll-in
+      const nums = document.querySelectorAll('.abx-counter-n');
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const io = new IntersectionObserver((es) => {
+          es.forEach((e) => {
+            if (!e.isIntersecting) return;
+            io.unobserve(e.target);
+            const el = e.target, to = +el.dataset.to, pre = el.dataset.prefix || '', suf = el.dataset.suffix || '', alt = el.dataset.alt || '';
+            const dur = 1300, t0 = performance.now();
+            (function tick(now) {
+              const k = Math.min((now - t0) / dur, 1);
+              const eased = 1 - Math.pow(1 - k, 3);
+              const v = Math.round(eased * to);
+              el.textContent = alt && k >= 1 ? alt : pre + v + suf;
+              if (k < 1) requestAnimationFrame(tick);
+            })(t0);
+          });
+        }, { threshold: 0.5 });
+        nums.forEach((n) => io.observe(n));
+      } else {
+        nums.forEach((n) => { n.textContent = (n.dataset.alt) || ((n.dataset.prefix||'') + n.dataset.to + (n.dataset.suffix||'')); });
+      }
+
+      // Lightweight parallax on [data-par] via Lenis/scroll
+      const par = document.querySelectorAll('[data-par]');
+      if (par.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const upd = () => {
+          par.forEach((el) => {
+            const r = el.parentElement.getBoundingClientRect();
+            const off = (r.top + r.height / 2 - window.innerHeight / 2) * -0.12;
+            el.style.transform = 'translate3d(0,' + off.toFixed(1) + 'px,0) scale(1.15)';
+          });
+          raf = 0;
+        };
+        let raf = 0;
+        const onScroll = () => { if (!raf) raf = requestAnimationFrame(upd); };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        upd();
+      }
+    })();
+  </script>
 </Base>

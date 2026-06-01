@@ -1330,12 +1330,9 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 .rwork-item.is-center .rwork-item-cap .w { color: var(--accent); }
 
 .rwork-foot { display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 0 24px; }
-.rwork-bricks { width: 150px; height: 72px; display: block; color: var(--accent); overflow: visible; }
-.rwork-brick {
-  fill: var(--accent); opacity: 0; transform: translateY(7px);
-  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
-}
-.rwork-brick.on { opacity: 1; transform: translateY(0); }
+.rwork-bricks { width: 200px; height: 50px; display: block; color: var(--accent); overflow: visible; }
+.rwork-bar { fill: var(--accent); opacity: 0.22; transition: opacity 0.3s ease; }
+.rwork-bar.lit { opacity: 1; }
 .rwork-all {
   font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #141519; text-decoration: none;
   display: inline-flex; align-items: center; gap: 8px; transition: gap 0.3s ease, color 0.2s ease;
@@ -1590,4 +1587,88 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
   .cs2-grid { columns: 2; }
   .cs2-prod-grid { grid-template-columns: repeat(2, 1fr); }
   .cs2-check { display: none; }
+}
+
+
+/* ============================================================
+   ABOUT page — premium rebuild (counters, process, parallax)
+   ============================================================ */
+.abx { background: var(--white); color: #141519; }
+.acc { color: var(--accent); }
+
+/* Hero */
+.abx-hero { position: relative; min-height: 92vh; display: flex; align-items: center; padding: 120px 100px; overflow: hidden; background: #0d0f14; color: var(--white); }
+.abx-hero-imgs { position: absolute; inset: 0; z-index: 0; }
+.abx-hero-img { position: absolute; background-size: cover; background-position: center; opacity: 0.32; filter: grayscale(0.3); }
+.abx-hero-img.a { inset: -8% 40% 30% -5%; }
+.abx-hero-img.b { inset: 30% -5% -8% 45%; }
+.abx-hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse 80% 70% at 30% 50%, rgba(13,15,20,0.72), rgba(13,15,20,0.94)); }
+.abx-hero-inner { position: relative; z-index: 2; max-width: 760px; }
+.abx-eyebrow { display: block; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(240,238,233,0.6); margin-bottom: 26px; }
+.abx-title { font-family: "Inter", sans-serif; font-weight: 600; font-size: clamp(44px, 7vw, 104px); line-height: 0.98; letter-spacing: -0.03em; }
+.abx-lead { margin-top: 30px; max-width: 540px; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.6; color: rgba(240,238,233,0.8); font-weight: 300; }
+.abx-scrollcue { position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%); z-index: 2; width: 24px; height: 38px; border: 1.5px solid rgba(240,238,233,0.4); border-radius: 12px; }
+.abx-scrollcue span { position: absolute; top: 7px; left: 50%; width: 3px; height: 7px; margin-left: -1.5px; border-radius: 2px; background: rgba(240,238,233,0.7); animation: abxScroll 1.7s ease-in-out infinite; }
+@keyframes abxScroll { 0%,100% { transform: translateY(0); opacity: 0; } 30% { opacity: 1; } 60% { transform: translateY(13px); opacity: 0; } }
+
+/* Counters */
+.abx-counters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; padding: 80px 100px; border-bottom: 1px solid rgba(20,21,25,0.1); }
+.abx-counter-n { display: block; font-family: "Inter", sans-serif; font-weight: 600; font-size: clamp(40px, 5.5vw, 78px); letter-spacing: -0.04em; line-height: 1; color: #141519; font-variant-numeric: tabular-nums; }
+.abx-counter-l { display: block; margin-top: 14px; font-size: 13px; line-height: 1.5; color: rgba(20,21,25,0.55); max-width: 200px; }
+
+/* Who */
+.abx-who { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; padding: 110px 100px; }
+.abx-kicker { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 22px; }
+.abx-who-lead { font-size: clamp(19px, 2vw, 26px); line-height: 1.5; font-weight: 400; color: #141519; letter-spacing: -0.01em; }
+.abx-who-body { margin-top: 22px; font-size: 16px; line-height: 1.8; font-weight: 300; color: rgba(20,21,25,0.7); }
+.abx-who-fig { position: relative; overflow: hidden; border-radius: 3px; }
+.abx-who-fig img { width: 100%; height: auto; display: block; }
+.abx-who-fig figcaption { position: absolute; left: 18px; bottom: 16px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 12px rgba(0,0,0,0.6); }
+
+/* Manifesto quote w/ parallax */
+.abx-quote { position: relative; overflow: hidden; padding: 150px 100px; color: var(--white); text-align: center; }
+.abx-quote-bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; will-change: transform; }
+.abx-quote::after { content: ""; position: absolute; inset: 0; z-index: 1; background: rgba(13,15,20,0.74); }
+.abx-quote blockquote { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+.abx-quote p { font-family: "Inter", sans-serif; font-weight: 500; font-size: clamp(24px, 3.4vw, 46px); line-height: 1.28; letter-spacing: -0.02em; }
+.abx-quote cite { display: block; margin-top: 30px; font-style: normal; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,238,233,0.6); }
+
+/* Process */
+.abx-process { padding: 120px 100px; background: var(--c-sand); }
+.abx-process-h { font-family: "Inter", sans-serif; font-weight: 600; font-size: clamp(28px, 3.6vw, 50px); letter-spacing: -0.025em; line-height: 1.05; color: #141519; margin-top: 6px; }
+.abx-process-head { margin-bottom: 60px; }
+.abx-steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: rgba(20,21,25,0.1); }
+.abx-step { display: flex; gap: 22px; padding: 44px 40px; background: var(--c-sand); transition: background 0.3s ease; }
+.abx-step:hover { background: #ece2cc; }
+.abx-step-n { font-family: "Inter", sans-serif; font-weight: 600; font-size: 15px; color: var(--accent); letter-spacing: 0.05em; flex: 0 0 auto; padding-top: 5px; }
+.abx-step-t { font-family: "Inter", sans-serif; font-weight: 600; font-size: clamp(22px, 2.4vw, 30px); letter-spacing: -0.01em; color: #141519; margin-bottom: 12px; }
+.abx-step-d { font-size: 15px; line-height: 1.75; font-weight: 300; color: rgba(20,21,25,0.72); }
+
+/* Philosophy */
+.abx-philo { padding: 130px 100px; text-align: center; max-width: 1000px; margin: 0 auto; }
+.abx-philo-big { font-family: "Inter", sans-serif; font-weight: 600; font-size: clamp(30px, 4.6vw, 64px); line-height: 1.08; letter-spacing: -0.03em; color: #141519; }
+.abx-philo-body { margin-top: 28px; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.7; font-weight: 300; color: rgba(20,21,25,0.65); max-width: 620px; margin-left: auto; margin-right: auto; }
+
+/* Credits */
+.abx-credits { padding: 0 100px 110px; text-align: center; }
+.abx-credits-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px 52px; }
+.abx-credit { font-family: "Inter", sans-serif; font-weight: 600; font-size: clamp(18px, 2.2vw, 30px); letter-spacing: -0.01em; color: rgba(20,21,25,0.32); transition: color 0.3s ease; }
+.abx-credit:hover { color: #141519; }
+
+/* CTA */
+.abx-cta { padding: 130px 100px; background: #0d0f14; color: var(--white); text-align: center; }
+.abx-cta-h { font-family: "Inter", sans-serif; font-weight: 600; font-size: clamp(28px, 3.8vw, 54px); line-height: 1.1; letter-spacing: -0.025em; }
+.abx-cta-row { display: flex; gap: 16px; justify-content: center; margin-top: 40px; flex-wrap: wrap; }
+
+@media (max-width: 860px) {
+  .abx-hero { padding: 120px 24px 90px; min-height: 80vh; }
+  .abx-hero-img.a, .abx-hero-img.b { display: none; }
+  .abx-counters { grid-template-columns: repeat(2, 1fr); gap: 36px 20px; padding: 56px 24px; }
+  .abx-who { grid-template-columns: 1fr; gap: 40px; padding: 70px 24px; }
+  .abx-quote { padding: 100px 24px; }
+  .abx-process { padding: 70px 24px; }
+  .abx-steps { grid-template-columns: 1fr; }
+  .abx-philo { padding: 80px 24px; }
+  .abx-credits { padding: 0 24px 70px; }
+  .abx-cta { padding: 80px 24px; }
 }
