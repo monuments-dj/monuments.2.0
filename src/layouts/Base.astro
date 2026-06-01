@@ -209,10 +209,10 @@ const { title = 'monuments', loader = false } = Astro.props;
     }
     // A big prop (trophy / film gear) that drops out of a patch and falls to the bottom
     const CAMERA_PROPS = ['🎬', '📷', '🎥'];
-    function spawnFallingProp(x, y, text) {
+    function spawnFallingProp(x, y, text, baseSize, sizeVar) {
       const b = document.createElement('span');
       b.className = 'trophy-fall'; b.textContent = text;
-      const size = 98 + Math.random() * 32;
+      const size = (baseSize ?? 98) + Math.random() * (sizeVar ?? 32);
       b.style.fontSize = size.toFixed(0) + 'px';
       b.style.left = (x - size / 2) + 'px';
       b.style.top = (y - size / 2) + 'px';
@@ -252,7 +252,7 @@ const { title = 'monuments', loader = false } = Astro.props;
             else if (t - lastT > 75) { lastT = t; spawnTrail(e.clientX, e.clientY, '🙂', 'smiley-trail'); }
           }
           else if (isEmmy && speed > 32 && t - lastT > 280) { lastT = t; spawnFallingProp(e.clientX, e.clientY, '🏆'); }
-          else if (isCamera && t - lastT > 240) { lastT = t; spawnFallingProp(e.clientX, e.clientY, CAMERA_PROPS[Math.floor(Math.random() * 3)]); }
+          else if (isCamera && t - lastT > 240) { lastT = t; spawnFallingProp(e.clientX, e.clientY, CAMERA_PROPS[Math.floor(Math.random() * 3)], 50, 20); }
         });
         const up = () => { down = false; };
         p.addEventListener('pointerup', up);
