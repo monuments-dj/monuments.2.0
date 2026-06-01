@@ -13,13 +13,16 @@ const testimonials = [
 // builds brick-by-brick as a progress meter.
 // `tail` = per-project line (DJ-approved). Flashpoint + Photography lines are my
 // placeholders — DJ to confirm. Images first-pass (galaxy pool + real Blue Cross).
+// Real case studies only — each links to an existing /work/<slug> page and uses
+// a real hero image pulled from that project's own folder. No placeholders.
 const reel = [
-  { brand: "AC Boise",    tail: "to start a movement", slug: "ac-boise",         img: "/galaxy/gx-04.jpg" },
-  { brand: "Turnstile",   tail: "to take it to 11",    slug: "turnstile",        img: "/galaxy/gx-09.jpg" },
-  { brand: "Blue Cross",  tail: "for life",            slug: "blue-cross",       img: "/case-studies/blue-cross/bc-24.jpg" },
-  { brand: "Sony Xperia", tail: "to chase the sun",    slug: "sony-this-moment", img: "/galaxy/gx-15.jpg" },
-  { brand: "Flashpoint",  tail: "to shape the light",  slug: "flashpoint",       img: "/galaxy/gx-21.jpg" },
-  { brand: "Photography", tail: "to look closer",      slug: "photography",      img: "/galaxy/gx-27.jpg" },
+  { brand: "Turnstile",   tail: "to take it to 11",    slug: "turnstile",          img: "/case-studies/turnstile/bts/bts-01.jpg" },
+  { brand: "Blue Cross",  tail: "for life",            slug: "blue-cross",         img: "/case-studies/blue-cross/gallery/bci-10.jpg" },
+  { brand: "Sony",        tail: "to chase the sun",    slug: "sony-xperia-summer", img: "/case-studies/sony-xperia-summer/gallery/xp-01.jpg" },
+  { brand: "Sony",        tail: "to capture the moment", slug: "sony-this-moment", img: "/case-studies/sony-this-moment/gallery/tm-01.jpg" },
+  { brand: "Flashpoint",  tail: "to shape the light",  slug: "flashpoint",         img: "/case-studies/flashpoint/gallery/fp-01.jpg" },
+  { brand: "Waffle Me Up", tail: "to be worth the wait", slug: "waffle-me-up",     img: "/case-studies/waffle-me-up/gallery/wmu-01.jpg" },
+  { brand: "Clothing & Merch", tail: "to be worn",     slug: "clothing-merch",     img: "/case-studies/clothing-merch/gallery/cm-01.jpg" },
 ];
 ---
 <Base title="HOME - monuments" loader={true}>
