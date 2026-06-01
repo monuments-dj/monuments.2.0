@@ -23,9 +23,9 @@ const projects = [
   { slug: 'waffle-me-up',       title: 'Waffle Me Up',            tagline: 'A taste worth the wait',    feeling: 'Warm',      industry: 'Food & Bev', tags: ['Branding', 'Photography'],           cats: 'branding photography',           img: U + '2023/08/waffle-me-up-boise11-scaled.jpg' },
   { slug: 'flashpoint',         title: 'Flashpoint',              tagline: 'The decisive moment',       feeling: 'Sharp',     industry: 'Retail',     tags: ['Branding', 'Creative Direction'],    cats: 'branding creative-direction',    img: U + '2024/10/Ad_1-scaled.jpg' },
   { slug: 'blue-cross',         title: 'Blue Cross of Idaho',     tagline: 'Care, made human',          feeling: 'Trusted',   industry: 'Healthcare', tags: ['Creative Direction', 'Photography'], cats: 'creative-direction photography', img: U + '2024/10/Blue-Cross-Of-Idaho22-scaled.jpg' },
-  { slug: 'sony-this-moment',   title: 'Sony: This Moment',      tagline: 'Every frame, a feeling',    feeling: 'Cinematic', industry: 'Technology', tags: ['Creative Direction', 'Video'],       cats: 'creative-direction video',       img: U + '2024/10/ONE00098-Edit-1-scaled.jpg' },
-  { slug: 'sony-flow-state',    title: 'Sony: Flow State',       tagline: 'In the zone',               feeling: 'Focused',   industry: 'Technology', tags: ['Creative Direction', 'Video'],       cats: 'creative-direction video',       img: U + '2024/10/AOV-X-Sony-Select-22-scaled.jpg' },
-  { slug: 'sony-xperia-summer', title: 'Sony: Summer w/ Xperia', tagline: 'A summer in motion',        feeling: 'Vivid',     industry: 'Technology', tags: ['Creative Direction', 'Photography'], cats: 'creative-direction photography', img: U + '2024/10/DC9C9A41-A762-4948-8DF5-1AF9B06EEB56_1_105_c.jpeg' },
+  { slug: 'sony-this-moment',   title: 'Sony — This Moment',      tagline: 'Every frame, a feeling',    feeling: 'Cinematic', industry: 'Technology', tags: ['Creative Direction', 'Video'],       cats: 'creative-direction video',       img: U + '2024/10/ONE00098-Edit-1-scaled.jpg' },
+  { slug: 'sony-flow-state',    title: 'Sony — Flow State',       tagline: 'In the zone',               feeling: 'Focused',   industry: 'Technology', tags: ['Creative Direction', 'Video'],       cats: 'creative-direction video',       img: U + '2024/10/AOV-X-Sony-Select-22-scaled.jpg' },
+  { slug: 'sony-xperia-summer', title: 'Sony — Summer w/ Xperia', tagline: 'A summer in motion',        feeling: 'Vivid',     industry: 'Technology', tags: ['Creative Direction', 'Photography'], cats: 'creative-direction photography', img: U + '2024/10/DC9C9A41-A762-4948-8DF5-1AF9B06EEB56_1_105_c.jpeg' },
   { slug: 'photography',        title: 'Photography',             tagline: 'Light, shadow, story',      feeling: 'Raw',       industry: 'Editorial',  tags: ['Photography'],                       cats: 'photography',                    img: U + '2023/12/B512B9E5-1FF2-48BD-B3AA-CDB03095E46B-scaled.jpg', href: '/photography' },
   { slug: 'clothing-merch',     title: 'Clothing & Merch',        tagline: 'Wear the work',             feeling: 'Street',    industry: 'Apparel',    tags: ['Branding', 'Apparel'],               cats: 'branding',                       img: U + '2024/11/dj-ramirez-creative-clothing_designer3.png' },
 ];
@@ -113,7 +113,7 @@ const filters = [
   </div>
 
   <script is:inline>
-    // Floating image "galaxy", ported from the reference's Particles component.
+    // Floating image "galaxy" — ported from the reference's Particles component.
     // Perpetual drift + Lenis scroll-velocity momentum + depth-scale + infinite wrap.
     (function () {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -151,7 +151,7 @@ const filters = [
             im._sp = rand(0.6, 1.45);                   // random parallax speed (wider)
             im._z = Math.round(rand(-260, 260));        // random depth (wider)
             im._rot = rand(-11, 11).toFixed(2);         // random tilt (wider)
-            im._baseScale = rand(0.62, 1.5);            // persistent per-image size, some bigger, some smaller
+            im._baseScale = rand(0.62, 1.5);            // persistent per-image size — some bigger, some smaller
             im.src = srcs[rnd(srcs.length)];            // random image (not sequential)
           }
           im.style.opacity = im._z < 0 ? Math.max(0.5, 1 + im._z / 250) : 1;

@@ -5,7 +5,7 @@ import Base from '../layouts/Base.astro';
 const TOTAL = 100;
 const ids = Array.from({ length: TOTAL }, (_, i) => `p-${String(i + 1).padStart(3, '0')}.jpg`);
 
-// Placeholder photography categories, /photography has its OWN set (separate from /work).
+// Placeholder photography categories — /photography has its OWN set (separate from /work).
 // Rename these / reorganize once you sort photos into category folders in Dropbox.
 const catNames = ['Brand', 'Editorial', 'Food', 'Motion', 'Non-Profit'];
 const per = Math.ceil(TOTAL / catNames.length);
@@ -20,7 +20,7 @@ const cats = catNames.map((name, ci) => ({
     <header class="pg-cover">
       <span class="pg-eyebrow">Selected photography</span>
       <h1 class="pg-title">Photography</h1>
-      <p class="pg-sub">A growing archive, hover a row to wander, click to enlarge.</p>
+      <p class="pg-sub">A growing archive — hover a row to wander, click to enlarge.</p>
       <button class="pg-cue" id="pgCue" type="button" aria-label="Scroll to gallery"><span>Scroll</span><i></i></button>
     </header>
 
