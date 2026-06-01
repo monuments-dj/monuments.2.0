@@ -1672,3 +1672,19 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
   .abx-credits { padding: 0 24px 70px; }
   .abx-cta { padding: 80px 24px; }
 }
+
+/* About — team / named portraits (placeholder monogram tiles) */
+.abx-team { padding: 0 100px 120px; }
+.abx-team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+.abx-person { display: flex; flex-direction: column; gap: 24px; }
+.abx-person-ph { position: relative; aspect-ratio: 4 / 5; border-radius: 3px; overflow: hidden; background: linear-gradient(145deg, #1b2630 0%, #2c3a47 100%); display: flex; align-items: center; justify-content: center; }
+.abx-person-ph.alt { background: linear-gradient(145deg, #5a6b54 0%, #76876a 100%); }
+.abx-person-ph::after { content: attr(data-mono); font-family: "Inter", sans-serif; font-weight: 600; font-size: clamp(60px, 9vw, 120px); letter-spacing: -0.04em; color: rgba(240,238,233,0.16); }
+.abx-person-ph::before { content: "Photo coming soon"; position: absolute; bottom: 16px; left: 0; right: 0; text-align: center; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(240,238,233,0.4); }
+.abx-person-name { font-family: "Inter", sans-serif; font-weight: 600; font-size: clamp(22px, 2.4vw, 32px); letter-spacing: -0.015em; color: #141519; }
+.abx-person-role { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-top: 6px; }
+.abx-person-bio { margin-top: 16px; font-size: 15px; line-height: 1.75; font-weight: 300; color: rgba(20,21,25,0.7); max-width: 420px; }
+@media (max-width: 860px) {
+  .abx-team { padding: 0 24px 80px; }
+  .abx-team-grid { grid-template-columns: 1fr; gap: 44px; }
+}
