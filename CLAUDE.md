@@ -1,5 +1,19 @@
 # Monuments Site — working agreement
 
+## ⛔ STOP — DO THIS FIRST, EVERY SESSION, BEFORE ANY EDIT
+**This repo is edited from MULTIPLE places (this CLI + Cowork + maybe GitHub web).**
+**Your local copy is probably STALE. Before touching ANY file, run:**
+```
+git fetch origin && git status
+git pull --rebase origin main      # if behind
+```
+If `git status` shows you're behind origin/main, you MUST pull before editing, or you
+will clobber work done elsewhere. Do not skip this even for a "quick" change.
+If a pull conflicts, STOP and tell DJ — do not force anything.
+(DJ explicitly asked for this guardrail because work happens in parallel sessions.)
+
+---
+
 Quick shorthand DJ can use. When DJ says these, act without re-explaining:
 
 - **"ship it"** / **"push it"** / **"go live"** → commit all current changes with a clear

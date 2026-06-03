@@ -1,0 +1,13 @@
+#!/bin/sh
+# Guardrail: block a push if local main is behind origin/main (would clobber parallel work).
+git fetch origin main --quiet 2>/dev/null
+LOCAL=$(git rev-parse main 2>/dev/null)
+BASE=$(git merge-base main origin/main 2>/dev/null)
+REMOTE=$(git rev-parse origin/main 2>/dev/null)
+if [ -n "$REMOTE" ] && [ "$LOCAL" != "$REMOTE" ] && [ "$BASE" = "$LOCAL" ]; then
+  echo "⛔ BLOCKED: local main is behind origin/main."
+  echo "   Another session pushed work. Run: git pull --rebase origin main"
+  echo "   then push again. (This prevents clobbering parallel work.)"
+  exit 1
+fi
+exit 0
