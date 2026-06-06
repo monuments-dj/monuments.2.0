@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 // === Sony — This Moment — faithful rebuild of monuments.cc/portfolio/sony-this-moment ===
 // Real campaign stills pulled from the live site into /public/case-studies/sony-this-moment.
 const g = Array.from({ length: 9 }, (_, i) => `/case-studies/sony-this-moment/gallery/tm-${String(i + 1).padStart(2, '0')}.jpg`);
+const carousel = [g[4], g[5], g[6], g[7]];
 const meta = [
   { k: 'Client', v: 'Sony Audio' },
   { k: 'Agency', v: 'Art of Visuals' },
@@ -55,22 +56,42 @@ const meta = [
       </div>
     </section>
 
-    <!-- WIDE PAIR -->
-    <div class="bc-duo fade">
-      <img src={g[4]} alt="Sony — This Moment" loading="lazy" />
-      <img src={g[5]} alt="Sony — This Moment" loading="lazy" />
-    </div>
+    <!-- GALLERY: 4-up auto-rotating carousel -->
+    <section class="wk-carousel fade" data-carousel>
+      <div class="wk-car-stage">
+        {carousel.map((src, i) => (
+          <div class={`wk-car-slide${i === 0 ? ' is-active' : ''}`}>
+            <img src={src} alt="Sony — This Moment campaign still" loading="lazy" />
+          </div>
+        ))}
+      </div>
+      <div class="wk-car-dots">
+        {carousel.map((_, i) => (
+          <button class={`wk-car-dot${i === 0 ? ' is-active' : ''}`} data-i={i} type="button" aria-label={`Show image ${i + 1}`}></button>
+        ))}
+      </div>
+    </section>
+
+    <!-- GALLERY: masonry stills with an inline text-block cell -->
+    <section class="wk-masonry fade">
+      <figure class="wk-mas-item"><img src={g[8]} alt="Sony — This Moment" loading="lazy" /></figure>
+      <figure class="wk-mas-item"><img src={g[0]} alt="Sony — This Moment" loading="lazy" /></figure>
+      <figure class="wk-mas-item"><img src={g[2]} alt="Sony — This Moment" loading="lazy" /></figure>
+      <div class="wk-mas-item wk-mas-text">
+        <span class="wk-mas-k">On set</span>
+        <p>Shaped the story, wrote the briefs, and directed the stills. Every frame matched to Sony's guides.</p>
+      </div>
+      <figure class="wk-mas-item"><img src={g[5]} alt="Sony — This Moment" loading="lazy" /></figure>
+      <figure class="wk-mas-item"><img src={g[7]} alt="Sony — This Moment" loading="lazy" /></figure>
+      <figure class="wk-mas-item"><img src={g[3]} alt="Sony — This Moment" loading="lazy" /></figure>
+      <figure class="wk-mas-item"><img src={g[1]} alt="Sony — This Moment" loading="lazy" /></figure>
+    </section>
 
     <!-- INSIGHT QUOTE -->
     <section class="bc-quote fade">
       <p>True creativity flourishes when given <span class="bc-quote-em">the space to breathe</span> and align with the natural flow of inspiration.</p>
       <p class="bc-quote-attr">The idea behind the campaign.</p>
     </section>
-
-    <!-- FINAL SHOT -->
-    <figure class="bc-shot fade">
-      <img src={g[7]} alt="Sony — This Moment" loading="lazy" />
-    </figure>
 
     <!-- META -->
     <div class="bc-meta fade">
@@ -89,4 +110,29 @@ const meta = [
     </a>
 
   </article>
+
+  <script>
+    function initWorkCarousels() {
+      document.querySelectorAll('[data-carousel]').forEach((root) => {
+        const slides = [...root.querySelectorAll('.wk-car-slide')];
+        const dots = [...root.querySelectorAll('.wk-car-dot')];
+        if (slides.length < 2) return;
+        let i = 0, timer = null;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const show = (n) => {
+          i = (n + slides.length) % slides.length;
+          slides.forEach((s, k) => s.classList.toggle('is-active', k === i));
+          dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
+        };
+        const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+        const start = () => { if (reduce) return; stop(); timer = setInterval(() => show(i + 1), 4500); };
+        dots.forEach((d) => d.addEventListener('click', () => { show(Number(d.dataset.i)); start(); }));
+        root.addEventListener('mouseenter', stop);
+        root.addEventListener('mouseleave', start);
+        start();
+      });
+    }
+    if (document.readyState !== 'loading') initWorkCarousels();
+    else document.addEventListener('DOMContentLoaded', initWorkCarousels);
+  </script>
 </Base>
