@@ -108,4 +108,17 @@ const meta = [
     </a>
 
   </article>
+
+  <script>
+    // Masonry text-block pops into a random slot each load. The .fade reveal keeps
+    // the grid hidden until it scrolls into view, so the reshuffle never flashes.
+    document.querySelectorAll('.wk-masonry').forEach((m) => {
+      const text = m.querySelector('.wk-mas-text');
+      if (!text) return;
+      text.remove();
+      const items = [...m.children];
+      const idx = 1 + Math.floor(Math.random() * (items.length - 1)); // never first or last
+      m.insertBefore(text, items[idx]);
+    });
+  </script>
 </Base>
