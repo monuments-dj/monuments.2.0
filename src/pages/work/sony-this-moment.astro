@@ -56,19 +56,17 @@ const meta = [
       </div>
     </section>
 
-    <!-- GALLERY: 4-up auto-rotating carousel -->
-    <section class="wk-carousel fade" data-carousel>
+    <!-- GALLERY: continuous auto-scrolling filmstrip (set duplicated for a seamless loop) -->
+    <section class="wk-carousel fade">
       <div class="wk-car-stage">
-        {carousel.map((src, i) => (
-          <div class={`wk-car-slide${i === 0 ? ' is-active' : ''}`}>
-            <img src={src} alt="Sony — This Moment campaign still" loading="lazy" />
-          </div>
-        ))}
-      </div>
-      <div class="wk-car-dots">
-        {carousel.map((_, i) => (
-          <button class={`wk-car-dot${i === 0 ? ' is-active' : ''}`} data-i={i} type="button" aria-label={`Show image ${i + 1}`}></button>
-        ))}
+        <div class="wk-car-track">
+          {carousel.map((src) => (
+            <div class="wk-car-item"><img src={src} alt="Sony — This Moment campaign still" loading="lazy" /></div>
+          ))}
+          {carousel.map((src) => (
+            <div class="wk-car-item" aria-hidden="true"><img src={src} alt="" loading="lazy" /></div>
+          ))}
+        </div>
       </div>
     </section>
 
@@ -110,29 +108,4 @@ const meta = [
     </a>
 
   </article>
-
-  <script>
-    function initWorkCarousels() {
-      document.querySelectorAll('[data-carousel]').forEach((root) => {
-        const slides = [...root.querySelectorAll('.wk-car-slide')];
-        const dots = [...root.querySelectorAll('.wk-car-dot')];
-        if (slides.length < 2) return;
-        let i = 0, timer = null;
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const show = (n) => {
-          i = (n + slides.length) % slides.length;
-          slides.forEach((s, k) => s.classList.toggle('is-active', k === i));
-          dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
-        };
-        const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
-        const start = () => { if (reduce) return; stop(); timer = setInterval(() => show(i + 1), 4500); };
-        dots.forEach((d) => d.addEventListener('click', () => { show(Number(d.dataset.i)); start(); }));
-        root.addEventListener('mouseenter', stop);
-        root.addEventListener('mouseleave', start);
-        start();
-      });
-    }
-    if (document.readyState !== 'loading') initWorkCarousels();
-    else document.addEventListener('DOMContentLoaded', initWorkCarousels);
-  </script>
 </Base>

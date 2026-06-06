@@ -1752,18 +1752,19 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 }
 
 /* ============================================================
-   WORK GALLERY (.wk-carousel / .wk-masonry) — auto-rotating
-   4-up hero carousel + a masonry stills grid with one cell as
-   a text block. Shares the work-page column rhythm (--wrap/--pad).
+   WORK GALLERY (.wk-carousel / .wk-masonry) — continuous
+   auto-scrolling filmstrip + a masonry stills grid with one
+   cell as a text block. Shares the column rhythm (--wrap/--pad).
+   Image set is duplicated in markup so translateX(-50%) loops
+   seamlessly; per-item margin (not flex gap) keeps the seam even.
    ============================================================ */
 .wk-carousel { max-width: var(--wrap); margin: 0 auto clamp(56px, 8vw, 96px); padding: 0 var(--pad); }
-.wk-car-stage { position: relative; aspect-ratio: 16 / 10; border-radius: 2px; overflow: hidden; background: #0d0f14; }
-.wk-car-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease; }
-.wk-car-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.wk-car-slide.is-active { opacity: 1; }
-.wk-car-dots { display: flex; gap: 10px; justify-content: center; margin-top: 18px; }
-.wk-car-dot { width: 8px; height: 8px; padding: 0; border: none; border-radius: 50%; background: rgba(20,21,25,0.22); cursor: pointer; transition: background 0.3s ease, transform 0.3s ease; }
-.wk-car-dot.is-active { background: #141519; transform: scale(1.3); }
+.wk-car-stage { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+.wk-car-track { display: flex; width: max-content; animation: wkScroll 42s linear infinite; }
+.wk-carousel:hover .wk-car-track { animation-play-state: paused; }
+.wk-car-item { flex: 0 0 auto; width: clamp(300px, 40vw, 540px); margin-right: 16px; aspect-ratio: 3 / 2; border-radius: 2px; overflow: hidden; background: #0d0f14; }
+.wk-car-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@keyframes wkScroll { to { transform: translateX(-50%); } }
 
 .wk-masonry { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad) clamp(96px, 13vw, 150px); columns: 3; column-gap: 16px; }
 .wk-mas-item { break-inside: avoid; margin: 0 0 16px; border-radius: 2px; overflow: hidden; }
@@ -1771,6 +1772,6 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 .wk-mas-text { background: #0d0f14; color: var(--white); padding: clamp(26px, 3vw, 38px) clamp(24px, 2.6vw, 32px); }
 .wk-mas-k { display: block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
 .wk-mas-text p { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(19px, 2vw, 26px); line-height: 1.28; letter-spacing: -0.015em; }
-@media (prefers-reduced-motion: reduce) { .wk-car-slide { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .wk-car-track { animation: none; } }
 @media (max-width: 980px) { .wk-masonry { columns: 2; } }
-@media (max-width: 620px) { .wk-car-stage { aspect-ratio: 4 / 3; } .wk-masonry { columns: 1; } }
+@media (max-width: 620px) { .wk-car-item { width: 76vw; } .wk-masonry { columns: 1; } }
