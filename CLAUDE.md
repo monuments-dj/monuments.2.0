@@ -25,9 +25,23 @@ Quick shorthand DJ can use. When DJ says these, act without re-explaining:
 - **"checkpoint"** → commit locally (no push) as a safe restore point.
 
 ## Workflow rhythm
-Local-first. Iterate at localhost:4321 (instant hot-reload, private). Only push when a
-batch feels good — keeps the live site (https://monuments-2-0.vercel.app) polished and
-every deploy a clean rollback point. Default to batching changes, not push-per-edit.
+Local-first. Iterate at localhost:4321 (instant hot-reload, private). DJ said: he's solo
+on the repo for now (no need to sync-check every turn) and **auto-push at the end of each
+change set is approved** — commit + push when a change feels done, no need to ask. Keep the
+live site polished; each deploy is a clean rollback point.
+
+## Layout system (IMPORTANT — DJ's rule)
+Every section fits ONE centered content column unless deliberately full-width:
+`max-width: var(--wrap)` (1300px) + `margin: 0 auto` + `padding: … var(--pad) …`
+(`--pad` = clamp(24px,5vw,40px)). All section left/right edges must line up. Full-bleed
+(hero images, dark quote bands) = simply omit the wrap. When building any new section,
+use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
+
+## Active work (2026-06-01) — see TODO.md
+Refining work/case-study pages to match real monuments.cc, one at a time. Sony "This Moment"
+is the built reference (`.wh-*` header w/ animated marker circle + per-page `--wh-circle`
+colour; `.wk-intro` 2×2 grid+text). NEXT: roll that pattern to the other work pages + build
+the scroll-reactive circular "FIND YOUR FLOW" credits component.
 
 ## Deploy facts
 - Repo: github.com/monuments-dj/monuments.2.0 (branch `main`)

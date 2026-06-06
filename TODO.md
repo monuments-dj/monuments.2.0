@@ -1,27 +1,44 @@
-# TODO — next session
+# TODO — current state (2026-06-01)
 
-**Quick start:** `cd monuments-site && npm run dev` → http://localhost:4321 · `npm run build` (builds clean, 9 pages). Read `HANDOFF.md` for the full map. A Claude chat also auto-loads the project memory — especially **monuments-copy.md** (DJ's approved copy + voice).
+**Quick start:** `cd monuments-site && npm run dev` → http://localhost:4321 · `npm run build`
+(builds clean, **15 pages**). Read `CLAUDE.md` first (shorthand + workflow), then `HANDOFF.md`.
+Project memory auto-loads — especially **monuments-copy.md** (the SOURCE-OF-TRUTH brand doc).
 
-**DJ's style:** precise designer feedback, fast iteration, loves tasteful scroll FX + playful easter eggs, can't watch video (screenshot/describe instead). Estimate effort before big tasks. Verify in-browser via the Claude Preview MCP (name `monuments`, port 4321) — read the DOM/computed styles when screenshots catch black/HMR frames.
+**DJ's style:** precise designer feedback, fast iteration. Replicate-first (match the real
+monuments.cc, THEN optimize — don't redesign unprompted). Can't watch video. Estimate effort
+before big tasks. Verify in-browser via Claude Preview MCP (name `monuments`, port 4321) — the
+headless preview renders narrow (~755px) and pauses rAF when hidden, so read the DOM/computed
+styles and trust DJ's real screen for fine spacing.
 
-## High priority
-- [ ] **Work-card hovers — build ~15 NEW options.** DJ disliked all 10 existing `.ov-*` variants (slide/wipe/duotone/glitch/stamp/lift/flood/invert/frame/skew — global.css ~`/* Overlay variants */`). Add fresh treatments + buttons to the `.ov-switcher` toggle (its JS in `work.astro` swaps the `ov-*` class on `#wp-grid`; switcher is fixed bottom, raised to clear the Astro dev toolbar). Once DJ picks a winner → bake it in as the default + delete the switcher and unused variants.
-- [ ] **Work-page header.** Add a subheadline under the "A portfolio built to move people." headline + a readability scrim/contrast layer so it reads over the moving galaxy photos (DJ flagged this as an accessibility issue). Pull copy from `monuments-copy.md`.
-- [ ] **Roll the approved copy in** (all in `monuments-copy.md`). Home hero → **"We build things worth remembering"** + subhead + CTA buttons (See the Work / Let's Talk); then About / Services / Contact / Photography ("When the brief calls for it, I shoot too."). Pages currently still have old placeholder copy.
+## DONE (do not redo)
+- Live + deployed: GitHub `monuments-dj/monuments.2.0` → Vercel auto-deploy →
+  https://monuments-2-0.vercel.app  (`gh` authed; `git push` works hands-off).
+- All 15 pages build; all 8 case studies exist (no 404s). Home, Work, Photography,
+  Contact, About, Services all built.
+- Menu patches: vintage set (Idaho [straight], LA, AI handshake, No Risk No Story, race,
+  film). Camera patch emojis sized down.
+- **Layout system:** every section uses `--wrap` (1300px) + `--pad` (clamp 24–40px),
+  centered. Sections fit the column UNLESS deliberately full-width (hero img, dark quote band).
 
-## Medium
-- [ ] **Build out About / Services / Contact** — currently `.page-stub` placeholders. Real layouts + the approved copy.
-- [ ] **Case-study pages** — ~10 still 404 (`/work/<slug>`). Two templates exist (Turnstile = structured `cs-*`, Blue Cross = image-led `bc-*`). Pick one, make it data-driven, add the rest.
+## IN PROGRESS — work-page refinement (this is the active task)
+Refining the work/case-study pages to match the real monuments.cc, one at a time.
+**Sony "This Moment" is the reference build** — pattern to roll to the others:
+- `.wh-*` work header: full-bleed campaign image, big uppercase title (top), client logo
+  + italic role with a hand-drawn **marker circle** that draws in / holds / fades / redraws
+  (~5s loop). Circle colour is per-page via inline `style="--wh-circle:#xxx"`.
+- `.wk-intro`: 2×2 photo grid (left) + heading & 2 paragraphs (right).
+- Then bc-* image/quote sections, `.bc-meta` credits, `.cs-next`.
 
-## Loose ends
-- [ ] `public/logos/against.png` is saved upside-down — confirm it's intentional brand styling or flip it.
-- [ ] DJ will self-host the showreel as an MP4 (replaces the YouTube embed → removes the YT branding-on-pause). Swap it in when he provides the file.
-- [ ] Deploy (Netlify/Vercel) when ready — currently local dev only.
+**NEXT:** roll the `.wh-*` header + `.wk-intro` pattern to the other work pages, each with
+its own `--wh-circle` colour + client logo:
+- [ ] sony-flow-state, sony-xperia-summer, flashpoint, waffle-me-up, clothing-merch, blue-cross, turnstile
+- [ ] DJ wants a **credits card + scroll-reactive circular "FIND YOUR FLOW" text** near the
+  credits (see ref he sent: circular wordmark rotates with scroll, beside a white credits box).
+  NOT built yet — was about to start when we paused.
 
-## Done this session — don't redo
-- Showreel: parallax scroll-zoom (small 16:9 → large **centered** 16:9 + "SHOWREEL" caption, pure-black section); controls = play/pause + sound + fullscreen, **play auto-unmutes**; loops via API.
-- Footer (all pages): black; © + socials moved inside so the wordmark is the true page bottom; word-by-word typewriter **Monuments → Built → To be → Remembered** (last word holds, caret blinks), replays on scroll-in.
-- Trusted-by: 1px grid lines, **hover-inverts** the box (black + white logo), the "M" monogram **spins 360° on the Y axis**.
-- Photography: horizontal gallery lanes + seamless drag/momentum filmstrip lightbox.
-- Menu: **6 draggable patches** with easter eggs — AI (robot icon) spews binary, Good Vibes (smiley) **shake = smiley downpour**, Emmy (gold rosette) **shake = giant trophy**, "Good at camera stuff" (lens) **drag = film gear 🎬📷🎥**; all wiggle occasionally; "M" logo folds away on menu open.
-- Git: 5 commits through `f744f67`. Builds clean.
+## Open / lower priority
+- About + Services: DJ is matching these to the real site via **Cowork** (separate tool).
+  Coordinate — pull before editing if Cowork has been active (pre-push hook blocks stale pushes).
+- Brand-doc conflicts still unresolved: photo-vs-film positioning, Tess section, featured-work list.
+- `against.png` logo upside-down. Self-host showreel MP4 when DJ provides it.
+- Real DJ/Tess headshots → swap into About placeholder tiles (`/public/about/`).
