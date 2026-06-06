@@ -30,6 +30,13 @@ on the repo for now (no need to sync-check every turn) and **auto-push at the en
 change set is approved** — commit + push when a change feels done, no need to ask. Keep the
 live site polished; each deploy is a clean rollback point.
 
+## ⚠️ VERIFY AT DESKTOP WIDTH — don't repeat the v2 mistake
+The Claude Preview MCP renders ~755px wide by default, so desktop-only bugs
+(overlaps, misalignment) are INVISIBLE there. Before judging ANY layout:
+`preview_resize` to **1280–1440px**, then screenshot + measure getBoundingClientRect
+edges. Many spacing bugs this session came from shipping layouts only seen at 755px.
+Avoid absolute-positioned elements over flowing text (they overlap at widths you can't see).
+
 ## Layout system (IMPORTANT — DJ's rule)
 Every section fits ONE centered content column unless deliberately full-width:
 `max-width: var(--wrap)` (1300px) + `margin: 0 auto` + `padding: … var(--pad) …`
