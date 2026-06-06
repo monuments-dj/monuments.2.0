@@ -18,7 +18,7 @@ const ringText = 'FIND · YOUR · FLOW · FIND · YOUR · FLOW · FIND · YOUR �
   <main class="fyf-lab">
     <header class="fyf-lab-head">
       <h1>FIND YOUR FLOW — motion options</h1>
-      <p>Scroll through both. Pick the one that feels right and I'll bake it into the real component.</p>
+      <p>Scroll through all three. Pick the one that feels right and I'll bake it into the real component.</p>
     </header>
 
     <!-- VARIANT A — Scroll-dial -->
@@ -57,6 +57,28 @@ const ringText = 'FIND · YOUR · FLOW · FIND · YOUR · FLOW · FIND · YOUR �
         </div>
       </div>
     </section>
+
+    <!-- VARIANT C — Counter-rotor -->
+    <section class="fyf-block" data-fyf="rotor">
+      <span class="fyf-tag">C · Counter-rotor — two rings spin opposite ways, scroll widens the contrast, hover eases them to a stop</span>
+      <div class="fyf-row">
+        <div class="fyf-ring-wrap">
+          <svg class="fyf-ring fyf-ring--rotor" viewBox="0 0 240 240" aria-hidden="true">
+            <defs>
+              <path id="fyfPathCo" d="M120,120 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0" />
+              <path id="fyfPathCi" d="M120,120 m-66,0 a66,66 0 1,1 132,0 a66,66 0 1,1 -132,0" />
+            </defs>
+            <g class="fyf-rotor-out"><text class="fyf-ring-text"><textPath href="#fyfPathCo" startOffset="0">{ringText}</textPath></text></g>
+            <g class="fyf-rotor-in"><text class="fyf-ring-text fyf-ring-text--sm"><textPath href="#fyfPathCi" startOffset="0">FIND · YOUR · FLOW · FIND · YOUR · FLOW · </textPath></text></g>
+          </svg>
+        </div>
+        <div class="fyf-credits">
+          {credits.map((c) => (
+            <div class="fyf-cred-row"><span class="fyf-cred-k">{c.k}:</span> <span class="fyf-cred-v">{c.v}</span></div>
+          ))}
+        </div>
+      </div>
+    </section>
   </main>
 
   <style>
@@ -70,6 +92,7 @@ const ringText = 'FIND · YOUR · FLOW · FIND · YOUR · FLOW · FIND · YOUR �
     .fyf-ring-wrap { display: flex; justify-content: center; align-items: center; }
     .fyf-ring { width: clamp(240px, 26vw, 340px); height: clamp(240px, 26vw, 340px); overflow: visible; transform-origin: center; }
     .fyf-ring-text { fill: var(--white); font-family: 'Inter', sans-serif; font-weight: 500; font-size: 15px; letter-spacing: 3px; text-transform: uppercase; }
+    .fyf-ring-text--sm { font-size: 12px; letter-spacing: 2px; fill: var(--accent); }
 
     .fyf-credits { background: var(--white); color: #141519; border-radius: 2px; padding: clamp(20px, 2.4vw, 32px) clamp(28px, 3.4vw, 46px); }
     .fyf-cred-row { font-size: clamp(15px, 1.4vw, 18px); line-height: 1; padding: 15px 0; border-bottom: 1px solid rgba(20,21,25,0.08); }
@@ -118,6 +141,27 @@ const ringText = 'FIND · YOUR · FLOW · FIND · YOUR · FLOW · FIND · YOUR �
           requestAnimationFrame(loop);
         };
         requestAnimationFrame(loop);
+      }
+
+      const rotor = document.querySelector('[data-fyf="rotor"]');
+      if (rotor && !reduce) {
+        const gOut = rotor.querySelector('.fyf-rotor-out');
+        const gIn = rotor.querySelector('.fyf-rotor-in');
+        const wrap = rotor.querySelector('.fyf-ring-wrap');
+        let aOut = 0, aIn = 0, vOut = 0.05, vIn = -0.05, locked = false;
+        wrap.addEventListener('pointerenter', () => { locked = true; });
+        wrap.addEventListener('pointerleave', () => { locked = false; });
+        const spin = () => {
+          const v = (window.lenis && typeof window.lenis.velocity === 'number') ? window.lenis.velocity : 0;
+          const idleOut = locked ? 0 : 0.05, idleIn = locked ? 0 : -0.05;
+          vOut += (idleOut - vOut) * 0.05 + v * 0.3;
+          vIn += (idleIn - vIn) * 0.05 - v * 0.3;
+          aOut += vOut; aIn += vIn;
+          gOut.setAttribute('transform', 'rotate(' + aOut.toFixed(2) + ' 120 120)');
+          gIn.setAttribute('transform', 'rotate(' + aIn.toFixed(2) + ' 120 120)');
+          requestAnimationFrame(spin);
+        };
+        requestAnimationFrame(spin);
       }
     })();
   </script>
