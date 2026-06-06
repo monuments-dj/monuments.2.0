@@ -7,7 +7,8 @@
   --warm: #c8b89a;
   --c-sand: #e7ddcc;   /* warm light section */
   --c-slate: #1b2630;  /* cool deep section */
-  --wrap: 1300px;      /* centered content column max-width (text/credits) */
+  --wrap: 1300px;      /* centered content column max-width — the default for ALL sections */
+  --pad: var(--pad);  /* shared L/R gutter so every section's edges line up */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1182,27 +1183,27 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 .bc-hero-lede { margin-top: 22px; font-size: clamp(17px, 2.1vw, 24px); font-weight: 300; max-width: 600px; color: rgba(252, 252, 252,0.9); }
 
 /* Lead intro */
-.bc-intro { max-width: var(--wrap); margin: 0 auto; padding: 110px clamp(24px, 5vw, 40px); }
+.bc-intro { max-width: var(--wrap); margin: 0 auto; padding: 110px var(--pad); }
 .bc-intro p { font-size: clamp(22px, 2.9vw, 38px); font-weight: 300; line-height: 1.34; letter-spacing: -0.01em; color: #141519; max-width: 1040px; }
 
 /* Campaign imagery */
-.bc-shot { padding: 0 100px; margin-bottom: 26px; }
+.bc-shot { max-width: var(--wrap); margin: 0 auto 26px; padding: 0 var(--pad); }
 .bc-shot img, .bc-duo img { width: 100%; height: auto; display: block; border-radius: 2px; }
-.bc-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; padding: 0 100px; margin-bottom: 26px; }
+.bc-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; max-width: var(--wrap); margin: 0 auto 26px; padding: 0 var(--pad); }
 
 /* Insight pull-quote (full-width dark band; text locked to centered column) */
-.bc-quote { background: #0d0f14; color: var(--white); padding: clamp(90px, 13vw, 170px) clamp(24px, 5vw, 40px); margin: 70px 0; }
+.bc-quote { background: #0d0f14; color: var(--white); padding: clamp(90px, 13vw, 170px) var(--pad); margin: 70px 0; }
 .bc-quote > * { max-width: var(--wrap); margin-left: auto; margin-right: auto; }
 .bc-quote p { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(26px, 4vw, 54px); line-height: 1.2; letter-spacing: -0.02em; }
 .bc-quote-em { color: var(--accent); }
 .bc-quote-attr { margin-top: 34px; font-size: 13px; letter-spacing: 0.04em; color: rgba(252, 252, 252,0.55); }
 
 /* Execution */
-.bc-exec { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: var(--wrap); margin: 0 auto; padding: 110px clamp(24px, 5vw, 40px); align-items: start; }
+.bc-exec { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: var(--wrap); margin: 0 auto; padding: 110px var(--pad); align-items: start; }
 .bc-exec-h { font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(26px, 3.6vw, 46px); letter-spacing: -0.02em; line-height: 1.06; color: #141519; }
 .bc-exec-b { font-size: 16px; line-height: 1.85; font-weight: 300; color: rgba(20,21,25,0.8); }
 .bc-exec-b p + p { margin-top: 1.15em; }
-.bc-meta { display: flex; flex-wrap: wrap; gap: 18px 52px; max-width: var(--wrap); margin: 0 auto; padding: 0 clamp(24px, 5vw, 40px) 110px; }
+.bc-meta { display: flex; flex-wrap: wrap; gap: 18px 52px; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad) 110px; }
 
 @media (max-width: 860px) {
   .bc-hero { height: 88vh; }
@@ -1699,7 +1700,7 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 .wh { position: relative; min-height: 100vh; display: flex; align-items: stretch; overflow: hidden; background: #0d0f14; }
 .wh-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .wh-scrim { position: absolute; inset: 0; background: linear-gradient(to right, rgba(13,15,20,0.82), rgba(13,15,20,0.55) 55%, rgba(13,15,20,0.4)); }
-.wh-inner { position: relative; z-index: 2; width: 100%; max-width: calc(var(--wrap) + 200px); margin: 0 auto; padding: 130px clamp(24px, 5vw, 100px) 56px; color: var(--white); display: flex; flex-direction: column; }
+.wh-inner { position: relative; z-index: 2; width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 130px var(--pad) 56px; color: var(--white); display: flex; flex-direction: column; }
 .wh-title { font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(64px, 13vw, 220px); line-height: 0.86; letter-spacing: -0.045em; text-transform: uppercase; }
 
 .wh-brandrow { display: flex; align-items: center; gap: 26px; margin-top: auto; padding-top: 48px; }
@@ -1722,7 +1723,7 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 
 .wh-lede { margin-top: 26px; max-width: 560px; font-size: clamp(14px, 1.35vw, 17px); line-height: 1.7; font-weight: 300; color: rgba(240,238,233,0.88); }
 /* All-work link sits at the lower-right of the header */
-.wh-all { position: absolute; right: 100px; bottom: 56px; z-index: 3; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); text-decoration: none; opacity: 0.85; transition: gap 0.3s ease, opacity 0.2s ease; }
+.wh-all { position: absolute; right: var(--pad); bottom: 56px; z-index: 3; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); text-decoration: none; opacity: 0.85; transition: gap 0.3s ease, opacity 0.2s ease; }
 .wh-all:hover { gap: 14px; opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1735,7 +1736,7 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 }
 
 /* Work intro: 2x2 photo grid (left) + heading & copy (right) */
-.wk-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: var(--wrap); margin: 0 auto; padding: 110px clamp(24px, 5vw, 40px); background: var(--white); }
+.wk-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: var(--wrap); margin: 0 auto; padding: 110px var(--pad); background: var(--white); }
 .wk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .wk-grid img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; border-radius: 2px; }
 .wk-intro-text { max-width: 540px; }
