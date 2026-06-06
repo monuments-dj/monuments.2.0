@@ -1700,10 +1700,13 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 .wh { position: relative; min-height: 100vh; display: flex; align-items: stretch; overflow: hidden; background: #0d0f14; }
 .wh-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .wh-scrim { position: absolute; inset: 0; background: linear-gradient(to right, rgba(13,15,20,0.82), rgba(13,15,20,0.55) 55%, rgba(13,15,20,0.4)); }
-.wh-inner { position: relative; z-index: 2; width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 130px var(--pad) 56px; color: var(--white); display: flex; flex-direction: column; }
+.wh-inner { position: relative; z-index: 2; width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 128px var(--pad) 64px; color: var(--white); display: flex; flex-direction: column; gap: 56px; }
 .wh-title { font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(64px, 13vw, 220px); line-height: 0.86; letter-spacing: -0.045em; text-transform: uppercase; }
 
-.wh-brandrow { display: flex; align-items: center; gap: 26px; margin-top: auto; padding-top: 48px; }
+/* Footer row: brand + copy on the left, All Work on the right — both in normal flow */
+.wh-foot { margin-top: auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+.wh-foot-main { min-width: 0; }
+.wh-brandrow { display: flex; align-items: center; gap: 26px; }
 .wh-logo { height: clamp(34px, 4vw, 54px); width: auto; filter: brightness(0) invert(1); }
 .wh-role { position: relative; font-family: 'Inter', sans-serif; font-style: italic; font-size: clamp(16px, 1.7vw, 24px); color: var(--white); padding: 6px 18px; white-space: nowrap; }
 .wh-circle { position: absolute; left: -6%; top: -26%; width: 112%; height: 152%; overflow: visible; pointer-events: none; }
@@ -1721,18 +1724,18 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
   100%  { stroke-dashoffset: 760; opacity: 1; }   /* ready to redraw next loop */
 }
 
-.wh-lede { margin-top: 26px; max-width: 560px; font-size: clamp(14px, 1.35vw, 17px); line-height: 1.7; font-weight: 300; color: rgba(240,238,233,0.88); }
-/* All-work link sits at the lower-right of the header */
-.wh-all { position: absolute; right: var(--pad); bottom: 56px; z-index: 3; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); text-decoration: none; opacity: 0.85; transition: gap 0.3s ease, opacity 0.2s ease; }
+.wh-lede { margin-top: 24px; max-width: 540px; font-size: clamp(14px, 1.35vw, 17px); line-height: 1.7; font-weight: 300; color: rgba(240,238,233,0.88); }
+/* All-work link — in flow at the right of the footer row, never overlaps copy */
+.wh-all { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); text-decoration: none; opacity: 0.85; white-space: nowrap; transition: gap 0.3s ease, opacity 0.2s ease; }
 .wh-all:hover { gap: 14px; opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   .wh-circle path { animation: none; stroke-dashoffset: 0; }
 }
 @media (max-width: 860px) {
-  .wh-inner { padding: 110px 24px 90px; }
+  .wh-inner { padding: 110px 24px 64px; gap: 40px; }
+  .wh-foot { flex-direction: column; align-items: flex-start; gap: 28px; }
   .wh-brandrow { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .wh-all { right: 24px; bottom: 28px; }
 }
 
 /* Work intro: 2x2 photo grid (left) + heading & copy (right) */
