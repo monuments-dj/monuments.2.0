@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import WorkScope from '../../components/work/WorkScope.astro';
+import WorkQuote from '../../components/work/WorkQuote.astro';
+import WorkCredits from '../../components/work/WorkCredits.astro';
+
+// Kit preview — renders the first reusable work-page components from sample data,
+// so DJ can review the two he asked for (Scope + Credits) without touching a live
+// page. These become `{type:'scope'}` / `{type:'credits'}` sections in WorkLayout.
+const scope = {
+  heading: 'Imagine, Illuminate, Create',
+  body: [
+    "The primary objective was to revitalize Flashpoint's market presence, ensuring it became synonymous with innovation, quality, and value in the world of photography.",
+    'This comprehensive rebranding effort focused on a fresh brand image and updated messaging, a redesigned website, revamped packaging, and powerful out-of-home (OOH) campaigns.',
+  ],
+  services: ['Brand Identity', 'Logo Design', 'Brand Positioning', 'Packaging Design', 'Product Design', 'Messaging'],
+};
+const credits = [
+  { k: 'Agency', v: 'Art of Visuals' },
+  { k: 'Client', v: 'Sony Audio' },
+  { k: 'Director', v: 'Krizia Vega + DJ Ramirez' },
+  { k: 'Creative Director', v: 'DJ Ramirez' },
+  { k: 'DP', v: 'Joachim Zunke' },
+  { k: 'Stills', v: 'Claire LeJune' },
+];
+const quote = {
+  lead: 'True creativity flourishes when given',
+  emphasis: 'the space to breathe',
+  trailing: ' and align with the natural flow of inspiration.',
+  attribution: 'The idea behind the campaign.',
+};
+---
+<Base title="Work kit — components — monuments">
+  <main class="kit">
+    <header class="kit-head">
+      <h1>Work-page kit</h1>
+      <p>Reusable, self-contained components for the work template — each is data-driven and category-agnostic. The two new ones you asked for: <strong>Scope</strong> ("what I did for them") and <strong>Credits</strong>. Every section is an entry in a per-project data object, so order + content are data.</p>
+    </header>
+
+    <p class="kit-label">Scope — "what I did for them"</p>
+    <WorkScope heading={scope.heading} body={scope.body} services={scope.services} />
+
+    <p class="kit-label">Quote</p>
+    <WorkQuote lead={quote.lead} emphasis={quote.emphasis} trailing={quote.trailing} attribution={quote.attribution} />
+
+    <p class="kit-label">Credits</p>
+    <WorkCredits items={credits} />
+  </main>
+
+  <style>
+    .kit-head { max-width: var(--wrap); margin: 0 auto; padding: clamp(80px, 11vw, 150px) var(--pad) 24px; }
+    .kit-head h1 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(28px, 4vw, 46px); letter-spacing: -0.02em; }
+    .kit-head p { margin-top: 14px; color: var(--gray-mid); font-size: 15px; line-height: 1.6; max-width: 64ch; }
+    .kit-label { max-width: var(--wrap); margin: 0 auto; padding: 48px var(--pad) 0; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+  </style>
+</Base>

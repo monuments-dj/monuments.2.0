@@ -1,0 +1,28 @@
+---
+// Credits — every work page gets these (Agency / Client / Director / etc.).
+// Card on a dark band. The scroll-reactive FIND YOUR FLOW ring is a separate
+// treatment that joins this once a variant is picked (/lab/find-your-flow);
+// the layout already reserves room to drop it on the left.
+interface Props { items: { k: string; v: string }[]; }
+const { items } = Astro.props;
+---
+<section class="wk-credits fade">
+  <div class="wk-credits-inner">
+    <div class="wk-credits-card">
+      {items.map((c) => (
+        <div class="wk-credits-row"><span class="wk-credits-k">{c.k}:</span> <span class="wk-credits-v">{c.v}</span></div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .wk-credits { background: #0d0f14; padding: clamp(70px, 9vw, 120px) var(--pad); }
+  .wk-credits-inner { max-width: var(--wrap); margin: 0 auto; display: flex; justify-content: flex-end; }
+  .wk-credits-card { background: var(--white); color: #141519; border-radius: 2px; width: 100%; max-width: 720px; padding: clamp(20px, 2.4vw, 34px) clamp(30px, 3.4vw, 52px); }
+  .wk-credits-row { font-size: clamp(15px, 1.4vw, 18px); line-height: 1; padding: 15px 0; border-bottom: 1px solid rgba(20,21,25,0.08); }
+  .wk-credits-row:last-child { border-bottom: 0; }
+  .wk-credits-k { font-weight: 600; }
+  .wk-credits-v { color: rgba(20,21,25,0.7); }
+  @media (max-width: 820px) { .wk-credits-inner { justify-content: stretch; } }
+</style>

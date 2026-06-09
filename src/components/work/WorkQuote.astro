@@ -1,0 +1,18 @@
+---
+// Insight pull-quote band (dark, full-width). `emphasis` is the accent-colored
+// phrase; lead/trailing are the text around it.
+interface Props { lead: string; emphasis: string; trailing?: string; attribution: string; }
+const { lead, emphasis, trailing = '', attribution } = Astro.props;
+---
+<section class="wk-quote fade">
+  <p class="wk-quote-p">{lead} <span class="wk-quote-em">{emphasis}</span>{trailing}</p>
+  <p class="wk-quote-attr">{attribution}</p>
+</section>
+
+<style>
+  .wk-quote { background: #0d0f14; color: var(--white); padding: clamp(90px, 13vw, 170px) var(--pad); }
+  .wk-quote-p, .wk-quote-attr { max-width: var(--wrap); margin-left: auto; margin-right: auto; }
+  .wk-quote-p { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(26px, 4vw, 54px); line-height: 1.2; letter-spacing: -0.02em; }
+  .wk-quote-em { color: var(--accent); }
+  .wk-quote-attr { margin-top: 34px; font-size: 13px; letter-spacing: 0.04em; color: rgba(240,238,233,0.55); }
+</style>
