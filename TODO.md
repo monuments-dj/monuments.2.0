@@ -1,7 +1,7 @@
 # TODO — current state (2026-06-01)
 
 **Quick start:** `cd monuments-site && npm run dev` → http://localhost:4321 · `npm run build`
-(builds clean, **15 pages**). Read `CLAUDE.md` first (shorthand + workflow), then `HANDOFF.md`.
+(builds clean, **17 pages**, incl. `/lab/find-your-flow` + `/lab/work-kit`). Read `CLAUDE.md` first (shorthand + workflow), then `HANDOFF.md`, then `CSS-MAP.md` (line-map of global.css).
 Project memory auto-loads — especially **monuments-copy.md** (the SOURCE-OF-TRUTH brand doc).
 
 **DJ's style:** precise designer feedback, fast iteration. Replicate-first (match the real
@@ -9,6 +9,26 @@ monuments.cc, THEN optimize — don't redesign unprompted). Can't watch video. E
 before big tasks. Verify in-browser via Claude Preview MCP (name `monuments`, port 4321) — the
 headless preview renders narrow (~755px) and pauses rAF when hidden, so read the DOM/computed
 styles and trust DJ's real screen for fine spacing.
+
+## SESSION 2026-06-08/09 — what changed (read this first)
+**Strategic context (NEW — memory `site-builder-vision`):** monuments is DJ's *learning vehicle + template #1* for a **category-based website-builder / site-factory** (client fills a form + uploads images → point a domain → auto-build a site by business category). So **build components + data model GENERIC / multi-site-ready, not monuments-specific**; theme by category via `--` tokens; per-client editing = a git-based CMS (Keystatic-style); reuse, don't reinvent.
+
+**Shipped this session:**
+- Real bug fixed: `--pad` was `--pad: var(--pad)` (circular) → killed padding on EVERY work section. Now `clamp(24px,5vw,40px)`. (This was the "spacing" complaint.)
+- `CSS-MAP.md` (repo root): audited line-map of all of global.css + a confirmed **dead-code list** to delete (old `.work` grid, old `.ab-*`, orphan `.cs-*` scaffold, `.menu-close`, `.pg-modes`, unused `--warm`/`--gray-bg`). CSS is otherwise structurally clean.
+- Sony This Moment gallery: **continuous auto-scroll filmstrip** carousel (CSS-only marquee, hover-pause) + a **masonry** with a dark text-block cell that **randomizes its slot each page load**.
+- `/lab/find-your-flow`: FIND YOUR FLOW credits ring built as **3 motion options A/B/C** to compare live — A scroll-dial, B draw-in seal, C counter-rotor.
+- `/lab/work-kit`: first reusable, SELF-CONTAINED (scoped-style) work components — **WorkScope** ("what I did for them": heading+body+services list), **WorkCredits**, **WorkQuote** — + generic `src/data/work/types.ts` (Section/Project model with BOTH `scope` and `credits` as section types). Additive; no live page touched.
+
+**⏳ Decisions waiting on DJ:**
+1. FIND YOUR FLOW: pick A / B / C (or a mix) at `/lab/find-your-flow`.
+2. CMS scope: Keystatic visual editor now / clean data files (GUI later) / no CMS.
+
+**NEXT (in order):**
+- [ ] Reuse the photography `.pg-*` gallery + filmstrip **lightbox** for the work-page gallery — lift the lightbox into a shared component (DJ's instruction). Don't build a new one.
+- [ ] Finish the kit + a `WorkLayout` that renders `project.sections` by `type`; keep components self-contained.
+- [ ] Sweep the dead CSS listed in `CSS-MAP.md` (re-grep first — multi-session repo).
+- [ ] Migrate work pages to the kit: scaffold → clothing-merch (proof) → bc family → cs2 family → **sony-this-moment (locked ref) LAST** → drop in the FIND YOUR FLOW winner.
 
 ## DONE (do not redo)
 - Live + deployed: GitHub `monuments-dj/monuments.2.0` → Vercel auto-deploy →
@@ -32,9 +52,8 @@ Refining the work/case-study pages to match the real monuments.cc, one at a time
 **NEXT:** roll the `.wh-*` header + `.wk-intro` pattern to the other work pages, each with
 its own `--wh-circle` colour + client logo:
 - [ ] sony-flow-state, sony-xperia-summer, flashpoint, waffle-me-up, clothing-merch, blue-cross, turnstile
-- [ ] DJ wants a **credits card + scroll-reactive circular "FIND YOUR FLOW" text** near the
-  credits (see ref he sent: circular wordmark rotates with scroll, beside a white credits box).
-  NOT built yet — was about to start when we paused.
+- [x] **FIND YOUR FLOW** credits ring — BUILT as 3 motion options at `/lab/find-your-flow`
+  (A scroll-dial / B draw-in seal / C counter-rotor). ⏳ DJ to pick — see SESSION block above.
 
 ## Open / lower priority
 - About + Services: DJ is matching these to the real site via **Cowork** (separate tool).
