@@ -8,9 +8,14 @@ import vercel from '@astrojs/vercel';
 // and its auth API are server routes (Vercel serverless), so visitor speed is
 // unchanged. Locally (no GitHub env vars) Keystatic falls back to local file storage.
 export default defineConfig({
-  // Canonical URL — Keystatic uses this to build the GitHub OAuth redirect_uri.
-  // Without it, the redirect defaults to localhost and GitHub rejects the login.
   site: 'https://monuments-2-0.vercel.app',
+  // Astro 5's host-injection guard rejects the request Host unless it's allow-listed,
+  // which made the serverless request.url fall back to localhost — so Keystatic built
+  // the GitHub OAuth redirect_uri as https://localhost/... and GitHub rejected it.
+  // Allow-listing the production host fixes request.url.origin → the real redirect_uri.
+  security: {
+    allowedDomains: [{ hostname: 'monuments-2-0.vercel.app' }],
+  },
   integrations: [react(), keystatic()],
   adapter: vercel(),
 });
