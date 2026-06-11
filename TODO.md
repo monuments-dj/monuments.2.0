@@ -1,4 +1,4 @@
-# TODO — current state (2026-06-01)
+# TODO — current state (2026-06-10)
 
 **Quick start:** `cd monuments-site && npm run dev` → http://localhost:4321 · `npm run build`
 (builds clean, **17 pages**, incl. `/lab/find-your-flow` + `/lab/work-kit`). Read `CLAUDE.md` first (shorthand + workflow), then `HANDOFF.md`, then `CSS-MAP.md` (line-map of global.css).
@@ -20,11 +20,14 @@ styles and trust DJ's real screen for fine spacing.
 - `/lab/find-your-flow`: FIND YOUR FLOW credits ring built as **3 motion options A/B/C** to compare live — A scroll-dial, B draw-in seal, C counter-rotor.
 - `/lab/work-kit`: first reusable, SELF-CONTAINED (scoped-style) work components — **WorkScope** ("what I did for them": heading+body+services list), **WorkCredits**, **WorkQuote** — + generic `src/data/work/types.ts` (Section/Project model with BOTH `scope` and `credits` as section types). Additive; no live page touched.
 
+- **Keystatic CMS — GitHub-mode browser login WORKING (2026-06-10).** `/keystatic` admin, collections **Work projects** + **Testimonials** + singleton **Site settings** (`keystatic.config.ts`; content under `content/`). React + `@keystatic/astro` + `@astrojs/vercel@8` adapter are added in `astro.config.mjs` but the integrations are **dev-gated** (`!process.argv.includes('build')`) so the production build stays **pure-static** (verified). Storage auto-switches local-in-dev / GitHub-on-deploy via `import.meta.env.DEV`. GitHub App "Monuments CC CMS" created + installed on the repo (Contents+PR read/write); 3 Vercel env vars set (KEYSTATIC_GITHUB_CLIENT_ID/SECRET + KEYSTATIC_SECRET, Sensitive/Production). Fixed an OAuth `redirect_uri=localhost` bug via `security.allowedDomains:[{hostname:'monuments-2-0.vercel.app'}]` in astro.config (Astro 5 host-injection guard). DJ logged in OK. Login from anywhere: monuments-2-0.vercel.app/keystatic.
+
 **⏳ Decisions waiting on DJ:**
 1. FIND YOUR FLOW: pick A / B / C (or a mix) at `/lab/find-your-flow`.
-2. CMS scope: Keystatic visual editor now / clean data files (GUI later) / no CMS.
+2. ✅ RESOLVED — CMS = Keystatic GitHub mode (built + login working, see above).
 
 **NEXT (in order):**
+- [ ] **Wire CMS content → live pages** (highest leverage now): work pages READ from Keystatic via `createReader` from `@keystatic/core/reader` over `content/work/*`, so CMS edits actually drive the site. Right now `/keystatic` saves content but the pages don't read it. Target data shape = `src/data/work/types.ts`. Do this alongside the kit / `WorkLayout` below.
 - [ ] Reuse the photography `.pg-*` gallery + filmstrip **lightbox** for the work-page gallery — lift the lightbox into a shared component (DJ's instruction). Don't build a new one.
 - [ ] Finish the kit + a `WorkLayout` that renders `project.sections` by `type`; keep components self-contained.
 - [ ] Sweep the dead CSS listed in `CSS-MAP.md` (re-grep first — multi-session repo).

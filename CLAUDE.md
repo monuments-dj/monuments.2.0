@@ -23,6 +23,12 @@ Quick shorthand DJ can use. When DJ says these, act without re-explaining:
 - **"undo"** / **"roll back"** → revert the last change (working tree → last commit, or
   `git revert` the last commit if already pushed). Confirm what was undone.
 - **"checkpoint"** → commit locally (no push) as a safe restore point.
+- **"handoff"** → prep this conversation for a fresh chat (do it proactively at ~70% context).
+  Steps: (1) update TODO.md (shipped this session / decisions / NEXT) + the "Active work" line
+  below; (2) push any cross-session *facts* to memory; (3) commit + push the docs; (4) output a
+  tight **kickoff prompt** for the new chat — working dir + "read CLAUDE.md, TODO.md, HANDOFF.md,
+  CSS-MAP.md first" + one-line current state + the immediate next task. Goal: the new chat is as
+  productive as this one from message 1.
 
 ## Workflow rhythm
 Local-first. Iterate at localhost:4321 (instant hot-reload, private). DJ said: he's solo
@@ -44,11 +50,13 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
-## Active work (2026-06-01) — see TODO.md
-Refining work/case-study pages to match real monuments.cc, one at a time. Sony "This Moment"
-is the built reference (`.wh-*` header w/ animated marker circle + per-page `--wh-circle`
-colour; `.wk-intro` 2×2 grid+text). NEXT: roll that pattern to the other work pages + build
-the scroll-reactive circular "FIND YOUR FLOW" credits component.
+## Active work (2026-06-10) — see TODO.md
+Building a GENERIC, multi-site component kit + data model — DJ's real goal is a category-based
+site-factory; monuments = template #1 (memory `site-builder-vision`). **Keystatic CMS is LIVE**
+(GitHub-mode browser login at `/keystatic`; dev-gated so prod stays static). NEXT: wire CMS
+content → the work pages, finish the kit + a `WorkLayout`, then roll pages onto it
+(sony-this-moment is the LOCKED reference, migrate it last). FIND YOUR FLOW ring awaiting DJ's
+A/B/C pick at `/lab/find-your-flow`.
 
 ## Deploy facts
 - Repo: github.com/monuments-dj/monuments.2.0 (branch `main`)

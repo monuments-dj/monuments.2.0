@@ -26,6 +26,11 @@ catch black mid-load/HMR frames and YouTube renders unreliably headless — veri
 - `src/styles/global.css` = **all** styles (one file), design tokens in `:root`
   (`--black #0d0f14`, `--white #f0eee9` cream, `--accent #6b8cae`).
 - **Inter only** (weights 300–600). No second font without asking.
+- **CMS:** Keystatic at `/keystatic` (GitHub-mode browser login, LIVE). React + `@keystatic/astro`
+  + `@astrojs/vercel` are **dev-gated** in `astro.config.mjs` (dropped when argv has `build`) so the
+  production build stays **pure-static**. Schema = `keystatic.config.ts`; content under `content/`.
+  Editing saves to the repo but the live pages don't read the CMS yet (next task). Full setup
+  (GitHub App, Vercel env vars, the `security.allowedDomains` OAuth fix) is in TODO.md.
 - Boxed content = 100px L/R gutters (24px mobile); headers/footers full-bleed.
 - `prefers-reduced-motion` respected throughout. Scroll FX are tasteful/restrained.
 
