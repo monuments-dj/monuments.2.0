@@ -27,6 +27,7 @@ export interface HeaderData {
 
 export type Section =
   | ProseSection
+  | IntroSection
   | ScopeSection
   | GallerySection
   | QuoteSection
@@ -35,6 +36,10 @@ export type Section =
   | NextSection;
 
 export interface ProseSection { type: 'prose'; heading?: string; body: string[]; }
+
+// The Sony `wk-intro`: a 2×2 photo grid (left) + heading & body copy (right).
+// Distinct from ScopeSection, which is the services-list / Flashpoint treatment.
+export interface IntroSection { type: 'intro'; heading: string; body: string[]; images: string[]; }
 
 // "What I did for them" — heading + body + a services/scope list (the Flashpoint pattern).
 export interface ScopeSection { type: 'scope'; heading: string; body: string[]; services: string[]; }

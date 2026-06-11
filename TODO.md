@@ -26,12 +26,23 @@ styles and trust DJ's real screen for fine spacing.
 1. FIND YOUR FLOW: pick A / B / C (or a mix) at `/lab/find-your-flow`.
 2. ✅ RESOLVED — CMS = Keystatic GitHub mode (built + login working, see above).
 
+## SESSION 2026-06-10 (cont.) — CMS→pages pipeline WIRED
+**The reader/adapter/WorkLayout pipeline is built + proven end-to-end.**
+- `src/lib/work.ts` — `createReader(@keystatic/core/reader)` over `content/work/*`; `toProject()` ADAPTS the flat Keystatic record → the generic `Project` (header + ordered `sections[]`, `src/data/work/types.ts`). This is the only seam that knows Keystatic field names. Exports `listWorkSlugs` / `getProject` / `getAllProjects`.
+- `src/components/work/WorkLayout.astro` — dispatches `project.sections` by `type`, reusing the **global** `.wh / .wk-intro / .wk-carousel / .wk-masonry / .bc-quote / .bc-meta / .cs-next` classes so a CMS page matches the locked Sony ref pixel-for-pixel (verified: same grid cols, 42s `wkScroll`, 3-col masonry, accent emphasis, `#e0322d` circle). Masonry images are Lightbox triggers.
+- `src/components/Lightbox.astro` — the photography `.pg-*` filmstrip lightbox LIFTED into a shared component (auto-drift + grab-momentum + keyboard). Binds to any `[data-lb-full]` trigger, grouped by `[data-lb-group]`. (Photography still has its own inline copy — entangled w/ lane drag-guard; migrate it onto this later.)
+- Added `quote{}` object to `keystatic.config.ts` (the `bc-quote` was the only non-CMS field) + a new `IntroSection` (`wk-intro` grid) to `types.ts`, distinct from `ScopeSection` (services-list/Flashpoint).
+- **Seed:** `content/work/sony-this-moment.json` (real Sony content). NOTE on-disk path: data-only collection → **flat `content/work/<slug>.json`**, NOT a `<slug>/index.json` dir.
+- **Comparison route:** `/work-preview/[slug]` renders the CMS page via WorkLayout. Locked `/work/sony-this-moment` is UNTOUCHED — A/B them at 1440 before flipping real routes.
+- ✅ Build clean (18 pages). `/work-preview/sony-this-moment` prerenders to **pure-static** `index.html` (CMS content baked in, 0 react islands) — static posture preserved.
+- ⚠️ **DOC FIX:** `astro.config.mjs` is NO LONGER dev-gated (that approach is gone). Current: Vercel adapter always on, **public pages prerendered/static, only `/keystatic` + auth API are serverless.** HANDOFF.md's "dev-gated pure-static build" text is stale.
+
 **NEXT (in order):**
-- [ ] **Wire CMS content → live pages** (highest leverage now): work pages READ from Keystatic via `createReader` from `@keystatic/core/reader` over `content/work/*`, so CMS edits actually drive the site. Right now `/keystatic` saves content but the pages don't read it. Target data shape = `src/data/work/types.ts`. Do this alongside the kit / `WorkLayout` below.
-- [ ] Reuse the photography `.pg-*` gallery + filmstrip **lightbox** for the work-page gallery — lift the lightbox into a shared component (DJ's instruction). Don't build a new one.
-- [ ] Finish the kit + a `WorkLayout` that renders `project.sections` by `type`; keep components self-contained.
+- [ ] **DJ A/B check** `/work-preview/sony-this-moment` vs locked `/work/sony-this-moment` at 1440 → if it matches, flip real `/work/[slug]` onto WorkLayout (sony LAST, it's the ref).
+- [ ] Roll real projects into the CMS (clothing-merch = proof, then bc family, cs2 family). Each work page becomes a `content/work/<slug>.json`.
+- [ ] Reuse `Lightbox.astro` on the photography page too (retire its inline copy) once the work flow is locked.
+- [ ] Finish the kit (WorkScope is wired into WorkLayout for the services/Flashpoint variant; WorkQuote/WorkCredits superseded by the global `.bc-quote/.bc-meta` for the Sony family — decide whether to keep them).
 - [ ] Sweep the dead CSS listed in `CSS-MAP.md` (re-grep first — multi-session repo).
-- [ ] Migrate work pages to the kit: scaffold → clothing-merch (proof) → bc family → cs2 family → **sony-this-moment (locked ref) LAST** → drop in the FIND YOUR FLOW winner.
 
 ## DONE (do not redo)
 - Live + deployed: GitHub `monuments-dj/monuments.2.0` → Vercel auto-deploy →

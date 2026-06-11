@@ -1,0 +1,141 @@
+---
+// Shared filmstrip lightbox — lifted from the photography page (.pg-* lightbox)
+// so work galleries reuse the exact same auto-drift + grab-momentum behaviour
+// instead of a second implementation. Drop <Lightbox /> once per page, then mark
+// any clickable image trigger with data-lb-full="<full-size src>" (optionally
+// data-lb-group="<name>" to scope which images share a strip). Styles live in
+// global.css (.pg-lightbox / .pg-lb-*).
+---
+<div class="pg-lightbox" data-lightbox aria-hidden="true">
+  <button class="pg-lb-close" data-lb-close aria-label="Close">✕</button>
+  <div class="pg-lb-strip" data-lb-strip>
+    <div class="pg-lb-track" data-lb-track></div>
+  </div>
+  <div class="pg-lb-bar">
+    <button class="pg-lb-arrow" data-lb-prev aria-label="Previous">←</button>
+    <span class="pg-lb-counter" data-lb-counter></span>
+    <button class="pg-lb-arrow" data-lb-next aria-label="Next">→</button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const lb = document.querySelector('[data-lightbox]');
+    if (!lb) return;
+    const strip = lb.querySelector('[data-lb-strip]');
+    const track = lb.querySelector('[data-lb-track]');
+    const counter = lb.querySelector('[data-lb-counter]');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let list = [], dir = 1, hover = false, busy = false, momRaf = 0;
+
+    const triggers = Array.from(document.querySelectorAll('[data-lb-full]'));
+
+    function centered() {
+      const c = strip.scrollLeft + strip.clientWidth / 2;
+      let best = 0, bd = Infinity;
+      for (let i = 0; i < track.children.length; i++) {
+        const ph = track.children[i], m = ph.offsetLeft + ph.offsetWidth / 2, d = Math.abs(m - c);
+        if (d < bd) { bd = d; best = i; }
+      }
+      return best;
+    }
+    function setCounter() { if (list.length) counter.textContent = (centered() + 1) + ' / ' + list.length; }
+    function centerOn(i, smooth) {
+      i = Math.max(0, Math.min(track.children.length - 1, i));
+      const ph = track.children[i]; if (!ph) return;
+      const left = ph.offsetLeft - (strip.clientWidth - ph.offsetWidth) / 2;
+      if (smooth) strip.scrollTo({ left, behavior: 'smooth' }); else strip.scrollLeft = left;
+    }
+    function nudge(d) { busy = true; centerOn(centered() + d, true); setTimeout(() => { busy = false; }, 650); }
+    strip.addEventListener('scroll', setCounter, { passive: true });
+
+    function open(trigger) {
+      const group = trigger.getAttribute('data-lb-group');
+      list = group ? triggers.filter((t) => t.getAttribute('data-lb-group') === group) : triggers;
+      track.innerHTML = '';
+      list.forEach((t) => {
+        const sl = document.createElement('div'); sl.className = 'pg-lb-slide';
+        const im = document.createElement('img'); im.className = 'pg-lb-photo';
+        im.src = t.getAttribute('data-lb-full'); im.alt = ''; im.draggable = false;
+        sl.appendChild(im); track.appendChild(sl);
+      });
+      lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden'; if (window.lenis) window.lenis.stop();
+      busy = true; dir = 1;
+      const ci = list.indexOf(trigger);
+      const recenter = () => { centerOn(ci, false); setCounter(); };
+      recenter();
+      requestAnimationFrame(recenter);
+      const img = track.children[ci] && track.children[ci].querySelector('img');
+      if (img && !img.complete) img.addEventListener('load', recenter, { once: true });
+      setTimeout(recenter, 250);
+      setTimeout(() => { recenter(); busy = false; }, 720);
+    }
+    function close() {
+      lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = ''; if (window.lenis) window.lenis.start();
+    }
+
+    triggers.forEach((t) => {
+      t.style.cursor = 'pointer';
+      t.addEventListener('click', (e) => { e.preventDefault(); open(t); });
+    });
+    lb.querySelector('[data-lb-close]').addEventListener('click', close);
+    lb.querySelector('[data-lb-prev]').addEventListener('click', () => nudge(-1));
+    lb.querySelector('[data-lb-next]').addEventListener('click', () => nudge(1));
+    window.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowRight') nudge(1);
+      else if (e.key === 'ArrowLeft') nudge(-1);
+    });
+
+    // gentle auto-drift; pauses while hovering the photos or interacting
+    strip.addEventListener('pointerenter', () => { hover = true; });
+    strip.addEventListener('pointerleave', () => { hover = false; });
+    (function frame() {
+      if (lb.classList.contains('open') && !hover && !busy && !reduce) {
+        const max = strip.scrollWidth - strip.clientWidth;
+        if (max > 2) {
+          let x = strip.scrollLeft + 0.45 * dir;
+          if (x >= max) { x = max; dir = -1; } else if (x <= 0) { x = 0; dir = 1; }
+          strip.scrollLeft = x;
+        }
+      }
+      requestAnimationFrame(frame);
+    })();
+
+    // grab + weighted momentum
+    (function () {
+      let down = false, sx = 0, ss = 0, lx = 0, v = 0, captured = false;
+      strip.addEventListener('pointerdown', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        cancelAnimationFrame(momRaf); down = true; busy = true; captured = false;
+        sx = e.clientX; lx = e.clientX; v = 0; ss = strip.scrollLeft;
+      });
+      strip.addEventListener('pointermove', (e) => {
+        if (!down) return;
+        const dx = e.clientX - sx;
+        if (!captured && Math.abs(dx) > 6) { captured = true; strip.classList.add('dragging'); try { strip.setPointerCapture(e.pointerId); } catch (_) {} }
+        v = e.clientX - lx; lx = e.clientX; strip.scrollLeft = ss - dx;
+      });
+      const up = () => {
+        if (!down) return; down = false; strip.classList.remove('dragging');
+        const max = strip.scrollWidth - strip.clientWidth;
+        let vel = -v * 1.6;
+        (function glide() {
+          if (Math.abs(vel) < 0.4) { busy = false; return; }
+          let x = strip.scrollLeft + vel;
+          if (x <= 0) { x = 0; vel = 0; } else if (x >= max) { x = max; vel = 0; }
+          strip.scrollLeft = x; vel *= 0.94; momRaf = requestAnimationFrame(glide);
+        })();
+      };
+      strip.addEventListener('pointerup', up);
+      strip.addEventListener('pointercancel', up);
+      strip.addEventListener('wheel', (e) => {
+        const d = Math.abs(e.deltaX) >= Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        e.preventDefault(); strip.scrollLeft += d;
+      }, { passive: false });
+    })();
+  })();
+</script>

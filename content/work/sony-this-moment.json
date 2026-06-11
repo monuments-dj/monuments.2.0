@@ -1,0 +1,45 @@
+{
+  "title": "This Moment",
+  "client": "Sony Audio",
+  "role": "creative direction",
+  "circleColor": "#e0322d",
+  "headerImage": "/case-studies/sony-this-moment/gallery/tm-09.jpg",
+  "lede": "Feeling overwhelmed shouldn't be the norm, but it's a feeling we can all relate to. When the world gets noisy, headphones aren't just a piece of tech, they're a device for creating an environment, a moment of peace and serenity no matter where you are or what may be happening around you. Along with Art of Visuals, I teamed up with Sony to highlight this moment. This moment is for you.",
+  "scope": {
+    "heading": "This Moment",
+    "body": [
+      "Sony partnered with Art of Visuals to craft a campaign that underscores the value of taking time, trusting the process, and rediscovering inspiration. This initiative encourages creators to embrace moments of pause, demonstrating that true creativity flourishes when given the space to breathe and align with the natural flow of inspiration.",
+      "As the creative director on this project, I helped shape the story, wrote the briefs, directed the stills, and made sure everything on set matched Sony's brand guides. I also worked closely with the production team through post, giving feedback on edits and prepping files for delivery. We cut the videos down from one minute to 30- and 15-second ads, and the stills were used for display ads."
+    ],
+    "services": []
+  },
+  "gallery": [
+    "/case-studies/sony-this-moment/gallery/tm-01.jpg",
+    "/case-studies/sony-this-moment/gallery/tm-02.jpg",
+    "/case-studies/sony-this-moment/gallery/tm-03.jpg",
+    "/case-studies/sony-this-moment/gallery/tm-04.jpg",
+    "/case-studies/sony-this-moment/gallery/tm-05.jpg",
+    "/case-studies/sony-this-moment/gallery/tm-06.jpg",
+    "/case-studies/sony-this-moment/gallery/tm-07.jpg",
+    "/case-studies/sony-this-moment/gallery/tm-08.jpg",
+    "/case-studies/sony-this-moment/gallery/tm-09.jpg"
+  ],
+  "quote": {
+    "lead": "True creativity flourishes when given",
+    "emphasis": "the space to breathe",
+    "trailing": " and align with the natural flow of inspiration.",
+    "attribution": "The idea behind the campaign."
+  },
+  "credits": [
+    { "k": "Client", "v": "Sony Audio" },
+    { "k": "Agency", "v": "Art of Visuals" },
+    { "k": "Production", "v": "MGX Creative" },
+    { "k": "Director", "v": "Daniel Malikyar" },
+    { "k": "Creative Direction", "v": "DJ Ramirez" },
+    { "k": "Stills", "v": "Claire LeJune" }
+  ],
+  "next": {
+    "slug": "sony-flow-state",
+    "title": "Sony — Flow State"
+  }
+}

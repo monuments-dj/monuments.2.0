@@ -53,10 +53,13 @@ use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px`
 ## Active work (2026-06-10) — see TODO.md
 Building a GENERIC, multi-site component kit + data model — DJ's real goal is a category-based
 site-factory; monuments = template #1 (memory `site-builder-vision`). **Keystatic CMS is LIVE**
-(GitHub-mode browser login at `/keystatic`; dev-gated so prod stays static). NEXT: wire CMS
-content → the work pages, finish the kit + a `WorkLayout`, then roll pages onto it
-(sony-this-moment is the LOCKED reference, migrate it last). FIND YOUR FLOW ring awaiting DJ's
-A/B/C pick at `/lab/find-your-flow`.
+(GitHub-mode browser login at `/keystatic`). **CMS→pages pipeline now WIRED**: `src/lib/work.ts`
+(reader+adapter) → `WorkLayout.astro` (dispatches `sections` by type) + shared `Lightbox.astro`.
+Proven at `/work-preview/sony-this-moment` (CMS-driven, matches the locked `/work/sony-this-moment`
+ref pixel-for-pixel, builds pure-static). NEXT: DJ A/B-checks the comparison route, then flip real
+`/work/[slug]` onto WorkLayout (sony LAST). FIND YOUR FLOW ring awaiting DJ's A/B/C pick at
+`/lab/find-your-flow`. NOTE: astro.config is NOT dev-gated anymore — Vercel adapter always on,
+public pages prerendered/static, only `/keystatic`+auth are serverless (HANDOFF text is stale).
 
 ## Deploy facts
 - Repo: github.com/monuments-dj/monuments.2.0 (branch `main`)

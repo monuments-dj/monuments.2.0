@@ -1,0 +1,24 @@
+---
+// CMS-driven work pages (comparison route). Reads each project from Keystatic via
+// the reader/adapter and renders it through WorkLayout. Lives under /work-preview
+// so we can A/B against the locked hand-coded /work/* pages before flipping the
+// real routes onto the layout. getStaticPaths enumerates content/work/*.
+import Base from '../../layouts/Base.astro';
+import WorkLayout from '../../components/work/WorkLayout.astro';
+import { listWorkSlugs, getProject } from '../../lib/work';
+
+export async function getStaticPaths() {
+  const slugs = await listWorkSlugs();
+  const paths = [];
+  for (const slug of slugs) {
+    const project = await getProject(slug);
+    if (project) paths.push({ params: { slug }, props: { project } });
+  }
+  return paths;
+}
+
+const { project } = Astro.props;
+---
+<Base title={project.title}>
+  <WorkLayout project={project} />
+</Base>

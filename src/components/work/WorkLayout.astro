@@ -1,0 +1,139 @@
+---
+// Generic work-page renderer. Takes a `Project` (header + ordered sections) and
+// dispatches each section by `type`, reusing the global .wh / .wk-* / .bc-* / .cs-*
+// classes so a CMS-driven page matches the locked Sony reference exactly. Gallery
+// images are wired as <Lightbox> triggers (shared filmstrip, no new lightbox).
+import type { Project } from '../../data/work/types';
+import Lightbox from '../Lightbox.astro';
+import WorkScope from './WorkScope.astro';
+
+interface Props { project: Project }
+const { project } = Astro.props;
+const h = project.header;
+// Sony's hand-drawn marker-circle path (per-page colour via --wh-circle).
+const circlePath =
+  'M116 11 C40 5, 12 28, 18 50 C25 74, 104 86, 162 82 C214 78, 232 56, 221 37 C209 17, 142 7, 60 14 C30 18, 15 33, 22 49';
+const hasGallery = project.sections.some((s) => s.type === 'gallery');
+---
+<article class="bc-page">
+
+  {/* WORK HEADER (.wh) — full-bleed image, big title, client logo + circled role */}
+  <header class="wh" style={`--wh-circle:${h.circleColor ?? '#e0322d'}`}>
+    {h.image && <img class="wh-img" src={h.image} alt={`${project.header.titleHtml.replace(/<br>/g, ' ')} campaign`} />}
+    <div class="wh-scrim"></div>
+    <div class="wh-inner">
+      <h1 class="wh-title" set:html={h.titleHtml}></h1>
+      <div class="wh-foot">
+        <div class="wh-foot-main">
+          <div class="wh-brandrow">
+            {h.logo && <img class="wh-logo" src={h.logo} alt="" />}
+            {h.role && (
+              <span class="wh-role">
+                {h.role}
+                <svg class="wh-circle" viewBox="0 0 240 92" aria-hidden="true" preserveAspectRatio="none">
+                  <path d={circlePath} />
+                </svg>
+              </span>
+            )}
+          </div>
+          {h.lede && <p class="wh-lede">{h.lede}</p>}
+        </div>
+        <a class="wh-all" href="/work">All Work <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </header>
+
+  {project.sections.map((s) => {
+    if (s.type === 'intro') {
+      return (
+        <section class="wk-intro fade">
+          <div class="wk-grid">
+            {s.images.map((src) => <img src={src} alt={s.heading} loading="lazy" />)}
+          </div>
+          <div class="wk-intro-text">
+            <h2 class="wk-intro-h">{s.heading}</h2>
+            {s.body.map((p) => <p>{p}</p>)}
+          </div>
+        </section>
+      );
+    }
+    if (s.type === 'scope') {
+      return <WorkScope heading={s.heading} body={s.body} services={s.services} />;
+    }
+    if (s.type === 'gallery' && s.layout === 'carousel') {
+      const loop = [...s.images, ...s.images];
+      return (
+        <section class="wk-carousel fade">
+          <div class="wk-car-stage">
+            <div class="wk-car-track">
+              {loop.map((src, i) => (
+                <div class="wk-car-item" aria-hidden={i >= s.images.length ? 'true' : undefined}>
+                  <img src={src} alt={i < s.images.length ? 'Campaign still' : ''} loading="lazy" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+    if (s.type === 'gallery' && s.layout === 'masonry') {
+      return (
+        <section class="wk-masonry fade">
+          {s.images.map((src) => (
+            <figure class="wk-mas-item" data-lb-full={src} data-lb-group="work"><img src={src} alt="Campaign still" loading="lazy" /></figure>
+          ))}
+          {s.textCell && (
+            <div class="wk-mas-item wk-mas-text">
+              <span class="wk-mas-k">{s.textCell.kicker}</span>
+              <p>{s.textCell.text}</p>
+            </div>
+          )}
+        </section>
+      );
+    }
+    if (s.type === 'quote') {
+      return (
+        <section class="bc-quote fade">
+          <p>{s.lead} <span class="bc-quote-em">{s.emphasis}</span>{s.trailing}</p>
+          {s.attribution && <p class="bc-quote-attr">{s.attribution}</p>}
+        </section>
+      );
+    }
+    if (s.type === 'credits') {
+      return (
+        <div class="bc-meta fade">
+          {s.items.map((m) => (
+            <div class="cs-meta-item">
+              <span class="cs-meta-k">{m.k}</span>
+              <span class="cs-meta-v">{m.v}</span>
+            </div>
+          ))}
+        </div>
+      );
+    }
+    if (s.type === 'next') {
+      return (
+        <a class="cs-next" href={s.href}>
+          <span class="cs-next-k">Next project</span>
+          <span class="cs-next-t">{s.title} <span class="cs-next-arrow">→</span></span>
+        </a>
+      );
+    }
+    return null;
+  })}
+
+  {hasGallery && <Lightbox />}
+</article>
+
+<script>
+  // Masonry text-block pops into a random slot each load (hidden by .fade until
+  // it scrolls in, so the reshuffle never flashes). Mirrors the locked Sony page.
+  document.querySelectorAll('.wk-masonry').forEach((m) => {
+    const text = m.querySelector('.wk-mas-text');
+    if (!text) return;
+    text.remove();
+    const items = [...m.children];
+    const idx = 1 + Math.floor(Math.random() * (items.length - 1));
+    m.insertBefore(text, items[idx]);
+  });
+</script>

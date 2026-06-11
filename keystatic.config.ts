@@ -57,6 +57,15 @@ export default config({
         gallery: fields.array(fields.text({ label: 'Image path' }), {
           label: 'Gallery images', itemLabel: (p) => p.value || 'Image',
         }),
+        quote: fields.object(
+          {
+            lead: fields.text({ label: 'Lead (before emphasis)' }),
+            emphasis: fields.text({ label: 'Emphasised phrase (accent colour)' }),
+            trailing: fields.text({ label: 'Trailing (after emphasis)' }),
+            attribution: fields.text({ label: 'Attribution' }),
+          },
+          { label: 'Insight quote' }
+        ),
         credits: fields.array(
           fields.object({ k: fields.text({ label: 'Label' }), v: fields.text({ label: 'Value' }) }),
           { label: 'Credits', itemLabel: (p) => `${p.fields.k.value || 'Label'}: ${p.fields.v.value || ''}` }
