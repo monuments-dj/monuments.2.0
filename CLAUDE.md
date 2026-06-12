@@ -36,6 +36,14 @@ on the repo for now (no need to sync-check every turn) and **auto-push at the en
 change set is approved** — commit + push when a change feels done, no need to ask. Keep the
 live site polished; each deploy is a clean rollback point.
 
+## 🔍 VISUAL TRUTH FIRST — never clone or judge a page from its HTML
+DJ's rule (2026-06-12): before cloning/judging ANY page, capture what's actually
+rendered: `node tools/snap.mjs <url> <name> [width=1440] [--sections]` →
+`tools/snaps/<name>/` gets a full-page screenshot, per-section crops, and
+`elements.json` (every visible element's rect + computed font/color/bg).
+Capture the reference AND the local build, Read both images, and diff the
+numbers (px sizes, weights, column widths) — match measurements, not vibes.
+
 ## ⚠️ VERIFY AT DESKTOP WIDTH — don't repeat the v2 mistake
 The Claude Preview MCP renders ~755px wide by default, so desktop-only bugs
 (overlaps, misalignment) are INVISIBLE there. Before judging ANY layout:
