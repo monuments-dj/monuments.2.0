@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import WorkNext from '../../components/work/WorkNext.astro';
+import WorkSlider from '../../components/work/WorkSlider.astro';
 
 // === Blue Cross of Idaho — faithful clone of monuments.cc/portfolio/blue-cross-2 ===
 // Structure mirrors the live page: .wh header → copy band (services left, copy right)
@@ -33,6 +34,7 @@ const masonry = [2, 9, 22, 27, 19, 7, 26, 24, 18, 17, 28, 16, 14, 13, 12, 11, 10
             </div>
             <p class="wh-lede">Blue Cross needed to develop a campaign that authentically represented their most valued asset&mdash;their customers. They wanted to highlight the diversity and individuality of their customer base in a relatable, human way while reinforcing their brand's commitment to serving real people. The challenge was to create visuals that would resonate emotionally with audiences, capturing everyday moments in a variety of settings.</p>
           </div>
+          <img class="wh-squiggle" src="/case-studies/blue-cross/squiggle-red.png" alt="" aria-hidden="true" />
           <a class="wh-all" href="/work">All Work <span aria-hidden="true">↗</span></a>
         </div>
       </div>
@@ -53,19 +55,8 @@ const masonry = [2, 9, 22, 27, 19, 7, 26, 24, 18, 17, 28, 16, 14, 13, 12, 11, 10
       </div>
     </section>
 
-    <!-- GALLERY: continuous auto-scrolling filmstrip (live page's 4-frame swiper) -->
-    <section class="wk-carousel fade">
-      <div class="wk-car-stage">
-        <div class="wk-car-track">
-          {carousel.map((src) => (
-            <div class="wk-car-item"><img src={src} alt="Blue Cross of Idaho campaign still" loading="lazy" /></div>
-          ))}
-          {carousel.map((src) => (
-            <div class="wk-car-item" aria-hidden="true"><img src={src} alt="" loading="lazy" /></div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <!-- GALLERY: contained single-image slider (matches the live Elementor swiper) -->
+    <WorkSlider images={carousel} alt="Blue Cross of Idaho campaign still" />
 
     <!-- GALLERY: full campaign masonry (matches the live 3-col set) -->
     <section class="wk-masonry fade">
@@ -87,13 +78,27 @@ const masonry = [2, 9, 22, 27, 19, 7, 26, 24, 18, 17, 28, 16, 14, 13, 12, 11, 10
 </Base>
 
 <style>
-  /* Page-scoped: the live copy band (wrapper-smaller column, services left / copy right) */
-  .bx-scope { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(40px, 6vw, 90px); align-items: start; max-width: var(--wrap); margin: 0 auto; padding: clamp(72px, 9vw, 120px) var(--pad); background: var(--white); }
-  .bx-scope-line { font-size: clamp(18px, 1.8vw, 24px); font-weight: 400; line-height: 1.5; color: #141519; margin-bottom: 34px; max-width: 30ch; }
+  /* Page-scoped overrides, measured off the live page at 1440 (tools/snaps/bc-live). */
+
+  /* Header: live title is weight 400 w/ near-normal tracking; lede is 15px/25 max 653px. */
+  .bc-page :global(.wh-title) { font-weight: 400; letter-spacing: -0.02em; }
+  .bc-page :global(.wh-lede) { font-size: 15px; line-height: 1.67; max-width: 653px; }
+  .wh-squiggle { position: absolute; right: clamp(60px, 14vw, 210px); bottom: 250px; width: 66px; height: auto; pointer-events: none; }
+
+  /* Copy band: live is a centered 830px block, two 405px columns, tight 20px gutter. */
+  .bx-scope { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; max-width: calc(830px + 2 * var(--pad)); margin: 0 auto; padding: clamp(90px, 9vw, 130px) var(--pad) clamp(40px, 4vw, 60px); background: var(--white); }
+  .bx-scope-line { font-size: clamp(24px, 2vw, 29px); font-weight: 300; line-height: 1.45; color: #141519; margin-bottom: 44px; }
   .bx-scope-services { list-style: none; padding: 0; margin: 0; }
-  .bx-scope-services li { font-size: clamp(16px, 1.5vw, 20px); color: #141519; padding: 18px 0; border-bottom: 1px solid rgba(20,21,25,0.18); }
-  .bx-scope-right p { font-size: 15px; line-height: 1.75; font-weight: 300; color: rgba(20,21,25,0.78); max-width: 56ch; }
-  .bx-scope-right p + p { margin-top: 1.4em; }
+  .bx-scope-services li { font-size: 18px; font-weight: 400; color: #141519; padding: 9px 0; border-bottom: 1px solid rgba(20,21,25,0.15); }
+  .bx-scope-right p { font-size: 16px; line-height: 1.6; font-weight: 300; color: rgba(20,21,25,0.85); }
+  .bx-scope-right p + p { margin-top: 1.5em; }
   .wh-logo-bcbs { height: 44px; width: auto; }
-  @media (max-width: 820px) { .bx-scope { grid-template-columns: 1fr; gap: 36px; padding: 64px var(--pad); } }
+
+  /* Masonry: live gallery is contained to the same 946px stage as the slider. */
+  .bc-page :global(.wk-masonry) { max-width: calc(946px + 2 * var(--pad)); }
+
+  @media (max-width: 820px) {
+    .bx-scope { grid-template-columns: 1fr; gap: 36px; padding: 64px var(--pad) 24px; }
+    .wh-squiggle { display: none; }
+  }
 </style>
