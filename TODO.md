@@ -42,7 +42,12 @@ styles and trust DJ's real screen for fine spacing.
 - [ ] Roll real projects into the CMS (clothing-merch = proof, then bc family, cs2 family). Each work page becomes a `content/work/<slug>.json`.
 - [ ] Reuse `Lightbox.astro` on the photography page too (retire its inline copy) once the work flow is locked.
 - [ ] Finish the kit (WorkScope is wired into WorkLayout for the services/Flashpoint variant; WorkQuote/WorkCredits superseded by the global `.bc-quote/.bc-meta` for the Sony family — decide whether to keep them).
-- [ ] Sweep the dead CSS listed in `CSS-MAP.md` (re-grep first — multi-session repo).
+- [x] ✅ DONE 2026-06-12 — dead CSS swept (all CSS-MAP candidates re-grepped + removed, ~110 lines; build verified clean).
+
+## SESSION 2026-06-12 — Blue Cross clone + full QC pass
+- **`/work/blue-cross` REBUILT as a faithful clone of monuments.cc/portfolio/blue-cross-2** (verified against the live page in-browser): `.wh` header (firefighter hero = bci-02, BCBS logo `/logos/blue-cross.png`, red `--wh-circle`, real intro copy) → page-scoped `.bx-scope` copy band (services list left / two paragraphs right, like live) → `.wk-carousel` (live swiper order: bci-22/24/02/28) → full 23-image `.wk-masonry` in live order → **new `WorkNext.astro`** (giant-ghost-text next-project teaser cloned from the live template; reusable, scoped styles). NOTE: local bci-NN numbering == live Blue-Cross-Of-IdahoNN numbering.
+- **QC pass (all clean):** `npm run build` 18 pages no errors; all 19 routes 200 + 404 works; zero console errors/warnings on every page (home, work, photography, about, contact, giving, both labs, all case studies); zero failed network requests; zero broken internal links/assets (only flag: `/about/dj.jpg` inside an intentional HTML comment placeholder); no console.log/TODO/debugger anywhere in src.
+- ⏳ DJ to A/B `/work/blue-cross` vs the live page, then approve cloning the remaining work pages.
 
 ## DONE (do not redo)
 - Live + deployed: GitHub `monuments-dj/monuments.2.0` → Vercel auto-deploy →

@@ -50,7 +50,7 @@ Jump-to index so edits go straight to the right ~20 lines instead of grepping a 
 | **Work intro `.wk-intro/.wk-grid`** | 1742–1752 | 2×2 photo grid + heading/copy on the `--wrap` column |
 | **Work gallery `.wk-carousel/.wk-masonry`** | 1754–1777 | Auto-rotating 4-up carousel + 3-col masonry w/ text-block cell |
 
-## Dead code to remove (audited safe — re-grep before deleting, repo is multi-session)
+## Dead code to remove — ✅ ALL REMOVED 2026-06-12 (re-grepped each, build verified). Line ranges above have drifted ~110 lines; re-grep selectors.
 - `--warm`, `--gray-bg` tokens (`:root`, lines 4, 7) — referenced nowhere
 - `.fw-l` / `.fw-l.on` rules (1221–1222 + reduced-motion 1227) — JS now renders `.fw-text`, not per-letter `.fw-l`
 - Home `.work` grid block (532–602 + its 860 entries) — replaced by `.rwork-*`

@@ -1,101 +1,99 @@
 ---
 import Base from '../../layouts/Base.astro';
+import WorkNext from '../../components/work/WorkNext.astro';
 
-// === Blue Cross of Idaho — image-led case study (robust build) ===
-// Content from monuments.cc/portfolio/blue-cross-2/. Pulls the full campaign set
-// (23 stills) from /public/case-studies/blue-cross/gallery/.
-const meta = [
-  { k: 'Client', v: 'Blue Cross of Idaho' },
-  { k: 'Agency', v: 'OMEK' },
-  { k: 'Role', v: 'Creative Direction' },
-  { k: 'Services', v: 'Creative Direction · Consulting' },
-  { k: 'Timeline', v: '2020 — 2024' },
-];
-// All campaign stills (real filenames in the gallery folder).
+// === Blue Cross of Idaho — faithful clone of monuments.cc/portfolio/blue-cross-2 ===
+// Structure mirrors the live page: .wh header → copy band (services left, copy right)
+// → 4-frame carousel → full masonry → next-project teaser.
 const nums = [2, 3, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28];
-const gallery = nums.map((n) => `/case-studies/blue-cross/gallery/bci-${String(n).padStart(2, '0')}.jpg`);
-// Pull a few hero/feature frames out of the set.
-const heroImg = gallery[16];      // bci-22
-const featA = gallery[18];        // bci-24
-const pairL = gallery[0];         // bci-02
-const pairR = gallery[22];        // bci-28
-const rest = gallery.filter((g) => ![heroImg, featA, pairL, pairR].includes(g));
+const g = Object.fromEntries(nums.map((n) => [n, `/case-studies/blue-cross/gallery/bci-${String(n).padStart(2, '0')}.jpg`]));
+const carousel = [g[22], g[24], g[2], g[28]];          // live swiper order
+// Masonry sequence approximates the live page's 3-col flow (firefighter leads).
+const masonry = [2, 9, 22, 27, 19, 7, 26, 24, 18, 17, 28, 16, 14, 13, 12, 11, 10, 8, 20, 3, 21, 23, 25].map((n) => g[n]);
 ---
 <Base title="Blue Cross — monuments">
   <article class="bc-page">
 
-    <!-- HERO (full-bleed image) -->
-    <header class="bc-hero">
-      <img class="bc-hero-img" src={heroImg} alt="Blue Cross of Idaho campaign" />
-      <div class="bc-hero-inner">
-        <p class="bc-hero-eyebrow">Creative Direction</p>
-        <h1 class="bc-hero-title">Blue Cross<br>of Idaho</h1>
-        <p class="bc-hero-lede">A campaign built on the people behind the coverage.</p>
-      </div>
-      <div class="bc-hero-meta">
-        <span>100+ images</span><span>2020 — 2024</span><span>Statewide</span>
+    <!-- WORK HEADER (full-bleed firefighter image, big title, logo + circled role, intro) -->
+    <header class="wh" style="--wh-circle:#e0322d">
+      <img class="wh-img" src={g[2]} alt="Blue Cross of Idaho campaign — Boise firefighter" />
+      <div class="wh-scrim"></div>
+      <div class="wh-inner">
+        <h1 class="wh-title">Blue<br>Cross</h1>
+        <div class="wh-foot">
+          <div class="wh-foot-main">
+            <div class="wh-brandrow">
+              <img class="wh-logo wh-logo-bcbs" src="/logos/blue-cross.png" alt="BlueCross BlueShield" />
+              <span class="wh-role">
+                creative direction
+                <svg class="wh-circle" viewBox="0 0 240 92" aria-hidden="true" preserveAspectRatio="none">
+                  <path d="M116 11 C40 5, 12 28, 18 50 C25 74, 104 86, 162 82 C214 78, 232 56, 221 37 C209 17, 142 7, 60 14 C30 18, 15 33, 22 49" />
+                </svg>
+              </span>
+            </div>
+            <p class="wh-lede">Blue Cross needed to develop a campaign that authentically represented their most valued asset&mdash;their customers. They wanted to highlight the diversity and individuality of their customer base in a relatable, human way while reinforcing their brand's commitment to serving real people. The challenge was to create visuals that would resonate emotionally with audiences, capturing everyday moments in a variety of settings.</p>
+          </div>
+          <a class="wh-all" href="/work">All Work <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
     </header>
 
-    <!-- INTRO -->
-    <section class="bc-intro fade">
-      <p>Blue Cross needed a campaign that authentically represented their most valued asset — their customers. The goal: highlight the diversity and individuality of real people in a relatable, human way, capturing everyday moments across a variety of settings.</p>
-    </section>
-
-    <!-- FEATURE SHOT -->
-    <figure class="bc-shot fade">
-      <img src={featA} alt="Blue Cross campaign — everyday moment" loading="lazy" />
-    </figure>
-
-    <!-- INSIGHT QUOTE -->
-    <section class="bc-quote fade">
-      <p>Health insurance isn't just about coverage — it's about <span class="bc-quote-em">knowing and caring for people as individuals.</span></p>
-      <p class="bc-quote-attr">The insight that anchored the campaign.</p>
-    </section>
-
-    <!-- CAMPAIGN PAIR -->
-    <div class="bc-duo fade">
-      <img src={pairL} alt="Blue Cross campaign" loading="lazy" />
-      <img src={pairR} alt="Blue Cross campaign" loading="lazy" />
-    </div>
-
-    <!-- EXECUTION -->
-    <section class="bc-exec fade">
-      <h2 class="bc-exec-h">Real people, real places.</h2>
-      <div class="bc-exec-b">
-        <p>In partnership with OMEK, I led creative direction and assisted in execution — from initial concept through final image selection. Over the course of a week, we captured authentic moments across a range of locations: local shops, homes, and the outdoors, each chosen to reflect the personal connection Blue Cross has with its customers.</p>
-        <p>By showing everyday people in familiar settings, the brand could communicate trust, reliability, and genuine human connection — the things that build real loyalty in healthcare. The campaign launched in 2020 and has continued to evolve through 2024, with licensing extended on the strength of its success.</p>
+    <!-- COPY BAND: services list (left) + paragraphs (right), per the live page -->
+    <section class="bx-scope fade">
+      <div class="bx-scope-left">
+        <p class="bx-scope-line">The campaign launched in 2020 and has continued to evolve through 2024, with licensing extended due to its success.</p>
+        <ul class="bx-scope-services">
+          <li>Creative Direction</li>
+          <li>Consulting</li>
+        </ul>
+      </div>
+      <div class="bx-scope-right">
+        <p>In partnership with OMEK agency, I helped with creative direction and assisted in execution of the campaign, from initial concept through final image selection. Over the course of a week, we captured authentic moments in a variety of locations, including local shops, homes, and outdoor areas, highlighting the personal connection Blue Cross has with its customers.</p>
+        <p>This campaign hinged on the insight that health insurance isn't just about coverage&mdash;it's about knowing and caring for people as individuals. By showcasing everyday people in familiar settings, the brand could reflect a sense of trust, reliability, and personal connection, which are key to customer loyalty in the healthcare industry.</p>
       </div>
     </section>
 
-    <!-- FULL CAMPAIGN GALLERY (masonry, all stills) -->
-    <section class="bc-gallery">
-      <div class="bc-gallery-head fade">
-        <h2 class="bc-gallery-h">The campaign</h2>
-        <span class="bc-gallery-meta">{gallery.length} selected frames</span>
-      </div>
-      <div class="bc-masonry">
-        {rest.map((src) => (
-          <figure class="bc-tile fade"><img src={src} alt="Blue Cross of Idaho campaign still" loading="lazy" /></figure>
-        ))}
-      </div>
-    </section>
-
-    <!-- META -->
-    <div class="bc-meta fade">
-      {meta.map((m) => (
-        <div class="cs-meta-item">
-          <span class="cs-meta-k">{m.k}</span>
-          <span class="cs-meta-v">{m.v}</span>
+    <!-- GALLERY: continuous auto-scrolling filmstrip (live page's 4-frame swiper) -->
+    <section class="wk-carousel fade">
+      <div class="wk-car-stage">
+        <div class="wk-car-track">
+          {carousel.map((src) => (
+            <div class="wk-car-item"><img src={src} alt="Blue Cross of Idaho campaign still" loading="lazy" /></div>
+          ))}
+          {carousel.map((src) => (
+            <div class="wk-car-item" aria-hidden="true"><img src={src} alt="" loading="lazy" /></div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
 
-    <!-- NEXT -->
-    <a class="cs-next" href="/work/waffle-me-up">
-      <span class="cs-next-k">Next project</span>
-      <span class="cs-next-t">Waffle Me Up <span class="cs-next-arrow">→</span></span>
-    </a>
+    <!-- GALLERY: full campaign masonry (matches the live 3-col set) -->
+    <section class="wk-masonry fade">
+      {masonry.map((src) => (
+        <figure class="wk-mas-item"><img src={src} alt="Blue Cross of Idaho campaign still" loading="lazy" /></figure>
+      ))}
+    </section>
+
+    <!-- NEXT (live-style giant-text teaser) -->
+    <WorkNext
+      href="/work/waffle-me-up"
+      title="Waffle ME UP"
+      image="/case-studies/waffle-me-up/cover.jpg"
+      year="2023"
+      services={['Branding', 'Creative Direction', 'Photography', 'Video Production']}
+    />
 
   </article>
 </Base>
+
+<style>
+  /* Page-scoped: the live copy band (wrapper-smaller column, services left / copy right) */
+  .bx-scope { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(40px, 6vw, 90px); align-items: start; max-width: var(--wrap); margin: 0 auto; padding: clamp(72px, 9vw, 120px) var(--pad); background: var(--white); }
+  .bx-scope-line { font-size: clamp(18px, 1.8vw, 24px); font-weight: 400; line-height: 1.5; color: #141519; margin-bottom: 34px; max-width: 30ch; }
+  .bx-scope-services { list-style: none; padding: 0; margin: 0; }
+  .bx-scope-services li { font-size: clamp(16px, 1.5vw, 20px); color: #141519; padding: 18px 0; border-bottom: 1px solid rgba(20,21,25,0.18); }
+  .bx-scope-right p { font-size: 15px; line-height: 1.75; font-weight: 300; color: rgba(20,21,25,0.78); max-width: 56ch; }
+  .bx-scope-right p + p { margin-top: 1.4em; }
+  .wh-logo-bcbs { height: 44px; width: auto; }
+  @media (max-width: 820px) { .bx-scope { grid-template-columns: 1fr; gap: 36px; padding: 64px var(--pad); } }
+</style>

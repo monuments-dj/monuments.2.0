@@ -1,0 +1,32 @@
+---
+// Next-project teaser cloned from the live monuments.cc portfolio pages:
+// giant title text running behind a centered image, then a meta row
+// (year · title · services). Self-contained styles so it drops into any template.
+interface Props {
+  href: string;
+  title: string;        // display title, e.g. "Waffle ME UP"
+  image: string;
+  year?: string;
+  services?: string[];
+}
+const { href, title, image, year, services = [] } = Astro.props;
+---
+<a class="wn" href={href}>
+  <span class="wn-ghost" aria-hidden="true">{title}&nbsp;&nbsp;{title}&nbsp;&nbsp;{title}</span>
+  <img class="wn-img" src={image} alt={title} loading="lazy" />
+  <span class="wn-meta">
+    {year && <span class="wn-meta-i">{year}</span>}
+    <span class="wn-meta-i wn-meta-t">{title}</span>
+    {services.length > 0 && <span class="wn-meta-i wn-meta-s">{services.join(' · ')}</span>}
+  </span>
+</a>
+
+<style>
+  .wn { position: relative; display: flex; flex-direction: column; align-items: center; overflow: hidden; padding: clamp(80px, 10vw, 150px) 0 clamp(48px, 6vw, 80px); background: var(--white); text-decoration: none; color: #141519; }
+  .wn-ghost { position: absolute; top: clamp(56px, 7vw, 110px); left: 50%; transform: translateX(-50%); white-space: nowrap; font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(80px, 12vw, 170px); letter-spacing: -0.03em; line-height: 1; color: #141519; pointer-events: none; }
+  .wn-img { position: relative; width: min(680px, 62vw); aspect-ratio: 16/10.5; object-fit: cover; margin-top: clamp(24px, 3vw, 48px); transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+  .wn:hover .wn-img { transform: scale(1.03); }
+  .wn-meta { display: flex; gap: clamp(24px, 4vw, 56px); align-items: baseline; margin-top: clamp(56px, 7vw, 100px); padding: 0 var(--pad); flex-wrap: wrap; justify-content: center; }
+  .wn-meta-i { font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; }
+  @media (max-width: 820px) { .wn-img { width: 80vw; } }
+</style>
