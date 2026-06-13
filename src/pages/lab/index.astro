@@ -167,6 +167,31 @@ const experiments = [
       <p class="lab-blocks-note fade">Want the selector? It's living bottom-left of this page. Click a swatch and the whole thing reskins from tokens, no reload.</p>
     </section>
 
+    <!-- TICKER PLAYGROUND — light + dark, with live speed + tone controls -->
+    <section class="lab-sec lab-ticklab" data-ticklab>
+      <div class="lab-sec-head">
+        <p class="lab-kicker fade">The logo ticker, tuned live</p>
+        <h2 class="lab-sec-title split">Light or dark, <em>your tempo.</em></h2>
+        <p class="lab-sec-sub fade">Both tones, side by side. Drag the speed and flip the invert to tune the strip that runs on every page.</p>
+      </div>
+
+      <div class="tl-controls fade">
+        <label class="tl-field">
+          <span class="tl-field-l">Speed <b data-tl-speedval>40</b> px/s</span>
+          <input class="tl-range" type="range" min="0" max="140" value="40" step="2" data-tl-speed aria-label="Ticker speed" />
+        </label>
+        <div class="tl-seg" role="group" aria-label="Invert logos">
+          <button class="tl-seg-btn on" type="button" data-tl-invert="off">Normal</button>
+          <button class="tl-seg-btn" type="button" data-tl-invert="on">Invert</button>
+        </div>
+      </div>
+
+      <div class="tl-stack" data-tl-stack>
+        <BrandTicker tone="white" speed={40} />
+        <BrandTicker tone="black" speed={40} />
+      </div>
+    </section>
+
     <!-- ALSO IN PROGRESS -->
     <section class="lab-sec lab-more">
       <p class="lab-kicker fade">Also on the bench</p>
@@ -389,6 +414,19 @@ const experiments = [
     .d-pile .ds { transform: none !important; opacity: 0.92 !important; }
     .lab-hero-frame { transform: none !important; }
   }
+
+  /* TICKER PLAYGROUND */
+  .lab-ticklab .tl-controls { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(20px, 4vw, 56px); margin: clamp(28px, 4vw, 48px) 0 clamp(24px, 3vw, 36px); }
+  .tl-field { display: flex; flex-direction: column; gap: 12px; min-width: 260px; flex: 1 1 280px; max-width: 420px; }
+  .tl-field-l { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.6); }
+  .tl-field-l b { color: var(--accent); font-variant-numeric: tabular-nums; }
+  .tl-range { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; border-radius: 999px; background: rgb(var(--fg-rgb) / 0.2); outline: none; cursor: pointer; }
+  .tl-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 2px 10px rgb(var(--ink-rgb) / 0.5); cursor: grab; }
+  .tl-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); cursor: grab; }
+  .tl-seg { display: inline-flex; padding: 4px; border-radius: 999px; border: 1px solid rgb(var(--fg-rgb) / 0.18); }
+  .tl-seg-btn { padding: 9px 18px; border: 0; border-radius: 999px; background: transparent; color: rgb(var(--fg-rgb) / 0.6); font: 600 12px/1 'Inter', sans-serif; letter-spacing: 0.06em; cursor: pointer; transition: color 0.2s, background 0.2s; }
+  .tl-seg-btn.on { background: var(--fg); color: var(--bg); }
+  .tl-stack { display: flex; flex-direction: column; gap: 14px; }
 </style>
 
 <script>
@@ -485,4 +523,40 @@ const experiments = [
       });
     });
   }
+
+  // --- Ticker playground: live speed + invert controls drive both tickers ---
+  (function () {
+    const lab = document.querySelector('[data-ticklab]');
+    if (!lab) return;
+    const stack = lab.querySelector('[data-tl-stack]');
+    const tickers = stack ? [...stack.querySelectorAll('.brand-ticker')] : [];
+    const range = lab.querySelector('[data-tl-speed]');
+    const speedVal = lab.querySelector('[data-tl-speedval]');
+    if (range) {
+      const apply = () => {
+        const v = range.value;
+        tickers.forEach((t) => { t.dataset.speed = v; });
+        if (speedVal) speedVal.textContent = v;
+      };
+      range.addEventListener('input', apply);
+      apply();
+    }
+    // Invert swaps each ticker's tone (white-on-dark <-> black-on-light) so both
+    // stay readable; toggling the tone class lets BrandTicker's own scoped styles
+    // do the work (a parent style can't reach into the scoped component).
+    const setInvert = (on) => {
+      tickers.forEach((t, i) => {
+        const base = i === 0 ? 'white' : 'black';
+        const tone = on ? (base === 'white' ? 'black' : 'white') : base;
+        t.classList.remove('bt-white', 'bt-black');
+        t.classList.add('bt-' + tone);
+      });
+    };
+    lab.querySelectorAll('[data-tl-invert]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setInvert(btn.getAttribute('data-tl-invert') === 'on');
+        lab.querySelectorAll('[data-tl-invert]').forEach((b) => b.classList.toggle('on', b === btn));
+      });
+    });
+  })();
 </script>

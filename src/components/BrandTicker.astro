@@ -174,7 +174,8 @@ const loop = [...brands, ...brands];
 
       if (reduced) return;
 
-      const baseSpeed = parseFloat(root.dataset.speed || "28"); // px/sec
+      // baseSpeed is read LIVE from data-speed each frame, so a control can
+      // retune it on the fly (see the lab ticker playground).
       let offset = 0;
       let half = track.scrollWidth / 2 || 1;
       let velAdd = 0; // extra velocity from scroll, decays back to 0
@@ -210,6 +211,7 @@ const loop = [...brands, ...brands];
       function frame(now) {
         const dt = Math.min(0.05, (now - last) / 1000);
         last = now;
+        const baseSpeed = parseFloat(root.dataset.speed) || 28; // live, retunable
 
         // Ease the scroll-velocity contribution back toward 0.
         velAdd *= 0.9;
