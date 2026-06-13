@@ -4,7 +4,9 @@
 //   snaps/<name>/full.png          — full-page screenshot at the given width
 //   snaps/<name>/sec-NN-<tag>.png  — one crop per top-level section
 //   snaps/<name>/elements.json     — visible elements w/ rects + key computed styles
-// Usage: node tools/snap.mjs <url> <name> [width=1440] [--sections]
+// Usage: node tools/snap.mjs <url> <name> [width=1440] [--sections] [--steps=N]
+//   --steps=N : for virtual-scroll/WebGL sites (body height ~0): dispatch N wheel
+//               scrolls and save a viewport frame after each → step-NN.png
 import { chromium } from 'playwright';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -96,6 +98,20 @@ if (wantSections) {
     });
   }
   console.log(JSON.stringify(sections, null, 1));
+}
+
+// Virtual-scroll capture: wheel-step through the experience, one frame per step.
+const stepsArg = process.argv.find((a) => a.startsWith('--steps'));
+if (stepsArg) {
+  const n = Number(stepsArg.split('=')[1]) || 12;
+  await page.reload({ waitUntil: 'networkidle' }).catch(() => {});
+  await page.waitForTimeout(2500);
+  await page.screenshot({ path: path.join(dir, 'step-00.png') });
+  for (let s = 1; s <= n; s++) {
+    await page.mouse.wheel(0, 850);
+    await page.waitForTimeout(900);
+    await page.screenshot({ path: path.join(dir, `step-${String(s).padStart(2, '0')}.png`) });
+  }
 }
 
 const fullH = await page.evaluate(() => document.body.scrollHeight);

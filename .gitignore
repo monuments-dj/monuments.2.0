@@ -15,3 +15,4 @@ npm-debug.log*
 
 # Personal Claude permissions (machine-local)
 .claude/settings.local.json
+tools/snaps/
