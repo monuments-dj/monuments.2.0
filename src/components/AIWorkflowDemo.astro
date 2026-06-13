@@ -1,0 +1,254 @@
+---
+// AIWorkflowDemo — "Can your AI do this?" A device screen that cycles through
+// five jobs an AI workflow takes off a business owner's plate, each with its own
+// little animation: draft email, answer from a knowledge base, research,
+// content at scale, A/B test. Auto-advances; click a tab to jump; pauses on
+// hover. Tokenized, reduced-motion safe. Self-contained.
+const caps = [
+  { key: 'email',    label: 'Draft email' },
+  { key: 'kb',       label: 'Knowledge base' },
+  { key: 'research', label: 'Research' },
+  { key: 'content',  label: 'Content at scale' },
+  { key: 'ab',       label: 'A/B test' },
+];
+---
+<section class="aw" data-aw>
+  <div class="aw-head">
+    <p class="aw-eyebrow fade">A quick demo</p>
+    <h2 class="aw-h split">Can your AI do <em>this?</em></h2>
+    <p class="aw-sub fade">One business, five jobs it can hand off. These run while you sleep.</p>
+  </div>
+
+  <div class="aw-panel" data-aw-panel>
+    <div class="aw-tabs" role="tablist">
+      {caps.map((c, i) => (
+        <button class="aw-tab" type="button" role="tab" data-i={i} data-cursor="Explore">
+          <span class="aw-tab-dot"></span>{c.label}
+        </button>
+      ))}
+    </div>
+
+    <div class="aw-screen">
+      <span class="aw-progress" data-prog></span>
+
+      <!-- 0 · Draft email -->
+      <div class="aw-scene sc-email" data-scene="0">
+        <div class="aw-win">
+          <div class="aw-bar"><i></i><i></i><i></i><span>Inbox</span></div>
+          <div class="aw-mail">New message · "Can you send over pricing?"</div>
+          <div class="aw-reply"><span class="aw-typed">Hi! Thanks for reaching out, here is our pricing and a couple of times to talk this week.</span><span class="aw-caret"></span></div>
+          <span class="aw-badge">Drafted by AI · 0.4s</span>
+        </div>
+      </div>
+
+      <!-- 1 · Knowledge base -->
+      <div class="aw-scene sc-kb" data-scene="1">
+        <div class="aw-win">
+          <div class="aw-q">What is our refund policy?</div>
+          <div class="aw-a">30 days, no questions asked. Refunds hit the original card in 3 to 5 business days.<span class="aw-src">from policy.pdf</span></div>
+          <span class="aw-badge">Answered from your own docs</span>
+        </div>
+      </div>
+
+      <!-- 2 · Research -->
+      <div class="aw-scene sc-research" data-scene="2">
+        <div class="aw-win">
+          <div class="aw-query">competitor pricing, 2026 <b>→</b></div>
+          <div class="aw-srcs"><span>cmp&#8209;a</span><span>cmp&#8209;b</span><span>cmp&#8209;c</span><span>cmp&#8209;d</span></div>
+          <div class="aw-sumline"><i></i></div>
+          <span class="aw-badge">Summarized from 4 sources</span>
+        </div>
+      </div>
+
+      <!-- 3 · Content at scale -->
+      <div class="aw-scene sc-content" data-scene="3">
+        <div class="aw-win aw-fan">
+          <span class="aw-idea">1 idea</span>
+          <span class="aw-out o1">Instagram</span>
+          <span class="aw-out o2">TikTok</span>
+          <span class="aw-out o3">LinkedIn</span>
+          <span class="aw-out o4">Email</span>
+          <span class="aw-badge">One idea, every channel</span>
+        </div>
+      </div>
+
+      <!-- 4 · A/B test -->
+      <div class="aw-scene sc-ab" data-scene="4">
+        <div class="aw-win aw-abwrap">
+          <div class="aw-col"><div class="aw-colbar a"></div><span>Variant A</span></div>
+          <div class="aw-col"><div class="aw-colbar b"></div><span>Variant B</span><b class="aw-winner">+38% &#10003;</b></div>
+          <span class="aw-badge">It picks the winner</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .aw { max-width: var(--wrap); margin: 0 auto; padding: clamp(90px, 12vw, 160px) var(--pad); }
+  .aw-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .aw-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5.4vw, 76px); letter-spacing: -0.03em; line-height: 1; margin-top: 14px; }
+  .aw-h em { font-style: italic; color: var(--accent); }
+  .aw-sub { margin-top: 18px; max-width: 44ch; font-size: clamp(15px, 1.4vw, 18px); line-height: 1.6; font-weight: 300; color: rgb(var(--fg-rgb) / 0.72); }
+
+  .aw-panel { margin-top: clamp(40px, 5vw, 64px); }
+  .aw-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .aw-tab { display: inline-flex; align-items: center; gap: 9px; padding: 10px 16px; border-radius: 999px; border: 1px solid rgb(var(--fg-rgb) / 0.18); background: transparent; color: rgb(var(--fg-rgb) / 0.62); font: 500 12.5px/1 'Inter', sans-serif; letter-spacing: 0.02em; cursor: pointer; transition: color 0.2s, border-color 0.2s, background 0.2s; }
+  .aw-tab-dot { width: 7px; height: 7px; border-radius: 50%; background: rgb(var(--fg-rgb) / 0.3); transition: background 0.2s, transform 0.2s; }
+  .aw-tab:hover { color: var(--fg); border-color: rgb(var(--fg-rgb) / 0.4); }
+  .aw-tab.on { color: var(--bg); background: var(--fg); border-color: var(--fg); }
+  .aw-tab.on .aw-tab-dot { background: var(--accent); transform: scale(1.3); }
+
+  /* the device screen: a light panel for contrast against the dark section */
+  .aw-screen { position: relative; background: var(--paper); color: var(--ink); border-radius: 14px; overflow: hidden; min-height: clamp(300px, 38vw, 440px); box-shadow: 0 40px 100px rgb(var(--ink-rgb) / 0.5); }
+  .aw-progress { position: absolute; left: 0; top: 0; height: 3px; width: 0; background: var(--accent); z-index: 5; }
+
+  .aw-scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: clamp(24px, 4vw, 56px); opacity: 0; pointer-events: none; transform: translateY(14px); transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .aw-scene.active { opacity: 1; pointer-events: auto; transform: none; }
+
+  .aw-win { width: min(560px, 100%); position: relative; }
+  .aw-badge { display: inline-block; margin-top: 18px; padding: 7px 13px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); font: 600 11px/1 'Inter', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0; }
+  .aw-scene.active .aw-badge { animation: awFade 0.5s ease 1.1s forwards; }
+  @keyframes awFade { to { opacity: 1; } }
+
+  /* 0 email */
+  .aw-bar { display: flex; align-items: center; gap: 6px; padding-bottom: 14px; border-bottom: 1px solid rgb(var(--ink-rgb) / 0.12); margin-bottom: 16px; }
+  .aw-bar i { width: 9px; height: 9px; border-radius: 50%; background: rgb(var(--ink-rgb) / 0.22); }
+  .aw-bar span { margin-left: 8px; font: 600 12px/1 'Inter'; color: rgb(var(--ink-rgb) / 0.5); letter-spacing: 0.06em; text-transform: uppercase; }
+  .aw-mail { font-size: 14px; color: rgb(var(--ink-rgb) / 0.7); }
+  .aw-reply { margin-top: 16px; padding: 16px; border-radius: 10px; background: rgb(var(--ink-rgb) / 0.05); font-size: 15px; line-height: 1.5; min-height: 3em; }
+  .aw-typed { display: inline; white-space: pre-wrap; }
+  .sc-email.active .aw-typed { animation: awType 1.6s steps(60, end) 0.3s both; }
+  @keyframes awType { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  .aw-typed { clip-path: inset(0 100% 0 0); }
+  .aw-caret { display: inline-block; width: 2px; height: 1.1em; background: var(--accent); vertical-align: -2px; margin-left: 1px; animation: awBlink 0.8s step-end infinite; }
+  @keyframes awBlink { 50% { opacity: 0; } }
+
+  /* 1 knowledge base */
+  .aw-q { font-size: 15px; font-weight: 500; padding: 12px 16px; border-radius: 10px 10px 10px 2px; background: rgb(var(--ink-rgb) / 0.06); width: fit-content; max-width: 90%; }
+  .aw-a { margin-top: 14px; margin-left: auto; font-size: 15px; line-height: 1.55; padding: 14px 16px; border-radius: 10px 10px 2px 10px; background: color-mix(in srgb, var(--accent) 12%, var(--paper)); width: fit-content; max-width: 92%; opacity: 0; transform: translateY(8px); }
+  .sc-kb.active .aw-a { animation: awRise 0.5s cubic-bezier(0.16,1,0.3,1) 0.7s both; }
+  @keyframes awRise { to { opacity: 1; transform: none; } }
+  .aw-src { display: block; margin-top: 8px; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+
+  /* 2 research */
+  .aw-query { font-size: 15px; font-weight: 500; color: rgb(var(--ink-rgb) / 0.8); }
+  .aw-query b { color: var(--accent); }
+  .aw-srcs { display: flex; gap: 8px; margin-top: 18px; }
+  .aw-srcs span { padding: 8px 12px; border-radius: 8px; background: rgb(var(--ink-rgb) / 0.06); font: 600 12px/1 'Inter'; color: rgb(var(--ink-rgb) / 0.7); opacity: 0; transform: translateY(12px); }
+  .sc-research.active .aw-srcs span { animation: awRise 0.45s cubic-bezier(0.16,1,0.3,1) both; }
+  .sc-research.active .aw-srcs span:nth-child(1) { animation-delay: 0.2s; }
+  .sc-research.active .aw-srcs span:nth-child(2) { animation-delay: 0.38s; }
+  .sc-research.active .aw-srcs span:nth-child(3) { animation-delay: 0.56s; }
+  .sc-research.active .aw-srcs span:nth-child(4) { animation-delay: 0.74s; }
+  .aw-sumline { margin-top: 18px; height: 8px; border-radius: 999px; background: rgb(var(--ink-rgb) / 0.08); overflow: hidden; }
+  .aw-sumline i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 999px; }
+  .sc-research.active .aw-sumline i { animation: awFill 1s cubic-bezier(0.5,0,0.2,1) 1s both; }
+  @keyframes awFill { to { width: 100%; } }
+
+  /* 3 content fan-out */
+  .aw-fan { display: grid; place-items: center; min-height: 220px; }
+  .aw-idea { position: relative; z-index: 2; padding: 14px 20px; border-radius: 999px; background: var(--ink); color: var(--paper); font: 600 14px/1 'Inter'; }
+  .aw-out { position: absolute; left: 50%; top: 50%; padding: 9px 15px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 14%, var(--paper)); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); color: var(--accent); font: 600 12.5px/1 'Inter'; opacity: 0; transform: translate(-50%, -50%); }
+  .sc-content.active .aw-out { animation: awOut 0.6s cubic-bezier(0.16,1,0.3,1) both; }
+  .sc-content.active .aw-o1 { animation-delay: 0.4s; --tx: -150px; --ty: -64px; }
+  .sc-content.active .aw-o2 { animation-delay: 0.55s; --tx: 150px; --ty: -64px; }
+  .sc-content.active .aw-o3 { animation-delay: 0.7s; --tx: -150px; --ty: 64px; }
+  .sc-content.active .aw-o4 { animation-delay: 0.85s; --tx: 150px; --ty: 64px; }
+  @keyframes awOut { to { opacity: 1; transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))); } }
+
+  /* 4 a/b */
+  .aw-abwrap { display: flex; gap: 40px; align-items: flex-end; justify-content: center; min-height: 230px; }
+  .aw-col { display: flex; flex-direction: column; align-items: center; gap: 10px; position: relative; }
+  .aw-col span { font: 600 12px/1 'Inter'; color: rgb(var(--ink-rgb) / 0.6); }
+  .aw-colbar { width: 64px; border-radius: 8px 8px 0 0; background: rgb(var(--ink-rgb) / 0.18); height: 0; }
+  .sc-ab.active .aw-colbar.a { animation: awBarA 0.9s cubic-bezier(0.5,0,0.2,1) 0.3s both; }
+  .sc-ab.active .aw-colbar.b { animation: awBarB 1s cubic-bezier(0.5,0,0.2,1) 0.5s both; background: var(--accent); }
+  @keyframes awBarA { to { height: 90px; } }
+  @keyframes awBarB { to { height: 150px; } }
+  .aw-winner { position: absolute; top: -34px; padding: 6px 11px; border-radius: 999px; background: var(--accent); color: var(--bg); font: 700 11px/1 'Inter'; letter-spacing: 0.04em; opacity: 0; transform: translateY(6px); }
+  .sc-ab.active .aw-winner { animation: awRise 0.5s cubic-bezier(0.16,1,0.3,1) 1.4s both; }
+
+  .aw :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .aw :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.7s cubic-bezier(0.16,1,0.3,1) calc(var(--wd) * 0.04s); }
+  .aw :global(.split.on .wi) { transform: none; }
+
+  @media (max-width: 640px) {
+    .aw-abwrap { gap: 24px; }
+    .sc-content.active .aw-o1, .sc-content.active .aw-o3 { --tx: -96px; }
+    .sc-content.active .aw-o2, .sc-content.active .aw-o4 { --tx: 96px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .aw-scene, .aw-scene * { animation: none !important; transition: none !important; }
+    .aw-typed { clip-path: none; }
+    .aw-a, .aw-out, .aw-winner, .aw-badge { opacity: 1 !important; transform: none !important; }
+    .aw-colbar.a { height: 90px; } .aw-colbar.b { height: 150px; background: var(--accent); }
+    .aw-out.aw-o1 { transform: translate(calc(-50% - 150px), calc(-50% - 64px)); }
+    .aw-out.aw-o2 { transform: translate(calc(-50% + 150px), calc(-50% - 64px)); }
+    .aw-out.aw-o3 { transform: translate(calc(-50% - 150px), calc(-50% + 64px)); }
+    .aw-out.aw-o4 { transform: translate(calc(-50% + 150px), calc(-50% + 64px)); }
+    .aw-sumline i { width: 100%; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-aw]').forEach((root) => {
+    const tabs = [...root.querySelectorAll('.aw-tab')];
+    const scenes = [...root.querySelectorAll('.aw-scene')];
+    const prog = root.querySelector('[data-prog]');
+    const panel = root.querySelector('[data-aw-panel]');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DWELL = 3800;
+    let cur = -1, timer = 0, raf = 0, started = false, paused = false;
+
+    const show = (i) => {
+      cur = i;
+      tabs.forEach((t, k) => t.classList.toggle('on', k === i));
+      scenes.forEach((s, k) => { s.classList.remove('active'); if (k === i) { void s.offsetWidth; s.classList.add('active'); } });
+    };
+    const runProgress = () => {
+      if (!prog) return;
+      let t0 = 0;
+      const step = (now) => {
+        if (paused) { raf = requestAnimationFrame(step); return; }
+        if (!t0) t0 = now;
+        const p = Math.min(1, (now - t0) / DWELL);
+        prog.style.width = (p * 100) + '%';
+        if (p >= 1) { t0 = 0; show((cur + 1) % scenes.length); }
+        raf = requestAnimationFrame(step);
+      };
+      raf = requestAnimationFrame(step);
+    };
+    const start = () => {
+      if (started) return; started = true; show(0);
+      if (!reduced) runProgress();
+    };
+
+    tabs.forEach((t, i) => t.addEventListener('click', () => { show(i); if (prog) prog.style.width = '0%'; }));
+    if (panel) {
+      panel.addEventListener('pointerenter', () => { paused = true; });
+      panel.addEventListener('pointerleave', () => { paused = false; });
+    }
+
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { start(); io.disconnect(); } }), { threshold: 0.3 });
+    io.observe(root);
+
+    // reveal the split heading
+    root.querySelectorAll('.split').forEach((el) => {
+      const frag = document.createDocumentFragment();
+      [...el.childNodes].forEach((node) => {
+        if (node.nodeType === 3) {
+          (node.textContent || '').split(/(\s+)/).forEach((part, i) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+            const w = document.createElement('span'); w.className = 'w';
+            const wi = document.createElement('span'); wi.className = 'wi'; wi.style.setProperty('--wd', String(i)); wi.textContent = part;
+            w.appendChild(wi); frag.appendChild(w);
+          });
+        } else { frag.appendChild(node.cloneNode(true)); }
+      });
+      el.textContent = ''; el.appendChild(frag);
+      new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { el.classList.add('on'); o.disconnect(); } }), { threshold: 0.4 }).observe(el);
+    });
+  });
+</script>

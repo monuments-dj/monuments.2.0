@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import BrandTicker from '../../components/BrandTicker.astro';
+import AttentionHourglass from '../../components/AttentionHourglass.astro';
 
 // === SERVICES V3 — /lab/services ===
 // Rebuilt on DJ's REAL services taxonomy (scrubbed from the live site), split
@@ -33,13 +34,44 @@ const steps = [
   { t: 'Make', d: 'Direction, production, post. Senior hands on every step that matters.' },
   { t: 'Ship', d: 'On time, in every format, with nothing lost between the idea and the screen.' },
 ];
+
+// Hero montage — real campaign stills, mixed across Sony / Blue Cross /
+// Flashpoint / Clothing, varied orientation. Sits behind a heavy scrim so the
+// headline reads clean; drifts SLOWER than the type for parallax depth.
+const heroMontage = [
+  { src: '/case-studies/sony-this-moment/gallery/tm-03.jpg', drift: 10, ar: '4/5' },
+  { src: '/case-studies/blue-cross/gallery/bci-12.jpg',      drift: -8, ar: '16/10' },
+  { src: '/case-studies/clothing-merch/gallery/cm-08.jpg',   drift: 14, ar: '3/4' },
+  { src: '/case-studies/flashpoint/gallery/fp-04.jpg',       drift: -12, ar: '16/10' },
+  { src: '/case-studies/sony-flow-state/gallery/fs-06.jpg',  drift: 18, ar: '4/5' },
+  { src: '/case-studies/sony-xperia-summer/gallery/xp-05.jpg', drift: -6, ar: '3/4' },
+];
+
+// Full-bleed image band between the capability rows — a horizontal strip of
+// campaign frames as a visual breather. Mixed sources, light parallax.
+const bandFrames = [
+  '/case-studies/sony-this-moment/gallery/tm-01.jpg',
+  '/case-studies/blue-cross/gallery/bci-07.jpg',
+  '/case-studies/clothing-merch/gallery/cm-03.jpg',
+  '/case-studies/flashpoint/gallery/fp-01.jpg',
+  '/case-studies/sony-xperia-summer/gallery/xp-09.jpg',
+  '/case-studies/blue-cross/gallery/bci-18.jpg',
+];
 ---
 <Base title="Services — monuments">
   <main class="sv3">
 
-    <!-- HERO -->
+    <!-- HERO — campaign montage under a scrim, headline stays crisp -->
     <header class="sv3-hero">
-      <figure class="sv3-hero-img" data-drift="9" aria-hidden="true"></figure>
+      <div class="sv3-hero-montage" aria-hidden="true">
+        {heroMontage.map((m) => (
+          <figure class="sv3-hm-frame" data-drift={m.drift} style={`aspect-ratio:${m.ar};`}>
+            <img src={m.src} alt="" loading="eager" decoding="async" />
+          </figure>
+        ))}
+      </div>
+      <div class="sv3-hero-scrim" aria-hidden="true"></div>
+      <figure class="sv3-hero-img" data-drift="5" aria-hidden="true"></figure>
       <div class="sv3-hero-inner">
         <p class="sv3-eyebrow fade">Services</p>
         <h1 class="sv3-h1 split">Hands-on across the <em>full agency spectrum.</em></h1>
@@ -65,6 +97,17 @@ const steps = [
           </li>
         ))}
       </ul>
+    </section>
+
+    <!-- FULL-BLEED IMAGE BAND — the work, as a breather between the two rows -->
+    <section class="sv3-band" aria-hidden="true">
+      <div class="sv3-band-track" data-drift="7">
+        {bandFrames.map((src) => (
+          <figure class="sv3-band-frame">
+            <img src={src} alt="" loading="lazy" decoding="async" />
+          </figure>
+        ))}
+      </div>
     </section>
 
     <!-- CAPABILITIES: PRODUCTION -->
@@ -94,6 +137,11 @@ const steps = [
         <p class="sv3-beat-line" data-cwords>One studio, one perspective, accountable for <em>everything we make.</em></p>
         <p class="sv3-beat-sub">No hand-offs into the void. No telephone game between vendors.</p>
       </div>
+    </section>
+
+    <!-- ATTENTION HOURGLASS — light beat: the 8-second window, why craft matters -->
+    <section class="on-paper" style="background:var(--paper); color:var(--ink);">
+      <AttentionHourglass />
     </section>
 
     <!-- AI SYSTEMS FEATURE BLOCK (its own atmosphere) -->
@@ -148,12 +196,26 @@ const steps = [
   .sv3-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
 
   /* HERO */
-  .sv3-hero { position: relative; min-height: 82vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; padding: 160px 0 9vh; }
-  .sv3-hero-img { position: absolute; inset: -12% 0 0; z-index: 0; pointer-events: none; will-change: transform;
-    background: radial-gradient(120% 90% at 78% 16%, rgb(var(--fg-rgb) / 0.05), transparent 60%),
-                radial-gradient(80% 70% at 12% 90%, var(--accent), transparent 62%);
-    opacity: 0.14; }
-  .sv3-hero-inner { position: relative; z-index: 1; max-width: var(--wrap); width: 100%; margin: 0 auto; padding: 0 var(--pad); }
+  .sv3-hero { position: relative; min-height: 92vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; padding: 160px 0 9vh; }
+
+  /* Campaign montage — an asymmetric collage that drifts slower than the type */
+  .sv3-hero-montage { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .sv3-hm-frame { position: absolute; margin: 0; border-radius: 6px; overflow: hidden; box-shadow: 0 30px 80px rgb(0 0 0 / 0.5); will-change: transform; }
+  .sv3-hm-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .sv3-hm-frame:nth-child(1) { right: 4vw;  top: 9vh;  width: clamp(190px, 21vw, 380px); opacity: 0.92; }
+  .sv3-hm-frame:nth-child(2) { right: 27vw; top: 5vh;  width: clamp(150px, 17vw, 300px); opacity: 0.7; }
+  .sv3-hm-frame:nth-child(3) { left: 2vw;   top: 13vh; width: clamp(150px, 16vw, 280px); opacity: 0.62; }
+  .sv3-hm-frame:nth-child(4) { right: 9vw;  bottom: 6vh; width: clamp(200px, 24vw, 420px); opacity: 0.78; }
+  .sv3-hm-frame:nth-child(5) { left: 5vw;   bottom: 5vh; width: clamp(150px, 15vw, 270px); opacity: 0.6; }
+  .sv3-hm-frame:nth-child(6) { left: 23vw;  top: 6vh;  width: clamp(130px, 13vw, 230px); opacity: 0.5; }
+
+  /* Scrim — keeps the headline crisp over the photos */
+  .sv3-hero-scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(180deg, rgb(var(--ink-rgb) / 0.62) 0%, rgb(var(--ink-rgb) / 0.7) 46%, rgb(var(--ink-rgb) / 0.82) 100%); }
+  .sv3-hero-img { position: absolute; inset: -12% 0 0; z-index: 1; pointer-events: none; will-change: transform;
+    background: radial-gradient(80% 70% at 12% 90%, var(--accent), transparent 62%);
+    opacity: 0.12; }
+  .sv3-hero-inner { position: relative; z-index: 2; max-width: var(--wrap); width: 100%; margin: 0 auto; padding: 0 var(--pad); }
   .sv3-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(44px, 7.2vw, 110px); line-height: 1.02; letter-spacing: -0.03em; max-width: 16ch; margin-top: 22px; }
   .sv3-h1 em, .sv3-beat-line em, .sv3-ai-h em, .sv3-end-big em { font-style: italic; color: var(--accent); }
   .sv3-lead { margin-top: 30px; max-width: 560px; font-size: 16px; line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.78); }
@@ -174,6 +236,12 @@ const steps = [
   .sv3-stroke path { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: 320; transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1); }
   .sv3-row:hover .sv3-stroke path { stroke-dashoffset: 0; }
   .sv3-d { font-size: 15px; line-height: 1.65; font-weight: 300; color: rgb(var(--fg-rgb) / 0.65); max-width: 56ch; }
+
+  /* FULL-BLEED IMAGE BAND (visual breather between the two capability rows) */
+  .sv3-band { position: relative; width: 100%; overflow: hidden; margin: clamp(56px, 8vw, 110px) 0 0; }
+  .sv3-band-track { display: flex; gap: clamp(10px, 1.2vw, 20px); padding: 0 clamp(10px, 1.2vw, 20px); will-change: transform; }
+  .sv3-band-frame { flex: 1 1 0; margin: 0; height: clamp(180px, 26vw, 380px); border-radius: 4px; overflow: hidden; }
+  .sv3-band-frame img { width: 100%; height: 114%; object-fit: cover; display: block; will-change: transform; }
 
   /* PINNED STATEMENT BEAT */
   .scn { position: relative; }
@@ -234,6 +302,12 @@ const steps = [
     .sv3-row { grid-template-columns: 40px 1fr; }
     .sv3-d { grid-column: 2; }
     .sv3-steps { grid-template-columns: 1fr 1fr; }
+    /* Thin the hero collage so the headline keeps room on small screens */
+    .sv3-hm-frame:nth-child(2), .sv3-hm-frame:nth-child(6) { display: none; }
+    .sv3-hm-frame:nth-child(1) { width: clamp(150px, 38vw, 240px); }
+    .sv3-hm-frame:nth-child(4) { width: clamp(170px, 46vw, 280px); }
+    /* Band: let frames scroll past the viewport rather than crushing to slivers */
+    .sv3-band-frame { flex: 0 0 62vw; height: clamp(150px, 44vw, 240px); }
   }
 
   @media (prefers-reduced-motion: reduce) {

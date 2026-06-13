@@ -13,14 +13,32 @@ import ShapePile from '../../components/ShapePile.astro';
 
 // The v2 set: bold experiment tiles. Each links to the new build; "compare"
 // links to what it would replace. Originals stay untouched until promoted.
+// `prev` is a representative real frame that fades in, cursor-following, on hover.
 const v2 = [
-  { href: '/lab/home',       vs: '/',                t: 'Homepage',       tag: 'Tilt hero',      d: "SIGHT SOUND EMOTION tilt hero, the red floating hand, a scroll-velocity ticker, parallax work scenes." },
-  { href: '/lab/work',       vs: '/work',            t: 'Work index',     tag: 'Portal scroll',  d: "Horizontal-scroll gallery with a cursor-driven preview index. The work takes over the viewport." },
-  { href: '/lab/blue-cross', vs: '/work/blue-cross', t: 'Case study',     tag: 'Editorial',      d: "Editorial chapters, a pinned insight scene, and a portal hand-off into the next project." },
-  { href: '/lab/ai',         vs: null,               t: 'AI systems',     tag: 'New offer',      d: "Audit. Automate. Deploy. The consulting offer, with the word-cascade moment in full." },
-  { href: '/lab/about',      vs: '/about',           t: 'About',          tag: 'Pinned credo',   d: "Builds monuments, not moments. A drifting photo wall, billions reached, a pinned credo scene." },
-  { href: '/lab/services',   vs: '/services',        t: 'Services',       tag: 'Tilted cards',   d: "The real capabilities, agency and production, plus the AI systems block on tilted cards." },
-  { href: '/lab/contact',    vs: '/contact',         t: 'Contact',        tag: 'Email as page',  d: "The email is the page. Badges escaped the menu. Modern, fast, almost nothing to click." },
+  { href: '/lab/home',       vs: '/',                t: 'Homepage',       tag: 'Tilt hero',      prev: '/case-studies/sony-this-moment/gallery/tm-01.jpg', d: "SIGHT SOUND EMOTION tilt hero, the red floating hand, a scroll-velocity ticker, parallax work scenes." },
+  { href: '/lab/work',       vs: '/work',            t: 'Work index',     tag: 'Portal scroll',  prev: '/case-studies/blue-cross/gallery/bci-02.jpg',       d: "Horizontal-scroll gallery with a cursor-driven preview index. The work takes over the viewport." },
+  { href: '/lab/blue-cross', vs: '/work/blue-cross', t: 'Case study',     tag: 'Editorial',      prev: '/case-studies/blue-cross/gallery/bci-10.jpg',       d: "Editorial chapters, a pinned insight scene, and a portal hand-off into the next project." },
+  { href: '/lab/ai',         vs: null,               t: 'AI systems',     tag: 'New offer',      prev: '/case-studies/sony-flow-state/gallery/fs-01.jpg',   d: "Audit. Automate. Deploy. The consulting offer, with the word-cascade moment in full." },
+  { href: '/lab/about',      vs: '/about',           t: 'About',          tag: 'Pinned credo',   prev: '/gallery/full/p-020.jpg',                           d: "Builds monuments, not moments. A drifting photo wall, billions reached, a pinned credo scene." },
+  { href: '/lab/services',   vs: '/services',        t: 'Services',       tag: 'Tilted cards',   prev: '/case-studies/flashpoint/gallery/fp-01.jpg',        d: "The real capabilities, agency and production, plus the AI systems block on tilted cards." },
+  { href: '/lab/contact',    vs: '/contact',         t: 'Contact',        tag: 'Email as page',  prev: '/case-studies/clothing-merch/gallery/cm-01.jpg',    d: "The email is the page. Badges escaped the menu. Modern, fast, almost nothing to click." },
+];
+
+// Hero montage — a thin strip of real campaign frames that drifts behind the
+// title (heavy scrim keeps "Where we test what's next." readable). Each frame
+// gets its own parallax rate via data-hspeed; the strip duplicates for a
+// seamless loop. Curated mix across the real case-study galleries.
+const heroStrip = [
+  { src: '/case-studies/sony-this-moment/gallery/tm-04.jpg',   sp: 0.5 },
+  { src: '/case-studies/blue-cross/gallery/bci-14.jpg',        sp: 0.8 },
+  { src: '/case-studies/sony-xperia-summer/gallery/xp-01.jpg', sp: 0.35 },
+  { src: '/case-studies/flashpoint/gallery/fp-01.jpg',         sp: 0.65 },
+  { src: '/gallery/full/p-044.jpg',                            sp: 0.5 },
+  { src: '/case-studies/sony-flow-state/gallery/fs-01.jpg',    sp: 0.85 },
+  { src: '/case-studies/clothing-merch/gallery/cm-08.jpg',     sp: 0.4 },
+  { src: '/gallery/full/p-066.jpg',                            sp: 0.6 },
+  { src: '/case-studies/waffle-me-up/gallery/wmu-01.jpg',      sp: 0.5 },
+  { src: '/case-studies/turnstile/products/prod-01.jpg',       sp: 0.75 },
 ];
 
 // Shipped building blocks: the toys, as labeled interactive cards. Each card's
@@ -45,6 +63,17 @@ const experiments = [
   <main class="lab">
     <!-- HERO -->
     <header class="lab-hero">
+      <!-- drifting strip of real work stills, behind a heavy scrim -->
+      <div class="lab-hero-strip" aria-hidden="true">
+        <div class="lab-hero-track">
+          {[...heroStrip, ...heroStrip].map((f) => (
+            <figure class="lab-hero-frame" data-hspeed={f.sp}>
+              <img src={f.src} alt="" loading="eager" decoding="async" />
+            </figure>
+          ))}
+        </div>
+      </div>
+      <div class="lab-hero-scrim" aria-hidden="true"></div>
       <FloatingHand side="right" top="16vh" />
       <div class="lab-hero-inner">
         <p class="lab-eyebrow fade">The lab</p>
@@ -73,7 +102,7 @@ const experiments = [
       <ul class="lab-tiles">
         {v2.map((p, i) => (
           <li class="lab-tile fade">
-            <a class="lab-tile-main" href={p.href} data-cursor="View" aria-label={`Open the ${p.t} experiment`}>
+            <a class="lab-tile-main" href={p.href} data-cursor="View" data-prev={p.prev} aria-label={`Open the ${p.t} experiment`}>
               <span class="lab-tile-n">{String(i + 1).padStart(2, '0')}</span>
               <span class="lab-tile-body">
                 <span class="lab-tile-tag">{p.tag}</span>
@@ -91,6 +120,9 @@ const experiments = [
           </li>
         ))}
       </ul>
+
+      <!-- shared cursor-following preview: image fades in on tile hover -->
+      <div class="lab-prev" aria-hidden="true"><img alt="" decoding="async" /></div>
     </section>
 
     <!-- BUILDING BLOCKS: the toys -->
@@ -181,6 +213,20 @@ const experiments = [
   .lab-meta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: clamp(20px, 3vw, 44px); font-size: 13px; font-weight: 300; letter-spacing: 0.02em; color: rgb(var(--fg-rgb) / 0.55); }
   .lab-meta b { font-weight: 500; color: var(--accent); font-size: 15px; }
 
+  /* drifting montage strip behind the hero copy */
+  .lab-hero-strip { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .lab-hero-track { position: absolute; top: 50%; left: 0; display: flex; gap: clamp(14px, 1.6vw, 26px); width: max-content; transform: translateY(-50%); animation: labDrift 70s linear infinite; will-change: transform; }
+  .lab-hero-frame { position: relative; margin: 0; flex: 0 0 auto; width: clamp(180px, 22vw, 320px); aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; opacity: 0.42; box-shadow: 0 24px 60px rgb(0 0 0 / 0.4); will-change: transform; }
+  .lab-hero-frame:nth-child(even) { aspect-ratio: 3/4; align-self: flex-start; margin-top: clamp(-30px, -4vw, -10px); }
+  .lab-hero-frame img { width: 100%; height: 118%; object-fit: cover; display: block; }
+  @keyframes labDrift { from { transform: translate(0, -50%); } to { transform: translate(-50%, -50%); } }
+  /* heavy scrim so the title stays readable over the montage */
+  .lab-hero-scrim { position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
+    linear-gradient(90deg, var(--bg) 0%, rgb(var(--fg-rgb) / 0) 5%, rgb(var(--fg-rgb) / 0) 95%, var(--bg) 100%),
+    linear-gradient(rgb(var(--ink-rgb) / 0.42), rgb(var(--ink-rgb) / 0.58)); }
+  /* second, accent-tinted vignette pinned to the copy column for legibility */
+  .lab-hero-scrim::after { content: ''; position: absolute; inset: 0; background: radial-gradient(120% 110% at 20% 55%, var(--bg) 0%, rgb(var(--fg-rgb) / 0) 58%); opacity: 0.82; }
+
   .lab-scrollcue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
   .lab-scrollcue i { width: 1px; height: 34px; background: linear-gradient(var(--accent), transparent); animation: cue 1.8s ease-in-out infinite; transform-origin: top; }
   @keyframes cue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
@@ -197,6 +243,7 @@ const experiments = [
   .lab-stroke.sm path { stroke-width: 2.2; }
 
   /* ---------- EXPERIMENT TILES ---------- */
+  .lab-exp { position: relative; }
   .lab-tiles { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
   .lab-tile { position: relative; border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }
   .lab-tile:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.14); }
@@ -213,6 +260,12 @@ const experiments = [
   .lab-tile-d { max-width: 64ch; font-size: clamp(13.5px, 1vw, 15px); line-height: 1.6; font-weight: 300; color: rgb(var(--fg-rgb) / 0.6); }
   .lab-tile-go { position: relative; z-index: 1; font-size: clamp(22px, 2.4vw, 34px); color: rgb(var(--fg-rgb) / 0.3); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), color 0.3s ease; }
   .lab-tile-main:hover .lab-tile-go { color: var(--accent); transform: translate(6px, -6px); }
+
+  /* cursor-following preview image (one shared element, src swapped on hover) */
+  .lab-prev { position: absolute; top: 0; left: 0; z-index: 4; width: clamp(220px, 22vw, 320px); aspect-ratio: 4/3; border-radius: 8px; overflow: hidden; pointer-events: none; opacity: 0; transform: translate(-50%, -50%) scale(0.92); transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1); box-shadow: 0 30px 70px rgb(0 0 0 / 0.5); border: 1px solid rgb(var(--fg-rgb) / 0.16); will-change: transform, opacity; }
+  .lab-prev img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lab-prev::after { content: 'View'; position: absolute; left: 10px; bottom: 8px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg); background: rgb(var(--ink-rgb) / 0.55); padding: 4px 9px; border-radius: 999px; backdrop-filter: blur(4px); }
+  .lab-exp.prev-on .lab-prev { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
   .lab-vs { position: absolute; right: 8px; bottom: clamp(20px, 2.6vw, 30px); z-index: 2; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); text-decoration: none; white-space: nowrap; transition: color 0.25s ease; }
   a.lab-vs:hover { color: var(--accent); }
@@ -320,14 +373,21 @@ const experiments = [
     .lab-grid { grid-template-columns: 1fr; }
     .lab-meta { gap: 14px; }
   }
+  /* hover preview is a pointer affordance — drop it where there's no fine pointer */
+  @media (max-width: 900px), (hover: none) {
+    .lab-prev { display: none; }
+  }
 
   @media (prefers-reduced-motion: reduce) {
+    .lab-hero-track { animation: none; }
+    .lab-prev { transition: none; }
     .lab-scrollcue i { animation: none; }
     .lab :global(.split .wi) { transform: none !important; transition: none !important; }
     .lab .fade { opacity: 1 !important; transform: none !important; }
     .lab-stroke path { stroke-dashoffset: 0; }
     .d-cursor-disc, .d-cursor-dot, .d-weave path, .d-ticker-row, .d-hand, .d-pile .ds, .d-theme .dt { animation: none !important; }
     .d-pile .ds { transform: none !important; opacity: 0.92 !important; }
+    .lab-hero-frame { transform: none !important; }
   }
 </style>
 
@@ -359,4 +419,70 @@ const experiments = [
     if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); }
   }), { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
   document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hero strip: subtle per-frame scroll parallax (media travels slower than type).
+  const heroFrames = [...document.querySelectorAll('.lab-hero-frame')];
+  let hTick = false;
+  const onHeroScroll = () => {
+    if (hTick) return;
+    hTick = true;
+    requestAnimationFrame(() => {
+      const y = scrollY;
+      heroFrames.forEach((f) => {
+        const sp = Number((f as HTMLElement).dataset.hspeed || 0.5);
+        (f as HTMLElement).style.transform = `translateY(${y * sp * -0.16}px)`;
+      });
+      hTick = false;
+    });
+  };
+  if (!reduced && heroFrames.length) {
+    addEventListener('scroll', onHeroScroll, { passive: true });
+    onHeroScroll();
+  }
+
+  // Experiment tiles: a shared preview image that follows the cursor and fades
+  // in on hover, swapping to that page's representative real frame.
+  const exp = document.querySelector('.lab-exp') as HTMLElement | null;
+  const prev = exp ? exp.querySelector('.lab-prev') as HTMLElement | null : null;
+  const prevImg = prev ? prev.querySelector('img') as HTMLImageElement | null : null;
+  const fineHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (exp && prev && prevImg && fineHover) {
+    let px = 0, py = 0, cx = 0, cy = 0, raf = 0, active = false;
+    const loop = () => {
+      cx += (px - cx) * 0.18;
+      cy += (py - cy) * 0.18;
+      prev.style.left = cx + 'px';
+      prev.style.top = cy + 'px';
+      if (active || Math.abs(px - cx) > 0.3 || Math.abs(py - cy) > 0.3) {
+        raf = requestAnimationFrame(loop);
+      } else { raf = 0; }
+    };
+    const tiles = [...exp.querySelectorAll('.lab-tile-main')] as HTMLElement[];
+    tiles.forEach((tile) => {
+      tile.addEventListener('pointerenter', (e) => {
+        if ((e as PointerEvent).pointerType === 'touch') return;
+        const src = tile.dataset.prev;
+        if (src && prevImg.getAttribute('src') !== src) prevImg.src = src;
+        const r = exp.getBoundingClientRect();
+        px = (e as PointerEvent).clientX - r.left;
+        py = (e as PointerEvent).clientY - r.top;
+        cx = px; cy = py; // snap on first enter so it doesn't fly across
+        active = true;
+        exp.classList.add('prev-on');
+        if (!raf) raf = requestAnimationFrame(loop);
+      });
+      tile.addEventListener('pointermove', (e) => {
+        const r = exp.getBoundingClientRect();
+        px = (e as PointerEvent).clientX - r.left;
+        py = (e as PointerEvent).clientY - r.top;
+        if (!raf) raf = requestAnimationFrame(loop);
+      }, { passive: true });
+      tile.addEventListener('pointerleave', () => {
+        active = false;
+        exp.classList.remove('prev-on');
+      });
+    });
+  }
 </script>

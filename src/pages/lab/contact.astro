@@ -8,12 +8,39 @@ import FloatingHand from '../../components/FloatingHand.astro';
 // link as the hero move, a short "what to expect," socials, and the patches
 // finally escaping the menu: three draggable badges to toss around (idea 9).
 // CTA language per the brand doc: start a conversation, never "hire a crew."
+//
+// HERO DEPTH (added): the header is no longer flat black. Behind the giant email
+// and headline sits a faint full-bleed montage of real work stills at low
+// opacity with a scrim, so there's texture instead of void. The email + marker
+// underline stay crisp and on top. Gentle scrubbed parallax on the montage,
+// collapses to a static still set under prefers-reduced-motion. Still minimal:
+// quiet, not flat.
+const heroFrames = [
+  '/case-studies/sony-this-moment/gallery/tm-03.jpg',
+  '/case-studies/sony-flow-state/gallery/fs-06.jpg',
+  '/case-studies/blue-cross/gallery/bci-11.jpg',
+  '/case-studies/sony-xperia-summer/gallery/xp-08.jpg',
+  '/case-studies/turnstile/products/prod-04.jpg',
+  '/case-studies/flashpoint/gallery/fp-03.jpg',
+];
 ---
 <Base title="Contact — monuments">
   <main class="ct2">
 
     <!-- HERO: the email IS the page -->
     <header class="ct2-hero">
+      <!-- Faint full-bleed montage of real work, behind everything, low opacity + scrim -->
+      <div class="ct2-montage" data-montage aria-hidden="true">
+        <div class="ct2-montage-grid">
+          {heroFrames.map((src, i) => (
+            <figure class="ct2-mframe" data-mdrift={i % 2 === 0 ? 22 : -16}>
+              <img src={src} alt="" loading="eager" decoding="async" />
+            </figure>
+          ))}
+        </div>
+      </div>
+      <div class="ct2-scrim" aria-hidden="true"></div>
+
       <FloatingHand side="right" top="20vh" />
       <p class="ct2-eyebrow fade">Contact</p>
       <h1 class="ct2-h1 split">Let's start <em>a conversation.</em></h1>
@@ -74,6 +101,27 @@ import FloatingHand from '../../components/FloatingHand.astro';
   .ct2-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
 
   .ct2-hero { position: relative; min-height: 78vh; display: flex; flex-direction: column; justify-content: center; max-width: var(--wrap); margin: 0 auto; padding: 170px var(--pad) 60px; }
+
+  /* Faint full-bleed montage behind the hero — depth, not noise. Bleeds past
+     the wrap with a viewport-wide stage so it reads as texture, not a card. */
+  .ct2-montage { position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); z-index: 0; overflow: hidden; pointer-events: none; opacity: 0.24; }
+  .ct2-montage-grid { position: absolute; inset: -14% -2%; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: clamp(10px, 1.4vw, 22px); }
+  .ct2-mframe { position: relative; margin: 0; border-radius: 5px; overflow: hidden; opacity: 0.9; will-change: transform; }
+  .ct2-mframe img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0.18) contrast(1.02); }
+  .ct2-mframe:nth-child(3n+2) { margin-top: -8%; }
+  .ct2-mframe:nth-child(3n) { margin-top: 5%; }
+
+  /* Scrim: keeps the email/headline crisp on top and the montage quiet.
+     Darkens toward the giant email's reading zone, with a soft vignette. */
+  .ct2-scrim { position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(180deg, var(--bg) 0%, rgb(var(--ink-rgb) / 0.6) 30%, rgb(var(--ink-rgb) / 0.72) 62%, var(--bg) 100%);
+  }
+  .ct2-scrim::after { content: ''; position: absolute; inset: 0; background: radial-gradient(140% 120% at 50% 50%, transparent 34%, rgb(var(--ink-rgb) / 0.55) 100%); }
+
+  /* Keep all hero copy above the montage + scrim */
+  .ct2-hero > .ct2-eyebrow, .ct2-hero > .ct2-h1, .ct2-hero > .ct2-mail, .ct2-hero > .ct2-sub { position: relative; z-index: 2; }
+
   .ct2-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(40px, 5.6vw, 84px); line-height: 1.02; letter-spacing: -0.03em; margin-top: 20px; }
   .ct2-h1 em { font-style: italic; color: var(--accent); }
   .ct2-mail { position: relative; width: fit-content; margin-top: 6vh; color: var(--white); text-decoration: none; }
@@ -113,10 +161,13 @@ import FloatingHand from '../../components/FloatingHand.astro';
     .ct2-low { flex-direction: column; align-items: flex-start; }
     .ct2-hint { text-align: left; }
     .ct2-patches { display: none; }
+    .ct2-montage-grid { grid-template-columns: repeat(2, 1fr); }
+    .ct2-montage { opacity: 0.2; }
   }
   @media (prefers-reduced-motion: reduce) {
     .ct2 :global(.split .wi) { transform: none !important; transition: none !important; }
     .ct2-stroke path { stroke-dashoffset: 0; }
+    .ct2-mframe { transform: none !important; }
   }
 </style>
 
@@ -175,5 +226,32 @@ import FloatingHand from '../../components/FloatingHand.astro';
       el.addEventListener('pointerup', release);
       el.addEventListener('pointercancel', release);
     });
+  }
+
+  // gentle scrubbed parallax on the hero montage (slower than the page, reversible)
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const montage = document.querySelector('[data-montage]');
+    const frames = montage ? [...montage.querySelectorAll<HTMLElement>('[data-mdrift]')] : [];
+    if (frames.length) {
+      let ticking = false;
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const vh = innerHeight || 1;
+          const r = montage.getBoundingClientRect();
+          // progress of the hero through the viewport, centered ~0 at mid-scroll
+          const c = (r.top + r.height / 2 - vh / 2) / vh;
+          frames.forEach((f) => {
+            const d = Number(f.dataset.mdrift || 0);
+            f.style.transform = `translate3d(0, ${c * d}px, 0)`;
+          });
+          ticking = false;
+        });
+      };
+      addEventListener('scroll', onScroll, { passive: true });
+      addEventListener('resize', onScroll, { passive: true });
+      onScroll();
+    }
   }
 </script>
