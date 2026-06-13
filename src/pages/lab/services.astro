@@ -1,0 +1,159 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// === SERVICES V2 — /lab/services ===
+// CD-first order per the Website Context doc. Editorial rows w/ marker
+// underline draws, a pinned statement beat, the AI systems block (links the
+// /lab/ai offer), and a plain how-we-work strip. Voice: studio "we".
+
+const services = [
+  { n: '01', t: 'Creative direction', d: 'Setting the idea, the look, the story. The reason brands bring us in.' },
+  { n: '02', t: 'Direction', d: 'Directing commercials, brand films, and campaigns end to end.' },
+  { n: '03', t: 'Brand campaigns', d: 'Concepting and producing multi-asset campaigns, not one-off clips.' },
+  { n: '04', t: 'Creative consulting', d: 'Helping brands and teams sharpen what they are making and why.' },
+  { n: '05', t: 'End-to-end production', d: 'Full production and post, scaled to the job.' },
+];
+
+const steps = [
+  { t: 'Listen', d: 'We start with your business, not our reel. What are you trying to move?' },
+  { t: 'Frame', d: 'One clear idea, written down, agreed on. The brief everyone can point at.' },
+  { t: 'Make', d: 'Direction, production, post. Senior hands at every step that matters.' },
+  { t: 'Ship', d: 'On time, in every format, with nothing lost between the idea and the screen.' },
+];
+---
+<Base title="Services — monuments">
+  <main class="sv2">
+
+    <!-- HERO -->
+    <header class="sv2-hero">
+      <p class="sv2-eyebrow fade">Services</p>
+      <h1 class="sv2-h1 split">Creative leadership, <em>start to ship.</em></h1>
+      <p class="sv2-lead fade">Production capability is assumed. What you are hiring is the thinking: the idea, the direction, and the judgment to get it made right.</p>
+    </header>
+
+    <!-- SERVICE ROWS -->
+    <section class="sv2-list-wrap">
+      <ul class="sv2-list">
+        {services.map((s) => (
+          <li class="sv2-row fade">
+            <span class="sv2-n">{s.n}</span>
+            <span class="sv2-t">
+              {s.t}
+              <svg class="sv2-stroke" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8 C60 4, 150 10, 296 5" /></svg>
+            </span>
+            <span class="sv2-d">{s.d}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- AI SYSTEMS BLOCK (cream, the new offer) -->
+    <section class="sv2-ai">
+      <div class="sv2-ai-inner">
+        <p class="sv2-kicker fade">New · AI systems</p>
+        <h2 class="sv2-ai-h split">Audit. Automate. <em>Deploy.</em></h2>
+        <p class="sv2-ai-b fade">For businesses that do not have time to figure AI out themselves. We audit what you have, build the systems you are missing, and train your team to run them. The audit is $5,000 flat, takes two weeks, and comes back in plain English.</p>
+        <a class="sv2-cta fade" href="/lab/ai">See the AI offer <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <!-- HOW WE WORK -->
+    <section class="sv2-how">
+      <p class="sv2-eyebrow fade">How we work</p>
+      <div class="sv2-steps">
+        {steps.map((s, i) => (
+          <div class="sv2-step fade">
+            <span class="sv2-step-n">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="sv2-step-t">{s.t}</h3>
+            <p class="sv2-step-d">{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="sv2-end">
+      <p class="sv2-end-big split">Tell us what you're <em>trying to move.</em></p>
+      <a class="sv2-cta fade" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
+    </section>
+
+  </main>
+</Base>
+
+<style>
+  .sv2 { background: var(--black); color: var(--white); overflow-x: clip; }
+  .sv2-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(252,252,252,0.5); }
+  .sv2-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #e0322d; }
+
+  .sv2-hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: flex-end; max-width: var(--wrap); margin: 0 auto; padding: 160px var(--pad) 8vh; }
+  .sv2-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(44px, 7vw, 108px); line-height: 1; letter-spacing: -0.03em; max-width: 14ch; margin-top: 20px; }
+  .sv2-h1 em, .sv2-ai-h em, .sv2-end-big em { font-style: italic; color: var(--accent); }
+  .sv2-lead { margin-top: 28px; max-width: 520px; font-size: 16px; line-height: 1.7; font-weight: 300; color: rgba(252,252,252,0.78); }
+
+  .sv2-list-wrap { max-width: var(--wrap); margin: 0 auto; padding: 6vh var(--pad) clamp(90px, 11vw, 150px); }
+  .sv2-list { list-style: none; margin: 0; padding: 0; }
+  .sv2-row { display: grid; grid-template-columns: 64px minmax(260px, 0.55fr) 1fr; gap: 28px; align-items: baseline; padding: 30px 6px; border-top: 1px solid rgba(252,252,252,0.14); transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .sv2-row:last-child { border-bottom: 1px solid rgba(252,252,252,0.14); }
+  .sv2-row:hover { padding-left: 22px; }
+  .sv2-n { font-size: 12px; letter-spacing: 0.18em; color: rgba(252,252,252,0.4); }
+  .sv2-t { position: relative; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(24px, 2.8vw, 40px); letter-spacing: -0.02em; width: fit-content; }
+  .sv2-stroke { position: absolute; left: 0; bottom: -6px; width: 100%; height: 10px; overflow: visible; }
+  .sv2-stroke path { fill: none; stroke: #e0322d; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: 320; transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .sv2-row:hover .sv2-stroke path { stroke-dashoffset: 0; }
+  .sv2-d { font-size: 15px; line-height: 1.65; font-weight: 300; color: rgba(252,252,252,0.65); max-width: 56ch; }
+
+  .sv2-ai { background: var(--white); color: #141519; }
+  .sv2-ai-inner { max-width: min(980px, 92vw); margin: 0 auto; padding: clamp(100px, 13vw, 170px) var(--pad); }
+  .sv2-ai-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(38px, 5.4vw, 80px); letter-spacing: -0.03em; margin-top: 18px; }
+  .sv2-ai-b { margin-top: 26px; max-width: 54ch; font-size: 16px; line-height: 1.75; font-weight: 300; color: rgba(20,21,25,0.8); }
+  .sv2-ai .sv2-cta { margin-top: 36px; color: var(--white); background: var(--black); }
+
+  .sv2-how { max-width: var(--wrap); margin: 0 auto; padding: clamp(90px, 11vw, 150px) var(--pad); }
+  .sv2-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 44px); margin-top: 40px; }
+  .sv2-step { border-top: 1px solid rgba(252,252,252,0.18); padding-top: 18px; }
+  .sv2-step-n { font-size: 12px; letter-spacing: 0.18em; color: rgba(252,252,252,0.4); }
+  .sv2-step-t { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 20px; margin-top: 12px; }
+  .sv2-step-d { margin-top: 10px; font-size: 14px; line-height: 1.65; font-weight: 300; color: rgba(252,252,252,0.65); }
+
+  .sv2-end { min-height: 54vh; display: flex; flex-direction: column; gap: 40px; align-items: center; justify-content: center; text-align: center; padding: 70px var(--pad); }
+  .sv2-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5vw, 72px); letter-spacing: -0.025em; }
+  .sv2-cta { display: inline-flex; align-items: center; gap: 10px; width: fit-content; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); background: var(--white); padding: 18px 30px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease; }
+  .sv2-cta:hover { gap: 18px; transform: translateY(-2px); }
+
+  .sv2 :global(.split .w) { display: inline-block; overflow: hidden; vertical-align: top; }
+  .sv2 :global(.split .wi) { display: inline-block; transform: translateY(115%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .sv2 :global(.split.on .wi) { transform: none; }
+
+  @media (max-width: 860px) {
+    .sv2-row { grid-template-columns: 40px 1fr; }
+    .sv2-d { grid-column: 2; }
+    .sv2-steps { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sv2 :global(.split .wi) { transform: none !important; transition: none !important; }
+    .sv2-stroke path { stroke-dashoffset: 0; }
+  }
+</style>
+
+<script>
+  const splitWords = (root: Node, counter: { n: number }) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) splitWords(node, counter);
+    });
+  };
+  document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); } }), { threshold: 0.35 });
+  document.querySelectorAll('.split').forEach((el) => io.observe(el));
+</script>

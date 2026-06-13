@@ -80,3 +80,18 @@ its own `--wh-circle` colour + client logo:
 - Brand-doc conflicts still unresolved: photo-vs-film positioning, Tess section, featured-work list.
 - `against.png` logo upside-down. Self-host showreel MP4 when DJ provides it.
 - Real DJ/Tess headshots → swap into About placeholder tiles (`/public/about/`).
+
+## SESSION 2026-06-12 (cont.) — V2 LAB PAGES BUILT (autonomous run, DJ to review)
+All new versions live at /lab/* (originals untouched; every page = its own commit
+for rollback). Built on the measured motion system (REFERENCES.md): pinned scenes,
+scrubbed reversible motion, sheet-over handoffs, marker accents.
+- /lab/ai — pinned ERA + QUESTIONS scenes, WILD stamp cascade, tilt cards
+- /lab/home — line-by-line hero build + marker circle over video, showreel kept,
+  brand-world work bands, services rows (incl. AI), trusted grid
+- /lab/work — exoape-style portals (grow → handoff), index list w/ hover thumbs
+- /lab/blue-cross — editorial chapters, pinned insight scene, collage, stats,
+  frame wall, portal-grow next-project ending
+- /lab/about — pinned credo scene, drifting galaxy media, team tiles
+- /lab/services — CD-first rows w/ marker underlines, cream AI block, process strip
+- /lab/contact — giant marker-underlined email, expect cards, draggable patches
+⏳ DJ: review each, punch-list or promote to real routes.
