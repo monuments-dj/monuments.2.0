@@ -1,8 +1,52 @@
-# TODO — current state (2026-06-10)
+# TODO — current state (2026-06-13)
 
 **Quick start:** `cd monuments-site && npm run dev` → http://localhost:4321 · `npm run build`
-(builds clean, **17 pages**, incl. `/lab/find-your-flow` + `/lab/work-kit`). Read `CLAUDE.md` first (shorthand + workflow), then `HANDOFF.md`, then `CSS-MAP.md` (line-map of global.css).
-Project memory auto-loads — especially **monuments-copy.md** (the SOURCE-OF-TRUTH brand doc).
+(builds clean, ~30 routes). Read `CLAUDE.md` first (shorthand + the VISUAL-TRUTH workflow),
+then `REFERENCES.md` (locked design refs + measured motion laws), `DESIGN-SPEC.md`,
+`IDEAS.md` (envelope log), and `COLOR-SYSTEM.md` (color-tool decision). Brand voice =
+memory `monuments-copy.md` (SOURCE OF TRUTH).
+
+## ════ SESSION 2026-06-13 — the /lab v2 redesign is the live work ════
+**Everything new lives at `/lab/*` (the originals at `/`, `/work`, `/about`, etc. are UNTOUCHED
+until DJ promotes a page). Hub: `/lab` (a public "Laboratory" showcase). Each change is its own
+commit = clean rollback. Deployed: https://monuments-2-0.vercel.app/lab**
+
+**The v2 pages (all on the shipped design system):** `/lab/home` (SIGHT SOUND AND EMOTION
+mouse-tilt hero + red floating hand + brand-world scenes), `/lab/work` (exoape-style vertical
+project cards + the actual showreel video + "View" cursor), `/lab/about` (DJ likes it; real
+photo montage, "Billions" stat that ticks up in a 4-up row, pinned credo, light/dark balance),
+`/lab/services` (real capabilities + AI block + attention hourglass + black logo ticker),
+`/lab/ai` (audit/automate/deploy, ambient reel hero, WILD intro, cards fold into a paper
+airplane on scroll, "Can your AI do this?" demo), `/lab/blue-cross` + `/lab/sony-this-moment`
++ `/lab/turnstile` (editorial case studies; insight scene = a ~56vh band, not full screen),
+`/lab/giving`, `/lab/contact`.
+
+**Shipped components (src/components/):** LabFx (theme tokens + grain + contextual cursor +
+4-preset color selector), FloatingHand (tiny red hand, flies diagonally on scroll behind text),
+BrandTicker (scroll-velocity logo marquee; `tone="white"|"black"`, live `data-speed`),
+WeavingLine (REMOVED from pages, DJ hated it — file still exists), ShapePile (physics shapes),
+AttentionHourglass (8s drain + flip), AIWorkflowDemo (cycling capability demo). Tools:
+`tools/snap.mjs` (full-page capture + measured geometry) and `tools/motion.mjs` (frame-by-frame
+scroll filmstrips) — ALWAYS use these to judge motion before/after; DJ has twice called out work
+done without actually looking.
+
+**The system:** tokenized colors via LabFx on `:root` (lab-only). Default theme "monument" =
+warm dark + RED accent (the floating-hand red). Type-clip fix on all word masks
+(overflow-clip-margin). Motion laws = pinned scenes, scrubbed+reversible, sheet-over handoffs,
+media slower than type (REFERENCES.md). Voice: studio "we", no em dashes, CD-first, never
+"photo studio"/"small". Black/WHITE section balance matters (DJ: too much black).
+
+**⏳ OPEN / NEXT:**
+- COLOR: stop hand-picking theme hexes. Use **Adobe Leonardo** (generate accessible scales from
+  the red) and/or **Radix Colors**; **culori** for math. See COLOR-SYSTEM.md. Regenerate the 4
+  LabFx presets from a tool.
+- DJ to send a specific photo album for the about-credo background (currently random from
+  /gallery/full; swap the POOL in about.astro's montage script).
+- Donut Media + DW Drums ticker logos are agent-crafted approximations — swap real marks.
+- DJ rewrites the AI-page copy himself (going-wild voice). Showreel = self-host the MP4 later.
+- Promote chosen /lab pages onto the real routes when DJ signs off.
+
+## ──────── older sessions below (historical) ────────
 
 **DJ's style:** precise designer feedback, fast iteration. Replicate-first (match the real
 monuments.cc, THEN optimize — don't redesign unprompted). Can't watch video. Estimate effort
