@@ -237,14 +237,36 @@
       // base ~12px dot (scale .125 of the 96px box), hover ring ~0.58, label disc = 1
       let tx = innerWidth / 2, ty = innerHeight / 2, x = tx, y = ty, scale = 0.125, tScale = 0.125, raf = 0;
       // Implicit context: elements get a label without per-page edits.
+      // Contextual cursor label rules, in priority order. An explicit
+      // data-cursor on the element (or an ancestor) always wins; then a gallery
+      // shot that opens, then links by where they go, then the gesture rules.
+      // Words signed off with DJ (2026-06-13); any one is overridable per element
+      // via data-cursor, so they are easy to retune later.
+      const DEST = [
+        [/^mailto:/,          'Contact us'],
+        [/^\/$/,              'Home'],          // the logo
+        [/^\/work(\/|$)/,     'View work'],
+        [/^\/contact(\/|$)/,  'Contact us'],
+        [/^\/about(\/|$)/,    'Our story'],
+        [/^\/services(\/|$)/, 'What we do'],
+        [/^\/lab(\/|$)/,      'Peek inside'],
+      ];
       const labelFor = (el) => {
         const explicit = el.closest('[data-cursor]');
         if (explicit) return explicit.getAttribute('data-cursor');
+        if (el.closest('[data-lb-full]')) return 'View';            // a shot that opens the lightbox
+        const a = el.closest('a[href]');                            // links, by where they go
+        if (a) {
+          const href = a.getAttribute('href') || '';
+          for (const [re, word] of DEST) if (re.test(href)) return word;
+          if (/^https?:\/\//.test(href) || a.target === '_blank') return 'Open';
+          if (href.startsWith('/')) return 'Go';
+        }
+        if (el.closest('[data-card]')) return 'View work';          // a work card that is not a link
         if (el.closest('[data-patch], .ct2-patch')) return 'Drag';
-        if (el.closest('[data-swipe], [class*="track"]')) return 'Swipe';
-        if (el.closest('.showreel, [class*="reel-frame"]')) return 'Play';
-        if (el.closest('[class*="scrollcue"], [class*="scroll-cue"], [class*="scrollCue"]')) return 'Scroll';
-        if (el.closest('a[href^="/work/"], [data-card]')) return 'View';
+        if (el.closest('[data-swipe], [class*="track"], [class*="lane"]')) return 'Swipe';
+        if (el.closest('.showreel, [class*="reel-frame"], [class*="reel"]')) return 'Play';
+        if (el.closest('[class*="scrollcue"], [class*="scroll-cue"], [class*="scrollCue"], .pg-cue')) return 'Scroll';
         return null;
       };
       const tick = () => {

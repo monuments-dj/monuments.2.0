@@ -48,7 +48,7 @@ const projects = [
     <!-- THE REEL — staggered vertical project cards w/ View cursor + parallax -->
     <section class="wk-reel">
       {projects.map((p, i) => (
-        <a class={`wk-card wk-${p.align}`} href={`/work/${p.slug}`} data-cursor="View" data-card>
+        <a class={`wk-card wk-${p.align}`} href={`/work/${p.slug}`} data-card>
           <figure class="wk-card-media">
             <img src={p.img} alt={`${p.brand} — ${p.desc}`} loading={i < 2 ? 'eager' : 'lazy'} data-pimg />
             <span class="wk-card-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
