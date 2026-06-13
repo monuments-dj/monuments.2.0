@@ -92,6 +92,10 @@
           <span class="pl-field-l">Word spread <b data-rr-spreadval>20</b> px</span>
           <input class="pl-range" type="range" min="0" max="140" value="20" step="5" data-rr-spread aria-label="Word spread" />
         </label>
+        <label class="pl-field">
+          <span class="pl-field-l">Parallax <b data-rr-parval>100</b> %</span>
+          <input class="pl-range" type="range" min="0" max="180" value="100" step="10" data-rr-par aria-label="Parallax amount" />
+        </label>
         <div class="pl-seg" role="group" aria-label="Corners">
           <button class="pl-seg-btn on" type="button" data-rr-corner="soft">Soft corners</button>
           <button class="pl-seg-btn" type="button" data-rr-corner="sharp">Sharp</button>
@@ -169,7 +173,7 @@
   .rr-word-r { transform: translateX(var(--rr-spread)); }
   .rr-panel { position: relative; flex: 0 0 auto; display: block; overflow: hidden; border-radius: var(--rr-radius); aspect-ratio: 16 / 9;
     width: calc(var(--rr-size) * 1%); box-shadow: 0 30px 80px rgb(0 0 0 / 0.45); }
-  .rr-poster { position: absolute; left: 0; top: -12%; width: 100%; height: 124%; object-fit: cover; display: block; transform: translateY(var(--rr-drift, 0%)); will-change: transform; }
+  .rr-poster { position: absolute; left: 0; top: -20%; width: 100%; height: 140%; object-fit: cover; display: block; transform: translateY(var(--rr-drift, 0%)); will-change: transform; }
   .rr-play { position: absolute; inset: 0; margin: auto; width: clamp(40px, 5vw, 60px); height: clamp(40px, 5vw, 60px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fg); background: rgb(var(--fg-rgb) / 0.14); border: 1px solid rgb(var(--fg-rgb) / 0.45); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
   .rr-cap { text-align: center; max-width: 42ch; margin: clamp(26px, 3.4vw, 46px) auto 0; font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.5; opacity: 0.72; }
   @media (max-width: 640px) { .rr-word { font-size: clamp(22px, 9vw, 52px); } }
@@ -232,22 +236,26 @@
     if (!rr) return;
     const sec = rr.closest('.pl-el') || rr;
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-    // Parallax: the image drifts inside the fixed frame and the block floats, both
-    // slower than scroll (exoape's media-at-~0.5x language). The size stays fixed.
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let par = 1; // parallax amount, 0..1.8 from the dial
+    // Parallax: the image drifts inside the fixed frame and the whole block floats,
+    // both slower than scroll (exoape's slow-media language). Size stays fixed; the
+    // drift is capped so the oversized poster never reveals an edge.
+    const update = () => {
+      const r = sec.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const p = clamp((vh - r.top) / (vh + r.height), 0, 1); // 0 entering, 1 exited
+      rr.style.setProperty('--rr-drift', clamp((0.5 - p) * 24 * par, -14, 14).toFixed(2) + '%');
+      rr.style.setProperty('--rr-float', ((0.5 - p) * 40 * par).toFixed(1) + 'px');
+    };
+    if (!reduced) {
       let raf = 0;
-      const update = () => {
-        raf = 0;
-        const r = sec.getBoundingClientRect();
-        const vh = window.innerHeight || 1;
-        const p = clamp((vh - r.top) / (vh + r.height), 0, 1); // 0 entering, 1 exited
-        rr.style.setProperty('--rr-drift', ((0.5 - p) * 16).toFixed(2) + '%');
-        rr.style.setProperty('--rr-float', ((0.5 - p) * 30).toFixed(1) + 'px');
-      };
-      const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+      const onScroll = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; update(); }); };
       addEventListener('scroll', onScroll, { passive: true });
       addEventListener('resize', onScroll, { passive: true });
       update();
+      const parRange = document.querySelector('[data-rr-par]'), parVal = document.querySelector('[data-rr-parval]');
+      parRange && parRange.addEventListener('input', () => { par = Number(parRange.value) / 100; if (parVal) parVal.textContent = parRange.value; update(); });
     }
     const size = document.querySelector('[data-rr-size]'), sizeVal = document.querySelector('[data-rr-sizeval]');
     size && size.addEventListener('input', () => { rr.style.setProperty('--rr-size', size.value); if (sizeVal) sizeVal.textContent = size.value; });
