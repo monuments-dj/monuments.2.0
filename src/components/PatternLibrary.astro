@@ -67,11 +67,11 @@
       <div class="pl-el-head">
         <p class="pl-kicker fade"><span class="pl-num">02</span> Motion</p>
         <h3 class="pl-el-title fade">Reel reveal.</h3>
-        <p class="pl-el-sub fade">The film holds center at a fixed size with the words parked either side, the exoape "Play Reel" framing. Dial the film size, how far the words sit, and the corners.</p>
+        <p class="pl-el-sub fade">The film holds a fixed size with the words parked either side; on scroll the image drifts inside the frame and the whole block floats, exoape's slow-media parallax. Dial the film size, word spread, and corners.</p>
       </div>
 
       <div class="pl-stage pl-stage--reel">
-        <div class="rr fade" data-rr>
+        <div class="rr" data-rr>
           <span class="rr-word rr-word-l">Play</span>
           <a class="rr-panel" href="#reel-reveal" aria-label="Play reel" data-cursor="Play">
             <img class="rr-poster" src="/case-studies/sony-this-moment/gallery/tm-04.jpg" alt="" loading="lazy" />
@@ -163,13 +163,13 @@
 
   /* ---------- ELEMENT 02: reel reveal ---------- */
   .pl-stage--reel { min-height: 62vh; display: flex; align-items: center; justify-content: center; }
-  .rr { --rr-size: 58; --rr-spread: 20px; --rr-radius: 14px; display: flex; align-items: center; justify-content: center; gap: clamp(8px, 2vw, 28px); width: 100%; }
+  .rr { --rr-size: 58; --rr-spread: 20px; --rr-radius: 14px; --rr-float: 0px; --rr-drift: 0%; display: flex; align-items: center; justify-content: center; gap: clamp(8px, 2vw, 28px); width: 100%; transform: translateY(var(--rr-float)); will-change: transform; }
   .rr-word { font-weight: 600; font-size: clamp(26px, 5.5vw, 84px); line-height: 0.9; letter-spacing: -0.03em; text-transform: uppercase; white-space: nowrap; }
   .rr-word-l { transform: translateX(calc(var(--rr-spread) * -1)); }
   .rr-word-r { transform: translateX(var(--rr-spread)); }
   .rr-panel { position: relative; flex: 0 0 auto; display: block; overflow: hidden; border-radius: var(--rr-radius); aspect-ratio: 16 / 9;
     width: calc(var(--rr-size) * 1%); box-shadow: 0 30px 80px rgb(0 0 0 / 0.45); }
-  .rr-poster { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .rr-poster { position: absolute; left: 0; top: -12%; width: 100%; height: 124%; object-fit: cover; display: block; transform: translateY(var(--rr-drift, 0%)); will-change: transform; }
   .rr-play { position: absolute; inset: 0; margin: auto; width: clamp(40px, 5vw, 60px); height: clamp(40px, 5vw, 60px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fg); background: rgb(var(--fg-rgb) / 0.14); border: 1px solid rgb(var(--fg-rgb) / 0.45); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
   .rr-cap { text-align: center; max-width: 42ch; margin: clamp(26px, 3.4vw, 46px) auto 0; font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.5; opacity: 0.72; }
   @media (max-width: 640px) { .rr-word { font-size: clamp(22px, 9vw, 52px); } }
@@ -226,10 +226,29 @@
     sec && sec.addEventListener('change', () => np.classList.toggle('np--nosection', !sec.checked));
   })();
 
-  // ---- ELEMENT 02: reel reveal (film held at a fixed size, words parked, per exoape) ----
+  // ---- ELEMENT 02: reel reveal (fixed size + exoape slow-media parallax) ----
   (function () {
     const rr = document.querySelector('[data-rr]');
     if (!rr) return;
+    const sec = rr.closest('.pl-el') || rr;
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    // Parallax: the image drifts inside the fixed frame and the block floats, both
+    // slower than scroll (exoape's media-at-~0.5x language). The size stays fixed.
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let raf = 0;
+      const update = () => {
+        raf = 0;
+        const r = sec.getBoundingClientRect();
+        const vh = window.innerHeight || 1;
+        const p = clamp((vh - r.top) / (vh + r.height), 0, 1); // 0 entering, 1 exited
+        rr.style.setProperty('--rr-drift', ((0.5 - p) * 16).toFixed(2) + '%');
+        rr.style.setProperty('--rr-float', ((0.5 - p) * 30).toFixed(1) + 'px');
+      };
+      const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+      addEventListener('scroll', onScroll, { passive: true });
+      addEventListener('resize', onScroll, { passive: true });
+      update();
+    }
     const size = document.querySelector('[data-rr-size]'), sizeVal = document.querySelector('[data-rr-sizeval]');
     size && size.addEventListener('input', () => { rr.style.setProperty('--rr-size', size.value); if (sizeVal) sizeVal.textContent = size.value; });
     const spread = document.querySelector('[data-rr-spread]'), spreadVal = document.querySelector('[data-rr-spreadval]');

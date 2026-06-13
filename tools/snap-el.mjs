@@ -7,8 +7,9 @@ import { chromium } from 'playwright';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const [url, selector, name, widthArg] = process.argv.slice(2);
+const [url, selector, name, widthArg, offArg] = process.argv.slice(2);
 const width = Number(widthArg) || 1440;
+const offset = Number(offArg) || 0; // extra px past centered, to see scroll-driven state
 if (!url || !selector || !name) { console.error('usage: node tools/snap-el.mjs <url> <selector> <name> [width]'); process.exit(1); }
 const dir = path.join('tools', 'snaps', name);
 fs.mkdirSync(dir, { recursive: true });
@@ -18,13 +19,13 @@ const page = await browser.newPage({ viewport: { width, height: 900 } });
 await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 }).catch(() => {});
 await page.waitForTimeout(900);
 await page.evaluate(() => document.querySelectorAll('.split, .fade').forEach((e) => e.classList.add('on')));
-await page.evaluate((sel) => {
+await page.evaluate(({ sel, o }) => {
   const el = document.querySelector(sel);
   if (!el) return;
   const r = el.getBoundingClientRect();
-  const target = r.top + window.scrollY - (window.innerHeight - r.height) / 2;
+  const target = r.top + window.scrollY - (window.innerHeight - r.height) / 2 + o;
   window.lenis ? window.lenis.scrollTo(target, { immediate: true }) : window.scrollTo(0, target);
-}, selector);
+}, { sel: selector, o: offset });
 await page.waitForTimeout(500);
 await page.evaluate(() => window.dispatchEvent(new Event('scroll')));
 await page.waitForTimeout(500);
