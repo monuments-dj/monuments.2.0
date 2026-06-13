@@ -130,3 +130,16 @@ thumbnail wall + credits. (Model for our case studies, incl. Blue Cross v2.)
 4. Media moves at a different rate than type (usually slower, ~0.5x).
 5. Color/world changes happen per scene, not per page: each chapter has its own
    atmosphere.
+
+**monuments v1 /about (scanned 2026-06-12)** — Personal intro ("Howdy, I'm DJ"),
+a big red stacked-type moment (RESPECT THE PROCESS energy), a creative-journey
+timeline, capability cards, and a repeating "services" marquee ticker band.
+That ticker + the red type moment are v1 DNA worth carrying forward. NOTE: copy
+is heavy first-person; new brand doc wants studio "we" for pitch copy (About may
+stay personal per doc).
+
+**monuments v2 /about (scanned 2026-06-12)** — "A decade in the hard rooms"
+hero, stats counters, team tiles (placeholder headshots), the two-rabbits quote
+band, "we come in at the thinking layer" services list. Structurally solid,
+motion is entrance-only (same PDF gap as the rest of v2; queued for the
+pinned-scene pass).

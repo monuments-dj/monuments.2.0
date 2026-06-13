@@ -88,10 +88,12 @@ Effort: S = hours, M = a session, L = multi-session.
    The next project's hero rises over the current page's end and BECOMES the next
    page's header (Astro view transitions + scene-over choreography). Replaces the
    "forced Elementor" feeling with continuity no reference site fully does.
-6. **Image-stamp cascade** (tinywins WINS mechanic, made ours) - M
-   Scroll duplicates PHOTOGRAPHS in a stepped trail (we are a photo studio; words
-   are their version, frames are ours). Hero candidate for the photography page
-   or the AI page's "input → filter" beat.
+6. **Frame-stamp cascade** (tinywins duplication mechanic, reframed) - M
+   ⚠️ CORRECTED 2026-06-12: DJ pushed back hard on "we are a photo studio."
+   Monuments is a creative-direction-led production studio; never frame
+   otherwise. If this idea lives, what cascades is DIRECTED WORK: campaign
+   frames stamping in as evidence of campaigns led, or it cascades the services
+   words themselves. It earns v1 only if it serves that story.
 7. **The site that builds itself** (no reference has this) - M/L
    AI page meta-moment: a scene where the page visibly assembles (layout blocks
    snap in, copy types, marker circles draw) as proof-of-work for the offer.
