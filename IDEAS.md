@@ -127,3 +127,9 @@ Effort: S = hours, M = a session, L = multi-session.
 system, (4) portals, (5) next-project transition. That set makes the whole site
 feel like one designed experience and covers DJ's explicit asks. (6)-(10) are the
 second wave; (7) is the one I would fight for on the AI page.
+
+15. **AI-FORWARD HOMEPAGE REFRAME** (DJ, 2026-06-12) - strategy note, revisit
+    AI services are hot right now; it may be the smart commercial move to lead
+    with AI services on the HOMEPAGE itself, not bury them at /lab/ai. Flagged
+    to revisit after the design pass: candidate = homepage v2 variant B with an
+    AI-services lead. Meanwhile: weave AI services into pages wherever natural.
