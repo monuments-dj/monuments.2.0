@@ -67,11 +67,11 @@
       <div class="pl-el-head">
         <p class="pl-kicker fade"><span class="pl-num">02</span> Motion</p>
         <h3 class="pl-el-title fade">Reel reveal.</h3>
-        <p class="pl-el-sub fade">The word splits and the film grows out of the gap. Scroll it to scrub the reveal: it opens toward center and recedes as you pass. Dial how far the words part and how wide the panel opens.</p>
+        <p class="pl-el-sub fade">The film holds center at a fixed size with the words parked either side, the exoape "Play Reel" framing. Dial the film size, how far the words sit, and the corners.</p>
       </div>
 
       <div class="pl-stage pl-stage--reel">
-        <div class="rr" data-rr>
+        <div class="rr fade" data-rr>
           <span class="rr-word rr-word-l">Play</span>
           <a class="rr-panel" href="#reel-reveal" aria-label="Play reel" data-cursor="Play">
             <img class="rr-poster" src="/case-studies/sony-this-moment/gallery/tm-04.jpg" alt="" loading="lazy" />
@@ -163,13 +163,12 @@
 
   /* ---------- ELEMENT 02: reel reveal ---------- */
   .pl-stage--reel { min-height: 62vh; display: flex; align-items: center; justify-content: center; }
-  .rr { --rr-p: 0; --rr-size: 58; --rr-spread: 20px; --rr-radius: 14px; display: flex; align-items: center; justify-content: center; gap: clamp(8px, 2vw, 28px); width: 100%; }
-  .rr-word { font-weight: 600; font-size: clamp(26px, 5.5vw, 84px); line-height: 0.9; letter-spacing: -0.03em; text-transform: uppercase; white-space: nowrap; will-change: transform; }
-  .rr-word-l { transform: translateX(calc(var(--rr-p) * var(--rr-spread) * -1)); }
-  .rr-word-r { transform: translateX(calc(var(--rr-p) * var(--rr-spread))); }
+  .rr { --rr-size: 58; --rr-spread: 20px; --rr-radius: 14px; display: flex; align-items: center; justify-content: center; gap: clamp(8px, 2vw, 28px); width: 100%; }
+  .rr-word { font-weight: 600; font-size: clamp(26px, 5.5vw, 84px); line-height: 0.9; letter-spacing: -0.03em; text-transform: uppercase; white-space: nowrap; }
+  .rr-word-l { transform: translateX(calc(var(--rr-spread) * -1)); }
+  .rr-word-r { transform: translateX(var(--rr-spread)); }
   .rr-panel { position: relative; flex: 0 0 auto; display: block; overflow: hidden; border-radius: var(--rr-radius); aspect-ratio: 16 / 9;
-    width: calc((1 - var(--rr-p)) * 96px + var(--rr-p) * var(--rr-size) * 1%);
-    box-shadow: 0 30px 80px rgb(0 0 0 / 0.45); will-change: width; }
+    width: calc(var(--rr-size) * 1%); box-shadow: 0 30px 80px rgb(0 0 0 / 0.45); }
   .rr-poster { width: 100%; height: 100%; object-fit: cover; display: block; }
   .rr-play { position: absolute; inset: 0; margin: auto; width: clamp(40px, 5vw, 60px); height: clamp(40px, 5vw, 60px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fg); background: rgb(var(--fg-rgb) / 0.14); border: 1px solid rgb(var(--fg-rgb) / 0.45); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
   .rr-cap { text-align: center; max-width: 42ch; margin: clamp(26px, 3.4vw, 46px) auto 0; font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.5; opacity: 0.72; }
@@ -227,28 +226,10 @@
     sec && sec.addEventListener('change', () => np.classList.toggle('np--nosection', !sec.checked));
   })();
 
-  // ---- ELEMENT 02: reel reveal ----
+  // ---- ELEMENT 02: reel reveal (film held at a fixed size, words parked, per exoape) ----
   (function () {
     const rr = document.querySelector('[data-rr]');
     if (!rr) return;
-    const sec = rr.closest('.pl-el') || rr;
-    const clamp = (v) => Math.max(0, Math.min(1, v));
-    // The film grows toward center as the section nears the viewport middle, then
-    // recedes as it passes (scroll-scrubbed + reversible, per the reference).
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const r = sec.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
-      const center = r.top + r.height / 2;
-      const p = clamp(1 - Math.abs(center - vh / 2) / (vh * 0.6));
-      rr.style.setProperty('--rr-p', p.toFixed(3));
-    };
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
-    addEventListener('scroll', onScroll, { passive: true });
-    addEventListener('resize', onScroll, { passive: true });
-    update();
-
     const size = document.querySelector('[data-rr-size]'), sizeVal = document.querySelector('[data-rr-sizeval]');
     size && size.addEventListener('input', () => { rr.style.setProperty('--rr-size', size.value); if (sizeVal) sizeVal.textContent = size.value; });
     const spread = document.querySelector('[data-rr-spread]'), spreadVal = document.querySelector('[data-rr-spreadval]');
