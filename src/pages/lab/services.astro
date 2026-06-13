@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
 
 // === SERVICES V2 — /lab/services ===
 // CD-first order per the Website Context doc. Editorial rows w/ marker
@@ -7,17 +8,17 @@ import Base from '../../layouts/Base.astro';
 // /lab/ai offer), and a plain how-we-work strip. Voice: studio "we".
 
 const services = [
-  { n: '01', t: 'Creative direction', d: 'Setting the idea, the look, the story. The reason brands bring us in.' },
-  { n: '02', t: 'Direction', d: 'Directing commercials, brand films, and campaigns end to end.' },
-  { n: '03', t: 'Brand campaigns', d: 'Concepting and producing multi-asset campaigns, not one-off clips.' },
-  { n: '04', t: 'Creative consulting', d: 'Helping brands and teams sharpen what they are making and why.' },
-  { n: '05', t: 'End-to-end production', d: 'Full production and post, scaled to the job.' },
+  { n: '01', t: 'Creative direction', d: 'The idea, the look, the story. The reason brands call.' },
+  { n: '02', t: 'Direction', d: 'Commercials, brand films, campaigns. Concept to final cut.' },
+  { n: '03', t: 'Brand campaigns', d: 'Whole campaigns, not one-off clips.' },
+  { n: '04', t: 'Creative consulting', d: "We help teams sharpen what they're making and why." },
+  { n: '05', t: 'End-to-end production', d: 'Full production and post, scaled to the job. No hand-offs into the void.' },
 ];
 
 const steps = [
-  { t: 'Listen', d: 'We start with your business, not our reel. What are you trying to move?' },
+  { t: 'Listen', d: 'We start with your business, not our reel. What are you actually trying to move?' },
   { t: 'Frame', d: 'One clear idea, written down, agreed on. The brief everyone can point at.' },
-  { t: 'Make', d: 'Direction, production, post. Senior hands at every step that matters.' },
+  { t: 'Make', d: 'Direction, production, post. Senior hands on every step that matters.' },
   { t: 'Ship', d: 'On time, in every format, with nothing lost between the idea and the screen.' },
 ];
 ---
@@ -28,7 +29,7 @@ const steps = [
     <header class="sv2-hero">
       <p class="sv2-eyebrow fade">Services</p>
       <h1 class="sv2-h1 split">Creative leadership, <em>start to ship.</em></h1>
-      <p class="sv2-lead fade">Production capability is assumed. What you are hiring is the thinking: the idea, the direction, and the judgment to get it made right.</p>
+      <p class="sv2-lead fade">Production muscle is assumed. What you're hiring is judgment: the idea, the direction, and the taste to get it made right.</p>
     </header>
 
     <!-- SERVICE ROWS -->
@@ -52,7 +53,7 @@ const steps = [
       <div class="sv2-ai-inner">
         <p class="sv2-kicker fade">New · AI systems</p>
         <h2 class="sv2-ai-h split">Audit. Automate. <em>Deploy.</em></h2>
-        <p class="sv2-ai-b fade">For businesses that do not have time to figure AI out themselves. We audit what you have, build the systems you are missing, and train your team to run them. The audit is $5,000 flat, takes two weeks, and comes back in plain English.</p>
+        <p class="sv2-ai-b fade">For businesses that don't have time to become AI businesses. We audit what you've got, build what's missing, and train your team to run it. $5,000 flat, two weeks, plain English.</p>
         <a class="sv2-cta fade" href="/lab/ai">See the AI offer <span aria-hidden="true">↗</span></a>
       </div>
     </section>
@@ -78,6 +79,7 @@ const steps = [
     </section>
 
   </main>
+  <LabFx />
 </Base>
 
 <style>

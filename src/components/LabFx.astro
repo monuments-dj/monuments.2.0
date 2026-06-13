@@ -1,0 +1,65 @@
+---
+// Shared pizzazz layer for the /lab v2 pages: cinematic film grain, a trailing
+// cursor ring that reacts to links, and magnetic CTAs. Desktop + motion-okay
+// only; native cursor stays (the ring is an accent, not a replacement).
+---
+<div class="fx-grain" aria-hidden="true"></div>
+<div class="fx-ring" aria-hidden="true"></div>
+
+<style is:global>
+  .fx-grain { position: fixed; inset: -50%; z-index: 2400; pointer-events: none; opacity: 0.05; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: fxGrain 0.9s steps(2) infinite; }
+  @keyframes fxGrain { 0% { transform: translate(0, 0); } 50% { transform: translate(-2%, 1.4%); } 100% { transform: translate(1.6%, -1%); } }
+
+  .fx-ring { position: fixed; left: 0; top: 0; z-index: 2500; width: 34px; height: 34px; margin: -17px 0 0 -17px; border: 1.5px solid rgba(224, 50, 45, 0.8); border-radius: 50%; pointer-events: none; opacity: 0; transform: scale(0.6); transition: opacity 0.3s ease; will-change: transform; }
+  .fx-ring.live { opacity: 1; }
+  .fx-ring.hot { border-color: rgba(107, 140, 174, 0.95); }
+
+  @media (pointer: coarse), (prefers-reduced-motion: reduce) {
+    .fx-grain { animation: none; }
+    .fx-ring { display: none; }
+  }
+</style>
+
+<script>
+  const fine = matchMedia('(pointer: fine)').matches;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Trailing ring: lerps behind the pointer, swells over interactive elements.
+  if (fine && !reduced) {
+    const ring = document.querySelector('.fx-ring') as HTMLElement;
+    if (ring) {
+      let tx = innerWidth / 2, ty = innerHeight / 2, x = tx, y = ty, scale = 0.6, tScale = 1, raf = 0;
+      const tick = () => {
+        x += (tx - x) * 0.16;
+        y += (ty - y) * 0.16;
+        scale += (tScale - scale) * 0.2;
+        ring.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+        raf = requestAnimationFrame(tick);
+      };
+      addEventListener('pointermove', (e) => {
+        tx = e.clientX; ty = e.clientY;
+        if (!ring.classList.contains('live')) { ring.classList.add('live'); x = tx; y = ty; tick(); }
+        const hot = (e.target as Element | null)?.closest?.('a, button, [data-mag]');
+        tScale = hot ? 1.9 : 1;
+        ring.classList.toggle('hot', !!hot);
+      }, { passive: true });
+      addEventListener('pointerleave', () => ring.classList.remove('live'));
+    }
+
+    // Magnetic CTAs: any element whose class ends in -cta gets the pull.
+    document.querySelectorAll('[class*="-cta"]').forEach((el) => {
+      const cta = el as HTMLElement;
+      if (cta.dataset.magBound) return;
+      cta.dataset.magBound = '1';
+      cta.addEventListener('pointermove', (e) => {
+        const r = cta.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top + r.height / 2);
+        cta.style.transform = `translate(${dx * 0.16}px, ${dy * 0.28}px)`;
+      });
+      cta.addEventListener('pointerleave', () => { cta.style.transform = ''; });
+    });
+  }
+</script>

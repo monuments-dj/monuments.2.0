@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
 
 // === CONTACT V2 — /lab/contact ===
 // Modern, fresh, easy (DJ's words on the reference menus). One giant email
@@ -18,7 +19,7 @@ import Base from '../../layouts/Base.astro';
         <span class="ct2-mail-t">monuments.cc<wbr>@gmail.com</span>
         <svg class="ct2-stroke" viewBox="0 0 600 18" preserveAspectRatio="none" aria-hidden="true"><path d="M6 12 C140 4, 380 16, 594 7" /></svg>
       </a>
-      <p class="ct2-sub fade">No form. No discovery-call funnel. Tell us what you are trying to move and we will answer like people.</p>
+      <p class="ct2-sub fade">No form. No funnel. Tell us what you're trying to move and a human writes back.</p>
     </header>
 
     <!-- EXPECT -->
@@ -27,17 +28,17 @@ import Base from '../../layouts/Base.astro';
         <div class="ct2-card fade">
           <span class="ct2-card-n">01</span>
           <h2 class="ct2-card-t">Within a day</h2>
-          <p class="ct2-card-d">You hear back from us. A real reply, not an autoresponder.</p>
+          <p class="ct2-card-d">A real reply from a real person. Not an autoresponder, ever.</p>
         </div>
         <div class="ct2-card fade">
           <span class="ct2-card-n">02</span>
           <h2 class="ct2-card-t">One honest read</h2>
-          <p class="ct2-card-d">If we are not the right studio for it, we say so and point you somewhere good.</p>
+          <p class="ct2-card-d">If we're not right for it, we'll say so and point you somewhere good.</p>
         </div>
         <div class="ct2-card fade">
           <span class="ct2-card-n">03</span>
           <h2 class="ct2-card-t">Then the work</h2>
-          <p class="ct2-card-d">A conversation, a clear brief, and a number. No mystery process.</p>
+          <p class="ct2-card-d">A conversation, a clear brief, and a number. No mystery, no maze.</p>
         </div>
       </div>
     </section>
@@ -52,7 +53,7 @@ import Base from '../../layouts/Base.astro';
           <li class="fade"><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
         </ul>
       </div>
-      <p class="ct2-hint fade" aria-hidden="true">PS: the badges are draggable. Everything here should be at least a little fun.</p>
+      <p class="ct2-hint fade" aria-hidden="true">PS the badges move. Nothing here is allowed to be boring.</p>
     </section>
 
     <!-- Escaped patches (decorative, draggable) -->
@@ -63,6 +64,7 @@ import Base from '../../layouts/Base.astro';
     </div>
 
   </main>
+  <LabFx />
 </Base>
 
 <style>

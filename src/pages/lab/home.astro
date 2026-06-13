@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
 
 // === HOMEPAGE V2 — /lab/home ===
 // Pinned-scene front door per the measured motion laws (REFERENCES.md).
@@ -14,7 +15,7 @@ const worlds = [
     slug: 'sony-this-moment',
     brand: 'Sony',
     line: 'Built to capture the moment',
-    think: 'A campaign about pause in a culture of noise. We shaped the story and directed the stills.',
+    think: 'A campaign about finding quiet in the noise. We shaped the story and directed every still.',
     img: '/case-studies/sony-this-moment/gallery/tm-01.jpg',
     bg: '#101418', ink: '#fcfcfc',
   },
@@ -22,7 +23,7 @@ const worlds = [
     slug: 'blue-cross',
     brand: 'Blue Cross of Idaho',
     line: 'Built for life',
-    think: 'Health insurance sold on a simple truth: know people as individuals. Four years of campaign licensing says it worked.',
+    think: "Insurance sold like it's about people, because it is. Four years of license renewals say it landed.",
     img: '/case-studies/blue-cross/gallery/bci-10.jpg',
     bg: '#0d2440', ink: '#fcfcfc',
   },
@@ -30,7 +31,7 @@ const worlds = [
     slug: 'sony-xperia-summer',
     brand: 'Sony Xperia',
     line: 'Built to chase the sun',
-    think: 'A summer campaign that put the product where the light was best. Direction, stills, and the brief.',
+    think: 'A summer campaign that chased golden hour across Idaho. Direction, stills, and the brief they shot from.',
     img: '/case-studies/sony-xperia-summer/gallery/xp-01.jpg',
     bg: '#1a1410', ink: '#fcfcfc',
   },
@@ -38,19 +39,19 @@ const worlds = [
     slug: 'turnstile',
     brand: 'Turnstile',
     line: 'Built to be heard',
-    think: 'Brand work for a band with a point of view. Identity, content, and the campaign around it.',
+    think: "Brand work for a band that doesn't whisper. Identity, content, and the campaign around it.",
     img: '/case-studies/turnstile/gallery/ts-01.jpg',
     bg: '#14181a', ink: '#fcfcfc',
   },
 ];
 
 const services = [
-  { t: 'Creative direction', d: 'Setting the idea, the look, the story. The reason brands bring us in.' },
-  { t: 'Direction', d: 'Directing commercials, brand films, and campaigns end to end.' },
-  { t: 'Brand campaigns', d: 'Concepting and producing multi-asset campaigns, not one-off clips.' },
-  { t: 'Creative consulting', d: 'Helping brands and teams sharpen what they are making and why.' },
-  { t: 'End-to-end production', d: 'Full production and post, scaled to the job.' },
-  { t: 'AI systems', d: 'Audit, automate, deploy. We bring your brand into the modern age.', href: '/lab/ai', tag: 'new' },
+  { t: 'Creative direction', d: 'The idea, the look, the story. The reason brands call.' },
+  { t: 'Direction', d: 'Commercials, brand films, campaigns. Concept to final cut.' },
+  { t: 'Brand campaigns', d: 'Whole campaigns, not one-off clips.' },
+  { t: 'Creative consulting', d: "We help teams sharpen what they're making and why." },
+  { t: 'End-to-end production', d: 'Full production and post, scaled to the job. No hand-offs into the void.' },
+  { t: 'AI systems', d: 'Audit, automate, deploy. Your business, brought up to speed.', href: '/lab/ai', tag: 'new' },
 ];
 ---
 <Base title="monuments — we build things worth remembering">
@@ -79,7 +80,7 @@ const services = [
             </span>
           </h1>
           <div class="hm-hero-foot">
-            <p class="hm-hero-sub">Brand campaigns and commercials, concept through delivery, for brands that need a strong point of view, not just a crew.</p>
+            <p class="hm-hero-sub">Brand campaigns and commercials, concept through delivery. For brands that want a point of view, not just a crew.</p>
             <a class="hm-cta" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
           </div>
         </div>
@@ -142,6 +143,14 @@ const services = [
         </div>
       </section>
 
+      <!-- TICKER — v1-DNA marquee band -->
+      <div class="hm-ticker" aria-hidden="true">
+        <div class="hm-ticker-track">
+          <span class="hm-ticker-seg">Creative direction · Brand campaigns · Commercials · Creative consulting · AI systems · Los Angeles · Boise ·&nbsp;</span>
+          <span class="hm-ticker-seg">Creative direction · Brand campaigns · Commercials · Creative consulting · AI systems · Los Angeles · Boise ·&nbsp;</span>
+        </div>
+      </div>
+
       <!-- SERVICES — CD first, AI systems included. Marker underline draws on hover. -->
       <section class="hm-sv">
         <p class="hm-eyebrow fade">What we do</p>
@@ -169,7 +178,7 @@ const services = [
         <div class="trusted-top">
           <div class="trusted-left">
             <h2 class="trusted-title">Trusted by the best</h2>
-            <p class="trusted-body">We have worked with global brands to craft campaigns that drive results: satisfying clients, uncovering insights, moving product, and winning awards along the way.</p>
+            <p class="trusted-body">We've spent a decade making campaigns for global brands: uncovering insights, moving product, and picking up awards along the way.</p>
             <a href="/contact" class="trusted-cta">Let's talk</a>
           </div>
           <img class="trusted-m" src="https://monuments.cc/wp-content/uploads/2023/12/logo-01.png" alt="M">
@@ -194,6 +203,7 @@ const services = [
 
     </div>
   </main>
+  <LabFx />
 </Base>
 
 <style>
@@ -243,6 +253,13 @@ const services = [
   .hm-world-index { position: absolute; right: var(--pad); bottom: 5vh; font-size: 12px; letter-spacing: 0.18em; opacity: 0.5; }
   .hm-worlds-all { display: flex; justify-content: center; padding: 12vh var(--pad); }
 
+  /* TICKER */
+  .hm-ticker { background: var(--white); color: #141519; transform: rotate(-1.4deg) scale(1.02); overflow: hidden; padding: 16px 0; margin: 10vh 0; }
+  .hm-ticker-track { display: flex; width: max-content; animation: hmTick 30s linear infinite; }
+  .hm-ticker-seg { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(16px, 2vw, 26px); letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap; }
+  @keyframes hmTick { to { transform: translateX(-50%); } }
+  .hm-ticker:hover .hm-ticker-track { animation-play-state: paused; }
+
   /* SERVICES rows */
   .hm-sv { max-width: var(--wrap); margin: 0 auto; padding: clamp(90px, 11vw, 150px) var(--pad); }
   .hm-sv-list { list-style: none; margin: 34px 0 0; padding: 0; }
@@ -279,6 +296,7 @@ const services = [
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .hm-ticker-track { animation: none; }
     .hm-line { clip-path: none; transform: none; transition: none; }
     .hm-hero-foot { opacity: 1; transform: none; }
     .hm-circle path { stroke-dashoffset: 0; }

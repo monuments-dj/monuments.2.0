@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
 
 // === BLUE CROSS REIMAGINED — /lab/blue-cross ===
 // The exoape-columbia editorial model (REFERENCES.md motion map) on DJ's real
@@ -91,7 +92,7 @@ const collage = [
     <section class="bcx-ch bcx-ch-cream">
       <div class="bcx-cols">
         <p class="bcx-kicker fade">04 · Every frame</p>
-        <div class="bcx-col fade"><p>The full campaign set. Real people, real places, shot to feel like neither was staged.</p></div>
+        <div class="bcx-col fade"><p>The full set. Real people, real places, shot so neither feels staged.</p></div>
       </div>
       <div class="bcx-wall">
         {wall.map((src) => (
@@ -113,6 +114,7 @@ const collage = [
     </section>
 
   </main>
+  <LabFx />
 </Base>
 
 <style>

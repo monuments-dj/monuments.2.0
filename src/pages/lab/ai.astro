@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
 
 // === AI LAB — /lab/ai — direction 1, pinned-scene build ===
 // Audit → automate → deploy for non-technical service businesses.
@@ -17,7 +18,7 @@ const services = [
     title: 'Audit',
     tilt: -3,
     price: '$5,000 flat',
-    lede: 'Where is your brand now, and where could it be? A complete read of your business, your tools, and what AI could actually do for you. Two weeks. Plain English. No jargon.',
+    lede: "A complete read of your business: the brand, the tools, the busywork. You get a map of what AI can actually do for you, and what it can't. Plain English, two weeks.",
     items: ['Brand and tech-stack review', 'Opportunity map', 'Competitor scan', 'Tool recommendations', 'A roadmap you can act on'],
   },
   {
@@ -26,7 +27,7 @@ const services = [
     title: 'Automate',
     tilt: 2,
     price: null,
-    lede: 'The busywork goes away. We build the systems that handle intake, content, reporting, and the other things eating your week.',
+    lede: "The busywork goes away. Intake, content, reporting, follow-ups: we build the systems that handle whatever's been eating your week.",
     items: ['Workflow automation', 'Content systems', 'Client communications', 'Internal tools'],
   },
   {
@@ -35,7 +36,7 @@ const services = [
     title: 'Deploy',
     tilt: -2,
     price: null,
-    lede: 'Ship it, and keep it running. Your team gets trained, everything gets documented, and you get a direct line to the director.',
+    lede: "We don't hand you a login and vanish. Your team gets trained, everything gets documented, and you keep a direct line to the director.",
     items: ['Team training', 'Documentation', 'Support retainer', 'Quarterly reviews'],
   },
 ];
@@ -69,8 +70,8 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
     <!-- HERO -->
     <header class="ai-hero">
       <p class="ai-eyebrow fade">AI audits · automation · deployment</p>
-      <h1 class="ai-h1 split">Where is your brand now, and <em>where could it be?</em></h1>
-      <p class="ai-lede fade">AI for businesses that do not have time to figure it out themselves. We audit what you have, build the systems you are missing, and train your team to run them.</p>
+      <h1 class="ai-h1 split">Where's your brand now, and <em>where could it be?</em></h1>
+      <p class="ai-lede fade">AI for businesses that don't have time to become AI businesses. We audit what you've got, build what's missing, and train your people to run it.</p>
       <a class="ai-cta fade" href="/contact">Book an audit <span aria-hidden="true">↗</span></a>
     </header>
 
@@ -88,7 +89,7 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
           </div>
           <p class="era-ended">That era just ended.</p>
         </div>
-        <p class="era-s3 ai-era-body">New tools ship every week, and nobody sent the memo. It is a lot to take in, even for us, and this is our job. That is the point. You should not have to keep up with all of it. That is what we are for.</p>
+        <p class="era-s3 ai-era-body">New tools ship every week and nobody sends a memo. Keeping up is a full-time job. Good news: it's ours. You run your business. We'll keep it modern.</p>
       </div>
     </section>
 
@@ -132,8 +133,8 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
       <section class="ai-who">
         <div class="ai-who-inner">
           <p class="ai-eyebrow fade">Who this is for</p>
-          <p class="ai-who-big split">CPAs. Agencies. Service businesses. You are great at the work. The tech is the problem.</p>
-          <p class="ai-era-body fade">Our job is creative direction: take in a huge amount of input, filter it, and make the call. That is exactly what this moment needs. We bring your brand into the modern age without burying you in tools you will never open again.</p>
+          <p class="ai-who-big split">CPAs. Agencies. Service businesses. You're great at the work. The tech shouldn't be your second job.</p>
+          <p class="ai-era-body fade">Creative direction is our trade: take in a flood of input, filter it, make the call. That's exactly the skill this moment needs. We'll wrangle the tools so you never have to open them.</p>
         </div>
       </section>
 
@@ -142,26 +143,27 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
         <div class="ai-proof-head">
           <p class="ai-eyebrow fade">Proof, not promises</p>
           <h2 class="ai-proof-h split">This site is the demo.</h2>
-          <p class="ai-era-body fade">Version one of monuments.cc took six months by hand. The site you are on now is being rebuilt with AI in a fraction of that, and it is better. Same eye. Faster hands. That is what we are offering.</p>
+          <p class="ai-era-body fade">Version one of this site took six months by hand. The one you're looking at was rebuilt with AI in a fraction of that, and it's better. Same eye. Faster hands. That's the offer.</p>
         </div>
         <div class="ai-strip" data-strip>
           {proof.map((src) => (
             <img src={src} alt="Monuments campaign work" loading="lazy" />
           ))}
         </div>
-        <p class="ai-strip-cap fade">Sony. Blue Cross. Intel. Big-brand campaigns, directed with the old tools. Imagine the new ones.</p>
+        <p class="ai-strip-cap fade">Sony. Blue Cross. Intel. Big campaigns, directed with the old tools. Imagine what we'll do with the new ones.</p>
       </section>
 
       <!-- CTA -->
       <section class="ai-end">
         <p class="ai-end-big split">Let's see what you're leaving on the table.</p>
         <a class="ai-cta ai-cta-big fade" href="/contact">Book the audit <span aria-hidden="true">↗</span></a>
-        <p class="ai-end-small fade">$5,000, two weeks, plain English. If there is nothing there, we will tell you.</p>
+        <p class="ai-end-small fade">$5,000. Two weeks. Plain English. And if there's nothing there, we'll tell you that too.</p>
       </section>
 
     </div>
 
   </main>
+  <LabFx />
 </Base>
 
 <style>
