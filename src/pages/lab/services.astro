@@ -177,7 +177,7 @@ const bandFrames = [
     <!-- BRAND TICKER BAND -->
     <section class="sv3-brands">
       <p class="sv3-eyebrow fade">In good company</p>
-      <BrandTicker />
+      <BrandTicker tone="black" />
     </section>
 
     <!-- CTA -->
@@ -280,8 +280,8 @@ const bandFrames = [
   .sv3-step-d { margin-top: 10px; font-size: 14px; line-height: 1.65; font-weight: 300; color: rgb(var(--fg-rgb) / 0.65); }
 
   /* BRAND TICKER BAND */
-  .sv3-brands { padding: clamp(20px, 4vw, 50px) 0; }
-  .sv3-brands .sv3-eyebrow { max-width: var(--wrap); margin: 0 auto clamp(24px, 3vw, 40px); padding: 0 var(--pad); }
+  .sv3-brands { background: var(--paper); color: var(--ink); padding: clamp(40px, 5vw, 70px) 0; }
+  .sv3-brands .sv3-eyebrow { color: rgb(var(--ink-rgb) / 0.5); max-width: var(--wrap); margin: 0 auto clamp(24px, 3vw, 40px); padding: 0 var(--pad); }
 
   /* CTA */
   .sv3-end { min-height: 56vh; display: flex; flex-direction: column; gap: 40px; align-items: center; justify-content: center; text-align: center; padding: 80px var(--pad); }

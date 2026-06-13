@@ -15,6 +15,10 @@ interface Brand {
 interface Props {
   brands?: Brand[];
   speed?: number; // base px/sec drift
+  // "white" = white logos on a dark band (use on dark sections).
+  // "black" = black logos on a light band (use on light/paper sections).
+  // omit = auto (knockout follows the active theme's foreground).
+  tone?: "white" | "black";
 }
 
 const DEFAULT_BRANDS: Brand[] = [
@@ -31,13 +35,13 @@ const DEFAULT_BRANDS: Brand[] = [
   { name: "Against", logo: "/logos/against.png" },
 ];
 
-const { brands = DEFAULT_BRANDS, speed = 28 } = Astro.props;
+const { brands = DEFAULT_BRANDS, speed = 28, tone } = Astro.props;
 
 // Render the set twice so the loop is seamless.
 const loop = [...brands, ...brands];
 ---
 
-<div class="brand-ticker" data-speed={speed} aria-label="Brands we have worked with">
+<div class:list={["brand-ticker", tone && `bt-${tone}`]} data-speed={speed} aria-label="Brands we have worked with">
   <div class="bt-track">
     {
       loop.map((b, i) => {
@@ -129,6 +133,16 @@ const loop = [...brands, ...brands];
   /* When the base is light (press theme), brightness(0) gives black marks,
      which already read on a light surface — so don't invert there. The
      --bt-invert var is flipped in script based on the resolved fg luminance. */
+
+  /* Explicit tones (override the auto knockout for deliberate placement). */
+  .bt-white { background: var(--bg); }
+  .bt-white .bt-logo { filter: brightness(0) invert(1); }
+  .bt-white .bt-word { color: var(--fg); }
+
+  .bt-black { background: var(--paper); border-top-color: rgb(var(--ink-rgb) / 0.12); border-bottom-color: rgb(var(--ink-rgb) / 0.12); }
+  .bt-black .bt-logo { filter: brightness(0); }
+  .bt-black .bt-word { color: var(--ink); }
+  a.bt-black:hover .bt-logo, .bt-black a.bt-item:hover .bt-logo { filter: none; }
 
   @media (prefers-reduced-motion: reduce) {
     .bt-track { transform: none !important; }
