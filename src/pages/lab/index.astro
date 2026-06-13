@@ -180,15 +180,18 @@ const experiments = [
           <span class="tl-field-l">Speed <b data-tl-speedval>40</b> px/s</span>
           <input class="tl-range" type="range" min="0" max="140" value="40" step="2" data-tl-speed aria-label="Ticker speed" />
         </label>
-        <div class="tl-seg" role="group" aria-label="Invert logos">
-          <button class="tl-seg-btn on" type="button" data-tl-invert="off">Normal</button>
-          <button class="tl-seg-btn" type="button" data-tl-invert="on">Invert</button>
+        <label class="tl-field">
+          <span class="tl-field-l">Logo size <b data-tl-sizeval>30</b> px</span>
+          <input class="tl-range" type="range" min="14" max="66" value="30" step="2" data-tl-size aria-label="Logo size" />
+        </label>
+        <div class="tl-seg" role="group" aria-label="Tone">
+          <button class="tl-seg-btn on" type="button" data-tl-invert="off">White on dark</button>
+          <button class="tl-seg-btn" type="button" data-tl-invert="on">Black on light</button>
         </div>
       </div>
 
       <div class="tl-stack" data-tl-stack>
         <BrandTicker tone="white" speed={40} />
-        <BrandTicker tone="black" speed={40} />
       </div>
     </section>
 
@@ -540,6 +543,17 @@ const experiments = [
       };
       range.addEventListener('input', apply);
       apply();
+    }
+    const sizeRange = lab.querySelector('[data-tl-size]');
+    const sizeVal = lab.querySelector('[data-tl-sizeval]');
+    if (sizeRange) {
+      const applySize = () => {
+        const v = sizeRange.value;
+        tickers.forEach((t) => { t.style.setProperty('--bt-size', v + 'px'); });
+        if (sizeVal) sizeVal.textContent = v;
+      };
+      sizeRange.addEventListener('input', applySize);
+      applySize();
     }
     // Invert swaps each ticker's tone (white-on-dark <-> black-on-light) so both
     // stay readable; toggling the tone class lets BrandTicker's own scoped styles

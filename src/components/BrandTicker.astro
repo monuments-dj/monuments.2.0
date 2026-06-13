@@ -97,7 +97,8 @@ const loop = [...brands, ...brands];
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    height: clamp(20px, 2.4vw, 34px);
+    /* --bt-size overrides the responsive default (set live by the playground). */
+    height: var(--bt-size, clamp(20px, 2.4vw, 34px));
     transition: opacity 0.25s ease, transform 0.25s ease;
   }
   a.bt-item:hover { transform: translateY(-2px); }
@@ -106,7 +107,8 @@ const loop = [...brands, ...brands];
   .bt-logo {
     height: 100%;
     width: auto;
-    max-width: clamp(90px, 10vw, 160px);
+    /* width cap scales with the logo height so wide marks grow too */
+    max-width: var(--bt-maxw, calc(var(--bt-size, 30px) * 5.2));
     object-fit: contain;
     display: block;
     /* Logos sit on var(--bg). Knock mono/dark marks to the --fg tone so they
