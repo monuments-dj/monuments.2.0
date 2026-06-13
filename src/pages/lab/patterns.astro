@@ -1,0 +1,193 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
+
+// === PATTERN LIBRARY (/lab/patterns) ===
+// The working library of reusable UI elements. Each element sits in its own
+// section with a live control panel so DJ can DIAL the look, then bake the
+// winning settings into the real pages. Sections deliberately alternate light
+// and dark (a rhythm we want across the whole site). Tokenized end to end, so
+// the LabFx theme selector re-skins everything and the light/dark alternation
+// re-derives correctly under every preset (light = --paper, dark = --bg).
+//
+// Adding an element later = drop in another <section class="pl-sec pl-sec--*">
+// with a .pl-stage (the live element) + a .pl-ctrl (its dial). Keep them
+// alternating dark/light down the page.
+---
+<Base title="Pattern library · monuments">
+  <main class="pl">
+    <!-- HERO (dark) -->
+    <header class="pl-sec pl-sec--dark pl-hero">
+      <div class="pl-wrap">
+        <p class="pl-eyebrow fade">The lab · patterns</p>
+        <h1 class="pl-h1 fade">Dial the building <em>blocks.</em></h1>
+        <p class="pl-lead fade">Every reusable element in one place, each with its own live controls. Tune it here, then bake the winning settings into the real pages. Sections alternate light and dark on purpose: that contrast rhythm is going into the whole site as we go.</p>
+        <p class="pl-note fade">Swatches bottom-left reskin everything live. The alternation flips with them.</p>
+      </div>
+    </header>
+
+    <!-- ELEMENT 01: NEXT-PAGE SCROLLER (light) -->
+    <section class="pl-sec pl-sec--light pl-el" id="next-page">
+      <div class="pl-wrap">
+        <div class="pl-el-head">
+          <p class="pl-kicker fade"><span class="pl-num">01</span> Wayfinding</p>
+          <h2 class="pl-el-title fade">Next-page scroller.</h2>
+          <p class="pl-el-sub fade">A horizontal rail that fills as the reader moves down a page, then hands off to the next one. Pulled from the reference set. Scroll past it to watch it fill; dial the weight, width, fill color, and labels.</p>
+        </div>
+
+        <div class="pl-stage pl-stage--tall">
+          <div class="np" data-np>
+            <span class="np-keep" data-np-keep>Keep scrolling to learn more</span>
+            <div class="np-row">
+              <span class="np-section" data-np-section>About us</span>
+              <a class="np-next" href="#next-page" aria-label="Next page">
+                <span class="np-label">Next page</span>
+                <span class="np-bar"><span class="np-fill" data-np-fill></span></span>
+                <span class="np-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 34 16" width="42" height="16" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="0" y1="8" x2="31" y2="8" /><path d="M24 2 L31 8 L24 14" /></svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pl-ctrl" data-np-ctrl>
+          <label class="pl-field">
+            <span class="pl-field-l">Bar weight <b data-np-hval>4</b> px</span>
+            <input class="pl-range" type="range" min="2" max="14" value="4" step="1" data-np-h aria-label="Bar weight" />
+          </label>
+          <label class="pl-field">
+            <span class="pl-field-l">Rail width <b data-np-wval>320</b> px</span>
+            <input class="pl-range" type="range" min="160" max="540" value="320" step="10" data-np-w aria-label="Rail width" />
+          </label>
+          <div class="pl-seg" role="group" aria-label="Fill color">
+            <button class="pl-seg-btn on" type="button" data-np-fillc="accent">Accent</button>
+            <button class="pl-seg-btn" type="button" data-np-fillc="lime">Lime</button>
+            <button class="pl-seg-btn" type="button" data-np-fillc="fg">Mono</button>
+          </div>
+          <label class="pl-check"><input type="checkbox" data-np-togglekeep checked /> Caption</label>
+          <label class="pl-check"><input type="checkbox" data-np-togglesection checked /> Section label</label>
+        </div>
+      </div>
+    </section>
+
+    <!-- More elements land below this line, alternating dark/light:
+         reel reveal, photo gallery, next-project teaser, project-detail slider,
+         + the existing toys with dials. -->
+    <section class="pl-sec pl-sec--dark pl-soon">
+      <div class="pl-wrap">
+        <p class="pl-kicker fade">On the bench</p>
+        <p class="pl-soon-list fade">Next into this library: the reel reveal (split-word, video grows from center), the photography galleries, the next-project teaser (and its reimagining), and the project-detail slider. Each will arrive with its own dial.</p>
+      </div>
+    </section>
+
+    <LabFx />
+  </main>
+</Base>
+
+<style>
+  /* ---------- page frame + light/dark alternation ---------- */
+  .pl { --pl-pad: clamp(64px, 9vw, 132px); background: var(--bg); }
+  .pl-sec { padding: var(--pl-pad) var(--pad); }
+  .pl-sec--dark { background: var(--bg); color: var(--fg); }
+  .pl-sec--light { background: var(--paper); color: var(--ink); }
+  .pl-wrap { max-width: var(--wrap); margin: 0 auto; }
+
+  /* ---------- hero ---------- */
+  .pl-hero { padding-top: clamp(120px, 16vh, 200px); }
+  .pl-eyebrow, .pl-kicker { font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.66; margin: 0 0 18px; }
+  .pl-num { color: var(--accent); margin-right: 6px; }
+  .pl-h1 { font-weight: 600; font-size: clamp(44px, 7vw, 104px); line-height: 0.98; letter-spacing: -0.03em; margin: 0 0 28px; }
+  .pl-h1 em { font-style: italic; color: var(--accent); }
+  .pl-lead { max-width: 60ch; font-size: clamp(16px, 1.5vw, 21px); font-weight: 300; line-height: 1.55; opacity: 0.9; margin: 0 0 14px; }
+  .pl-note { font-size: 13px; opacity: 0.55; margin: 0; }
+
+  /* ---------- per-element scaffold ---------- */
+  .pl-el-head { max-width: 64ch; margin: 0 0 clamp(40px, 5vw, 72px); }
+  .pl-el-title { font-weight: 600; font-size: clamp(30px, 4.4vw, 60px); line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 18px; }
+  .pl-el-sub { font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.55; opacity: 0.82; margin: 0; }
+  .pl-stage { position: relative; }
+  /* a tall stage gives scroll-linked elements room to demonstrate */
+  .pl-stage--tall { min-height: 46vh; display: flex; align-items: center; }
+
+  /* ---------- control panel (the dial) ---------- */
+  .pl-ctrl { margin-top: clamp(34px, 4vw, 56px); display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px;
+    padding: 16px 18px; border-radius: 14px; border: 1px solid currentColor; background: color-mix(in srgb, currentColor 5%, transparent); }
+  .pl-field { display: flex; flex-direction: column; gap: 7px; min-width: 168px; }
+  .pl-field-l { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; }
+  .pl-field-l b { font-weight: 700; opacity: 1; }
+  .pl-range { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; border-radius: 3px; background: color-mix(in srgb, currentColor 28%, transparent); cursor: pointer; }
+  .pl-range::-webkit-slider-thumb { -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); cursor: pointer; }
+  .pl-range::-moz-range-thumb { width: 15px; height: 15px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); cursor: pointer; }
+  .pl-seg { display: inline-flex; border: 1px solid currentColor; border-radius: 999px; overflow: hidden; }
+  .pl-seg-btn { font: 600 12px/1 'Inter', sans-serif; letter-spacing: 0.04em; padding: 9px 15px; border: 0; background: transparent; color: currentColor; cursor: pointer; opacity: 0.62; transition: opacity 0.2s, background 0.2s; }
+  .pl-seg-btn.on { opacity: 1; background: color-mix(in srgb, currentColor 14%, transparent); }
+  .pl-check { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 400; cursor: pointer; user-select: none; }
+  .pl-check input { accent-color: var(--accent); width: 15px; height: 15px; }
+
+  /* ---------- ELEMENT 01: next-page scroller ---------- */
+  .np { --np-h: 4px; --np-w: 320px; --np-fill-color: var(--accent); width: 100%; }
+  .np-keep { display: block; font-size: 13px; font-weight: 400; letter-spacing: 0.04em; opacity: 0.6; margin: 0 0 clamp(36px, 6vw, 72px); text-transform: uppercase; }
+  .np.np--nokeep .np-keep { display: none; }
+  .np-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
+  .np-section { font-weight: 600; font-size: clamp(30px, 5vw, 64px); line-height: 0.92; letter-spacing: -0.02em; text-transform: uppercase; }
+  .np.np--nosection .np-section { display: none; }
+  .np-next { display: inline-flex; align-items: center; gap: 16px; text-decoration: none; color: inherit; margin-left: auto; }
+  .np-label { font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+  .np-bar { display: block; width: var(--np-w); max-width: 46vw; height: var(--np-h); border-radius: 999px; background: color-mix(in srgb, currentColor 22%, transparent); overflow: hidden; }
+  .np-fill { display: block; height: 100%; width: calc(var(--np-progress, 0) * 100%); background: var(--np-fill-color); border-radius: 999px; transition: width 0.08s linear; }
+  .np-arrow { display: inline-flex; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+  .np-next:hover .np-arrow { transform: translateX(8px); }
+
+  /* ---------- on-the-bench placeholder ---------- */
+  .pl-soon-list { max-width: 64ch; font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.6; opacity: 0.7; margin: 14px 0 0; }
+
+  @media (max-width: 720px) {
+    .np-row { align-items: flex-start; }
+    .np-next { margin-left: 0; }
+  }
+</style>
+
+<script>
+  // ---- ELEMENT 01: next-page scroller ----
+  (function () {
+    const np = document.querySelector('[data-np]');
+    if (!np) return;
+    const section = np.closest('.pl-el') || np;
+    const hVal = document.querySelector('[data-np-hval]');
+    const wVal = document.querySelector('[data-np-wval]');
+
+    // Fill tracks how far the element's section has travelled through the viewport.
+    const LIME = '#c8ff00';
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const r = section.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const p = (vh - r.top) / (vh + r.height);
+      np.style.setProperty('--np-progress', String(Math.max(0, Math.min(1, p))));
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll, { passive: true });
+    update();
+
+    // Dial controls
+    const hRange = document.querySelector('[data-np-h]');
+    hRange && hRange.addEventListener('input', () => { np.style.setProperty('--np-h', hRange.value + 'px'); if (hVal) hVal.textContent = hRange.value; });
+    const wRange = document.querySelector('[data-np-w]');
+    wRange && wRange.addEventListener('input', () => { np.style.setProperty('--np-w', wRange.value + 'px'); if (wVal) wVal.textContent = wRange.value; });
+
+    document.querySelectorAll('[data-np-fillc]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const v = btn.getAttribute('data-np-fillc');
+        np.style.setProperty('--np-fill-color', v === 'lime' ? LIME : v === 'fg' ? 'currentColor' : 'var(--accent)');
+        document.querySelectorAll('[data-np-fillc]').forEach((b) => b.classList.toggle('on', b === btn));
+      });
+    });
+    const keep = document.querySelector('[data-np-togglekeep]');
+    keep && keep.addEventListener('change', () => np.classList.toggle('np--nokeep', !keep.checked));
+    const sec = document.querySelector('[data-np-togglesection]');
+    sec && sec.addEventListener('change', () => np.classList.toggle('np--nosection', !sec.checked));
+  })();
+</script>
