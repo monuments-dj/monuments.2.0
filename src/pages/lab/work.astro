@@ -1,0 +1,190 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// === WORK LANDING V2 — /lab/work ===
+// The portal mechanic measured off exoape /work (REFERENCES.md motion map),
+// built our way: each project is a centered card that GROWS toward full-bleed
+// as you scroll into it, title overlaid, then the next portal slides up over
+// it. Persistent per-portal counter, index grid escape hatch at the end.
+
+const projects = [
+  { slug: 'sony-this-moment',   brand: 'Sony',               title: 'This Moment',      role: 'Creative direction', year: '2024', img: '/case-studies/sony-this-moment/gallery/tm-01.jpg' },
+  { slug: 'blue-cross',         brand: 'Blue Cross of Idaho', title: 'Built for life',  role: 'Creative direction', year: '2020 – 2024', img: '/case-studies/blue-cross/gallery/bci-02.jpg' },
+  { slug: 'sony-xperia-summer', brand: 'Sony Xperia',        title: 'Chase the sun',    role: 'Direction · stills', year: '2023', img: '/case-studies/sony-xperia-summer/gallery/xp-01.jpg' },
+  { slug: 'turnstile',          brand: 'Turnstile',          title: 'Built to be heard', role: 'Brand · campaign',  year: '2023', img: '/case-studies/turnstile/bts/bts-01.jpg' },
+  { slug: 'sony-flow-state',    brand: 'Sony',               title: 'Flow State',       role: 'Creative direction', year: '2023', img: '/case-studies/sony-flow-state/gallery/fs-01.jpg' },
+  { slug: 'flashpoint',         brand: 'Flashpoint',         title: 'Shape the light',  role: 'Creative direction', year: '2022', img: '/case-studies/flashpoint/gallery/fp-01.jpg' },
+  { slug: 'waffle-me-up',       brand: 'Waffle Me Up',       title: 'Worth the wait',   role: 'Brand · content',   year: '2023', img: '/case-studies/waffle-me-up/gallery/wmu-01.jpg' },
+  { slug: 'clothing-merch',     brand: 'Clothing & Merch',   title: 'Built to be worn', role: 'Design · production', year: '2023', img: '/case-studies/clothing-merch/gallery/cm-01.jpg' },
+];
+---
+<Base title="WORK — monuments">
+  <main class="wp2">
+
+    <!-- HEADER -->
+    <header class="wp2-head">
+      <p class="wp2-eyebrow fade">Selected work</p>
+      <h1 class="wp2-h1 fade">The work does <em>the talking.</em></h1>
+      <a class="wp2-index-link fade" href="#index">Index <span aria-hidden="true">↓</span></a>
+    </header>
+
+    <!-- PORTALS -->
+    {projects.map((p, i) => (
+      <section class="wp2-portal" data-portal style={`z-index:${i + 2}`}>
+        <div class="wp2-stage">
+          <a class="wp2-card" href={`/work/${p.slug}`} data-card>
+            <img src={p.img} alt={`${p.brand} — ${p.title}`} loading={i < 2 ? 'eager' : 'lazy'} data-pimg />
+            <span class="wp2-scrim" aria-hidden="true"></span>
+            <span class="wp2-titlerow">
+              <span class="wp2-brand">{p.brand}</span>
+              <span class="wp2-title">{p.title}</span>
+              <span class="wp2-meta">{p.role} · {p.year}</span>
+            </span>
+          </a>
+          <span class="wp2-count" aria-hidden="true">{String(i + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span>
+        </div>
+      </section>
+    ))}
+
+    <!-- INDEX + CTA ride over the last portal -->
+    <div class="wp2-after" id="index">
+      <section class="wp2-indexsec">
+        <p class="wp2-eyebrow fade">Index</p>
+        <ul class="wp2-list">
+          {projects.map((p, i) => (
+            <li class="fade">
+              <a class="wp2-row" href={`/work/${p.slug}`}>
+                <span class="wp2-row-n">{String(i + 1).padStart(2, '0')}</span>
+                <span class="wp2-row-t">{p.brand} <em>{p.title}</em></span>
+                <img class="wp2-row-img" src={p.img} alt="" loading="lazy" aria-hidden="true" />
+                <span class="wp2-row-meta">{p.year}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section class="wp2-end">
+        <p class="wp2-end-big split">Your brand could <em>live here.</em></p>
+        <a class="wp2-cta fade" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
+      </section>
+    </div>
+
+  </main>
+</Base>
+
+<style>
+  .wp2 { background: var(--black); color: var(--white); overflow-x: clip; }
+  .wp2-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(252,252,252,0.5); }
+
+  .wp2-head { position: relative; z-index: 1; min-height: 72vh; display: flex; flex-direction: column; justify-content: flex-end; max-width: var(--wrap); margin: 0 auto; padding: 160px var(--pad) 9vh; }
+  .wp2-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(44px, 7vw, 110px); line-height: 1; letter-spacing: -0.03em; max-width: 13ch; margin-top: 20px; }
+  .wp2-h1 em, .wp2-end-big em, .wp2-row-t em { font-style: italic; color: var(--accent); }
+  .wp2-index-link { margin-top: 30px; width: fit-content; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(252,252,252,0.6); text-decoration: none; }
+  .wp2-index-link:hover { color: var(--white); }
+
+  /* PORTALS — 240vh each: grow over the first 140vh, hold, hand off in the
+     last 100vh as the next portal slides over. */
+  .wp2-portal { position: relative; height: 240vh; }
+  .wp2-portal + .wp2-portal, .wp2-after { margin-top: -100vh; }
+  .wp2-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--black); }
+  .wp2-card { position: relative; display: block; width: 94vw; max-width: 1680px; aspect-ratio: 16/9.5; max-height: 88vh; overflow: hidden; border-radius: 6px; transform: scale(var(--gs, 0.52)); will-change: transform; text-decoration: none; color: var(--white); }
+  .wp2-card img { width: 100%; height: 114%; object-fit: cover; display: block; transform: translateY(var(--py, -7%)); will-change: transform; }
+  .wp2-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,9,12,0.72), transparent 52%); }
+  .wp2-titlerow { position: absolute; left: clamp(20px, 3.4vw, 54px); right: clamp(20px, 3.4vw, 54px); bottom: clamp(20px, 3.2vw, 48px); display: flex; flex-direction: column; gap: 6px; opacity: var(--to, 0); transform: translateY(calc((1 - var(--to, 0)) * 26px)); will-change: opacity, transform; }
+  .wp2-brand { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.75; }
+  .wp2-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 4.6vw, 76px); line-height: 1; letter-spacing: -0.03em; }
+  .wp2-meta { font-size: 13px; font-weight: 300; opacity: 0.7; margin-top: 6px; }
+  .wp2-count { position: absolute; right: var(--pad); bottom: 4.5vh; font-size: 12px; letter-spacing: 0.18em; color: rgba(252,252,252,0.55); }
+
+  /* INDEX */
+  .wp2-after { position: relative; z-index: 40; background: var(--black); }
+  .wp2-indexsec { max-width: var(--wrap); margin: 0 auto; padding: clamp(100px, 12vw, 160px) var(--pad) 40px; }
+  .wp2-list { list-style: none; margin: 30px 0 0; padding: 0; }
+  .wp2-row { position: relative; display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 24px; padding: 22px 6px; color: var(--white); text-decoration: none; border-top: 1px solid rgba(252,252,252,0.13); transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .wp2-list li:last-child .wp2-row { border-bottom: 1px solid rgba(252,252,252,0.13); }
+  .wp2-row:hover { padding-left: 20px; }
+  .wp2-row-n { font-size: 12px; letter-spacing: 0.18em; color: rgba(252,252,252,0.45); }
+  .wp2-row-t { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(20px, 2.3vw, 32px); letter-spacing: -0.02em; }
+  .wp2-row-img { position: absolute; right: 120px; top: 50%; width: 200px; aspect-ratio: 3/2; object-fit: cover; border-radius: 3px; transform: translateY(-50%) scale(0.92); opacity: 0; transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1); pointer-events: none; z-index: 2; }
+  .wp2-row:hover .wp2-row-img { opacity: 1; transform: translateY(-50%) scale(1) rotate(-1.5deg); }
+  .wp2-row-meta { font-size: 13px; color: rgba(252,252,252,0.5); }
+
+  .wp2-end { min-height: 56vh; display: flex; flex-direction: column; gap: 40px; align-items: center; justify-content: center; text-align: center; padding: 60px var(--pad) 100px; }
+  .wp2-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5vw, 72px); letter-spacing: -0.025em; line-height: 1.08; }
+  .wp2-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); background: var(--white); padding: 18px 30px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease; }
+  .wp2-cta:hover { gap: 18px; transform: translateY(-2px); }
+
+  .wp2 :global(.split .w) { display: inline-block; overflow: hidden; vertical-align: top; }
+  .wp2 :global(.split .wi) { display: inline-block; transform: translateY(115%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .wp2 :global(.split.on .wi) { transform: none; }
+
+  @media (max-width: 820px) {
+    .wp2-card { width: 92vw; aspect-ratio: 3/3.6; }
+    .wp2-row-img { display: none; }
+    .wp2-row { grid-template-columns: 40px 1fr auto; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wp2-portal { height: auto; }
+    .wp2-portal + .wp2-portal, .wp2-after { margin-top: 0; }
+    .wp2-stage { position: static; height: auto; padding: 8vh 0; }
+    .wp2-card { transform: none; }
+    .wp2-titlerow { opacity: 1; transform: none; }
+    .wp2 :global(.split .wi) { transform: none !important; transition: none !important; }
+  }
+</style>
+
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+  const phase = (p: number, a: number, b: number) => clamp01((p - a) / (b - a));
+
+  // split util for the closer
+  const splitWords = (root: Node, counter: { n: number }) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1) splitWords(node, counter);
+    });
+  };
+  document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); } }), { threshold: 0.35 });
+  document.querySelectorAll('.split').forEach((el) => io.observe(el));
+
+  // PORTAL engine: grow 0→0.55, title 0.2→0.45, inner image drifts all the way.
+  const portals = [...document.querySelectorAll('[data-portal]')] as HTMLElement[];
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      portals.forEach((portal) => {
+        const r = portal.getBoundingClientRect();
+        if (r.bottom < -innerHeight || r.top > innerHeight * 2) return;
+        const p = clamp01(-r.top / (portal.offsetHeight - innerHeight * 2));
+        const card = portal.querySelector('[data-card]') as HTMLElement;
+        const img = portal.querySelector('[data-pimg]') as HTMLElement;
+        const grow = phase(p, 0, 0.55);
+        const ease = 1 - Math.pow(1 - grow, 3);
+        card.style.setProperty('--gs', String(0.52 + ease * 0.48));
+        card.style.setProperty('--to', String(phase(p, 0.18, 0.42)));
+        if (img) img.style.setProperty('--py', `${-7 + p * 7}%`);
+      });
+      ticking = false;
+    });
+  };
+  if (!reduced) {
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>
