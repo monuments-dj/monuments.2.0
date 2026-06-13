@@ -240,14 +240,20 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
 
   /* DEPLOY fold-and-fly: once the section is done, the Deploy card folds into a
      paper airplane (clip-path morph + content fades) and zips off the top-right. */
-  .ai-card.flyoff { pointer-events: none; animation: deployFold 1.5s cubic-bezier(0.5, 0, 0.2, 1) forwards; box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
-  .ai-card.flyoff > * { opacity: 0; transition: opacity 0.3s ease; }
+  .ai-card.flyoff { pointer-events: none; animation: deployFold 2.4s cubic-bezier(0.45, 0, 0.18, 1) forwards; box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    /* nose-to-tail crease so the folded card reads as paper, not a bird */
+    background-image: linear-gradient(to bottom, transparent calc(50% - 0.8px), rgb(var(--ink-rgb) / 0.18) calc(50% - 0.8px), rgb(var(--ink-rgb) / 0.18) calc(50% + 0.8px), transparent calc(50% + 0.8px)); }
+  .ai-card.flyoff > * { opacity: 0; transition: opacity 0.25s ease; }
+  /* Paper-airplane fold: the two FRONT corners collapse into a nose (right) +
+     a center notch (left); the two BACK corners stay, so it reads as a dart.
+     Same 4 vertices throughout so it folds cleanly instead of morphing wildly. */
   @keyframes deployFold {
-    0%   { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: rotate(var(--tilt)); }
-    24%  { clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 50%); transform: rotate(-3deg) scale(0.92); }
-    46%  { clip-path: polygon(2% 50%, 100% 6%, 56% 50%, 100% 94%); transform: rotate(-9deg) scale(0.6) translateY(-20px); }
-    62%  { clip-path: polygon(2% 50%, 100% 6%, 56% 50%, 100% 94%); transform: rotate(-2deg) scale(0.5) translate(-30px, 10px); }
-    100% { clip-path: polygon(2% 50%, 100% 6%, 56% 50%, 100% 94%); transform: translate(135vw, -70vh) rotate(22deg) scale(0.22); opacity: 0; }
+    0%   { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); transform: rotate(var(--tilt)); }
+    22%  { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); transform: rotate(var(--tilt)) scale(0.97); }
+    44%  { clip-path: polygon(0% 0%, 100% 24%, 58% 50%, 0% 100%); transform: rotate(-3deg) scale(0.8); }
+    60%  { clip-path: polygon(0% 0%, 100% 50%, 26% 50%, 0% 100%); transform: rotate(8deg) scale(0.56) translateY(-6px); }
+    72%  { clip-path: polygon(0% 0%, 100% 50%, 26% 50%, 0% 100%); transform: rotate(14deg) scale(0.48) translate(28px, -20px); }
+    100% { clip-path: polygon(0% 0%, 100% 50%, 26% 50%, 0% 100%); transform: translate(126vw, -92vh) rotate(24deg) scale(0.15); opacity: 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
