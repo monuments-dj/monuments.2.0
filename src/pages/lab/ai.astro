@@ -1,12 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-// === AI LAB — /lab/ai — direction 1 ===
-// The AI consulting page: audit → automate → deploy for non-technical service
-// businesses. References: tinywins (kinetic load intro), lusion about (tilted
-// service cards), exoape (dark cinematic pacing). See REFERENCES.md.
-// Copy = DJ's positioning (2026-06-12): $5k audit, "what are you leaving on
-// the table", the going-wild era framing. Plain-spoken voice, no em dashes.
+// === AI LAB — /lab/ai — direction 1, pinned-scene build ===
+// Audit → automate → deploy for non-technical service businesses.
+// Motion model = the measured reference laws (REFERENCES.md "motion map"):
+// pinned scenes, scroll-scrubbed + reversible composition, sheet-over handoffs,
+// media slower than type. Scenes: ERA (white, statement → WILD stamp cascade →
+// payoff) and QUESTIONS (black, two questions trading the stage).
+// Copy = DJ's positioning: $5k audit, going-wild era framing. Voice: studio "we",
+// plain-spoken, no em dashes, no buzzwords (see memory: monuments-copy).
 
 const services = [
   {
@@ -38,7 +40,7 @@ const services = [
   },
 ];
 
-// Work imagery for the proof strip (real campaign stills already in /public).
+// Directed campaign work for the proof strip (stills from campaigns we led).
 const proof = [
   '/case-studies/blue-cross/gallery/bci-02.jpg',
   '/case-studies/sony-this-moment/gallery/tm-09.jpg',
@@ -46,12 +48,11 @@ const proof = [
   '/case-studies/sony-this-moment/gallery/tm-05.jpg',
   '/case-studies/blue-cross/gallery/bci-13.jpg',
 ];
+const stamps = [0, 1, 2, 3, 4, 5, 6];
 ---
 <Base title="AI, without the overwhelm — monuments">
 
-  <!-- KINETIC LOAD INTRO — monuments take on the tinywins expand/multiply.
-       The word stacks and multiplies downward, holds a beat, then the curtain
-       lifts into the page. Skipped entirely under prefers-reduced-motion. -->
+  <!-- KINETIC LOAD INTRO — stacks and multiplies, curtain lifts into the page. -->
   <div class="ai-intro" id="aiIntro" aria-hidden="true">
     <div class="ai-intro-stack">
       <span class="ai-intro-eyebrow">the tools just went</span>
@@ -73,77 +74,92 @@ const proof = [
       <a class="ai-cta fade" href="/contact">Book an audit <span aria-hidden="true">↗</span></a>
     </header>
 
-    <!-- THE ERA — story-first framing -->
-    <section class="ai-era">
-      <div class="ai-era-inner">
-        <p class="ai-era-big split">For twenty years, this stuff was gatekept. Custom software cost six figures. Good design needed a dev team. Automation was for companies with an IT department.</p>
-        <p class="ai-era-big ai-era-accent split">That era just ended.</p>
-        <p class="ai-era-body fade">New tools ship every week, and nobody sent the memo. It is a lot to take in, even for us, and this is our job. That is the point. You should not have to keep up with all of it. That is what we are for.</p>
+    <!-- SCENE 1 — THE ERA (pinned, white). Scroll composes:
+         statement lights word by word → exits up → "That era just ended." lands
+         over a scroll-driven WILD stamp cascade → payoff line. Reversible. -->
+    <section class="scn scn-era" data-scene="era">
+      <div class="scn-stage scn-stage-era">
+        <p class="era-s1 scrubwords">For twenty years, this stuff was gatekept. Custom software cost six figures. Good design needed a dev team. Automation was for companies with an IT department.</p>
+        <div class="era-s2">
+          <div class="wild-field" aria-hidden="true">
+            {stamps.map((i) => (
+              <span class="wild-stamp" style={`--s:${i}`}>WILD</span>
+            ))}
+          </div>
+          <p class="era-ended">That era just ended.</p>
+        </div>
+        <p class="era-s3 ai-era-body">New tools ship every week, and nobody sent the memo. It is a lot to take in, even for us, and this is our job. That is the point. You should not have to keep up with all of it. That is what we are for.</p>
       </div>
     </section>
 
-    <!-- THE QUESTIONS — scroll moments, one per viewport -->
-    <section class="ai-q" data-q>
-      <h2 class="ai-q-text split">What are you <em>leaving on the table?</em></h2>
-    </section>
-    <section class="ai-q" data-q>
-      <h2 class="ai-q-text split">Is your brand <em>getting left behind?</em></h2>
-    </section>
-
-    <!-- SERVICES — tilted cards (lusion-pattern, monuments-flavored) -->
-    <section class="ai-sv">
-      <div class="ai-sv-head fade">
-        <p class="ai-eyebrow">How it works</p>
-        <h2 class="ai-sv-h">Audit. Automate. Deploy.</h2>
-      </div>
-      <div class="ai-cards">
-        {services.map((s) => (
-          <article class="ai-card fade" style={`--tilt:${s.tilt}deg`}>
-            <div class="ai-card-top">
-              <span class="ai-card-n">{s.n}</span>
-              <h3 class="ai-card-t">{s.title}</h3>
-              {s.price && <span class="ai-card-price">{s.price}</span>}
-            </div>
-            <p class="ai-card-lede">{s.lede}</p>
-            <ul class="ai-card-list">
-              {s.items.map((i) => <li>{i}</li>)}
-            </ul>
-            <span class="ai-card-mirror" aria-hidden="true">{s.title}</span>
-          </article>
-        ))}
+    <!-- SCENE 2 — THE QUESTIONS (pinned, black). Q1 lands word by word, holds,
+         exits up while Q2 rises from below. Slides in OVER the era stage. -->
+    <section class="scn scn-q" data-scene="q">
+      <div class="scn-stage scn-stage-q">
+        <h2 class="q q1">What are you <em>leaving on the table?</em></h2>
+        <h2 class="q q2">Is your brand <em>getting left behind?</em></h2>
       </div>
     </section>
 
-    <!-- WHO IT'S FOR -->
-    <section class="ai-who">
-      <div class="ai-who-inner">
-        <p class="ai-eyebrow fade">Who this is for</p>
-        <p class="ai-who-big split">CPAs. Agencies. Service businesses. You are great at the work. The tech is the problem.</p>
-        <p class="ai-era-body fade">Our job is creative direction: take in a huge amount of input, filter it, and make the call. That is exactly what this moment needs. We bring your brand into the modern age without burying you in tools you will never open again.</p>
-      </div>
-    </section>
+    <!-- Everything after the scenes rides above them (sheet-over handoff). -->
+    <div class="ai-after">
 
-    <!-- PROOF — this site is the demo -->
-    <section class="ai-proof">
-      <div class="ai-proof-head">
-        <p class="ai-eyebrow fade">Proof, not promises</p>
-        <h2 class="ai-proof-h split">This site is the demo.</h2>
-        <p class="ai-era-body fade">Version one of monuments.cc took six months by hand. The site you are on now is being rebuilt with AI in a fraction of that, and it is better. Same eye. Faster hands. That is what we are offering.</p>
-      </div>
-      <div class="ai-strip" data-strip>
-        {proof.map((src) => (
-          <img src={src} alt="Monuments campaign work" loading="lazy" />
-        ))}
-      </div>
-      <p class="ai-strip-cap fade">Sony. Blue Cross. Intel. Big-brand strategy, done with the old tools. Imagine the new ones.</p>
-    </section>
+      <!-- SERVICES — tilted cards (lusion-pattern, monuments-flavored) -->
+      <section class="ai-sv">
+        <div class="ai-sv-head fade">
+          <p class="ai-eyebrow">How it works</p>
+          <h2 class="ai-sv-h">Audit. Automate. Deploy.</h2>
+        </div>
+        <div class="ai-cards">
+          {services.map((s) => (
+            <article class="ai-card fade" style={`--tilt:${s.tilt}deg`}>
+              <div class="ai-card-top">
+                <span class="ai-card-n">{s.n}</span>
+                <h3 class="ai-card-t">{s.title}</h3>
+                {s.price && <span class="ai-card-price">{s.price}</span>}
+              </div>
+              <p class="ai-card-lede">{s.lede}</p>
+              <ul class="ai-card-list">
+                {s.items.map((i) => <li>{i}</li>)}
+              </ul>
+              <span class="ai-card-mirror" aria-hidden="true">{s.title}</span>
+            </article>
+          ))}
+        </div>
+      </section>
 
-    <!-- CTA -->
-    <section class="ai-end">
-      <p class="ai-end-big split">Let's see what you're leaving on the table.</p>
-      <a class="ai-cta ai-cta-big fade" href="/contact">Book the audit <span aria-hidden="true">↗</span></a>
-      <p class="ai-end-small fade">$5,000, two weeks, plain English. If there is nothing there, we will tell you.</p>
-    </section>
+      <!-- WHO IT'S FOR -->
+      <section class="ai-who">
+        <div class="ai-who-inner">
+          <p class="ai-eyebrow fade">Who this is for</p>
+          <p class="ai-who-big split">CPAs. Agencies. Service businesses. You are great at the work. The tech is the problem.</p>
+          <p class="ai-era-body fade">Our job is creative direction: take in a huge amount of input, filter it, and make the call. That is exactly what this moment needs. We bring your brand into the modern age without burying you in tools you will never open again.</p>
+        </div>
+      </section>
+
+      <!-- PROOF — this site is the demo -->
+      <section class="ai-proof">
+        <div class="ai-proof-head">
+          <p class="ai-eyebrow fade">Proof, not promises</p>
+          <h2 class="ai-proof-h split">This site is the demo.</h2>
+          <p class="ai-era-body fade">Version one of monuments.cc took six months by hand. The site you are on now is being rebuilt with AI in a fraction of that, and it is better. Same eye. Faster hands. That is what we are offering.</p>
+        </div>
+        <div class="ai-strip" data-strip>
+          {proof.map((src) => (
+            <img src={src} alt="Monuments campaign work" loading="lazy" />
+          ))}
+        </div>
+        <p class="ai-strip-cap fade">Sony. Blue Cross. Intel. Big-brand campaigns, directed with the old tools. Imagine the new ones.</p>
+      </section>
+
+      <!-- CTA -->
+      <section class="ai-end">
+        <p class="ai-end-big split">Let's see what you're leaving on the table.</p>
+        <a class="ai-cta ai-cta-big fade" href="/contact">Book the audit <span aria-hidden="true">↗</span></a>
+        <p class="ai-end-small fade">$5,000, two weeks, plain English. If there is nothing there, we will tell you.</p>
+      </section>
+
+    </div>
 
   </main>
 </Base>
@@ -151,15 +167,6 @@ const proof = [
 <style>
   .ai-page { background: var(--black); color: var(--white); overflow-x: clip; }
   .ai-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(252,252,252,0.45); }
-
-  /* SPLIT — word-mask reveal for display copy (the exoape/tinywins "parallax
-     language"): each word rises out of its own clipped line on scroll-in. */
-  .ai-page :global(.split .w) { display: inline-block; overflow: hidden; vertical-align: top; }
-  .ai-page :global(.split .wi) { display: inline-block; transform: translateY(115%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); will-change: transform; }
-  .ai-page :global(.split.on .wi) { transform: none; }
-  @media (prefers-reduced-motion: reduce) {
-    .ai-page :global(.split .wi) { transform: none; transition: none; }
-  }
 
   /* INTRO */
   .ai-intro { position: fixed; inset: 0; z-index: 3000; background: var(--white); display: flex; align-items: center; justify-content: center; transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1); }
@@ -173,34 +180,55 @@ const proof = [
   @keyframes aiFadeIn { to { opacity: 1; } }
   @media (prefers-reduced-motion: reduce) { .ai-intro { display: none; } }
 
+  /* SPLIT — word-mask entrance for non-scene display copy */
+  .ai-page :global(.split .w) { display: inline-block; overflow: hidden; vertical-align: top; }
+  .ai-page :global(.split .wi) { display: inline-block; transform: translateY(115%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); will-change: transform; }
+  .ai-page :global(.split.on .wi) { transform: none; }
+
   /* HERO */
   .ai-hero { min-height: 86vh; display: flex; flex-direction: column; justify-content: center; max-width: var(--wrap); margin: 0 auto; padding: 160px var(--pad) 80px; }
-  .ai-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(44px, 7.2vw, 104px); line-height: 1.02; letter-spacing: -0.03em; max-width: 14ch; margin-top: 26px; }
+  .ai-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(44px, 7.2vw, 104px); line-height: 1.02; letter-spacing: -0.03em; max-width: 14ch; margin-top: 26px; transition: transform 0.3s ease-out; will-change: transform; }
   .ai-h1 em { font-style: italic; color: var(--accent); }
   .ai-lede { margin-top: 34px; max-width: 520px; font-size: 16px; line-height: 1.7; font-weight: 300; color: rgba(252,252,252,0.78); }
   .ai-cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 44px; width: fit-content; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); background: var(--white); padding: 18px 30px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease; }
   .ai-cta:hover { gap: 18px; transform: translateY(-2px); }
 
-  /* ERA */
-  .ai-era { background: var(--white); color: #141519; }
-  .ai-era-inner { max-width: var(--wrap); margin: 0 auto; padding: clamp(110px, 14vw, 190px) var(--pad); }
-  .ai-era-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(26px, 3.4vw, 48px); line-height: 1.18; letter-spacing: -0.02em; max-width: 24ch; }
-  .ai-era-big + .ai-era-big { margin-top: 1.2em; }
-  .ai-era-accent { color: #e0322d; font-weight: 500; }
-  .ai-era-body { margin-top: 40px; max-width: 480px; font-size: 16px; line-height: 1.75; font-weight: 300; color: rgba(20,21,25,0.75); }
-  .ai-era .ai-era-body { color: rgba(20,21,25,0.75); }
+  /* ===== PINNED SCENES ===== */
+  .scn { position: relative; }
+  .scn-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
 
-  /* QUESTIONS */
-  .ai-q { min-height: 78vh; display: flex; align-items: center; justify-content: center; padding: 0 var(--pad); }
-  .ai-q-text { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(38px, 6vw, 88px); line-height: 1.05; letter-spacing: -0.025em; text-align: center; max-width: 16ch; will-change: transform; }
-  .ai-q-text em { font-style: italic; color: var(--accent); display: inline-block; }
+  /* Scene 1 — ERA. 340vh parent: 140vh of scrub + 100vh handoff window. */
+  .scn-era { height: 340vh; z-index: 1; }
+  .scn-stage-era { background: var(--white); color: #141519; }
+  .era-s1 { position: absolute; max-width: 21ch; padding: 0 var(--pad); font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 52px); line-height: 1.16; letter-spacing: -0.02em; text-align: center; will-change: transform, opacity; }
+  .era-s1 :global(.wi) { transform: none !important; transition: opacity 0.18s linear; opacity: 0.14; }
+  .era-s2 { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; will-change: opacity; }
+  .era-ended { position: relative; z-index: 2; font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(44px, 6.5vw, 110px); letter-spacing: -0.03em; color: #e0322d; will-change: transform; text-shadow: 0 0 24px rgba(252,252,252,0.85); }
+  .wild-field { position: absolute; inset: 0; z-index: 1; }
+  .wild-stamp { position: absolute; left: calc(6% + var(--s) * 12%); top: calc(10% + var(--s) * 11%); font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(40px, 5vw, 84px); letter-spacing: -0.03em; color: rgba(20,21,25,0.08); transform: scale(0.7) rotate(calc((var(--s) - 3) * 1.6deg)); opacity: 0; transition: opacity 0.22s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+  .wild-stamp:nth-child(odd) { color: rgba(224,50,45,0.13); }
+  .wild-stamp.on { opacity: 1; transform: scale(1) rotate(calc((var(--s) - 3) * 1.6deg)); }
+  .era-s3 { position: absolute; bottom: 12vh; left: 50%; transform: translateX(-50%); max-width: 560px; padding: 0 var(--pad); text-align: center; opacity: 0; will-change: opacity; }
+  .ai-era-body { font-size: 16px; line-height: 1.75; font-weight: 300; color: rgba(20,21,25,0.75); }
+
+  /* Scene 2 — QUESTIONS. Slides over the era stage; services slides over this. */
+  .scn-q { height: 360vh; z-index: 2; margin-top: -100vh; }
+  .scn-stage-q { background: var(--black); }
+  .q { position: absolute; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(38px, 6vw, 88px); line-height: 1.05; letter-spacing: -0.025em; text-align: center; max-width: 16ch; padding: 0 var(--pad); will-change: transform, opacity; }
+  .q em { font-style: italic; color: var(--accent); }
+  .q :global(.w) { display: inline-block; overflow: hidden; vertical-align: top; }
+  .q :global(.wi) { display: inline-block; transform: translateY(115%); transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform; }
+  .q :global(.wi.on) { transform: none; }
+
+  /* Post-scene content rides OVER the pinned stages (sheet-over handoff). */
+  .ai-after { position: relative; z-index: 3; margin-top: -100vh; background: var(--black); }
 
   /* SERVICES */
   .ai-sv { max-width: var(--wrap); margin: 0 auto; padding: clamp(90px, 11vw, 150px) var(--pad); }
   .ai-sv-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(36px, 5vw, 72px); letter-spacing: -0.025em; margin-top: 18px; }
   .ai-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 2.6vw, 36px); margin-top: clamp(48px, 6vw, 80px); }
-  .ai-card { position: relative; background: var(--white); color: #141519; border-radius: 14px; padding: clamp(28px, 2.8vw, 42px); transform: rotate(var(--tilt)); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden; display: flex; flex-direction: column; min-height: 480px; }
-  .ai-card:hover { transform: rotate(0deg) translateY(-8px); }
+  .ai-card { position: relative; background: var(--white); color: #141519; border-radius: 14px; padding: clamp(28px, 2.8vw, 42px); transform: rotate(var(--tilt)); transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease; overflow: hidden; display: flex; flex-direction: column; min-height: 480px; will-change: transform; transform-style: preserve-3d; }
+  .ai-card:hover { box-shadow: 0 24px 60px rgba(0,0,0,0.35); }
   .ai-card-top { display: flex; align-items: baseline; gap: 14px; }
   .ai-card-n { font-size: 12px; letter-spacing: 0.18em; color: rgba(20,21,25,0.4); }
   .ai-card-t { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(26px, 2.6vw, 38px); letter-spacing: -0.02em; }
@@ -236,21 +264,34 @@ const proof = [
     .ai-cards { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
     .ai-card { min-height: 0; }
   }
+
+  /* Reduced motion: no pinning, no scrubbing; scenes read as plain sections. */
+  @media (prefers-reduced-motion: reduce) {
+    .ai-page :global(.split .wi), .q :global(.wi) { transform: none !important; transition: none !important; }
+    .scn { height: auto !important; margin-top: 0 !important; }
+    .scn-stage { position: static; height: auto; padding: 18vh var(--pad); flex-direction: column; gap: 8vh; }
+    .era-s1, .era-s3, .q { position: static; opacity: 1 !important; transform: none !important; }
+    .era-s1 :global(.wi) { opacity: 1 !important; }
+    .era-s2 { position: static; opacity: 1 !important; inset: auto; }
+    .wild-field { display: none; }
+    .ai-after { margin-top: 0; }
+  }
 </style>
 
 <script>
-  // --- Load intro: play once per visit, lift the curtain, clean up. ---
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = matchMedia('(pointer: fine)').matches;
+
+  // --- Load intro ---
   const intro = document.getElementById('aiIntro');
-  if (intro && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (intro && !reduced) {
     setTimeout(() => intro.classList.add('lift'), 1750);
     setTimeout(() => intro.classList.add('gone'), 2600);
   } else if (intro) {
     intro.classList.add('gone');
   }
 
-  // --- Split: wrap each word of display copy in a masked span, reveal on
-  //     scroll-in with a per-word stagger. Recurses into <em> so accent
-  //     words keep their styling. ---
+  // --- Word splitter (entrance .split + scene-driven .scrubwords/.q) ---
   const splitWords = (root, counter) => {
     [...root.childNodes].forEach((node) => {
       if (node.nodeType === 3) {
@@ -270,37 +311,129 @@ const proof = [
       }
     });
   };
-  const splits = [...document.querySelectorAll('.split')];
-  splits.forEach((el) => splitWords(el, { n: 0 }));
+  document.querySelectorAll('.split, .scrubwords, .q').forEach((el) => splitWords(el, { n: 0 }));
+
+  // Entrance reveals for .split only (scenes drive their own words).
   const splitIO = new IntersectionObserver((entries) => {
     entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('on'); splitIO.unobserve(e.target); } });
   }, { threshold: 0.35 });
-  splits.forEach((el) => splitIO.observe(el));
+  document.querySelectorAll('.split').forEach((el) => splitIO.observe(el));
 
-  // --- Question sections: gentle scroll parallax (text drifts against scroll). ---
-  const qs = [...document.querySelectorAll('[data-q] .ai-q-text')];
+  // --- Pinned-scene engine: progress = how far through the parent we've
+  //     scrolled, finishing one viewport early (that last 100vh is the
+  //     sheet-over handoff window). Everything below is driven by p, so it
+  //     scrubs forward AND backward. ---
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  const phase = (p, a, b) => clamp01((p - a) / (b - a));
+
+  const eraScene = document.querySelector('[data-scene="era"]');
+  const eraS1 = eraScene && eraScene.querySelector('.era-s1');
+  const eraS1Words = eraS1 ? [...eraS1.querySelectorAll('.wi')] : [];
+  const eraS2 = eraScene && eraScene.querySelector('.era-s2');
+  const eraEnded = eraScene && eraScene.querySelector('.era-ended');
+  const eraStamps = eraScene ? [...eraScene.querySelectorAll('.wild-stamp')] : [];
+  const eraS3 = eraScene && eraScene.querySelector('.era-s3');
+
+  const qScene = document.querySelector('[data-scene="q"]');
+  const q1 = qScene && qScene.querySelector('.q1');
+  const q2 = qScene && qScene.querySelector('.q2');
+  const q1Words = q1 ? [...q1.querySelectorAll('.wi')] : [];
+  const q2Words = q2 ? [...q2.querySelectorAll('.wi')] : [];
+
   const strip = document.querySelector('[data-strip]');
+  const stripImgs = strip ? [...strip.querySelectorAll('img')] : [];
+
+  const sceneP = (el) => {
+    const r = el.getBoundingClientRect();
+    return clamp01(-r.top / (el.offsetHeight - innerHeight * 2));
+  };
+
   let ticking = false;
   const onScroll = () => {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
-      const vh = innerHeight;
-      qs.forEach((el) => {
-        const r = el.getBoundingClientRect();
-        const p = (r.top + r.height / 2 - vh / 2) / vh; // -0.5..0.5 around center
-        el.style.transform = `translateY(${p * -60}px)`;
-      });
+      // SCENE 1: ERA
+      if (eraScene) {
+        const p = sceneP(eraScene);
+        // s1: words light up over p 0.02-0.30, block exits up 0.36-0.52
+        const lit = phase(p, 0.02, 0.3) * eraS1Words.length * 1.1;
+        eraS1Words.forEach((w, i) => { w.style.opacity = Math.max(0.14, Math.min(1, lit - i)); });
+        const exit = phase(p, 0.36, 0.52);
+        eraS1.style.opacity = String(1 - exit);
+        eraS1.style.transform = `translateY(${exit * -90}px)`;
+        // s2: "ended" lands 0.40-0.55; stamps cascade one by one 0.46-0.78
+        const land = phase(p, 0.4, 0.55);
+        eraS2.style.opacity = String(land);
+        eraEnded.style.transform = `scale(${0.92 + land * 0.08})`;
+        const k = Math.floor(phase(p, 0.46, 0.78) * (eraStamps.length + 0.99));
+        eraStamps.forEach((s, i) => s.classList.toggle('on', i < k));
+        // s3: payoff line 0.80-0.95
+        eraS3.style.opacity = String(phase(p, 0.8, 0.95));
+      }
+      // SCENE 2: QUESTIONS
+      if (qScene) {
+        const p = sceneP(qScene);
+        const q1in = phase(p, 0.04, 0.28);
+        q1Words.forEach((w, i) => w.classList.toggle('on', q1in * q1Words.length * 1.15 > i));
+        const q1out = phase(p, 0.46, 0.62);
+        q1.style.transform = `translateY(${q1out * -55}vh)`;
+        q1.style.opacity = String(1 - q1out);
+        const q2in = phase(p, 0.52, 0.78);
+        q2.style.transform = `translateY(${(1 - q2in) * 45}vh)`;
+        q2.style.opacity = String(Math.min(1, q2in * 2));
+        q2Words.forEach((w, i) => w.classList.toggle('on', phase(p, 0.56, 0.8) * q2Words.length * 1.15 > i));
+      }
+      // Proof strip: layered drift, each frame at its own rate.
       if (strip) {
         const r = strip.getBoundingClientRect();
-        const p = Math.min(1, Math.max(0, 1 - r.top / vh));
-        strip.style.transform = `translateX(${p * -120}px)`;
+        const sp = Math.min(1.2, Math.max(0, 1 - r.top / innerHeight));
+        stripImgs.forEach((img, i) => { img.style.transform = `translateX(${sp * -(90 + i * 46)}px)`; });
       }
       ticking = false;
     });
   };
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (!reduced) {
     addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+  }
+
+  // --- Pointer-reactive layer (desktop only) ---
+  if (!reduced && finePointer) {
+    document.querySelectorAll('.ai-card').forEach((card) => {
+      const base = card.style.getPropertyValue('--tilt') || '0deg';
+      card.addEventListener('pointerenter', () => {
+        card.style.transition = 'transform 0.12s ease-out, box-shadow 0.45s ease';
+      });
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(900px) rotateY(${px * 7}deg) rotateX(${py * -7}deg) translateY(-6px)`;
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.transition = 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease';
+        card.style.transform = `rotate(${base})`;
+      });
+    });
+    document.querySelectorAll('.ai-cta').forEach((cta) => {
+      cta.addEventListener('pointermove', (e) => {
+        const r = cta.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top + r.height / 2);
+        cta.style.transform = `translate(${dx * 0.18}px, ${dy * 0.3}px)`;
+      });
+      cta.addEventListener('pointerleave', () => { cta.style.transform = ''; });
+    });
+    const h1 = document.querySelector('.ai-h1');
+    const hero = document.querySelector('.ai-hero');
+    if (h1 && hero) {
+      hero.addEventListener('pointermove', (e) => {
+        const px = e.clientX / innerWidth - 0.5;
+        const py = e.clientY / innerHeight - 0.5;
+        h1.style.transform = `translate(${px * -14}px, ${py * -10}px)`;
+      });
+      hero.addEventListener('pointerleave', () => { h1.style.transform = ''; });
+    }
   }
 </script>
