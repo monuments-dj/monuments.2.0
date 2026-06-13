@@ -72,23 +72,53 @@ const colC = ['/gallery/full/p-040.jpg', '/gallery/full/p-070.jpg', '/gallery/fu
     <!-- BRAND TICKER -->
     <BrandTicker />
 
-    <!-- STATS — light band; "Billions" leads, three supporting stats below -->
+    <!-- STATS — light band, 4-up; numbers tick up on scroll -->
     <section class="ab3-stats">
       <div class="ab3-stats-inner">
-        <div class="ab3-stat-lead fade">
-          <span class="ab3-stat-lead-n">{stats[0].n}</span>
-          <span class="ab3-stat-lead-l">{stats[0].l}</span>
-        </div>
-        <div class="ab3-stats-row">
-          {stats.slice(1).map((s) => (
-            <div class="ab3-stat fade">
-              <span class="ab3-stat-n">{s.n}</span>
+        <div class="ab3-stats-grid">
+          {stats.map((s, i) => (
+            <div class={`ab3-stat fade ${i === 0 ? 'lead' : ''}`}>
+              <span class="ab3-stat-n" data-count>{s.n}</span>
               <span class="ab3-stat-l">{s.l}</span>
             </div>
           ))}
         </div>
       </div>
     </section>
+
+    <script>
+      // Stats: numbers tick up from 0 when the row scrolls into view. Non-numeric
+      // values (like "Billions") are left as-is. Reduced-motion shows finals.
+      (function () {
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const nums = [...document.querySelectorAll('.ab3-stat-n[data-count]')];
+        nums.forEach((el) => {
+          const m = el.textContent.trim().match(/^(\d+)(\D*)$/);
+          if (!m) { el.dataset.done = '1'; return; }     // "Billions" etc.
+          el.dataset.target = m[1]; el.dataset.suffix = m[2] || '';
+          if (!reduced) el.textContent = '0' + (m[2] || '');
+        });
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            const el = e.target; io.unobserve(el);
+            if (el.dataset.done || reduced || el.dataset.target === undefined) return;
+            const target = parseInt(el.dataset.target, 10);
+            const suffix = el.dataset.suffix || '';
+            const dur = 1100; let t0 = 0;
+            const tick = (now) => {
+              if (!t0) t0 = now;
+              const p = Math.min(1, (now - t0) / dur);
+              const eased = 1 - Math.pow(1 - p, 3);
+              el.textContent = Math.round(eased * target) + (p >= 1 ? suffix : '');
+              if (p < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+          });
+        }, { threshold: 0.6 });
+        nums.forEach((el) => io.observe(el));
+      })();
+    </script>
 
     <!-- WHO (paper chapter) -->
     <section class="ab3-who">
@@ -223,16 +253,16 @@ const colC = ['/gallery/full/p-040.jpg', '/gallery/full/p-070.jpg', '/gallery/fu
   .ab3-scrollcue i { width: 1px; height: 34px; background: linear-gradient(var(--accent), transparent); animation: cue 1.8s ease-in-out infinite; }
   @keyframes cue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; transform-origin: top; } 50% { transform: scaleY(1); opacity: 1; transform-origin: top; } }
 
-  /* ---------- STATS (light band; Billions leads) ---------- */
+  /* ---------- STATS (light band, 4-up; numbers tick in) ---------- */
   .ab3-stats { background: var(--paper); color: var(--ink); }
-  .ab3-stats-inner { max-width: var(--wrap); margin: 0 auto; padding: clamp(80px, 10vw, 130px) var(--pad); }
-  .ab3-stat-lead { display: flex; flex-direction: column; gap: 16px; padding-bottom: clamp(40px, 5vw, 64px); border-bottom: 1px solid rgb(var(--ink-rgb) / 0.14); }
-  .ab3-stat-lead-n { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(60px, 12vw, 184px); line-height: 0.9; letter-spacing: -0.04em; color: var(--accent); }
-  .ab3-stat-lead-l { font-size: clamp(15px, 1.6vw, 20px); font-weight: 300; line-height: 1.5; color: rgb(var(--ink-rgb) / 0.72); max-width: 42ch; }
-  .ab3-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 56px); margin-top: clamp(40px, 5vw, 64px); }
-  .ab3-stat { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid rgb(var(--ink-rgb) / 0.16); padding-top: 18px; }
-  .ab3-stat-n { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 4.4vw, 64px); letter-spacing: -0.03em; line-height: 1; color: var(--ink); }
-  .ab3-stat-l { font-size: clamp(12.5px, 1vw, 14px); font-weight: 300; line-height: 1.5; color: rgb(var(--ink-rgb) / 0.62); }
+  .ab3-stats-inner { max-width: var(--wrap); margin: 0 auto; padding: clamp(72px, 9vw, 120px) var(--pad); }
+  .ab3-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 48px); }
+  .ab3-stat { display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgb(var(--ink-rgb) / 0.16); padding-top: 18px; }
+  .ab3-stat-n { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(32px, 4vw, 58px); letter-spacing: -0.03em; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .ab3-stat.lead { border-top-color: var(--accent); }
+  .ab3-stat.lead .ab3-stat-n { color: var(--accent); }
+  .ab3-stat-l { font-size: clamp(12.5px, 1vw, 14px); font-weight: 300; line-height: 1.5; color: rgb(var(--ink-rgb) / 0.62); max-width: 24ch; }
+  @media (max-width: 760px) { .ab3-stats-grid { grid-template-columns: 1fr 1fr; gap: 30px; } }
 
   /* ---------- WHO ---------- */
   .ab3-who { background: var(--paper); color: var(--ink); padding: clamp(100px, 13vw, 170px) 0; }
