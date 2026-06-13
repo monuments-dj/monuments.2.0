@@ -6,7 +6,7 @@
 // Default (no class on <html>) = "monument": warm cinematic dark + signature red.
 ---
 <div class="fx-grain" aria-hidden="true"></div>
-<div class="fx-ring" aria-hidden="true"></div>
+<div class="fx-cur" aria-hidden="true"><span class="fx-cur-label"></span></div>
 
 <!-- Live color selector: bottom-left, one round swatch per preset -->
 <div class="fx-theme" role="group" aria-label="Color theme">
@@ -76,9 +76,21 @@
   /* ===================================================================
      CURSOR RING — trailing accent ring, swells over interactive elements
      =================================================================== */
-  .fx-ring { position: fixed; left: 0; top: 0; z-index: 2500; width: 34px; height: 34px; margin: -17px 0 0 -17px; border: 1.5px solid var(--accent); border-radius: 50%; pointer-events: none; opacity: 0; transform: scale(0.6); transition: opacity 0.3s ease; will-change: transform; }
-  .fx-ring.live { opacity: 1; }
-  .fx-ring.hot { border-color: var(--accent-2); }
+  /* Contextual cursor (exoape-style): a lagging circle that swaps to a labelled
+     disc — Scroll / View / Play / Drag / Swipe — over the right elements. */
+  .fx-cur { position: fixed; left: 0; top: 0; z-index: 2550; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; pointer-events: none; opacity: 0;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    background: var(--accent); border: 1.5px solid transparent;
+    transition: opacity .35s ease, background .3s ease, border-color .3s ease; will-change: transform; }
+  .fx-cur.live { opacity: 1; }
+  .fx-cur-label { font: 600 13px/1 'Inter', sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg); opacity: 0; transition: opacity .25s ease; }
+  /* over a link/button: hollow ring */
+  .fx-cur.hot { background: transparent; border-color: var(--fg); }
+  /* over a [data-cursor] target: translucent labelled disc */
+  .fx-cur.label { background: rgb(var(--ink-rgb) / 0.5); border-color: transparent; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+  .fx-cur.label .fx-cur-label { opacity: 1; }
+  /* hide the native pointer only while the custom cursor is active */
+  html.cur-on, html.cur-on * { cursor: none !important; }
 
   /* ===================================================================
      COLOR SELECTOR — fixed bottom-LEFT, above content, never blocks scroll
@@ -161,24 +173,40 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (fine && !reduced) {
-    const ring = document.querySelector('.fx-ring');
-    if (ring) {
-      let tx = innerWidth / 2, ty = innerHeight / 2, x = tx, y = ty, scale = 0.6, tScale = 1, raf = 0;
+    const cur = document.querySelector('.fx-cur');
+    const curLabel = cur && cur.querySelector('.fx-cur-label');
+    if (cur) {
+      document.documentElement.classList.add('cur-on');
+      // base ~12px dot (scale .125 of the 96px box), hover ring ~0.58, label disc = 1
+      let tx = innerWidth / 2, ty = innerHeight / 2, x = tx, y = ty, scale = 0.125, tScale = 0.125, raf = 0;
+      // Implicit context: elements get a label without per-page edits.
+      const labelFor = (el) => {
+        const explicit = el.closest('[data-cursor]');
+        if (explicit) return explicit.getAttribute('data-cursor');
+        if (el.closest('[data-patch], .ct2-patch')) return 'Drag';
+        if (el.closest('[data-swipe], [class*="track"]')) return 'Swipe';
+        if (el.closest('.showreel, [class*="reel-frame"]')) return 'Play';
+        if (el.closest('[class*="scrollcue"], [class*="scroll-cue"], [class*="scrollCue"]')) return 'Scroll';
+        if (el.closest('a[href^="/work/"], [data-card]')) return 'View';
+        return null;
+      };
       const tick = () => {
-        x += (tx - x) * 0.16;
-        y += (ty - y) * 0.16;
-        scale += (tScale - scale) * 0.2;
-        ring.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+        x += (tx - x) * 0.18; y += (ty - y) * 0.18; scale += (tScale - scale) * 0.22;
+        cur.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
         raf = requestAnimationFrame(tick);
       };
       addEventListener('pointermove', (e) => {
         tx = e.clientX; ty = e.clientY;
-        if (!ring.classList.contains('live')) { ring.classList.add('live'); x = tx; y = ty; tick(); }
-        const hot = e.target && e.target.closest && e.target.closest('a, button, [data-mag]');
-        tScale = hot ? 1.9 : 1;
-        ring.classList.toggle('hot', !!hot);
+        if (!cur.classList.contains('live')) { cur.classList.add('live'); x = tx; y = ty; tick(); }
+        const t = e.target;
+        const label = t && t.closest ? labelFor(t) : null;
+        const hot = t && t.closest && t.closest('a, button, [data-mag]');
+        if (label) { if (curLabel) curLabel.textContent = label; cur.classList.add('label'); cur.classList.remove('hot'); tScale = 1; }
+        else if (hot) { cur.classList.add('hot'); cur.classList.remove('label'); tScale = 0.58; }
+        else { cur.classList.remove('hot', 'label'); tScale = 0.125; }
       }, { passive: true });
-      addEventListener('pointerleave', () => ring.classList.remove('live'));
+      addEventListener('pointerleave', () => cur.classList.remove('live'));
+      addEventListener('mousedown', () => { cur.style.setProperty('--press', '0.9'); });
     }
 
     // Magnetic CTAs: any element whose class ends in -cta gets the pull.
