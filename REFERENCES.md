@@ -55,3 +55,29 @@ DJ: "closest to my design language. And copy, also."
 Impress with (1) the work, (2) the layout. Visitors should ENJOY the site and come back
 excited for updates. The site is the proof-of-work for the AI consulting offer: v1 took
 6 months by hand; v2 with Claude must visibly outclass it.
+
+## Motion vocabulary — MEASURED, not assumed (2026-06-12, via tools/motion.mjs)
+Frame-by-frame scroll captures (tools/snaps/motion-*). What these sites actually do:
+
+**The model is PINNED SCENES, not a scrolling document.**
+- tinywins /about: viewport locks on a scene; scroll progress COMPOSES it. Copy
+  fragments land in corners one at a time, the illustration assembles piece by
+  piece, then the famous moment: the key word DUPLICATES one copy per scroll
+  tick, each copy stepping down/right in a cascade between two phrase fragments.
+  More scroll = more copies; scroll back = they retract. Then the next scene
+  slides UP AND OVER the pinned scene like a sheet.
+- exoape /studio: giant short statements scrub through while panels overlap;
+  image blocks travel at ~half scroll speed; a section's text is still exiting
+  while the next image panel is already entering. Continuous interleave.
+- Telemetry: elements deviate up to ~244px from static flow per 500px of wheel.
+  That is pinning + 0.5x parallax factors, not subtle drift.
+
+**Implications for our pages (the gap that made /lab/ai feel like a PDF):**
+1. Document flow + entrance reveals ≠ experience. Scenes must PIN (sticky stage,
+   200-300vh parent; progress through parent drives composition).
+2. Motion must be scrubbed and reversible, driven by scroll position every frame.
+3. Transitions overlap: next scene slides over the current one. Sections never
+   just stack.
+4. Parallax factors are large (0.4-0.6x) and choreographed, not ±60px seasoning.
+Tool: `node tools/motion.mjs <url> <name> [width] [steps] [wheel]` → filmstrip
+sheets + motion.json + moved-summary.json. RUN THIS before designing any motion.
