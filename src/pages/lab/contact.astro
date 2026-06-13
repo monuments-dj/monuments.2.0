@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
+import FloatingHand from '../../components/FloatingHand.astro';
 
 // === CONTACT V2 — /lab/contact ===
 // Modern, fresh, easy (DJ's words on the reference menus). One giant email
@@ -13,6 +14,7 @@ import LabFx from '../../components/LabFx.astro';
 
     <!-- HERO: the email IS the page -->
     <header class="ct2-hero">
+      <FloatingHand side="right" top="20vh" />
       <p class="ct2-eyebrow fade">Contact</p>
       <h1 class="ct2-h1 split">Let's start <em>a conversation.</em></h1>
       <a class="ct2-mail" href="mailto:monuments.cc@gmail.com" data-mail>
@@ -69,41 +71,41 @@ import LabFx from '../../components/LabFx.astro';
 
 <style>
   .ct2 { position: relative; background: var(--black); color: var(--white); overflow-x: clip; }
-  .ct2-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(252,252,252,0.5); }
+  .ct2-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
 
-  .ct2-hero { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; max-width: var(--wrap); margin: 0 auto; padding: 170px var(--pad) 60px; }
+  .ct2-hero { position: relative; min-height: 78vh; display: flex; flex-direction: column; justify-content: center; max-width: var(--wrap); margin: 0 auto; padding: 170px var(--pad) 60px; }
   .ct2-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(40px, 5.6vw, 84px); line-height: 1.02; letter-spacing: -0.03em; margin-top: 20px; }
   .ct2-h1 em { font-style: italic; color: var(--accent); }
   .ct2-mail { position: relative; width: fit-content; margin-top: 6vh; color: var(--white); text-decoration: none; }
   .ct2-mail-t { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 5.6vw, 86px); letter-spacing: -0.035em; line-height: 1; word-break: break-word; }
   .ct2-mail:hover .ct2-mail-t { color: var(--accent); transition: color 0.25s; }
   .ct2-stroke { position: absolute; left: 0; bottom: -14px; width: 100%; height: 16px; overflow: visible; }
-  .ct2-stroke path { fill: none; stroke: #e0322d; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 640; stroke-dashoffset: var(--moff, 640); transition: stroke-dashoffset 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s; }
+  .ct2-stroke path { fill: none; stroke: var(--accent); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 640; stroke-dashoffset: var(--moff, 640); transition: stroke-dashoffset 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s; }
   .ct2-mail.on .ct2-stroke path { --moff: 0; }
-  .ct2-sub { margin-top: 7vh; max-width: 480px; font-size: 15px; line-height: 1.7; font-weight: 300; color: rgba(252,252,252,0.7); }
+  .ct2-sub { margin-top: 7vh; max-width: 480px; font-size: 15px; line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.7); }
 
-  .ct2-expect { background: var(--white); color: #141519; padding: clamp(90px, 11vw, 150px) 0; }
+  .ct2-expect { background: var(--white); color: var(--ink); padding: clamp(90px, 11vw, 150px) 0; }
   .ct2-expect-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 40px); max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); }
-  .ct2-card { border-top: 1px solid rgba(20,21,25,0.2); padding-top: 18px; }
-  .ct2-card-n { font-size: 12px; letter-spacing: 0.18em; color: rgba(20,21,25,0.4); }
+  .ct2-card { border-top: 1px solid rgb(var(--ink-rgb) / 0.2); padding-top: 18px; }
+  .ct2-card-n { font-size: 12px; letter-spacing: 0.18em; color: rgb(var(--ink-rgb) / 0.4); }
   .ct2-card-t { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 21px; margin-top: 12px; }
-  .ct2-card-d { margin-top: 10px; font-size: 14.5px; line-height: 1.65; font-weight: 300; color: rgba(20,21,25,0.72); }
+  .ct2-card-d { margin-top: 10px; font-size: 14.5px; line-height: 1.65; font-weight: 300; color: rgb(var(--ink-rgb) / 0.72); }
 
   .ct2-low { max-width: var(--wrap); margin: 0 auto; padding: clamp(80px, 10vw, 130px) var(--pad); display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
   .ct2-soc-list { list-style: none; margin: 22px 0 0; padding: 0; display: flex; gap: clamp(24px, 4vw, 56px); }
   .ct2-soc-list a { font-family: 'Inter', sans-serif; font-size: clamp(18px, 1.8vw, 24px); color: var(--white); text-decoration: none; opacity: 0.8; transition: opacity 0.2s; }
   .ct2-soc-list a:hover { opacity: 1; }
-  .ct2-hint { font-size: 12px; letter-spacing: 0.06em; color: rgba(252,252,252,0.4); max-width: 240px; text-align: right; }
+  .ct2-hint { font-size: 12px; letter-spacing: 0.06em; color: rgb(var(--fg-rgb) / 0.4); max-width: 240px; text-align: right; }
 
   .ct2-patches { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
-  .ct2-patch { position: absolute; pointer-events: auto; cursor: grab; user-select: none; display: grid; place-items: center; text-align: center; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.12em; line-height: 1.5; padding: 18px 16px; border-radius: 999px; transform: rotate(var(--pr, -6deg)); box-shadow: 0 10px 26px rgba(0,0,0,0.45), inset 0 0 0 3px rgba(252,252,252,0.25); }
+  .ct2-patch { position: absolute; pointer-events: auto; cursor: grab; user-select: none; display: grid; place-items: center; text-align: center; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.12em; line-height: 1.5; padding: 18px 16px; border-radius: 999px; transform: rotate(var(--pr, -6deg)); box-shadow: 0 10px 26px rgba(0,0,0,0.45), inset 0 0 0 3px rgb(var(--fg-rgb) / 0.25); }
   .ct2-patch:active { cursor: grabbing; }
-  .p1 { top: 22vh; right: 12vw; background: #1b2630; color: #f0eee9; --pr: 7deg; }
-  .p2 { top: 52vh; right: 22vw; background: #2a1614; color: #f0eee9; --pr: -8deg; }
-  .p3 { top: 36vh; right: 5vw; background: #14233a; color: #f0eee9; --pr: 4deg; }
+  .p1 { top: 22vh; right: 12vw; background: var(--deep); color: var(--paper); --pr: 7deg; }
+  .p2 { top: 52vh; right: 22vw; background: var(--warm-deep); color: var(--paper); --pr: -8deg; }
+  .p3 { top: 36vh; right: 5vw; background: var(--deep); color: var(--paper); --pr: 4deg; }
 
-  .ct2 :global(.split .w) { display: inline-block; overflow: hidden; vertical-align: top; }
-  .ct2 :global(.split .wi) { display: inline-block; transform: translateY(115%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .ct2 :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .ct2 :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
   .ct2 :global(.split.on .wi) { transform: none; }
 
   @media (max-width: 860px) {

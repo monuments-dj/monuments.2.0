@@ -1,14 +1,18 @@
 ---
 import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
+import FloatingHand from '../../components/FloatingHand.astro';
+import BrandTicker from '../../components/BrandTicker.astro';
 
-// === HOMEPAGE V2 — /lab/home ===
-// Pinned-scene front door per the measured motion laws (REFERENCES.md).
-// Keeps what DJ loves (showreel scroll-zoom, footer) and rebuilds the spine:
-// line-by-line hero build w/ scroll-drawn marker circle, brand-world work
-// bands (each project owns the viewport in its own atmosphere, media at half
-// speed), services rows incl. the AI offer, trusted-by grid.
-// Voice: studio "we", CD-first, CTA = start a conversation. No em dashes.
+// === HOMEPAGE V3 — /lab/home ===
+// DJ feedback rebuild. Brings back the mouse-tracked SIGHT SOUND AND EMOTION
+// headline (he liked it more than the line-by-line build), adds the red
+// FloatingHand over the hero, drops in the scroll-velocity BrandTicker, KEEPS
+// the showreel scroll-zoom DJ loves, and pushes MORE parallax + scroll pizzazz
+// through the work scenes (pinned, sheet-over handoffs, media at ~0.5x).
+// All color routes through the tokenized system (var(--bg)/--fg/--accent/...)
+// so the LabFx theme selector reskins it automatically. Voice: studio "we",
+// CD-first, CTA = start a conversation. No em dashes. DJ rewords copy later.
 
 const worlds = [
   {
@@ -17,15 +21,15 @@ const worlds = [
     line: 'Built to capture the moment',
     think: 'A campaign about finding quiet in the noise. We shaped the story and directed every still.',
     img: '/case-studies/sony-this-moment/gallery/tm-01.jpg',
-    bg: '#101418', ink: '#fcfcfc',
+    bg: 'var(--bg)', ink: 'var(--fg)', tint: 'var(--accent)',
   },
   {
     slug: 'blue-cross',
     brand: 'Blue Cross of Idaho',
     line: 'Built for life',
-    think: "Insurance sold like it's about people, because it is. Four years of license renewals say it landed.",
+    think: "Insurance sold like it's about people, because it is. Four years of renewals say it landed.",
     img: '/case-studies/blue-cross/gallery/bci-10.jpg',
-    bg: '#0d2440', ink: '#fcfcfc',
+    bg: 'var(--deep)', ink: 'var(--fg)', tint: 'var(--accent-2)',
   },
   {
     slug: 'sony-xperia-summer',
@@ -33,15 +37,15 @@ const worlds = [
     line: 'Built to chase the sun',
     think: 'A summer campaign that chased golden hour across Idaho. Direction, stills, and the brief they shot from.',
     img: '/case-studies/sony-xperia-summer/gallery/xp-01.jpg',
-    bg: '#1a1410', ink: '#fcfcfc',
+    bg: 'var(--warm-deep)', ink: 'var(--fg)', tint: 'var(--accent)',
   },
   {
     slug: 'turnstile',
     brand: 'Turnstile',
     line: 'Built to be heard',
     think: "Brand work for a band that doesn't whisper. Identity, content, and the campaign around it.",
-    img: '/case-studies/turnstile/gallery/ts-01.jpg',
-    bg: '#14181a', ink: '#fcfcfc',
+    img: '/case-studies/turnstile/products/prod-01.jpg',
+    bg: 'var(--bg)', ink: 'var(--fg)', tint: 'var(--accent-2)',
   },
 ];
 
@@ -50,259 +54,303 @@ const services = [
   { t: 'Direction', d: 'Commercials, brand films, campaigns. Concept to final cut.' },
   { t: 'Brand campaigns', d: 'Whole campaigns, not one-off clips.' },
   { t: 'Creative consulting', d: "We help teams sharpen what they're making and why." },
-  { t: 'End-to-end production', d: 'Full production and post, scaled to the job. No hand-offs into the void.' },
   { t: 'AI systems', d: 'Audit, automate, deploy. Your business, brought up to speed.', href: '/lab/ai', tag: 'new' },
 ];
 ---
-<Base title="monuments — we build things worth remembering">
+<Base title="monuments — sight, sound and emotion">
 
   <main class="hm">
 
-    <!-- SCENE — HERO (pinned, 320vh). Line-by-line build over the bg video,
-         marker circle draws around the last word, then the reel slides over. -->
-    <section class="hm-hero scn" data-scene="hero">
-      <div class="scn-stage hm-hero-stage">
-        <div class="hm-hero-video" aria-hidden="true">
-          <iframe id="heroVideo"
-            src="https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=1&loop=1&playlist=VMubUUZ2tdU&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
-            frameborder="0" allow="autoplay; encrypted-media"></iframe>
+    <!-- ============================================================
+         SCENE 1 — SIGHT SOUND AND EMOTION (mouse-tracked tilt hero)
+         The whole block tilts toward the cursor as one rigid unit over
+         a darkened bg video. FloatingHand floats over the type.
+         ============================================================ -->
+    <section class="hm-hero">
+      <div class="hm-hero-video" aria-hidden="true">
+        <iframe id="heroVideo"
+          src="https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=1&loop=1&playlist=VMubUUZ2tdU&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
+          frameborder="0" allow="autoplay; encrypted-media"></iframe>
+      </div>
+      <div class="hm-hero-scrim" aria-hidden="true"></div>
+
+      <FloatingHand side="right" top="9vh" />
+
+      <div class="hero-type">
+        <div class="hero-tilt" id="hero-tilt">
+          <span class="hero-word">Sight</span>
+          <span class="hero-word">Sound</span>
+          <span class="hero-word">and <span class="hero-word-sub">The Creative<br>Portfolio<br>of DJ Ramirez</span></span>
+          <span class="hero-word">Emotion</span>
         </div>
-        <div class="hm-hero-scrim" aria-hidden="true"></div>
-        <div class="hm-hero-type">
-          <p class="hm-eyebrow">Monuments Creative · a creative-led production studio</p>
-          <h1 class="hm-h1">
-            <span class="hm-line" data-line="0">We build things</span>
-            <span class="hm-line" data-line="1">worth</span>
-            <span class="hm-line hm-line-mark" data-line="2">remembering.
-              <svg class="hm-circle" viewBox="0 0 520 150" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M256 18 C90 8, 28 52, 38 92 C50 138, 240 150, 380 138 C492 128, 506 78, 478 50 C448 20, 300 8, 150 22" />
-              </svg>
-            </span>
-          </h1>
-          <div class="hm-hero-foot">
-            <p class="hm-hero-sub">Brand campaigns and commercials, concept through delivery. For brands that want a point of view, not just a crew.</p>
-            <a class="hm-cta" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="hm-hero-foot">
+        <p class="hm-eyebrow">Creative Direction · Integrated Content</p>
+        <p class="hm-hero-sub">Brand campaigns and commercials, concept through delivery. For brands that want a point of view, not just a crew.</p>
+        <a class="hm-cta hm-cta-link" href="/work">See the work <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <span class="hm-scrollcue" aria-hidden="true">Scroll</span>
+    </section>
+
+    <!-- ============================================================
+         BRAND TICKER — scroll-velocity logo marquee, logos link out.
+         ============================================================ -->
+    <BrandTicker />
+
+    <!-- ============================================================
+         SHOWREEL — the scroll-zoom DJ loves, mechanics unchanged.
+         ============================================================ -->
+    <section class="showreel">
+      <div class="reel-stage">
+        <div class="reel-zoom" id="reelZoom">
+          <div class="reel-frame-wrap">
+            <div class="reel-frame">
+              <iframe id="reelVideo"
+                src="https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
+                frameborder="0" allow="autoplay; encrypted-media; fullscreen"></iframe>
+            </div>
+            <div class="reel-controls">
+              <button class="reel-ctrl reel-play" id="reelPlay" type="button" aria-label="Play or pause">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path class="reel-ico-play" d="M8 5v14l11-7z"/><path class="reel-ico-pause" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+              </button>
+              <button class="reel-ctrl reel-audio" id="reelAudio" type="button" aria-pressed="false" aria-label="Sound on or off">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor" stroke="none"/>
+                  <path class="reel-wave" d="M16.5 8.5a5 5 0 0 1 0 7"/>
+                  <line class="reel-slash" x1="3.5" y1="3.5" x2="20.5" y2="20.5"/>
+                </svg>
+              </button>
+              <button class="reel-ctrl reel-fs" id="reelFs" type="button" aria-label="Fullscreen">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+              </button>
+            </div>
           </div>
         </div>
+        <div class="reel-cap">Showreel</div>
       </div>
     </section>
 
-    <!-- Everything below slides over the hero stage. -->
-    <div class="hm-after">
-
-      <!-- SHOWREEL — the scroll-zoom DJ loves, unchanged mechanics. -->
-      <section class="showreel">
-        <div class="reel-stage">
-          <div class="reel-zoom" id="reelZoom">
-            <div class="reel-frame-wrap">
-              <div class="reel-frame">
-                <iframe id="reelVideo"
-                  src="https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
-                  frameborder="0" allow="autoplay; encrypted-media; fullscreen"></iframe>
-              </div>
-              <div class="reel-controls">
-                <button class="reel-ctrl reel-play" id="reelPlay" type="button" aria-label="Play or pause">
-                  <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path class="reel-ico-play" d="M8 5v14l11-7z"/><path class="reel-ico-pause" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
-                </button>
-                <button class="reel-ctrl reel-audio" id="reelAudio" type="button" aria-pressed="false" aria-label="Sound on or off">
-                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor" stroke="none"/>
-                    <path class="reel-wave" d="M16.5 8.5a5 5 0 0 1 0 7"/>
-                    <line class="reel-slash" x1="3.5" y1="3.5" x2="20.5" y2="20.5"/>
-                  </svg>
-                </button>
-                <button class="reel-ctrl reel-fs" id="reelFs" type="button" aria-label="Fullscreen">
-                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="reel-cap">Showreel</div>
-        </div>
-      </section>
-
-      <!-- WORK — brand worlds. Each project owns the viewport in its own
-           atmosphere; the image travels slower than the type (0.5x law). -->
-      <section class="hm-worlds">
-        {worlds.map((w, i) => (
-          <a class="hm-world" href={`/work/${w.slug}`} style={`--wbg:${w.bg}; --wink:${w.ink}`} data-world>
+    <!-- ============================================================
+         WORK — full-viewport brand-world scenes. Each is pinned in its
+         own atmosphere; media travels SLOWER than the type (~0.5x), and
+         scenes overlap at the seams (sheet-over handoff).
+         ============================================================ -->
+    <section class="hm-worlds">
+      {worlds.map((w, i) => (
+        <a class="hm-world" href={`/work/${w.slug}`} style={`--wbg:${w.bg}; --wink:${w.ink}; --wtint:${w.tint};`} data-world data-idx={i}>
+          <div class="hm-world-stage" data-stage>
             <figure class="hm-world-media" data-media>
               <img src={w.img} alt={`${w.brand} campaign`} loading={i === 0 ? 'eager' : 'lazy'} />
+              <span class="hm-world-glow" aria-hidden="true"></span>
             </figure>
-            <div class="hm-world-copy">
+            <div class="hm-world-copy" data-copy>
               <p class="hm-world-brand">{w.brand}</p>
               <h2 class="hm-world-line">{w.line}</h2>
               <p class="hm-world-think">{w.think}</p>
               <span class="hm-world-go">See the work <span aria-hidden="true">→</span></span>
             </div>
-            <span class="hm-world-index" aria-hidden="true">{String(i + 1).padStart(2, '0')} / {String(worlds.length).padStart(2, '0')}</span>
-          </a>
-        ))}
-        <div class="hm-worlds-all">
-          <a class="hm-cta hm-cta-ghost" href="/work">All work <span aria-hidden="true">↗</span></a>
-        </div>
-      </section>
-
-      <!-- TICKER — v1-DNA marquee band -->
-      <div class="hm-ticker" aria-hidden="true">
-        <div class="hm-ticker-track">
-          <span class="hm-ticker-seg">Creative direction · Brand campaigns · Commercials · Creative consulting · AI systems · Los Angeles · Boise ·&nbsp;</span>
-          <span class="hm-ticker-seg">Creative direction · Brand campaigns · Commercials · Creative consulting · AI systems · Los Angeles · Boise ·&nbsp;</span>
-        </div>
-      </div>
-
-      <!-- SERVICES — CD first, AI systems included. Marker underline draws on hover. -->
-      <section class="hm-sv">
-        <p class="hm-eyebrow fade">What we do</p>
-        <ul class="hm-sv-list">
-          {services.map((s) => (
-            <li class="hm-sv-row fade">
-              <a href={s.href || '/services'} class="hm-sv-link">
-                <span class="hm-sv-t">
-                  {s.t}
-                  {s.tag && <sup class="hm-sv-tag">{s.tag}</sup>}
-                  <svg class="hm-sv-stroke" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true">
-                    <path d="M4 8 C60 4, 150 10, 296 5" />
-                  </svg>
-                </span>
-                <span class="hm-sv-d">{s.d}</span>
-                <span class="hm-sv-arrow" aria-hidden="true">→</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <!-- TRUSTED BY — the invert grid, kept. -->
-      <section class="trusted fade">
-        <div class="trusted-top">
-          <div class="trusted-left">
-            <h2 class="trusted-title">Trusted by the best</h2>
-            <p class="trusted-body">We've spent a decade making campaigns for global brands: uncovering insights, moving product, and picking up awards along the way.</p>
-            <a href="/contact" class="trusted-cta">Let's talk</a>
+            <span class="hm-world-index" data-index aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
           </div>
-          <img class="trusted-m" src="https://monuments.cc/wp-content/uploads/2023/12/logo-01.png" alt="M">
-        </div>
-        <div class="logo-grid">
-          <div class="logo-cell"><img src="/logos/sony.png" alt="Sony"></div>
-          <div class="logo-cell"><img src="/logos/intel.png" alt="Intel"></div>
-          <div class="logo-cell"><img src="/logos/adorama.png" alt="Adorama"></div>
-          <div class="logo-cell"><img src="/logos/msi.png" alt="MSI"></div>
-          <div class="logo-cell"><img src="/logos/lexar.png" alt="Lexar"></div>
-          <div class="logo-cell"><img src="/logos/flashpoint.png" alt="Flashpoint"></div>
-          <div class="logo-cell"><img src="/logos/against.png" alt="Against"></div>
-          <div class="logo-cell"><img src="/logos/art-of-visuals.png" alt="Art of Visuals"></div>
-        </div>
-      </section>
+        </a>
+      ))}
+    </section>
 
-      <!-- CTA -->
-      <section class="hm-end">
-        <p class="hm-end-big split">Let's build something <em>worth remembering.</em></p>
-        <a class="hm-cta fade" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
-      </section>
-
+    <div class="hm-worlds-all">
+      <a class="hm-cta hm-cta-ghost" href="/work">All work <span aria-hidden="true">↗</span></a>
     </div>
+
+    <!-- ============================================================
+         SERVICES — CD first, AI systems linked. Marker underline draws
+         on hover. Each row reveals on scroll.
+         ============================================================ -->
+    <section class="hm-sv">
+      <p class="hm-eyebrow fade">What we do</p>
+      <ul class="hm-sv-list">
+        {services.map((s) => (
+          <li class="hm-sv-row fade">
+            <a href={s.href || '/services'} class="hm-sv-link">
+              <span class="hm-sv-t">
+                {s.t}
+                {s.tag && <sup class="hm-sv-tag">{s.tag}</sup>}
+                <svg class="hm-sv-stroke" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M4 8 C60 4, 150 10, 296 5" />
+                </svg>
+              </span>
+              <span class="hm-sv-d">{s.d}</span>
+              <span class="hm-sv-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- ============================================================
+         CLOSING CTA — start a conversation. Second hand for spice.
+         ============================================================ -->
+    <section class="hm-end">
+      <FloatingHand side="left" top="6vh" />
+      <p class="hm-end-big split">Let's build something <em>worth remembering.</em></p>
+      <a class="hm-cta fade" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
+    </section>
+
   </main>
   <LabFx />
 </Base>
 
 <style>
-  .hm { background: var(--black); color: var(--white); overflow-x: clip; }
-  .hm-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(252,252,252,0.5); }
-  .hm-cta { display: inline-flex; align-items: center; gap: 10px; width: fit-content; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); background: var(--white); padding: 18px 30px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease; }
+  .hm { background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .hm-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+
+  .hm-cta { display: inline-flex; align-items: center; gap: 10px; width: fit-content; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--fg); padding: 18px 30px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease; }
   .hm-cta:hover { gap: 18px; transform: translateY(-2px); }
-  .hm-cta-ghost { color: var(--white); background: transparent; border: 1px solid rgba(252,252,252,0.35); }
+  .hm-cta-ghost { color: var(--fg); background: transparent; border: 1px solid rgb(var(--fg-rgb) / 0.35); }
+  .hm-cta-link { color: var(--fg); background: transparent; border: 1px solid rgb(var(--fg-rgb) / 0.4); padding: 13px 24px; }
 
-  /* SCENE shell */
-  .scn { position: relative; }
-  .scn-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-
-  /* HERO */
-  .hm-hero { height: 320vh; z-index: 1; }
-  .hm-hero-stage { display: flex; align-items: flex-end; }
-  .hm-hero-video { position: absolute; inset: 0; pointer-events: none; }
+  /* ===================== HERO — mouse-tracked tilt ===================== */
+  .hm-hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; perspective: 900px; }
+  .hm-hero-video { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
   .hm-hero-video iframe { position: absolute; top: 50%; left: 50%; width: 178vh; min-width: 100%; height: 100vh; min-height: 56.25vw; transform: translate(-50%, -50%); }
-  .hm-hero-scrim { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(13,15,20,0.5), rgba(13,15,20,0.35) 45%, rgba(13,15,20,0.78)); }
-  .hm-hero-type { position: relative; z-index: 2; width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad) 9vh; }
-  .hm-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(52px, 8.6vw, 132px); line-height: 0.98; letter-spacing: -0.035em; margin-top: 22px; }
-  .hm-line { display: block; overflow: hidden; }
-  .hm-line > :global(.li), .hm-line { position: relative; }
-  .hm-line::after { content: ''; } /* keeps layout stable while inner masks */
-  .hm-line { clip-path: inset(0 0 102% 0); transform: translateY(0.25em); transition: clip-path 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
-  .hm-line.on { clip-path: inset(0 0 -8% 0); transform: none; }
-  .hm-line-mark { display: inline-block; padding-right: 0.1em; }
-  .hm-circle { position: absolute; left: -3%; top: -14%; width: 64%; height: 128%; overflow: visible; pointer-events: none; }
-  .hm-circle path { fill: none; stroke: #e0322d; stroke-width: 7; stroke-linecap: round; stroke-dasharray: var(--len, 2400); stroke-dashoffset: var(--off, 2400); }
-  .hm-hero-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-top: 5vh; opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1); }
-  .hm-hero-foot.on { opacity: 1; transform: none; }
-  .hm-hero-sub { max-width: 480px; font-size: 15px; line-height: 1.7; font-weight: 300; color: rgba(252,252,252,0.8); }
+  .hm-hero-scrim { position: absolute; inset: 0; z-index: 1; background:
+      radial-gradient(120% 100% at 50% 30%, rgb(var(--ink-rgb) / 0.35), rgb(var(--ink-rgb) / 0.72) 70%),
+      linear-gradient(to bottom, rgb(var(--ink-rgb) / 0.55), rgb(var(--ink-rgb) / 0.4) 45%, rgb(var(--ink-rgb) / 0.82)); }
 
-  .hm-after { position: relative; z-index: 2; margin-top: -100vh; background: var(--black); }
+  .hero-type { position: absolute; top: 50%; left: 0; right: 0; z-index: 2; transform: translateY(-50%); display: flex; justify-content: center; transform-style: preserve-3d; }
+  .hero-tilt {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transform-style: preserve-3d; will-change: transform;
+    text-align: center;
+    color: var(--fg);
+    text-shadow: 0 18px 60px rgb(var(--ink-rgb) / 0.5);
+  }
+  .hero-word {
+    display: block; position: relative;
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(46px, 10.5vw, 168px); line-height: 0.96; letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+  .hero-word:nth-child(2) { color: var(--fg); }
+  .hero-word-sub {
+    display: inline-block; vertical-align: middle;
+    margin-left: 0.4em;
+    font-size: clamp(11px, 1.1vw, 16px); font-weight: 400; line-height: 1.18;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    text-align: left; color: var(--accent);
+    text-shadow: none;
+    transform: translateZ(40px);
+  }
 
-  /* WORK — brand worlds */
+  .hm-hero-foot {
+    position: absolute; left: 0; right: 0; bottom: clamp(28px, 6vh, 64px); z-index: 3;
+    max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad);
+    display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 22px;
+  }
+  .hm-hero-foot .hm-eyebrow { flex-basis: 100%; }
+  .hm-hero-sub { max-width: 460px; font-size: 15px; line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.82); }
+
+  .hm-scrollcue { position: absolute; left: 50%; bottom: 14px; z-index: 3; transform: translateX(-50%); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); animation: cueBob 2.4s ease-in-out infinite; }
+  @keyframes cueBob { 0%,100% { transform: translate(-50%, 0); opacity: 0.5; } 50% { transform: translate(-50%, 6px); opacity: 1; } }
+
+  /* ===================== WORK — brand worlds (pinned + parallax) ===================== */
   .hm-worlds { position: relative; }
-  .hm-world { position: relative; display: flex; align-items: center; min-height: 100vh; padding: 14vh var(--pad); background: var(--wbg); color: var(--wink); text-decoration: none; overflow: hidden; }
-  .hm-world-media { position: absolute; right: max(var(--pad), 6vw); top: 50%; width: min(46vw, 760px); aspect-ratio: 3/2; margin: 0; overflow: hidden; border-radius: 4px; transform: translateY(-50%); }
-  .hm-world-media img { width: 100%; height: 118%; object-fit: cover; display: block; will-change: transform; transform: translateY(var(--py, 0)); }
-  .hm-world-copy { position: relative; z-index: 2; max-width: min(46vw, 600px); }
-  .hm-world-brand { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.6; }
-  .hm-world-line { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 4.6vw, 72px); line-height: 1.02; letter-spacing: -0.03em; margin-top: 16px; max-width: 13ch; }
+  .hm-world {
+    position: relative; display: block; height: 130vh;
+    text-decoration: none; color: var(--wink);
+  }
+  /* Pinned stage: progress through the 130vh parent drives composition. */
+  .hm-world-stage {
+    position: sticky; top: 0; height: 100vh; overflow: hidden;
+    display: flex; align-items: center;
+    padding: 14vh var(--pad);
+    background: var(--wbg);
+  }
+  /* Subtle atmosphere wash unique to each scene's tint. */
+  .hm-world-stage::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(80% 70% at 78% 50%, color-mix(in srgb, var(--wtint) 16%, transparent), transparent 70%);
+    opacity: 0.9;
+  }
+  .hm-world-media {
+    position: absolute; right: max(var(--pad), 6vw); top: 50%;
+    width: min(46vw, 760px); aspect-ratio: 3/2; margin: 0;
+    overflow: hidden; border-radius: 4px;
+    transform: translateY(-50%);
+    box-shadow: 0 40px 90px rgb(var(--ink-rgb) / 0.45);
+  }
+  .hm-world-media img {
+    width: 100%; height: 134%; object-fit: cover; display: block;
+    will-change: transform; transform: translateY(var(--py, -12%)) scale(var(--ps, 1.06));
+  }
+  .hm-world-glow { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 120px rgb(var(--ink-rgb) / 0.4); }
+  .hm-world-copy {
+    position: relative; z-index: 2; max-width: min(46vw, 600px);
+    will-change: transform; transform: translateY(var(--cy, 0px));
+  }
+  .hm-world-brand { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--wtint); }
+  .hm-world-line { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 4.6vw, 72px); line-height: 1.05; letter-spacing: -0.03em; margin-top: 16px; max-width: 13ch; padding-bottom: 0.08em; }
   .hm-world-think { margin-top: 22px; max-width: 42ch; font-size: 15px; line-height: 1.7; font-weight: 300; opacity: 0.82; }
   .hm-world-go { display: inline-flex; gap: 10px; margin-top: 30px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.25s, gap 0.25s; }
   .hm-world:hover .hm-world-go { opacity: 1; gap: 16px; }
-  .hm-world-index { position: absolute; right: var(--pad); bottom: 5vh; font-size: 12px; letter-spacing: 0.18em; opacity: 0.5; }
-  .hm-worlds-all { display: flex; justify-content: center; padding: 12vh var(--pad); }
+  .hm-world-index {
+    position: absolute; left: var(--pad); bottom: 6vh; z-index: 1;
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(80px, 16vw, 240px); line-height: 0.8; letter-spacing: -0.04em;
+    color: var(--wtint); opacity: 0.1; pointer-events: none;
+    will-change: transform; transform: translateY(var(--iy, 0px));
+  }
 
-  /* TICKER */
-  .hm-ticker { background: var(--white); color: #141519; transform: rotate(-1.4deg) scale(1.02); overflow: hidden; padding: 16px 0; margin: 10vh 0; }
-  .hm-ticker-track { display: flex; width: max-content; animation: hmTick 30s linear infinite; }
-  .hm-ticker-seg { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(16px, 2vw, 26px); letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap; }
-  @keyframes hmTick { to { transform: translateX(-50%); } }
-  .hm-ticker:hover .hm-ticker-track { animation-play-state: paused; }
+  .hm-worlds-all { display: flex; justify-content: center; padding: 14vh var(--pad); background: var(--bg); }
 
-  /* SERVICES rows */
+  /* ===================== SERVICES rows ===================== */
   .hm-sv { max-width: var(--wrap); margin: 0 auto; padding: clamp(90px, 11vw, 150px) var(--pad); }
   .hm-sv-list { list-style: none; margin: 34px 0 0; padding: 0; }
-  .hm-sv-row { border-top: 1px solid rgba(252,252,252,0.14); }
-  .hm-sv-row:last-child { border-bottom: 1px solid rgba(252,252,252,0.14); }
-  .hm-sv-link { display: grid; grid-template-columns: minmax(220px, 0.55fr) 1fr auto; align-items: baseline; gap: 28px; padding: 26px 6px; color: var(--white); text-decoration: none; transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .hm-sv-row { border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .hm-sv-row:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .hm-sv-link { display: grid; grid-template-columns: minmax(220px, 0.55fr) 1fr auto; align-items: baseline; gap: 28px; padding: 26px 6px; color: var(--fg); text-decoration: none; transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
   .hm-sv-link:hover { padding-left: 22px; }
   .hm-sv-t { position: relative; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(22px, 2.4vw, 34px); letter-spacing: -0.02em; width: fit-content; }
-  .hm-sv-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #e0322d; margin-left: 8px; }
+  .hm-sv-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-left: 8px; }
   .hm-sv-stroke { position: absolute; left: 0; bottom: -6px; width: 100%; height: 10px; overflow: visible; }
-  .hm-sv-stroke path { fill: none; stroke: #e0322d; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: 320; transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .hm-sv-stroke path { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: 320; transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1); }
   .hm-sv-link:hover .hm-sv-stroke path { stroke-dashoffset: 0; }
-  .hm-sv-d { font-size: 14px; line-height: 1.6; font-weight: 300; color: rgba(252,252,252,0.62); max-width: 56ch; }
+  .hm-sv-d { font-size: 14px; line-height: 1.6; font-weight: 300; color: rgb(var(--fg-rgb) / 0.62); max-width: 56ch; }
   .hm-sv-arrow { font-size: 20px; opacity: 0.45; transition: opacity 0.25s, transform 0.3s; }
   .hm-sv-link:hover .hm-sv-arrow { opacity: 1; transform: translateX(6px); }
 
-  /* END */
-  .hm-end { min-height: 64vh; display: flex; flex-direction: column; gap: 44px; align-items: center; justify-content: center; text-align: center; padding: 80px var(--pad); }
-  .hm-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5vw, 72px); letter-spacing: -0.025em; line-height: 1.08; max-width: 18ch; }
+  /* ===================== END ===================== */
+  .hm-end { position: relative; min-height: 70vh; display: flex; flex-direction: column; gap: 44px; align-items: center; justify-content: center; text-align: center; padding: 100px var(--pad); overflow: hidden; }
+  .hm-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5vw, 72px); letter-spacing: -0.025em; line-height: 1.12; max-width: 18ch; padding-bottom: 0.1em; }
   .hm-end-big em { font-style: italic; color: var(--accent); }
 
-  /* split util (shared pattern with /lab/ai) */
-  .hm :global(.split .w) { display: inline-block; overflow: hidden; vertical-align: top; }
-  .hm :global(.split .wi) { display: inline-block; transform: translateY(115%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  /* ===================== shared reveal utils ===================== */
+  .fade { opacity: 0; transform: translateY(26px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+  .fade.on { opacity: 1; transform: none; }
+
+  /* split util (type-clip fix — overhang + descenders never get cut) */
+  .hm :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .hm :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); will-change: transform; }
   .hm :global(.split.on .wi) { transform: none; }
 
   @media (max-width: 900px) {
-    .hm-world { flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 30px; }
+    .hm-world { height: auto; }
+    .hm-world-stage { position: relative; height: auto; min-height: 100vh; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 30px; }
     .hm-world-media { position: relative; right: auto; top: auto; transform: none; width: 100%; order: -1; }
-    .hm-world-copy { max-width: 100%; }
+    .hm-world-media img { transform: none; height: 100%; }
+    .hm-world-copy { max-width: 100%; transform: none !important; }
+    .hm-world-index { display: none; }
     .hm-sv-link { grid-template-columns: 1fr auto; }
     .hm-sv-d { display: none; }
-    .hm-hero-foot { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .hm-hero-foot { flex-direction: column; align-items: flex-start; }
+    .hero-word-sub { display: block; margin-left: 0; margin-top: 0.3em; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hm-ticker-track { animation: none; }
-    .hm-line { clip-path: none; transform: none; transition: none; }
-    .hm-hero-foot { opacity: 1; transform: none; }
-    .hm-circle path { stroke-dashoffset: 0; }
-    .hm-hero { height: auto; }
-    .hm-hero .scn-stage, .hm-hero-stage { position: static; height: 100vh; }
-    .hm-after { margin-top: 0; }
+    .hero-tilt { transform: none !important; }
+    .hm-scrollcue { animation: none; }
+    .hm-world-media img { transform: none; }
+    .hm-world-copy, .hm-world-index { transform: none !important; }
+    .fade { opacity: 1; transform: none; }
     .hm :global(.split .wi) { transform: none !important; transition: none !important; }
   }
 </style>
@@ -310,9 +358,8 @@ const services = [
 <script>
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp01 = (v) => Math.min(1, Math.max(0, v));
-  const phase = (p, a, b) => clamp01((p - a) / (b - a));
 
-  // --- word splitter for the .split closer ---
+  // ---------- word splitter for the .split closer ----------
   const splitWords = (root, counter) => {
     [...root.childNodes].forEach((node) => {
       if (node.nodeType === 3) {
@@ -331,56 +378,66 @@ const services = [
     });
   };
   document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
-  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: 0.35 });
-  document.querySelectorAll('.split').forEach((el) => io.observe(el));
 
-  // --- HERO scene: lines land at progress thresholds; circle draws; foot lands ---
-  const hero = document.querySelector('[data-scene="hero"]');
-  const lines = hero ? [...hero.querySelectorAll('.hm-line')] : [];
-  const circlePath = hero && hero.querySelector('.hm-circle path');
-  const heroFoot = hero && hero.querySelector('.hm-hero-foot');
-  if (circlePath) {
-    const len = circlePath.getTotalLength();
-    circlePath.style.setProperty('--len', len);
-    circlePath.style.setProperty('--off', len);
-  }
+  // ---------- entrance reveals (.split + .fade) ----------
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.3 });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
 
-  // --- WORK worlds: image travels slower than the band (0.5x law) ---
+  // ---------- HERO — mouse-tracked rigid tilt ----------
+  (function () {
+    const inner = document.getElementById('hero-tilt');
+    if (!inner || reduced) return;
+    let mx = 0, my = 0, cx = 0, cy = 0;
+    const MAX_Y = 20.8, MAX_X = 14.3, SHIFT = 28.6;
+    addEventListener('mousemove', (e) => {
+      mx = (e.clientX / innerWidth - 0.5) * 2;
+      my = (e.clientY / innerHeight - 0.5) * 2;
+    });
+    (function tick() {
+      cx += (mx - cx) * 0.09; cy += (my - cy) * 0.09;
+      const ry = cx * MAX_Y, rx = -cy * MAX_X, tx = cx * SHIFT, ty = cy * SHIFT * 0.5;
+      inner.style.transform = `translate3d(${tx}px,${ty}px,0) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      requestAnimationFrame(tick);
+    })();
+  })();
+
+  // ---------- WORK worlds — pinned scene parallax (media slower than type) ----------
   const worlds = [...document.querySelectorAll('[data-world]')];
-
   let ticking = false;
   const onScroll = () => {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
-      if (hero) {
-        const r = hero.getBoundingClientRect();
-        const p = clamp01(-r.top / (hero.offsetHeight - innerHeight * 2));
-        lines.forEach((l, i) => l.classList.toggle('on', p > 0.04 + i * 0.16));
-        if (circlePath) {
-          const len = circlePath.getTotalLength();
-          circlePath.style.setProperty('--off', String(len * (1 - phase(p, 0.42, 0.72))));
-        }
-        if (heroFoot) heroFoot.classList.toggle('on', p > 0.62);
-      }
       worlds.forEach((w) => {
         const r = w.getBoundingClientRect();
-        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight; // -.. around center
+        // progress 0..1 across the full pinned scroll of this scene
+        const total = r.height - innerHeight;
+        const p = clamp01(-r.top / (total || 1));
         const img = w.querySelector('[data-media] img');
-        if (img) img.style.setProperty('--py', `${c * 9 - 9}%`);
+        const copy = w.querySelector('[data-copy]');
+        const idx = w.querySelector('[data-index]');
+        // media travels slow: ~ -22% .. -2% (deviates generously, ~0.45x feel)
+        if (img) {
+          img.style.setProperty('--py', `${-22 + p * 20}%`);
+          img.style.setProperty('--ps', (1.12 - p * 0.06).toFixed(3));
+        }
+        // type travels fast: rises ~ +110px .. -110px (passes the media)
+        if (copy) copy.style.setProperty('--cy', `${(0.5 - p) * 220}px`);
+        // giant index drifts opposite for depth
+        if (idx) idx.style.setProperty('--iy', `${(p - 0.5) * 160}px`);
       });
       ticking = false;
     });
   };
   if (!reduced) {
     addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll, { passive: true });
     onScroll();
-  } else {
-    lines.forEach((l) => l.classList.add('on'));
-    if (heroFoot) heroFoot.classList.add('on');
   }
 
-  // --- Showreel: scroll-zoom (carried over from the current home) ---
+  // ---------- Showreel — scroll-zoom (carried over, mechanics unchanged) ----------
   (function () {
     const section = document.querySelector('.showreel');
     const zoom = document.getElementById('reelZoom');
@@ -404,24 +461,24 @@ const services = [
     update();
   })();
 
-  // --- YouTube control: hero loop + reel controls (same behavior as home) ---
+  // ---------- YouTube control: hero loop + reel controls ----------
   (function () {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(tag);
     let heroP, reel;
-    (window as any).onYouTubeIframeAPIReady = function () {
-      const YT = (window as any).YT;
+    window['onYouTubeIframeAPIReady'] = function () {
+      const YT = window['YT'];
       heroP = new YT.Player('heroVideo', {
         events: {
-          onStateChange: (e: any) => { if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(6, true); e.target.playVideo(); } },
+          onStateChange: (e) => { if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(6, true); e.target.playVideo(); } },
         },
       });
       const reelEl = document.querySelector('.reel-frame-wrap');
       reel = new YT.Player('reelVideo', {
         events: {
-          onStateChange: (e: any) => {
-            if (reelEl) (reelEl as HTMLElement).dataset.playing = (e.data === YT.PlayerState.PLAYING) ? 'true' : 'false';
+          onStateChange: (e) => {
+            if (reelEl) reelEl.dataset.playing = (e.data === YT.PlayerState.PLAYING) ? 'true' : 'false';
             if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(6, true); e.target.playVideo(); }
           },
         },
@@ -432,16 +489,16 @@ const services = [
       const playToggle = () => {
         const st = reel.getPlayerState();
         if (st === YT.PlayerState.PLAYING) { reel.pauseVideo(); }
-        else { reel.playVideo(); reel.unMute(); audioBtn && audioBtn.setAttribute('aria-pressed', 'true'); }
+        else { reel.playVideo(); reel.unMute(); if (audioBtn) audioBtn.setAttribute('aria-pressed', 'true'); }
       };
-      playBtn && playBtn.addEventListener('click', playToggle);
-      audioBtn && audioBtn.addEventListener('click', () => {
+      if (playBtn) playBtn.addEventListener('click', playToggle);
+      if (audioBtn) audioBtn.addEventListener('click', () => {
         if (reel.isMuted()) { reel.unMute(); audioBtn.setAttribute('aria-pressed', 'true'); }
         else { reel.mute(); audioBtn.setAttribute('aria-pressed', 'false'); }
       });
-      fsBtn && fsBtn.addEventListener('click', () => {
+      if (fsBtn) fsBtn.addEventListener('click', () => {
         const f = document.querySelector('.reel-frame iframe');
-        if (f && (f as any).requestFullscreen) (f as any).requestFullscreen();
+        if (f && f.requestFullscreen) f.requestFullscreen();
       });
     };
   })();

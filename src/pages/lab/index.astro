@@ -1,18 +1,19 @@
 ---
 import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
+import BrandTicker from '../../components/BrandTicker.astro';
 
 // === THE LAB INDEX — /lab ===
 // DJ's hub for everything in progress: the v2 pages (with their current
 // counterparts for instant A/B), plus the older experiments. Bookmark this.
 
 const v2 = [
-  { href: '/lab/home',       vs: '/',                 t: 'Homepage v2',       d: 'Pinned hero, marker circle, brand worlds, ticker, showreel kept.' },
-  { href: '/lab/work',       vs: '/work',             t: 'Work portals',      d: 'Projects grow to full-bleed and hand off, exoape-style.' },
+  { href: '/lab/home',       vs: '/',                 t: 'Homepage v2',       d: 'SIGHT SOUND EMOTION tilt hero, red floating hand, brand ticker, parallax work scenes.' },
+  { href: '/lab/work',       vs: '/work',             t: 'Work, reimagined',  d: 'Horizontal-scroll gallery + cursor-preview index. Portals scrapped.' },
   { href: '/lab/blue-cross', vs: '/work/blue-cross',  t: 'Blue Cross, reimagined', d: 'Editorial chapters, pinned insight, portal next-project.' },
   { href: '/lab/ai',         vs: null,                t: 'AI systems',        d: 'Audit. Automate. Deploy. The $5k offer, WILD cascade and all.' },
-  { href: '/lab/about',      vs: '/about',            t: 'About v2',          d: 'Hard rooms, pinned credo, team tiles, the range.' },
-  { href: '/lab/services',   vs: '/services',         t: 'Services v2',       d: 'CD-first rows, marker underlines, the AI block.' },
+  { href: '/lab/about',      vs: '/about',            t: 'About, from scratch', d: 'Builds monuments not moments. Real photo montage, Billions reached, philosophy pillars.' },
+  { href: '/lab/services',   vs: '/services',         t: 'Services v2',       d: 'Your real capabilities (agency + production) + the AI systems block.' },
   { href: '/lab/contact',    vs: '/contact',          t: 'Contact v2',        d: 'The email is the page. Badges escaped the menu.' },
 ];
 
@@ -68,40 +69,42 @@ const experiments = [
 
     <p class="lb-foot fade">Rollback safety: every page above is its own commit. Nothing replaces a live page until you promote it.</p>
 
+    <BrandTicker />
+
   </main>
   <LabFx />
 </Base>
 
 <style>
   .lb { background: var(--black); color: var(--white); min-height: 100vh; overflow-x: clip; }
-  .lb-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(252,252,252,0.5); }
-  .lb-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #e0322d; }
+  .lb-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .lb-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
 
   .lb-head { max-width: var(--wrap); margin: 0 auto; padding: 170px var(--pad) 7vh; }
   .lb-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(40px, 6vw, 92px); line-height: 1; letter-spacing: -0.03em; margin-top: 20px; }
   .lb-h1 em { font-style: italic; color: var(--accent); }
-  .lb-lead { margin-top: 26px; max-width: 540px; font-size: 15px; line-height: 1.7; font-weight: 300; color: rgba(252,252,252,0.72); }
+  .lb-lead { margin-top: 26px; max-width: 540px; font-size: 15px; line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.72); }
 
   .lb-sec { max-width: var(--wrap); margin: 0 auto; padding: 5vh var(--pad) 4vh; }
   .lb-list { list-style: none; margin: 22px 0 0; padding: 0; }
-  .lb-row { display: grid; grid-template-columns: 48px minmax(220px, 0.5fr) 1fr auto; gap: 24px; align-items: baseline; padding: 22px 6px; border-top: 1px solid rgba(252,252,252,0.13); transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
-  .lb-list li:last-child { border-bottom: 1px solid rgba(252,252,252,0.13); }
+  .lb-row { display: grid; grid-template-columns: 48px minmax(220px, 0.5fr) 1fr auto; gap: 24px; align-items: baseline; padding: 22px 6px; border-top: 1px solid rgb(var(--fg-rgb) / 0.13); transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .lb-list li:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.13); }
   .lb-row:hover { padding-left: 18px; }
-  .lb-n { font-size: 12px; letter-spacing: 0.18em; color: rgba(252,252,252,0.4); }
+  .lb-n { font-size: 12px; letter-spacing: 0.18em; color: rgb(var(--fg-rgb) / 0.4); }
   .lb-t { position: relative; width: fit-content; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(20px, 2.2vw, 30px); letter-spacing: -0.02em; color: var(--white); text-decoration: none; }
   .lb-t-sm { font-size: clamp(17px, 1.8vw, 23px); }
   .lb-stroke { position: absolute; left: 0; bottom: -5px; width: 100%; height: 9px; overflow: visible; }
-  .lb-stroke path { fill: none; stroke: #e0322d; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: 320; transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .lb-stroke path { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: 320; transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1); }
   .lb-row:hover .lb-stroke path { stroke-dashoffset: 0; }
-  .lb-d { font-size: 14px; line-height: 1.6; font-weight: 300; color: rgba(252,252,252,0.6); max-width: 52ch; }
-  .lb-vs { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(252,252,252,0.55); text-decoration: none; white-space: nowrap; transition: color 0.2s; }
+  .lb-d { font-size: 14px; line-height: 1.6; font-weight: 300; color: rgb(var(--fg-rgb) / 0.6); max-width: 52ch; }
+  .lb-vs { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); text-decoration: none; white-space: nowrap; transition: color 0.2s; }
   a.lb-vs:hover { color: var(--white); }
-  .lb-vs-new { color: #e0322d; }
+  .lb-vs-new { color: var(--accent); }
 
-  .lb-foot { max-width: var(--wrap); margin: 0 auto; padding: 6vh var(--pad) 14vh; font-size: 13px; font-weight: 300; color: rgba(252,252,252,0.45); }
+  .lb-foot { max-width: var(--wrap); margin: 0 auto; padding: 6vh var(--pad) 14vh; font-size: 13px; font-weight: 300; color: rgb(var(--fg-rgb) / 0.45); }
 
-  .lb :global(.split .w) { display: inline-block; overflow: hidden; vertical-align: top; }
-  .lb :global(.split .wi) { display: inline-block; transform: translateY(115%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .lb :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .lb :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
   .lb :global(.split.on .wi) { transform: none; }
 
   @media (max-width: 860px) {

@@ -1,0 +1,221 @@
+---
+// BrandTicker — a scroll-driven brand-logo marquee.
+// Auto-marquees slowly AND speeds up / shifts with scroll velocity: the page's
+// scroll delta is added to the translateX offset each frame, then eases back to
+// the base speed. Seamless loop (the set is duplicated). Hover pauses.
+// Logos with a /logos PNG render as <img> on var(--bg) (dark logos get knocked
+// to var(--fg) tone via filter); items without a logo render a clean uppercase
+// Inter wordmark in var(--fg). Each entry is an <a target="_blank"> when it has
+// a url, otherwise a <span>.
+interface Brand {
+  name: string;
+  logo?: string;
+  url?: string;
+}
+interface Props {
+  brands?: Brand[];
+  speed?: number; // base px/sec drift
+}
+
+const DEFAULT_BRANDS: Brand[] = [
+  { name: "Sony", logo: "/logos/sony.png", url: "https://www.sony.com" },
+  { name: "Intel", logo: "/logos/intel.png", url: "https://www.intel.com" },
+  { name: "Adorama", logo: "/logos/adorama.png", url: "https://www.adorama.com" },
+  { name: "MSI", logo: "/logos/msi.png", url: "https://www.msi.com" },
+  { name: "Lexar", logo: "/logos/lexar.png", url: "https://www.lexar.com" },
+  { name: "Flashpoint", logo: "/logos/flashpoint.png", url: "https://www.adorama.com" },
+  { name: "Art of Visuals", logo: "/logos/art-of-visuals.png", url: "https://artofvisuals.com" },
+  { name: "Blue Cross of Idaho", logo: "/logos/blue-cross.png", url: "https://www.bcidaho.com" },
+  { name: "Donut Media", logo: "/logos/donut-media.svg", url: "https://donut.media" },
+  { name: "DW Drums", logo: "/logos/dw-drums.png", url: "https://www.dwdrums.com" },
+  { name: "Against", logo: "/logos/against.png" },
+];
+
+const { brands = DEFAULT_BRANDS, speed = 28 } = Astro.props;
+
+// Render the set twice so the loop is seamless.
+const loop = [...brands, ...brands];
+---
+
+<div class="brand-ticker" data-speed={speed} aria-label="Brands we have worked with">
+  <div class="bt-track">
+    {
+      loop.map((b, i) => {
+        const inner = b.logo
+          ? <img class="bt-logo" src={b.logo} alt={b.name} loading="lazy" decoding="async" width="160" height="34" />
+          : <span class="bt-word">{b.name}</span>;
+        return b.url ? (
+          <a
+            class="bt-item"
+            href={b.url}
+            target="_blank"
+            rel="noopener"
+            aria-label={b.name}
+            aria-hidden={i >= brands.length ? "true" : undefined}
+            tabindex={i >= brands.length ? -1 : undefined}
+          >
+            {inner}
+          </a>
+        ) : (
+          <span class="bt-item" aria-hidden={i >= brands.length ? "true" : undefined}>{inner}</span>
+        );
+      })
+    }
+  </div>
+</div>
+
+<style>
+  .brand-ticker {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    background: var(--bg);
+    overflow: hidden;
+    padding: clamp(18px, 2.6vw, 34px) 0;
+    border-top: 1px solid rgb(var(--fg-rgb) / 0.08);
+    border-bottom: 1px solid rgb(var(--fg-rgb) / 0.08);
+    /* Fade the edges so items enter/exit cleanly. */
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  .bt-track {
+    display: flex;
+    align-items: center;
+    gap: clamp(40px, 5vw, 88px);
+    width: max-content;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .bt-item {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    height: clamp(20px, 2.4vw, 34px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  a.bt-item:hover { transform: translateY(-2px); }
+  a.bt-item:hover .bt-logo { opacity: 1; }
+
+  .bt-logo {
+    height: 100%;
+    width: auto;
+    max-width: clamp(90px, 10vw, 160px);
+    object-fit: contain;
+    display: block;
+    /* Logos sit on var(--bg). Knock mono/dark marks to the --fg tone so they
+       read on the dark surface; ease back to full color on hover. */
+    filter: brightness(0) invert(var(--bt-invert, 1));
+    opacity: 0.78;
+    transition: filter 0.3s ease, opacity 0.25s ease;
+  }
+  a.bt-item:hover .bt-logo { filter: none; opacity: 1; }
+
+  .bt-word {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: clamp(15px, 1.5vw, 22px);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--fg);
+    opacity: 0.72;
+    white-space: nowrap;
+    transition: opacity 0.25s ease;
+  }
+  a.bt-item:hover .bt-word { opacity: 1; color: var(--accent); }
+
+  /* When the base is light (press theme), brightness(0) gives black marks,
+     which already read on a light surface — so don't invert there. The
+     --bt-invert var is flipped in script based on the resolved fg luminance. */
+
+  @media (prefers-reduced-motion: reduce) {
+    .bt-track { transform: none !important; }
+  }
+</style>
+
+<script>
+  // Scroll-velocity marquee. Base drift + scroll delta added to the offset each
+  // frame, easing back toward the base speed. Seamless wrap at half the track
+  // width (the set is duplicated). Hover pauses. Reduced-motion: static.
+  (function () {
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    document.querySelectorAll(".brand-ticker").forEach((root) => {
+      const track = root.querySelector(".bt-track");
+      if (!track) return;
+
+      // If the rendered fg is dark (light theme like "press"), don't invert the
+      // knockout — brightness(0) already yields a dark mark that reads on light.
+      try {
+        const fg = getComputedStyle(document.documentElement).getPropertyValue("--fg").trim();
+        const m = fg.match(/^#?([0-9a-f]{6})$/i);
+        if (m) {
+          const n = parseInt(m[1], 16);
+          const lum = (((n >> 16) & 255) * 0.299 + ((n >> 8) & 255) * 0.587 + (n & 255) * 0.114) / 255;
+          root.style.setProperty("--bt-invert", lum < 0.5 ? "0" : "1");
+        }
+      } catch (e) {}
+
+      if (reduced) return;
+
+      const baseSpeed = parseFloat(root.dataset.speed || "28"); // px/sec
+      let offset = 0;
+      let half = track.scrollWidth / 2 || 1;
+      let velAdd = 0; // extra velocity from scroll, decays back to 0
+      let lastScroll = window.scrollY;
+      let paused = false;
+      let last = performance.now();
+
+      root.addEventListener("pointerenter", () => (paused = true));
+      root.addEventListener("pointerleave", () => (paused = false));
+
+      addEventListener(
+        "scroll",
+        () => {
+          const y = window.scrollY;
+          const dy = y - lastScroll;
+          lastScroll = y;
+          // Scroll velocity feeds the track: faster + direction-aware kick.
+          velAdd += -dy * 0.9;
+          // Clamp so a flick can't fling it absurdly far.
+          velAdd = Math.max(-900, Math.min(900, velAdd));
+        },
+        { passive: true }
+      );
+
+      addEventListener(
+        "resize",
+        () => {
+          half = track.scrollWidth / 2 || half;
+        },
+        { passive: true }
+      );
+
+      function frame(now) {
+        const dt = Math.min(0.05, (now - last) / 1000);
+        last = now;
+
+        // Ease the scroll-velocity contribution back toward 0.
+        velAdd *= 0.9;
+        if (Math.abs(velAdd) < 0.1) velAdd = 0;
+
+        if (!paused) {
+          offset += (baseSpeed + velAdd) * dt;
+        } else {
+          // Paused: still let the scroll kick bleed off so it resumes smoothly.
+          offset += velAdd * dt;
+        }
+
+        // Seamless wrap in both directions.
+        if (offset >= half) offset -= half;
+        else if (offset < 0) offset += half;
+
+        track.style.transform = "translate3d(" + -offset.toFixed(2) + "px,0,0)";
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    });
+  })();
+</script>

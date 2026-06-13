@@ -1,18 +1,30 @@
 ---
 import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
+import BrandTicker from '../../components/BrandTicker.astro';
 
-// === SERVICES V2 — /lab/services ===
-// CD-first order per the Website Context doc. Editorial rows w/ marker
-// underline draws, a pinned statement beat, the AI systems block (links the
-// /lab/ai offer), and a plain how-we-work strip. Voice: studio "we".
+// === SERVICES V3 — /lab/services ===
+// Rebuilt on DJ's REAL services taxonomy (scrubbed from the live site), split
+// into AGENCY + PRODUCTION, with creative direction emphasized FIRST. Adds the
+// new AI SYSTEMS feature block (links the /lab/ai offer), a pinned statement
+// beat with parallax, a how-we-work strip, the BrandTicker band, and a closing
+// CTA. Everything routes through the tokenized color system (LabFx redefines
+// --bg/--fg/--accent/etc on :root) so the live theme selector reskins it.
+// Voice: studio "we", creative-direction first, gear never the headline.
 
-const services = [
-  { n: '01', t: 'Creative direction', d: 'The idea, the look, the story. The reason brands call.' },
-  { n: '02', t: 'Direction', d: 'Commercials, brand films, campaigns. Concept to final cut.' },
-  { n: '03', t: 'Brand campaigns', d: 'Whole campaigns, not one-off clips.' },
-  { n: '04', t: 'Creative consulting', d: "We help teams sharpen what they're making and why." },
-  { n: '05', t: 'End-to-end production', d: 'Full production and post, scaled to the job. No hand-offs into the void.' },
+const agency = [
+  { n: '01', t: 'Creative Direction', d: 'The throughline. One taste, one vision, owned end to end. The reason brands call.' },
+  { n: '02', t: 'Creative Strategy', d: 'What to say, to whom, and why now. The thinking before the making.' },
+  { n: '03', t: 'Campaign Development', d: 'Whole campaigns, not one-off clips. Built to run across every channel.' },
+  { n: '04', t: 'Experiential', d: 'Moments people stand inside. Brand made physical, made memorable.' },
+  { n: '05', t: 'Community Building', d: 'The long game: an audience that shows up, stays, and brings friends.' },
+];
+
+const production = [
+  { n: '06', t: 'Video Production', d: 'Commercials, brand films, social. Concept to final cut, senior hands throughout.' },
+  { n: '07', t: 'Photography', d: 'Campaign, product, editorial. The frame that does the work in one look.' },
+  { n: '08', t: 'Brand Design', d: 'Identity, systems, the visual language a brand lives in.' },
+  { n: '09', t: 'Merchandising', d: 'Product and merch that people actually want to wear and keep.' },
 ];
 
 const steps = [
@@ -23,59 +35,107 @@ const steps = [
 ];
 ---
 <Base title="Services — monuments">
-  <main class="sv2">
+  <main class="sv3">
 
     <!-- HERO -->
-    <header class="sv2-hero">
-      <p class="sv2-eyebrow fade">Services</p>
-      <h1 class="sv2-h1 split">Creative leadership, <em>start to ship.</em></h1>
-      <p class="sv2-lead fade">Production muscle is assumed. What you're hiring is judgment: the idea, the direction, and the taste to get it made right.</p>
+    <header class="sv3-hero">
+      <figure class="sv3-hero-img" data-drift="9" aria-hidden="true"></figure>
+      <div class="sv3-hero-inner">
+        <p class="sv3-eyebrow fade">Services</p>
+        <h1 class="sv3-h1 split">Hands-on across the <em>full agency spectrum.</em></h1>
+        <p class="sv3-lead fade">From strategy and experiential to production and creative direction. One holistic perspective on everything we make, and one team accountable for all of it.</p>
+      </div>
     </header>
 
-    <!-- SERVICE ROWS -->
-    <section class="sv2-list-wrap">
-      <ul class="sv2-list">
-        {services.map((s) => (
-          <li class="sv2-row fade">
-            <span class="sv2-n">{s.n}</span>
-            <span class="sv2-t">
+    <!-- CAPABILITIES: AGENCY -->
+    <section class="sv3-cap">
+      <div class="sv3-cap-head fade">
+        <p class="sv3-kicker">Agency</p>
+        <p class="sv3-cap-sub">Strategy, direction, and the ideas that hold a campaign together.</p>
+      </div>
+      <ul class="sv3-list">
+        {agency.map((s) => (
+          <li class="sv3-row fade">
+            <span class="sv3-n">{s.n}</span>
+            <span class="sv3-t">
               {s.t}
-              <svg class="sv2-stroke" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8 C60 4, 150 10, 296 5" /></svg>
+              <svg class="sv3-stroke" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8 C60 4, 150 10, 296 5" /></svg>
             </span>
-            <span class="sv2-d">{s.d}</span>
+            <span class="sv3-d">{s.d}</span>
           </li>
         ))}
       </ul>
     </section>
 
-    <!-- AI SYSTEMS BLOCK (cream, the new offer) -->
-    <section class="sv2-ai">
-      <div class="sv2-ai-inner">
-        <p class="sv2-kicker fade">New · AI systems</p>
-        <h2 class="sv2-ai-h split">Audit. Automate. <em>Deploy.</em></h2>
-        <p class="sv2-ai-b fade">For businesses that don't have time to become AI businesses. We audit what you've got, build what's missing, and train your team to run it. $5,000 flat, two weeks, plain English.</p>
-        <a class="sv2-cta fade" href="/lab/ai">See the AI offer <span aria-hidden="true">↗</span></a>
+    <!-- CAPABILITIES: PRODUCTION -->
+    <section class="sv3-cap sv3-cap-prod">
+      <div class="sv3-cap-head fade">
+        <p class="sv3-kicker">Production</p>
+        <p class="sv3-cap-sub">The muscle that gets the idea made, in every format it needs to live in.</p>
+      </div>
+      <ul class="sv3-list">
+        {production.map((s) => (
+          <li class="sv3-row fade">
+            <span class="sv3-n">{s.n}</span>
+            <span class="sv3-t">
+              {s.t}
+              <svg class="sv3-stroke" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8 C60 4, 150 10, 296 5" /></svg>
+            </span>
+            <span class="sv3-d">{s.d}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- PINNED STATEMENT BEAT (parallax, atmosphere shift) -->
+    <section class="sv3-beat scn" data-scene="beat">
+      <div class="scn-stage sv3-beat-stage">
+        <figure class="sv3-beat-bg" data-drift="6" aria-hidden="true"></figure>
+        <p class="sv3-beat-line" data-cwords>One studio, one perspective, accountable for <em>everything we make.</em></p>
+        <p class="sv3-beat-sub">No hand-offs into the void. No telephone game between vendors.</p>
+      </div>
+    </section>
+
+    <!-- AI SYSTEMS FEATURE BLOCK (its own atmosphere) -->
+    <section class="sv3-ai">
+      <figure class="sv3-ai-glow" data-drift="4" aria-hidden="true"></figure>
+      <div class="sv3-ai-inner">
+        <p class="sv3-ai-kicker fade">New · AI Systems</p>
+        <h2 class="sv3-ai-h split">Audit. Automate. <em>Deploy.</em></h2>
+        <p class="sv3-ai-b fade">For businesses that don't have time to become AI businesses. We audit what you've got, build what's missing, and train your team to run it. Five thousand dollars flat, two weeks, plain English.</p>
+        <div class="sv3-ai-meta fade">
+          <span class="sv3-ai-tag">$5,000 audit</span>
+          <span class="sv3-ai-tag">Two weeks</span>
+          <span class="sv3-ai-tag">Plain English</span>
+        </div>
+        <a class="sv3-ai-cta" href="/lab/ai">See the AI offer <span aria-hidden="true">↗</span></a>
       </div>
     </section>
 
     <!-- HOW WE WORK -->
-    <section class="sv2-how">
-      <p class="sv2-eyebrow fade">How we work</p>
-      <div class="sv2-steps">
+    <section class="sv3-how">
+      <p class="sv3-eyebrow fade">How we work</p>
+      <div class="sv3-steps">
         {steps.map((s, i) => (
-          <div class="sv2-step fade">
-            <span class="sv2-step-n">{String(i + 1).padStart(2, '0')}</span>
-            <h3 class="sv2-step-t">{s.t}</h3>
-            <p class="sv2-step-d">{s.d}</p>
+          <div class="sv3-step fade">
+            <span class="sv3-step-n">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="sv3-step-t">{s.t}</h3>
+            <p class="sv3-step-d">{s.d}</p>
           </div>
         ))}
       </div>
     </section>
 
+    <!-- BRAND TICKER BAND -->
+    <section class="sv3-brands">
+      <p class="sv3-eyebrow fade">In good company</p>
+      <BrandTicker />
+    </section>
+
     <!-- CTA -->
-    <section class="sv2-end">
-      <p class="sv2-end-big split">Tell us what you're <em>trying to move.</em></p>
-      <a class="sv2-cta fade" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
+    <section class="sv3-end">
+      <p class="sv3-end-big split">Tell us what you're <em>trying to move.</em></p>
+      <a class="sv3-end-cta" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
     </section>
 
   </main>
@@ -83,62 +143,118 @@ const steps = [
 </Base>
 
 <style>
-  .sv2 { background: var(--black); color: var(--white); overflow-x: clip; }
-  .sv2-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(252,252,252,0.5); }
-  .sv2-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #e0322d; }
+  .sv3 { background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .sv3-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .sv3-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
 
-  .sv2-hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: flex-end; max-width: var(--wrap); margin: 0 auto; padding: 160px var(--pad) 8vh; }
-  .sv2-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(44px, 7vw, 108px); line-height: 1; letter-spacing: -0.03em; max-width: 14ch; margin-top: 20px; }
-  .sv2-h1 em, .sv2-ai-h em, .sv2-end-big em { font-style: italic; color: var(--accent); }
-  .sv2-lead { margin-top: 28px; max-width: 520px; font-size: 16px; line-height: 1.7; font-weight: 300; color: rgba(252,252,252,0.78); }
+  /* HERO */
+  .sv3-hero { position: relative; min-height: 82vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; padding: 160px 0 9vh; }
+  .sv3-hero-img { position: absolute; inset: -12% 0 0; z-index: 0; pointer-events: none; will-change: transform;
+    background: radial-gradient(120% 90% at 78% 16%, rgb(var(--fg-rgb) / 0.05), transparent 60%),
+                radial-gradient(80% 70% at 12% 90%, var(--accent), transparent 62%);
+    opacity: 0.14; }
+  .sv3-hero-inner { position: relative; z-index: 1; max-width: var(--wrap); width: 100%; margin: 0 auto; padding: 0 var(--pad); }
+  .sv3-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(44px, 7.2vw, 110px); line-height: 1.02; letter-spacing: -0.03em; max-width: 16ch; margin-top: 22px; }
+  .sv3-h1 em, .sv3-beat-line em, .sv3-ai-h em, .sv3-end-big em { font-style: italic; color: var(--accent); }
+  .sv3-lead { margin-top: 30px; max-width: 560px; font-size: 16px; line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.78); }
 
-  .sv2-list-wrap { max-width: var(--wrap); margin: 0 auto; padding: 6vh var(--pad) clamp(90px, 11vw, 150px); }
-  .sv2-list { list-style: none; margin: 0; padding: 0; }
-  .sv2-row { display: grid; grid-template-columns: 64px minmax(260px, 0.55fr) 1fr; gap: 28px; align-items: baseline; padding: 30px 6px; border-top: 1px solid rgba(252,252,252,0.14); transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
-  .sv2-row:last-child { border-bottom: 1px solid rgba(252,252,252,0.14); }
-  .sv2-row:hover { padding-left: 22px; }
-  .sv2-n { font-size: 12px; letter-spacing: 0.18em; color: rgba(252,252,252,0.4); }
-  .sv2-t { position: relative; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(24px, 2.8vw, 40px); letter-spacing: -0.02em; width: fit-content; }
-  .sv2-stroke { position: absolute; left: 0; bottom: -6px; width: 100%; height: 10px; overflow: visible; }
-  .sv2-stroke path { fill: none; stroke: #e0322d; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: 320; transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1); }
-  .sv2-row:hover .sv2-stroke path { stroke-dashoffset: 0; }
-  .sv2-d { font-size: 15px; line-height: 1.65; font-weight: 300; color: rgba(252,252,252,0.65); max-width: 56ch; }
+  /* CAPABILITIES */
+  .sv3-cap { max-width: var(--wrap); margin: 0 auto; padding: clamp(70px, 9vw, 120px) var(--pad) 0; }
+  .sv3-cap-prod { padding-bottom: clamp(40px, 6vw, 80px); }
+  .sv3-cap-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px 26px; padding-bottom: 24px; }
+  .sv3-cap-sub { font-size: 15px; line-height: 1.6; font-weight: 300; color: rgb(var(--fg-rgb) / 0.6); max-width: 46ch; }
 
-  .sv2-ai { background: var(--white); color: #141519; }
-  .sv2-ai-inner { max-width: min(980px, 92vw); margin: 0 auto; padding: clamp(100px, 13vw, 170px) var(--pad); }
-  .sv2-ai-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(38px, 5.4vw, 80px); letter-spacing: -0.03em; margin-top: 18px; }
-  .sv2-ai-b { margin-top: 26px; max-width: 54ch; font-size: 16px; line-height: 1.75; font-weight: 300; color: rgba(20,21,25,0.8); }
-  .sv2-ai .sv2-cta { margin-top: 36px; color: var(--white); background: var(--black); }
+  .sv3-list { list-style: none; margin: 0; padding: 0; }
+  .sv3-row { display: grid; grid-template-columns: 64px minmax(220px, 0.5fr) 1fr; gap: 28px; align-items: baseline; padding: 30px 6px; border-top: 1px solid rgb(var(--fg-rgb) / 0.14); transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .sv3-row:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .sv3-row:hover { padding-left: 22px; }
+  .sv3-n { font-size: 12px; letter-spacing: 0.18em; color: rgb(var(--fg-rgb) / 0.4); }
+  .sv3-t { position: relative; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(24px, 2.8vw, 40px); letter-spacing: -0.02em; line-height: 1.12; width: fit-content; }
+  .sv3-stroke { position: absolute; left: 0; bottom: -6px; width: 100%; height: 10px; overflow: visible; }
+  .sv3-stroke path { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: 320; transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .sv3-row:hover .sv3-stroke path { stroke-dashoffset: 0; }
+  .sv3-d { font-size: 15px; line-height: 1.65; font-weight: 300; color: rgb(var(--fg-rgb) / 0.65); max-width: 56ch; }
 
-  .sv2-how { max-width: var(--wrap); margin: 0 auto; padding: clamp(90px, 11vw, 150px) var(--pad); }
-  .sv2-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 44px); margin-top: 40px; }
-  .sv2-step { border-top: 1px solid rgba(252,252,252,0.18); padding-top: 18px; }
-  .sv2-step-n { font-size: 12px; letter-spacing: 0.18em; color: rgba(252,252,252,0.4); }
-  .sv2-step-t { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 20px; margin-top: 12px; }
-  .sv2-step-d { margin-top: 10px; font-size: 14px; line-height: 1.65; font-weight: 300; color: rgba(252,252,252,0.65); }
+  /* PINNED STATEMENT BEAT */
+  .scn { position: relative; }
+  .scn-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  .sv3-beat { height: 220vh; }
+  .sv3-beat-stage { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 8vh var(--pad); }
+  .sv3-beat-bg { position: absolute; inset: -14% -6%; z-index: 0; pointer-events: none; will-change: transform;
+    background: radial-gradient(60% 60% at 50% 42%, var(--accent), transparent 64%),
+                radial-gradient(50% 50% at 20% 80%, var(--accent-2), transparent 70%);
+    opacity: 0.16; }
+  .sv3-beat-line { position: relative; z-index: 1; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(32px, 5.6vw, 86px); line-height: 1.08; letter-spacing: -0.03em; max-width: 18ch; }
+  .sv3-beat-sub { position: relative; z-index: 1; margin-top: 4vh; font-size: 14px; letter-spacing: 0.06em; color: rgb(var(--fg-rgb) / 0.6); opacity: var(--subo, 0); transition: opacity 0.4s ease; }
 
-  .sv2-end { min-height: 54vh; display: flex; flex-direction: column; gap: 40px; align-items: center; justify-content: center; text-align: center; padding: 70px var(--pad); }
-  .sv2-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5vw, 72px); letter-spacing: -0.025em; }
-  .sv2-cta { display: inline-flex; align-items: center; gap: 10px; width: fit-content; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); background: var(--white); padding: 18px 30px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease; }
-  .sv2-cta:hover { gap: 18px; transform: translateY(-2px); }
+  /* The next section slides OVER the pinned beat (seam overlap). */
+  .sv3-ai { position: relative; z-index: 3; margin-top: -100vh; }
 
-  .sv2 :global(.split .w) { display: inline-block; overflow: hidden; vertical-align: top; }
-  .sv2 :global(.split .wi) { display: inline-block; transform: translateY(115%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
-  .sv2 :global(.split.on .wi) { transform: none; }
+  /* AI SYSTEMS FEATURE BLOCK — its own atmosphere (paper-on-ink inversion) */
+  .sv3-ai { background: var(--paper); color: var(--ink); overflow: hidden; }
+  .sv3-ai-glow { position: absolute; inset: -20% -10% auto auto; width: 60vw; height: 60vw; z-index: 0; pointer-events: none; will-change: transform;
+    background: radial-gradient(circle at 70% 30%, var(--accent), transparent 60%); opacity: 0.12; }
+  .sv3-ai-inner { position: relative; z-index: 1; max-width: min(980px, 92vw); margin: 0 auto; padding: clamp(100px, 13vw, 180px) var(--pad); }
+  .sv3-ai-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+  .sv3-ai-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(40px, 6vw, 92px); line-height: 1.04; letter-spacing: -0.03em; margin-top: 18px; }
+  .sv3-ai-b { margin-top: 26px; max-width: 54ch; font-size: 16px; line-height: 1.75; font-weight: 300; color: rgb(var(--ink-rgb) / 0.8); }
+  .sv3-ai-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .sv3-ai-tag { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); border: 1px solid rgb(var(--ink-rgb) / 0.24); border-radius: 999px; padding: 9px 16px; }
+  .sv3-ai-cta { display: inline-flex; align-items: center; gap: 10px; width: fit-content; margin-top: 38px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--paper); background: var(--accent); padding: 18px 30px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease; }
+  .sv3-ai-cta:hover { gap: 18px; transform: translateY(-2px); }
+
+  /* HOW WE WORK */
+  .sv3-how { max-width: var(--wrap); margin: 0 auto; padding: clamp(90px, 11vw, 150px) var(--pad); }
+  .sv3-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 44px); margin-top: 40px; }
+  .sv3-step { border-top: 1px solid rgb(var(--fg-rgb) / 0.18); padding-top: 18px; }
+  .sv3-step-n { font-size: 12px; letter-spacing: 0.18em; color: rgb(var(--fg-rgb) / 0.4); }
+  .sv3-step-t { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 20px; margin-top: 12px; }
+  .sv3-step-d { margin-top: 10px; font-size: 14px; line-height: 1.65; font-weight: 300; color: rgb(var(--fg-rgb) / 0.65); }
+
+  /* BRAND TICKER BAND */
+  .sv3-brands { padding: clamp(20px, 4vw, 50px) 0; }
+  .sv3-brands .sv3-eyebrow { max-width: var(--wrap); margin: 0 auto clamp(24px, 3vw, 40px); padding: 0 var(--pad); }
+
+  /* CTA */
+  .sv3-end { min-height: 56vh; display: flex; flex-direction: column; gap: 40px; align-items: center; justify-content: center; text-align: center; padding: 80px var(--pad); }
+  .sv3-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5vw, 72px); line-height: 1.08; letter-spacing: -0.025em; }
+  .sv3-end-cta { display: inline-flex; align-items: center; gap: 10px; width: fit-content; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--fg); padding: 18px 30px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease; }
+  .sv3-end-cta:hover { gap: 18px; transform: translateY(-2px); }
+
+  /* TYPE-CLIP-SAFE word reveal (overhang + descenders never clipped) */
+  .sv3 :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .sv3 :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .sv3 :global(.split.on .wi) { transform: none; }
+
+  /* .fade reveals (line-mask is clip-path so overhang isn't cut) */
+  .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+  .fade.on { opacity: 1; transform: none; }
 
   @media (max-width: 860px) {
-    .sv2-row { grid-template-columns: 40px 1fr; }
-    .sv2-d { grid-column: 2; }
-    .sv2-steps { grid-template-columns: 1fr 1fr; }
+    .sv3-row { grid-template-columns: 40px 1fr; }
+    .sv3-d { grid-column: 2; }
+    .sv3-steps { grid-template-columns: 1fr 1fr; }
   }
+
   @media (prefers-reduced-motion: reduce) {
-    .sv2 :global(.split .wi) { transform: none !important; transition: none !important; }
-    .sv2-stroke path { stroke-dashoffset: 0; }
+    .sv3 :global(.split .wi) { transform: none !important; transition: none !important; }
+    .sv3-stroke path { stroke-dashoffset: 0; }
+    .fade { opacity: 1; transform: none; transition: none; }
+    .sv3-beat { height: auto; }
+    .scn-stage { position: static; height: auto; padding: 16vh var(--pad); }
+    .sv3-ai { margin-top: 0; }
+    .sv3-beat-sub { opacity: 1; }
+    [data-drift] { transform: none !important; }
   }
 </style>
 
 <script>
-  const splitWords = (root: Node, counter: { n: number }) => {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  const phase = (p, a, b) => clamp01((p - a) / (b - a));
+
+  // --- Type-clip-safe word splitter (never touches text inside <svg>) ---
+  const splitWords = (root, counter) => {
     [...root.childNodes].forEach((node) => {
       if (node.nodeType === 3) {
         const frag = document.createDocumentFragment();
@@ -152,10 +268,52 @@ const steps = [
           w.appendChild(wi); frag.appendChild(w);
         });
         node.replaceWith(frag);
-      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) splitWords(node, counter);
+      } else if (node.nodeType === 1 && !node.closest('svg')) {
+        splitWords(node, counter);
+      }
     });
   };
-  document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
-  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); } }), { threshold: 0.35 });
-  document.querySelectorAll('.split').forEach((el) => io.observe(el));
+  document.querySelectorAll('.split, [data-cwords]').forEach((el) => splitWords(el, { n: 0 }));
+
+  // --- Reveal observers (.split words + .fade blocks) ---
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.3 });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
+
+  // --- Pinned beat progress + parallax drifts (scrubbed every frame, rAF) ---
+  const beat = document.querySelector('[data-scene="beat"]');
+  const bWords = beat ? [...beat.querySelectorAll('.wi')] : [];
+  const bSub = beat ? beat.querySelector('.sv3-beat-sub') : null;
+  const drifts = [...document.querySelectorAll('[data-drift]')];
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      if (beat) {
+        const r = beat.getBoundingClientRect();
+        const p = clamp01(-r.top / (beat.offsetHeight - innerHeight));
+        const reveal = phase(p, 0.08, 0.5);
+        bWords.forEach((w, i) => w.classList.toggle('on', reveal * bWords.length * 1.1 > i));
+        if (bSub) bSub.style.setProperty('--subo', String(phase(p, 0.55, 0.78)));
+      }
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+        const v = Number(el.dataset.drift || 6);
+        el.style.transform = `translateY(${c * -v * 14}px)`;
+      });
+      ticking = false;
+    });
+  };
+
+  if (!reduced) {
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  } else {
+    bWords.forEach((w) => w.classList.add('on'));
+  }
 </script>

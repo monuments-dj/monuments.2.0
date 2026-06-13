@@ -1,103 +1,173 @@
 ---
 import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
+import BrandTicker from '../../components/BrandTicker.astro';
+import FloatingHand from '../../components/FloatingHand.astro';
 
-// === ABOUT V2 — /lab/about ===
-// exoape-studio pacing + tinywins generosity, on the existing approved copy.
-// One pinned scene (the credo), drifting media, marker accents, team tiles
-// (placeholder headshots still pending), mission-work texture band per the
-// Website Context doc. About is allowed personal voice; pitch lines stay "we".
+// === ABOUT V3 — /lab/about ===
+// Full rebuild. First-person is allowed on About (brand doc). Image-rich:
+// a drifting hero photo wall, parallax montage columns, a PINNED credo scene
+// with a deep-parallax photo bed, the real team frame, and a documentary-range
+// band. Pizzazz: scrubbed + reversible parallax, FloatingHand, BrandTicker.
+// Every surface/text/accent is tokenized so the LabFx color selector re-skins it.
 
+// Honest-but-big stats. "Billions" is the claim (a word, not a fake precise
+// number): weekly work on a brand with millions of audience, plus Sony's global
+// distribution. No fabricated precision.
 const stats = [
-  { n: '10+', l: 'years in the hard rooms' },
-  { n: '1M+', l: 'people reached by the work' },
-  { n: '8', l: 'global brands and counting' },
-  { n: '2', l: 'cities: Los Angeles and Boise' },
+  { n: 'Billions', l: "reached. Campaigns for globally distributed brands, Sony included." },
+  { n: '10+', l: 'years directing creative that has to perform.' },
+  { n: '8+', l: 'global brands, from Sony and Intel to independents.' },
+  { n: '2', l: 'home bases: Los Angeles and Boise.' },
 ];
+
+// DJ's five pillars (his words, lightly tightened). Each gets a real frame.
+const pillars = [
+  { k: '01', t: 'Insight, Empathy & Data', img: '/gallery/full/p-005.jpg',
+    d: "I dig into the brand and the audience in equal measure, then turn what I find into something you can actually act on." },
+  { k: '02', t: 'Collaborative & Strategic', img: '/about/team.jpg',
+    d: "I work next to clients, not at them. The best ideas come out of the room when everyone is building the same thing." },
+  { k: '03', t: 'Status Quo Slayer', img: '/gallery/full/p-040.jpg',
+    d: "Creative never sits still. I keep refining the work so it meets the market where it is now, not where it was last year." },
+  { k: '04', t: 'Results-Driven', img: '/gallery/full/p-070.jpg',
+    d: "I care about ROI and the life of a campaign after launch. Trackable, repeatable, built to keep paying off." },
+  { k: '05', t: 'From Concept to Impact', img: '/gallery/full/p-050.jpg',
+    d: "Big picture and fine detail at the same time. Ideas that perform, not just ones that look good in a deck." },
+];
+
+// Hero drifting photo wall — a curated mix of real frames, varied orientation.
+const wall = [
+  { src: '/gallery/full/p-020.jpg', drift: 14, ar: '3/4' },
+  { src: '/gallery/full/p-070.jpg', drift: -10, ar: '16/10' },
+  { src: '/gallery/full/p-040.jpg', drift: 20, ar: '2/3' },
+  { src: '/gallery/full/p-005.jpg', drift: -16, ar: '16/10' },
+];
+
+// Montage columns (the pinned scene's parallax photo bed) — three columns of
+// real frames that travel at different rates behind the credo.
+const colA = ['/gallery/full/p-001.jpg', '/gallery/full/p-030.jpg', '/gallery/full/p-060.jpg', '/gallery/full/p-090.jpg'];
+const colB = ['/gallery/full/p-020.jpg', '/gallery/full/p-050.jpg', '/gallery/full/p-080.jpg', '/gallery/full/p-010.jpg'];
+const colC = ['/gallery/full/p-040.jpg', '/gallery/full/p-070.jpg', '/gallery/full/p-100.jpg', '/gallery/full/p-015.jpg'];
 ---
 <Base title="About — monuments">
-  <main class="ab2">
+  <main class="ab3">
 
-    <!-- HERO -->
-    <header class="ab2-hero">
-      <figure class="ab2-hero-img a" data-drift="7"><img src="/galaxy/gx-07.jpg" alt="" loading="eager" /></figure>
-      <figure class="ab2-hero-img b" data-drift="11"><img src="/galaxy/gx-18.jpg" alt="" loading="eager" /></figure>
-      <div class="ab2-hero-inner">
-        <p class="ab2-eyebrow fade">About Monuments</p>
-        <h1 class="ab2-h1 split">A decade in <em>the hard rooms.</em></h1>
-        <p class="ab2-lead fade">Rooms where the brief was wrong, the timeline was rude, and the stakes were real. We learned to love those rooms.</p>
+    <!-- HERO: first person, with a drifting photo wall and the floating hand -->
+    <header class="ab3-hero">
+      <FloatingHand side="right" top="14vh" />
+      <div class="ab3-wall" aria-hidden="true">
+        {wall.map((w) => (
+          <figure class="ab3-wall-img" data-drift={w.drift} style={`aspect-ratio:${w.ar};`}>
+            <img src={w.src} alt="" loading="eager" decoding="async" />
+          </figure>
+        ))}
       </div>
+      <div class="ab3-hero-inner">
+        <p class="ab3-eyebrow fade">Hey, I'm DJ.</p>
+        <h1 class="ab3-h1 split">A creative director who builds <em>monuments,</em> not moments.</h1>
+        <p class="ab3-lead fade">Creative director and strategist out of Los Angeles. I help brands say something that lasts, and then I help them prove it worked.</p>
+      </div>
+      <div class="ab3-scrollcue fade" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
 
-    <!-- STATS -->
-    <section class="ab2-stats">
-      {stats.map((s) => (
-        <div class="ab2-stat fade">
-          <span class="ab2-stat-n">{s.n}</span>
-          <span class="ab2-stat-l">{s.l}</span>
+    <!-- BRAND TICKER -->
+    <BrandTicker />
+
+    <!-- STATS — "Billions" lands as the hero stat -->
+    <section class="ab3-stats">
+      {stats.map((s, i) => (
+        <div class={`ab3-stat fade ${i === 0 ? 'hero' : ''}`}>
+          <span class="ab3-stat-n">{s.n}</span>
+          <span class="ab3-stat-l">{s.l}</span>
         </div>
       ))}
     </section>
 
-    <!-- WHO (cream chapter) -->
-    <section class="ab2-who">
-      <div class="ab2-cols">
-        <p class="ab2-kicker fade">Who we are</p>
-        <div class="ab2-col">
-          <p class="ab2-big split">A creative-led studio run by CD <em>DJ Ramirez</em>, based between Los Angeles and Boise.</p>
-          <p class="ab2-body fade">We plug in at the senior level: strategy, creative direction, integrated content. For brands that want to show up in culture and mean it, and for the agencies that serve them. DJ leads the creative. Tess keeps the trains running. A trusted bench of makers joins when the job calls for it.</p>
+    <!-- WHO (paper chapter) -->
+    <section class="ab3-who">
+      <div class="ab3-cols">
+        <p class="ab3-kicker fade">The short version</p>
+        <div class="ab3-col">
+          <p class="ab3-big split">I plug in at the senior level: <em>strategy, creative direction, integrated content.</em> For brands that want to show up in culture and mean it.</p>
+          <p class="ab3-body fade">Ten years of campaigns taught me the difference between work that impresses and work that performs. I chase the second one. The idea has to land, the audience has to feel it, and the numbers have to move. That is the whole job.</p>
         </div>
       </div>
     </section>
 
-    <!-- PINNED CREDO SCENE (dark, the two-rabbits + the point) -->
-    <section class="ab2-credo scn" data-scene="credo">
-      <div class="scn-stage ab2-credo-stage">
-        <figure class="ab2-credo-bg" data-drift="5"><img src="/galaxy/gx-22.jpg" alt="" loading="lazy" /></figure>
-        <div class="ab2-credo-copy">
-          <p class="ab2-credo-line" data-cwords>I shoot but I'm not a shooter. I direct but it's not the point. The point is <em>the story.
-            <svg class="ab2-stroke" viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M5 9 C70 4, 180 12, 295 6" /></svg>
-          </em></p>
-          <p class="ab2-credo-sub">The moment. Always has been.</p>
+    <!-- PINNED MONTAGE + CREDO -->
+    <section class="ab3-credo scn" data-scene="credo">
+      <div class="scn-stage ab3-credo-stage">
+        <div class="ab3-montage" aria-hidden="true">
+          <div class="ab3-mcol" data-mspeed="0.55">
+            {colA.map((s) => <figure><img src={s} alt="" loading="lazy" decoding="async" /></figure>)}
+          </div>
+          <div class="ab3-mcol mid" data-mspeed="0.85">
+            {colB.map((s) => <figure><img src={s} alt="" loading="lazy" decoding="async" /></figure>)}
+          </div>
+          <div class="ab3-mcol" data-mspeed="0.4">
+            {colC.map((s) => <figure><img src={s} alt="" loading="lazy" decoding="async" /></figure>)}
+          </div>
+        </div>
+        <div class="ab3-credo-scrim" aria-hidden="true"></div>
+        <div class="ab3-credo-copy">
+          <p class="ab3-credo-line" data-cwords>I direct, I shoot, I strategize. None of that is the point. The point is the <em>story
+            <svg class="ab3-stroke" viewBox="0 0 320 14" preserveAspectRatio="none" aria-hidden="true"><path d="M5 9 C80 4, 200 12, 315 6" /></svg>
+          </em> and whether it moves anyone.</p>
+          <p class="ab3-credo-sub">Always has been.</p>
         </div>
       </div>
     </section>
 
-    <!-- TEAM (rides over the credo stage) -->
-    <div class="ab2-after">
-      <section class="ab2-team">
-        <p class="ab2-kicker fade">The team</p>
-        <div class="ab2-team-grid">
-          <article class="ab2-person fade">
-            <div class="ab2-person-ph" data-mono="DJ" aria-label="Portrait of DJ Ramirez, placeholder"></div>
-            <h3 class="ab2-person-name">DJ Ramirez</h3>
-            <p class="ab2-person-role">Founder · Creative Director</p>
-            <p class="ab2-person-bio">Leads every engagement: the strategy, the direction, the thinking. A decade of campaigns for brands that wanted to mean something.</p>
-          </article>
-          <article class="ab2-person fade">
-            <div class="ab2-person-ph alt" data-mono="T" aria-label="Portrait of Tess, placeholder"></div>
-            <h3 class="ab2-person-name">Tess</h3>
-            <p class="ab2-person-role">Operations</p>
-            <p class="ab2-person-bio">Keeps the operation moving so the creative can stay creative. The reason deadlines hold and the work actually ships.</p>
-          </article>
+    <!-- AFTER: rides up over the pinned stage -->
+    <div class="ab3-after">
+
+      <!-- PHILOSOPHY PILLARS -->
+      <section class="ab3-pillars">
+        <div class="ab3-pill-head">
+          <p class="ab3-kicker fade">How I work</p>
+          <h2 class="ab3-pill-title split">Five things I refuse to <em>fake.</em></h2>
+        </div>
+        <div class="ab3-pill-list">
+          {pillars.map((p) => (
+            <article class="ab3-pill fade">
+              <figure class="ab3-pill-img" data-drift="9"><img src={p.img} alt="" loading="lazy" decoding="async" /></figure>
+              <div class="ab3-pill-text">
+                <span class="ab3-pill-k">{p.k}</span>
+                <h3 class="ab3-pill-h">{p.t}</h3>
+                <p class="ab3-pill-d">{p.d}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      <!-- RANGE (mission-work texture, per the brand doc: texture, never the lead) -->
-      <section class="ab2-range">
-        <div class="ab2-cols">
-          <p class="ab2-kicker fade">The range</p>
-          <div class="ab2-col">
-            <p class="ab2-body fade">The work has carried us across the US and well past it: documentary and mission projects in Nepal, Uganda, and Europe. It shows in how we tell stories at home. Patience, respect for the subject, and a low tolerance for fake.</p>
-          </div>
+      <!-- TEAM NOTE (light, real frame) -->
+      <section class="ab3-team">
+        <figure class="ab3-team-img" data-drift="8"><img src="/about/team.jpg" alt="The crew on set" loading="lazy" decoding="async" /></figure>
+        <div class="ab3-team-copy">
+          <p class="ab3-kicker fade">The bench</p>
+          <p class="ab3-team-big split">I lead the creative. A <em>trusted crew</em> of makers joins per job.</p>
+          <p class="ab3-body fade">No bloated retainer, no agency middle layer. I bring in the right directors, editors, and producers for the work in front of us, people I have shot with for years. You get senior thinking and a team that has done this before.</p>
+        </div>
+      </section>
+
+      <!-- RANGE (documentary texture, never the lead) -->
+      <section class="ab3-range">
+        <figure class="ab3-range-bg" data-drift="6" aria-hidden="true"><img src="/gallery/full/p-005.jpg" alt="" loading="lazy" decoding="async" /></figure>
+        <div class="ab3-range-inner">
+          <p class="ab3-kicker fade">The range</p>
+          <p class="ab3-range-big split">The work has carried me across the US and well past it. Documentary projects in <em>Nepal, Uganda, and Europe.</em></p>
+          <p class="ab3-range-body fade">That work shows up in how I tell stories at home: patience, respect for the subject, and a low tolerance for anything fake.</p>
         </div>
       </section>
 
       <!-- CTA -->
-      <section class="ab2-end">
-        <p class="ab2-end-big split">Bring us the <em>hard room.</em></p>
-        <a class="ab2-cta fade" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
+      <section class="ab3-end">
+        <FloatingHand side="left" top="6vh" />
+        <p class="ab3-end-big split">Got something that <em>has to matter?</em></p>
+        <a class="ab3-cta fade" href="/contact" data-mag>Start a conversation <span aria-hidden="true">↗</span></a>
       </section>
+
     </div>
 
   </main>
@@ -105,102 +175,148 @@ const stats = [
 </Base>
 
 <style>
-  .ab2 { background: var(--black); color: var(--white); overflow-x: clip; }
-  .ab2-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(252,252,252,0.5); }
-  .ab2-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #e0322d; }
+  .ab3 { background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .ab3-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); }
+  .ab3-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+  .ab3-h1 em, .ab3-big em, .ab3-end-big em, .ab3-pill-title em,
+  .ab3-team-big em, .ab3-range-big em, .ab3-credo-line em { font-style: italic; color: var(--accent); }
 
-  /* HERO */
-  .ab2-hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
-  .ab2-hero-inner { position: relative; z-index: 2; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
-  .ab2-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(46px, 7.4vw, 116px); line-height: 1; letter-spacing: -0.03em; max-width: 12ch; margin-top: 20px; }
-  .ab2-h1 em, .ab2-big em, .ab2-end-big em { font-style: italic; color: var(--accent); }
-  .ab2-lead { margin-top: 30px; max-width: 480px; font-size: 16px; line-height: 1.7; font-weight: 300; color: rgba(252,252,252,0.78); }
-  .ab2-hero-img { position: absolute; margin: 0; border-radius: 4px; overflow: hidden; opacity: 0.55; }
-  .ab2-hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .ab2-hero-img.a { right: 6vw; top: 12vh; width: clamp(220px, 24vw, 420px); aspect-ratio: 3/4; }
-  .ab2-hero-img.b { right: 24vw; bottom: 8vh; width: clamp(160px, 17vw, 300px); aspect-ratio: 4/3; }
+  /* ---------- HERO ---------- */
+  .ab3-hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; padding: 14vh 0; }
+  .ab3-hero-inner { position: relative; z-index: 3; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+  .ab3-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(44px, 7vw, 112px); line-height: 1.02; letter-spacing: -0.03em; max-width: 15ch; }
+  .ab3-lead { margin-top: 32px; max-width: 50ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.78); }
 
-  /* STATS */
-  .ab2-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: var(--wrap); margin: 0 auto; padding: clamp(70px, 9vw, 120px) var(--pad); }
-  .ab2-stat { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid rgba(252,252,252,0.18); padding-top: 16px; }
-  .ab2-stat-n { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(38px, 4.6vw, 68px); letter-spacing: -0.03em; line-height: 1; }
-  .ab2-stat-l { font-size: 13px; font-weight: 300; color: rgba(252,252,252,0.6); }
+  /* Drifting photo wall behind the hero copy */
+  .ab3-wall { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .ab3-wall-img { position: absolute; margin: 0; border-radius: 5px; overflow: hidden; opacity: 0.5; box-shadow: 0 30px 80px rgb(0 0 0 / 0.4); will-change: transform; }
+  .ab3-wall-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ab3-wall-img:nth-child(1) { right: 5vw;  top: 8vh;  width: clamp(200px, 22vw, 380px); }
+  .ab3-wall-img:nth-child(2) { right: 26vw; bottom: 9vh; width: clamp(180px, 20vw, 340px); opacity: 0.4; }
+  .ab3-wall-img:nth-child(3) { left: 3vw;  bottom: 7vh; width: clamp(150px, 15vw, 260px); opacity: 0.42; }
+  .ab3-wall-img:nth-child(4) { left: 9vw;  top: 9vh;  width: clamp(160px, 17vw, 290px); opacity: 0.3; }
 
-  /* WHO */
-  .ab2-who { background: var(--white); color: #141519; padding: clamp(100px, 13vw, 170px) 0; }
-  .ab2-cols { display: grid; grid-template-columns: 200px 1fr; gap: clamp(28px, 5vw, 80px); max-width: min(1080px, 94vw); margin: 0 auto; padding: 0 var(--pad); align-items: start; }
-  .ab2-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 52px); line-height: 1.16; letter-spacing: -0.02em; max-width: 22ch; }
-  .ab2-who .ab2-body { color: rgba(20,21,25,0.78); }
-  .ab2-body { margin-top: 28px; max-width: 56ch; font-size: 16px; line-height: 1.75; font-weight: 300; color: rgba(252,252,252,0.75); }
+  .ab3-scrollcue { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .ab3-scrollcue i { width: 1px; height: 34px; background: linear-gradient(var(--accent), transparent); animation: cue 1.8s ease-in-out infinite; }
+  @keyframes cue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; transform-origin: top; } 50% { transform: scaleY(1); opacity: 1; transform-origin: top; } }
 
-  /* CREDO */
+  /* ---------- STATS ---------- */
+  .ab3-stats { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: clamp(20px, 3vw, 44px); max-width: var(--wrap); margin: 0 auto; padding: clamp(80px, 10vw, 130px) var(--pad); }
+  .ab3-stat { display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgb(var(--fg-rgb) / 0.18); padding-top: 18px; }
+  .ab3-stat-n { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 4.4vw, 64px); letter-spacing: -0.03em; line-height: 1; }
+  .ab3-stat.hero { border-top-color: var(--accent); }
+  .ab3-stat.hero .ab3-stat-n { color: var(--accent); font-size: clamp(44px, 6.4vw, 96px); }
+  .ab3-stat-l { font-size: clamp(12.5px, 1vw, 14px); font-weight: 300; line-height: 1.5; color: rgb(var(--fg-rgb) / 0.6); }
+
+  /* ---------- WHO ---------- */
+  .ab3-who { background: var(--paper); color: var(--ink); padding: clamp(100px, 13vw, 170px) 0; }
+  .ab3-cols { display: grid; grid-template-columns: 200px 1fr; gap: clamp(28px, 5vw, 80px); max-width: min(1100px, 94vw); margin: 0 auto; padding: 0 var(--pad); align-items: start; }
+  .ab3-who .ab3-kicker { color: var(--accent); }
+  .ab3-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 52px); line-height: 1.16; letter-spacing: -0.02em; max-width: 22ch; }
+  .ab3-who .ab3-big em { color: var(--accent); }
+  .ab3-who .ab3-body { color: rgb(var(--ink-rgb) / 0.78); }
+  .ab3-body { margin-top: 28px; max-width: 56ch; font-size: 16px; line-height: 1.78; font-weight: 300; color: rgb(var(--fg-rgb) / 0.75); }
+
+  /* ---------- PINNED CREDO + MONTAGE ---------- */
   .scn { position: relative; }
   .scn-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-  .ab2-credo { height: 280vh; z-index: 2; }
-  .ab2-credo-stage { background: var(--black); display: flex; align-items: center; justify-content: center; }
-  .ab2-credo-bg { position: absolute; inset: -6%; margin: 0; opacity: 0.32; }
-  .ab2-credo-bg img { width: 100%; height: 100%; object-fit: cover; }
-  .ab2-credo-copy { position: relative; z-index: 2; text-align: center; padding: 0 var(--pad); }
-  .ab2-credo-line { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.18; letter-spacing: -0.02em; max-width: 24ch; }
-  .ab2-credo-line em { font-style: italic; color: var(--accent); position: relative; white-space: nowrap; }
-  .ab2-credo-line :global(.w) { display: inline-block; overflow: hidden; vertical-align: top; }
-  .ab2-credo-line :global(.wi) { display: inline-block; transform: translateY(115%); transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
-  .ab2-credo-line :global(.wi.on) { transform: none; }
-  .ab2-stroke { position: absolute; left: 0; bottom: -10px; width: 100%; height: 12px; overflow: visible; }
-  .ab2-stroke path { fill: none; stroke: #e0322d; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: var(--soff, 320); }
-  .ab2-credo-sub { margin-top: 3vh; font-size: 14px; letter-spacing: 0.08em; color: rgba(252,252,252,0.6); opacity: var(--subo, 0); transition: opacity 0.4s ease; }
+  .ab3-credo { height: 320vh; z-index: 2; }
+  .ab3-credo-stage { background: var(--bg); display: flex; align-items: center; justify-content: center; }
+  .ab3-montage { position: absolute; inset: -12% -2%; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.6vw, 26px); z-index: 1; }
+  .ab3-mcol { display: flex; flex-direction: column; gap: clamp(12px, 1.6vw, 26px); will-change: transform; }
+  .ab3-mcol.mid { margin-top: -14vh; }
+  .ab3-mcol figure { margin: 0; border-radius: 5px; overflow: hidden; }
+  .ab3-mcol img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ab3-credo-scrim { position: absolute; inset: 0; z-index: 2; background: radial-gradient(ellipse at center, rgb(var(--ink-rgb) / 0.82) 0%, rgb(var(--ink-rgb) / 0.62) 45%, rgb(var(--ink-rgb) / 0.78) 100%); }
+  .ab3-credo .ab3-credo-stage { /* ensure --ink scrim reads against bg */ }
+  .ab3-credo-copy { position: relative; z-index: 3; text-align: center; padding: 0 var(--pad); max-width: min(1000px, 92vw); }
+  .ab3-credo-line { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.6vw, 68px); line-height: 1.18; letter-spacing: -0.02em; }
+  .ab3-credo-line em { font-style: italic; color: var(--accent); position: relative; white-space: nowrap; }
+  .ab3-credo-line :global(.w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .ab3-credo-line :global(.wi) { display: inline-block; transform: translateY(135%); transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .ab3-credo-line :global(.wi.on) { transform: none; }
+  .ab3-stroke { position: absolute; left: 0; bottom: -8px; width: 100%; height: 12px; overflow: visible; }
+  .ab3-stroke path { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 340; stroke-dashoffset: var(--soff, 340); }
+  .ab3-credo-sub { margin-top: 3vh; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.6); opacity: var(--subo, 0); transition: opacity 0.4s ease; }
 
-  .ab2-after { position: relative; z-index: 3; margin-top: -100vh; background: var(--black); }
+  .ab3-after { position: relative; z-index: 3; margin-top: -100vh; background: var(--bg); }
 
-  /* TEAM */
-  .ab2-team { max-width: var(--wrap); margin: 0 auto; padding: clamp(100px, 12vw, 160px) var(--pad) 60px; }
-  .ab2-team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 60px); margin-top: 40px; }
-  .ab2-person-ph { aspect-ratio: 4/5; border-radius: 6px; background: linear-gradient(145deg, #1b2630, #0d0f14); display: grid; place-items: center; position: relative; overflow: hidden; }
-  .ab2-person-ph.alt { background: linear-gradient(145deg, #2a2118, #0d0f14); }
-  .ab2-person-ph::after { content: attr(data-mono); font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(60px, 8vw, 120px); letter-spacing: -0.04em; color: rgba(252,252,252,0.14); }
-  .ab2-person-name { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 20px; margin-top: 18px; }
-  .ab2-person-role { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(252,252,252,0.55); margin-top: 6px; }
-  .ab2-person-bio { margin-top: 12px; font-size: 14.5px; line-height: 1.65; font-weight: 300; color: rgba(252,252,252,0.7); max-width: 46ch; }
+  /* ---------- PILLARS ---------- */
+  .ab3-pillars { max-width: var(--wrap); margin: 0 auto; padding: clamp(110px, 13vw, 180px) var(--pad) clamp(40px, 6vw, 80px); }
+  .ab3-pill-head { margin-bottom: clamp(48px, 6vw, 88px); }
+  .ab3-pill-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(32px, 4.4vw, 64px); line-height: 1.08; letter-spacing: -0.025em; margin-top: 18px; max-width: 16ch; }
+  .ab3-pill-list { display: flex; flex-direction: column; gap: clamp(28px, 4vw, 56px); }
+  .ab3-pill { display: grid; grid-template-columns: clamp(220px, 32vw, 460px) 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+  .ab3-pill:nth-child(even) { grid-template-columns: 1fr clamp(220px, 32vw, 460px); }
+  .ab3-pill:nth-child(even) .ab3-pill-img { order: 2; }
+  .ab3-pill-img { margin: 0; border-radius: 6px; overflow: hidden; aspect-ratio: 4/3; box-shadow: 0 24px 60px rgb(0 0 0 / 0.35); }
+  .ab3-pill-img img { width: 100%; height: 112%; object-fit: cover; display: block; will-change: transform; }
+  .ab3-pill-k { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px; letter-spacing: 0.1em; color: var(--accent); }
+  .ab3-pill-h { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(22px, 2.4vw, 34px); letter-spacing: -0.02em; margin-top: 10px; line-height: 1.12; }
+  .ab3-pill-d { margin-top: 14px; max-width: 46ch; font-size: clamp(15px, 1.15vw, 17px); line-height: 1.72; font-weight: 300; color: rgb(var(--fg-rgb) / 0.72); }
 
-  /* RANGE */
-  .ab2-range { background: var(--c-slate); padding: clamp(90px, 11vw, 140px) 0; }
-  .ab2-range .ab2-body { margin-top: 0; }
+  /* ---------- TEAM ---------- */
+  .ab3-team { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 5vw, 80px); align-items: center; max-width: var(--wrap); margin: 0 auto; padding: clamp(70px, 9vw, 120px) var(--pad); }
+  .ab3-team-img { margin: 0; border-radius: 8px; overflow: hidden; aspect-ratio: 3/2; box-shadow: 0 30px 70px rgb(0 0 0 / 0.4); }
+  .ab3-team-img img { width: 100%; height: 116%; object-fit: cover; display: block; will-change: transform; }
+  .ab3-team-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(26px, 3.2vw, 46px); line-height: 1.16; letter-spacing: -0.02em; margin-top: 16px; max-width: 18ch; }
 
-  /* END */
-  .ab2-end { min-height: 56vh; display: flex; flex-direction: column; gap: 40px; align-items: center; justify-content: center; text-align: center; padding: 70px var(--pad); }
-  .ab2-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5vw, 72px); letter-spacing: -0.025em; }
-  .ab2-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); background: var(--white); padding: 18px 30px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease; }
-  .ab2-cta:hover { gap: 18px; transform: translateY(-2px); }
+  /* ---------- RANGE ---------- */
+  .ab3-range { position: relative; overflow: hidden; padding: clamp(120px, 16vw, 220px) 0; }
+  .ab3-range-bg { position: absolute; inset: -12%; margin: 0; z-index: 0; }
+  .ab3-range-bg img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.26; will-change: transform; }
+  .ab3-range::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(rgb(var(--ink-rgb) / 0.55), rgb(var(--ink-rgb) / 0.75)); }
+  .ab3-range-inner { position: relative; z-index: 2; max-width: min(900px, 92vw); margin: 0 auto; padding: 0 var(--pad); text-align: center; }
+  .ab3-range-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 3.8vw, 56px); line-height: 1.16; letter-spacing: -0.02em; margin-top: 18px; }
+  .ab3-range-body { margin: 24px auto 0; max-width: 50ch; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.75; font-weight: 300; color: rgb(var(--fg-rgb) / 0.78); }
 
-  .ab2 :global(.split .w) { display: inline-block; overflow: hidden; vertical-align: top; }
-  .ab2 :global(.split .wi) { display: inline-block; transform: translateY(115%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
-  .ab2 :global(.split.on .wi) { transform: none; }
+  /* ---------- END ---------- */
+  .ab3-end { position: relative; min-height: 64vh; display: flex; flex-direction: column; gap: 40px; align-items: center; justify-content: center; text-align: center; padding: 80px var(--pad); overflow: hidden; }
+  .ab3-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5.4vw, 80px); letter-spacing: -0.025em; line-height: 1.05; position: relative; z-index: 2; }
+  .ab3-cta { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--accent); padding: 18px 32px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 14px 40px rgb(0 0 0 / 0.3); }
+  .ab3-cta:hover { gap: 18px; transform: translateY(-2px); box-shadow: 0 18px 50px rgb(0 0 0 / 0.4); }
 
-  @media (max-width: 860px) {
-    .ab2-stats { grid-template-columns: 1fr 1fr; }
-    .ab2-cols { grid-template-columns: 1fr; gap: 18px; }
-    .ab2-team-grid { grid-template-columns: 1fr; }
-    .ab2-hero-img.b { display: none; }
+  /* ---------- shared split reveal ---------- */
+  .ab3 :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .ab3 :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .ab3 :global(.split.on .wi) { transform: none; }
+  .ab3 .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .ab3 .fade.on { opacity: 1; transform: none; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px) {
+    .ab3-stats { grid-template-columns: 1fr 1fr; }
+    .ab3-cols { grid-template-columns: 1fr; gap: 18px; }
+    .ab3-pill, .ab3-pill:nth-child(even) { grid-template-columns: 1fr; gap: 18px; }
+    .ab3-pill:nth-child(even) .ab3-pill-img { order: 0; }
+    .ab3-team { grid-template-columns: 1fr; }
+    .ab3-wall-img:nth-child(2), .ab3-wall-img:nth-child(4) { display: none; }
+    .ab3-montage { grid-template-columns: repeat(2, 1fr); }
+    .ab3-mcol:nth-child(3) { display: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ab2-credo { height: auto; }
+    .ab3-credo { height: auto; }
     .scn-stage { position: static; height: auto; padding: 16vh var(--pad); }
-    .ab2-after { margin-top: 0; }
-    .ab2-credo-line :global(.wi) { transform: none !important; transition: none !important; }
-    .ab2-stroke path { stroke-dashoffset: 0; }
-    .ab2-credo-sub { opacity: 1; }
-    .ab2 :global(.split .wi) { transform: none !important; transition: none !important; }
-    [data-drift] { transform: none !important; }
+    .ab3-montage { position: absolute; inset: 0; opacity: 0.4; }
+    .ab3-after { margin-top: 0; }
+    .ab3-scrollcue i { animation: none; }
+    .ab3-credo-line :global(.wi) { transform: none !important; transition: none !important; }
+    .ab3-stroke path { stroke-dashoffset: 0; }
+    .ab3-credo-sub { opacity: 1; }
+    .ab3 :global(.split .wi) { transform: none !important; transition: none !important; }
+    .ab3 .fade { opacity: 1 !important; transform: none !important; }
+    [data-drift], .ab3-mcol { transform: none !important; }
   }
 </style>
 
 <script>
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
-  const phase = (p: number, a: number, b: number) => clamp01((p - a) / (b - a));
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  const phase = (p, a, b) => clamp01((p - a) / (b - a));
 
-  const splitWords = (root: Node, counter: { n: number }) => {
+  // --- word splitter (line-safe, descender-safe per the type-clip rules) ---
+  const splitWords = (root, counter) => {
     [...root.childNodes].forEach((node) => {
       if (node.nodeType === 3) {
         const frag = document.createDocumentFragment();
@@ -214,20 +330,26 @@ const stats = [
           w.appendChild(wi); frag.appendChild(w);
         });
         node.replaceWith(frag);
-      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) {
+      } else if (node.nodeType === 1 && !node.closest('svg')) {
         splitWords(node, counter);
       }
     });
   };
   document.querySelectorAll('.split, [data-cwords]').forEach((el) => splitWords(el, { n: 0 }));
-  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); } }), { threshold: 0.35 });
-  document.querySelectorAll('.split').forEach((el) => io.observe(el));
 
-  const credo = document.querySelector('[data-scene="credo"]') as HTMLElement;
-  const cWords = credo ? [...credo.querySelectorAll('.wi')] : [];
-  const stroke = credo && (credo.querySelector('.ab2-stroke path') as SVGPathElement | null);
-  const sub = credo && (credo.querySelector('.ab2-credo-sub') as HTMLElement | null);
-  const drifts = [...document.querySelectorAll('[data-drift]')] as HTMLElement[];
+  // --- on-enter reveals (split + fade) ---
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.25, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
+
+  // --- pinned credo scrub ---
+  const credo = document.querySelector('[data-scene="credo"]');
+  const cWords = credo ? [...credo.querySelectorAll('.ab3-credo-line .wi')] : [];
+  const stroke = credo && credo.querySelector('.ab3-stroke path');
+  const sub = credo && credo.querySelector('.ab3-credo-sub');
+  const mcols = credo ? [...credo.querySelectorAll('.ab3-mcol')] : [];
+  const drifts = [...document.querySelectorAll('[data-drift]')];
 
   let ticking = false;
   const onScroll = () => {
@@ -236,25 +358,34 @@ const stats = [
     requestAnimationFrame(() => {
       if (credo) {
         const r = credo.getBoundingClientRect();
-        const p = clamp01(-r.top / (credo.offsetHeight - innerHeight * 2));
-        cWords.forEach((w, i) => (w as HTMLElement).classList.toggle('on', phase(p, 0.05, 0.55) * cWords.length * 1.1 > i));
-        if (stroke) stroke.style.setProperty('--soff', String(320 * (1 - phase(p, 0.58, 0.82))));
-        if (sub) sub.style.setProperty('--subo', String(phase(p, 0.72, 0.9)));
+        const p = clamp01(-r.top / (credo.offsetHeight - innerHeight));
+        // montage columns travel up at different rates (scrubbed, reversible)
+        mcols.forEach((col) => {
+          const sp = Number(col.dataset.mspeed || 0.5);
+          col.style.transform = `translateY(${(0.5 - p) * sp * 480}px)`;
+        });
+        // credo words reveal across the middle of the scene
+        cWords.forEach((w, i) => w.classList.toggle('on', phase(p, 0.12, 0.6) * cWords.length * 1.1 > i));
+        if (stroke) stroke.style.setProperty('--soff', String(340 * (1 - phase(p, 0.6, 0.82))));
+        if (sub) sub.style.setProperty('--subo', String(phase(p, 0.74, 0.9)));
       }
+      // generous parallax on all [data-drift] media (slower than the page)
       drifts.forEach((el) => {
         const r = el.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > innerHeight) return;
+        if (r.bottom < -200 || r.top > innerHeight + 200) return;
         const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
         const v = Number(el.dataset.drift || 6);
-        el.style.transform = `translateY(${c * -v * 6}px)`;
+        el.style.transform = `translateY(${c * -v * 7}px)`;
       });
       ticking = false;
     });
   };
+
   if (!reduced) {
     addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll, { passive: true });
     onScroll();
   } else {
-    cWords.forEach((w) => (w as HTMLElement).classList.add('on'));
+    cWords.forEach((w) => w.classList.add('on'));
   }
 </script>
