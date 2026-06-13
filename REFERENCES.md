@@ -81,3 +81,52 @@ Frame-by-frame scroll captures (tools/snaps/motion-*). What these sites actually
 4. Parallax factors are large (0.4-0.6x) and choreographed, not ±60px seasoning.
 Tool: `node tools/motion.mjs <url> <name> [width] [steps] [wheel]` → filmstrip
 sheets + motion.json + moved-summary.json. RUN THIS before designing any motion.
+
+## The full motion map (all reference pages scanned, 2026-06-12)
+10 motion scans in tools/snaps/motion-*. Per-page mechanics, measured:
+
+**tinywins /home** — Rhythm: STATEMENT SCENE → BRAND WORLD → STATEMENT SCENE.
+Giant claims split across two pinned scenes (line one, then its payoff). Work
+shows as full-bleed color-blocked "brand worlds" (each case study takes over the
+viewport in the client's palette). Between them: collage scenes where small
+panels scatter-assemble around the viewport at staggered offsets. Device mockups
+sit on pinned stages and tilt/settle as you pass.
+
+**tinywins /about** — (mapped earlier) pinned scenes, corner-landing fragments,
+the scroll-driven word-duplication cascade, sheet-over scene exits.
+
+**lusion /home** — One continuous WebGL world; objects PERSIST and morph between
+scenes (chrome blobs → paint stroke → reel). Copy floats over the world and
+scrubs scale. Reel moment = words part as video panel grows between them.
+
+**lusion /about** — The inversion of tinywins: the TEXT barely moves (persistent
+identity line left, descriptor right), the WORLD does the storytelling (light
+shafts, camera drift, environment morphs). Minimal copy, maximal atmosphere.
+
+**exoape /home** — Headline builds LINE BY LINE across scroll ticks (word group
+1, then 2, then 3 stacking into the full claim) while a media panel scales and
+settles behind. Work index = asymmetric collage, images at 3-4 sizes rising at
+different rates around a centered portrait.
+
+**exoape /studio** — (mapped earlier) giant short statements scrub through;
+image panels at ~half scroll speed; sections interleave (text exits while next
+image enters).
+
+**exoape /work** — THE PORTAL MECHANIC (target for our work landing): each
+project is a centered image card that GROWS toward full-bleed as you scroll in,
+title overlaid, then hands off as the next project's card rises from beneath.
+Persistent index/counter. Grow → handoff → grow rhythm.
+
+**exoape /work/columbia-pictures** — Editorial case-study flow: cream base,
+kicker + narrow-column statements, then full-width color panels (teal/dark) with
+stills collaged at varied sizes stepping in at alternating offsets. Background
+color alternates per chapter with sheet-over transitions. Ends in a dense
+thumbnail wall + credits. (Model for our case studies, incl. Blue Cross v2.)
+
+**Cross-site laws (every page obeys these):**
+1. One idea per scene; the scene owns the viewport until its idea lands.
+2. Motion is scroll-scrubbed and reversible; nothing fires once and dies.
+3. Scenes overlap at the seams (slide-over / grow-over / morph), never hard-cut.
+4. Media moves at a different rate than type (usually slower, ~0.5x).
+5. Color/world changes happen per scene, not per page: each chapter has its own
+   atmosphere.
