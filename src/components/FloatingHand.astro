@@ -1,132 +1,90 @@
 ---
-// FloatingHand — the brand's red "floating hand" signature element.
-// A crafted inline SVG of a stylized open hand (palm + 4 fingers + thumb),
-// filled with the signature red (var(--accent)) with a darker-red edge for a
-// little dimension. It idle-floats (slow CSS bob + tilt) and ALSO reacts to
-// scroll: a tiny rAF client script parallaxes + "deploys" it as it enters view.
-// Position is absolute-in-section (drop it inside a position:relative parent),
-// pointer-events:none. Respects prefers-reduced-motion (idle only, no scroll FX).
+// FloatingHand — the brand's red hand mark, reimagined as a tiny "rocket" that
+// flies DIAGONALLY through a section on scroll, behind the text. Small (about a
+// headline's height), tilted (not upright), z below the copy. The scroll script
+// reads the host SECTION (not the hand) so the long travel never feeds back.
+// Respects prefers-reduced-motion (sits still, tucked in a corner).
 interface Props {
   side?: "left" | "right";
   top?: string;
   z?: number;
 }
-const { side = "right", top = "12vh", z = 3 } = Astro.props;
-// A unique id so multiple hands on one page don't collide in the scroll script.
+const { side = "right", top = "16vh", z = 1 } = Astro.props;
 const uid = "fh-" + Math.random().toString(36).slice(2, 9);
 ---
-
 <div
   class:list={["floating-hand", `fh-${side}`]}
   data-fh={uid}
   style={`--fh-top:${top}; --fh-z:${z};`}
   aria-hidden="true"
 >
-  <!-- DJ's real floating-hand asset (his own mark) -->
-  <img class="fh-svg" src="/hand.png" alt="" />
-
+  <img class="fh-img" src="/hand.png" alt="" />
 </div>
 
 <style>
   .floating-hand {
     position: absolute;
-    top: var(--fh-top, 12vh);
-    z-index: var(--fh-z, 3);
-    width: clamp(140px, 16vw, 300px);
+    top: var(--fh-top, 16vh);
+    z-index: var(--fh-z, 1);          /* below the text (which sits z >= 2) */
+    width: clamp(34px, 4.4vw, 66px);  /* tiny: about a headline's height */
     pointer-events: none;
-    will-change: transform;
-    /* The idle bob/tilt lives here; the scroll script writes into --fh-sx/--fh-sy/--fh-sr. */
-    transform: translate3d(var(--fh-sx, 0px), var(--fh-sy, 0px), 0)
-      rotate(var(--fh-sr, 0deg));
+    will-change: transform, opacity;
+    transform: translate3d(var(--fh-x, 0px), var(--fh-y, 0px), 0) rotate(var(--fh-r, 24deg));
   }
-  .fh-right { right: clamp(-30px, 2vw, 40px); }
-  .fh-left { left: clamp(-30px, 2vw, 40px); }
+  .fh-right { right: clamp(10px, 8vw, 130px); --fh-r-base: 24deg; }
+  .fh-left { left: clamp(10px, 8vw, 130px); --fh-r-base: -24deg; }
 
-  .fh-svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    overflow: visible;
-    filter: drop-shadow(0 22px 40px rgba(0, 0, 0, 0.35));
-    /* The slow idle float: a gentle bob + tilt, layered under the scroll transform. */
-    animation: fhFloat 7s ease-in-out infinite;
+  .fh-img {
+    display: block; width: 100%; height: auto;
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.4));
   }
 
-  @keyframes fhFloat {
-    0%,
-    100% {
-      transform: translateY(0) rotate(-3deg);
-    }
-    50% {
-      transform: translateY(-16px) rotate(4deg);
-    }
-  }
-
-  /* Reduced motion: kill the idle animation AND any scroll transform. */
   @media (prefers-reduced-motion: reduce) {
-    .fh-svg {
-      animation: none;
-    }
-    .floating-hand {
-      transform: none;
-    }
+    .floating-hand { transform: rotate(24deg); }
+    .fh-left { transform: rotate(-24deg); }
   }
 </style>
 
 <script>
-  // Scroll-reactive parallax + "deploy" entrance for each FloatingHand.
-  // Scrubbed every frame via rAF, reversible (math reads scroll position live).
-  // No-ops under prefers-reduced-motion so the element only idle-floats.
   (function () {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
-
     const hands = Array.from(document.querySelectorAll(".floating-hand"));
     if (!hands.length) return;
-
-    let ticking = false;
-
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    let ticking = false;
 
     function update() {
       ticking = false;
       const vh = window.innerHeight || 1;
+      const vw = window.innerWidth || 1;
       for (const el of hands) {
-        const r = el.getBoundingClientRect();
-        // Progress 0..1 as the element travels from just below the viewport
-        // (center at bottom) up through it (center at top). Reversible.
-        const center = r.top + r.height / 2;
-        const p = clamp(1 - center / vh, 0, 1);
+        // Progress is read off the HOST section, so the hand's own big travel
+        // never creates a feedback loop. 0 = section entering from the bottom,
+        // 1 = section fully above the viewport.
+        const host = el.offsetParent || el.parentElement;
+        if (!host) continue;
+        const pr = host.getBoundingClientRect();
+        const denom = vh + pr.height || 1;
+        const p = clamp((vh - pr.top) / denom, 0, 1);
+        const dir = el.classList.contains("fh-left") ? -1 : 1;
 
-        // Deploy entrance: as it first enters (p small), it slides up + rotates
-        // into place, then keeps a gentle parallax drift through the rest.
-        const deploy = clamp(p / 0.35, 0, 1); // 0..1 over the first 35%
-        const ease = deploy * deploy * (3 - 2 * deploy); // smoothstep
+        // Diagonal rocket path: flies UP through the section and drifts outward,
+        // tilted toward its direction of travel. Reversible (pure function of p).
+        const x = dir * (p * 0.24 - 0.04) * vw;
+        const y = (0.5 - p) * vh * 1.35;
+        const r = dir * 24 + (p - 0.5) * 26;          // lean + a little arc
+        const fade = clamp(Math.min(p, 1 - p) * 7 + 0.1, 0, 1);
 
-        // Parallax: travel further (slower than the page = deviates up to ~180px).
-        const drift = (p - 0.5) * 240; // -120..+120 px
-        const side = el.classList.contains("fh-left") ? -1 : 1;
-
-        const sx = (1 - ease) * -40 * side; // deploy in from the edge
-        const sy = (1 - ease) * 90 + -drift * 0.75; // deploy up + parallax
-        const sr = (1 - ease) * 14 * side + (p - 0.5) * 10; // deploy tilt + drift tilt
-
-        el.style.setProperty("--fh-sx", sx.toFixed(1) + "px");
-        el.style.setProperty("--fh-sy", sy.toFixed(1) + "px");
-        el.style.setProperty("--fh-sr", sr.toFixed(2) + "deg");
-        el.style.opacity = String(clamp(0.2 + ease, 0, 1));
+        el.style.setProperty("--fh-x", x.toFixed(1) + "px");
+        el.style.setProperty("--fh-y", y.toFixed(1) + "px");
+        el.style.setProperty("--fh-r", r.toFixed(2) + "deg");
+        el.style.opacity = fade.toFixed(2);
       }
     }
-
-    function onScroll() {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(update);
-      }
-    }
-
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
     addEventListener("scroll", onScroll, { passive: true });
     addEventListener("resize", onScroll, { passive: true });
-    update(); // set initial state so it isn't a hard pop on first paint
+    update();
   })();
 </script>

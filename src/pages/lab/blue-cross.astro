@@ -51,10 +51,12 @@ const collage = [
     <!-- PINNED INSIGHT SCENE (BCBS deep blue) -->
     <section class="bcx-insight scn" data-scene="insight">
       <div class="scn-stage bcx-insight-stage">
-        <p class="bcx-insight-kicker">The insight</p>
-        <h2 class="bcx-insight-line" data-iwords>Health insurance isn't about coverage. It's about <em>knowing people
-          <svg class="bcx-stroke" viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M5 9 C70 4, 180 12, 295 6" /></svg>
-        </em> as individuals.</h2>
+        <div class="bcx-insight-band">
+          <p class="bcx-insight-kicker">The insight</p>
+          <h2 class="bcx-insight-line" data-iwords>Health insurance isn't about coverage. It's about <em>knowing people
+            <svg class="bcx-stroke" viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M5 9 C70 4, 180 12, 295 6" /></svg>
+          </em> as individuals.</h2>
+        </div>
       </div>
     </section>
 
@@ -144,9 +146,10 @@ const collage = [
   .scn { position: relative; }
   .scn-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
   .bcx-insight { height: 280vh; z-index: 2; margin-top: 0; }
-  .bcx-insight-stage { background: var(--deep); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4vh; text-align: center; padding: 0 var(--pad); }
+  .bcx-insight-stage { background: var(--bg); display: flex; align-items: center; justify-content: center; padding: 0; }
+  .bcx-insight-band { background: var(--deep); width: 100%; min-height: 56vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4vh; text-align: center; padding: 6vh var(--pad); }
   .bcx-insight-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); }
-  .bcx-insight-line { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 4.8vw, 72px); line-height: 1.12; letter-spacing: -0.025em; max-width: 20ch; color: var(--white); }
+  .bcx-insight-line { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 52px); line-height: 1.14; letter-spacing: -0.025em; max-width: 20ch; color: var(--white); }
   .bcx-insight-line em { font-style: italic; position: relative; white-space: nowrap; }
   .bcx-insight-line :global(.w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
   .bcx-insight-line :global(.wi) { display: inline-block; transform: translateY(135%); transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
