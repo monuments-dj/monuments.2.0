@@ -1638,3 +1638,41 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 @media (prefers-reduced-motion: reduce) { .wk-car-track { animation: none; } }
 @media (max-width: 980px) { .wk-masonry { columns: 2; } }
 @media (max-width: 620px) { .wk-car-item { width: 76vw; } .wk-masonry { columns: 1; } }
+
+/* ===================================================================
+   SHARED FLOATING MEDIA (exoape pass): token-only, reusable across pages.
+   A bare photo that floats: small radius, soft tinted shadow (never pure
+   black), real margin, and a slow parallax (the image drifts inside an
+   oversized frame). Drive --lf-drift (inner image, ~16% range) and
+   --lf-float (whole block, ~26px) from each .lab-float's viewport progress,
+   like the reel handler. No JS wired yet; the hero keeps its own horizontal
+   parallax and does NOT use this block.
+   =================================================================== */
+.lab-float {
+  --lf-ar: 0.8;            /* 4:5 portrait default */
+  --lf-radius: 10px;
+  --lf-float: 0px;         /* whole-block drift, set by JS */
+  --lf-drift: 0%;          /* inner-image drift, set by JS */
+  display: block;
+  margin: clamp(28px, 4vw, 64px) auto;
+  width: min(100%, clamp(280px, 34vw, 520px));
+  transform: translateY(var(--lf-float));
+  will-change: transform;
+}
+.lab-float-frame {
+  position: relative; overflow: hidden;
+  aspect-ratio: var(--lf-ar); border-radius: var(--lf-radius);
+  box-shadow: 0 28px 64px rgb(var(--ink-rgb) / 0.16);
+}
+.lab-float-img {
+  position: absolute; left: 0; top: -9%;
+  width: 100%; height: 118%; object-fit: cover; display: block;
+  transform: translateY(var(--lf-drift)); will-change: transform;
+}
+.lab-float--sm { width: min(100%, clamp(240px, 22vw, 340px)); }
+.lab-float--lg { width: min(100%, clamp(320px, 42vw, 600px)); }
+.lab-float--push { margin-top: clamp(60px, 9vw, 150px); } /* stagger a frame lower */
+@media (prefers-reduced-motion: reduce) {
+  .lab-float { transform: none !important; }
+  .lab-float-img { transform: none !important; top: 0; height: 100%; }
+}

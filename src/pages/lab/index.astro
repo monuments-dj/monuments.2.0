@@ -25,21 +25,15 @@ const v2 = [
   { href: '/lab/contact',    vs: '/contact',         t: 'Contact',        tag: 'Email as page',  prev: '/case-studies/clothing-merch/gallery/cm-01.jpg',    d: "The email is the page. Badges escaped the menu. Modern, fast, almost nothing to click." },
 ];
 
-// Hero montage — a thin strip of real campaign frames that drifts behind the
-// title (heavy scrim keeps "Where we test what's next." readable). Each frame
-// gets its own parallax rate via data-hspeed; the strip duplicates for a
-// seamless loop. Curated mix across the real case-study galleries.
+// Hero montage: four real campaign stills that float beside the title on a
+// light ground (no scrim now; the frames read at full opacity). Each frame gets
+// its own parallax rate via data-hspeed; the strip duplicates for a seamless
+// loop. Curated mix across the real case-study galleries.
 const heroStrip = [
   { src: '/case-studies/sony-this-moment/gallery/tm-04.jpg',   sp: 0.5 },
   { src: '/case-studies/blue-cross/gallery/bci-14.jpg',        sp: 0.8 },
-  { src: '/case-studies/sony-xperia-summer/gallery/xp-01.jpg', sp: 0.35 },
   { src: '/case-studies/flashpoint/gallery/fp-01.jpg',         sp: 0.65 },
-  { src: '/gallery/full/p-044.jpg',                            sp: 0.5 },
   { src: '/case-studies/sony-flow-state/gallery/fs-01.jpg',    sp: 0.85 },
-  { src: '/case-studies/clothing-merch/gallery/cm-08.jpg',     sp: 0.4 },
-  { src: '/gallery/full/p-066.jpg',                            sp: 0.6 },
-  { src: '/case-studies/waffle-me-up/gallery/wmu-01.jpg',      sp: 0.5 },
-  { src: '/case-studies/turnstile/products/prod-01.jpg',       sp: 0.75 },
 ];
 
 // Shipped building blocks: the toys, as labeled interactive cards. Each card's
@@ -60,11 +54,11 @@ const experiments = [
   { href: '/work-preview/sony-this-moment', t: 'CMS pipeline proof', d: "Sony This Moment, rendered from Keystatic content end to end." },
 ];
 ---
-<Base title="The Lab — monuments">
+<Base title="The Lab, monuments">
   <main class="lab">
     <!-- HERO -->
     <header class="lab-hero">
-      <!-- drifting strip of real work stills, behind a heavy scrim -->
+      <!-- drifting strip of real work stills, floating on the light ground -->
       <div class="lab-hero-strip" aria-hidden="true">
         <div class="lab-hero-track">
           {[...heroStrip, ...heroStrip].map((f) => (
@@ -74,10 +68,9 @@ const experiments = [
           ))}
         </div>
       </div>
-      <div class="lab-hero-scrim" aria-hidden="true"></div>
       <FloatingHand side="right" top="16vh" />
       <div class="lab-hero-inner">
-        <p class="lab-eyebrow fade">The lab</p>
+        <p class="lab-eyebrow fade"><span class="lab-kicker-mark" aria-hidden="true">+</span>The lab</p>
         <h1 class="lab-h1 split">Where we test <em>what's next.</em></h1>
         <p class="lab-lead fade">This is the open workbench. We build the studio's own pages here first, in public, with the emerging web tech and AI we then bring to client work. If something is bleeding into the future, it shows up on this page before it ships anywhere else.</p>
         <div class="lab-meta fade">
@@ -90,12 +83,12 @@ const experiments = [
     </header>
 
     <!-- BRAND TICKER -->
-    <BrandTicker tone="white" />
+    <div class="lab-ticker-band"><BrandTicker tone="black" /></div>
 
     <!-- THE EXPERIMENTS -->
     <section class="lab-sec lab-exp">
       <div class="lab-sec-head">
-        <p class="lab-kicker fade">The experiments</p>
+        <p class="lab-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span>The experiments</p>
         <h2 class="lab-sec-title split">Seven pages, rebuilt from <em>nothing.</em></h2>
         <p class="lab-sec-sub fade">Open the title to see the new build. Open compare to see the live page it would replace. Nothing goes live until we call it.</p>
       </div>
@@ -129,7 +122,7 @@ const experiments = [
     <!-- BUILDING BLOCKS: the toys -->
     <section class="lab-sec lab-blocks">
       <div class="lab-sec-head">
-        <p class="lab-kicker fade">Shipped building blocks</p>
+        <p class="lab-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span>Shipped building blocks</p>
         <h2 class="lab-sec-title split">The toys, out of the <em>box.</em></h2>
         <p class="lab-sec-sub fade">Every page above is assembled from these. Built once, reused everywhere. Poke at them.</p>
       </div>
@@ -168,10 +161,10 @@ const experiments = [
       <p class="lab-blocks-note fade">Want the selector? It's living bottom-left of this page. Click a swatch and the whole thing reskins from tokens, no reload.</p>
     </section>
 
-    <!-- TICKER PLAYGROUND — light + dark, with live speed + tone controls -->
+    <!-- TICKER PLAYGROUND: light + dark, with live speed + tone controls -->
     <section class="lab-sec lab-ticklab" data-ticklab>
       <div class="lab-sec-head">
-        <p class="lab-kicker fade">The logo ticker, tuned live</p>
+        <p class="lab-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span>The logo ticker, tuned live</p>
         <h2 class="lab-sec-title split">Light or dark, <em>your tempo.</em></h2>
         <p class="lab-sec-sub fade">Both tones, side by side. Drag the speed and flip the invert to tune the strip that runs on every page.</p>
       </div>
@@ -186,13 +179,14 @@ const experiments = [
           <input class="tl-range" type="range" min="14" max="66" value="30" step="2" data-tl-size aria-label="Logo size" />
         </label>
         <div class="tl-seg" role="group" aria-label="Tone">
-          <button class="tl-seg-btn on" type="button" data-tl-invert="off">White on dark</button>
-          <button class="tl-seg-btn" type="button" data-tl-invert="on">Black on light</button>
+          <button class="tl-seg-btn on" type="button" data-tl-invert="off">Black on light</button>
+          <button class="tl-seg-btn" type="button" data-tl-invert="on">White on dark</button>
         </div>
       </div>
 
       <div class="tl-stack" data-tl-stack>
-        <BrandTicker tone="white" speed={40} />
+        <div class="tl-card"><BrandTicker tone="black" speed={40} /></div>
+        <div class="tl-card"><BrandTicker tone="white" speed={40} /></div>
       </div>
     </section>
 
@@ -201,7 +195,7 @@ const experiments = [
 
     <!-- ALSO IN PROGRESS -->
     <section class="lab-sec lab-more">
-      <p class="lab-kicker fade">Also on the bench</p>
+      <p class="lab-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span>Also on the bench</p>
       <ul class="lab-list">
         {experiments.map((p, i) => (
           <li class="lab-row fade">
@@ -220,7 +214,7 @@ const experiments = [
     <section class="lab-end">
       <FloatingHand side="left" top="8vh" />
       <div class="lab-end-inner">
-        <p class="lab-kicker fade">Seen enough?</p>
+        <p class="lab-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span>Seen enough?</p>
         <p class="lab-end-big split">This is the edge we build from. <em>Let's build yours.</em></p>
         <a class="lab-cta fade" href="/contact" data-mag data-cursor="Let's talk">Start a conversation <span aria-hidden="true">↗</span></a>
       </div>
@@ -232,42 +226,46 @@ const experiments = [
 </Base>
 
 <style>
-  .lab { background: var(--bg); color: var(--fg); overflow-x: clip; }
-  .lab-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); }
-  .lab-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+  .lab { background: var(--paper); color: var(--ink); overflow-x: clip; }
+  /* Kicker label: small caps next to the accent "+" marker. Default tone is the
+     light-band ink; dark bands (reel, .lab-end) re-tint the label to fg below. */
+  .lab-eyebrow,
+  .lab-kicker { display: inline-flex; align-items: baseline; gap: 22px; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.75); }
+  .lab-eyebrow { letter-spacing: 0.24em; }
+  .lab-kicker-mark { color: var(--accent); font-weight: 500; }
   .lab-h1 em, .lab-sec-title em, .lab-end-big em { font-style: italic; color: var(--accent); }
 
   /* ---------- HERO ---------- */
-  .lab-hero { position: relative; min-height: 96vh; display: flex; align-items: center; overflow: hidden; padding: 16vh 0 12vh; }
+  .lab-hero { position: relative; min-height: 96vh; display: flex; align-items: center; overflow: hidden; padding: 16vh 0 12vh; background: var(--paper); color: var(--ink); }
   .lab-hero-inner { position: relative; z-index: 3; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+  /* soft paper backing so the headline reads cleanly over the floating frames */
+  .lab-hero-inner::before { content: ''; position: absolute; inset: -5vh -8%; z-index: -1; pointer-events: none;
+    background: radial-gradient(120% 86% at 44% 46%, color-mix(in srgb, var(--paper) 90%, transparent) 0%, color-mix(in srgb, var(--paper) 66%, transparent) 40%, transparent 76%); }
   .lab-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(46px, 8vw, 128px); line-height: 1; letter-spacing: -0.035em; margin-top: 22px; padding-bottom: 0.12em; }
-  .lab-lead { margin-top: 30px; max-width: 56ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.72; font-weight: 300; color: rgb(var(--fg-rgb) / 0.78); }
-  .lab-meta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: clamp(20px, 3vw, 44px); font-size: 13px; font-weight: 300; letter-spacing: 0.02em; color: rgb(var(--fg-rgb) / 0.55); }
+  .lab-lead { margin-top: 30px; max-width: 56ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.72; font-weight: 300; color: rgb(var(--ink-rgb) / 0.7); }
+  .lab-meta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: clamp(20px, 3vw, 44px); font-size: 13px; font-weight: 300; letter-spacing: 0.02em; color: rgb(var(--ink-rgb) / 0.55); }
   .lab-meta b { font-weight: 500; color: var(--accent); font-size: 15px; }
 
-  /* drifting montage strip behind the hero copy */
+  /* floating montage strip of real stills (light ground, full opacity, soft tinted shadow) */
   .lab-hero-strip { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .lab-hero-track { position: absolute; top: 50%; left: 0; display: flex; gap: clamp(14px, 1.6vw, 26px); width: max-content; transform: translateY(-50%); animation: labDrift 70s linear infinite; will-change: transform; }
-  .lab-hero-frame { position: relative; margin: 0; flex: 0 0 auto; width: clamp(180px, 22vw, 320px); aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; opacity: 0.42; box-shadow: 0 24px 60px rgb(0 0 0 / 0.4); will-change: transform; }
+  .lab-hero-track { position: absolute; top: 50%; left: 0; display: flex; gap: clamp(40px, 4vw, 80px); width: max-content; transform: translateY(-50%); animation: labDrift 70s linear infinite; will-change: transform; }
+  .lab-hero-frame { position: relative; margin: 0; flex: 0 0 auto; width: clamp(220px, 26vw, 360px); aspect-ratio: 4/3; border-radius: 10px; overflow: hidden; opacity: 1; box-shadow: 0 28px 64px rgb(var(--ink-rgb) / 0.14); will-change: transform; }
   .lab-hero-frame:nth-child(even) { aspect-ratio: 3/4; align-self: flex-start; margin-top: clamp(-30px, -4vw, -10px); }
   .lab-hero-frame img { width: 100%; height: 118%; object-fit: cover; display: block; }
   @keyframes labDrift { from { transform: translate(0, -50%); } to { transform: translate(-50%, -50%); } }
-  /* heavy scrim so the title stays readable over the montage */
-  .lab-hero-scrim { position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
-    linear-gradient(90deg, var(--bg) 0%, rgb(var(--fg-rgb) / 0) 5%, rgb(var(--fg-rgb) / 0) 95%, var(--bg) 100%),
-    linear-gradient(rgb(var(--ink-rgb) / 0.42), rgb(var(--ink-rgb) / 0.58)); }
-  /* second, accent-tinted vignette pinned to the copy column for legibility */
-  .lab-hero-scrim::after { content: ''; position: absolute; inset: 0; background: radial-gradient(120% 110% at 20% 55%, var(--bg) 0%, rgb(var(--fg-rgb) / 0) 58%); opacity: 0.82; }
 
-  .lab-scrollcue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .lab-scrollcue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.5); }
   .lab-scrollcue i { width: 1px; height: 34px; background: linear-gradient(var(--accent), transparent); animation: cue 1.8s ease-in-out infinite; transform-origin: top; }
   @keyframes cue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
 
+  /* ---------- under-hero ticker band (airy light) ---------- */
+  .lab-ticker-band { padding: clamp(48px, 7vw, 90px) 0; background: var(--paper); }
+
   /* ---------- shared section frame ---------- */
   .lab-sec { max-width: var(--wrap); margin: 0 auto; padding: clamp(90px, 12vw, 160px) var(--pad); }
-  .lab-sec-head { max-width: 760px; margin-bottom: clamp(48px, 6vw, 80px); }
+  .lab-sec-head { max-width: 640px; margin-bottom: clamp(48px, 6vw, 80px); }
   .lab-sec-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(32px, 4.6vw, 68px); line-height: 1.04; letter-spacing: -0.03em; margin-top: 16px; padding-bottom: 0.1em; }
-  .lab-sec-sub { margin-top: 22px; max-width: 54ch; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.66); }
+  .lab-sec-sub { margin-top: 22px; max-width: 54ch; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.7; font-weight: 300; color: rgb(var(--ink-rgb) / 0.66); }
 
   /* shared marker stroke */
   .lab-stroke { position: absolute; left: 0; bottom: -6px; width: 100%; height: 10px; overflow: visible; }
@@ -277,29 +275,29 @@ const experiments = [
   /* ---------- EXPERIMENT TILES ---------- */
   .lab-exp { position: relative; }
   .lab-tiles { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-  .lab-tile { position: relative; border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }
-  .lab-tile:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.14); }
-  .lab-tile-main { display: grid; grid-template-columns: 64px 1fr auto; gap: clamp(18px, 3vw, 44px); align-items: center; padding: clamp(26px, 3.2vw, 40px) 8px clamp(26px, 3.2vw, 40px) 6px; text-decoration: none; color: var(--fg); position: relative; transition: padding-left 0.4s cubic-bezier(0.16,1,0.3,1); overflow: hidden; }
+  .lab-tile { position: relative; border-top: 1px solid rgb(var(--ink-rgb) / 0.1); }
+  .lab-tile:last-child { border-bottom: 1px solid rgb(var(--ink-rgb) / 0.1); }
+  .lab-tile-main { display: grid; grid-template-columns: 64px 1fr auto; gap: clamp(18px, 3vw, 44px); align-items: center; padding: clamp(34px, 3.6vw, 48px) 8px clamp(34px, 3.6vw, 48px) 6px; text-decoration: none; color: var(--ink); position: relative; transition: padding-left 0.4s cubic-bezier(0.16,1,0.3,1); overflow: hidden; }
   /* accent wash that sweeps in on hover */
-  .lab-tile-main::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(var(--fg-rgb) / 0.05), transparent 70%); transform: translateX(-100%); transition: transform 0.55s cubic-bezier(0.16,1,0.3,1); z-index: 0; }
+  .lab-tile-main::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(var(--ink-rgb) / 0.05), transparent 70%); transform: translateX(-100%); transition: transform 0.55s cubic-bezier(0.16,1,0.3,1); z-index: 0; }
   .lab-tile-main:hover::before { transform: translateX(0); }
   .lab-tile-main:hover { padding-left: 22px; }
-  .lab-tile-n { position: relative; z-index: 1; font-size: 13px; letter-spacing: 0.16em; color: rgb(var(--fg-rgb) / 0.4); font-feature-settings: 'tnum'; }
+  .lab-tile-n { position: relative; z-index: 1; font-size: 13px; letter-spacing: 0.16em; color: rgb(var(--ink-rgb) / 0.4); font-feature-settings: 'tnum'; }
   .lab-tile-body { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 8px; }
   .lab-tile-tag { font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
   .lab-tile-t { position: relative; width: fit-content; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(26px, 3.4vw, 50px); letter-spacing: -0.025em; line-height: 1.02; }
   .lab-tile:hover .lab-stroke path { stroke-dashoffset: 0; }
-  .lab-tile-d { max-width: 64ch; font-size: clamp(13.5px, 1vw, 15px); line-height: 1.6; font-weight: 300; color: rgb(var(--fg-rgb) / 0.6); }
-  .lab-tile-go { position: relative; z-index: 1; font-size: clamp(22px, 2.4vw, 34px); color: rgb(var(--fg-rgb) / 0.3); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), color 0.3s ease; }
+  .lab-tile-d { max-width: 64ch; font-size: clamp(13.5px, 1vw, 15px); line-height: 1.6; font-weight: 300; color: rgb(var(--ink-rgb) / 0.6); }
+  .lab-tile-go { position: relative; z-index: 1; font-size: clamp(22px, 2.4vw, 34px); color: rgb(var(--ink-rgb) / 0.3); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), color 0.3s ease; }
   .lab-tile-main:hover .lab-tile-go { color: var(--accent); transform: translate(6px, -6px); }
 
   /* cursor-following preview image (one shared element, src swapped on hover) */
-  .lab-prev { position: absolute; top: 0; left: 0; z-index: 4; width: clamp(220px, 22vw, 320px); aspect-ratio: 4/3; border-radius: 8px; overflow: hidden; pointer-events: none; opacity: 0; transform: translate(-50%, -50%) scale(0.92); transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1); box-shadow: 0 30px 70px rgb(0 0 0 / 0.5); border: 1px solid rgb(var(--fg-rgb) / 0.16); will-change: transform, opacity; }
+  .lab-prev { position: absolute; top: 0; left: 0; z-index: 4; width: clamp(220px, 22vw, 320px); aspect-ratio: 4/3; border-radius: 8px; overflow: hidden; pointer-events: none; opacity: 0; transform: translate(-50%, -50%) scale(0.92); transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1); box-shadow: 0 24px 60px rgb(var(--ink-rgb) / 0.18); border: 1px solid rgb(var(--ink-rgb) / 0.12); will-change: transform, opacity; }
   .lab-prev img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .lab-prev::after { content: 'View'; position: absolute; left: 10px; bottom: 8px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg); background: rgb(var(--ink-rgb) / 0.55); padding: 4px 9px; border-radius: 999px; backdrop-filter: blur(4px); }
+  .lab-prev::after { content: 'View'; position: absolute; left: 10px; bottom: 8px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper); background: rgb(var(--ink-rgb) / 0.55); padding: 4px 9px; border-radius: 999px; backdrop-filter: blur(4px); }
   .lab-exp.prev-on .lab-prev { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
-  .lab-vs { position: absolute; right: 8px; bottom: clamp(20px, 2.6vw, 30px); z-index: 2; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); text-decoration: none; white-space: nowrap; transition: color 0.25s ease; }
+  .lab-vs { position: absolute; right: 8px; bottom: clamp(20px, 2.6vw, 30px); z-index: 2; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.5); text-decoration: none; white-space: nowrap; transition: color 0.25s ease; }
   a.lab-vs:hover { color: var(--accent); }
   .lab-vs-new { color: var(--accent); }
   /* keep the compare link clear of the long-form description on wide screens */
@@ -310,20 +308,20 @@ const experiments = [
   }
 
   /* ---------- BUILDING BLOCKS GRID ---------- */
-  .lab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 1.8vw, 24px); }
-  .lab-card { position: relative; border: 1px solid rgb(var(--fg-rgb) / 0.12); border-radius: 10px; overflow: hidden; background: rgb(var(--fg-rgb) / 0.02); transition: border-color 0.35s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1), background 0.35s ease; }
-  .lab-card:hover { border-color: rgb(var(--fg-rgb) / 0.3); transform: translateY(-4px); background: rgb(var(--fg-rgb) / 0.04); }
-  .lab-card-demo { position: relative; height: 168px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: radial-gradient(120% 140% at 50% 0%, rgb(var(--fg-rgb) / 0.05), transparent 70%); border-bottom: 1px solid rgb(var(--fg-rgb) / 0.08); }
+  .lab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 3vw, 44px); }
+  .lab-card { position: relative; border: 1px solid rgb(var(--ink-rgb) / 0.07); border-radius: 10px; overflow: hidden; background: transparent; transition: border-color 0.35s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease; }
+  .lab-card:hover { box-shadow: 0 20px 50px rgb(var(--ink-rgb) / 0.12); border-color: rgb(var(--ink-rgb) / 0.12); transform: translateY(-4px); }
+  .lab-card-demo { position: relative; height: 168px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: radial-gradient(120% 140% at 50% 0%, rgb(var(--ink-rgb) / 0.04), transparent 70%); border-bottom: 1px solid rgb(var(--ink-rgb) / 0.06); border-radius: 13px 13px 0 0; }
   .lab-card-text { padding: clamp(18px, 1.6vw, 24px); }
   .lab-card-t { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(17px, 1.5vw, 21px); letter-spacing: -0.015em; }
-  .lab-card-d { margin-top: 10px; font-size: 13.5px; line-height: 1.62; font-weight: 300; color: rgb(var(--fg-rgb) / 0.62); }
-  .lab-blocks-note { margin-top: clamp(40px, 5vw, 64px); max-width: 56ch; font-size: 13.5px; font-weight: 300; line-height: 1.6; color: rgb(var(--fg-rgb) / 0.5); }
+  .lab-card-d { margin-top: 10px; font-size: 13.5px; line-height: 1.62; font-weight: 300; color: rgb(var(--ink-rgb) / 0.62); }
+  .lab-blocks-note { margin-top: clamp(40px, 5vw, 64px); max-width: 56ch; font-size: 13.5px; font-weight: 300; line-height: 1.6; color: rgb(var(--ink-rgb) / 0.5); }
 
   /* --- block demos --- */
   /* cursor: a lagging disc chasing a dot */
   .d-cursor { position: relative; width: 100%; height: 100%; }
-  .d-cursor-disc { position: absolute; left: 30%; top: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; background: rgb(var(--fg-rgb) / 0.12); border: 1px solid rgb(var(--fg-rgb) / 0.3); display: flex; align-items: center; justify-content: center; animation: dcDisc 3.4s cubic-bezier(0.5,0,0.2,1) infinite; }
-  .d-cursor-disc i { font-style: normal; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg); }
+  .d-cursor-disc { position: absolute; left: 30%; top: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; background: rgb(var(--ink-rgb) / 0.12); border: 1px solid rgb(var(--ink-rgb) / 0.3); display: flex; align-items: center; justify-content: center; animation: dcDisc 3.4s cubic-bezier(0.5,0,0.2,1) infinite; }
+  .d-cursor-disc i { font-style: normal; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
   .d-cursor-dot { position: absolute; left: 30%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%; background: var(--accent); animation: dcDot 3.4s cubic-bezier(0.5,0,0.2,1) infinite; }
   @keyframes dcDisc { 0%,100% { transform: translate(-26px,-12px); } 50% { transform: translate(40px,14px); } }
   @keyframes dcDot { 0%,100% { transform: translate(-18px,-6px); } 50% { transform: translate(48px,20px); } }
@@ -336,11 +334,11 @@ const experiments = [
   /* ticker: a drifting wordmark row */
   .d-ticker { width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); }
   .d-ticker-row { display: flex; gap: 28px; width: max-content; animation: dTick 9s linear infinite; }
-  .d-ticker-row b { font-weight: 500; font-size: 15px; letter-spacing: 0.06em; color: rgb(var(--fg-rgb) / 0.7); }
+  .d-ticker-row b { font-weight: 500; font-size: 15px; letter-spacing: 0.06em; color: rgb(var(--ink-rgb) / 0.7); }
   @keyframes dTick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   /* hand: idle bob */
-  .d-hand { width: 70px; height: auto; overflow: visible; filter: drop-shadow(0 14px 26px rgb(0 0 0 / 0.35)); animation: dHand 6s ease-in-out infinite; }
+  .d-hand { width: 70px; height: auto; overflow: visible; filter: drop-shadow(0 14px 26px rgb(var(--ink-rgb) / 0.22)); animation: dHand 6s ease-in-out infinite; }
   @keyframes dHand { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-12px) rotate(5deg); } }
 
   /* pile: shapes settled with a slow drop loop */
@@ -348,15 +346,15 @@ const experiments = [
   .d-pile .ds { position: absolute; bottom: 26px; width: 20px; height: 20px; animation: dDrop 3.6s cubic-bezier(0.5,0,0.3,1) infinite; }
   .ds-1 { left: 6px;  background: var(--accent);   border-radius: 50%; animation-delay: 0s; }
   .ds-2 { left: 34px; background: var(--accent-2); border-radius: 3px; animation-delay: 0.25s; }
-  .ds-3 { left: 60px; background: var(--fg);       border-radius: 50%; animation-delay: 0.5s; }
+  .ds-3 { left: 60px; background: var(--ink);      border-radius: 50%; animation-delay: 0.5s; }
   .ds-4 { left: 88px; background: var(--accent);   border-radius: 999px; width: 32px; animation-delay: 0.15s; }
   .ds-5 { left: 20px; bottom: 48px; background: var(--accent-2); border-radius: 3px; animation-delay: 0.4s; }
-  .ds-6 { left: 70px; bottom: 48px; background: var(--fg); border-radius: 50%; animation-delay: 0.6s; }
+  .ds-6 { left: 70px; bottom: 48px; background: var(--ink); border-radius: 50%; animation-delay: 0.6s; }
   @keyframes dDrop { 0% { transform: translateY(-120px); opacity: 0; } 20%,100% { transform: translateY(0); opacity: 0.92; } }
 
   /* theme: eight reskin swatches (mirror the picker presets) */
   .d-theme { display: flex; flex-wrap: wrap; gap: 10px; }
-  .d-theme .dt { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgb(var(--fg-rgb) / 0.2); animation: dThemeP 4s ease-in-out infinite; }
+  .d-theme .dt { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgb(var(--ink-rgb) / 0.2); animation: dThemeP 4s ease-in-out infinite; }
   .dt-1 { background: radial-gradient(circle at 50% 50%, #ff3b2e 0 44%, #0c0b0a 46% 100%); animation-delay: 0s; }
   .dt-2 { background: radial-gradient(circle at 50% 50%, #ff3b2e 0 44%, #000000 46% 100%); animation-delay: 0.2s; }
   .dt-3 { background: radial-gradient(circle at 50% 50%, #5768ff 0 44%, #0a0b12 46% 100%); animation-delay: 0.4s; }
@@ -368,23 +366,25 @@ const experiments = [
   @keyframes dThemeP { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
 
   /* ---------- ALSO ON THE BENCH ---------- */
-  .lab-more { padding-top: 0; }
+  .lab-more { padding: clamp(90px, 12vw, 160px) var(--pad); }
   .lab-list { list-style: none; margin: 22px 0 0; padding: 0; }
-  .lab-row { display: grid; grid-template-columns: 44px minmax(200px, 0.5fr) 1fr; gap: 24px; align-items: baseline; padding: 22px 6px; border-top: 1px solid rgb(var(--fg-rgb) / 0.12); transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
-  .lab-list li:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.12); }
+  .lab-row { display: grid; grid-template-columns: 44px minmax(200px, 0.5fr) 1fr; gap: 24px; align-items: baseline; padding: clamp(24px, 2.6vw, 34px) 6px; border-top: 1px solid rgb(var(--ink-rgb) / 0.1); transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .lab-list li:last-child { border-bottom: 1px solid rgb(var(--ink-rgb) / 0.1); }
   .lab-row:hover { padding-left: 16px; }
-  .lab-row-n { font-size: 12px; letter-spacing: 0.18em; color: rgb(var(--fg-rgb) / 0.4); }
-  .lab-row-t { position: relative; width: fit-content; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(18px, 1.9vw, 26px); letter-spacing: -0.02em; color: var(--fg); text-decoration: none; }
+  .lab-row-n { font-size: 12px; letter-spacing: 0.18em; color: rgb(var(--ink-rgb) / 0.4); }
+  .lab-row-t { position: relative; width: fit-content; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(18px, 1.9vw, 26px); letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
   .lab-row:hover .lab-stroke path { stroke-dashoffset: 0; }
-  .lab-row-d { font-size: 14px; line-height: 1.6; font-weight: 300; color: rgb(var(--fg-rgb) / 0.58); max-width: 52ch; }
+  .lab-row-d { font-size: 14px; line-height: 1.6; font-weight: 300; color: rgb(var(--ink-rgb) / 0.58); max-width: 52ch; }
 
-  /* ---------- CTA + PILE ---------- */
-  .lab-end { position: relative; overflow: hidden; padding-top: clamp(60px, 8vw, 110px); }
+  /* ---------- CTA + PILE (deliberate dark closer) ---------- */
+  .lab-end { position: relative; overflow: hidden; padding-top: clamp(90px, 11vw, 150px); background: var(--bg); color: var(--fg); }
+  /* dark band: re-tint the kicker label to the fg tone (the "+" stays accent) */
+  .lab-end .lab-kicker { color: rgb(var(--fg-rgb) / 0.75); }
   .lab-end-inner { position: relative; z-index: 2; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 30px; }
   .lab-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5.6vw, 86px); letter-spacing: -0.03em; line-height: 1.04; max-width: 16ch; padding-bottom: 0.1em; }
-  .lab-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--accent); padding: 18px 32px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 14px 40px rgb(0 0 0 / 0.3); }
-  .lab-cta:hover { gap: 18px; transform: translateY(-2px); box-shadow: 0 18px 50px rgb(0 0 0 / 0.4); }
-  .lab-end :global(.pile) { margin-top: clamp(40px, 6vw, 80px); }
+  .lab-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--accent); padding: 18px 32px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 14px 40px rgb(var(--ink-rgb) / 0.2); }
+  .lab-cta:hover { gap: 18px; transform: translateY(-2px); box-shadow: 0 18px 50px rgb(var(--ink-rgb) / 0.28); }
+  .lab-end :global(.pile) { margin-top: clamp(60px, 8vw, 110px); }
 
   /* ---------- split + fade reveal ---------- */
   .lab :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
@@ -409,7 +409,7 @@ const experiments = [
     .lab-grid { grid-template-columns: 1fr; }
     .lab-meta { gap: 14px; }
   }
-  /* hover preview is a pointer affordance — drop it where there's no fine pointer */
+  /* hover preview is a pointer affordance: drop it where there's no fine pointer */
   @media (max-width: 900px), (hover: none) {
     .lab-prev { display: none; }
   }
@@ -429,15 +429,16 @@ const experiments = [
   /* TICKER PLAYGROUND */
   .lab-ticklab .tl-controls { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(20px, 4vw, 56px); margin: clamp(28px, 4vw, 48px) 0 clamp(24px, 3vw, 36px); }
   .tl-field { display: flex; flex-direction: column; gap: 12px; min-width: 260px; flex: 1 1 280px; max-width: 420px; }
-  .tl-field-l { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.6); }
+  .tl-field-l { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.6); }
   .tl-field-l b { color: var(--accent); font-variant-numeric: tabular-nums; }
-  .tl-range { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; border-radius: 999px; background: rgb(var(--fg-rgb) / 0.2); outline: none; cursor: pointer; }
-  .tl-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 2px 10px rgb(var(--ink-rgb) / 0.5); cursor: grab; }
-  .tl-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); cursor: grab; }
-  .tl-seg { display: inline-flex; padding: 4px; border-radius: 999px; border: 1px solid rgb(var(--fg-rgb) / 0.18); }
-  .tl-seg-btn { padding: 9px 18px; border: 0; border-radius: 999px; background: transparent; color: rgb(var(--fg-rgb) / 0.6); font: 600 12px/1 'Inter', sans-serif; letter-spacing: 0.06em; cursor: pointer; transition: color 0.2s, background 0.2s; }
-  .tl-seg-btn.on { background: var(--fg); color: var(--bg); }
-  .tl-stack { display: flex; flex-direction: column; gap: 14px; }
+  .tl-range { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; border-radius: 999px; background: rgb(var(--ink-rgb) / 0.2); outline: none; cursor: pointer; }
+  .tl-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); border: 3px solid var(--paper); box-shadow: 0 2px 10px rgb(var(--ink-rgb) / 0.25); cursor: grab; }
+  .tl-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid var(--paper); cursor: grab; }
+  .tl-seg { display: inline-flex; padding: 4px; border-radius: 999px; border: 1px solid rgb(var(--ink-rgb) / 0.18); }
+  .tl-seg-btn { padding: 9px 18px; border: 0; border-radius: 999px; background: transparent; color: rgb(var(--ink-rgb) / 0.6); font: 600 12px/1 'Inter', sans-serif; letter-spacing: 0.06em; cursor: pointer; transition: color 0.2s, background 0.2s; }
+  .tl-seg-btn.on { background: var(--ink); color: var(--paper); }
+  .tl-stack { display: flex; flex-direction: column; gap: clamp(20px, 2.4vw, 32px); }
+  .tl-card { padding: clamp(18px, 2.4vw, 30px); border-radius: 12px; background: var(--paper); box-shadow: 0 20px 50px rgb(var(--ink-rgb) / 0.1); }
 </style>
 
 <script>
@@ -481,7 +482,7 @@ const experiments = [
       const y = scrollY;
       heroFrames.forEach((f) => {
         const sp = Number((f as HTMLElement).dataset.hspeed || 0.5);
-        (f as HTMLElement).style.transform = `translateY(${y * sp * -0.16}px)`;
+        (f as HTMLElement).style.transform = `translateY(${y * sp * -0.10}px)`;
       });
       hTick = false;
     });
@@ -568,7 +569,7 @@ const experiments = [
     // do the work (a parent style can't reach into the scoped component).
     const setInvert = (on) => {
       tickers.forEach((t, i) => {
-        const base = i === 0 ? 'white' : 'black';
+        const base = i === 0 ? 'black' : 'white';
         const tone = on ? (base === 'white' ? 'black' : 'white') : base;
         t.classList.remove('bt-white', 'bt-black');
         t.classList.add('bt-' + tone);
