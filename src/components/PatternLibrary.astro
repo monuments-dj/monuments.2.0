@@ -245,21 +245,23 @@
     // Parallax: the image drifts inside the fixed frame and the whole block floats,
     // both slower than scroll (exoape's slow-media language). Size stays fixed; the
     // drift is capped so the oversized poster never reveals an edge.
-    const update = () => {
-      const r = sec.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
-      const p = clamp((vh - r.top) / (vh + r.height), 0, 1); // 0 entering, 1 exited
-      rr.style.setProperty('--rr-drift', clamp((0.5 - p) * 24 * par, -14, 14).toFixed(2) + '%');
-      rr.style.setProperty('--rr-float', ((0.5 - p) * 40 * par).toFixed(1) + 'px');
-    };
     if (!reduced) {
-      let raf = 0;
-      const onScroll = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; update(); }); };
-      addEventListener('scroll', onScroll, { passive: true });
-      addEventListener('resize', onScroll, { passive: true });
-      update();
+      // Drive the parallax from a continuous rAF loop, NOT from 'scroll' events, so
+      // it works no matter how Lenis dispatches scrolling. Cheap (one rect read +
+      // two var writes per frame) and only writes while the section is near view.
+      const tick = () => {
+        const r = sec.getBoundingClientRect();
+        const vh = window.innerHeight || 1;
+        if (r.bottom > -240 && r.top < vh + 240) {
+          const p = clamp((vh - r.top) / (vh + r.height), 0, 1); // 0 entering, 1 exited
+          rr.style.setProperty('--rr-drift', clamp((0.5 - p) * 24 * par, -14, 14).toFixed(2) + '%');
+          rr.style.setProperty('--rr-float', ((0.5 - p) * 40 * par).toFixed(1) + 'px');
+        }
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
       const parRange = document.querySelector('[data-rr-par]'), parVal = document.querySelector('[data-rr-parval]');
-      parRange && parRange.addEventListener('input', () => { par = Number(parRange.value) / 100; if (parVal) parVal.textContent = parRange.value; update(); });
+      parRange && parRange.addEventListener('input', () => { par = Number(parRange.value) / 100; if (parVal) parVal.textContent = parRange.value; });
     }
     const size = document.querySelector('[data-rr-size]'), sizeVal = document.querySelector('[data-rr-sizeval]');
     size && size.addEventListener('input', () => { rr.style.setProperty('--rr-size', size.value); if (sizeVal) sizeVal.textContent = size.value; });
