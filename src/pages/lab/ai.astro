@@ -113,9 +113,9 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
           <p class="ai-eyebrow">How it works</p>
           <h2 class="ai-sv-h">Audit. Automate. Deploy.</h2>
         </div>
-        <div class="ai-cards">
-          {services.map((s) => (
-            <article class="ai-card fade" style={`--tilt:${s.tilt}deg`}>
+        <div class="ai-cards" data-cards>
+          {services.map((s, ci) => (
+            <article class="ai-card" data-key={s.key} style={`--tilt:${s.tilt}deg; --ci:${ci};`}>
               <div class="ai-card-top">
                 <span class="ai-card-n">{s.n}</span>
                 <h3 class="ai-card-t">{s.title}</h3>
@@ -231,8 +231,29 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
   .ai-sv { max-width: var(--wrap); margin: 0 auto; padding: clamp(90px, 11vw, 150px) var(--pad); }
   .ai-sv-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(36px, 5vw, 72px); letter-spacing: -0.025em; margin-top: 18px; }
   .ai-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 2.6vw, 36px); margin-top: clamp(48px, 6vw, 80px); }
-  .ai-card { position: relative; background: var(--white); color: var(--ink); border-radius: 14px; padding: clamp(28px, 2.8vw, 42px); transform: rotate(var(--tilt)); transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease; overflow: hidden; display: flex; flex-direction: column; min-height: 480px; will-change: transform; transform-style: preserve-3d; }
+  .ai-card { position: relative; background: var(--white); color: var(--ink); border-radius: 14px; padding: clamp(28px, 2.8vw, 42px); overflow: hidden; display: flex; flex-direction: column; min-height: 480px; will-change: transform, opacity; transform-style: preserve-3d;
+    /* pre-reveal: dropped + faded, deals itself in on scroll */
+    opacity: 0; transform: translateY(72px) rotate(calc(var(--tilt) * 2)) scale(0.95);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--ci) * 0.12s), opacity 0.6s ease calc(var(--ci) * 0.12s), box-shadow 0.45s ease; }
+  .ai-card.shown { opacity: 1; transform: rotate(var(--tilt)); }
   .ai-card:hover { box-shadow: 0 24px 60px rgba(0,0,0,0.35); }
+
+  /* DEPLOY fold-and-fly: once the section is done, the Deploy card folds into a
+     paper airplane (clip-path morph + content fades) and zips off the top-right. */
+  .ai-card.flyoff { pointer-events: none; animation: deployFold 1.5s cubic-bezier(0.5, 0, 0.2, 1) forwards; box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+  .ai-card.flyoff > * { opacity: 0; transition: opacity 0.3s ease; }
+  @keyframes deployFold {
+    0%   { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: rotate(var(--tilt)); }
+    24%  { clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 50%); transform: rotate(-3deg) scale(0.92); }
+    46%  { clip-path: polygon(2% 50%, 100% 6%, 56% 50%, 100% 94%); transform: rotate(-9deg) scale(0.6) translateY(-20px); }
+    62%  { clip-path: polygon(2% 50%, 100% 6%, 56% 50%, 100% 94%); transform: rotate(-2deg) scale(0.5) translate(-30px, 10px); }
+    100% { clip-path: polygon(2% 50%, 100% 6%, 56% 50%, 100% 94%); transform: translate(135vw, -70vh) rotate(22deg) scale(0.22); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ai-card { opacity: 1; transform: rotate(var(--tilt)); transition: none; }
+    .ai-card.flyoff { animation: none; }
+  }
   .ai-card-top { display: flex; align-items: baseline; gap: 14px; }
   .ai-card-n { font-size: 12px; letter-spacing: 0.18em; color: rgb(var(--ink-rgb) / 0.4); }
   .ai-card-t { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(26px, 2.6vw, 38px); letter-spacing: -0.02em; }
@@ -402,6 +423,31 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
     onScroll();
   }
 
+  // --- Services cards: deal in on scroll (staggered .shown); once you scroll
+  //     past, the Deploy card folds into a paper airplane and zips off. ---
+  const svCards = [...document.querySelectorAll('.ai-card')];
+  const deployCard = svCards.find((c) => c.getAttribute('data-key') === 'deploy');
+  const cardsWrap = document.querySelector('[data-cards]');
+  if (!reduced) {
+    const cardIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('shown'); cardIO.unobserve(e.target); } });
+    }, { threshold: 0.3 });
+    svCards.forEach((c) => cardIO.observe(c));
+
+    if (cardsWrap && deployCard) {
+      let flown = false;
+      const onCardsScroll = () => {
+        const r = cardsWrap.getBoundingClientRect();
+        if (!flown && r.bottom < innerHeight * 0.6 && deployCard.classList.contains('shown')) { deployCard.classList.add('flyoff'); flown = true; }
+        else if (flown && r.bottom > innerHeight * 0.9) { deployCard.classList.remove('flyoff'); flown = false; }
+      };
+      addEventListener('scroll', onCardsScroll, { passive: true });
+      onCardsScroll();
+    }
+  } else {
+    svCards.forEach((c) => c.classList.add('shown'));
+  }
+
   // --- Pointer-reactive layer (desktop only) ---
   if (!reduced && finePointer) {
     document.querySelectorAll('.ai-card').forEach((card) => {
@@ -410,6 +456,7 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
         card.style.transition = 'transform 0.12s ease-out, box-shadow 0.45s ease';
       });
       card.addEventListener('pointermove', (e) => {
+        if (card.classList.contains('flyoff')) return;
         const r = card.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width - 0.5;
         const py = (e.clientY - r.top) / r.height - 0.5;
