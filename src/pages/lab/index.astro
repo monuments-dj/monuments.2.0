@@ -49,7 +49,7 @@ const blocks = [
   { demo: 'ticker', t: 'Brand ticker',      d: "A logo marquee that drifts on its own and speeds up with scroll velocity. Hover to pause, click to leave." },
   { demo: 'hand',   t: 'Floating hand',     d: "The red signature mark. Idle-bobs, then deploys and parallaxes as it enters view. The studio's tell." },
   { demo: 'pile',   t: 'Shape pile',        d: "Brand-colored shapes that fall and pile up at a section floor as it scrolls in. Playful, never a game." },
-  { demo: 'theme',  t: 'Theme selector',    d: "Four presets reskin the whole page live from tokens. Try the swatches in the corner; nothing is hardcoded." },
+  { demo: 'theme',  t: 'Theme selector',    d: "Eight presets reskin the whole page live from tokens, each one contrast-checked by a color tool. Try the swatches in the corner; nothing is hardcoded." },
 ];
 
 // The older experiments: kept as a quieter "also in progress" row.
@@ -82,7 +82,7 @@ const experiments = [
         <div class="lab-meta fade">
           <span><b>{v2.length}</b> live experiments</span>
           <span><b>{blocks.length}</b> shipped building blocks</span>
-          <span><b>4</b> themes, reskinned live</span>
+          <span><b>8</b> themes, reskinned live</span>
         </div>
       </div>
       <div class="lab-scrollcue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
@@ -153,7 +153,7 @@ const experiments = [
                 <div class="d-pile"><span class="ds ds-1"></span><span class="ds ds-2"></span><span class="ds ds-3"></span><span class="ds ds-4"></span><span class="ds ds-5"></span><span class="ds ds-6"></span></div>
               )}
               {b.demo === 'theme' && (
-                <div class="d-theme"><span class="dt dt-1"></span><span class="dt dt-2"></span><span class="dt dt-3"></span><span class="dt dt-4"></span></div>
+                <div class="d-theme"><span class="dt dt-1"></span><span class="dt dt-2"></span><span class="dt dt-3"></span><span class="dt dt-4"></span><span class="dt dt-5"></span><span class="dt dt-6"></span><span class="dt dt-7"></span><span class="dt dt-8"></span></div>
               )}
             </div>
             <div class="lab-card-text">
@@ -350,13 +350,17 @@ const experiments = [
   .ds-6 { left: 70px; bottom: 48px; background: var(--fg); border-radius: 50%; animation-delay: 0.6s; }
   @keyframes dDrop { 0% { transform: translateY(-120px); opacity: 0; } 20%,100% { transform: translateY(0); opacity: 0.92; } }
 
-  /* theme: four reskin swatches */
-  .d-theme { display: flex; gap: 12px; }
-  .d-theme .dt { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgb(var(--fg-rgb) / 0.2); animation: dThemeP 4s ease-in-out infinite; }
+  /* theme: eight reskin swatches (mirror the picker presets) */
+  .d-theme { display: flex; flex-wrap: wrap; gap: 10px; }
+  .d-theme .dt { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgb(var(--fg-rgb) / 0.2); animation: dThemeP 4s ease-in-out infinite; }
   .dt-1 { background: radial-gradient(circle at 50% 50%, #ff3b2e 0 44%, #0c0b0a 46% 100%); animation-delay: 0s; }
-  .dt-2 { background: radial-gradient(circle at 50% 50%, #ff2e1f 0 44%, #000 46% 100%); animation-delay: 0.5s; }
-  .dt-3 { background: radial-gradient(circle at 50% 50%, #3a4dff 0 44%, #0a0b12 46% 100%); animation-delay: 1s; }
-  .dt-4 { background: radial-gradient(circle at 50% 50%, #e0241a 0 44%, #f4efe6 46% 100%); animation-delay: 1.5s; }
+  .dt-2 { background: radial-gradient(circle at 50% 50%, #ff3b2e 0 44%, #000000 46% 100%); animation-delay: 0.2s; }
+  .dt-3 { background: radial-gradient(circle at 50% 50%, #5768ff 0 44%, #0a0b12 46% 100%); animation-delay: 0.4s; }
+  .dt-4 { background: radial-gradient(circle at 50% 50%, #d3261c 0 44%, #f4efe6 46% 100%); animation-delay: 0.6s; }
+  .dt-5 { background: radial-gradient(circle at 50% 50%, #5b6cff 0 44%, #0e1014 46% 100%); animation-delay: 0.8s; }
+  .dt-6 { background: radial-gradient(circle at 50% 50%, #ffb224 0 44%, #0b110d 46% 100%); animation-delay: 1s; }
+  .dt-7 { background: radial-gradient(circle at 50% 50%, #b9450f 0 44%, #f3ece1 46% 100%); animation-delay: 1.2s; }
+  .dt-8 { background: radial-gradient(circle at 50% 50%, #ff3b2e 0 44%, #050505 46% 100%); animation-delay: 1.4s; }
   @keyframes dThemeP { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
 
   /* ---------- ALSO ON THE BENCH ---------- */

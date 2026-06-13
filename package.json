@@ -22,6 +22,8 @@
     "react-dom": "^19.2.7"
   },
   "devDependencies": {
+    "@adobe/leonardo-contrast-colors": "^1.1.0",
+    "culori": "^4.0.2",
     "playwright": "^1.60.0"
   }
 }
