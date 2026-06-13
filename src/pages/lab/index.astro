@@ -1,123 +1,341 @@
 ---
 import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
+import WeavingLine from '../../components/WeavingLine.astro';
 import BrandTicker from '../../components/BrandTicker.astro';
+import FloatingHand from '../../components/FloatingHand.astro';
+import ShapePile from '../../components/ShapePile.astro';
 
-// === THE LAB INDEX — /lab ===
-// DJ's hub for everything in progress: the v2 pages (with their current
-// counterparts for instant A/B), plus the older experiments. Bookmark this.
+// === THE LAB (/lab) ===
+// Public-facing Laboratory showcase: proof the studio is ahead of the market.
+// Every v2 page is an experiment tile (with a compare link to its live
+// counterpart); a "building blocks" rack shows off the shipped toys; ShapePile
+// + CTA close it out. Tokenized end to end so the LabFx selector re-skins it.
 
+// The v2 set: bold experiment tiles. Each links to the new build; "compare"
+// links to what it would replace. Originals stay untouched until promoted.
 const v2 = [
-  { href: '/lab/home',       vs: '/',                 t: 'Homepage v2',       d: 'SIGHT SOUND EMOTION tilt hero, red floating hand, brand ticker, parallax work scenes.' },
-  { href: '/lab/work',       vs: '/work',             t: 'Work, reimagined',  d: 'Horizontal-scroll gallery + cursor-preview index. Portals scrapped.' },
-  { href: '/lab/blue-cross', vs: '/work/blue-cross',  t: 'Blue Cross, reimagined', d: 'Editorial chapters, pinned insight, portal next-project.' },
-  { href: '/lab/ai',         vs: null,                t: 'AI systems',        d: 'Audit. Automate. Deploy. The $5k offer, WILD cascade and all.' },
-  { href: '/lab/about',      vs: '/about',            t: 'About, from scratch', d: 'Builds monuments not moments. Real photo montage, Billions reached, philosophy pillars.' },
-  { href: '/lab/services',   vs: '/services',         t: 'Services v2',       d: 'Your real capabilities (agency + production) + the AI systems block.' },
-  { href: '/lab/contact',    vs: '/contact',          t: 'Contact v2',        d: 'The email is the page. Badges escaped the menu.' },
+  { href: '/lab/home',       vs: '/',                t: 'Homepage',       tag: 'Tilt hero',      d: "SIGHT SOUND EMOTION tilt hero, the red floating hand, a scroll-velocity ticker, parallax work scenes." },
+  { href: '/lab/work',       vs: '/work',            t: 'Work index',     tag: 'Portal scroll',  d: "Horizontal-scroll gallery with a cursor-driven preview index. The work takes over the viewport." },
+  { href: '/lab/blue-cross', vs: '/work/blue-cross', t: 'Case study',     tag: 'Editorial',      d: "Editorial chapters, a pinned insight scene, and a portal hand-off into the next project." },
+  { href: '/lab/ai',         vs: null,               t: 'AI systems',     tag: 'New offer',      d: "Audit. Automate. Deploy. The consulting offer, with the word-cascade moment in full." },
+  { href: '/lab/about',      vs: '/about',           t: 'About',          tag: 'Pinned credo',   d: "Builds monuments, not moments. A drifting photo wall, billions reached, a pinned credo scene." },
+  { href: '/lab/services',   vs: '/services',        t: 'Services',       tag: 'Tilted cards',   d: "The real capabilities, agency and production, plus the AI systems block on tilted cards." },
+  { href: '/lab/contact',    vs: '/contact',         t: 'Contact',        tag: 'Email as page',  d: "The email is the page. Badges escaped the menu. Modern, fast, almost nothing to click." },
 ];
 
+// Shipped building blocks: the toys, as labeled interactive cards. Each card's
+// `demo` key drives a tiny live demo rendered in markup below.
+const blocks = [
+  { demo: 'cursor', t: 'Contextual cursor', d: "A lagging disc that swaps its label by context: View, Scroll, Explore. Reads data attributes off whatever it touches." },
+  { demo: 'weave',  t: 'Weaving line',      d: "An organic thread that draws itself down a page edge in time with scroll. Ties a long page together." },
+  { demo: 'ticker', t: 'Brand ticker',      d: "A logo marquee that drifts on its own and speeds up with scroll velocity. Hover to pause, click to leave." },
+  { demo: 'hand',   t: 'Floating hand',     d: "The red signature mark. Idle-bobs, then deploys and parallaxes as it enters view. The studio's tell." },
+  { demo: 'pile',   t: 'Shape pile',        d: "Brand-colored shapes that fall and pile up at a section floor as it scrolls in. Playful, never a game." },
+  { demo: 'theme',  t: 'Theme selector',    d: "Four presets reskin the whole page live from tokens. Try the swatches in the corner; nothing is hardcoded." },
+];
+
+// The older experiments: kept as a quieter "also in progress" row.
 const experiments = [
-  { href: '/lab/find-your-flow', t: 'Find Your Flow ring', d: 'Three credits-ring motion options, still awaiting a pick.' },
-  { href: '/lab/work-kit',       t: 'Work component kit',  d: 'Self-contained work-page components, the site-factory seed.' },
-  { href: '/work-preview/sony-this-moment', t: 'CMS pipeline proof', d: 'Sony This Moment rendered from Keystatic content.' },
+  { href: '/lab/find-your-flow', t: 'Find Your Flow ring',  d: "Three credits-ring motion options, awaiting a final pick." },
+  { href: '/lab/work-kit',       t: 'Work component kit',   d: "Self-contained work-page parts. The seed of the site-factory." },
+  { href: '/work-preview/sony-this-moment', t: 'CMS pipeline proof', d: "Sony This Moment, rendered from Keystatic content end to end." },
 ];
 ---
 <Base title="The Lab — monuments">
-  <main class="lb">
+  <main class="lab">
+    <WeavingLine side="left" />
 
-    <header class="lb-head">
-      <p class="lb-eyebrow fade">The lab</p>
-      <h1 class="lb-h1 split">Work in progress, <em>on purpose.</em></h1>
-      <p class="lb-lead fade">Every v2 page lives here until it's promoted. Click the title for the new version; click compare to see what it replaces. Originals stay untouched until you call it.</p>
+    <!-- HERO -->
+    <header class="lab-hero">
+      <FloatingHand side="right" top="16vh" />
+      <div class="lab-hero-inner">
+        <p class="lab-eyebrow fade">The lab</p>
+        <h1 class="lab-h1 split">Where we test <em>what's next.</em></h1>
+        <p class="lab-lead fade">This is the open workbench. We build the studio's own pages here first, in public, with the emerging web tech and AI we then bring to client work. If something is bleeding into the future, it shows up on this page before it ships anywhere else.</p>
+        <div class="lab-meta fade">
+          <span><b>{v2.length}</b> live experiments</span>
+          <span><b>{blocks.length}</b> shipped building blocks</span>
+          <span><b>4</b> themes, reskinned live</span>
+        </div>
+      </div>
+      <div class="lab-scrollcue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
 
-    <section class="lb-sec">
-      <p class="lb-kicker fade">The v2 set · built 2026-06-12</p>
-      <ul class="lb-list">
-        {v2.map((p, i) => (
-          <li class="lb-row fade">
-            <span class="lb-n">{String(i + 1).padStart(2, '0')}</span>
-            <a class="lb-t" href={p.href}>
-              {p.t}
-              <svg class="lb-stroke" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8 C60 4, 150 10, 296 5" /></svg>
-            </a>
-            <span class="lb-d">{p.d}</span>
-            {p.vs
-              ? <a class="lb-vs" href={p.vs}>compare <span aria-hidden="true">→</span></a>
-              : <span class="lb-vs lb-vs-new">new page</span>}
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section class="lb-sec">
-      <p class="lb-kicker fade">Experiments</p>
-      <ul class="lb-list">
-        {experiments.map((p, i) => (
-          <li class="lb-row lb-row-x fade">
-            <span class="lb-n">x{i + 1}</span>
-            <a class="lb-t lb-t-sm" href={p.href}>
-              {p.t}
-              <svg class="lb-stroke" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8 C60 4, 150 10, 296 5" /></svg>
-            </a>
-            <span class="lb-d">{p.d}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <p class="lb-foot fade">Rollback safety: every page above is its own commit. Nothing replaces a live page until you promote it.</p>
-
+    <!-- BRAND TICKER -->
     <BrandTicker />
+
+    <!-- THE EXPERIMENTS -->
+    <section class="lab-sec lab-exp">
+      <div class="lab-sec-head">
+        <p class="lab-kicker fade">The experiments</p>
+        <h2 class="lab-sec-title split">Seven pages, rebuilt from <em>nothing.</em></h2>
+        <p class="lab-sec-sub fade">Open the title to see the new build. Open compare to see the live page it would replace. Nothing goes live until we call it.</p>
+      </div>
+
+      <ul class="lab-tiles">
+        {v2.map((p, i) => (
+          <li class="lab-tile fade">
+            <a class="lab-tile-main" href={p.href} data-cursor="View" aria-label={`Open the ${p.t} experiment`}>
+              <span class="lab-tile-n">{String(i + 1).padStart(2, '0')}</span>
+              <span class="lab-tile-body">
+                <span class="lab-tile-tag">{p.tag}</span>
+                <span class="lab-tile-t">
+                  {p.t}
+                  <svg class="lab-stroke" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8 C60 4, 150 10, 296 5" /></svg>
+                </span>
+                <span class="lab-tile-d">{p.d}</span>
+              </span>
+              <span class="lab-tile-go" aria-hidden="true">↗</span>
+            </a>
+            {p.vs
+              ? <a class="lab-vs" href={p.vs} data-cursor="Compare">compare live <span aria-hidden="true">→</span></a>
+              : <span class="lab-vs lab-vs-new">new page</span>}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- BUILDING BLOCKS: the toys -->
+    <section class="lab-sec lab-blocks">
+      <div class="lab-sec-head">
+        <p class="lab-kicker fade">Shipped building blocks</p>
+        <h2 class="lab-sec-title split">The toys, out of the <em>box.</em></h2>
+        <p class="lab-sec-sub fade">Every page above is assembled from these. Built once, reused everywhere. Poke at them.</p>
+      </div>
+
+      <div class="lab-grid">
+        {blocks.map((b) => (
+          <article class={`lab-card fade card-${b.demo}`} data-cursor="Explore">
+            <div class="lab-card-demo" aria-hidden="true">
+              {b.demo === 'cursor' && (
+                <div class="d-cursor"><span class="d-cursor-disc"><i>View</i></span><span class="d-cursor-dot"></span></div>
+              )}
+              {b.demo === 'weave' && (
+                <svg class="d-weave" viewBox="0 0 120 200" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M60 4 C 10 40, 110 76, 60 112 C 12 148, 108 176, 60 196" /></svg>
+              )}
+              {b.demo === 'ticker' && (
+                <div class="d-ticker"><div class="d-ticker-row"><b>SONY</b><b>INTEL</b><b>MSI</b><b>LEXAR</b><b>SONY</b><b>INTEL</b><b>MSI</b><b>LEXAR</b></div></div>
+              )}
+              {b.demo === 'hand' && (
+                <svg class="d-hand" viewBox="0 0 200 240" aria-hidden="true"><path fill="var(--accent)" d="M52 232 C44 232 38 226 38 218 L38 150 C28 150 22 142 22 132 L22 96 C22 88 28 82 36 82 C44 82 50 88 50 96 L50 122 L56 122 L56 40 C56 32 62 26 70 26 C78 26 84 32 84 40 L84 116 L90 116 L90 22 C90 14 96 8 104 8 C112 8 118 14 118 22 L118 116 L124 116 L124 34 C124 26 130 20 138 20 C146 20 152 26 152 34 L152 124 L158 124 L162 96 C164 86 172 80 181 82 C189 84 194 92 192 101 L182 158 C176 198 150 232 108 232 Z"/></svg>
+              )}
+              {b.demo === 'pile' && (
+                <div class="d-pile"><span class="ds ds-1"></span><span class="ds ds-2"></span><span class="ds ds-3"></span><span class="ds ds-4"></span><span class="ds ds-5"></span><span class="ds ds-6"></span></div>
+              )}
+              {b.demo === 'theme' && (
+                <div class="d-theme"><span class="dt dt-1"></span><span class="dt dt-2"></span><span class="dt dt-3"></span><span class="dt dt-4"></span></div>
+              )}
+            </div>
+            <div class="lab-card-text">
+              <h3 class="lab-card-t">{b.t}</h3>
+              <p class="lab-card-d">{b.d}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p class="lab-blocks-note fade">Want the selector? It's living bottom-left of this page. Click a swatch and the whole thing reskins from tokens, no reload.</p>
+    </section>
+
+    <!-- ALSO IN PROGRESS -->
+    <section class="lab-sec lab-more">
+      <p class="lab-kicker fade">Also on the bench</p>
+      <ul class="lab-list">
+        {experiments.map((p, i) => (
+          <li class="lab-row fade">
+            <span class="lab-row-n">x{i + 1}</span>
+            <a class="lab-row-t" href={p.href} data-cursor="View">
+              {p.t}
+              <svg class="lab-stroke sm" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8 C60 4, 150 10, 296 5" /></svg>
+            </a>
+            <span class="lab-row-d">{p.d}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- CTA + SHAPE PILE -->
+    <section class="lab-end">
+      <FloatingHand side="left" top="8vh" />
+      <div class="lab-end-inner">
+        <p class="lab-kicker fade">Seen enough?</p>
+        <p class="lab-end-big split">This is the edge we build from. <em>Let's build yours.</em></p>
+        <a class="lab-cta fade" href="/contact" data-mag data-cursor="Let's talk">Start a conversation <span aria-hidden="true">↗</span></a>
+      </div>
+      <ShapePile count={30} height="clamp(220px, 30vh, 360px)" />
+    </section>
 
   </main>
   <LabFx />
 </Base>
 
 <style>
-  .lb { background: var(--black); color: var(--white); min-height: 100vh; overflow-x: clip; }
-  .lb-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
-  .lb-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+  .lab { background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .lab-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); }
+  .lab-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+  .lab-h1 em, .lab-sec-title em, .lab-end-big em { font-style: italic; color: var(--accent); }
 
-  .lb-head { max-width: var(--wrap); margin: 0 auto; padding: 170px var(--pad) 7vh; }
-  .lb-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(40px, 6vw, 92px); line-height: 1; letter-spacing: -0.03em; margin-top: 20px; }
-  .lb-h1 em { font-style: italic; color: var(--accent); }
-  .lb-lead { margin-top: 26px; max-width: 540px; font-size: 15px; line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.72); }
+  /* ---------- HERO ---------- */
+  .lab-hero { position: relative; min-height: 96vh; display: flex; align-items: center; overflow: hidden; padding: 16vh 0 12vh; }
+  .lab-hero-inner { position: relative; z-index: 3; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+  .lab-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(46px, 8vw, 128px); line-height: 1; letter-spacing: -0.035em; margin-top: 22px; padding-bottom: 0.12em; }
+  .lab-lead { margin-top: 30px; max-width: 56ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.72; font-weight: 300; color: rgb(var(--fg-rgb) / 0.78); }
+  .lab-meta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: clamp(20px, 3vw, 44px); font-size: 13px; font-weight: 300; letter-spacing: 0.02em; color: rgb(var(--fg-rgb) / 0.55); }
+  .lab-meta b { font-weight: 500; color: var(--accent); font-size: 15px; }
 
-  .lb-sec { max-width: var(--wrap); margin: 0 auto; padding: 5vh var(--pad) 4vh; }
-  .lb-list { list-style: none; margin: 22px 0 0; padding: 0; }
-  .lb-row { display: grid; grid-template-columns: 48px minmax(220px, 0.5fr) 1fr auto; gap: 24px; align-items: baseline; padding: 22px 6px; border-top: 1px solid rgb(var(--fg-rgb) / 0.13); transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
-  .lb-list li:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.13); }
-  .lb-row:hover { padding-left: 18px; }
-  .lb-n { font-size: 12px; letter-spacing: 0.18em; color: rgb(var(--fg-rgb) / 0.4); }
-  .lb-t { position: relative; width: fit-content; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(20px, 2.2vw, 30px); letter-spacing: -0.02em; color: var(--white); text-decoration: none; }
-  .lb-t-sm { font-size: clamp(17px, 1.8vw, 23px); }
-  .lb-stroke { position: absolute; left: 0; bottom: -5px; width: 100%; height: 9px; overflow: visible; }
-  .lb-stroke path { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: 320; transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1); }
-  .lb-row:hover .lb-stroke path { stroke-dashoffset: 0; }
-  .lb-d { font-size: 14px; line-height: 1.6; font-weight: 300; color: rgb(var(--fg-rgb) / 0.6); max-width: 52ch; }
-  .lb-vs { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); text-decoration: none; white-space: nowrap; transition: color 0.2s; }
-  a.lb-vs:hover { color: var(--white); }
-  .lb-vs-new { color: var(--accent); }
+  .lab-scrollcue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .lab-scrollcue i { width: 1px; height: 34px; background: linear-gradient(var(--accent), transparent); animation: cue 1.8s ease-in-out infinite; transform-origin: top; }
+  @keyframes cue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
 
-  .lb-foot { max-width: var(--wrap); margin: 0 auto; padding: 6vh var(--pad) 14vh; font-size: 13px; font-weight: 300; color: rgb(var(--fg-rgb) / 0.45); }
+  /* ---------- shared section frame ---------- */
+  .lab-sec { max-width: var(--wrap); margin: 0 auto; padding: clamp(90px, 12vw, 160px) var(--pad); }
+  .lab-sec-head { max-width: 760px; margin-bottom: clamp(48px, 6vw, 80px); }
+  .lab-sec-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(32px, 4.6vw, 68px); line-height: 1.04; letter-spacing: -0.03em; margin-top: 16px; padding-bottom: 0.1em; }
+  .lab-sec-sub { margin-top: 22px; max-width: 54ch; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.66); }
 
-  .lb :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
-  .lb :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
-  .lb :global(.split.on .wi) { transform: none; }
+  /* shared marker stroke */
+  .lab-stroke { position: absolute; left: 0; bottom: -6px; width: 100%; height: 10px; overflow: visible; }
+  .lab-stroke path { fill: none; stroke: var(--accent); stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: 320; transition: stroke-dashoffset 0.55s cubic-bezier(0.16,1,0.3,1); }
+  .lab-stroke.sm path { stroke-width: 2.2; }
 
-  @media (max-width: 860px) {
-    .lb-row { grid-template-columns: 36px 1fr; }
-    .lb-d { grid-column: 2; }
-    .lb-vs { grid-column: 2; }
+  /* ---------- EXPERIMENT TILES ---------- */
+  .lab-tiles { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .lab-tile { position: relative; border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .lab-tile:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .lab-tile-main { display: grid; grid-template-columns: 64px 1fr auto; gap: clamp(18px, 3vw, 44px); align-items: center; padding: clamp(26px, 3.2vw, 40px) 8px clamp(26px, 3.2vw, 40px) 6px; text-decoration: none; color: var(--fg); position: relative; transition: padding-left 0.4s cubic-bezier(0.16,1,0.3,1); overflow: hidden; }
+  /* accent wash that sweeps in on hover */
+  .lab-tile-main::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(var(--fg-rgb) / 0.05), transparent 70%); transform: translateX(-100%); transition: transform 0.55s cubic-bezier(0.16,1,0.3,1); z-index: 0; }
+  .lab-tile-main:hover::before { transform: translateX(0); }
+  .lab-tile-main:hover { padding-left: 22px; }
+  .lab-tile-n { position: relative; z-index: 1; font-size: 13px; letter-spacing: 0.16em; color: rgb(var(--fg-rgb) / 0.4); font-feature-settings: 'tnum'; }
+  .lab-tile-body { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 8px; }
+  .lab-tile-tag { font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+  .lab-tile-t { position: relative; width: fit-content; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(26px, 3.4vw, 50px); letter-spacing: -0.025em; line-height: 1.02; }
+  .lab-tile:hover .lab-stroke path { stroke-dashoffset: 0; }
+  .lab-tile-d { max-width: 64ch; font-size: clamp(13.5px, 1vw, 15px); line-height: 1.6; font-weight: 300; color: rgb(var(--fg-rgb) / 0.6); }
+  .lab-tile-go { position: relative; z-index: 1; font-size: clamp(22px, 2.4vw, 34px); color: rgb(var(--fg-rgb) / 0.3); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), color 0.3s ease; }
+  .lab-tile-main:hover .lab-tile-go { color: var(--accent); transform: translate(6px, -6px); }
+
+  .lab-vs { position: absolute; right: 8px; bottom: clamp(20px, 2.6vw, 30px); z-index: 2; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); text-decoration: none; white-space: nowrap; transition: color 0.25s ease; }
+  a.lab-vs:hover { color: var(--accent); }
+  .lab-vs-new { color: var(--accent); }
+  /* keep the compare link clear of the long-form description on wide screens */
+  @media (min-width: 901px) {
+    .lab-tile-d { max-width: 52ch; }
+    .lab-vs { bottom: auto; top: 50%; transform: translateY(-50%); right: 64px; }
+    .lab-tile-go { margin-right: 0; }
   }
+
+  /* ---------- BUILDING BLOCKS GRID ---------- */
+  .lab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 1.8vw, 24px); }
+  .lab-card { position: relative; border: 1px solid rgb(var(--fg-rgb) / 0.12); border-radius: 10px; overflow: hidden; background: rgb(var(--fg-rgb) / 0.02); transition: border-color 0.35s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1), background 0.35s ease; }
+  .lab-card:hover { border-color: rgb(var(--fg-rgb) / 0.3); transform: translateY(-4px); background: rgb(var(--fg-rgb) / 0.04); }
+  .lab-card-demo { position: relative; height: 168px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: radial-gradient(120% 140% at 50% 0%, rgb(var(--fg-rgb) / 0.05), transparent 70%); border-bottom: 1px solid rgb(var(--fg-rgb) / 0.08); }
+  .lab-card-text { padding: clamp(18px, 1.6vw, 24px); }
+  .lab-card-t { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(17px, 1.5vw, 21px); letter-spacing: -0.015em; }
+  .lab-card-d { margin-top: 10px; font-size: 13.5px; line-height: 1.62; font-weight: 300; color: rgb(var(--fg-rgb) / 0.62); }
+  .lab-blocks-note { margin-top: clamp(40px, 5vw, 64px); max-width: 56ch; font-size: 13.5px; font-weight: 300; line-height: 1.6; color: rgb(var(--fg-rgb) / 0.5); }
+
+  /* --- block demos --- */
+  /* cursor: a lagging disc chasing a dot */
+  .d-cursor { position: relative; width: 100%; height: 100%; }
+  .d-cursor-disc { position: absolute; left: 30%; top: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; background: rgb(var(--fg-rgb) / 0.12); border: 1px solid rgb(var(--fg-rgb) / 0.3); display: flex; align-items: center; justify-content: center; animation: dcDisc 3.4s cubic-bezier(0.5,0,0.2,1) infinite; }
+  .d-cursor-disc i { font-style: normal; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg); }
+  .d-cursor-dot { position: absolute; left: 30%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%; background: var(--accent); animation: dcDot 3.4s cubic-bezier(0.5,0,0.2,1) infinite; }
+  @keyframes dcDisc { 0%,100% { transform: translate(-26px,-12px); } 50% { transform: translate(40px,14px); } }
+  @keyframes dcDot { 0%,100% { transform: translate(-18px,-6px); } 50% { transform: translate(48px,20px); } }
+
+  /* weave: a self-drawing thread */
+  .d-weave { width: 70px; height: 100%; overflow: visible; }
+  .d-weave path { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 45%, transparent)); stroke-dasharray: 520; stroke-dashoffset: 520; animation: dWeave 4s ease-in-out infinite; }
+  @keyframes dWeave { 0% { stroke-dashoffset: 520; } 45%,55% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -520; } }
+
+  /* ticker: a drifting wordmark row */
+  .d-ticker { width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); }
+  .d-ticker-row { display: flex; gap: 28px; width: max-content; animation: dTick 9s linear infinite; }
+  .d-ticker-row b { font-weight: 500; font-size: 15px; letter-spacing: 0.06em; color: rgb(var(--fg-rgb) / 0.7); }
+  @keyframes dTick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* hand: idle bob */
+  .d-hand { width: 70px; height: auto; overflow: visible; filter: drop-shadow(0 14px 26px rgb(0 0 0 / 0.35)); animation: dHand 6s ease-in-out infinite; }
+  @keyframes dHand { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-12px) rotate(5deg); } }
+
+  /* pile: shapes settled with a slow drop loop */
+  .d-pile { position: relative; width: 130px; height: 100%; }
+  .d-pile .ds { position: absolute; bottom: 26px; width: 20px; height: 20px; animation: dDrop 3.6s cubic-bezier(0.5,0,0.3,1) infinite; }
+  .ds-1 { left: 6px;  background: var(--accent);   border-radius: 50%; animation-delay: 0s; }
+  .ds-2 { left: 34px; background: var(--accent-2); border-radius: 3px; animation-delay: 0.25s; }
+  .ds-3 { left: 60px; background: var(--fg);       border-radius: 50%; animation-delay: 0.5s; }
+  .ds-4 { left: 88px; background: var(--accent);   border-radius: 999px; width: 32px; animation-delay: 0.15s; }
+  .ds-5 { left: 20px; bottom: 48px; background: var(--accent-2); border-radius: 3px; animation-delay: 0.4s; }
+  .ds-6 { left: 70px; bottom: 48px; background: var(--fg); border-radius: 50%; animation-delay: 0.6s; }
+  @keyframes dDrop { 0% { transform: translateY(-120px); opacity: 0; } 20%,100% { transform: translateY(0); opacity: 0.92; } }
+
+  /* theme: four reskin swatches */
+  .d-theme { display: flex; gap: 12px; }
+  .d-theme .dt { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgb(var(--fg-rgb) / 0.2); animation: dThemeP 4s ease-in-out infinite; }
+  .dt-1 { background: radial-gradient(circle at 50% 50%, #ff3b2e 0 44%, #0c0b0a 46% 100%); animation-delay: 0s; }
+  .dt-2 { background: radial-gradient(circle at 50% 50%, #ff2e1f 0 44%, #000 46% 100%); animation-delay: 0.5s; }
+  .dt-3 { background: radial-gradient(circle at 50% 50%, #3a4dff 0 44%, #0a0b12 46% 100%); animation-delay: 1s; }
+  .dt-4 { background: radial-gradient(circle at 50% 50%, #e0241a 0 44%, #f4efe6 46% 100%); animation-delay: 1.5s; }
+  @keyframes dThemeP { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+
+  /* ---------- ALSO ON THE BENCH ---------- */
+  .lab-more { padding-top: 0; }
+  .lab-list { list-style: none; margin: 22px 0 0; padding: 0; }
+  .lab-row { display: grid; grid-template-columns: 44px minmax(200px, 0.5fr) 1fr; gap: 24px; align-items: baseline; padding: 22px 6px; border-top: 1px solid rgb(var(--fg-rgb) / 0.12); transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .lab-list li:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.12); }
+  .lab-row:hover { padding-left: 16px; }
+  .lab-row-n { font-size: 12px; letter-spacing: 0.18em; color: rgb(var(--fg-rgb) / 0.4); }
+  .lab-row-t { position: relative; width: fit-content; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(18px, 1.9vw, 26px); letter-spacing: -0.02em; color: var(--fg); text-decoration: none; }
+  .lab-row:hover .lab-stroke path { stroke-dashoffset: 0; }
+  .lab-row-d { font-size: 14px; line-height: 1.6; font-weight: 300; color: rgb(var(--fg-rgb) / 0.58); max-width: 52ch; }
+
+  /* ---------- CTA + PILE ---------- */
+  .lab-end { position: relative; overflow: hidden; padding-top: clamp(60px, 8vw, 110px); }
+  .lab-end-inner { position: relative; z-index: 2; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 30px; }
+  .lab-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5.6vw, 86px); letter-spacing: -0.03em; line-height: 1.04; max-width: 16ch; padding-bottom: 0.1em; }
+  .lab-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--accent); padding: 18px 32px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 14px 40px rgb(0 0 0 / 0.3); }
+  .lab-cta:hover { gap: 18px; transform: translateY(-2px); box-shadow: 0 18px 50px rgb(0 0 0 / 0.4); }
+  .lab-end :global(.pile) { margin-top: clamp(40px, 6vw, 80px); }
+
+  /* ---------- split + fade reveal ---------- */
+  .lab :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .lab :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .lab :global(.split.on .wi) { transform: none; }
+  .lab .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .lab .fade.on { opacity: 1; transform: none; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 1100px) {
+    .lab-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .lab-tile-main { grid-template-columns: 40px 1fr; }
+    .lab-tile-go { display: none; }
+    .lab-vs { position: static; transform: none; grid-column: 2; margin: 8px 0 0 calc(40px + clamp(18px, 3vw, 44px)); display: inline-block; }
+    .lab-tile { padding-bottom: 8px; }
+    .lab-row { grid-template-columns: 34px 1fr; }
+    .lab-row-d { grid-column: 2; }
+  }
+  @media (max-width: 560px) {
+    .lab-grid { grid-template-columns: 1fr; }
+    .lab-meta { gap: 14px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .lb :global(.split .wi) { transform: none !important; transition: none !important; }
+    .lab-scrollcue i { animation: none; }
+    .lab :global(.split .wi) { transform: none !important; transition: none !important; }
+    .lab .fade { opacity: 1 !important; transform: none !important; }
+    .lab-stroke path { stroke-dashoffset: 0; }
+    .d-cursor-disc, .d-cursor-dot, .d-weave path, .d-ticker-row, .d-hand, .d-pile .ds, .d-theme .dt { animation: none !important; }
+    .d-pile .ds { transform: none !important; opacity: 0.92 !important; }
   }
 </style>
 
 <script>
+  // Word splitter (line-safe, descender-safe per the type-clip rules).
   const splitWords = (root: Node, counter: { n: number }) => {
     [...root.childNodes].forEach((node) => {
       if (node.nodeType === 3) {
@@ -132,10 +350,16 @@ const experiments = [
           w.appendChild(wi); frag.appendChild(w);
         });
         node.replaceWith(frag);
-      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) splitWords(node, counter);
+      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) {
+        splitWords(node, counter);
+      }
     });
   };
   document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
-  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); } }), { threshold: 0.35 });
-  document.querySelectorAll('.split').forEach((el) => io.observe(el));
+
+  // On-enter reveals (split + fade).
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
 </script>

@@ -1,0 +1,416 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
+import WeavingLine from '../../components/WeavingLine.astro';
+import BrandTicker from '../../components/BrandTicker.astro';
+import FloatingHand from '../../components/FloatingHand.astro';
+import ShapePile from '../../components/ShapePile.astro';
+
+// === GIVING — /lab/giving ===
+// Full rebuild from the "Giving Back" stub. Frames the studio's craft as a tool
+// for good: community, mentorship, documentary/mission work, pro-bono creative.
+// Same shipped architecture as /lab/about — drifting hero photo wall + FloatingHand,
+// a PINNED manifesto scene with a deep-parallax photo bed, three "ways we give"
+// blocks with real frames, a documentary-mission range band, and a quiet closing
+// CTA with a ShapePile flourish. Every surface/text/accent is tokenized so the
+// LabFx color selector re-skins it. Studio "we" voice. No em dashes.
+
+// ============================================================================
+// >>> DJ-EDITABLE PLACEHOLDER COPY <<<
+// DJ has not supplied giving copy yet. Everything below in `*Copy` and the inline
+// strings is strong placeholder written in his voice so the page feels real and
+// shippable. Swap any of it freely — the layout will hold. Numbers in `givingStats`
+// are illustrative; replace with real figures (or delete the stat) before going live.
+// ============================================================================
+
+// Illustrative, honest-feeling counters. NOT verified figures — DJ to confirm or cut.
+const givingStats = [
+  { n: 'Pro bono', l: "creative for causes we believe in, built to the same standard as paid work." },
+  { n: '3', l: 'continents of documentary and mission work, from Nepal to Uganda to Europe.' },
+  { n: '2', l: 'home towns we show up for: Boise and Los Angeles.' },
+  { n: 'Open door', l: "for the next generation of makers who can't buy their way in." },
+];
+
+// The three ways we give — each gets a real frame.
+const ways = [
+  {
+    k: '01',
+    t: 'Pro-bono creative',
+    img: '/gallery/full/p-032.jpg',
+    d: "Some of the best stories belong to people who can't afford a campaign. So a few times a year we hand our full toolkit to a cause that has earned it: the strategy, the shoot, the edit, the rollout. Same crew, same standard as the paid work. The only difference is the invoice.",
+  },
+  {
+    k: '02',
+    t: 'Mentorship',
+    img: '/gallery/full/p-058.jpg',
+    d: "Nobody walks onto a set knowing how it works. We did not. So we keep a door open for young makers who have the eye but not the network: time on real projects, honest notes, and the kind of access that usually costs a connection you don't have yet. Talent is everywhere. The room is not.",
+  },
+  {
+    k: '03',
+    t: 'Documentary & mission work',
+    img: '/gallery/full/p-074.jpg',
+    d: "We have carried cameras through Nepal, Uganda, and across Europe for work that was never about selling anything. Those trips taught us patience, respect for the subject, and how to disappear so a true story can show up. We still take that work when it matters, and we bring everything we learned in the hard rooms to it.",
+  },
+];
+
+// Hero drifting photo wall — curated real frames, varied orientation.
+const wall = [
+  { src: '/gallery/full/p-014.jpg', drift: 14, ar: '3/4' },
+  { src: '/gallery/full/p-066.jpg', drift: -10, ar: '16/10' },
+  { src: '/gallery/full/p-088.jpg', drift: 20, ar: '2/3' },
+  { src: '/gallery/full/p-027.jpg', drift: -16, ar: '16/10' },
+];
+
+// Montage columns (pinned manifesto's parallax photo bed) — travel at different rates.
+const colA = ['/galaxy/gx-03.jpg', '/gallery/full/p-046.jpg', '/galaxy/gx-12.jpg', '/gallery/full/p-091.jpg'];
+const colB = ['/gallery/full/p-019.jpg', '/galaxy/gx-21.jpg', '/gallery/full/p-063.jpg', '/galaxy/gx-08.jpg'];
+const colC = ['/galaxy/gx-16.jpg', '/gallery/full/p-077.jpg', '/galaxy/gx-25.jpg', '/gallery/full/p-009.jpg'];
+---
+<Base title="Giving — monuments">
+  <main class="gv">
+    <WeavingLine side="left" />
+
+    <!-- HERO: studio voice, drifting photo wall, floating hand -->
+    <header class="gv-hero">
+      <FloatingHand side="right" top="14vh" />
+      <div class="gv-wall" aria-hidden="true">
+        {wall.map((w) => (
+          <figure class="gv-wall-img" data-drift={w.drift} style={`aspect-ratio:${w.ar};`}>
+            <img src={w.src} alt="" loading="eager" decoding="async" />
+          </figure>
+        ))}
+      </div>
+      <div class="gv-hero-inner">
+        <p class="gv-eyebrow fade">Giving back</p>
+        <h1 class="gv-h1 split">We build monuments. The most important ones <em>aren't for sale.</em></h1>
+        <p class="gv-lead fade">The same craft that moves brands can move people who have no budget for it. A few times a year, that is exactly where we point it.</p>
+      </div>
+      <div class="gv-scrollcue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+    </header>
+
+    <!-- BRAND TICKER -->
+    <BrandTicker />
+
+    <!-- STATS -->
+    <section class="gv-stats">
+      {givingStats.map((s, i) => (
+        <div class={`gv-stat fade ${i === 0 ? 'hero' : ''}`}>
+          <span class="gv-stat-n">{s.n}</span>
+          <span class="gv-stat-l">{s.l}</span>
+        </div>
+      ))}
+    </section>
+
+    <!-- MANIFESTO (paper chapter) -->
+    <section class="gv-manifesto">
+      <div class="gv-cols">
+        <p class="gv-kicker fade">Why we do it</p>
+        <div class="gv-col">
+          <p class="gv-big split">A camera is just a tool. <em>What you point it at</em> is the whole decision.</p>
+          <p class="gv-body fade">We are not a foundation and we are not pretending to save the world. We are a small studio that happens to be good at making people feel something, and that skill has no business sitting idle when a cause, a kid, or a true story needs it. So we set aside real time for work that pays nothing and matters more. No press release, no logo on a banner. Just the work, done right, handed to someone who could not have made it alone.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PINNED MANIFESTO LINE + MONTAGE -->
+    <section class="gv-credo scn" data-scene="credo">
+      <div class="scn-stage gv-credo-stage">
+        <div class="gv-montage" aria-hidden="true">
+          <div class="gv-mcol" data-mspeed="0.55">
+            {colA.map((s) => <figure><img src={s} alt="" loading="lazy" decoding="async" /></figure>)}
+          </div>
+          <div class="gv-mcol mid" data-mspeed="0.85">
+            {colB.map((s) => <figure><img src={s} alt="" loading="lazy" decoding="async" /></figure>)}
+          </div>
+          <div class="gv-mcol" data-mspeed="0.4">
+            {colC.map((s) => <figure><img src={s} alt="" loading="lazy" decoding="async" /></figure>)}
+          </div>
+        </div>
+        <div class="gv-credo-scrim" aria-hidden="true"></div>
+        <div class="gv-credo-copy">
+          <p class="gv-credo-line" data-cwords>The work that doesn't pay is usually the work we are <em>proudest
+            <svg class="gv-stroke" viewBox="0 0 320 14" preserveAspectRatio="none" aria-hidden="true"><path d="M5 9 C80 4, 200 12, 315 6" /></svg>
+          </em> of.</p>
+          <p class="gv-credo-sub">That's the part nobody invoices for.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AFTER: rides up over the pinned stage -->
+    <div class="gv-after">
+
+      <!-- WAYS WE GIVE -->
+      <section class="gv-ways">
+        <div class="gv-ways-head">
+          <p class="gv-kicker fade">How it shows up</p>
+          <h2 class="gv-ways-title split">Three ways we put the craft to <em>work.</em></h2>
+        </div>
+        <div class="gv-ways-list">
+          {ways.map((w) => (
+            <article class="gv-way fade">
+              <figure class="gv-way-img" data-drift="9"><img src={w.img} alt="" loading="lazy" decoding="async" /></figure>
+              <div class="gv-way-text">
+                <span class="gv-way-k">{w.k}</span>
+                <h3 class="gv-way-h">{w.t}</h3>
+                <p class="gv-way-d">{w.d}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- LOCAL ROOTS (light, real frame) -->
+      <section class="gv-roots">
+        <figure class="gv-roots-img" data-drift="8"><img src="/gallery/full/p-041.jpg" alt="" loading="lazy" decoding="async" /></figure>
+        <div class="gv-roots-copy">
+          <p class="gv-kicker fade">Close to home</p>
+          <p class="gv-roots-big split">Boise raised us. <em>Los Angeles</em> made us. We answer to both.</p>
+          <p class="gv-body fade">Most of what we give happens within driving distance of the two places we call home. A local nonprofit that needs a film and can't afford one. A high schooler with a camera and no idea where the door is. A neighbor's project that deserves to look as good as it is. You don't have to fly across the world to find work worth doing for free. Usually it's down the street.</p>
+        </div>
+      </section>
+
+      <!-- MISSION RANGE (documentary texture, full-bleed bed) -->
+      <section class="gv-range">
+        <figure class="gv-range-bg" data-drift="6" aria-hidden="true"><img src="/galaxy/gx-19.jpg" alt="" loading="lazy" decoding="async" /></figure>
+        <div class="gv-range-inner">
+          <p class="gv-kicker fade">Further afield</p>
+          <p class="gv-range-big split">When the story is bigger than us, we go to it. Documentary and mission work in <em>Nepal, Uganda, and Europe.</em></p>
+          <p class="gv-range-body fade">We are careful with this kind of work. We go in to listen, not to take. The footage belongs to the people in it as much as it belongs to us, and the goal is never a highlight reel. It's the truth, told with enough care that it lands.</p>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="gv-end">
+        <FloatingHand side="left" top="4vh" />
+        <p class="gv-end-big split">Got a cause that <em>deserves to be seen?</em></p>
+        <p class="gv-end-sub fade">We take on a handful of these a year. If yours is one, tell us about it.</p>
+        <a class="gv-cta fade" href="/contact" data-cursor="Start" data-mag>Start a conversation <span aria-hidden="true">↗</span></a>
+        <div class="gv-pile-wrap" aria-hidden="true"><ShapePile count={24} height="clamp(180px, 26vh, 300px)" /></div>
+      </section>
+
+    </div>
+
+  </main>
+  <LabFx />
+</Base>
+
+<style>
+  .gv { background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .gv-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); }
+  .gv-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+  .gv-h1 em, .gv-big em, .gv-end-big em, .gv-ways-title em,
+  .gv-roots-big em, .gv-range-big em, .gv-credo-line em { font-style: italic; color: var(--accent); }
+
+  /* ---------- HERO ---------- */
+  .gv-hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; padding: 14vh 0; }
+  .gv-hero-inner { position: relative; z-index: 3; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+  .gv-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(44px, 7vw, 112px); line-height: 1.02; letter-spacing: -0.03em; max-width: 15ch; padding-bottom: 0.1em; }
+  .gv-lead { margin-top: 32px; max-width: 50ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.78); }
+
+  /* Drifting photo wall behind the hero copy */
+  .gv-wall { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .gv-wall-img { position: absolute; margin: 0; border-radius: 5px; overflow: hidden; opacity: 0.5; box-shadow: 0 30px 80px rgb(0 0 0 / 0.4); will-change: transform; }
+  .gv-wall-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gv-wall-img:nth-child(1) { right: 5vw;  top: 8vh;  width: clamp(200px, 22vw, 380px); }
+  .gv-wall-img:nth-child(2) { right: 26vw; bottom: 9vh; width: clamp(180px, 20vw, 340px); opacity: 0.4; }
+  .gv-wall-img:nth-child(3) { left: 3vw;  bottom: 7vh; width: clamp(150px, 15vw, 260px); opacity: 0.42; }
+  .gv-wall-img:nth-child(4) { left: 9vw;  top: 9vh;  width: clamp(160px, 17vw, 290px); opacity: 0.3; }
+
+  .gv-scrollcue { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .gv-scrollcue i { width: 1px; height: 34px; background: linear-gradient(var(--accent), transparent); animation: cue 1.8s ease-in-out infinite; }
+  @keyframes cue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; transform-origin: top; } 50% { transform: scaleY(1); opacity: 1; transform-origin: top; } }
+
+  /* ---------- STATS ---------- */
+  .gv-stats { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: clamp(20px, 3vw, 44px); max-width: var(--wrap); margin: 0 auto; padding: clamp(80px, 10vw, 130px) var(--pad); }
+  .gv-stat { display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgb(var(--fg-rgb) / 0.18); padding-top: 18px; }
+  .gv-stat-n { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4vw, 56px); letter-spacing: -0.03em; line-height: 1; }
+  .gv-stat.hero { border-top-color: var(--accent); }
+  .gv-stat.hero .gv-stat-n { color: var(--accent); font-size: clamp(38px, 5.4vw, 80px); }
+  .gv-stat-l { font-size: clamp(12.5px, 1vw, 14px); font-weight: 300; line-height: 1.5; color: rgb(var(--fg-rgb) / 0.6); }
+
+  /* ---------- MANIFESTO ---------- */
+  .gv-manifesto { background: var(--paper); color: var(--ink); padding: clamp(100px, 13vw, 170px) 0; }
+  .gv-cols { display: grid; grid-template-columns: 200px 1fr; gap: clamp(28px, 5vw, 80px); max-width: min(1100px, 94vw); margin: 0 auto; padding: 0 var(--pad); align-items: start; }
+  .gv-manifesto .gv-kicker { color: var(--accent); }
+  .gv-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 52px); line-height: 1.16; letter-spacing: -0.02em; max-width: 22ch; padding-bottom: 0.08em; }
+  .gv-manifesto .gv-big em { color: var(--accent); }
+  .gv-manifesto .gv-body { color: rgb(var(--ink-rgb) / 0.78); }
+  .gv-body { margin-top: 28px; max-width: 56ch; font-size: 16px; line-height: 1.78; font-weight: 300; color: rgb(var(--fg-rgb) / 0.75); }
+
+  /* ---------- PINNED MANIFESTO LINE + MONTAGE ---------- */
+  .scn { position: relative; }
+  .scn-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  .gv-credo { height: 320vh; z-index: 2; }
+  .gv-credo-stage { background: var(--bg); display: flex; align-items: center; justify-content: center; }
+  .gv-montage { position: absolute; inset: -12% -2%; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.6vw, 26px); z-index: 1; }
+  .gv-mcol { display: flex; flex-direction: column; gap: clamp(12px, 1.6vw, 26px); will-change: transform; }
+  .gv-mcol.mid { margin-top: -14vh; }
+  .gv-mcol figure { margin: 0; border-radius: 5px; overflow: hidden; }
+  .gv-mcol img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gv-credo-scrim { position: absolute; inset: 0; z-index: 2; background: radial-gradient(ellipse at center, rgb(var(--ink-rgb) / 0.82) 0%, rgb(var(--ink-rgb) / 0.62) 45%, rgb(var(--ink-rgb) / 0.78) 100%); }
+  .gv-credo-copy { position: relative; z-index: 3; text-align: center; padding: 0 var(--pad); max-width: min(1000px, 92vw); }
+  .gv-credo-line { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.6vw, 68px); line-height: 1.18; letter-spacing: -0.02em; padding-bottom: 0.12em; }
+  .gv-credo-line em { font-style: italic; color: var(--accent); position: relative; white-space: nowrap; }
+  .gv-credo-line :global(.w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .gv-credo-line :global(.wi) { display: inline-block; transform: translateY(135%); transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .gv-credo-line :global(.wi.on) { transform: none; }
+  .gv-stroke { position: absolute; left: 0; bottom: -8px; width: 100%; height: 12px; overflow: visible; }
+  .gv-stroke path { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 340; stroke-dashoffset: var(--soff, 340); }
+  .gv-credo-sub { margin-top: 3vh; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.6); opacity: var(--subo, 0); transition: opacity 0.4s ease; }
+
+  .gv-after { position: relative; z-index: 3; margin-top: -100vh; background: var(--bg); }
+
+  /* ---------- WAYS WE GIVE ---------- */
+  .gv-ways { max-width: var(--wrap); margin: 0 auto; padding: clamp(110px, 13vw, 180px) var(--pad) clamp(40px, 6vw, 80px); }
+  .gv-ways-head { margin-bottom: clamp(48px, 6vw, 88px); }
+  .gv-ways-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(32px, 4.4vw, 64px); line-height: 1.08; letter-spacing: -0.025em; margin-top: 18px; max-width: 16ch; padding-bottom: 0.1em; }
+  .gv-ways-list { display: flex; flex-direction: column; gap: clamp(28px, 4vw, 56px); }
+  .gv-way { display: grid; grid-template-columns: clamp(220px, 32vw, 460px) 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+  .gv-way:nth-child(even) { grid-template-columns: 1fr clamp(220px, 32vw, 460px); }
+  .gv-way:nth-child(even) .gv-way-img { order: 2; }
+  .gv-way-img { margin: 0; border-radius: 6px; overflow: hidden; aspect-ratio: 4/3; box-shadow: 0 24px 60px rgb(0 0 0 / 0.35); }
+  .gv-way-img img { width: 100%; height: 112%; object-fit: cover; display: block; will-change: transform; }
+  .gv-way-k { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px; letter-spacing: 0.1em; color: var(--accent); }
+  .gv-way-h { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(22px, 2.4vw, 34px); letter-spacing: -0.02em; margin-top: 10px; line-height: 1.12; }
+  .gv-way-d { margin-top: 14px; max-width: 50ch; font-size: clamp(15px, 1.15vw, 17px); line-height: 1.72; font-weight: 300; color: rgb(var(--fg-rgb) / 0.72); }
+
+  /* ---------- LOCAL ROOTS ---------- */
+  .gv-roots { background: var(--paper); color: var(--ink); }
+  .gv-roots { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 5vw, 80px); align-items: center; max-width: 100%; padding: clamp(80px, 10vw, 140px) max(var(--pad), calc((100vw - var(--wrap)) / 2 + var(--pad))); margin-top: clamp(40px, 6vw, 80px); }
+  .gv-roots .gv-kicker { color: var(--accent); }
+  .gv-roots .gv-body { color: rgb(var(--ink-rgb) / 0.78); }
+  .gv-roots-img { margin: 0; border-radius: 8px; overflow: hidden; aspect-ratio: 3/2; box-shadow: 0 30px 70px rgb(0 0 0 / 0.4); }
+  .gv-roots-img img { width: 100%; height: 116%; object-fit: cover; display: block; will-change: transform; }
+  .gv-roots-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(26px, 3.2vw, 46px); line-height: 1.16; letter-spacing: -0.02em; margin-top: 16px; max-width: 18ch; padding-bottom: 0.08em; }
+  .gv-roots-big em { color: var(--accent); }
+
+  /* ---------- MISSION RANGE ---------- */
+  .gv-range { position: relative; overflow: hidden; padding: clamp(120px, 16vw, 220px) 0; }
+  .gv-range-bg { position: absolute; inset: -12%; margin: 0; z-index: 0; }
+  .gv-range-bg img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.26; will-change: transform; }
+  .gv-range::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(rgb(var(--ink-rgb) / 0.55), rgb(var(--ink-rgb) / 0.75)); }
+  .gv-range-inner { position: relative; z-index: 2; max-width: min(900px, 92vw); margin: 0 auto; padding: 0 var(--pad); text-align: center; }
+  .gv-range-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 3.8vw, 56px); line-height: 1.16; letter-spacing: -0.02em; margin-top: 18px; padding-bottom: 0.1em; }
+  .gv-range-body { margin: 24px auto 0; max-width: 52ch; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.75; font-weight: 300; color: rgb(var(--fg-rgb) / 0.78); }
+
+  /* ---------- END ---------- */
+  .gv-end { position: relative; min-height: 78vh; display: flex; flex-direction: column; gap: 22px; align-items: center; justify-content: center; text-align: center; padding: 80px var(--pad) 0; overflow: hidden; }
+  .gv-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5.4vw, 80px); letter-spacing: -0.025em; line-height: 1.05; position: relative; z-index: 2; padding-bottom: 0.1em; }
+  .gv-end-sub { position: relative; z-index: 2; max-width: 40ch; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.7); }
+  .gv-cta { position: relative; z-index: 2; margin-top: 14px; display: inline-flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--accent); padding: 18px 32px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 14px 40px rgb(0 0 0 / 0.3); }
+  .gv-cta:hover { gap: 18px; transform: translateY(-2px); box-shadow: 0 18px 50px rgb(0 0 0 / 0.4); }
+  .gv-pile-wrap { position: relative; z-index: 1; width: 100%; max-width: var(--wrap); margin: clamp(24px, 5vh, 60px) auto 0; }
+
+  /* ---------- shared split reveal ---------- */
+  .gv :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .gv :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .gv :global(.split.on .wi) { transform: none; }
+  .gv .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .gv .fade.on { opacity: 1; transform: none; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px) {
+    .gv-stats { grid-template-columns: 1fr 1fr; }
+    .gv-cols { grid-template-columns: 1fr; gap: 18px; }
+    .gv-way, .gv-way:nth-child(even) { grid-template-columns: 1fr; gap: 18px; }
+    .gv-way:nth-child(even) .gv-way-img { order: 0; }
+    .gv-roots { grid-template-columns: 1fr; }
+    .gv-wall-img:nth-child(2), .gv-wall-img:nth-child(4) { display: none; }
+    .gv-montage { grid-template-columns: repeat(2, 1fr); }
+    .gv-mcol:nth-child(3) { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gv-credo { height: auto; }
+    .scn-stage { position: static; height: auto; padding: 16vh var(--pad); }
+    .gv-montage { position: absolute; inset: 0; opacity: 0.4; }
+    .gv-after { margin-top: 0; }
+    .gv-scrollcue i { animation: none; }
+    .gv-credo-line :global(.wi) { transform: none !important; transition: none !important; }
+    .gv-stroke path { stroke-dashoffset: 0; }
+    .gv-credo-sub { opacity: 1; }
+    .gv :global(.split .wi) { transform: none !important; transition: none !important; }
+    .gv .fade { opacity: 1 !important; transform: none !important; }
+    [data-drift], .gv-mcol { transform: none !important; }
+  }
+</style>
+
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  const phase = (p, a, b) => clamp01((p - a) / (b - a));
+
+  // --- word splitter (line-safe, descender-safe per the type-clip rules) ---
+  const splitWords = (root, counter) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && !node.closest('svg')) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  document.querySelectorAll('.split, [data-cwords]').forEach((el) => splitWords(el, { n: 0 }));
+
+  // --- on-enter reveals (split + fade) ---
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.25, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
+
+  // --- pinned manifesto scrub ---
+  const credo = document.querySelector('[data-scene="credo"]');
+  const cWords = credo ? [...credo.querySelectorAll('.gv-credo-line .wi')] : [];
+  const stroke = credo && credo.querySelector('.gv-stroke path');
+  const sub = credo && credo.querySelector('.gv-credo-sub');
+  const mcols = credo ? [...credo.querySelectorAll('.gv-mcol')] : [];
+  const drifts = [...document.querySelectorAll('[data-drift]')];
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      if (credo) {
+        const r = credo.getBoundingClientRect();
+        const p = clamp01(-r.top / (credo.offsetHeight - innerHeight));
+        // montage columns travel up at different rates (scrubbed, reversible)
+        mcols.forEach((col) => {
+          const sp = Number(col.dataset.mspeed || 0.5);
+          col.style.transform = `translateY(${(0.5 - p) * sp * 480}px)`;
+        });
+        // manifesto words reveal across the middle of the scene
+        cWords.forEach((w, i) => w.classList.toggle('on', phase(p, 0.12, 0.6) * cWords.length * 1.1 > i));
+        if (stroke) stroke.style.setProperty('--soff', String(340 * (1 - phase(p, 0.6, 0.82))));
+        if (sub) sub.style.setProperty('--subo', String(phase(p, 0.74, 0.9)));
+      }
+      // generous parallax on all [data-drift] media (slower than the page)
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > innerHeight + 200) return;
+        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+        const v = Number(el.dataset.drift || 6);
+        el.style.transform = `translateY(${c * -v * 7}px)`;
+      });
+      ticking = false;
+    });
+  };
+
+  if (!reduced) {
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+  } else {
+    cWords.forEach((w) => w.classList.add('on'));
+  }
+</script>

@@ -99,7 +99,7 @@ const colC = ['/gallery/full/p-040.jpg', '/gallery/full/p-070.jpg', '/gallery/fu
     <!-- PINNED MONTAGE + CREDO -->
     <section class="ab3-credo scn" data-scene="credo">
       <div class="scn-stage ab3-credo-stage">
-        <div class="ab3-montage" aria-hidden="true">
+        <div class="ab3-montage" data-rand aria-hidden="true">
           <div class="ab3-mcol" data-mspeed="0.55">
             {colA.map((s) => <figure><img src={s} alt="" loading="lazy" decoding="async" /></figure>)}
           </div>
@@ -119,6 +119,20 @@ const colC = ['/gallery/full/p-040.jpg', '/gallery/full/p-070.jpg', '/gallery/fu
         </div>
       </div>
     </section>
+
+    <script>
+      // Credo montage — randomize the background photos on every visit.
+      // DJ: to use a specific album later, just replace POOL with that list
+      // (or point it at a folder of files). Math.random is client-side, so the
+      // mix changes each load. Reduced-motion users still get a random still set.
+      (function () {
+        const mont = document.querySelector('.ab3-montage[data-rand]');
+        if (!mont) return;
+        const POOL = Array.from({ length: 100 }, (_, i) => `/gallery/full/p-${String(i + 1).padStart(3, '0')}.jpg`);
+        for (let i = POOL.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = POOL[i]; POOL[i] = POOL[j]; POOL[j] = t; }
+        mont.querySelectorAll('img').forEach((img, k) => { img.src = POOL[k % POOL.length]; });
+      })();
+    </script>
 
     <!-- AFTER: rides up over the pinned stage -->
     <div class="ab3-after">

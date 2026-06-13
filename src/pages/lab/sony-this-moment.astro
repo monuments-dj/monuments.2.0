@@ -1,0 +1,296 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
+import WeavingLine from '../../components/WeavingLine.astro';
+
+// === SONY — THIS MOMENT (editorial) — /lab/sony-this-moment ===
+// The reimagined-Blue-Cross editorial model on the real Sony Audio campaign:
+// chapter kickers + narrow columns, color-blocked chapters, a pinned insight
+// scene with a marker underline, a drifting photo collage, credits, and the
+// portal-grow next-project ending into Sony Xperia. Copy = the real case-study
+// text, restructured into chapters. Sony accent tint = var(--accent-2).
+
+const g = Array.from({ length: 9 }, (_, i) => `/case-studies/sony-this-moment/gallery/tm-${String(i + 1).padStart(2, '0')}.jpg`);
+const collage = [
+  { src: g[0], w: 30, x: 3,  y: 0,   v: 5 },
+  { src: g[4], w: 38, x: 39, y: 14,  v: 9 },
+  { src: g[6], w: 24, x: 73, y: 2,   v: 6 },
+  { src: g[2], w: 30, x: 12, y: 54,  v: 8 },
+  { src: g[5], w: 40, x: 50, y: 60,  v: 5 },
+];
+const meta = [
+  { k: 'Client', v: 'Sony Audio' },
+  { k: 'Agency', v: 'Art of Visuals' },
+  { k: 'Production', v: 'MGX Creative' },
+  { k: 'Director', v: 'Daniel Malikyar' },
+  { k: 'Creative Direction', v: 'DJ Ramirez' },
+];
+---
+<Base title="Sony — This Moment — a pause in the noise — monuments">
+  <main class="tmx">
+    <WeavingLine side="left" />
+
+    <!-- HERO CHAPTER (dark) -->
+    <header class="tmx-hero">
+      <img class="tmx-hero-img" src={g[8]} alt="Sony — This Moment campaign still" data-drift="6" />
+      <div class="tmx-hero-scrim" aria-hidden="true"></div>
+      <div class="tmx-hero-inner">
+        <p class="tmx-eyebrow fade">Sony Audio · creative direction</p>
+        <h1 class="tmx-h1 split">This <em>Moment.</em></h1>
+        <p class="tmx-hero-meta fade">A campaign about pause, in a culture that never stops</p>
+      </div>
+    </header>
+
+    <!-- CHAPTER 01 — THE IDEA (cream) -->
+    <section class="tmx-ch tmx-ch-cream">
+      <div class="tmx-cols">
+        <p class="tmx-kicker fade">01 · The idea</p>
+        <div class="tmx-col fade">
+          <p>Feeling overwhelmed shouldn't be the norm, but it's a feeling we can all relate to. When the world gets noisy, headphones aren't just a piece of tech. They're a device for creating an environment, a moment of peace and serenity no matter where you are or what may be happening around you.</p>
+          <p>Along with Art of Visuals, we teamed up with Sony to highlight that pause. The campaign underscores the value of taking time, trusting the process, and rediscovering inspiration. This moment is for you.</p>
+        </div>
+      </div>
+      <figure class="tmx-wide fade">
+        <img src={g[3]} alt="Sony — This Moment campaign still" loading="lazy" data-drift="8" />
+      </figure>
+    </section>
+
+    <!-- PINNED INSIGHT SCENE (Sony deep tint) -->
+    <section class="tmx-insight scn" data-scene="insight">
+      <div class="scn-stage tmx-insight-stage">
+        <p class="tmx-insight-kicker">The insight</p>
+        <h2 class="tmx-insight-line" data-iwords>True creativity flourishes when given <em>the space to breathe
+          <svg class="tmx-stroke" viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M5 9 C70 4, 180 12, 295 6" /></svg>
+        </em> and the room to begin again.</h2>
+      </div>
+    </section>
+
+    <!-- CHAPTER 02 — THE WORK (cream, drifting collage) -->
+    <section class="tmx-ch tmx-ch-cream tmx-over">
+      <div class="tmx-cols">
+        <p class="tmx-kicker fade">02 · The work</p>
+        <div class="tmx-col fade">
+          <p>As the creative director on this project, I helped shape the story, wrote the briefs, directed the stills, and made sure everything on set matched Sony's brand guides.</p>
+          <p>We worked closely with the production team through post, giving feedback on edits and prepping files for delivery. The videos cut down from one minute to 30- and 15-second ads, and the stills ran as display.</p>
+        </div>
+      </div>
+      <div class="tmx-collage">
+        {collage.map((c) => (
+          <figure class="tmx-cell" style={`--w:${c.w}%; --x:${c.x}%; --y:${c.y}%`}>
+            <img src={c.src} alt="Sony — This Moment campaign still" loading="lazy" data-drift={String(c.v)} />
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <!-- CHAPTER 03 — THE CRAFT (deep tint band) -->
+    <section class="tmx-run">
+      <div class="tmx-run-inner">
+        <p class="tmx-kicker fade">03 · The craft</p>
+        <div class="tmx-stats">
+          <div class="tmx-stat fade"><span class="tmx-stat-n">1:00 → :15</span><span class="tmx-stat-l">cut for 30- and 15-second ads</span></div>
+          <div class="tmx-stat fade"><span class="tmx-stat-n">Brand-matched</span><span class="tmx-stat-l">every frame to Sony's guides</span></div>
+          <div class="tmx-stat fade"><span class="tmx-stat-n">Stills + motion</span><span class="tmx-stat-l">directed on set, finished in post</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CREDITS (cream) -->
+    <section class="tmx-ch tmx-ch-cream">
+      <div class="tmx-cols">
+        <p class="tmx-kicker fade">04 · Credits</p>
+        <div class="tmx-col fade">
+          <dl class="tmx-credits">
+            {meta.map((m) => (
+              <div class="tmx-credit">
+                <dt>{m.k}</dt>
+                <dd>{m.v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEXT PROJECT — portal grow into Sony Xperia -->
+    <section class="tmx-next" data-portal>
+      <div class="tmx-next-stage">
+        <p class="tmx-kicker tmx-next-k">Next project</p>
+        <a class="tmx-next-card" href="/work/sony-xperia-summer" data-card data-cursor="View">
+          <img src="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" alt="Sony Xperia — Summer" data-pimg />
+          <span class="tmx-next-scrim" aria-hidden="true"></span>
+          <span class="tmx-next-title">Sony Xperia — Summer <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+  <LabFx />
+</Base>
+
+<style>
+  .tmx { background: var(--black); color: var(--white); overflow-x: clip; }
+  .tmx-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.6); }
+  .tmx-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-2); }
+
+  /* HERO */
+  .tmx-hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden; }
+  .tmx-hero-img { position: absolute; inset: -8% 0; width: 100%; height: 116%; object-fit: cover; }
+  .tmx-hero-scrim { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.32), rgba(0,0,0,0.8)); }
+  .tmx-hero-inner { position: relative; z-index: 2; width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad) 9vh; }
+  .tmx-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(48px, 8vw, 124px); line-height: 1; letter-spacing: -0.03em; max-width: 13ch; margin-top: 18px; padding-bottom: 0.12em; }
+  .tmx-h1 em { font-style: italic; color: var(--accent-2); }
+  .tmx-hero-meta { margin-top: 24px; font-size: 13px; font-weight: 300; color: rgb(var(--fg-rgb) / 0.7); }
+
+  /* CHAPTERS (cream) */
+  .tmx-ch-cream { background: var(--white); color: var(--ink); }
+  .tmx-ch { padding: clamp(90px, 11vw, 150px) 0; }
+  .tmx-cols { display: grid; grid-template-columns: 200px 1fr; gap: clamp(28px, 5vw, 80px); max-width: min(980px, 92vw); margin: 0 auto; padding: 0 var(--pad); align-items: start; }
+  .tmx-col p { font-size: 16px; line-height: 1.75; font-weight: 300; color: rgb(var(--ink-rgb) / 0.82); max-width: 54ch; }
+  .tmx-col p + p { margin-top: 1.3em; }
+  .tmx-col em { font-style: italic; color: var(--accent-2); }
+  .tmx-wide { max-width: min(1180px, 94vw); margin: clamp(56px, 7vw, 100px) auto 0; padding: 0 var(--pad); overflow: hidden; }
+  .tmx-wide img { width: 100%; display: block; border-radius: 4px; }
+
+  /* CREDITS list */
+  .tmx-credits { display: grid; gap: 0; }
+  .tmx-credit { display: grid; grid-template-columns: 160px 1fr; gap: 20px; padding: 16px 0; border-top: 1px solid rgb(var(--ink-rgb) / 0.16); align-items: baseline; }
+  .tmx-credit:last-child { border-bottom: 1px solid rgb(var(--ink-rgb) / 0.16); }
+  .tmx-credit dt { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.5); }
+  .tmx-credit dd { margin: 0; font-size: 16px; font-weight: 400; color: var(--ink); }
+
+  /* PINNED INSIGHT */
+  .scn { position: relative; }
+  .scn-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  .tmx-insight { height: 280vh; z-index: 2; margin-top: 0; }
+  .tmx-insight-stage { background: var(--deep); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4vh; text-align: center; padding: 0 var(--pad); }
+  .tmx-insight-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); }
+  .tmx-insight-line { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 4.8vw, 72px); line-height: 1.12; letter-spacing: -0.025em; max-width: 20ch; color: var(--white); padding-bottom: 0.12em; }
+  .tmx-insight-line em { font-style: italic; position: relative; white-space: nowrap; color: var(--accent-2); }
+  .tmx-insight-line :global(.w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .tmx-insight-line :global(.wi) { display: inline-block; transform: translateY(135%); transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .tmx-insight-line :global(.wi.on) { transform: none; }
+  .tmx-stroke { position: absolute; left: 0; bottom: -10px; width: 100%; height: 12px; overflow: visible; }
+  .tmx-stroke path { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: var(--soff, 320); }
+
+  /* Post-insight chapters slide over the pinned stage */
+  .tmx-over { position: relative; z-index: 3; margin-top: -100vh; }
+
+  /* COLLAGE */
+  .tmx-collage { position: relative; max-width: min(1280px, 96vw); margin: clamp(56px, 7vw, 110px) auto 0; height: clamp(520px, 64vw, 900px); }
+  .tmx-cell { position: absolute; width: var(--w); left: var(--x); top: var(--y); margin: 0; overflow: hidden; border-radius: 4px; }
+  .tmx-cell img { width: 100%; height: auto; display: block; }
+
+  /* CRAFT (stats band) */
+  .tmx-run { position: relative; z-index: 3; background: var(--deep); color: var(--white); }
+  .tmx-run-inner { max-width: min(980px, 92vw); margin: 0 auto; padding: clamp(80px, 10vw, 130px) var(--pad); }
+  .tmx-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 40px; }
+  .tmx-stat { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid rgb(var(--fg-rgb) / 0.25); padding-top: 18px; }
+  .tmx-stat-n { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 3.4vw, 50px); letter-spacing: -0.03em; line-height: 1; }
+  .tmx-stat-l { font-size: 13px; font-weight: 300; color: rgb(var(--fg-rgb) / 0.65); }
+
+  /* NEXT portal */
+  .tmx-next { position: relative; height: 220vh; z-index: 4; background: var(--black); }
+  .tmx-next-stage { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4vh; overflow: hidden; }
+  .tmx-next-k { color: rgb(var(--fg-rgb) / 0.55); }
+  .tmx-next-card { position: relative; display: block; width: 92vw; max-width: 1560px; aspect-ratio: 16/9; max-height: 78vh; overflow: hidden; border-radius: 6px; transform: scale(var(--gs, 0.45)); will-change: transform; }
+  .tmx-next-card img { width: 100%; height: 112%; object-fit: cover; display: block; transform: translateY(var(--py, -6%)); }
+  .tmx-next-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.62), transparent 50%); }
+  .tmx-next-title { position: absolute; left: clamp(20px, 3.2vw, 50px); bottom: clamp(18px, 3vw, 44px); font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 4vw, 60px); letter-spacing: -0.03em; color: var(--white); opacity: var(--to, 0); transform: translateY(calc((1 - var(--to, 0)) * 24px)); }
+
+  .tmx :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .tmx :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .tmx :global(.split.on .wi) { transform: none; }
+
+  @media (max-width: 860px) {
+    .tmx-cols { grid-template-columns: 1fr; gap: 18px; }
+    .tmx-collage { height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 var(--pad); }
+    .tmx-cell { position: static; width: auto; }
+    .tmx-stats { grid-template-columns: 1fr; }
+    .tmx-credit { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tmx-insight, .tmx-next { height: auto; }
+    .tmx-over { margin-top: 0; }
+    .scn-stage, .tmx-next-stage { position: static; height: auto; padding: 14vh var(--pad); }
+    .tmx-insight-line :global(.wi) { transform: none !important; transition: none !important; }
+    .tmx-stroke path { stroke-dashoffset: 0; }
+    .tmx-next-card { transform: none; }
+    .tmx-next-title { opacity: 1; transform: none; }
+    .tmx :global(.split .wi) { transform: none !important; transition: none !important; }
+    [data-drift] { transform: none !important; }
+  }
+</style>
+
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  const phase = (p, a, b) => clamp01((p - a) / (b - a));
+
+  const splitWords = (root, counter) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && node.tagName !== 'svg' && node.tagName !== 'SVG' && !node.closest('svg')) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  document.querySelectorAll('.split, [data-iwords]').forEach((el) => splitWords(el, { n: 0 }));
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: 0.35 });
+  document.querySelectorAll('.split').forEach((el) => io.observe(el));
+
+  const insight = document.querySelector('[data-scene="insight"]');
+  const iWords = insight ? [...insight.querySelectorAll('.wi')] : [];
+  const stroke = insight && insight.querySelector('.tmx-stroke path');
+  const portal = document.querySelector('[data-portal]');
+  const drifts = [...document.querySelectorAll('[data-drift]')];
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      if (insight) {
+        const r = insight.getBoundingClientRect();
+        const p = clamp01(-r.top / (insight.offsetHeight - innerHeight * 2));
+        iWords.forEach((w, i) => w.classList.toggle('on', phase(p, 0.05, 0.55) * iWords.length * 1.1 > i));
+        if (stroke) stroke.style.setProperty('--soff', String(320 * (1 - phase(p, 0.6, 0.85))));
+      }
+      if (portal) {
+        const r = portal.getBoundingClientRect();
+        const p = clamp01(-r.top / (portal.offsetHeight - innerHeight));
+        const card = portal.querySelector('[data-card]');
+        const ease = 1 - Math.pow(1 - phase(p, 0, 0.7), 3);
+        card.style.setProperty('--gs', String(0.45 + ease * 0.55));
+        card.style.setProperty('--to', String(phase(p, 0.25, 0.5)));
+      }
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+        const v = Number(el.dataset.drift || 6);
+        el.style.transform = `translateY(${c * -v * 6}px)`;
+      });
+      ticking = false;
+    });
+  };
+  if (!reduced) {
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  } else {
+    iWords.forEach((w) => w.classList.add('on'));
+  }
+</script>
+</Base>

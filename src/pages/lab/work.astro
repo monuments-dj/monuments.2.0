@@ -33,6 +33,21 @@ const projects = [
       <span class="wk-scrollcue" aria-hidden="true">Scroll</span>
     </header>
 
+    <!-- SHOWREEL — the actual reel (DJ's YouTube). Muted ambient loop; click to
+         play with sound. The contextual cursor reads "Play" over it. -->
+    <section class="wk-showreel" data-cursor="Play">
+      <div class="wk-reel-frame" data-reel>
+        <iframe id="wkReel"
+          src="https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=1&loop=1&playlist=VMubUUZ2tdU&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&iv_load_policy=3&fs=0&disablekb=1"
+          frameborder="0" allow="autoplay; encrypted-media; fullscreen" title="Monuments showreel"></iframe>
+        <button class="wk-reel-play" type="button" aria-label="Play the reel with sound">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          <span>Play with sound</span>
+        </button>
+      </div>
+      <p class="wk-reel-cap">The reel</p>
+    </section>
+
     <!-- THE REEL — staggered vertical project cards w/ View cursor + parallax -->
     <section class="wk-reel">
       {projects.map((p, i) => (
@@ -69,6 +84,16 @@ const projects = [
   .wk-h1 em, .wk-card-name em, .wk-end-big em { font-style: italic; color: var(--accent); }
   .wk-lead { margin-top: 26px; max-width: 460px; font-size: 16px; line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.78); }
   .wk-scrollcue { margin-top: 40px; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+
+  /* SHOWREEL */
+  .wk-showreel { position: relative; z-index: 1; max-width: 1500px; margin: 0 auto; padding: 2vh var(--pad) clamp(40px, 6vw, 80px); }
+  .wk-reel-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 6px; background: var(--deep); box-shadow: 0 40px 120px rgb(var(--ink-rgb) / 0.55); }
+  .wk-reel-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+  .wk-reel-play { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 2; display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px 13px 18px; border: 0; border-radius: 999px; cursor: pointer; background: rgb(var(--ink-rgb) / 0.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: var(--fg); font: 600 12px/1 'Inter', sans-serif; letter-spacing: 0.14em; text-transform: uppercase; transition: background 0.25s ease, transform 0.25s ease; }
+  .wk-reel-play:hover { background: var(--accent); color: var(--bg); transform: translateX(-50%) translateY(-2px); }
+  .wk-reel-frame.playing .wk-reel-play { opacity: 0; pointer-events: none; }
+  .wk-reel-frame.playing iframe { pointer-events: auto; }
+  .wk-reel-cap { margin-top: 16px; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
 
   /* THE REEL */
   .wk-reel { position: relative; z-index: 1; max-width: 1500px; margin: 0 auto; padding: 4vh var(--pad) clamp(80px, 10vw, 140px); display: flex; flex-direction: column; gap: clamp(80px, 14vh, 200px); }
@@ -146,4 +171,15 @@ const projects = [
     });
   };
   if (!reduced) { addEventListener('scroll', onScroll, { passive: true }); onScroll(); }
+
+  // Showreel: click to play with sound (swap the iframe to an unmuted, controllable embed)
+  const reelFrame = document.querySelector('[data-reel]');
+  const reelBtn = reelFrame && reelFrame.querySelector('.wk-reel-play');
+  const reelIframe = document.getElementById('wkReel');
+  if (reelBtn && reelIframe) {
+    reelBtn.addEventListener('click', () => {
+      reelIframe.src = 'https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=0&loop=1&playlist=VMubUUZ2tdU&controls=1&rel=0&modestbranding=1&playsinline=1&start=6';
+      reelFrame.classList.add('playing');
+    });
+  }
 </script>

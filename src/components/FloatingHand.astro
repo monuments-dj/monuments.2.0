@@ -22,63 +22,9 @@ const uid = "fh-" + Math.random().toString(36).slice(2, 9);
   style={`--fh-top:${top}; --fh-z:${z};`}
   aria-hidden="true"
 >
-  <svg
-    class="fh-svg"
-    viewBox="0 0 200 240"
-    xmlns="http://www.w3.org/2000/svg"
-    role="presentation"
-  >
-    <defs>
-      <linearGradient id={`${uid}-grad`} x1="0" y1="0" x2="0.45" y2="1">
-        <stop offset="0" stop-color="var(--accent)"></stop>
-        <stop offset="1" stop-color="var(--deep)"></stop>
-      </linearGradient>
-    </defs>
-    <!-- One unified hand silhouette: palm + thumb + four fingers.
-         Drawn as a single bold path so it reads as an intentional mark,
-         not stacked clip-art. The inner edge-stroke adds dimension. -->
-    <path
-      class="fh-shape"
-      fill={`url(#${uid}-grad)`}
-      d="M52 232
-         C44 232 38 226 38 218
-         L38 150
-         C28 150 22 142 22 132
-         L22 96
-         C22 88 28 82 36 82
-         C44 82 50 88 50 96
-         L50 122
-         L56 122
-         L56 40
-         C56 32 62 26 70 26
-         C78 26 84 32 84 40
-         L84 116
-         L90 116
-         L90 22
-         C90 14 96 8 104 8
-         C112 8 118 14 118 22
-         L118 116
-         L124 116
-         L124 34
-         C124 26 130 20 138 20
-         C146 20 152 26 152 34
-         L152 124
-         L158 124
-         L162 96
-         C164 86 172 80 181 82
-         C189 84 194 92 192 101
-         L182 158
-         C176 198 150 232 108 232
-         Z"
-    ></path>
-    <!-- Subtle darker inner crease lines (finger separations) for craft. -->
-    <g class="fh-creases" stroke="var(--deep)" stroke-width="3.2" stroke-linecap="round" fill="none" opacity="0.55">
-      <path d="M70 60 L70 116"></path>
-      <path d="M104 46 L104 116"></path>
-      <path d="M138 56 L138 122"></path>
-      <path d="M58 150 C72 158 92 158 110 152"></path>
-    </g>
-  </svg>
+  <!-- DJ's real floating-hand asset (his own mark) -->
+  <img class="fh-svg" src="/hand.png" alt="" />
+
 </div>
 
 <style>

@@ -1,0 +1,332 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
+import WeavingLine from '../../components/WeavingLine.astro';
+import BrandTicker from '../../components/BrandTicker.astro';
+import FloatingHand from '../../components/FloatingHand.astro';
+import ShapePile from '../../components/ShapePile.astro';
+
+// === TURNSTILE REIMAGINED — /lab/turnstile ===
+// The reimagined-Blue-Cross editorial model on the Turnstile band: chapter
+// kickers + narrow columns, color-blocked chapters, a pinned insight scene with
+// marker underline, a drifting collage of product + BTS stills, credits, and the
+// portal-grow next-project ending to Waffle Me Up. Energy is loud and bold — a
+// band that does not whisper. Copy = real case-study text, restructured.
+
+const products = Array.from({ length: 8 }, (_, i) => `/case-studies/turnstile/products/prod-${String(i + 1).padStart(2, '0')}.jpg`);
+const bts = Array.from({ length: 10 }, (_, i) => `/case-studies/turnstile/bts/bts-${String(i + 1).padStart(2, '0')}.jpg`);
+
+// Drifting collage: product hero shots stacked with raw BTS frames.
+const collage = [
+  { src: products[0], w: 34, x: 2,  y: 0,   v: 5 },
+  { src: bts[2],      w: 26, x: 42, y: 14,  v: 9 },
+  { src: products[3], w: 30, x: 70, y: 2,   v: 6 },
+  { src: bts[6],      w: 28, x: 10, y: 52,  v: 8 },
+  { src: products[5], w: 38, x: 46, y: 56,  v: 4 },
+];
+
+const ticker = [
+  { name: 'Turnstile Audio', url: 'https://www.adorama.com' },
+  { name: 'Adorama', logo: '/logos/adorama.png', url: 'https://www.adorama.com' },
+  { name: 'Art of Visuals', logo: '/logos/art-of-visuals.png', url: 'https://artofvisuals.com' },
+  { name: 'Built to be heard' },
+  { name: 'No whisper' },
+];
+---
+<Base title="Turnstile Audio — built to be heard — monuments">
+  <main class="tsx">
+    <WeavingLine side="right" />
+
+    <!-- HERO CHAPTER (dark) -->
+    <header class="tsx-hero">
+      <img class="tsx-hero-img" src={bts[1]} alt="Turnstile Audio gear, on the build" data-drift="6" />
+      <div class="tsx-hero-scrim" aria-hidden="true"></div>
+      <img class="tsx-hero-mark" src="/case-studies/turnstile/brand/logo-mark.png" alt="" data-drift="3" />
+      <div class="tsx-hero-inner">
+        <p class="tsx-eyebrow fade">Turnstile Audio · brand identity</p>
+        <h1 class="tsx-h1 split">Built to be <em>heard.</em></h1>
+        <p class="tsx-hero-meta fade">Brand, identity, content, campaign · two weeks to design, iterate, launch</p>
+        <span class="tsx-scrollcue fade" data-cursor="Scroll">Scroll</span>
+      </div>
+      <FloatingHand side="right" top="16vh" />
+    </header>
+
+    <!-- CHAPTER 01 — THE BRIEF (cream) -->
+    <section class="tsx-ch tsx-ch-cream">
+      <div class="tsx-cols">
+        <p class="tsx-kicker fade">01 · The brief</p>
+        <div class="tsx-col fade">
+          <p>Turnstile Audio came to us wanting a brand that struck the perfect balance: clean, simple, and inspired by the legendary audio gear of the past, but fresh enough to stand out in today's market. They didn't want flashy. They wanted timeless.</p>
+          <p>Something that communicated quality and craftsmanship without overcomplicating things, and felt welcoming to up-and-coming creators and seasoned pros alike. A name that earns the volume it asks for.</p>
+        </div>
+      </div>
+      <figure class="tsx-wide fade">
+        <img src={products[1]} alt="Turnstile Audio product, studio frame" loading="lazy" data-drift="8" />
+      </figure>
+    </section>
+
+    <!-- PINNED INSIGHT SCENE (deep) — marker underline -->
+    <section class="tsx-insight scn" data-scene="insight">
+      <div class="scn-stage tsx-insight-stage">
+        <p class="tsx-insight-kicker">The insight</p>
+        <h2 class="tsx-insight-line" data-iwords>A band's gear isn't a product line. It's the <em>sound it makes
+          <svg class="tsx-stroke" viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M5 9 C70 4, 180 12, 295 6" /></svg>
+        </em> before anyone plays a note.</h2>
+      </div>
+    </section>
+
+    <!-- CHAPTER 02 — THE WORK (cream, drifting collage) -->
+    <section class="tsx-ch tsx-ch-cream tsx-over">
+      <div class="tsx-cols">
+        <p class="tsx-kicker fade">02 · The work</p>
+        <div class="tsx-col fade">
+          <p>Identity first. A single confident wordmark, geometric and built to last just like the gear, paired with a mark that reads from across a loud room. Then the content: product photography shot so the metal and the message hit at the same time.</p>
+          <p>Then the campaign. We took a deep dive into the world of vintage audio brands, what made them iconic and enduring, then built something modern and a little nostalgic without trying too hard. The brand quietly amplifies; the gear is the star.</p>
+        </div>
+      </div>
+      <div class="tsx-collage">
+        {collage.map((c) => (
+          <figure class="tsx-cell" style={`--w:${c.w}%; --x:${c.x}%; --y:${c.y}%`} data-cursor="Explore">
+            <img src={c.src} alt="Turnstile Audio brand still" loading="lazy" data-drift={String(c.v)} />
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <!-- BRAND TICKER BAND (dark) -->
+    <section class="tsx-ticker-band">
+      <BrandTicker brands={ticker} speed={70} />
+    </section>
+
+    <!-- CHAPTER 03 — THE RUN (deep stats band) -->
+    <section class="tsx-run">
+      <div class="tsx-run-inner">
+        <p class="tsx-kicker fade">03 · The run</p>
+        <div class="tsx-stats">
+          <div class="tsx-stat fade"><span class="tsx-stat-n">2 wks</span><span class="tsx-stat-l">concept to launch</span></div>
+          <div class="tsx-stat fade"><span class="tsx-stat-n">1 mark</span><span class="tsx-stat-l">three weights, one voice</span></div>
+          <div class="tsx-stat fade"><span class="tsx-stat-n">Full kit</span><span class="tsx-stat-l">identity, content, campaign</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE WALL (cream, every product frame) -->
+    <section class="tsx-ch tsx-ch-cream">
+      <div class="tsx-cols">
+        <p class="tsx-kicker fade">04 · The kit</p>
+        <div class="tsx-col fade"><p>The gear, shot like it sounds. Clean, confident, understated but undeniably cool — a nod to the classics.</p></div>
+      </div>
+      <div class="tsx-wall">
+        {products.map((src) => (
+          <figure class="tsx-brick fade" data-cursor="Explore"><img src={src} alt="Turnstile Audio product" loading="lazy" /></figure>
+        ))}
+      </div>
+    </section>
+
+    <!-- CREDITS (dark, shapes pile in) -->
+    <section class="tsx-credits-band">
+      <div class="tsx-credits-inner">
+        <p class="tsx-kicker fade">Credits</p>
+        <div class="tsx-credits fade">
+          <div><span>Agency</span>Art of Visuals</div>
+          <div><span>Client</span>Adorama</div>
+          <div><span>Creative Direction</span>DJ Ramirez</div>
+          <div><span>Scope</span>Brand · Identity · Content · Campaign</div>
+        </div>
+      </div>
+      <ShapePile />
+    </section>
+
+    <!-- NEXT PROJECT — portal grow -->
+    <section class="tsx-next" data-portal>
+      <div class="tsx-next-stage">
+        <p class="tsx-kicker tsx-next-k">Next project</p>
+        <a class="tsx-next-card" href="/work/waffle-me-up" data-card data-cursor="View">
+          <img src="/case-studies/waffle-me-up/cover.jpg" alt="Waffle Me Up" data-pimg />
+          <span class="tsx-next-scrim" aria-hidden="true"></span>
+          <span class="tsx-next-title">Waffle Me Up <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+  <LabFx />
+</Base>
+
+<style>
+  .tsx { background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .tsx-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.6); }
+  .tsx-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+
+  /* HERO — loud, oversized */
+  .tsx-hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden; }
+  .tsx-hero-img { position: absolute; inset: -8% 0; width: 100%; height: 116%; object-fit: cover; }
+  .tsx-hero-scrim { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.32), rgba(0,0,0,0.82)); }
+  .tsx-hero-mark { position: absolute; top: 8vh; right: clamp(20px, 5vw, 80px); width: clamp(90px, 13vw, 200px); opacity: 0.9; z-index: 2; filter: drop-shadow(0 4px 30px rgba(0,0,0,0.5)); }
+  .tsx-hero-inner { position: relative; z-index: 2; width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad) 9vh; }
+  .tsx-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(56px, 12vw, 200px); line-height: 0.92; letter-spacing: -0.04em; max-width: 12ch; margin-top: 18px; padding-bottom: 0.12em; text-transform: uppercase; }
+  .tsx-h1 em { font-style: italic; color: var(--accent); text-transform: none; }
+  .tsx-hero-meta { margin-top: 24px; font-size: 13px; font-weight: 300; color: rgb(var(--fg-rgb) / 0.72); max-width: 46ch; }
+  .tsx-scrollcue { display: inline-block; margin-top: 28px; font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); }
+
+  /* CHAPTERS (cream) */
+  .tsx-ch-cream { background: var(--paper); color: var(--ink); }
+  .tsx-ch { padding: clamp(90px, 11vw, 150px) 0; }
+  .tsx-cols { display: grid; grid-template-columns: 200px 1fr; gap: clamp(28px, 5vw, 80px); max-width: min(980px, 92vw); margin: 0 auto; padding: 0 var(--pad); align-items: start; }
+  .tsx-col p { font-size: 16px; line-height: 1.75; font-weight: 300; color: rgb(var(--ink-rgb) / 0.82); max-width: 54ch; }
+  .tsx-col p + p { margin-top: 1.3em; }
+  .tsx-wide { max-width: min(1180px, 94vw); margin: clamp(56px, 7vw, 100px) auto 0; padding: 0 var(--pad); overflow: hidden; }
+  .tsx-wide img { width: 100%; display: block; border-radius: 4px; }
+
+  /* PINNED INSIGHT */
+  .scn { position: relative; }
+  .scn-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  .tsx-insight { height: 280vh; z-index: 2; margin-top: 0; }
+  .tsx-insight-stage { background: var(--deep); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4vh; text-align: center; padding: 0 var(--pad); }
+  .tsx-insight-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); }
+  .tsx-insight-line { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5.2vw, 80px); line-height: 1.1; letter-spacing: -0.03em; max-width: 19ch; color: var(--fg); padding-bottom: 0.12em; }
+  .tsx-insight-line em { font-style: italic; position: relative; white-space: nowrap; color: var(--accent); }
+  .tsx-insight-line :global(.w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .tsx-insight-line :global(.wi) { display: inline-block; transform: translateY(135%); transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .tsx-insight-line :global(.wi.on) { transform: none; }
+  .tsx-stroke { position: absolute; left: 0; bottom: -10px; width: 100%; height: 12px; overflow: visible; }
+  .tsx-stroke path { fill: none; stroke: var(--accent); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: var(--soff, 320); }
+
+  /* Post-insight chapter slides over the pinned stage */
+  .tsx-over { position: relative; z-index: 3; margin-top: -100vh; }
+
+  /* COLLAGE */
+  .tsx-collage { position: relative; max-width: min(1280px, 96vw); margin: clamp(56px, 7vw, 110px) auto 0; height: clamp(520px, 64vw, 900px); }
+  .tsx-cell { position: absolute; width: var(--w); left: var(--x); top: var(--y); margin: 0; overflow: hidden; border-radius: 4px; }
+  .tsx-cell img { width: 100%; height: auto; display: block; }
+
+  /* TICKER BAND */
+  .tsx-ticker-band { position: relative; z-index: 3; background: var(--bg); color: var(--fg); padding: clamp(28px, 4vw, 48px) 0; border-top: 1px solid rgb(var(--fg-rgb) / 0.1); border-bottom: 1px solid rgb(var(--fg-rgb) / 0.1); }
+
+  /* RUN (stats band) */
+  .tsx-run { position: relative; z-index: 3; background: var(--deep); color: var(--fg); }
+  .tsx-run-inner { max-width: min(980px, 92vw); margin: 0 auto; padding: clamp(80px, 10vw, 130px) var(--pad); }
+  .tsx-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 40px; }
+  .tsx-stat { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid rgb(var(--fg-rgb) / 0.25); padding-top: 18px; }
+  .tsx-stat-n { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(40px, 5.5vw, 80px); letter-spacing: -0.03em; line-height: 1; text-transform: uppercase; }
+  .tsx-stat-l { font-size: 13px; font-weight: 300; color: rgb(var(--fg-rgb) / 0.65); }
+
+  /* WALL */
+  .tsx-wall { columns: 3; column-gap: 12px; max-width: min(1320px, 96vw); margin: clamp(56px, 7vw, 100px) auto 0; padding: 0 var(--pad); }
+  .tsx-brick { break-inside: avoid; margin: 0 0 12px; overflow: hidden; border-radius: 3px; }
+  .tsx-brick img { width: 100%; display: block; transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .tsx-brick:hover img { transform: scale(1.04); }
+
+  /* CREDITS BAND */
+  .tsx-credits-band { position: relative; z-index: 3; background: var(--bg); color: var(--fg); padding-top: clamp(80px, 10vw, 130px); }
+  .tsx-credits-inner { max-width: min(980px, 92vw); margin: 0 auto; padding: 0 var(--pad); }
+  .tsx-credits { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 60px; margin-top: 40px; max-width: 760px; }
+  .tsx-credits div { display: flex; flex-direction: column; gap: 8px; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(18px, 2vw, 26px); letter-spacing: -0.01em; border-top: 1px solid rgb(var(--fg-rgb) / 0.2); padding-top: 14px; }
+  .tsx-credits span { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+
+  /* NEXT portal */
+  .tsx-next { position: relative; height: 220vh; z-index: 4; background: var(--bg); }
+  .tsx-next-stage { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4vh; overflow: hidden; }
+  .tsx-next-k { color: rgb(var(--fg-rgb) / 0.55); }
+  .tsx-next-card { position: relative; display: block; width: 92vw; max-width: 1560px; aspect-ratio: 16/9; max-height: 78vh; overflow: hidden; border-radius: 6px; transform: scale(var(--gs, 0.45)); will-change: transform; }
+  .tsx-next-card img { width: 100%; height: 112%; object-fit: cover; display: block; transform: translateY(var(--py, -6%)); }
+  .tsx-next-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.62), transparent 50%); }
+  .tsx-next-title { position: absolute; left: clamp(20px, 3.2vw, 50px); bottom: clamp(18px, 3vw, 44px); font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.2vw, 64px); letter-spacing: -0.03em; color: var(--fg); opacity: var(--to, 0); transform: translateY(calc((1 - var(--to, 0)) * 24px)); }
+
+  /* CLIP-FIX for the hero split mask */
+  .tsx :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .tsx :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .tsx :global(.split.on .wi) { transform: none; }
+
+  @media (max-width: 860px) {
+    .tsx-cols { grid-template-columns: 1fr; gap: 18px; }
+    .tsx-collage { height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 var(--pad); }
+    .tsx-cell { position: static; width: auto; }
+    .tsx-stats { grid-template-columns: 1fr; }
+    .tsx-wall { columns: 2; }
+    .tsx-credits { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tsx-insight, .tsx-next { height: auto; }
+    .tsx-over { margin-top: 0; }
+    .scn-stage, .tsx-next-stage { position: static; height: auto; padding: 14vh var(--pad); }
+    .tsx-insight-line :global(.wi) { transform: none !important; transition: none !important; }
+    .tsx-stroke path { stroke-dashoffset: 0; }
+    .tsx-next-card { transform: none; }
+    .tsx-next-title { opacity: 1; transform: none; }
+    .tsx :global(.split .wi) { transform: none !important; transition: none !important; }
+    [data-drift] { transform: none !important; }
+  }
+</style>
+
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  const phase = (p, a, b) => clamp01((p - a) / (b - a));
+
+  const splitWords = (root, counter) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && node.tagName !== 'svg' && node.tagName !== 'SVG' && !node.closest('svg')) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  document.querySelectorAll('.split, [data-iwords]').forEach((el) => splitWords(el, { n: 0 }));
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: 0.35 });
+  document.querySelectorAll('.split').forEach((el) => io.observe(el));
+
+  const insight = document.querySelector('[data-scene="insight"]');
+  const iWords = insight ? [...insight.querySelectorAll('.wi')] : [];
+  const stroke = insight && insight.querySelector('.tsx-stroke path');
+  const portal = document.querySelector('[data-portal]');
+  const drifts = [...document.querySelectorAll('[data-drift]')];
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      if (insight) {
+        const r = insight.getBoundingClientRect();
+        const p = clamp01(-r.top / (insight.offsetHeight - innerHeight * 2));
+        iWords.forEach((w, i) => w.classList.toggle('on', phase(p, 0.05, 0.55) * iWords.length * 1.1 > i));
+        if (stroke) stroke.style.setProperty('--soff', String(320 * (1 - phase(p, 0.6, 0.85))));
+      }
+      if (portal) {
+        const r = portal.getBoundingClientRect();
+        const p = clamp01(-r.top / (portal.offsetHeight - innerHeight));
+        const card = portal.querySelector('[data-card]');
+        const ease = 1 - Math.pow(1 - phase(p, 0, 0.7), 3);
+        card.style.setProperty('--gs', String(0.45 + ease * 0.55));
+        card.style.setProperty('--to', String(phase(p, 0.25, 0.5)));
+      }
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+        const v = Number(el.dataset.drift || 6);
+        el.style.transform = `translateY(${c * -v * 6}px)`;
+      });
+      ticking = false;
+    });
+  };
+  if (!reduced) {
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  } else {
+    iWords.forEach((w) => w.classList.add('on'));
+  }
+</script>
