@@ -1,0 +1,76 @@
+---
+// ShapePile (lusion-style): brand-colored shapes that fall and PILE UP at the
+// bottom of the container as it scrolls into view. Lightweight DOM physics
+// (gravity + floor settle + damping, no expensive inter-shape collision), runs
+// only while in view. Reduced-motion = a static settled pile.
+interface Props {
+  count?: number;
+  height?: string;   // pile area height
+}
+const { count = 26, height = 'clamp(220px, 32vh, 380px)' } = Astro.props;
+const shapes = Array.from({ length: count }, (_, i) => i);
+const kinds = ['circle', 'square', 'tri', 'plus', 'pill'];
+const tints = ['var(--accent)', 'var(--accent-2)', 'var(--fg)', 'var(--accent)', 'var(--fg)'];
+---
+<div class="pile" data-pile style={`--pile-h:${height}`} aria-hidden="true">
+  {shapes.map((i) => (
+    <span class={`pile-shape sh-${kinds[i % kinds.length]}`} style={`--tint:${tints[i % tints.length]}; --sz:${22 + (i * 7) % 34}px;`}></span>
+  ))}
+</div>
+
+<style>
+  .pile { position: relative; width: 100%; height: var(--pile-h); overflow: hidden; pointer-events: none; }
+  .pile-shape { position: absolute; left: 0; top: 0; width: var(--sz); height: var(--sz); background: var(--tint); will-change: transform; opacity: 0.92; }
+  .sh-circle { border-radius: 50%; }
+  .sh-square { border-radius: 3px; }
+  .sh-pill { border-radius: 999px; width: calc(var(--sz) * 1.7); }
+  .sh-tri { background: transparent; width: 0; height: 0; border-left: calc(var(--sz) / 2) solid transparent; border-right: calc(var(--sz) / 2) solid transparent; border-bottom: var(--sz) solid var(--tint); }
+  .sh-plus { background: transparent; }
+  .sh-plus::before, .sh-plus::after { content: ''; position: absolute; background: var(--tint); border-radius: 2px; }
+  .sh-plus::before { left: 40%; top: 0; width: 20%; height: 100%; }
+  .sh-plus::after { top: 40%; left: 0; height: 20%; width: 100%; }
+  @media (prefers-reduced-motion: reduce) { .pile-shape { opacity: 0.5; } }
+</style>
+
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-pile]').forEach((pile) => {
+    const shapes = [...pile.querySelectorAll('.pile-shape')];
+    const W = () => pile.clientWidth, H = () => pile.clientHeight;
+    // each shape: target resting spot along the floor (spread across width, slight stack)
+    const bodies = shapes.map((el, i) => {
+      const sz = el.offsetWidth || 28;
+      const restX = (W() * (0.06 + (i * 0.137) % 0.88));
+      const row = Math.floor(i / 9);
+      const restY = H() - sz - row * (sz * 0.5) - ((i * 13) % 18);
+      return { el, sz, x: restX, y: -sz - (i % 7) * 60, vy: 0, restX, restY, rot: ((i * 47) % 60) - 30, settled: false, delay: i * 2.5 };
+    });
+    const place = (b) => { b.el.style.transform = `translate(${b.x}px, ${b.y}px) rotate(${b.rot}deg)`; };
+
+    if (reduced) { bodies.forEach((b) => { b.y = b.restY; place(b); }); return; }
+
+    let running = false, frame = 0, raf = 0;
+    const step = () => {
+      frame++;
+      let active = false;
+      bodies.forEach((b) => {
+        if (frame < b.delay) { active = true; return; }
+        if (b.settled) return;
+        b.vy += 0.9;                 // gravity
+        b.y += b.vy;
+        if (b.y >= b.restY) {        // floor / pile top
+          b.y = b.restY; b.vy *= -0.32;   // small bounce
+          if (Math.abs(b.vy) < 1.2) { b.y = b.restY; b.settled = true; }
+        }
+        place(b);
+        active = true;
+      });
+      if (active) raf = requestAnimationFrame(step); else running = false;
+    };
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting && !running) { running = true; frame = 0; bodies.forEach((b) => { b.settled = false; b.vy = 0; b.y = -b.sz - (b.delay); }); raf = requestAnimationFrame(step); }
+    }), { threshold: 0.2 });
+    io.observe(pile);
+    bodies.forEach(place);
+  });
+</script>

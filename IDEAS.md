@@ -133,3 +133,14 @@ second wave; (7) is the one I would fight for on the AI page.
     with AI services on the HOMEPAGE itself, not bury them at /lab/ai. Flagged
     to revisit after the design pass: candidate = homepage v2 variant B with an
     AI-services lead. Meanwhile: weave AI services into pages wherever natural.
+
+## SHIPPED 2026-06-13 — experiments round (DJ loved the pizzazz, wanted more)
+- ✅ **Contextual cursor** (exoape) — lagging disc that swaps to Scroll/View/Play/Drag/Swipe by hovered element; hides native cursor desktop; themed. In LabFx, site-wide on lab pages. [data-cursor="X"] overrides per element.
+- ✅ **Weaving line** (lusion) — WeavingLine.astro: accent thread that draws down a page edge with scroll progress. On home (left) + about (right). Reusable: <WeavingLine side color width opacity />.
+- ✅ **Work page reworked to exoape** — vertical staggered project cards, inner-image parallax, "View" cursor, Brand — descriptor captions. (Horizontal-scroll scrapped per DJ.)
+
+## NEXT EXPERIMENTS (research-backed, 2026-06-13 web-design-trends pass)
+16. **Stacking graphics at the bottom** (lusion physics pile) — DJ asked for this. Playful shapes (could be the marker/patch family or brand-colored confetti) that accumulate/settle at the bottom of a section as you scroll, light physics. Build as a reusable <ShapePile> experiment; candidate for contact or a lab page.
+17. **Scroll speedometer / velocity personality** (2026 trend) — a tiny readout or element that reacts to scroll SPEED (the brand ticker already velocity-reacts; extend the idea: a shape that stretches/skews with scroll velocity). Adds "alive" personality.
+18. **Perspective / depth scroll** (2026 trend) — sections that shift depth/perspective as you pass (beyond flat parallax). Selective, on a hero or work card.
+19. **Public LAB page** (DJ "dig that experiments tab" + bleeding-edge positioning) — turn the internal /lab index into a public-facing "Laboratory" page showcasing emerging-tech experiments. Doubles as proof he's ahead of the market (ties to the AI consulting pitch).
