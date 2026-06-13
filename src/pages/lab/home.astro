@@ -1,0 +1,430 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// === HOMEPAGE V2 — /lab/home ===
+// Pinned-scene front door per the measured motion laws (REFERENCES.md).
+// Keeps what DJ loves (showreel scroll-zoom, footer) and rebuilds the spine:
+// line-by-line hero build w/ scroll-drawn marker circle, brand-world work
+// bands (each project owns the viewport in its own atmosphere, media at half
+// speed), services rows incl. the AI offer, trusted-by grid.
+// Voice: studio "we", CD-first, CTA = start a conversation. No em dashes.
+
+const worlds = [
+  {
+    slug: 'sony-this-moment',
+    brand: 'Sony',
+    line: 'Built to capture the moment',
+    think: 'A campaign about pause in a culture of noise. We shaped the story and directed the stills.',
+    img: '/case-studies/sony-this-moment/gallery/tm-01.jpg',
+    bg: '#101418', ink: '#fcfcfc',
+  },
+  {
+    slug: 'blue-cross',
+    brand: 'Blue Cross of Idaho',
+    line: 'Built for life',
+    think: 'Health insurance sold on a simple truth: know people as individuals. Four years of campaign licensing says it worked.',
+    img: '/case-studies/blue-cross/gallery/bci-10.jpg',
+    bg: '#0d2440', ink: '#fcfcfc',
+  },
+  {
+    slug: 'sony-xperia-summer',
+    brand: 'Sony Xperia',
+    line: 'Built to chase the sun',
+    think: 'A summer campaign that put the product where the light was best. Direction, stills, and the brief.',
+    img: '/case-studies/sony-xperia-summer/gallery/xp-01.jpg',
+    bg: '#1a1410', ink: '#fcfcfc',
+  },
+  {
+    slug: 'turnstile',
+    brand: 'Turnstile',
+    line: 'Built to be heard',
+    think: 'Brand work for a band with a point of view. Identity, content, and the campaign around it.',
+    img: '/case-studies/turnstile/gallery/ts-01.jpg',
+    bg: '#14181a', ink: '#fcfcfc',
+  },
+];
+
+const services = [
+  { t: 'Creative direction', d: 'Setting the idea, the look, the story. The reason brands bring us in.' },
+  { t: 'Direction', d: 'Directing commercials, brand films, and campaigns end to end.' },
+  { t: 'Brand campaigns', d: 'Concepting and producing multi-asset campaigns, not one-off clips.' },
+  { t: 'Creative consulting', d: 'Helping brands and teams sharpen what they are making and why.' },
+  { t: 'End-to-end production', d: 'Full production and post, scaled to the job.' },
+  { t: 'AI systems', d: 'Audit, automate, deploy. We bring your brand into the modern age.', href: '/lab/ai', tag: 'new' },
+];
+---
+<Base title="monuments — we build things worth remembering">
+
+  <main class="hm">
+
+    <!-- SCENE — HERO (pinned, 320vh). Line-by-line build over the bg video,
+         marker circle draws around the last word, then the reel slides over. -->
+    <section class="hm-hero scn" data-scene="hero">
+      <div class="scn-stage hm-hero-stage">
+        <div class="hm-hero-video" aria-hidden="true">
+          <iframe id="heroVideo"
+            src="https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=1&loop=1&playlist=VMubUUZ2tdU&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
+            frameborder="0" allow="autoplay; encrypted-media"></iframe>
+        </div>
+        <div class="hm-hero-scrim" aria-hidden="true"></div>
+        <div class="hm-hero-type">
+          <p class="hm-eyebrow">Monuments Creative · a creative-led production studio</p>
+          <h1 class="hm-h1">
+            <span class="hm-line" data-line="0">We build things</span>
+            <span class="hm-line" data-line="1">worth</span>
+            <span class="hm-line hm-line-mark" data-line="2">remembering.
+              <svg class="hm-circle" viewBox="0 0 520 150" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M256 18 C90 8, 28 52, 38 92 C50 138, 240 150, 380 138 C492 128, 506 78, 478 50 C448 20, 300 8, 150 22" />
+              </svg>
+            </span>
+          </h1>
+          <div class="hm-hero-foot">
+            <p class="hm-hero-sub">Brand campaigns and commercials, concept through delivery, for brands that need a strong point of view, not just a crew.</p>
+            <a class="hm-cta" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Everything below slides over the hero stage. -->
+    <div class="hm-after">
+
+      <!-- SHOWREEL — the scroll-zoom DJ loves, unchanged mechanics. -->
+      <section class="showreel">
+        <div class="reel-stage">
+          <div class="reel-zoom" id="reelZoom">
+            <div class="reel-frame-wrap">
+              <div class="reel-frame">
+                <iframe id="reelVideo"
+                  src="https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
+                  frameborder="0" allow="autoplay; encrypted-media; fullscreen"></iframe>
+              </div>
+              <div class="reel-controls">
+                <button class="reel-ctrl reel-play" id="reelPlay" type="button" aria-label="Play or pause">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path class="reel-ico-play" d="M8 5v14l11-7z"/><path class="reel-ico-pause" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+                </button>
+                <button class="reel-ctrl reel-audio" id="reelAudio" type="button" aria-pressed="false" aria-label="Sound on or off">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor" stroke="none"/>
+                    <path class="reel-wave" d="M16.5 8.5a5 5 0 0 1 0 7"/>
+                    <line class="reel-slash" x1="3.5" y1="3.5" x2="20.5" y2="20.5"/>
+                  </svg>
+                </button>
+                <button class="reel-ctrl reel-fs" id="reelFs" type="button" aria-label="Fullscreen">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="reel-cap">Showreel</div>
+        </div>
+      </section>
+
+      <!-- WORK — brand worlds. Each project owns the viewport in its own
+           atmosphere; the image travels slower than the type (0.5x law). -->
+      <section class="hm-worlds">
+        {worlds.map((w, i) => (
+          <a class="hm-world" href={`/work/${w.slug}`} style={`--wbg:${w.bg}; --wink:${w.ink}`} data-world>
+            <figure class="hm-world-media" data-media>
+              <img src={w.img} alt={`${w.brand} campaign`} loading={i === 0 ? 'eager' : 'lazy'} />
+            </figure>
+            <div class="hm-world-copy">
+              <p class="hm-world-brand">{w.brand}</p>
+              <h2 class="hm-world-line">{w.line}</h2>
+              <p class="hm-world-think">{w.think}</p>
+              <span class="hm-world-go">See the work <span aria-hidden="true">→</span></span>
+            </div>
+            <span class="hm-world-index" aria-hidden="true">{String(i + 1).padStart(2, '0')} / {String(worlds.length).padStart(2, '0')}</span>
+          </a>
+        ))}
+        <div class="hm-worlds-all">
+          <a class="hm-cta hm-cta-ghost" href="/work">All work <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <!-- SERVICES — CD first, AI systems included. Marker underline draws on hover. -->
+      <section class="hm-sv">
+        <p class="hm-eyebrow fade">What we do</p>
+        <ul class="hm-sv-list">
+          {services.map((s) => (
+            <li class="hm-sv-row fade">
+              <a href={s.href || '/services'} class="hm-sv-link">
+                <span class="hm-sv-t">
+                  {s.t}
+                  {s.tag && <sup class="hm-sv-tag">{s.tag}</sup>}
+                  <svg class="hm-sv-stroke" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M4 8 C60 4, 150 10, 296 5" />
+                  </svg>
+                </span>
+                <span class="hm-sv-d">{s.d}</span>
+                <span class="hm-sv-arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- TRUSTED BY — the invert grid, kept. -->
+      <section class="trusted fade">
+        <div class="trusted-top">
+          <div class="trusted-left">
+            <h2 class="trusted-title">Trusted by the best</h2>
+            <p class="trusted-body">We have worked with global brands to craft campaigns that drive results: satisfying clients, uncovering insights, moving product, and winning awards along the way.</p>
+            <a href="/contact" class="trusted-cta">Let's talk</a>
+          </div>
+          <img class="trusted-m" src="https://monuments.cc/wp-content/uploads/2023/12/logo-01.png" alt="M">
+        </div>
+        <div class="logo-grid">
+          <div class="logo-cell"><img src="/logos/sony.png" alt="Sony"></div>
+          <div class="logo-cell"><img src="/logos/intel.png" alt="Intel"></div>
+          <div class="logo-cell"><img src="/logos/adorama.png" alt="Adorama"></div>
+          <div class="logo-cell"><img src="/logos/msi.png" alt="MSI"></div>
+          <div class="logo-cell"><img src="/logos/lexar.png" alt="Lexar"></div>
+          <div class="logo-cell"><img src="/logos/flashpoint.png" alt="Flashpoint"></div>
+          <div class="logo-cell"><img src="/logos/against.png" alt="Against"></div>
+          <div class="logo-cell"><img src="/logos/art-of-visuals.png" alt="Art of Visuals"></div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="hm-end">
+        <p class="hm-end-big split">Let's build something <em>worth remembering.</em></p>
+        <a class="hm-cta fade" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
+      </section>
+
+    </div>
+  </main>
+</Base>
+
+<style>
+  .hm { background: var(--black); color: var(--white); overflow-x: clip; }
+  .hm-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(252,252,252,0.5); }
+  .hm-cta { display: inline-flex; align-items: center; gap: 10px; width: fit-content; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); background: var(--white); padding: 18px 30px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease; }
+  .hm-cta:hover { gap: 18px; transform: translateY(-2px); }
+  .hm-cta-ghost { color: var(--white); background: transparent; border: 1px solid rgba(252,252,252,0.35); }
+
+  /* SCENE shell */
+  .scn { position: relative; }
+  .scn-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+
+  /* HERO */
+  .hm-hero { height: 320vh; z-index: 1; }
+  .hm-hero-stage { display: flex; align-items: flex-end; }
+  .hm-hero-video { position: absolute; inset: 0; pointer-events: none; }
+  .hm-hero-video iframe { position: absolute; top: 50%; left: 50%; width: 178vh; min-width: 100%; height: 100vh; min-height: 56.25vw; transform: translate(-50%, -50%); }
+  .hm-hero-scrim { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(13,15,20,0.5), rgba(13,15,20,0.35) 45%, rgba(13,15,20,0.78)); }
+  .hm-hero-type { position: relative; z-index: 2; width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad) 9vh; }
+  .hm-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(52px, 8.6vw, 132px); line-height: 0.98; letter-spacing: -0.035em; margin-top: 22px; }
+  .hm-line { display: block; overflow: hidden; }
+  .hm-line > :global(.li), .hm-line { position: relative; }
+  .hm-line::after { content: ''; } /* keeps layout stable while inner masks */
+  .hm-line { clip-path: inset(0 0 102% 0); transform: translateY(0.25em); transition: clip-path 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+  .hm-line.on { clip-path: inset(0 0 -8% 0); transform: none; }
+  .hm-line-mark { display: inline-block; padding-right: 0.1em; }
+  .hm-circle { position: absolute; left: -3%; top: -14%; width: 64%; height: 128%; overflow: visible; pointer-events: none; }
+  .hm-circle path { fill: none; stroke: #e0322d; stroke-width: 7; stroke-linecap: round; stroke-dasharray: var(--len, 2400); stroke-dashoffset: var(--off, 2400); }
+  .hm-hero-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-top: 5vh; opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .hm-hero-foot.on { opacity: 1; transform: none; }
+  .hm-hero-sub { max-width: 480px; font-size: 15px; line-height: 1.7; font-weight: 300; color: rgba(252,252,252,0.8); }
+
+  .hm-after { position: relative; z-index: 2; margin-top: -100vh; background: var(--black); }
+
+  /* WORK — brand worlds */
+  .hm-worlds { position: relative; }
+  .hm-world { position: relative; display: flex; align-items: center; min-height: 100vh; padding: 14vh var(--pad); background: var(--wbg); color: var(--wink); text-decoration: none; overflow: hidden; }
+  .hm-world-media { position: absolute; right: max(var(--pad), 6vw); top: 50%; width: min(46vw, 760px); aspect-ratio: 3/2; margin: 0; overflow: hidden; border-radius: 4px; transform: translateY(-50%); }
+  .hm-world-media img { width: 100%; height: 118%; object-fit: cover; display: block; will-change: transform; transform: translateY(var(--py, 0)); }
+  .hm-world-copy { position: relative; z-index: 2; max-width: min(46vw, 600px); }
+  .hm-world-brand { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.6; }
+  .hm-world-line { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 4.6vw, 72px); line-height: 1.02; letter-spacing: -0.03em; margin-top: 16px; max-width: 13ch; }
+  .hm-world-think { margin-top: 22px; max-width: 42ch; font-size: 15px; line-height: 1.7; font-weight: 300; opacity: 0.82; }
+  .hm-world-go { display: inline-flex; gap: 10px; margin-top: 30px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.25s, gap 0.25s; }
+  .hm-world:hover .hm-world-go { opacity: 1; gap: 16px; }
+  .hm-world-index { position: absolute; right: var(--pad); bottom: 5vh; font-size: 12px; letter-spacing: 0.18em; opacity: 0.5; }
+  .hm-worlds-all { display: flex; justify-content: center; padding: 12vh var(--pad); }
+
+  /* SERVICES rows */
+  .hm-sv { max-width: var(--wrap); margin: 0 auto; padding: clamp(90px, 11vw, 150px) var(--pad); }
+  .hm-sv-list { list-style: none; margin: 34px 0 0; padding: 0; }
+  .hm-sv-row { border-top: 1px solid rgba(252,252,252,0.14); }
+  .hm-sv-row:last-child { border-bottom: 1px solid rgba(252,252,252,0.14); }
+  .hm-sv-link { display: grid; grid-template-columns: minmax(220px, 0.55fr) 1fr auto; align-items: baseline; gap: 28px; padding: 26px 6px; color: var(--white); text-decoration: none; transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .hm-sv-link:hover { padding-left: 22px; }
+  .hm-sv-t { position: relative; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(22px, 2.4vw, 34px); letter-spacing: -0.02em; width: fit-content; }
+  .hm-sv-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #e0322d; margin-left: 8px; }
+  .hm-sv-stroke { position: absolute; left: 0; bottom: -6px; width: 100%; height: 10px; overflow: visible; }
+  .hm-sv-stroke path { fill: none; stroke: #e0322d; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: 320; transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .hm-sv-link:hover .hm-sv-stroke path { stroke-dashoffset: 0; }
+  .hm-sv-d { font-size: 14px; line-height: 1.6; font-weight: 300; color: rgba(252,252,252,0.62); max-width: 56ch; }
+  .hm-sv-arrow { font-size: 20px; opacity: 0.45; transition: opacity 0.25s, transform 0.3s; }
+  .hm-sv-link:hover .hm-sv-arrow { opacity: 1; transform: translateX(6px); }
+
+  /* END */
+  .hm-end { min-height: 64vh; display: flex; flex-direction: column; gap: 44px; align-items: center; justify-content: center; text-align: center; padding: 80px var(--pad); }
+  .hm-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5vw, 72px); letter-spacing: -0.025em; line-height: 1.08; max-width: 18ch; }
+  .hm-end-big em { font-style: italic; color: var(--accent); }
+
+  /* split util (shared pattern with /lab/ai) */
+  .hm :global(.split .w) { display: inline-block; overflow: hidden; vertical-align: top; }
+  .hm :global(.split .wi) { display: inline-block; transform: translateY(115%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .hm :global(.split.on .wi) { transform: none; }
+
+  @media (max-width: 900px) {
+    .hm-world { flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 30px; }
+    .hm-world-media { position: relative; right: auto; top: auto; transform: none; width: 100%; order: -1; }
+    .hm-world-copy { max-width: 100%; }
+    .hm-sv-link { grid-template-columns: 1fr auto; }
+    .hm-sv-d { display: none; }
+    .hm-hero-foot { flex-direction: column; align-items: flex-start; gap: 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hm-line { clip-path: none; transform: none; transition: none; }
+    .hm-hero-foot { opacity: 1; transform: none; }
+    .hm-circle path { stroke-dashoffset: 0; }
+    .hm-hero { height: auto; }
+    .hm-hero .scn-stage, .hm-hero-stage { position: static; height: 100vh; }
+    .hm-after { margin-top: 0; }
+    .hm :global(.split .wi) { transform: none !important; transition: none !important; }
+  }
+</style>
+
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  const phase = (p, a, b) => clamp01((p - a) / (b - a));
+
+  // --- word splitter for the .split closer ---
+  const splitWords = (root, counter) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        node.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', counter.n++);
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1) splitWords(node, counter);
+    });
+  };
+  document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: 0.35 });
+  document.querySelectorAll('.split').forEach((el) => io.observe(el));
+
+  // --- HERO scene: lines land at progress thresholds; circle draws; foot lands ---
+  const hero = document.querySelector('[data-scene="hero"]');
+  const lines = hero ? [...hero.querySelectorAll('.hm-line')] : [];
+  const circlePath = hero && hero.querySelector('.hm-circle path');
+  const heroFoot = hero && hero.querySelector('.hm-hero-foot');
+  if (circlePath) {
+    const len = circlePath.getTotalLength();
+    circlePath.style.setProperty('--len', len);
+    circlePath.style.setProperty('--off', len);
+  }
+
+  // --- WORK worlds: image travels slower than the band (0.5x law) ---
+  const worlds = [...document.querySelectorAll('[data-world]')];
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      if (hero) {
+        const r = hero.getBoundingClientRect();
+        const p = clamp01(-r.top / (hero.offsetHeight - innerHeight * 2));
+        lines.forEach((l, i) => l.classList.toggle('on', p > 0.04 + i * 0.16));
+        if (circlePath) {
+          const len = circlePath.getTotalLength();
+          circlePath.style.setProperty('--off', String(len * (1 - phase(p, 0.42, 0.72))));
+        }
+        if (heroFoot) heroFoot.classList.toggle('on', p > 0.62);
+      }
+      worlds.forEach((w) => {
+        const r = w.getBoundingClientRect();
+        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight; // -.. around center
+        const img = w.querySelector('[data-media] img');
+        if (img) img.style.setProperty('--py', `${c * 9 - 9}%`);
+      });
+      ticking = false;
+    });
+  };
+  if (!reduced) {
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  } else {
+    lines.forEach((l) => l.classList.add('on'));
+    if (heroFoot) heroFoot.classList.add('on');
+  }
+
+  // --- Showreel: scroll-zoom (carried over from the current home) ---
+  (function () {
+    const section = document.querySelector('.showreel');
+    const zoom = document.getElementById('reelZoom');
+    if (!section || !zoom) return;
+    if (reduced) { zoom.style.transform = 'scale(1)'; return; }
+    const MIN = 0.4;
+    let t2 = false;
+    function update() {
+      const r = section.getBoundingClientRect();
+      const vh = innerHeight;
+      const range = r.height - vh;
+      let p = range > 0 ? (-r.top) / range : 0;
+      p = Math.max(0, Math.min(1, p));
+      const zp = Math.min(1, p / 0.6);
+      const e = 1 - Math.pow(1 - zp, 3);
+      zoom.style.transform = 'scale(' + (MIN + (1 - MIN) * e).toFixed(3) + ')';
+      t2 = false;
+    }
+    addEventListener('scroll', () => { if (!t2) { t2 = true; requestAnimationFrame(update); } }, { passive: true });
+    addEventListener('resize', () => { if (!t2) { t2 = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  })();
+
+  // --- YouTube control: hero loop + reel controls (same behavior as home) ---
+  (function () {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+    let heroP, reel;
+    (window as any).onYouTubeIframeAPIReady = function () {
+      const YT = (window as any).YT;
+      heroP = new YT.Player('heroVideo', {
+        events: {
+          onStateChange: (e: any) => { if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(6, true); e.target.playVideo(); } },
+        },
+      });
+      const reelEl = document.querySelector('.reel-frame-wrap');
+      reel = new YT.Player('reelVideo', {
+        events: {
+          onStateChange: (e: any) => {
+            if (reelEl) (reelEl as HTMLElement).dataset.playing = (e.data === YT.PlayerState.PLAYING) ? 'true' : 'false';
+            if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(6, true); e.target.playVideo(); }
+          },
+        },
+      });
+      const playBtn = document.getElementById('reelPlay');
+      const audioBtn = document.getElementById('reelAudio');
+      const fsBtn = document.getElementById('reelFs');
+      const playToggle = () => {
+        const st = reel.getPlayerState();
+        if (st === YT.PlayerState.PLAYING) { reel.pauseVideo(); }
+        else { reel.playVideo(); reel.unMute(); audioBtn && audioBtn.setAttribute('aria-pressed', 'true'); }
+      };
+      playBtn && playBtn.addEventListener('click', playToggle);
+      audioBtn && audioBtn.addEventListener('click', () => {
+        if (reel.isMuted()) { reel.unMute(); audioBtn.setAttribute('aria-pressed', 'true'); }
+        else { reel.mute(); audioBtn.setAttribute('aria-pressed', 'false'); }
+      });
+      fsBtn && fsBtn.addEventListener('click', () => {
+        const f = document.querySelector('.reel-frame iframe');
+        if (f && (f as any).requestFullscreen) (f as any).requestFullscreen();
+      });
+    };
+  })();
+</script>
