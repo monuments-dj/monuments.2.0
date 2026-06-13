@@ -1,0 +1,280 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// === BLUE CROSS REIMAGINED — /lab/blue-cross ===
+// The exoape-columbia editorial model (REFERENCES.md motion map) on DJ's real
+// campaign: chapter kickers + narrow columns, color-blocked chapters, a pinned
+// insight scene, a drifting collage, the full frame wall, and the portal-grow
+// next-project ending (replaces the old forced next-link). Copy = DJ's own
+// case-study text, restructured into chapters.
+
+const nums = [2, 3, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28];
+const g = Object.fromEntries(nums.map((n) => [n, `/case-studies/blue-cross/gallery/bci-${String(n).padStart(2, '0')}.jpg`]));
+const wall = nums.map((n) => g[n]);
+const collage = [
+  { src: g[27], w: 30, x: 4,  y: 0,   v: 4 },   // bubbles
+  { src: g[24], w: 38, x: 40, y: 12,  v: 9 },   // reading
+  { src: g[13], w: 24, x: 72, y: 4,   v: 6 },   // checkers
+  { src: g[18], w: 30, x: 14, y: 52,  v: 8 },   // florist
+  { src: g[11], w: 40, x: 52, y: 58,  v: 5 },   // sunset pour
+];
+---
+<Base title="Blue Cross — a campaign built on people — monuments">
+  <main class="bcx">
+
+    <!-- HERO CHAPTER (dark) -->
+    <header class="bcx-hero">
+      <img class="bcx-hero-img" src={g[2]} alt="Blue Cross of Idaho campaign, Boise firefighter" data-drift="6" />
+      <div class="bcx-hero-scrim" aria-hidden="true"></div>
+      <div class="bcx-hero-inner">
+        <p class="bcx-eyebrow fade">Blue Cross of Idaho · creative direction</p>
+        <h1 class="bcx-h1 split">A campaign built <em>on people.</em></h1>
+        <p class="bcx-hero-meta fade">2020 – 2024 · statewide · licensing extended on results</p>
+      </div>
+    </header>
+
+    <!-- CHAPTER 01 — THE BRIEF (cream) -->
+    <section class="bcx-ch bcx-ch-cream">
+      <div class="bcx-cols">
+        <p class="bcx-kicker fade">01 · The brief</p>
+        <div class="bcx-col fade">
+          <p>Blue Cross needed to develop a campaign that authentically represented their most valued asset: their customers. They wanted to highlight the diversity and individuality of their customer base in a relatable, human way while reinforcing their brand's commitment to serving real people.</p>
+          <p>The challenge was to create visuals that would resonate emotionally with audiences, capturing everyday moments in a variety of settings.</p>
+        </div>
+      </div>
+      <figure class="bcx-wide fade">
+        <img src={g[26]} alt="Blue Cross campaign, family dinner" loading="lazy" data-drift="8" />
+      </figure>
+    </section>
+
+    <!-- PINNED INSIGHT SCENE (BCBS deep blue) -->
+    <section class="bcx-insight scn" data-scene="insight">
+      <div class="scn-stage bcx-insight-stage">
+        <p class="bcx-insight-kicker">The insight</p>
+        <h2 class="bcx-insight-line" data-iwords>Health insurance isn't about coverage. It's about <em>knowing people
+          <svg class="bcx-stroke" viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M5 9 C70 4, 180 12, 295 6" /></svg>
+        </em> as individuals.</h2>
+      </div>
+    </section>
+
+    <!-- CHAPTER 02 — THE WORK (cream, drifting collage) -->
+    <section class="bcx-ch bcx-ch-cream bcx-over">
+      <div class="bcx-cols">
+        <p class="bcx-kicker fade">02 · The work</p>
+        <div class="bcx-col fade">
+          <p>In partnership with OMEK agency, I helped with creative direction and assisted in execution of the campaign, from initial concept through final image selection.</p>
+          <p>Over the course of a week, we captured authentic moments in a variety of locations, including local shops, homes, and outdoor areas, highlighting the personal connection Blue Cross has with its customers.</p>
+        </div>
+      </div>
+      <div class="bcx-collage">
+        {collage.map((c) => (
+          <figure class="bcx-cell" style={`--w:${c.w}%; --x:${c.x}%; --y:${c.y}%`}>
+            <img src={c.src} alt="Blue Cross of Idaho campaign still" loading="lazy" data-drift={String(c.v)} />
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <!-- CHAPTER 03 — THE RUN (blue stats band) -->
+    <section class="bcx-run">
+      <div class="bcx-run-inner">
+        <p class="bcx-kicker fade">03 · The run</p>
+        <div class="bcx-stats">
+          <div class="bcx-stat fade"><span class="bcx-stat-n">4 yrs</span><span class="bcx-stat-l">in market, 2020 to 2024</span></div>
+          <div class="bcx-stat fade"><span class="bcx-stat-n">100+</span><span class="bcx-stat-l">frames delivered statewide</span></div>
+          <div class="bcx-stat fade"><span class="bcx-stat-n">2x</span><span class="bcx-stat-l">licensing extended on results</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE WALL (cream, every frame) -->
+    <section class="bcx-ch bcx-ch-cream">
+      <div class="bcx-cols">
+        <p class="bcx-kicker fade">04 · Every frame</p>
+        <div class="bcx-col fade"><p>The full campaign set. Real people, real places, shot to feel like neither was staged.</p></div>
+      </div>
+      <div class="bcx-wall">
+        {wall.map((src) => (
+          <figure class="bcx-brick fade"><img src={src} alt="Blue Cross of Idaho campaign still" loading="lazy" /></figure>
+        ))}
+      </div>
+    </section>
+
+    <!-- NEXT PROJECT — portal grow (the creative next-transition) -->
+    <section class="bcx-next" data-portal>
+      <div class="bcx-next-stage">
+        <p class="bcx-kicker bcx-next-k">Next project</p>
+        <a class="bcx-next-card" href="/work/waffle-me-up" data-card>
+          <img src="/case-studies/waffle-me-up/cover.jpg" alt="Waffle Me Up" data-pimg />
+          <span class="bcx-next-scrim" aria-hidden="true"></span>
+          <span class="bcx-next-title">Waffle Me Up <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+</Base>
+
+<style>
+  .bcx { background: var(--black); color: var(--white); overflow-x: clip; }
+  .bcx-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(252,252,252,0.6); }
+  .bcx-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #e0322d; }
+
+  /* HERO */
+  .bcx-hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden; }
+  .bcx-hero-img { position: absolute; inset: -8% 0; width: 100%; height: 116%; object-fit: cover; }
+  .bcx-hero-scrim { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(13,15,20,0.35), rgba(13,15,20,0.75)); }
+  .bcx-hero-inner { position: relative; z-index: 2; width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad) 9vh; }
+  .bcx-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(44px, 7vw, 110px); line-height: 1; letter-spacing: -0.03em; max-width: 13ch; margin-top: 18px; }
+  .bcx-h1 em { font-style: italic; color: var(--accent); }
+  .bcx-hero-meta { margin-top: 24px; font-size: 13px; font-weight: 300; color: rgba(252,252,252,0.7); }
+
+  /* CHAPTERS (cream) */
+  .bcx-ch-cream { background: var(--white); color: #141519; }
+  .bcx-ch { padding: clamp(90px, 11vw, 150px) 0; }
+  .bcx-cols { display: grid; grid-template-columns: 200px 1fr; gap: clamp(28px, 5vw, 80px); max-width: min(980px, 92vw); margin: 0 auto; padding: 0 var(--pad); align-items: start; }
+  .bcx-col p { font-size: 16px; line-height: 1.75; font-weight: 300; color: rgba(20,21,25,0.82); max-width: 54ch; }
+  .bcx-col p + p { margin-top: 1.3em; }
+  .bcx-wide { max-width: min(1180px, 94vw); margin: clamp(56px, 7vw, 100px) auto 0; padding: 0 var(--pad); overflow: hidden; }
+  .bcx-wide img { width: 100%; display: block; border-radius: 4px; }
+
+  /* PINNED INSIGHT */
+  .scn { position: relative; }
+  .scn-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  .bcx-insight { height: 280vh; z-index: 2; margin-top: 0; }
+  .bcx-insight-stage { background: #0d2440; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4vh; text-align: center; padding: 0 var(--pad); }
+  .bcx-insight-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(252,252,252,0.55); }
+  .bcx-insight-line { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 4.8vw, 72px); line-height: 1.12; letter-spacing: -0.025em; max-width: 20ch; color: var(--white); }
+  .bcx-insight-line em { font-style: italic; position: relative; white-space: nowrap; }
+  .bcx-insight-line :global(.w) { display: inline-block; overflow: hidden; vertical-align: top; }
+  .bcx-insight-line :global(.wi) { display: inline-block; transform: translateY(115%); transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .bcx-insight-line :global(.wi.on) { transform: none; }
+  .bcx-stroke { position: absolute; left: 0; bottom: -10px; width: 100%; height: 12px; overflow: visible; }
+  .bcx-stroke path { fill: none; stroke: #e0322d; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: var(--soff, 320); }
+
+  /* Post-insight chapters slide over the pinned stage */
+  .bcx-over { position: relative; z-index: 3; margin-top: -100vh; }
+
+  /* COLLAGE */
+  .bcx-collage { position: relative; max-width: min(1280px, 96vw); margin: clamp(56px, 7vw, 110px) auto 0; height: clamp(520px, 64vw, 900px); }
+  .bcx-cell { position: absolute; width: var(--w); left: var(--x); top: var(--y); margin: 0; overflow: hidden; border-radius: 4px; }
+  .bcx-cell img { width: 100%; height: auto; display: block; }
+
+  /* RUN (stats band) */
+  .bcx-run { position: relative; z-index: 3; background: #0d2440; color: var(--white); }
+  .bcx-run-inner { max-width: min(980px, 92vw); margin: 0 auto; padding: clamp(80px, 10vw, 130px) var(--pad); }
+  .bcx-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 40px; }
+  .bcx-stat { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid rgba(252,252,252,0.25); padding-top: 18px; }
+  .bcx-stat-n { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(40px, 5vw, 72px); letter-spacing: -0.03em; line-height: 1; }
+  .bcx-stat-l { font-size: 13px; font-weight: 300; color: rgba(252,252,252,0.65); }
+
+  /* WALL */
+  .bcx-wall { columns: 4; column-gap: 12px; max-width: min(1320px, 96vw); margin: clamp(56px, 7vw, 100px) auto 0; padding: 0 var(--pad); }
+  .bcx-brick { break-inside: avoid; margin: 0 0 12px; overflow: hidden; border-radius: 3px; }
+  .bcx-brick img { width: 100%; display: block; transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .bcx-brick:hover img { transform: scale(1.035); }
+
+  /* NEXT portal */
+  .bcx-next { position: relative; height: 220vh; z-index: 4; background: var(--black); }
+  .bcx-next-stage { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4vh; overflow: hidden; }
+  .bcx-next-k { color: rgba(252,252,252,0.55); }
+  .bcx-next-card { position: relative; display: block; width: 92vw; max-width: 1560px; aspect-ratio: 16/9; max-height: 78vh; overflow: hidden; border-radius: 6px; transform: scale(var(--gs, 0.45)); will-change: transform; }
+  .bcx-next-card img { width: 100%; height: 112%; object-fit: cover; display: block; transform: translateY(var(--py, -6%)); }
+  .bcx-next-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,9,12,0.6), transparent 50%); }
+  .bcx-next-title { position: absolute; left: clamp(20px, 3.2vw, 50px); bottom: clamp(18px, 3vw, 44px); font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.2vw, 64px); letter-spacing: -0.03em; color: var(--white); opacity: var(--to, 0); transform: translateY(calc((1 - var(--to, 0)) * 24px)); }
+
+  .bcx :global(.split .w) { display: inline-block; overflow: hidden; vertical-align: top; }
+  .bcx :global(.split .wi) { display: inline-block; transform: translateY(115%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .bcx :global(.split.on .wi) { transform: none; }
+
+  @media (max-width: 860px) {
+    .bcx-cols { grid-template-columns: 1fr; gap: 18px; }
+    .bcx-collage { height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 var(--pad); }
+    .bcx-cell { position: static; width: auto; }
+    .bcx-stats { grid-template-columns: 1fr; }
+    .bcx-wall { columns: 2; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bcx-insight, .bcx-next { height: auto; }
+    .bcx-over { margin-top: 0; }
+    .scn-stage, .bcx-next-stage { position: static; height: auto; padding: 14vh var(--pad); }
+    .bcx-insight-line :global(.wi) { transform: none !important; transition: none !important; }
+    .bcx-stroke path { stroke-dashoffset: 0; }
+    .bcx-next-card { transform: none; }
+    .bcx-next-title { opacity: 1; transform: none; }
+    .bcx :global(.split .wi) { transform: none !important; transition: none !important; }
+    [data-drift] { transform: none !important; }
+  }
+</style>
+
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+  const phase = (p: number, a: number, b: number) => clamp01((p - a) / (b - a));
+
+  const splitWords = (root: Node, counter: { n: number }) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && (node as Element).tagName !== 'svg' && (node as Element).tagName !== 'SVG' && !(node as Element).closest('svg')) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  document.querySelectorAll('.split, [data-iwords]').forEach((el) => splitWords(el, { n: 0 }));
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); } }), { threshold: 0.35 });
+  document.querySelectorAll('.split').forEach((el) => io.observe(el));
+
+  const insight = document.querySelector('[data-scene="insight"]') as HTMLElement;
+  const iWords = insight ? [...insight.querySelectorAll('.wi')] : [];
+  const stroke = insight && (insight.querySelector('.bcx-stroke path') as SVGPathElement | null);
+  const portal = document.querySelector('[data-portal]') as HTMLElement;
+  const drifts = [...document.querySelectorAll('[data-drift]')] as HTMLElement[];
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      if (insight) {
+        const r = insight.getBoundingClientRect();
+        const p = clamp01(-r.top / (insight.offsetHeight - innerHeight * 2));
+        iWords.forEach((w, i) => (w as HTMLElement).classList.toggle('on', phase(p, 0.05, 0.55) * iWords.length * 1.1 > i));
+        if (stroke) stroke.style.setProperty('--soff', String(320 * (1 - phase(p, 0.6, 0.85))));
+      }
+      if (portal) {
+        const r = portal.getBoundingClientRect();
+        const p = clamp01(-r.top / (portal.offsetHeight - innerHeight));
+        const card = portal.querySelector('[data-card]') as HTMLElement;
+        const ease = 1 - Math.pow(1 - phase(p, 0, 0.7), 3);
+        card.style.setProperty('--gs', String(0.45 + ease * 0.55));
+        card.style.setProperty('--to', String(phase(p, 0.25, 0.5)));
+      }
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+        const v = Number(el.dataset.drift || 6);
+        el.style.transform = `translateY(${c * -v * 6}px)`;
+      });
+      ticking = false;
+    });
+  };
+  if (!reduced) {
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  } else {
+    iWords.forEach((w) => (w as HTMLElement).classList.add('on'));
+  }
+</script>
