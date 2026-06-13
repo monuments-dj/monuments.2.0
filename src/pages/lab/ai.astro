@@ -68,7 +68,7 @@ const proof = [
     <!-- HERO -->
     <header class="ai-hero">
       <p class="ai-eyebrow fade">AI audits · automation · deployment</p>
-      <h1 class="ai-h1 fade">Where is your brand now, and <em>where could it be?</em></h1>
+      <h1 class="ai-h1 split">Where is your brand now, and <em>where could it be?</em></h1>
       <p class="ai-lede fade">AI for businesses that do not have time to figure it out themselves. We audit what you have, build the systems you are missing, and train your team to run them.</p>
       <a class="ai-cta fade" href="/contact">Book an audit <span aria-hidden="true">↗</span></a>
     </header>
@@ -76,18 +76,18 @@ const proof = [
     <!-- THE ERA — story-first framing -->
     <section class="ai-era">
       <div class="ai-era-inner">
-        <p class="ai-era-big fade">For twenty years, this stuff was gatekept. Custom software cost six figures. Good design needed a dev team. Automation was for companies with an IT department.</p>
-        <p class="ai-era-big ai-era-accent fade">That era just ended.</p>
+        <p class="ai-era-big split">For twenty years, this stuff was gatekept. Custom software cost six figures. Good design needed a dev team. Automation was for companies with an IT department.</p>
+        <p class="ai-era-big ai-era-accent split">That era just ended.</p>
         <p class="ai-era-body fade">New tools ship every week, and nobody sent the memo. It is a lot to take in, even for us, and this is our job. That is the point. You should not have to keep up with all of it. That is what we are for.</p>
       </div>
     </section>
 
     <!-- THE QUESTIONS — scroll moments, one per viewport -->
     <section class="ai-q" data-q>
-      <h2 class="ai-q-text">What are you <em>leaving on the table?</em></h2>
+      <h2 class="ai-q-text split">What are you <em>leaving on the table?</em></h2>
     </section>
     <section class="ai-q" data-q>
-      <h2 class="ai-q-text">Is your brand <em>getting left behind?</em></h2>
+      <h2 class="ai-q-text split">Is your brand <em>getting left behind?</em></h2>
     </section>
 
     <!-- SERVICES — tilted cards (lusion-pattern, monuments-flavored) -->
@@ -118,17 +118,17 @@ const proof = [
     <section class="ai-who">
       <div class="ai-who-inner">
         <p class="ai-eyebrow fade">Who this is for</p>
-        <p class="ai-who-big fade">CPAs. Agencies. Service businesses. You are great at the work. The tech is the problem.</p>
+        <p class="ai-who-big split">CPAs. Agencies. Service businesses. You are great at the work. The tech is the problem.</p>
         <p class="ai-era-body fade">Our job is creative direction: take in a huge amount of input, filter it, and make the call. That is exactly what this moment needs. We bring your brand into the modern age without burying you in tools you will never open again.</p>
       </div>
     </section>
 
     <!-- PROOF — this site is the demo -->
     <section class="ai-proof">
-      <div class="ai-proof-head fade">
-        <p class="ai-eyebrow">Proof, not promises</p>
-        <h2 class="ai-proof-h">This site is the demo.</h2>
-        <p class="ai-era-body">Version one of monuments.cc took six months by hand. The site you are on now is being rebuilt with AI in a fraction of that, and it is better. Same eye. Faster hands. That is what we are offering.</p>
+      <div class="ai-proof-head">
+        <p class="ai-eyebrow fade">Proof, not promises</p>
+        <h2 class="ai-proof-h split">This site is the demo.</h2>
+        <p class="ai-era-body fade">Version one of monuments.cc took six months by hand. The site you are on now is being rebuilt with AI in a fraction of that, and it is better. Same eye. Faster hands. That is what we are offering.</p>
       </div>
       <div class="ai-strip" data-strip>
         {proof.map((src) => (
@@ -140,7 +140,7 @@ const proof = [
 
     <!-- CTA -->
     <section class="ai-end">
-      <p class="ai-end-big fade">Let's see what you're leaving on the table.</p>
+      <p class="ai-end-big split">Let's see what you're leaving on the table.</p>
       <a class="ai-cta ai-cta-big fade" href="/contact">Book the audit <span aria-hidden="true">↗</span></a>
       <p class="ai-end-small fade">$5,000, two weeks, plain English. If there is nothing there, we will tell you.</p>
     </section>
@@ -151,6 +151,15 @@ const proof = [
 <style>
   .ai-page { background: var(--black); color: var(--white); overflow-x: clip; }
   .ai-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(252,252,252,0.45); }
+
+  /* SPLIT — word-mask reveal for display copy (the exoape/tinywins "parallax
+     language"): each word rises out of its own clipped line on scroll-in. */
+  .ai-page :global(.split .w) { display: inline-block; overflow: hidden; vertical-align: top; }
+  .ai-page :global(.split .wi) { display: inline-block; transform: translateY(115%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); will-change: transform; }
+  .ai-page :global(.split.on .wi) { transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .ai-page :global(.split .wi) { transform: none; transition: none; }
+  }
 
   /* INTRO */
   .ai-intro { position: fixed; inset: 0; z-index: 3000; background: var(--white); display: flex; align-items: center; justify-content: center; transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1); }
@@ -238,6 +247,35 @@ const proof = [
   } else if (intro) {
     intro.classList.add('gone');
   }
+
+  // --- Split: wrap each word of display copy in a masked span, reveal on
+  //     scroll-in with a per-word stagger. Recurses into <em> so accent
+  //     words keep their styling. ---
+  const splitWords = (root, counter) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        node.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', counter.n++);
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  const splits = [...document.querySelectorAll('.split')];
+  splits.forEach((el) => splitWords(el, { n: 0 }));
+  const splitIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('on'); splitIO.unobserve(e.target); } });
+  }, { threshold: 0.35 });
+  splits.forEach((el) => splitIO.observe(el));
 
   // --- Question sections: gentle scroll parallax (text drifts against scroll). ---
   const qs = [...document.querySelectorAll('[data-q] .ai-q-text')];
