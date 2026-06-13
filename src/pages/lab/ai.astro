@@ -1,0 +1,268 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// === AI LAB — /lab/ai — direction 1 ===
+// The AI consulting page: audit → automate → deploy for non-technical service
+// businesses. References: tinywins (kinetic load intro), lusion about (tilted
+// service cards), exoape (dark cinematic pacing). See REFERENCES.md.
+// Copy = DJ's positioning (2026-06-12): $5k audit, "what are you leaving on
+// the table", the going-wild era framing. Plain-spoken voice, no em dashes.
+
+const services = [
+  {
+    key: 'audit',
+    n: '01',
+    title: 'Audit',
+    tilt: -3,
+    price: '$5,000 flat',
+    lede: 'Where is your brand now, and where could it be? A complete read of your business, your tools, and what AI could actually do for you. Two weeks. Plain English. No jargon.',
+    items: ['Brand and tech-stack review', 'Opportunity map', 'Competitor scan', 'Tool recommendations', 'A roadmap you can act on'],
+  },
+  {
+    key: 'automate',
+    n: '02',
+    title: 'Automate',
+    tilt: 2,
+    price: null,
+    lede: 'The busywork goes away. We build the systems that handle intake, content, reporting, and the other things eating your week.',
+    items: ['Workflow automation', 'Content systems', 'Client communications', 'Internal tools'],
+  },
+  {
+    key: 'deploy',
+    n: '03',
+    title: 'Deploy',
+    tilt: -2,
+    price: null,
+    lede: 'Ship it, and keep it running. Your team gets trained, everything gets documented, and you get a direct line to me.',
+    items: ['Team training', 'Documentation', 'Support retainer', 'Quarterly reviews'],
+  },
+];
+
+// Work imagery for the proof strip (real campaign stills already in /public).
+const proof = [
+  '/case-studies/blue-cross/gallery/bci-02.jpg',
+  '/case-studies/sony-this-moment/gallery/tm-09.jpg',
+  '/case-studies/blue-cross/gallery/bci-18.jpg',
+  '/case-studies/sony-this-moment/gallery/tm-05.jpg',
+  '/case-studies/blue-cross/gallery/bci-13.jpg',
+];
+---
+<Base title="AI, without the overwhelm — monuments">
+
+  <!-- KINETIC LOAD INTRO — monuments take on the tinywins expand/multiply.
+       The word stacks and multiplies downward, holds a beat, then the curtain
+       lifts into the page. Skipped entirely under prefers-reduced-motion. -->
+  <div class="ai-intro" id="aiIntro" aria-hidden="true">
+    <div class="ai-intro-stack">
+      <span class="ai-intro-eyebrow">the tools just went</span>
+      <span class="ai-intro-word" style="--i:0">WILD</span>
+      <span class="ai-intro-word" style="--i:1">WILD</span>
+      <span class="ai-intro-word" style="--i:2">WILD</span>
+      <span class="ai-intro-word" style="--i:3">WILD</span>
+      <span class="ai-intro-word" style="--i:4">WILD</span>
+    </div>
+  </div>
+
+  <main class="ai-page">
+
+    <!-- HERO -->
+    <header class="ai-hero">
+      <p class="ai-eyebrow fade">AI audits · automation · deployment</p>
+      <h1 class="ai-h1 fade">Where is your brand now, and <em>where could it be?</em></h1>
+      <p class="ai-lede fade">AI for businesses that do not have time to figure it out themselves. I audit what you have, build the systems you are missing, and train your team to run them.</p>
+      <a class="ai-cta fade" href="/contact">Book an audit <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <!-- THE ERA — story-first framing -->
+    <section class="ai-era">
+      <div class="ai-era-inner">
+        <p class="ai-era-big fade">For twenty years, this stuff was gatekept. Custom software cost six figures. Good design needed a dev team. Automation was for companies with an IT department.</p>
+        <p class="ai-era-big ai-era-accent fade">That era just ended.</p>
+        <p class="ai-era-body fade">New tools ship every week, and nobody sent the memo. It is a lot to take in, even for me, and this is my job. That is the point. You should not have to keep up with all of it. You need one person who does.</p>
+      </div>
+    </section>
+
+    <!-- THE QUESTIONS — scroll moments, one per viewport -->
+    <section class="ai-q" data-q>
+      <h2 class="ai-q-text">What are you <em>leaving on the table?</em></h2>
+    </section>
+    <section class="ai-q" data-q>
+      <h2 class="ai-q-text">Is your brand <em>getting left behind?</em></h2>
+    </section>
+
+    <!-- SERVICES — tilted cards (lusion-pattern, monuments-flavored) -->
+    <section class="ai-sv">
+      <div class="ai-sv-head fade">
+        <p class="ai-eyebrow">How it works</p>
+        <h2 class="ai-sv-h">Audit. Automate. Deploy.</h2>
+      </div>
+      <div class="ai-cards">
+        {services.map((s) => (
+          <article class="ai-card fade" style={`--tilt:${s.tilt}deg`}>
+            <div class="ai-card-top">
+              <span class="ai-card-n">{s.n}</span>
+              <h3 class="ai-card-t">{s.title}</h3>
+              {s.price && <span class="ai-card-price">{s.price}</span>}
+            </div>
+            <p class="ai-card-lede">{s.lede}</p>
+            <ul class="ai-card-list">
+              {s.items.map((i) => <li>{i}</li>)}
+            </ul>
+            <span class="ai-card-mirror" aria-hidden="true">{s.title}</span>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- WHO IT'S FOR -->
+    <section class="ai-who">
+      <div class="ai-who-inner">
+        <p class="ai-eyebrow fade">Who this is for</p>
+        <p class="ai-who-big fade">CPAs. Agencies. Service businesses. You are great at the work. The tech is the problem.</p>
+        <p class="ai-era-body fade">My job is creative direction: take in a huge amount of input, filter it, and make the call. That is exactly what this moment needs. I bring your brand into the modern age without burying you in tools you will never open again.</p>
+      </div>
+    </section>
+
+    <!-- PROOF — this site is the demo -->
+    <section class="ai-proof">
+      <div class="ai-proof-head fade">
+        <p class="ai-eyebrow">Proof, not promises</p>
+        <h2 class="ai-proof-h">This site is the demo.</h2>
+        <p class="ai-era-body">Version one of monuments.cc took me six months by hand. The site you are on now is being rebuilt with AI in a fraction of that, and it is better. Same eye. Faster hands. That is what I am offering.</p>
+      </div>
+      <div class="ai-strip" data-strip>
+        {proof.map((src) => (
+          <img src={src} alt="Monuments campaign work" loading="lazy" />
+        ))}
+      </div>
+      <p class="ai-strip-cap fade">Sony. Blue Cross. Intel. Big-brand strategy, done with the old tools. Imagine the new ones.</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="ai-end">
+      <p class="ai-end-big fade">Let's see what you're leaving on the table.</p>
+      <a class="ai-cta ai-cta-big fade" href="/contact">Book the audit <span aria-hidden="true">↗</span></a>
+      <p class="ai-end-small fade">$5,000, two weeks, plain English. If there is nothing there, I will tell you.</p>
+    </section>
+
+  </main>
+</Base>
+
+<style>
+  .ai-page { background: var(--black); color: var(--white); overflow-x: clip; }
+  .ai-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(252,252,252,0.45); }
+
+  /* INTRO */
+  .ai-intro { position: fixed; inset: 0; z-index: 3000; background: var(--white); display: flex; align-items: center; justify-content: center; transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1); }
+  .ai-intro.lift { transform: translateY(-100%); }
+  .ai-intro.gone { display: none; }
+  .ai-intro-stack { display: flex; flex-direction: column; align-items: center; line-height: 0.82; }
+  .ai-intro-eyebrow { font-size: clamp(13px, 1.4vw, 18px); letter-spacing: 0.3em; text-transform: uppercase; color: #141519; margin-bottom: 3vh; opacity: 0; animation: aiFadeIn 0.5s ease 0.15s forwards; }
+  .ai-intro-word { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(70px, 13vw, 190px); letter-spacing: -0.03em; color: #141519; clip-path: inset(0 0 100% 0); animation: aiWordIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) calc(0.25s + var(--i) * 0.12s) forwards; }
+  .ai-intro-word:nth-child(odd) { color: #e0322d; }
+  @keyframes aiWordIn { to { clip-path: inset(0 0 -10% 0); } }
+  @keyframes aiFadeIn { to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .ai-intro { display: none; } }
+
+  /* HERO */
+  .ai-hero { min-height: 86vh; display: flex; flex-direction: column; justify-content: center; max-width: var(--wrap); margin: 0 auto; padding: 160px var(--pad) 80px; }
+  .ai-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(44px, 7.2vw, 104px); line-height: 1.02; letter-spacing: -0.03em; max-width: 14ch; margin-top: 26px; }
+  .ai-h1 em { font-style: italic; color: var(--accent); }
+  .ai-lede { margin-top: 34px; max-width: 520px; font-size: 16px; line-height: 1.7; font-weight: 300; color: rgba(252,252,252,0.78); }
+  .ai-cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 44px; width: fit-content; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); background: var(--white); padding: 18px 30px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease; }
+  .ai-cta:hover { gap: 18px; transform: translateY(-2px); }
+
+  /* ERA */
+  .ai-era { background: var(--white); color: #141519; }
+  .ai-era-inner { max-width: var(--wrap); margin: 0 auto; padding: clamp(110px, 14vw, 190px) var(--pad); }
+  .ai-era-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(26px, 3.4vw, 48px); line-height: 1.18; letter-spacing: -0.02em; max-width: 24ch; }
+  .ai-era-big + .ai-era-big { margin-top: 1.2em; }
+  .ai-era-accent { color: #e0322d; font-weight: 500; }
+  .ai-era-body { margin-top: 40px; max-width: 480px; font-size: 16px; line-height: 1.75; font-weight: 300; color: rgba(20,21,25,0.75); }
+  .ai-era .ai-era-body { color: rgba(20,21,25,0.75); }
+
+  /* QUESTIONS */
+  .ai-q { min-height: 78vh; display: flex; align-items: center; justify-content: center; padding: 0 var(--pad); }
+  .ai-q-text { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(38px, 6vw, 88px); line-height: 1.05; letter-spacing: -0.025em; text-align: center; max-width: 16ch; will-change: transform; }
+  .ai-q-text em { font-style: italic; color: var(--accent); display: inline-block; }
+
+  /* SERVICES */
+  .ai-sv { max-width: var(--wrap); margin: 0 auto; padding: clamp(90px, 11vw, 150px) var(--pad); }
+  .ai-sv-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(36px, 5vw, 72px); letter-spacing: -0.025em; margin-top: 18px; }
+  .ai-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 2.6vw, 36px); margin-top: clamp(48px, 6vw, 80px); }
+  .ai-card { position: relative; background: var(--white); color: #141519; border-radius: 14px; padding: clamp(28px, 2.8vw, 42px); transform: rotate(var(--tilt)); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden; display: flex; flex-direction: column; min-height: 480px; }
+  .ai-card:hover { transform: rotate(0deg) translateY(-8px); }
+  .ai-card-top { display: flex; align-items: baseline; gap: 14px; }
+  .ai-card-n { font-size: 12px; letter-spacing: 0.18em; color: rgba(20,21,25,0.4); }
+  .ai-card-t { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(26px, 2.6vw, 38px); letter-spacing: -0.02em; }
+  .ai-card-price { margin-left: auto; font-size: 13px; font-weight: 500; color: #e0322d; white-space: nowrap; }
+  .ai-card-lede { margin-top: 18px; font-size: 14.5px; line-height: 1.65; font-weight: 300; color: rgba(20,21,25,0.8); }
+  .ai-card-list { list-style: none; margin: 22px 0 56px; padding: 0; }
+  .ai-card-list li { font-size: 14px; padding: 11px 0; border-bottom: 1px dotted rgba(20,21,25,0.25); }
+  .ai-card-list li:last-child { border-bottom: 0; }
+  .ai-card-mirror { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%) rotate(180deg); font-family: 'Inter', sans-serif; font-weight: 500; font-size: 20px; letter-spacing: -0.02em; color: rgba(20,21,25,0.22); }
+
+  /* WHO */
+  .ai-who { background: var(--c-slate); }
+  .ai-who-inner { max-width: var(--wrap); margin: 0 auto; padding: clamp(100px, 13vw, 170px) var(--pad); }
+  .ai-who-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 4vw, 56px); line-height: 1.15; letter-spacing: -0.02em; max-width: 22ch; margin-top: 22px; }
+  .ai-who .ai-era-body { color: rgba(252,252,252,0.7); }
+
+  /* PROOF */
+  .ai-proof { padding: clamp(100px, 12vw, 160px) 0; }
+  .ai-proof-head { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); }
+  .ai-proof-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(36px, 5.4vw, 76px); letter-spacing: -0.025em; margin-top: 18px; }
+  .ai-proof .ai-era-body { color: rgba(252,252,252,0.7); }
+  .ai-strip { display: flex; gap: 14px; margin-top: clamp(48px, 6vw, 72px); padding: 0 var(--pad); overflow: hidden; }
+  .ai-strip img { width: clamp(220px, 24vw, 360px); aspect-ratio: 3/2; object-fit: cover; border-radius: 4px; flex: 0 0 auto; will-change: transform; }
+  .ai-strip-cap { max-width: var(--wrap); margin: 28px auto 0; padding: 0 var(--pad); font-size: 13px; letter-spacing: 0.04em; color: rgba(252,252,252,0.5); }
+
+  /* END CTA */
+  .ai-end { min-height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px var(--pad); }
+  .ai-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(34px, 5vw, 72px); letter-spacing: -0.025em; line-height: 1.08; max-width: 18ch; }
+  .ai-cta-big { margin-top: 48px; }
+  .ai-end-small { margin-top: 26px; font-size: 14px; font-weight: 300; color: rgba(252,252,252,0.55); }
+
+  @media (max-width: 900px) {
+    .ai-cards { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .ai-card { min-height: 0; }
+  }
+</style>
+
+<script>
+  // --- Load intro: play once per visit, lift the curtain, clean up. ---
+  const intro = document.getElementById('aiIntro');
+  if (intro && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setTimeout(() => intro.classList.add('lift'), 1750);
+    setTimeout(() => intro.classList.add('gone'), 2600);
+  } else if (intro) {
+    intro.classList.add('gone');
+  }
+
+  // --- Question sections: gentle scroll parallax (text drifts against scroll). ---
+  const qs = [...document.querySelectorAll('[data-q] .ai-q-text')];
+  const strip = document.querySelector('[data-strip]');
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const vh = innerHeight;
+      qs.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        const p = (r.top + r.height / 2 - vh / 2) / vh; // -0.5..0.5 around center
+        el.style.transform = `translateY(${p * -60}px)`;
+      });
+      if (strip) {
+        const r = strip.getBoundingClientRect();
+        const p = Math.min(1, Math.max(0, 1 - r.top / vh));
+        strip.style.transform = `translateX(${p * -120}px)`;
+      }
+      ticking = false;
+    });
+  };
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>
