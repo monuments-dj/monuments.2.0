@@ -165,7 +165,8 @@ const services = [
          on hover. Each row reveals on scroll.
          ============================================================ -->
     <section class="hm-sv">
-      <p class="hm-eyebrow fade">What we do</p>
+      <div class="hm-sv-inner">
+      <p class="hm-eyebrow hm-sv-eyebrow fade">What we do</p>
       <ul class="hm-sv-list">
         {services.map((s) => (
           <li class="hm-sv-row fade">
@@ -183,6 +184,7 @@ const services = [
           </li>
         ))}
       </ul>
+      </div>
     </section>
 
     <!-- ============================================================
@@ -302,18 +304,20 @@ const services = [
   .hm-worlds-all { display: flex; justify-content: center; padding: 14vh var(--pad); background: var(--bg); }
 
   /* ===================== SERVICES rows ===================== */
-  .hm-sv { max-width: var(--wrap); margin: 0 auto; padding: clamp(90px, 11vw, 150px) var(--pad); }
+  .hm-sv { background: var(--paper); color: var(--ink); padding: clamp(90px, 11vw, 150px) 0; }
+  .hm-sv-inner { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); }
+  .hm-sv-eyebrow { color: rgb(var(--ink-rgb) / 0.5); }
   .hm-sv-list { list-style: none; margin: 34px 0 0; padding: 0; }
-  .hm-sv-row { border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }
-  .hm-sv-row:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.14); }
-  .hm-sv-link { display: grid; grid-template-columns: minmax(220px, 0.55fr) 1fr auto; align-items: baseline; gap: 28px; padding: 26px 6px; color: var(--fg); text-decoration: none; transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .hm-sv-row { border-top: 1px solid rgb(var(--ink-rgb) / 0.16); }
+  .hm-sv-row:last-child { border-bottom: 1px solid rgb(var(--ink-rgb) / 0.16); }
+  .hm-sv-link { display: grid; grid-template-columns: minmax(220px, 0.55fr) 1fr auto; align-items: baseline; gap: 28px; padding: 26px 6px; color: var(--ink); text-decoration: none; transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
   .hm-sv-link:hover { padding-left: 22px; }
   .hm-sv-t { position: relative; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(22px, 2.4vw, 34px); letter-spacing: -0.02em; width: fit-content; }
   .hm-sv-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-left: 8px; }
   .hm-sv-stroke { position: absolute; left: 0; bottom: -6px; width: 100%; height: 10px; overflow: visible; }
   .hm-sv-stroke path { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: 320; transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1); }
   .hm-sv-link:hover .hm-sv-stroke path { stroke-dashoffset: 0; }
-  .hm-sv-d { font-size: 14px; line-height: 1.6; font-weight: 300; color: rgb(var(--fg-rgb) / 0.62); max-width: 56ch; }
+  .hm-sv-d { font-size: 14px; line-height: 1.6; font-weight: 300; color: rgb(var(--ink-rgb) / 0.62); max-width: 56ch; }
   .hm-sv-arrow { font-size: 20px; opacity: 0.45; transition: opacity 0.25s, transform 0.3s; }
   .hm-sv-link:hover .hm-sv-arrow { opacity: 1; transform: translateX(6px); }
 
