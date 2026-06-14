@@ -1,0 +1,91 @@
+---
+// The "Play / Reel" showreel reveal: a full-bleed dark stage that PINS while a vertical
+// scroll scrubs the reveal — the Play/Reel words slide in from the sides and a small film
+// panel scales up to take over the viewport. GSAP ScrollTrigger, bridged to Lenis via
+// gsap-lenis.js (waits for window.lenis, so it is safe in the prod bundle script order).
+// Colours are hard-coded dark (it ships on pages without the lab --bg/--fg tokens).
+// Poster still for now (click is a visual cue); pass a self-hosted MP4 later for real play.
+interface Props {
+  poster?: string;
+  kicker?: string;
+  caption?: string;
+  leftWord?: string;
+  rightWord?: string;
+}
+const {
+  poster = '/case-studies/sony-this-moment/gallery/tm-04.jpg',
+  kicker = 'Work in motion',
+  caption = 'Press play, and turn it up. Half the story is in the sound.',
+  leftWord = 'Play',
+  rightWord = 'Reel',
+} = Astro.props;
+---
+<section class="rr-section" aria-label="Showreel">
+  <div class="rr-stage" data-rr-stage>
+    <p class="rr-kicker"><span class="rr-mark" aria-hidden="true">+</span>{kicker}</p>
+    <button class="rr-panel" type="button" aria-label="Play reel" data-rr-panel>
+      <img class="rr-poster" src={poster} alt="Showreel still" loading="lazy" decoding="async" />
+    </button>
+    <span class="rr-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z" /></svg></span>
+    <span class="rr-word rr-word-l">{leftWord}</span>
+    <span class="rr-word rr-word-r">{rightWord}</span>
+    <p class="rr-cap">{caption}</p>
+  </div>
+</section>
+
+<style>
+  .rr-section { background: #0b0b0d; color: #f4efe6; }
+  .rr-stage { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; }
+  .rr-kicker { position: absolute; top: clamp(28px, 6vh, 64px); left: 0; right: 0; z-index: 4; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13px; letter-spacing: 0.04em; color: rgb(244 239 230 / 0.7); margin: 0; }
+  .rr-mark { color: #ff3b2e; font-weight: 500; }
+  .rr-panel { position: absolute; inset: 0; margin: auto; width: 100vw; aspect-ratio: 16 / 10; padding: 0; border: 0; cursor: pointer; overflow: hidden; border-radius: 8px; background: #000;
+    transform: scale(0.26); transform-origin: center center; will-change: transform; z-index: 2; box-shadow: 0 30px 70px rgb(0 0 0 / 0.5); }
+  .rr-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .rr-play { position: absolute; inset: 0; margin: auto; width: 60px; height: 60px; border-radius: 50%; z-index: 3; pointer-events: none; display: flex; align-items: center; justify-content: center; color: #f4efe6; background: rgb(244 239 230 / 0.16); border: 1px solid rgb(244 239 230 / 0.55); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+  .rr-word { position: absolute; top: 50%; z-index: 3; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(40px, 10vw, 144px); line-height: 0.9; letter-spacing: -0.035em; white-space: nowrap; opacity: 0; will-change: transform, opacity; color: #f4efe6; }
+  .rr-word-l { left: clamp(16px, 8vw, 150px); }
+  .rr-word-r { right: clamp(16px, 8vw, 150px); }
+  .rr-cap { position: absolute; bottom: clamp(28px, 6vh, 64px); left: 0; right: 0; z-index: 4; text-align: center; max-width: 42ch; margin: 0 auto; padding: 0 var(--pad, clamp(24px, 5vw, 40px)); font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.5; opacity: 0.72; }
+  @media (max-width: 640px) { .rr-word { font-size: clamp(30px, 12vw, 72px); } }
+</style>
+
+<script>
+  import { gsap, ScrollTrigger } from '../scripts/gsap-lenis.js';
+  (function () {
+    const stage = document.querySelector('[data-rr-stage]');
+    if (!stage) return;
+    const panel = stage.querySelector('[data-rr-panel]');
+    const wordL = stage.querySelector('.rr-word-l');
+    const wordR = stage.querySelector('.rr-word-r');
+
+    const mm = gsap.matchMedia();
+    // Full motion: pin the stage and scrub the reveal as the user scrolls through it.
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap.set([wordL, wordR], { yPercent: -50 });
+      const tl = gsap.timeline({
+        defaults: { ease: 'none' },
+        scrollTrigger: {
+          trigger: stage,
+          start: 'top top',
+          end: () => '+=' + Math.round(window.innerHeight * 2.2),
+          pin: true,
+          scrub: 0.6,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+      tl.fromTo(wordL, { xPercent: -260, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.45 }, 0)
+        .fromTo(wordR, { xPercent: 260, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.45 }, 0)
+        .fromTo(panel, { scale: 0.26 }, { scale: 1, duration: 0.55 }, 0.45)
+        .to([wordL, wordR], { autoAlpha: 0, duration: 0.25 }, 0.62);
+    });
+    // Reduced motion: a calm resting state, no pin/scroll animation.
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      gsap.set([wordL, wordR], { yPercent: -50, xPercent: 0, autoAlpha: 1 });
+      gsap.set(panel, { scale: 0.42 });
+    });
+
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+    ScrollTrigger.refresh();
+  })();
+</script>

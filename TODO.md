@@ -99,6 +99,18 @@ URL across requests until the new build is consistent before judging.
    scroller into /lab/sony-this-moment (teal fill). Copy = the real /work/flashpoint text, de-em-dashed.
    Real-Chromium verified: all sections render, concept lights, scroller fills→100% + pull-to-next, no
    console errors. NOTE: built purpose-fit (not a sony clone) since Flashpoint is a rebrand, not a film.
+8. **🚀 FIRST PROMOTION TO PRODUCTION HOME (2026-06-14, DJ's call).** Promoted the Play/Reel showreel
+   reveal from the lab onto the REAL homepage `/` (`src/pages/index.astro`), as `ReelReveal.astro`.
+   Replaced the old scroll-zoom YouTube showreel (its markup is gone; the old guarded JS self-disables;
+   dead `.showreel/.reel-*` CSS in global.css + the dead showreel/reel-control JS in index.astro can be
+   cleaned up later). Component is self-contained: hard-coded dark colours (home has no --bg/--fg
+   tokens), GSAP ScrollTrigger pin/scrub bridged to Lenis via `src/scripts/gsap-lenis.js` (the bridge
+   waits for window.lenis, so the prod script order is safe — the reel-saga fix holds). POSTER STILL
+   for now (DJ chose "replace, poster for now"); pass `video=` / a self-hosted MP4 later for real play.
+   Real-Chromium verified LOCAL: reveal pins (stageTop=0), panel scales 0.26→1, Play/Reel words slide
+   in then fade, the EXISTING rwork reel still scrubs (track -53→-1096), no console errors. ⚠️ Domain
+   monuments.cc still WordPress/untouched — this only changes the Vercel `/` build. NOT yet componentized
+   with the lab's inline reel (PatternLibrary still has its own copy; dedupe later).
 
 **New tools:** `tools/gen-palettes.mjs` (color), `tools/snap-el.mjs` (capture one element at a
 scroll offset in real Chromium), `tools/snap-themes.mjs`. The headless Claude-preview pauses rAF

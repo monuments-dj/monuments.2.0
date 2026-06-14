@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import ReelReveal from '../components/ReelReveal.astro';
 
 const testimonials = [
   { quote: "We love working with DJ and Tess. We thought we were hiring a production company and got a creative director. The thinking they bring to the room changes the whole project.", name: "AC Boise", role: "Creative Partner" },
@@ -76,36 +77,8 @@ const reel = [
     </div>
   </section>
 
-  <section class="showreel">
-    <div class="reel-stage">
-      <div class="reel-zoom" id="reelZoom">
-        <div class="reel" id="reel" data-playing="true">
-          <div class="reel-frame">
-            <iframe id="reelVideo"
-              src="https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
-              frameborder="0" allow="autoplay; encrypted-media; fullscreen" title="Showreel"></iframe>
-          </div>
-          <div class="reel-controls">
-            <button class="reel-ctrl reel-play" id="reelPlay" type="button" aria-label="Play or pause">
-              <svg class="ic-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-              <svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-            </button>
-            <button class="reel-ctrl reel-audio" id="reelAudio" type="button" aria-pressed="false" aria-label="Sound on or off">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M4 9v6h4l5 4V5L8 9z"/>
-                <path class="reel-wave" d="M16.5 8.5a5 5 0 0 1 0 7"/>
-                <line class="reel-slash" x1="3.5" y1="3.5" x2="20.5" y2="20.5"/>
-              </svg>
-            </button>
-            <button class="reel-ctrl reel-fs" id="reelFs" type="button" aria-label="Fullscreen">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
-            </button>
-          </div>
-        </div>
-        <div class="reel-cap">Showreel</div>
-      </div>
-    </div>
-  </section>
+  <!-- Showreel: the Play/Reel scroll reveal (promoted from the lab). Poster for now. -->
+  <ReelReveal />
 
   <section class="rwork" id="homeReel" aria-label="Recent work">
     <div class="rwork-pin" id="rworkPin">
