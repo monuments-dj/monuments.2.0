@@ -77,6 +77,16 @@ URL across requests until the new build is consistent before judging.
    Reference capture: `tools/snaps/ref-lusion-of_the_oak/` (snap.mjs `--steps`, 21 frames). Dark/
    cinematic (--bg/--fg), reduced-motion + ≤820px fall back to a vertical stack. Real-Chromium
    verified: pin holds, track 0→-7200 frame-accurate, counter 01→06, no console errors, images load.
+6. **Work-page NEXT-PROJECT scroller PROTOTYPE (2026-06-14, DJ's ask).** Repurposed the Element-01
+   next-page scroller as the bottom-of-work-page next-project handoff, on `/lab/sony-this-moment`
+   (replaced its portal-grow ending; blue-cross + turnstile KEEP the portal for an A/B compare).
+   Big next-project name (TURNSTILE) + "Keep scrolling to the next project" + a NEXT PROJECT rail that
+   fills toward the page bottom (`--np-progress`), `is-full` lights the cue, click or pull-to-next
+   (gated overscroll) enters `/lab/turnstile`. Real-Chromium verified: fill 0→100%, pull-to-next nav,
+   no errors. ⚠️ OPEN DECISION: the GLOBAL site footer renders AFTER the scroller (so it is not the
+   literal final beat, and pull-to-next is gated to not fire at the footer). For the real work-page
+   pattern, decide whether to suppress the global footer on case studies (scroller = true closer) or
+   fold the next-project block into the footer. DJ to react to the prototype first.
 
 **New tools:** `tools/gen-palettes.mjs` (color), `tools/snap-el.mjs` (capture one element at a
 scroll offset in real Chromium), `tools/snap-themes.mjs`. The headless Claude-preview pauses rAF

@@ -5,9 +5,11 @@ import LabFx from '../../components/LabFx.astro';
 // === SONY — THIS MOMENT (editorial) — /lab/sony-this-moment ===
 // The reimagined-Blue-Cross editorial model on the real Sony Audio campaign:
 // chapter kickers + narrow columns, color-blocked chapters, a pinned insight
-// scene with a marker underline, a drifting photo collage, credits, and the
-// portal-grow next-project ending into Sony Xperia. Copy = the real case-study
-// text, restructured into chapters. Sony accent tint = var(--accent-2).
+// scene with a marker underline, a drifting photo collage, credits, and a
+// next-page-scroller next-project ending into Turnstile (the rail fills toward the
+// page bottom; keep scrolling or click to enter). PROTOTYPE of the work-page footer
+// pattern (blue-cross + turnstile still use the portal-grow ending, for compare).
+// Copy = the real case-study text, restructured into chapters. Sony tint = var(--accent-2).
 
 const g = Array.from({ length: 9 }, (_, i) => `/case-studies/sony-this-moment/gallery/tm-${String(i + 1).padStart(2, '0')}.jpg`);
 const collage = [
@@ -111,15 +113,24 @@ const meta = [
       </div>
     </section>
 
-    <!-- NEXT PROJECT — portal grow into Sony Xperia -->
-    <section class="tmx-next" data-portal>
-      <div class="tmx-next-stage">
-        <p class="tmx-kicker tmx-next-k">Next project</p>
-        <a class="tmx-next-card" href="/work/sony-xperia-summer" data-card>
-          <img src="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" alt="Sony Xperia — Summer" data-pimg />
-          <span class="tmx-next-scrim" aria-hidden="true"></span>
-          <span class="tmx-next-title">Sony Xperia — Summer <span aria-hidden="true">→</span></span>
-        </a>
+    <!-- NEXT PROJECT — next-page scroller: the rail fills as you reach the end,
+         keep scrolling (or click) to carry into the next project. -->
+    <section class="tmx-np" data-np>
+      <div class="tmx-np-inner">
+        <span class="tmx-np-keep">Keep scrolling to the next project</span>
+        <div class="tmx-np-row">
+          <div class="tmx-np-head">
+            <a class="tmx-np-name" href="/lab/turnstile" data-cursor="View">Turnstile</a>
+            <span class="tmx-np-tag">Brand film &middot; Music</span>
+          </div>
+          <a class="tmx-np-next" href="/lab/turnstile" data-np-link data-cursor="View" aria-label="Next project: Turnstile">
+            <span class="tmx-np-label">Next project</span>
+            <span class="tmx-np-bar"><span class="tmx-np-fill" data-np-fill></span></span>
+            <span class="tmx-np-arrow" aria-hidden="true">
+              <svg viewBox="0 0 34 16" width="42" height="16" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="0" y1="8" x2="31" y2="8" /><path d="M24 2 L31 8 L24 14" /></svg>
+            </span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -189,14 +200,28 @@ const meta = [
   .tmx-stat-n { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 3.4vw, 50px); letter-spacing: -0.03em; line-height: 1; }
   .tmx-stat-l { font-size: 13px; font-weight: 300; color: rgb(var(--fg-rgb) / 0.65); }
 
-  /* NEXT portal */
-  .tmx-next { position: relative; height: 220vh; z-index: 4; background: var(--black); }
-  .tmx-next-stage { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4vh; overflow: hidden; }
-  .tmx-next-k { color: rgb(var(--fg-rgb) / 0.55); }
-  .tmx-next-card { position: relative; display: block; width: 92vw; max-width: 1560px; aspect-ratio: 16/9; max-height: 78vh; overflow: hidden; border-radius: 6px; transform: scale(var(--gs, 0.45)); will-change: transform; }
-  .tmx-next-card img { width: 100%; height: 112%; object-fit: cover; display: block; transform: translateY(var(--py, -6%)); }
-  .tmx-next-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.62), transparent 50%); }
-  .tmx-next-title { position: absolute; left: clamp(20px, 3.2vw, 50px); bottom: clamp(18px, 3vw, 44px); font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 4vw, 60px); letter-spacing: -0.03em; color: var(--white); opacity: var(--to, 0); transform: translateY(calc((1 - var(--to, 0)) * 24px)); }
+  /* NEXT PROJECT — next-page scroller (rail fills toward the page bottom) */
+  .tmx-np { position: relative; min-height: 100vh; display: flex; align-items: center; z-index: 4; background: var(--black); color: var(--white); padding: 12vh var(--pad); }
+  .tmx-np-inner { width: 100%; max-width: var(--wrap, 1300px); margin: 0 auto; }
+  .tmx-np-keep { display: block; font-size: 13px; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); margin: 0 0 clamp(40px, 9vh, 110px); }
+  .tmx-np-row { display: flex; align-items: flex-end; justify-content: space-between; gap: clamp(28px, 5vw, 80px); flex-wrap: wrap; }
+  .tmx-np-name { display: block; width: fit-content; font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(44px, 10vw, 170px); line-height: 0.88; letter-spacing: -0.04em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .tmx-np-tag { display: block; margin-top: clamp(14px, 1.6vw, 22px); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .tmx-np-next { display: inline-flex; align-items: center; gap: 16px; margin-left: auto; text-decoration: none; color: var(--white); padding-bottom: 6px; }
+  .tmx-np-label { font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+  .tmx-np-bar { display: block; width: clamp(220px, 32vw, 480px); max-width: 52vw; height: 4px; border-radius: 999px; background: rgb(var(--fg-rgb) / 0.22); overflow: hidden; }
+  .tmx-np-fill { display: block; height: 100%; width: calc(var(--np-progress, 0) * 100%); background: var(--accent); border-radius: 999px; transition: width 0.08s linear; }
+  .tmx-np-arrow { display: inline-flex; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+  .tmx-np-next:hover .tmx-np-arrow { transform: translateX(8px); }
+  /* when the rail is full (you've reached the end): the cue lights up */
+  .tmx-np.is-full .tmx-np-label { color: var(--accent); }
+  .tmx-np.is-full .tmx-np-arrow { transform: translateX(8px); animation: tmxNpPulse 1.1s ease-in-out infinite; }
+  @keyframes tmxNpPulse { 0%,100% { transform: translateX(8px); } 50% { transform: translateX(16px); } }
+  @media (max-width: 720px) {
+    .tmx-np-row { align-items: flex-start; flex-direction: column; }
+    .tmx-np-next { margin-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .tmx-np.is-full .tmx-np-arrow { animation: none; } }
 
   .tmx :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
   .tmx :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
@@ -254,7 +279,10 @@ const meta = [
   const insight = document.querySelector('[data-scene="insight"]');
   const iWords = insight ? [...insight.querySelectorAll('.wi')] : [];
   const stroke = insight && insight.querySelector('.tmx-stroke path');
-  const portal = document.querySelector('[data-portal]');
+  const np = document.querySelector('[data-np]');
+  const npFill = np && np.querySelector('[data-np-fill]');
+  const npLink = np && np.querySelector('[data-np-link]');
+  const npDest = npLink ? npLink.getAttribute('href') : null;
   const drifts = [...document.querySelectorAll('[data-drift]')];
 
   let ticking = false;
@@ -268,13 +296,11 @@ const meta = [
         iWords.forEach((w, i) => w.classList.toggle('on', phase(p, 0.05, 0.55) * iWords.length * 1.1 > i));
         if (stroke) stroke.style.setProperty('--soff', String(320 * (1 - phase(p, 0.6, 0.85))));
       }
-      if (portal) {
-        const r = portal.getBoundingClientRect();
-        const p = clamp01(-r.top / (portal.offsetHeight - innerHeight));
-        const card = portal.querySelector('[data-card]');
-        const ease = 1 - Math.pow(1 - phase(p, 0, 0.7), 3);
-        card.style.setProperty('--gs', String(0.45 + ease * 0.55));
-        card.style.setProperty('--to', String(phase(p, 0.25, 0.5)));
+      if (np && npFill) {
+        const r = np.getBoundingClientRect();
+        const p = clamp01((innerHeight - r.top) / r.height);
+        np.style.setProperty('--np-progress', String(p));
+        np.classList.toggle('is-full', p > 0.995);
       }
       drifts.forEach((el) => {
         const r = el.getBoundingClientRect();
@@ -289,8 +315,23 @@ const meta = [
   if (!reduced) {
     addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+    // pull-to-next: once the rail is full at the page bottom, continued downward
+    // scroll carries into the next project (the link is the click-through fallback).
+    if (np && npDest) {
+      let over = 0;
+      addEventListener('wheel', (e) => {
+        const r = np.getBoundingClientRect();
+        const p = clamp01((innerHeight - r.top) / r.height);
+        // only while the scroller still fills the view (not once you've reached the footer below)
+        if (p > 0.99 && r.bottom > innerHeight * 0.5 && e.deltaY > 0) {
+          over += e.deltaY;
+          if (over > 320) { over = 0; location.href = npDest; }
+        } else if (e.deltaY < 0) { over = 0; }
+      }, { passive: true });
+    }
   } else {
     iWords.forEach((w) => w.classList.add('on'));
+    if (np) { np.style.setProperty('--np-progress', '1'); np.classList.add('is-full'); }
   }
 </script>
 </Base>
