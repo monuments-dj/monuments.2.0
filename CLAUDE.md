@@ -58,12 +58,17 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
-## Active work (2026-06-13): see TODO.md top block
-**CURRENT: the `/lab/*` v2 redesign.** GSAP ScrollTrigger is now the scroll-animation stack
-(`src/scripts/gsap-lenis.js` bridges it to Lenis). Done: 8-preset color system, the inline pattern
-library on the hub, the contextual cursor, the exoape light-forward pass on the hub, the reel
-reveal (pinned scroll-scrub; needs a self-hosted MP4), and the about "How I work" pinned horizontal
-scroll. NEXT: roll the exoape pass onto the other lab pages, wire the reel MP4. Older context below.
+## Active work (2026-06-14): see TODO.md top block
+**CURRENT: the `/lab/*` v2 redesign + first promotions to production.** GSAP ScrollTrigger is the
+scroll-animation stack (`src/scripts/gsap-lenis.js` bridges it to Lenis). Done: 9-preset color system
+(incl. the `brand` ink/denim/rose preset), the inline pattern library on the hub (next-page · reel ·
+next-project · galleries), the contextual cursor, the exoape light-forward pass on the hub, the reel
+reveal, the about "How I work" pinned horizontal scroll, the `BrandWorld` brand-book band on `/lab`,
+the spinning-metallic-M loader, and `NextProject.astro`. **FIRST PROMOTIONS TO `/`:** the Play/Reel
+reveal (`ReelReveal.astro`) + the new loader now ship on the real homepage (the `monuments.cc` domain
+is still WordPress/untouched — only the Vercel build changed). NEXT: roll the exoape pass onto the
+other lab pages; self-host DJ's reel MP4 and pass `video=` so the reel/preview frames actually play;
+swap the real vectorized eye+spark M into the loader (`ldrMPath` in `Loader.astro`). Older context below.
 
 Building a GENERIC, multi-site component kit + data model — DJ's real goal is a category-based
 site-factory; monuments = template #1 (memory `site-builder-vision`). **Keystatic CMS is LIVE**

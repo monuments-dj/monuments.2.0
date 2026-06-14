@@ -1,4 +1,4 @@
-# TODO — current state (2026-06-13)
+# TODO — current state (2026-06-14)
 
 **Quick start:** `cd monuments-site && npm run dev` → http://localhost:4321 · `npm run build`
 (builds clean, ~30 routes). Read `CLAUDE.md` first (shorthand + the VISUAL-TRUTH workflow),
@@ -136,6 +136,28 @@ URL across requests until the new build is consistent before judging.
    tilt, testimonials, reel reveal, rwork, loader all present, no console errors). NOT deduped: the lab's
    inline reel vs ReelReveal are intentionally different (the lab one reskins with LabFx, the home one is
    fixed-dark) — leave them.
+12. **BRAND color PRESET + dark `/lab` hero (2026-06-14).** Added the 9th LabFx preset **`brand`**
+   (ink/denim/rose) to the picker — generate via `tools/gen-palettes.mjs` (denim #3E6E94 was
+   Leonardo-lifted to #527da0 for AA on ink), wired through `LabFx.astro` (`THEMES` array + a `.fx-sw`
+   swatch + `:root.theme-brand`). Made the `/lab` HERO a darker version that reads off `--bg`/`--fg`
+   tokens, so it retints with whatever preset is active. Real-Chromium verified across presets, brand
+   preset applies ink/denim/rose with no errors.
+13. **BrandWorld tagline CLIP FIXED (2026-06-14, commit ca2ad54).** The `M●NUMENTS` wordmark (Archivo
+   ~1230px at the old 164px) overflowed the brand band's 1180px inner and dragged `.taglinerow` left
+   under `overflow:hidden`, clipping "Built to be remembered." Fix in `BrandWorld.astro`: widened
+   `.bw .inner` to `var(--wrap,1300px)`, added `min-width:0` to `.bw .hero > div` (so the wordmark
+   can't force the track/tagline wider), capped the wordmark at `clamp(36px,10vw,150px)`. Verified
+   flush + clip-free with Archivo loaded at 375 / 768 / 1024 / 1440 / 1920 / 2200px.
+14. **CODE TIGHTENED — verified dead-code sweep (2026-06-14, commit 2a5ba64).** Multi-agent adversarial
+   audit over this session's files (each removal grep-proven unreferenced across src/public/tools).
+   Removed 13 dead items: legacy `.work-grid`/`.work-card`/`.work` home rules (home is `.rwork-*` now)
+   + the `.work-card` reduced-motion entry; 7 orphan `cs-` label comments + the TEMP movement-toggle
+   comment; the no-op `function build()` in index.astro (no callers; superseded by `drawWave`);
+   `.fx-ring` (cursor renamed `.fx-cur`) + the mousedown handler writing the never-read `--press`;
+   the `.tmx-next*` reduced-motion rules orphaned when the next-project block moved into
+   `NextProject.astro`; corrected a stale "eight swatches" comment (picker has 9). 1 candidate KEPT:
+   the `.bw` full-bleed gutter is a live design choice (CLAUDE.md full-bleed exception), not dead.
+   Build clean; `/` + `/lab` + `/lab/sony-this-moment` render with 0 console errors.
 
 **New tools:** `tools/gen-palettes.mjs` (color), `tools/snap-el.mjs` (capture one element at a
 scroll offset in real Chromium), `tools/snap-themes.mjs`. The headless Claude-preview pauses rAF
