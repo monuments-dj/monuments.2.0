@@ -18,6 +18,7 @@
   <button class="fx-sw" data-theme="forest" aria-label="Forest theme: deep green, amber"></button>
   <button class="fx-sw" data-theme="sand" aria-label="Sand theme: warm light, clay"></button>
   <button class="fx-sw" data-theme="mono" aria-label="Mono theme: max contrast, single red"></button>
+  <button class="fx-sw" data-theme="brand" aria-label="Brand theme: ink + denim, rose accent"></button>
 </div>
 
 <style is:global>
@@ -117,6 +118,17 @@
     --warm-deep: #0f0d0b; --c-sand: #fcebcc;
   }
 
+  :root.theme-brand {
+    /* Brand theme: ink + denim, rose accent */
+    --bg: #0A0A0A;        --black: #0A0A0A;
+    --fg: #f4ede6;        --white: #f4ede6;   --fg-rgb: 244 237 230;
+    --paper: #F4F4F2;
+    --ink: #12120a;       --ink-rgb: 18 18 10;
+    --accent: #527da0;    --accent-2: #efa1ad;
+    --deep: #0d1727;      --c-slate: #0d1727;
+    --warm-deep: #1d1106; --c-sand: #f6e5c6;
+  }
+
   /* ===================================================================
      FILM GRAIN — cinematic noise wash
      =================================================================== */
@@ -173,6 +185,7 @@
   .fx-sw[data-theme="forest"]   { background: radial-gradient(circle at 50% 50%, #ffb224 0 45%, #0b110d 46% 100%); }
   .fx-sw[data-theme="sand"]     { background: radial-gradient(circle at 50% 50%, #b9450f 0 45%, #f3ece1 46% 100%); }
   .fx-sw[data-theme="mono"]     { background: radial-gradient(circle at 50% 50%, #ff3b2e 0 45%, #050505 46% 100%); }
+  .fx-sw[data-theme="brand"]    { background: radial-gradient(circle at 50% 50%, #527da0 0 45%, #0A0A0A 46% 100%); }
 
   @media (pointer: coarse), (prefers-reduced-motion: reduce) {
     .fx-grain { animation: none; }
@@ -196,7 +209,7 @@
 
 <script>
   // --- Theme selector: toggle class on <html>, persist to localStorage ---
-  const THEMES = ['monument', 'noir', 'electric', 'press', 'slate', 'forest', 'sand', 'mono'];
+  const THEMES = ['monument', 'noir', 'electric', 'press', 'slate', 'forest', 'sand', 'mono', 'brand'];
   const root = document.documentElement;
 
   function currentTheme() {

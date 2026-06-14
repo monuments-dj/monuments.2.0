@@ -123,6 +123,10 @@ const PRESETS = [
     light: '#f3ece1', dark: '#1a1410', accent: '#c2410c', accent2: '#0f766e' },
   { name: 'mono', label: 'Mono theme: max contrast, single red', mode: 'dark',
     dark: '#050505', light: '#fafafa', accent: '#ff3b2e', accent2: '#ff3b2e' },
+  // Brand book v0.8: ink ground, paper inverse, denim as the structural accent,
+  // rose as the punctuation accent (accent-2). Denim may get a legibility lift on ink.
+  { name: 'brand', label: 'Brand theme: ink + denim, rose accent', mode: 'dark',
+    dark: '#0A0A0A', light: '#F4F4F2', accent: '#3E6E94', accent2: '#EFA1AD' },
 ];
 
 function build(p) {

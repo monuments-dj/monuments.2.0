@@ -275,26 +275,27 @@ const sessionWork = [
   .lab-kicker-mark { color: var(--accent); font-weight: 500; }
   .lab-h1 em, .lab-sec-title em, .lab-end-big em { font-style: italic; color: var(--accent); }
 
-  /* ---------- HERO ---------- */
-  .lab-hero { position: relative; min-height: 96vh; display: flex; align-items: center; overflow: hidden; padding: 16vh 0 12vh; background: var(--paper); color: var(--ink); }
+  /* ---------- HERO (dark) ---------- */
+  .lab-hero { position: relative; min-height: 96vh; display: flex; align-items: center; overflow: hidden; padding: 16vh 0 12vh; background: var(--bg); color: var(--fg); }
+  .lab-hero .lab-eyebrow { color: rgb(var(--fg-rgb) / 0.72); }
   .lab-hero-inner { position: relative; z-index: 3; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
-  /* soft paper backing so the headline reads cleanly over the floating frames */
+  /* soft dark scrim so the light headline reads cleanly over the floating frames */
   .lab-hero-inner::before { content: ''; position: absolute; inset: -5vh -8%; z-index: -1; pointer-events: none;
-    background: radial-gradient(120% 86% at 44% 46%, color-mix(in srgb, var(--paper) 90%, transparent) 0%, color-mix(in srgb, var(--paper) 66%, transparent) 40%, transparent 76%); }
+    background: radial-gradient(120% 86% at 44% 46%, color-mix(in srgb, var(--bg) 88%, transparent) 0%, color-mix(in srgb, var(--bg) 60%, transparent) 42%, transparent 78%); }
   .lab-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(46px, 8vw, 128px); line-height: 1; letter-spacing: -0.035em; margin-top: 22px; padding-bottom: 0.12em; }
-  .lab-lead { margin-top: 30px; max-width: 56ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.72; font-weight: 300; color: rgb(var(--ink-rgb) / 0.7); }
-  .lab-meta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: clamp(20px, 3vw, 44px); font-size: 13px; font-weight: 300; letter-spacing: 0.02em; color: rgb(var(--ink-rgb) / 0.55); }
+  .lab-lead { margin-top: 30px; max-width: 56ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.72; font-weight: 300; color: rgb(var(--fg-rgb) / 0.72); }
+  .lab-meta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: clamp(20px, 3vw, 44px); font-size: 13px; font-weight: 300; letter-spacing: 0.02em; color: rgb(var(--fg-rgb) / 0.55); }
   .lab-meta b { font-weight: 500; color: var(--accent); font-size: 15px; }
 
-  /* floating montage strip of real stills (light ground, full opacity, soft tinted shadow) */
+  /* floating montage strip of real stills (dark ground now, soft drop shadow for depth) */
   .lab-hero-strip { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
   .lab-hero-track { position: absolute; top: 50%; left: 0; display: flex; gap: clamp(40px, 4vw, 80px); width: max-content; transform: translateY(-50%); animation: labDrift 70s linear infinite; will-change: transform; }
-  .lab-hero-frame { position: relative; margin: 0; flex: 0 0 auto; width: clamp(220px, 26vw, 360px); aspect-ratio: 4/3; border-radius: 10px; overflow: hidden; opacity: 1; box-shadow: 0 28px 64px rgb(var(--ink-rgb) / 0.14); will-change: transform; }
+  .lab-hero-frame { position: relative; margin: 0; flex: 0 0 auto; width: clamp(220px, 26vw, 360px); aspect-ratio: 4/3; border-radius: 10px; overflow: hidden; opacity: 1; box-shadow: 0 28px 64px rgb(0 0 0 / 0.55); will-change: transform; }
   .lab-hero-frame:nth-child(even) { aspect-ratio: 3/4; align-self: flex-start; margin-top: clamp(-30px, -4vw, -10px); }
   .lab-hero-frame img { width: 100%; height: 118%; object-fit: cover; display: block; }
   @keyframes labDrift { from { transform: translate(0, -50%); } to { transform: translate(-50%, -50%); } }
 
-  .lab-scrollcue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.5); }
+  .lab-scrollcue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
   .lab-scrollcue i { width: 1px; height: 34px; background: linear-gradient(var(--accent), transparent); animation: cue 1.8s ease-in-out infinite; transform-origin: top; }
   @keyframes cue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
 
