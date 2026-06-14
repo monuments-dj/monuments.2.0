@@ -307,36 +307,12 @@ const reel = [
       timer = setInterval(next, 5000);
     })();
 
-    // Showreel: scroll-zoom — a small 16:9 video grows up to a full-width 16:9 frame, then holds (interactable)
-    (function () {
-      const section = document.querySelector('.showreel');
-      const zoom = document.getElementById('reelZoom');
-      if (!section || !zoom) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { zoom.style.transform = 'scale(1)'; return; }
-      const MIN = 0.4;
-      let ticking = false;
-      function update() {
-        const r = section.getBoundingClientRect();
-        const vh = window.innerHeight;
-        const range = r.height - vh;
-        let p = range > 0 ? (-r.top) / range : 0;
-        p = Math.max(0, Math.min(1, p));
-        const zp = Math.min(1, p / 0.6); // reach full-width by 60% of the scroll, then hold
-        const e = 1 - Math.pow(1 - zp, 3); // ease-out cubic
-        zoom.style.transform = 'scale(' + (MIN + (1 - MIN) * e).toFixed(3) + ')';
-        ticking = false;
-      }
-      window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-      window.addEventListener('resize', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-      update();
-    })();
-
-    // YouTube control: hero (start 6s, loop ending 15s early) + reel (audio toggle)
+    // YouTube control: the hero video (start 6s, loop ending 15s early)
     (function () {
       const tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
       document.head.appendChild(tag);
-      let hero, reel;
+      let hero;
       window.onYouTubeIframeAPIReady = function () {
         if (document.getElementById('heroVideo')) {
           hero = new YT.Player('heroVideo', {
@@ -351,42 +327,6 @@ const reel = [
               if (d > 21 && t >= d - 15) hero.seekTo(6, true);
             }
           }, 500);
-        }
-        if (document.getElementById('reelVideo')) {
-          const reelEl = document.getElementById('reel');
-          const frame = reelEl ? reelEl.querySelector('.reel-frame') : null;
-          const audioBtn = document.getElementById('reelAudio');
-          const setSound = (on) => { if (audioBtn) audioBtn.setAttribute('aria-pressed', on ? 'true' : 'false'); };
-          reel = new YT.Player('reelVideo', {
-            events: {
-              onReady: (e) => { e.target.mute(); e.target.seekTo(6, true); e.target.playVideo(); setSound(false); },
-              onStateChange: (e) => {
-                if (reelEl) reelEl.dataset.playing = (e.data === YT.PlayerState.PLAYING) ? 'true' : 'false';
-                if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(6, true); e.target.playVideo(); }
-              }
-            }
-          });
-          const playToggle = () => {
-            if (!reel || !reel.getPlayerState) return;
-            if (reel.getPlayerState() === 1) { reel.pauseVideo(); }
-            else { reel.playVideo(); reel.unMute(); setSound(true); } // play auto-unmutes the audio
-          };
-          if (reelEl) reelEl.addEventListener('click', (ev) => { if (ev.target.closest('.reel-controls')) return; playToggle(); });
-          const playBtn = document.getElementById('reelPlay');
-          if (playBtn) playBtn.addEventListener('click', (ev) => { ev.stopPropagation(); playToggle(); });
-          if (audioBtn) audioBtn.addEventListener('click', (ev) => {
-            ev.stopPropagation();
-            if (!reel || !reel.isMuted) return;
-            if (reel.isMuted()) { reel.unMute(); setSound(true); } else { reel.mute(); setSound(false); }
-          });
-          const fsBtn = document.getElementById('reelFs');
-          if (fsBtn) fsBtn.addEventListener('click', (ev) => {
-            ev.stopPropagation();
-            if (document.fullscreenElement) { document.exitFullscreen(); return; }
-            const el = frame || reelEl;
-            if (el && el.requestFullscreen) el.requestFullscreen();
-            else if (el && el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-          });
         }
       };
     })();

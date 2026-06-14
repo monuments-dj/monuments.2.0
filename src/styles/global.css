@@ -479,27 +479,7 @@ body.loaded .hero-bottom {
 
 .logo-cell:hover img { filter: brightness(0) invert(1); }
 
-/* Showreel — full-bleed video, parallax reveal, hover label, audio toggle */
-/* Parallax showreel: a small 16:9 video scroll-zooms up to a full-width 16:9 frame (edge-to-edge, never cropped) */
-.showreel { background: #000; padding: 0; position: relative; height: 200vh; }
-.reel-stage { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.reel-zoom { width: min(82vw, 1500px); display: flex; flex-direction: column; align-items: center; gap: clamp(14px, 3vh, 34px); transform: scale(0.4); transform-origin: center center; will-change: transform; }
-.reel { position: relative; width: 100%; aspect-ratio: 16 / 9; }
-.reel-frame { position: absolute; inset: 0; overflow: hidden; background: #000; }
-.reel-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; transform: scale(1.04); transform-origin: center; pointer-events: none; }
-.reel-cap { font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(13px, 1.3vw, 19px); letter-spacing: 0.42em; text-indent: 0.42em; text-transform: uppercase; color: var(--white); white-space: nowrap; }
-@media (prefers-reduced-motion: reduce) { .showreel { height: auto; } .reel-stage { position: static; height: auto; } .reel-zoom { transform: scale(1); } }
-@media (max-width: 860px) { .showreel { height: 170vh; } }
-.reel-controls { position: absolute; bottom: 18px; right: 18px; z-index: 3; display: flex; gap: 9px; }
-.reel-ctrl { width: 44px; height: 44px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(252, 252, 252,0.3); background: rgba(13,15,20,0.55); backdrop-filter: blur(8px); color: var(--white); cursor: pointer; transition: background 0.2s, border-color 0.2s; }
-.reel-ctrl:hover { background: rgba(13,15,20,0.82); border-color: rgba(252, 252, 252,0.6); }
-.reel-ctrl svg { width: 19px; height: 19px; }
-.reel-play .ic-pause { display: none; }
-.reel[data-playing="true"] .reel-play .ic-play { display: none; }
-.reel[data-playing="true"] .reel-play .ic-pause { display: inline; }
-.reel-audio .reel-wave, .reel-audio .reel-slash { transition: opacity 0.2s; }
-.reel-audio[aria-pressed="false"] .reel-wave { opacity: 0; }
-.reel-audio[aria-pressed="true"] .reel-slash { opacity: 0; }
+/* (Old scroll-zoom showreel CSS removed — the home now uses the ReelReveal component.) */
 
 /* --- Staggered scroll reveal for grids (logos + work cards) --- */
 .trusted .logo-cell {
