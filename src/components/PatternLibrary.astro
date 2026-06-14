@@ -4,6 +4,18 @@
 // (--paper) and dark (--bg) so the rhythm re-derives correctly under every color
 // theme. Add an element = drop in another <section class="pl-sec pl-sec--*"> with a
 // .pl-stage (the live element) + a .pl-ctrl (its dial). Keep them alternating.
+import Lightbox from './Lightbox.astro';
+
+// Element 04 (photo galleries): one curated set of real gallery frames laid out three
+// ways (justified rows / masonry / uniform grid) via the dial. `ar` = thumb aspect ratio
+// (drives the justified flex sizing). Thumb renders in the grid; full opens in the box.
+// Interleaved landscape/portrait so masonry reads distinctly from the grid.
+const galleryImgs = [
+  { n: '002', ar: 1.5 }, { n: '009', ar: 0.67 }, { n: '021', ar: 1.5 }, { n: '016', ar: 0.67 },
+  { n: '028', ar: 1.5 }, { n: '035', ar: 0.67 }, { n: '042', ar: 1.5 }, { n: '044', ar: 0.67 },
+  { n: '050', ar: 1.5 }, { n: '055', ar: 0.67 }, { n: '066', ar: 1.5 }, { n: '062', ar: 0.67 },
+  { n: '073', ar: 1.5 }, { n: '077', ar: 0.67 }, { n: '090', ar: 1.5 }, { n: '014', ar: 0.67 },
+];
 ---
 <div class="pl">
   <!-- INTRO (light) -->
@@ -130,13 +142,55 @@
     </div>
   </section>
 
+  <!-- ELEMENT 04: PHOTO GALLERIES (dark) -->
+  <section class="pl-sec pl-sec--dark pl-el" id="photo-galleries">
+    <div class="pl-wrap">
+      <div class="pl-el-head">
+        <p class="pl-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span><span class="pl-num">04</span> Media</p>
+        <h3 class="pl-el-title fade">Photo galleries.</h3>
+        <p class="pl-el-sub fade">One set of real frames, three ways to lay it out. Flip the layout, tune the columns and the gap, and click any frame to open it in the lightbox. Mono-until-hover is there when the set needs to feel quieter.</p>
+      </div>
+
+      <div class="pl-stage">
+        <div class="pg-lab" data-pg data-mode="justified" style="--pg-cols: 4; --pg-gap: 10px; --pg-row: 220px;">
+          {galleryImgs.map((g) => (
+            <a class="pg-lab-item" href={`/gallery/full/p-${g.n}.jpg`} style={`--ar: ${g.ar};`}
+               data-lb-full={`/gallery/full/p-${g.n}.jpg`} data-lb-group="pl-gallery" data-cursor="View" aria-label="Open image">
+              <img src={`/gallery/thumb/p-${g.n}.jpg`} alt="" loading="lazy" decoding="async" />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="pl-ctrl" data-pg-ctrl>
+        <div class="pl-seg" role="group" aria-label="Layout">
+          <button class="pl-seg-btn on" type="button" data-pg-mode="justified">Justified</button>
+          <button class="pl-seg-btn" type="button" data-pg-mode="masonry">Masonry</button>
+          <button class="pl-seg-btn" type="button" data-pg-mode="grid">Grid</button>
+        </div>
+        <label class="pl-field">
+          <span class="pl-field-l">Columns <b data-pg-colsval>4</b></span>
+          <input class="pl-range" type="range" min="2" max="6" value="4" step="1" data-pg-cols aria-label="Columns" />
+        </label>
+        <label class="pl-field">
+          <span class="pl-field-l">Gap <b data-pg-gapval>10</b> px</span>
+          <input class="pl-range" type="range" min="2" max="28" value="10" step="2" data-pg-gap aria-label="Gap" />
+        </label>
+        <label class="pl-check"><input type="checkbox" data-pg-mono /> Mono until hover</label>
+      </div>
+    </div>
+  </section>
+
   <!-- ON THE BENCH (light) -->
   <section class="pl-sec pl-sec--light pl-soon">
     <div class="pl-wrap">
       <p class="pl-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span>On the bench</p>
-      <p class="pl-soon-list fade">Next into this library: the photography galleries, each with its own dial. The project-detail slider graduated to its own page, on the bench below.</p>
+      <p class="pl-soon-list fade">Four building blocks so far: wayfinding, the reel reveal, the project handoff, and the galleries. New ones land here as the work calls for them. Bigger patterns graduate to their own page, like the project-detail slider on the bench below.</p>
     </div>
   </section>
+
+  <!-- shared lightbox: auto-wires every [data-lb-full] trigger (the gallery frames) -->
+  <Lightbox />
 </div>
 
 <style>
@@ -232,6 +286,39 @@
   .npx-name { font-weight: 600; font-size: clamp(26px, 3.4vw, 50px); line-height: 1.0; letter-spacing: -0.02em; }
   .npx--nocount .npx-count { display: none; }
   .npx--nolabel .npx-label { display: none; }
+
+  /* ---------- ELEMENT 04: photo galleries ---------- */
+  /* One image set, three layouts off one set of custom props (--pg-cols / --pg-gap /
+     --pg-row). Justified = flex rows sized by each frame's aspect ratio; Masonry = CSS
+     multicol with natural heights; Grid = uniform cells. All open the shared Lightbox. */
+  .pg-lab { --pg-cols: 4; --pg-gap: 10px; --pg-row: 220px; }
+  .pg-lab-item { position: relative; display: block; overflow: hidden; border-radius: 6px; background: rgb(var(--fg-rgb) / 0.06); cursor: pointer; }
+  .pg-lab-item img { display: block; width: 100%; transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), filter 0.4s ease; }
+  .pg-lab-item:hover img { transform: scale(1.05); }
+
+  /* justified rows: flex-basis = aspect * row-height, grow by aspect so rows fill width */
+  .pg-lab[data-mode="justified"] { display: flex; flex-wrap: wrap; gap: var(--pg-gap); }
+  .pg-lab[data-mode="justified"] .pg-lab-item { height: var(--pg-row); flex: var(--ar) 1 calc(var(--ar) * var(--pg-row)); }
+  .pg-lab[data-mode="justified"] .pg-lab-item img { height: 100%; object-fit: cover; }
+
+  /* masonry: CSS multicol, items keep their natural height */
+  .pg-lab[data-mode="masonry"] { column-count: var(--pg-cols); column-gap: var(--pg-gap); }
+  .pg-lab[data-mode="masonry"] .pg-lab-item { width: 100%; margin-bottom: var(--pg-gap); break-inside: avoid; }
+  .pg-lab[data-mode="masonry"] .pg-lab-item img { height: auto; }
+
+  /* grid: uniform cells */
+  .pg-lab[data-mode="grid"] { display: grid; grid-template-columns: repeat(var(--pg-cols), 1fr); gap: var(--pg-gap); }
+  .pg-lab[data-mode="grid"] .pg-lab-item { aspect-ratio: 4 / 3; }
+  .pg-lab[data-mode="grid"] .pg-lab-item img { height: 100%; object-fit: cover; }
+
+  /* mono until hover */
+  .pg-lab.is-mono .pg-lab-item img { filter: grayscale(1); }
+  .pg-lab.is-mono .pg-lab-item:hover img { filter: grayscale(0); }
+
+  @media (max-width: 720px) {
+    .pg-lab[data-mode="grid"], .pg-lab[data-mode="masonry"] { --pg-cols: 2; }
+    .pg-lab[data-mode="masonry"] { column-count: 2; }
+  }
 
   /* ---------- on-the-bench note ---------- */
   .pl-soon-list { max-width: 64ch; font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.6; opacity: 0.7; margin: 14px 0 0; }
@@ -429,5 +516,37 @@
     tc && tc.addEventListener('change', () => npx.classList.toggle('npx--nocount', !tc.checked));
     const tl = document.querySelector('[data-npx-togglelabel]');
     tl && tl.addEventListener('change', () => npx.classList.toggle('npx--nolabel', !tl.checked));
+  })();
+
+  // ---- ELEMENT 04: photo galleries (layout + columns + gap + mono dial) ----
+  (function () {
+    const pg = document.querySelector('[data-pg]');
+    if (!pg) return;
+    // justified row height tracks the columns dial (more columns => shorter rows)
+    const syncRow = () => {
+      const cols = Number(pg.style.getPropertyValue('--pg-cols')) || 4;
+      pg.style.setProperty('--pg-row', (380 - cols * 40) + 'px');
+    };
+    syncRow();
+
+    document.querySelectorAll('[data-pg-mode]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        pg.setAttribute('data-mode', btn.getAttribute('data-pg-mode'));
+        document.querySelectorAll('[data-pg-mode]').forEach((b) => b.classList.toggle('on', b === btn));
+      });
+    });
+    const cols = document.querySelector('[data-pg-cols]');
+    cols && cols.addEventListener('input', () => {
+      pg.style.setProperty('--pg-cols', cols.value);
+      syncRow();
+      const o = document.querySelector('[data-pg-colsval]'); if (o) o.textContent = cols.value;
+    });
+    const gap = document.querySelector('[data-pg-gap]');
+    gap && gap.addEventListener('input', () => {
+      pg.style.setProperty('--pg-gap', gap.value + 'px');
+      const o = document.querySelector('[data-pg-gapval]'); if (o) o.textContent = gap.value;
+    });
+    const mono = document.querySelector('[data-pg-mono]');
+    mono && mono.addEventListener('change', () => pg.classList.toggle('is-mono', mono.checked));
   })();
 </script>

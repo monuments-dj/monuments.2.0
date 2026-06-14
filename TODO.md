@@ -60,7 +60,13 @@ URL across requests until the new build is consistent before judging.
    handoff-point dials; Counter/Label toggles. Light beat after the dark reel. Real-Chromium verified:
    render math exact across all 3 styles, scroll driver maps 100→0 clean, prod build clean. Caught +
    fixed a path bug (flashpoint hero is in `/gallery/`). Cards: Sony This Moment (tm-02) → Flashpoint.
-   **Remaining inline library elements:** photo galleries.
+   **Element 04 PHOTO GALLERIES SHIPPED + verified (2026-06-14).** Dark inline element on the hub:
+   one curated 16-frame set (8 land / 8 port from `/gallery/thumb`) laid out three ways via the dial,
+   Justified (flex rows sized by aspect) / Masonry (CSS multicol, natural heights) / Grid (uniform
+   4:3) + Columns (2-6, also drives justified row height) + Gap + "Mono until hover" toggle. Click any
+   frame to open the shared `Lightbox.astro` (full-size from `/gallery/full`). Real-Chromium verified:
+   all 3 layouts render, dial drives every prop, lightbox opens correct full src, no console errors.
+   **The inline pattern library is now COMPLETE (01 next-page · 02 reel · 03 next-project · 04 galleries).**
 5. **Project-detail slider PAGE SHIPPED + verified (2026-06-14).** New dedicated page
    `/lab/project-detail` (linked from the hub "Also on the bench" row). Lusion `of_the_oak`-style
    project-detail slider: a section that PINS while a horizontal track of 6 framed "chapter" panels
