@@ -55,6 +55,18 @@ const experiments = [
   { href: '/lab/work-kit',       t: 'Work component kit',   d: "Self-contained work-page parts. The seed of the site-factory." },
   { href: '/work-preview/sony-this-moment', t: 'CMS pipeline proof', d: "Sony This Moment, rendered from Keystatic content end to end." },
 ];
+
+// Everything built in the 2026-06-14 session, indexed up top so it is easy to find.
+// On-this-page items deep-link to the live element; the rest link to their page.
+const sessionWork = [
+  { href: '/lab/project-detail', t: 'Project-detail slider', tag: 'New page', d: "Pinned horizontal chapter slider, Lusion of_the_oak style." },
+  { href: '/lab/flashpoint', t: 'Flashpoint case study', tag: 'New page', d: "Light-forward rebrand page: the Imagine / Illuminate / Create concept." },
+  { href: '/lab/sony-this-moment', t: 'Next-project hand-off', tag: 'Component', d: "Growing media preview + scroll-to-next, at the bottom of the case studies." },
+  { href: '/lab#photo-galleries', t: 'Photo galleries', tag: 'On this page', d: "Pattern-library element: justified / masonry / grid + the lightbox." },
+  { href: '/lab#next-project', t: 'Next-project handoff element', tag: 'On this page', d: "Pattern-library element: the exoape grow-and-handoff." },
+  { href: '/', t: 'Play / Reel reveal', tag: 'Homepage', d: "Promoted to the production homepage. Scroll down to the showreel." },
+  { href: '/', t: 'Metallic M loader', tag: 'Homepage', d: "The new intro loader. Open the home in a fresh tab to catch it." },
+];
 ---
 <Base title="The Lab, monuments">
   <main class="lab">
@@ -83,6 +95,27 @@ const experiments = [
       </div>
       <div class="lab-scrollcue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
+
+    <!-- BUILT THIS SESSION — quick index of everything new, so it's easy to find -->
+    <section class="lab-sec lab-session" id="this-session">
+      <div class="lab-sec-head">
+        <p class="lab-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span>Built this session</p>
+        <h2 class="lab-sec-title split">Everything from <em>today,</em> in one place.</h2>
+        <p class="lab-sec-sub fade">Quick links to all the new work, so nothing gets lost. June 14.</p>
+      </div>
+      <ul class="lab-list">
+        {sessionWork.map((p, i) => (
+          <li class="lab-row fade">
+            <span class="lab-row-n">{String(i + 1).padStart(2, '0')}</span>
+            <a class="lab-row-t" href={p.href} data-cursor="View">
+              {p.t}
+              <svg class="lab-stroke sm" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8 C60 4, 150 10, 296 5" /></svg>
+            </a>
+            <span class="lab-row-d"><span class="lab-session-tag">{p.tag}</span>{p.d}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
 
     <!-- BRAND TICKER -->
     <div class="lab-ticker-band"><BrandTicker tone="black" /></div>
@@ -377,6 +410,9 @@ const experiments = [
   .lab-row-t { position: relative; width: fit-content; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(18px, 1.9vw, 26px); letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
   .lab-row:hover .lab-stroke path { stroke-dashoffset: 0; }
   .lab-row-d { font-size: 14px; line-height: 1.6; font-weight: 300; color: rgb(var(--ink-rgb) / 0.58); max-width: 52ch; }
+  /* "Built this session" index */
+  .lab-session { border-top: 1px solid rgb(var(--ink-rgb) / 0.08); }
+  .lab-session-tag { display: inline-block; margin-right: 12px; font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: 999px; padding: 2px 9px; vertical-align: 1px; white-space: nowrap; }
 
   /* ---------- CTA + PILE (deliberate dark closer) ---------- */
   .lab-end { position: relative; overflow: hidden; padding-top: clamp(90px, 11vw, 150px); background: var(--bg); color: var(--fg); }
