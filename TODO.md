@@ -44,9 +44,14 @@ URL across requests until the new build is consistent before judging.
 **⏳ OPEN / NEXT:**
 1. **Reel:** wire a self-hosted MP4 into `.rr-panel` for real click-to-play + crisp takeover (DJ
    to send the reel file, or pull from the YouTube showreel `VMubUUZ2tdU`).
-2. **Verify the about horizontal scroll in DJ's real browser.** Verified on a local PRODUCTION
-   build (pins + translates 0 to -1153, no errors), but the in-browser confirm got cut off when the
-   Chrome extension timed out on that heavy page (credo scrub + parallax + GSAP). Watch its perf.
+2. **About horizontal scroll — VERIFIED on the LIVE deploy (2026-06-13, DJ's real browser via
+   Claude-in-Chrome + real-Chromium snap).** ScrollTrigger pin-spacer present (padding-bottom =
+   computed amount, 730px @1920px); section stays pinned (sectionTop=0) the whole range; track
+   translates frame-accurate 0 to -730 @1920 (every 25% step within 1px of expected); no console
+   errors; renders clean (photos loaded). Snap: `tools/snaps/about-howiwork-mid/`. ⚠️ PERF NOT yet
+   numbered — the rAF/FPS probe got throttled because the tab was backgrounded (rAF pauses when
+   hidden). Behavior is frame-accurate (good sign); a true smoothness read needs the tab FOREGROUND
+   (DJ scrolls it) or a real-Chromium FPS script. Watch perf on that heavy page (credo + parallax + pin).
 3. **Roll the exoape light-forward pass onto the other lab pages** (hub done; follow `EXOAPE-PASS.md`).
 4. **Pattern library, remaining elements:** photo galleries, next-project teaser (and its
    reimagining), project-detail slider (lusion `of_the_oak` style).
