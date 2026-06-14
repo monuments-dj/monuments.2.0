@@ -75,11 +75,66 @@
     </div>
   </section>
 
+  <!-- ELEMENT 03: NEXT-PROJECT HANDOFF (light) -->
+  <section class="pl-sec pl-sec--light pl-el" id="next-project">
+    <div class="pl-wrap">
+      <div class="pl-el-head">
+        <p class="pl-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span><span class="pl-num">03</span> Wayfinding</p>
+        <h3 class="pl-el-title fade">Next-project handoff.</h3>
+        <p class="pl-el-sub fade">The exoape grow-and-handoff. The project you are on grows toward full, then the next one rises from beneath and takes over, its title settling in. Scroll through it to watch the pass, or scrub to freeze a frame; dial the rise, the handoff point, and the takeover style.</p>
+      </div>
+
+      <div class="pl-stage">
+        <div class="npx" data-npx>
+          <article class="npx-card npx-card--cur" data-npx-cur>
+            <img src="/case-studies/sony-this-moment/gallery/tm-02.jpg" alt="" loading="lazy" decoding="async" />
+            <div class="npx-meta">
+              <span class="npx-count">04 / 08</span>
+              <span class="npx-client">Sony</span>
+              <h4 class="npx-name">This Moment</h4>
+            </div>
+          </article>
+          <article class="npx-card npx-card--next" data-npx-next>
+            <img src="/case-studies/flashpoint/gallery/fp-01.jpg" alt="" loading="lazy" decoding="async" />
+            <div class="npx-meta">
+              <span class="npx-label">Next project</span>
+              <span class="npx-count">05 / 08</span>
+              <span class="npx-client">Brand film</span>
+              <h4 class="npx-name">Flashpoint</h4>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="pl-ctrl" data-npx-ctrl>
+        <label class="pl-field">
+          <span class="pl-field-l">Scrub <b data-npx-sval>0</b> %</span>
+          <input class="pl-range" type="range" min="0" max="100" value="0" step="1" data-npx-scrub aria-label="Scrub the handoff" />
+        </label>
+        <label class="pl-field">
+          <span class="pl-field-l">Rise distance <b data-npx-rval>100</b> %</span>
+          <input class="pl-range" type="range" min="40" max="100" value="100" step="5" data-npx-rise aria-label="Rise distance" />
+        </label>
+        <label class="pl-field">
+          <span class="pl-field-l">Handoff point <b data-npx-hval>42</b> %</span>
+          <input class="pl-range" type="range" min="20" max="65" value="42" step="1" data-npx-hand aria-label="Handoff point" />
+        </label>
+        <div class="pl-seg" role="group" aria-label="Takeover style">
+          <button class="pl-seg-btn on" type="button" data-npx-style="rise">Rise</button>
+          <button class="pl-seg-btn" type="button" data-npx-style="grow">Grow</button>
+          <button class="pl-seg-btn" type="button" data-npx-style="curtain">Curtain</button>
+        </div>
+        <label class="pl-check"><input type="checkbox" data-npx-togglecount checked /> Counter</label>
+        <label class="pl-check"><input type="checkbox" data-npx-togglelabel checked /> Label</label>
+      </div>
+    </div>
+  </section>
+
   <!-- ON THE BENCH (light) -->
   <section class="pl-sec pl-sec--light pl-soon">
     <div class="pl-wrap">
       <p class="pl-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span>On the bench</p>
-      <p class="pl-soon-list fade">Next into this library: the photography galleries, the next-project teaser (and its reimagining), and the project-detail slider. Each will arrive with its own dial.</p>
+      <p class="pl-soon-list fade">Next into this library: the photography galleries and the project-detail slider (lusion of_the_oak). Each will arrive with its own dial.</p>
     </div>
   </section>
 </div>
@@ -158,6 +213,25 @@
   .rr-word-r { right: clamp(16px, 8vw, 150px); }
   .rr-cap { position: absolute; bottom: clamp(28px, 6vh, 64px); left: 0; right: 0; z-index: 4; text-align: center; max-width: 42ch; margin: 0 auto; padding: 0 var(--pad); font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.5; opacity: 0.72; }
   @media (max-width: 640px) { .rr-word { font-size: clamp(30px, 12vw, 72px); } }
+
+  /* ---------- ELEMENT 03: next-project handoff ---------- */
+  /* Framed viewport stage. Two project cards stack; the "next" rises from beneath
+     and takes over as you scroll the stage through the viewport (or scrub the dial).
+     All animation is transform / clip-path / opacity, driven by one render(p). */
+  .npx { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; background: #000; box-shadow: 0 30px 70px rgb(var(--ink-rgb) / 0.18); }
+  .npx-card { position: absolute; inset: 0; overflow: hidden; will-change: transform, clip-path, opacity; transform-origin: center center; }
+  .npx-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .npx-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgb(0 0 0 / 0.62) 0%, rgb(0 0 0 / 0) 48%); pointer-events: none; }
+  .npx-card--cur { z-index: 1; }
+  .npx-card--next { z-index: 2; transform: translateY(100%); }
+  .npx-meta { position: absolute; left: clamp(20px, 3vw, 44px); right: clamp(20px, 3vw, 44px); bottom: clamp(18px, 3vw, 38px); z-index: 2; color: #fff; display: flex; flex-direction: column; gap: 7px; }
+  .npx-card--next .npx-meta { opacity: 0; }
+  .npx-count { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; opacity: 0.82; }
+  .npx-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+  .npx-client { font-size: 13px; font-weight: 400; opacity: 0.85; }
+  .npx-name { font-weight: 600; font-size: clamp(26px, 3.4vw, 50px); line-height: 1.0; letter-spacing: -0.02em; }
+  .npx--nocount .npx-count { display: none; }
+  .npx--nolabel .npx-label { display: none; }
 
   /* ---------- on-the-bench note ---------- */
   .pl-soon-list { max-width: 64ch; font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.6; opacity: 0.7; margin: 14px 0 0; }
@@ -271,5 +345,89 @@
     // Recompute pin start/end after fonts + images settle.
     window.addEventListener('load', () => ScrollTrigger.refresh());
     ScrollTrigger.refresh();
+  })();
+
+  // ---- ELEMENT 03: next-project handoff (scroll-scrubbed grow -> handoff -> takeover) ----
+  (function () {
+    const npx = document.querySelector('[data-npx]');
+    if (!npx) return;
+    const section = npx.closest('.pl-el') || npx;
+    const cur = npx.querySelector('[data-npx-cur]');
+    const next = npx.querySelector('[data-npx-next]');
+    const nextMeta = next.querySelector('.npx-meta');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let rise = 1.0;    // fraction of card height the next card starts below
+    let hand = 0.42;   // progress at which the next card begins its rise
+    let style = 'rise';
+    const clamp01 = (v) => Math.max(0, Math.min(1, v));
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+    function render(p) {
+      p = clamp01(p);
+      // current card grows toward the handoff, then eases back and dims as it's covered
+      const cg = hand > 0 ? clamp01(p / hand) : 1;
+      cur.style.transform = 'scale(' + (1 + 0.06 * easeOut(cg)).toFixed(4) + ')';
+      cur.style.opacity = (1 - 0.16 * clamp01((p - hand) / (1 - hand))).toFixed(3);
+
+      // next card reveals after the handoff point, by the chosen style
+      const t = p <= hand ? 0 : easeOut((p - hand) / (1 - hand));
+      next.style.clipPath = '';
+      if (style === 'grow') {
+        next.style.transform = 'translateY(0%) scale(' + (0.62 + 0.38 * t).toFixed(4) + ')';
+        next.style.opacity = clamp01(t / 0.5).toFixed(3);
+      } else if (style === 'curtain') {
+        next.style.transform = 'translateY(0%)';
+        next.style.opacity = '1';
+        next.style.clipPath = 'inset(0 0 ' + ((1 - t) * 100).toFixed(2) + '% 0)';
+      } else { // rise
+        next.style.transform = 'translateY(' + ((1 - t) * rise * 100).toFixed(2) + '%)';
+        next.style.opacity = '1';
+      }
+      // the next project's title settles in near the end of the pass
+      nextMeta.style.opacity = clamp01((t - 0.55) / 0.35).toFixed(3);
+    }
+
+    const scrub = document.querySelector('[data-npx-scrub]');
+    const sval = document.querySelector('[data-npx-sval]');
+    const setScrub = (pct) => { if (scrub) scrub.value = String(pct); if (sval) sval.textContent = String(pct); };
+
+    // scroll-driven progress: 0 as the stage enters, 1 as it clears the viewport
+    let raf = 0;
+    const fromScroll = () => {
+      raf = 0;
+      const r = section.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const p = clamp01((vh * 0.82 - r.top) / (r.height * 0.62 + vh * 0.18));
+      render(p);
+      setScrub(Math.round(p * 100));
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(fromScroll); };
+    if (reduce) {
+      render(0); setScrub(0);
+    } else {
+      addEventListener('scroll', onScroll, { passive: true });
+      addEventListener('resize', onScroll, { passive: true });
+      fromScroll();
+    }
+
+    // dial
+    const reRender = () => render((scrub ? Number(scrub.value) : 0) / 100);
+    scrub && scrub.addEventListener('input', () => { if (sval) sval.textContent = scrub.value; render(Number(scrub.value) / 100); });
+    const riseR = document.querySelector('[data-npx-rise]');
+    riseR && riseR.addEventListener('input', () => { rise = Number(riseR.value) / 100; const o = document.querySelector('[data-npx-rval]'); if (o) o.textContent = riseR.value; reRender(); });
+    const handR = document.querySelector('[data-npx-hand]');
+    handR && handR.addEventListener('input', () => { hand = Number(handR.value) / 100; const o = document.querySelector('[data-npx-hval]'); if (o) o.textContent = handR.value; reRender(); });
+    document.querySelectorAll('[data-npx-style]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        style = btn.getAttribute('data-npx-style');
+        document.querySelectorAll('[data-npx-style]').forEach((b) => b.classList.toggle('on', b === btn));
+        reRender();
+      });
+    });
+    const tc = document.querySelector('[data-npx-togglecount]');
+    tc && tc.addEventListener('change', () => npx.classList.toggle('npx--nocount', !tc.checked));
+    const tl = document.querySelector('[data-npx-togglelabel]');
+    tl && tl.addEventListener('change', () => npx.classList.toggle('npx--nolabel', !tl.checked));
   })();
 </script>
