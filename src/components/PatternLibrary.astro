@@ -61,28 +61,17 @@
     </div>
   </section>
 
-  <!-- ELEMENT 02: REEL REVEAL (dark) -->
-  <section class="pl-sec pl-sec--dark pl-el" id="reel-reveal">
-    <div class="pl-wrap">
-      <div class="pl-el-head">
-        <p class="pl-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span><span class="pl-num">02</span> Motion</p>
-        <h3 class="pl-el-title fade">Reel reveal.</h3>
-        <p class="pl-el-sub fade">The showreel plays in a fixed frame with the words parked either side, exoape's "Play Reel" moment. The film carries the motion; the words and kicker hold steady.</p>
-      </div>
-
-      <div class="pl-stage pl-stage--reel">
-        <p class="rr-kicker"><span class="lab-kicker-mark" aria-hidden="true">+</span>Work in motion</p>
-        <div class="rr" data-rr>
-          <span class="rr-word rr-word-l">Play</span>
-          <div class="rr-panel" data-cursor="Play">
-            <img class="rr-poster" src="/case-studies/sony-this-moment/gallery/tm-04.jpg" alt="Showreel still" />
-            <span class="rr-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z" /></svg></span>
-          </div>
-          <span class="rr-word rr-word-r">Reel</span>
-        </div>
-      </div>
-
-      <p class="rr-cap fade">Press play, and turn it up. Half the story is in the sound.</p>
+  <!-- ELEMENT 02: REEL REVEAL (dark, pinned GSAP ScrollTrigger reveal) -->
+  <section class="rr-section" id="reel-reveal" aria-label="Reel reveal">
+    <div class="rr-stage" data-rr-stage>
+      <p class="rr-kicker"><span class="lab-kicker-mark" aria-hidden="true">+</span>Work in motion</p>
+      <button class="rr-panel" type="button" data-cursor="Play" aria-label="Play reel" data-rr-panel>
+        <img class="rr-poster" src="/case-studies/sony-this-moment/gallery/tm-04.jpg" alt="Showreel still" />
+      </button>
+      <span class="rr-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z" /></svg></span>
+      <span class="rr-word rr-word-l">Play</span>
+      <span class="rr-word rr-word-r">Reel</span>
+      <p class="rr-cap">Press play, and turn it up. Half the story is in the sound.</p>
     </div>
   </section>
 
@@ -152,21 +141,23 @@
   .np-next:hover .np-arrow { transform: translateX(8px); }
 
   /* ---------- ELEMENT 02: reel reveal ---------- */
-  /* svh (stable small viewport) so the stage does NOT resize when a mobile URL bar
-     hides/shows on scroll, which reads as the reel jumping size. */
-  .pl-stage--reel { min-height: 72vh; min-height: 72svh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-  .rr-kicker { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13px; letter-spacing: 0.04em; color: rgb(var(--fg-rgb) / 0.7); margin: 0 0 clamp(44px, 8vh, 104px); }
-  .rr { --rr-size: 26; --rr-spread: 0px; --rr-radius: 10px; --rr-float: 0px; --rr-drift: 0%; display: flex; align-items: center; justify-content: center; gap: clamp(24px, 6vw, 110px); width: 100%; transform: translateY(var(--rr-float)); will-change: transform; }
-  .rr-word { font-weight: 400; font-size: clamp(44px, 10vw, 144px); line-height: 0.9; letter-spacing: -0.035em; white-space: nowrap; }
-  .rr-word-l { transform: translateX(calc(var(--rr-spread) * -1)); }
-  .rr-word-r { transform: translateX(var(--rr-spread)); }
-  .rr-panel { position: relative; flex: 0 0 auto; display: block; overflow: hidden; border-radius: var(--rr-radius); aspect-ratio: 16 / 9;
-    width: calc(var(--rr-size) * 1%); box-shadow: 0 30px 70px rgb(var(--ink-rgb) / 0.22); }
-  .rr-panel { aspect-ratio: 16 / 10; }
+  /* ---------- ELEMENT 02: reel reveal (pinned GSAP ScrollTrigger) ---------- */
+  /* Full-bleed dark stage that PINS; scroll scrubs the reveal. The film panel is
+     base-sized to cover the viewport and starts scaled DOWN (scale 0.26), so it
+     stays crisp when it scales back to full takeover. Words slide in from the
+     sides as absolute layers. All animation is transform/opacity only. */
+  .rr-section { background: var(--bg); color: var(--fg); }
+  .rr-stage { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; }
+  .rr-kicker { position: absolute; top: clamp(28px, 6vh, 64px); left: 0; right: 0; z-index: 4; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13px; letter-spacing: 0.04em; color: rgb(var(--fg-rgb) / 0.7); margin: 0; }
+  .rr-panel { position: absolute; inset: 0; margin: auto; width: 100vw; aspect-ratio: 16 / 10; padding: 0; border: 0; cursor: pointer; overflow: hidden; border-radius: 8px; background: #000;
+    transform: scale(0.26); transform-origin: center center; will-change: transform; z-index: 2; box-shadow: 0 30px 70px rgb(0 0 0 / 0.5); }
   .rr-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-  .rr-play { position: absolute; inset: 0; margin: auto; width: clamp(38px, 4vw, 52px); height: clamp(38px, 4vw, 52px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fg); background: rgb(var(--fg-rgb) / 0.16); border: 1px solid rgb(var(--fg-rgb) / 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
-  .rr-cap { text-align: center; max-width: 42ch; margin: clamp(26px, 3.4vw, 46px) auto 0; font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.5; opacity: 0.72; }
-  @media (max-width: 640px) { .rr-word { font-size: clamp(30px, 13vw, 74px); } .rr { gap: clamp(14px, 5vw, 40px); } }
+  .rr-play { position: absolute; inset: 0; margin: auto; width: 60px; height: 60px; border-radius: 50%; z-index: 3; pointer-events: none; display: flex; align-items: center; justify-content: center; color: var(--fg); background: rgb(var(--fg-rgb) / 0.16); border: 1px solid rgb(var(--fg-rgb) / 0.55); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+  .rr-word { position: absolute; top: 50%; z-index: 3; font-weight: 400; font-size: clamp(40px, 10vw, 144px); line-height: 0.9; letter-spacing: -0.035em; white-space: nowrap; opacity: 0; will-change: transform, opacity; }
+  .rr-word-l { left: clamp(16px, 8vw, 150px); }
+  .rr-word-r { right: clamp(16px, 8vw, 150px); }
+  .rr-cap { position: absolute; bottom: clamp(28px, 6vh, 64px); left: 0; right: 0; z-index: 4; text-align: center; max-width: 42ch; margin: 0 auto; padding: 0 var(--pad); font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.5; opacity: 0.72; }
+  @media (max-width: 640px) { .rr-word { font-size: clamp(30px, 12vw, 72px); } }
 
   /* ---------- on-the-bench note ---------- */
   .pl-soon-list { max-width: 64ch; font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.6; opacity: 0.7; margin: 14px 0 0; }
@@ -178,6 +169,10 @@
 </style>
 
 <script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
   // ---- ELEMENT 01: next-page scroller ----
   (function () {
     const np = document.querySelector('[data-np]');
@@ -220,4 +215,53 @@
     sec && sec.addEventListener('change', () => np.classList.toggle('np--nosection', !sec.checked));
   })();
 
+  // ---- ELEMENT 02: reel reveal (pinned scroll-scrub: words in from the sides, film takes over) ----
+  (function () {
+    const stage = document.querySelector('[data-rr-stage]');
+    if (!stage) return;
+    const panel = stage.querySelector('[data-rr-panel]');
+    const wordL = stage.querySelector('.rr-word-l');
+    const wordR = stage.querySelector('.rr-word-r');
+
+    // Bridge GSAP <-> the existing Lenis so ScrollTrigger tracks the SMOOTHED scroll
+    // position (one shared rAF loop, per the Lenis docs). window.lenis is set by Base
+    // and is absent under reduced-motion; Base's standalone loop self-stops via the flag.
+    if (window.lenis && !window.__lenisGsapBridged) {
+      window.__lenisGsapBridged = true;
+      window.lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((t) => window.lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    const mm = gsap.matchMedia();
+    // Full motion: pin the stage and scrub the reveal as the user scrolls through it.
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap.set([wordL, wordR], { yPercent: -50 });
+      const tl = gsap.timeline({
+        defaults: { ease: 'none' },
+        scrollTrigger: {
+          trigger: stage,
+          start: 'top top',
+          end: () => '+=' + Math.round(window.innerHeight * 2.2),
+          pin: true,
+          scrub: 0.6,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+      tl.fromTo(wordL, { xPercent: -260, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.45 }, 0)
+        .fromTo(wordR, { xPercent: 260, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.45 }, 0)
+        .fromTo(panel, { scale: 0.26 }, { scale: 1, duration: 0.55 }, 0.45)
+        .to([wordL, wordR], { autoAlpha: 0, duration: 0.25 }, 0.62);
+    });
+    // Reduced motion: no pin/scroll animation, just a calm resting state.
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      gsap.set([wordL, wordR], { yPercent: -50, xPercent: 0, autoAlpha: 1 });
+      gsap.set(panel, { scale: 0.42 });
+    });
+
+    // Recompute pin start/end after fonts + images settle.
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+    ScrollTrigger.refresh();
+  })();
 </script>

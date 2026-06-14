@@ -338,7 +338,10 @@ const { title = 'monuments', loader = false } = Astro.props;
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const lenis = new Lenis({ duration: 1.1, smoothWheel: true, touchMultiplier: 1.4 });
       window.lenis = lenis;
-      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      // A page that uses GSAP ScrollTrigger drives Lenis from gsap.ticker instead
+      // (one shared rAF loop, per the Lenis docs). It sets window.__lenisGsapBridged,
+      // and this standalone loop self-stops so the two never run at once.
+      function raf(time) { if (window.__lenisGsapBridged) return; lenis.raf(time); requestAnimationFrame(raf); }
       requestAnimationFrame(raf);
     }
   </script>
