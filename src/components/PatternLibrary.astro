@@ -74,10 +74,9 @@
         <p class="rr-kicker"><span class="lab-kicker-mark" aria-hidden="true">+</span>Work in motion</p>
         <div class="rr" data-rr>
           <span class="rr-word rr-word-l">Play</span>
-          <a class="rr-panel" href="#reel-reveal" aria-label="Play reel" data-cursor="Play">
-            <img class="rr-poster" src="/case-studies/sony-this-moment/gallery/tm-04.jpg" alt="" loading="lazy" />
-            <span class="rr-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg></span>
-          </a>
+          <div class="rr-panel" data-cursor="Watch">
+            <iframe class="rr-video" src="https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=1&controls=0&loop=1&playlist=VMubUUZ2tdU&rel=0&modestbranding=1&playsinline=1&showinfo=0&iv_load_policy=3&disablekb=1&fs=0&start=6" title="Showreel" frameborder="0" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+          </div>
           <span class="rr-word rr-word-r">Reel</span>
         </div>
       </div>
@@ -94,8 +93,8 @@
           <input class="pl-range" type="range" min="0" max="140" value="0" step="5" data-rr-spread aria-label="Word spread" />
         </label>
         <label class="pl-field">
-          <span class="pl-field-l">Parallax <b data-rr-parval>100</b> %</span>
-          <input class="pl-range" type="range" min="0" max="180" value="100" step="10" data-rr-par aria-label="Parallax amount" />
+          <span class="pl-field-l">Float <b data-rr-parval>0</b> %</span>
+          <input class="pl-range" type="range" min="0" max="180" value="0" step="10" data-rr-par aria-label="Float amount" />
         </label>
         <div class="pl-seg" role="group" aria-label="Corners">
           <button class="pl-seg-btn on" type="button" data-rr-corner="soft">Soft corners</button>
@@ -179,9 +178,7 @@
   .rr-word-r { transform: translateX(var(--rr-spread)); }
   .rr-panel { position: relative; flex: 0 0 auto; display: block; overflow: hidden; border-radius: var(--rr-radius); aspect-ratio: 16 / 9;
     width: calc(var(--rr-size) * 1%); box-shadow: 0 30px 70px rgb(var(--ink-rgb) / 0.22); }
-  .rr-panel { aspect-ratio: 16 / 10; }
-  .rr-poster { position: absolute; left: 0; top: -20%; width: 100%; height: 140%; object-fit: cover; display: block; transform: translateY(var(--rr-drift, 0%)); will-change: transform; }
-  .rr-play { position: absolute; inset: 0; margin: auto; width: clamp(40px, 5vw, 60px); height: clamp(40px, 5vw, 60px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fg); background: rgb(var(--fg-rgb) / 0.14); border: 1px solid rgb(var(--fg-rgb) / 0.45); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+  .rr-video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
   .rr-cap { text-align: center; max-width: 42ch; margin: clamp(26px, 3.4vw, 46px) auto 0; font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.5; opacity: 0.72; }
   @media (max-width: 640px) { .rr-word { font-size: clamp(30px, 13vw, 74px); } .rr { gap: clamp(14px, 5vw, 40px); } }
 
@@ -244,7 +241,7 @@
     const sec = rr.closest('.pl-el') || rr;
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let par = 1; // parallax amount, 0..1.8 from the dial
+    let par = 0; // block-float amount from the dial (off by default; the video is the motion)
     // Parallax: the image drifts inside the fixed frame and the whole block floats,
     // both slower than scroll (exoape's slow-media language). Size stays fixed; the
     // drift is capped so the oversized poster never reveals an edge.
@@ -257,7 +254,6 @@
         const vh = window.innerHeight || 1;
         if (r.bottom > -240 && r.top < vh + 240) {
           const p = clamp((vh - r.top) / (vh + r.height), 0, 1); // 0 entering, 1 exited
-          rr.style.setProperty('--rr-drift', clamp((0.5 - p) * 24 * par, -14, 14).toFixed(2) + '%');
           rr.style.setProperty('--rr-float', ((0.5 - p) * 40 * par).toFixed(1) + 'px');
         }
         requestAnimationFrame(tick);
