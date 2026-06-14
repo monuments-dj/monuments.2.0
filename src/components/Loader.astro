@@ -1,11 +1,93 @@
 ---
-// Intro loader overlay. Behavior lives in the global script in Base.astro.
+// Intro loader: black field, the monuments M spinning in metal (the #2 "conic metal
+// sweep" treatment), flanked by the studio's disciplines. Progress + curtain dismiss
+// live in the global loader script in Base.astro (it drives #loader-bar / #loader-pct
+// then adds .done). Styles live in global.css (#loader … keyframes).
+//
+// ── SWAP THE M ─────────────────────────────────────────────────────────────────
+// The path id="ldrMPath" below is a PLACEHOLDER geometric M (viewBox 0 0 120 100).
+// Drop in the real vectorized mark: replace that <path d="…"> with the official M's
+// path (normalized to the same 0 0 120 100 viewBox). Then either update the three
+// `.edge` segments to trace the new top edges, or just delete the <path class="edge">.
+// Everything else (metal, spin, clip, words) keeps working unchanged.
 ---
 <div id="loader">
-  <div class="loader-word">MONUMENTS</div>
-  <img class="loader-logo" src="https://monuments.cc/wp-content/uploads/2023/11/Asset-22.png" alt="M">
-  <div class="loader-bar-wrap">
-    <div class="loader-bar" id="loader-bar"></div>
+  <div class="ldr-stage" role="img" aria-label="Monuments, loading">
+    <div class="ldr-words ldr-left">
+      <span class="ldr-word ldr-dim">Creative</span>
+      <span class="ldr-word">Production</span>
+    </div>
+
+    <div class="ldr-mark">
+      <div class="ldr-spin">
+        <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="ldrChromeBase" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+              <stop offset="0" stop-color="#f4f7fb" />
+              <stop offset="0.18" stop-color="#aeb8c6" />
+              <stop offset="0.40" stop-color="#5d6470" />
+              <stop offset="0.55" stop-color="#20242b" />
+              <stop offset="0.70" stop-color="#5a626f" />
+              <stop offset="0.86" stop-color="#c3ccd8" />
+              <stop offset="1" stop-color="#7d8694" />
+            </linearGradient>
+
+            <linearGradient id="ldrConicAngular" gradientUnits="userSpaceOnUse" x1="0" y1="51" x2="120" y2="51">
+              <stop offset="0" stop-color="#0c0e12" />
+              <stop offset="0.14" stop-color="#9aa6b6" />
+              <stop offset="0.24" stop-color="#ffffff" />
+              <stop offset="0.30" stop-color="#c2ccd9" />
+              <stop offset="0.42" stop-color="#3a4049" />
+              <stop offset="0.5" stop-color="#11141a" />
+              <stop offset="0.58" stop-color="#3a4049" />
+              <stop offset="0.70" stop-color="#c2ccd9" />
+              <stop offset="0.76" stop-color="#ffffff" />
+              <stop offset="0.86" stop-color="#9aa6b6" />
+              <stop offset="1" stop-color="#0c0e12" />
+            </linearGradient>
+
+            <linearGradient id="ldrSpecStreak" gradientUnits="userSpaceOnUse" x1="20" y1="0" x2="100" y2="0">
+              <stop offset="0" stop-color="#ffffff" stop-opacity="0" />
+              <stop offset="0.42" stop-color="#ffffff" stop-opacity="0" />
+              <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.95" />
+              <stop offset="0.58" stop-color="#ffffff" stop-opacity="0" />
+              <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+            </linearGradient>
+
+            <linearGradient id="ldrEdgeHi" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#ffffff" stop-opacity="0.1" />
+              <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.95" />
+              <stop offset="1" stop-color="#ffffff" stop-opacity="0.1" />
+            </linearGradient>
+
+            <!-- PLACEHOLDER M — swap this path d="…" for the official mark (same viewBox) -->
+            <path id="ldrMPath" d="M12 86 L12 32 L38 16 L38 86 Z M47 86 L47 32 L73 16 L73 86 Z M82 86 L82 32 L108 16 L108 86 Z" />
+            <clipPath id="ldrMClip"><use href="#ldrMPath" /></clipPath>
+          </defs>
+
+          <use href="#ldrMPath" class="body" />
+
+          <g clip-path="url(#ldrMClip)">
+            <g id="ldrConicRot">
+              <rect x="-60" y="-60" width="240" height="220" fill="url(#ldrConicAngular)" opacity="0.55" style="mix-blend-mode:screen" />
+              <rect x="-60" y="-60" width="240" height="220" fill="url(#ldrConicAngular)" opacity="0.32" style="mix-blend-mode:multiply" transform="rotate(180 60 51)" />
+            </g>
+          </g>
+
+          <g clip-path="url(#ldrMClip)">
+            <g id="ldrSpecMove"><use href="#ldrMPath" class="spec" /></g>
+          </g>
+
+          <path class="edge" d="M12 32 L38 16 M47 32 L73 16 M82 32 L108 16" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="ldr-words ldr-right">
+      <span class="ldr-word">AI</span>
+    </div>
   </div>
-  <div class="loader-pct" id="loader-pct">0%</div>
+
+  <div class="ldr-progress" aria-hidden="true"><span class="loader-bar" id="loader-bar"></span></div>
+  <span class="loader-pct" id="loader-pct" hidden>0%</span>
 </div>

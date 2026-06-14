@@ -111,6 +111,15 @@ URL across requests until the new build is consistent before judging.
    in then fade, the EXISTING rwork reel still scrubs (track -53→-1096), no console errors. ⚠️ Domain
    monuments.cc still WordPress/untouched — this only changes the Vercel `/` build. NOT yet componentized
    with the lab's inline reel (PatternLibrary still has its own copy; dedupe later).
+9. **Loader REDESIGNED (2026-06-14, DJ's ask).** Replaced the old MONUMENTS-word + raster-M + bar loader
+   with: black field, a SPINNING METALLIC M (the "#2 conic metal sweep" — DJ A/B-picked it from 6 variants
+   a metallic-m-loader workflow generated), flanked by CREATIVE / PRODUCTION / AI. `Loader.astro` (SVG +
+   chrome/conic/spec gradients) + the loader CSS in `global.css` (`.ldr-*` + `#ldrConicRot`/`#ldrSpecMove`
+   + keyframes). Progress + curtain dismiss UNCHANGED (Base.astro drives `#loader-bar`/`#loader-pct` then
+   `.done`). Real-Chromium verified: shows, words animate, progress fills, curtain dismisses + reveals hero,
+   no console errors; reduced-motion holds a still frame. Shows on `/` only (index.astro `loader={true}`).
+   ⚠️ THE M IS A PLACEHOLDER geometric mark — DJ is vectorizing the real one; swap is one line: replace
+   `<path id="ldrMPath" d="…">` in Loader.astro (same 0 0 120 100 viewBox), then update/delete `.edge`.
 
 **New tools:** `tools/gen-palettes.mjs` (color), `tools/snap-el.mjs` (capture one element at a
 scroll offset in real Chromium), `tools/snap-themes.mjs`. The headless Claude-preview pauses rAF
