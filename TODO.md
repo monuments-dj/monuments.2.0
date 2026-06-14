@@ -53,8 +53,14 @@ URL across requests until the new build is consistent before judging.
    hidden). Behavior is frame-accurate (good sign); a true smoothness read needs the tab FOREGROUND
    (DJ scrolls it) or a real-Chromium FPS script. Watch perf on that heavy page (credo + parallax + pin).
 3. **Roll the exoape light-forward pass onto the other lab pages** (hub done; follow `EXOAPE-PASS.md`).
-4. **Pattern library, remaining elements:** photo galleries, next-project teaser (and its
-   reimagining), project-detail slider (lusion `of_the_oak` style).
+4. **Pattern library — Element 03 NEXT-PROJECT HANDOFF SHIPPED + verified (2026-06-13, commit
+   34c0219).** Exoape grow→handoff: current project hero grows, next project's card rises from
+   beneath and takes over with its title (DJ's starred next-project ask, IDEAS.md). Scroll-scrubbed
+   + a Scrub dial to freeze any frame; 3 takeover styles (rise/grow/curtain) + rise-distance and
+   handoff-point dials; Counter/Label toggles. Light beat after the dark reel. Real-Chromium verified:
+   render math exact across all 3 styles, scroll driver maps 100→0 clean, prod build clean. Caught +
+   fixed a path bug (flashpoint hero is in `/gallery/`). Cards: Sony This Moment (tm-02) → Flashpoint.
+   **Remaining library elements:** photo galleries, project-detail slider (lusion `of_the_oak`).
 
 **New tools:** `tools/gen-palettes.mjs` (color), `tools/snap-el.mjs` (capture one element at a
 scroll offset in real Chromium), `tools/snap-themes.mjs`. The headless Claude-preview pauses rAF
