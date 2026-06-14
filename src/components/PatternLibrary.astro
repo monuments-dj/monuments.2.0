@@ -226,11 +226,19 @@
     // Bridge GSAP <-> the existing Lenis so ScrollTrigger tracks the SMOOTHED scroll
     // position (one shared rAF loop, per the Lenis docs). window.lenis is set by Base
     // and is absent under reduced-motion; Base's standalone loop self-stops via the flag.
-    if (window.lenis && !window.__lenisGsapBridged) {
-      window.__lenisGsapBridged = true;
-      window.lenis.on('scroll', ScrollTrigger.update);
+    function bridgeLenis() {
+      if (window.__lenisGsapBridged) return true;
+      if (!window.lenis) return false;        // Base sets window.lenis in a separate
+      window.__lenisGsapBridged = true;       // script; in the prod bundle THIS script
+      window.lenis.on('scroll', ScrollTrigger.update); // can run first, so wait for it.
       gsap.ticker.add((t) => window.lenis.raf(t * 1000));
       gsap.ticker.lagSmoothing(0);
+      ScrollTrigger.refresh();
+      return true;
+    }
+    if (!bridgeLenis()) {
+      const iv = setInterval(() => { if (bridgeLenis()) clearInterval(iv); }, 50);
+      setTimeout(() => clearInterval(iv), 4000);
     }
 
     const mm = gsap.matchMedia();
