@@ -874,11 +874,9 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
   .hero-type { left: 50%; transform: translate(-50%, -52%); }
   .hero-bottom { flex-direction: column; align-items: flex-start; gap: 28px; padding: 0 24px 48px; }
   nav { padding: 20px 24px; }
-  .trusted, .work, .bottom-cta { padding-left: 24px; padding-right: 24px; }
+  .trusted, .bottom-cta { padding-left: 24px; padding-right: 24px; }
   .trusted-top { flex-direction: column; gap: 24px; }
   .logo-grid { grid-template-columns: repeat(2, 1fr); }
-  .work-grid { grid-template-columns: 1fr; }
-  .work-card.wide { grid-column: span 1; aspect-ratio: 4/3; }
   .testimonials { padding: 80px 24px; }
   .tm-card { flex-basis: 80vw; padding: 28px 26px; }
   .tm-statement-foot { margin-top: 34px; }
@@ -923,7 +921,7 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
     scroll-behavior: auto !important;
   }
   #loader { display: none !important; }
-  #hero-type, .hero-bottom, .fade, .logo-cell, .work-card { opacity: 1 !important; transform: none !important; }
+  #hero-type, .hero-bottom, .fade, .logo-cell { opacity: 1 !important; transform: none !important; }
 }
 
 /* ===== Photography — horizontal category lanes ===== */
@@ -960,8 +958,6 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 .pg-item img { height: 100%; width: auto; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), filter 0.45s ease; filter: grayscale(0.12); user-select: none; -webkit-user-drag: none; }
 .pg-item:hover img { transform: scale(1.05); filter: grayscale(0); }
 
-/* Movement toggle (TEMP — compare motion styles) */
-
 /* Lightbox */
 .pg-lightbox { position: fixed; inset: 0; z-index: 3000; display: none; flex-direction: column; background: rgba(10,11,14,0.96); backdrop-filter: blur(4px); }
 .pg-lightbox.open { display: flex; }
@@ -995,24 +991,10 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
 
 /* ===== Case study template (cs-) ===== */
 
-/* Hero — full-bleed header */
-
 /* Meta bar */
 .cs-meta-item { display: flex; flex-direction: column; gap: 8px; }
 .cs-meta-k { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-mid); }
 .cs-meta-v { font-size: 14px; color: #141519; }
-
-/* Generic boxed section */
-
-/* Two-column: heading + body */
-
-/* Objectives list */
-
-/* Approach sub-points */
-
-/* Visuals */
-
-/* Credits */
 
 /* Next project */
 .cs-next { display: block; padding: 86px 100px; background: #0d0f14; color: var(--white); text-decoration: none; transition: background 0.3s ease; }

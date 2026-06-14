@@ -386,7 +386,6 @@ const reel = [
           bars[i].classList.toggle('lit', i <= lead);  // progress fill
         }
       }
-      function build() {}   // no-op kept so existing call sites are harmless
 
       // ---- Native fallback (touch / reduced-motion): swipeable strip, no pin/scrub ----
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

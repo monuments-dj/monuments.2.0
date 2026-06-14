@@ -189,7 +189,6 @@
 
   @media (pointer: coarse), (prefers-reduced-motion: reduce) {
     .fx-grain { animation: none; }
-    .fx-ring { display: none; }
   }
 </style>
 
@@ -298,7 +297,6 @@
         else { cur.classList.remove('hot', 'label'); tScale = 0.125; }
       }, { passive: true });
       addEventListener('pointerleave', () => cur.classList.remove('live'));
-      addEventListener('mousedown', () => { cur.style.setProperty('--press', '0.9'); });
     }
 
     // Magnetic CTAs: any element whose class ends in -cta gets the pull.

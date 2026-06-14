@@ -203,13 +203,11 @@ const meta = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .tmx-insight, .tmx-next { height: auto; }
+    .tmx-insight { height: auto; }
     .tmx-over { margin-top: 0; }
-    .scn-stage, .tmx-next-stage { position: static; height: auto; padding: 14vh var(--pad); }
+    .scn-stage { position: static; height: auto; padding: 14vh var(--pad); }
     .tmx-insight-line :global(.wi) { transform: none !important; transition: none !important; }
     .tmx-stroke path { stroke-dashoffset: 0; }
-    .tmx-next-card { transform: none; }
-    .tmx-next-title { opacity: 1; transform: none; }
     .tmx :global(.split .wi) { transform: none !important; transition: none !important; }
     [data-drift] { transform: none !important; }
   }
