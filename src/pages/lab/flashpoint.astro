@@ -132,6 +132,11 @@ const credits = [
 
   /* ---------- HERO ---------- */
   .fp-hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding: 16vh 0 12vh; }
+  /* slight scrim to take the edge off the bright paper + mockups (portfolio-header mood).
+     Sits above the floating frames (z1) and below the headline (z3), so type stays crisp. */
+  .fp-hero::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
+    linear-gradient(180deg, rgb(var(--ink-rgb) / 0.26) 0%, rgb(var(--ink-rgb) / 0.08) 46%, rgb(var(--ink-rgb) / 0.24) 100%),
+    radial-gradient(120% 100% at 40% 46%, transparent 36%, rgb(var(--ink-rgb) / 0.14) 100%); }
   .fp-hero-inner { position: relative; z-index: 3; max-width: var(--wrap, 1300px); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
   .fp-hero-inner::before { content: ''; position: absolute; inset: -6vh -10%; z-index: -1; pointer-events: none; background: radial-gradient(120% 84% at 38% 50%, color-mix(in srgb, var(--paper) 88%, transparent) 0%, color-mix(in srgb, var(--paper) 55%, transparent) 46%, transparent 78%); }
   .fp-back { display: inline-block; margin-bottom: clamp(20px, 4vh, 40px); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.55); text-decoration: none; transition: color 0.25s ease; }
