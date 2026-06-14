@@ -1,0 +1,281 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
+
+// === /lab/project-detail ===
+// Pattern-library page: a project-detail SLIDER in the Lusion `of_the_oak` style.
+// A pinned section whose horizontal track of framed "chapter" panels scrubs sideways
+// as you scroll down (GSAP ScrollTrigger, bridged to Lenis). Each panel = a framed
+// project still + chapter title + description, with a counter / progress / arrows HUD.
+// Reference capture: tools/snaps/ref-lusion-of_the_oak/. Reduced-motion + narrow
+// screens fall back to a clean vertical stack. Dark, cinematic (--bg/--fg), tokenized
+// so the LabFx selector reskins it live.
+
+const project = { client: 'Sony', name: 'This Moment', meta: 'Brand film + stills · 2025' };
+
+const chapters = [
+  { n: '01', k: 'Direction',   t: 'The brief',     img: '/case-studies/sony-this-moment/gallery/tm-01.jpg',
+    d: 'Sony wanted the launch to feel like a memory, not an ad. We built the whole idea around a single held moment and worked outward from there.' },
+  { n: '02', k: 'Production',  t: 'On location',   img: '/case-studies/sony-this-moment/gallery/tm-03.jpg',
+    d: 'Two days, one coastline, a small crew that has shot together for years. No bloated call sheet, just the people the work actually needed.' },
+  { n: '03', k: 'Film',        t: 'The hero film', img: '/case-studies/sony-this-moment/gallery/tm-04.jpg',
+    d: 'Sixty seconds that earn their length. We cut for feeling first, then kept tightening until there was nothing left to take away.' },
+  { n: '04', k: 'Photography', t: 'The stills',    img: '/case-studies/sony-this-moment/gallery/tm-05.jpg',
+    d: 'A full stills set captured alongside the film, so one look carried the campaign from the billboard down to the last story frame.' },
+  { n: '05', k: 'Post',        t: 'The grade',     img: '/case-studies/sony-this-moment/gallery/tm-07.jpg',
+    d: 'Warm, filmic, a little imperfect on purpose. The grade is where the moment stopped looking shot and started looking remembered.' },
+  { n: '06', k: 'Delivery',    t: 'The launch',    img: '/case-studies/sony-this-moment/gallery/tm-09.jpg',
+    d: 'Cut down into every placement the media plan asked for, from the hero film to the six second pre-roll, all from one shoot.' },
+];
+---
+<Base title="Project detail slider, the Lab">
+  <main class="pdx">
+    <!-- INTRO -->
+    <header class="pdx-intro">
+      <a class="pdx-back" href="/lab" data-cursor="Back">&larr; The Lab</a>
+      <p class="pdx-eyebrow fade"><span class="pdx-mark" aria-hidden="true">+</span>Pattern library &middot; Project detail</p>
+      <h1 class="pdx-h1 split">The project, one <em>chapter</em> at a time.</h1>
+      <p class="pdx-lead fade">A project-detail slider in the Lusion <i>of&nbsp;the&nbsp;oak</i> spirit. The section pins and a horizontal track of framed chapters scrubs sideways as you scroll. Each frame is a beat in the story, with room to read before the next one slides in. Use the arrows, or just keep scrolling.</p>
+      <p class="pdx-demo fade"><span class="pdx-demo-k">Demo project</span> {project.name} &middot; {project.client} &middot; {project.meta}</p>
+      <div class="pdx-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll to enter</span><i></i></div>
+    </header>
+
+    <!-- PINNED HORIZONTAL SLIDER -->
+    <section class="pdx-stage" data-pdx aria-label="Project detail slider">
+      <div class="pdx-track" data-pdx-track>
+        {chapters.map((c, i) => (
+          <article class="pdx-panel" data-cursor="View">
+            <div class="pdx-panel-inner">
+              <figure class="pdx-frame">
+                <div class="pdx-frame-bar" aria-hidden="true">
+                  <span class="pdx-dots"><i></i><i></i><i></i></span>
+                  <span class="pdx-frame-label">monuments &middot; {project.name}</span>
+                  <span class="pdx-frame-go">&#8599;</span>
+                </div>
+                <div class="pdx-frame-media">
+                  <img src={c.img} alt={`${project.name}, ${c.t}`} loading="eager" decoding="async" />
+                </div>
+              </figure>
+              <div class="pdx-text">
+                <span class="pdx-index">{c.n}<i>/ 0{chapters.length}</i></span>
+                <span class="pdx-k">{c.k}</span>
+                <h2 class="pdx-title">{c.t}</h2>
+                <p class="pdx-desc">{c.d}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- HUD: progress runs as a hairline along the very bottom; the counter + arrows
+           cluster bottom-right so they clear the LabFx swatch picker (bottom-left). -->
+      <div class="pdx-hud">
+        <div class="pdx-progress"><span class="pdx-progress-fill" data-pdx-fill></span></div>
+        <div class="pdx-hud-right">
+          <div class="pdx-counter"><b data-pdx-cur>01</b><span>/ 0{chapters.length}</span></div>
+          <div class="pdx-nav">
+            <button class="pdx-arrow" type="button" data-pdx-prev data-cursor="Prev" aria-label="Previous chapter">&larr;</button>
+            <button class="pdx-arrow" type="button" data-pdx-next data-cursor="Next" aria-label="Next chapter">&rarr;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLOSER -->
+    <section class="pdx-end">
+      <p class="pdx-eyebrow fade"><span class="pdx-mark" aria-hidden="true">+</span>One pattern of many</p>
+      <p class="pdx-end-big split">That is the project-detail slider. The rest of the kit lives on the <em>Lab.</em></p>
+      <div class="pdx-end-cta fade">
+        <a class="pdx-cta" href="/lab" data-cursor="View">Back to the Lab <span aria-hidden="true">&#8599;</span></a>
+        <a class="pdx-cta pdx-cta--ghost" href="/lab/work" data-cursor="View">See the work index</a>
+      </div>
+    </section>
+  </main>
+  <LabFx />
+</Base>
+
+<style>
+  .pdx { background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .pdx em { font-style: italic; color: var(--accent); }
+  .pdx-mark { color: var(--accent); font-weight: 500; margin-right: 22px; }
+  .pdx-eyebrow { display: inline-flex; align-items: baseline; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.72); margin: 0; }
+
+  /* ---------- INTRO ---------- */
+  .pdx-intro { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; max-width: var(--wrap); margin: 0 auto; padding: 18vh var(--pad) 12vh; }
+  .pdx-back { position: absolute; top: clamp(80px, 12vh, 130px); left: var(--pad); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); text-decoration: none; transition: color 0.25s ease; }
+  .pdx-back:hover { color: var(--accent); }
+  .pdx-h1 { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(42px, 7vw, 116px); line-height: 1.0; letter-spacing: -0.035em; margin: 20px 0 0; padding-bottom: 0.1em; max-width: 16ch; }
+  .pdx-lead { margin: 30px 0 0; max-width: 58ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.72; font-weight: 300; color: rgb(var(--fg-rgb) / 0.72); }
+  .pdx-lead i { font-style: italic; color: rgb(var(--fg-rgb) / 0.92); }
+  .pdx-demo { margin: 34px 0 0; font-size: 13px; font-weight: 300; letter-spacing: 0.02em; color: rgb(var(--fg-rgb) / 0.55); }
+  .pdx-demo-k { display: inline-block; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-right: 12px; }
+  .pdx-cue { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .pdx-cue i { width: 1px; height: 34px; background: linear-gradient(var(--accent), transparent); animation: pdxCue 1.8s ease-in-out infinite; transform-origin: top; }
+  @keyframes pdxCue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
+
+  /* ---------- PINNED STAGE + HORIZONTAL TRACK ---------- */
+  .pdx-stage { position: relative; height: 100vh; height: 100svh; overflow: hidden; }
+  .pdx-track { display: flex; flex-direction: row; height: 100%; width: max-content; will-change: transform; }
+  .pdx-panel { flex: 0 0 100vw; height: 100%; display: flex; align-items: center; }
+  /* consistent frame-left / text-right keeps a frame on screen at every handoff
+     (the exiting panel's text and the entering panel's frame overlap at center) */
+  .pdx-panel-inner { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad);
+    display: grid; grid-template-columns: 1.18fr 0.82fr; gap: clamp(36px, 5vw, 84px); align-items: center; }
+
+  /* the framed "screen" */
+  .pdx-frame { margin: 0; border-radius: 12px; overflow: hidden; background: rgb(var(--fg-rgb) / 0.04);
+    border: 1px solid rgb(var(--fg-rgb) / 0.1); box-shadow: 0 40px 90px rgb(0 0 0 / 0.5); }
+  .pdx-frame-bar { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-bottom: 1px solid rgb(var(--fg-rgb) / 0.08); }
+  .pdx-dots { display: inline-flex; gap: 6px; }
+  .pdx-dots i { width: 9px; height: 9px; border-radius: 50%; background: rgb(var(--fg-rgb) / 0.22); }
+  .pdx-frame-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); margin: 0 auto 0 4px; }
+  .pdx-frame-go { font-size: 13px; color: rgb(var(--fg-rgb) / 0.4); }
+  .pdx-frame-media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+  .pdx-frame-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.12); will-change: transform; }
+
+  /* the chapter text column */
+  .pdx-text { max-width: 46ch; }
+  .pdx-index { display: block; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .pdx-index i { font-style: normal; color: rgb(var(--fg-rgb) / 0.4); margin-left: 4px; }
+  .pdx-k { display: block; margin-top: 18px; font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.6); }
+  .pdx-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4vw, 60px); line-height: 1.04; letter-spacing: -0.03em; margin: 12px 0 0; }
+  .pdx-desc { margin: 20px 0 0; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.68; font-weight: 300; color: rgb(var(--fg-rgb) / 0.74); }
+
+  /* ---------- HUD (pinned inside the stage) ---------- */
+  .pdx-hud { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+  .pdx-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgb(var(--fg-rgb) / 0.16); overflow: hidden; }
+  .pdx-progress-fill { display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: left; background: var(--accent); }
+  .pdx-hud-right { position: absolute; right: var(--pad); bottom: clamp(24px, 4vh, 46px); display: flex; align-items: center; gap: clamp(16px, 2vw, 26px); pointer-events: auto; }
+  .pdx-counter { font-size: 13px; letter-spacing: 0.08em; color: rgb(var(--fg-rgb) / 0.55); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pdx-counter b { color: var(--fg); font-weight: 500; font-size: 16px; }
+  .pdx-nav { display: inline-flex; gap: 10px; }
+  .pdx-arrow { width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgb(var(--fg-rgb) / 0.24); background: rgb(var(--fg-rgb) / 0.04); color: var(--fg); font-size: 16px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease; }
+  .pdx-arrow:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); transform: translateY(-2px); }
+
+  /* ---------- CLOSER ---------- */
+  .pdx-end { max-width: var(--wrap); margin: 0 auto; padding: clamp(110px, 16vw, 200px) var(--pad); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 26px; }
+  .pdx-end .pdx-eyebrow { color: rgb(var(--fg-rgb) / 0.72); }
+  .pdx-end-big { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.8vw, 72px); line-height: 1.06; letter-spacing: -0.03em; max-width: 18ch; padding-bottom: 0.08em; }
+  .pdx-end-cta { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 8px; }
+  .pdx-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--accent); padding: 17px 30px; border-radius: 999px; text-decoration: none; transition: gap 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 14px 40px rgb(0 0 0 / 0.32); }
+  .pdx-cta:hover { gap: 18px; transform: translateY(-2px); box-shadow: 0 18px 50px rgb(0 0 0 / 0.42); }
+  .pdx-cta--ghost { background: transparent; color: var(--fg); border: 1px solid rgb(var(--fg-rgb) / 0.28); box-shadow: none; }
+  .pdx-cta--ghost:hover { border-color: var(--accent); color: var(--accent); box-shadow: none; }
+
+  /* ---------- split + fade reveal ---------- */
+  .pdx :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .pdx :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .pdx :global(.split.on .wi) { transform: none; }
+  .pdx .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .pdx .fade.on { opacity: 1; transform: none; }
+
+  /* ---------- vertical-stack fallback (narrow screens + reduced motion) ---------- */
+  @media (max-width: 820px) {
+    .pdx-stage { height: auto; overflow: visible; }
+    .pdx-track { flex-direction: column; width: auto; max-width: var(--wrap); margin: 0 auto; transform: none !important; }
+    .pdx-panel { flex: none; width: auto; height: auto; padding: clamp(48px, 9vw, 90px) 0; border-top: 1px solid rgb(var(--fg-rgb) / 0.1); }
+    .pdx-panel:first-child { border-top: 0; }
+    .pdx-panel-inner { grid-template-columns: 1fr; gap: 28px; }
+    .pdx-frame-media img { transform: none; }
+    .pdx-hud { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pdx-stage { height: auto; overflow: visible; }
+    .pdx-track { flex-direction: column; width: auto; max-width: var(--wrap); margin: 0 auto; transform: none !important; }
+    .pdx-panel { flex: none; width: auto; height: auto; padding: clamp(48px, 9vw, 90px) 0; }
+    .pdx-panel-inner { grid-template-columns: 1fr; gap: 28px; }
+    .pdx-frame-media img { transform: none !important; }
+    .pdx-hud { display: none; }
+    .pdx-cue i { animation: none; }
+    .pdx :global(.split .wi) { transform: none !important; transition: none !important; }
+    .pdx .fade { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+
+<script>
+  import { gsap, ScrollTrigger } from '../../scripts/gsap-lenis.js';
+
+  // --- split + fade reveal (line-safe word splitter, descender-safe clip) ---
+  const splitWords = (root: Node, counter: { n: number }) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
+
+  // --- the pinned horizontal slider ---
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const small = matchMedia('(max-width: 820px)').matches;
+  const stage = document.querySelector('[data-pdx]') as HTMLElement | null;
+  const track = document.querySelector('[data-pdx-track]') as HTMLElement | null;
+
+  if (stage && track && !reduced && !small) {
+    const panels = [...track.querySelectorAll('.pdx-panel')] as HTMLElement[];
+    const medias = panels.map((p) => p.querySelector('.pdx-frame-media img') as HTMLImageElement | null);
+    const N = panels.length;
+    const curEl = document.querySelector('[data-pdx-cur]') as HTMLElement | null;
+    const fill = document.querySelector('[data-pdx-fill]') as HTMLElement | null;
+    const amount = () => Math.max(0, track.scrollWidth - window.innerWidth);
+
+    const tween = gsap.to(track, {
+      x: () => -amount(),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: stage,
+        start: 'top top',
+        end: () => '+=' + amount(),
+        pin: true,
+        scrub: 0.8,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const p = self.progress;
+          if (fill) fill.style.transform = `scaleX(${p.toFixed(4)})`;
+          if (curEl) curEl.textContent = String(Math.min(N, Math.round(p * (N - 1)) + 1)).padStart(2, '0');
+          // subtle image counter-parallax within each frame as panels pass center
+          const vpc = window.innerWidth / 2;
+          for (let i = 0; i < panels.length; i++) {
+            const img = medias[i];
+            if (!img) continue;
+            const r = panels[i].getBoundingClientRect();
+            const off = (r.left + r.width / 2 - vpc) / window.innerWidth;
+            img.style.transform = `translate3d(${(-off * 6).toFixed(2)}%,0,0) scale(1.12)`;
+          }
+        },
+      },
+    });
+
+    // arrows: jump to the adjacent chapter's slice of the pinned scroll range
+    const st = tween.scrollTrigger!;
+    const goTo = (k: number) => {
+      const kk = Math.max(0, Math.min(N - 1, k));
+      const target = st.start + (kk / (N - 1)) * (st.end - st.start);
+      const w = window as any;
+      if (w.lenis) w.lenis.scrollTo(target, { duration: 0.9 });
+      else window.scrollTo({ top: target, behavior: 'smooth' });
+    };
+    const curIdx = () => Math.round(st.progress * (N - 1));
+    document.querySelector('[data-pdx-prev]')?.addEventListener('click', () => goTo(curIdx() - 1));
+    document.querySelector('[data-pdx-next]')?.addEventListener('click', () => goTo(curIdx() + 1));
+
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+  }
+</script>

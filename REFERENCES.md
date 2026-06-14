@@ -34,6 +34,12 @@ DJ: "closest to my design language. And copy, also."
 - Physics confetti/squiggle layers = playful without being a game.
 - Sound FX: DJ unsure, suspects too gimmicky for his brand. Verdict: skip for v1; if ever,
   opt-in toggle only. (snaps: ref-lusion-home, ref-lusion-about + DJ's screenshots)
+- **lusion.co/projects/of_the_oak — the PROJECT-DETAIL slider** (DJ's reference for the pattern):
+  the project-detail page is a horizontal handoff of framed device/browser mockups of the project's
+  screens, each paired with a narrow title + description card (chapters: "Trapped Russula", "Midas
+  Tree Weaver", "Welcome to the Digital Field Guide"...). One card exits left as the next scene slides
+  in from the right; near-black panels over deep forest-green, persistent top nav, side thumbnails on
+  rich panels. → BUILT as `/lab/project-detail` (snaps: ref-lusion-of_the_oak, 21 step frames).
 
 ## Approved page scope (v2 push, LA deadline Thu 2026-06-18)
 1. **Homepage v2** — "go crazy" but pull from existing site. KEEP: the reel entrance

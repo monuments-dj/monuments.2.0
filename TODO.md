@@ -60,7 +60,17 @@ URL across requests until the new build is consistent before judging.
    handoff-point dials; Counter/Label toggles. Light beat after the dark reel. Real-Chromium verified:
    render math exact across all 3 styles, scroll driver maps 100→0 clean, prod build clean. Caught +
    fixed a path bug (flashpoint hero is in `/gallery/`). Cards: Sony This Moment (tm-02) → Flashpoint.
-   **Remaining library elements:** photo galleries, project-detail slider (lusion `of_the_oak`).
+   **Remaining inline library elements:** photo galleries.
+5. **Project-detail slider PAGE SHIPPED + verified (2026-06-14).** New dedicated page
+   `/lab/project-detail` (linked from the hub "Also on the bench" row). Lusion `of_the_oak`-style
+   project-detail slider: a section that PINS while a horizontal track of 6 framed "chapter" panels
+   (Sony This Moment, tm-01→tm-09) scrubs sideways on scroll (GSAP ScrollTrigger via `gsap-lenis.js`).
+   Each panel = a device-framed still + chapter title/description; HUD = counter + bottom progress
+   hairline + prev/next arrows (arrows lenis.scrollTo the next slice). Consistent frame-left layout
+   so a frame stays on screen at every handoff (alternating left a void at the midpoint — fixed).
+   Reference capture: `tools/snaps/ref-lusion-of_the_oak/` (snap.mjs `--steps`, 21 frames). Dark/
+   cinematic (--bg/--fg), reduced-motion + ≤820px fall back to a vertical stack. Real-Chromium
+   verified: pin holds, track 0→-7200 frame-accurate, counter 01→06, no console errors, images load.
 
 **New tools:** `tools/gen-palettes.mjs` (color), `tools/snap-el.mjs` (capture one element at a
 scroll offset in real Chromium), `tools/snap-themes.mjs`. The headless Claude-preview pauses rAF
