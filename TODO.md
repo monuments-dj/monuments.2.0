@@ -120,6 +120,22 @@ URL across requests until the new build is consistent before judging.
    no console errors; reduced-motion holds a still frame. Shows on `/` only (index.astro `loader={true}`).
    ⚠️ THE M IS A PLACEHOLDER geometric mark — DJ is vectorizing the real one; swap is one line: replace
    `<path id="ldrMPath" d="…">` in Loader.astro (same 0 0 120 100 viewBox), then update/delete `.edge`.
+10. **BRAND BOOK INTEGRATED into the lab (2026-06-14, overnight).** DJ sent the brand book v0.8
+   (`~/Downloads/monuments-brand-book.html`; see memory `monuments-brand-book`). Built `BrandWorld.astro`,
+   a dark "Brand World" band on `/lab` (id `#brand`, after the session index): living M-eye-NUMENTS
+   wordmark (eye blinks, spark spins), the ink/paper/denim/rose palette, the auto-cycling symbol family,
+   a soft eye-sun, voice + Space Mono colophon. Added Archivo + Space Mono (Base font link) and
+   `--denim`/`--rose`/`--brand-ink`/`--brand-paper` tokens. Picked from 4 generated concepts; the other 3
+   (**sun-playground** — interactive generative soft-sun + symbol grid, very lab-native; **block-noise**;
+   **wordmark-hero**) are PARKED at `public/brand-lab/*.html` (local only, not deployed — view at
+   `localhost:4321/brand-lab/<name>.html`). DJ may want one added. Real-Chromium verified: generators fire,
+   symbol cycle runs, no console errors, reads as a clean dark beat in the lab.
+11. **CODE TIGHTENED (2026-06-14, overnight).** Removed the dead scroll-zoom showreel CSS (`.showreel`/
+   `.reel-*` in global.css) + JS (the scroll-zoom IIFE + the `reelVideo` YouTube block in index.astro) left
+   over when the home moved to ReelReveal; kept the hero YouTube control. Verified the home is intact (hero,
+   tilt, testimonials, reel reveal, rwork, loader all present, no console errors). NOT deduped: the lab's
+   inline reel vs ReelReveal are intentionally different (the lab one reskins with LabFx, the home one is
+   fixed-dark) — leave them.
 
 **New tools:** `tools/gen-palettes.mjs` (color), `tools/snap-el.mjs` (capture one element at a
 scroll offset in real Chromium), `tools/snap-themes.mjs`. The headless Claude-preview pauses rAF
