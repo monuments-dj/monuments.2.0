@@ -87,6 +87,15 @@ URL across requests until the new build is consistent before judging.
    literal final beat, and pull-to-next is gated to not fire at the footer). For the real work-page
    pattern, decide whether to suppress the global footer on case studies (scroller = true closer) or
    fold the next-project block into the footer. DJ to react to the prototype first.
+7. **`/lab/flashpoint` TEST PAGE shipped + verified (2026-06-14, DJ's ask).** New light-forward lab
+   case study for the Flashpoint rebrand (Adorama's photo-gear label), linked from the hub "Also on
+   the bench" row. Brand-literal teal (#16a3ab) + orange (#f0612a) on --paper; assets float as cards.
+   Beats: FLASHPOINT hero (floating mockups, drift), the brief (services + real lead copy), the
+   IMAGINE/ILLUMINATE/CREATE concept triad (staggered light-in, brand colours), the system gallery
+   (6-col editorial grid → shared Lightbox), the work spanned, credits, then the DARK next-project
+   scroller into /lab/sony-this-moment (teal fill). Copy = the real /work/flashpoint text, de-em-dashed.
+   Real-Chromium verified: all sections render, concept lights, scroller fills→100% + pull-to-next, no
+   console errors. NOTE: built purpose-fit (not a sony clone) since Flashpoint is a rebrand, not a film.
 
 **New tools:** `tools/gen-palettes.mjs` (color), `tools/snap-el.mjs` (capture one element at a
 scroll offset in real Chromium), `tools/snap-themes.mjs`. The headless Claude-preview pauses rAF
