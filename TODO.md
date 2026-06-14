@@ -77,16 +77,19 @@ URL across requests until the new build is consistent before judging.
    Reference capture: `tools/snaps/ref-lusion-of_the_oak/` (snap.mjs `--steps`, 21 frames). Dark/
    cinematic (--bg/--fg), reduced-motion + ≤820px fall back to a vertical stack. Real-Chromium
    verified: pin holds, track 0→-7200 frame-accurate, counter 01→06, no console errors, images load.
-6. **Work-page NEXT-PROJECT scroller PROTOTYPE (2026-06-14, DJ's ask).** Repurposed the Element-01
-   next-page scroller as the bottom-of-work-page next-project handoff, on `/lab/sony-this-moment`
-   (replaced its portal-grow ending; blue-cross + turnstile KEEP the portal for an A/B compare).
-   Big next-project name (TURNSTILE) + "Keep scrolling to the next project" + a NEXT PROJECT rail that
-   fills toward the page bottom (`--np-progress`), `is-full` lights the cue, click or pull-to-next
-   (gated overscroll) enters `/lab/turnstile`. Real-Chromium verified: fill 0→100%, pull-to-next nav,
-   no errors. ⚠️ OPEN DECISION: the GLOBAL site footer renders AFTER the scroller (so it is not the
-   literal final beat, and pull-to-next is gated to not fire at the footer). For the real work-page
-   pattern, decide whether to suppress the global footer on case studies (scroller = true closer) or
-   fold the next-project block into the footer. DJ to react to the prototype first.
+6. **`NextProject.astro` — the standard work-page project-nav component (2026-06-14, DJ loves it).**
+   Reusable next-project hand-off: the clean scroller (caption + big next name + tag + filling rail,
+   `is-full` lights the cue) PLUS a MEDIA CLUSTER (a video-preview frame + 2 peeking photos) that
+   starts small and GROWS as you scroll (`--np-g` scale 0.34→1 near-linear, `--np-mo` opacity).
+   Scroll-to-end carries to the next project via a SHORT gated overscroll (`threshold` prop, default
+   100px, was 320 — much snappier) or click. Props: href/name/tag/accent/poster/video?/photos/threshold.
+   `video` optional (mp4); without it the poster frame is the video slot (awaiting real reels). LIVE on
+   `/lab/sony-this-moment` (→Turnstile, red, turnstile bts/products media) and `/lab/flashpoint`
+   (→This Moment, teal, sony tm media). Inline tmx-np/fp-np removed. Real-Chromium verified on both:
+   media grows 0.54→0.74→1, pull-to-next fires in ~120px, no console errors. ⚠️ STILL OPEN: the GLOBAL
+   footer renders AFTER the component (gate stops pull-to-next firing at the footer). Decide whether to
+   suppress the footer on case studies (component = true closer) or fold next-project into the footer.
+   TODO: self-host project reel MP4s and pass `video=` to make the preview frames actually play.
 7. **`/lab/flashpoint` TEST PAGE shipped + verified (2026-06-14, DJ's ask).** New light-forward lab
    case study for the Flashpoint rebrand (Adorama's photo-gear label), linked from the hub "Also on
    the bench" row. Brand-literal teal (#16a3ab) + orange (#f0612a) on --paper; assets float as cards.

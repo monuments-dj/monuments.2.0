@@ -1,0 +1,137 @@
+---
+// Reusable next-project hand-off for the bottom of work pages. The clean scroller
+// (caption + big name + tag + filling rail) plus a media cluster (a video preview and
+// a couple of photos) that starts small and GROWS as you scroll the section into view.
+// Scroll to the end (or click) to enter the next project. DJ's standard project-nav.
+//   <NextProject href name tag accent poster video photos threshold />
+// `video` is optional (mp4); without it the poster frame stands in as the video slot.
+// `accent` is any CSS colour (defaults to the site accent); use a brand tint per page.
+interface Props {
+  href: string;
+  name: string;
+  tag?: string;
+  accent?: string;
+  poster: string;
+  video?: string;
+  photos?: string[];
+  threshold?: number; // overscroll px past full before it carries to the next page
+}
+const { href, name, tag, accent = 'var(--accent)', poster, video, photos = [], threshold = 100 } = Astro.props;
+---
+<section class="np" data-np data-np-threshold={threshold} style={`--np-accent: ${accent};`}>
+  <div class="np-inner">
+    <span class="np-keep">Keep scrolling to the next project</span>
+
+    <div class="np-media" data-np-media aria-hidden="true">
+      {photos[0] && <figure class="np-photo np-photo-a"><img src={photos[0]} alt="" loading="lazy" decoding="async" /></figure>}
+      {photos[1] && <figure class="np-photo np-photo-b"><img src={photos[1]} alt="" loading="lazy" decoding="async" /></figure>}
+      <figure class="np-vid">
+        {video
+          ? <video src={video} poster={poster} muted loop autoplay playsinline></video>
+          : <img src={poster} alt="" loading="lazy" decoding="async" />}
+        <span class="np-play" data-cursor="Play"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M8 5v14l11-7z" /></svg></span>
+      </figure>
+    </div>
+
+    <div class="np-row">
+      <div class="np-head">
+        <a class="np-name" href={href} data-cursor="View">{name}</a>
+        {tag && <span class="np-tag">{tag}</span>}
+      </div>
+      <a class="np-next" href={href} data-np-link data-cursor="View" aria-label={`Next project: ${name}`}>
+        <span class="np-label">Next project</span>
+        <span class="np-bar"><span class="np-fill" data-np-fill></span></span>
+        <span class="np-arrow" aria-hidden="true"><svg viewBox="0 0 34 16" width="42" height="16" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="0" y1="8" x2="31" y2="8" /><path d="M24 2 L31 8 L24 14" /></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .np { position: relative; min-height: 100vh; min-height: 100svh; z-index: 4; background: var(--bg); color: var(--fg); }
+  .np-inner { position: relative; min-height: 100vh; min-height: 100svh; max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(50px, 10vh, 110px) var(--pad); display: flex; flex-direction: column; justify-content: space-between; gap: 4vh; }
+  .np-keep { flex: 0 0 auto; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); }
+
+  /* growing media cluster — JS scrubs --np-g (scale) + --np-mo (opacity) by scroll */
+  .np-media { position: relative; flex: 0 0 auto; align-self: center; width: clamp(240px, 38vw, 560px); aspect-ratio: 16/10; transform: scale(var(--np-g, 0.42)); opacity: var(--np-mo, 0.2); transform-origin: center; will-change: transform, opacity; }
+  .np-vid { position: absolute; inset: 0; margin: 0; border-radius: 10px; overflow: hidden; box-shadow: 0 50px 100px rgb(0 0 0 / 0.55); }
+  .np-vid img, .np-vid video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .np-play { position: absolute; inset: 0; margin: auto; width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fg); background: rgb(var(--fg-rgb) / 0.14); border: 1px solid rgb(var(--fg-rgb) / 0.5); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+  .np-photo { position: absolute; margin: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 30px 64px rgb(0 0 0 / 0.5); }
+  .np-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .np-photo-a { width: 42%; aspect-ratio: 3/4; top: -15%; left: -13%; }
+  .np-photo-b { width: 36%; aspect-ratio: 4/3; bottom: -13%; right: -11%; }
+
+  .np-row { flex: 0 0 auto; display: flex; align-items: flex-end; justify-content: space-between; gap: clamp(24px, 5vw, 70px); flex-wrap: wrap; }
+  .np-name { display: block; width: fit-content; font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(40px, 8vw, 132px); line-height: 0.9; letter-spacing: -0.04em; text-transform: uppercase; color: var(--fg); text-decoration: none; }
+  .np-tag { display: block; margin-top: clamp(12px, 1.4vw, 20px); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .np-next { display: inline-flex; align-items: center; gap: 16px; text-decoration: none; color: var(--fg); padding-bottom: 8px; }
+  .np-label { font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+  .np-bar { display: block; width: clamp(200px, 30vw, 460px); max-width: 50vw; height: 4px; border-radius: 999px; background: rgb(var(--fg-rgb) / 0.22); overflow: hidden; }
+  .np-fill { display: block; height: 100%; width: calc(var(--np-progress, 0) * 100%); background: var(--np-accent); border-radius: 999px; transition: width 0.08s linear; }
+  .np-arrow { display: inline-flex; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+  .np-next:hover .np-arrow { transform: translateX(8px); }
+  .np.is-full .np-label { color: var(--np-accent); }
+  .np.is-full .np-arrow { transform: translateX(8px); animation: npPulse 1.1s ease-in-out infinite; }
+  @keyframes npPulse { 0%,100% { transform: translateX(8px); } 50% { transform: translateX(16px); } }
+
+  @media (max-width: 760px) {
+    .np-media { width: 66vw; }
+    .np-photo-a, .np-photo-b { display: none; }
+    .np-row { flex-direction: column; align-items: flex-start; gap: 22px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .np-media { transform: none !important; opacity: 1 !important; }
+    .np.is-full .np-arrow { animation: none; }
+  }
+</style>
+
+<script>
+  const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const np = document.querySelector('[data-np]') as HTMLElement | null;
+
+  if (np) {
+    const media = np.querySelector('[data-np-media]') as HTMLElement | null;
+    const link = np.querySelector('[data-np-link]') as HTMLAnchorElement | null;
+    const dest = link ? link.getAttribute('href') : null;
+    const threshold = Number(np.getAttribute('data-np-threshold')) || 100;
+
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const r = np.getBoundingClientRect();
+      const p = clamp01((innerHeight - r.top) / r.height);
+      np.style.setProperty('--np-progress', String(p));
+      np.classList.toggle('is-full', p > 0.99);
+      if (media) {
+        // near-linear so it visibly grows across the scroll (not all up-front)
+        media.style.setProperty('--np-g', (0.34 + 0.66 * p).toFixed(3));
+        media.style.setProperty('--np-mo', clamp01(0.25 + p * 1.5).toFixed(3));
+      }
+    };
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+
+    if (!reduced) {
+      addEventListener('scroll', onScroll, { passive: true });
+      addEventListener('resize', onScroll, { passive: true });
+      update();
+      // scroll-to-end carries to the next project: a short overscroll past full while
+      // the closer still fills the view (so it never fires once you reach the footer).
+      if (dest) {
+        let over = 0;
+        addEventListener('wheel', (e) => {
+          const r = np.getBoundingClientRect();
+          const p = clamp01((innerHeight - r.top) / r.height);
+          if (p > 0.985 && r.bottom > innerHeight * 0.5 && e.deltaY > 0) {
+            over += e.deltaY;
+            if (over > threshold) { over = 0; location.href = dest; }
+          } else if (e.deltaY < 0) { over = 0; }
+        }, { passive: true });
+      }
+    } else {
+      np.style.setProperty('--np-progress', '1');
+      np.classList.add('is-full');
+    }
+  }
+</script>

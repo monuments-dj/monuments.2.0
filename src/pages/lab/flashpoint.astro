@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
+import NextProject from '../../components/NextProject.astro';
 
 // === /lab/flashpoint — TEST PAGE ===
 // A light-forward lab case study for the Flashpoint rebrand (Adorama's photography-gear
@@ -108,25 +109,15 @@ const credits = [
       </dl>
     </section>
 
-    <!-- NEXT PROJECT — next-page scroller (dark closer beat) -->
-    <section class="fp-np" data-np>
-      <div class="fp-np-inner">
-        <span class="fp-np-keep">Keep scrolling to the next project</span>
-        <div class="fp-np-row">
-          <div class="fp-np-head">
-            <a class="fp-np-name" href="/lab/sony-this-moment" data-cursor="View">This Moment</a>
-            <span class="fp-np-tag">Sony &middot; Brand film</span>
-          </div>
-          <a class="fp-np-next" href="/lab/sony-this-moment" data-np-link data-cursor="View" aria-label="Next project: Sony This Moment">
-            <span class="fp-np-label">Next project</span>
-            <span class="fp-np-bar"><span class="fp-np-fill" data-np-fill></span></span>
-            <span class="fp-np-arrow" aria-hidden="true">
-              <svg viewBox="0 0 34 16" width="42" height="16" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="0" y1="8" x2="31" y2="8" /><path d="M24 2 L31 8 L24 14" /></svg>
-            </span>
-          </a>
-        </div>
-      </div>
-    </section>
+    <!-- NEXT PROJECT — reusable hand-off: growing media cluster + scroll-to-next -->
+    <NextProject
+      href="/lab/sony-this-moment"
+      name="This Moment"
+      tag="Sony · Brand film"
+      accent="#16a3ab"
+      poster="/case-studies/sony-this-moment/gallery/tm-04.jpg"
+      photos={["/case-studies/sony-this-moment/gallery/tm-02.jpg", "/case-studies/sony-this-moment/gallery/tm-07.jpg"]}
+    />
 
     <Lightbox />
   </main>
@@ -211,23 +202,6 @@ const credits = [
   .fp-cred dt { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.5); }
   .fp-cred dd { margin: 10px 0 0; font-family: 'Inter', sans-serif; font-size: clamp(16px, 1.5vw, 21px); letter-spacing: -0.01em; color: var(--ink); }
 
-  /* ---------- NEXT PROJECT scroller (dark closer) ---------- */
-  .fp-np { position: relative; min-height: 100vh; display: flex; align-items: center; z-index: 4; background: var(--bg); color: var(--fg); padding: 12vh var(--pad); }
-  .fp-np-inner { width: 100%; max-width: var(--wrap, 1300px); margin: 0 auto; }
-  .fp-np-keep { display: block; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); margin: 0 0 clamp(40px, 9vh, 110px); }
-  .fp-np-row { display: flex; align-items: flex-end; justify-content: space-between; gap: clamp(28px, 5vw, 80px); flex-wrap: wrap; }
-  .fp-np-name { display: block; width: fit-content; font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(44px, 10vw, 170px); line-height: 0.88; letter-spacing: -0.04em; text-transform: uppercase; color: var(--fg); text-decoration: none; }
-  .fp-np-tag { display: block; margin-top: clamp(14px, 1.6vw, 22px); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
-  .fp-np-next { display: inline-flex; align-items: center; gap: 16px; margin-left: auto; text-decoration: none; color: var(--fg); padding-bottom: 6px; }
-  .fp-np-label { font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
-  .fp-np-bar { display: block; width: clamp(220px, 32vw, 480px); max-width: 52vw; height: 4px; border-radius: 999px; background: rgb(var(--fg-rgb) / 0.22); overflow: hidden; }
-  .fp-np-fill { display: block; height: 100%; width: calc(var(--np-progress, 0) * 100%); background: var(--fp-teal); border-radius: 999px; transition: width 0.08s linear; }
-  .fp-np-arrow { display: inline-flex; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
-  .fp-np-next:hover .fp-np-arrow { transform: translateX(8px); }
-  .fp-np.is-full .fp-np-label { color: var(--fp-teal); }
-  .fp-np.is-full .fp-np-arrow { transform: translateX(8px); animation: fpNpPulse 1.1s ease-in-out infinite; }
-  @keyframes fpNpPulse { 0%,100% { transform: translateX(8px); } 50% { transform: translateX(16px); } }
-
   /* ---------- reveals ---------- */
   .fp :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
   .fp :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
@@ -242,11 +216,9 @@ const credits = [
     .fp-cell-0, .fp-cell-1, .fp-cell-2, .fp-cell-3, .fp-cell-4,
     .fp-cell:nth-child(6), .fp-cell:nth-child(7), .fp-cell:nth-child(8) { grid-column: span 1; aspect-ratio: 4/3; }
     .fp-cred-list { grid-template-columns: 1fr 1fr; }
-    .fp-np-row { flex-direction: column; align-items: flex-start; }
-    .fp-np-next { margin-left: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .fp-cue i, .fp-np.is-full .fp-np-arrow { animation: none; }
+    .fp-cue i { animation: none; }
     .fp :global(.split .wi) { transform: none !important; transition: none !important; }
     .fp .fade { opacity: 1 !important; transform: none !important; }
     .fp-word { transform: none !important; }
@@ -295,26 +267,13 @@ const credits = [
   }), { threshold: 0.5 });
   if (cw.length) cio.observe(cw[0].parentElement as Element);
 
-  const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
-
-  // next-project scroller fill + pull-to-next
-  const np = document.querySelector('[data-np]') as HTMLElement | null;
-  const npFill = np && np.querySelector('[data-np-fill]');
-  const npLink = np && np.querySelector('[data-np-link]');
-  const npDest = npLink ? npLink.getAttribute('href') : null;
+  // subtle parallax drift on the floating frames + gallery cells
   const drifts = [...document.querySelectorAll('[data-drift]')] as HTMLElement[];
-
   let ticking = false;
   const onScroll = () => {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
-      if (np && npFill) {
-        const r = np.getBoundingClientRect();
-        const p = clamp01((innerHeight - r.top) / r.height);
-        np.style.setProperty('--np-progress', String(p));
-        np.classList.toggle('is-full', p > 0.995);
-      }
       drifts.forEach((el) => {
         const r = el.getBoundingClientRect();
         if (r.bottom < 0 || r.top > innerHeight) return;
@@ -328,19 +287,5 @@ const credits = [
   if (!reduced) {
     addEventListener('scroll', onScroll, { passive: true });
     onScroll();
-    if (np && npDest) {
-      let over = 0;
-      addEventListener('wheel', (e) => {
-        const r = np.getBoundingClientRect();
-        const p = clamp01((innerHeight - r.top) / r.height);
-        if (p > 0.99 && r.bottom > innerHeight * 0.5 && e.deltaY > 0) {
-          over += e.deltaY;
-          if (over > 320) { over = 0; location.href = npDest; }
-        } else if (e.deltaY < 0) { over = 0; }
-      }, { passive: true });
-    }
-  } else if (np) {
-    np.style.setProperty('--np-progress', '1');
-    np.classList.add('is-full');
   }
 </script>
