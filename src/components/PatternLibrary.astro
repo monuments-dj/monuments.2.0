@@ -67,7 +67,7 @@
       <div class="pl-el-head">
         <p class="pl-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span><span class="pl-num">02</span> Motion</p>
         <h3 class="pl-el-title fade">Reel reveal.</h3>
-        <p class="pl-el-sub fade">The film holds a fixed size with the words parked either side; on scroll the image drifts inside the frame and the whole block floats, exoape's slow-media parallax. Dial the film size, word spread, and corners.</p>
+        <p class="pl-el-sub fade">The showreel plays in a fixed frame with the words parked either side, exoape's "Play Reel" moment. The film carries the motion; the words and kicker hold steady.</p>
       </div>
 
       <div class="pl-stage pl-stage--reel">
@@ -82,25 +82,6 @@
       </div>
 
       <p class="rr-cap fade">Press play, and turn it up. Half the story is in the sound.</p>
-
-      <div class="pl-ctrl" data-rr-ctrl>
-        <label class="pl-field">
-          <span class="pl-field-l">Panel size <b data-rr-sizeval>26</b> %</span>
-          <input class="pl-range" type="range" min="18" max="60" value="26" step="2" data-rr-size aria-label="Panel size" />
-        </label>
-        <label class="pl-field">
-          <span class="pl-field-l">Word spread <b data-rr-spreadval>0</b> px</span>
-          <input class="pl-range" type="range" min="0" max="140" value="0" step="5" data-rr-spread aria-label="Word spread" />
-        </label>
-        <label class="pl-field">
-          <span class="pl-field-l">Float <b data-rr-parval>0</b> %</span>
-          <input class="pl-range" type="range" min="0" max="180" value="0" step="10" data-rr-par aria-label="Float amount" />
-        </label>
-        <div class="pl-seg" role="group" aria-label="Corners">
-          <button class="pl-seg-btn on" type="button" data-rr-corner="soft">Soft corners</button>
-          <button class="pl-seg-btn" type="button" data-rr-corner="sharp">Sharp</button>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -170,7 +151,9 @@
   .np-next:hover .np-arrow { transform: translateX(8px); }
 
   /* ---------- ELEMENT 02: reel reveal ---------- */
-  .pl-stage--reel { min-height: 72vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  /* svh (stable small viewport) so the stage does NOT resize when a mobile URL bar
+     hides/shows on scroll, which reads as the reel jumping size. */
+  .pl-stage--reel { min-height: 72vh; min-height: 72svh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
   .rr-kicker { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13px; letter-spacing: 0.04em; color: rgb(var(--fg-rgb) / 0.7); margin: 0 0 clamp(44px, 8vh, 104px); }
   .rr { --rr-size: 26; --rr-spread: 0px; --rr-radius: 10px; --rr-float: 0px; --rr-drift: 0%; display: flex; align-items: center; justify-content: center; gap: clamp(24px, 6vw, 110px); width: 100%; transform: translateY(var(--rr-float)); will-change: transform; }
   .rr-word { font-weight: 400; font-size: clamp(44px, 10vw, 144px); line-height: 0.9; letter-spacing: -0.035em; white-space: nowrap; }
@@ -234,43 +217,4 @@
     sec && sec.addEventListener('change', () => np.classList.toggle('np--nosection', !sec.checked));
   })();
 
-  // ---- ELEMENT 02: reel reveal (fixed size + exoape slow-media parallax) ----
-  (function () {
-    const rr = document.querySelector('[data-rr]');
-    if (!rr) return;
-    const sec = rr.closest('.pl-el') || rr;
-    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let par = 0; // block-float amount from the dial (off by default; the video is the motion)
-    // Parallax: the image drifts inside the fixed frame and the whole block floats,
-    // both slower than scroll (exoape's slow-media language). Size stays fixed; the
-    // drift is capped so the oversized poster never reveals an edge.
-    if (!reduced) {
-      // Drive the parallax from a continuous rAF loop, NOT from 'scroll' events, so
-      // it works no matter how Lenis dispatches scrolling. Cheap (one rect read +
-      // two var writes per frame) and only writes while the section is near view.
-      const tick = () => {
-        const r = sec.getBoundingClientRect();
-        const vh = window.innerHeight || 1;
-        if (r.bottom > -240 && r.top < vh + 240) {
-          const p = clamp((vh - r.top) / (vh + r.height), 0, 1); // 0 entering, 1 exited
-          rr.style.setProperty('--rr-float', ((0.5 - p) * 40 * par).toFixed(1) + 'px');
-        }
-        requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-      const parRange = document.querySelector('[data-rr-par]'), parVal = document.querySelector('[data-rr-parval]');
-      parRange && parRange.addEventListener('input', () => { par = Number(parRange.value) / 100; if (parVal) parVal.textContent = parRange.value; });
-    }
-    const size = document.querySelector('[data-rr-size]'), sizeVal = document.querySelector('[data-rr-sizeval]');
-    size && size.addEventListener('input', () => { rr.style.setProperty('--rr-size', size.value); if (sizeVal) sizeVal.textContent = size.value; });
-    const spread = document.querySelector('[data-rr-spread]'), spreadVal = document.querySelector('[data-rr-spreadval]');
-    spread && spread.addEventListener('input', () => { rr.style.setProperty('--rr-spread', spread.value + 'px'); if (spreadVal) spreadVal.textContent = spread.value; });
-    document.querySelectorAll('[data-rr-corner]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        rr.style.setProperty('--rr-radius', btn.getAttribute('data-rr-corner') === 'sharp' ? '0px' : '14px');
-        document.querySelectorAll('[data-rr-corner]').forEach((b) => b.classList.toggle('on', b === btn));
-      });
-    });
-  })();
 </script>
