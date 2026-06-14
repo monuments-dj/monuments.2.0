@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Monuments — Lab / Sun Playground</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap');
+
+  :root{
+    --ink:#0A0A0A; --paper:#F4F4F2; --denim:#3E6E94; --rose:#EFA1AD;
+    --panel:#121212; --line:#262626; --dim:#8A8A88;
+    --grot:'Archivo',Helvetica,Arial,sans-serif;
+    --mono:'Space Mono',monospace;
+    --sun:var(--paper);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--grot);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+
+  .wrap{
+    max-width:1240px;
+    margin:0 auto;
+    padding:clamp(28px,6vw,80px) clamp(20px,5vw,64px);
+  }
+
+  /* ---------- top strip ---------- */
+  .strip{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; flex-wrap:wrap;
+    border-bottom:1px solid var(--line);
+    padding-bottom:18px; margin-bottom:clamp(36px,6vw,68px);
+  }
+  .lockup{display:flex; align-items:center; gap:12px;}
+  .wordmark{
+    display:flex; align-items:center;
+    font-family:var(--grot); font-weight:900;
+    font-size:clamp(20px,2.4vw,26px); letter-spacing:-.02em;
+    color:var(--paper); line-height:1;
+  }
+  .wordmark .eyeO{
+    width:.96em; height:.96em; margin:0 .03em;
+    display:inline-block; color:var(--paper); transform:translateY(.06em);
+  }
+  .wordmark .eyeO svg{display:block; width:100%; height:100%;}
+  .tagline{
+    font-family:var(--mono); font-size:11px; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--dim); white-space:nowrap;
+  }
+
+  /* ---------- section head ---------- */
+  .head{margin-bottom:clamp(30px,5vw,56px);}
+  .kicker{
+    font-family:var(--mono); font-size:12px; letter-spacing:.32em;
+    text-transform:uppercase; color:var(--denim);
+    display:flex; align-items:center; gap:12px; margin-bottom:18px;
+  }
+  .kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--rose);}
+  h1.title{
+    margin:0; font-weight:900; letter-spacing:-.03em; line-height:.92;
+    font-size:clamp(40px,8.2vw,104px); text-transform:uppercase;
+  }
+  h1.title .soft{color:var(--denim);}
+  .lead{
+    margin:22px 0 0; max-width:46ch;
+    font-size:clamp(15px,1.5vw,18px); line-height:1.55; color:#cfcfcb;
+    font-weight:400;
+  }
+  .lead b{color:var(--paper); font-weight:600;}
+
+  /* ---------- playground layout ---------- */
+  .stage{
+    display:grid;
+    grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+    gap:clamp(20px,3vw,40px);
+    align-items:stretch;
+  }
+  @media(max-width:840px){ .stage{grid-template-columns:1fr;} }
+
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:clamp(20px,3vw,34px);
+    position:relative; overflow:hidden;
+  }
+
+  /* sun stage */
+  .sunStage{
+    display:flex; flex-direction:column;
+    min-height:clamp(360px,46vw,520px);
+  }
+  .sunStage .corner{
+    position:absolute; top:16px; right:18px;
+    font-family:var(--mono); font-size:11px; letter-spacing:.16em;
+    color:var(--dim); text-transform:uppercase;
+  }
+  .sunHolder{
+    flex:1; display:flex; align-items:center; justify-content:center;
+    padding:18px 0;
+  }
+  #sun{
+    width:min(78%,340px); height:auto; display:block;
+    color:var(--sun);
+    transition:color .5s ease;
+    transform-origin:50% 50%;
+    animation:breathe 9s ease-in-out infinite;
+  }
+  #sun .rays{transform-origin:120px 120px; animation:spin 64s linear infinite;}
+  #sun .ink{color:#141414;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  @keyframes breathe{0%,100%{transform:scale(1);}50%{transform:scale(1.035);}}
+
+  .sunMeta{
+    display:flex; align-items:baseline; justify-content:space-between;
+    gap:12px; border-top:1px solid var(--line); padding-top:16px;
+  }
+  .sunMeta .line{font-family:var(--grot); font-weight:800; font-size:clamp(15px,1.8vw,19px); letter-spacing:-.01em;}
+  .sunMeta .seed{font-family:var(--mono); font-size:11px; color:var(--dim); letter-spacing:.12em;}
+
+  /* controls */
+  .deck{display:flex; flex-direction:column; gap:22px;}
+  .deck .deckHead{
+    font-family:var(--mono); font-size:12px; letter-spacing:.26em;
+    text-transform:uppercase; color:var(--dim);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .ctrl .row{
+    display:flex; align-items:baseline; justify-content:space-between; margin-bottom:10px;
+  }
+  .ctrl label{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#bfbfbb;}
+  .ctrl .val{font-family:var(--mono); font-size:13px; color:var(--paper);}
+
+  input[type=range]{
+    -webkit-appearance:none; appearance:none;
+    width:100%; height:2px; background:var(--line); border-radius:2px; outline:none; cursor:pointer;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none;
+    width:18px; height:18px; border-radius:50%;
+    background:var(--paper); border:3px solid var(--ink);
+    box-shadow:0 0 0 1px var(--paper); transition:transform .12s ease;
+  }
+  input[type=range]::-webkit-slider-thumb:active{transform:scale(1.2);}
+  input[type=range]::-moz-range-thumb{
+    width:18px; height:18px; border-radius:50%;
+    background:var(--paper); border:3px solid var(--ink); box-shadow:0 0 0 1px var(--paper);
+  }
+  input[type=range]::-moz-range-track{height:2px; background:var(--line);}
+
+  .swatches{display:flex; gap:10px;}
+  .swatch{
+    flex:1; cursor:pointer; border:1px solid var(--line); background:transparent;
+    border-radius:10px; padding:12px 10px 11px;
+    display:flex; flex-direction:column; gap:9px; align-items:flex-start;
+    transition:border-color .2s ease, transform .12s ease;
+    color:inherit; font:inherit; text-align:left;
+  }
+  .swatch:hover{transform:translateY(-2px);}
+  .swatch .chip{width:100%; height:22px; border-radius:6px;}
+  .swatch .nm{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim);}
+  .swatch[aria-pressed="true"]{border-color:var(--paper);}
+  .swatch[aria-pressed="true"] .nm{color:var(--paper);}
+
+  .pBtns{display:flex; gap:10px;}
+  .pBtn{
+    flex:1; cursor:pointer; border:1px solid var(--line); background:transparent;
+    color:var(--paper); border-radius:10px; padding:12px;
+    font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    transition:background .2s ease, border-color .2s ease;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .pBtn:hover{background:#1b1b1b; border-color:#3a3a3a;}
+  .pBtn .gly{width:14px; height:14px; display:inline-block;}
+  .pBtn .gly svg{display:block; width:100%; height:100%; fill:currentColor;}
+
+  /* ---------- symbol family ---------- */
+  .famHead{
+    display:flex; align-items:flex-end; justify-content:space-between;
+    gap:16px; flex-wrap:wrap;
+    margin:clamp(48px,7vw,84px) 0 22px;
+    border-top:1px solid var(--line); padding-top:30px;
+  }
+  .famHead h2{
+    margin:0; font-weight:900; letter-spacing:-.02em; text-transform:uppercase;
+    font-size:clamp(22px,3.4vw,40px); line-height:1;
+  }
+  .famHead .note{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--dim); max-width:30ch; text-align:right;}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:14px;
+  }
+  @media(max-width:780px){ .grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+
+  .tile{
+    background:var(--panel); border:1px solid var(--line); border-radius:14px;
+    aspect-ratio:1/1; position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    cursor:crosshair;
+    transition:border-color .25s ease, background .25s ease;
+  }
+  .tile:hover{border-color:#3a3a3a; background:#161616;}
+  .tile svg{width:46%; height:46%; color:var(--paper); display:block;}
+  .tile .tag{
+    position:absolute; left:12px; bottom:11px;
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--dim); transition:color .25s ease;
+  }
+  .tile:hover .tag{color:var(--paper);}
+  .tile .rose{position:absolute; right:11px; top:11px; width:6px; height:6px; border-radius:50%; background:var(--rose); opacity:0; transition:opacity .25s ease;}
+  .tile:hover .rose{opacity:1;}
+
+  /* per-symbol motion on hover */
+  .spin{transform-origin:50% 50%;}
+  .tile:hover .spin{animation:spin360 1.4s cubic-bezier(.2,.7,.2,1) both;}
+  @keyframes spin360{to{transform:rotate(180deg);}}
+
+  .iris{transform-origin:50% 50%;}
+  .tile:hover .iris{animation:irisPulse 1.6s ease-in-out infinite;}
+  @keyframes irisPulse{0%,100%{transform:scale(1);}50%{transform:scale(.62);}}
+
+  .blink{transform-origin:50% 50%; transform-box:fill-box;}
+  .tile:hover .blink{animation:blink 1.7s ease-in-out infinite;}
+  @keyframes blink{0%,38%,52%,100%{transform:scaleY(1);}45%{transform:scaleY(.08);}}
+
+  .drift{transform-origin:50% 50%;}
+  .tile:hover .drift{animation:driftRot 6s linear infinite;}
+  @keyframes driftRot{to{transform:rotate(360deg);}}
+
+  .rise{transform-origin:50% 100%;}
+  .tile:hover .rise{animation:rise 1.5s ease-in-out infinite;}
+  @keyframes rise{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+
+  .ringSpin{transform-origin:50% 50%;}
+  .tile:hover .ringSpin{animation:drift360 5s linear infinite;}
+  @keyframes drift360{to{transform:rotate(-360deg);}}
+
+  /* ---------- colophon ---------- */
+  .colophon{
+    margin-top:clamp(40px,6vw,72px); border-top:1px solid var(--line);
+    padding-top:22px; display:flex; align-items:center; justify-content:space-between;
+    gap:16px; flex-wrap:wrap;
+  }
+  .colophon .c{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--dim); text-transform:uppercase;}
+  .colophon .noise{font-family:var(--grot); font-weight:900; font-size:clamp(13px,1.4vw,15px); letter-spacing:.04em; color:var(--paper); text-transform:uppercase;}
+  .colophon .noise .r{color:var(--rose);}
+
+  @media (prefers-reduced-motion: reduce){
+    #sun, #sun .rays{animation:none !important;}
+    .tile:hover *{animation:none !important;}
+    input[type=range]::-webkit-slider-thumb{transition:none;}
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <!-- ===== brand strip ===== -->
+  <div class="strip">
+    <div class="lockup">
+      <span class="wordmark" aria-label="Monuments">M<span class="eyeO" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M8 50 C30 24 70 24 92 50 C70 76 30 76 8 50 Z" fill="none" stroke="currentColor" stroke-width="7"/><g transform="translate(50,50)" fill="currentColor"><rect x="-3" y="-17" width="6" height="34" rx="3"/><rect x="-3" y="-17" width="6" height="34" rx="3" transform="rotate(60)"/><rect x="-3" y="-17" width="6" height="34" rx="3" transform="rotate(120)"/></g></svg></span>NUMENTS</span>
+    </div>
+    <span class="tagline">The Laboratory · No. 004259</span>
+  </div>
+
+  <!-- ===== section head ===== -->
+  <div class="head">
+    <div class="kicker"><span class="dot"></span>Lab specimen 01 · generative identity</div>
+    <h1 class="title">Dial the <span class="soft">sun.</span></h1>
+    <p class="lead">A living piece of the mark. <b>Tune the petals, swap the ground</b>, watch it redraw. The symbol family below wakes on touch. Same kit. Same weight. <b>Built to be remembered.</b></p>
+  </div>
+
+  <!-- ===== playground ===== -->
+  <section class="stage" aria-label="Interactive sun playground">
+
+    <!-- sun render -->
+    <div class="panel sunStage">
+      <span class="corner">Soft sun · live</span>
+      <div class="sunHolder">
+        <svg id="sun" viewBox="0 0 240 240" role="img" aria-label="Generative soft sun mark">
+          <g class="rays" id="rays"></g>
+          <g id="center"></g>
+        </svg>
+      </div>
+      <div class="sunMeta">
+        <span class="line" id="metaLine">Block out the noise.</span>
+        <span class="seed" id="metaSeed">SEED · 0000</span>
+      </div>
+    </div>
+
+    <!-- controls -->
+    <div class="panel">
+      <div class="deck">
+        <div class="deckHead"><span>Controls</span><span>02 dials</span></div>
+
+        <div class="ctrl">
+          <div class="row">
+            <label for="petals">Petals</label>
+            <span class="val" id="petalsVal">9</span>
+          </div>
+          <input type="range" id="petals" min="5" max="16" step="1" value="9" aria-label="Petal count" />
+        </div>
+
+        <div class="ctrl">
+          <div class="row">
+            <label>Ground</label>
+            <span class="val" id="groundVal">Paper</span>
+          </div>
+          <div class="swatches" id="swatches" role="group" aria-label="Sun colour">
+            <button class="swatch" data-c="paper" data-hex="#F4F4F2" aria-pressed="true">
+              <span class="chip" style="background:#F4F4F2;"></span><span class="nm">Paper</span>
+            </button>
+            <button class="swatch" data-c="denim" data-hex="#3E6E94" aria-pressed="false">
+              <span class="chip" style="background:#3E6E94;"></span><span class="nm">Denim</span>
+            </button>
+            <button class="swatch" data-c="rose" data-hex="#EFA1AD" aria-pressed="false">
+              <span class="chip" style="background:#EFA1AD;"></span><span class="nm">Rose</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <div class="row">
+            <label>Center</label>
+            <span class="val" id="modeVal">Eye</span>
+          </div>
+          <div class="pBtns">
+            <button class="pBtn" id="toggleCenter" aria-label="Toggle center between eye and solid">
+              <span class="gly" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M14 50 C32 28 68 28 86 50 C68 72 32 72 14 50 Z" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="50" cy="50" r="9"/></svg></span>
+              Swap
+            </button>
+            <button class="pBtn" id="reseed" aria-label="Regenerate the sun">
+              <span class="gly" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M50 6 C54 36 64 46 94 50 C64 54 54 64 50 94 C46 64 36 54 6 50 C36 46 46 36 50 6 Z"/></svg></span>
+              Reseed
+            </button>
+          </div>
+        </div>
+
+        <p style="margin:4px 0 0; font-family:var(--mono); font-size:11px; line-height:1.7; letter-spacing:.04em; color:var(--dim);">
+          Organic petals. Slight randomness on every seed. Rose is punctuation, never paragraph.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== symbol family ===== -->
+  <div class="famHead">
+    <h2>The symbol family.</h2>
+    <span class="note">One grid · one weight · hover to wake</span>
+  </div>
+
+  <div class="grid">
+    <div class="tile" tabindex="0">
+      <svg viewBox="0 0 100 100" aria-label="Spark"><path class="drift" d="M50 6 C54 36 64 46 94 50 C64 54 54 64 50 94 C46 64 36 54 6 50 C36 46 46 36 50 6 Z" fill="currentColor"/></svg>
+      <span class="rose" aria-hidden="true"></span><span class="tag">Spark</span>
+    </div>
+
+    <div class="tile" tabindex="0">
+      <svg viewBox="0 0 100 100" aria-label="Asterisk"><g class="spin" transform="translate(50,50)" fill="currentColor"><rect x="-3" y="-38" width="6" height="76" rx="3"/><rect x="-3" y="-38" width="6" height="76" rx="3" transform="rotate(60)"/><rect x="-3" y="-38" width="6" height="76" rx="3" transform="rotate(120)"/></g></svg>
+      <span class="rose" aria-hidden="true"></span><span class="tag">Asterisk</span>
+    </div>
+
+    <div class="tile" tabindex="0">
+      <svg viewBox="0 0 100 100" aria-label="Burst"><g class="spin" transform="translate(50,50)" fill="currentColor"><rect x="-3" y="-40" width="6" height="80" rx="3"/><rect x="-3" y="-40" width="6" height="80" rx="3" transform="rotate(45)"/><rect x="-3" y="-40" width="6" height="80" rx="3" transform="rotate(90)"/><rect x="-3" y="-40" width="6" height="80" rx="3" transform="rotate(135)"/></g></svg>
+      <span class="rose" aria-hidden="true"></span><span class="tag">Burst</span>
+    </div>
+
+    <div class="tile" tabindex="0">
+      <svg viewBox="0 0 100 100" aria-label="Eye"><path class="blink" d="M14 50 C32 28 68 28 86 50 C68 72 32 72 14 50 Z" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="50" cy="50" r="9" fill="currentColor"/></svg>
+      <span class="rose" aria-hidden="true"></span><span class="tag">Eye</span>
+    </div>
+
+    <div class="tile" tabindex="0">
+      <svg viewBox="0 0 100 100" aria-label="Plus"><g class="spin" transform="translate(50,50)" fill="currentColor"><rect x="-30" y="-5" width="60" height="10" rx="5"/><rect x="-5" y="-30" width="10" height="60" rx="5"/></g></svg>
+      <span class="rose" aria-hidden="true"></span><span class="tag">Plus</span>
+    </div>
+
+    <div class="tile" tabindex="0">
+      <svg viewBox="0 0 100 100" aria-label="Obelisk"><g class="rise"><path d="M40 90 L40 36 L50 16 L60 36 L60 90 Z" fill="currentColor"/><rect x="33" y="90" width="34" height="6" rx="2" fill="currentColor"/></g></svg>
+      <span class="rose" aria-hidden="true"></span><span class="tag">Obelisk</span>
+    </div>
+
+    <div class="tile" tabindex="0">
+      <svg viewBox="0 0 100 100" aria-label="Aperture"><g class="ringSpin" id="apTiles"></g></svg>
+      <span class="rose" aria-hidden="true"></span><span class="tag">Aperture</span>
+    </div>
+
+    <div class="tile" tabindex="0">
+      <svg viewBox="0 0 100 100" aria-label="Eye sun"><g class="drift" id="miniSun"></g></svg>
+      <span class="rose" aria-hidden="true"></span><span class="tag">Eye-sun</span>
+    </div>
+  </div>
+
+  <!-- ===== colophon ===== -->
+  <div class="colophon">
+    <span class="c">MONUMENTS © 2026 · NO. 004259 · EST. MMXXVI · LA / NY</span>
+    <span class="noise">We build things worth remembering<span class="r">.</span></span>
+  </div>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var SVGNS = "http://www.w3.org/2000/svg";
+
+  /* ---------- petal geometry (verbatim from kit) ---------- */
+  function petalPath(w, L){
+    return 'M0 0 C ' + (-w) + ' ' + (-L*0.25) + ', ' + (-w) + ' ' + (-L*0.78) +
+           ', 0 ' + (-L) + ' C ' + w + ' ' + (-L*0.78) + ', ' + w + ' ' + (-L*0.25) + ', 0 0 Z';
+  }
+
+  var rays   = document.getElementById('rays');
+  var center = document.getElementById('center');
+  var metaSeed = document.getElementById('metaSeed');
+
+  var state = { n:9, base:24, len:66, seed:4259, mode:'eye' };
+
+  function rng(s){
+    var x = Math.sin(s) * 10000;
+    return x - Math.floor(x);
+  }
+
+  function drawSun(){
+    while(rays.firstChild) rays.removeChild(rays.firstChild);
+    while(center.firstChild) center.removeChild(center.firstChild);
+
+    var n = state.n, base = state.base, len = state.len;
+    var cx = 120, cy = 120;
+
+    for(var i=0; i<n; i++){
+      var jitterL = (rng(state.seed + i*1.7) - 0.5) * 16;
+      var jitterW = (rng(state.seed + i*3.3) - 0.5) * 6;
+      var L = len + jitterL;
+      var w = 17 + jitterW;
+      var deg = (360/n) * i + (rng(state.seed + i*0.9) - 0.5) * (120/n);
+
+      var g = document.createElementNS(SVGNS, 'g');
+      g.setAttribute('transform', 'translate('+cx+','+cy+') rotate('+deg+') translate(0,'+(-base)+')');
+      var p = document.createElementNS(SVGNS, 'path');
+      p.setAttribute('d', petalPath(w, L));
+      p.setAttribute('fill', 'currentColor');
+      g.appendChild(p);
+      rays.appendChild(g);
+    }
+
+    if(state.mode === 'eye'){
+      var eye = document.createElementNS(SVGNS,'path');
+      eye.setAttribute('d','M'+(cx-46)+' '+cy+' C '+(cx-28)+' '+(cy-26)+', '+(cx+28)+' '+(cy-26)+', '+(cx+46)+' '+cy+' C '+(cx+28)+' '+(cy+26)+', '+(cx-28)+' '+(cy+26)+', '+(cx-46)+' '+cy+' Z');
+      eye.setAttribute('fill','currentColor');
+      center.appendChild(eye);
+
+      var pupil = document.createElementNS(SVGNS,'circle');
+      pupil.setAttribute('cx',cx); pupil.setAttribute('cy',cy); pupil.setAttribute('r','16');
+      pupil.setAttribute('fill','#141414');
+      center.appendChild(pupil);
+
+      var spark = document.createElementNS(SVGNS,'g');
+      spark.setAttribute('transform','translate('+cx+','+cy+')');
+      spark.setAttribute('fill','#141414');
+      [0,60,120].forEach(function(rot){
+        var r = document.createElementNS(SVGNS,'rect');
+        r.setAttribute('x','-2.4'); r.setAttribute('y','-12'); r.setAttribute('width','4.8'); r.setAttribute('height','24'); r.setAttribute('rx','2.4');
+        if(rot) r.setAttribute('transform','rotate('+rot+')');
+        spark.appendChild(r);
+      });
+      var dot = document.createElementNS(SVGNS,'circle');
+      dot.setAttribute('cx',cx); dot.setAttribute('cy',cy); dot.setAttribute('r','3.4'); dot.setAttribute('fill','currentColor');
+      center.appendChild(spark);
+      center.appendChild(dot);
+    } else {
+      var c = document.createElementNS(SVGNS,'circle');
+      c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r', base+10);
+      c.setAttribute('fill','currentColor');
+      center.appendChild(c);
+    }
+
+    var seedStr = ('0000' + (state.seed % 10000)).slice(-4);
+    metaSeed.textContent = 'SEED · ' + seedStr;
+  }
+
+  /* ---------- petals dial ---------- */
+  var petals = document.getElementById('petals');
+  var petalsVal = document.getElementById('petalsVal');
+  petals.addEventListener('input', function(){
+    state.n = parseInt(petals.value,10);
+    petalsVal.textContent = state.n;
+    drawSun();
+  });
+
+  /* ---------- ground swatches ---------- */
+  var swatches = document.getElementById('swatches');
+  var groundVal = document.getElementById('groundVal');
+  swatches.addEventListener('click', function(e){
+    var btn = e.target.closest('.swatch');
+    if(!btn) return;
+    [].forEach.call(swatches.querySelectorAll('.swatch'), function(s){ s.setAttribute('aria-pressed','false'); });
+    btn.setAttribute('aria-pressed','true');
+    document.documentElement.style.setProperty('--sun', btn.getAttribute('data-hex'));
+    var label = btn.querySelector('.nm').textContent;
+    groundVal.textContent = label.charAt(0) + label.slice(1).toLowerCase();
+  });
+
+  /* ---------- center toggle ---------- */
+  var modeVal = document.getElementById('modeVal');
+  document.getElementById('toggleCenter').addEventListener('click', function(){
+    state.mode = state.mode === 'eye' ? 'solid' : 'eye';
+    modeVal.textContent = state.mode === 'eye' ? 'Eye' : 'Solid';
+    drawSun();
+  });
+
+  /* ---------- reseed ---------- */
+  document.getElementById('reseed').addEventListener('click', function(){
+    state.seed = Math.floor(Math.random()*9999) + 1;
+    drawSun();
+  });
+
+  /* ---------- aperture symbol (JS-built per kit) ---------- */
+  var ap = document.getElementById('apTiles');
+  for(var i=0;i<8;i++){
+    var a = i/8 * 2*Math.PI;
+    var dotc = document.createElementNS(SVGNS,'circle');
+    dotc.setAttribute('cx', 50 + Math.cos(a)*32);
+    dotc.setAttribute('cy', 50 + Math.sin(a)*32);
+    dotc.setAttribute('r', 5);
+    dotc.setAttribute('fill','currentColor');
+    ap.appendChild(dotc);
+  }
+  var ring = document.createElementNS(SVGNS,'circle');
+  ring.setAttribute('cx',50); ring.setAttribute('cy',50); ring.setAttribute('r',7);
+  ring.setAttribute('fill','none'); ring.setAttribute('stroke','currentColor'); ring.setAttribute('stroke-width',4);
+  ap.appendChild(ring);
+
+  /* ---------- mini eye-sun tile ---------- */
+  (function(){
+    var box = document.getElementById('miniSun');
+    var cx=50, cy=50, n=8, base=11, len=24;
+    for(var i=0;i<n;i++){
+      var deg = (360/n)*i;
+      var g = document.createElementNS(SVGNS,'g');
+      g.setAttribute('transform','translate('+cx+','+cy+') rotate('+deg+') translate(0,'+(-base)+')');
+      var p = document.createElementNS(SVGNS,'path');
+      p.setAttribute('d', petalPath(7, len));
+      p.setAttribute('fill','currentColor');
+      g.appendChild(p); box.appendChild(g);
+    }
+    var c = document.createElementNS(SVGNS,'circle');
+    c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',base+4); c.setAttribute('fill','currentColor');
+    box.appendChild(c);
+    var pup = document.createElementNS(SVGNS,'circle');
+    pup.setAttribute('cx',cx); pup.setAttribute('cy',cy); pup.setAttribute('r',5); pup.setAttribute('fill','#0A0A0A');
+    box.appendChild(pup);
+  })();
+
+  drawSun();
+})();
+</script>
+</body>
+</html>

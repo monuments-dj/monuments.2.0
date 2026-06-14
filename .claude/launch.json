@@ -1,0 +1,35 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "monuments",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 4321
+    },
+    {
+      "name": "dashboard",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8741"],
+      "port": 8741
+    },
+    {
+      "name": "itunes-viz",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8742"],
+      "port": 8742
+    },
+    {
+      "name": "style-system",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8743"],
+      "port": 8743
+    },
+    {
+      "name": "loaders",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8744"],
+      "port": 8744
+    }
+  ]
+}

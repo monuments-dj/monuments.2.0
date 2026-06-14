@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Block out the noise / Monuments</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap');
+
+  :root{
+    --ink:#0A0A0A; --paper:#F4F4F2; --denim:#3E6E94; --rose:#EFA1AD;
+    --panel:#121212; --line:#262626; --dim:#8A8A88;
+    --grot:'Archivo',Helvetica,Arial,sans-serif;
+    --mono:'Space Mono',monospace;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html,body{ background:var(--ink); color:var(--paper); }
+
+  .bn{
+    position:relative;
+    width:100%;
+    min-height:100vh;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--grot);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    padding:clamp(20px,4vw,56px);
+    isolation:isolate;
+  }
+
+  /* faint grid / scanline texture, flat, no glow */
+  .bn::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line) 0.5px, transparent 0.5px),
+      linear-gradient(90deg, var(--line) 0.5px, transparent 0.5px);
+    background-size:64px 64px;
+    opacity:.28;
+    z-index:0;
+    pointer-events:none;
+  }
+
+  /* ---------- top rail ---------- */
+  .bn__rail{
+    position:relative; z-index:2;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px;
+    font-family:var(--mono);
+    font-size:clamp(10px,1.1vw,12px);
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--dim);
+    border-bottom:1px solid var(--line);
+    padding-bottom:14px;
+  }
+  .bn__rail b{ color:var(--paper); font-weight:400; }
+  .bn__rail .dot{ color:var(--rose); }
+  .bn__rail-r{ display:flex; gap:18px; align-items:center; flex-wrap:wrap; justify-content:flex-end; }
+  .bn__sec{ display:inline-flex; align-items:center; gap:8px; }
+  .bn__live{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--denim);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+
+  /* ---------- wordmark ---------- */
+  .bn__brand{
+    position:relative; z-index:2;
+    display:flex; align-items:center; gap:2px;
+    margin-top:clamp(18px,3vw,30px);
+    font-family:var(--grot); font-weight:900;
+    font-size:clamp(20px,2.4vw,30px);
+    letter-spacing:-.02em;
+    color:var(--paper);
+    line-height:1;
+  }
+  .bn__brand .wm-eye{
+    width:.92em; height:.92em;
+    display:inline-block; vertical-align:middle;
+    color:var(--denim);
+    margin:0 .02em;
+    transform:translateY(.02em);
+  }
+  .bn__brand .wm-eye .pupil{ color:var(--rose); }
+
+  /* ---------- centre stage ---------- */
+  .bn__stage{
+    position:relative; z-index:2;
+    flex:1;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    align-items:center;
+    gap:clamp(20px,4vw,56px);
+    padding:clamp(16px,3vw,32px) 0;
+  }
+
+  /* eye-sun */
+  .bn__sun{
+    width:clamp(180px,26vw,340px);
+    aspect-ratio:1;
+    flex:0 0 auto;
+    color:var(--paper);
+  }
+  .bn__sun svg{ display:block; width:100%; height:100%; overflow:visible; }
+  .bn__petals{
+    transform-origin:120px 120px;
+    animation:spin 60s linear infinite;
+  }
+  .bn__petals path{ animation:breathe 6s ease-in-out infinite; transform-box:fill-box; transform-origin:bottom center; }
+  .bn__eyegrp{ transform-origin:120px 120px; }
+  .bn__lid{
+    transform-origin:120px 120px;
+    animation:blink 7s ease-in-out infinite;
+  }
+  .bn__spark{
+    transform-origin:120px 120px;
+    animation:spin-rev 12s linear infinite;
+  }
+
+  /* statement */
+  .bn__statement{ min-width:0; }
+  .bn__kicker{
+    font-family:var(--mono);
+    font-size:clamp(10px,1.1vw,12px);
+    letter-spacing:.2em; text-transform:uppercase;
+    color:var(--dim);
+    display:flex; align-items:center; gap:12px;
+    margin-bottom:clamp(12px,2vw,22px);
+  }
+  .bn__kicker::before{ content:""; width:clamp(28px,4vw,64px); height:1px; background:var(--denim); display:inline-block; }
+  .bn__kicker .em{ color:var(--rose); }
+
+  .bn__head{
+    font-family:var(--grot); font-weight:900;
+    font-size:clamp(46px,10.4vw,150px);
+    line-height:.88;
+    letter-spacing:-.035em;
+    text-transform:uppercase;
+    color:var(--paper);
+  }
+  .bn__head .l{ display:block; overflow:hidden; }
+  .bn__head .l span{
+    display:block;
+    transform:translateY(110%);
+    animation:rise .9s cubic-bezier(.16,1,.3,1) forwards;
+  }
+  .bn__head .l:nth-child(1) span{ animation-delay:.05s; }
+  .bn__head .l:nth-child(2) span{ animation-delay:.16s; }
+  .bn__head .l:nth-child(3) span{ animation-delay:.27s; }
+  .bn__head .denim{ color:var(--denim); }
+  .bn__head .rose{ color:var(--rose); }
+
+  .bn__sub{
+    margin-top:clamp(18px,2.6vw,34px);
+    display:flex; align-items:baseline; gap:clamp(14px,2vw,26px);
+    flex-wrap:wrap;
+  }
+  .bn__sub .line{
+    font-family:var(--grot); font-weight:600;
+    font-size:clamp(14px,1.5vw,19px);
+    letter-spacing:-.01em;
+    color:var(--paper);
+    max-width:46ch;
+  }
+  .bn__sub .tag{
+    font-family:var(--mono); font-weight:700;
+    font-size:clamp(10px,1vw,12px);
+    letter-spacing:.12em; text-transform:uppercase;
+    color:var(--ink);
+    background:var(--rose);
+    padding:5px 10px;
+    white-space:nowrap;
+  }
+
+  /* ---------- colophon ---------- */
+  .bn__foot{
+    position:relative; z-index:2;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; flex-wrap:wrap;
+    border-top:1px solid var(--line);
+    padding-top:14px;
+    font-family:var(--mono);
+    font-size:clamp(10px,1.05vw,12px);
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--dim);
+  }
+  .bn__foot .colo b{ color:var(--paper); font-weight:400; }
+  .bn__foot .colo .dot{ color:var(--denim); }
+  .bn__marks{ display:flex; align-items:center; gap:14px; color:var(--dim); }
+  .bn__marks svg{ width:18px; height:18px; display:block; }
+  .bn__marks .m{ color:var(--dim); transition:color .3s; }
+  .bn__marks .m.on{ color:var(--rose); }
+
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  @keyframes spin-rev{ to{ transform:rotate(-360deg); } }
+  @keyframes breathe{
+    0%,100%{ transform:scaleY(1); }
+    50%{ transform:scaleY(1.05); }
+  }
+  @keyframes blink{
+    0%,92%,100%{ transform:scaleY(1); }
+    95%{ transform:scaleY(.06); }
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:.35; transform:scale(.82); }
+  }
+  @keyframes rise{ to{ transform:translateY(0); } }
+
+  @media (max-width:780px){
+    .bn__stage{ grid-template-columns:1fr; gap:clamp(10px,5vw,28px); }
+    .bn__sun{ width:clamp(150px,46vw,240px); }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .bn__petals,.bn__spark,.bn__petals path,.bn__lid,.bn__live{ animation:none !important; }
+    .bn__head .l span{ animation:none !important; transform:none !important; }
+  }
+</style>
+</head>
+<body>
+  <section class="bn" aria-label="Monuments laboratory / block out the noise">
+
+    <div class="bn__rail">
+      <span class="bn__sec">LABORATORY <span class="dot">/</span> FIELD NO. 004259</span>
+      <span class="bn__rail-r">
+        <span class="bn__sec"><span class="bn__live" aria-hidden="true"></span> SIGNAL LIVE</span>
+        <span class="bn__sec">VOICE DIAL <b>10 / 10</b></span>
+        <span class="bn__sec">LA <span class="dot">/</span> NY</span>
+      </span>
+    </div>
+
+    <div class="bn__brand" aria-label="Monuments">
+      M<svg class="wm-eye" viewBox="0 0 100 100" aria-hidden="true"><path d="M8 50 C30 24 70 24 92 50 C70 76 30 76 8 50 Z" fill="none" stroke="currentColor" stroke-width="7"/><g transform="translate(50,50)"><rect class="pupil" x="-3" y="-17" width="6" height="34" rx="3" fill="currentColor"/><rect class="pupil" x="-3" y="-17" width="6" height="34" rx="3" transform="rotate(60)" fill="currentColor"/><rect class="pupil" x="-3" y="-17" width="6" height="34" rx="3" transform="rotate(120)" fill="currentColor"/></g></svg>NUMENTS
+    </div>
+
+    <div class="bn__stage">
+
+      <div class="bn__sun" aria-hidden="true">
+        <svg viewBox="0 0 240 240" id="sun"></svg>
+      </div>
+
+      <div class="bn__statement">
+        <p class="bn__kicker">The studio at full volume <span class="em">·</span> a brand book, alive</p>
+
+        <h2 class="bn__head" aria-label="Block out the noise.">
+          <span class="l"><span>Block</span></span>
+          <span class="l"><span class="denim">out the</span></span>
+          <span class="l"><span>noise<span class="rose">.</span></span></span>
+        </h2>
+
+        <div class="bn__sub">
+          <p class="line">We build things worth remembering. One signal. No clutter. Built to be remembered.</p>
+          <span class="tag">BUILT TO LAST</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bn__foot">
+      <span class="colo">MONUMENTS <span class="dot">©</span> 2026 <span class="dot">·</span> NO. 004259 <span class="dot">·</span> EST. MMXXVI <span class="dot">·</span> LA / NY</span>
+      <span class="bn__marks" aria-hidden="true" id="marks"></span>
+    </div>
+
+  </section>
+
+<script>
+(function(){
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var sun = document.getElementById("sun");
+
+  function petalPath(w,L){
+    return 'M0 0 C '+(-w)+' '+(-L*0.25)+', '+(-w)+' '+(-L*0.78)+', 0 '+(-L)+
+           ' C '+w+' '+(-L*0.78)+', '+w+' '+(-L*0.25)+', 0 0 Z';
+  }
+
+  function el(tag,attrs){
+    var e=document.createElementNS(SVGNS,tag);
+    for(var k in attrs){ e.setAttribute(k,attrs[k]); }
+    return e;
+  }
+
+  var cx=120, cy=120, n=9, base=24, len=66;
+
+  var petals=el("g",{class:"bn__petals"});
+  for(var i=0;i<n;i++){
+    var deg=(i/n)*360;
+    var w=20 + ((i*37)%7);
+    var L=len + (((i*53)%9)-4);
+    var g=el("g",{transform:"translate("+cx+","+cy+") rotate("+deg+") translate(0,"+(-base)+")"});
+    var p=el("path",{d:petalPath(w,L),fill:"var(--denim)"});
+    g.appendChild(p);
+    petals.appendChild(g);
+  }
+  sun.appendChild(petals);
+
+  var eye=el("g",{class:"bn__eyegrp",transform:"translate("+(cx-50)+","+(cy-50)+")"});
+
+  var disc=el("circle",{cx:50,cy:50,r:(base+12),fill:"var(--ink)"});
+  eye.appendChild(disc);
+
+  eye.appendChild(el("path",{d:"M14 50 C32 28 68 28 86 50 C68 72 32 72 14 50 Z",fill:"none",stroke:"var(--paper)","stroke-width":7}));
+
+  var lidGrp=el("g",{class:"bn__lid"});
+  lidGrp.appendChild(el("path",{d:"M14 50 C32 28 68 28 86 50 C68 72 32 72 14 50 Z",fill:"var(--ink)"}));
+  eye.appendChild(lidGrp);
+
+  eye.appendChild(el("path",{d:"M14 50 C32 28 68 28 86 50 C68 72 32 72 14 50 Z",fill:"none",stroke:"var(--paper)","stroke-width":7}));
+
+  eye.appendChild(el("circle",{cx:50,cy:50,r:13,fill:"var(--denim)"}));
+
+  var spark=el("g",{class:"bn__spark",transform:"translate("+cx+","+cy+")"});
+  [0,60,120].forEach(function(r){
+    spark.appendChild(el("rect",{x:-2.4,y:-13,width:4.8,height:26,rx:2.4,fill:"var(--rose)",transform:"rotate("+r+")"}));
+  });
+
+  sun.appendChild(eye);
+  sun.appendChild(spark);
+
+  var marks=document.getElementById("marks");
+  var glyphs=[
+    '<path d="M50 6 C54 36 64 46 94 50 C64 54 54 64 50 94 C46 64 36 54 6 50 C36 46 46 36 50 6 Z" fill="currentColor"/>',
+    '<g transform="translate(50,50)" fill="currentColor"><rect x="-30" y="-5" width="60" height="10" rx="5"/><rect x="-5" y="-30" width="10" height="60" rx="5"/></g>',
+    '<path d="M14 50 C32 28 68 28 86 50 C68 72 32 72 14 50 Z" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="50" cy="50" r="9" fill="currentColor"/>',
+    '<path d="M40 90 L40 36 L50 16 L60 36 L60 90 Z" fill="currentColor"/><rect x="33" y="90" width="34" height="6" rx="2" fill="currentColor"/>',
+    '<g transform="translate(50,50)" fill="currentColor"><rect x="-3" y="-38" width="6" height="76" rx="3"/><rect x="-3" y="-38" width="6" height="76" rx="3" transform="rotate(60)"/><rect x="-3" y="-38" width="6" height="76" rx="3" transform="rotate(120)"/></g>'
+  ];
+  var holders=[];
+  glyphs.forEach(function(g){
+    var span=document.createElement("span");
+    span.className="m";
+    span.innerHTML='<svg viewBox="0 0 100 100">'+g+'</svg>';
+    marks.appendChild(span);
+    holders.push(span);
+  });
+
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  if(!reduce){
+    var idx=0;
+    setInterval(function(){
+      holders.forEach(function(h){ h.classList.remove("on"); });
+      holders[idx].classList.add("on");
+      idx=(idx+1)%holders.length;
+    },1100);
+  }
+})();
+</script>
+</body>
+</html>
