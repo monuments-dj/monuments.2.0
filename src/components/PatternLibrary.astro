@@ -74,8 +74,9 @@
         <p class="rr-kicker"><span class="lab-kicker-mark" aria-hidden="true">+</span>Work in motion</p>
         <div class="rr" data-rr>
           <span class="rr-word rr-word-l">Play</span>
-          <div class="rr-panel" data-cursor="Watch">
-            <iframe class="rr-video" src="https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=1&controls=0&loop=1&playlist=VMubUUZ2tdU&rel=0&modestbranding=1&playsinline=1&showinfo=0&iv_load_policy=3&disablekb=1&fs=0&start=6" title="Showreel" frameborder="0" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+          <div class="rr-panel" data-cursor="Play">
+            <img class="rr-poster" src="/case-studies/sony-this-moment/gallery/tm-04.jpg" alt="Showreel still" />
+            <span class="rr-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z" /></svg></span>
           </div>
           <span class="rr-word rr-word-r">Reel</span>
         </div>
@@ -161,7 +162,9 @@
   .rr-word-r { transform: translateX(var(--rr-spread)); }
   .rr-panel { position: relative; flex: 0 0 auto; display: block; overflow: hidden; border-radius: var(--rr-radius); aspect-ratio: 16 / 9;
     width: calc(var(--rr-size) * 1%); box-shadow: 0 30px 70px rgb(var(--ink-rgb) / 0.22); }
-  .rr-video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+  .rr-panel { aspect-ratio: 16 / 10; }
+  .rr-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .rr-play { position: absolute; inset: 0; margin: auto; width: clamp(38px, 4vw, 52px); height: clamp(38px, 4vw, 52px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fg); background: rgb(var(--fg-rgb) / 0.16); border: 1px solid rgb(var(--fg-rgb) / 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
   .rr-cap { text-align: center; max-width: 42ch; margin: clamp(26px, 3.4vw, 46px) auto 0; font-size: clamp(15px, 1.3vw, 18px); font-weight: 300; line-height: 1.5; opacity: 0.72; }
   @media (max-width: 640px) { .rr-word { font-size: clamp(30px, 13vw, 74px); } .rr { gap: clamp(14px, 5vw, 40px); } }
 
