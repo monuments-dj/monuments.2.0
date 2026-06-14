@@ -5,6 +5,7 @@ import BrandTicker from '../../components/BrandTicker.astro';
 import FloatingHand from '../../components/FloatingHand.astro';
 import ShapePile from '../../components/ShapePile.astro';
 import PatternLibrary from '../../components/PatternLibrary.astro';
+import BrandWorld from '../../components/BrandWorld.astro';
 
 // === THE LAB (/lab) ===
 // Public-facing Laboratory showcase: proof the studio is ahead of the market.
@@ -62,6 +63,7 @@ const sessionWork = [
   { href: '/lab/project-detail', t: 'Project-detail slider', tag: 'New page', d: "Pinned horizontal chapter slider, Lusion of_the_oak style." },
   { href: '/lab/flashpoint', t: 'Flashpoint case study', tag: 'New page', d: "Light-forward rebrand page: the Imagine / Illuminate / Create concept." },
   { href: '/lab/sony-this-moment', t: 'Next-project hand-off', tag: 'Component', d: "Growing media preview + scroll-to-next, at the bottom of the case studies." },
+  { href: '/lab#brand', t: 'Brand system, integrated', tag: 'On this page', d: "The brand book woven into the lab: wordmark, palette, symbol family, eye-sun, voice." },
   { href: '/lab#photo-galleries', t: 'Photo galleries', tag: 'On this page', d: "Pattern-library element: justified / masonry / grid + the lightbox." },
   { href: '/lab#next-project', t: 'Next-project handoff element', tag: 'On this page', d: "Pattern-library element: the exoape grow-and-handoff." },
   { href: '/', t: 'Play / Reel reveal', tag: 'Homepage', d: "Promoted to the production homepage. Scroll down to the showreel." },
@@ -116,6 +118,9 @@ const sessionWork = [
         ))}
       </ul>
     </section>
+
+    <!-- BRAND WORLD — the brand book (v0.8) integrated into the lab as a dark band -->
+    <BrandWorld />
 
     <!-- BRAND TICKER -->
     <div class="lab-ticker-band"><BrandTicker tone="black" /></div>

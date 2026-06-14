@@ -5,6 +5,8 @@
   --accent: #6b8cae;
   --c-sand: #e7ddcc;   /* warm light section */
   --c-slate: #1b2630;  /* cool deep section */
+  /* brand book v0.8: ink/paper carry the system, denim is the one structural colour, rose is accent only */
+  --brand-ink: #0A0A0A; --brand-paper: #F4F4F2; --denim: #3E6E94; --rose: #EFA1AD;
   --wrap: 1300px;      /* centered content column max-width — the default for ALL sections */
   --pad: clamp(24px, 5vw, 40px);  /* shared L/R gutter so every section's edges line up */
 }
