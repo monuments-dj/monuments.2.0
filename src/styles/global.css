@@ -286,6 +286,16 @@ nav a {
 
 .menu-socials a:hover { color: var(--white); }
 
+/* Phones: the big menu words (e.g. "Photography" ≈ 344px) overflow the screen at the
+   desktop clamp. Tighten the gutter + cap the type so every link and the footer fit. */
+@media (max-width: 560px) {
+  .fullscreen-menu { padding: 0 28px; }
+  .menu-links a { font-size: clamp(30px, 10vw, 72px); }
+  /* Stack the footer so the email and the social row don't collide / run off-screen */
+  .menu-footer { left: 28px; right: 28px; bottom: 32px; flex-direction: column; align-items: flex-start; gap: 14px; }
+  .menu-socials { flex-wrap: wrap; gap: 18px; }
+}
+
 .hero {
   position: relative;
   height: 100vh;
@@ -468,6 +478,10 @@ body.loaded .hero-bottom {
 .logo-cell {
   border-right: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; padding: 48px 32px;
   display: flex; align-items: center; justify-content: center;
+  /* min-width:0 stops the aspect-ratio from deriving a min-width off the cell's
+     content height (1.9 × height ≈ 233px), which forced the 1fr columns wider than
+     their share and overflowed the page on narrow phones. */
+  min-width: 0;
   aspect-ratio: 1.9 / 1; transition: background 0.2s; /* taller cells, matching the reference proportions */
 }
 
@@ -877,6 +891,7 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
   .trusted, .bottom-cta { padding-left: 24px; padding-right: 24px; }
   .trusted-top { flex-direction: column; gap: 24px; }
   .logo-grid { grid-template-columns: repeat(2, 1fr); }
+  .logo-cell { padding: 30px 16px; }
   .testimonials { padding: 80px 24px; }
   .tm-card { flex-basis: 80vw; padding: 28px 26px; }
   .tm-statement-foot { margin-top: 34px; }
