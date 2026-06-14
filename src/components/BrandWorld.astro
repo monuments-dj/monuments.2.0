@@ -114,14 +114,15 @@
   .bw .field .s2{bottom:-130px;left:-90px;width:300px;color:var(--rose);opacity:.045;animation:bwDrift 52s linear infinite reverse}
   @keyframes bwDrift{to{transform:rotate(360deg)}}
 
-  .bw .inner{position:relative;z-index:1;max-width:1180px;margin:0 auto}
+  .bw .inner{position:relative;z-index:1;max-width:var(--wrap, 1300px);margin:0 auto}
 
   .bw .eyebrow{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin:0 0 30px}
   .bw .eyebrow .ic{width:15px;height:15px;color:var(--rose);flex:none}
   .bw .eyebrow .rule{flex:1;height:1px;background:var(--line)}
 
   .bw .hero{display:grid;grid-template-columns:1fr;gap:34px;padding-bottom:clamp(44px,6vw,68px);border-bottom:1px solid var(--line);margin-bottom:clamp(44px,6vw,68px)}
-  .bw .wordmark{display:flex;align-items:center;gap:.06em;font-weight:900;line-height:.84;font-size:clamp(48px,12vw,164px);letter-spacing:-.02em;color:var(--paper)}
+  .bw .hero > div{min-width:0}  /* don't let the big wordmark force the track wider / drag the tagline */
+  .bw .wordmark{display:flex;align-items:center;gap:.06em;font-weight:900;line-height:.84;font-size:clamp(36px,10vw,150px);letter-spacing:-.02em;color:var(--paper);max-width:100%}
   .bw .wordmark .mk{display:inline-flex;width:.92em;height:.92em;color:var(--paper);position:relative;top:.02em;flex:none}
   .bw .wordmark .mk svg{width:100%;height:100%;overflow:visible}
   .bw .wm-eye{transform-box:fill-box;transform-origin:center;animation:bwBlink 7.2s ease-in-out infinite}
