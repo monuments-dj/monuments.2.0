@@ -279,7 +279,8 @@ its own `--wh-circle` colour + client logo:
 - About + Services: DJ is matching these to the real site via **Cowork** (separate tool).
   Coordinate — pull before editing if Cowork has been active (pre-push hook blocks stale pushes).
 - Brand-doc conflicts still unresolved: photo-vs-film positioning, Tess section, featured-work list.
-- `against.png` logo upside-down. Self-host showreel MP4 when DJ provides it.
+- Self-host showreel MP4 when DJ provides it. (NOTE: `against.png` renders inverted
+  by design — that's the actual AGAINST mark, confirmed by DJ. Do NOT "fix"/flip it.)
 - Real DJ/Tess headshots → swap into About placeholder tiles (`/public/about/`).
 
 ## SESSION 2026-06-12 (cont.) — V2 LAB PAGES BUILT (autonomous run, DJ to review)

@@ -76,8 +76,9 @@ Master imagery lives in DJ's Dropbox: `~/Library/CloudStorage/Dropbox/Monuments/
 3. **Roll approved copy in** — home hero "We build things worth remembering" + subhead +
    CTA, plus About/Services/Contact/Photography. Voice + lines: see the project memory
    (`monuments-copy.md`) — plain-spoken, story-first, anti-jargon.
-4. Build remaining case studies; flesh out About/Services/Contact stubs; `against.png`
-   logo is upside-down (confirm intent); deploy (Netlify/Vercel) when ready.
+4. Build remaining case studies; flesh out About/Services/Contact stubs; deploy
+   (Netlify/Vercel) when ready. (`against.png` renders inverted on purpose — that is
+   the real AGAINST mark, confirmed by DJ; not a bug, leave it.)
 
 ## Notes
 - DJ gives precise designer feedback, iterates fast, is cost-conscious (estimate effort
