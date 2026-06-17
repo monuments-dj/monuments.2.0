@@ -309,7 +309,7 @@ const pad2 = (n: number) => String(n).padStart(2, '0');
     const N = panels.length;
     const DELAY = 4000;        // autoplay cadence
     const IDLE_RESUME = 3500;  // wait after the last gesture before resuming
-    const PROG_GUARD = 650;    // smooth-scroll has no end event; clear our guard after this
+    const PROG_GUARD = 2000;   // FALLBACK only: scrollend releases the flag; this covers engines without it
 
     track.setAttribute('data-lenis-prevent', ''); // belt-and-braces (also in markup)
 
@@ -356,7 +356,8 @@ const pad2 = (n: number) => String(n).padStart(2, '0');
       tick = window.setTimeout(() => {
         tick = 0;
         if (!canRun()) return;             // re-check at fire time: a gate may have flipped
-        goTo(nearestIndex() + 1, true);    // resume from where the user actually is; wraps via %
+        const next = nearestIndex() + 1;   // resume from where the user actually is
+        goTo(next, next % N !== 0);        // smooth between panels; instant on the loop back to 0
         schedule();
       }, DELAY);
     };
@@ -375,12 +376,22 @@ const pad2 = (n: number) => String(n).padStart(2, '0');
     // scroll: track the active dot live; a NON-programmatic scroll counts as interaction
     let scrollIdle = 0;
     track.addEventListener('scroll', () => {
-      setActive(nearestIndex());
-      if (!programmatic) interrupt();
+      // user scroll: live dot tracking + interrupt autoplay. During our OWN smooth scroll
+      // (programmatic) skip both, so the dot stays on goTo's destination (no rewind) and
+      // autoplay never pauses itself.
+      if (!programmatic) { setActive(nearestIndex()); interrupt(); }
       clearTimeout(scrollIdle);
-      scrollIdle = window.setTimeout(() => { current = nearestIndex(); }, 120);
+      scrollIdle = window.setTimeout(() => {
+        setActive(nearestIndex());   // settle the dot onto the snapped panel (manages `current`)
+        programmatic = false;        // the scroll has stopped -> release the guard (every engine)
+        clearTimeout(progTimer);
+      }, 140);
     }, { passive: true });
-    track.addEventListener('scrollend', () => setActive(nearestIndex()), { passive: true } as any);
+    // snappier release where supported; the 140ms scroll-settle above is the cross-browser guarantee
+    track.addEventListener('scrollend', () => {
+      setActive(nearestIndex());
+      programmatic = false; clearTimeout(progTimer);
+    }, { passive: true } as any);
 
     // dots: tap to jump = explicit interrupt + go
     dots.forEach((d, i) => d.addEventListener('click', () => { interrupt(); goTo(i, true); }));
@@ -403,14 +414,26 @@ const pad2 = (n: number) => String(n).padStart(2, '0');
 
     goTo(0, false); // align panel 0 without animation; IO arms autoplay once on-screen
 
-    // teardown: resize across 820px, or bfcache/navigate-away -> kill every timer + observer
-    const mq = matchMedia('(max-width: 820px)');
-    const teardown = () => {
+    // teardown: always clear timers; only sever the observers on a REAL unload. On a bfcache
+    // freeze (pagehide persisted) keep the IO + visibilitychange so the page restores live.
+    const teardown = (e?: PageTransitionEvent) => {
       stop(); clearTimeout(idle); clearTimeout(scrollIdle); clearTimeout(progTimer);
+      if (e && e.persisted) return;
       io.disconnect();
       document.removeEventListener('visibilitychange', onVis);
     };
-    mq.addEventListener?.('change', (e) => { if (!e.matches) teardown(); });
-    window.addEventListener('pagehide', teardown, { once: true });
+    window.addEventListener('pagehide', teardown);
+    // bfcache restore (tap a card -> Back): the script does not re-run, so re-read the
+    // visibility gate and re-arm autoplay.
+    window.addEventListener('pageshow', (e) => {
+      if (!e.persisted) return;
+      pageVisible = !document.hidden;
+      interrupted = false;
+      resume();
+    });
+    // crossing the 820px line (tablet rotate / desktop resize) must re-init the matching
+    // branch (mobile<->desktop); a reload is the simplest correct way and is rare on phones.
+    const mq = matchMedia('(max-width: 820px)');
+    mq.addEventListener?.('change', () => location.reload());
   }
 </script>
