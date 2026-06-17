@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import ReelReveal from '../components/ReelReveal.astro';
+import RecentProjects from '../components/RecentProjects.astro';
 
 const testimonials = [
   { quote: "We love working with DJ and Tess. We thought we were hiring a production company and got a creative director. The thinking they bring to the room changes the whole project.", name: "AC Boise", role: "Creative Partner" },
@@ -8,23 +9,8 @@ const testimonials = [
   { quote: "DJ doesn't just execute. He makes you rethink what the work could be. We came in with a brief and left with a better brief.", name: "Agency Partner", role: "Creative Director" },
 ];
 
-// Home "Recent Work" reel — headline "Built ___", the centred item fills the
-// tail (carries its own preposition so "Built to…" and "Built for…" both work).
-// Section pins; vertical scroll scrubs the filmstrip horizontally; a monument
-// builds brick-by-brick as a progress meter.
-// `tail` = per-project line (DJ-approved). Flashpoint + Photography lines are my
-// placeholders — DJ to confirm. Images first-pass (galaxy pool + real Blue Cross).
-// Real case studies only — each links to an existing /work/<slug> page and uses
-// a real hero image pulled from that project's own folder. No placeholders.
-const reel = [
-  { brand: "Turnstile",   tail: "to take it to 11",    slug: "turnstile",          img: "/case-studies/turnstile/bts/bts-01.jpg" },
-  { brand: "Blue Cross",  tail: "for life",            slug: "blue-cross",         img: "/case-studies/blue-cross/gallery/bci-10.jpg" },
-  { brand: "Sony",        tail: "to chase the sun",    slug: "sony-xperia-summer", img: "/case-studies/sony-xperia-summer/gallery/xp-01.jpg" },
-  { brand: "Sony",        tail: "to capture the moment", slug: "sony-this-moment", img: "/case-studies/sony-this-moment/gallery/tm-01.jpg" },
-  { brand: "Flashpoint",  tail: "to shape the light",  slug: "flashpoint",         img: "/case-studies/flashpoint/gallery/fp-01.jpg" },
-  { brand: "Waffle Me Up", tail: "to be worth the wait", slug: "waffle-me-up",     img: "/case-studies/waffle-me-up/gallery/wmu-01.jpg" },
-  { brand: "Clothing & Merch", tail: "to be worn",     slug: "clothing-merch",     img: "/case-studies/clothing-merch/gallery/cm-01.jpg" },
-];
+// The "Recent Work" slider now lives in the RecentProjects component (the project
+// data moved there too). The old pinned filmstrip + its reel[] data were removed.
 ---
 <Base title="HOME - monuments" loader={true}>
   <section class="hero">
@@ -80,32 +66,7 @@ const reel = [
   <!-- Showreel: the Play/Reel scroll reveal (promoted from the lab). Poster for now. -->
   <ReelReveal />
 
-  <section class="rwork" id="homeReel" aria-label="Recent work">
-    <div class="rwork-pin" id="rworkPin">
-      <div class="rwork-stage">
-        <div class="rwork-top">
-          <span class="rwork-eyebrow">Recent Work</span>
-          <h2 class="rwork-headline">Built <span class="rwork-blank"><span class="rwork-word" id="reelWord">{reel[0].tail}</span></span></h2>
-        </div>
-
-        <div class="rwork-viewport" id="reelViewport">
-          <div class="rwork-track" id="reelTrack">
-            {reel.map((p, i) => (
-              <a class="rwork-item" href={`/work/${p.slug}`} data-tail={p.tail} data-idx={i}>
-                <div class="rwork-item-media"><img src={p.img} alt={`${p.brand} — built ${p.tail}`} loading="lazy" /></div>
-                <div class="rwork-item-cap"><span class="b">{p.brand}</span> <span class="w">{p.tail}</span></div>
-              </a>
-            ))}
-          </div>
-        </div>
-
-        <div class="rwork-foot">
-          <svg class="rwork-bricks" id="reelBricks" viewBox="0 0 240 116" preserveAspectRatio="xMidYMax meet" aria-hidden="true"></svg>
-          <a href="/work" class="rwork-all">See all work <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <RecentProjects />
 
   <section class="testimonials fade" data-tm="1">
     <span class="tm-eyebrow">Client Words</span>
@@ -342,113 +303,4 @@ const reel = [
     })();
   </script>
 
-  <!-- Recent Work reel: section pins, vertical scroll scrubs the filmstrip; centre item drives the "Built to ___" headline; a monument builds brick-by-brick (scroll-reactive progress). -->
-  <script is:inline>
-    (function () {
-      const section = document.getElementById('homeReel');
-      if (!section) return;
-      const pin = document.getElementById('rworkPin');
-      const track = document.getElementById('reelTrack');
-      const viewport = document.getElementById('reelViewport');
-      const wordEl = document.getElementById('reelWord');
-      const svg = document.getElementById('reelBricks');
-      const items = track ? Array.from(track.querySelectorAll('.rwork-item')) : [];
-      if (!pin || !track || !viewport || !svg || !items.length) return;
-      const N = items.length;
-
-      // ---- Scroll-reactive waveform: bars react to scroll velocity + double as a
-      // progress meter (bars left of the scrub point glow, bars ahead sit dim). ----
-      const SVGNS = 'http://www.w3.org/2000/svg';
-      const BARS = 44, VBW = 240, VBH = 60, MID = VBH / 2, bw = VBW / BARS;
-      const bars = [];
-      for (let i = 0; i < BARS; i++) {
-        const rect = document.createElementNS(SVGNS, 'rect');
-        rect.setAttribute('x', (i * bw + bw * 0.22).toFixed(2));
-        rect.setAttribute('width', (bw * 0.56).toFixed(2));
-        rect.setAttribute('rx', (bw * 0.28).toFixed(2));
-        rect.setAttribute('class', 'rwork-bar');
-        svg.appendChild(rect); bars.push(rect);
-      }
-      // amplitude per bar (smoothed), and the progress fill point
-      let amp = new Array(BARS).fill(0);
-      function drawWave(p, energy, time) {
-        const lead = p * BARS;                         // progress position across the bars
-        for (let i = 0; i < BARS; i++) {
-          const center = 1 - Math.abs((i / (BARS - 1)) * 2 - 1);   // 1 mid -> 0 edges
-          // idle shimmer + velocity-driven spikes (each bar phase-offset so it ripples)
-          const idle = 0.18 + 0.12 * Math.sin(time * 0.004 + i * 0.5);
-          const spike = energy * (0.5 + 0.5 * Math.sin(time * 0.02 + i * 0.9));
-          const target = (idle + spike * 1.6) * (0.45 + center * 0.55);
-          amp[i] += (target - amp[i]) * 0.2;
-          const h = Math.max(2, amp[i] * VBH);
-          bars[i].setAttribute('y', (MID - h / 2).toFixed(2));
-          bars[i].setAttribute('height', h.toFixed(2));
-          bars[i].classList.toggle('lit', i <= lead);  // progress fill
-        }
-      }
-
-      // ---- Native fallback (touch / reduced-motion): swipeable strip, no pin/scrub ----
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const coarse = window.matchMedia('(pointer: coarse)').matches;
-      if (reduce || coarse) {
-        section.classList.add('rwork-native');
-        items[0].classList.add('is-center');
-        drawWave(1, 0.2, 0);
-        return;
-      }
-
-      // ---- Measure pin height + scrub geometry ----
-      // Use getBoundingClientRect deltas, not offsetLeft: a position:sticky ancestor
-      // nulls offsetParent (offsetLeft -> 0). Rect deltas are invariant to the
-      // track's translate and its centering padding.
-      let step = 0, scrollable = 0, pinExtra = 0;
-      function measure() {
-        const r0 = items[0].getBoundingClientRect();
-        const itemW = r0.width;
-        step = N > 1 ? (items[1].getBoundingClientRect().left - r0.left) : itemW;
-        if (!step) step = itemW + 40;                  // safety net
-        const padX = Math.max((viewport.clientWidth - itemW) / 2, 0);
-        track.style.paddingLeft = padX + 'px';
-        track.style.paddingRight = padX + 'px';
-        scrollable = step * (N - 1);
-        pinExtra = Math.max(scrollable * 1.15, 1);     // vertical scroll distance to scrub the full list
-        pin.style.height = (window.innerHeight + pinExtra) + 'px';
-      }
-      measure();
-      window.addEventListener('resize', measure, { passive: true });
-      window.addEventListener('load', measure);
-
-      // ---- Scrub loop: scroll position -> horizontal translate + centre + brick build ----
-      let energy = 0, curWord = items[0].dataset.tail, curCenter = 0, t = 0;
-      items[0].classList.add('is-center');
-
-      function frame() {
-        t += 16;
-        const top = pin.getBoundingClientRect().top;
-        let p = -top / pinExtra; p = p < 0 ? 0 : (p > 1 ? 1 : p);
-        track.style.transform = 'translate3d(' + (-(p * scrollable)).toFixed(2) + 'px,0,0)';
-
-        const ci = Math.round(p * (N - 1));
-        if (ci !== curCenter) {
-          curCenter = ci;
-          items.forEach((x, i) => x.classList.toggle('is-center', i === ci));
-          const w = items[ci].dataset.tail;
-          if (wordEl && w && w !== curWord) {
-            curWord = w;
-            wordEl.classList.add('swap');
-            setTimeout(() => { wordEl.textContent = w; wordEl.classList.remove('swap'); }, 200);
-          }
-        }
-
-        // velocity -> waveform energy (peaks while scrolling, eases back to idle)
-        const lv = (window.lenis && typeof window.lenis.velocity === 'number') ? window.lenis.velocity : 0;
-        const tgt = Math.min(Math.abs(lv) / 38, 1);
-        energy += (tgt - energy) * 0.12;
-        drawWave(p, energy, t);
-
-        requestAnimationFrame(frame);
-      }
-      requestAnimationFrame(frame);
-    })();
-  </script>
 </Base>
