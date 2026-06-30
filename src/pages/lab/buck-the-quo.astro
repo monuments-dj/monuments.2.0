@@ -1,0 +1,415 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import NextProject from '../../components/NextProject.astro';
+
+// === /lab/buck-the-quo ===
+// Experiential case study for Buck the Quo, a social-change campaign for the J.A. and
+// Kathryn Albertson Family Foundation aimed at lifting Idaho's post-secondary enrollment
+// by talking WITH teens instead of at them. The spine is the "More In Store" activation:
+// a traveling pop-up (shipping container) that toured fairs and teen spots, under-18s only,
+// and turned a hard conversation about the future into something teens actually wanted to
+// have. 18,000+ one-on-one conversations, three Rocky Mountain Emmys.
+//
+// Light-forward, brand-literal pink/gold accents on the LabFx --paper/--ink ground.
+// Beats: hero, the problem (They Sayers), the experiential spine (scenes), the
+// I AM / I CAN / I WILL triad, the 18,000 stat band, the merch gallery + lightbox,
+// DJ's role (the Drake Cooper -> consultant -> director arc), the Emmys, credits, next.
+// Patterns reused from the flashpoint page: split/fade reveals, drift parallax, triad.
+//
+// ⚠️ COPY STATUS: the campaign facts are from drakecooper.com/portfolio/buck-the-quo and
+// are accurate. DJ's specific experiential contributions are framed ONLY at the level he
+// stated (came on via Drake Cooper, stayed as a consultant, directed the experiential
+// build). The pull-quote in "The role" is a PLACEHOLDER for DJ's own words. Replace it.
+
+const G = '/case-studies/buck-the-quo/gallery';
+const scenes = [
+  { img: `${G}/container-front.jpg`, k: 'The space', t: 'A shipping container that pulled up like a store', d: 'It traveled the state and parked where teens already were: fairs, events, the places adults usually skip. From the outside it read like a drop, not a lecture.' },
+  { img: `${G}/future-sign.jpg`,     k: 'The hook',   t: 'A room built around one word', d: 'FUTURE in neon, merch worth wearing, a saddle that said I AM, I CAN, I WILL. The space earned a few minutes of attention, then used them well.' },
+  { img: `${G}/chop-board.jpg`,      k: 'The turn',   t: 'The merch was the doorway, the conversation was the point', d: 'Teens only, no parents, no teachers. A simple writing exercise opened a real talk about what they actually wanted their life to look like, with a near-peer who listened instead of advised.' },
+];
+// merch + scene set for the editorial grid -> shared Lightbox
+const gallery = [
+  `${G}/container-coaster.jpg`,
+  `${G}/merch-shirt.jpg`,
+  `${G}/merch-glasses.jpg`,
+  `${G}/saddle.jpg`,
+  `${G}/merch-backpack.jpg`,
+  `${G}/merch-beanie.jpg`,
+  `${G}/merch-dadhat.jpg`,
+  `${G}/merch-flag.jpg`,
+];
+const stats = [
+  { n: '18,000+', l: 'one-on-one conversations with Idaho teens' },
+  { n: '1 in 2', l: 'teens knew Buck the Quo' },
+  { n: '88%', l: 'favorability among teens who knew it' },
+];
+const emmys = [
+  { img: '/case-studies/buck-the-quo/emmy/emmy-gold.png', k: 'Gold' },
+  { img: '/case-studies/buck-the-quo/emmy/emmy-silver.png', k: 'Silver' },
+  { img: '/case-studies/buck-the-quo/emmy/emmy-bos.png', k: 'Best of Show' },
+];
+const credits = [
+  { k: 'Client', v: 'Albertson Family Foundation' },
+  { k: 'Agency', v: 'Drake Cooper' },
+  { k: 'Role', v: 'Director, Experiential' },
+  { k: 'Years', v: '2015 to 2018' },
+];
+---
+<Base title="Buck the Quo, the Lab">
+  <main class="bq">
+    <!-- HERO -->
+    <header class="bq-hero">
+      <div class="bq-hero-frames" aria-hidden="true">
+        <figure class="bq-float bq-float-a" data-drift="7"><img src={`${G}/container-front.jpg`} alt="" loading="eager" decoding="async" /></figure>
+        <figure class="bq-float bq-float-b" data-drift="11"><img src={`${G}/future-sign.jpg`} alt="" loading="eager" decoding="async" /></figure>
+      </div>
+      <div class="bq-hero-inner">
+        <a class="bq-back" href="/lab" data-cursor="Back">&larr; The Lab</a>
+        <p class="bq-eyebrow fade"><span class="bq-mark" aria-hidden="true">+</span>Case study &middot; Experiential</p>
+        <h1 class="bq-h1 split">Buck the Quo</h1>
+        <p class="bq-tag fade">I am. I can. <em>I will.</em></p>
+        <p class="bq-meta fade">A statewide campaign to get more Idaho teens to picture a future after high school, and a traveling activation that made that conversation one they actually wanted to have.</p>
+      </div>
+      <div class="bq-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+    </header>
+
+    <!-- THE PROBLEM -->
+    <section class="bq-brief">
+      <aside class="bq-brief-side">
+        <h2 class="bq-brief-h split">Stop wagging the <em>finger.</em></h2>
+        <p class="bq-stat-lead fade"><b>46%</b><span>of Idaho grads went on after high school. One of the lowest rates in the country.</span></p>
+      </aside>
+      <div class="bq-brief-body">
+        <p class="bq-lead fade">The usual fix is an adult telling a teen what they should do. The campaign had a name for those people: They Sayers. Nobody listens to a They Sayer.</p>
+        <p class="bq-body fade">So Buck the Quo did the opposite. It talked to the teens themselves, not their parents, not their teachers, and treated them like the people actually making the decision. The brand had to feel like theirs before it could change a single mind.</p>
+      </div>
+    </section>
+
+    <!-- THE EXPERIENTIAL SPINE: More In Store -->
+    <section class="bq-scenes">
+      <div class="bq-sc-head">
+        <p class="bq-kicker fade"><span class="bq-mark" aria-hidden="true">+</span>The activation &middot; More In Store</p>
+        <h2 class="bq-sc-title split">Meet them where they <em>are.</em></h2>
+        <p class="bq-sc-sub fade">Most of this campaign happened in person. A mock-retail space that traveled Idaho, turned a heavy subject into a place teens chose to walk into, and earned a real conversation once they did.</p>
+      </div>
+      <ol class="bq-scene-list">
+        {scenes.map((s, i) => (
+          <li class={`bq-scene ${i % 2 ? 'is-rev' : ''}`}>
+            <figure class="bq-scene-media fade" data-drift={4 + (i % 2) * 3}>
+              <a href={s.img} data-lb-full={s.img} data-lb-group="bq" data-cursor="View" aria-label={s.t}>
+                <img src={s.img} alt={s.t} loading="lazy" decoding="async" />
+              </a>
+            </figure>
+            <div class="bq-scene-text">
+              <span class="bq-scene-n">0{i + 1}</span>
+              <span class="bq-scene-k fade">{s.k}</span>
+              <h3 class="bq-scene-t split">{s.t}</h3>
+              <p class="bq-scene-d fade">{s.d}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- CONCEPT TRIAD -->
+    <section class="bq-concept" data-concept>
+      <p class="bq-kicker fade"><span class="bq-mark" aria-hidden="true">+</span>The message that carried it</p>
+      <h2 class="bq-concept-head">
+        <span class="bq-word" data-cw>I am</span>
+        <span class="bq-word" data-cw>I can</span>
+        <span class="bq-word" data-cw>I will</span>
+      </h2>
+      <p class="bq-concept-sub fade">Not a slogan pointed at teens. A line they could say back. Confidence first, instructions never.</p>
+    </section>
+
+    <!-- STAT BAND -->
+    <section class="bq-stats">
+      {stats.map((s) => (
+        <div class="bq-stat fade">
+          <span class="bq-stat-n">{s.n}</span>
+          <span class="bq-stat-l">{s.l}</span>
+        </div>
+      ))}
+    </section>
+
+    <!-- THE MERCH / GALLERY -->
+    <section class="bq-system">
+      <div class="bq-sys-head">
+        <p class="bq-kicker fade"><span class="bq-mark" aria-hidden="true">+</span>What they took home</p>
+        <h2 class="bq-sys-title split">A brand teens actually <em>wanted to wear.</em></h2>
+      </div>
+      <div class="bq-grid">
+        {gallery.map((src, i) => (
+          <figure class={`bq-cell bq-cell-${i % 5} fade`} data-drift={3 + (i % 3) * 2}>
+            <a href={src} data-lb-full={src} data-lb-group="bq" data-cursor="View" aria-label="Open image">
+              <img src={src} alt="" loading="lazy" decoding="async" />
+            </a>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <!-- THE ROLE -->
+    <section class="bq-role">
+      <p class="bq-kicker fade"><span class="bq-mark" aria-hidden="true">+</span>The role</p>
+      <h2 class="bq-role-h split">From the agency floor to the <em>director's seat.</em></h2>
+      <p class="bq-role-body fade">DJ started on Buck the Quo as part of Drake Cooper, then stayed with the campaign as a consultant as it grew. Over its run he worked nearly every side of it: behind the camera for the bulk of the photo and video, on the floor of the More In Store activation, in the room for the focus groups that kept it honest, and in the brand's replies across social. He directed the campaign's YouTube show.</p>
+      <ul class="bq-did">
+        <li class="fade"><span class="bq-did-k">Photo + Video</span><span class="bq-did-v">Shot the majority of the campaign's stills and motion.</span></li>
+        <li class="fade"><span class="bq-did-k">The activation</span><span class="bq-did-v">Worked the More In Store retail experience on the ground.</span></li>
+        <li class="fade"><span class="bq-did-k">Games + Giveaways</span><span class="bq-did-v">Hosted the games and giveaways that pulled teens in.</span></li>
+        <li class="fade"><span class="bq-did-k">Social</span><span class="bq-did-v">Responded in the brand's voice across the channels.</span></li>
+        <li class="fade"><span class="bq-did-k">Focus Groups</span><span class="bq-did-v">Ran focus groups to keep the work true to its audience.</span></li>
+        <li class="fade"><span class="bq-did-k">Influencer Program</span><span class="bq-did-v">Helped build and run the teen influencer program.</span></li>
+        <li class="fade"><span class="bq-did-k">YouTube Show</span><span class="bq-did-v">Directed the weekly series.</span></li>
+      </ul>
+    </section>
+
+    <!-- AWARDS -->
+    <section class="bq-awards">
+      <p class="bq-kicker fade"><span class="bq-mark" aria-hidden="true">+</span>Recognition</p>
+      <h2 class="bq-aw-title split">Three Rocky Mountain <em>Emmys.</em></h2>
+      <div class="bq-emmys">
+        {emmys.map((e) => (
+          <figure class="bq-emmy fade">
+            <img src={e.img} alt={`Rocky Mountain Emmy, ${e.k}`} loading="lazy" decoding="async" />
+            <figcaption>{e.k}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <!-- CREDITS -->
+    <section class="bq-credits">
+      <dl class="bq-cred-list">
+        {credits.map((c) => (
+          <div class="bq-cred fade"><dt>{c.k}</dt><dd>{c.v}</dd></div>
+        ))}
+      </dl>
+    </section>
+
+    <!-- NEXT PROJECT -->
+    <NextProject
+      href="/lab/flashpoint"
+      name="Flashpoint"
+      tag="Adorama · Rebrand"
+      accent="#16a3ab"
+      poster="/case-studies/flashpoint/gallery/fp-01.jpg"
+      photos={["/case-studies/flashpoint/gallery/fp-03.jpg", "/case-studies/flashpoint/gallery/fp-05.jpg"]}
+    />
+
+    <Lightbox />
+  </main>
+  <LabFx />
+</Base>
+
+<style>
+  .bq { --bq-pink: #ec3a7d; --bq-gold: #f2a01e; background: var(--paper); color: var(--ink); overflow-x: clip; }
+  .bq em { font-style: italic; color: var(--bq-pink); }
+  .bq-mark { color: var(--bq-pink); font-weight: 500; margin-right: 18px; }
+  .bq-eyebrow, .bq-kicker { display: inline-flex; align-items: baseline; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.72); margin: 0; }
+
+  /* ---------- HERO ---------- */
+  .bq-hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding: 16vh 0 12vh; }
+  .bq-hero::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
+    linear-gradient(180deg, rgb(var(--ink-rgb) / 0.26) 0%, rgb(var(--ink-rgb) / 0.06) 46%, rgb(var(--ink-rgb) / 0.24) 100%),
+    radial-gradient(120% 100% at 42% 46%, transparent 36%, rgb(var(--ink-rgb) / 0.14) 100%); }
+  .bq-hero-inner { position: relative; z-index: 3; max-width: var(--wrap, 1300px); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+  .bq-hero-inner::before { content: ''; position: absolute; inset: -6vh -10%; z-index: -1; pointer-events: none; background: radial-gradient(120% 84% at 36% 50%, color-mix(in srgb, var(--paper) 88%, transparent) 0%, color-mix(in srgb, var(--paper) 55%, transparent) 46%, transparent 78%); }
+  .bq-back { display: inline-block; margin-bottom: clamp(20px, 4vh, 40px); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.55); text-decoration: none; transition: color 0.25s ease; }
+  .bq-back:hover { color: var(--bq-pink); }
+  .bq-h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(52px, 12vw, 200px); line-height: 0.9; letter-spacing: -0.05em; margin: 14px 0 0; text-transform: uppercase; }
+  .bq-tag { margin: clamp(18px, 2.4vw, 30px) 0 0; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(22px, 3vw, 44px); letter-spacing: -0.02em; color: var(--ink); }
+  .bq-meta { margin: 26px 0 0; max-width: 52ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; font-weight: 300; color: rgb(var(--ink-rgb) / 0.66); }
+
+  .bq-hero-frames { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .bq-float { position: absolute; margin: 0; border-radius: 10px; overflow: hidden; box-shadow: 0 40px 90px rgb(var(--ink-rgb) / 0.20); will-change: transform; }
+  .bq-float img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bq-float-a { right: 4vw; top: 15vh; width: clamp(280px, 36vw, 560px); aspect-ratio: 16/9; }
+  .bq-float-b { right: 30vw; bottom: 9vh; width: clamp(160px, 18vw, 300px); aspect-ratio: 16/9; }
+  @media (max-width: 900px) { .bq-hero-frames { opacity: 0.16; } .bq-float-b { display: none; } }
+
+  .bq-cue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.5); }
+  .bq-cue i { width: 1px; height: 34px; background: linear-gradient(var(--bq-pink), transparent); animation: bqCue 1.8s ease-in-out infinite; transform-origin: top; }
+  @keyframes bqCue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
+
+  /* ---------- shared section frame ---------- */
+  .bq-brief, .bq-scenes, .bq-concept, .bq-system, .bq-role, .bq-awards, .bq-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+
+  /* ---------- PROBLEM ---------- */
+  .bq-brief { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(36px, 6vw, 100px); align-items: start; }
+  .bq-brief-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 3.4vw, 50px); line-height: 1.06; letter-spacing: -0.03em; }
+  .bq-stat-lead { display: flex; align-items: baseline; gap: 14px; margin: clamp(26px, 3vw, 40px) 0 0; }
+  .bq-stat-lead b { font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(44px, 6vw, 86px); letter-spacing: -0.04em; color: var(--bq-pink); line-height: 1; }
+  .bq-stat-lead span { font-size: 14px; line-height: 1.5; color: rgb(var(--ink-rgb) / 0.62); max-width: 22ch; }
+  .bq-lead { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(20px, 2.1vw, 30px); line-height: 1.4; letter-spacing: -0.015em; margin: 0; }
+  .bq-body { margin: 26px 0 0; max-width: 58ch; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.72; font-weight: 300; color: rgb(var(--ink-rgb) / 0.72); }
+
+  /* ---------- SCENES (the experiential spine) ---------- */
+  .bq-sc-head { max-width: 680px; margin-bottom: clamp(44px, 6vw, 88px); }
+  .bq-sc-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(32px, 5vw, 76px); line-height: 1.0; letter-spacing: -0.035em; margin: 14px 0 0; }
+  .bq-sc-sub { margin: 24px 0 0; max-width: 56ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.72; font-weight: 300; color: rgb(var(--ink-rgb) / 0.7); }
+  .bq-scene-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: clamp(64px, 10vw, 150px); }
+  .bq-scene { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: clamp(30px, 5vw, 76px); align-items: center; }
+  .bq-scene.is-rev { grid-template-columns: 0.75fr 1.25fr; }
+  .bq-scene.is-rev .bq-scene-media { order: 2; }
+  .bq-scene-media { margin: 0; border-radius: 12px; overflow: hidden; background: rgb(var(--ink-rgb) / 0.05); box-shadow: 0 36px 80px rgb(var(--ink-rgb) / 0.16); will-change: transform; }
+  .bq-scene-media a { display: block; }
+  .bq-scene-media img { width: 100%; height: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+  .bq-scene-media:hover img { transform: scale(1.04); }
+  .bq-scene-n { font-size: 13px; letter-spacing: 0.16em; color: var(--bq-pink); font-variant-numeric: tabular-nums; }
+  .bq-scene-k { display: block; margin-top: 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.55); }
+  .bq-scene-t { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(24px, 2.8vw, 40px); line-height: 1.1; letter-spacing: -0.025em; margin: 12px 0 0; }
+  .bq-scene-d { margin: 16px 0 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.7; font-weight: 300; color: rgb(var(--ink-rgb) / 0.72); }
+
+  /* ---------- CONCEPT TRIAD ---------- */
+  .bq-concept { text-align: center; }
+  .bq-concept-head { display: flex; flex-direction: column; align-items: center; gap: clamp(4px, 1vh, 14px); margin: clamp(28px, 4vw, 54px) 0; font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(48px, 12vw, 176px); line-height: 0.92; letter-spacing: -0.045em; text-transform: uppercase; }
+  .bq-word { color: rgb(var(--ink-rgb) / 0.16); transition: color 0.6s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1); transform: translateY(0.18em); }
+  .bq-word.on { transform: translateY(0); }
+  .bq-word.lit:nth-child(1) { color: var(--bq-pink); }
+  .bq-word.lit:nth-child(2) { color: var(--bq-gold); }
+  .bq-word.lit:nth-child(3) { color: var(--ink); }
+  .bq-concept-sub { max-width: 52ch; margin: 0 auto; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.74; font-weight: 300; color: rgb(var(--ink-rgb) / 0.68); }
+
+  /* ---------- STAT BAND ---------- */
+  .bq-stats { background: var(--ink); color: var(--paper); display: grid; grid-template-columns: repeat(3, 1fr); }
+  .bq-stat { padding: clamp(54px, 8vw, 110px) var(--pad); text-align: center; border-left: 1px solid rgb(var(--paper-rgb, 252 252 252) / 0.12); }
+  .bq-stat:first-child { border-left: 0; }
+  .bq-stat-n { display: block; font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(44px, 6vw, 92px); letter-spacing: -0.04em; line-height: 1; color: var(--paper); }
+  .bq-stat-l { display: block; margin: 16px auto 0; max-width: 24ch; font-size: 13px; line-height: 1.55; letter-spacing: 0.01em; color: color-mix(in srgb, var(--paper) 64%, transparent); }
+
+  /* ---------- MERCH GALLERY ---------- */
+  .bq-sys-head { max-width: 640px; margin-bottom: clamp(40px, 5vw, 72px); }
+  .bq-sys-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin-top: 14px; }
+  .bq-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(14px, 1.6vw, 26px); }
+  .bq-cell { margin: 0; border-radius: 8px; overflow: hidden; background: rgb(var(--ink-rgb) / 0.04); box-shadow: 0 22px 50px rgb(var(--ink-rgb) / 0.12); will-change: transform; }
+  .bq-cell a { display: block; }
+  .bq-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .bq-cell:hover img { transform: scale(1.04); }
+  .bq-cell-0 { grid-column: span 4; aspect-ratio: 16/9; }
+  .bq-cell-1 { grid-column: span 2; aspect-ratio: 4/5; }
+  .bq-cell-2 { grid-column: span 2; aspect-ratio: 4/5; }
+  .bq-cell-3 { grid-column: span 4; aspect-ratio: 16/9; }
+  .bq-cell-4 { grid-column: span 3; aspect-ratio: 4/3; }
+  .bq-cell:nth-child(6) { grid-column: span 3; aspect-ratio: 4/3; }
+  .bq-cell:nth-child(7) { grid-column: span 3; aspect-ratio: 4/3; }
+  .bq-cell:nth-child(8) { grid-column: span 3; aspect-ratio: 4/3; }
+
+  /* ---------- ROLE ---------- */
+  .bq-role { max-width: 880px; }
+  .bq-role-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin: 14px 0 0; }
+  .bq-role-body { margin: 28px 0 0; max-width: 60ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.7; font-weight: 300; color: rgb(var(--ink-rgb) / 0.74); }
+  .bq-did { list-style: none; margin: clamp(36px, 4vw, 60px) 0 0; padding: 0; }
+  .bq-did li { display: grid; grid-template-columns: 190px 1fr; gap: clamp(16px, 3vw, 44px); align-items: baseline; padding: clamp(16px, 1.8vw, 22px) 4px; border-top: 1px solid rgb(var(--ink-rgb) / 0.12); }
+  .bq-did li:last-child { border-bottom: 1px solid rgb(var(--ink-rgb) / 0.12); }
+  .bq-did-k { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bq-pink); }
+  .bq-did-v { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(17px, 1.7vw, 24px); line-height: 1.3; letter-spacing: -0.015em; color: var(--ink); }
+
+  /* ---------- AWARDS ---------- */
+  .bq-aw-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin: 14px 0 clamp(40px, 5vw, 70px); }
+  .bq-emmys { display: flex; flex-wrap: wrap; gap: clamp(28px, 5vw, 70px); }
+  .bq-emmy { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .bq-emmy img { width: clamp(96px, 12vw, 150px); height: auto; display: block; filter: drop-shadow(0 14px 30px rgb(var(--ink-rgb) / 0.22)); }
+  .bq-emmy figcaption { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.6); }
+
+  /* ---------- CREDITS ---------- */
+  .bq-cred-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 50px); }
+  .bq-cred dt { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.5); }
+  .bq-cred dd { margin: 10px 0 0; font-family: 'Inter', sans-serif; font-size: clamp(16px, 1.5vw, 21px); letter-spacing: -0.01em; color: var(--ink); }
+
+  /* ---------- reveals ---------- */
+  .bq :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .bq :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .bq :global(.split.on .wi) { transform: none; }
+  .bq .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .bq .fade.on { opacity: 1; transform: none; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px) {
+    .bq-brief { grid-template-columns: 1fr; gap: 32px; }
+    .bq-scene, .bq-scene.is-rev { grid-template-columns: 1fr; gap: 22px; }
+    .bq-scene.is-rev .bq-scene-media { order: 0; }
+    .bq-stats { grid-template-columns: 1fr; }
+    .bq-stat { border-left: 0; border-top: 1px solid rgb(var(--paper-rgb, 252 252 252) / 0.12); }
+    .bq-stat:first-child { border-top: 0; }
+    .bq-grid { grid-template-columns: repeat(2, 1fr); }
+    .bq-cell-0, .bq-cell-1, .bq-cell-2, .bq-cell-3, .bq-cell-4,
+    .bq-cell:nth-child(6), .bq-cell:nth-child(7), .bq-cell:nth-child(8) { grid-column: span 1; aspect-ratio: 4/3; }
+    .bq-did li { grid-template-columns: 1fr; gap: 6px; }
+    .bq-cred-list { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bq-cue i { animation: none; }
+    .bq :global(.split .wi) { transform: none !important; transition: none !important; }
+    .bq .fade { opacity: 1 !important; transform: none !important; }
+    .bq-word { transform: none !important; }
+    .bq-float, .bq-scene-media { transform: none !important; }
+  }
+</style>
+
+<script>
+  // word splitter (line-safe, descender-safe clip) — shared pattern with the other lab pages
+  const splitWords = (root: Node, counter: { n: number }) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // on-enter reveals
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
+
+  // concept triad: each line slides up + lights in its colour, staggered
+  const cw = [...document.querySelectorAll('[data-cw]')] as HTMLElement[];
+  const cio = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) {
+      cw.forEach((w, i) => setTimeout(() => { w.classList.add('on', 'lit'); }, i * 240));
+      cio.disconnect();
+    }
+  }), { threshold: 0.5 });
+  if (cw.length) cio.observe(cw[0].parentElement as Element);
+
+  // subtle parallax drift on the floating frames + scene/gallery media
+  const drifts = [...document.querySelectorAll('[data-drift]')] as HTMLElement[];
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+        const v = Number(el.dataset.drift || 6);
+        el.style.transform = `translateY(${c * -v * 6}px)`;
+      });
+      ticking = false;
+    });
+  };
+  if (!reduced) {
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>

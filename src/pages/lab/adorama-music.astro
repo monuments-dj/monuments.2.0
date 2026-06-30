@@ -1,0 +1,376 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import NextProject from '../../components/NextProject.astro';
+
+// === /lab/adorama-music ===
+// SCAFFOLD case study for "Adorama Music: The Journey" (2020), a branded film for Adorama
+// made with Art of Visuals. The film follows three musicians from a garage, to the studio,
+// to the stage. Dark / cinematic, on the LabFx --bg/--fg ground with a warm amber accent.
+// Beats: hero, the film (poster -> YouTube), the Garage/Studio/Stage journey, the stills
+// gallery + lightbox, DJ's role, credits, next-project hand-off. Patterns reused from the
+// flashpoint / buck-the-quo pages (split/fade reveals, scenes, drift parallax).
+//
+// ⚠️ COPY STATUS: facts (the premise, the tagline, year, the film URL) are from
+// artofvisuals.com/portfolio/adorama-music. DJ is writing the brand/role copy. The journey
+// captions are a lean true draft from the known arc; the ROLE section + the Role credit are
+// PLACEHOLDERS for DJ's writeup. Swap them.
+
+const FILM = 'https://youtu.be/l1RBdpQ8vi8';
+const BTS = 'https://youtu.be/i_hGj3rKH7k';   // secondary "behind the film" cut
+const G = '/case-studies/adorama-music/gallery';
+const journey = [
+  { img: `${G}/am-03.jpg`, k: 'Garage', t: 'Where it starts', d: 'Cheap gear, loud rooms, and the first songs nobody asked for. The beginning is rough on purpose.' },
+  { img: `${G}/am-08.jpg`, k: 'Studio', t: 'Where it sharpens', d: 'The take after the take after the take. The slow work of turning a feeling into a record.' },
+  { img: `${G}/am-13.jpg`, k: 'Stage',  t: 'Where it lands', d: 'Lights up, room full, the same players a long way from the garage. Same drive, bigger room.' },
+];
+// the rest of the selects, for the editorial grid -> shared Lightbox
+const gallery = [
+  `${G}/am-02.jpg`, `${G}/am-04.jpg`, `${G}/am-05.jpg`, `${G}/am-06.jpg`,
+  `${G}/am-10.jpg`, `${G}/am-11.jpg`, `${G}/am-12.jpg`, `${G}/am-14.jpg`,
+  `${G}/am-15.jpg`, `${G}/am-16.jpg`, `${G}/am-17.jpg`, `${G}/am-19.jpg`,
+  `${G}/am-20.jpg`, `${G}/am-23.jpg`, `${G}/am-27.jpg`, `${G}/am-31.jpg`,
+];
+const stats = [
+  { n: '160M+', l: 'social impressions' },
+  { n: '3.4M+', l: 'engagements' },
+  { n: '113K+', l: 'film views' },
+  { n: '50K+', l: 'posts tagged #CreateNoMatterWhat' },
+];
+const credits = [
+  { k: 'Client', v: 'Adorama' },
+  { k: 'Studio', v: 'Art of Visuals' },
+  { k: 'Role', v: 'Creative Director' },
+  { k: 'Campaign', v: '#CreateNoMatterWhat' },
+  { k: 'Production', v: 'Rad Animal' },
+  { k: 'Year', v: '2020' },
+];
+---
+<Base title="Adorama Music, the Lab">
+  <main class="am">
+    <!-- HERO -->
+    <header class="am-hero">
+      <div class="am-hero-frames" aria-hidden="true">
+        <figure class="am-float am-float-a" data-drift="7"><img src={`${G}/am-01.jpg`} alt="" loading="eager" decoding="async" /></figure>
+        <figure class="am-float am-float-b" data-drift="11"><img src={`${G}/am-09.jpg`} alt="" loading="eager" decoding="async" /></figure>
+      </div>
+      <div class="am-hero-inner">
+        <a class="am-back" href="/lab" data-cursor="Back">&larr; The Lab</a>
+        <p class="am-eyebrow fade"><span class="am-mark" aria-hidden="true">+</span>Case study &middot; Brand film</p>
+        <h1 class="am-h1 split">Adorama Music</h1>
+        <p class="am-tag fade">Wherever you're from. <em>Wherever you'll go.</em></p>
+        <p class="am-meta fade">The film that launched Adorama Music, part of the #CreateNoMatterWhat campaign. It follows musicians from the garage, to the studio, to the stage, on one idea: gear is only as good as the stories it helps you tell.</p>
+      </div>
+      <div class="am-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+    </header>
+
+    <!-- THE FILM -->
+    <section class="am-film">
+      <div class="am-film-head">
+        <p class="am-kicker fade"><span class="am-mark" aria-hidden="true">+</span>The film</p>
+        <h2 class="am-film-title split">The Journey.</h2>
+      </div>
+      <a class="am-stage fade" href={FILM} target="_blank" rel="noopener" data-cursor="Play" aria-label="Watch Adorama Music: The Journey on YouTube">
+        <img src={`${G}/am-07.jpg`} alt="Adorama Music: The Journey" loading="lazy" decoding="async" />
+        <span class="am-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
+        <span class="am-film-cap">Adorama Music: The Journey &middot; 2020</span>
+      </a>
+    </section>
+
+    <!-- THE JOURNEY: garage / studio / stage -->
+    <section class="am-scenes">
+      <div class="am-sc-head">
+        <p class="am-kicker fade"><span class="am-mark" aria-hidden="true">+</span>The journey</p>
+        <h2 class="am-sc-title split">Garage. Studio. <em>Stage.</em></h2>
+        <p class="am-sc-sub fade">Three rooms, one through-line: keep going. The film moves with the band as the gear gets better and the rooms get bigger, but the reason never changes.</p>
+      </div>
+      <ol class="am-scene-list">
+        {journey.map((s, i) => (
+          <li class={`am-scene ${i % 2 ? 'is-rev' : ''}`}>
+            <figure class="am-scene-media fade" data-drift={4 + (i % 2) * 3}>
+              <a href={s.img} data-lb-full={s.img} data-lb-group="am" data-cursor="View" aria-label={s.t}>
+                <img src={s.img} alt={s.t} loading="lazy" decoding="async" />
+              </a>
+            </figure>
+            <div class="am-scene-text">
+              <span class="am-scene-n">0{i + 1}</span>
+              <span class="am-scene-k fade">{s.k}</span>
+              <h3 class="am-scene-t split">{s.t}</h3>
+              <p class="am-scene-d fade">{s.d}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- STILLS GALLERY -->
+    <section class="am-gallery">
+      <div class="am-gal-head">
+        <p class="am-kicker fade"><span class="am-mark" aria-hidden="true">+</span>Stills</p>
+        <h2 class="am-gal-title split">Shot like the music <em>sounds.</em></h2>
+      </div>
+      <div class="am-grid">
+        {gallery.map((src, i) => (
+          <figure class="am-cell fade" data-drift={3 + (i % 3) * 2}>
+            <a href={src} data-lb-full={src} data-lb-group="am" data-cursor="View" aria-label="Open image">
+              <img src={src} alt="" loading="lazy" decoding="async" />
+            </a>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <!-- SECONDARY: behind the film -->
+    <section class="am-bts">
+      <p class="am-kicker fade"><span class="am-mark" aria-hidden="true">+</span>Behind the film</p>
+      <div class="am-bts-row">
+        <a class="am-bts-stage fade" href={BTS} target="_blank" rel="noopener" data-cursor="Play" aria-label="Watch the behind-the-scenes cut on YouTube">
+          <img src={`${G}/am-37.jpg`} alt="Behind the scenes of Adorama Music: The Journey" loading="lazy" decoding="async" />
+          <span class="am-play am-play-sm" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
+          <span class="am-film-cap">Behind the film</span>
+        </a>
+        <div class="am-bts-thumbs">
+          <figure class="fade"><img src={`${G}/am-36.jpg`} alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="fade"><img src={`${G}/am-38.jpg`} alt="" loading="lazy" decoding="async" /></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="am-results">
+      <p class="am-kicker fade"><span class="am-mark" aria-hidden="true">+</span>What it did</p>
+      <div class="am-stats">
+        {stats.map((s) => (
+          <div class="am-stat fade"><span class="am-stat-n">{s.n}</span><span class="am-stat-l">{s.l}</span></div>
+        ))}
+      </div>
+      <p class="am-result-note fade">Part of Adorama's #CreateNoMatterWhat campaign, a Shorty Awards finalist. It moved Adorama from a retailer to a creative ally, and spun off into the AMPLIFIED and Behind the Music series.</p>
+    </section>
+
+    <!-- THE ROLE -->
+    <section class="am-role">
+      <p class="am-kicker fade"><span class="am-mark" aria-hidden="true">+</span>The role</p>
+      <h2 class="am-role-h split">Strategy, the shoot, and the <em>client in the room.</em></h2>
+      <p class="am-role-body fade">DJ led Adorama Music: The Journey as creative director. He set the strategy, directed the photo and video, shot a chunk of the stills himself, and was Adorama's main point of contact from the first call to the final cut. Rad Animal came on to help with the production.</p>
+      <ul class="am-did">
+        <li class="fade"><span class="am-did-k">Strategy</span><span class="am-did-v">Shaped what the campaign needed to say, and to whom.</span></li>
+        <li class="fade"><span class="am-did-k">Creative Direction</span><span class="am-did-v">Owned the creative from concept through final delivery.</span></li>
+        <li class="fade"><span class="am-did-k">Photo + Video</span><span class="am-did-v">Directed the shoot and shot a portion of the stills.</span></li>
+        <li class="fade"><span class="am-did-k">Client Lead</span><span class="am-did-v">Adorama's main point of contact, start to finish.</span></li>
+      </ul>
+    </section>
+
+    <!-- CREDITS -->
+    <section class="am-credits">
+      <dl class="am-cred-list">
+        {credits.map((c) => (
+          <div class="am-cred fade"><dt>{c.k}</dt><dd>{c.v}</dd></div>
+        ))}
+      </dl>
+    </section>
+
+    <!-- NEXT PROJECT -->
+    <NextProject
+      href="/lab/buck-the-quo"
+      name="Buck the Quo"
+      tag="Albertson Foundation · Experiential"
+      accent="#ec3a7d"
+      poster="/case-studies/buck-the-quo/gallery/future-sign.jpg"
+      photos={["/case-studies/buck-the-quo/gallery/container-front.jpg", "/case-studies/buck-the-quo/gallery/saddle.jpg"]}
+    />
+
+    <Lightbox />
+  </main>
+  <LabFx />
+</Base>
+
+<style>
+  .am { --am-amber: #e8a23a; background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .am em { font-style: italic; color: var(--am-amber); }
+  .am-mark { color: var(--am-amber); font-weight: 500; margin-right: 18px; }
+  .am-eyebrow, .am-kicker { display: inline-flex; align-items: baseline; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.7); margin: 0; }
+
+  /* ---------- HERO ---------- */
+  .am-hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding: 16vh 0 12vh; }
+  .am-hero::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
+    linear-gradient(180deg, rgb(var(--bg-rgb, 13 15 20) / 0.5) 0%, rgb(var(--bg-rgb, 13 15 20) / 0.2) 42%, rgb(var(--bg-rgb, 13 15 20) / 0.86) 100%),
+    radial-gradient(120% 100% at 60% 44%, transparent 32%, rgb(var(--bg-rgb, 13 15 20) / 0.5) 100%); }
+  .am-hero-inner { position: relative; z-index: 3; max-width: var(--wrap, 1300px); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+  .am-back { display: inline-block; margin-bottom: clamp(20px, 4vh, 40px); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); text-decoration: none; transition: color 0.25s ease; }
+  .am-back:hover { color: var(--am-amber); }
+  .am-h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(52px, 12vw, 200px); line-height: 0.9; letter-spacing: -0.05em; margin: 14px 0 0; text-transform: uppercase; }
+  .am-tag { margin: clamp(18px, 2.4vw, 30px) 0 0; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(22px, 3vw, 44px); letter-spacing: -0.02em; color: var(--fg); }
+  .am-meta { margin: 26px 0 0; max-width: 52ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.66); }
+
+  .am-hero-frames { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .am-float { position: absolute; margin: 0; border-radius: 10px; overflow: hidden; box-shadow: 0 40px 90px rgb(0 0 0 / 0.5); will-change: transform; }
+  .am-float img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .am-float-a { right: 4vw; top: 14vh; width: clamp(280px, 38vw, 600px); aspect-ratio: 16/9; }
+  .am-float-b { right: 32vw; bottom: 8vh; width: clamp(160px, 18vw, 300px); aspect-ratio: 16/9; }
+  @media (max-width: 900px) { .am-hero-frames { opacity: 0.3; } .am-float-b { display: none; } }
+
+  .am-cue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .am-cue i { width: 1px; height: 34px; background: linear-gradient(var(--am-amber), transparent); animation: amCue 1.8s ease-in-out infinite; transform-origin: top; }
+  @keyframes amCue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
+
+  /* ---------- shared section frame ---------- */
+  .am-film, .am-bts, .am-scenes, .am-gallery, .am-results, .am-role, .am-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+
+  /* ---------- THE FILM ---------- */
+  .am-film-head { max-width: 640px; margin-bottom: clamp(34px, 4vw, 56px); }
+  .am-film-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(32px, 5vw, 72px); line-height: 1.0; letter-spacing: -0.035em; margin-top: 14px; }
+  .am-stage { position: relative; display: block; border-radius: 14px; overflow: hidden; aspect-ratio: 16/9; box-shadow: 0 50px 110px rgb(0 0 0 / 0.55); background: #000; }
+  .am-stage img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.82; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease; }
+  .am-stage:hover img { transform: scale(1.03); opacity: 0.7; }
+  .am-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: clamp(74px, 8vw, 104px); height: clamp(74px, 8vw, 104px); border-radius: 50%; background: var(--am-amber); display: grid; place-items: center; box-shadow: 0 16px 50px rgb(0 0 0 / 0.5); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
+  .am-stage:hover .am-play { transform: translate(-50%,-50%) scale(1.08); }
+  .am-play svg { width: 42%; height: 42%; fill: #14110a; margin-left: 6%; }
+  .am-film-cap { position: absolute; left: 20px; bottom: 18px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(255 255 255 / 0.86); text-shadow: 0 2px 14px rgb(0 0 0 / 0.6); }
+
+  /* ---------- SECONDARY: behind the film ---------- */
+  .am-bts .am-kicker { margin-bottom: clamp(24px, 3vw, 40px); }
+  .am-bts-row { display: grid; grid-template-columns: 1.7fr 0.9fr; gap: clamp(16px, 2vw, 26px); align-items: stretch; }
+  .am-bts-stage { position: relative; display: block; border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; box-shadow: 0 36px 80px rgb(0 0 0 / 0.45); background: #000; }
+  .am-bts-stage img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.8; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease; }
+  .am-bts-stage:hover img { transform: scale(1.03); opacity: 0.66; }
+  .am-play-sm { width: clamp(54px, 6vw, 78px); height: clamp(54px, 6vw, 78px); }
+  .am-bts-thumbs { display: grid; grid-template-rows: 1fr 1fr; gap: clamp(16px, 2vw, 26px); }
+  .am-bts-thumbs figure { margin: 0; border-radius: 10px; overflow: hidden; box-shadow: 0 22px 50px rgb(0 0 0 / 0.4); }
+  .am-bts-thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ---------- SCENES ---------- */
+  .am-sc-head { max-width: 680px; margin-bottom: clamp(44px, 6vw, 88px); }
+  .am-sc-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(32px, 5vw, 76px); line-height: 1.0; letter-spacing: -0.035em; margin: 14px 0 0; }
+  .am-sc-sub { margin: 24px 0 0; max-width: 56ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.72; font-weight: 300; color: rgb(var(--fg-rgb) / 0.7); }
+  .am-scene-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: clamp(64px, 10vw, 150px); }
+  .am-scene { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: clamp(30px, 5vw, 76px); align-items: center; }
+  .am-scene.is-rev { grid-template-columns: 0.75fr 1.25fr; }
+  .am-scene.is-rev .am-scene-media { order: 2; }
+  .am-scene-media { margin: 0; border-radius: 12px; overflow: hidden; background: rgb(var(--fg-rgb) / 0.05); box-shadow: 0 36px 80px rgb(0 0 0 / 0.45); will-change: transform; }
+  .am-scene-media a { display: block; }
+  .am-scene-media img { width: 100%; height: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+  .am-scene-media:hover img { transform: scale(1.04); }
+  .am-scene-n { font-size: 13px; letter-spacing: 0.16em; color: var(--am-amber); font-variant-numeric: tabular-nums; }
+  .am-scene-k { display: block; margin-top: 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); }
+  .am-scene-t { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(24px, 2.8vw, 40px); line-height: 1.1; letter-spacing: -0.025em; margin: 12px 0 0; }
+  .am-scene-d { margin: 16px 0 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.72); }
+
+  /* ---------- GALLERY ---------- */
+  .am-gal-head { max-width: 640px; margin-bottom: clamp(40px, 5vw, 72px); }
+  .am-gal-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin-top: 14px; }
+  .am-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(14px, 1.6vw, 26px); }
+  .am-cell { margin: 0; border-radius: 8px; overflow: hidden; background: rgb(var(--fg-rgb) / 0.05); box-shadow: 0 22px 50px rgb(0 0 0 / 0.4); will-change: transform; }
+  .am-cell a { display: block; }
+  .am-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .am-cell:hover img { transform: scale(1.04); }
+  /* repeating 6-col rhythm: (4+2), (2+4), (3+3) — tiles cleanly at any count */
+  .am-cell:nth-child(6n+1) { grid-column: span 4; aspect-ratio: 16/9; }
+  .am-cell:nth-child(6n+2) { grid-column: span 2; aspect-ratio: 4/5; }
+  .am-cell:nth-child(6n+3) { grid-column: span 2; aspect-ratio: 4/5; }
+  .am-cell:nth-child(6n+4) { grid-column: span 4; aspect-ratio: 16/9; }
+  .am-cell:nth-child(6n+5) { grid-column: span 3; aspect-ratio: 4/3; }
+  .am-cell:nth-child(6n+6) { grid-column: span 3; aspect-ratio: 4/3; }
+
+  /* ---------- ROLE ---------- */
+  .am-role { max-width: 880px; }
+  .am-role-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin: 14px 0 0; }
+  .am-role-body { margin: 28px 0 0; max-width: 62ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.74); }
+  .am-did { list-style: none; margin: clamp(36px, 4vw, 60px) 0 0; padding: 0; }
+  .am-did li { display: grid; grid-template-columns: 190px 1fr; gap: clamp(16px, 3vw, 44px); align-items: baseline; padding: clamp(16px, 1.8vw, 22px) 4px; border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .am-did li:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .am-did-k { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--am-amber); }
+  .am-did-v { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(17px, 1.7vw, 24px); line-height: 1.3; letter-spacing: -0.015em; color: var(--fg); }
+
+  /* ---------- RESULTS ---------- */
+  .am-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(18px, 2.5vw, 40px); margin: clamp(34px, 4vw, 56px) 0 0; border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .am-stat { padding: clamp(30px, 4vw, 52px) 0 0; }
+  .am-stat-n { display: block; font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(38px, 5vw, 80px); letter-spacing: -0.04em; line-height: 1; color: var(--am-amber); }
+  .am-stat-l { display: block; margin-top: 12px; max-width: 22ch; font-size: 13px; line-height: 1.5; color: rgb(var(--fg-rgb) / 0.6); }
+  .am-result-note { margin: clamp(40px, 5vw, 64px) 0 0; max-width: 60ch; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(19px, 2vw, 28px); line-height: 1.4; letter-spacing: -0.015em; color: var(--fg); }
+
+  /* ---------- CREDITS ---------- */
+  .am-cred-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 50px); }
+  .am-cred dt { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .am-cred dd { margin: 10px 0 0; font-family: 'Inter', sans-serif; font-size: clamp(16px, 1.5vw, 21px); letter-spacing: -0.01em; color: var(--fg); }
+
+  /* ---------- reveals ---------- */
+  .am :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .am :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .am :global(.split.on .wi) { transform: none; }
+  .am .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .am .fade.on { opacity: 1; transform: none; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px) {
+    .am-scene, .am-scene.is-rev { grid-template-columns: 1fr; gap: 22px; }
+    .am-scene.is-rev .am-scene-media { order: 0; }
+    .am-grid { grid-template-columns: repeat(2, 1fr); }
+    .am-grid .am-cell { grid-column: span 1; aspect-ratio: 4/3; }
+    .am-bts-row { grid-template-columns: 1fr; }
+    .am-bts-thumbs { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .am-bts-thumbs img { aspect-ratio: 16/9; }
+    .am-stats { grid-template-columns: repeat(2, 1fr); }
+    .am-did li { grid-template-columns: 1fr; gap: 6px; }
+    .am-cred-list { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .am-cue i { animation: none; }
+    .am :global(.split .wi) { transform: none !important; transition: none !important; }
+    .am .fade { opacity: 1 !important; transform: none !important; }
+    .am-float, .am-scene-media { transform: none !important; }
+  }
+</style>
+
+<script>
+  // word splitter (shared pattern with the other lab pages)
+  const splitWords = (root: Node, counter: { n: number }) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
+
+  // parallax drift on the floating frames + scene/gallery media
+  const drifts = [...document.querySelectorAll('[data-drift]')] as HTMLElement[];
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+        const v = Number(el.dataset.drift || 6);
+        el.style.transform = `translateY(${c * -v * 6}px)`;
+      });
+      ticking = false;
+    });
+  };
+  if (!reduced) {
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>
