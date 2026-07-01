@@ -19,6 +19,15 @@ import CaseCredits from '../../components/CaseCredits.astro';
 
 const G = '/case-studies/donut-zumiez/gallery';
 
+// The three cuts DJ directed for the drop (his uploads). Main = the launch film.
+// ⚠️ TODO(DJ): confirm which poster + caption matches which cut. Raw titles were
+// "DONUT X ZUMIEZ YT", "CROY DONUT COLLAB", "DONUT RMS".
+const filmMain = { poster: `${G}/yt-launch.jpg`, url: 'https://youtu.be/2eUYg_P5rfc', cap: 'Launch film' };
+const filmMore = [
+  { poster: `${G}/yt-ptcruiser.jpg`, url: 'https://youtu.be/HEx3bUYCwdk', cap: 'Croy collab' },
+  { poster: `${G}/dz-03.jpg`,        url: 'https://youtu.be/UwM3_jGjz6Q', cap: 'The cut' },
+];
+
 const gallery = [
   `${G}/dz-01.jpg`, `${G}/dz-02.jpg`, `${G}/dz-03.jpg`, `${G}/dz-04.jpg`,
   `${G}/product-shirt.jpg`, `${G}/merch.jpg`, `${G}/yt-ptcruiser.jpg`,
@@ -58,19 +67,26 @@ const credits = [
     <!-- CREDITS STRIP: role at a glance, close to the top -->
     <CaseCredits items={credits} accent="#ff5a3c" />
 
-    <!-- THE FILM (poster, non-linking until a real URL lands) -->
+    <!-- THE FILMS: the three cuts DJ directed, now linking to YouTube -->
     <section class="dz-film">
       <div class="dz-film-head">
-        <p class="dz-kicker fade"><span class="dz-mark" aria-hidden="true">+</span>The launch film</p>
+        <p class="dz-kicker fade"><span class="dz-mark" aria-hidden="true">+</span>The films</p>
         <h2 class="dz-film-title split">Loud, fast, <em>and funny.</em></h2>
       </div>
-      <figure class="dz-stage fade" data-cursor="Play" aria-label="Donut x Zumiez launch film (poster)">
-        <img src={`${G}/yt-launch.jpg`} alt="Donut x Zumiez launch film" loading="lazy" decoding="async" />
+      <a class="dz-stage fade" href={filmMain.url} target="_blank" rel="noopener" data-cursor="Play" aria-label="Watch the Donut x Zumiez launch film on YouTube">
+        <img src={filmMain.poster} alt="Donut x Zumiez launch film" loading="lazy" decoding="async" />
         <span class="dz-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
-        <figcaption class="dz-film-cap">Launch film &middot; 2023</figcaption>
-      </figure>
-      <!-- ⚠️ TODO: swap this <figure> for a linking <a href={YOUTUBE_URL}> once DJ gives the
-           real watch URLs (there are at least two cuts: yt-launch + yt-ptcruiser). -->
+        <span class="dz-film-cap">{filmMain.cap} &middot; 2023</span>
+      </a>
+      <div class="dz-more-films">
+        {filmMore.map((f) => (
+          <a class="dz-mf fade" href={f.url} target="_blank" rel="noopener" data-cursor="Play" aria-label={`Watch ${f.cap} on YouTube`}>
+            <img src={f.poster} alt={f.cap} loading="lazy" decoding="async" />
+            <span class="dz-play dz-play-sm" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
+            <span class="dz-film-cap">{f.cap}</span>
+          </a>
+        ))}
+      </div>
     </section>
 
     <!-- STILLS GALLERY -->
@@ -159,6 +175,12 @@ const credits = [
   .dz-stage:hover .dz-play { transform: translate(-50%,-50%) scale(1.08); }
   .dz-play svg { width: 42%; height: 42%; fill: #1a0d08; margin-left: 6%; }
   .dz-film-cap { position: absolute; left: 20px; bottom: 18px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(255 255 255 / 0.86); text-shadow: 0 2px 14px rgb(0 0 0 / 0.6); }
+  .dz-more-films { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 26px); margin-top: clamp(14px, 2vw, 26px); }
+  .dz-mf { position: relative; display: block; border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; box-shadow: 0 30px 70px rgb(0 0 0 / 0.45); background: #000; }
+  .dz-mf img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.8; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease; }
+  .dz-mf:hover img { transform: scale(1.03); opacity: 0.66; }
+  .dz-play-sm { width: clamp(54px, 6vw, 76px); height: clamp(54px, 6vw, 76px); }
+  @media (max-width: 640px) { .dz-more-films { grid-template-columns: 1fr; } }
 
   /* ---------- GALLERY ---------- */
   .dz-gal-head { max-width: 640px; margin-bottom: clamp(40px, 5vw, 72px); }
