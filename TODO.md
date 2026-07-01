@@ -26,9 +26,10 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
    linked episode grid uses DJ's video.wkno.org URLs (verified). Emmy = 2024 NW Regional
    (NATAS NW), Community Outreach/Small Market, CAMPAIGN-level — framed honestly ("part of an
    Emmy-winning campaign"; DJ not on the public Emmy credit list, so no personal-Emmy claim).
+   ✅ DJ DECIDED (2026-07-01): keep the "part of the Emmy-winning campaign" framing (he can't
+   confirm his spots were in the submission, and isn't on the credit list, but they're Know
+   Vape-branded so "part of" is defensible). Do NOT escalate to a personal/craft Emmy claim.
    ⚠️ ONLY LEFT: reach/impression numbers for the Award section (optional).
-   ⚠️ DJ TO SANITY-CHECK: is he OK with the campaign-level Emmy framing, or does he have proof
-   of an individual craft credit? Told him the nuance; awaiting his call.
 5. ⚙️ `caffeinate` + the dev server (localhost:4321) are still running — kill when fully done.
 
 
