@@ -18,16 +18,15 @@ import NextProject from '../../components/NextProject.astro';
 // is NOT DJ's directing credit, so it's intentionally not featured here.
 // ⚠️ STILL OPEN (DJ to confirm): the Emmy category + exact year, and any reach/impression numbers.
 
-const HERO_EP = 'https://www.pbs.org/video/know-vape-myth-vs-fact-vapor-h5git8/'; // "Vapor" spot
-// The six Myth vs Fact spots DJ directed. `m`/`f` = the myth/fact beat (only Vapor's exact copy
-// is confirmed from the source; the rest carry the topic only, no invented chemistry).
+const HERO_EP = 'https://video.wkno.org/video/know-vape-myth-vs-fact-vapor-h5git8/'; // "Vapor" spot
+// The six Myth vs Fact spots DJ directed (canonical URLs per DJ; all verified live).
 const episodes = [
-  { t: 'Vapor',    d: 'Vapes are just water vapor? It’s an aerosol of chemicals.', url: 'https://www.pbs.org/video/know-vape-myth-vs-fact-vapor-h5git8/' },
-  { t: 'Nicotine', d: 'The addiction the flavors are built to hide.', url: 'https://www.pbs.org/video/know-vape-myth-vs-fact-nicotine-ymwf0l/' },
-  { t: 'Safety',   d: '“Safer than cigarettes” is the wrong bar.', url: 'https://www.pbs.org/video/know-vape-myth-vs-fact-safety-bw4khy/' },
-  { t: 'Anxiety',  d: 'The vape-to-calm loop, pulled apart.', url: 'https://www.pbs.org/video/know-vape-myth-vs-fact-anxiety-4c2k2p/' },
-  { t: 'Drugs',    d: 'What else ends up in the device.', url: 'https://www.pbs.org/video/know-vape-myth-vs-fact-drugs-4cfubf/' },
-  { t: 'Smoking Cessation Device', d: 'Not the quit-tool it’s sold as.', url: 'https://www.pbs.org/video/know-vape-myth-vs-fact-0wqr4a/' },
+  { t: 'Vapor',    d: 'Vapes are just water vapor? It’s an aerosol of chemicals.', url: 'https://video.wkno.org/video/know-vape-myth-vs-fact-vapor-h5git8/' },
+  { t: 'Nicotine', d: 'The addiction the flavors are built to hide.', url: 'https://video.wkno.org/video/know-vape-myth-vs-fact-nicotine-ymwf0l/' },
+  { t: 'Safety',   d: '“Safer than cigarettes” is the wrong bar.', url: 'https://video.wkno.org/video/know-vape-myth-vs-fact-safety-bw4khy/' },
+  { t: 'Anxiety',  d: 'The vape-to-calm loop, pulled apart.', url: 'https://video.wkno.org/video/know-vape-myth-vs-fact-anxiety-4c2k2p/' },
+  { t: 'Drugs',    d: 'What else ends up in the device.', url: 'https://video.wkno.org/video/know-vape-myth-vs-fact-drugs-4cfubf/' },
+  { t: 'Smoking Cessation Device', d: 'Not the quit-tool it’s sold as.', url: 'https://video.wkno.org/video/know-vape-myth-vs-fact-0wqr4a/' },
 ];
 const G = '/case-studies/know-vape/gallery';
 const posters = [
