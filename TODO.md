@@ -33,6 +33,12 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
 - ✅ DONUT × ZUMIEZ films wired: DJ gave 3 cuts — launch film (2eUYg_P5rfc) is the main linked
   player; Croy collab (HEx3bUYCwdk) + the cut (UwM3_jGjz6Q) as a 2-up row. All 200. In-file TODO
   to confirm which poster/caption maps to which cut.
+- ⏳ CREDITS BAR — iterated per DJ. First 3-variant version was "hideous"; replaced with ONE
+  full-bleed bar, then (per DJ) rebuilt as CreditsBar with tone ('dark'|'light') + variant
+  ('simple'|'standard'|'full'). Compare all 6 at /lab/credits (light-page band + dark-page band).
+  Removed the old CreditsVariants. AWAITING DJ: (a) pick complexity + confirm tone handling,
+  (b) the per-project CREATORS (the "With"/Team names+roles) for each case study — the one thing
+  I don't have. Then wire the winner onto every /work + /lab page, prop-driven, tone per page.
 - ⏳ CREDITS BAR (per DJ: agency + my role + other creators, black bar/white text, "lives on every
   work/case-study page"): built 3 A/B variants at /lab/credits (V1 inline · V2 columned · V3 end-
   credits, role highlighted). AWAITING DJ's pick, then wire the winner as a shared component onto
