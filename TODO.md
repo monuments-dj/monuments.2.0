@@ -37,8 +37,15 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
   work/case-study page"): built 3 A/B variants at /lab/credits (V1 inline · V2 columned · V3 end-
   credits, role highlighted). AWAITING DJ's pick, then wire the winner as a shared component onto
   every /work + /lab case study (real per-project credit data needed per page).
-- ⏳ "FEARLESS" PAGE requested — NEED INFO from DJ: what Fearless is (brand/campaign?), his role,
-  and whether he has assets (images/video) or wants a scaffold to fill later. Not started.
+- ✅ CREDITS variants extracted to shared CreditsVariants.astro; embedded at the TOP of the /lab
+  hub (first section under the hero) + reused on /lab/credits. Still AWAITING DJ's pick to wire the
+  winner onto every work/case-study page.
+- ✅ DONUT merch: pulled 4 real product shots from donut.media (work shirt/jort/tee/stickers),
+  web-optimized, added a "The product I made films for" section linking to the product pages.
+- 🏗️ "FEARLESS" page SCAFFOLDED at /lab/fearless (DJ: "build the page, I'll give content soon").
+  Full case-study structure w/ PLACEHOLDER copy + dashed image slots + Draft badge + in-file TODO.
+  NEED FROM DJ: what Fearless is + premise, role/collaborators, headline number(s), assets (hero +
+  stills + any video), year/credits. Then swap placeholders, add images, promote to Work/home.
 
 **⛔ ROADBLOCKS / needs DJ (all flagged as in-file `⚠️ TODO` comments):**
 1. AOV: only "4x" is real — the other 3 stat values (5+, 100M+, 3yrs) + role title + year span
