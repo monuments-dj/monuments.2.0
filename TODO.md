@@ -19,6 +19,13 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
   copy to first-person "I". Pushed.
 - ⚠️ VOICE: know-vape.astro is still third-person ("DJ directed...") while every other case study
   is now first-person "I" — flip for consistency (quick; offered to DJ).
+- ✅ THIN CREDITS STRIP: new reusable CaseCredits.astro added under the hero of all 6 case studies
+  (role at a glance, accent-emphasized, auto light/dark). Bottom credits <dl> removed (promoted).
+- ✅ LAUNCHED / PROMOTED INTO MAIN SITE (DJ: "promote into main site" + "launch now, fill in live",
+  NO domain swap): Work page now pins the 6 case studies to the front (Case-study badge + headline
+  result, /lab/* links) + new Experiential filter + featured-pinned shuffle; home Recent-Work slider
+  leads with the 6 case studies. Live monuments.cc WordPress UNTOUCHED. Placeholders still flagged
+  in-file and to fill live: AOV stat numbers, Donut/AC Boise video URLs, LinkedIn URL + one-pager PDF.
 
 **⛔ ROADBLOCKS / needs DJ (all flagged as in-file `⚠️ TODO` comments):**
 1. AOV: only "4x" is real — the other 3 stat values (5+, 100M+, 3yrs) + role title + year span
