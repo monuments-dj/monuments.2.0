@@ -22,9 +22,13 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
    non-linking posters — need clean watch/embed URLs to make them play.
 3. Contact hire-kit: real **LinkedIn URL** (placeholder points to linkedin.com), and a hosted
    **resume/one-pager PDF** (currently a mailto) → drop a PDF at /public and I'll wire it.
-4. Know Vape: RESOLVED the big one — DJ directed all 6 Myth vs Fact spots (IdahoPTV 2023);
-   page now has a linked episode grid (pbs.org URLs verified); Nic Sick dropped (not his).
-   ONLY LEFT: the Emmy category + exact year, and any reach numbers.
+4. Know Vape: DONE except reach numbers. DJ directed all 6 Myth vs Fact spots (IdahoPTV 2023),
+   linked episode grid uses DJ's video.wkno.org URLs (verified). Emmy = 2024 NW Regional
+   (NATAS NW), Community Outreach/Small Market, CAMPAIGN-level — framed honestly ("part of an
+   Emmy-winning campaign"; DJ not on the public Emmy credit list, so no personal-Emmy claim).
+   ⚠️ ONLY LEFT: reach/impression numbers for the Award section (optional).
+   ⚠️ DJ TO SANITY-CHECK: is he OK with the campaign-level Emmy framing, or does he have proof
+   of an individual craft credit? Told him the nuance; awaiting his call.
 5. ⚙️ `caffeinate` + the dev server (localhost:4321) are still running — kill when fully done.
 
 
