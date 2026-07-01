@@ -34,11 +34,21 @@ is DJ's single most marketable number). Selected Work: Donut x Zumiez (2023 laun
 AC Boise kit-reveal (IG reel DR04D0ZDOjV = "This kit is Boise", USL League One, Hummel + Against), the
 Sony launches, etc.
 
-**Assets on disk:** buck-the-quo (19), adorama-music (38), know-vape (10) — web-sized. donut-zumiez
-(film-01 + merch). AC Boise kit-reveal still FAILED (IG login-gated). A **sourcing workflow was
-running** to find more images+video for donut-zumiez / ac-boise / art-of-visuals — RE-RUN it (agents
-hunt YouTube/IG/official sites for downloadable images + video watch URLs + poster stills) or DJ
-provides assets. DJ said he lacks assets and wants me to source them.
+**Assets on disk (all web-sized, in `public/case-studies/<slug>/gallery/`):** buck-the-quo (19),
+adorama-music (38), know-vape (10). NEW — SOURCED + DOWNLOADED 2026-06-30 (a sourcing workflow found
+these, verified downloadable): donut-zumiez (9: dz-01..04 car-meet, product-shirt, film-01, merch,
+yt-launch, yt-ptcruiser), ac-boise (9: home-01/02, away-01/02, keeper-01, crest, logo.png, yt-away,
+yt-keeper), art-of-visuals (9: xm5-01, xm4-01, xm3-bts, xperia-01/02, stansport-01, podcast-cover,
+yt-thismoment, yt-flowstate). The `yt-*.jpg` are YouTube poster stills for the videos below.
+**VIDEO LINKS to wire (posters already downloaded):**
+- Donut x Zumiez (DJ = launch films): YouTube `4UidSBSTo8o` (launch party) + `W4gT_4BWf5c` (PT Cruiser).
+- AC Boise: the reveal DJ DIRECTED is the IG reel `instagram.com/reel/DR04D0ZDOjV` ("This Kit Is Boise",
+  HOME kit, IG-only, no stable poster → use home-01 as poster). Also YT `eOnejUtqpKY` (away) + `2QqHz5Gz3qA`
+  (keeper) IF DJ directed those. Context: USL League One, Hummel + Against, Egyptian Theatre reveal 12/3/25.
+- Art of Visuals: YT `KIi8cBOlU50` (This Moment/XM4) + `CS5UXhe17O4` (Flow State/XM3) + `l1RBdpQ8vi8`
+  (Adorama, already used elsewhere) + `sdFbORd-6wE` / `wZCPlSlN9Oo` (Xperia) + Vimeo `809843534` (agency reel).
+  ⚠️ Sourcing could NOT confirm Intel / MSI / Sonos / DW Drums assets, and can't confirm WHICH cuts DJ
+  directed on Donut or AC Boise-away/keeper — verify all attribution with DJ before publishing.
 
 **Also shipped earlier this session (PUSHED):** homepage mobile overflow fix (`.trusted` grid +
 menu fit on phones); the homepage **RECENT WORK slider** (`RecentProjects.astro`, promoted from
