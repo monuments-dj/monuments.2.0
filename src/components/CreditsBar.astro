@@ -1,44 +1,103 @@
 ---
 // === CreditsBar ===
-// The project credits bar that ships on every work + case-study page. Simplified,
-// FULL-BLEED (edge to edge): a black band with white text, content aligned to the site
-// column. Three plain groups — Agency, my Role, and the other creators. Prop-driven so
-// each page passes its real credits; sample defaults shown for the /lab preview.
+// Full-bleed project credits bar for every work + case-study page. Two knobs:
+//   tone: 'dark' | 'light'  — matches the page it sits on
+//   variant: 'simple' | 'standard' | 'full'  — simple → complex, use as the credits need
+// Prop-driven; sample defaults for the /lab preview.
 interface Member { name: string; role?: string }
-interface Props { agency?: string; role?: string; team?: Member[] }
+interface Props {
+  tone?: 'dark' | 'light';
+  variant?: 'simple' | 'standard' | 'full';
+  client?: string; agency?: string; role?: string; year?: string;
+  team?: Member[];
+}
 const {
+  tone = 'dark',
+  variant = 'standard',
+  client = 'DW Drums',
   agency = 'Art of Visuals',
   role = 'Creative Director + Designer',
+  year = '2023',
   team = [
-    { name: 'Kelsey Grant' }, { name: 'Marcus Reed' }, { name: 'Ana Flores' },
-    { name: 'Sam Park' }, { name: 'Riley Chen' },
+    { name: 'Kelsey Grant', role: 'ECD' }, { name: 'Marcus Reed', role: 'Producer' },
+    { name: 'Ana Flores', role: 'DP' }, { name: 'Sam Park', role: 'Editor' },
+    { name: 'Riley Chen', role: 'Copywriter' },
   ],
 } = Astro.props;
 const names = team.map((m) => m.name).join(', ');
 ---
-<aside class="cbar" aria-label="Project credits">
+<aside class={`cbar tone-${tone} v-${variant}`} aria-label="Project credits">
   <div class="cbar-inner">
-    <div class="cbar-col"><span class="cbar-k">Agency</span><span class="cbar-v">{agency}</span></div>
-    <div class="cbar-col is-role"><span class="cbar-k">Role</span><span class="cbar-v">{role}</span></div>
-    <div class="cbar-col cbar-with"><span class="cbar-k">With</span><span class="cbar-v">{names}</span></div>
+    {variant === 'simple' && (
+      <p class="cbar-simple">
+        <span>{agency}</span><b>·</b><span class="role">{role}</span><b>·</b><span class="muted">{names}</span>
+      </p>
+    )}
+
+    {variant === 'standard' && (
+      <>
+        <div class="cbar-col"><span class="k">Agency</span><span class="v">{agency}</span></div>
+        <div class="cbar-col role"><span class="k">Role</span><span class="v">{role}</span></div>
+        <div class="cbar-col with"><span class="k">With</span><span class="v">{names}</span></div>
+      </>
+    )}
+
+    {variant === 'full' && (
+      <>
+        <div class="cbar-meta">
+          <div class="cbar-col"><span class="k">Client</span><span class="v">{client}</span></div>
+          <div class="cbar-col"><span class="k">Agency</span><span class="v">{agency}</span></div>
+          <div class="cbar-col role"><span class="k">Role</span><span class="v">{role}</span></div>
+          <div class="cbar-col"><span class="k">Year</span><span class="v">{year}</span></div>
+        </div>
+        <div class="cbar-team">
+          <span class="k">Team</span>
+          <span class="cbar-team-list">
+            {team.map((m, i) => (
+              <span class="mem">{m.name}{m.role && <i>{m.role}</i>}{i < team.length - 1 && <b>·</b>}</span>
+            ))}
+          </span>
+        </div>
+      </>
+    )}
   </div>
 </aside>
 
 <style>
-  /* full-bleed black band (a direct-child block spans its container = viewport width) */
-  .cbar { width: 100%; background: #0b0c0e; color: #fff; }
-  .cbar-inner {
-    max-width: var(--wrap, 1300px); margin: 0 auto;
-    padding: clamp(22px, 2.6vw, 34px) var(--pad);
-    display: grid; grid-template-columns: auto auto 1fr;
-    gap: clamp(26px, 5vw, 80px); align-items: baseline;
-  }
+  .cbar { width: 100%; }
+  .cbar-inner { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(20px, 2.4vw, 32px) var(--pad); }
+
+  /* tone tokens */
+  .tone-dark { background: #0b0c0e; color: #fff; border-top: 1px solid rgb(255 255 255 / 0.08); border-bottom: 1px solid rgb(255 255 255 / 0.08); --cbk: rgb(255 255 255 / 0.4); --cbr: #a8c0dd; --cbm: rgb(255 255 255 / 0.72); }
+  .tone-light { background: #f2f2f0; color: #14151a; border-top: 1px solid rgb(20 21 25 / 0.1); border-bottom: 1px solid rgb(20 21 25 / 0.1); --cbk: rgb(20 21 25 / 0.5); --cbr: #3a5f86; --cbm: rgb(20 21 25 / 0.6); }
+
+  .k { font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cbk); }
+  .v { font-size: clamp(14px, 1.25vw, 17px); letter-spacing: -0.01em; line-height: 1.35; color: inherit; }
+
+  /* --- SIMPLE: one inline line --- */
+  .cbar-simple { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 12px; margin: 0; font-size: clamp(14px, 1.2vw, 16px); }
+  .cbar-simple b { color: var(--cbk); }
+  .cbar-simple .role { color: var(--cbr); font-weight: 500; }
+  .cbar-simple .muted { color: var(--cbm); }
+
+  /* --- STANDARD: 3 labelled groups --- */
+  .v-standard .cbar-inner { display: grid; grid-template-columns: auto auto 1fr; gap: clamp(26px, 5vw, 80px); align-items: baseline; }
   .cbar-col { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-  .cbar-k { font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(255 255 255 / 0.4); }
-  .cbar-v { font-size: clamp(14px, 1.25vw, 17px); letter-spacing: -0.01em; line-height: 1.35; color: #fff; }
-  .is-role .cbar-v { color: #a8c0dd; font-weight: 500; }
-  .cbar-with .cbar-v { color: rgb(255 255 255 / 0.72); }
+  .cbar-col.role .v { color: var(--cbr); font-weight: 500; }
+  .cbar-col.with .v { color: var(--cbm); }
+
+  /* --- FULL: meta row + team row --- */
+  .v-full .cbar-inner { display: flex; flex-direction: column; gap: clamp(16px, 2vw, 22px); }
+  .cbar-meta { display: grid; grid-template-columns: repeat(4, auto); gap: clamp(24px, 4vw, 64px); justify-content: start; }
+  .cbar-meta .cbar-col.role .v { color: var(--cbr); font-weight: 500; }
+  .cbar-team { display: flex; gap: clamp(14px, 3vw, 40px); align-items: baseline; padding-top: clamp(14px, 1.8vw, 20px); border-top: 1px solid var(--cbk); border-top-color: color-mix(in srgb, var(--cbk) 40%, transparent); }
+  .cbar-team-list { display: flex; flex-wrap: wrap; gap: 10px; font-size: clamp(13px, 1.1vw, 15px); color: var(--cbm); }
+  .cbar-team .mem i { font-style: normal; color: var(--cbk); margin-left: 6px; }
+  .cbar-team .mem b { margin-left: 10px; color: var(--cbk); }
+
   @media (max-width: 700px) {
-    .cbar-inner { grid-template-columns: 1fr; gap: 18px; }
+    .v-standard .cbar-inner { grid-template-columns: 1fr; gap: 16px; }
+    .cbar-meta { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .cbar-team { flex-direction: column; gap: 8px; }
   }
 </style>

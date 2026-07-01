@@ -2,25 +2,61 @@
 import Base from '../../layouts/Base.astro';
 import CreditsBar from '../../components/CreditsBar.astro';
 
-// === /lab/credits — the credits bar (simplified, full-width) ===
-// The project credits block that ships on every work + case-study page. Lives in the
-// shared CreditsBar component (also embedded on the /lab hub). Prop-driven per page.
+// === /lab/credits — the credits bar, 3 variants × light/dark ===
+// simple → standard → full, each shown on a light page and a dark page. DJ picks the
+// complexity + confirms the tone treatment; then it ships per-page (prop-driven).
+const variants = [
+  { v: 'simple',   label: 'Simple', note: 'One inline line. Agency · role · creators.' },
+  { v: 'standard', label: 'Standard', note: 'Three labelled groups: Agency / Role / With.' },
+  { v: 'full',     label: 'Full', note: 'Client · Agency · Role · Year, plus the team with roles.' },
+];
 ---
 <Base title="Credits bar — the Lab">
   <main class="crlab">
     <header class="crlab-head">
       <a class="crlab-back" href="/lab">&larr; The Lab</a>
       <h1>Project credits bar</h1>
-      <p>Simplified, full-width. The agency, my role, and the other creators, on one black band. Ships on every work + case-study page.</p>
+      <p>Full-bleed, black-or-light. Three levels — simple to full — shown on a light page and a dark page. Pick a complexity and a tone and I'll ship it on every work + case-study page.</p>
     </header>
-    <CreditsBar />
+
+    <!-- ON A LIGHT PAGE -->
+    <section class="crlab-ctx crlab-light">
+      <p class="crlab-ctx-label">On a light page</p>
+      {variants.map((x) => (
+        <div class="crlab-item">
+          <p class="crlab-tag"><span>{x.label}</span>{x.note}</p>
+          <CreditsBar tone="light" variant={x.v} />
+        </div>
+      ))}
+    </section>
+
+    <!-- ON A DARK PAGE -->
+    <section class="crlab-ctx crlab-dark">
+      <p class="crlab-ctx-label">On a dark page</p>
+      {variants.map((x) => (
+        <div class="crlab-item">
+          <p class="crlab-tag"><span>{x.label}</span>{x.note}</p>
+          <CreditsBar tone="dark" variant={x.v} />
+        </div>
+      ))}
+    </section>
   </main>
 </Base>
 
 <style>
-  .crlab { background: var(--paper, #f4f4f2); color: var(--ink, #0c0b0a); min-height: 100vh; padding-bottom: clamp(60px, 10vw, 120px); }
-  .crlab-head { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vh, 140px) var(--pad) clamp(36px, 5vw, 60px); }
+  .crlab { color: var(--ink, #0c0b0a); }
+  .crlab-head { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vh, 140px) var(--pad) clamp(30px, 4vw, 48px); }
   .crlab-back { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(20 21 25 / 0.55); text-decoration: none; }
   .crlab-head h1 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(32px, 5vw, 60px); letter-spacing: -0.03em; margin: 18px 0 0; }
-  .crlab-head p { margin: 16px 0 0; max-width: 56ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; font-weight: 300; color: rgb(20 21 25 / 0.64); }
+  .crlab-head p { margin: 16px 0 0; max-width: 60ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; font-weight: 300; color: rgb(20 21 25 / 0.64); }
+
+  /* context bands so each tone is judged on the page it belongs to */
+  .crlab-ctx { padding: clamp(40px, 6vw, 80px) 0; }
+  .crlab-light { background: #f4f4f2; color: #14151a; }
+  .crlab-dark { background: #0f1115; color: #fff; }
+  .crlab-ctx-label { max-width: var(--wrap, 1300px); margin: 0 auto clamp(24px, 3vw, 40px); padding: 0 var(--pad); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.55; }
+  .crlab-item { margin: 0 0 clamp(34px, 4.5vw, 56px); }
+  .crlab-item:last-child { margin-bottom: 0; }
+  .crlab-tag { max-width: var(--wrap, 1300px); margin: 0 auto 14px; padding: 0 var(--pad); font-size: 13px; opacity: 0.7; }
+  .crlab-tag span { display: inline-block; margin-right: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.9; }
 </style>
