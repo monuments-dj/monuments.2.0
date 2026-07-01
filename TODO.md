@@ -39,13 +39,6 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
   Removed the old CreditsVariants. AWAITING DJ: (a) pick complexity + confirm tone handling,
   (b) the per-project CREATORS (the "With"/Team names+roles) for each case study — the one thing
   I don't have. Then wire the winner onto every /work + /lab page, prop-driven, tone per page.
-- ⏳ CREDITS BAR (per DJ: agency + my role + other creators, black bar/white text, "lives on every
-  work/case-study page"): built 3 A/B variants at /lab/credits (V1 inline · V2 columned · V3 end-
-  credits, role highlighted). AWAITING DJ's pick, then wire the winner as a shared component onto
-  every /work + /lab case study (real per-project credit data needed per page).
-- ✅ CREDITS variants extracted to shared CreditsVariants.astro; embedded at the TOP of the /lab
-  hub (first section under the hero) + reused on /lab/credits. Still AWAITING DJ's pick to wire the
-  winner onto every work/case-study page.
 - ✅ DONUT merch: pulled 4 real product shots from donut.media (work shirt/jort/tee/stickers),
   web-optimized, added a "The product I made films for" section linking to the product pages.
 - 🏗️ "FEARLESS" page SCAFFOLDED at /lab/fearless (DJ: "build the page, I'll give content soon").
