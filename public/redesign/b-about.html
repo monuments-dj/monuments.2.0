@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction B · Ledger — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0A0A; --paper:#F4F4F2; --denim:#3E6E94; --rose:#EFA1AD; --dim:#8A8A88;
+  --lineL:#DDDDD8; --wrap:1300px; --pad:clamp(24px,5vw,40px);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 'Archivo',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px var(--pad);border-bottom:1px solid var(--lineL);position:sticky;top:0;background:rgba(244,244,242,.92);backdrop-filter:blur(8px);z-index:50}
+nav .m{font:800 18px 'Archivo';letter-spacing:-.02em}
+nav .m .spark{color:var(--denim)}
+nav .links{display:flex;gap:28px}
+nav .links a{position:relative;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+nav .links a::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .35s cubic-bezier(.65,0,.35,1)}
+nav .links a:hover::after{transform:scaleX(1);transform-origin:left}
+
+/* manifesto hero */
+.hero{padding:13vh 0 10vh;border-bottom:1px solid var(--lineL)}
+.hero .kicker{color:var(--dim);margin-bottom:5vh}
+.manifesto{font-weight:800;font-size:clamp(38px,5.6vw,84px);line-height:1.04;letter-spacing:-.03em;text-transform:uppercase}
+.manifesto .l{display:block;overflow:hidden}
+.manifesto .l>span{display:block;transform:translateY(110%);animation:rise .9s cubic-bezier(.22,1,.36,1) forwards}
+.manifesto .l:nth-child(2)>span{animation-delay:.09s}
+.manifesto .l:nth-child(3)>span{animation-delay:.18s}
+.manifesto .l:nth-child(4)>span{animation-delay:.27s}
+.manifesto em{font-style:normal;color:var(--denim)}
+.manifesto .rose{color:var(--rose)}
+@keyframes rise{to{transform:translateY(0)}}
+
+/* intro two-col */
+.intro{display:grid;grid-template-columns:.55fr 1fr;gap:60px;padding:10vh 0;border-bottom:1px solid var(--lineL)}
+.intro img{width:100%;height:440px;object-fit:cover}
+.intro p{max-width:54ch;margin-bottom:1.2em;font-size:18px}
+.intro p b{font-weight:700}
+
+/* the ledger (timeline) */
+.ledger{padding:11vh 0;border-bottom:1px solid var(--lineL)}
+.ledger .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:40px}
+h2{font-weight:700;font-size:clamp(26px,2.6vw,36px);letter-spacing:-.02em}
+.led{border-top:1px solid var(--lineL)}
+.led .entry{display:grid;grid-template-columns:130px .5fr 1fr;gap:26px;padding:38px 0;border-bottom:1px solid var(--lineL);align-items:baseline;transition:background .3s,padding-left .35s cubic-bezier(.22,1,.36,1)}
+.led .entry:hover{padding-left:16px}
+.led .no{color:var(--dim)}
+.led .role{font-weight:700;font-size:clamp(22px,2.4vw,34px);letter-spacing:-.02em;line-height:1.05}
+.led .entry p{color:#3c3c3a;max-width:52ch}
+.led .entry.now .no{color:var(--rose)}
+.led .entry.now .role em{font-style:normal;color:var(--denim)}
+.led .tagnow{display:inline-block;margin-left:12px;padding:4px 10px;border:1px solid var(--rose);border-radius:99px;color:#b96a77;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;vertical-align:middle}
+
+/* values */
+.values{padding:11vh 0;border-bottom:1px solid var(--lineL)}
+.values .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;margin-top:44px}
+.values .v .n{color:var(--rose);font-family:'Space Mono',monospace;font-size:12px}
+.values .v h3{font-weight:700;font-size:22px;letter-spacing:-.01em;margin:10px 0 8px}
+.values .v p{color:#3c3c3a;font-size:16px}
+
+/* crew */
+.crew{padding:11vh 0;border-bottom:1px solid var(--lineL);display:grid;grid-template-columns:1fr .8fr;gap:60px;align-items:center}
+.crew img{width:100%;height:480px;object-fit:cover}
+.crew h3{font-weight:700;font-size:clamp(24px,2.6vw,36px);letter-spacing:-.02em;margin:14px 0 16px}
+.crew p{color:#3c3c3a;max-width:44ch;margin-bottom:1em}
+
+.cta{padding:15vh 0}
+.cta .big{font-weight:800;font-size:clamp(44px,7vw,104px);letter-spacing:-.04em;line-height:.95;text-transform:uppercase}
+.cta .big a{position:relative;color:var(--denim)}
+.cta .big a::after{content:"";position:absolute;left:0;bottom:6px;width:100%;height:3px;background:var(--denim);transform:scaleX(0);transform-origin:right;transition:transform .5s cubic-bezier(.65,0,.35,1)}
+.cta .big a:hover::after{transform:scaleX(1);transform-origin:left}
+footer{border-top:1px solid var(--lineL);padding:30px 0}
+footer .row{display:flex;justify-content:space-between;color:var(--dim);flex-wrap:wrap;gap:12px}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:820px){
+  .intro,.crew{grid-template-columns:1fr}
+  .led .entry{grid-template-columns:1fr;gap:8px}
+  .values .grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.manifesto .l>span{transform:none}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="m" href="index.html">M<span class="spark">✳</span>NUMENTS</a>
+  <div class="links"><a href="b-home.html">Home</a><a href="b-home.html#work">Work</a><a href="mailto:monuments.cc@gmail.com">Contact</a></div>
+</nav>
+
+<header class="hero wrap">
+  <p class="kicker mono">About · DJ Ramirez · Brand Experience &amp; Experiential CD</p>
+  <div class="manifesto">
+    <span class="l"><span>Make it worth</span></span>
+    <span class="l"><span>showing up for<span class="rose">.</span></span></span>
+    <span class="l"><span>Make it <em>last.</em></span></span>
+    <span class="l"><span>Make it<span class="rose">.</span></span></span>
+  </div>
+</header>
+
+<section class="intro wrap">
+  <div class="rv"><img src="/gallery/full/p-005.jpg" alt="On location"></div>
+  <div class="rv">
+    <span class="mono" style="color:var(--dim)">The short version</span>
+    <p style="margin-top:14px"><b>I'm DJ Ramirez, a creative director. I build monuments with my friends.</b></p>
+    <p>Ten years in the hard rooms: where the brief was wrong, the timeline was tight, and the stakes were real. I started in UX, learned speed in agencies, earned the title on camera and on the hook for the number.</p>
+    <p>Now I run Monuments, a production studio and consultancy between Los Angeles and Boise. I plug in at the senior level: strategy, creative direction, integrated content.</p>
+  </div>
+</section>
+
+<section class="ledger wrap">
+  <div class="head">
+    <h2 class="rv">The ledger</h2>
+    <span class="mono rv" style="color:var(--dim)">Career, in order</span>
+  </div>
+  <div class="led rv">
+    <div class="entry">
+      <span class="no mono">Chapter 01</span>
+      <span class="role">UX Design</span>
+      <p>Where I learned systems. Research, wireframes, and why people do what they do. Every campaign still starts with that question.</p>
+    </div>
+    <div class="entry">
+      <span class="no mono">Chapter 02</span>
+      <span class="role">Agency Creative</span>
+      <p>Where I learned speed. Concepting daily, selling work in the room, shipping campaigns for global brands on real deadlines.</p>
+    </div>
+    <div class="entry">
+      <span class="no mono">Chapter 03</span>
+      <span class="role">Creative Director</span>
+      <p>Where I learned scale. On camera and behind it: teams of up to 50 contractors, agency revenue grown 4x, an Emmy-winning film series.</p>
+    </div>
+    <div class="entry now">
+      <span class="no mono">Chapter 04</span>
+      <span class="role"><em>Monuments</em><span class="tagnow">You are here</span></span>
+      <p>My own studio and consultancy. Me, Tess keeping the operation moving, and a trusted crew of makers who come in when the work calls for it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="values wrap">
+  <span class="mono rv" style="color:var(--dim)">How I work</span>
+  <div class="grid">
+    <div class="v rv"><span class="n">✳ 01</span><h3>Listen</h3><p>Before a single deliverable, I find what you actually stand for. Most brands are too close to see it. That gap is where the work begins.</p></div>
+    <div class="v rv"><span class="n">✳ 02</span><h3>Frame</h3><p>Strategy and creative direction, set at the senior level. We decide what the work needs to say and how it should feel, then lock the thinking.</p></div>
+    <div class="v rv"><span class="n">✳ 03</span><h3>Build</h3><p>Big campaign or a single shoot, the craft is the same. Integrated content, made with people who have done it at scale.</p></div>
+  </div>
+</section>
+
+<section class="crew wrap">
+  <div class="rv"><img src="/about/team.jpg" alt="The Monuments crew"></div>
+  <div class="rv">
+    <span class="mono" style="color:var(--dim)">The crew</span>
+    <h3>Like a band, not an agency.</h3>
+    <p>Tess is the project manager who keeps things in line. The reason timelines hold and the work actually ships.</p>
+    <p>Around us: a trusted network of makers. Directors of photography, editors, designers, producers. People I have shipped real work with, who come in when the project calls for it.</p>
+  </div>
+</section>
+
+<section class="cta wrap">
+  <div class="big rv">Tell me what<br>you're <a href="mailto:monuments.cc@gmail.com">building.</a></div>
+</section>
+
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © 2026 · Built to be remembered</span>
+    <span>Redesign preview · Direction B</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

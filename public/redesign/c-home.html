@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction C · Signal — Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0A0A; --paper:#F4F4F2; --denim:#3E6E94; --rose:#EFA1AD;
+  --panel:#121212; --line:#262626; --dim:#8A8A88;
+  --wrap:1300px; --pad:clamp(24px,5vw,40px);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font:400 17px/1.6 'Archivo',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}
+.mono{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none;cursor:none}
+
+/* custom cursor */
+#cur{position:fixed;z-index:99;width:14px;height:14px;border-radius:50%;background:var(--rose);pointer-events:none;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s;mix-blend-mode:difference}
+#cur.big{width:64px;height:64px}
+@media (pointer:coarse){#cur{display:none}body,a{cursor:auto}}
+
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px var(--pad);mix-blend-mode:difference}
+nav .m{font:900 20px 'Archivo';letter-spacing:-.02em}
+nav .m .spark{color:var(--rose);display:inline-block;animation:spin 4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+nav .links{display:flex;gap:28px}
+nav .links a{position:relative;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+
+/* hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+.hero .kicker{color:var(--rose);margin-bottom:3vh}
+.hero .giant{font-weight:900;font-size:clamp(64px,12.6vw,182px);line-height:.86;letter-spacing:-.045em;text-transform:uppercase;will-change:transform}
+.hero .giant .l{display:block;overflow:hidden}
+.hero .giant .l>span{display:block;transform:translateY(110%);animation:rise .9s cubic-bezier(.22,1,.36,1) forwards}
+.hero .giant .l:nth-child(2)>span{animation-delay:.1s}
+.hero .giant .l:nth-child(3)>span{animation-delay:.2s}
+.hero .giant .out{color:transparent;-webkit-text-stroke:1.5px var(--paper)}
+.hero .giant em{font-style:normal;color:var(--denim)}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;padding:5vh 0 4vh;border-top:1px solid var(--line);margin-top:6vh}
+.hero .sub p{max-width:46ch;color:#cfcfcd}
+.hero .sub .cue{color:var(--dim);white-space:nowrap}
+
+/* marquee */
+.marq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:20px 0;background:var(--panel)}
+.marq .track{display:flex;gap:0;width:max-content;animation:scrollx 22s linear infinite}
+.marq:hover .track{animation-play-state:paused}
+.marq span{font-weight:900;font-size:clamp(22px,2.6vw,38px);letter-spacing:-.02em;text-transform:uppercase;white-space:nowrap;padding-right:28px}
+.marq i{font-style:normal;color:var(--rose);padding-right:28px}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+
+/* work cards */
+.workhead{padding:110px 0 50px;display:flex;justify-content:space-between;align-items:baseline}
+h2{font-weight:900;font-size:clamp(34px,4vw,56px);letter-spacing:-.03em;text-transform:uppercase}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:26px;padding-bottom:40px}
+.card{position:relative;overflow:hidden;background:var(--panel)}
+.card img{width:100%;height:56vh;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.22,1,.36,1),filter .5s}
+.card:hover img{transform:scale(1.05);filter:grayscale(60%)}
+.card .veil{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,10,.85),transparent 55%)}
+.card .info{position:absolute;left:22px;right:22px;bottom:20px;display:flex;justify-content:space-between;align-items:baseline}
+.card .info .t{font-weight:700;font-size:clamp(22px,2.2vw,30px);letter-spacing:-.02em}
+.card .info .f{color:var(--rose)}
+.card .n{position:absolute;top:16px;left:22px;color:var(--paper);font-family:'Space Mono',monospace;font-size:12px}
+.card.wide{grid-column:1/-1}
+.card.wide img{height:70vh}
+
+/* stats ticker band */
+.band{background:var(--denim);color:var(--ink);padding:11vh 0}
+.band .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:36px}
+.band .num{font-weight:900;font-size:clamp(38px,5vw,72px);letter-spacing:-.03em}
+.band .lbl{margin-top:6px;color:rgba(10,10,10,.65)}
+
+/* cta */
+.cta{padding:18vh 0;text-align:center;position:relative;overflow:hidden}
+.cta .spark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:clamp(300px,46vw,640px);color:var(--panel);z-index:0;animation:spin 40s linear infinite;line-height:1}
+.cta .inner{position:relative;z-index:1}
+.cta .big{font-weight:900;font-size:clamp(46px,8vw,120px);letter-spacing:-.04em;line-height:.92;text-transform:uppercase}
+.cta .big em{font-style:normal;color:var(--rose)}
+.pill{display:inline-flex;align-items:center;gap:10px;margin-top:48px;padding:22px 40px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;will-change:transform;transition:background .3s}
+.pill:hover{background:var(--rose)}
+footer{border-top:1px solid var(--line);padding:34px 0}
+footer .row{display:flex;justify-content:space-between;color:var(--dim);flex-wrap:wrap;gap:12px}
+
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:820px){.cards{grid-template-columns:1fr}.card img{height:44vh}.band .grid{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero .giant .l>span{transform:none}.rv{opacity:1;transform:none}
+  .marq .track{animation:none!important}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+
+<nav>
+  <a class="m" href="index.html">M<span class="spark">✳</span>NUMENTS</a>
+  <div class="links"><a href="#work">Work</a><a href="c-about.html">About</a><a href="mailto:monuments.cc@gmail.com">Contact</a></div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker mono">DJ Ramirez · Brand Experience &amp; Experiential Creative Director</p>
+    <div class="giant" id="giant">
+      <span class="l"><span>Moments</span></span>
+      <span class="l"><span class="out">people</span></span>
+      <span class="l"><span><em>show up</em> for</span></span>
+    </div>
+    <div class="sub">
+      <p>As AI floods the feed with cheap content, brands win in the real world. I lead the campaigns and experiences that get people to show up, not just scroll.</p>
+      <span class="cue mono">Scroll ↓</span>
+    </div>
+  </div>
+</header>
+
+<div class="marq" aria-hidden="true">
+  <div class="track">
+    <span>Brand campaigns</span><i>✳</i><span>Experiential</span><i>✳</i><span>Brand films</span><i>✳</i><span>Creative direction</span><i>✳</i>
+    <span>Brand campaigns</span><i>✳</i><span>Experiential</span><i>✳</i><span>Brand films</span><i>✳</i><span>Creative direction</span><i>✳</i>
+  </div>
+</div>
+
+<section id="work" class="wrap">
+  <div class="workhead">
+    <h2 class="rv">The work</h2>
+    <span class="mono rv" style="color:var(--dim)">04 selected · full index on /work</span>
+  </div>
+  <div class="cards">
+    <a class="card wide rv" href="#" data-cur>
+      <img src="/galaxy/gx-01.jpg" alt="Art of Visuals">
+      <div class="veil"></div><span class="n">01</span>
+      <div class="info"><span class="t">Art of Visuals</span><span class="f mono">Brand campaign · 4x</span></div>
+    </a>
+    <a class="card rv" href="#" data-cur>
+      <img src="/case-studies/blue-cross/bc-2.jpg" alt="Blue Cross of Idaho">
+      <div class="veil"></div><span class="n">02</span>
+      <div class="info"><span class="t">Blue Cross of Idaho</span><span class="f mono">Documentary</span></div>
+    </a>
+    <a class="card rv" href="#" data-cur>
+      <img src="/case-studies/turnstile/products/prod-01.jpg" alt="Turnstile Audio">
+      <div class="veil"></div><span class="n">03</span>
+      <div class="info"><span class="t">Turnstile Audio</span><span class="f mono">Brand + product</span></div>
+    </a>
+    <a class="card wide rv" href="#" data-cur>
+      <img src="/case-studies/turnstile/bts/bts-05.jpg" alt="Adorama Music">
+      <div class="veil"></div><span class="n">04</span>
+      <div class="info"><span class="t">Adorama Music</span><span class="f mono">Content series</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap grid">
+    <div class="rv"><div class="num">4x</div><div class="lbl mono">Agency revenue grown</div></div>
+    <div class="rv"><div class="num">160M+</div><div class="lbl mono">Campaign impressions</div></div>
+    <div class="rv"><div class="num">Emmy</div><div class="lbl mono">Winning film series</div></div>
+    <div class="rv"><div class="num">50</div><div class="lbl mono">Contractors led</div></div>
+  </div>
+</section>
+
+<section class="cta">
+  <span class="spark" aria-hidden="true">✳</span>
+  <div class="inner wrap">
+    <div class="big rv">Tell me what<br>you're <em>building.</em></div>
+    <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com" data-cur>monuments.cc@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © 2026 · Built to be remembered</span>
+    <span id="clock">LOS ANGELES —:—</span>
+    <span>Redesign preview · Direction C</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// custom cursor
+const cur=document.getElementById('cur');
+if(matchMedia('(pointer:fine)').matches){
+  addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'},{passive:true});
+  document.querySelectorAll('[data-cur],a').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+  });
+}
+
+// scroll-velocity skew on the giant headline
+const giant=document.getElementById('giant');
+let lastY=scrollY,vel=0,raf2=null;
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  addEventListener('scroll',()=>{
+    vel=Math.max(-1,Math.min(1,(scrollY-lastY)/40));lastY=scrollY;
+    if(!raf2)decay();
+  },{passive:true});
+  function decay(){raf2=requestAnimationFrame(()=>{
+    vel*=.9;
+    giant.style.transform=`skewY(${vel*2.2}deg)`;
+    Math.abs(vel)>.01?decay():(giant.style.transform='',raf2=null);
+  })}
+}
+
+// magnetic pill
+const mag=document.querySelector('.magnetic');
+if(mag&&matchMedia('(pointer:fine)').matches){
+  let raf;const st={x:0,y:0,tx:0,ty:0};
+  mag.addEventListener('mousemove',e=>{
+    const r=mag.getBoundingClientRect();
+    st.tx=(e.clientX-r.left-r.width/2)*.35;st.ty=(e.clientY-r.top-r.height/2)*.35;loop();
+  });
+  mag.addEventListener('mouseleave',()=>{st.tx=0;st.ty=0;loop()});
+  function loop(){cancelAnimationFrame(raf);(function step(){
+    st.x+=(st.tx-st.x)*.16;st.y+=(st.ty-st.y)*.16;
+    mag.style.transform=`translate(${st.x}px,${st.y}px)`;
+    if(Math.abs(st.tx-st.x)>.2||Math.abs(st.ty-st.y)>.2)raf=requestAnimationFrame(step);
+  })()}
+}
+
+function tick(){
+  const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('clock').textContent='LOS ANGELES '+t;
+}
+tick();setInterval(tick,30000);
+</script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction A · Monument — Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0A0A; --paper:#F4F4F2; --denim:#3E6E94; --rose:#EFA1AD;
+  --panel:#121212; --line:#262626; --dim:#8A8A88;
+  --wrap:1300px; --pad:clamp(24px,5vw,40px);
+}
+*{margin:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font:400 17px/1.6 'Archivo',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+
+/* nav */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px var(--pad);mix-blend-mode:difference}
+nav .m{font:800 20px 'Archivo';letter-spacing:-.02em}
+nav .m .spark{color:var(--rose);display:inline-block;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+nav .links{display:flex;gap:28px}
+nav .links a{position:relative;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+nav .links a::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .35s cubic-bezier(.65,0,.35,1)}
+nav .links a:hover::after{transform:scaleX(1);transform-origin:left}
+
+/* hero */
+.hero{position:relative;height:100vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero .media{position:absolute;inset:-10% 0;z-index:0}
+.hero .media img{width:100%;height:100%;object-fit:cover;filter:grayscale(30%) brightness(.55);transform:scale(1.08);animation:heroZoom 2.4s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes heroZoom{to{transform:scale(1)}}
+.hero .inner{position:relative;z-index:1;width:100%;padding-bottom:9vh}
+.hero .kicker{color:var(--rose);margin-bottom:26px}
+h1{font-weight:800;font-size:clamp(52px,8.4vw,120px);line-height:.96;letter-spacing:-.03em;text-transform:uppercase}
+h1 .line{display:block;overflow:hidden}
+h1 .line>span{display:block;transform:translateY(110%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+h1 .line:nth-child(2)>span{animation-delay:.12s}
+h1 .line:nth-child(3)>span{animation-delay:.24s}
+h1 em{font-style:normal;color:var(--denim)}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .sub{max-width:460px;margin-top:30px;color:#cfcfcd;opacity:0;animation:fade 1s .7s forwards}
+@keyframes fade{to{opacity:1}}
+.hero .scrollcue{position:absolute;right:var(--pad);bottom:9vh;z-index:1;color:var(--dim);display:flex;align-items:center;gap:12px}
+.hero .scrollcue::after{content:"";width:1px;height:44px;background:var(--dim);display:block;animation:cue 1.8s ease-in-out infinite;transform-origin:top}
+@keyframes cue{0%{transform:scaleY(0)}45%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* stats */
+.stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stats .cell{padding:56px 28px;border-left:1px solid var(--line)}
+.stats .cell:first-child{border-left:0}
+.stats .num{font-weight:700;font-size:clamp(36px,4.6vw,64px);letter-spacing:-.02em;color:var(--paper)}
+.stats .num i{font-style:normal;color:var(--denim)}
+.stats .lbl{color:var(--dim);margin-top:10px}
+
+/* work */
+.workhead{padding:110px 0 60px;display:flex;justify-content:space-between;align-items:baseline}
+h2{font-weight:700;font-size:clamp(30px,3.2vw,44px);letter-spacing:-.02em}
+.project{margin-bottom:120px}
+.project .media{position:relative;overflow:hidden}
+.project .media img{width:100%;display:block;height:72vh;object-fit:cover;transform:translateY(0);will-change:transform;transition:filter .5s}
+.project.full .media{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}
+.project.contained .media img{height:64vh}
+.project a:hover .media img{filter:brightness(.85)}
+.project .meta{display:flex;justify-content:space-between;align-items:baseline;padding-top:22px;border-top:1px solid var(--line);margin-top:0}
+.project .meta .t{font-weight:700;font-size:clamp(22px,2.4vw,32px);letter-spacing:-.02em}
+.project .meta .tag{color:var(--dim)}
+.project .meta .tag b{color:var(--rose);font-weight:400}
+
+/* quote band */
+.quote{background:var(--denim);color:var(--ink);padding:16vh 0}
+.quote p{font-weight:700;font-size:clamp(30px,4.2vw,58px);line-height:1.12;letter-spacing:-.02em;max-width:1050px}
+.quote .who{margin-top:34px;color:rgba(10,10,10,.62)}
+
+/* about teaser + cta */
+.teaser{padding:18vh 0;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.teaser img{width:100%;height:520px;object-fit:cover}
+.teaser h3{font-weight:700;font-size:clamp(28px,3vw,42px);letter-spacing:-.02em;line-height:1.15;margin:18px 0 22px}
+.teaser p{color:#cfcfcd;max-width:44ch}
+.pill{display:inline-flex;align-items:center;gap:10px;margin-top:36px;padding:20px 34px;border:1px solid var(--paper);border-radius:99px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;transition:background .3s,color .3s;will-change:transform}
+.pill:hover{background:var(--paper);color:var(--ink)}
+
+footer{border-top:1px solid var(--line);padding:34px 0}
+footer .row{display:flex;justify-content:space-between;color:var(--dim);flex-wrap:wrap;gap:12px}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .stats .grid{grid-template-columns:1fr 1fr}
+  .stats .cell:nth-child(3){border-left:0}
+  .teaser{grid-template-columns:1fr}
+  .project .media img{height:52vh}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  h1 .line>span{transform:none}.hero .sub{opacity:1}.rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="m" href="index.html">M<span class="spark">✳</span>NUMENTS</a>
+  <div class="links"><a href="#work">Work</a><a href="a-about.html">About</a><a href="#contact">Contact</a></div>
+</nav>
+
+<header class="hero">
+  <div class="media"><img src="/galaxy/gx-13.jpg" alt=""></div>
+  <div class="inner wrap">
+    <p class="kicker mono">DJ Ramirez · Brand Experience &amp; Experiential Creative Director</p>
+    <h1>
+      <span class="line"><span>I make brand</span></span>
+      <span class="line"><span>moments people</span></span>
+      <span class="line"><span><em>show up</em> for.</span></span>
+    </h1>
+    <p class="sub">As AI floods the feed with cheap content, brands win in the real world. I lead the campaigns and experiences that get people to show up, not just scroll.</p>
+  </div>
+  <div class="scrollcue mono">Scroll</div>
+</header>
+
+<section class="stats">
+  <div class="wrap grid">
+    <div class="cell rv"><div class="num" data-count="4"><i>4x</i></div><div class="lbl mono">Agency revenue grown</div></div>
+    <div class="cell rv"><div class="num">160M+</div><div class="lbl mono">Campaign impressions</div></div>
+    <div class="cell rv"><div class="num">Emmy</div><div class="lbl mono">Winning film series</div></div>
+    <div class="cell rv"><div class="num">50</div><div class="lbl mono">Contractors led</div></div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap workhead">
+    <h2 class="rv">Selected work</h2>
+    <span class="mono rv" style="color:var(--dim)">04 projects · 2020–2026</span>
+  </div>
+
+  <article class="project full">
+    <a href="#">
+      <div class="media rv"><img class="plx" src="/galaxy/gx-01.jpg" alt="Art of Visuals"></div>
+      <div class="wrap meta"><span class="t">Art of Visuals</span><span class="tag mono"><b>✳</b> Brand campaign · Built to grow the agency 4x</span></div>
+    </a>
+  </article>
+
+  <article class="project contained wrap">
+    <a href="#">
+      <div class="media rv"><img class="plx" src="/case-studies/blue-cross/bc-2.jpg" alt="Blue Cross of Idaho"></div>
+      <div class="meta"><span class="t">Blue Cross of Idaho</span><span class="tag mono"><b>✳</b> Documentary campaign · Real people, real stakes</span></div>
+    </a>
+  </article>
+
+  <article class="project full">
+    <a href="#">
+      <div class="media rv"><img class="plx" src="/case-studies/turnstile/products/prod-01.jpg" alt="Turnstile Audio"></div>
+      <div class="wrap meta"><span class="t">Turnstile Audio</span><span class="tag mono"><b>✳</b> Brand &amp; product launch · Zero to shelf</span></div>
+    </a>
+  </article>
+
+  <article class="project contained wrap">
+    <a href="#">
+      <div class="media rv"><img class="plx" src="/case-studies/turnstile/bts/bts-05.jpg" alt="Adorama Music"></div>
+      <div class="meta"><span class="t">Adorama Music</span><span class="tag mono"><b>✳</b> Content series · Half the story is in the sound</span></div>
+    </a>
+  </article>
+</section>
+
+<section class="quote">
+  <div class="wrap">
+    <p class="rv">I shoot but I'm not a shooter. I direct but it's not the point. The point is the story. The moment. Always has been.</p>
+    <p class="who mono rv">DJ Ramirez · Creative Director</p>
+  </div>
+</section>
+
+<section class="teaser wrap" id="contact">
+  <div class="rv"><img src="/about/team.jpg" alt="The Monuments crew"></div>
+  <div class="rv">
+    <span class="mono" style="color:var(--rose)">✳ The studio</span>
+    <h3>I build monuments with my friends.</h3>
+    <p>A decade in the hard rooms: UX, agency creative, creative director, and now my own studio. Tess keeps it on the rails. A crew of talented friends comes in when the work calls for it.</p>
+    <a class="pill magnetic" href="mailto:monuments.cc@gmail.com">Tell me what you're building →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © 2026 · Built to be remembered</span>
+    <span id="clock">LOS ANGELES —:—</span>
+    <span>Redesign preview · Direction A</span>
+  </div>
+</footer>
+
+<script>
+// reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// parallax on media only (type never drifts)
+const plx=[...document.querySelectorAll('.project .media img')];
+let ticking=false;
+addEventListener('scroll',()=>{
+  if(ticking)return;ticking=true;
+  requestAnimationFrame(()=>{
+    const vh=innerHeight;
+    plx.forEach(img=>{
+      const r=img.parentElement.getBoundingClientRect();
+      if(r.bottom<0||r.top>vh)return;
+      const p=(r.top+r.height/2-vh/2)/vh; // -0.5..0.5
+      img.style.transform=`translateY(${p*-40}px) scale(1.06)`;
+    });
+    ticking=false;
+  });
+},{passive:true});
+
+// magnetic pill
+const mag=document.querySelector('.magnetic');
+if(mag&&matchMedia('(pointer:fine)').matches){
+  let raf;const st={x:0,y:0,tx:0,ty:0};
+  mag.addEventListener('mousemove',e=>{
+    const r=mag.getBoundingClientRect();
+    st.tx=(e.clientX-r.left-r.width/2)*.3;st.ty=(e.clientY-r.top-r.height/2)*.3;loop();
+  });
+  mag.addEventListener('mouseleave',()=>{st.tx=0;st.ty=0;loop()});
+  function loop(){cancelAnimationFrame(raf);(function step(){
+    st.x+=(st.tx-st.x)*.16;st.y+=(st.ty-st.y)*.16;
+    mag.style.transform=`translate(${st.x}px,${st.y}px)`;
+    if(Math.abs(st.tx-st.x)>.2||Math.abs(st.ty-st.y)>.2)raf=requestAnimationFrame(step);
+  })()}
+}
+
+// live LA clock
+function tick(){
+  const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('clock').textContent='LOS ANGELES '+t;
+}
+tick();setInterval(tick,30000);
+</script>
+</body>
+</html>
