@@ -65,6 +65,17 @@ const credits = [
       <div class="am-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
 
+    <!-- RESULTS FIRST: lead with the number -->
+    <section class="am-results">
+      <p class="am-kicker fade"><span class="am-mark" aria-hidden="true">+</span>The results</p>
+      <div class="am-stats">
+        {stats.map((s) => (
+          <div class="am-stat fade"><span class="am-stat-n">{s.n}</span><span class="am-stat-l">{s.l}</span></div>
+        ))}
+      </div>
+      <p class="am-result-note fade">Part of Adorama's #CreateNoMatterWhat campaign, a Shorty Awards finalist. It moved Adorama from a retailer to a creative ally, and spun off into the AMPLIFIED and Behind the Music series.</p>
+    </section>
+
     <!-- THE FILM -->
     <section class="am-film">
       <div class="am-film-head">
@@ -137,22 +148,11 @@ const credits = [
       </div>
     </section>
 
-    <!-- RESULTS -->
-    <section class="am-results">
-      <p class="am-kicker fade"><span class="am-mark" aria-hidden="true">+</span>What it did</p>
-      <div class="am-stats">
-        {stats.map((s) => (
-          <div class="am-stat fade"><span class="am-stat-n">{s.n}</span><span class="am-stat-l">{s.l}</span></div>
-        ))}
-      </div>
-      <p class="am-result-note fade">Part of Adorama's #CreateNoMatterWhat campaign, a Shorty Awards finalist. It moved Adorama from a retailer to a creative ally, and spun off into the AMPLIFIED and Behind the Music series.</p>
-    </section>
-
     <!-- THE ROLE -->
     <section class="am-role">
       <p class="am-kicker fade"><span class="am-mark" aria-hidden="true">+</span>The role</p>
       <h2 class="am-role-h split">Strategy, the shoot, and the <em>client in the room.</em></h2>
-      <p class="am-role-body fade">DJ led Adorama Music: The Journey as creative director. He set the strategy, directed the photo and video, shot a chunk of the stills himself, and was Adorama's main point of contact from the first call to the final cut. Rad Animal came on to help with the production.</p>
+      <p class="am-role-body fade">I led Adorama Music: The Journey as creative director. I set the strategy, directed the photo and video, shot a chunk of the stills myself, and was Adorama's main point of contact from the first call to the final cut. Rad Animal came on to help with the production.</p>
       <ul class="am-did">
         <li class="fade"><span class="am-did-k">Strategy</span><span class="am-did-v">Shaped what the campaign needed to say, and to whom.</span></li>
         <li class="fade"><span class="am-did-k">Creative Direction</span><span class="am-did-v">Owned the creative from concept through final delivery.</span></li>

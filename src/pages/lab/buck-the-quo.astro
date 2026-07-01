@@ -72,10 +72,20 @@ const credits = [
         <p class="bq-eyebrow fade"><span class="bq-mark" aria-hidden="true">+</span>Case study &middot; Experiential</p>
         <h1 class="bq-h1 split">Buck the Quo</h1>
         <p class="bq-tag fade">I am. I can. <em>I will.</em></p>
-        <p class="bq-meta fade">A statewide campaign to get more Idaho teens to picture a future after high school, and a traveling activation that made that conversation one they actually wanted to have.</p>
+        <p class="bq-meta fade">A statewide campaign to lift Idaho's college-going rate by talking with teens instead of at them. I directed the experiential build that turned a hard conversation about the future into one 18,000+ teens chose to have.</p>
       </div>
       <div class="bq-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
+
+    <!-- RESULTS FIRST: lead with the number -->
+    <section class="bq-stats">
+      {stats.map((s) => (
+        <div class="bq-stat fade">
+          <span class="bq-stat-n">{s.n}</span>
+          <span class="bq-stat-l">{s.l}</span>
+        </div>
+      ))}
+    </section>
 
     <!-- THE PROBLEM -->
     <section class="bq-brief">
@@ -126,16 +136,6 @@ const credits = [
       <p class="bq-concept-sub fade">Not a slogan pointed at teens. A line they could say back. Confidence first, instructions never.</p>
     </section>
 
-    <!-- STAT BAND -->
-    <section class="bq-stats">
-      {stats.map((s) => (
-        <div class="bq-stat fade">
-          <span class="bq-stat-n">{s.n}</span>
-          <span class="bq-stat-l">{s.l}</span>
-        </div>
-      ))}
-    </section>
-
     <!-- THE MERCH / GALLERY -->
     <section class="bq-system">
       <div class="bq-sys-head">
@@ -157,7 +157,7 @@ const credits = [
     <section class="bq-role">
       <p class="bq-kicker fade"><span class="bq-mark" aria-hidden="true">+</span>The role</p>
       <h2 class="bq-role-h split">From the agency floor to the <em>director's seat.</em></h2>
-      <p class="bq-role-body fade">DJ started on Buck the Quo as part of Drake Cooper, then stayed with the campaign as a consultant as it grew. Over its run he worked nearly every side of it: behind the camera for the bulk of the photo and video, on the floor of the More In Store activation, in the room for the focus groups that kept it honest, and in the brand's replies across social. He directed the campaign's YouTube show.</p>
+      <p class="bq-role-body fade">I started on Buck the Quo as part of Drake Cooper, then stayed with the campaign as a consultant as it grew. Over its run I worked nearly every side of it: behind the camera for the bulk of the photo and video, on the floor of the More In Store activation, in the room for the focus groups that kept it honest, and in the brand's replies across social. I directed the campaign's YouTube show.</p>
       <ul class="bq-did">
         <li class="fade"><span class="bq-did-k">Photo + Video</span><span class="bq-did-v">Shot the majority of the campaign's stills and motion.</span></li>
         <li class="fade"><span class="bq-did-k">The activation</span><span class="bq-did-v">Worked the More In Store retail experience on the ground.</span></li>
