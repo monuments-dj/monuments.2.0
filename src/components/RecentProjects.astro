@@ -6,16 +6,18 @@
 // by a draggable/clickable SCRUBBER (no corner arrows). Reduced-motion + narrow screens
 // fall back to a clean vertical stack. Self-contained (home has no LabFx tokens).
 
-// Real case studies only — each links to its /work/<slug> page with a real hero image.
-// `tail` carries the "Built ___" line (DJ-approved copy, moved here from the old reel).
+// Lead with the flagship + selected case studies (the hiring-portfolio work), each linking
+// to its /lab/<slug> detail page; a few strong older pieces follow (/work/<slug>).
+// `tail` carries the "Built ___" line (reads "Built <tail>.").
 const projects = [
-  { brand: 'Turnstile',       tail: 'to take it to 11',      slug: 'turnstile',          img: '/case-studies/turnstile/bts/bts-01.jpg' },
-  { brand: 'Blue Cross',      tail: 'for life',              slug: 'blue-cross',         img: '/case-studies/blue-cross/gallery/bci-10.jpg' },
-  { brand: 'Sony',            tail: 'to chase the sun',      slug: 'sony-xperia-summer', img: '/case-studies/sony-xperia-summer/gallery/xp-01.jpg' },
+  { brand: 'Art of Visuals',  tail: 'to grow the agency 4x', slug: 'art-of-visuals', href: '/lab/art-of-visuals', img: '/case-studies/art-of-visuals/gallery/xm5-01.jpg' },
+  { brand: 'Buck the Quo',    tail: 'for 18,000+ teens',     slug: 'buck-the-quo',   href: '/lab/buck-the-quo',   img: '/case-studies/buck-the-quo/gallery/future-sign.jpg' },
+  { brand: 'Adorama Music',   tail: 'to reach 160M+',        slug: 'adorama-music',  href: '/lab/adorama-music',  img: '/case-studies/adorama-music/gallery/am-07.jpg' },
+  { brand: 'Know Vape',       tail: 'for Idaho teens',       slug: 'know-vape',      href: '/lab/know-vape',      img: '/case-studies/know-vape/gallery/hero.jpg' },
+  { brand: 'AC Boise',        tail: 'for the whole city',    slug: 'ac-boise',       href: '/lab/ac-boise',       img: '/case-studies/ac-boise/gallery/home-01.jpg' },
+  { brand: 'Donut × Zumiez',  tail: 'to launch the drop',    slug: 'donut-zumiez',   href: '/lab/donut-zumiez',   img: '/case-studies/donut-zumiez/gallery/film-01.jpg' },
   { brand: 'Sony',            tail: 'to capture the moment', slug: 'sony-this-moment',   img: '/case-studies/sony-this-moment/gallery/tm-01.jpg' },
-  { brand: 'Flashpoint',      tail: 'to shape the light',    slug: 'flashpoint',         img: '/case-studies/flashpoint/gallery/fp-01.jpg' },
-  { brand: 'Waffle Me Up',    tail: 'to be worth the wait',  slug: 'waffle-me-up',       img: '/case-studies/waffle-me-up/gallery/wmu-01.jpg' },
-  { brand: 'Clothing & Merch', tail: 'to be worn',           slug: 'clothing-merch',     img: '/case-studies/clothing-merch/gallery/cm-01.jpg' },
+  { brand: 'Blue Cross',      tail: 'for life',              slug: 'blue-cross',         img: '/case-studies/blue-cross/gallery/bci-10.jpg' },
 ];
 const N = projects.length;
 const pad2 = (n: number) => String(n).padStart(2, '0');
@@ -31,7 +33,7 @@ const pad2 = (n: number) => String(n).padStart(2, '0');
       {projects.map((p, i) => (
         <article class="rp-panel">
           <div class="rp-panel-inner">
-            <a class="rp-frame" href={`/work/${p.slug}`} aria-label={`View ${p.brand}`}>
+            <a class="rp-frame" href={p.href ?? `/work/${p.slug}`} aria-label={`View ${p.brand}`}>
               <span class="rp-frame-bar" aria-hidden="true">
                 <span class="rp-dots"><i></i><i></i><i></i></span>
                 <span class="rp-frame-label">monuments &middot; {p.brand}</span>
@@ -46,7 +48,7 @@ const pad2 = (n: number) => String(n).padStart(2, '0');
               <span class="rp-index">{pad2(i + 1)}<i>&thinsp;/&thinsp;{pad2(N)}</i></span>
               <h3 class="rp-title">{p.brand}</h3>
               <p class="rp-desc">Built {p.tail}.</p>
-              <a class="rp-view" href={`/work/${p.slug}`}>View project <span aria-hidden="true">&rarr;</span></a>
+              <a class="rp-view" href={p.href ?? `/work/${p.slug}`}>View project <span aria-hidden="true">&rarr;</span></a>
             </div>
           </div>
         </article>

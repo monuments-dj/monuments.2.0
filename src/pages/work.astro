@@ -18,7 +18,19 @@ const GX_COUNT = 18;
 // Floating header galaxy now pulls from DJ's real photo library (resized spread in /public/galaxy)
 const galaxy = Array.from({ length: 29 }, (_, i) => `/galaxy/gx-${String(i + 1).padStart(2, '0')}.jpg`);
 
+// Flagship + selected case studies (the hiring-portfolio work). Pinned to the front of the
+// grid and linked to their /lab/* detail pages. Lead with the number in the tagline.
+const caseStudies = [
+  { slug: 'art-of-visuals', title: 'Art of Visuals',  tagline: 'Grew the agency 4x',     feeling: 'Strategic', industry: 'Agency',        tags: ['Creative Direction', 'Growth'],       cats: 'creative-direction',                    img: '/case-studies/art-of-visuals/gallery/xm5-01.jpg',    href: '/lab/art-of-visuals', feat: true },
+  { slug: 'buck-the-quo',   title: 'Buck the Quo',    tagline: '18,000+ conversations',  feeling: 'Human',     industry: 'Social change', tags: ['Experiential', 'Creative Direction'], cats: 'creative-direction experiential',       img: '/case-studies/buck-the-quo/gallery/future-sign.jpg', href: '/lab/buck-the-quo', feat: true },
+  { slug: 'adorama-music',  title: 'Adorama Music',   tagline: '160M+ impressions',      feeling: 'Cinematic', industry: 'Brand film',    tags: ['Creative Direction', 'Brand Film'],   cats: 'creative-direction video',              img: '/case-studies/adorama-music/gallery/am-07.jpg',      href: '/lab/adorama-music', feat: true },
+  { slug: 'know-vape',      title: 'Know Vape',       tagline: 'Emmy-winning campaign',  feeling: 'Honest',    industry: 'Public media',  tags: ['Director', 'Film Series'],            cats: 'creative-direction video experiential', img: '/case-studies/know-vape/gallery/hero.jpg',           href: '/lab/know-vape', feat: true },
+  { slug: 'ac-boise',       title: 'AC Boise',        tagline: 'This kit is Boise',      feeling: 'Civic',     industry: 'Pro sport',     tags: ['Director', 'Kit Reveal'],             cats: 'creative-direction video experiential', img: '/case-studies/ac-boise/gallery/home-01.jpg',         href: '/lab/ac-boise', feat: true },
+  { slug: 'donut-zumiez',   title: 'Donut × Zumiez',  tagline: 'Launch films',           feeling: 'Playful',   industry: 'Streetwear',    tags: ['Director', 'Launch Films'],           cats: 'creative-direction video',              img: '/case-studies/donut-zumiez/gallery/film-01.jpg',     href: '/lab/donut-zumiez', feat: true },
+];
+
 const projects = [
+  ...caseStudies,
   { slug: 'turnstile',          title: 'Turnstile Audio',         tagline: 'Sound, redefined',          feeling: 'Bold',      industry: 'Audio',      tags: ['Branding', 'Creative Direction'],    cats: 'branding creative-direction',    img: U + '2023/08/sound.webp' },
   { slug: 'waffle-me-up',       title: 'Waffle Me Up',            tagline: 'A taste worth the wait',    feeling: 'Warm',      industry: 'Food & Bev', tags: ['Branding', 'Photography'],           cats: 'branding photography',           img: U + '2023/08/waffle-me-up-boise11-scaled.jpg' },
   { slug: 'flashpoint',         title: 'Flashpoint',              tagline: 'The decisive moment',       feeling: 'Sharp',     industry: 'Retail',     tags: ['Branding', 'Creative Direction'],    cats: 'branding creative-direction',    img: U + '2024/10/Ad_1-scaled.jpg' },
@@ -34,6 +46,7 @@ const filters = [
   { label: 'All', value: 'all' },
   { label: 'Branding', value: 'branding' },
   { label: 'Creative Direction', value: 'creative-direction' },
+  { label: 'Experiential', value: 'experiential' },
   { label: 'Photography', value: 'photography' },
   { label: 'Video', value: 'video' },
 ];
@@ -76,12 +89,14 @@ const filters = [
 
     <div class="wp-grid ov-focus cols-4" id="wp-grid">
       {projects.map((p) => (
-        <a class="wp-card fade" href={p.href ?? `/work/${p.slug}`} data-cats={p.cats}>
+        <a class={p.feat ? 'wp-card fade is-feat' : 'wp-card fade'} href={p.href ?? `/work/${p.slug}`} data-cats={p.cats} data-feat={p.feat ? '1' : undefined}>
           <div class="wp-card-media">
             <img src={p.img} alt={p.title} loading="lazy" />
+            {p.feat && <span class="wp-card-badge">Case study</span>}
             <div class="wp-card-overlay">
               <div class="wp-card-tags">{p.tags.map((t) => <span>{t}</span>)}</div>
               <h3 class="wp-card-title">{p.title}</h3>
+              {p.feat && p.tagline && <p class="wp-card-result">{p.tagline}</p>}
             </div>
           </div>
         </a>
@@ -241,16 +256,19 @@ const filters = [
       loop();
     })();
 
-    // Randomize portfolio order on load (cards are still opacity:0 here, so no flicker)
+    // Randomize portfolio order on load, but PIN the featured case studies to the front
+    // (they lead the hiring portfolio); only the rest shuffle. Cards are opacity:0 here.
     (function () {
       const grid = document.getElementById('wp-grid');
       if (!grid) return;
-      const cards = Array.from(grid.children);
-      for (let i = cards.length - 1; i > 0; i--) {
+      const all = Array.from(grid.children);
+      const feat = all.filter((c) => c.dataset.feat === '1');
+      const rest = all.filter((c) => c.dataset.feat !== '1');
+      for (let i = rest.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
+        [rest[i], rest[j]] = [rest[j], rest[i]];
       }
-      cards.forEach((c) => grid.appendChild(c));
+      [...feat, ...rest].forEach((c) => grid.appendChild(c));
     })();
 
     // Column-count toggle (2 / 4)
@@ -281,4 +299,19 @@ const filters = [
     })();
 
   </script>
+
+<style>
+  /* Featured case-study cards: a small badge + the headline result, always visible. */
+  .wp-card-media { position: relative; }
+  .wp-card-badge {
+    position: absolute; top: 12px; left: 12px; z-index: 2;
+    font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #fff;
+    background: rgb(13 15 20 / 0.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    padding: 5px 10px; border-radius: 999px;
+  }
+  .wp-card-result {
+    margin: 6px 0 0; font-size: 13px; font-weight: 500; letter-spacing: 0.01em;
+    color: rgb(252 252 252 / 0.92);
+  }
+</style>
 </Base>
