@@ -46,6 +46,9 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
   Full case-study structure w/ PLACEHOLDER copy + dashed image slots + Draft badge + in-file TODO.
   NEED FROM DJ: what Fearless is + premise, role/collaborators, headline number(s), assets (hero +
   stills + any video), year/credits. Then swap placeholders, add images, promote to Work/home.
+- 🧭 DECISION (2026-07-01): VIDEO stays on YouTube for now — all of it (Waffle/home header loops
+  AND case-study films). DJ declined self-hosting (revisit later if the YouTube branding grates).
+  Do NOT re-pitch self-hosting / a video CDN unprompted. Waffle keeps its YT-embed + fade-on-play.
 
 **⛔ ROADBLOCKS / needs DJ (all flagged as in-file `⚠️ TODO` comments):**
 1. AOV: only "4x" is real — the other 3 stat values (5+, 100M+, 3yrs) + role title + year span
