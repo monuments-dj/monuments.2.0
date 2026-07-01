@@ -57,6 +57,10 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
   ROLE + agency/collaborators, whether it SHIPPED or was a pitch/spec (layouts still lorem-ipsum),
   and any RESULTS. Also: ~9 Midjourney concept comps were held OUT of the gallery (AI-as-tool
   positioning) — available if DJ wants an "exploration" section.
+  ✅ STORY CONFIRMED + PROMOTED (2026-07-01): Client DW Drums, Agency Art of Visuals, DJ = Creative
+  Director + Designer. Brief = show one hybrid kit (acoustic + electronic) living in two worlds;
+  split-screen is his strategic solution. Real hero/role/credits copy in; promoted to Work grid
+  (tagline "One kit, two worlds") + home slider. Still optional/open: shipped-vs-spec + any results.
 - 🧭 DECISION (2026-07-01): VIDEO stays on YouTube for now — all of it (Waffle/home header loops
   AND case-study films). DJ declined self-hosting (revisit later if the YouTube branding grates).
   Do NOT re-pitch self-hosting / a video CDN unprompted. Waffle keeps its YT-embed + fade-on-play.
