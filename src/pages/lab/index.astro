@@ -6,7 +6,7 @@ import FloatingHand from '../../components/FloatingHand.astro';
 import ShapePile from '../../components/ShapePile.astro';
 import PatternLibrary from '../../components/PatternLibrary.astro';
 import BrandWorld from '../../components/BrandWorld.astro';
-import CreditsVariants from '../../components/CreditsVariants.astro';
+import CreditsBar from '../../components/CreditsBar.astro';
 
 // === THE LAB (/lab) ===
 // Public-facing Laboratory showcase: proof the studio is ahead of the market.
@@ -114,15 +114,15 @@ const sessionWork = [
       <div class="lab-scrollcue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
 
-    <!-- DECIDE FIRST: the credits bar A/B, pushed to the top of the hub -->
+    <!-- CREDITS BAR: simplified, full-width, ships on every work/case-study page -->
     <section class="lab-sec lab-credits-pick" id="credits">
       <div class="lab-sec-head">
-        <p class="lab-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span>Pick one</p>
+        <p class="lab-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span>On every page</p>
         <h2 class="lab-sec-title split">The project <em>credits bar.</em></h2>
-        <p class="lab-sec-sub fade">Three directions for the credits block that ships on every work + case-study page: the agency, my role, and the other creators. Tell me which and I'll wire it everywhere.</p>
+        <p class="lab-sec-sub fade">Simplified and full-width. The agency, my role, and the other creators, on one black band. This is the version that ships on every work + case-study page.</p>
       </div>
-      <CreditsVariants />
     </section>
+    <CreditsBar />
 
     <!-- BUILT THIS SESSION — quick index of everything new, so it's easy to find -->
     <section class="lab-sec lab-session" id="this-session">

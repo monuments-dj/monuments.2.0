@@ -1,0 +1,44 @@
+---
+// === CreditsBar ===
+// The project credits bar that ships on every work + case-study page. Simplified,
+// FULL-BLEED (edge to edge): a black band with white text, content aligned to the site
+// column. Three plain groups — Agency, my Role, and the other creators. Prop-driven so
+// each page passes its real credits; sample defaults shown for the /lab preview.
+interface Member { name: string; role?: string }
+interface Props { agency?: string; role?: string; team?: Member[] }
+const {
+  agency = 'Art of Visuals',
+  role = 'Creative Director + Designer',
+  team = [
+    { name: 'Kelsey Grant' }, { name: 'Marcus Reed' }, { name: 'Ana Flores' },
+    { name: 'Sam Park' }, { name: 'Riley Chen' },
+  ],
+} = Astro.props;
+const names = team.map((m) => m.name).join(', ');
+---
+<aside class="cbar" aria-label="Project credits">
+  <div class="cbar-inner">
+    <div class="cbar-col"><span class="cbar-k">Agency</span><span class="cbar-v">{agency}</span></div>
+    <div class="cbar-col is-role"><span class="cbar-k">Role</span><span class="cbar-v">{role}</span></div>
+    <div class="cbar-col cbar-with"><span class="cbar-k">With</span><span class="cbar-v">{names}</span></div>
+  </div>
+</aside>
+
+<style>
+  /* full-bleed black band (a direct-child block spans its container = viewport width) */
+  .cbar { width: 100%; background: #0b0c0e; color: #fff; }
+  .cbar-inner {
+    max-width: var(--wrap, 1300px); margin: 0 auto;
+    padding: clamp(22px, 2.6vw, 34px) var(--pad);
+    display: grid; grid-template-columns: auto auto 1fr;
+    gap: clamp(26px, 5vw, 80px); align-items: baseline;
+  }
+  .cbar-col { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .cbar-k { font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(255 255 255 / 0.4); }
+  .cbar-v { font-size: clamp(14px, 1.25vw, 17px); letter-spacing: -0.01em; line-height: 1.35; color: #fff; }
+  .is-role .cbar-v { color: #a8c0dd; font-weight: 500; }
+  .cbar-with .cbar-v { color: rgb(255 255 255 / 0.72); }
+  @media (max-width: 700px) {
+    .cbar-inner { grid-template-columns: 1fr; gap: 18px; }
+  }
+</style>

@@ -1,30 +1,26 @@
 ---
 import Base from '../../layouts/Base.astro';
-import CreditsVariants from '../../components/CreditsVariants.astro';
+import CreditsBar from '../../components/CreditsBar.astro';
 
-// === /lab/credits — CREDITS BAR, 3 variants to A/B ===
-// Dedicated view of the credits-bar directions. The variants themselves live in the
-// shared CreditsVariants component (also embedded at the top of the /lab hub). DJ picks
-// one, then it becomes the credits block wired onto every work + case-study page.
+// === /lab/credits — the credits bar (simplified, full-width) ===
+// The project credits block that ships on every work + case-study page. Lives in the
+// shared CreditsBar component (also embedded on the /lab hub). Prop-driven per page.
 ---
 <Base title="Credits bar — the Lab">
   <main class="crlab">
     <header class="crlab-head">
       <a class="crlab-back" href="/lab">&larr; The Lab</a>
       <h1>Project credits bar</h1>
-      <p>Three directions for the credits block that ships on every work + case-study page. Agency, my role, and the other creators. Pick one and I'll wire it everywhere.</p>
+      <p>Simplified, full-width. The agency, my role, and the other creators, on one black band. Ships on every work + case-study page.</p>
     </header>
-    <div class="crlab-body">
-      <CreditsVariants />
-    </div>
+    <CreditsBar />
   </main>
 </Base>
 
 <style>
   .crlab { background: var(--paper, #f4f4f2); color: var(--ink, #0c0b0a); min-height: 100vh; padding-bottom: clamp(60px, 10vw, 120px); }
-  .crlab-head { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vh, 140px) var(--pad) clamp(30px, 4vw, 50px); }
+  .crlab-head { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vh, 140px) var(--pad) clamp(36px, 5vw, 60px); }
   .crlab-back { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(20 21 25 / 0.55); text-decoration: none; }
   .crlab-head h1 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(32px, 5vw, 60px); letter-spacing: -0.03em; margin: 18px 0 0; }
   .crlab-head p { margin: 16px 0 0; max-width: 56ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; font-weight: 300; color: rgb(20 21 25 / 0.64); }
-  .crlab-body { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(20px, 3vw, 40px) var(--pad) 0; }
 </style>
