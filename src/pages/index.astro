@@ -34,12 +34,29 @@ const testimonials = [
     </div>
     <div class="hero-bottom">
       <div class="hero-bottom-left">
-        <p class="hero-eyebrow">Creative Direction. Integrated Content</p>
-        <p class="hero-desc">I help brands and agencies shout into the void of culture without losing their voice. Part agency partner, part brainstorm machine, part creative mercenary.</p>
-        <a href="/contact" class="hero-cta">Lets Chat</a>
+        <p class="hero-eyebrow">Brand Experience &amp; Experiential Creative Director</p>
+        <p class="hero-desc">As AI floods the feed with cheap content, brands win in the real world. I lead the campaigns and experiences that get people to show up, not just scroll.</p>
+        <a href="/contact" class="hero-cta">Let's chat</a>
       </div>
       <a href="/work" class="hero-see-work">See The Work</a>
     </div>
+  </section>
+
+  <!-- 3-NUMBER BAND: lead with the results, per the hiring-portfolio positioning.
+       All three are backed by case studies on the site (Adorama / AOV / Know Vape). -->
+  <section class="hero-stats fade" aria-label="Career highlights">
+    <a class="hs-stat" href="/lab/art-of-visuals" data-cursor="View">
+      <span class="hs-n">4x</span>
+      <span class="hs-l">agency revenue grown</span>
+    </a>
+    <a class="hs-stat" href="/lab/adorama-music" data-cursor="View">
+      <span class="hs-n">160M+</span>
+      <span class="hs-l">campaign impressions</span>
+    </a>
+    <a class="hs-stat" href="/lab/know-vape" data-cursor="View">
+      <span class="hs-n">Emmy</span>
+      <span class="hs-l">winning film series</span>
+    </a>
   </section>
 
   <section class="trusted fade">
@@ -304,3 +321,46 @@ const testimonials = [
   </script>
 
 </Base>
+
+<style>
+  /* 3-number band under the hero. Full-width band, single centered content column
+     via the shared --wrap/--pad tokens so its edges line up with every other section. */
+  .hero-stats {
+    max-width: var(--wrap, 1300px);
+    margin: 0 auto;
+    padding: clamp(48px, 7vw, 96px) var(--pad);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 4vw, 64px);
+  }
+  /* The band sits on the dark page body (continuing the hero), so text is light. */
+  .hs-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: clamp(20px, 2.2vw, 30px) 0 0;
+    border-top: 1px solid rgb(255 255 255 / 0.16);
+    text-decoration: none;
+    color: #fff;
+    transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .hs-stat:hover { border-color: var(--accent, #6b8cae); transform: translateY(-3px); }
+  .hs-n {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: clamp(44px, 6vw, 92px);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+    color: var(--accent, #6b8cae);
+  }
+  .hs-l {
+    font-size: clamp(13px, 1.1vw, 15px);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    color: rgb(255 255 255 / 0.6);
+  }
+  @media (max-width: 680px) {
+    .hero-stats { grid-template-columns: 1fr; gap: 0; }
+    .hs-stat { padding-bottom: 22px; }
+  }
+</style>

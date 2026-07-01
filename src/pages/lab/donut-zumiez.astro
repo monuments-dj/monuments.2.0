@@ -1,0 +1,269 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import NextProject from '../../components/NextProject.astro';
+
+// === /lab/donut-zumiez ===
+// LIGHTER "Selected Work" case study. In 2023 DJ directed the launch films + merch
+// campaign for a Donut x Zumiez collaboration (Donut = car-culture media brand;
+// Zumiez = skate/streetwear retailer). Playful, streetwear, car-culture energy.
+// Cloned lean from adorama-music.astro: hero, film poster (non-linking), stills
+// gallery + lightbox, short role, credits, next-project. No multi-scene journey.
+//
+// ⚠️ COPY STATUS: needs DJ's specifics (which films, his exact role split, any
+// numbers). No verified hard numbers exist for this one — copy is premise + craft,
+// results-light, DRAFT. Do not invent views/sales/awards. Swap the film poster for a
+// real YouTube URL when DJ provides it (see TODO by the poster).
+
+const G = '/case-studies/donut-zumiez/gallery';
+
+const gallery = [
+  `${G}/dz-01.jpg`, `${G}/dz-02.jpg`, `${G}/dz-03.jpg`, `${G}/dz-04.jpg`,
+  `${G}/product-shirt.jpg`, `${G}/merch.jpg`, `${G}/yt-ptcruiser.jpg`,
+];
+
+const did = [
+  { k: 'Direction', v: 'Directed the launch films — the tone, the shots, the cut.' },
+  { k: 'Concept',   v: 'Landed on car-culture-meets-skate as the through-line the drop could own.' },
+  { k: 'Campaign',  v: 'Tied the films to the merch so the whole thing read as one release.' },
+];
+
+const credits = [
+  { k: 'Brands', v: 'Donut · Zumiez' },
+  { k: 'Role', v: 'Director' },          // ⚠️ confirm exact role
+  { k: 'Scope', v: 'Launch films · Merch campaign' },
+  { k: 'Year', v: '2023' },
+];
+---
+<Base title="Donut x Zumiez, the Lab">
+  <main class="dz">
+    <!-- HERO -->
+    <header class="dz-hero">
+      <div class="dz-hero-frames" aria-hidden="true">
+        <figure class="dz-float dz-float-a" data-drift="7"><img src={`${G}/film-01.jpg`} alt="" loading="eager" decoding="async" /></figure>
+        <figure class="dz-float dz-float-b" data-drift="11"><img src={`${G}/dz-02.jpg`} alt="" loading="eager" decoding="async" /></figure>
+      </div>
+      <div class="dz-hero-inner">
+        <a class="dz-back" href="/lab" data-cursor="Back">&larr; The Lab</a>
+        <p class="dz-eyebrow fade"><span class="dz-mark" aria-hidden="true">+</span>Selected work &middot; Launch films</p>
+        <h1 class="dz-h1 split">Donut <em>&times;</em> Zumiez</h1>
+        <p class="dz-tag fade">Car culture, cut for the skate shop.</p>
+        <p class="dz-meta fade">I directed the launch films for the Donut x Zumiez drop — a collaboration between a car-culture media brand and a streetwear retailer. The films and the merch shipped as one release, built to live natively in feeds.</p>
+      </div>
+      <div class="dz-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+    </header>
+
+    <!-- THE FILM (poster, non-linking until a real URL lands) -->
+    <section class="dz-film">
+      <div class="dz-film-head">
+        <p class="dz-kicker fade"><span class="dz-mark" aria-hidden="true">+</span>The launch film</p>
+        <h2 class="dz-film-title split">Loud, fast, <em>and funny.</em></h2>
+      </div>
+      <figure class="dz-stage fade" data-cursor="Play" aria-label="Donut x Zumiez launch film (poster)">
+        <img src={`${G}/yt-launch.jpg`} alt="Donut x Zumiez launch film" loading="lazy" decoding="async" />
+        <span class="dz-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
+        <figcaption class="dz-film-cap">Launch film &middot; 2023</figcaption>
+      </figure>
+      <!-- ⚠️ TODO: swap this <figure> for a linking <a href={YOUTUBE_URL}> once DJ gives the
+           real watch URLs (there are at least two cuts: yt-launch + yt-ptcruiser). -->
+    </section>
+
+    <!-- STILLS GALLERY -->
+    <section class="dz-gallery">
+      <div class="dz-gal-head">
+        <p class="dz-kicker fade"><span class="dz-mark" aria-hidden="true">+</span>The drop</p>
+        <h2 class="dz-gal-title split">Films <em>and</em> merch, one release.</h2>
+      </div>
+      <div class="dz-grid">
+        {gallery.map((src, i) => (
+          <figure class="dz-cell fade" data-drift={3 + (i % 3) * 2}>
+            <a href={src} data-lb-full={src} data-lb-group="dz" data-cursor="View" aria-label="Open image">
+              <img src={src} alt="" loading="lazy" decoding="async" />
+            </a>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <!-- THE ROLE -->
+    <section class="dz-role">
+      <p class="dz-kicker fade"><span class="dz-mark" aria-hidden="true">+</span>The role</p>
+      <h2 class="dz-role-h split">Directed the films, <em>owned the tone.</em></h2>
+      <p class="dz-role-body fade">A collab like this only works if it feels native to both worlds at once. My job was to find the tone that let a car brand and a skate retailer share the same frame — and then direct films that earned a spot in the feed instead of interrupting it.</p>
+      <ul class="dz-did">
+        {did.map((d) => (
+          <li class="fade"><span class="dz-did-k">{d.k}</span><span class="dz-did-v">{d.v}</span></li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- CREDITS -->
+    <section class="dz-credits">
+      <dl class="dz-cred-list">
+        {credits.map((c) => (
+          <div class="dz-cred fade"><dt>{c.k}</dt><dd>{c.v}</dd></div>
+        ))}
+      </dl>
+    </section>
+
+    <!-- NEXT PROJECT -->
+    <NextProject
+      href="/lab/ac-boise"
+      name="AC Boise"
+      tag="USL League One · Kit reveal"
+      accent="#f26722"
+      poster="/case-studies/ac-boise/gallery/home-01.jpg"
+      photos={["/case-studies/ac-boise/gallery/away-01.jpg", "/case-studies/ac-boise/gallery/keeper-01.jpg"]}
+    />
+
+    <Lightbox />
+  </main>
+  <LabFx />
+</Base>
+
+<style>
+  .dz { --dz-accent: #ff5a3c; background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .dz em { font-style: italic; color: var(--dz-accent); }
+  .dz-mark { color: var(--dz-accent); font-weight: 500; margin-right: 18px; }
+  .dz-eyebrow, .dz-kicker { display: inline-flex; align-items: baseline; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.7); margin: 0; }
+
+  /* ---------- HERO ---------- */
+  .dz-hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding: 16vh 0 12vh; }
+  .dz-hero::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
+    linear-gradient(180deg, rgb(var(--bg-rgb, 13 15 20) / 0.5) 0%, rgb(var(--bg-rgb, 13 15 20) / 0.2) 42%, rgb(var(--bg-rgb, 13 15 20) / 0.86) 100%),
+    radial-gradient(120% 100% at 60% 44%, transparent 32%, rgb(var(--bg-rgb, 13 15 20) / 0.5) 100%); }
+  .dz-hero-inner { position: relative; z-index: 3; max-width: var(--wrap, 1300px); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+  .dz-back { display: inline-block; margin-bottom: clamp(20px, 4vh, 40px); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); text-decoration: none; transition: color 0.25s ease; }
+  .dz-back:hover { color: var(--dz-accent); }
+  .dz-h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(48px, 11vw, 176px); line-height: 0.9; letter-spacing: -0.05em; margin: 14px 0 0; text-transform: uppercase; }
+  .dz-tag { margin: clamp(18px, 2.4vw, 30px) 0 0; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(22px, 3vw, 44px); letter-spacing: -0.02em; color: var(--fg); }
+  .dz-meta { margin: 26px 0 0; max-width: 54ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.66); }
+
+  .dz-hero-frames { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .dz-float { position: absolute; margin: 0; border-radius: 10px; overflow: hidden; box-shadow: 0 40px 90px rgb(0 0 0 / 0.5); will-change: transform; }
+  .dz-float img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dz-float-a { right: 4vw; top: 14vh; width: clamp(280px, 38vw, 600px); aspect-ratio: 16/9; }
+  .dz-float-b { right: 32vw; bottom: 8vh; width: clamp(160px, 18vw, 300px); aspect-ratio: 16/9; }
+  @media (max-width: 900px) { .dz-hero-frames { opacity: 0.3; } .dz-float-b { display: none; } }
+
+  .dz-cue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .dz-cue i { width: 1px; height: 34px; background: linear-gradient(var(--dz-accent), transparent); animation: dzCue 1.8s ease-in-out infinite; transform-origin: top; }
+  @keyframes dzCue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
+
+  /* ---------- shared section frame ---------- */
+  .dz-film, .dz-gallery, .dz-role, .dz-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+
+  /* ---------- THE FILM ---------- */
+  .dz-film-head { max-width: 640px; margin-bottom: clamp(34px, 4vw, 56px); }
+  .dz-film-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(32px, 5vw, 72px); line-height: 1.0; letter-spacing: -0.035em; margin-top: 14px; }
+  .dz-stage { position: relative; display: block; margin: 0; border-radius: 14px; overflow: hidden; aspect-ratio: 16/9; box-shadow: 0 50px 110px rgb(0 0 0 / 0.55); background: #000; }
+  .dz-stage img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.82; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease; }
+  .dz-stage:hover img { transform: scale(1.03); opacity: 0.7; }
+  .dz-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: clamp(74px, 8vw, 104px); height: clamp(74px, 8vw, 104px); border-radius: 50%; background: var(--dz-accent); display: grid; place-items: center; box-shadow: 0 16px 50px rgb(0 0 0 / 0.5); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
+  .dz-stage:hover .dz-play { transform: translate(-50%,-50%) scale(1.08); }
+  .dz-play svg { width: 42%; height: 42%; fill: #1a0d08; margin-left: 6%; }
+  .dz-film-cap { position: absolute; left: 20px; bottom: 18px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(255 255 255 / 0.86); text-shadow: 0 2px 14px rgb(0 0 0 / 0.6); }
+
+  /* ---------- GALLERY ---------- */
+  .dz-gal-head { max-width: 640px; margin-bottom: clamp(40px, 5vw, 72px); }
+  .dz-gal-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin-top: 14px; }
+  .dz-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(14px, 1.6vw, 26px); }
+  .dz-cell { margin: 0; border-radius: 8px; overflow: hidden; background: rgb(var(--fg-rgb) / 0.05); box-shadow: 0 22px 50px rgb(0 0 0 / 0.4); will-change: transform; }
+  .dz-cell a { display: block; }
+  .dz-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .dz-cell:hover img { transform: scale(1.04); }
+  .dz-cell:nth-child(6n+1) { grid-column: span 4; aspect-ratio: 16/9; }
+  .dz-cell:nth-child(6n+2) { grid-column: span 2; aspect-ratio: 4/5; }
+  .dz-cell:nth-child(6n+3) { grid-column: span 2; aspect-ratio: 4/5; }
+  .dz-cell:nth-child(6n+4) { grid-column: span 4; aspect-ratio: 16/9; }
+  .dz-cell:nth-child(6n+5) { grid-column: span 3; aspect-ratio: 4/3; }
+  .dz-cell:nth-child(6n+6) { grid-column: span 3; aspect-ratio: 4/3; }
+
+  /* ---------- ROLE ---------- */
+  .dz-role { max-width: 880px; }
+  .dz-role-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin: 14px 0 0; }
+  .dz-role-body { margin: 28px 0 0; max-width: 62ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.74); }
+  .dz-did { list-style: none; margin: clamp(36px, 4vw, 60px) 0 0; padding: 0; }
+  .dz-did li { display: grid; grid-template-columns: 190px 1fr; gap: clamp(16px, 3vw, 44px); align-items: baseline; padding: clamp(16px, 1.8vw, 22px) 4px; border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .dz-did li:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .dz-did-k { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dz-accent); }
+  .dz-did-v { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(17px, 1.7vw, 24px); line-height: 1.3; letter-spacing: -0.015em; color: var(--fg); }
+
+  /* ---------- CREDITS ---------- */
+  .dz-cred-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 50px); }
+  .dz-cred dt { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .dz-cred dd { margin: 10px 0 0; font-family: 'Inter', sans-serif; font-size: clamp(16px, 1.5vw, 21px); letter-spacing: -0.01em; color: var(--fg); }
+
+  /* ---------- reveals ---------- */
+  .dz :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .dz :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .dz :global(.split.on .wi) { transform: none; }
+  .dz .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .dz .fade.on { opacity: 1; transform: none; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px) {
+    .dz-grid { grid-template-columns: repeat(2, 1fr); }
+    .dz-grid .dz-cell { grid-column: span 1; aspect-ratio: 4/3; }
+    .dz-did li { grid-template-columns: 1fr; gap: 6px; }
+    .dz-cred-list { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dz-cue i { animation: none; }
+    .dz :global(.split .wi) { transform: none !important; transition: none !important; }
+    .dz .fade { opacity: 1 !important; transform: none !important; }
+    .dz-float, .dz-cell { transform: none !important; }
+  }
+</style>
+
+<script>
+  const splitWords = (root: Node, counter: { n: number }) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
+
+  const drifts = [...document.querySelectorAll('[data-drift]')] as HTMLElement[];
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+        const v = Number(el.dataset.drift || 6);
+        el.style.transform = `translateY(${c * -v * 6}px)`;
+      });
+      ticking = false;
+    });
+  };
+  if (!reduced) {
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>

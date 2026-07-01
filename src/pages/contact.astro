@@ -11,6 +11,23 @@ import Base from '../layouts/Base.astro';
       <p class="ip-lead">Building partnerships with agencies and brands in LA and Boise. Come with a brief, a budget range, and what you've tried.</p>
     </header>
 
+    <!-- HIRE-ME KIT: for agency/brand hiring managers (the site's real audience now).
+         ⚠️ TODO(DJ): (1) real LinkedIn URL — placeholder below; (2) host a resume /
+         one-pager PDF at /dj-ramirez.pdf and point "the one-pager" at it (currently a
+         mailto so nothing is broken). Roles line per the locked positioning. -->
+    <section class="hire fade" aria-label="For hiring teams">
+      <p class="hire-kicker">For hiring teams</p>
+      <h2 class="hire-title">Open to senior creative roles.</h2>
+      <p class="hire-lead">Creative Director &middot; Experiential / Brand Experience Lead &middot; ECD track. Based in LA and Boise, building toward the LA mega-event window. If you're staffing a team, let's talk.</p>
+      <div class="hire-actions">
+        <a class="hire-btn hire-btn-solid" href="mailto:monuments.cc@gmail.com?subject=Role%20opportunity%20for%20DJ%20Ramirez">Email me</a>
+        <!-- ⚠️ TODO: replace with DJ's real LinkedIn URL -->
+        <a class="hire-btn" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <!-- ⚠️ TODO: swap mailto for a hosted /dj-ramirez.pdf one-pager when it exists -->
+        <a class="hire-btn" href="mailto:monuments.cc@gmail.com?subject=Requesting%20DJ%20Ramirez%20one-pager">Request the one-pager</a>
+      </div>
+    </section>
+
     <!-- GRID: details + form -->
     <section class="band band-sand">
       <div class="ct-grid">
@@ -70,4 +87,42 @@ import Base from '../layouts/Base.astro';
       });
     })();
   </script>
+
+<style>
+  /* Hire-me kit band. Reads as one light zone with the white hero above it, so it
+     matches the contact page's existing 100px/24px gutters (this page isn't on the
+     --wrap/--pad token system yet) — keeps all section left edges aligned. */
+  .hire {
+    background: var(--white, #fcfcfc);
+    color: #141519;
+    padding: clamp(40px, 6vw, 72px) 100px clamp(56px, 7vw, 96px);
+  }
+  @media (max-width: 720px) { .hire { padding: 48px 24px 64px; } }
+  .hire-kicker {
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent, #ff3b2e); margin: 0 0 16px;
+  }
+  .hire-title {
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(28px, 4vw, 52px); line-height: 1.04; letter-spacing: -0.03em;
+    color: #141519; margin: 0;
+  }
+  .hire-lead {
+    margin: 18px 0 0; max-width: 58ch;
+    font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; font-weight: 300;
+    color: rgb(20 21 25 / 0.66);
+  }
+  .hire-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: clamp(26px, 3vw, 38px); }
+  .hire-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 26px; border-radius: 999px;
+    border: 1px solid rgb(20 21 25 / 0.24);
+    font-size: 13px; letter-spacing: 0.06em; text-decoration: none;
+    color: #141519;
+    transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease, transform 0.3s ease;
+  }
+  .hire-btn:hover { border-color: var(--accent, #6b8cae); transform: translateY(-2px); }
+  .hire-btn-solid { background: var(--accent, #6b8cae); border-color: var(--accent, #6b8cae); color: #fff; }
+  .hire-btn-solid:hover { color: #fff; }
+</style>
 </Base>

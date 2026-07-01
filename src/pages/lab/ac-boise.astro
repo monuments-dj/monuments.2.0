@@ -1,0 +1,272 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import NextProject from '../../components/NextProject.astro';
+
+// === /lab/ac-boise ===
+// LIGHTER "Selected Work" case study. DJ directed the kit-reveal campaign for AC Boise,
+// a USL League One pro soccer club. Hero line: "This kit is Boise." Kit maker = Hummel,
+// brand/creative partner = Against. There was an Instagram reel for the reveal. Bold,
+// civic-proud, sport. Cloned lean from adorama-music.astro: hero, reel poster
+// (non-linking), kit gallery + lightbox, short role, credits, next-project.
+//
+// ⚠️ COPY STATUS: needs DJ's specifics (exact role split, which kits, any numbers, the
+// reel URL). KNOWN FACTS used: club = AC Boise; league = USL League One; kit maker =
+// Hummel; creative/brand partner = Against; line = "This kit is Boise"; format = kit
+// reveal incl. an Instagram reel (id DR04D0ZDOjV). Everything else is DRAFT. Do not
+// invent attendance/views/sales/awards.
+
+const G = '/case-studies/ac-boise/gallery';
+
+const gallery = [
+  `${G}/home-02.jpg`, `${G}/away-01.jpg`, `${G}/keeper-01.jpg`, `${G}/away-02.jpg`,
+  `${G}/yt-keeper.jpg`, `${G}/crest.jpg`,
+];
+
+const did = [
+  { k: 'Direction', v: 'Directed the reveal — how each kit was shot, cut, and dropped.' },
+  { k: 'Concept',   v: '"This kit is Boise": the kit as a piece of the city, not just a jersey.' },
+  { k: 'Partners',  v: 'Worked alongside Hummel on the kits and Against on the brand.' },
+];
+
+const credits = [
+  { k: 'Client', v: 'AC Boise' },
+  { k: 'League', v: 'USL League One' },
+  { k: 'Kit', v: 'Hummel' },
+  { k: 'Brand partner', v: 'Against' },
+  { k: 'Role', v: 'Director' },        // ⚠️ confirm exact role
+  { k: 'Format', v: 'Kit reveal · IG reel' },
+];
+---
+<Base title="AC Boise, the Lab">
+  <main class="acb">
+    <!-- HERO -->
+    <header class="acb-hero">
+      <div class="acb-hero-frames" aria-hidden="true">
+        <figure class="acb-float acb-float-a" data-drift="7"><img src={`${G}/home-01.jpg`} alt="" loading="eager" decoding="async" /></figure>
+        <figure class="acb-float acb-float-b" data-drift="11"><img src={`${G}/away-01.jpg`} alt="" loading="eager" decoding="async" /></figure>
+      </div>
+      <div class="acb-hero-inner">
+        <a class="acb-back" href="/lab" data-cursor="Back">&larr; The Lab</a>
+        <p class="acb-eyebrow fade"><span class="acb-mark" aria-hidden="true">+</span>Selected work &middot; Kit reveal</p>
+        <h1 class="acb-h1 split">This kit is <em>Boise.</em></h1>
+        <p class="acb-tag fade">A jersey drop that belonged to the city.</p>
+        <p class="acb-meta fade">I directed the kit-reveal campaign for AC Boise, a USL League One club, with Hummel on the kits and Against on the brand. The idea was simple: don't reveal a jersey, reveal a piece of the city — then drop it where the city already lives, in the feed.</p>
+      </div>
+      <div class="acb-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+    </header>
+
+    <!-- THE REEL (poster, non-linking until a real URL lands) -->
+    <section class="acb-film">
+      <div class="acb-film-head">
+        <p class="acb-kicker fade"><span class="acb-mark" aria-hidden="true">+</span>The reveal</p>
+        <h2 class="acb-film-title split">Shot like the city <em>wears it.</em></h2>
+      </div>
+      <figure class="acb-stage fade" data-cursor="Play" aria-label="AC Boise kit reveal reel (poster)">
+        <img src={`${G}/yt-away.jpg`} alt="AC Boise kit reveal" loading="lazy" decoding="async" />
+        <span class="acb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
+        <figcaption class="acb-film-cap">Kit reveal &middot; Instagram</figcaption>
+      </figure>
+      <!-- ⚠️ TODO: swap this <figure> for a linking <a> once DJ gives a clean reel/video
+           URL. IG reel id on record: DR04D0ZDOjV (not cleanly embeddable as-is). -->
+    </section>
+
+    <!-- KIT GALLERY -->
+    <section class="acb-gallery">
+      <div class="acb-gal-head">
+        <p class="acb-kicker fade"><span class="acb-mark" aria-hidden="true">+</span>The kits</p>
+        <h2 class="acb-gal-title split">Home, away, <em>keeper.</em></h2>
+      </div>
+      <div class="acb-grid">
+        {gallery.map((src, i) => (
+          <figure class="acb-cell fade" data-drift={3 + (i % 3) * 2}>
+            <a href={src} data-lb-full={src} data-lb-group="acb" data-cursor="View" aria-label="Open image">
+              <img src={src} alt="" loading="lazy" decoding="async" />
+            </a>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <!-- THE ROLE -->
+    <section class="acb-role">
+      <p class="acb-kicker fade"><span class="acb-mark" aria-hidden="true">+</span>The role</p>
+      <h2 class="acb-role-h split">Directed the reveal, <em>owned the idea.</em></h2>
+      <p class="acb-role-body fade">A kit drop can be a product shot, or it can be a moment the whole city wants to share. I directed this one for the second outcome — a reveal built to be posted, screenshotted, and worn, working with Hummel on the kits and Against on the brand.</p>
+      <ul class="acb-did">
+        {did.map((d) => (
+          <li class="fade"><span class="acb-did-k">{d.k}</span><span class="acb-did-v">{d.v}</span></li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- CREDITS -->
+    <section class="acb-credits">
+      <dl class="acb-cred-list">
+        {credits.map((c) => (
+          <div class="acb-cred fade"><dt>{c.k}</dt><dd>{c.v}</dd></div>
+        ))}
+      </dl>
+    </section>
+
+    <!-- NEXT PROJECT -->
+    <NextProject
+      href="/lab/art-of-visuals"
+      name="Art of Visuals"
+      tag="Agency · 4x revenue"
+      accent="#3b7de8"
+      poster="/case-studies/art-of-visuals/gallery/xm5-01.jpg"
+      photos={["/case-studies/art-of-visuals/gallery/xperia-01.jpg", "/case-studies/art-of-visuals/gallery/yt-flowstate.jpg"]}
+    />
+
+    <Lightbox />
+  </main>
+  <LabFx />
+</Base>
+
+<style>
+  .acb { --acb-accent: #f26722; background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .acb em { font-style: italic; color: var(--acb-accent); }
+  .acb-mark { color: var(--acb-accent); font-weight: 500; margin-right: 18px; }
+  .acb-eyebrow, .acb-kicker { display: inline-flex; align-items: baseline; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.7); margin: 0; }
+
+  /* ---------- HERO ---------- */
+  .acb-hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding: 16vh 0 12vh; }
+  .acb-hero::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
+    linear-gradient(180deg, rgb(var(--bg-rgb, 13 15 20) / 0.5) 0%, rgb(var(--bg-rgb, 13 15 20) / 0.2) 42%, rgb(var(--bg-rgb, 13 15 20) / 0.86) 100%),
+    radial-gradient(120% 100% at 60% 44%, transparent 32%, rgb(var(--bg-rgb, 13 15 20) / 0.5) 100%); }
+  .acb-hero-inner { position: relative; z-index: 3; max-width: var(--wrap, 1300px); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+  .acb-back { display: inline-block; margin-bottom: clamp(20px, 4vh, 40px); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); text-decoration: none; transition: color 0.25s ease; }
+  .acb-back:hover { color: var(--acb-accent); }
+  .acb-h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(48px, 11vw, 184px); line-height: 0.9; letter-spacing: -0.05em; margin: 14px 0 0; text-transform: uppercase; }
+  .acb-tag { margin: clamp(18px, 2.4vw, 30px) 0 0; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(22px, 3vw, 44px); letter-spacing: -0.02em; color: var(--fg); }
+  .acb-meta { margin: 26px 0 0; max-width: 54ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.66); }
+
+  .acb-hero-frames { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .acb-float { position: absolute; margin: 0; border-radius: 10px; overflow: hidden; box-shadow: 0 40px 90px rgb(0 0 0 / 0.5); will-change: transform; }
+  .acb-float img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .acb-float-a { right: 4vw; top: 14vh; width: clamp(260px, 34vw, 520px); aspect-ratio: 4/5; }
+  .acb-float-b { right: 30vw; bottom: 8vh; width: clamp(160px, 18vw, 300px); aspect-ratio: 4/5; }
+  @media (max-width: 900px) { .acb-hero-frames { opacity: 0.3; } .acb-float-b { display: none; } }
+
+  .acb-cue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .acb-cue i { width: 1px; height: 34px; background: linear-gradient(var(--acb-accent), transparent); animation: acbCue 1.8s ease-in-out infinite; transform-origin: top; }
+  @keyframes acbCue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
+
+  /* ---------- shared section frame ---------- */
+  .acb-film, .acb-gallery, .acb-role, .acb-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+
+  /* ---------- THE REEL ---------- */
+  .acb-film-head { max-width: 640px; margin-bottom: clamp(34px, 4vw, 56px); }
+  .acb-film-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(32px, 5vw, 72px); line-height: 1.0; letter-spacing: -0.035em; margin-top: 14px; }
+  .acb-stage { position: relative; display: block; margin: 0 auto; max-width: 460px; border-radius: 14px; overflow: hidden; aspect-ratio: 9/16; box-shadow: 0 50px 110px rgb(0 0 0 / 0.55); background: #000; }
+  .acb-stage img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.85; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease; }
+  .acb-stage:hover img { transform: scale(1.03); opacity: 0.72; }
+  .acb-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: clamp(66px, 7vw, 92px); height: clamp(66px, 7vw, 92px); border-radius: 50%; background: var(--acb-accent); display: grid; place-items: center; box-shadow: 0 16px 50px rgb(0 0 0 / 0.5); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
+  .acb-stage:hover .acb-play { transform: translate(-50%,-50%) scale(1.08); }
+  .acb-play svg { width: 42%; height: 42%; fill: #1c0f06; margin-left: 6%; }
+  .acb-film-cap { position: absolute; left: 20px; bottom: 18px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(255 255 255 / 0.86); text-shadow: 0 2px 14px rgb(0 0 0 / 0.6); }
+
+  /* ---------- GALLERY ---------- */
+  .acb-gal-head { max-width: 640px; margin-bottom: clamp(40px, 5vw, 72px); }
+  .acb-gal-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin-top: 14px; }
+  .acb-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(14px, 1.6vw, 26px); }
+  .acb-cell { margin: 0; border-radius: 8px; overflow: hidden; background: rgb(var(--fg-rgb) / 0.05); box-shadow: 0 22px 50px rgb(0 0 0 / 0.4); will-change: transform; }
+  .acb-cell a { display: block; }
+  .acb-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .acb-cell:hover img { transform: scale(1.04); }
+  .acb-cell:nth-child(6n+1) { grid-column: span 4; aspect-ratio: 16/9; }
+  .acb-cell:nth-child(6n+2) { grid-column: span 2; aspect-ratio: 4/5; }
+  .acb-cell:nth-child(6n+3) { grid-column: span 2; aspect-ratio: 4/5; }
+  .acb-cell:nth-child(6n+4) { grid-column: span 4; aspect-ratio: 16/9; }
+  .acb-cell:nth-child(6n+5) { grid-column: span 3; aspect-ratio: 4/3; }
+  .acb-cell:nth-child(6n+6) { grid-column: span 3; aspect-ratio: 4/3; }
+
+  /* ---------- ROLE ---------- */
+  .acb-role { max-width: 880px; }
+  .acb-role-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin: 14px 0 0; }
+  .acb-role-body { margin: 28px 0 0; max-width: 62ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.74); }
+  .acb-did { list-style: none; margin: clamp(36px, 4vw, 60px) 0 0; padding: 0; }
+  .acb-did li { display: grid; grid-template-columns: 190px 1fr; gap: clamp(16px, 3vw, 44px); align-items: baseline; padding: clamp(16px, 1.8vw, 22px) 4px; border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .acb-did li:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .acb-did-k { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--acb-accent); }
+  .acb-did-v { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(17px, 1.7vw, 24px); line-height: 1.3; letter-spacing: -0.015em; color: var(--fg); }
+
+  /* ---------- CREDITS ---------- */
+  .acb-cred-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 50px); }
+  .acb-cred dt { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .acb-cred dd { margin: 10px 0 0; font-family: 'Inter', sans-serif; font-size: clamp(16px, 1.5vw, 21px); letter-spacing: -0.01em; color: var(--fg); }
+
+  /* ---------- reveals ---------- */
+  .acb :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .acb :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .acb :global(.split.on .wi) { transform: none; }
+  .acb .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .acb .fade.on { opacity: 1; transform: none; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px) {
+    .acb-grid { grid-template-columns: repeat(2, 1fr); }
+    .acb-grid .acb-cell { grid-column: span 1; aspect-ratio: 4/3; }
+    .acb-did li { grid-template-columns: 1fr; gap: 6px; }
+    .acb-cred-list { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .acb-cue i { animation: none; }
+    .acb :global(.split .wi) { transform: none !important; transition: none !important; }
+    .acb .fade { opacity: 1 !important; transform: none !important; }
+    .acb-float, .acb-cell { transform: none !important; }
+  }
+</style>
+
+<script>
+  const splitWords = (root: Node, counter: { n: number }) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
+
+  const drifts = [...document.querySelectorAll('[data-drift]')] as HTMLElement[];
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+        const v = Number(el.dataset.drift || 6);
+        el.style.transform = `translateY(${c * -v * 6}px)`;
+      });
+      ticking = false;
+    });
+  };
+  if (!reduced) {
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>

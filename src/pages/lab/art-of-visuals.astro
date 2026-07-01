@@ -1,0 +1,323 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import NextProject from '../../components/NextProject.astro';
+
+// === /lab/art-of-visuals ===
+// FLAGSHIP case study. This is the BUSINESS-IMPACT story, not a single deliverable:
+// DJ led creative at the agency arm of Art of Visuals and the agency grew revenue ~4x.
+// Lead with THAT number. Results-first: the 4x up top, then the how. First-person "I".
+// Dark / premium on the LabFx --bg/--fg ground with an electric-blue accent (the work
+// shown is Sony Xperia + WH-1000XM headphones, flow-state, this-moment). Beats: hero
+// (the number), a stats band, the story/how, the stills gallery + lightbox, the role,
+// credits, next-project hand-off. Patterns cloned from adorama-music.astro.
+//
+// ⚠️ COPY STATUS: the ONLY hard fact stated as fact is "grew agency revenue ~4x."
+// Everything else — exact revenue figures, the year span, DJ's exact title, headcount,
+// the full client roster beyond what the assets clearly show (Sony / Xperia / Stansport),
+// the supporting stat values — is a believable DRAFT and PLACEHOLDER for DJ's real
+// numbers. Do not treat the non-4x stats as verified. Swap them.
+
+const G = '/case-studies/art-of-visuals/gallery';
+
+// Supporting stats. ⚠️ Only "4x" is verified. The rest are PLACEHOLDER — DJ to confirm.
+const stats = [
+  { n: '4x',   l: 'agency revenue growth I helped drive', real: true },
+  { n: '5+',   l: 'brands I led creative for (PLACEHOLDER)', real: false },
+  { n: '100M+', l: 'impressions across the work (PLACEHOLDER)', real: false },
+  { n: '3 yrs', l: 'building + running the agency offer (PLACEHOLDER)', real: false },
+];
+
+// The stills selects → editorial grid → shared Lightbox.
+const gallery = [
+  `${G}/xperia-01.jpg`, `${G}/xm4-01.jpg`, `${G}/xperia-02.jpg`, `${G}/xm3-bts.jpg`,
+  `${G}/yt-thismoment.jpg`, `${G}/stansport-01.jpg`, `${G}/podcast-cover.jpg`,
+];
+
+const did = [
+  { k: 'Strategy',        v: 'Shaped what the agency sold and who it sold to, then packaged it into an offer brands actually bought.' },
+  { k: 'Creative Direction', v: 'Owned the creative across the roster, from first pitch to final delivery.' },
+  { k: 'New Business',    v: 'Turned the community and the reel into a pipeline — the growth engine behind the 4x.' },
+  { k: 'Client Lead',    v: 'The point of contact brands trusted, which is what turned one project into the next.' },
+];
+
+const credits = [
+  { k: 'Company', v: 'Art of Visuals' },
+  { k: 'Role', v: 'Creative Director' },       // ⚠️ confirm exact title
+  { k: 'Clients', v: 'Sony · Xperia · Stansport' }, // ⚠️ expand with real roster
+  { k: 'Scope', v: 'Strategy · Creative · New business' },
+  { k: 'Outcome', v: '~4x agency revenue' },
+  { k: 'Years', v: '2019–2022' },              // ⚠️ confirm span
+];
+---
+<Base title="Art of Visuals, the Lab">
+  <main class="aov">
+    <!-- HERO -->
+    <header class="aov-hero">
+      <div class="aov-hero-frames" aria-hidden="true">
+        <figure class="aov-float aov-float-a" data-drift="7"><img src={`${G}/xm5-01.jpg`} alt="" loading="eager" decoding="async" /></figure>
+        <figure class="aov-float aov-float-b" data-drift="11"><img src={`${G}/xperia-01.jpg`} alt="" loading="eager" decoding="async" /></figure>
+      </div>
+      <div class="aov-hero-inner">
+        <a class="aov-back" href="/lab" data-cursor="Back">&larr; The Lab</a>
+        <p class="aov-eyebrow fade"><span class="aov-mark" aria-hidden="true">+</span>Case study &middot; Agency growth</p>
+        <h1 class="aov-h1 split">I grew the agency <em>4x.</em></h1>
+        <p class="aov-tag fade">Not one campaign. A book of business.</p>
+        <p class="aov-meta fade">At Art of Visuals I led creative as the agency scaled its revenue roughly four times over. This is the story under that number: the offer we built, the brands we won, and the work — Sony, Xperia, and more — that made it repeatable.</p>
+      </div>
+      <div class="aov-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+    </header>
+
+    <!-- RESULTS (leads, per hiring-portfolio rule) -->
+    <section class="aov-results">
+      <p class="aov-kicker fade"><span class="aov-mark" aria-hidden="true">+</span>The number</p>
+      <div class="aov-stats">
+        {stats.map((s) => (
+          <div class={`aov-stat fade ${s.real ? 'is-hero' : ''}`}><span class="aov-stat-n">{s.n}</span><span class="aov-stat-l">{s.l}</span></div>
+        ))}
+      </div>
+      <p class="aov-result-note fade">Growth like that is not a lucky project. It is an offer brands keep buying, a reel that keeps opening doors, and creative good enough that the first job turns into the next one.</p>
+    </section>
+
+    <!-- THE STORY / HOW -->
+    <section class="aov-story">
+      <div class="aov-story-head">
+        <p class="aov-kicker fade"><span class="aov-mark" aria-hidden="true">+</span>How it happened</p>
+        <h2 class="aov-story-title split">A community, turned into a <em>creative business.</em></h2>
+        <p class="aov-story-sub fade">Art of Visuals had reach and a real audience. My job was to turn that into work brands would pay for — and then make it grow.</p>
+      </div>
+      <ol class="aov-steps">
+        <li class="aov-step fade">
+          <span class="aov-step-n">01</span>
+          <h3 class="aov-step-t split">Built the offer.</h3>
+          <p class="aov-step-d">I shaped what the agency actually sold — strategy plus production a brand could trust — and made it something a marketing lead could say yes to fast.</p>
+        </li>
+        <li class="aov-step fade">
+          <span class="aov-step-n">02</span>
+          <h3 class="aov-step-t split">Won the brands.</h3>
+          <p class="aov-step-d">Sony, Xperia, and others. I led the pitches and directed the work, so the reel got stronger every quarter and the pipeline compounded.</p>
+        </li>
+        <li class="aov-step fade">
+          <span class="aov-step-n">03</span>
+          <h3 class="aov-step-t split">Made it repeat.</h3>
+          <p class="aov-step-d">Being the client's point of contact meant one project became three. That retention — not any single hit — is what multiplied the revenue.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- STILLS GALLERY -->
+    <section class="aov-gallery">
+      <div class="aov-gal-head">
+        <p class="aov-kicker fade"><span class="aov-mark" aria-hidden="true">+</span>The work</p>
+        <h2 class="aov-gal-title split">The reel that <em>sold the room.</em></h2>
+        <p class="aov-gal-sub fade">A slice of the campaigns the agency shipped while it scaled. Sony headphones, Xperia, and the branded content in between.</p>
+      </div>
+      <div class="aov-grid">
+        {gallery.map((src, i) => (
+          <figure class="aov-cell fade" data-drift={3 + (i % 3) * 2}>
+            <a href={src} data-lb-full={src} data-lb-group="aov" data-cursor="View" aria-label="Open image">
+              <img src={src} alt="" loading="lazy" decoding="async" />
+            </a>
+          </figure>
+        ))}
+      </div>
+      <!-- ⚠️ TODO: yt-flowstate.jpg / yt-thismoment.jpg are YouTube poster stills. If DJ
+           supplies the real watch URLs, promote one to a linking "film" tile like adorama. -->
+    </section>
+
+    <!-- THE ROLE -->
+    <section class="aov-role">
+      <p class="aov-kicker fade"><span class="aov-mark" aria-hidden="true">+</span>The role</p>
+      <h2 class="aov-role-h split">Part creative director, part <em>growth engine.</em></h2>
+      <p class="aov-role-body fade">I was not just making the work — I was building the business that made the work possible. Strategy, the pitch, the shoot, and the relationship after, all in one seat. That's the range I bring to an agency: creative that stands up, and a nose for what turns it into revenue.</p>
+      <ul class="aov-did">
+        {did.map((d) => (
+          <li class="fade"><span class="aov-did-k">{d.k}</span><span class="aov-did-v">{d.v}</span></li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- CREDITS -->
+    <section class="aov-credits">
+      <dl class="aov-cred-list">
+        {credits.map((c) => (
+          <div class="aov-cred fade"><dt>{c.k}</dt><dd>{c.v}</dd></div>
+        ))}
+      </dl>
+    </section>
+
+    <!-- NEXT PROJECT -->
+    <NextProject
+      href="/lab/buck-the-quo"
+      name="Buck the Quo"
+      tag="Albertson Foundation · Experiential"
+      accent="#ec3a7d"
+      poster="/case-studies/buck-the-quo/gallery/future-sign.jpg"
+      photos={["/case-studies/buck-the-quo/gallery/container-front.jpg", "/case-studies/buck-the-quo/gallery/saddle.jpg"]}
+    />
+
+    <Lightbox />
+  </main>
+  <LabFx />
+</Base>
+
+<style>
+  .aov { --aov-accent: #3b7de8; background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .aov em { font-style: italic; color: var(--aov-accent); }
+  .aov-mark { color: var(--aov-accent); font-weight: 500; margin-right: 18px; }
+  .aov-eyebrow, .aov-kicker { display: inline-flex; align-items: baseline; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.7); margin: 0; }
+
+  /* ---------- HERO ---------- */
+  .aov-hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding: 16vh 0 12vh; }
+  .aov-hero::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
+    linear-gradient(180deg, rgb(var(--bg-rgb, 13 15 20) / 0.5) 0%, rgb(var(--bg-rgb, 13 15 20) / 0.2) 42%, rgb(var(--bg-rgb, 13 15 20) / 0.86) 100%),
+    radial-gradient(120% 100% at 60% 44%, transparent 32%, rgb(var(--bg-rgb, 13 15 20) / 0.5) 100%); }
+  .aov-hero-inner { position: relative; z-index: 3; max-width: var(--wrap, 1300px); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+  .aov-back { display: inline-block; margin-bottom: clamp(20px, 4vh, 40px); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); text-decoration: none; transition: color 0.25s ease; }
+  .aov-back:hover { color: var(--aov-accent); }
+  .aov-h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(52px, 12vw, 200px); line-height: 0.9; letter-spacing: -0.05em; margin: 14px 0 0; text-transform: uppercase; }
+  .aov-tag { margin: clamp(18px, 2.4vw, 30px) 0 0; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(22px, 3vw, 44px); letter-spacing: -0.02em; color: var(--fg); }
+  .aov-meta { margin: 26px 0 0; max-width: 54ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.66); }
+
+  .aov-hero-frames { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .aov-float { position: absolute; margin: 0; border-radius: 10px; overflow: hidden; box-shadow: 0 40px 90px rgb(0 0 0 / 0.5); will-change: transform; }
+  .aov-float img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .aov-float-a { right: 4vw; top: 14vh; width: clamp(280px, 38vw, 600px); aspect-ratio: 16/9; }
+  .aov-float-b { right: 32vw; bottom: 8vh; width: clamp(160px, 18vw, 300px); aspect-ratio: 16/9; }
+  @media (max-width: 900px) { .aov-hero-frames { opacity: 0.3; } .aov-float-b { display: none; } }
+
+  .aov-cue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .aov-cue i { width: 1px; height: 34px; background: linear-gradient(var(--aov-accent), transparent); animation: aovCue 1.8s ease-in-out infinite; transform-origin: top; }
+  @keyframes aovCue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
+
+  /* ---------- shared section frame ---------- */
+  .aov-results, .aov-story, .aov-gallery, .aov-role, .aov-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+
+  /* ---------- RESULTS ---------- */
+  .aov-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(18px, 2.5vw, 40px); margin: clamp(34px, 4vw, 56px) 0 0; border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .aov-stat { padding: clamp(30px, 4vw, 52px) 0 0; }
+  .aov-stat-n { display: block; font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(38px, 5vw, 80px); letter-spacing: -0.04em; line-height: 1; color: rgb(var(--fg-rgb) / 0.85); }
+  .aov-stat.is-hero .aov-stat-n { color: var(--aov-accent); font-size: clamp(48px, 6.5vw, 104px); }
+  .aov-stat-l { display: block; margin-top: 12px; max-width: 22ch; font-size: 13px; line-height: 1.5; color: rgb(var(--fg-rgb) / 0.6); }
+  .aov-result-note { margin: clamp(40px, 5vw, 64px) 0 0; max-width: 60ch; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(19px, 2vw, 28px); line-height: 1.4; letter-spacing: -0.015em; color: var(--fg); }
+
+  /* ---------- STORY / HOW ---------- */
+  .aov-story-head { max-width: 680px; margin-bottom: clamp(44px, 6vw, 88px); }
+  .aov-story-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(32px, 5vw, 72px); line-height: 1.0; letter-spacing: -0.035em; margin: 14px 0 0; }
+  .aov-story-sub { margin: 24px 0 0; max-width: 56ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.72; font-weight: 300; color: rgb(var(--fg-rgb) / 0.7); }
+  .aov-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 4vw, 60px); }
+  .aov-step { border-top: 1px solid rgb(var(--fg-rgb) / 0.14); padding-top: clamp(22px, 2.4vw, 32px); }
+  .aov-step-n { font-size: 13px; letter-spacing: 0.16em; color: var(--aov-accent); font-variant-numeric: tabular-nums; }
+  .aov-step-t { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(22px, 2.6vw, 36px); line-height: 1.1; letter-spacing: -0.025em; margin: 14px 0 0; }
+  .aov-step-d { margin: 14px 0 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.72); }
+
+  /* ---------- GALLERY ---------- */
+  .aov-gal-head { max-width: 640px; margin-bottom: clamp(40px, 5vw, 72px); }
+  .aov-gal-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin-top: 14px; }
+  .aov-gal-sub { margin: 22px 0 0; max-width: 54ch; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.66); }
+  .aov-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(14px, 1.6vw, 26px); margin-top: clamp(30px, 4vw, 52px); }
+  .aov-cell { margin: 0; border-radius: 8px; overflow: hidden; background: rgb(var(--fg-rgb) / 0.05); box-shadow: 0 22px 50px rgb(0 0 0 / 0.4); will-change: transform; }
+  .aov-cell a { display: block; }
+  .aov-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .aov-cell:hover img { transform: scale(1.04); }
+  /* repeating 6-col rhythm */
+  .aov-cell:nth-child(6n+1) { grid-column: span 4; aspect-ratio: 16/9; }
+  .aov-cell:nth-child(6n+2) { grid-column: span 2; aspect-ratio: 4/5; }
+  .aov-cell:nth-child(6n+3) { grid-column: span 2; aspect-ratio: 4/5; }
+  .aov-cell:nth-child(6n+4) { grid-column: span 4; aspect-ratio: 16/9; }
+  .aov-cell:nth-child(6n+5) { grid-column: span 3; aspect-ratio: 4/3; }
+  .aov-cell:nth-child(6n+6) { grid-column: span 3; aspect-ratio: 4/3; }
+
+  /* ---------- ROLE ---------- */
+  .aov-role { max-width: 880px; }
+  .aov-role-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin: 14px 0 0; }
+  .aov-role-body { margin: 28px 0 0; max-width: 62ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.74); }
+  .aov-did { list-style: none; margin: clamp(36px, 4vw, 60px) 0 0; padding: 0; }
+  .aov-did li { display: grid; grid-template-columns: 190px 1fr; gap: clamp(16px, 3vw, 44px); align-items: baseline; padding: clamp(16px, 1.8vw, 22px) 4px; border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .aov-did li:last-child { border-bottom: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .aov-did-k { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--aov-accent); }
+  .aov-did-v { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(17px, 1.7vw, 24px); line-height: 1.3; letter-spacing: -0.015em; color: var(--fg); }
+
+  /* ---------- CREDITS ---------- */
+  .aov-cred-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 50px); }
+  .aov-cred dt { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .aov-cred dd { margin: 10px 0 0; font-family: 'Inter', sans-serif; font-size: clamp(16px, 1.5vw, 21px); letter-spacing: -0.01em; color: var(--fg); }
+
+  /* ---------- reveals ---------- */
+  .aov :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .aov :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .aov :global(.split.on .wi) { transform: none; }
+  .aov .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .aov .fade.on { opacity: 1; transform: none; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px) {
+    .aov-steps { grid-template-columns: 1fr; gap: 0; }
+    .aov-step { padding-bottom: 22px; }
+    .aov-grid { grid-template-columns: repeat(2, 1fr); }
+    .aov-grid .aov-cell { grid-column: span 1; aspect-ratio: 4/3; }
+    .aov-stats { grid-template-columns: repeat(2, 1fr); }
+    .aov-did li { grid-template-columns: 1fr; gap: 6px; }
+    .aov-cred-list { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .aov-cue i { animation: none; }
+    .aov :global(.split .wi) { transform: none !important; transition: none !important; }
+    .aov .fade { opacity: 1 !important; transform: none !important; }
+    .aov-float, .aov-cell { transform: none !important; }
+  }
+</style>
+
+<script>
+  // word splitter (shared pattern with the other lab pages)
+  const splitWords = (root: Node, counter: { n: number }) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
+
+  // parallax drift on the floating frames + gallery media
+  const drifts = [...document.querySelectorAll('[data-drift]')] as HTMLElement[];
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+        const v = Number(el.dataset.drift || 6);
+        el.style.transform = `translateY(${c * -v * 6}px)`;
+      });
+      ticking = false;
+    });
+  };
+  if (!reduced) {
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>

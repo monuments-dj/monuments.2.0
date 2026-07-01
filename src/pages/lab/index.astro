@@ -20,6 +20,7 @@ const v2 = [
   { href: '/lab/know-vape',     vs: null, t: 'Know Vape',     tag: 'Emmy series',  prev: '/case-studies/know-vape/gallery/hero.jpg',           d: "Emmy-winning anti-vaping film series for Idaho Public Television. Big Tobacco vs Idaho teens, told straight." },
   { href: '/lab/buck-the-quo',  vs: null, t: 'Buck the Quo',  tag: 'Experiential', prev: '/case-studies/buck-the-quo/gallery/future-sign.jpg', d: "Experiential campaign for Idaho teens. The More In Store activation, 18,000 conversations, top Rocky Awards." },
   { href: '/lab/adorama-music', vs: null, t: 'Adorama Music', tag: 'Brand film',   prev: '/case-studies/adorama-music/gallery/am-01.jpg',      d: "The film that launched Adorama Music. Garage to studio to stage, 160M impressions, a Shorty finalist." },
+  { href: '/lab/art-of-visuals', vs: null, t: 'Art of Visuals', tag: 'Agency growth', prev: '/case-studies/art-of-visuals/gallery/xm5-01.jpg',   d: "The business story: I led creative as the agency grew revenue ~4x. Sony, Xperia, the work that scaled it." },
   { href: '/lab/home',       vs: '/',                t: 'Homepage',       tag: 'Tilt hero',      prev: '/case-studies/sony-this-moment/gallery/tm-01.jpg', d: "SIGHT SOUND EMOTION tilt hero, the red floating hand, a scroll-velocity ticker, parallax work scenes." },
   { href: '/lab/work',       vs: '/work',            t: 'Work index',     tag: 'Portal scroll',  prev: '/case-studies/blue-cross/gallery/bci-02.jpg',       d: "Horizontal-scroll gallery with a cursor-driven preview index. The work takes over the viewport." },
   { href: '/lab/blue-cross', vs: '/work/blue-cross', t: 'Case study',     tag: 'Editorial',      prev: '/case-studies/blue-cross/gallery/bci-10.jpg',       d: "Editorial chapters, a pinned insight scene, and a portal hand-off into the next project." },
@@ -49,6 +50,15 @@ const blocks = [
   { demo: 'hand',   t: 'Floating hand',     d: "The red signature mark. Idle-bobs, then deploys and parallaxes as it enters view. The studio's tell." },
   { demo: 'pile',   t: 'Shape pile',        d: "Brand-colored shapes that fall and pile up at a section floor as it scrolls in. Playful, never a game." },
   { demo: 'theme',  t: 'Theme selector',    d: "Eight presets reskin the whole page live from tokens, each one contrast-checked by a color tool. Try the swatches in the corner; nothing is hardcoded." },
+];
+
+// Selected work: lighter case studies for range (not flagship deep-dives). New
+// hiring-portfolio entries live here so the reel doesn't turn into a dump.
+const selectedWork = [
+  { href: '/lab/donut-zumiez', t: 'Donut × Zumiez', tag: 'Launch films', d: "2023 collab drop. I directed the launch films for a car-culture brand and a streetwear retailer, films + merch as one release." },
+  { href: '/lab/ac-boise', t: 'AC Boise', tag: 'Kit reveal', d: "“This kit is Boise.” A USL League One kit reveal with Hummel and Against, directed to be posted and worn." },
+  { href: '/work/sony-this-moment', t: 'Sony · This Moment', tag: 'Launch film', d: "One of the Sony launch campaigns. The live case study on the production site." },
+  { href: '/work/sony-flow-state', t: 'Sony · Flow State', tag: 'Launch film', d: "Sony flow-state launch work. Live case study on the production site." },
 ];
 
 // The older experiments: kept as a quieter "also in progress" row.
@@ -160,6 +170,27 @@ const sessionWork = [
 
       <!-- shared cursor-following preview: image fades in on tile hover -->
       <div class="lab-prev" aria-hidden="true"><img alt="" decoding="async" /></div>
+    </section>
+
+    <!-- SELECTED WORK: lighter case studies for range -->
+    <section class="lab-sec lab-selected" id="selected-work">
+      <div class="lab-sec-head">
+        <p class="lab-kicker fade"><span class="lab-kicker-mark" aria-hidden="true">+</span>Selected work</p>
+        <h2 class="lab-sec-title split">More of the <em>range.</em></h2>
+        <p class="lab-sec-sub fade">Shorter cuts, not deep-dives. Enough to show the reach across sport, streetwear, and brand.</p>
+      </div>
+      <ul class="lab-list">
+        {selectedWork.map((p, i) => (
+          <li class="lab-row fade">
+            <span class="lab-row-n">{String(i + 1).padStart(2, '0')}</span>
+            <a class="lab-row-t" href={p.href} data-cursor="View">
+              {p.t}
+              <svg class="lab-stroke sm" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8 C60 4, 150 10, 296 5" /></svg>
+            </a>
+            <span class="lab-row-d"><span class="lab-session-tag">{p.tag}</span>{p.d}</span>
+          </li>
+        ))}
+      </ul>
     </section>
 
     <!-- BUILDING BLOCKS: the toys -->
