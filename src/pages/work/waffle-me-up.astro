@@ -131,16 +131,27 @@ const tags = ['Brand Refresh'];
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       var shown = false;
       function reveal() { if (!shown) { shown = true; wrap.classList.add('is-playing'); } }
-      var fb = setTimeout(reveal, 2600);
+      // Reveal ONLY when the player is genuinely PLAYING (state 1), via the event or a
+      // short state-poll backup. No blind timer — if it never plays, the poster stays
+      // (never the black YouTube loading state).
       var tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
       document.head.appendChild(tag);
       window.onYouTubeIframeAPIReady = function () {
         try {
-          new YT.Player('wmuHeaderVideo', {
-            events: { onStateChange: function (e) { if (e.data === 1) { clearTimeout(fb); reveal(); } } }
+          var p = new YT.Player('wmuHeaderVideo', {
+            events: {
+              onReady: function () { try { p.playVideo(); } catch (_) {} },
+              onStateChange: function (e) { if (e.data === 1) reveal(); }
+            }
           });
-        } catch (_) { reveal(); }
+          var tries = 0;
+          var iv = setInterval(function () {
+            tries++;
+            try { if (p.getPlayerState && p.getPlayerState() === 1) reveal(); } catch (_) {}
+            if (shown || tries > 40) clearInterval(iv); // give up after ~12s (poster stays)
+          }, 300);
+        } catch (_) {}
       };
     })();
   </script>
