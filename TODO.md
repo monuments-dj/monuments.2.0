@@ -26,6 +26,10 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
   result, /lab/* links) + new Experiential filter + featured-pinned shuffle; home Recent-Work slider
   leads with the 6 case studies. Live monuments.cc WordPress UNTOUCHED. Placeholders still flagged
   in-file and to fill live: AOV stat numbers, Donut/AC Boise video URLs, LinkedIn URL + one-pager PDF.
+- ✅ WAFFLE ME UP header video: DJ's "WEB HEADER" YouTube loop (LI496YXDIRE) now runs as the muted
+  autoplay hero background (poster holds until PLAYING, then fades in — no black load flash). Caught +
+  fixed a PROD-ONLY black flash (blind reveal timer) by revealing only on the real PLAYING state;
+  verified on the live Vercel deploy in a real browser. Reusable pattern for header loops elsewhere.
 
 **⛔ ROADBLOCKS / needs DJ (all flagged as in-file `⚠️ TODO` comments):**
 1. AOV: only "4x" is real — the other 3 stat values (5+, 100M+, 3yrs) + role title + year span
