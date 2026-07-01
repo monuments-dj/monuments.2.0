@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction E · Poster — Home</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blk:#0B0B0B; --wht:#F5F4F0; --org:#FF4D00; --dim:#8b8b88; --line:#242423;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,42px);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--blk);color:var(--wht);font:400 17px/1.6 'Satoshi',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.disp{font-family:'Clash Display',sans-serif}
+.lbl{font:700 11px/1 'Satoshi';letter-spacing:.2em;text-transform:uppercase}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;inset:0 0 auto 0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:20px var(--pad);mix-blend-mode:difference}
+nav .m{font-family:'Clash Display';font-weight:700;font-size:20px;letter-spacing:.01em;text-transform:uppercase}
+nav .m em{font-style:normal;color:var(--org)}
+nav .links{display:flex;gap:26px}
+nav .links a{font:700 11px 'Satoshi';letter-spacing:.2em;text-transform:uppercase}
+
+/* hero: giant type + photo collage */
+.hero{min-height:100svh;position:relative;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding-top:10vh}
+.hero .stack{position:absolute;inset:0;pointer-events:none}
+.hero .stack img{position:absolute;object-fit:cover;box-shadow:0 30px 80px rgba(0,0,0,.5);will-change:transform}
+.hero .stack .s1{width:24vw;height:32vw;right:6%;top:8%;transform:rotate(3deg)}
+.hero .stack .s2{width:17vw;height:22vw;right:31%;bottom:22%;transform:rotate(-5deg)}
+.hero .stack .s3{width:13vw;height:17vw;left:33%;top:6%;transform:rotate(2deg)}
+.hero h1{position:relative;z-index:1;font-family:'Clash Display';font-weight:700;font-size:clamp(58px,11.4vw,168px);line-height:.9;letter-spacing:-.03em;text-transform:uppercase}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln>span{display:block;transform:translateY(112%);animation:rise .9s cubic-bezier(.22,1,.36,1) forwards}
+.hero h1 .ln:nth-child(2)>span{animation-delay:.1s}
+.hero h1 .ln:nth-child(3)>span{animation-delay:.2s}
+.hero h1 em{font-style:normal;color:var(--org)}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .sub{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:end;gap:40px;margin-top:6vh;flex-wrap:wrap}
+.hero .sub p{max-width:44ch;color:#cfcfcb}
+.hero .tag{color:var(--org)}
+
+/* image marquee */
+.imarq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:16px 0;background:#101010}
+.imarq .track{display:flex;gap:14px;width:max-content;animation:mx 34s linear infinite}
+.imarq img{height:150px;width:auto;display:block}
+.imarq:hover .track{animation-play-state:paused}
+@keyframes mx{to{transform:translateX(-50%)}}
+
+/* poster grid */
+.workhead{padding:100px 0 44px;display:flex;justify-content:space-between;align-items:baseline}
+h2.disp{font-weight:700;font-size:clamp(36px,5vw,72px);letter-spacing:-.02em;text-transform:uppercase}
+h2.disp em{font-style:normal;color:var(--org)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px;padding-bottom:60px}
+.poster{position:relative;overflow:hidden;background:#151515;display:block}
+.poster img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.poster:hover img{transform:scale(1.06)}
+.poster .band{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:var(--blk)}
+.poster:hover .band{background:var(--org);color:var(--blk)}
+.poster .band .t{font-family:'Clash Display';font-weight:600;font-size:clamp(18px,1.8vw,26px);text-transform:uppercase;letter-spacing:-.01em}
+.poster .band .f{font:700 10px 'Satoshi';letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.poster:hover .band .f{color:var(--blk)}
+.p1{grid-column:1/8;height:66vh}
+.p2{grid-column:8/13;height:66vh}
+.p3{grid-column:1/6;height:56vh}
+.p4{grid-column:6/13;height:56vh}
+.poster .no{position:absolute;top:14px;left:18px;font:700 11px 'Satoshi';letter-spacing:.18em;color:var(--wht);background:rgba(11,11,11,.6);padding:6px 10px}
+
+/* stats: orange band */
+.band-stats{background:var(--org);color:var(--blk);padding:9vh 0}
+.band-stats .row{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+.band-stats .c .n{font-family:'Clash Display';font-weight:700;font-size:clamp(40px,5.6vw,84px);letter-spacing:-.03em;line-height:1}
+.band-stats .c .t{font:700 11px 'Satoshi';letter-spacing:.2em;text-transform:uppercase;margin-top:8px;color:rgba(11,11,11,.7)}
+
+/* cta */
+.cta{padding:17vh 0;position:relative;overflow:hidden}
+.cta .big{font-family:'Clash Display';font-weight:700;font-size:clamp(52px,10vw,150px);line-height:.9;letter-spacing:-.03em;text-transform:uppercase}
+.cta .big em{font-style:normal;color:var(--org)}
+.cta .row{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-top:6vh;flex-wrap:wrap}
+.cta .row p{max-width:40ch;color:#cfcfcb}
+.pill{display:inline-flex;padding:20px 36px;background:var(--wht);color:var(--blk);border-radius:99px;font:700 12px 'Satoshi';letter-spacing:.2em;text-transform:uppercase;transition:background .3s;will-change:transform}
+.pill:hover{background:var(--org)}
+footer{border-top:1px solid var(--line);padding:30px 0}
+footer .row{display:flex;justify-content:space-between;color:var(--dim);flex-wrap:wrap;gap:12px}
+
+.rv{opacity:0;transform:translateY(38px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:860px){
+  .hero .stack .s1{width:44vw;height:56vw}
+  .hero .stack .s2,.hero .stack .s3{display:none}
+  .p1,.p2,.p3,.p4{grid-column:1/13;height:46vh}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero h1 .ln>span{transform:none}.rv{opacity:1;transform:none}.imarq .track{animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="m" href="index.html">Monuments<em>*</em></a>
+  <div class="links"><a href="#work">Work</a><a href="e-about.html">About</a><a href="mailto:monuments.cc@gmail.com">Contact</a></div>
+</nav>
+
+<header class="hero wrap">
+  <div class="stack" aria-hidden="true">
+    <img class="s1 flt" src="/gallery/full/p-067.jpg" alt="">
+    <img class="s2 flt" src="/gallery/full/p-029.jpg" alt="">
+    <img class="s3 flt" src="/gallery/full/p-008.jpg" alt="">
+  </div>
+  <h1>
+    <span class="ln"><span>Moments</span></span>
+    <span class="ln"><span>people <em>show</em></span></span>
+    <span class="ln"><span><em>up</em> for.</span></span>
+  </h1>
+  <div class="sub">
+    <p>As AI floods the feed with cheap content, brands win in the real world. I lead the campaigns and experiences that get people to show up, not just scroll.</p>
+    <span class="tag lbl">DJ Ramirez · Brand Experience &amp; Experiential CD</span>
+  </div>
+</header>
+
+<div class="imarq" aria-hidden="true">
+  <div class="track">
+    <img src="/gallery/full/p-001.jpg" alt=""><img src="/gallery/full/p-021.jpg" alt=""><img src="/gallery/full/p-043.jpg" alt=""><img src="/gallery/full/p-057.jpg" alt=""><img src="/gallery/full/p-069.jpg" alt=""><img src="/gallery/full/p-017.jpg" alt=""><img src="/gallery/full/p-090.jpg" alt=""><img src="/gallery/full/p-038.jpg" alt="">
+    <img src="/gallery/full/p-001.jpg" alt=""><img src="/gallery/full/p-021.jpg" alt=""><img src="/gallery/full/p-043.jpg" alt=""><img src="/gallery/full/p-057.jpg" alt=""><img src="/gallery/full/p-069.jpg" alt=""><img src="/gallery/full/p-017.jpg" alt=""><img src="/gallery/full/p-090.jpg" alt=""><img src="/gallery/full/p-038.jpg" alt="">
+  </div>
+</div>
+
+<section id="work" class="wrap">
+  <div class="workhead">
+    <h2 class="disp rv">The <em>work</em></h2>
+    <span class="lbl rv" style="color:var(--dim)">04 selected · full index on /work</span>
+  </div>
+  <div class="grid">
+    <a class="poster p1 rv" href="#">
+      <img src="/gallery/full/p-061.jpg" alt="Art of Visuals">
+      <span class="no">01</span>
+      <div class="band"><span class="t">Art of Visuals</span><span class="f">Brand campaign · 4x</span></div>
+    </a>
+    <a class="poster p2 rv" href="#">
+      <img src="/case-studies/blue-cross/bc-2.jpg" alt="Blue Cross of Idaho">
+      <span class="no">02</span>
+      <div class="band"><span class="t">Blue Cross</span><span class="f">Documentary</span></div>
+    </a>
+    <a class="poster p3 rv" href="#">
+      <img src="/case-studies/turnstile/products/prod-01.jpg" alt="Turnstile Audio">
+      <span class="no">03</span>
+      <div class="band"><span class="t">Turnstile</span><span class="f">Brand + product</span></div>
+    </a>
+    <a class="poster p4 rv" href="#">
+      <img src="/gallery/full/p-013.jpg" alt="Adorama Music">
+      <span class="no">04</span>
+      <div class="band"><span class="t">Adorama Music</span><span class="f">Content series</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="band-stats">
+  <div class="wrap row">
+    <div class="c rv"><div class="n">4x</div><div class="t">Agency revenue grown</div></div>
+    <div class="c rv"><div class="n">160M+</div><div class="t">Campaign impressions</div></div>
+    <div class="c rv"><div class="n">Emmy</div><div class="t">Winning film series</div></div>
+    <div class="c rv"><div class="n">50</div><div class="t">Contractors led</div></div>
+  </div>
+</section>
+
+<section class="cta wrap">
+  <div class="big rv">Tell me<br>what you're<br><em>building.</em></div>
+  <div class="row">
+    <p class="rv">One conversation, no deck required. Big campaign or a single shoot, the thinking comes with it.</p>
+    <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row lbl">
+    <span>Monuments © 2026</span>
+    <span id="clock">LA —:—</span>
+    <span>Redesign preview · Direction E</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// hero collage: gentle mouse-drift (spring toward cursor offset)
+const flts=[...document.querySelectorAll('.flt')];
+if(matchMedia('(pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  let mx=0,my=0,raf=null;const st=flts.map(()=>({x:0,y:0}));
+  addEventListener('mousemove',e=>{
+    mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5);
+    if(!raf)step();
+  },{passive:true});
+  function step(){raf=requestAnimationFrame(()=>{
+    let live=false;
+    flts.forEach((el,i)=>{
+      const k=(i+1)*8;
+      st[i].x+=((mx*k)-st[i].x)*.06;st[i].y+=((my*k)-st[i].y)*.06;
+      el.style.translate=`${st[i].x}px ${st[i].y}px`;
+      if(Math.abs(mx*k-st[i].x)>.3||Math.abs(my*k-st[i].y)>.3)live=true;
+    });
+    live?step():raf=null;
+  })}
+}
+
+// magnetic pill
+const mag=document.querySelector('.magnetic');
+if(mag&&matchMedia('(pointer:fine)').matches){
+  let raf;const st={x:0,y:0,tx:0,ty:0};
+  mag.addEventListener('mousemove',e=>{
+    const r=mag.getBoundingClientRect();
+    st.tx=(e.clientX-r.left-r.width/2)*.35;st.ty=(e.clientY-r.top-r.height/2)*.35;loop();
+  });
+  mag.addEventListener('mouseleave',()=>{st.tx=0;st.ty=0;loop()});
+  function loop(){cancelAnimationFrame(raf);(function step(){
+    st.x+=(st.tx-st.x)*.16;st.y+=(st.ty-st.y)*.16;
+    mag.style.transform=`translate(${st.x}px,${st.y}px)`;
+    if(Math.abs(st.tx-st.x)>.2||Math.abs(st.ty-st.y)>.2)raf=requestAnimationFrame(step);
+  })()}
+}
+function clock(){
+  const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('clock').textContent='LA '+t;
+}
+clock();setInterval(clock,30000);
+</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction F · Contact Sheet — Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7F6F2; --ink:#141414; --red:#E0311A; --dim:#8f8d87; --line:#dedcd4;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,42px);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 'Instrument Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+
+nav{position:sticky;top:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:18px var(--pad);background:rgba(247,246,242,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .m{font-family:'Fragment Mono',monospace;font-size:14px;letter-spacing:.04em}
+nav .m b{color:var(--red);font-weight:400}
+nav .links{display:flex;gap:26px}
+nav .links a{font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+nav .links a:hover{color:var(--red)}
+
+/* hero: a contact sheet with one circled frame */
+.hero{padding:7vh 0 5vh}
+.hero .meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--dim);margin-bottom:4vh}
+.hero h1{font-weight:700;font-size:clamp(40px,6.6vw,96px);line-height:1;letter-spacing:-.035em;max-width:20ch}
+.hero h1 .red{color:var(--red)}
+.hero h1 .circ{position:relative;white-space:nowrap}
+.hero h1 .circ svg{position:absolute;inset:-16% -6%;width:112%;height:132%;overflow:visible;pointer-events:none}
+.hero h1 .circ path{fill:none;stroke:var(--red);stroke-width:3.4;stroke-linecap:round;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 1.4s .9s cubic-bezier(.6,0,.3,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-top:4vh;flex-wrap:wrap}
+.hero .sub p{max-width:46ch;color:#4c4a45}
+
+/* the sheet */
+.sheet{padding:4vh 0 8vh}
+.sheet .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:14px;border-bottom:2px solid var(--ink);margin-bottom:18px}
+.sheet .bar .mono b{color:var(--red);font-weight:400}
+.frames{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.fr{position:relative;background:#fff;padding:8px 8px 26px;border:1px solid var(--line);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.fr img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.92)}
+.fr .cap{position:absolute;left:9px;bottom:6px;font-family:'Fragment Mono',monospace;font-size:9.5px;color:var(--dim)}
+.fr:hover{transform:rotate(-1.2deg) scale(1.04);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2}
+.fr.pick::after{content:"";position:absolute;inset:2px;border:3px solid var(--red);border-radius:50%/44%;transform:rotate(-2deg);pointer-events:none}
+.fr.pick .cap{color:var(--red)}
+.fr .note{position:absolute;top:-14px;right:-8px;font-family:'Fragment Mono',monospace;font-size:10px;color:var(--red);transform:rotate(4deg);background:var(--paper);padding:2px 6px;border:1px solid var(--red)}
+
+/* work index: archive rows */
+.idxhead{display:flex;justify-content:space-between;align-items:baseline;padding:9vh 0 20px}
+h2{font-weight:700;font-size:clamp(28px,3.4vw,48px);letter-spacing:-.03em}
+h2 .red{color:var(--red)}
+.rowp{display:grid;grid-template-columns:110px 130px 1fr auto;gap:26px;align-items:center;padding:22px 0;border-top:1px solid var(--line);transition:background .3s,padding-left .35s cubic-bezier(.22,1,.36,1)}
+.rowp:last-child{border-bottom:1px solid var(--line)}
+.rowp:hover{background:#fff;padding-left:14px}
+.rowp .id{font-family:'Fragment Mono',monospace;font-size:11px;color:var(--dim)}
+.rowp .th{width:130px;height:88px;object-fit:cover;display:block;filter:saturate(.92);transition:transform .4s}
+.rowp:hover .th{transform:scale(1.06) rotate(-1deg)}
+.rowp .t{font-weight:600;font-size:clamp(20px,2.2vw,30px);letter-spacing:-.02em}
+.rowp .f{font-family:'Fragment Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase}
+.rowp:hover .f{color:var(--red)}
+
+/* stats: editor's notes */
+.notes{padding:10vh 0;display:flex;gap:26px;flex-wrap:wrap}
+.note-c{flex:1;min-width:200px;background:#fff;border:1px solid var(--line);padding:26px 24px 22px;position:relative;transform:rotate(-.6deg)}
+.note-c:nth-child(2){transform:rotate(.8deg)}
+.note-c:nth-child(3){transform:rotate(-.4deg)}
+.note-c:nth-child(4){transform:rotate(.5deg)}
+.note-c .n{font-weight:700;font-size:clamp(34px,3.8vw,54px);letter-spacing:-.03em}
+.note-c .n.red{color:var(--red)}
+.note-c .t{font-family:'Fragment Mono',monospace;font-size:10.5px;color:var(--dim);text-transform:uppercase;margin-top:8px}
+.note-c .pin{position:absolute;top:-9px;left:50%;width:14px;height:14px;border-radius:50%;background:var(--red);transform:translateX(-50%)}
+
+/* cta */
+.cta{border-top:2px solid var(--ink);padding:13vh 0}
+.cta .big{font-weight:700;font-size:clamp(40px,7vw,104px);letter-spacing:-.04em;line-height:.98}
+.cta .big a{color:var(--red);position:relative}
+.cta .big a u{text-decoration:none;border-bottom:4px solid var(--red)}
+.cta .mono{color:var(--dim);margin-top:26px;display:block}
+footer{border-top:1px solid var(--line);padding:26px 0}
+footer .row{display:flex;justify-content:space-between;color:var(--dim);flex-wrap:wrap;gap:12px}
+
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:900px){
+  .frames{grid-template-columns:repeat(3,1fr)}
+  .rowp{grid-template-columns:80px 1fr auto}
+  .rowp .th{display:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.hero h1 .circ path{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="m" href="index.html">MONUMENTS<b>_ARCHIVE</b></a>
+  <div class="links"><a href="#work">Index</a><a href="f-about.html">About</a><a href="mailto:monuments.cc@gmail.com">Contact</a></div>
+</nav>
+
+<header class="hero wrap">
+  <div class="meta mono">
+    <span>DJ Ramirez</span>
+    <span>Brand Experience &amp; Experiential CD</span>
+    <span>Roll 2016–2026</span>
+    <span id="clock">LA —:—</span>
+  </div>
+  <h1>Ten years of moments people <span class="circ"><span class="red">showed up</span><svg viewBox="0 0 300 100" preserveAspectRatio="none"><path d="M20,50 C20,14 280,10 284,44 C288,82 40,96 16,62 C4,44 60,18 150,14"/></svg></span> for.</h1>
+  <div class="sub">
+    <p class="rv">As AI floods the feed with cheap content, brands win in the real world. I lead the campaigns and experiences that get people to show up, not just scroll. Every frame below is from a real shoot.</p>
+    <span class="mono rv" style="color:var(--red)">Refresh to reshuffle the sheet ↻</span>
+  </div>
+</header>
+
+<section class="sheet wrap">
+  <div class="bar">
+    <span class="mono"><b>CONTACT SHEET 01</b> · SELECTS FROM THE LAST DECADE</span>
+    <span class="mono" style="color:var(--dim)">Hover to inspect</span>
+  </div>
+  <div class="frames" id="frames"></div>
+</section>
+
+<section id="work" class="wrap">
+  <div class="idxhead">
+    <h2 class="rv">The <span class="red">index.</span></h2>
+    <span class="mono rv" style="color:var(--dim)">04 selected · full archive on /work</span>
+  </div>
+  <div class="rv">
+    <a class="rowp" href="#">
+      <span class="id">MC-2024-01</span>
+      <img class="th" src="/gallery/full/p-061.jpg" alt="">
+      <span class="t">Art of Visuals</span>
+      <span class="f">Brand campaign · grew the agency 4x</span>
+    </a>
+    <a class="rowp" href="#">
+      <span class="id">MC-2023-04</span>
+      <img class="th" src="/case-studies/blue-cross/bc-2.jpg" alt="">
+      <span class="t">Blue Cross of Idaho</span>
+      <span class="f">Documentary campaign</span>
+    </a>
+    <a class="rowp" href="#">
+      <span class="id">MC-2023-02</span>
+      <img class="th" src="/case-studies/turnstile/products/prod-01.jpg" alt="">
+      <span class="t">Turnstile Audio</span>
+      <span class="f">Brand + product launch</span>
+    </a>
+    <a class="rowp" href="#">
+      <span class="id">MC-2022-07</span>
+      <img class="th" src="/gallery/full/p-013.jpg" alt="">
+      <span class="t">Adorama Music</span>
+      <span class="f">Content series</span>
+    </a>
+  </div>
+</section>
+
+<section class="notes wrap">
+  <div class="note-c rv"><span class="pin"></span><div class="n red">4x</div><div class="t">Agency revenue grown</div></div>
+  <div class="note-c rv"><span class="pin"></span><div class="n">160M+</div><div class="t">Campaign impressions</div></div>
+  <div class="note-c rv"><span class="pin"></span><div class="n">Emmy</div><div class="t">Winning film series</div></div>
+  <div class="note-c rv"><span class="pin"></span><div class="n">50</div><div class="t">Contractors led</div></div>
+</section>
+
+<section class="cta wrap">
+  <div class="big rv">Tell me what you're <a href="mailto:monuments.cc@gmail.com"><u>building.</u></a></div>
+  <span class="mono rv">monuments.cc@gmail.com · no deck required</span>
+</section>
+
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © 2026</span>
+    <span>Sheet reshuffles every visit</span>
+    <span>Redesign preview · Direction F</span>
+  </div>
+</footer>
+
+<script>
+// contact sheet: 12 frames drawn from the archive, reshuffled every load (Adam Ho pattern)
+const POOL=['p-001','p-004','p-008','p-011','p-013','p-017','p-021','p-023','p-025','p-028','p-029','p-030','p-038','p-043','p-044','p-049','p-054','p-057','p-058','p-061','p-066','p-067','p-069','p-076','p-090','p-094','p-098','p-099'];
+const NOTES=['USE THIS','THE ONE','HOLD','PRINT IT'];
+const shuffled=POOL.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]).slice(0,12);
+const pick=Math.floor(Math.random()*12), pick2=(pick+5)%12;
+document.getElementById('frames').innerHTML=shuffled.map((id,i)=>`
+  <figure class="fr ${i===pick?'pick':''}">
+    ${i===pick2?`<span class="note">${NOTES[Math.floor(Math.random()*NOTES.length)]}</span>`:''}
+    <img src="/gallery/thumb/${id}.jpg" alt="" loading="lazy">
+    <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · ${id.toUpperCase()}</figcaption>
+  </figure>`).join('');
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+function clock(){
+  const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('clock').textContent='LA '+t;
+}
+clock();setInterval(clock,30000);
+</script>
+</body>
+</html>
