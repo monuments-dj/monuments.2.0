@@ -1,0 +1,282 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import NextProject from '../../components/NextProject.astro';
+
+// === /lab/know-vape ===
+// Emmy-winning case study for KNOW VAPE, Idaho Public Television's statewide youth anti-vaping
+// campaign ("Be Smart. Don't Start." / the "kNOw" wordmark hiding NO). DJ DIRECTED the video
+// series; the campaign won an Emmy. Dark + punchy on the LabFx --bg/--fg ground with a vivid
+// green accent so the bright poster graphics + video still pop.
+// Beats: hero, the film/series (poster -> YouTube), the challenge (Big Tobacco vs Idaho teens),
+// the poster system gallery + lightbox, DJ's role, the Emmy, credits, next-project hand-off.
+//
+// ⚠️ COPY STATUS: campaign facts (mission, partners, the Nic Sick doc, "Be Smart Don't Start")
+// are from idahoptv.org/knowvape. The video link is the campaign's YouTube. PLACEHOLDERS for DJ:
+// (1) exactly WHICH videos he directed + how many, (2) the Emmy category + year, (3) any reach
+// numbers, (4) his role detail. The role + award sections are marked. Confirm and I'll finalize.
+
+const FILM = 'https://youtu.be/tCaacdSKMMo';                 // a campaign video (its still = hero.jpg)
+const DOC = 'https://video.idahoptv.org/video/nic-sick-uesfxt/'; // "Nic Sick" documentary
+const SERIES = 'https://www.youtube.com/playlist?list=PLvDo4LDXnoaAUc_zLFZXS4ngSvg4P5Wjo';
+const G = '/case-studies/know-vape/gallery';
+const posters = [
+  `${G}/poster-01.png`, `${G}/poster-02.png`, `${G}/poster-03.png`,
+  `${G}/poster-04.png`, `${G}/poster-05.png`, `${G}/poster-06.png`,
+];
+const credits = [
+  { k: 'Client', v: 'Idaho Public Television' },
+  { k: 'Role', v: 'Director' },
+  { k: 'Award', v: 'Emmy' },          // ⚠️ confirm category + year
+  { k: 'Partners', v: 'Idaho Millennium Fund · Health Districts' },
+];
+---
+<Base title="Know Vape, the Lab">
+  <main class="kv">
+    <!-- HERO -->
+    <header class="kv-hero">
+      <div class="kv-hero-frames" aria-hidden="true">
+        <figure class="kv-float kv-float-a" data-drift="7"><img src={`${G}/hero.jpg`} alt="" loading="eager" decoding="async" /></figure>
+        <figure class="kv-float kv-float-b" data-drift="11"><img src={`${G}/poster-02.png`} alt="" loading="eager" decoding="async" /></figure>
+      </div>
+      <div class="kv-hero-inner">
+        <a class="kv-back" href="/lab" data-cursor="Back">&larr; The Lab</a>
+        <p class="kv-eyebrow fade"><span class="kv-mark" aria-hidden="true">+</span>Case study &middot; Emmy-winning series</p>
+        <h1 class="kv-h1 split">Know Vape</h1>
+        <p class="kv-tag fade">Be smart. <em>Don't start.</em></p>
+        <p class="kv-meta fade">A statewide film series for Idaho Public Television built to pull teens away from vaping, by telling the truth about Big Tobacco instead of wagging a finger. It won an Emmy.</p>
+      </div>
+      <div class="kv-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+    </header>
+
+    <!-- THE FILM / SERIES -->
+    <section class="kv-film">
+      <div class="kv-film-head">
+        <p class="kv-kicker fade"><span class="kv-mark" aria-hidden="true">+</span>The series</p>
+        <h2 class="kv-film-title split">Made to land with <em>teens.</em></h2>
+      </div>
+      <a class="kv-stage fade" href={FILM} target="_blank" rel="noopener" data-cursor="Play" aria-label="Watch a Know Vape video on YouTube">
+        <img src={`${G}/hero.jpg`} alt="Know Vape video still" loading="lazy" decoding="async" />
+        <span class="kv-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
+        <span class="kv-film-cap">Know Vape &middot; Idaho Public Television</span>
+      </a>
+      <p class="kv-film-links fade">
+        <a href={SERIES} target="_blank" rel="noopener" data-cursor="Play">Watch the full series &#8599;</a>
+        <a href={DOC} target="_blank" rel="noopener" data-cursor="Play">Stream the <i>Nic Sick</i> documentary &#8599;</a>
+      </p>
+    </section>
+
+    <!-- THE CHALLENGE -->
+    <section class="kv-brief">
+      <aside class="kv-brief-side">
+        <h2 class="kv-brief-h split">The truth, not a <em>lecture.</em></h2>
+      </aside>
+      <div class="kv-brief-body">
+        <p class="kv-lead fade">Idaho's youth vaping crisis was built by Big Tobacco: addictive, easy to hide, fruity-flavored devices aimed straight at kids. Finger-wagging does not move a teenager.</p>
+        <p class="kv-body fade">So Know Vape did the opposite. The series exposed the chemicals, named the way the industry preys on young people, and separated myth from fact, in a voice teens would actually watch. "Be Smart. Don't Start." Real information, on their level, not adults talking down.</p>
+      </div>
+    </section>
+
+    <!-- THE POSTER SYSTEM -->
+    <section class="kv-system">
+      <div class="kv-sys-head">
+        <p class="kv-kicker fade"><span class="kv-mark" aria-hidden="true">+</span>The campaign</p>
+        <h2 class="kv-sys-title split">One loud, honest <em>voice.</em></h2>
+      </div>
+      <div class="kv-grid">
+        {posters.map((src) => (
+          <figure class="kv-cell fade" data-drift="4">
+            <a href={src} data-lb-full={src} data-lb-group="kv" data-cursor="View" aria-label="Open graphic">
+              <img src={src} alt="" loading="lazy" decoding="async" />
+            </a>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <!-- THE ROLE -->
+    <section class="kv-role">
+      <p class="kv-kicker fade"><span class="kv-mark" aria-hidden="true">+</span>The role</p>
+      <h2 class="kv-role-h split">Behind the <em>camera.</em></h2>
+      <p class="kv-role-body fade">DJ directed the Know Vape video series, the films at the heart of the campaign that carried the message to Idaho teens. The work won an Emmy.</p>
+      <!-- ⚠️ TODO before this is flagship-ready (DJ to confirm): exactly which/how many videos he
+           directed, whether that includes the Nic Sick documentary, the Emmy category + year, and any
+           reach numbers. Then expand this into a full role breakdown like the other case studies. -->
+    </section>
+
+    <!-- THE AWARD -->
+    <section class="kv-award">
+      <p class="kv-kicker fade"><span class="kv-mark" aria-hidden="true">+</span>Recognition</p>
+      <h2 class="kv-aw-title split">An <em>Emmy</em> for the work.</h2>
+      <p class="kv-aw-note fade">Public-media storytelling that earned its reach: a statewide campaign, an Emmy, and a message that met teens where they are.</p>
+    </section>
+
+    <!-- CREDITS -->
+    <section class="kv-credits">
+      <dl class="kv-cred-list">
+        {credits.map((c) => (
+          <div class="kv-cred fade"><dt>{c.k}</dt><dd>{c.v}</dd></div>
+        ))}
+      </dl>
+    </section>
+
+    <!-- NEXT PROJECT -->
+    <NextProject
+      href="/lab/buck-the-quo"
+      name="Buck the Quo"
+      tag="Albertson Foundation · Experiential"
+      accent="#ec3a7d"
+      poster="/case-studies/buck-the-quo/gallery/future-sign.jpg"
+      photos={["/case-studies/buck-the-quo/gallery/container-front.jpg", "/case-studies/buck-the-quo/gallery/saddle.jpg"]}
+    />
+
+    <Lightbox />
+  </main>
+  <LabFx />
+</Base>
+
+<style>
+  .kv { --kv-green: #15c98a; background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .kv em { font-style: italic; color: var(--kv-green); }
+  .kv-mark { color: var(--kv-green); font-weight: 500; margin-right: 18px; }
+  .kv-eyebrow, .kv-kicker { display: inline-flex; align-items: baseline; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.7); margin: 0; }
+
+  /* ---------- HERO ---------- */
+  .kv-hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding: 16vh 0 12vh; }
+  .kv-hero::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
+    linear-gradient(180deg, rgb(var(--bg-rgb, 13 15 20) / 0.5) 0%, rgb(var(--bg-rgb, 13 15 20) / 0.2) 42%, rgb(var(--bg-rgb, 13 15 20) / 0.86) 100%); }
+  .kv-hero-inner { position: relative; z-index: 3; max-width: var(--wrap, 1300px); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+  .kv-back { display: inline-block; margin-bottom: clamp(20px, 4vh, 40px); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); text-decoration: none; transition: color 0.25s ease; }
+  .kv-back:hover { color: var(--kv-green); }
+  .kv-h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(52px, 12vw, 200px); line-height: 0.9; letter-spacing: -0.05em; margin: 14px 0 0; text-transform: uppercase; }
+  .kv-tag { margin: clamp(18px, 2.4vw, 30px) 0 0; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(22px, 3vw, 44px); letter-spacing: -0.02em; color: var(--fg); }
+  .kv-meta { margin: 26px 0 0; max-width: 54ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.66); }
+
+  .kv-hero-frames { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .kv-float { position: absolute; margin: 0; border-radius: 10px; overflow: hidden; box-shadow: 0 40px 90px rgb(0 0 0 / 0.5); will-change: transform; }
+  .kv-float img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .kv-float-a { right: 4vw; top: 14vh; width: clamp(280px, 36vw, 560px); aspect-ratio: 16/9; }
+  .kv-float-b { right: 33vw; bottom: 8vh; width: clamp(130px, 14vw, 220px); aspect-ratio: 2/3; }
+  @media (max-width: 900px) { .kv-hero-frames { opacity: 0.28; } .kv-float-b { display: none; } }
+
+  .kv-cue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .kv-cue i { width: 1px; height: 34px; background: linear-gradient(var(--kv-green), transparent); animation: kvCue 1.8s ease-in-out infinite; transform-origin: top; }
+  @keyframes kvCue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
+
+  /* ---------- shared section frame ---------- */
+  .kv-film, .kv-brief, .kv-system, .kv-role, .kv-award, .kv-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+
+  /* ---------- FILM ---------- */
+  .kv-film-head { max-width: 640px; margin-bottom: clamp(34px, 4vw, 56px); }
+  .kv-film-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(32px, 5vw, 72px); line-height: 1.0; letter-spacing: -0.035em; margin-top: 14px; }
+  .kv-stage { position: relative; display: block; border-radius: 14px; overflow: hidden; aspect-ratio: 16/9; box-shadow: 0 50px 110px rgb(0 0 0 / 0.55); background: #000; }
+  .kv-stage img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.84; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease; }
+  .kv-stage:hover img { transform: scale(1.03); opacity: 0.72; }
+  .kv-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: clamp(74px, 8vw, 104px); height: clamp(74px, 8vw, 104px); border-radius: 50%; background: var(--kv-green); display: grid; place-items: center; box-shadow: 0 16px 50px rgb(0 0 0 / 0.5); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
+  .kv-stage:hover .kv-play { transform: translate(-50%,-50%) scale(1.08); }
+  .kv-play svg { width: 42%; height: 42%; fill: #06231a; margin-left: 6%; }
+  .kv-film-cap { position: absolute; left: 20px; bottom: 18px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(255 255 255 / 0.86); text-shadow: 0 2px 14px rgb(0 0 0 / 0.6); }
+  .kv-film-links { display: flex; flex-wrap: wrap; gap: clamp(18px, 3vw, 40px); margin: clamp(24px, 3vw, 36px) 0 0; }
+  .kv-film-links a { font-size: 13px; letter-spacing: 0.06em; color: var(--fg); text-decoration: none; border-bottom: 1px solid rgb(var(--fg-rgb) / 0.2); padding-bottom: 4px; transition: color 0.2s ease, border-color 0.2s ease; }
+  .kv-film-links a:hover { color: var(--kv-green); border-color: var(--kv-green); }
+  .kv-film-links i { font-style: italic; }
+
+  /* ---------- BRIEF ---------- */
+  .kv-brief { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(36px, 6vw, 100px); align-items: start; }
+  .kv-brief-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 3.4vw, 50px); line-height: 1.06; letter-spacing: -0.03em; }
+  .kv-lead { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(20px, 2.1vw, 30px); line-height: 1.4; letter-spacing: -0.015em; margin: 0; }
+  .kv-body { margin: 26px 0 0; max-width: 58ch; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.72; font-weight: 300; color: rgb(var(--fg-rgb) / 0.72); }
+
+  /* ---------- POSTER SYSTEM ---------- */
+  .kv-sys-head { max-width: 640px; margin-bottom: clamp(40px, 5vw, 72px); }
+  .kv-sys-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin-top: 14px; }
+  .kv-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(14px, 1.6vw, 26px); }
+  .kv-cell { margin: 0; border-radius: 10px; overflow: hidden; background: rgb(var(--fg-rgb) / 0.05); box-shadow: 0 22px 50px rgb(0 0 0 / 0.4); grid-column: span 2; aspect-ratio: 2/3; will-change: transform; }
+  .kv-cell a { display: block; height: 100%; }
+  .kv-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .kv-cell:hover img { transform: scale(1.04); }
+
+  /* ---------- ROLE ---------- */
+  .kv-role { max-width: 880px; }
+  .kv-role-h { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin: 14px 0 0; }
+  .kv-role-body { margin: 28px 0 0; max-width: 62ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.74); }
+  .kv-role-todo { margin: 20px 0 0; max-width: 60ch; font-size: 14px; line-height: 1.6; font-style: italic; color: rgb(var(--fg-rgb) / 0.5); border-left: 2px solid var(--kv-green); padding-left: 18px; }
+
+  /* ---------- AWARD ---------- */
+  .kv-aw-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin: 14px 0 0; }
+  .kv-aw-note { margin: 24px 0 0; max-width: 56ch; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(18px, 1.9vw, 26px); line-height: 1.42; letter-spacing: -0.015em; color: var(--fg); }
+
+  /* ---------- CREDITS ---------- */
+  .kv-cred-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 50px); }
+  .kv-cred dt { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .kv-cred dd { margin: 10px 0 0; font-family: 'Inter', sans-serif; font-size: clamp(15px, 1.4vw, 20px); letter-spacing: -0.01em; color: var(--fg); }
+
+  /* ---------- reveals ---------- */
+  .kv :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .kv :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); }
+  .kv :global(.split.on .wi) { transform: none; }
+  .kv .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .kv .fade.on { opacity: 1; transform: none; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px) {
+    .kv-brief { grid-template-columns: 1fr; gap: 28px; }
+    .kv-grid { grid-template-columns: repeat(2, 1fr); }
+    .kv-cell { grid-column: span 1; }
+    .kv-cred-list { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .kv-cue i { animation: none; }
+    .kv :global(.split .wi) { transform: none !important; transition: none !important; }
+    .kv .fade { opacity: 1 !important; transform: none !important; }
+    .kv-float { transform: none !important; }
+  }
+</style>
+
+<script>
+  const splitWords = (root: Node, counter: { n: number }) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
+
+  const drifts = [...document.querySelectorAll('[data-drift]')] as HTMLElement[];
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+        const v = Number(el.dataset.drift || 6);
+        el.style.transform = `translateY(${c * -v * 6}px)`;
+      });
+      ticking = false;
+    });
+  };
+  if (!reduced) { addEventListener('scroll', onScroll, { passive: true }); onScroll(); }
+</script>

@@ -58,7 +58,16 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
-## Active work (2026-06-14): see TODO.md top block
+## Active work (2026-06-30): THE SITE IS NOW DJ'S HIRING PORTFOLIO
+Real goal (memory `site-goal-agency-job` + `monuments-copy` = SOURCE OF TRUTH): a portfolio to get DJ
+HIRED at an agency/brand. Audience = hiring managers. POSITIONING LOCKED: **Brand Experience /
+Experiential Creative Director** (campaigns + experiential), lead with the NUMBER, AI is a tool NOT
+the headline, first-person "I" voice. Case studies at `/lab/*`: buck-the-quo + adorama-music PUSHED,
+know-vape built (has a TODO). NEXT: build the **Art of Visuals** flagship (4x revenue), a **Selected
+Work** grid (Donut x Zumiez, AC Boise kit reveal), recut flagships results-first, add a hire-me kit,
+rework the home hero. Full detail: TODO.md top block. Older /lab-redesign context below.
+
+## Active work (2026-06-14, historical): see TODO.md
 **CURRENT: the `/lab/*` v2 redesign + first promotions to production.** GSAP ScrollTrigger is the
 scroll-animation stack (`src/scripts/gsap-lenis.js` bridges it to Lenis). Done: 9-preset color system
 (incl. the `brand` ink/denim/rose preset), the inline pattern library on the hub (next-page · reel ·

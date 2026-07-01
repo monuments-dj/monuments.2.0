@@ -1,4 +1,60 @@
-# TODO — current state (2026-06-14)
+# TODO — current state (2026-06-30)
+
+## ════ SESSION 2026-06-30 :: CAREER PIVOT + case studies + portfolio strategy ════
+**THE BIG SHIFT (memory `site-goal-agency-job` + `monuments-copy` are SOURCE OF TRUTH):** the site's
+real job is now a **PORTFOLIO TO GET DJ HIRED** at an agency/brand. Audience = hiring managers, not
+brand clients. POSITIONING LOCKED: lead as a **Brand Experience / Experiential Creative Director**
+(campaigns + experiential), agency-native, targeting culturally-relevant brands. AI = a TOOL, NOT the
+headline. Lead with the NUMBER, not the idea. Thesis: "As AI floods feeds with cheap content, brands
+win in the real world. That's the work I lead." Voice = first-person "I" + "my friends" (the crew),
+Tess = PM; DO NOT lead with "make brands cool" (fuzzy, rejected).
+
+**Research (2 cited multi-agent workflows, in memory):** experiential + campaign CD is durable/
+AI-resistant through 2030 (Forrester: ~7.5% agency jobs to AI by 2030; creative spared). Holdcos
+contracting (~-15% projected 2026); money moved in-house + to experiential specialists. Ride the LA
+mega-event window (World Cup 2026 / Super Bowl 2027 / LA28). Lean audio/sports/music/gaming/DTC, NOT
+legacy film/TV (contracting). Founder "flight-risk" bias is REAL (Rutgers 2024, successful founders
+penalized MORE) — beat it with REFERRALS + "joining to build" framing, not cold apps. Comp anchors:
+exp CD ~$94-160K, LA CD ~$133-213K, VP/ECD ~$193-350K+; awards = ~$50K premium.
+
+**Case studies built this session (all `/lab`, in the hub `v2` grid):**
+- ✅ PUSHED earlier: `/lab/buck-the-quo` (experiential flagship: More in Store, 18k conversations,
+  enrollment lift) + `/lab/adorama-music` (160M+ impressions, Shorty finalist, a "Behind the film"
+  2nd video). Real assets, real roles.
+- `/lab/know-vape` (Emmy-winning IdahoPTV anti-vaping film series DJ DIRECTED; dark + green; poster
+  gallery + video). ⚠️ TODO (comment in file): which/how many videos, incl. Nic Sick? Emmy
+  category+year, reach numbers, full role breakdown.
+- ⚠️ AWARD FIX: BTQ was wrongly "3 Rocky Mountain Emmys" → corrected to **Rocky Advertising Awards**
+  (per DJ's resume; the Emmy is Know Vape). Confirm exact award name + that the badge images fit.
+
+**PORTFOLIO STRATEGY (agreed):** a few FLAGSHIP deep case studies told as RESULTS (problem→strategy→
+build→execution→NUMBER) + a lighter **"Selected Work" grid** for range (don't reel-dump). Flagships:
+Buck the Quo, Adorama, Know Vape, and **Art of Visuals — NOT BUILT YET, build it** (4x agency revenue
+is DJ's single most marketable number). Selected Work: Donut x Zumiez (2023 launch films DJ directed),
+AC Boise kit-reveal (IG reel DR04D0ZDOjV = "This kit is Boise", USL League One, Hummel + Against), the
+Sony launches, etc.
+
+**Assets on disk:** buck-the-quo (19), adorama-music (38), know-vape (10) — web-sized. donut-zumiez
+(film-01 + merch). AC Boise kit-reveal still FAILED (IG login-gated). A **sourcing workflow was
+running** to find more images+video for donut-zumiez / ac-boise / art-of-visuals — RE-RUN it (agents
+hunt YouTube/IG/official sites for downloadable images + video watch URLs + poster stills) or DJ
+provides assets. DJ said he lacks assets and wants me to source them.
+
+**Also shipped earlier this session (PUSHED):** homepage mobile overflow fix (`.trusted` grid +
+menu fit on phones); the homepage **RECENT WORK slider** (`RecentProjects.astro`, promoted from
+`/lab/project-detail`: white, compact, minimal scrubber; mobile = autoplay scroll-snap carousel,
+hardened by an adversarial-review workflow — 6 real bugs fixed); added **Lab** to the main menu;
+`astro.config` `server: { host: true }` for phone testing; AGAINST logo is intentional (not upside-down).
+
+**NEXT (in order):**
+1. Finish **Know Vape** once DJ confirms the specifics (films / Nic Sick / Emmy category+year / reach).
+2. Build the **Art of Visuals** flagship (source assets first) — the 4x-revenue business-impact story.
+3. Build a **Selected Work** grid; add Donut x Zumiez + AC Boise + the Sony launches as entries.
+4. **Recut the flagships results-first** (lead with the number) per the hiring-portfolio research;
+   shift copy to first-person "I" per `monuments-copy`.
+5. Add the **hire-me kit**: an "open to [roles]" line + prominent contact/LinkedIn + a resume/one-pager.
+6. Rework the **HOME hero** to the locked positioning + a 3-number band above the fold.
+7. ⚙️ `caffeinate` is running (keeps the Mac awake) — kill it when done. New chat can turn it off.
 
 **Quick start:** `cd monuments-site && npm run dev` → http://localhost:4321 · `npm run build`
 (builds clean, ~30 routes). Read `CLAUDE.md` first (shorthand + the VISUAL-TRUTH workflow),

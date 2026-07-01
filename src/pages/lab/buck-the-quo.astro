@@ -10,7 +10,9 @@ import NextProject from '../../components/NextProject.astro';
 // by talking WITH teens instead of at them. The spine is the "More In Store" activation:
 // a traveling pop-up (shipping container) that toured fairs and teen spots, under-18s only,
 // and turned a hard conversation about the future into something teens actually wanted to
-// have. 18,000+ one-on-one conversations, three Rocky Mountain Emmys.
+// have. 18,000+ one-on-one conversations, top Rocky Advertising Awards.
+// NOTE (2026-06-30): per DJ's resume, BTQ won ROCKY ADVERTISING AWARDS (Gold/Silver/Best in
+// Show), not Emmys. The Emmy was the separate KNOW VAPE campaign. Confirm the exact award name.
 //
 // Light-forward, brand-literal pink/gold accents on the LabFx --paper/--ink ground.
 // Beats: hero, the problem (They Sayers), the experiential spine (scenes), the
@@ -170,11 +172,11 @@ const credits = [
     <!-- AWARDS -->
     <section class="bq-awards">
       <p class="bq-kicker fade"><span class="bq-mark" aria-hidden="true">+</span>Recognition</p>
-      <h2 class="bq-aw-title split">Three Rocky Mountain <em>Emmys.</em></h2>
+      <h2 class="bq-aw-title split">Rocky Advertising <em>Awards.</em></h2>
       <div class="bq-emmys">
         {emmys.map((e) => (
           <figure class="bq-emmy fade">
-            <img src={e.img} alt={`Rocky Mountain Emmy, ${e.k}`} loading="lazy" decoding="async" />
+            <img src={e.img} alt={`Rocky Advertising Award, ${e.k}`} loading="lazy" decoding="async" />
             <figcaption>{e.k}</figcaption>
           </figure>
         ))}
