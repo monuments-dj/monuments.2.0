@@ -1,0 +1,215 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import NextProject from '../../components/NextProject.astro';
+import CaseCredits from '../../components/CaseCredits.astro';
+
+// === /lab/fearless — SCAFFOLD (content coming from DJ) ===
+// Structure is in place, matching the other /lab/* case studies. Everything below is a
+// PLACEHOLDER skeleton so DJ can see the shape and drop real content in. Image slots are
+// neutral placeholder tiles (no broken <img>) until real assets land.
+//
+// ⚠️ TODO(DJ) — send me:
+//   (1) what "Fearless" is (brand / campaign / project?) + the one-line premise
+//   (2) DJ's role + the collaborators/agency
+//   (3) the headline NUMBER(s) for the results band
+//   (4) assets: hero image(s), gallery stills, any video/reel URL
+//   (5) year + credits
+// Then I'll swap the placeholders, drop the images into /public/case-studies/fearless/,
+// and promote it into the Work grid + home like the others.
+
+const accent = '#ff4d3d'; // placeholder accent — change to Fearless's real brand color
+
+// Placeholder credits (swap with real).
+const credits = [
+  { k: 'Client', v: 'PLACEHOLDER' },
+  { k: 'Role', v: 'PLACEHOLDER' },
+  { k: 'Scope', v: 'PLACEHOLDER' },
+  { k: 'Year', v: '20—' },
+];
+// Placeholder results — only fill these with real numbers.
+const stats = [
+  { n: '—', l: 'headline result (PLACEHOLDER)' },
+  { n: '—', l: 'supporting stat (PLACEHOLDER)' },
+  { n: '—', l: 'supporting stat (PLACEHOLDER)' },
+];
+const steps = [
+  { n: '01', t: 'The problem', d: 'PLACEHOLDER — what Fearless needed to solve, in a sentence.' },
+  { n: '02', t: 'The idea', d: 'PLACEHOLDER — the creative move that made it work.' },
+  { n: '03', t: 'The build', d: 'PLACEHOLDER — what I actually made and led.' },
+];
+const galleryCount = 6; // placeholder tiles until real stills land
+---
+<Base title="Fearless (draft) — the Lab">
+  <main class="fl" style={`--fl-accent:${accent}`}>
+    <!-- HERO -->
+    <header class="fl-hero">
+      <div class="fl-hero-inner">
+        <a class="fl-back" href="/lab" data-cursor="Back">&larr; The Lab</a>
+        <p class="fl-eyebrow fade"><span class="fl-mark" aria-hidden="true">+</span>Case study &middot; <span class="fl-draft">Draft</span></p>
+        <h1 class="fl-h1 split">Fearless</h1>
+        <p class="fl-tag fade">Placeholder tagline &mdash; the one line that sums it up.</p>
+        <p class="fl-meta fade">PLACEHOLDER. A sentence or two on what Fearless was, who it was for, and what I did on it. DJ is sending the real copy and assets; this page is the scaffold that will hold them.</p>
+      </div>
+      <div class="fl-cue fade" aria-hidden="true"><span>Scroll</span><i></i></div>
+    </header>
+
+    <!-- CREDITS STRIP -->
+    <CaseCredits items={credits} accent={accent} />
+
+    <!-- RESULTS -->
+    <section class="fl-sec fl-results">
+      <p class="fl-kicker fade"><span class="fl-mark" aria-hidden="true">+</span>The results</p>
+      <div class="fl-stats">
+        {stats.map((s, i) => (
+          <div class={`fl-stat fade ${i === 0 ? 'is-hero' : ''}`}><span class="fl-stat-n">{s.n}</span><span class="fl-stat-l">{s.l}</span></div>
+        ))}
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="fl-sec fl-story">
+      <div class="fl-story-head">
+        <p class="fl-kicker fade"><span class="fl-mark" aria-hidden="true">+</span>How it happened</p>
+        <h2 class="fl-story-title split">Placeholder <em>story headline.</em></h2>
+      </div>
+      <ol class="fl-steps">
+        {steps.map((s) => (
+          <li class="fl-step fade">
+            <span class="fl-step-n">{s.n}</span>
+            <h3 class="fl-step-t">{s.t}</h3>
+            <p class="fl-step-d">{s.d}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- GALLERY (placeholder tiles) -->
+    <section class="fl-sec fl-gallery">
+      <div class="fl-gal-head">
+        <p class="fl-kicker fade"><span class="fl-mark" aria-hidden="true">+</span>The work</p>
+        <h2 class="fl-gal-title split">Stills go <em>here.</em></h2>
+      </div>
+      <div class="fl-grid">
+        {Array.from({ length: galleryCount }).map((_, i) => (
+          <figure class={`fl-cell fl-ph fade`}><span>Image {i + 1}</span></figure>
+        ))}
+      </div>
+    </section>
+
+    <!-- ROLE -->
+    <section class="fl-sec fl-role">
+      <p class="fl-kicker fade"><span class="fl-mark" aria-hidden="true">+</span>The role</p>
+      <h2 class="fl-role-h split">What I <em>did.</em></h2>
+      <p class="fl-role-body fade">PLACEHOLDER. First-person breakdown of DJ's role on Fearless, in the same voice as the other case studies. Swap this once DJ sends the details.</p>
+    </section>
+
+    <!-- NEXT PROJECT -->
+    <NextProject
+      href="/lab/art-of-visuals"
+      name="Art of Visuals"
+      tag="Agency · 4x revenue"
+      accent="#3b7de8"
+      poster="/case-studies/art-of-visuals/gallery/xm5-01.jpg"
+      photos={["/case-studies/art-of-visuals/gallery/xperia-01.jpg", "/case-studies/art-of-visuals/gallery/yt-flowstate.jpg"]}
+    />
+
+    <Lightbox />
+  </main>
+  <LabFx />
+</Base>
+
+<style>
+  .fl { background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .fl em { font-style: italic; color: var(--fl-accent); }
+  .fl-mark { color: var(--fl-accent); font-weight: 500; margin-right: 18px; }
+  .fl-eyebrow, .fl-kicker { display: inline-flex; align-items: baseline; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.7); margin: 0; }
+  .fl-draft { color: var(--fl-accent); letter-spacing: 0.1em; }
+
+  /* HERO */
+  .fl-hero { position: relative; min-height: 78vh; display: flex; align-items: center; padding: 18vh 0 12vh; }
+  .fl-hero-inner { position: relative; z-index: 2; max-width: var(--wrap, 1300px); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+  .fl-back { display: inline-block; margin-bottom: clamp(20px, 4vh, 40px); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); text-decoration: none; }
+  .fl-back:hover { color: var(--fl-accent); }
+  .fl-h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(52px, 12vw, 200px); line-height: 0.9; letter-spacing: -0.05em; margin: 14px 0 0; text-transform: uppercase; }
+  .fl-tag { margin: clamp(18px, 2.4vw, 30px) 0 0; font-weight: 400; font-size: clamp(22px, 3vw, 44px); letter-spacing: -0.02em; color: var(--fg); }
+  .fl-meta { margin: 26px 0 0; max-width: 54ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.66); }
+  .fl-cue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .fl-cue i { width: 1px; height: 34px; background: linear-gradient(var(--fl-accent), transparent); }
+
+  /* shared section frame */
+  .fl-sec { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(70px, 10vw, 140px) var(--pad); }
+
+  /* RESULTS */
+  .fl-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 2.5vw, 40px); margin-top: clamp(30px, 4vw, 50px); border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .fl-stat { padding: clamp(28px, 4vw, 48px) 0 0; }
+  .fl-stat-n { display: block; font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(38px, 5vw, 80px); letter-spacing: -0.04em; line-height: 1; color: rgb(var(--fg-rgb) / 0.85); }
+  .fl-stat.is-hero .fl-stat-n { color: var(--fl-accent); font-size: clamp(48px, 6.5vw, 104px); }
+  .fl-stat-l { display: block; margin-top: 12px; max-width: 22ch; font-size: 13px; line-height: 1.5; color: rgb(var(--fg-rgb) / 0.6); }
+
+  /* STORY */
+  .fl-story-head { max-width: 640px; margin-bottom: clamp(40px, 5vw, 70px); }
+  .fl-story-title { font-weight: 400; font-size: clamp(30px, 4.6vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin-top: 14px; }
+  .fl-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 4vw, 56px); }
+  .fl-step { border-top: 1px solid rgb(var(--fg-rgb) / 0.14); padding-top: clamp(20px, 2.4vw, 30px); }
+  .fl-step-n { font-size: 13px; letter-spacing: 0.16em; color: var(--fl-accent); }
+  .fl-step-t { font-weight: 400; font-size: clamp(20px, 2.4vw, 32px); letter-spacing: -0.02em; margin: 12px 0 0; }
+  .fl-step-d { margin: 12px 0 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.72); }
+
+  /* GALLERY placeholders */
+  .fl-gal-head { max-width: 640px; margin-bottom: clamp(36px, 5vw, 64px); }
+  .fl-gal-title { font-weight: 400; font-size: clamp(30px, 4.4vw, 60px); line-height: 1.04; letter-spacing: -0.03em; margin-top: 14px; }
+  .fl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.6vw, 24px); }
+  .fl-ph { margin: 0; display: grid; place-items: center; aspect-ratio: 4/3; border-radius: 10px; border: 1px dashed rgb(var(--fg-rgb) / 0.22); background: rgb(var(--fg-rgb) / 0.04); }
+  .fl-ph span { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.35); }
+
+  /* ROLE */
+  .fl-role { max-width: 880px; }
+  .fl-role-h { font-weight: 400; font-size: clamp(30px, 4.4vw, 60px); line-height: 1.04; letter-spacing: -0.03em; margin: 14px 0 0; }
+  .fl-role-body { margin: 24px 0 0; max-width: 62ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.74); }
+
+  /* reveals */
+  .fl :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .fl :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16,1,0.3,1) calc(var(--wd) * 0.04s); }
+  .fl :global(.split.on .wi) { transform: none; }
+  .fl .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .fl .fade.on { opacity: 1; transform: none; }
+
+  @media (max-width: 860px) {
+    .fl-stats { grid-template-columns: 1fr; }
+    .fl-steps { grid-template-columns: 1fr; }
+    .fl-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fl :global(.split .wi) { transform: none !important; transition: none !important; }
+    .fl .fade { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+
+<script>
+  const splitWords = (root: Node, counter: { n: number }) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
+</script>
