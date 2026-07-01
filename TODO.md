@@ -1,5 +1,19 @@
 # TODO — current state (2026-07-01)
 
+## ════ SESSION 2026-07-01 (later) :: REDESIGN KIT — AWAITING DJ'S A/B/C PICK ════
+DJ asked for a design overhaul: more references, harder-hitting design, career arc shown
+digitally. Delivered (commit 8ec1a9b, LIVE):
+- ✅ `redesign/01-references.md` (16 refs), `02-diagnosis.md` (measured audit of the deploy:
+  Inter-only w/ 29 size/weight combos, 5+ surface colors, dead space, two M marks),
+  `03-direction.md` (shared system + 3 direction briefs).
+- ✅ 3 viewable mockup directions at **/redesign/** (hub): A=Monument (cinematic editorial),
+  B=Ledger (typographic index), C=Signal (kinetic bold). Home + about each; same copy in all
+  three so the comparison isolates design. Career timeline = chapters 01-04 (NO years; ask DJ).
+- ⏭ NEXT: DJ picks (or Frankensteins) → fold winner into global.css tokens/Base.astro →
+  rebuild real home + about → work index → em-dash sweep + retire blackletter M.
+- NOTE: fullPage snap.mjs does NOT fire IntersectionObserver (reveal sections capture blank);
+  use tools/motion.mjs filmstrips as ground truth for reveal-on-scroll pages.
+
 ## ════ SESSION 2026-07-01 :: PORTFOLIO SCAFFOLD PASS (autonomous) ════
 DJ said "move on all of them, scaffold the site first, rework design as pages are created,
 message me with roadblocks." Built + PUSHED (commit 7d1bc8c → Vercel preview):
