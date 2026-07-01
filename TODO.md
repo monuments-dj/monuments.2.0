@@ -46,6 +46,17 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
   Full case-study structure w/ PLACEHOLDER copy + dashed image slots + Draft badge + in-file TODO.
   NEED FROM DJ: what Fearless is + premise, role/collaborators, headline number(s), assets (hero +
   stills + any video), year/credits. Then swap placeholders, add images, promote to Work/home.
+- ✅ FILE PIPELINE PROVEN: Dropbox folder links work — flip dl=0→dl=1 (I do it automatically),
+  curl the zip, unzip, sips-optimize. DJ can just paste Dropbox links as-is going forward. Also:
+  local paths on his Mac (I read directly) and direct file URLs both work; Drive "view" / dl=0
+  preview links do NOT (they return HTML).
+- 🏗️ DW DRUMS (DWe) case study BUILT at /lab/dw-drums from Dropbox assets: split-screen "torn
+  paper" campaign (Engineer Approved/Drummer Tested, Plug In/Rock Out). 11 finished spreads
+  optimized (48M→3.8M), masonry gallery (uncropped), concept copy from the real spreads, teal
+  accent. Added to the /lab hub v2 grid. ⚠️ NEED FROM DJ before promoting to Work/home: his exact
+  ROLE + agency/collaborators, whether it SHIPPED or was a pitch/spec (layouts still lorem-ipsum),
+  and any RESULTS. Also: ~9 Midjourney concept comps were held OUT of the gallery (AI-as-tool
+  positioning) — available if DJ wants an "exploration" section.
 - 🧭 DECISION (2026-07-01): VIDEO stays on YouTube for now — all of it (Waffle/home header loops
   AND case-study films). DJ declined self-hosting (revisit later if the YouTube branding grates).
   Do NOT re-pitch self-hosting / a video CDN unprompted. Waffle keeps its YT-embed + fade-on-play.
