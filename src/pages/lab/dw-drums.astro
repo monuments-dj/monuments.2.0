@@ -1,0 +1,238 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabFx from '../../components/LabFx.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import NextProject from '../../components/NextProject.astro';
+import CaseCredits from '../../components/CaseCredits.astro';
+
+// === /lab/dw-drums — DWe (DW Drums electronic) campaign ===
+// A torn-paper "split screen" campaign for DWe, DW Drums' electronic kit. Every spread
+// pairs two worlds across a ripped seam: Engineer Approved / Drummer Tested, Plug In /
+// Rock Out (the kit vs the R-TAP headphone amp), acoustic vs electric. Dark ground with
+// a teal accent to match the ads. Cloned from the adorama/aov case-study pattern.
+//
+// ⚠️ COPY STATUS: the CONCEPT copy below is written from the actual spreads (verified).
+// The layouts still carry lorem-ipsum body, so this reads as concept/spec work — I did
+// NOT claim it shipped or state any results. PLACEHOLDER + TODO for DJ:
+//   (1) his exact role + the agency/collaborators, (2) whether it ran or was a pitch/spec,
+//   (3) any results/numbers if it ran, (4) confirm client + year (dated 2023 from the files).
+// Gallery = the campaign spreads, shown uncropped. Not yet promoted to Work/home.
+
+const G = '/case-studies/dw-drums/gallery';
+const spreads = [
+  `${G}/face-off.jpg`, `${G}/spread-01.jpg`, `${G}/spread-02.jpg`, `${G}/spread-03.jpg`,
+  `${G}/spread-04.jpg`, `${G}/spread-05.jpg`, `${G}/spread-06.jpg`, `${G}/spread-07.jpg`,
+  `${G}/spread-08.jpg`, `${G}/spread-09.jpg`, `${G}/spread-10.jpg`,
+];
+
+const credits = [
+  { k: 'Client', v: 'DW Drums (DWe)' },
+  { k: 'Role', v: 'PLACEHOLDER' },      // ⚠️ DJ to confirm
+  { k: 'Scope', v: 'Campaign concept · Art direction' }, // ⚠️ confirm
+  { k: 'Year', v: '2023' },
+];
+
+const worlds = [
+  { a: 'Engineer', b: 'Drummer',  d: 'Approved and tested. The person who dials the sound in, and the person who beats it up on stage.' },
+  { a: 'Plug In',  b: 'Rock Out', d: 'The quiet studio kit and the loud live one, the same DWe rig playing both roles.' },
+  { a: 'Acoustic', b: 'Electric', d: 'A hybrid kit that refuses to pick a side, so the campaign refused to as well.' },
+];
+---
+<Base title="DW Drums — the Lab">
+  <main class="dwd">
+    <!-- HERO -->
+    <header class="dwd-hero">
+      <div class="dwd-hero-frames" aria-hidden="true">
+        <figure class="dwd-float dwd-float-a" data-drift="7"><img src={`${G}/face-off.jpg`} alt="" loading="eager" decoding="async" /></figure>
+        <figure class="dwd-float dwd-float-b" data-drift="11"><img src={`${G}/spread-01.jpg`} alt="" loading="eager" decoding="async" /></figure>
+      </div>
+      <div class="dwd-hero-inner">
+        <a class="dwd-back" href="/lab" data-cursor="Back">&larr; The Lab</a>
+        <p class="dwd-eyebrow fade"><span class="dwd-mark" aria-hidden="true">+</span>Case study &middot; Campaign</p>
+        <h1 class="dwd-h1 split">DW Drums</h1>
+        <p class="dwd-tag fade">Engineer approved. <em>Drummer tested.</em></p>
+        <p class="dwd-meta fade">A split-screen campaign for DWe, DW Drums' electronic kit. One idea, torn down the middle: two worlds that shouldn't share a page — studio and stage, acoustic and electric — divided by a ripped seam and held together by the kit that lives in both.</p>
+      </div>
+      <div class="dwd-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+    </header>
+
+    <!-- CREDITS STRIP -->
+    <CaseCredits items={credits} accent="#2fb8a0" />
+
+    <!-- THE CONCEPT -->
+    <section class="dwd-sec dwd-concept">
+      <div class="dwd-concept-head">
+        <p class="dwd-kicker fade"><span class="dwd-mark" aria-hidden="true">+</span>The idea</p>
+        <h2 class="dwd-concept-title split">Two worlds, <em>one seam.</em></h2>
+        <p class="dwd-concept-sub fade">DWe is a hybrid: a real DW kit that plugs in. So the campaign never picked a side. Every spread rips down the middle and puts two opposites face to face, the tear itself doing the talking.</p>
+      </div>
+      <ol class="dwd-worlds">
+        {worlds.map((w, i) => (
+          <li class="dwd-world fade">
+            <span class="dwd-world-n">0{i + 1}</span>
+            <h3 class="dwd-world-t"><span>{w.a}</span><i aria-hidden="true">/</i><span>{w.b}</span></h3>
+            <p class="dwd-world-d">{w.d}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- THE CAMPAIGN (spreads, uncropped) -->
+    <section class="dwd-sec dwd-gallery">
+      <div class="dwd-gal-head">
+        <p class="dwd-kicker fade"><span class="dwd-mark" aria-hidden="true">+</span>The campaign</p>
+        <h2 class="dwd-gal-title split">The spreads.</h2>
+      </div>
+      <div class="dwd-grid">
+        {spreads.map((src) => (
+          <figure class="dwd-cell fade">
+            <a href={src} data-lb-full={src} data-lb-group="dwd" data-cursor="View" aria-label="Open spread">
+              <img src={src} alt="DWe campaign spread" loading="lazy" decoding="async" />
+            </a>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <!-- THE ROLE -->
+    <section class="dwd-sec dwd-role">
+      <p class="dwd-kicker fade"><span class="dwd-mark" aria-hidden="true">+</span>The role</p>
+      <h2 class="dwd-role-h split">What I <em>did.</em></h2>
+      <p class="dwd-role-body fade">PLACEHOLDER. First-person breakdown of DJ's role on the DWe campaign, in the same voice as the other case studies. DJ to confirm the role, the team, and whether this ran or was a concept pitch — then I'll swap this in.</p>
+    </section>
+
+    <!-- NEXT PROJECT -->
+    <NextProject
+      href="/lab/adorama-music"
+      name="Adorama Music"
+      tag="Brand film · 160M+"
+      accent="#e8a23a"
+      poster="/case-studies/adorama-music/gallery/am-07.jpg"
+      photos={["/case-studies/adorama-music/gallery/am-01.jpg", "/case-studies/adorama-music/gallery/am-09.jpg"]}
+    />
+
+    <Lightbox />
+  </main>
+  <LabFx />
+</Base>
+
+<style>
+  .dwd { --dwd-accent: #2fb8a0; background: var(--bg); color: var(--fg); overflow-x: clip; }
+  .dwd em { font-style: italic; color: var(--dwd-accent); }
+  .dwd-mark { color: var(--dwd-accent); font-weight: 500; margin-right: 18px; }
+  .dwd-eyebrow, .dwd-kicker { display: inline-flex; align-items: baseline; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.7); margin: 0; }
+
+  /* HERO */
+  .dwd-hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding: 16vh 0 12vh; }
+  .dwd-hero::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
+    linear-gradient(180deg, rgb(var(--bg-rgb, 13 15 20) / 0.55) 0%, rgb(var(--bg-rgb, 13 15 20) / 0.25) 42%, rgb(var(--bg-rgb, 13 15 20) / 0.88) 100%),
+    radial-gradient(120% 100% at 60% 44%, transparent 30%, rgb(var(--bg-rgb, 13 15 20) / 0.55) 100%); }
+  .dwd-hero-inner { position: relative; z-index: 3; max-width: var(--wrap, 1300px); margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+  .dwd-back { display: inline-block; margin-bottom: clamp(20px, 4vh, 40px); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.55); text-decoration: none; transition: color 0.25s ease; }
+  .dwd-back:hover { color: var(--dwd-accent); }
+  .dwd-h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(52px, 12vw, 200px); line-height: 0.9; letter-spacing: -0.05em; margin: 14px 0 0; text-transform: uppercase; }
+  .dwd-tag { margin: clamp(18px, 2.4vw, 30px) 0 0; font-weight: 400; font-size: clamp(22px, 3vw, 44px); letter-spacing: -0.02em; color: var(--fg); }
+  .dwd-meta { margin: 26px 0 0; max-width: 56ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.66); }
+
+  .dwd-hero-frames { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .dwd-float { position: absolute; margin: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 40px 90px rgb(0 0 0 / 0.55); will-change: transform; }
+  .dwd-float img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dwd-float-a { right: 3vw; top: 13vh; width: clamp(300px, 42vw, 660px); aspect-ratio: 3/2; }
+  .dwd-float-b { right: 30vw; bottom: 7vh; width: clamp(180px, 22vw, 360px); aspect-ratio: 3/2; }
+  @media (max-width: 900px) { .dwd-hero-frames { opacity: 0.28; } .dwd-float-b { display: none; } }
+
+  .dwd-cue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); }
+  .dwd-cue i { width: 1px; height: 34px; background: linear-gradient(var(--dwd-accent), transparent); animation: dwdCue 1.8s ease-in-out infinite; transform-origin: top; }
+  @keyframes dwdCue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
+
+  /* shared section frame */
+  .dwd-sec { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(70px, 11vw, 150px) var(--pad); }
+
+  /* CONCEPT */
+  .dwd-concept-head { max-width: 680px; margin-bottom: clamp(40px, 6vw, 80px); }
+  .dwd-concept-title { font-weight: 400; font-size: clamp(32px, 5vw, 72px); line-height: 1.0; letter-spacing: -0.035em; margin: 14px 0 0; }
+  .dwd-concept-sub { margin: 24px 0 0; max-width: 58ch; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.72; font-weight: 300; color: rgb(var(--fg-rgb) / 0.7); }
+  .dwd-worlds { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 4vw, 56px); }
+  .dwd-world { border-top: 1px solid rgb(var(--fg-rgb) / 0.14); padding-top: clamp(20px, 2.4vw, 30px); }
+  .dwd-world-n { font-size: 13px; letter-spacing: 0.16em; color: var(--dwd-accent); }
+  .dwd-world-t { display: flex; align-items: baseline; gap: 10px; font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(22px, 2.6vw, 34px); letter-spacing: -0.025em; margin: 12px 0 0; }
+  .dwd-world-t i { font-style: normal; color: var(--dwd-accent); font-weight: 300; }
+  .dwd-world-d { margin: 14px 0 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.72); }
+
+  /* CAMPAIGN — masonry, spreads shown uncropped */
+  .dwd-gal-head { max-width: 640px; margin-bottom: clamp(36px, 5vw, 64px); }
+  .dwd-gal-title { font-weight: 400; font-size: clamp(32px, 5vw, 72px); line-height: 1.0; letter-spacing: -0.035em; margin-top: 14px; }
+  .dwd-grid { column-count: 2; column-gap: clamp(14px, 1.8vw, 26px); }
+  .dwd-cell { break-inside: avoid; margin: 0 0 clamp(14px, 1.8vw, 26px); border-radius: 8px; overflow: hidden; background: rgb(var(--fg-rgb) / 0.05); box-shadow: 0 22px 50px rgb(0 0 0 / 0.4); }
+  .dwd-cell a { display: block; }
+  .dwd-cell img { width: 100%; height: auto; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .dwd-cell:hover img { transform: scale(1.03); }
+  @media (max-width: 720px) { .dwd-grid { column-count: 1; } }
+
+  /* ROLE */
+  .dwd-role { max-width: 880px; }
+  .dwd-role-h { font-weight: 400; font-size: clamp(30px, 4.4vw, 60px); line-height: 1.04; letter-spacing: -0.03em; margin: 14px 0 0; }
+  .dwd-role-body { margin: 24px 0 0; max-width: 62ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.74); }
+
+  /* reveals */
+  .dwd :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
+  .dwd :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16,1,0.3,1) calc(var(--wd) * 0.04s); }
+  .dwd :global(.split.on .wi) { transform: none; }
+  .dwd .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .dwd .fade.on { opacity: 1; transform: none; }
+
+  @media (max-width: 860px) { .dwd-worlds { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) {
+    .dwd-cue i { animation: none; }
+    .dwd :global(.split .wi) { transform: none !important; transition: none !important; }
+    .dwd .fade { opacity: 1 !important; transform: none !important; }
+    .dwd-float, .dwd-cell img { transform: none !important; }
+  }
+</style>
+
+<script>
+  const splitWords = (root: Node, counter: { n: number }) => {
+    [...root.childNodes].forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (node.textContent || '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi';
+          wi.style.setProperty('--wd', String(counter.n++));
+          wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && !(node as Element).closest('svg')) {
+        splitWords(node, counter);
+      }
+    });
+  };
+  document.querySelectorAll('.split').forEach((el) => splitWords(el, { n: 0 }));
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { (e.target as HTMLElement).classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
+
+  const drifts = [...document.querySelectorAll('[data-drift]')] as HTMLElement[];
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+        const v = Number(el.dataset.drift || 6);
+        el.style.transform = `translateY(${c * -v * 6}px)`;
+      });
+      ticking = false;
+    });
+  };
+  if (!reduced) { addEventListener('scroll', onScroll, { passive: true }); onScroll(); }
+</script>
