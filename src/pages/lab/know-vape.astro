@@ -16,7 +16,11 @@ import NextProject from '../../components/NextProject.astro';
 // episodes below (IdahoPTV, aired Nov 2023, "Be Smart. Don't Start."). Every episode URL is
 // verified live on pbs.org. The Nic Sick documentary is part of the WIDER Know Vape campaign but
 // is NOT DJ's directing credit, so it's intentionally not featured here.
-// ⚠️ STILL OPEN (DJ to confirm): the Emmy category + exact year, and any reach/impression numbers.
+// ✅ EMMY (confirmed via idahoptv.org/about/awards): the Know Vape CAMPAIGN won the 2024 Northwest
+// Regional Emmy (NATAS Northwest) for "Community Outreach, Small Market." It's a campaign-level
+// award (not a craft/directing Emmy for the spots), and DJ is not on the public Emmy credit list —
+// so the page says his Myth vs Fact spots were PART OF the Emmy-winning campaign. Do not overclaim.
+// ⚠️ STILL OPEN: any reach/impression numbers for the Award section.
 
 const HERO_EP = 'https://video.wkno.org/video/know-vape-myth-vs-fact-vapor-h5git8/'; // "Vapor" spot
 // The six Myth vs Fact spots DJ directed (canonical URLs per DJ; all verified live).
@@ -37,7 +41,7 @@ const credits = [
   { k: 'Client', v: 'Idaho Public Television' },
   { k: 'Role', v: 'Director' },
   { k: 'Series', v: 'Myth vs Fact · 6 spots' },
-  { k: 'Award', v: 'Emmy' },          // ⚠️ confirm category + year
+  { k: 'Campaign award', v: '2024 NW Emmy · Community Outreach' },
   { k: 'Year', v: '2023' },
   { k: 'Partners', v: 'Idaho Millennium Fund · Health Districts' },
 ];
@@ -52,10 +56,10 @@ const credits = [
       </div>
       <div class="kv-hero-inner">
         <a class="kv-back" href="/lab" data-cursor="Back">&larr; The Lab</a>
-        <p class="kv-eyebrow fade"><span class="kv-mark" aria-hidden="true">+</span>Case study &middot; Emmy-winning series</p>
+        <p class="kv-eyebrow fade"><span class="kv-mark" aria-hidden="true">+</span>Case study &middot; Emmy-winning campaign</p>
         <h1 class="kv-h1 split">Know Vape</h1>
         <p class="kv-tag fade">Be smart. <em>Don't start.</em></p>
-        <p class="kv-meta fade">A statewide film series for Idaho Public Television built to pull teens away from vaping, by telling the truth about Big Tobacco instead of wagging a finger. It won an Emmy.</p>
+        <p class="kv-meta fade">A statewide anti-vaping campaign for Idaho Public Television, built to pull teens away from vaping by telling the truth about Big Tobacco instead of wagging a finger. DJ directed the Myth vs Fact spots inside it; the campaign won a 2024 Northwest Regional Emmy.</p>
       </div>
       <div class="kv-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
@@ -136,8 +140,8 @@ const credits = [
     <!-- THE AWARD -->
     <section class="kv-award">
       <p class="kv-kicker fade"><span class="kv-mark" aria-hidden="true">+</span>Recognition</p>
-      <h2 class="kv-aw-title split">An <em>Emmy</em> for the work.</h2>
-      <p class="kv-aw-note fade">Public-media storytelling that earned its reach: a statewide campaign, an Emmy, and a message that met teens where they are.</p>
+      <h2 class="kv-aw-title split">Part of an <em>Emmy-winning</em> campaign.</h2>
+      <p class="kv-aw-note fade">Know Vape won the 2024 Northwest Regional Emmy for Community Outreach (Small Market), from the NATAS Northwest chapter. The Myth vs Fact spots DJ directed were part of that campaign, public-media storytelling that met teens where they are and earned its reach.</p>
     </section>
 
     <!-- CREDITS -->
