@@ -13,6 +13,17 @@ const tags = ['Brand Refresh'];
     <!-- HERO -->
     <header class="cs2-hero">
       <div class="cs2-hero-bg" style={`background-image:url(${gallery[2]})`}></div>
+      <!-- Header loop (DJ's "WEB HEADER" cut). Muted autoplay background. The bg image
+           above is the poster; the video fades in only once it's actually PLAYING, so
+           there's no black YouTube-load flash on the hero. -->
+      <div class="cs2-hero-video" data-hero-video aria-hidden="true">
+        <iframe
+          id="wmuHeaderVideo"
+          title="Waffle Me Up header"
+          src="https://www.youtube.com/embed/LI496YXDIRE?autoplay=1&mute=1&loop=1&playlist=LI496YXDIRE&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
+          frameborder="0"
+          allow="autoplay; encrypted-media; picture-in-picture"></iframe>
+      </div>
       <div class="cs2-hero-scrim"></div>
       <div class="cs2-hero-inner">
         <h1 class="cs2-hero-title">Waffle<br>Me Up</h1>
@@ -109,4 +120,44 @@ const tags = ['Brand Refresh'];
     </section>
 
   </article>
+
+  <script is:inline>
+    // Reveal the header loop only once it's actually PLAYING (poster shows until then),
+    // so the hero never flashes the black YouTube loading state. Falls back to a timer
+    // if the IFrame API is slow/blocked, and stays on the poster for reduced-motion.
+    (function () {
+      var wrap = document.querySelector('[data-hero-video]');
+      if (!wrap) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var shown = false;
+      function reveal() { if (!shown) { shown = true; wrap.classList.add('is-playing'); } }
+      var fb = setTimeout(reveal, 2600);
+      var tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+      window.onYouTubeIframeAPIReady = function () {
+        try {
+          new YT.Player('wmuHeaderVideo', {
+            events: { onStateChange: function (e) { if (e.data === 1) { clearTimeout(fb); reveal(); } } }
+          });
+        } catch (_) { reveal(); }
+      };
+    })();
+  </script>
 </Base>
+
+<style>
+  /* Full-bleed muted YouTube header loop. Sits above the poster image and below the
+     scrim (source order handles the layering — no z-index needed). The 16:9 iframe is
+     sized larger than the hero and centered so it covers with no letterbox bars. */
+  .cs2-hero-video { position: absolute; inset: 0; overflow: hidden; pointer-events: none; opacity: 0; transition: opacity 0.9s ease; }
+  .cs2-hero-video.is-playing { opacity: 1; }
+  .cs2-hero-video iframe {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 177.78vh; height: 100vh; min-width: 100%; min-height: 100%; border: 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    /* honor reduced-motion: hide the loop, fall back to the poster image */
+    .cs2-hero-video { display: none; }
+  }
+</style>
