@@ -1,4 +1,30 @@
-# TODO — current state (2026-06-30)
+# TODO — current state (2026-07-01)
+
+## ════ SESSION 2026-07-01 :: PORTFOLIO SCAFFOLD PASS (autonomous) ════
+DJ said "move on all of them, scaffold the site first, rework design as pages are created,
+message me with roadblocks." Built + PUSHED (commit 7d1bc8c → Vercel preview):
+- ✅ `/lab/art-of-visuals` — FLAGSHIP, results-first, leads with "I grew the agency 4x."
+  Real assets (Sony/Xperia/XM/Stansport/Creator Clubhouse). Cloned the adorama pattern.
+- ✅ `/lab/donut-zumiez` + `/lab/ac-boise` — lighter Selected Work case pages (real assets;
+  film/reel posters are NON-linking pending real video URLs).
+- ✅ Lab hub: added the AOV flagship tile + a new **Selected Work** section (Donut, AC Boise,
+  Sony This Moment, Sony Flow State).
+- ✅ Home: hero copy → locked positioning ("Brand Experience & Experiential CD"; AI-floods-
+  the-feed thesis; first-person) + a **3-number band** under the hero (4x / 160M+ / Emmy,
+  each links to its case study). Verified legible on the dark body via snap.mjs.
+- ✅ Contact: **hire-me kit** band ("Open to senior creative roles" + Email/LinkedIn/one-pager).
+Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
+
+**⛔ ROADBLOCKS / needs DJ (all flagged as in-file `⚠️ TODO` comments):**
+1. AOV: only "4x" is real — the other 3 stat values (5+, 100M+, 3yrs) + role title + year span
+   + client roster are PLACEHOLDER. Give me the real numbers/titles.
+2. Video URLs: Donut launch films (2 cuts) + AC Boise IG reel (id DR04D0ZDOjV) render as
+   non-linking posters — need clean watch/embed URLs to make them play.
+3. Contact hire-kit: real **LinkedIn URL** (placeholder points to linkedin.com), and a hosted
+   **resume/one-pager PDF** (currently a mailto) → drop a PDF at /public and I'll wire it.
+4. Still open from before: Know Vape specifics (films / Nic Sick / Emmy category+year / reach).
+5. ⚙️ `caffeinate` + the dev server (localhost:4321) are still running — kill when fully done.
+
 
 ## ════ SESSION 2026-06-30 :: CAREER PIVOT + case studies + portfolio strategy ════
 **THE BIG SHIFT (memory `site-goal-agency-job` + `monuments-copy` are SOURCE OF TRUTH):** the site's
