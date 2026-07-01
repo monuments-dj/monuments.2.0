@@ -12,14 +12,23 @@ import NextProject from '../../components/NextProject.astro';
 // Beats: hero, the film/series (poster -> YouTube), the challenge (Big Tobacco vs Idaho teens),
 // the poster system gallery + lightbox, DJ's role, the Emmy, credits, next-project hand-off.
 //
-// ⚠️ COPY STATUS: campaign facts (mission, partners, the Nic Sick doc, "Be Smart Don't Start")
-// are from idahoptv.org/knowvape. The video link is the campaign's YouTube. PLACEHOLDERS for DJ:
-// (1) exactly WHICH videos he directed + how many, (2) the Emmy category + year, (3) any reach
-// numbers, (4) his role detail. The role + award sections are marked. Confirm and I'll finalize.
+// ✅ CONFIRMED by DJ (2026-07-01): DJ DIRECTED ALL of the "Myth vs Fact" spot series — the six
+// episodes below (IdahoPTV, aired Nov 2023, "Be Smart. Don't Start."). Every episode URL is
+// verified live on pbs.org. The Nic Sick documentary is part of the WIDER Know Vape campaign but
+// is NOT DJ's directing credit, so it's intentionally not featured here.
+// ⚠️ STILL OPEN (DJ to confirm): the Emmy category + exact year, and any reach/impression numbers.
 
-const FILM = 'https://youtu.be/tCaacdSKMMo';                 // a campaign video (its still = hero.jpg)
-const DOC = 'https://video.idahoptv.org/video/nic-sick-uesfxt/'; // "Nic Sick" documentary
-const SERIES = 'https://www.youtube.com/playlist?list=PLvDo4LDXnoaAUc_zLFZXS4ngSvg4P5Wjo';
+const HERO_EP = 'https://www.pbs.org/video/know-vape-myth-vs-fact-vapor-h5git8/'; // "Vapor" spot
+// The six Myth vs Fact spots DJ directed. `m`/`f` = the myth/fact beat (only Vapor's exact copy
+// is confirmed from the source; the rest carry the topic only, no invented chemistry).
+const episodes = [
+  { t: 'Vapor',    d: 'Vapes are just water vapor? It’s an aerosol of chemicals.', url: 'https://www.pbs.org/video/know-vape-myth-vs-fact-vapor-h5git8/' },
+  { t: 'Nicotine', d: 'The addiction the flavors are built to hide.', url: 'https://www.pbs.org/video/know-vape-myth-vs-fact-nicotine-ymwf0l/' },
+  { t: 'Safety',   d: '“Safer than cigarettes” is the wrong bar.', url: 'https://www.pbs.org/video/know-vape-myth-vs-fact-safety-bw4khy/' },
+  { t: 'Anxiety',  d: 'The vape-to-calm loop, pulled apart.', url: 'https://www.pbs.org/video/know-vape-myth-vs-fact-anxiety-4c2k2p/' },
+  { t: 'Drugs',    d: 'What else ends up in the device.', url: 'https://www.pbs.org/video/know-vape-myth-vs-fact-drugs-4cfubf/' },
+  { t: 'Smoking Cessation Device', d: 'Not the quit-tool it’s sold as.', url: 'https://www.pbs.org/video/know-vape-myth-vs-fact-0wqr4a/' },
+];
 const G = '/case-studies/know-vape/gallery';
 const posters = [
   `${G}/poster-01.png`, `${G}/poster-02.png`, `${G}/poster-03.png`,
@@ -28,7 +37,9 @@ const posters = [
 const credits = [
   { k: 'Client', v: 'Idaho Public Television' },
   { k: 'Role', v: 'Director' },
+  { k: 'Series', v: 'Myth vs Fact · 6 spots' },
   { k: 'Award', v: 'Emmy' },          // ⚠️ confirm category + year
+  { k: 'Year', v: '2023' },
   { k: 'Partners', v: 'Idaho Millennium Fund · Health Districts' },
 ];
 ---
@@ -56,15 +67,34 @@ const credits = [
         <p class="kv-kicker fade"><span class="kv-mark" aria-hidden="true">+</span>The series</p>
         <h2 class="kv-film-title split">Made to land with <em>teens.</em></h2>
       </div>
-      <a class="kv-stage fade" href={FILM} target="_blank" rel="noopener" data-cursor="Play" aria-label="Watch a Know Vape video on YouTube">
-        <img src={`${G}/hero.jpg`} alt="Know Vape video still" loading="lazy" decoding="async" />
+      <a class="kv-stage fade" href={HERO_EP} target="_blank" rel="noopener" data-cursor="Play" aria-label="Watch the Know Vape: Myth vs Fact — Vapor spot on PBS">
+        <img src={`${G}/hero.jpg`} alt="Know Vape: Myth vs Fact video still" loading="lazy" decoding="async" />
         <span class="kv-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
-        <span class="kv-film-cap">Know Vape &middot; Idaho Public Television</span>
+        <span class="kv-film-cap">Myth vs Fact: Vapor &middot; Idaho Public Television</span>
       </a>
-      <p class="kv-film-links fade">
-        <a href={SERIES} target="_blank" rel="noopener" data-cursor="Play">Watch the full series &#8599;</a>
-        <a href={DOC} target="_blank" rel="noopener" data-cursor="Play">Stream the <i>Nic Sick</i> documentary &#8599;</a>
-      </p>
+    </section>
+
+    <!-- THE EPISODES: the six Myth vs Fact spots DJ directed -->
+    <section class="kv-eps">
+      <div class="kv-eps-head">
+        <p class="kv-kicker fade"><span class="kv-mark" aria-hidden="true">+</span>The series</p>
+        <h2 class="kv-eps-title split">Six spots. One truth at a <em>time.</em></h2>
+        <p class="kv-eps-sub fade">Each one takes a myth teens actually believe and puts the fact next to it, fast enough to survive a feed. I directed all six.</p>
+      </div>
+      <ol class="kv-eps-list">
+        {episodes.map((e, i) => (
+          <li class="kv-ep fade">
+            <a class="kv-ep-link" href={e.url} target="_blank" rel="noopener" data-cursor="Play" aria-label={`Watch Myth vs Fact: ${e.t} on PBS`}>
+              <span class="kv-ep-n">{String(i + 1).padStart(2, '0')}</span>
+              <span class="kv-ep-body">
+                <span class="kv-ep-t">{e.t}</span>
+                <span class="kv-ep-d">{e.d}</span>
+              </span>
+              <span class="kv-ep-go" aria-hidden="true">▶</span>
+            </a>
+          </li>
+        ))}
+      </ol>
     </section>
 
     <!-- THE CHALLENGE -->
@@ -99,10 +129,9 @@ const credits = [
     <section class="kv-role">
       <p class="kv-kicker fade"><span class="kv-mark" aria-hidden="true">+</span>The role</p>
       <h2 class="kv-role-h split">Behind the <em>camera.</em></h2>
-      <p class="kv-role-body fade">DJ directed the Know Vape video series, the films at the heart of the campaign that carried the message to Idaho teens. The work won an Emmy.</p>
-      <!-- ⚠️ TODO before this is flagship-ready (DJ to confirm): exactly which/how many videos he
-           directed, whether that includes the Nic Sick documentary, the Emmy category + year, and any
-           reach numbers. Then expand this into a full role breakdown like the other case studies. -->
+      <p class="kv-role-body fade">DJ directed all six Myth vs Fact spots, the films at the heart of the campaign that carried the message to Idaho teens. Each one had to make a public-health point land in seconds, in a voice a teenager would not scroll past. The work is part of an Emmy-winning Know Vape campaign.</p>
+      <!-- ⚠️ TODO (DJ, last two): the Emmy category + exact year, and any reach/impression numbers
+           to add to the Award section. Everything else on this page is confirmed. -->
     </section>
 
     <!-- THE AWARD -->
@@ -165,7 +194,25 @@ const credits = [
   @keyframes kvCue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
 
   /* ---------- shared section frame ---------- */
-  .kv-film, .kv-brief, .kv-system, .kv-role, .kv-award, .kv-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+  .kv-film, .kv-eps, .kv-brief, .kv-system, .kv-role, .kv-award, .kv-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+  /* the film + episodes read as one unit: tighten the gap between them */
+  .kv-film { padding-bottom: clamp(28px, 4vw, 56px); }
+  .kv-eps { padding-top: clamp(40px, 6vw, 80px); }
+
+  /* ---------- EPISODES ---------- */
+  .kv-eps-head { max-width: 640px; margin-bottom: clamp(32px, 4vw, 56px); }
+  .kv-eps-title { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 4vw, 58px); line-height: 1.04; letter-spacing: -0.03em; margin-top: 14px; }
+  .kv-eps-sub { margin: 22px 0 0; max-width: 56ch; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.7; font-weight: 300; color: rgb(var(--fg-rgb) / 0.7); }
+  .kv-eps-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(24px, 4vw, 64px); }
+  .kv-ep { border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }
+  .kv-ep-link { display: grid; grid-template-columns: auto 1fr auto; gap: clamp(14px, 2vw, 26px); align-items: center; padding: clamp(20px, 2.2vw, 28px) 4px; text-decoration: none; color: var(--fg); transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .kv-ep-link:hover { padding-left: 14px; }
+  .kv-ep-n { font-size: 12px; letter-spacing: 0.16em; color: var(--kv-green); font-variant-numeric: tabular-nums; }
+  .kv-ep-body { display: flex; flex-direction: column; gap: 6px; }
+  .kv-ep-t { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(19px, 2vw, 28px); line-height: 1.1; letter-spacing: -0.02em; }
+  .kv-ep-d { font-size: clamp(13px, 1vw, 14.5px); line-height: 1.5; font-weight: 300; color: rgb(var(--fg-rgb) / 0.62); }
+  .kv-ep-go { font-size: 13px; color: rgb(var(--fg-rgb) / 0.3); transition: color 0.25s ease, transform 0.3s ease; }
+  .kv-ep-link:hover .kv-ep-go { color: var(--kv-green); transform: scale(1.15); }
 
   /* ---------- FILM ---------- */
   .kv-film-head { max-width: 640px; margin-bottom: clamp(34px, 4vw, 56px); }
@@ -222,6 +269,7 @@ const credits = [
   /* ---------- responsive ---------- */
   @media (max-width: 860px) {
     .kv-brief { grid-template-columns: 1fr; gap: 28px; }
+    .kv-eps-list { grid-template-columns: 1fr; }
     .kv-grid { grid-template-columns: repeat(2, 1fr); }
     .kv-cell { grid-column: span 1; }
     .kv-cred-list { grid-template-columns: 1fr 1fr; }
