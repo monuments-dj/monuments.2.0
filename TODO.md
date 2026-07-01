@@ -14,6 +14,11 @@ message me with roadblocks." Built + PUSHED (commit 7d1bc8c → Vercel preview):
   each links to its case study). Verified legible on the dark body via snap.mjs.
 - ✅ Contact: **hire-me kit** band ("Open to senior creative roles" + Email/LinkedIn/one-pager).
 Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
+- ✅ RECUT Adorama + Buck the Quo RESULTS-FIRST: moved each stat band directly under the hero so
+  the NUMBER leads (Adorama 160M+/3.4M+/113K+/50K+; BTQ 18,000+/1-in-2/88%), shifted hero+role
+  copy to first-person "I". Pushed.
+- ⚠️ VOICE: know-vape.astro is still third-person ("DJ directed...") while every other case study
+  is now first-person "I" — flip for consistency (quick; offered to DJ).
 
 **⛔ ROADBLOCKS / needs DJ (all flagged as in-file `⚠️ TODO` comments):**
 1. AOV: only "4x" is real — the other 3 stat values (5+, 100M+, 3yrs) + role title + year span
