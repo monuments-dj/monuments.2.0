@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
+import CaseCredits from '../../components/CaseCredits.astro';
 
 // === /lab/buck-the-quo ===
 // Experiential case study for Buck the Quo, a social-change campaign for the J.A. and
@@ -76,6 +77,9 @@ const credits = [
       </div>
       <div class="bq-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
+
+    <!-- CREDITS STRIP: role at a glance, close to the top -->
+    <CaseCredits items={credits} accent="#ec3a7d" />
 
     <!-- RESULTS FIRST: lead with the number -->
     <section class="bq-stats">
@@ -181,15 +185,6 @@ const credits = [
           </figure>
         ))}
       </div>
-    </section>
-
-    <!-- CREDITS -->
-    <section class="bq-credits">
-      <dl class="bq-cred-list">
-        {credits.map((c) => (
-          <div class="bq-cred fade"><dt>{c.k}</dt><dd>{c.v}</dd></div>
-        ))}
-      </dl>
     </section>
 
     <!-- NEXT PROJECT -->

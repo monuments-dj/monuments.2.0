@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
+import CaseCredits from '../../components/CaseCredits.astro';
 
 // === /lab/know-vape ===
 // Emmy-winning case study for KNOW VAPE, Idaho Public Television's statewide youth anti-vaping
@@ -63,6 +64,9 @@ const credits = [
       </div>
       <div class="kv-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
+
+    <!-- CREDITS STRIP: role at a glance, close to the top -->
+    <CaseCredits items={credits} accent="#15c98a" />
 
     <!-- THE FILM / SERIES -->
     <section class="kv-film">
@@ -142,15 +146,6 @@ const credits = [
       <p class="kv-kicker fade"><span class="kv-mark" aria-hidden="true">+</span>Recognition</p>
       <h2 class="kv-aw-title split">Part of an <em>Emmy-winning</em> campaign.</h2>
       <p class="kv-aw-note fade">Know Vape won the 2024 Northwest Regional Emmy for Community Outreach (Small Market), from the NATAS Northwest chapter. The Myth vs Fact spots DJ directed were part of that campaign, public-media storytelling that met teens where they are and earned its reach.</p>
-    </section>
-
-    <!-- CREDITS -->
-    <section class="kv-credits">
-      <dl class="kv-cred-list">
-        {credits.map((c) => (
-          <div class="kv-cred fade"><dt>{c.k}</dt><dd>{c.v}</dd></div>
-        ))}
-      </dl>
     </section>
 
     <!-- NEXT PROJECT -->

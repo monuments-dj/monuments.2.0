@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
+import CaseCredits from '../../components/CaseCredits.astro';
 
 // === /lab/art-of-visuals ===
 // FLAGSHIP case study. This is the BUSINESS-IMPACT story, not a single deliverable:
@@ -68,6 +69,9 @@ const credits = [
       </div>
       <div class="aov-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
+
+    <!-- CREDITS STRIP: role at a glance, close to the top -->
+    <CaseCredits items={credits} accent="#3b7de8" />
 
     <!-- RESULTS (leads, per hiring-portfolio rule) -->
     <section class="aov-results">
@@ -136,15 +140,6 @@ const credits = [
           <li class="fade"><span class="aov-did-k">{d.k}</span><span class="aov-did-v">{d.v}</span></li>
         ))}
       </ul>
-    </section>
-
-    <!-- CREDITS -->
-    <section class="aov-credits">
-      <dl class="aov-cred-list">
-        {credits.map((c) => (
-          <div class="aov-cred fade"><dt>{c.k}</dt><dd>{c.v}</dd></div>
-        ))}
-      </dl>
     </section>
 
     <!-- NEXT PROJECT -->

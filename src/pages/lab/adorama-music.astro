@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
+import CaseCredits from '../../components/CaseCredits.astro';
 
 // === /lab/adorama-music ===
 // SCAFFOLD case study for "Adorama Music: The Journey" (2020), a branded film for Adorama
@@ -64,6 +65,9 @@ const credits = [
       </div>
       <div class="am-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
+
+    <!-- CREDITS STRIP: role at a glance, close to the top -->
+    <CaseCredits items={credits} accent="#e8a23a" />
 
     <!-- RESULTS FIRST: lead with the number -->
     <section class="am-results">
@@ -159,15 +163,6 @@ const credits = [
         <li class="fade"><span class="am-did-k">Photo + Video</span><span class="am-did-v">Directed the shoot and shot a portion of the stills.</span></li>
         <li class="fade"><span class="am-did-k">Client Lead</span><span class="am-did-v">Adorama's main point of contact, start to finish.</span></li>
       </ul>
-    </section>
-
-    <!-- CREDITS -->
-    <section class="am-credits">
-      <dl class="am-cred-list">
-        {credits.map((c) => (
-          <div class="am-cred fade"><dt>{c.k}</dt><dd>{c.v}</dd></div>
-        ))}
-      </dl>
     </section>
 
     <!-- NEXT PROJECT -->

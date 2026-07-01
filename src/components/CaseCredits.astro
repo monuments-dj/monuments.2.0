@@ -1,0 +1,44 @@
+---
+// === CaseCredits ===
+// A thin, scannable credits strip for the top of a case study. Shows role + key facts
+// at a glance (the first thing a hiring manager reads). Reusable across every /lab/* case
+// study: pass the page's existing `credits` array + its accent. Tone-agnostic — it inherits
+// the page's text color via currentColor, so it reads correctly on light OR dark grounds.
+interface Item { k: string; v: string; }
+interface Props { items: Item[]; accent?: string; }
+const { items, accent = 'currentColor' } = Astro.props;
+---
+<aside class="cc" style={`--cc-accent:${accent}`} aria-label="Project credits">
+  <dl class="cc-list">
+    {items.map((i) => (
+      <div class={/role/i.test(i.k) ? 'cc-item is-role' : 'cc-item'}>
+        <dt>{i.k}</dt>
+        <dd>{i.v}</dd>
+      </div>
+    ))}
+  </dl>
+</aside>
+
+<style>
+  .cc { max-width: var(--wrap, 1300px); margin: 0 auto; padding: 0 var(--pad); }
+  .cc-list {
+    display: flex; flex-wrap: wrap; gap: clamp(20px, 4vw, 60px);
+    margin: 0; padding: clamp(22px, 2.6vw, 30px) 0;
+    border-top: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+  }
+  .cc-item { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+  .cc-item dt {
+    font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: color-mix(in srgb, currentColor 52%, transparent);
+  }
+  .cc-item dd {
+    margin: 0; font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(14px, 1.3vw, 17px); letter-spacing: -0.01em; line-height: 1.2;
+  }
+  /* Emphasize the role — it's the point of the strip. */
+  .cc-item.is-role dd { color: var(--cc-accent); font-weight: 500; }
+  @media (max-width: 620px) {
+    .cc-list { gap: 18px 28px; }
+  }
+</style>

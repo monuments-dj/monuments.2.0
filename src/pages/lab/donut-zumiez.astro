@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
+import CaseCredits from '../../components/CaseCredits.astro';
 
 // === /lab/donut-zumiez ===
 // LIGHTER "Selected Work" case study. In 2023 DJ directed the launch films + merch
@@ -54,6 +55,9 @@ const credits = [
       <div class="dz-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
 
+    <!-- CREDITS STRIP: role at a glance, close to the top -->
+    <CaseCredits items={credits} accent="#ff5a3c" />
+
     <!-- THE FILM (poster, non-linking until a real URL lands) -->
     <section class="dz-film">
       <div class="dz-film-head">
@@ -96,15 +100,6 @@ const credits = [
           <li class="fade"><span class="dz-did-k">{d.k}</span><span class="dz-did-v">{d.v}</span></li>
         ))}
       </ul>
-    </section>
-
-    <!-- CREDITS -->
-    <section class="dz-credits">
-      <dl class="dz-cred-list">
-        {credits.map((c) => (
-          <div class="dz-cred fade"><dt>{c.k}</dt><dd>{c.v}</dd></div>
-        ))}
-      </dl>
     </section>
 
     <!-- NEXT PROJECT -->
