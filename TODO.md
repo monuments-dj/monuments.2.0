@@ -30,6 +30,15 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
   autoplay hero background (poster holds until PLAYING, then fades in — no black load flash). Caught +
   fixed a PROD-ONLY black flash (blind reveal timer) by revealing only on the real PLAYING state;
   verified on the live Vercel deploy in a real browser. Reusable pattern for header loops elsewhere.
+- ✅ DONUT × ZUMIEZ films wired: DJ gave 3 cuts — launch film (2eUYg_P5rfc) is the main linked
+  player; Croy collab (HEx3bUYCwdk) + the cut (UwM3_jGjz6Q) as a 2-up row. All 200. In-file TODO
+  to confirm which poster/caption maps to which cut.
+- ⏳ CREDITS BAR (per DJ: agency + my role + other creators, black bar/white text, "lives on every
+  work/case-study page"): built 3 A/B variants at /lab/credits (V1 inline · V2 columned · V3 end-
+  credits, role highlighted). AWAITING DJ's pick, then wire the winner as a shared component onto
+  every /work + /lab case study (real per-project credit data needed per page).
+- ⏳ "FEARLESS" PAGE requested — NEED INFO from DJ: what Fearless is (brand/campaign?), his role,
+  and whether he has assets (images/video) or wants a scaffold to fill later. Not started.
 
 **⛔ ROADBLOCKS / needs DJ (all flagged as in-file `⚠️ TODO` comments):**
 1. AOV: only "4x" is real — the other 3 stat values (5+, 100M+, 3yrs) + role title + year span
