@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monuments · Type Specimen — Pick the Face</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600&f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --pad:clamp(24px,4.6vw,44px);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.6 system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.wrap{max-width:1380px;margin:0 auto;padding:0 var(--pad)}
+a{color:inherit;text-decoration:none}
+
+header{padding:8vh 0 5vh;border-bottom:2px solid var(--ink)}
+header .kick{color:var(--dim);margin-bottom:20px}
+header .kick b{color:#c14355;font-weight:400}
+header h1{font-family:'Fragment Mono',monospace;font-weight:400;font-size:clamp(20px,2.4vw,30px);letter-spacing:-.01em;max-width:52ch;text-transform:none}
+header h1 i{font-style:normal;background:var(--cobalt);color:var(--paper);padding:0 8px}
+header p{color:#55524c;max-width:62ch;margin-top:18px}
+
+/* candidate block */
+.cand{border-bottom:2px solid var(--ink)}
+.cand .bar{display:flex;justify-content:space-between;align-items:baseline;padding:26px 0 0}
+.cand .bar .no{font-family:'Fragment Mono',monospace;font-size:12px;color:#c14355}
+.cand .bar .name{font-family:'Fragment Mono',monospace;font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}
+
+/* 1: statement hero w/ serif splice */
+.stmt{padding:7vh 0 5vh}
+.stmt .line{font-size:clamp(44px,7.4vw,108px);line-height:.98;letter-spacing:-.03em;text-transform:uppercase}
+.stmt .line .serif{font-family:'Instrument Serif',serif;font-style:italic;text-transform:none;letter-spacing:0;color:inherit}
+.stmt .line .spark{color:var(--rose)}
+.stmt .sub{display:flex;gap:40px;justify-content:space-between;align-items:end;flex-wrap:wrap;margin-top:4vh}
+.stmt .sub p{max-width:46ch;color:#55524c;font-size:17px}
+.stmt .stats{font-family:'Fragment Mono',monospace;font-size:12px;color:var(--ink);text-align:right;line-height:2}
+.stmt .stats i{font-style:normal;color:var(--cobalt)}
+
+/* 2: type over photography (Stranger I Know move) */
+.overphoto{position:relative;height:78vh;overflow:hidden;background:var(--ink)}
+.overphoto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.06);opacity:.92}
+.overphoto .t{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:112%;text-align:center;color:var(--paper);font-size:clamp(60px,10.4vw,152px);line-height:.9;letter-spacing:-.03em;text-transform:uppercase;mix-blend-mode:screen}
+.overphoto .t .serif{font-family:'Instrument Serif',serif;font-style:italic;text-transform:none;letter-spacing:0}
+.overphoto .badge{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);border:1.5px solid var(--paper);border-radius:99px;color:var(--paper);padding:9px 18px;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.1em}
+.overphoto .colo{position:absolute;left:0;right:0;bottom:10px;text-align:center;color:rgba(245,243,239,.55);font-family:'Fragment Mono',monospace;font-size:10px;letter-spacing:.12em}
+
+/* 3: work row + tags */
+.rows{padding:5vh 0}
+.rowp{display:grid;grid-template-columns:120px 1fr auto;gap:26px;align-items:baseline;padding:22px 0;border-top:1px solid var(--line)}
+.rowp:last-child{border-bottom:1px solid var(--line)}
+.rowp .id{font-family:'Fragment Mono',monospace;font-size:11px;color:var(--dim)}
+.rowp .t{font-size:clamp(24px,2.8vw,40px);letter-spacing:-.02em;line-height:1}
+.rowp .tag{font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rowp .tag i{font-style:normal;color:var(--cobalt)}
+.rowp:hover .t{color:var(--cobalt)}
+
+/* 4: banner (width axis / caps test) */
+.banner{padding:0 0 6vh}
+.banner .big{font-size:clamp(64px,11vw,170px);line-height:.86;letter-spacing:-.02em;text-transform:uppercase;white-space:nowrap;overflow:hidden}
+.banner .note{font-family:'Fragment Mono',monospace;font-size:10.5px;color:var(--dim);margin-top:10px;text-transform:uppercase;letter-spacing:.08em}
+
+/* face assignments */
+.f-bric .face{font-family:'Bricolage Grotesque',sans-serif;font-weight:600}
+.f-bric .banner .big{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-stretch:75%}
+.f-clash .face{font-family:'Clash Grotesk',sans-serif;font-weight:500}
+.f-clash .banner .big{font-family:'Clash Grotesk',sans-serif;font-weight:600}
+.f-cab .face{font-family:'Cabinet Grotesk',sans-serif;font-weight:700}
+.f-cab .banner .big{font-family:'Cabinet Grotesk',sans-serif;font-weight:800}
+
+/* verdict strip */
+.verdict{background:var(--ink);color:var(--paper);padding:7vh 0}
+.verdict .mono{color:var(--rose)}
+.verdict h2{font-family:'Fragment Mono',monospace;font-weight:400;font-size:clamp(18px,2vw,24px);max-width:56ch;margin-top:14px;text-transform:none}
+.verdict h2 i{font-style:normal;background:var(--cobalt);padding:0 8px}
+footer{background:var(--ink);color:var(--dim);padding:0 0 30px}
+footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--lined);padding-top:22px}
+@media (max-width:820px){.rowp{grid-template-columns:1fr}.overphoto{height:52vh}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kick mono"><b>Type specimen</b> · pick the face · everything else identical</p>
+    <h1>Three grotesques, one candidate system: face + Fragment Mono metadata + Instrument Serif <i>spliced italics</i>, rose spark, cobalt structure.</h1>
+    <p>Same headlines, same photography, same layout grammar three times. The only variable is the display face. Scroll, compare, pick one (or tell me what none of them have).</p>
+  </div>
+</header>
+
+<!-- ============ 01 BRICOLAGE ============ -->
+<section class="cand f-bric">
+  <div class="wrap bar"><span class="no">Candidate 01</span><span class="name">Bricolage Grotesque · the quirky one (Khteka lane)</span></div>
+  <div class="wrap stmt">
+    <div class="line face">Moments people<br><span class="serif">show up</span> for<span class="spark">.</span></div>
+    <div class="sub">
+      <p>As AI floods the feed with cheap content, brands win in the real world. I lead the campaigns and experiences that get people to show up, not just scroll.</p>
+      <div class="stats mono">4x agency revenue grown · 160M+ impressions<br><i>Emmy</i> winning film series · 50 contractors led</div>
+    </div>
+  </div>
+  <div class="overphoto">
+    <img src="/gallery/full/p-054.jpg" alt="">
+    <div class="t face">A decade in<br>the <span class="serif">hard rooms</span></div>
+    <span class="badge">✳ DJ RAMIREZ · CREATIVE DIRECTOR</span>
+    <span class="colo">MONUMENTS © MMXXVI · ELMT.NO.004259 · LA / BOISE</span>
+  </div>
+  <div class="wrap rows">
+    <div class="rowp"><span class="id">MC-2024-01</span><span class="t face">Art of Visuals</span><span class="tag"><i>\</i> Brand campaign · 4x</span></div>
+    <div class="rowp"><span class="id">MC-2023-04</span><span class="t face">Blue Cross of Idaho</span><span class="tag"><i>\</i> Documentary</span></div>
+  </div>
+  <div class="wrap banner">
+    <div class="big">Built to be remembered</div>
+    <p class="note">Bonus: Bricolage has a real condensed axis (this banner is the 75% width cut). The other two don't.</p>
+  </div>
+</section>
+
+<!-- ============ 02 CLASH ============ -->
+<section class="cand f-clash">
+  <div class="wrap bar"><span class="no">Candidate 02</span><span class="name">Clash Grotesk · the sharp one (Neue Montreal lane)</span></div>
+  <div class="wrap stmt">
+    <div class="line face">Moments people<br><span class="serif">show up</span> for<span class="spark">.</span></div>
+    <div class="sub">
+      <p>As AI floods the feed with cheap content, brands win in the real world. I lead the campaigns and experiences that get people to show up, not just scroll.</p>
+      <div class="stats mono">4x agency revenue grown · 160M+ impressions<br><i>Emmy</i> winning film series · 50 contractors led</div>
+    </div>
+  </div>
+  <div class="overphoto">
+    <img src="/gallery/full/p-013.jpg" alt="">
+    <div class="t face">A decade in<br>the <span class="serif">hard rooms</span></div>
+    <span class="badge">✳ DJ RAMIREZ · CREATIVE DIRECTOR</span>
+    <span class="colo">MONUMENTS © MMXXVI · ELMT.NO.004259 · LA / BOISE</span>
+  </div>
+  <div class="wrap rows">
+    <div class="rowp"><span class="id">MC-2024-01</span><span class="t face">Art of Visuals</span><span class="tag"><i>\</i> Brand campaign · 4x</span></div>
+    <div class="rowp"><span class="id">MC-2023-04</span><span class="t face">Blue Cross of Idaho</span><span class="tag"><i>\</i> Documentary</span></div>
+  </div>
+  <div class="wrap banner">
+    <div class="big">Built to be remembered</div>
+    <p class="note">Clash at 600. Sharpest apertures of the three; the most "studio in 2026."</p>
+  </div>
+</section>
+
+<!-- ============ 03 CABINET ============ -->
+<section class="cand f-cab">
+  <div class="wrap bar"><span class="no">Candidate 03</span><span class="name">Cabinet Grotesk · the warm one (Suisse/editorial lane)</span></div>
+  <div class="wrap stmt">
+    <div class="line face">Moments people<br><span class="serif">show up</span> for<span class="spark">.</span></div>
+    <div class="sub">
+      <p>As AI floods the feed with cheap content, brands win in the real world. I lead the campaigns and experiences that get people to show up, not just scroll.</p>
+      <div class="stats mono">4x agency revenue grown · 160M+ impressions<br><i>Emmy</i> winning film series · 50 contractors led</div>
+    </div>
+  </div>
+  <div class="overphoto">
+    <img src="/gallery/full/p-049.jpg" alt="">
+    <div class="t face">A decade in<br>the <span class="serif">hard rooms</span></div>
+    <span class="badge">✳ DJ RAMIREZ · CREATIVE DIRECTOR</span>
+    <span class="colo">MONUMENTS © MMXXVI · ELMT.NO.004259 · LA / BOISE</span>
+  </div>
+  <div class="wrap rows">
+    <div class="rowp"><span class="id">MC-2024-01</span><span class="t face">Art of Visuals</span><span class="tag"><i>\</i> Brand campaign · 4x</span></div>
+    <div class="rowp"><span class="id">MC-2023-04</span><span class="t face">Blue Cross of Idaho</span><span class="tag"><i>\</i> Documentary</span></div>
+  </div>
+  <div class="wrap banner">
+    <div class="big">Built to be remembered</div>
+    <p class="note">Cabinet at 800. Warmest curves; closest to the nueu/adj rounded-logotype energy.</p>
+  </div>
+</section>
+
+<section class="verdict">
+  <div class="wrap">
+    <span class="mono">✳ The recipe (constant across all three)</span>
+    <h2>One grotesque, two weights max. Fragment Mono for every tag, ID, and colophon. Instrument Serif italics spliced into single words. Rose = the spark. <i>Cobalt = structure.</i> Type sits IN the photograph, not above it.</h2>
+  </div>
+</section>
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © 2026</span>
+    <span>Specimen · reply with 01 / 02 / 03</span>
+  </div>
+</footer>
+</body>
+</html>
