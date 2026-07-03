@@ -125,6 +125,21 @@ footer{background:var(--ink);border-top:1px solid var(--lined);padding:30px 0}
 footer .row{display:flex;justify-content:space-between;align-items:center;color:var(--dim);flex-wrap:wrap;gap:12px}
 footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
 
+
+/* footer under-reveal (tinywins) */
+.over{position:relative;z-index:1;background:inherit}
+.underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
+/* spark companion (workbyw glove, our glyph) */
+.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
+/* split-line statement rise */
+[data-split] .sl{display:block;overflow:hidden}
+[data-split] .sl>span{display:block;transform:translateY(112%);transition:transform .95s cubic-bezier(.22,1,.36,1)}
+[data-split].in .sl:nth-child(2)>span{transition-delay:.1s}
+[data-split].in .sl>span{transform:none}
+@media (prefers-reduced-motion:reduce){[data-split] .sl>span{transform:none}}
+
 .rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
 .rv.in{opacity:1;transform:none}
 @media (max-width:900px){
@@ -141,6 +156,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
+<div class="companion" aria-hidden="true">✳</div>
 
 <div class="corners">
   <span class="c1"><a href="index.html"><b>M<i>✳</i>NUMENTS</b></a></span>
@@ -149,6 +165,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   <span class="c4" id="clock">LA —:—</span>
 </div>
 
+<div class="over">
 <header class="hero">
   <img src="/gallery/full/p-049.jpg" alt="">
   <div class="t">
@@ -244,11 +261,13 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
   <div class="wrap">
     <span class="kick mono rv">✳ One conversation, no deck required</span>
-    <div class="big rv">Tell me what<br>you're <span class="serif">building.</span></div>
+    <div class="big" data-split>Tell me what<br>you're <span class="serif">building.</span></div>
     <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
   </div>
 </section>
 
+</div><!--/over-->
+<div class="underfoot">
 <footer>
   <div class="wrap row mono">
     <span>Monuments © MMXXVI · ELMT.NO.004259</span>
@@ -256,6 +275,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
     <span>Converged cut · About</span>
   </div>
 </footer>
+</div><!--/underfoot-->
 
 <script>
 (function(){const g=document.getElementById('rays');let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s})();
@@ -290,6 +310,39 @@ if(mag&&matchMedia('(pointer:fine)').matches){
 }
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
+
+// footer under-reveal sizing
+(function(){
+  const uf=document.querySelector('.underfoot'),over=document.querySelector('.over');
+  if(!uf||!over)return;
+  function size(){ if(matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)').matches){over.style.marginBottom='0px';return}
+    over.style.marginBottom=uf.offsetHeight+'px'; }
+  size();addEventListener('resize',size);setTimeout(size,600);
+})();
+// spark companion: drifts + rotates with scroll
+(function(){
+  const c=document.querySelector('.companion');
+  if(!c||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  let cTick=false;
+  addEventListener('scroll',()=>{
+    if(cTick)return;cTick=true;
+    requestAnimationFrame(()=>{
+      c.style.transform=`translateY(${(Math.sin(scrollY/420)*34).toFixed(1)}px) rotate(${(scrollY*0.22).toFixed(1)}deg)`;
+      cTick=false;
+    });
+  },{passive:true});
+})();
+// split-line rise
+(function(){
+  const els=document.querySelectorAll('[data-split]');
+  if(!els.length)return;
+  els.forEach(el=>{
+    el.innerHTML=el.innerHTML.split(/<br\s*\/?>/i).map(l=>`<span class="sl"><span>${l}</span></span>`).join('');
+  });
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.2});
+  els.forEach(el=>io.observe(el));
+})();
+
 
 // scroll-lit rows: light up as they cross the center band
 (function(){
