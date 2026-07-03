@@ -1,318 +1,444 @@
----
-import Base from '../layouts/Base.astro';
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Work · Monuments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style is:global>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --dispcond:var(--disp); --condstretch:75%;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
 
-const U = 'https://monuments.cc/wp-content/uploads/';
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.09;mix-blend-mode:multiply;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
 
-// Small thumbnails cycled through the floating galaxy.
-const thumbs = [
-  U + '2023/08/waffle-me-up-boise11-300x200.jpg',
-  U + '2024/10/Ad_1-300x200.jpg',
-  U + '2024/10/ONE00098-Edit-1-300x414.jpg',
-  U + '2023/12/B512B9E5-1FF2-48BD-B3AA-CDB03095E46B-300x169.jpg',
-  U + '2023/08/waffle-me-up-boise10-300x200.jpg',
-  U + '2024/10/DC9C9A41-A762-4948-8DF5-1AF9B06EEB56_1_105_c-300x449.jpeg',
-  U + '2024/11/dj-ramirez-creative-clothing_designer3-300x391.png',
-  U + '2024/10/Blue-Cross-Of-Idaho22-300x200.jpg',
-];
-const GX_COUNT = 18;
-// Floating header galaxy now pulls from DJ's real photo library (resized spread in /public/galaxy)
-const galaxy = Array.from({ length: 29 }, (_, i) => `/galaxy/gx-${String(i + 1).padStart(2, '0')}.jpg`);
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:20px;left:22px;pointer-events:auto}
+.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
+.corners .c1 i{font-style:normal;color:#fff;display:inline-block;animation:spin 7s linear infinite}
+.corners .c2{top:26px;right:22px;pointer-events:auto}
+.corners .c2 a{font-size:21px;letter-spacing:.06em}
+.corners .c2 a{margin-left:22px}
+.corners .c3{bottom:20px;left:22px}
+.corners .c4{bottom:20px;right:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
 
-// Flagship + selected case studies (the hiring-portfolio work). Pinned to the front of the
-// grid and linked to their /lab/* detail pages. Lead with the number in the tagline.
-const caseStudies = [
-  { slug: 'art-of-visuals', title: 'Art of Visuals',  tagline: 'Grew the agency 4x',     feeling: 'Strategic', industry: 'Agency',        tags: ['Creative Direction', 'Growth'],       cats: 'creative-direction',                    img: '/case-studies/art-of-visuals/gallery/xm5-01.jpg',    href: '/lab/art-of-visuals', feat: true },
-  { slug: 'dw-drums',       title: 'DW Drums',        tagline: 'One kit, two worlds',    feeling: 'Split',     industry: 'Product',       tags: ['Creative Direction', 'Design'],       cats: 'creative-direction',                    img: '/case-studies/dw-drums/gallery/face-off.jpg',        href: '/lab/dw-drums', feat: true },
-  { slug: 'buck-the-quo',   title: 'Buck the Quo',    tagline: '18,000+ conversations',  feeling: 'Human',     industry: 'Social change', tags: ['Experiential', 'Creative Direction'], cats: 'creative-direction experiential',       img: '/case-studies/buck-the-quo/gallery/future-sign.jpg', href: '/lab/buck-the-quo', feat: true },
-  { slug: 'adorama-music',  title: 'Adorama Music',   tagline: '160M+ impressions',      feeling: 'Cinematic', industry: 'Brand film',    tags: ['Creative Direction', 'Brand Film'],   cats: 'creative-direction video',              img: '/case-studies/adorama-music/gallery/am-07.jpg',      href: '/lab/adorama-music', feat: true },
-  { slug: 'know-vape',      title: 'Know Vape',       tagline: 'Emmy-winning campaign',  feeling: 'Honest',    industry: 'Public media',  tags: ['Director', 'Film Series'],            cats: 'creative-direction video experiential', img: '/case-studies/know-vape/gallery/hero.jpg',           href: '/lab/know-vape', feat: true },
-  { slug: 'ac-boise',       title: 'AC Boise',        tagline: 'This kit is Boise',      feeling: 'Civic',     industry: 'Pro sport',     tags: ['Director', 'Kit Reveal'],             cats: 'creative-direction video experiential', img: '/case-studies/ac-boise/gallery/home-01.jpg',         href: '/lab/ac-boise', feat: true },
-  { slug: 'donut-zumiez',   title: 'Donut × Zumiez',  tagline: 'Launch films',           feeling: 'Playful',   industry: 'Streetwear',    tags: ['Director', 'Launch Films'],           cats: 'creative-direction video',              img: '/case-studies/donut-zumiez/gallery/film-01.jpg',     href: '/lab/donut-zumiez', feat: true },
-];
+/* hero: statement on paper */
+.hero{position:relative;min-height:78svh;display:flex;align-items:flex-end;padding:14vh 0 7vh;border-bottom:2px solid var(--ink);overflow:hidden}
+.hero .kick{color:var(--red)}
+.hero h1{font-weight:var(--dispw);font-size:clamp(56px,10.4vw,152px);line-height:.88;letter-spacing:-.035em;text-transform:uppercase;margin-top:16px}
+.hero h1 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero h1 .ln:nth-child(2)>span{animation-delay:.12s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-top:5vh;width:100%}
+.hero .sub p{max-width:44ch;color:#4c4a45}
+.hero .count{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88;text-align:right;line-height:2}
+.hero .count b{color:var(--ink);font-weight:400}
 
-const projects = [
-  ...caseStudies,
-  { slug: 'turnstile',          title: 'Turnstile Audio',         tagline: 'Sound, redefined',          feeling: 'Bold',      industry: 'Audio',      tags: ['Branding', 'Creative Direction'],    cats: 'branding creative-direction',    img: U + '2023/08/sound.webp' },
-  { slug: 'waffle-me-up',       title: 'Waffle Me Up',            tagline: 'A taste worth the wait',    feeling: 'Warm',      industry: 'Food & Bev', tags: ['Branding', 'Photography'],           cats: 'branding photography',           img: U + '2023/08/waffle-me-up-boise11-scaled.jpg' },
-  { slug: 'flashpoint',         title: 'Flashpoint',              tagline: 'The decisive moment',       feeling: 'Sharp',     industry: 'Retail',     tags: ['Branding', 'Creative Direction'],    cats: 'branding creative-direction',    img: U + '2024/10/Ad_1-scaled.jpg' },
-  { slug: 'blue-cross',         title: 'Blue Cross of Idaho',     tagline: 'Care, made human',          feeling: 'Trusted',   industry: 'Healthcare', tags: ['Creative Direction', 'Photography'], cats: 'creative-direction photography', img: U + '2024/10/Blue-Cross-Of-Idaho22-scaled.jpg' },
-  { slug: 'sony-this-moment',   title: 'Sony — This Moment',      tagline: 'Every frame, a feeling',    feeling: 'Cinematic', industry: 'Technology', tags: ['Creative Direction', 'Video'],       cats: 'creative-direction video',       img: U + '2024/10/ONE00098-Edit-1-scaled.jpg' },
-  { slug: 'sony-flow-state',    title: 'Sony — Flow State',       tagline: 'In the zone',               feeling: 'Focused',   industry: 'Technology', tags: ['Creative Direction', 'Video'],       cats: 'creative-direction video',       img: U + '2024/10/AOV-X-Sony-Select-22-scaled.jpg' },
-  { slug: 'sony-xperia-summer', title: 'Sony — Summer w/ Xperia', tagline: 'A summer in motion',        feeling: 'Vivid',     industry: 'Technology', tags: ['Creative Direction', 'Photography'], cats: 'creative-direction photography', img: U + '2024/10/DC9C9A41-A762-4948-8DF5-1AF9B06EEB56_1_105_c.jpeg' },
-  { slug: 'photography',        title: 'Photography',             tagline: 'Light, shadow, story',      feeling: 'Raw',       industry: 'Editorial',  tags: ['Photography'],                       cats: 'photography',                    img: U + '2023/12/B512B9E5-1FF2-48BD-B3AA-CDB03095E46B-scaled.jpg', href: '/photography' },
-  { slug: 'clothing-merch',     title: 'Clothing & Merch',        tagline: 'Wear the work',             feeling: 'Street',    industry: 'Apparel',    tags: ['Branding', 'Apparel'],               cats: 'branding',                       img: U + '2024/11/dj-ramirez-creative-clothing_designer3.png' },
-];
+/* stat band */
+.statrow{background:var(--struct)}
+.statrow .in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:26px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72)}
+.statrow b{color:var(--paper);font-weight:400}
+.statrow i{font-style:normal;color:var(--paper)}
 
-const filters = [
-  { label: 'All', value: 'all' },
-  { label: 'Branding', value: 'branding' },
-  { label: 'Creative Direction', value: 'creative-direction' },
-  { label: 'Experiential', value: 'experiential' },
-  { label: 'Photography', value: 'photography' },
-  { label: 'Video', value: 'video' },
-];
----
-<Base title="WORK - monuments">
-  <div class="work-page view-grid">
-    <header class="galaxy" id="galaxy">
-      <div class="galaxy-field" data-particles="container" aria-hidden="true">
-        {Array.from({ length: GX_COUNT }).map((_, i) => (
-          <img class="gx-img" data-particles="image" src={galaxy[i % galaxy.length]} alt="" loading="eager" />
-        ))}
-      </div>
-      <div class="galaxy-head">
-        <h1 class="hero-float-title">
-          <span class="gx-word" style="--tx:-40px;--ty:0px;--delay:0s">The</span>
-          <span class="gx-word" style="--tx:0px;--ty:-40px;--delay:0.1s">work</span><br>
-          <span class="gx-word" style="--tx:0px;--ty:40px;--delay:0.2s">speaks.</span>
-        </h1>
-        <p class="galaxy-sub">Here's some of it.</p>
-      </div>
-    </header>
 
-    <div class="wp-controls">
-      <div class="wp-filter" role="tablist" aria-label="Filter projects">
-        {filters.map((f, idx) => (
-          <button type="button" data-filter={f.value} class={idx === 0 ? 'active' : ''}>{f.label}</button>
-        ))}
-      </div>
-      <div class="wp-controls-right">
-        <div class="wp-cols" role="group" aria-label="Column layout">
-          <button type="button" data-cols="2" aria-label="Two columns"><i></i><i></i></button>
-          <button type="button" data-cols="4" class="on" aria-label="Four columns"><i></i><i></i><i></i><i></i></button>
-        </div>
-        <div class="wp-view" role="group" aria-label="View layout">
-          <button type="button" data-view="grid" class="on" aria-label="Grid view"><span class="wp-view-grid"><i></i><i></i><i></i><i></i></span></button>
-          <button type="button" data-view="list" aria-label="List view"><span class="wp-view-list"><i></i><i></i><i></i></span></button>
-        </div>
+/* brands scroller (lab BrandTicker, ported) */
+.brand-ticker{overflow:hidden;padding:clamp(20px,2.8vw,36px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.bt-track{display:flex;align-items:center;gap:clamp(40px,5vw,88px);width:max-content;will-change:transform;transform:translate3d(0,0,0)}
+.bt-item{flex:0 0 auto;display:inline-flex;align-items:center;height:clamp(22px,2.4vw,34px);transition:transform .25s}
+a.bt-item:hover{transform:translateY(-2px)}
+.bt-logo{height:100%;width:auto;max-width:calc(clamp(22px,2.4vw,34px)*5.2);object-fit:contain;display:block;opacity:.78;transition:filter .3s,opacity .25s}
+a.bt-item:hover .bt-logo{filter:none!important;opacity:1}
+@media (prefers-reduced-motion:reduce){.bt-track{transform:none!important}}
+.brand-ticker.bt-black{background:var(--paper);border-bottom:1px solid var(--line)}
+.bt-black .bt-logo{filter:brightness(0)}
+
+/* discipline lens: highlight, don't hide */
+.lens{border-bottom:1px solid var(--line);background:var(--paper)}
+.lens .in{display:flex;align-items:baseline;gap:10px 14px;flex-wrap:wrap;padding:18px 0}
+.lens .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-right:8px}
+.lens button{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:99px;padding:8px 14px;color:#55524c;cursor:pointer;transition:border-color .25s,color .25s,background .25s}
+.lens button:hover{border-color:var(--ink);color:var(--ink)}
+.lens button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.lens button b{font-weight:400;color:var(--red)}
+.lens button.on b{color:var(--spark)}
+body.lensed .rowp:not(.match){opacity:.14;filter:grayscale(1)}
+body.lensed .rowp.match{opacity:1}
+body.lensed .rowp.match .id{color:var(--red)}
+.rowp{transition:background .3s,padding-left .4s cubic-bezier(.22,1,.36,1),opacity .45s,filter .45s}
+
+/* the archive: taxonomy groups + rows */
+.arch{padding:7vh 0 9vh}
+.group{padding-top:6vh}
+.group .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.group .bar .mono b{color:var(--red)}
+.rowp{display:grid;grid-template-columns:118px 1fr auto auto;gap:26px;align-items:baseline;padding:26px 0;border-bottom:1px solid var(--line);transition:background .3s,padding-left .4s cubic-bezier(.22,1,.36,1)}
+.rowp:hover{background:#fff;padding-left:16px}
+.rowp .id{font-family:var(--mono);font-size:10.5px;color:var(--dim);text-transform:uppercase}
+.rowp:hover .id{color:var(--red)}
+.rowp .t{font-weight:var(--dispw);font-size:clamp(26px,3.8vw,54px);letter-spacing:-.03em;line-height:.95;text-transform:uppercase;transition:color .3s}
+.rowp:hover .t{color:var(--struct)}
+.rowp .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.rowp .fmt{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rowp .fmt i{font-style:normal;color:var(--struct)}
+.rowp .fmt b.mx{font-weight:400;color:var(--red);margin-left:10px}
+.rowp .yr{font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+.litrow{opacity:.32;transition:opacity .5s cubic-bezier(.22,1,.36,1)}
+.litrow.lit{opacity:1}
+@media (prefers-reduced-motion:reduce){.litrow{opacity:1}}
+.rowp.litrow{transition:background .3s,padding-left .4s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1)}
+
+/* cursor-trailing preview */
+#preview{position:fixed;z-index:55;width:330px;height:224px;pointer-events:none;overflow:hidden;opacity:0;transform:scale(.94) rotate(-1.5deg);transition:opacity .25s,transform .25s;box-shadow:0 24px 60px rgba(20,20,20,.28);background:#fff;padding:7px 7px 22px}
+#preview img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92)}
+#preview .cap{position:absolute;left:9px;bottom:4px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
+#preview.on{opacity:1;transform:scale(1) rotate(-1.5deg)}
+@media (max-width:900px),(prefers-reduced-motion:reduce){#preview{display:none}}
+
+/* rose interlude: the sheet strip */
+.strip{background:var(--spark);padding:9vh 0;overflow:hidden}
+.strip .track{display:flex;width:max-content;animation:drift 40s linear infinite}
+.strip:hover .track{animation-play-state:paused}
+@keyframes drift{to{transform:translateX(-50%)}}
+.strip .fr{background:#fff;padding:6px 6px 20px;flex:none;position:relative;box-shadow:0 14px 34px rgba(20,20,20,.16);margin-right:14px}
+.strip .fr img{height:180px;width:auto;display:block;filter:saturate(.92)}
+.strip .fr .cap{position:absolute;left:7px;bottom:4px;font-family:var(--mono);font-size:8.5px;color:var(--dim);text-transform:uppercase}
+
+/* cta on ink */
+.cta{position:relative;background:var(--ink);color:var(--paper);padding:15vh 0 16vh;text-align:center;overflow:hidden}
+.cta .emblem{width:112px;aspect-ratio:1;margin:0 auto 30px;display:block;animation:spin 70s linear infinite}
+.cta .emblem g{fill:var(--paper)}
+.cta .kick{color:var(--spark)}
+.cta .big{font-weight:var(--dispw);font-size:clamp(44px,7.6vw,112px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:20px}
+.cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.cta .pill{display:inline-flex;margin-top:42px;padding:20px 38px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
+.cta .pill:hover{background:var(--spark)}
+footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
+footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
+
+.over{position:relative;z-index:1;background:inherit}
+.underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
+[data-split] .sl{display:block;overflow:hidden}
+[data-split] .sl>span{display:block;transform:translateY(112%);transition:transform .95s cubic-bezier(.22,1,.36,1)}
+[data-split].in .sl:nth-child(2)>span{transition-delay:.1s}
+[data-split].in .sl>span{transform:none}
+@media (prefers-reduced-motion:reduce){[data-split] .sl>span{transform:none}}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:900px){
+  .rowp{grid-template-columns:1fr auto}.rowp .id,.rowp .yr{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero h1 .ln>span{transform:none}.rv{opacity:1;transform:none}.grain{animation:none}
+  .strip .track{animation:none!important}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="companion" aria-hidden="true">✳</div>
+
+<div class="corners">
+  <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/lab">Lab</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a></span>
+  <span class="c3">The archive · roll 2016–2026</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<div class="over">
+<header class="hero">
+  <div class="wrap">
+    <span class="kick mono">Work · DJ Ramirez · Monuments</span>
+    <h1>
+      <span class="ln"><span>The</span></span>
+      <span class="ln"><span><span class="serif">archive</span>.</span></span>
+    </h1>
+    <div class="sub">
+      <p>Campaigns, films, and brand builds from the last decade. Every entry is real, shipped, and accounted for. Hover to inspect.</p>
+      <div class="count mono">
+        <span><b>15</b> projects on file</span><br>
+        <span><b>4</b> categories</span><br>
+        <span><b>✳</b> selects marked</span>
       </div>
     </div>
+  </div>
+</header>
 
-    <div class="wp-grid ov-focus cols-4" id="wp-grid">
-      {projects.map((p) => (
-        <a class={p.feat ? 'wp-card fade is-feat' : 'wp-card fade'} href={p.href ?? `/work/${p.slug}`} data-cats={p.cats} data-feat={p.feat ? '1' : undefined}>
-          <div class="wp-card-media">
-            <img src={p.img} alt={p.title} loading="lazy" />
-            {p.feat && <span class="wp-card-badge">Case study</span>}
-            <div class="wp-card-overlay">
-              <div class="wp-card-tags">{p.tags.map((t) => <span>{t}</span>)}</div>
-              <h3 class="wp-card-title">{p.title}</h3>
-              {p.feat && p.tagline && <p class="wp-card-result">{p.tagline}</p>}
-            </div>
-          </div>
-        </a>
-      ))}
-    </div>
+<div class="statrow">
+  <div class="wrap in">
+    <span><b>4x</b> agency revenue grown</span>
+    <span><b>160M+</b> campaign impressions</span>
+    <span><i>✳</i> <b>Emmy</b> winning film series</span>
+    <span><b>50</b> contractors led</span>
+  </div>
+</div>
 
-    <div class="wp-list" id="wp-list">
-      {projects.map((p) => (
-        <a class="wp-row" href={p.href ?? `/work/${p.slug}`} data-cats={p.cats}>
-          <div class="wp-row-head">
-            <div class="wp-row-main">
-              <h3 class="wp-row-title">{p.title}</h3>
-              <p class="wp-row-tagline">{p.tagline}</p>
-            </div>
-            <div class="wp-row-meta">
-              <span><em>Feeling</em>{p.feeling}</span>
-              <span><em>Industry</em>{p.industry}</span>
-            </div>
-            <span class="wp-row-arrow" aria-hidden="true">↗</span>
-          </div>
-          <div class="wp-strip" data-lenis-prevent>
-            {thumbs.map((t) => <img src={t} alt="" loading="lazy" />)}
-          </div>
-        </a>
-      ))}
-    </div>
+<div class="brand-ticker bt-black" data-speed="28" aria-label="Brands worked with">
+  <div class="bt-track">
+    <a class="bt-item" href="https://www.sony.com" target="_blank" rel="noopener" aria-label="Sony"><img class="bt-logo" src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.intel.com" target="_blank" rel="noopener" aria-label="Intel"><img class="bt-logo" src="/logos/intel.png" alt="Intel" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Adorama"><img class="bt-logo" src="/logos/adorama.png" alt="Adorama" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.msi.com" target="_blank" rel="noopener" aria-label="MSI"><img class="bt-logo" src="/logos/msi.png" alt="MSI" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.lexar.com" target="_blank" rel="noopener" aria-label="Lexar"><img class="bt-logo" src="/logos/lexar.png" alt="Lexar" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Flashpoint"><img class="bt-logo" src="/logos/flashpoint.png" alt="Flashpoint" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://artofvisuals.com" target="_blank" rel="noopener" aria-label="Art of Visuals"><img class="bt-logo" src="/logos/art-of-visuals.png" alt="Art of Visuals" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.bcidaho.com" target="_blank" rel="noopener" aria-label="Blue Cross of Idaho"><img class="bt-logo" src="/logos/blue-cross.png" alt="Blue Cross of Idaho" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://donut.media" target="_blank" rel="noopener" aria-label="Donut Media"><img class="bt-logo" src="/logos/donut-media.svg" alt="Donut Media" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.dwdrums.com" target="_blank" rel="noopener" aria-label="DW Drums"><img class="bt-logo" src="/logos/dw-drums.png" alt="DW Drums" loading="lazy" decoding="async"></a>
+    <span class="bt-item"><img class="bt-logo" src="/logos/against.png" alt="Against" loading="lazy" decoding="async"></span>
+    <a class="bt-item" href="https://www.sony.com" target="_blank" rel="noopener" aria-label="Sony"><img class="bt-logo" src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.intel.com" target="_blank" rel="noopener" aria-label="Intel"><img class="bt-logo" src="/logos/intel.png" alt="Intel" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Adorama"><img class="bt-logo" src="/logos/adorama.png" alt="Adorama" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.msi.com" target="_blank" rel="noopener" aria-label="MSI"><img class="bt-logo" src="/logos/msi.png" alt="MSI" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.lexar.com" target="_blank" rel="noopener" aria-label="Lexar"><img class="bt-logo" src="/logos/lexar.png" alt="Lexar" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Flashpoint"><img class="bt-logo" src="/logos/flashpoint.png" alt="Flashpoint" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://artofvisuals.com" target="_blank" rel="noopener" aria-label="Art of Visuals"><img class="bt-logo" src="/logos/art-of-visuals.png" alt="Art of Visuals" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.bcidaho.com" target="_blank" rel="noopener" aria-label="Blue Cross of Idaho"><img class="bt-logo" src="/logos/blue-cross.png" alt="Blue Cross of Idaho" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://donut.media" target="_blank" rel="noopener" aria-label="Donut Media"><img class="bt-logo" src="/logos/donut-media.svg" alt="Donut Media" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.dwdrums.com" target="_blank" rel="noopener" aria-label="DW Drums"><img class="bt-logo" src="/logos/dw-drums.png" alt="DW Drums" loading="lazy" decoding="async"></a>
+    <span class="bt-item"><img class="bt-logo" src="/logos/against.png" alt="Against" loading="lazy" decoding="async"></span>
+  </div>
+</div>
 
-    <div class="wp-cursor" id="wpCursor" aria-hidden="true">View Project</div>
+<div class="lens">
+  <div class="wrap in" id="lens">
+    <span class="lab">\ Disciplines</span>
+    <button data-d="all" class="on">All <b id="cAll"></b></button>
+    <button data-d="commercial">Commercial directing <b></b></button>
+    <button data-d="cd">Creative direction <b></b></button>
+    <button data-d="photo">Photography <b></b></button>
+    <button data-d="experiential">Experiential <b></b></button>
+    <button data-d="campaign">Campaign development <b></b></button>
+    <button data-d="oncam">On-camera <b></b></button>
+  </div>
+</div>
+
+<section class="arch wrap">
+
+  <div class="group">
+    <div class="bar"><span class="mono"><b>\ Selected</b> · the ones to see first</span><span class="mono" style="color:#8f8d88">01–04</span></div>
+    <a class="rowp litrow" href="/work/art-of-visuals" data-img="/case-studies/art-of-visuals/gallery/podcast-cover.jpg" data-cap="MC-2024-01 · GREW THE AGENCY 4X" data-disc="cd,campaign,oncam">
+      <span class="id">MC-2024-01 ✳</span><span class="t">Art of <span class="serif">Visuals</span></span><span class="fmt"><i>\</i> Brand campaign <b class="mx">4x</b></span><span class="yr">2024</span>
+    </a>
+    <a class="rowp litrow" href="/work/sony-this-moment" data-img="/case-studies/sony-this-moment/gallery/tm-09.jpg" data-cap="MC-2023-06 · SONY AUDIO" data-disc="cd,photo,campaign">
+      <span class="id">MC-2023-06 ✳</span><span class="t">Sony · This <span class="serif">Moment</span></span><span class="fmt"><i>\</i> Campaign film + stills</span><span class="yr">2023</span>
+    </a>
+    <a class="rowp litrow" href="/work/blue-cross" data-img="/case-studies/blue-cross/bc-2.jpg" data-cap="MC-2023-04 · REAL PEOPLE, REAL STAKES" data-disc="cd,photo,campaign,commercial">
+      <span class="id">MC-2023-04 ✳</span><span class="t">Blue Cross <span class="serif">of Idaho</span></span><span class="fmt"><i>\</i> Documentary campaign <b class="mx">1 week · 23 frames</b></span><span class="yr">2023</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/adorama-music/gallery/am-01.jpg" data-cap="MC-2022-07 · 160M+ IMPRESSIONS" data-disc="cd,commercial,campaign">
+      <span class="id">MC-2022-07 ✳</span><span class="t">Adorama <span class="serif">Music</span></span><span class="fmt"><i>\</i> Content series <b class="mx">160M+</b></span><span class="yr">2022</span>
+    </a>
   </div>
 
-  <script is:inline>
-    // Floating image "galaxy" — ported from the reference's Particles component.
-    // Perpetual drift + Lenis scroll-velocity momentum + depth-scale + infinite wrap.
-    (function () {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const galaxy = document.getElementById('galaxy');
-      if (!galaxy) return;
-      const field = galaxy.querySelector('[data-particles="container"]');
-      const imgs = Array.from(galaxy.querySelectorAll('[data-particles="image"]'));
-      if (!imgs.length) return;
+  <div class="group">
+    <div class="bar"><span class="mono"><b>\ Campaigns</b> · integrated + experiential</span><span class="mono" style="color:#8f8d88">05–08</span></div>
+    <a class="rowp litrow" href="#" data-img="/case-studies/buck-the-quo/gallery/chop-board.jpg" data-cap="MC-2021-03 · EMMY-WINNING SERIES" data-disc="commercial,cd,oncam">
+      <span class="id">MC-2021-03 ✳</span><span class="t">Buck the <span class="serif">Quo</span></span><span class="fmt"><i>\</i> Film series · Emmy</span><span class="yr">2021</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" data-cap="MC-2022-02 · SONY XPERIA" data-disc="campaign,photo,commercial">
+      <span class="id">MC-2022-02</span><span class="t">Xperia <span class="serif">Summer</span></span><span class="fmt"><i>\</i> Product campaign</span><span class="yr">2022</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/donut-zumiez/gallery/dz-01.jpg" data-cap="MC-2023-08 · DONUT X ZUMIEZ" data-disc="campaign,experiential,cd">
+      <span class="id">MC-2023-08</span><span class="t">Donut × <span class="serif">Zumiez</span></span><span class="fmt"><i>\</i> Retail collab</span><span class="yr">2023</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/ac-boise/gallery/away-01.jpg" data-cap="MC-2024-05 · KIT REVEAL" data-disc="experiential,campaign,cd">
+      <span class="id">MC-2024-05</span><span class="t">AC <span class="serif">Boise</span></span><span class="fmt"><i>\</i> Kit reveal · Experiential</span><span class="yr">2024</span>
+    </a>
+  </div>
 
-      const cfg = { speed: 0.069, ease: 0.1, scaleEase: 0.25, scrollMult: 0.035, scaleMin: 0.5, scaleMax: 1.4 };
-      const srcs = [...new Set(imgs.map((im) => im.src))];
-      const rnd = (n) => Math.floor(Math.random() * n);
-      const rand = (min, max) => min + Math.random() * (max - min);
-      const lerp = (a, b, t) => (1 - t) * a + t * b;
+  <div class="group">
+    <div class="bar"><span class="mono"><b>\ Films &amp; series</b> · the longer stories</span><span class="mono" style="color:#8f8d88">09–11</span></div>
+    <a class="rowp litrow" href="#" data-img="/case-studies/sony-flow-state/gallery/fs-01.jpg" data-cap="MC-2023-07 · SONY AUDIO" data-disc="commercial,cd">
+      <span class="id">MC-2023-07</span><span class="t">Sony · Flow <span class="serif">State</span></span><span class="fmt"><i>\</i> Campaign film</span><span class="yr">2023</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/dw-drums/gallery/emotional-split.jpg" data-cap="MC-2022-04 · DW DRUMS" data-disc="commercial,photo">
+      <span class="id">MC-2022-04</span><span class="t">DW <span class="serif">Drums</span></span><span class="fmt"><i>\</i> Brand film</span><span class="yr">2022</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/know-vape/gallery/banner.jpg" data-cap="MC-2021-06 · PUBLIC HEALTH" data-disc="campaign,commercial,cd">
+      <span class="id">MC-2021-06</span><span class="t">Know <span class="serif">Vape</span></span><span class="fmt"><i>\</i> PSA campaign</span><span class="yr">2021</span>
+    </a>
+  </div>
 
-      let containerH = 0, offsetH = 0;
-      const st = { current: 0, target: 0, last: 0 };
-      let dirSign = 1, direction = 'down';
+  <div class="group">
+    <div class="bar"><span class="mono"><b>\ Brand &amp; product</b> · zero to shelf</span><span class="mono" style="color:#8f8d88">12–15</span></div>
+    <a class="rowp litrow" href="#" data-img="/case-studies/turnstile/products/prod-01.jpg" data-cap="MC-2023-02 · TURNSTILE AUDIO" data-disc="cd,campaign,photo">
+      <span class="id">MC-2023-02</span><span class="t">Turnstile <span class="serif">Audio</span></span><span class="fmt"><i>\</i> Brand + product launch</span><span class="yr">2023</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/flashpoint/gallery/fp-01.jpg" data-cap="MC-2020-02 · FLASHPOINT" data-disc="cd,campaign">
+      <span class="id">MC-2020-02</span><span class="t">Flash<span class="serif">point</span></span><span class="fmt"><i>\</i> Brand build</span><span class="yr">2020</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/waffle-me-up/cover.jpg" data-cap="MC-2019-05 · WAFFLE ME UP" data-disc="cd,experiential,photo">
+      <span class="id">MC-2019-05</span><span class="t">Waffle <span class="serif">Me Up</span></span><span class="fmt"><i>\</i> Brand + spatial</span><span class="yr">2019</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/clothing-merch/gallery/cm-01.jpg" data-cap="MC-2020-08 · APPAREL" data-disc="cd,photo">
+      <span class="id">MC-2020-08</span><span class="t">Clothing &amp; <span class="serif">Merch</span></span><span class="fmt"><i>\</i> Apparel + print</span><span class="yr">2020</span>
+    </a>
+  </div>
 
-      // Ease the drift down to ~20% while the cursor is over the header
-      let speedFactor = 1, targetFactor = 1;
-      galaxy.addEventListener('mouseenter', () => { targetFactor = 0.2; });
-      galaxy.addEventListener('mouseleave', () => { targetFactor = 1; });
+</section>
+<div id="preview"><img alt=""><span class="cap"></span></div>
 
-      function layout() {
-        const rect = field.getBoundingClientRect();
-        containerH = field.clientHeight;
-        offsetH = containerH * 0.1;
-        const mobile = window.innerWidth < 700;
-        imgs.forEach((im, n) => {
-          if (im._init === undefined) {
-            im._init = true;
-            im._x = rnd(96);
-            im._y = rnd(100);
-            im._sp = rand(0.6, 1.45);                   // random parallax speed (wider)
-            im._z = Math.round(rand(-260, 260));        // random depth (wider)
-            im._rot = rand(-11, 11).toFixed(2);         // random tilt (wider)
-            im._baseScale = rand(0.62, 1.5);            // persistent per-image size — some bigger, some smaller
-            im.src = srcs[rnd(srcs.length)];            // random image (not sequential)
-          }
-          im.style.opacity = im._z < 0 ? Math.max(0.5, 1 + im._z / 250) : 1;
-          im.style.left = (mobile ? ((n % 4) * 25 + (im._x % 20)) : im._x) + '%';
-          im.style.top = im._y + '%';
-          im.style.transform = `translate3d(0,0,0) rotate(${im._rot}deg)`;
-          const r = im.getBoundingClientRect();
-          im._extra = 0; im._h = r.height; im._top = r.top - rect.top; im._scale = 1;
-        });
-      }
+<div class="strip" aria-hidden="true">
+  <div class="track" id="stripTrack"></div>
+</div>
 
-      let lastT = 0;
-      function tick(t) {
-        const dt = lastT ? Math.min(64, t - lastT) : 16; lastT = t;
-        const vel = (window.lenis && window.lenis.velocity) || 0;
-        if (vel) { st.target += vel * cfg.scrollMult; dirSign = Math.sign(vel) || dirSign; }
-        speedFactor = lerp(speedFactor, targetFactor, 0.04);
-        st.target += cfg.speed * dt * dirSign * speedFactor;
-        st.current = lerp(st.current, st.target, cfg.ease);
-        direction = st.current < st.last ? 'down' : 'up';
-        imgs.forEach((im) => {
-          let pos = -st.current * im._sp - im._extra;
-          const bottom = pos + im._top + im._h;
-          if (direction === 'up' && bottom < -offsetH) im._extra -= containerH + offsetH;
-          if (direction === 'down' && bottom > containerH + offsetH) im._extra += containerH;
-          pos = -st.current * im._sp - im._extra;
-          const l = Math.max(0, Math.min(1, (pos + im._top) / containerH));
-          const target = cfg.scaleMin + l * (cfg.scaleMax - cfg.scaleMin);
-          im._scale = lerp(im._scale, target, cfg.scaleEase);
-          im.style.transform = `translate3d(0, ${pos.toFixed(1)}px, ${im._z}px) scale(${(im._scale * im._baseScale).toFixed(3)}) rotate(${im._rot}deg)`;
-        });
-        st.last = st.current;
-        requestAnimationFrame(tick);
-      }
+<section class="cta">
+  <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
+  <div class="wrap">
+    <span class="kick mono rv">✳ One conversation, no deck required</span>
+    <div class="big" data-split>Tell me what<br>you're <span class="serif">building.</span></div>
+    <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
+  </div>
+</section>
+</div><!--/over-->
 
-      layout();
-      if (reduce) return; // static field if reduced motion
-      galaxy.classList.add('gx-ready');
-      requestAnimationFrame(tick);
-      let rt;
-      window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(layout, 200); }, { passive: true });
-    })();
+<div class="underfoot">
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
+    <span class="blk">built to be remembered</span>
+    <span>Work</span>
+  </div>
+</footer>
+</div><!--/underfoot-->
 
-    // Category filter (grid cards + list rows) with a reorder animation
-    (function () {
-      const page = document.querySelector('.work-page');
-      const grid = document.getElementById('wp-grid');
-      if (!grid || !page) return;
-      const btns = document.querySelectorAll('.wp-filter button');
-      const items = Array.from(document.querySelectorAll('.wp-card, .wp-row'));
-      btns.forEach((b) => b.addEventListener('click', () => {
-        const f = b.dataset.filter;
-        btns.forEach((x) => x.classList.remove('active'));
-        b.classList.add('active');
-        grid.classList.toggle('filtered', f !== 'all');
-        page.classList.add('wp-switching');                 // fade the current set out
-        setTimeout(() => {
-          items.forEach((c) => {
-            const show = f === 'all' || c.dataset.cats.split(' ').includes(f);
-            c.classList.toggle('hide', !show);
-          });
-          const vis = items.filter((c) => !c.classList.contains('hide'));
-          vis.forEach((c, i) => { c.style.animationDelay = (Math.min(i, 14) * 0.03) + 's'; });
-          page.classList.remove('wp-switching');
-          page.classList.remove('wp-entering'); void page.offsetWidth; page.classList.add('wp-entering'); // staggered rebuild
-        }, 230);
-      }));
-    })();
+<script is:inline>
+(function(){const g=document.getElementById('rays');let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s})();
 
-    // Cursor-following "View Project" badge over work cards
-    (function () {
-      const cur = document.getElementById('wpCursor');
-      if (!cur) return;
-      const cards = document.querySelectorAll('.wp-card');
-      if (!cards.length) return;
-      let tx = 0, ty = 0, cx = 0, cy = 0;
-      function loop() {
-        cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18;
-        cur.style.left = cx.toFixed(1) + 'px'; cur.style.top = cy.toFixed(1) + 'px';
-        requestAnimationFrame(loop);
-      }
-      cards.forEach((card) => {
-        card.addEventListener('mouseenter', (e) => { tx = cx = e.clientX; ty = cy = e.clientY; cur.classList.add('show'); });
-        card.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
-        card.addEventListener('mouseleave', () => { cur.classList.remove('show'); });
-      });
-      loop();
-    })();
+// strip: pull covers from the index rows themselves (single source of truth)
+(function(){
+  const rows=[...document.querySelectorAll('.rowp')];
+  const frs=rows.map((r,i)=>`<div class="fr"><img src="${r.dataset.img}" alt="" loading="lazy"><span class="cap">FR-${String(i+1).padStart(2,'0')} · ${r.querySelector('.t').textContent.trim().toUpperCase().slice(0,22)}</span></div>`).join('');
+  document.getElementById('stripTrack').innerHTML=frs+frs;
+})();
 
-    // Randomize portfolio order on load, but PIN the featured case studies to the front
-    // (they lead the hiring portfolio); only the rest shuffle. Cards are opacity:0 here.
-    (function () {
-      const grid = document.getElementById('wp-grid');
-      if (!grid) return;
-      const all = Array.from(grid.children);
-      const feat = all.filter((c) => c.dataset.feat === '1');
-      const rest = all.filter((c) => c.dataset.feat !== '1');
-      for (let i = rest.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [rest[i], rest[j]] = [rest[j], rest[i]];
-      }
-      [...feat, ...rest].forEach((c) => grid.appendChild(c));
-    })();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
-    // Column-count toggle (2 / 4)
-    (function () {
-      const grid = document.getElementById('wp-grid');
-      if (!grid) return;
-      const btns = document.querySelectorAll('.wp-cols button');
-      btns.forEach((b) => b.addEventListener('click', () => {
-        grid.classList.remove('cols-2', 'cols-4');
-        grid.classList.add('cols-' + b.dataset.cols);
-        btns.forEach((x) => x.classList.remove('on'));
-        b.classList.add('on');
-      }));
-    })();
-
-    // View toggle (grid / list)
-    (function () {
-      const page = document.querySelector('.work-page');
-      if (!page) return;
-      const btns = document.querySelectorAll('.wp-view button');
-      btns.forEach((b) => b.addEventListener('click', () => {
-        const v = b.dataset.view;
-        page.classList.toggle('view-grid', v === 'grid');
-        page.classList.toggle('view-list', v === 'list');
-        btns.forEach((x) => x.classList.remove('on'));
-        b.classList.add('on');
-      }));
-    })();
-
-  </script>
-
-<style>
-  /* Featured case-study cards: a small badge + the headline result, always visible. */
-  .wp-card-media { position: relative; }
-  .wp-card-badge {
-    position: absolute; top: 12px; left: 12px; z-index: 2;
-    font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #fff;
-    background: rgb(13 15 20 / 0.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-    padding: 5px 10px; border-radius: 999px;
+// discipline lens: highlight matching rows, dim the rest (never hide)
+(function(){
+  const rows=[...document.querySelectorAll('.rowp')];
+  const btns=[...document.querySelectorAll('#lens button')];
+  // counts
+  btns.forEach(b=>{
+    const d=b.dataset.d;
+    const n=d==='all'?rows.length:rows.filter(r=>(r.dataset.disc||'').split(',').includes(d)).length;
+    b.querySelector('b').textContent=String(n).padStart(2,'0');
+  });
+  function set(d){
+    btns.forEach(b=>b.classList.toggle('on',b.dataset.d===d));
+    if(d==='all'){document.body.classList.remove('lensed');rows.forEach(r=>r.classList.remove('match'));return}
+    document.body.classList.add('lensed');
+    rows.forEach(r=>r.classList.toggle('match',(r.dataset.disc||'').split(',').includes(d)));
   }
-  .wp-card-result {
-    margin: 6px 0 0; font-size: 13px; font-weight: 500; letter-spacing: 0.01em;
-    color: rgb(252 252 252 / 0.92);
+  btns.forEach(b=>b.addEventListener('click',()=>set(b.dataset.d)));
+})();
+
+// scroll-lit rows
+(function(){
+  const rows=document.querySelectorAll('.litrow');
+  const io2=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('lit',e.isIntersecting)),{rootMargin:'-30% 0px -30% 0px'});
+  rows.forEach(r=>io2.observe(r));
+})();
+
+// cursor-trailing preview
+(function(){
+  const pv=document.getElementById('preview'),pimg=pv.querySelector('img'),pcap=pv.querySelector('.cap');
+  if(!matchMedia('(pointer:fine)').matches)return;
+  let px=0,py=0,tx=0,ty=0,raf=null;
+  document.querySelectorAll('.rowp').forEach(row=>{
+    row.addEventListener('mouseenter',()=>{pimg.src=row.dataset.img;pcap.textContent=row.dataset.cap;pv.classList.add('on')});
+    row.addEventListener('mouseleave',()=>pv.classList.remove('on'));
+  });
+  addEventListener('mousemove',e=>{tx=e.clientX+30;ty=e.clientY-120;if(!raf)step()},{passive:true});
+  function step(){raf=requestAnimationFrame(()=>{
+    px+=(tx-px)*.13;py+=(ty-py)*.13;
+    pv.style.left=px+'px';pv.style.top=py+'px';
+    (Math.abs(tx-px)>.5||Math.abs(ty-py)>.5)?step():raf=null;
+  })}
+})();
+
+// under-reveal sizing
+(function(){
+  const uf=document.querySelector('.underfoot'),over=document.querySelector('.over');
+  function size(){ if(matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)').matches){over.style.marginBottom='0px';return}
+    over.style.marginBottom=uf.offsetHeight+'px'; }
+  size();addEventListener('resize',size);setTimeout(size,600);
+})();
+// companion
+(function(){
+  const c=document.querySelector('.companion');
+  let k=false;
+  addEventListener('scroll',()=>{
+    if(k)return;k=true;
+    requestAnimationFrame(()=>{
+      if(c&&!matchMedia('(prefers-reduced-motion:reduce)').matches)
+        c.style.transform=`translateY(${(Math.sin(scrollY/420)*34).toFixed(1)}px) rotate(${(scrollY*0.22).toFixed(1)}deg)`;
+      k=false;
+    });
+  },{passive:true});
+})();
+// split-line rise
+(function(){
+  const els=document.querySelectorAll('[data-split]');
+  els.forEach(el=>{el.innerHTML=el.innerHTML.split(/<br\s*\/?>/i).map(l=>`<span class="sl"><span>${l}</span></span>`).join('')});
+  const io3=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io3.unobserve(e.target)}}),{threshold:.2});
+  els.forEach(el=>io3.observe(el));
+})();
+// magnetic pill
+(function(){
+  const mag=document.querySelector('.magnetic');
+  if(!mag||!matchMedia('(pointer:fine)').matches)return;
+  let raf;const st={x:0,y:0,tx:0,ty:0};
+  mag.addEventListener('mousemove',e=>{const r=mag.getBoundingClientRect();st.tx=(e.clientX-r.left-r.width/2)*.32;st.ty=(e.clientY-r.top-r.height/2)*.32;loop()});
+  mag.addEventListener('mouseleave',()=>{st.tx=0;st.ty=0;loop()});
+  function loop(){cancelAnimationFrame(raf);(function step(){st.x+=(st.tx-st.x)*.16;st.y+=(st.ty-st.y)*.16;mag.style.transform=`translate(${st.x}px,${st.y}px)`;if(Math.abs(st.tx-st.x)>.2||Math.abs(st.ty-st.y)>.2)raf=requestAnimationFrame(step)})()}
+})();
+// velocity marquee with decay back to base
+(function(){
+  let ly=scrollY,decaying=false;
+  const anims=()=>[...document.querySelectorAll('.strip .track')].map(el=>el.getAnimations&&el.getAnimations()[0]).filter(Boolean);
+  function decay(){
+    let live=false;
+    anims().forEach(a=>{if(a.playbackRate>1.03){a.playbackRate=1+(a.playbackRate-1)*0.92;live=true}else a.playbackRate=1});
+    decaying=live;if(live)requestAnimationFrame(decay);
   }
-</style>
-</Base>
+  addEventListener('scroll',()=>{
+    const vel=Math.min(3,Math.abs(scrollY-ly)/18);ly=scrollY;
+    anims().forEach(a=>a.playbackRate=Math.max(a.playbackRate,1+vel));
+    if(!decaying){decaying=true;requestAnimationFrame(decay)}
+  },{passive:true});
+})();
+function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
+clock();setInterval(clock,30000);
+</script>
+<script is:inline src="/redesign/ticker.js" defer></script>
+<script is:inline src="/redesign/switcher.js" defer></script>
+</body>
+</html>

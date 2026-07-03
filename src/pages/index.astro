@@ -1,366 +1,647 @@
----
-import Base from '../layouts/Base.astro';
-import ReelReveal from '../components/ReelReveal.astro';
-import RecentProjects from '../components/RecentProjects.astro';
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monuments · DJ Ramirez · Brand Experience & Experiential Creative Director</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style is:global>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --dispcond:var(--disp); --condstretch:75%;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
 
-const testimonials = [
-  { quote: "We love working with DJ and Tess. We thought we were hiring a production company and got a creative director. The thinking they bring to the room changes the whole project.", name: "AC Boise", role: "Creative Partner" },
-  { quote: "The cultural insight they brought to the campaign was unlike anything we'd seen from a local partner. Monuments understands what a city needs to feel about its brand.", name: "Brand Partner", role: "Marketing Lead" },
-  { quote: "DJ doesn't just execute. He makes you rethink what the work could be. We came in with a brief and left with a better brief.", name: "Agency Partner", role: "Creative Director" },
-];
+/* fixed corner frame (Paris move) */
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:20px;left:22px;pointer-events:auto}
+.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
+.corners .c1 i{font-style:normal;color:var(--spark);display:inline-block;animation:spin 7s linear infinite}
+.corners .c2{top:26px;right:22px;pointer-events:auto}
+.corners .c2 a{font-size:21px;letter-spacing:.06em}
+.corners .c3{bottom:20px;left:22px}
+.corners .c4{bottom:20px;right:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.corners .c2 a{margin-left:22px}
 
-// The "Recent Work" slider now lives in the RecentProjects component (the project
-// data moved there too). The old pinned filmstrip + its reel[] data were removed.
----
-<Base title="HOME - monuments" loader={true}>
-  <section class="hero">
-    <div class="hero-video-wrap">
-      <iframe id="heroVideo"
-        src="https://www.youtube.com/embed/VMubUUZ2tdU?autoplay=1&mute=1&loop=1&playlist=VMubUUZ2tdU&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
-        frameborder="0"
-        allow="autoplay; encrypted-media">
-      </iframe>
-    </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-type" id="hero-type">
-      <div class="hero-type-inner" id="hero-tilt">
-        <span class="hero-word">Sight</span>
-        <span class="hero-word">Sound</span>
-        <span class="hero-word">and
-          <span class="hero-word-sub">The Creative<br>Portfolio<br>of DJ Ramirez</span>
-        </span>
-        <span class="hero-word">Emotion</span>
-      </div>
-    </div>
-    <div class="hero-bottom">
-      <div class="hero-bottom-left">
-        <p class="hero-eyebrow">Brand Experience &amp; Experiential Creative Director</p>
-        <p class="hero-desc">As AI floods the feed with cheap content, brands win in the real world. I lead the campaigns and experiences that get people to show up, not just scroll.</p>
-        <a href="/contact" class="hero-cta">Let's chat</a>
-      </div>
-      <a href="/work" class="hero-see-work">See The Work</a>
-    </div>
-  </section>
+/* hero: type IN the footage */
+.hero-media{position:absolute;inset:0;will-change:transform}
+.hero-media iframe{position:absolute;top:50%;left:50%;width:max(100vw,178svh);height:max(100svh,56.25vw);transform:translate(-50%,-50%);pointer-events:none;border:0;filter:grayscale(1) contrast(1.05) brightness(.8);opacity:0;transition:opacity 1.2s}
+.hero-media.live iframe{opacity:1}
+.hero-media img{transition:opacity 1.2s}
+.hero-media.live img{opacity:0}
+.playreel{position:absolute;left:50%;bottom:12vh;transform:translateX(-50%);z-index:2;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);border:1px solid rgba(245,243,239,.55);border-radius:99px;padding:13px 22px;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);cursor:pointer;transition:background .3s,color .3s}
+.playreel:hover{background:var(--paper);color:var(--ink)}
+.playreel .dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.25}}
+/* reel lightbox */
+#reelbox{position:fixed;inset:0;z-index:96;background:rgba(12,11,10,.96);display:none;align-items:center;justify-content:center;padding:4vmin}
+#reelbox.on{display:flex}
+#reelbox .frame{position:relative;width:min(92vw,1500px);aspect-ratio:16/9;background:#000;box-shadow:0 40px 120px rgba(0,0,0,.6)}
+#reelbox iframe{width:100%;height:100%;border:0}
+#reelbox .x{position:absolute;top:-42px;right:0;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:none;border:1px solid rgba(245,243,239,.4);border-radius:99px;padding:8px 16px;cursor:pointer}
+#reelbox .x:hover{background:var(--paper);color:var(--ink)}
+#reelbox .cap{position:absolute;bottom:-34px;left:0;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88}
 
-  <!-- 3-NUMBER BAND: lead with the results, per the hiring-portfolio positioning.
-       All three are backed by case studies on the site (Adorama / AOV / Know Vape). -->
-  <section class="hero-stats fade" aria-label="Career highlights">
-    <a class="hs-stat" href="/lab/art-of-visuals" data-cursor="View">
-      <span class="hs-n">4x</span>
-      <span class="hs-l">agency revenue grown</span>
-    </a>
-    <a class="hs-stat" href="/lab/adorama-music" data-cursor="View">
-      <span class="hs-n">160M+</span>
-      <span class="hs-l">campaign impressions</span>
-    </a>
-    <a class="hs-stat" href="/lab/know-vape" data-cursor="View">
-      <span class="hs-n">Emmy</span>
-      <span class="hs-l">winning film series</span>
-    </a>
-  </section>
+/* hero: type IN the photograph */
+.hero{position:relative;height:100svh;overflow:hidden;background:var(--ink)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05) brightness(.9)}
+.hero .t{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);width:106%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(64px,11.6vw,172px);line-height:.88;letter-spacing:-.035em;text-transform:uppercase;mix-blend-mode:screen}
+.hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero .t .spark{color:var(--spark);mix-blend-mode:normal}
+.hero .t .ln{display:block;overflow:hidden}
+.hero .t .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero .t .ln:nth-child(2)>span{animation-delay:.12s}
+.hero .t .ln:nth-child(3)>span{animation-delay:.24s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .nfo{position:absolute;right:var(--pad);bottom:12vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .9s forwards}
+.hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
+@keyframes fade{to{opacity:1}}
+.hero .sub{position:absolute;left:var(--pad);bottom:12vh;max-width:40ch;color:#d9d6d0;font-size:16px;opacity:0;animation:fade 1s .8s forwards}
 
-  <section class="trusted fade">
-    <div class="trusted-top">
-      <div class="trusted-left">
-        <h2 class="trusted-title">Trusted By The Best</h2>
-        <p class="trusted-body">I've worked with global brands to craft campaigns that drive results. Satisfying clients, uncovering insights, moving product, and winning awards along the way.</p>
-        <a href="/contact" class="trusted-cta">Let's Talk</a>
-      </div>
-      <img class="trusted-m" src="https://monuments.cc/wp-content/uploads/2023/12/logo-01.png" alt="M">
-    </div>
-    <div class="logo-grid">
-      <div class="logo-cell"><img src="/logos/sony.png" alt="Sony"></div>
-      <div class="logo-cell"><img src="/logos/intel.png" alt="Intel"></div>
-      <div class="logo-cell"><img src="/logos/adorama.png" alt="Adorama"></div>
-      <div class="logo-cell"><img src="/logos/msi.png" alt="MSI"></div>
-      <div class="logo-cell"><img src="/logos/lexar.png" alt="Lexar"></div>
-      <div class="logo-cell"><img src="/logos/flashpoint.png" alt="Flashpoint"></div>
-      <div class="logo-cell"><img src="/logos/against.png" alt="Against"></div>
-      <div class="logo-cell"><img src="/logos/art-of-visuals.png" alt="Art of Visuals"></div>
-    </div>
-  </section>
+/* plain stat row (tinywins move) */
+.statrow{background:var(--struct);border-top:none;border-bottom:none}
+.statrow .in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:26px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72)}
+.statrow b{color:var(--paper);font-weight:400}
+.statrow i{font-style:normal;color:var(--paper)}
 
-  <!-- Showreel: the Play/Reel scroll reveal (promoted from the lab). Poster for now. -->
-  <ReelReveal />
+/* contact sheet (the locked element) on paper */
+.paper{background:var(--paper);color:var(--ink)}
+.sheet{padding:9vh 0 6vh}
+.sheet .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:13px;border-bottom:2px solid var(--ink);margin-bottom:16px}
+.sheet .bar .mono b{color:var(--red)}
+.sheet .bar .mono{color:#55524c}
+.frames{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.fr{position:relative;background:#fff;padding:7px 7px 24px;border:1px solid var(--line);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.fr img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.9)}
+.fr .cap{position:absolute;left:8px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim)}
+.fr:hover{transform:rotate(-1.2deg) scale(1.05);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2}
+.fr.pick::after{content:"";position:absolute;inset:2px;border:3px solid var(--red);border-radius:50%/44%;transform:rotate(-2deg)}
+.fr.pick .cap{color:var(--red)}
+.fr .note{position:absolute;top:-13px;right:-7px;font-family:var(--mono);font-size:9.5px;color:var(--red);transform:rotate(4deg);background:var(--paper);padding:2px 6px;border:1px solid var(--red)}
 
-  <RecentProjects />
+/* work index on paper */
+.idx{padding:5vh 0 10vh}
+.idx .head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:18px}
+h2{font-weight:var(--dispw);font-size:clamp(30px,3.8vw,54px);letter-spacing:-.03em;text-transform:uppercase;line-height:.95}
+h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.rowp{display:grid;grid-template-columns:110px 128px 1fr auto;gap:26px;align-items:center;padding:20px 0;border-top:1px solid var(--line);transition:background .3s,padding-left .35s cubic-bezier(.22,1,.36,1)}
+.rowp:last-of-type{border-bottom:1px solid var(--line)}
+.rowp:hover{background:#fff;padding-left:14px}
+.rowp .id{font-family:var(--mono);font-size:10.5px;color:var(--dim);text-transform:uppercase}
+.rowp .th{width:128px;height:84px;object-fit:cover;display:block;filter:saturate(.9);transition:transform .4s}
+.rowp:hover .th{transform:scale(1.06) rotate(-1deg)}
+.rowp .t{font-weight:var(--dispw2);font-size:clamp(21px,2.4vw,34px);letter-spacing:-.02em;line-height:1}
+.rowp:hover .t{color:var(--struct)}
+.rowp .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rowp .tag i{font-style:normal;color:var(--struct)}
 
-  <section class="testimonials fade" data-tm="1">
-    <span class="tm-eyebrow">Client Words</span>
 
-    <!-- V1 — drifting marquee of quote cards -->
-    <div class="tm-v tm-v1">
-      <div class="tm-marquee">
-        <div class="tm-marquee-track">
-          {[...testimonials, ...testimonials].map((t) => (
-            <figure class="tm-card">
-              <blockquote class="tm-card-quote">{t.quote}</blockquote>
-              <figcaption class="tm-card-meta"><span class="tm-card-name">{t.name}</span><span class="tm-card-role">{t.role}</span></figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </div>
+/* pinned horizontal reel (tinywins grammar) */
+.reel{height:760svh;position:relative;background:var(--ink);color:var(--paper)}
+.reel-pin{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:5vh}
+.reel-head{display:flex;justify-content:space-between;align-items:baseline;gap:30px;flex-wrap:wrap;width:100%}
+.reel-head h2{font-weight:var(--dispw);font-size:clamp(28px,3.6vw,52px);letter-spacing:-.03em;text-transform:uppercase;color:var(--paper)}
+.reel-head h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;color:var(--spark);display:inline-block;min-width:4.2ch}
+.reel-head h2 .serif.swap{animation:wordIn .45s cubic-bezier(.22,1,.36,1)}
+@keyframes wordIn{0%{opacity:0;transform:translateY(60%)}100%{opacity:1;transform:none}}
+.ticks{display:flex;gap:5px;align-items:flex-end;height:22px}
+.ticks i{width:2px;height:10px;background:#4a4844;transition:height .3s,background .3s}
+.ticks i.on{height:22px;background:var(--spark)}
+.reel-track{display:flex;gap:4vw;padding:0 var(--pad);will-change:transform}
+.reel-card{flex:0 0 auto;width:min(56vw,720px);background:#fff;border:1px solid var(--line);padding:9px 9px 0;box-shadow:0 30px 70px rgba(0,0,0,.4);color:var(--ink);will-change:transform}
+.reel-card img{width:100%;height:52svh;object-fit:cover;display:block;filter:saturate(.9)}
+.reel-card .rc-meta{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 6px}
+.reel-card .rc-meta .t{font-weight:var(--dispw2);font-size:clamp(18px,1.8vw,26px);letter-spacing:-.02em}
+.reel-card .rc-meta .mono{color:var(--dim);font-size:9.5px}
+.reel-foot{display:block;color:var(--spark);text-align:center;transition:color .3s}
+.reel-foot:hover{color:var(--paper)}
+@media (max-width:900px),(prefers-reduced-motion:reduce){
+  .reel{height:auto}
+  .reel-pin{position:static;height:auto;padding:8vh 0}
+  .reel-track{overflow-x:auto;transform:none!important;-webkit-overflow-scrolling:touch}
+  .reel-card{width:78vw}.reel-card img{height:40svh}
+}
 
-    <!-- V2 — big rotating statement -->
-    <div class="tm-v tm-v2">
-      <blockquote class="tm-statement" id="tmStatement">{testimonials[0].quote}</blockquote>
-      <div class="tm-statement-foot">
-        <div class="tm-statement-meta"><span id="tmStName">{testimonials[0].name}</span><span id="tmStRole">{testimonials[0].role}</span></div>
-        <div class="tm-dots" id="tmDots">
-          {testimonials.map((t, i) => (
-            <button type="button" class={i === 0 ? 'on' : ''} data-i={i} data-quote={t.quote} data-name={t.name} data-role={t.role} aria-label={`Testimonial ${i + 1}`}></button>
-          ))}
-        </div>
-      </div>
-    </div>
+/* tile ring strip (rico move) */
+.tiles{padding:9vh 0;overflow:hidden;background:var(--spark)}
+.tiles .track{display:flex;width:max-content;animation:drift 36s linear infinite}
+.tiles:hover .track{animation-play-state:paused}
+@keyframes drift{to{transform:translateX(-50%)}}
+.tile{width:190px;height:190px;border-radius:22px;overflow:hidden;flex:none;display:flex;align-items:center;justify-content:center;background:#fff;border:none;box-shadow:0 14px 34px rgba(20,20,20,.14);margin-right:16px}
+.tile img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.tile.cob{background:var(--struct);color:var(--paper);font-weight:var(--dispw);font-size:64px}
+.tile.ros{background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:center;padding:18px}
+.tile.ink{background:var(--ink);color:var(--paper);font-weight:var(--dispw);font-size:34px;letter-spacing:-.02em}
+.tile.stat b{font-weight:var(--dispw);font-size:44px}
+.tile.blk{background:#fff;color:var(--ink);font-family:'Pirata One',serif;font-size:74px}
+.tile.eye{background:#fff}
+.tile.eye .eyewrap{width:70%;animation:blink 6s infinite}
+.tile.eye svg{width:100%;display:block;color:var(--ink)}
+.tile.eye .spk{fill:var(--spark);animation:spin 9s linear infinite}
+@keyframes blink{0%,90%,100%{transform:scaleY(1)}94%{transform:scaleY(.08)}}
+.tile.stat{flex-direction:column;gap:7px}
+.tile.stat span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,243,239,.65)}
+.tile.band{font-family:var(--disp);font-weight:var(--dispw);font-size:20px;letter-spacing:-.01em;text-transform:uppercase;line-height:1.18;text-align:center;padding:14px}
+.tile .logo{filter:none;width:60%;height:auto;object-fit:contain}
 
-    <!-- V3 — stacked editorial list -->
-    <div class="tm-v tm-v3">
-      {testimonials.map((t, i) => (
-        <figure class="tm-row">
-          <span class="tm-row-num">{String(i + 1).padStart(2, '0')}</span>
-          <blockquote class="tm-row-quote">{t.quote}</blockquote>
-          <figcaption class="tm-row-meta"><span class="tm-row-name">{t.name}</span><span class="tm-row-role">{t.role}</span></figcaption>
-        </figure>
-      ))}
-    </div>
 
-    <!-- V4 — Spotlight card -->
-    <div class="tm-v tm-v4">
-      <figure class="tm-spotlight">
-        <span class="tm-sp-mark" aria-hidden="true">&ldquo;</span>
-        <blockquote class="tm-sp-quote">{testimonials[0].quote}</blockquote>
-        <figcaption class="tm-sp-meta"><span>{testimonials[0].name}</span><span>{testimonials[0].role}</span></figcaption>
-      </figure>
-    </div>
+/* brands scroller (lab BrandTicker, ported) */
+.brand-ticker{overflow:hidden;padding:clamp(20px,2.8vw,36px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.bt-track{display:flex;align-items:center;gap:clamp(40px,5vw,88px);width:max-content;will-change:transform;transform:translate3d(0,0,0)}
+.bt-item{flex:0 0 auto;display:inline-flex;align-items:center;height:clamp(22px,2.4vw,34px);transition:transform .25s}
+a.bt-item:hover{transform:translateY(-2px)}
+.bt-logo{height:100%;width:auto;max-width:calc(clamp(22px,2.4vw,34px)*5.2);object-fit:contain;display:block;opacity:.78;transition:filter .3s,opacity .25s}
+a.bt-item:hover .bt-logo{filter:none!important;opacity:1}
+@media (prefers-reduced-motion:reduce){.bt-track{transform:none!important}}
+.brand-ticker.bt-white{background:var(--ink);border-top:1px solid var(--lined)}
+.bt-white .bt-logo{filter:brightness(0) invert(1)}
 
-    <!-- V5 — Split -->
-    <div class="tm-v tm-v5">
-      <div class="tm-split">
-        <div class="tm-split-l"><span class="tm-split-num">01</span><span class="tm-split-name">{testimonials[0].name}</span><span class="tm-split-role">{testimonials[0].role}</span></div>
-        <blockquote class="tm-split-q">{testimonials[0].quote}</blockquote>
-      </div>
-    </div>
+/* sun CTA on ink */
+.cta{position:relative;background:var(--ink);color:var(--paper);padding:19vh 0;text-align:center;overflow:hidden}
+.cta .emblem{width:112px;aspect-ratio:1;margin:0 auto 30px;display:block;animation:spin 70s linear infinite}
+.cta .emblem g{fill:var(--paper)}
+.cta .inner{position:relative;z-index:1}
+.cta .kick{color:var(--spark)}
+.cta .big{font-weight:var(--dispw);font-size:clamp(48px,8.4vw,124px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:20px}
+.cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.cta .pill{display:inline-flex;margin-top:44px;padding:20px 38px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
+.cta .pill:hover{background:var(--spark)}
 
-    <!-- V6 — Ticker -->
-    <div class="tm-v tm-v6">
-      <div class="tm-ticker"><div class="tm-ticker-track">
-        {[...testimonials, ...testimonials, ...testimonials].map((t) => (<span class="tm-tick">{t.quote.split('. ')[0]}. <em>— {t.name}</em></span>))}
-      </div></div>
-    </div>
+/* condensed banner */
+.banner{background:var(--ink);border-top:1px solid var(--lined);padding:5vh 0 4vh;overflow:hidden}
+.banner .big{font-weight:var(--dispw);font-family:var(--dispcond);font-stretch:var(--condstretch);font-size:clamp(60px,10.6vw,158px);line-height:.9;letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;width:max-content;display:flex;gap:56px;animation:drift 30s linear infinite}
+.banner .big i{font-style:normal;color:transparent;-webkit-text-stroke:1.5px var(--paper)}
 
-    <!-- V7 — Oversized mark -->
-    <div class="tm-v tm-v7">
-      <div class="tm-omark"><span class="tm-omark-glyph" aria-hidden="true">&rdquo;</span><blockquote class="tm-omark-q">{testimonials[0].quote}</blockquote><div class="tm-omark-meta">{testimonials[0].name} — {testimonials[0].role}</div></div>
-    </div>
+.gwm{background:var(--ink);color:var(--paper);font-weight:var(--dispw);font-size:15.5vw;letter-spacing:-.04em;line-height:.62;text-align:center;overflow:hidden;padding-top:2vw}
+.gwm span{color:var(--spark)}
+footer{background:var(--ink);border-top:1px solid var(--lined);padding:30px 0}
+footer .row{display:flex;justify-content:space-between;align-items:center;color:var(--dim);flex-wrap:wrap;gap:12px}
+footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
 
-    <!-- V8 — Grid -->
-    <div class="tm-v tm-v8">
-      <div class="tm-grid">
-        {testimonials.map((t) => (<figure class="tm-gcard"><blockquote>{t.quote}</blockquote><figcaption><span class="tm-gname">{t.name}</span><span class="tm-grole">{t.role}</span></figcaption></figure>))}
-      </div>
-    </div>
 
-    <!-- V9 — Vertical drift -->
-    <div class="tm-v tm-v9">
-      <div class="tm-vdrift"><div class="tm-vdrift-track">
-        {[...testimonials, ...testimonials].map((t) => (<figure class="tm-vcard"><blockquote>{t.quote}</blockquote><figcaption>{t.name} · {t.role}</figcaption></figure>))}
-      </div></div>
-    </div>
+/* film grain: the texture layer */
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+/* contact sheet settle-in */
+.frames .fr{opacity:0;transform:translateY(16px) rotate(-.6deg)}
+.frames.show .fr{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);transition-delay:var(--d,0ms)}
+.frames.show .fr:hover{transition-delay:0ms}
+@media (prefers-reduced-motion:reduce){.grain{animation:none}.frames .fr{opacity:1;transform:none}}
 
-    <!-- V10 — Minimal -->
-    <div class="tm-v tm-v10">
-      <div class="tm-min"><blockquote class="tm-min-q">{testimonials[0].quote}</blockquote><div class="tm-min-meta">{testimonials[0].name}, {testimonials[0].role}</div></div>
-    </div>
 
-    <!-- V11 — Accent block -->
-    <div class="tm-v tm-v11">
-      <div class="tm-accent"><blockquote class="tm-accent-q">{testimonials[0].quote}</blockquote><div class="tm-accent-meta"><span>{testimonials[0].name}</span><span>{testimonials[0].role}</span></div></div>
-    </div>
+/* footer under-reveal (tinywins) */
+.over{position:relative;z-index:1;background:inherit}
+.underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
+/* spark companion (workbyw glove, our glyph) */
+.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
+/* split-line statement rise */
+[data-split] .sl{display:block;overflow:hidden}
+[data-split] .sl>span{display:block;transform:translateY(112%);transition:transform .95s cubic-bezier(.22,1,.36,1)}
+[data-split].in .sl:nth-child(2)>span{transition-delay:.1s}
+[data-split].in .sl>span{transform:none}
+@media (prefers-reduced-motion:reduce){[data-split] .sl>span{transform:none}}
 
-    <!-- V12 — Scroll-snap carousel -->
-    <div class="tm-v tm-v12">
-      <div class="tm-snap">
-        {testimonials.map((t) => (<figure class="tm-snap-item"><blockquote>{t.quote}</blockquote><figcaption><span class="tm-snap-name">{t.name}</span><span class="tm-snap-role">{t.role}</span></figcaption></figure>))}
-      </div>
-    </div>
-
-    <!-- V13 — Numbered editorial -->
-    <div class="tm-v tm-v13">
-      <div class="tm-num"><span class="tm-num-big" aria-hidden="true">01</span><blockquote class="tm-num-q">{testimonials[0].quote}</blockquote><div class="tm-num-meta">{testimonials[0].name} — {testimonials[0].role}</div></div>
-    </div>
-
-    <!-- TEMP: layout switcher -->
-    <div class="tm-switcher" id="tmSwitcher">
-      <span>Testimonials</span>
-      <button type="button" data-tm="1" class="on">Marquee</button>
-      <button type="button" data-tm="2">Statement</button>
-      <button type="button" data-tm="3">List</button>
-      <button type="button" data-tm="4">Spotlight</button>
-      <button type="button" data-tm="5">Split</button>
-      <button type="button" data-tm="6">Ticker</button>
-      <button type="button" data-tm="7">Mark</button>
-      <button type="button" data-tm="8">Grid</button>
-      <button type="button" data-tm="9">Column</button>
-      <button type="button" data-tm="10">Minimal</button>
-      <button type="button" data-tm="11">Accent</button>
-      <button type="button" data-tm="12">Swipe</button>
-      <button type="button" data-tm="13">Numbered</button>
-    </div>
-  </section>
-
-  <section class="collab fade">
-    <div class="collab-img">
-      <img src="https://monuments.cc/wp-content/uploads/2026/05/332D1704-05BD-4A55-8B6A-62C948489863_1_102_o-1024x679.jpeg" alt="Monuments team">
-    </div>
-    <div class="collab-text">
-      <p class="collab-eyebrow">Rooted in collaboration</p>
-      <h2 class="collab-title">The best work is bigger than any one person.</h2>
-      <p class="collab-body">From films and photography to campaigns and brand partnerships, everything we do is rooted in collaboration. The right people, the right energy, moving toward something that matters.<br><br>We're not here to be another vendor or a line item. We show up as a creative partner, working alongside you to build something that lasts.</p>
-      <a href="/about" class="collab-link">About Monuments</a>
-    </div>
-  </section>
-
-  <section class="bottom-cta fade">
-    <h2 class="bottom-cta-title">let's build something<br>great, <span class="cta-reveal"><span class="cta-reveal-inner">together.</span></span></h2>
-    <a href="/contact" class="btn-solid">Get In Touch</a>
-  </section>
-
-  <!-- Home-only behaviors: hero parallax + testimonial carousel -->
-  <script is:inline>
-    // Hero perspective tilt — the whole headline block tilts toward the cursor as one rigid unit
-    (function () {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const inner = document.getElementById('hero-tilt');
-      if (!inner) return;
-      let mx = 0, my = 0, cx = 0, cy = 0;
-      const MAX_Y = 20.8;  // deg of left/right tilt (rotateY) — +30% intensity
-      const MAX_X = 14.3;  // deg of up/down tilt (rotateX) — +30% intensity
-      const SHIFT = 28.6;  // px the block drifts as a whole — +30% intensity
-
-      document.addEventListener('mousemove', (e) => {
-        mx = (e.clientX / window.innerWidth - 0.5) * 2;   // -1..1
-        my = (e.clientY / window.innerHeight - 0.5) * 2;  // -1..1
-      });
-
-      function tick() {
-        cx += (mx - cx) * 0.09;
-        cy += (my - cy) * 0.09;
-        const ry = cx * MAX_Y;       // horizontal mouse -> rotate around Y
-        const rx = -cy * MAX_X;      // vertical mouse -> rotate around X
-        const tx = cx * SHIFT;
-        const ty = cy * SHIFT * 0.5;
-        inner.style.transform =
-          `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, 0) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
-        requestAnimationFrame(tick);
-      }
-      tick();
-    })();
-
-    // Testimonials — layout toggle (Marquee / Statement / List) + Statement auto-rotate
-    (function () {
-      const sw = document.getElementById('tmSwitcher');
-      const sec = document.querySelector('.testimonials');
-      if (sw && sec) sw.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
-        sec.dataset.tm = b.dataset.tm;
-        sw.querySelectorAll('button').forEach((x) => x.classList.remove('on'));
-        b.classList.add('on');
-      }));
-
-      const dots = Array.from(document.querySelectorAll('#tmDots button'));
-      const stEl = document.getElementById('tmStatement');
-      const nmEl = document.getElementById('tmStName');
-      const rlEl = document.getElementById('tmStRole');
-      if (!dots.length || !stEl) return;
-      let i = 0, timer = 0;
-      function show(n) {
-        i = n; const d = dots[i];
-        stEl.style.opacity = '0';
-        setTimeout(() => { stEl.textContent = d.dataset.quote; nmEl.textContent = d.dataset.name; rlEl.textContent = d.dataset.role; stEl.style.opacity = '1'; }, 280);
-        dots.forEach((x) => x.classList.remove('on')); d.classList.add('on');
-      }
-      function next() { show((i + 1) % dots.length); }
-      dots.forEach((d) => d.addEventListener('click', () => { show(+d.dataset.i); clearInterval(timer); timer = setInterval(next, 5000); }));
-      timer = setInterval(next, 5000);
-    })();
-
-    // YouTube control: the hero video (start 6s, loop ending 15s early)
-    (function () {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      document.head.appendChild(tag);
-      let hero;
-      window.onYouTubeIframeAPIReady = function () {
-        if (document.getElementById('heroVideo')) {
-          hero = new YT.Player('heroVideo', {
-            events: {
-              onReady: (e) => { e.target.mute(); e.target.seekTo(6, true); e.target.playVideo(); },
-              onStateChange: (e) => { if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(6, true); e.target.playVideo(); } }
-            }
-          });
-          setInterval(() => {
-            if (hero && hero.getDuration) {
-              const d = hero.getDuration(), t = hero.getCurrentTime();
-              if (d > 21 && t >= d - 15) hero.seekTo(6, true);
-            }
-          }, 500);
-        }
-      };
-    })();
-
-    // CTA: replay the reveal every time it scrolls into view
-    (function () {
-      const cta = document.querySelector('.bottom-cta');
-      if (!cta || !('IntersectionObserver' in window)) return;
-      const io = new IntersectionObserver((es) => {
-        es.forEach((e) => cta.classList.toggle('on', e.isIntersecting));
-      }, { threshold: 0.2 });
-      io.observe(cta);
-    })();
-  </script>
-
-</Base>
-
-<style>
-  /* 3-number band under the hero. Full-width band, single centered content column
-     via the shared --wrap/--pad tokens so its edges line up with every other section. */
-  .hero-stats {
-    max-width: var(--wrap, 1300px);
-    margin: 0 auto;
-    padding: clamp(48px, 7vw, 96px) var(--pad);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(20px, 4vw, 64px);
-  }
-  /* The band sits on the dark page body (continuing the hero), so text is light. */
-  .hs-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: clamp(20px, 2.2vw, 30px) 0 0;
-    border-top: 1px solid rgb(255 255 255 / 0.16);
-    text-decoration: none;
-    color: #fff;
-    transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
-  }
-  .hs-stat:hover { border-color: var(--accent, #6b8cae); transform: translateY(-3px); }
-  .hs-n {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: clamp(44px, 6vw, 92px);
-    line-height: 0.94;
-    letter-spacing: -0.04em;
-    color: var(--accent, #6b8cae);
-  }
-  .hs-l {
-    font-size: clamp(13px, 1.1vw, 15px);
-    letter-spacing: 0.02em;
-    line-height: 1.5;
-    color: rgb(255 255 255 / 0.6);
-  }
-  @media (max-width: 680px) {
-    .hero-stats { grid-template-columns: 1fr; gap: 0; }
-    .hs-stat { padding-bottom: 22px; }
-  }
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:900px){
+  .frames{grid-template-columns:repeat(3,1fr)}
+  .rowp{grid-template-columns:1fr auto}.rowp .id,.rowp .th{display:none}
+  .hero .sub{display:none}.hero .nfo{right:auto;left:var(--pad)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero .t .ln>span{transform:none}.hero .nfo,.hero .sub{opacity:1}.rv{opacity:1;transform:none}
+  .banner .big,.tiles .track{animation:none!important}
+}
 </style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="companion" aria-hidden="true">✳</div>
+
+<div class="corners" aria-hidden="false">
+  <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/lab">Lab</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a></span>
+  <span class="c3">34.05° N · 116.24° W — LA / Boise</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<div id="reelbox" role="dialog" aria-label="Showreel">
+  <div class="frame">
+    <button class="x" id="reelClose" type="button">Close ✕</button>
+    <div id="reelMount"></div>
+    <span class="cap">Monuments · studio reel · sound on</span>
+  </div>
+</div>
+
+<div class="over">
+<header class="hero">
+  <div class="hero-media" id="heroMedia">
+    <img src="/gallery/full/p-013.jpg" alt="">
+  </div>
+  <div style="position:absolute;left:50%;bottom:12vh;transform:translateX(-50%);z-index:2;display:flex;gap:12px">
+    <button class="playreel" id="playReel" type="button" style="position:static;transform:none"><span class="dot"></span>Play the reel</button>
+    <button class="playreel" id="soundTog" type="button" style="position:static;transform:none"><span class="dot"></span>Sound off</button>
+  </div>
+  <div class="t">
+    <span class="ln"><span>Moments</span></span>
+    <span class="ln"><span>people <span class="serif">show up</span></span></span>
+    <span class="ln"><span>for<span class="spark">.</span></span></span>
+  </div>
+  <p class="sub">As AI floods the feed with cheap content, brands win in the real world. I lead the campaigns and experiences that get people to show up, not just scroll.</p>
+  <div class="nfo">
+    <span class="h">NFO</span><br>
+    DJ Ramirez<br>
+    Brand Experience &amp;<br>
+    Experiential Creative Director<br>
+    Roll 2016–2026 · Est. MMXXVI
+  </div>
+</header>
+
+<div class="statrow">
+  <div class="wrap in">
+    <span><b>4x</b> agency revenue grown</span>
+    <span><b>160M+</b> campaign impressions</span>
+    <span><i>✳</i> <b>Emmy</b> winning film series</span>
+    <span><b>50</b> contractors led</span>
+  </div>
+</div>
+
+<section class="paper">
+  <div class="wrap sheet">
+    <div class="bar">
+      <span class="mono"><b>Contact sheet 01</b> · selects from the last decade</span>
+      <span class="mono">Refresh to reshuffle ↻</span>
+    </div>
+    <div class="frames" id="frames"></div>
+  </div>
+
+  <section class="reel" id="work">
+    <div class="reel-pin">
+      <div class="wrap reel-head">
+        <h2>Built to be <span class="serif" id="feelWord">bigger.</span></h2>
+        <div class="ticks" id="ticks" aria-hidden="true"></div>
+      </div>
+      <div class="reel-track" id="reelTrack">
+        <a class="reel-card" href="/work/art-of-visuals" data-word="bigger.">
+          <img src="/case-studies/art-of-visuals/gallery/podcast-cover.jpg" alt="Art of Visuals">
+          <div class="rc-meta"><span class="t">Art of Visuals</span><span class="mono">MC-2024-01 · Brand campaign · 4x</span></div>
+        </a>
+        <a class="reel-card" href="/work/sony-this-moment" data-word="felt.">
+          <img src="/case-studies/sony-this-moment/gallery/tm-09.jpg" alt="Sony This Moment" loading="lazy">
+          <div class="rc-meta"><span class="t">Sony · This Moment</span><span class="mono">MC-2023-06 · Campaign film + stills</span></div>
+        </a>
+        <a class="reel-card" href="/work/blue-cross" data-word="human.">
+          <img src="/case-studies/blue-cross/bc-2.jpg" alt="Blue Cross of Idaho" loading="lazy">
+          <div class="rc-meta"><span class="t">Blue Cross of Idaho</span><span class="mono">MC-2023-04 · Documentary campaign</span></div>
+        </a>
+        <a class="reel-card" href="/work" data-word="fast.">
+          <img src="/case-studies/donut-zumiez/gallery/dz-01.jpg" alt="Donut x Zumiez" loading="lazy">
+          <div class="rc-meta"><span class="t">Donut × Zumiez</span><span class="mono">MC-2023-08 · Retail collab</span></div>
+        </a>
+        <a class="reel-card" href="/work" data-word="heard.">
+          <img src="/case-studies/turnstile/products/prod-01.jpg" alt="Turnstile Audio" loading="lazy">
+          <div class="rc-meta"><span class="t">Turnstile Audio</span><span class="mono">MC-2023-02 · Brand + product launch</span></div>
+        </a>
+        <a class="reel-card" href="/work" data-word="played.">
+          <img src="/case-studies/dw-drums/gallery/emotional-split.jpg" alt="DW Drums" loading="lazy">
+          <div class="rc-meta"><span class="t">DW Drums</span><span class="mono">MC-2022-04 · Brand film</span></div>
+        </a>
+        <a class="reel-card" href="/work" data-word="worn.">
+          <img src="/case-studies/ac-boise/gallery/away-01.jpg" alt="AC Boise" loading="lazy">
+          <div class="rc-meta"><span class="t">AC Boise</span><span class="mono">MC-2024-05 · Kit reveal · Experiential</span></div>
+        </a>
+        <a class="reel-card" href="/work" data-word="loud.">
+          <img src="/case-studies/adorama-music/gallery/am-01.jpg" alt="Adorama Music" loading="lazy">
+          <div class="rc-meta"><span class="t">Adorama Music</span><span class="mono">MC-2022-07 · Content series</span></div>
+        </a>
+        <a class="reel-card" href="/work" data-word="remembered.">
+          <img src="/case-studies/buck-the-quo/gallery/chop-board.jpg" alt="Buck the Quo" loading="lazy">
+          <div class="rc-meta"><span class="t">Buck the Quo</span><span class="mono">MC-2021-03 · Film series · Emmy ✳</span></div>
+        </a>
+      </div>
+      <a class="wrap reel-foot mono" href="/work">Scroll to scrub · full archive on /work ↗</a>
+    </div>
+  </section>
+
+  <div class="wrap" style="padding:12vh 0 10vh">
+    <p class="rv" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(26px,3.4vw,48px);line-height:1.2;max-width:26ch;color:var(--ink)">"I shoot but I'm not a shooter. I direct but it's not the point. The point is the story. The moment. <span style="color:#b96a77">Always has been."</span></p>
+    <p class="mono rv" style="margin-top:22px;color:#8f8d88">DJ Ramirez · Creative Director</p>
+  </div>
+  <div class="tiles" aria-hidden="true">
+    <div class="track" id="tiles"></div>
+  </div>
+</section>
+
+<div class="brand-ticker bt-white" data-speed="28" aria-label="Brands worked with">
+  <div class="bt-track">
+    <a class="bt-item" href="https://www.sony.com" target="_blank" rel="noopener" aria-label="Sony"><img class="bt-logo" src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.intel.com" target="_blank" rel="noopener" aria-label="Intel"><img class="bt-logo" src="/logos/intel.png" alt="Intel" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Adorama"><img class="bt-logo" src="/logos/adorama.png" alt="Adorama" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.msi.com" target="_blank" rel="noopener" aria-label="MSI"><img class="bt-logo" src="/logos/msi.png" alt="MSI" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.lexar.com" target="_blank" rel="noopener" aria-label="Lexar"><img class="bt-logo" src="/logos/lexar.png" alt="Lexar" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Flashpoint"><img class="bt-logo" src="/logos/flashpoint.png" alt="Flashpoint" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://artofvisuals.com" target="_blank" rel="noopener" aria-label="Art of Visuals"><img class="bt-logo" src="/logos/art-of-visuals.png" alt="Art of Visuals" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.bcidaho.com" target="_blank" rel="noopener" aria-label="Blue Cross of Idaho"><img class="bt-logo" src="/logos/blue-cross.png" alt="Blue Cross of Idaho" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://donut.media" target="_blank" rel="noopener" aria-label="Donut Media"><img class="bt-logo" src="/logos/donut-media.svg" alt="Donut Media" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.dwdrums.com" target="_blank" rel="noopener" aria-label="DW Drums"><img class="bt-logo" src="/logos/dw-drums.png" alt="DW Drums" loading="lazy" decoding="async"></a>
+    <span class="bt-item"><img class="bt-logo" src="/logos/against.png" alt="Against" loading="lazy" decoding="async"></span>
+    <a class="bt-item" href="https://www.sony.com" target="_blank" rel="noopener" aria-label="Sony"><img class="bt-logo" src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.intel.com" target="_blank" rel="noopener" aria-label="Intel"><img class="bt-logo" src="/logos/intel.png" alt="Intel" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Adorama"><img class="bt-logo" src="/logos/adorama.png" alt="Adorama" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.msi.com" target="_blank" rel="noopener" aria-label="MSI"><img class="bt-logo" src="/logos/msi.png" alt="MSI" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.lexar.com" target="_blank" rel="noopener" aria-label="Lexar"><img class="bt-logo" src="/logos/lexar.png" alt="Lexar" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Flashpoint"><img class="bt-logo" src="/logos/flashpoint.png" alt="Flashpoint" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://artofvisuals.com" target="_blank" rel="noopener" aria-label="Art of Visuals"><img class="bt-logo" src="/logos/art-of-visuals.png" alt="Art of Visuals" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.bcidaho.com" target="_blank" rel="noopener" aria-label="Blue Cross of Idaho"><img class="bt-logo" src="/logos/blue-cross.png" alt="Blue Cross of Idaho" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://donut.media" target="_blank" rel="noopener" aria-label="Donut Media"><img class="bt-logo" src="/logos/donut-media.svg" alt="Donut Media" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.dwdrums.com" target="_blank" rel="noopener" aria-label="DW Drums"><img class="bt-logo" src="/logos/dw-drums.png" alt="DW Drums" loading="lazy" decoding="async"></a>
+    <span class="bt-item"><img class="bt-logo" src="/logos/against.png" alt="Against" loading="lazy" decoding="async"></span>
+  </div>
+</div>
+
+<section class="cta">
+  <div class="inner wrap">
+    <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
+    <span class="kick mono rv">✳ One conversation, no deck required</span>
+    <div class="big" data-split>Tell me what<br>you're <span class="serif">building.</span></div>
+    <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
+  </div>
+</section>
+
+</div><!--/over-->
+<div class="underfoot">
+<div class="gwm" aria-hidden="true">M<span>✳</span>NUMENTS</div>
+<div class="banner" aria-hidden="true">
+  <div class="big"><span>Built to be remembered</span><i>Built to be remembered</i><span>Built to be remembered</span><i>Built to be remembered</i></div>
+</div>
+
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
+    <span class="blk">built to be remembered</span>
+    <span>The one</span>
+  </div>
+</footer>
+</div><!--/underfoot-->
+
+<script is:inline>
+// sun rays
+(function(){
+  const g=document.getElementById('rays');let s='';
+  for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}
+  g.innerHTML=s;
+})();
+
+// contact sheet: reshuffles every visit
+const POOL=['p-001','p-004','p-008','p-011','p-013','p-017','p-021','p-023','p-025','p-028','p-029','p-030','p-038','p-043','p-044','p-049','p-054','p-057','p-058','p-061','p-066','p-067','p-069','p-076','p-090','p-094','p-098','p-099'];
+const NOTES=['USE THIS','THE ONE','HOLD','PRINT IT'];
+const shuffled=POOL.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]).slice(0,12);
+const pick=Math.floor(Math.random()*12),pick2=(pick+5)%12;
+document.getElementById('frames').innerHTML=shuffled.map((id,i)=>`
+  <figure class="fr ${i===pick?'pick':''}">
+    ${i===pick2?`<span class="note">${NOTES[Math.floor(Math.random()*NOTES.length)]}</span>`:''}
+    <img src="/gallery/thumb/${id}.jpg" alt="" loading="lazy">
+    <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · ${id.toUpperCase()}</figcaption>
+  </figure>`).join('');
+
+// tile strip (doubled for seamless loop)
+const EYE=`<div class="tile eye"><div class="eyewrap"><svg viewBox="0 0 100 100" aria-label="The Monuments eye">
+  <path d="M8 50 C30 24 70 24 92 50 C70 76 30 76 8 50 Z" fill="none" stroke="currentColor" stroke-width="7"/>
+  <g transform="translate(50,50)"><g class="pupil"><g class="spk">
+    <rect x="-3" y="-17" width="6" height="34" rx="3"/>
+    <rect x="-3" y="-17" width="6" height="34" rx="3" transform="rotate(60)"/>
+    <rect x="-3" y="-17" width="6" height="34" rx="3" transform="rotate(120)"/>
+  </g></g></g>
+</svg></div></div>`;
+const TILES=[
+  EYE,
+  `<div class="tile"><img src="/gallery/thumb/p-067.jpg" alt=""></div>`,
+  `<div class="tile ink stat"><b>4x</b><span>revenue growth</span></div>`,
+  `<div class="tile"><img src="/gallery/thumb/p-040.jpg" alt=""></div>`,
+  `<div class="tile ros band">Less agency.<br>More band.</div>`,
+  `<div class="tile"><img src="/gallery/thumb/p-021.jpg" alt=""></div>`,
+  `<div class="tile cob">✳</div>`,
+  `<div class="tile"><img src="/gallery/thumb/p-069.jpg" alt=""></div>`,
+  `<div class="tile blk">m</div>`,
+  `<div class="tile"><img src="/gallery/thumb/p-090.jpg" alt=""></div>`,
+];
+document.getElementById('tiles').innerHTML=TILES.join('')+TILES.join('');
+
+// reveals
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// magnetic pill
+const mag=document.querySelector('.magnetic');
+if(mag&&matchMedia('(pointer:fine)').matches){
+  let raf;const st={x:0,y:0,tx:0,ty:0};
+  mag.addEventListener('mousemove',e=>{
+    const r=mag.getBoundingClientRect();
+    st.tx=(e.clientX-r.left-r.width/2)*.32;st.ty=(e.clientY-r.top-r.height/2)*.32;loop();
+  });
+  mag.addEventListener('mouseleave',()=>{st.tx=0;st.ty=0;loop()});
+  function loop(){cancelAnimationFrame(raf);(function step(){
+    st.x+=(st.tx-st.x)*.16;st.y+=(st.ty-st.y)*.16;
+    mag.style.transform=`translate(${st.x}px,${st.y}px)`;
+    if(Math.abs(st.tx-st.x)>.2||Math.abs(st.ty-st.y)>.2)raf=requestAnimationFrame(step);
+  })()}
+}
+
+// clock
+// velocity marquee with decay back to base
+(function(){
+  let ly=scrollY,decaying=false;
+  const anims=()=>[...document.querySelectorAll('.tiles .track,.banner .big')].map(el=>el.getAnimations&&el.getAnimations()[0]).filter(Boolean);
+  function decay(){
+    let live=false;
+    anims().forEach(a=>{if(a.playbackRate>1.03){a.playbackRate=1+(a.playbackRate-1)*0.92;live=true}else a.playbackRate=1});
+    decaying=live;if(live)requestAnimationFrame(decay);
+  }
+  addEventListener('scroll',()=>{
+    const vel=Math.min(3,Math.abs(scrollY-ly)/18);ly=scrollY;
+    anims().forEach(a=>a.playbackRate=Math.max(a.playbackRate,1+vel));
+    if(!decaying){decaying=true;requestAnimationFrame(decay)}
+  },{passive:true});
+})();
+function clock(){
+  const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('clock').textContent='LA '+t;
+}
+clock();setInterval(clock,30000);
+// the eye watches: pupils track the cursor (buttermax gesture, brand-book witness)
+(function(){
+  if(!matchMedia('(pointer:fine)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  let mx=innerWidth/2,my=innerHeight/2,raf=null;const st={x:0,y:0};
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;if(!raf)step()},{passive:true});
+  function step(){raf=requestAnimationFrame(()=>{
+    let live=false;
+    document.querySelectorAll('.tile.eye .pupil').forEach(pu=>{
+      const r=pu.closest('svg').getBoundingClientRect();
+      if(r.bottom<0||r.top>innerHeight){return}
+      const dx=mx-(r.left+r.width/2),dy=my-(r.top+r.height/2);
+      const d=Math.hypot(dx,dy)||1,lim=9;
+      const tx=dx/d*Math.min(lim,d/16),ty=dy/d*Math.min(lim,d/16);
+      st.x+=(tx-st.x)*.12;st.y+=(ty-st.y)*.12;
+      pu.setAttribute('transform',`translate(${st.x.toFixed(2)},${st.y.toFixed(2)})`);
+      if(Math.abs(tx-st.x)>.05||Math.abs(ty-st.y)>.05)live=true;
+    });
+    raf=live?requestAnimationFrame(step):null;if(!live)raf=null;
+  })}
+})();
+// sound toggle on the hero reel (unseen verb)
+(function(){
+  const hm=document.getElementById('heroMedia');if(!hm)return;
+  const btn=document.getElementById('soundTog');if(!btn)return;
+  let on=false;
+  btn.addEventListener('click',()=>{
+    const f=hm.querySelector('iframe');if(!f)return;
+    on=!on;
+    f.contentWindow.postMessage(JSON.stringify({event:'command',func:on?'unMute':'mute',args:[]}),'*');
+    if(on)f.contentWindow.postMessage(JSON.stringify({event:'command',func:'setVolume',args:[80]}),'*');
+    btn.innerHTML=on?'<span class="dot" style="background:#3ddc84"></span>Sound on':'<span class="dot"></span>Sound off';
+  });
+})();
+// reel: background video header (desktop, motion-ok) + sound-on lightbox
+(function(){
+  const REEL='VMubUUZ2tdU';
+  const hm=document.getElementById('heroMedia');
+  if(hm && matchMedia('(pointer:fine)').matches && innerWidth>900 && !matchMedia('(prefers-reduced-motion:reduce)').matches){
+    const f=document.createElement('iframe');
+    f.src=`https://www.youtube.com/embed/${REEL}?autoplay=1&mute=1&loop=1&playlist=${REEL}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&iv_load_policy=3&fs=0&disablekb=1&enablejsapi=1`;
+    f.allow='autoplay; encrypted-media';f.title='Showreel background';
+    hm.appendChild(f);
+    setTimeout(()=>hm.classList.add('live'),1400);
+  }
+  const box=document.getElementById('reelbox'),mount=document.getElementById('reelMount');
+  function open(){
+    mount.innerHTML=`<iframe src="https://www.youtube.com/embed/${REEL}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Showreel"></iframe>`;
+    box.classList.add('on');document.body.style.overflow='hidden';
+  }
+  function close(){box.classList.remove('on');mount.innerHTML='';document.body.style.overflow=''}
+  const pr=document.getElementById('playReel');
+  if(pr)pr.addEventListener('click',open);
+  document.getElementById('reelClose').addEventListener('click',close);
+  box.addEventListener('click',e=>{if(e.target===box)close()});
+  addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+})();
+
+// footer under-reveal sizing
+(function(){
+  const uf=document.querySelector('.underfoot'),over=document.querySelector('.over');
+  if(!uf||!over)return;
+  function size(){ if(matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)').matches){over.style.marginBottom='0px';return}
+    over.style.marginBottom=uf.offsetHeight+'px'; }
+  size();addEventListener('resize',size);setTimeout(size,600);
+})();
+// spark companion: drifts + rotates with scroll
+(function(){
+  const c=document.querySelector('.companion');
+  if(!c||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  let cTick=false;
+  addEventListener('scroll',()=>{
+    if(cTick)return;cTick=true;
+    requestAnimationFrame(()=>{
+      c.style.transform=`translateY(${(Math.sin(scrollY/420)*34).toFixed(1)}px) rotate(${(scrollY*0.22).toFixed(1)}deg)`;
+      cTick=false;
+    });
+  },{passive:true});
+})();
+// split-line rise
+(function(){
+  const els=document.querySelectorAll('[data-split]');
+  if(!els.length)return;
+  els.forEach(el=>{
+    el.innerHTML=el.innerHTML.split(/<br\s*\/?>/i).map(l=>`<span class="sl"><span>${l}</span></span>`).join('');
+  });
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.2});
+  els.forEach(el=>io.observe(el));
+})();
+
+
+// pinned reel scrub (tinywins grammar)
+(function(){
+  const sec=document.querySelector('.reel'),track=document.getElementById('reelTrack'),
+        word=document.getElementById('feelWord'),ticks=document.getElementById('ticks');
+  if(!sec||!track)return;
+  const cards=[...track.children];
+  ticks.innerHTML=cards.map(()=>'<i></i>').join('');
+  const tickEls=[...ticks.children];
+  let cur=-1;
+  function setWord(i){
+    if(i===cur)return;cur=i;
+    word.textContent=cards[i].dataset.word;
+    word.classList.remove('swap');void word.offsetWidth;word.classList.add('swap');
+    tickEls.forEach((el,j)=>el.classList.toggle('on',j===i));
+  }
+  setWord(0);
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches||innerWidth<=900)return;
+  let rTick=false;
+  addEventListener('scroll',()=>{
+    if(rTick)return;rTick=true;
+    requestAnimationFrame(()=>{
+      const vh=innerHeight,r=sec.getBoundingClientRect();
+      const total=r.height-vh;
+      const p=Math.min(1,Math.max(0,-r.top/total));
+      const max=track.scrollWidth-innerWidth+innerWidth*0.06;
+      track.style.transform=`translateX(${-p*max}px)`;
+      const rv=(p-(window.__rp||p))*140;window.__rp=p;
+      cards.forEach((c,i)=>{c.style.transform=`translateY(${(Math.sin(p*5+i*1.7)*12).toFixed(1)}px) rotate(${(Math.max(-2.4,Math.min(2.4,rv))*(i%2?-.5:.5)).toFixed(2)}deg)`});
+      setWord(Math.min(cards.length-1,Math.floor(p*cards.length)));
+      rTick=false;
+    });
+  },{passive:true});
+})();
+
+
+// hero parallax: image drifts, type counter-drifts (guarded)
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const hImg=document.querySelector('.hero>img'),hT=document.querySelector('.hero .t');
+  let hTick=false;
+  addEventListener('scroll',()=>{
+    if(hTick)return;hTick=true;
+    requestAnimationFrame(()=>{
+      const y=scrollY;
+      if(y<innerHeight){
+        const hm=document.getElementById('heroMedia');
+        if(hm)hm.style.transform=`translateY(${y*.22}px) scale(1.02)`;
+        else if(hImg)hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
+        if(hT)hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
+        if(hT)hT.style.opacity=String(Math.max(0,1-y/(innerHeight*.9)));
+        const nfo=document.querySelector('.hero .nfo'),sub=document.querySelector('.hero .sub');
+        if(nfo)nfo.style.transform=`translateY(${y*-.16}px)`;
+        if(sub)sub.style.transform=`translateY(${y*-.06}px)`;
+      }
+      hTick=false;
+    });
+  },{passive:true});
+}
+// contact sheet stagger
+const framesEl=document.getElementById('frames');
+if(framesEl){
+  [...framesEl.children].forEach((f,i)=>f.style.setProperty('--d',(i*45)+'ms'));
+  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){framesEl.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(framesEl);
+}
+
+</script>
+<script is:inline src="/redesign/ticker.js" defer></script>
+<script is:inline src="/redesign/switcher.js" defer></script>
+</body>
+</html>
