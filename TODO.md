@@ -19,8 +19,11 @@ DJ said "lets swap it" → /, /work, /about, /services, /contact, /photography +
 (scripts is:inline, styles is:global, links rewritten). All 9 routes verified + live.
 Old pages in git history. Still old-style: /lab hub, lab/* cases, /giving (folded into
 /about). Open: DJ's discipline tags, Q3 badge confirm, Sony spot link, real social handles,
-face pick (Bricolage default), em-dash sweep on lab pages, self-host reel, djthecd.com alt
-skin (memory: djthecd-personal-site). Domain monuments.cc still WordPress — swap is a
+face pick (Bricolage default), self-host reel, djthecd.com alt
+skin (memory: djthecd-personal-site). ✅ EM-DASH SWEEP DONE 2026-07-03 (5c7c876): 227 dashes
+cleared site-wide (lab/*, legacy work/*, main pages, titles, alt text, work.ts title builder,
+Base aria-label); only CSS-comment dashes remain (never rendered); /redesign/*.html mockups
+intentionally NOT swept (museum pieces). Domain monuments.cc still WordPress — swap is a
 separate deliberate step.
 
 ## ════ SESSION 2026-07-02/03 :: THE CONVERGED CUT — NEARLY LOCKED, MIGRATION NEXT ════
