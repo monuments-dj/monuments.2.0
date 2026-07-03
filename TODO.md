@@ -10,8 +10,10 @@ reel cards: client LOGOS on strips + A/B HOVER images (defaults mine; DJ picks v
 sorts real photos) + Roll/Shuffle/Category sort + filtered lightbox; home brands ticker
 moved up (after stat band); "Built to be ___" reel line; eye tile tracks cursor; sound
 toggle on hero reel; giving folded into /about ("Some stories are not for sale.").
-AWAITING DJ: reel-picker string, timeline years/titles, discipline tags review, Q3 badge,
-social handles, Sony spot link, photo category sorting.
+AWAITING DJ: timeline years/titles, discipline tags review, Q3 badge,
+social handles, Sony spot link, photo category sorting, face pick.
+✅ REEL A/B PICKS WIRED 2026-07-03: DJ's picker string applied to all 7 reel cards on /
+(blue-cross + turnstile weren't in the picker, keep defaults). All 14 images verified 200.
 
 ## (older) THE SWAP IS DONE: the converged cut IS the real site now
 DJ said "lets swap it" → /, /work, /about, /services, /contact, /photography + case routes
