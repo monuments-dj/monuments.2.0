@@ -319,12 +319,18 @@ function applyTheme(){
   document.body.classList.toggle('paper',state.theme==='paper');
   document.querySelectorAll('#theme button').forEach(b=>b.classList.toggle('on',b.dataset.v===state.theme));
 }
+function normKit(v){
+  // paste-proof: accept a bare id, a full URL, or domain/id with or without scheme/.css
+  let id=(v||'').trim().replace(/\.css$/,'').split('/').filter(Boolean).pop()||'';
+  if(!/^[a-z0-9]{4,12}$/i.test(id))id='aos2vlu';
+  return id;
+}
 function applyKit(){
-  const id=(state.kit||'').replace(/^https?:\/\/use\.typekit\.net\//,'').replace(/\.css$/,'').trim();
-  if(!id)return refreshFaceList();
+  const id=normKit(state.kit);
+  state.kit=id;localStorage.pgKit=id;
   const l=document.getElementById('kitcss');
   const href=`https://use.typekit.net/${id}.css`;
-  if(l.getAttribute('href')!==href){l.href=href;l.onload=()=>setTimeout(refreshFaceList,600);}
+  if(l.getAttribute('href')!==href){l.href=href;l.onload=()=>setTimeout(warmFonts,300);l.onerror=()=>{if(id!=='aos2vlu'){state.kit='aos2vlu';applyKit()}};}
   $('#kit').value=id;
 }
 const _mc=document.createElement('canvas').getContext('2d');
