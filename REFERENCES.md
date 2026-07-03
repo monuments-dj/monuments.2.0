@@ -144,8 +144,7 @@ That ticker + the red type moment are v1 DNA worth carrying forward. NOTE: copy
 is heavy first-person; new brand doc wants studio "we" for pitch copy (About may
 stay personal per doc).
 
-**monuments v2 /about (scanned 2026-06-12)** — "A decade in the hard rooms"
-hero, stats counters, team tiles (placeholder headshots), the two-rabbits quote
+**monuments v2 /about (scanned 2026-06-12)** — old hero line (banned by DJ 2026-07-02, do not reuse), stats counters, team tiles (placeholder headshots), the two-rabbits quote
 band, "we come in at the thinking layer" services list. Structurally solid,
 motion is entrance-only (same PDF gap as the rest of v2; queued for the
 pinned-scene pass).
