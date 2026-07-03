@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600&f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet">
+<link id="kitcss" href="https://use.typekit.net/aos2vlu.css" rel="stylesheet">
 <style>
 :root{
   --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
@@ -19,17 +20,18 @@
   --disp:'Bricolage Grotesque',sans-serif;
   --dispw:800; --dispw2:600;
   --dispcond:var(--disp); --condstretch:75%;
+  --mono:'Fragment Mono',monospace;
   --spark:var(--rose);     /* human accent */
   --struct:var(--cobalt);  /* structural accent */
 }
 *{margin:0;box-sizing:border-box}
 body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.mono{font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
 .wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 a{color:inherit;text-decoration:none}
 
 .corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
-.corners span{position:absolute;font-family:'Fragment Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
 .corners .c1{top:20px;left:22px;pointer-events:auto}
 .corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:17px;letter-spacing:-.01em}
 .corners .c1 i{font-style:normal;color:var(--spark);display:inline-block;animation:spin 7s linear infinite}
@@ -44,12 +46,12 @@ a{color:inherit;text-decoration:none}
 .hero .t{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);width:106%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(64px,11.6vw,172px);line-height:.88;letter-spacing:-.035em;text-transform:uppercase;mix-blend-mode:screen}
 .hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
 .hero .t .spark{color:var(--spark);mix-blend-mode:normal}
-.hero .nfo{position:absolute;right:var(--pad);bottom:12vh;text-align:left;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper)}
+.hero .nfo{position:absolute;right:var(--pad);bottom:12vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper)}
 .hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
 .hero .sub{position:absolute;left:var(--pad);bottom:12vh;max-width:40ch;color:#d9d6d0;font-size:16px}
 
 .statrow{background:var(--ink);border-top:1px solid var(--lined);border-bottom:1px solid var(--lined)}
-.statrow .in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px 0;font-family:'Fragment Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.statrow .in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
 .statrow b{color:var(--paper);font-weight:400}
 .statrow i{font-style:normal;color:var(--spark)}
 body.paper .statrow{background:var(--paper);border-color:var(--line)}
@@ -64,11 +66,11 @@ body.paper .statrow b{color:var(--ink)}
 .frames{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
 .fr{position:relative;background:#fff;padding:7px 7px 24px;border:1px solid var(--line);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
 .fr img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.9)}
-.fr .cap{position:absolute;left:8px;bottom:6px;font-family:'Fragment Mono',monospace;font-size:9px;color:var(--dim)}
+.fr .cap{position:absolute;left:8px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim)}
 .fr:hover{transform:rotate(-1.2deg) scale(1.05);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2}
 .fr.pick::after{content:"";position:absolute;inset:2px;border:3px solid var(--red);border-radius:50%/44%;transform:rotate(-2deg)}
 .fr.pick .cap{color:var(--red)}
-.fr .note{position:absolute;top:-13px;right:-7px;font-family:'Fragment Mono',monospace;font-size:9.5px;color:var(--red);transform:rotate(4deg);background:var(--paper);padding:2px 6px;border:1px solid var(--red)}
+.fr .note{position:absolute;top:-13px;right:-7px;font-family:var(--mono);font-size:9.5px;color:var(--red);transform:rotate(4deg);background:var(--paper);padding:2px 6px;border:1px solid var(--red)}
 
 .idx{padding:5vh 0 10vh}
 .idx .head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:18px}
@@ -77,12 +79,12 @@ h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400
 .rowp{display:grid;grid-template-columns:110px 128px 1fr auto;gap:26px;align-items:center;padding:20px 0;border-top:1px solid var(--line);transition:background .3s,padding-left .35s cubic-bezier(.22,1,.36,1)}
 .rowp:last-of-type{border-bottom:1px solid var(--line)}
 .rowp:hover{background:#fff;padding-left:14px}
-.rowp .id{font-family:'Fragment Mono',monospace;font-size:10.5px;color:var(--dim);text-transform:uppercase}
+.rowp .id{font-family:var(--mono);font-size:10.5px;color:var(--dim);text-transform:uppercase}
 .rowp .th{width:128px;height:84px;object-fit:cover;display:block;filter:saturate(.9);transition:transform .4s}
 .rowp:hover .th{transform:scale(1.06) rotate(-1deg)}
 .rowp .t{font-weight:var(--dispw2);font-size:clamp(21px,2.4vw,34px);letter-spacing:-.02em;line-height:1}
 .rowp:hover .t{color:var(--struct)}
-.rowp .tag{font-family:'Fragment Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rowp .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
 .rowp .tag i{font-style:normal;color:var(--struct)}
 
 .tiles{padding:0 0 10vh;overflow:hidden}
@@ -92,7 +94,7 @@ h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400
 .tile{width:190px;height:190px;border-radius:22px;overflow:hidden;flex:none;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line)}
 .tile img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
 .tile.cob{background:var(--struct);color:var(--paper);font-weight:var(--dispw);font-size:64px}
-.tile.ros{background:var(--spark);color:var(--ink);font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:center;padding:18px}
+.tile.ros{background:var(--spark);color:var(--ink);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:center;padding:18px}
 .tile.ink{background:var(--ink);color:var(--paper);font-weight:var(--dispw);font-size:34px;letter-spacing:-.02em}
 .tile.blk{background:#fff;color:var(--ink);font-family:'Pirata One',serif;font-size:74px}
 
@@ -106,7 +108,7 @@ body.paper .cta .sun g{fill:var(--ink)}
 body.paper .cta .kick{color:var(--struct)}
 .cta .big{font-weight:var(--dispw);font-size:clamp(48px,8.4vw,124px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:20px}
 .cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
-.cta .pill{display:inline-flex;margin-top:44px;padding:20px 38px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:'Fragment Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
+.cta .pill{display:inline-flex;margin-top:44px;padding:20px 38px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
 body.paper .cta .pill{background:var(--ink);color:var(--paper)}
 .cta .pill:hover{background:var(--spark)!important;color:var(--ink)!important}
 
@@ -123,7 +125,7 @@ footer .row{display:flex;justify-content:space-between;align-items:center;color:
 footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
 
 /* ============ CONTROL STRIP ============ */
-#ctl{position:fixed;left:18px;bottom:18px;z-index:90;background:var(--ink);color:var(--paper);border:1px solid #3a3936;border-radius:14px;padding:14px 16px;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.04em;box-shadow:0 18px 50px rgba(0,0,0,.45);max-width:330px}
+#ctl{position:fixed;left:18px;bottom:18px;z-index:90;background:var(--ink);color:var(--paper);border:1px solid #3a3936;border-radius:14px;padding:14px 16px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;box-shadow:0 18px 50px rgba(0,0,0,.45);max-width:330px}
 #ctl .hd{display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
 #ctl .hd b{font-weight:400;color:var(--rose);text-transform:uppercase;letter-spacing:.1em}
 #ctl .body{margin-top:12px;display:grid;gap:10px}
@@ -248,9 +250,16 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
       </div>
     </div>
     <div>
-      <label>Adobe kit ID (from Cowork)</label>
-      <input type="text" id="kit" placeholder="e.g. abc1def or full use.typekit.net URL">
-      <p class="note" style="margin-top:6px">Paste the kit ID and the Adobe faces in the list light up. Grayed faces are not loaded yet.</p>
+      <label>Mono voice</label>
+      <div class="seg" id="mono">
+        <button data-v="fragment">Fragment</button>
+        <button data-v="input">Input (kit)</button>
+      </div>
+    </div>
+    <div>
+      <label>Adobe kit</label>
+      <input type="text" id="kit" placeholder="kit id">
+      <p class="note" style="margin-top:6px">Kit aos2vlu is loaded. All foundry faces live.</p>
     </div>
     <div>
       <label>Combo (click to copy, send me this)</label>
@@ -262,15 +271,17 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 <script>
 /* ---------- face registry ---------- */
 const FACES=[
-  {id:'bricolage', label:'Bricolage Grotesque (baseline · free)', stack:"'Bricolage Grotesque',sans-serif", w:800, w2:600, cond:null, stretch:'75%', src:'free'},
+  {id:'bricolage', label:'Bricolage Grotesque (free)', stack:"'Bricolage Grotesque',sans-serif", w:800, w2:600, cond:null, stretch:'75%', src:'free'},
   {id:'clash', label:'Clash Grotesk (free)', stack:"'Clash Grotesk',sans-serif", w:600, w2:500, src:'free'},
   {id:'cabinet', label:'Cabinet Grotesk (free)', stack:"'Cabinet Grotesk',sans-serif", w:800, w2:700, src:'free'},
-  {id:'neue-haas-grotesk-display', label:'Neue Haas Grotesk Display (kit)', stack:"'neue-haas-grotesk-display',sans-serif", w:700, w2:600, src:'kit'},
-  {id:'neue-haas-unica', label:'Neue Haas Unica (kit)', stack:"'neue-haas-unica',sans-serif", w:700, w2:600, src:'kit'},
+  {id:'neue-haas-grotesk-display', label:'Neue Haas Grotesk Display (kit)', stack:"'neue-haas-grotesk-display',sans-serif", w:700, w2:500, src:'kit'},
+  {id:'neue-haas-unica', label:'Neue Haas Unica (kit)', stack:"'neue-haas-unica',sans-serif", w:700, w2:500, src:'kit'},
   {id:'roc-grotesk', label:'Roc Grotesk (kit)', stack:"'roc-grotesk',sans-serif", w:800, w2:500, cond:"'roc-grotesk-condensed','roc-grotesk',sans-serif", src:'kit'},
+  {id:'roc-grotesk-wide', label:'Roc Grotesk Wide (kit)', stack:"'roc-grotesk-wide',sans-serif", w:700, w2:500, cond:"'roc-grotesk-condensed','roc-grotesk',sans-serif", src:'kit'},
   {id:'forma-djr-display', label:'Forma DJR Display (kit)', stack:"'forma-djr-display',sans-serif", w:700, w2:500, src:'kit'},
-  {id:'halyard-display', label:'Halyard Display (kit)', stack:"'halyard-display',sans-serif", w:700, w2:600, src:'kit'},
+  {id:'halyard-display', label:'Halyard Display (kit)', stack:"'halyard-display',sans-serif", w:700, w2:500, src:'kit'},
 ];
+const MONOS={fragment:"'Fragment Mono',monospace",input:"'input-mono',monospace"};
 const $=s=>document.querySelector(s);
 const root=document.documentElement;
 
@@ -280,7 +291,8 @@ const state={
   face: url.get('face')||localStorage.pgFace||'bricolage',
   accent: url.get('accent')||localStorage.pgAccent||'duo',
   theme: url.get('theme')||localStorage.pgTheme||'ink',
-  kit: url.get('kit')||localStorage.pgKit||'',
+  kit: url.get('kit')||localStorage.pgKit||'aos2vlu',
+  mono: url.get('mono')||localStorage.pgMono||'fragment',
 };
 
 /* ---------- apply ---------- */
@@ -299,20 +311,20 @@ function applyAccent(){
   root.style.setProperty('--struct',struct);
   document.querySelectorAll('#accent button').forEach(b=>b.classList.toggle('on',b.dataset.v===state.accent));
 }
+function applyMono(){
+  root.style.setProperty('--mono',MONOS[state.mono]||MONOS.fragment);
+  document.querySelectorAll('#mono button').forEach(b=>b.classList.toggle('on',b.dataset.v===state.mono));
+}
 function applyTheme(){
   document.body.classList.toggle('paper',state.theme==='paper');
   document.querySelectorAll('#theme button').forEach(b=>b.classList.toggle('on',b.dataset.v===state.theme));
 }
 function applyKit(){
-  if(!state.kit)return refreshFaceList();
-  const id=state.kit.replace(/^https?:\/\/use\.typekit\.net\//,'').replace(/\.css$/,'').trim();
+  const id=(state.kit||'').replace(/^https?:\/\/use\.typekit\.net\//,'').replace(/\.css$/,'').trim();
   if(!id)return refreshFaceList();
-  if(!document.getElementById('kitcss')){
-    const l=document.createElement('link');l.id='kitcss';l.rel='stylesheet';
-    l.href=`https://use.typekit.net/${id}.css`;
-    l.onload=()=>setTimeout(refreshFaceList,600);
-    document.head.appendChild(l);
-  }
+  const l=document.getElementById('kitcss');
+  const href=`https://use.typekit.net/${id}.css`;
+  if(l.getAttribute('href')!==href){l.href=href;l.onload=()=>setTimeout(refreshFaceList,600);}
   $('#kit').value=id;
 }
 const _mc=document.createElement('canvas').getContext('2d');
@@ -337,18 +349,19 @@ function refreshFaceList(){
   });
 }
 function combo(){
-  const c=`face=${state.face}&accent=${state.accent}&theme=${state.theme}`;
+  const c=`face=${state.face}&accent=${state.accent}&theme=${state.theme}&mono=${state.mono}`;
   $('#combo').textContent=c;
   const q=new URLSearchParams(c);if(state.kit)q.set('kit',state.kit);
   history.replaceState(null,'','?'+q.toString());
 }
-function save(){localStorage.pgFace=state.face;localStorage.pgAccent=state.accent;localStorage.pgTheme=state.theme;localStorage.pgKit=state.kit}
-function applyAll(){applyFace();applyAccent();applyTheme();combo();save()}
+function save(){localStorage.pgFace=state.face;localStorage.pgAccent=state.accent;localStorage.pgTheme=state.theme;localStorage.pgKit=state.kit;localStorage.pgMono=state.mono}
+function applyAll(){applyFace();applyAccent();applyMono();applyTheme();combo();save()}
 
 /* ---------- wire controls ---------- */
 $('#face').addEventListener('change',e=>{state.face=e.target.value;applyAll()});
 document.querySelectorAll('#accent button').forEach(b=>b.addEventListener('click',()=>{state.accent=b.dataset.v;applyAll()}));
 document.querySelectorAll('#theme button').forEach(b=>b.addEventListener('click',()=>{state.theme=b.dataset.v;applyAll()}));
+document.querySelectorAll('#mono button').forEach(b=>b.addEventListener('click',()=>{state.mono=b.dataset.v;applyAll()}));
 $('#kit').addEventListener('change',e=>{state.kit=e.target.value.trim();save();applyKit()});
 $('#combo').addEventListener('click',()=>{navigator.clipboard.writeText($('#combo').textContent);$('#combo').textContent='copied ✓';setTimeout(combo,900)});
 $('#ctlHd').addEventListener('click',()=>{$('#ctl').classList.toggle('min');$('#ctlTog').textContent=$('#ctl').classList.contains('min')?'[+]':'[–]'});
