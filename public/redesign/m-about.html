@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cut · Converged Direction — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font:400 17px/1.6 'Bricolage Grotesque',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:'Fragment Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:20px;left:22px;pointer-events:auto}
+.corners .c1 b{font-family:'Bricolage Grotesque';font-weight:800;font-size:17px;letter-spacing:-.01em}
+.corners .c1 i{font-style:normal;color:var(--rose);display:inline-block;animation:spin 7s linear infinite}
+.corners .c2{top:22px;right:22px;pointer-events:auto}
+.corners .c2 a{margin-left:22px}
+.corners .c3{bottom:20px;left:22px}
+.corners .c4{bottom:20px;right:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* hero: type in the photograph */
+.hero{position:relative;height:100svh;overflow:hidden;background:var(--ink)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.06) brightness(.85)}
+.hero .t{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:800;font-size:clamp(56px,10.2vw,150px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;mix-blend-mode:screen}
+.hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero .t .spark{color:var(--rose);mix-blend-mode:normal}
+.hero .t .ln{display:block;overflow:hidden}
+.hero .t .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero .t .ln:nth-child(2)>span{animation-delay:.12s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .nfo{position:absolute;right:var(--pad);bottom:12vh;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
+.hero .nfo .h{color:var(--cobalt);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
+.hero .sub{position:absolute;left:var(--pad);bottom:12vh;max-width:40ch;color:#d9d6d0;font-size:16px;opacity:0;animation:fade 1s .7s forwards}
+@keyframes fade{to{opacity:1}}
+
+.statrow{border-top:1px solid var(--lined);border-bottom:1px solid var(--lined)}
+.statrow .in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px 0;font-family:'Fragment Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.statrow b{color:var(--paper);font-weight:400}
+.statrow i{font-style:normal;color:var(--rose)}
+
+/* subject file on paper */
+.paper{background:var(--paper);color:var(--ink)}
+.file{display:grid;grid-template-columns:.58fr 1.42fr;gap:64px;padding:11vh 0;align-items:start}
+.file .photo{background:#fff;border:1px solid var(--line);padding:10px 10px 34px;transform:rotate(-1.4deg);position:relative;box-shadow:0 24px 60px rgba(20,20,20,.12)}
+.file .photo img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:grayscale(.2) saturate(.9)}
+.file .photo .cap{position:absolute;left:12px;bottom:9px;font-family:'Fragment Mono',monospace;font-size:10px;color:var(--dim)}
+.file .photo .stamp{position:absolute;top:16px;right:-14px;font-family:'Fragment Mono',monospace;font-size:10px;color:var(--red);border:2px solid var(--red);border-radius:6px;padding:5px 10px;transform:rotate(6deg);background:var(--paper)}
+.file h2{font-weight:800;font-size:clamp(28px,3.4vw,48px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin:14px 0 22px}
+.file h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.file p{color:#4c4a45;max-width:58ch;margin-bottom:1.15em;font-size:18px}
+
+/* the roll: career eras as film strips */
+.roll{padding:2vh 0 10vh}
+.roll .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:13px;border-bottom:2px solid var(--ink)}
+.roll .bar .mono b{color:var(--red)}
+.era{display:grid;grid-template-columns:150px 236px 1fr;gap:34px;align-items:center;padding:36px 0;border-bottom:1px solid var(--line);transition:background .3s,padding-left .35s cubic-bezier(.22,1,.36,1)}
+.era:hover{background:#fff;padding-left:14px}
+.era .id{font-family:'Fragment Mono',monospace;font-size:10.5px;color:var(--dim);text-transform:uppercase;line-height:1.8}
+.era .strip{display:flex;gap:5px;background:var(--ink);padding:7px 6px;transform:rotate(-.8deg);transition:transform .4s}
+.era:nth-child(odd) .strip{transform:rotate(.7deg)}
+.era:hover .strip{transform:rotate(0deg) scale(1.03)}
+.era .strip img{width:68px;height:50px;object-fit:cover;display:block;filter:grayscale(.3) saturate(.85)}
+.era h3{font-weight:800;font-size:clamp(22px,2.5vw,36px);letter-spacing:-.02em;text-transform:uppercase}
+.era h3 .co{color:var(--cobalt)}
+.era p{color:#4c4a45;max-width:56ch;margin-top:6px}
+.era .here{display:inline-block;margin-top:10px;font-family:'Fragment Mono',monospace;font-size:10px;color:var(--red);border:2px solid var(--red);border-radius:6px;padding:4px 10px;transform:rotate(-2deg);text-transform:uppercase}
+
+/* crew: full-bleed with parallax */
+.crew{position:relative;height:86svh;overflow:hidden}
+.crew img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;filter:grayscale(.25) brightness(.75);will-change:transform}
+.crew .grade{position:absolute;inset:0;background:linear-gradient(6deg,rgba(22,21,20,.82),transparent 52%)}
+.crew .cap{position:absolute;left:var(--pad);right:var(--pad);bottom:42px;color:var(--paper)}
+.crew .cap .k{color:var(--rose)}
+.crew .cap h3{font-weight:800;font-size:clamp(30px,4.4vw,64px);letter-spacing:-.03em;text-transform:uppercase;margin-top:10px}
+.crew .cap h3 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.crew .cap p{max-width:52ch;margin-top:12px;color:rgba(245,243,239,.85)}
+
+/* how I work */
+.how{padding:11vh 0}
+.how .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:13px;border-bottom:2px solid var(--ink);margin-bottom:0}
+.how .bar .mono b{color:var(--red)}
+.step{display:grid;grid-template-columns:130px .5fr 1fr;gap:30px;padding:30px 0;border-bottom:1px solid var(--line);align-items:baseline;transition:background .3s,padding-left .35s cubic-bezier(.22,1,.36,1)}
+.step:hover{background:#fff;padding-left:14px}
+.step .n{font-family:'Fragment Mono',monospace;font-size:11px;color:var(--cobalt)}
+.step h4{font-weight:800;font-size:clamp(20px,2.2vw,30px);letter-spacing:-.02em;text-transform:uppercase}
+.step p{color:#4c4a45;max-width:56ch}
+
+/* cta */
+.cta{position:relative;background:var(--ink);color:var(--paper);padding:16vh 0;text-align:center;overflow:hidden}
+.cta .emblem{width:112px;aspect-ratio:1;margin:0 auto 30px;display:block;animation:spin 70s linear infinite}
+.cta .emblem g{fill:var(--paper)}
+.cta .kick{color:var(--rose)}
+.cta .big{font-weight:800;font-size:clamp(44px,7.6vw,112px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:20px}
+.cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.cta .pill{display:inline-flex;margin-top:42px;padding:20px 38px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:'Fragment Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
+.cta .pill:hover{background:var(--rose)}
+footer{background:var(--ink);border-top:1px solid var(--lined);padding:30px 0}
+footer .row{display:flex;justify-content:space-between;align-items:center;color:var(--dim);flex-wrap:wrap;gap:12px}
+footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text-transform:lowercase}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:900px){
+  .file{grid-template-columns:1fr}
+  .era{grid-template-columns:1fr;gap:14px}
+  .step{grid-template-columns:1fr;gap:8px}
+  .hero .sub{display:none}.hero .nfo{right:auto;left:var(--pad)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero .t .ln>span{transform:none}.hero .nfo,.hero .sub{opacity:1}.rv{opacity:1;transform:none}.grain{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="corners">
+  <span class="c1"><a href="index.html"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="m-home.html">Home</a><a href="m-home.html#work">Work</a><a href="m-services.html">Services</a><a href="mailto:monuments.cc@gmail.com">Contact</a></span>
+  <span class="c3">Subject file · opened 2016 · still active</span>
+  <span class="c4" id="clock">LA —:—</span>
+</div>
+
+<header class="hero">
+  <img src="/gallery/full/p-049.jpg" alt="">
+  <div class="t">
+    <span class="ln"><span>I build monuments</span></span>
+    <span class="ln"><span>with <span class="serif">my friends</span><span class="spark">.</span></span></span>
+  </div>
+  <p class="sub">I'm DJ Ramirez, a creative director. Ten years of wrong briefs, tight timelines, and real stakes. I learned to love that pressure.</p>
+  <div class="nfo">
+    <span class="h">NFO</span><br>
+    Ramirez, DJ · Subject-001<br>
+    Brand Experience &amp;<br>
+    Experiential Creative Director<br>
+    LA / Boise · Est. MMXXVI
+  </div>
+</header>
+
+<div class="statrow">
+  <div class="wrap in">
+    <span><b>4x</b> agency revenue grown</span>
+    <span><b>160M+</b> campaign impressions</span>
+    <span><i>✳</i> <b>Emmy</b> winning film series</span>
+    <span><b>50</b> contractors led</span>
+  </div>
+</div>
+
+<section class="paper">
+  <div class="wrap file">
+    <div class="photo rv">
+      <span class="stamp">Approved</span>
+      <img src="/gallery/full/p-054.jpg" alt="DJ Ramirez">
+      <span class="cap">SUBJECT-001 · RAMIREZ, DJ · CREATIVE DIRECTOR</span>
+    </div>
+    <div class="rv">
+      <span class="mono" style="color:var(--red)">✳ The short version</span>
+      <h2>Directing is the job. <span class="serif">Caring</span> is the method.</h2>
+      <p>I started in UX, learned the craft in agencies, and earned the title the loud way: on camera, on set, on the hook for the number. Now I run Monuments, a production studio and consultancy based between Los Angeles and Boise.</p>
+      <p>I plug in at the senior level: strategy, creative direction, integrated content. For brands that want to show up in culture and mean it, and for the agencies that serve them.</p>
+    </div>
+  </div>
+
+  <div class="wrap roll">
+    <div class="bar">
+      <span class="mono"><b>The roll</b> · career, frame by frame</span>
+      <span class="mono" style="color:#8f8d88">Four eras</span>
+    </div>
+    <div class="era rv">
+      <span class="id">Era 01<br>The systems years</span>
+      <div class="strip"><img src="/gallery/thumb/p-041.jpg" alt=""><img src="/gallery/thumb/p-009.jpg" alt=""><img src="/gallery/thumb/p-037.jpg" alt=""></div>
+      <div><h3>UX Design</h3><p>Where I learned systems. Research, wireframes, and why people do what they do. Every campaign I run still starts with that question.</p></div>
+    </div>
+    <div class="era rv">
+      <span class="id">Era 02<br>The speed years</span>
+      <div class="strip"><img src="/gallery/thumb/p-034.jpg" alt=""><img src="/gallery/thumb/p-043.jpg" alt=""><img src="/gallery/thumb/p-012.jpg" alt=""></div>
+      <div><h3>Agency Creative</h3><p>Where I learned speed. Concepting daily, selling work in the room, shipping campaigns for global brands on real deadlines.</p></div>
+    </div>
+    <div class="era rv">
+      <span class="id">Era 03<br>The scale years</span>
+      <div class="strip"><img src="/gallery/thumb/p-040.jpg" alt=""><img src="/gallery/thumb/p-002.jpg" alt=""><img src="/gallery/thumb/p-038.jpg" alt=""></div>
+      <div><h3>Creative Director</h3><p>Where I learned scale. On camera and behind it: leading teams of up to 50 contractors, growing agency revenue 4x, and directing an Emmy-winning film series.</p></div>
+    </div>
+    <div class="era rv">
+      <span class="id">Era 04<br>Now</span>
+      <div class="strip"><img src="/gallery/thumb/p-053.jpg" alt=""><img src="/gallery/thumb/p-098.jpg" alt=""><img src="/gallery/thumb/p-061.jpg" alt=""></div>
+      <div><h3><span class="co">Monuments</span></h3><p>My own studio and consultancy. Me, Tess keeping the operation moving, and a trusted crew of makers who come in when the work calls for it.</p><span class="here">● You are here</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="crew">
+  <img class="plx" src="/about/team.jpg" alt="The Monuments crew">
+  <div class="grade"></div>
+  <div class="cap">
+    <span class="k mono">✳ The crew</span>
+    <h3>Like a band, <span class="serif">not an agency.</span></h3>
+    <p>Tess is the project manager who keeps things in line. The reason timelines hold and the work actually ships. Around us: a trusted network of makers who have done it at scale.</p>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap how">
+    <div class="bar">
+      <span class="mono"><b>How I work</b> · four steps, no mystery</span>
+      <span class="mono" style="color:#8f8d88">The method</span>
+    </div>
+    <div class="step rv"><span class="n">\ 01</span><h4>Listen</h4><p>Before a single deliverable, I find what you actually stand for. Most brands are too close to see it. That gap is where the work begins.</p></div>
+    <div class="step rv"><span class="n">\ 02</span><h4>Frame</h4><p>Strategy and creative direction, set at the senior level. We decide what the work needs to say and how it should feel, then lock the thinking.</p></div>
+    <div class="step rv"><span class="n">\ 03</span><h4>Build</h4><p>Big campaign or a single shoot, the craft is the same. Integrated content, made with people who have done it at scale.</p></div>
+    <div class="step rv"><span class="n">\ 04</span><h4>Stand</h4><p>Work that lasts past the launch. I hand you something worth remembering, and the reasons it works.</p></div>
+  </div>
+</section>
+
+<section class="cta">
+  <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
+  <div class="wrap">
+    <span class="kick mono rv">✳ One conversation, no deck required</span>
+    <div class="big rv">Tell me what<br>you're <span class="serif">building.</span></div>
+    <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
+    <span class="blk">built to be remembered</span>
+    <span>Converged cut · About</span>
+  </div>
+</footer>
+
+<script>
+(function(){const g=document.getElementById('rays');let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s})();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const hImg=document.querySelector('.hero>img'),hT=document.querySelector('.hero .t'),crew=document.querySelector('.crew img');
+  let tick=false;
+  addEventListener('scroll',()=>{
+    if(tick)return;tick=true;
+    requestAnimationFrame(()=>{
+      const y=scrollY,vh=innerHeight;
+      if(y<vh){
+        hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
+        hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
+        hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));
+      }
+      const r=crew.parentElement.getBoundingClientRect();
+      if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;crew.style.transform=`translateY(${p*-52}px)`}
+      tick=false;
+    });
+  },{passive:true});
+}
+
+const mag=document.querySelector('.magnetic');
+if(mag&&matchMedia('(pointer:fine)').matches){
+  let raf;const st={x:0,y:0,tx:0,ty:0};
+  mag.addEventListener('mousemove',e=>{const r=mag.getBoundingClientRect();st.tx=(e.clientX-r.left-r.width/2)*.32;st.ty=(e.clientY-r.top-r.height/2)*.32;loop()});
+  mag.addEventListener('mouseleave',()=>{st.tx=0;st.ty=0;loop()});
+  function loop(){cancelAnimationFrame(raf);(function step(){st.x+=(st.tx-st.x)*.16;st.y+=(st.ty-st.y)*.16;mag.style.transform=`translate(${st.x}px,${st.y}px)`;if(Math.abs(st.tx-st.x)>.2||Math.abs(st.ty-st.y)>.2)raf=requestAnimationFrame(step)})()}
+}
+function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
+clock();setInterval(clock,30000);
+</script>
+</body>
+</html>
