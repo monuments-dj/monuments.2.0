@@ -256,7 +256,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <div class="hero-media" id="heroMedia">
     <img src="/gallery/full/p-013.jpg" alt="">
   </div>
-  <button class="playreel" id="playReel" type="button"><span class="dot"></span>Play the reel</button>
+  <div style="position:absolute;left:50%;bottom:12vh;transform:translateX(-50%);z-index:2;display:flex;gap:12px">
+    <button class="playreel" id="playReel" type="button" style="position:static;transform:none"><span class="dot"></span>Play the reel</button>
+    <button class="playreel" id="soundTog" type="button" style="position:static;transform:none"><span class="dot"></span>Sound off</button>
+  </div>
   <div class="t">
     <span class="ln"><span>Moments</span></span>
     <span class="ln"><span>people <span class="serif">show up</span></span></span>
@@ -422,11 +425,11 @@ document.getElementById('frames').innerHTML=shuffled.map((id,i)=>`
 // tile strip (doubled for seamless loop)
 const EYE=`<div class="tile eye"><div class="eyewrap"><svg viewBox="0 0 100 100" aria-label="The Monuments eye">
   <path d="M8 50 C30 24 70 24 92 50 C70 76 30 76 8 50 Z" fill="none" stroke="currentColor" stroke-width="7"/>
-  <g transform="translate(50,50)"><g class="spk">
+  <g transform="translate(50,50)"><g class="pupil"><g class="spk">
     <rect x="-3" y="-17" width="6" height="34" rx="3"/>
     <rect x="-3" y="-17" width="6" height="34" rx="3" transform="rotate(60)"/>
     <rect x="-3" y="-17" width="6" height="34" rx="3" transform="rotate(120)"/>
-  </g></g>
+  </g></g></g>
 </svg></div></div>`;
 const TILES=[
   EYE,
@@ -483,13 +486,46 @@ function clock(){
   document.getElementById('clock').textContent='LA '+t;
 }
 clock();setInterval(clock,30000);
+// the eye watches: pupils track the cursor (buttermax gesture, brand-book witness)
+(function(){
+  if(!matchMedia('(pointer:fine)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  let mx=innerWidth/2,my=innerHeight/2,raf=null;const st={x:0,y:0};
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;if(!raf)step()},{passive:true});
+  function step(){raf=requestAnimationFrame(()=>{
+    let live=false;
+    document.querySelectorAll('.tile.eye .pupil').forEach(pu=>{
+      const r=pu.closest('svg').getBoundingClientRect();
+      if(r.bottom<0||r.top>innerHeight){return}
+      const dx=mx-(r.left+r.width/2),dy=my-(r.top+r.height/2);
+      const d=Math.hypot(dx,dy)||1,lim=9;
+      const tx=dx/d*Math.min(lim,d/16),ty=dy/d*Math.min(lim,d/16);
+      st.x+=(tx-st.x)*.12;st.y+=(ty-st.y)*.12;
+      pu.setAttribute('transform',`translate(${st.x.toFixed(2)},${st.y.toFixed(2)})`);
+      if(Math.abs(tx-st.x)>.05||Math.abs(ty-st.y)>.05)live=true;
+    });
+    raf=live?requestAnimationFrame(step):null;if(!live)raf=null;
+  })}
+})();
+// sound toggle on the hero reel (unseen verb)
+(function(){
+  const hm=document.getElementById('heroMedia');if(!hm)return;
+  const btn=document.getElementById('soundTog');if(!btn)return;
+  let on=false;
+  btn.addEventListener('click',()=>{
+    const f=hm.querySelector('iframe');if(!f)return;
+    on=!on;
+    f.contentWindow.postMessage(JSON.stringify({event:'command',func:on?'unMute':'mute',args:[]}),'*');
+    if(on)f.contentWindow.postMessage(JSON.stringify({event:'command',func:'setVolume',args:[80]}),'*');
+    btn.innerHTML=on?'<span class="dot" style="background:#3ddc84"></span>Sound on':'<span class="dot"></span>Sound off';
+  });
+})();
 // reel: background video header (desktop, motion-ok) + sound-on lightbox
 (function(){
   const REEL='VMubUUZ2tdU';
   const hm=document.getElementById('heroMedia');
   if(hm && matchMedia('(pointer:fine)').matches && innerWidth>900 && !matchMedia('(prefers-reduced-motion:reduce)').matches){
     const f=document.createElement('iframe');
-    f.src=`https://www.youtube.com/embed/${REEL}?autoplay=1&mute=1&loop=1&playlist=${REEL}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&iv_load_policy=3&fs=0&disablekb=1`;
+    f.src=`https://www.youtube.com/embed/${REEL}?autoplay=1&mute=1&loop=1&playlist=${REEL}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&iv_load_policy=3&fs=0&disablekb=1&enablejsapi=1`;
     f.allow='autoplay; encrypted-media';f.title='Showreel background';
     hm.appendChild(f);
     setTimeout(()=>hm.classList.add('live'),1400);
