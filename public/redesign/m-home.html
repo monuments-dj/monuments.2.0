@@ -88,6 +88,32 @@ h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400
 .rowp .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
 .rowp .tag i{font-style:normal;color:var(--struct)}
 
+
+/* pinned horizontal reel (tinywins grammar) */
+.reel{height:420svh;position:relative}
+.reel-pin{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:5vh}
+.reel-head{display:flex;justify-content:space-between;align-items:baseline;gap:30px;flex-wrap:wrap}
+.reel-head h2{font-weight:var(--dispw);font-size:clamp(28px,3.6vw,52px);letter-spacing:-.03em;text-transform:uppercase}
+.reel-head h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;color:var(--struct);display:inline-block;min-width:4.2ch}
+.reel-head h2 .serif.swap{animation:wordIn .45s cubic-bezier(.22,1,.36,1)}
+@keyframes wordIn{0%{opacity:0;transform:translateY(60%)}100%{opacity:1;transform:none}}
+.ticks{display:flex;gap:5px;align-items:flex-end;height:22px}
+.ticks i{width:2px;height:10px;background:#c8c4bb;transition:height .3s,background .3s}
+.ticks i.on{height:22px;background:var(--red)}
+.reel-track{display:flex;gap:4vw;padding:0 var(--pad);will-change:transform}
+.reel-card{flex:0 0 auto;width:min(56vw,720px);background:#fff;border:1px solid var(--line);padding:9px 9px 0;box-shadow:0 22px 54px rgba(20,20,20,.12)}
+.reel-card img{width:100%;height:52svh;object-fit:cover;display:block;filter:saturate(.9)}
+.reel-card .rc-meta{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 6px}
+.reel-card .rc-meta .t{font-weight:var(--dispw2);font-size:clamp(18px,1.8vw,26px);letter-spacing:-.02em}
+.reel-card .rc-meta .mono{color:var(--dim);font-size:9.5px}
+.reel-foot{color:#8f8d88;text-align:center}
+@media (max-width:900px),(prefers-reduced-motion:reduce){
+  .reel{height:auto}
+  .reel-pin{position:static;height:auto;padding:8vh 0}
+  .reel-track{overflow-x:auto;transform:none!important;-webkit-overflow-scrolling:touch}
+  .reel-card{width:78vw}.reel-card img{height:40svh}
+}
+
 /* tile ring strip (rico move) */
 .tiles{padding:0 0 10vh;overflow:hidden}
 .tiles .track{display:flex;gap:16px;width:max-content;animation:drift 36s linear infinite}
@@ -192,36 +218,33 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="frames" id="frames"></div>
   </div>
 
-  <div class="wrap idx" id="work">
-    <div class="head">
-      <h2 class="rv">The <span class="serif">index.</span></h2>
-      <span class="mono rv" style="color:#55524c">04 selected · full archive on /work</span>
+  <section class="reel" id="work">
+    <div class="reel-pin">
+      <div class="wrap reel-head">
+        <h2>Made people feel <span class="serif" id="feelWord">bigger.</span></h2>
+        <div class="ticks" id="ticks" aria-hidden="true"></div>
+      </div>
+      <div class="reel-track" id="reelTrack">
+        <a class="reel-card" href="#" data-word="bigger.">
+          <img src="/gallery/full/p-061.jpg" alt="Art of Visuals">
+          <div class="rc-meta"><span class="t">Art of Visuals</span><span class="mono">MC-2024-01 · Brand campaign · 4x</span></div>
+        </a>
+        <a class="reel-card" href="#" data-word="human.">
+          <img src="/case-studies/blue-cross/bc-2.jpg" alt="Blue Cross of Idaho">
+          <div class="rc-meta"><span class="t">Blue Cross of Idaho</span><span class="mono">MC-2023-04 · Documentary campaign</span></div>
+        </a>
+        <a class="reel-card" href="#" data-word="heard.">
+          <img src="/case-studies/turnstile/products/prod-01.jpg" alt="Turnstile Audio">
+          <div class="rc-meta"><span class="t">Turnstile Audio</span><span class="mono">MC-2023-02 · Brand + product launch</span></div>
+        </a>
+        <a class="reel-card" href="#" data-word="loud.">
+          <img src="/case-studies/turnstile/bts/bts-05.jpg" alt="Adorama Music">
+          <div class="rc-meta"><span class="t">Adorama Music</span><span class="mono">MC-2022-07 · Content series</span></div>
+        </a>
+      </div>
+      <div class="wrap reel-foot mono" aria-hidden="true">Scroll to scrub · full archive on /work</div>
     </div>
-    <a class="rowp rv" href="#">
-      <span class="id">MC-2024-01</span>
-      <img class="th" src="/gallery/full/p-061.jpg" alt="">
-      <span class="t">Art of Visuals</span>
-      <span class="tag"><i>\</i> Brand campaign · grew the agency 4x</span>
-    </a>
-    <a class="rowp rv" href="#">
-      <span class="id">MC-2023-04</span>
-      <img class="th" src="/case-studies/blue-cross/bc-2.jpg" alt="">
-      <span class="t">Blue Cross of Idaho</span>
-      <span class="tag"><i>\</i> Documentary campaign</span>
-    </a>
-    <a class="rowp rv" href="#">
-      <span class="id">MC-2023-02</span>
-      <img class="th" src="/case-studies/turnstile/products/prod-01.jpg" alt="">
-      <span class="t">Turnstile Audio</span>
-      <span class="tag"><i>\</i> Brand + product launch</span>
-    </a>
-    <a class="rowp rv" href="#">
-      <span class="id">MC-2022-07</span>
-      <img class="th" src="/case-studies/turnstile/bts/bts-05.jpg" alt="">
-      <span class="t">Adorama Music</span>
-      <span class="tag"><i>\</i> Content series</span>
-    </a>
-  </div>
+  </section>
 
   <div class="tiles" aria-hidden="true">
     <div class="track" id="tiles"></div>
@@ -309,6 +332,39 @@ function clock(){
   document.getElementById('clock').textContent='LA '+t;
 }
 clock();setInterval(clock,30000);
+
+// pinned reel scrub (tinywins grammar)
+(function(){
+  const sec=document.querySelector('.reel'),track=document.getElementById('reelTrack'),
+        word=document.getElementById('feelWord'),ticks=document.getElementById('ticks');
+  if(!sec||!track)return;
+  const cards=[...track.children];
+  ticks.innerHTML=cards.map(()=>'<i></i>').join('');
+  const tickEls=[...ticks.children];
+  let cur=-1;
+  function setWord(i){
+    if(i===cur)return;cur=i;
+    word.textContent=cards[i].dataset.word;
+    word.classList.remove('swap');void word.offsetWidth;word.classList.add('swap');
+    tickEls.forEach((el,j)=>el.classList.toggle('on',j===i));
+  }
+  setWord(0);
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches||innerWidth<=900)return;
+  let rTick=false;
+  addEventListener('scroll',()=>{
+    if(rTick)return;rTick=true;
+    requestAnimationFrame(()=>{
+      const vh=innerHeight,r=sec.getBoundingClientRect();
+      const total=r.height-vh;
+      const p=Math.min(1,Math.max(0,-r.top/total));
+      const max=track.scrollWidth-innerWidth+innerWidth*0.06;
+      track.style.transform=`translateX(${-p*max}px)`;
+      setWord(Math.min(cards.length-1,Math.floor(p*cards.length)));
+      rTick=false;
+    });
+  },{passive:true});
+})();
+
 
 // hero parallax: image drifts, type counter-drifts (guarded)
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches){

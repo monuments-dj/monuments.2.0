@@ -110,3 +110,23 @@
   refreshFaces();apply();
   if(document.fonts){document.fonts.ready.then(warm);setTimeout(warm,1200);setTimeout(refreshFaces,3500)}
 })();
+
+/* scramble-text hover (jesse grammar) — pills + corner links */
+(function(){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const CH='MONUMENTS✳\\/·0123456789';
+  document.querySelectorAll('.pill,.corners .c2 a').forEach(el=>{
+    const final=el.textContent;
+    let raf=null;
+    el.addEventListener('mouseenter',()=>{
+      const t0=performance.now(),dur=340;
+      cancelAnimationFrame(raf);
+      (function step(now){
+        const k=Math.min(1,(now-t0)/dur);
+        const settled=Math.floor(k*final.length);
+        el.textContent=final.slice(0,settled)+[...final.slice(settled)].map(c=>c===' '?' ':CH[Math.floor(Math.random()*CH.length)]).join('');
+        if(k<1)raf=requestAnimationFrame(step);else el.textContent=final;
+      })(t0);
+    });
+  });
+})();
