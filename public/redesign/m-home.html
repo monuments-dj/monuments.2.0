@@ -126,7 +126,8 @@ h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400
 .reel-card .rc-meta{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 6px}
 .reel-card .rc-meta .t{font-weight:var(--dispw2);font-size:clamp(18px,1.8vw,26px);letter-spacing:-.02em}
 .reel-card .rc-meta .mono{color:var(--dim);font-size:9.5px}
-.reel-foot{color:#7a7873;text-align:center}
+.reel-foot{display:block;color:var(--spark);text-align:center;transition:color .3s}
+.reel-foot:hover{color:var(--paper)}
 @media (max-width:900px),(prefers-reduced-motion:reduce){
   .reel{height:auto}
   .reel-pin{position:static;height:auto;padding:8vh 0}
@@ -184,13 +185,15 @@ a.bt-item:hover .bt-logo{filter:none!important;opacity:1}
 .banner .big{font-weight:var(--dispw);font-family:var(--dispcond);font-stretch:var(--condstretch);font-size:clamp(60px,10.6vw,158px);line-height:.9;letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;width:max-content;display:flex;gap:56px;animation:drift 30s linear infinite}
 .banner .big i{font-style:normal;color:transparent;-webkit-text-stroke:1.5px var(--paper)}
 
+.gwm{background:var(--ink);color:var(--paper);font-weight:var(--dispw);font-size:15.5vw;letter-spacing:-.04em;line-height:.62;text-align:center;overflow:hidden;padding-top:2vw}
+.gwm span{color:var(--spark)}
 footer{background:var(--ink);border-top:1px solid var(--lined);padding:30px 0}
 footer .row{display:flex;justify-content:space-between;align-items:center;color:var(--dim);flex-wrap:wrap;gap:12px}
 footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
 
 
 /* film grain: the texture layer */
-.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
 background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
@@ -294,7 +297,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <div class="ticks" id="ticks" aria-hidden="true"></div>
       </div>
       <div class="reel-track" id="reelTrack">
-        <a class="reel-card" href="m-work.html" data-word="bigger.">
+        <a class="reel-card" href="m-work-aov.html" data-word="bigger.">
           <img src="/case-studies/art-of-visuals/gallery/podcast-cover.jpg" alt="Art of Visuals">
           <div class="rc-meta"><span class="t">Art of Visuals</span><span class="mono">MC-2024-01 · Brand campaign · 4x</span></div>
         </a>
@@ -302,7 +305,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
           <img src="/case-studies/sony-this-moment/gallery/tm-09.jpg" alt="Sony This Moment" loading="lazy">
           <div class="rc-meta"><span class="t">Sony · This Moment</span><span class="mono">MC-2023-06 · Campaign film + stills</span></div>
         </a>
-        <a class="reel-card" href="m-work.html" data-word="human.">
+        <a class="reel-card" href="m-work-bluecross.html" data-word="human.">
           <img src="/case-studies/blue-cross/bc-2.jpg" alt="Blue Cross of Idaho" loading="lazy">
           <div class="rc-meta"><span class="t">Blue Cross of Idaho</span><span class="mono">MC-2023-04 · Documentary campaign</span></div>
         </a>
@@ -331,10 +334,14 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
           <div class="rc-meta"><span class="t">Buck the Quo</span><span class="mono">MC-2021-03 · Film series · Emmy ✳</span></div>
         </a>
       </div>
-      <div class="wrap reel-foot mono" aria-hidden="true">Scroll to scrub · full archive on /work</div>
+      <a class="wrap reel-foot mono" href="m-work.html">Scroll to scrub · full archive on /work ↗</a>
     </div>
   </section>
 
+  <div class="wrap" style="padding:12vh 0 10vh">
+    <p class="rv" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(26px,3.4vw,48px);line-height:1.2;max-width:26ch;color:var(--ink)">"I shoot but I'm not a shooter. I direct but it's not the point. The point is the story. The moment. <span style="color:#b96a77">Always has been."</span></p>
+    <p class="mono rv" style="margin-top:22px;color:#8f8d88">DJ Ramirez · Creative Director</p>
+  </div>
   <div class="tiles" aria-hidden="true">
     <div class="track" id="tiles"></div>
   </div>
@@ -378,6 +385,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 </div><!--/over-->
 <div class="underfoot">
+<div class="gwm" aria-hidden="true">M<span>✳</span>NUMENTS</div>
 <div class="banner" aria-hidden="true">
   <div class="big"><span>Built to be remembered</span><i>Built to be remembered</i><span>Built to be remembered</span><i>Built to be remembered</i></div>
 </div>
