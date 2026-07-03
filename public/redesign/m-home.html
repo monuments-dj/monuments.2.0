@@ -143,7 +143,16 @@ h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400
 .tile.cob{background:var(--struct);color:var(--paper);font-weight:var(--dispw);font-size:64px}
 .tile.ros{background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:center;padding:18px}
 .tile.ink{background:var(--ink);color:var(--paper);font-weight:var(--dispw);font-size:34px;letter-spacing:-.02em}
+.tile.stat b{font-weight:var(--dispw);font-size:44px}
 .tile.blk{background:#fff;color:var(--ink);font-family:'Pirata One',serif;font-size:74px}
+.tile.eye{background:#fff}
+.tile.eye .eyewrap{width:70%;animation:blink 6s infinite}
+.tile.eye svg{width:100%;display:block;color:var(--ink)}
+.tile.eye .spk{fill:var(--spark);animation:spin 9s linear infinite}
+@keyframes blink{0%,90%,100%{transform:scaleY(1)}94%{transform:scaleY(.08)}}
+.tile.stat{flex-direction:column;gap:7px}
+.tile.stat span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,243,239,.65)}
+.tile.band{font-family:var(--disp);font-weight:var(--dispw);font-size:20px;letter-spacing:-.01em;text-transform:uppercase;line-height:1.18;text-align:center;padding:14px}
 .tile .logo{filter:none;width:60%;height:auto;object-fit:contain}
 
 
@@ -402,13 +411,22 @@ document.getElementById('frames').innerHTML=shuffled.map((id,i)=>`
   </figure>`).join('');
 
 // tile strip (doubled for seamless loop)
+const EYE=`<div class="tile eye"><div class="eyewrap"><svg viewBox="0 0 100 100" aria-label="The Monuments eye">
+  <path d="M8 50 C30 24 70 24 92 50 C70 76 30 76 8 50 Z" fill="none" stroke="currentColor" stroke-width="7"/>
+  <g transform="translate(50,50)"><g class="spk">
+    <rect x="-3" y="-17" width="6" height="34" rx="3"/>
+    <rect x="-3" y="-17" width="6" height="34" rx="3" transform="rotate(60)"/>
+    <rect x="-3" y="-17" width="6" height="34" rx="3" transform="rotate(120)"/>
+  </g></g>
+</svg></div></div>`;
 const TILES=[
+  EYE,
   `<div class="tile"><img src="/gallery/thumb/p-067.jpg" alt=""></div>`,
-  `<div class="tile cob">✳</div>`,
+  `<div class="tile ink stat"><b>4x</b><span>revenue growth</span></div>`,
   `<div class="tile"><img src="/gallery/thumb/p-040.jpg" alt=""></div>`,
-  `<div class="tile ink">4x</div>`,
+  `<div class="tile ros band">Less agency.<br>More band.</div>`,
   `<div class="tile"><img src="/gallery/thumb/p-021.jpg" alt=""></div>`,
-  `<div class="tile ros">Like a band<br>not an agency</div>`,
+  `<div class="tile cob">✳</div>`,
   `<div class="tile"><img src="/gallery/thumb/p-069.jpg" alt=""></div>`,
   `<div class="tile blk">m</div>`,
   `<div class="tile"><img src="/gallery/thumb/p-090.jpg" alt=""></div>`,
