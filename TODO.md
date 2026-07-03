@@ -1,4 +1,34 @@
-# TODO — current state (2026-07-01)
+# TODO — current state (2026-07-03)
+
+## ════ SESSION 2026-07-02/03 :: THE CONVERGED CUT — NEARLY LOCKED, MIGRATION NEXT ════
+The redesign converged. Everything lives at `public/redesign/` (hub: /redesign/), system docs
+in `redesign/01..06.md`. DJ: "designwise this cut is feeling pretty close."
+- ✅ THE CUT (m-home / m-about / m-services / m-work / m-work-sony): Bricolage + Fragment Mono
+  + Instrument Serif splices, rose/cobalt accents, color blocking, grain, type-in-photo heroes.
+- ✅ MOTION (measured from DJ's 4 reference sites via motion.mjs, doc: redesign/06):
+  pinned scroll-scrubbed work reel ("Built to be bigger/felt/human/fast/heard/played/worn/
+  loud/remembered." — 9 best projects, Emmy closer), scroll-lit rows, scramble hovers, footer
+  under-reveal, spark companion, velocity marquees (with decay), split-line CTAs, parallax layers.
+- ✅ VIDEO: reel (YT VMubUUZ2tdU) as m-home hero bg + sound-on lightbox; Sony case has a film
+  block with `data-video` slot (currently plays reel as LABELED STAND-IN).
+- ✅ WORK: m-work = taxonomy archive + DISCIPLINE LENS (6 disciplines highlight/dim, live
+  counts — ⚠️ discipline tags per project are MY GUESSES, DJ must review data-disc attrs).
+  m-work-sony = case TEMPLATE built from content/work/sony-this-moment.json.
+- ✅ Brands ticker (lab BrandTicker ported to public/redesign/ticker.js) on m-work + m-home.
+- ✅ Tiles strip: brand-book EYE (blink + spark pupil), "4x revenue growth", "Less agency.
+  More band.", blackletter m — DJ loves these.
+- ✅ PROMOTED TO REAL SITE already: converged tokens in global.css + fonts in Base.astro,
+  /about fully converted, /lab display face swapped, nav wordmark = M✳NUMENTS (32px).
+- ✅ Playground + switcher.js on every cut page (9 faces incl. Adobe kit use.typekit.net/aos2vlu).
+- 43-agent review workflow hardened the work pages (11 real bugs fixed).
+NEXT (in order):
+1. DJ reactions: face pick still DEFAULT BRICOLAGE (no combo string ever sent); discipline
+   tags review; Sony spot video link for the film block; reel words tune.
+2. Say "locked" → MIGRATE real site pages into the cut: home hero (worst offender, still
+   old Inter hero), /work + case studies (pour into m-work-sony template), /contact, /services.
+3. Site-wide em-dash sweep (lab pages still violate); self-host reel MP4 (kills YT chrome).
+4. Known accepted tradeoffs: corner-spark monochrome on paper pages; YT branding on hero video;
+   preview MCP throttles rAF (verify motion via Playwright/motion.mjs, NOT preview_eval).
 
 ## ════ SESSION 2026-07-01 (later) :: REDESIGN KIT — AWAITING DJ'S A/B/C PICK ════
 DJ asked for a design overhaul: more references, harder-hitting design, career arc shown
