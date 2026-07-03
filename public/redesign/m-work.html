@@ -73,6 +73,20 @@ a.bt-item:hover .bt-logo{filter:none!important;opacity:1}
 .brand-ticker.bt-black{background:var(--paper);border-bottom:1px solid var(--line)}
 .bt-black .bt-logo{filter:brightness(0)}
 
+/* discipline lens: highlight, don't hide */
+.lens{border-bottom:1px solid var(--line);background:var(--paper)}
+.lens .in{display:flex;align-items:baseline;gap:10px 14px;flex-wrap:wrap;padding:18px 0}
+.lens .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-right:8px}
+.lens button{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:99px;padding:8px 14px;color:#55524c;cursor:pointer;transition:border-color .25s,color .25s,background .25s}
+.lens button:hover{border-color:var(--ink);color:var(--ink)}
+.lens button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.lens button b{font-weight:400;color:var(--red)}
+.lens button.on b{color:var(--spark)}
+body.lensed .rowp:not(.match){opacity:.14;filter:grayscale(1)}
+body.lensed .rowp.match{opacity:1}
+body.lensed .rowp.match .id{color:var(--red)}
+.rowp{transition:background .3s,padding-left .4s cubic-bezier(.22,1,.36,1),opacity .45s,filter .45s}
+
 /* the archive: taxonomy groups + rows */
 .arch{padding:7vh 0 9vh}
 .group{padding-top:6vh}
@@ -209,65 +223,78 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   </div>
 </div>
 
+<div class="lens">
+  <div class="wrap in" id="lens">
+    <span class="lab">\ Disciplines</span>
+    <button data-d="all" class="on">All <b id="cAll"></b></button>
+    <button data-d="commercial">Commercial directing <b></b></button>
+    <button data-d="cd">Creative direction <b></b></button>
+    <button data-d="photo">Photography <b></b></button>
+    <button data-d="experiential">Experiential <b></b></button>
+    <button data-d="campaign">Campaign development <b></b></button>
+    <button data-d="oncam">On-camera <b></b></button>
+  </div>
+</div>
+
 <section class="arch wrap">
 
   <div class="group">
     <div class="bar"><span class="mono"><b>\ Selected</b> · the ones to see first</span><span class="mono" style="color:#8f8d88">01–04</span></div>
-    <a class="rowp litrow" href="#" data-img="/case-studies/art-of-visuals/gallery/podcast-cover.jpg" data-cap="MC-2024-01 · GREW THE AGENCY 4X">
+    <a class="rowp litrow" href="#" data-img="/case-studies/art-of-visuals/gallery/podcast-cover.jpg" data-cap="MC-2024-01 · GREW THE AGENCY 4X" data-disc="cd,campaign,oncam">
       <span class="id">MC-2024-01 ✳</span><span class="t">Art of <span class="serif">Visuals</span></span><span class="fmt"><i>\</i> Brand campaign</span><span class="yr">2024</span>
     </a>
-    <a class="rowp litrow" href="m-work-sony.html" data-img="/case-studies/sony-this-moment/gallery/tm-09.jpg" data-cap="MC-2023-06 · SONY AUDIO">
+    <a class="rowp litrow" href="m-work-sony.html" data-img="/case-studies/sony-this-moment/gallery/tm-09.jpg" data-cap="MC-2023-06 · SONY AUDIO" data-disc="cd,photo,campaign">
       <span class="id">MC-2023-06 ✳</span><span class="t">Sony · This <span class="serif">Moment</span></span><span class="fmt"><i>\</i> Campaign film + stills</span><span class="yr">2023</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/blue-cross/bc-2.jpg" data-cap="MC-2023-04 · REAL PEOPLE, REAL STAKES">
+    <a class="rowp litrow" href="#" data-img="/case-studies/blue-cross/bc-2.jpg" data-cap="MC-2023-04 · REAL PEOPLE, REAL STAKES" data-disc="cd,photo,campaign,commercial">
       <span class="id">MC-2023-04 ✳</span><span class="t">Blue Cross <span class="serif">of Idaho</span></span><span class="fmt"><i>\</i> Documentary campaign</span><span class="yr">2023</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/adorama-music/gallery/am-01.jpg" data-cap="MC-2022-07 · 160M+ IMPRESSIONS">
+    <a class="rowp litrow" href="#" data-img="/case-studies/adorama-music/gallery/am-01.jpg" data-cap="MC-2022-07 · 160M+ IMPRESSIONS" data-disc="cd,commercial,campaign">
       <span class="id">MC-2022-07 ✳</span><span class="t">Adorama <span class="serif">Music</span></span><span class="fmt"><i>\</i> Content series</span><span class="yr">2022</span>
     </a>
   </div>
 
   <div class="group">
     <div class="bar"><span class="mono"><b>\ Campaigns</b> · integrated + experiential</span><span class="mono" style="color:#8f8d88">05–08</span></div>
-    <a class="rowp litrow" href="#" data-img="/case-studies/buck-the-quo/gallery/chop-board.jpg" data-cap="MC-2021-03 · EMMY-WINNING SERIES">
+    <a class="rowp litrow" href="#" data-img="/case-studies/buck-the-quo/gallery/chop-board.jpg" data-cap="MC-2021-03 · EMMY-WINNING SERIES" data-disc="commercial,cd,oncam">
       <span class="id">MC-2021-03 ✳</span><span class="t">Buck the <span class="serif">Quo</span></span><span class="fmt"><i>\</i> Film series · Emmy</span><span class="yr">2021</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" data-cap="MC-2022-02 · SONY XPERIA">
+    <a class="rowp litrow" href="#" data-img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" data-cap="MC-2022-02 · SONY XPERIA" data-disc="campaign,photo,commercial">
       <span class="id">MC-2022-02</span><span class="t">Xperia <span class="serif">Summer</span></span><span class="fmt"><i>\</i> Product campaign</span><span class="yr">2022</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/donut-zumiez/gallery/dz-01.jpg" data-cap="MC-2023-08 · DONUT X ZUMIEZ">
+    <a class="rowp litrow" href="#" data-img="/case-studies/donut-zumiez/gallery/dz-01.jpg" data-cap="MC-2023-08 · DONUT X ZUMIEZ" data-disc="campaign,experiential,cd">
       <span class="id">MC-2023-08</span><span class="t">Donut × <span class="serif">Zumiez</span></span><span class="fmt"><i>\</i> Retail collab</span><span class="yr">2023</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/ac-boise/gallery/away-01.jpg" data-cap="MC-2024-05 · KIT REVEAL">
+    <a class="rowp litrow" href="#" data-img="/case-studies/ac-boise/gallery/away-01.jpg" data-cap="MC-2024-05 · KIT REVEAL" data-disc="experiential,campaign,cd">
       <span class="id">MC-2024-05</span><span class="t">AC <span class="serif">Boise</span></span><span class="fmt"><i>\</i> Kit reveal · Experiential</span><span class="yr">2024</span>
     </a>
   </div>
 
   <div class="group">
     <div class="bar"><span class="mono"><b>\ Films &amp; series</b> · the longer stories</span><span class="mono" style="color:#8f8d88">09–11</span></div>
-    <a class="rowp litrow" href="#" data-img="/case-studies/sony-flow-state/gallery/fs-01.jpg" data-cap="MC-2023-07 · SONY AUDIO">
+    <a class="rowp litrow" href="#" data-img="/case-studies/sony-flow-state/gallery/fs-01.jpg" data-cap="MC-2023-07 · SONY AUDIO" data-disc="commercial,cd">
       <span class="id">MC-2023-07</span><span class="t">Sony · Flow <span class="serif">State</span></span><span class="fmt"><i>\</i> Campaign film</span><span class="yr">2023</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/dw-drums/gallery/emotional-split.jpg" data-cap="MC-2022-04 · DW DRUMS">
+    <a class="rowp litrow" href="#" data-img="/case-studies/dw-drums/gallery/emotional-split.jpg" data-cap="MC-2022-04 · DW DRUMS" data-disc="commercial,photo">
       <span class="id">MC-2022-04</span><span class="t">DW <span class="serif">Drums</span></span><span class="fmt"><i>\</i> Brand film</span><span class="yr">2022</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/know-vape/gallery/banner.jpg" data-cap="MC-2021-06 · PUBLIC HEALTH">
+    <a class="rowp litrow" href="#" data-img="/case-studies/know-vape/gallery/banner.jpg" data-cap="MC-2021-06 · PUBLIC HEALTH" data-disc="campaign,commercial,cd">
       <span class="id">MC-2021-06</span><span class="t">Know <span class="serif">Vape</span></span><span class="fmt"><i>\</i> PSA campaign</span><span class="yr">2021</span>
     </a>
   </div>
 
   <div class="group">
     <div class="bar"><span class="mono"><b>\ Brand &amp; product</b> · zero to shelf</span><span class="mono" style="color:#8f8d88">12–15</span></div>
-    <a class="rowp litrow" href="#" data-img="/case-studies/turnstile/products/prod-01.jpg" data-cap="MC-2023-02 · TURNSTILE AUDIO">
+    <a class="rowp litrow" href="#" data-img="/case-studies/turnstile/products/prod-01.jpg" data-cap="MC-2023-02 · TURNSTILE AUDIO" data-disc="cd,campaign,photo">
       <span class="id">MC-2023-02</span><span class="t">Turnstile <span class="serif">Audio</span></span><span class="fmt"><i>\</i> Brand + product launch</span><span class="yr">2023</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/flashpoint/gallery/fp-01.jpg" data-cap="MC-2020-02 · FLASHPOINT">
+    <a class="rowp litrow" href="#" data-img="/case-studies/flashpoint/gallery/fp-01.jpg" data-cap="MC-2020-02 · FLASHPOINT" data-disc="cd,campaign">
       <span class="id">MC-2020-02</span><span class="t">Flash<span class="serif">point</span></span><span class="fmt"><i>\</i> Brand build</span><span class="yr">2020</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/waffle-me-up/cover.jpg" data-cap="MC-2019-05 · WAFFLE ME UP">
+    <a class="rowp litrow" href="#" data-img="/case-studies/waffle-me-up/cover.jpg" data-cap="MC-2019-05 · WAFFLE ME UP" data-disc="cd,experiential,photo">
       <span class="id">MC-2019-05</span><span class="t">Waffle <span class="serif">Me Up</span></span><span class="fmt"><i>\</i> Brand + spatial</span><span class="yr">2019</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/clothing-merch/gallery/cm-01.jpg" data-cap="MC-2020-08 · APPAREL">
+    <a class="rowp litrow" href="#" data-img="/case-studies/clothing-merch/gallery/cm-01.jpg" data-cap="MC-2020-08 · APPAREL" data-disc="cd,photo">
       <span class="id">MC-2020-08</span><span class="t">Clothing &amp; <span class="serif">Merch</span></span><span class="fmt"><i>\</i> Apparel + print</span><span class="yr">2020</span>
     </a>
   </div>
@@ -311,6 +338,25 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// discipline lens: highlight matching rows, dim the rest (never hide)
+(function(){
+  const rows=[...document.querySelectorAll('.rowp')];
+  const btns=[...document.querySelectorAll('#lens button')];
+  // counts
+  btns.forEach(b=>{
+    const d=b.dataset.d;
+    const n=d==='all'?rows.length:rows.filter(r=>(r.dataset.disc||'').split(',').includes(d)).length;
+    b.querySelector('b').textContent=String(n).padStart(2,'0');
+  });
+  function set(d){
+    btns.forEach(b=>b.classList.toggle('on',b.dataset.d===d));
+    if(d==='all'){document.body.classList.remove('lensed');rows.forEach(r=>r.classList.remove('match'));return}
+    document.body.classList.add('lensed');
+    rows.forEach(r=>r.classList.toggle('match',(r.dataset.disc||'').split(',').includes(d)));
+  }
+  btns.forEach(b=>b.addEventListener('click',()=>set(b.dataset.d)));
+})();
 
 // scroll-lit rows
 (function(){
