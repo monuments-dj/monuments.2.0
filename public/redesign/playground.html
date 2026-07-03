@@ -389,7 +389,18 @@ clock();setInterval(clock,30000);
 
 /* ---------- boot ---------- */
 refreshFaceList();applyKit();applyAll();
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refreshFaceList);
+// force-download every kit family (Typekit only serves on use), then fix the labels
+function warmFonts(){
+  const jobs=[];
+  FACES.forEach(f=>{const fam=f.stack.split(',')[0];jobs.push(document.fonts.load(`700 24px ${fam}`),document.fonts.load(`400 24px ${fam}`))});
+  ['input-mono','roc-grotesk-condensed'].forEach(fam=>jobs.push(document.fonts.load(`400 24px '${fam}'`)));
+  Promise.allSettled(jobs).then(()=>refreshFaceList());
+}
+if(document.fonts){
+  document.fonts.ready.then(warmFonts);
+  document.fonts.addEventListener('loadingdone',()=>refreshFaceList());
+  setTimeout(warmFonts,1200);setTimeout(refreshFaceList,3500);
+}
 </script>
 </body>
 </html>
