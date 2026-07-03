@@ -7,6 +7,12 @@
   --c-slate: #1b2630;  /* cool deep section */
   /* brand book v0.8: ink/paper carry the system, denim is the one structural colour, rose is accent only */
   --brand-ink: #0A0A0A; --brand-paper: #F4F4F2; --denim: #3E6E94; --rose: #EFA1AD;
+  /* converged cut (2026-07): the promoted system */
+  --disp: 'Bricolage Grotesque', sans-serif;
+  --mono2: 'Fragment Mono', monospace;
+  --serif-it: 'Instrument Serif', serif;
+  --cobalt: #2438E8; --gred: #E0311A;
+  --spark: var(--rose); --struct: var(--cobalt);
   --wrap: 1300px;      /* centered content column max-width — the default for ALL sections */
   --pad: clamp(24px, 5vw, 40px);  /* shared L/R gutter so every section's edges line up */
 }
@@ -1663,3 +1669,32 @@ footer { background: #0d0f14; color: var(--white); padding: 64px 100px 0; overfl
   .lab-float { transform: none !important; }
   .lab-float-img { transform: none !important; top: 0; height: 100%; }
 }
+
+
+/* ============================================================
+   CONVERGED CUT PROMOTION (2026-07) — type system + texture
+   Bricolage display · Fragment Mono metadata · Instrument Serif splices
+   ============================================================ */
+
+/* film grain overlay — pages opt in with <div class="grain"> */
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.06;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+@media (prefers-reduced-motion:reduce){.grain{animation:none}}
+
+/* the wordmark joins the system */
+.nav-wm{font-family:var(--disp);font-weight:800}
+
+/* about page (abx) — converged type */
+.abx-eyebrow{font-family:var(--mono2);letter-spacing:.1em}
+.abx-kicker{font-family:var(--mono2);letter-spacing:.1em}
+.abx-title{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.035em}
+.abx-title .acc{font-family:var(--serif-it);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;color:var(--rose)}
+.abx-counter-n{font-family:var(--disp);font-weight:800}
+.abx-process-h,.abx-philo-big,.abx-cta-h,.abx-person-name,.abx-step-t{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.03em}
+.abx-philo-big .acc,.abx-cta-h .acc,.abx-process-h .acc{font-family:var(--serif-it);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.abx-step-n{font-family:var(--mono2);font-weight:400;color:var(--struct)}
+.abx-credit{font-family:var(--disp);font-weight:800;text-transform:uppercase}
+.abx-quote blockquote p{font-family:var(--serif-it);font-style:italic;font-weight:400;letter-spacing:0}
+.abx-quote blockquote cite{font-family:var(--mono2);font-style:normal;letter-spacing:.1em;text-transform:uppercase;font-size:11px}
