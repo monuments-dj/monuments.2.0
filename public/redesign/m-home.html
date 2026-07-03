@@ -35,6 +35,25 @@ a{color:inherit;text-decoration:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 .corners .c2 a{margin-left:22px}
 
+/* hero: type IN the footage */
+.hero-media{position:absolute;inset:0;will-change:transform}
+.hero-media iframe{position:absolute;top:50%;left:50%;width:max(100vw,178svh);height:max(100svh,56.25vw);transform:translate(-50%,-50%);pointer-events:none;border:0;filter:grayscale(1) contrast(1.05) brightness(.8);opacity:0;transition:opacity 1.2s}
+.hero-media.live iframe{opacity:1}
+.hero-media img{transition:opacity 1.2s}
+.hero-media.live img{opacity:0}
+.playreel{position:absolute;left:50%;bottom:12vh;transform:translateX(-50%);z-index:2;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);border:1px solid rgba(245,243,239,.55);border-radius:99px;padding:13px 22px;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);cursor:pointer;transition:background .3s,color .3s}
+.playreel:hover{background:var(--paper);color:var(--ink)}
+.playreel .dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.25}}
+/* reel lightbox */
+#reelbox{position:fixed;inset:0;z-index:96;background:rgba(12,11,10,.96);display:none;align-items:center;justify-content:center;padding:4vmin}
+#reelbox.on{display:flex}
+#reelbox .frame{position:relative;width:min(92vw,1500px);aspect-ratio:16/9;background:#000;box-shadow:0 40px 120px rgba(0,0,0,.6)}
+#reelbox iframe{width:100%;height:100%;border:0}
+#reelbox .x{position:absolute;top:-42px;right:0;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:none;border:1px solid rgba(245,243,239,.4);border-radius:99px;padding:8px 16px;cursor:pointer}
+#reelbox .x:hover{background:var(--paper);color:var(--ink)}
+#reelbox .cap{position:absolute;bottom:-34px;left:0;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88}
+
 /* hero: type IN the photograph */
 .hero{position:relative;height:100svh;overflow:hidden;background:var(--ink)}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05) brightness(.9)}
@@ -116,16 +135,28 @@ h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400
 
 /* tile ring strip (rico move) */
 .tiles{padding:9vh 0;overflow:hidden;background:var(--spark)}
-.tiles .track{display:flex;gap:16px;width:max-content;animation:drift 36s linear infinite}
+.tiles .track{display:flex;width:max-content;animation:drift 36s linear infinite}
 .tiles:hover .track{animation-play-state:paused}
 @keyframes drift{to{transform:translateX(-50%)}}
-.tile{width:190px;height:190px;border-radius:22px;overflow:hidden;flex:none;display:flex;align-items:center;justify-content:center;background:#fff;border:none;box-shadow:0 14px 34px rgba(20,20,20,.14)}
+.tile{width:190px;height:190px;border-radius:22px;overflow:hidden;flex:none;display:flex;align-items:center;justify-content:center;background:#fff;border:none;box-shadow:0 14px 34px rgba(20,20,20,.14);margin-right:16px}
 .tile img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
 .tile.cob{background:var(--struct);color:var(--paper);font-weight:var(--dispw);font-size:64px}
 .tile.ros{background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:center;padding:18px}
 .tile.ink{background:var(--ink);color:var(--paper);font-weight:var(--dispw);font-size:34px;letter-spacing:-.02em}
 .tile.blk{background:#fff;color:var(--ink);font-family:'Pirata One',serif;font-size:74px}
 .tile .logo{filter:none;width:60%;height:auto;object-fit:contain}
+
+
+/* brands scroller (lab BrandTicker, ported) */
+.brand-ticker{overflow:hidden;padding:clamp(20px,2.8vw,36px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.bt-track{display:flex;align-items:center;gap:clamp(40px,5vw,88px);width:max-content;will-change:transform;transform:translate3d(0,0,0)}
+.bt-item{flex:0 0 auto;display:inline-flex;align-items:center;height:clamp(22px,2.4vw,34px);transition:transform .25s}
+a.bt-item:hover{transform:translateY(-2px)}
+.bt-logo{height:100%;width:auto;max-width:calc(clamp(22px,2.4vw,34px)*5.2);object-fit:contain;display:block;opacity:.78;transition:filter .3s,opacity .25s}
+a.bt-item:hover .bt-logo{filter:none!important;opacity:1}
+@media (prefers-reduced-motion:reduce){.bt-track{transform:none!important}}
+.brand-ticker.bt-white{background:var(--ink);border-top:1px solid var(--lined)}
+.bt-white .bt-logo{filter:brightness(0) invert(1)}
 
 /* sun CTA on ink */
 .cta{position:relative;background:var(--ink);color:var(--paper);padding:19vh 0;text-align:center;overflow:hidden}
@@ -196,12 +227,23 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <span class="c1"><a href="index.html"><b>M<i>✳</i>NUMENTS</b></a></span>
   <span class="c2"><a href="#work">Work</a><a href="m-about.html" style="margin-left:22px">About</a><a href="m-services.html" style="margin-left:22px">Services</a><a href="mailto:monuments.cc@gmail.com" style="margin-left:22px">Contact</a></span>
   <span class="c3">34.05° N · 116.24° W — LA / Boise</span>
-  <span class="c4" id="clock">LA —:—</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<div id="reelbox" role="dialog" aria-label="Showreel">
+  <div class="frame">
+    <button class="x" id="reelClose" type="button">Close ✕</button>
+    <div id="reelMount"></div>
+    <span class="cap">Monuments · studio reel · sound on</span>
+  </div>
 </div>
 
 <div class="over">
 <header class="hero">
-  <img src="/gallery/full/p-013.jpg" alt="">
+  <div class="hero-media" id="heroMedia">
+    <img src="/gallery/full/p-013.jpg" alt="">
+  </div>
+  <button class="playreel" id="playReel" type="button"><span class="dot"></span>Play the reel</button>
   <div class="t">
     <span class="ln"><span>Moments</span></span>
     <span class="ln"><span>people <span class="serif">show up</span></span></span>
@@ -267,6 +309,33 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="track" id="tiles"></div>
   </div>
 </section>
+
+<div class="brand-ticker bt-white" data-speed="28" aria-label="Brands worked with">
+  <div class="bt-track">
+    <a class="bt-item" href="https://www.sony.com" target="_blank" rel="noopener" aria-label="Sony"><img class="bt-logo" src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.intel.com" target="_blank" rel="noopener" aria-label="Intel"><img class="bt-logo" src="/logos/intel.png" alt="Intel" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Adorama"><img class="bt-logo" src="/logos/adorama.png" alt="Adorama" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.msi.com" target="_blank" rel="noopener" aria-label="MSI"><img class="bt-logo" src="/logos/msi.png" alt="MSI" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.lexar.com" target="_blank" rel="noopener" aria-label="Lexar"><img class="bt-logo" src="/logos/lexar.png" alt="Lexar" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Flashpoint"><img class="bt-logo" src="/logos/flashpoint.png" alt="Flashpoint" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://artofvisuals.com" target="_blank" rel="noopener" aria-label="Art of Visuals"><img class="bt-logo" src="/logos/art-of-visuals.png" alt="Art of Visuals" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.bcidaho.com" target="_blank" rel="noopener" aria-label="Blue Cross of Idaho"><img class="bt-logo" src="/logos/blue-cross.png" alt="Blue Cross of Idaho" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://donut.media" target="_blank" rel="noopener" aria-label="Donut Media"><img class="bt-logo" src="/logos/donut-media.svg" alt="Donut Media" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.dwdrums.com" target="_blank" rel="noopener" aria-label="DW Drums"><img class="bt-logo" src="/logos/dw-drums.png" alt="DW Drums" loading="lazy" decoding="async"></a>
+    <span class="bt-item"><img class="bt-logo" src="/logos/against.png" alt="Against" loading="lazy" decoding="async"></span>
+    <a class="bt-item" href="https://www.sony.com" target="_blank" rel="noopener" aria-label="Sony"><img class="bt-logo" src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.intel.com" target="_blank" rel="noopener" aria-label="Intel"><img class="bt-logo" src="/logos/intel.png" alt="Intel" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Adorama"><img class="bt-logo" src="/logos/adorama.png" alt="Adorama" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.msi.com" target="_blank" rel="noopener" aria-label="MSI"><img class="bt-logo" src="/logos/msi.png" alt="MSI" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.lexar.com" target="_blank" rel="noopener" aria-label="Lexar"><img class="bt-logo" src="/logos/lexar.png" alt="Lexar" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Flashpoint"><img class="bt-logo" src="/logos/flashpoint.png" alt="Flashpoint" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://artofvisuals.com" target="_blank" rel="noopener" aria-label="Art of Visuals"><img class="bt-logo" src="/logos/art-of-visuals.png" alt="Art of Visuals" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.bcidaho.com" target="_blank" rel="noopener" aria-label="Blue Cross of Idaho"><img class="bt-logo" src="/logos/blue-cross.png" alt="Blue Cross of Idaho" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://donut.media" target="_blank" rel="noopener" aria-label="Donut Media"><img class="bt-logo" src="/logos/donut-media.svg" alt="Donut Media" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.dwdrums.com" target="_blank" rel="noopener" aria-label="DW Drums"><img class="bt-logo" src="/logos/dw-drums.png" alt="DW Drums" loading="lazy" decoding="async"></a>
+    <span class="bt-item"><img class="bt-logo" src="/logos/against.png" alt="Against" loading="lazy" decoding="async"></span>
+  </div>
+</div>
 
 <section class="cta">
   <div class="inner wrap">
@@ -347,11 +416,49 @@ if(mag&&matchMedia('(pointer:fine)').matches){
 }
 
 // clock
+// velocity marquee with decay back to base
+(function(){
+  let ly=scrollY,decaying=false;
+  const anims=()=>[...document.querySelectorAll('.tiles .track,.banner .big')].map(el=>el.getAnimations&&el.getAnimations()[0]).filter(Boolean);
+  function decay(){
+    let live=false;
+    anims().forEach(a=>{if(a.playbackRate>1.03){a.playbackRate=1+(a.playbackRate-1)*0.92;live=true}else a.playbackRate=1});
+    decaying=live;if(live)requestAnimationFrame(decay);
+  }
+  addEventListener('scroll',()=>{
+    const vel=Math.min(3,Math.abs(scrollY-ly)/18);ly=scrollY;
+    anims().forEach(a=>a.playbackRate=Math.max(a.playbackRate,1+vel));
+    if(!decaying){decaying=true;requestAnimationFrame(decay)}
+  },{passive:true});
+})();
 function clock(){
   const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});
   document.getElementById('clock').textContent='LA '+t;
 }
 clock();setInterval(clock,30000);
+// reel: background video header (desktop, motion-ok) + sound-on lightbox
+(function(){
+  const REEL='VMubUUZ2tdU';
+  const hm=document.getElementById('heroMedia');
+  if(hm && matchMedia('(pointer:fine)').matches && innerWidth>900 && !matchMedia('(prefers-reduced-motion:reduce)').matches){
+    const f=document.createElement('iframe');
+    f.src=`https://www.youtube.com/embed/${REEL}?autoplay=1&mute=1&loop=1&playlist=${REEL}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&iv_load_policy=3&fs=0&disablekb=1`;
+    f.allow='autoplay; encrypted-media';f.title='Showreel background';
+    hm.appendChild(f);
+    setTimeout(()=>hm.classList.add('live'),1400);
+  }
+  const box=document.getElementById('reelbox'),mount=document.getElementById('reelMount');
+  function open(){
+    mount.innerHTML=`<iframe src="https://www.youtube.com/embed/${REEL}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Showreel"></iframe>`;
+    box.classList.add('on');document.body.style.overflow='hidden';
+  }
+  function close(){box.classList.remove('on');mount.innerHTML='';document.body.style.overflow=''}
+  const pr=document.getElementById('playReel');
+  if(pr)pr.addEventListener('click',open);
+  document.getElementById('reelClose').addEventListener('click',close);
+  box.addEventListener('click',e=>{if(e.target===box)close()});
+  addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+})();
 
 // footer under-reveal sizing
 (function(){
@@ -430,18 +537,15 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
     requestAnimationFrame(()=>{
       const y=scrollY;
       if(y<innerHeight){
-        if(hImg)hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
+        const hm=document.getElementById('heroMedia');
+        if(hm)hm.style.transform=`translateY(${y*.22}px) scale(1.02)`;
+        else if(hImg)hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
         if(hT)hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
         if(hT)hT.style.opacity=String(Math.max(0,1-y/(innerHeight*.9)));
         const nfo=document.querySelector('.hero .nfo'),sub=document.querySelector('.hero .sub');
         if(nfo)nfo.style.transform=`translateY(${y*-.16}px)`;
         if(sub)sub.style.transform=`translateY(${y*-.06}px)`;
       }
-      // velocity-reactive marquees
-      const vel=Math.min(3,Math.abs(y-(window.__ly||y))/18);window.__ly=y;
-      document.querySelectorAll('.tiles .track,.banner .big').forEach(el=>{
-        const a=el.getAnimations&&el.getAnimations()[0];if(a)a.playbackRate=1+vel;
-      });
       hTick=false;
     });
   },{passive:true});
@@ -454,6 +558,7 @@ if(framesEl){
 }
 
 </script>
+<script src="ticker.js" defer></script>
 <script src="switcher.js" defer></script>
 </body>
 </html>

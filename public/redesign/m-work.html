@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cut · Converged Direction — Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --dispcond:var(--disp); --condstretch:75%;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.06;mix-blend-mode:multiply;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:20px;left:22px;pointer-events:auto}
+.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:17px;letter-spacing:-.01em}
+.corners .c1 i{font-style:normal;color:#fff;display:inline-block;animation:spin 7s linear infinite}
+.corners .c2{top:22px;right:22px;pointer-events:auto}
+.corners .c2 a{margin-left:22px}
+.corners .c3{bottom:20px;left:22px}
+.corners .c4{bottom:20px;right:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
+
+/* hero: statement on paper */
+.hero{position:relative;min-height:78svh;display:flex;align-items:flex-end;padding:14vh 0 7vh;border-bottom:2px solid var(--ink);overflow:hidden}
+.hero .kick{color:var(--red)}
+.hero h1{font-weight:var(--dispw);font-size:clamp(56px,10.4vw,152px);line-height:.88;letter-spacing:-.035em;text-transform:uppercase;margin-top:16px}
+.hero h1 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero h1 .ln:nth-child(2)>span{animation-delay:.12s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-top:5vh;width:100%}
+.hero .sub p{max-width:44ch;color:#4c4a45}
+.hero .count{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88;text-align:right;line-height:2}
+.hero .count b{color:var(--ink);font-weight:400}
+
+/* stat band */
+.statrow{background:var(--struct)}
+.statrow .in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:26px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72)}
+.statrow b{color:var(--paper);font-weight:400}
+.statrow i{font-style:normal;color:var(--paper)}
+
+
+/* brands scroller (lab BrandTicker, ported) */
+.brand-ticker{overflow:hidden;padding:clamp(20px,2.8vw,36px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.bt-track{display:flex;align-items:center;gap:clamp(40px,5vw,88px);width:max-content;will-change:transform;transform:translate3d(0,0,0)}
+.bt-item{flex:0 0 auto;display:inline-flex;align-items:center;height:clamp(22px,2.4vw,34px);transition:transform .25s}
+a.bt-item:hover{transform:translateY(-2px)}
+.bt-logo{height:100%;width:auto;max-width:calc(clamp(22px,2.4vw,34px)*5.2);object-fit:contain;display:block;opacity:.78;transition:filter .3s,opacity .25s}
+a.bt-item:hover .bt-logo{filter:none!important;opacity:1}
+@media (prefers-reduced-motion:reduce){.bt-track{transform:none!important}}
+.brand-ticker.bt-black{background:var(--paper);border-bottom:1px solid var(--line)}
+.bt-black .bt-logo{filter:brightness(0)}
+
+/* the archive: taxonomy groups + rows */
+.arch{padding:7vh 0 9vh}
+.group{padding-top:6vh}
+.group .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.group .bar .mono b{color:var(--red)}
+.rowp{display:grid;grid-template-columns:118px 1fr auto auto;gap:26px;align-items:baseline;padding:26px 0;border-bottom:1px solid var(--line);transition:background .3s,padding-left .4s cubic-bezier(.22,1,.36,1)}
+.rowp:hover{background:#fff;padding-left:16px}
+.rowp .id{font-family:var(--mono);font-size:10.5px;color:var(--dim);text-transform:uppercase}
+.rowp:hover .id{color:var(--red)}
+.rowp .t{font-weight:var(--dispw);font-size:clamp(26px,3.8vw,54px);letter-spacing:-.03em;line-height:.95;text-transform:uppercase;transition:color .3s}
+.rowp:hover .t{color:var(--struct)}
+.rowp .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.rowp .fmt{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rowp .fmt i{font-style:normal;color:var(--struct)}
+.rowp .yr{font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+.litrow{opacity:.32;transition:opacity .5s cubic-bezier(.22,1,.36,1)}
+.litrow.lit{opacity:1}
+@media (prefers-reduced-motion:reduce){.litrow{opacity:1}}
+.rowp.litrow{transition:background .3s,padding-left .4s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1)}
+
+/* cursor-trailing preview */
+#preview{position:fixed;z-index:55;width:330px;height:224px;pointer-events:none;overflow:hidden;opacity:0;transform:scale(.94) rotate(-1.5deg);transition:opacity .25s,transform .25s;box-shadow:0 24px 60px rgba(20,20,20,.28);background:#fff;padding:7px 7px 22px}
+#preview img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92)}
+#preview .cap{position:absolute;left:9px;bottom:4px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
+#preview.on{opacity:1;transform:scale(1) rotate(-1.5deg)}
+@media (max-width:900px),(prefers-reduced-motion:reduce){#preview{display:none}}
+
+/* rose interlude: the sheet strip */
+.strip{background:var(--spark);padding:9vh 0;overflow:hidden}
+.strip .track{display:flex;width:max-content;animation:drift 40s linear infinite}
+.strip:hover .track{animation-play-state:paused}
+@keyframes drift{to{transform:translateX(-50%)}}
+.strip .fr{background:#fff;padding:6px 6px 20px;flex:none;position:relative;box-shadow:0 14px 34px rgba(20,20,20,.16);margin-right:14px}
+.strip .fr img{height:180px;width:auto;display:block;filter:saturate(.92)}
+.strip .fr .cap{position:absolute;left:7px;bottom:4px;font-family:var(--mono);font-size:8.5px;color:var(--dim);text-transform:uppercase}
+
+/* cta on ink */
+.cta{position:relative;background:var(--ink);color:var(--paper);padding:15vh 0 16vh;text-align:center;overflow:hidden}
+.cta .emblem{width:112px;aspect-ratio:1;margin:0 auto 30px;display:block;animation:spin 70s linear infinite}
+.cta .emblem g{fill:var(--paper)}
+.cta .kick{color:var(--spark)}
+.cta .big{font-weight:var(--dispw);font-size:clamp(44px,7.6vw,112px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:20px}
+.cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.cta .pill{display:inline-flex;margin-top:42px;padding:20px 38px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
+.cta .pill:hover{background:var(--spark)}
+footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
+footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
+
+.over{position:relative;z-index:1;background:inherit}
+.underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
+[data-split] .sl{display:block;overflow:hidden}
+[data-split] .sl>span{display:block;transform:translateY(112%);transition:transform .95s cubic-bezier(.22,1,.36,1)}
+[data-split].in .sl:nth-child(2)>span{transition-delay:.1s}
+[data-split].in .sl>span{transform:none}
+@media (prefers-reduced-motion:reduce){[data-split] .sl>span{transform:none}}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:900px){
+  .rowp{grid-template-columns:1fr auto}.rowp .id,.rowp .yr{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero h1 .ln>span{transform:none}.rv{opacity:1;transform:none}.grain{animation:none}
+  .strip .track{animation:none!important}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="companion" aria-hidden="true">✳</div>
+
+<div class="corners">
+  <span class="c1"><a href="index.html"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="m-home.html">Home</a><a href="m-about.html">About</a><a href="m-services.html">Services</a><a href="mailto:monuments.cc@gmail.com">Contact</a></span>
+  <span class="c3">The archive · roll 2016–2026</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<div class="over">
+<header class="hero">
+  <div class="wrap">
+    <span class="kick mono">Work · DJ Ramirez · Monuments</span>
+    <h1>
+      <span class="ln"><span>The</span></span>
+      <span class="ln"><span><span class="serif">archive</span>.</span></span>
+    </h1>
+    <div class="sub">
+      <p>Campaigns, films, and brand builds from the last decade. Every entry is real, shipped, and accounted for. Hover to inspect.</p>
+      <div class="count mono">
+        <span><b>15</b> projects on file</span><br>
+        <span><b>4</b> categories</span><br>
+        <span><b>✳</b> selects marked</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="statrow">
+  <div class="wrap in">
+    <span><b>4x</b> agency revenue grown</span>
+    <span><b>160M+</b> campaign impressions</span>
+    <span><i>✳</i> <b>Emmy</b> winning film series</span>
+    <span><b>50</b> contractors led</span>
+  </div>
+</div>
+
+<div class="brand-ticker bt-black" data-speed="28" aria-label="Brands worked with">
+  <div class="bt-track">
+    <a class="bt-item" href="https://www.sony.com" target="_blank" rel="noopener" aria-label="Sony"><img class="bt-logo" src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.intel.com" target="_blank" rel="noopener" aria-label="Intel"><img class="bt-logo" src="/logos/intel.png" alt="Intel" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Adorama"><img class="bt-logo" src="/logos/adorama.png" alt="Adorama" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.msi.com" target="_blank" rel="noopener" aria-label="MSI"><img class="bt-logo" src="/logos/msi.png" alt="MSI" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.lexar.com" target="_blank" rel="noopener" aria-label="Lexar"><img class="bt-logo" src="/logos/lexar.png" alt="Lexar" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Flashpoint"><img class="bt-logo" src="/logos/flashpoint.png" alt="Flashpoint" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://artofvisuals.com" target="_blank" rel="noopener" aria-label="Art of Visuals"><img class="bt-logo" src="/logos/art-of-visuals.png" alt="Art of Visuals" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.bcidaho.com" target="_blank" rel="noopener" aria-label="Blue Cross of Idaho"><img class="bt-logo" src="/logos/blue-cross.png" alt="Blue Cross of Idaho" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://donut.media" target="_blank" rel="noopener" aria-label="Donut Media"><img class="bt-logo" src="/logos/donut-media.svg" alt="Donut Media" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.dwdrums.com" target="_blank" rel="noopener" aria-label="DW Drums"><img class="bt-logo" src="/logos/dw-drums.png" alt="DW Drums" loading="lazy" decoding="async"></a>
+    <span class="bt-item"><img class="bt-logo" src="/logos/against.png" alt="Against" loading="lazy" decoding="async"></span>
+    <a class="bt-item" href="https://www.sony.com" target="_blank" rel="noopener" aria-label="Sony"><img class="bt-logo" src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.intel.com" target="_blank" rel="noopener" aria-label="Intel"><img class="bt-logo" src="/logos/intel.png" alt="Intel" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Adorama"><img class="bt-logo" src="/logos/adorama.png" alt="Adorama" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.msi.com" target="_blank" rel="noopener" aria-label="MSI"><img class="bt-logo" src="/logos/msi.png" alt="MSI" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.lexar.com" target="_blank" rel="noopener" aria-label="Lexar"><img class="bt-logo" src="/logos/lexar.png" alt="Lexar" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Flashpoint"><img class="bt-logo" src="/logos/flashpoint.png" alt="Flashpoint" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://artofvisuals.com" target="_blank" rel="noopener" aria-label="Art of Visuals"><img class="bt-logo" src="/logos/art-of-visuals.png" alt="Art of Visuals" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.bcidaho.com" target="_blank" rel="noopener" aria-label="Blue Cross of Idaho"><img class="bt-logo" src="/logos/blue-cross.png" alt="Blue Cross of Idaho" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://donut.media" target="_blank" rel="noopener" aria-label="Donut Media"><img class="bt-logo" src="/logos/donut-media.svg" alt="Donut Media" loading="lazy" decoding="async"></a>
+    <a class="bt-item" href="https://www.dwdrums.com" target="_blank" rel="noopener" aria-label="DW Drums"><img class="bt-logo" src="/logos/dw-drums.png" alt="DW Drums" loading="lazy" decoding="async"></a>
+    <span class="bt-item"><img class="bt-logo" src="/logos/against.png" alt="Against" loading="lazy" decoding="async"></span>
+  </div>
+</div>
+
+<section class="arch wrap">
+
+  <div class="group">
+    <div class="bar"><span class="mono"><b>\ Selected</b> · the ones to see first</span><span class="mono" style="color:#8f8d88">01–04</span></div>
+    <a class="rowp litrow" href="#" data-img="/case-studies/art-of-visuals/gallery/podcast-cover.jpg" data-cap="MC-2024-01 · GREW THE AGENCY 4X">
+      <span class="id">MC-2024-01 ✳</span><span class="t">Art of <span class="serif">Visuals</span></span><span class="fmt"><i>\</i> Brand campaign</span><span class="yr">2024</span>
+    </a>
+    <a class="rowp litrow" href="m-work-sony.html" data-img="/case-studies/sony-this-moment/gallery/tm-09.jpg" data-cap="MC-2023-06 · SONY AUDIO">
+      <span class="id">MC-2023-06 ✳</span><span class="t">Sony · This <span class="serif">Moment</span></span><span class="fmt"><i>\</i> Campaign film + stills</span><span class="yr">2023</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/blue-cross/bc-2.jpg" data-cap="MC-2023-04 · REAL PEOPLE, REAL STAKES">
+      <span class="id">MC-2023-04 ✳</span><span class="t">Blue Cross <span class="serif">of Idaho</span></span><span class="fmt"><i>\</i> Documentary campaign</span><span class="yr">2023</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/adorama-music/gallery/am-01.jpg" data-cap="MC-2022-07 · 160M+ IMPRESSIONS">
+      <span class="id">MC-2022-07 ✳</span><span class="t">Adorama <span class="serif">Music</span></span><span class="fmt"><i>\</i> Content series</span><span class="yr">2022</span>
+    </a>
+  </div>
+
+  <div class="group">
+    <div class="bar"><span class="mono"><b>\ Campaigns</b> · integrated + experiential</span><span class="mono" style="color:#8f8d88">05–08</span></div>
+    <a class="rowp litrow" href="#" data-img="/case-studies/buck-the-quo/gallery/chop-board.jpg" data-cap="MC-2021-03 · EMMY-WINNING SERIES">
+      <span class="id">MC-2021-03 ✳</span><span class="t">Buck the <span class="serif">Quo</span></span><span class="fmt"><i>\</i> Film series · Emmy</span><span class="yr">2021</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" data-cap="MC-2022-02 · SONY XPERIA">
+      <span class="id">MC-2022-02</span><span class="t">Xperia <span class="serif">Summer</span></span><span class="fmt"><i>\</i> Product campaign</span><span class="yr">2022</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/donut-zumiez/gallery/dz-01.jpg" data-cap="MC-2023-08 · DONUT X ZUMIEZ">
+      <span class="id">MC-2023-08</span><span class="t">Donut × <span class="serif">Zumiez</span></span><span class="fmt"><i>\</i> Retail collab</span><span class="yr">2023</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/ac-boise/gallery/away-01.jpg" data-cap="MC-2024-05 · KIT REVEAL">
+      <span class="id">MC-2024-05</span><span class="t">AC <span class="serif">Boise</span></span><span class="fmt"><i>\</i> Kit reveal · Experiential</span><span class="yr">2024</span>
+    </a>
+  </div>
+
+  <div class="group">
+    <div class="bar"><span class="mono"><b>\ Films &amp; series</b> · the longer stories</span><span class="mono" style="color:#8f8d88">09–11</span></div>
+    <a class="rowp litrow" href="#" data-img="/case-studies/sony-flow-state/gallery/fs-01.jpg" data-cap="MC-2023-07 · SONY AUDIO">
+      <span class="id">MC-2023-07</span><span class="t">Sony · Flow <span class="serif">State</span></span><span class="fmt"><i>\</i> Campaign film</span><span class="yr">2023</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/dw-drums/gallery/emotional-split.jpg" data-cap="MC-2022-04 · DW DRUMS">
+      <span class="id">MC-2022-04</span><span class="t">DW <span class="serif">Drums</span></span><span class="fmt"><i>\</i> Brand film</span><span class="yr">2022</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/know-vape/gallery/banner.jpg" data-cap="MC-2021-06 · PUBLIC HEALTH">
+      <span class="id">MC-2021-06</span><span class="t">Know <span class="serif">Vape</span></span><span class="fmt"><i>\</i> PSA campaign</span><span class="yr">2021</span>
+    </a>
+  </div>
+
+  <div class="group">
+    <div class="bar"><span class="mono"><b>\ Brand &amp; product</b> · zero to shelf</span><span class="mono" style="color:#8f8d88">12–15</span></div>
+    <a class="rowp litrow" href="#" data-img="/case-studies/turnstile/products/prod-01.jpg" data-cap="MC-2023-02 · TURNSTILE AUDIO">
+      <span class="id">MC-2023-02</span><span class="t">Turnstile <span class="serif">Audio</span></span><span class="fmt"><i>\</i> Brand + product launch</span><span class="yr">2023</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/flashpoint/gallery/fp-01.jpg" data-cap="MC-2020-02 · FLASHPOINT">
+      <span class="id">MC-2020-02</span><span class="t">Flash<span class="serif">point</span></span><span class="fmt"><i>\</i> Brand build</span><span class="yr">2020</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/waffle-me-up/cover.jpg" data-cap="MC-2019-05 · WAFFLE ME UP">
+      <span class="id">MC-2019-05</span><span class="t">Waffle <span class="serif">Me Up</span></span><span class="fmt"><i>\</i> Brand + spatial</span><span class="yr">2019</span>
+    </a>
+    <a class="rowp litrow" href="#" data-img="/case-studies/clothing-merch/gallery/cm-01.jpg" data-cap="MC-2020-08 · APPAREL">
+      <span class="id">MC-2020-08</span><span class="t">Clothing &amp; <span class="serif">Merch</span></span><span class="fmt"><i>\</i> Apparel + print</span><span class="yr">2020</span>
+    </a>
+  </div>
+
+</section>
+<div id="preview"><img alt=""><span class="cap"></span></div>
+
+<div class="strip" aria-hidden="true">
+  <div class="track" id="stripTrack"></div>
+</div>
+
+<section class="cta">
+  <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
+  <div class="wrap">
+    <span class="kick mono rv">✳ One conversation, no deck required</span>
+    <div class="big" data-split>Tell me what<br>you're <span class="serif">building.</span></div>
+    <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
+  </div>
+</section>
+</div><!--/over-->
+
+<div class="underfoot">
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
+    <span class="blk">built to be remembered</span>
+    <span>Converged cut · Work</span>
+  </div>
+</footer>
+</div><!--/underfoot-->
+
+<script>
+(function(){const g=document.getElementById('rays');let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s})();
+
+// strip: pull covers from the index rows themselves (single source of truth)
+(function(){
+  const rows=[...document.querySelectorAll('.rowp')];
+  const frs=rows.map((r,i)=>`<div class="fr"><img src="${r.dataset.img}" alt="" loading="lazy"><span class="cap">FR-${String(i+1).padStart(2,'0')} · ${r.querySelector('.t').textContent.trim().toUpperCase().slice(0,22)}</span></div>`).join('');
+  document.getElementById('stripTrack').innerHTML=frs+frs;
+})();
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// scroll-lit rows
+(function(){
+  const rows=document.querySelectorAll('.litrow');
+  const io2=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('lit',e.isIntersecting)),{rootMargin:'-30% 0px -30% 0px'});
+  rows.forEach(r=>io2.observe(r));
+})();
+
+// cursor-trailing preview
+(function(){
+  const pv=document.getElementById('preview'),pimg=pv.querySelector('img'),pcap=pv.querySelector('.cap');
+  if(!matchMedia('(pointer:fine)').matches)return;
+  let px=0,py=0,tx=0,ty=0,raf=null;
+  document.querySelectorAll('.rowp').forEach(row=>{
+    row.addEventListener('mouseenter',()=>{pimg.src=row.dataset.img;pcap.textContent=row.dataset.cap;pv.classList.add('on')});
+    row.addEventListener('mouseleave',()=>pv.classList.remove('on'));
+  });
+  addEventListener('mousemove',e=>{tx=e.clientX+30;ty=e.clientY-120;if(!raf)step()},{passive:true});
+  function step(){raf=requestAnimationFrame(()=>{
+    px+=(tx-px)*.13;py+=(ty-py)*.13;
+    pv.style.left=px+'px';pv.style.top=py+'px';
+    (Math.abs(tx-px)>.5||Math.abs(ty-py)>.5)?step():raf=null;
+  })}
+})();
+
+// under-reveal sizing
+(function(){
+  const uf=document.querySelector('.underfoot'),over=document.querySelector('.over');
+  function size(){ if(matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)').matches){over.style.marginBottom='0px';return}
+    over.style.marginBottom=uf.offsetHeight+'px'; }
+  size();addEventListener('resize',size);setTimeout(size,600);
+})();
+// companion
+(function(){
+  const c=document.querySelector('.companion');
+  let k=false;
+  addEventListener('scroll',()=>{
+    if(k)return;k=true;
+    requestAnimationFrame(()=>{
+      if(c&&!matchMedia('(prefers-reduced-motion:reduce)').matches)
+        c.style.transform=`translateY(${(Math.sin(scrollY/420)*34).toFixed(1)}px) rotate(${(scrollY*0.22).toFixed(1)}deg)`;
+      k=false;
+    });
+  },{passive:true});
+})();
+// split-line rise
+(function(){
+  const els=document.querySelectorAll('[data-split]');
+  els.forEach(el=>{el.innerHTML=el.innerHTML.split(/<br\s*\/?>/i).map(l=>`<span class="sl"><span>${l}</span></span>`).join('')});
+  const io3=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io3.unobserve(e.target)}}),{threshold:.2});
+  els.forEach(el=>io3.observe(el));
+})();
+// magnetic pill
+(function(){
+  const mag=document.querySelector('.magnetic');
+  if(!mag||!matchMedia('(pointer:fine)').matches)return;
+  let raf;const st={x:0,y:0,tx:0,ty:0};
+  mag.addEventListener('mousemove',e=>{const r=mag.getBoundingClientRect();st.tx=(e.clientX-r.left-r.width/2)*.32;st.ty=(e.clientY-r.top-r.height/2)*.32;loop()});
+  mag.addEventListener('mouseleave',()=>{st.tx=0;st.ty=0;loop()});
+  function loop(){cancelAnimationFrame(raf);(function step(){st.x+=(st.tx-st.x)*.16;st.y+=(st.ty-st.y)*.16;mag.style.transform=`translate(${st.x}px,${st.y}px)`;if(Math.abs(st.tx-st.x)>.2||Math.abs(st.ty-st.y)>.2)raf=requestAnimationFrame(step)})()}
+})();
+// velocity marquee with decay back to base
+(function(){
+  let ly=scrollY,decaying=false;
+  const anims=()=>[...document.querySelectorAll('.strip .track')].map(el=>el.getAnimations&&el.getAnimations()[0]).filter(Boolean);
+  function decay(){
+    let live=false;
+    anims().forEach(a=>{if(a.playbackRate>1.03){a.playbackRate=1+(a.playbackRate-1)*0.92;live=true}else a.playbackRate=1});
+    decaying=live;if(live)requestAnimationFrame(decay);
+  }
+  addEventListener('scroll',()=>{
+    const vel=Math.min(3,Math.abs(scrollY-ly)/18);ly=scrollY;
+    anims().forEach(a=>a.playbackRate=Math.max(a.playbackRate,1+vel));
+    if(!decaying){decaying=true;requestAnimationFrame(decay)}
+  },{passive:true});
+})();
+function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
+clock();setInterval(clock,30000);
+</script>
+<script src="ticker.js" defer></script>
+<script src="switcher.js" defer></script>
+</body>
+</html>

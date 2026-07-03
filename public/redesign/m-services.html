@@ -32,7 +32,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
 .corners .c1{top:20px;left:22px;pointer-events:auto}
 .corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:17px;letter-spacing:-.01em}
-.corners .c1 i{font-style:normal;color:var(--spark);display:inline-block;animation:spin 7s linear infinite}
+.corners .c1 i{font-style:normal;color:#fff;display:inline-block;animation:spin 7s linear infinite}
 .corners .c2{top:22px;right:22px;pointer-events:auto}
 .corners .c2 a{margin-left:22px}
 .corners .c3{bottom:20px;left:22px}
@@ -72,12 +72,14 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 #preview img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.25) saturate(.9)}
 #preview .cap{position:absolute;left:9px;bottom:4px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
 #preview.on{opacity:1;transform:scale(1) rotate(-1.5deg)}
+@media (prefers-reduced-motion:reduce){#preview{display:none}}
 
 
 /* scroll-lit rows (monolog grammar): dim until they cross viewport center */
 .litrow{opacity:.32;transition:opacity .5s cubic-bezier(.22,1,.36,1)}
 .litrow.lit{opacity:1}
 @media (prefers-reduced-motion:reduce){.litrow{opacity:1}}
+.srow.litrow{transition:background .3s,padding-left .4s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1)}
 
 /* process band on ink */
 .proc{background:var(--struct);color:var(--paper);padding:11vh 0}
@@ -146,7 +148,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   <span class="c1"><a href="index.html"><b>M<i>✳</i>NUMENTS</b></a></span>
   <span class="c2"><a href="m-home.html">Home</a><a href="m-home.html#work">Work</a><a href="m-about.html">About</a><a href="mailto:monuments.cc@gmail.com">Contact</a></span>
   <span class="c3">Services · lead with the thinking</span>
-  <span class="c4" id="clock">LA —:—</span>
+  <span class="c4" id="clock">LA --:--</span>
 </div>
 
 <div class="over">
@@ -291,12 +293,19 @@ clock();setInterval(clock,30000);
     });
   },{passive:true});
 })();
-// velocity marquee
+// velocity marquee with decay back to base
 (function(){
-  let ly=scrollY;
+  let ly=scrollY,decaying=false;
+  const anims=()=>[...document.querySelectorAll('.cli .track')].map(el=>el.getAnimations&&el.getAnimations()[0]).filter(Boolean);
+  function decay(){
+    let live=false;
+    anims().forEach(a=>{if(a.playbackRate>1.03){a.playbackRate=1+(a.playbackRate-1)*0.92;live=true}else a.playbackRate=1});
+    decaying=live;if(live)requestAnimationFrame(decay);
+  }
   addEventListener('scroll',()=>{
     const vel=Math.min(3,Math.abs(scrollY-ly)/18);ly=scrollY;
-    document.querySelectorAll('.cli .track').forEach(el=>{const a=el.getAnimations&&el.getAnimations()[0];if(a)a.playbackRate=1+vel});
+    anims().forEach(a=>a.playbackRate=Math.max(a.playbackRate,1+vel));
+    if(!decaying){decaying=true;requestAnimationFrame(decay)}
   },{passive:true});
 })();
 

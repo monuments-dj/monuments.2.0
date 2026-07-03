@@ -32,7 +32,7 @@
 
   // strip UI
   const css=`
-  #ctl{position:fixed;left:18px;bottom:18px;z-index:95;background:#161514;color:#F5F3EF;border:1px solid #3a3936;border-radius:14px;padding:12px 14px;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.04em;box-shadow:0 18px 50px rgba(0,0,0,.45);max-width:300px}
+  #ctl{position:fixed;left:18px;bottom:54px;z-index:95;background:#161514;color:#F5F3EF;border:1px solid #3a3936;border-radius:14px;padding:12px 14px;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.04em;box-shadow:0 18px 50px rgba(0,0,0,.45);max-width:300px}
   #ctl .hd{display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;gap:18px}
   #ctl .hd b{font-weight:400;color:#EFA1AD;text-transform:uppercase;letter-spacing:.1em}
   #ctl .body{margin-top:12px;display:grid;gap:10px}
@@ -71,7 +71,7 @@
       const o=document.createElement('option');o.value=f.id;
       const fam=f.stack.split(',')[0];
       const loaded=f.src==='free'||famLoaded(fam);
-      o.textContent=(loaded?'':'○ ')+f.label+(loaded?'':' — loading');
+      o.textContent=(loaded?'':'○ ')+f.label+(loaded?'':' · loading');
       if(f.id===state.face)o.selected=true;
       sel.appendChild(o);
     });
