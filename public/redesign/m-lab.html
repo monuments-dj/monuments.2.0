@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cut · The Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --dispcond:var(--disp); --condstretch:75%;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:20px;left:22px;pointer-events:auto}
+.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
+.corners .c1 i{font-style:normal;color:var(--spark);display:inline-block;animation:spin 7s linear infinite}
+.corners .c2{top:26px;right:22px;pointer-events:auto}
+.corners .c2 a{font-size:21px;letter-spacing:.06em;margin-left:22px}
+.corners .c3{bottom:20px;left:22px}
+.corners .c4{bottom:20px;right:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero h1 .ln:nth-child(2)>span{animation-delay:.12s}
+@keyframes rise{to{transform:translateY(0)}}
+.serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
+footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text-transform:lowercase}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.hero h1 .ln>span{transform:none}.rv{opacity:1;transform:none}.grain{animation:none}}
+
+.hero{padding:16vh 0 6vh}
+.hero .kick{color:var(--spark)}
+.hero h1{font-weight:var(--dispw);font-size:clamp(52px,9.4vw,140px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:14px;color:var(--paper)}
+.hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-top:4vh}
+.hero .sub p{max-width:48ch;color:#c9c7c1}
+.hero .stats{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);text-align:right;line-height:2}
+.hero .stats b{color:var(--paper);font-weight:400}
+.group{padding-top:6vh}
+.group .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined)}
+.group .bar .mono b{color:var(--spark)}
+.group .bar .mono{color:#8f8d88}
+.rowp{display:grid;grid-template-columns:110px 1fr auto;gap:26px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--lined);transition:background .3s,padding-left .4s cubic-bezier(.22,1,.36,1),opacity .45s}
+.rowp:hover{background:#201f1d;padding-left:16px}
+.rowp .id{font-family:var(--mono);font-size:10.5px;color:var(--dim);text-transform:uppercase}
+.rowp:hover .id{color:var(--spark)}
+.rowp .t{font-weight:var(--dispw2);font-size:clamp(22px,2.8vw,38px);letter-spacing:-.02em;line-height:1;text-transform:uppercase;color:var(--paper);transition:color .3s}
+.rowp:hover .t{color:var(--struct)}
+.rowp .f{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rowp .f i{font-style:normal;color:var(--struct)}
+.litrow{opacity:.4}
+.litrow.lit{opacity:1}
+.note{padding:8vh 0 12vh;color:#8f8d88;max-width:60ch}
+
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="companion" aria-hidden="true">✳</div>
+<div class="corners">
+  <span class="c1"><a href="index.html"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="m-work.html">Work</a><a href="m-photo.html">Photo</a><a href="m-lab.html">Lab</a><a href="m-about.html">About</a><a href="m-services.html">Services</a><a href="m-contact.html">Contact</a></span>
+  <span class="c3">Open workbench · bleeding into the future</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<header class="hero wrap">
+  <span class="kick mono">✳ The Lab · open workbench</span>
+  <h1><span class="ln"><span>Where we test</span></span><span class="ln"><span><span class="serif">what's next</span>.</span></span></h1>
+  <div class="sub">
+    <p class="rv">This is the open workbench. We build the studio's own pages here first, in public, with the emerging web tech and AI we then bring to client work. If something is bleeding into the future, it shows up on this page before it ships anywhere else.</p>
+    <div class="stats mono rv">
+      <span><b>6</b> live experiments</span><br>
+      <span><b>8</b> case studies v2</span><br>
+      <span><b>5</b> page rebuilds</span>
+    </div>
+  </div>
+</header>
+<section class="wrap">
+  <div class="group"><div class="bar"><span class="mono"><b>\ Experiments</b> · playable, in public</span><span class="mono">001–006</span></div>
+    <a class="rowp litrow" href="/lab/find-your-flow" target="_blank" rel="noopener">
+      <span class="id">LAB-001</span><span class="t">Find Your Flow</span><span class="f"><i>\</i> Interactive ring · A/B/C</span>
+    </a>
+    <a class="rowp litrow" href="/lab/fearless" target="_blank" rel="noopener">
+      <span class="id">LAB-002</span><span class="t">Fearless</span><span class="f"><i>\</i> Experiment</span>
+    </a>
+    <a class="rowp litrow" href="/lab/ai" target="_blank" rel="noopener">
+      <span class="id">LAB-003</span><span class="t">AI</span><span class="f"><i>\</i> Thinking + tooling</span>
+    </a>
+    <a class="rowp litrow" href="/lab/credits" target="_blank" rel="noopener">
+      <span class="id">LAB-004</span><span class="t">Credits Bar</span><span class="f"><i>\</i> Shipped building block</span>
+    </a>
+    <a class="rowp litrow" href="/lab/work-kit" target="_blank" rel="noopener">
+      <span class="id">LAB-005</span><span class="t">Work Kit</span><span class="f"><i>\</i> CMS component system</span>
+    </a>
+    <a class="rowp litrow" href="/lab/project-detail" target="_blank" rel="noopener">
+      <span class="id">LAB-006</span><span class="t">Project Detail</span><span class="f"><i>\</i> Layout experiment</span>
+    </a>
+  </div>
+  <div class="group"><div class="bar"><span class="mono"><b>\ Case studies v2</b> · built here first</span><span class="mono">007–014</span></div>
+    <a class="rowp litrow" href="/lab/art-of-visuals" target="_blank" rel="noopener">
+      <span class="id">LAB-007</span><span class="t">Art of Visuals</span><span class="f"><i>\</i> Flagship case v2</span>
+    </a>
+    <a class="rowp litrow" href="/lab/buck-the-quo" target="_blank" rel="noopener">
+      <span class="id">LAB-008</span><span class="t">Buck the Quo</span><span class="f"><i>\</i> Emmy case v2</span>
+    </a>
+    <a class="rowp litrow" href="/lab/adorama-music" target="_blank" rel="noopener">
+      <span class="id">LAB-009</span><span class="t">Adorama Music</span><span class="f"><i>\</i> 160M+ case v2</span>
+    </a>
+    <a class="rowp litrow" href="/lab/sony-this-moment" target="_blank" rel="noopener">
+      <span class="id">LAB-010</span><span class="t">Sony · This Moment</span><span class="f"><i>\</i> Case v2</span>
+    </a>
+    <a class="rowp litrow" href="/lab/donut-zumiez" target="_blank" rel="noopener">
+      <span class="id">LAB-011</span><span class="t">Donut × Zumiez</span><span class="f"><i>\</i> Selected work</span>
+    </a>
+    <a class="rowp litrow" href="/lab/ac-boise" target="_blank" rel="noopener">
+      <span class="id">LAB-012</span><span class="t">AC Boise</span><span class="f"><i>\</i> Selected work</span>
+    </a>
+    <a class="rowp litrow" href="/lab/know-vape" target="_blank" rel="noopener">
+      <span class="id">LAB-013</span><span class="t">Know Vape</span><span class="f"><i>\</i> PSA case v2</span>
+    </a>
+    <a class="rowp litrow" href="/lab/dw-drums" target="_blank" rel="noopener">
+      <span class="id">LAB-014</span><span class="t">DW Drums</span><span class="f"><i>\</i> Brand film case</span>
+    </a>
+  </div>
+  <div class="group"><div class="bar"><span class="mono"><b>\ Page rebuilds</b> · the site, remade in the open</span><span class="mono">015–019</span></div>
+    <a class="rowp litrow" href="/lab/home" target="_blank" rel="noopener">
+      <span class="id">LAB-015</span><span class="t">Home v2</span><span class="f"><i>\</i> Page rebuild</span>
+    </a>
+    <a class="rowp litrow" href="/lab/work" target="_blank" rel="noopener">
+      <span class="id">LAB-016</span><span class="t">Work v2</span><span class="f"><i>\</i> Page rebuild</span>
+    </a>
+    <a class="rowp litrow" href="/lab/about" target="_blank" rel="noopener">
+      <span class="id">LAB-017</span><span class="t">About v2</span><span class="f"><i>\</i> Page rebuild</span>
+    </a>
+    <a class="rowp litrow" href="/lab/services" target="_blank" rel="noopener">
+      <span class="id">LAB-018</span><span class="t">Services v2</span><span class="f"><i>\</i> Page rebuild</span>
+    </a>
+    <a class="rowp litrow" href="/lab/giving" target="_blank" rel="noopener">
+      <span class="id">LAB-019</span><span class="t">Giving</span><span class="f"><i>\</i> Mission work · texture</span>
+    </a>
+  </div>
+  <p class="note mono rv">Lab routes open the live site's /lab pages in a new tab. The cut and the lab are converging: this page is the index; the experiments keep their own rules.</p>
+</section>
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
+    <span class="blk">built to be remembered</span>
+    <span>Converged cut · The Lab</span>
+  </div>
+</footer>
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+(function(){
+  const c=document.querySelector('.companion');
+  if(!c||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  let k=false;
+  addEventListener('scroll',()=>{if(k)return;k=true;requestAnimationFrame(()=>{
+    c.style.transform=`translateY(${(Math.sin(scrollY/420)*34).toFixed(1)}px) rotate(${(scrollY*0.22).toFixed(1)}deg)`;k=false})},{passive:true});
+})();
+function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
+clock();setInterval(clock,30000);
+
+(function(){
+  const rows=document.querySelectorAll('.litrow');
+  const io2=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('lit',e.isIntersecting)),{rootMargin:'-30% 0px -30% 0px'});
+  rows.forEach(r=>io2.observe(r));
+})();
+
+</script>
+<script src="switcher.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cut · Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --dispcond:var(--disp); --condstretch:75%;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.09;mix-blend-mode:multiply;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:20px;left:22px;pointer-events:auto}
+.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
+.corners .c1 i{font-style:normal;color:#fff;display:inline-block;animation:spin 7s linear infinite}
+.corners .c2{top:26px;right:22px;pointer-events:auto}
+.corners .c2 a{font-size:21px;letter-spacing:.06em;margin-left:22px}
+.corners .c3{bottom:20px;left:22px}
+.corners .c4{bottom:20px;right:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero h1 .ln:nth-child(2)>span{animation-delay:.12s}
+@keyframes rise{to{transform:translateY(0)}}
+.serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
+footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text-transform:lowercase}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.hero h1 .ln>span{transform:none}.rv{opacity:1;transform:none}.grain{animation:none}}
+
+.hero{padding:16vh 0 6vh}
+.hero .kick{color:var(--red)}
+.hero h1{font-weight:var(--dispw);font-size:clamp(52px,9.4vw,140px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:14px}
+.hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-top:4vh}
+.hero .sub p{max-width:44ch;color:#4c4a45}
+.hero .shuffle{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);background:none;border:1px solid var(--red);border-radius:99px;padding:10px 18px;cursor:pointer}
+.hero .shuffle:hover{background:var(--red);color:var(--paper)}
+.sheetbar{border-bottom:2px solid var(--ink);padding-bottom:12px;display:flex;justify-content:space-between;align-items:baseline}
+.sheetbar .mono b{color:var(--red)}
+.frames{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:18px 0 10vh}
+.fr{position:relative;background:#fff;padding:7px 7px 24px;border:1px solid var(--line);cursor:zoom-in;opacity:0;transform:translateY(14px)}
+.fr.show{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.fr img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.92)}
+.fr .cap{position:absolute;left:8px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
+.fr:hover{transform:rotate(-1deg) scale(1.04);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2}
+#lb{position:fixed;inset:0;z-index:96;background:rgba(12,11,10,.96);display:none;align-items:center;justify-content:center;padding:4vmin}
+#lb.on{display:flex}
+#lb img{max-width:92vw;max-height:84vh;box-shadow:0 40px 120px rgba(0,0,0,.6)}
+#lb .cap{position:absolute;bottom:26px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88}
+#lb .x{position:absolute;top:22px;right:22px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:none;border:1px solid rgba(245,243,239,.4);border-radius:99px;padding:8px 16px;cursor:pointer}
+#lb .nav{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:22px;color:var(--paper);background:none;border:none;cursor:pointer;padding:20px}
+#lb .prev{left:8px}#lb .next{right:8px}
+@media (max-width:900px){.frames{grid-template-columns:repeat(3,1fr)}}
+
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="companion" aria-hidden="true">✳</div>
+<div class="corners">
+  <span class="c1"><a href="index.html"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="m-work.html">Work</a><a href="m-photo.html">Photo</a><a href="m-lab.html">Lab</a><a href="m-about.html">About</a><a href="m-services.html">Services</a><a href="m-contact.html">Contact</a></span>
+  <span class="c3">The photo archive · one hundred frames</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<header class="hero wrap">
+  <span class="kick mono">Photography · DJ Ramirez · Monuments</span>
+  <h1><span class="ln"><span>One hundred</span></span><span class="ln"><span><span class="serif">frames</span>.</span></span></h1>
+  <div class="sub">
+    <p class="rv">The photo archive. Campaign stills, editorial work, and the frames between takes. Photography is one output of directed work, never the whole story. Click any frame to inspect.</p>
+    <button class="shuffle rv" id="shuffle">Reshuffle the sheet ↻</button>
+  </div>
+</header>
+<section class="wrap">
+  <div class="sheetbar"><span class="mono"><b>Contact sheet</b> · the full roll</span><span class="mono" style="color:#8f8d88" id="count"></span></div>
+  <div class="frames" id="frames"></div>
+</section>
+<div id="lb" role="dialog"><button class="x" id="lbX">Close ✕</button><button class="nav prev" id="lbP">←</button><img alt=""><button class="nav next" id="lbN">→</button><span class="cap"></span></div>
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
+    <span class="blk">built to be remembered</span>
+    <span>Converged cut · Photography</span>
+  </div>
+</footer>
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+(function(){
+  const c=document.querySelector('.companion');
+  if(!c||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  let k=false;
+  addEventListener('scroll',()=>{if(k)return;k=true;requestAnimationFrame(()=>{
+    c.style.transform=`translateY(${(Math.sin(scrollY/420)*34).toFixed(1)}px) rotate(${(scrollY*0.22).toFixed(1)}deg)`;k=false})},{passive:true});
+})();
+function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
+clock();setInterval(clock,30000);
+
+(function(){
+  const N=100, ids=Array.from({length:N},(_,i)=>String(i+1).padStart(3,'0'));
+  const el=document.getElementById('frames');let order=[...ids];
+  function render(){
+    el.innerHTML=order.map((id,i)=>`
+      <figure class="fr" data-id="${id}" style="transition-delay:${(i%18)*30}ms">
+        <img src="/gallery/thumb/p-${id}.jpg" alt="Frame ${id}" loading="lazy" onerror="this.closest('.fr').remove()">
+        <figcaption class="cap">FR-${id} · P-${id}</figcaption>
+      </figure>`).join('');
+    document.getElementById('count').textContent=el.children.length+' frames · click to inspect';
+    const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io2.unobserve(e.target)}}),{rootMargin:'0px 0px 200px 0px'});
+    [...el.children].forEach(f=>io2.observe(f));
+  }
+  render();
+  document.getElementById('shuffle').addEventListener('click',()=>{order=order.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);render();scrollTo({top:document.querySelector('.sheetbar').offsetTop-80,behavior:'smooth'})});
+  // lightbox
+  const lb=document.getElementById('lb'),img=lb.querySelector('img'),cap=lb.querySelector('.cap');let cur=0;
+  function openAt(i){cur=(i+order.length)%order.length;const id=order[cur];
+    img.src=`/gallery/full/p-${id}.jpg`;cap.textContent=`P-${id} · MONUMENTS ARCHIVE · ${cur+1}/${order.length}`;
+    lb.classList.add('on');document.body.style.overflow='hidden'}
+  function close(){lb.classList.remove('on');img.src='';document.body.style.overflow=''}
+  el.addEventListener('click',e=>{const f=e.target.closest('.fr');if(f)openAt(order.indexOf(f.dataset.id))});
+  document.getElementById('lbX').addEventListener('click',close);
+  document.getElementById('lbP').addEventListener('click',()=>openAt(cur-1));
+  document.getElementById('lbN').addEventListener('click',()=>openAt(cur+1));
+  lb.addEventListener('click',e=>{if(e.target===lb)close()});
+  addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;
+    if(e.key==='Escape')close();if(e.key==='ArrowLeft')openAt(cur-1);if(e.key==='ArrowRight')openAt(cur+1)});
+})();
+
+</script>
+<script src="switcher.js" defer></script>
+</body>
+</html>
