@@ -1,5 +1,15 @@
 # TODO — current state (2026-07-03)
 
+## 🚀 THE SWAP IS DONE: the converged cut IS the real site now
+DJ said "lets swap it" → /, /work, /about, /services, /contact, /photography + case routes
+(sony-this-moment, art-of-visuals NEW, blue-cross) are cut pages as full-document .astro
+(scripts is:inline, styles is:global, links rewritten). All 9 routes verified + live.
+Old pages in git history. Still old-style: /lab hub, lab/* cases, /giving (folded into
+/about). Open: DJ's discipline tags, Q3 badge confirm, Sony spot link, real social handles,
+face pick (Bricolage default), em-dash sweep on lab pages, self-host reel, djthecd.com alt
+skin (memory: djthecd-personal-site). Domain monuments.cc still WordPress — swap is a
+separate deliberate step.
+
 ## ════ SESSION 2026-07-02/03 :: THE CONVERGED CUT — NEARLY LOCKED, MIGRATION NEXT ════
 The redesign converged. Everything lives at `public/redesign/` (hub: /redesign/), system docs
 in `redesign/01..06.md`. DJ: "designwise this cut is feeling pretty close."
