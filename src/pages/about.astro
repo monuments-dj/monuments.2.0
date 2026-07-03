@@ -153,6 +153,41 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 [data-split].in .sl>span{transform:none}
 @media (prefers-reduced-motion:reduce){[data-split] .sl>span{transform:none}}
 
+
+/* career timeline: pinned scroll-scrub through the eras */
+.tl{height:520svh;position:relative;background:var(--ink);color:var(--paper)}
+.tl-pin{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:4vh}
+.tl-head{width:100%;display:flex;justify-content:space-between;align-items:baseline;gap:30px;flex-wrap:wrap}
+.tl-head h2{font-weight:var(--dispw);font-size:clamp(26px,3.4vw,50px);letter-spacing:-.03em;text-transform:uppercase;color:var(--paper)}
+.tl-head h2 .serif{color:var(--spark);display:inline-block;min-width:5ch}
+.tl-head h2 .serif.swap{animation:wordIn .45s cubic-bezier(.22,1,.36,1)}
+@keyframes wordIn{0%{opacity:0;transform:translateY(60%)}100%{opacity:1;transform:none}}
+.tl-count{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+.tl-count b{color:var(--spark);font-weight:400}
+.tl-rail{width:100%;height:2px;background:#33312e;position:relative}
+.tl-rail .fill{position:absolute;left:0;top:0;bottom:0;background:var(--spark);width:0%}
+.tl-rail .node{position:absolute;top:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:#33312e;transition:background .3s}
+.tl-rail .node.hit{background:var(--spark)}
+.tl-track{display:flex;gap:5vw;will-change:transform;padding:0 var(--pad)}
+.era-p{flex:0 0 auto;width:min(62vw,860px);display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;background:#1d1c1a;border:1px solid var(--lined);padding:30px}
+.era-p .ph{position:relative;background:#fff;padding:7px 7px 24px}
+.era-p .ph img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(.25) saturate(.9)}
+.era-p .ph .cap{position:absolute;left:9px;bottom:5px;font-family:var(--mono);font-size:9px;color:#8f8d88;text-transform:uppercase}
+.era-p .no{font-family:var(--mono);font-size:10.5px;color:var(--struct);text-transform:uppercase;letter-spacing:.1em}
+.era-p h3{font-weight:var(--dispw);font-size:clamp(24px,2.8vw,42px);letter-spacing:-.03em;line-height:.98;text-transform:uppercase;margin:10px 0 4px;color:var(--paper)}
+.era-p .role{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,1.7vw,24px);color:var(--spark);margin-bottom:14px}
+.era-p ul{list-style:none;margin:0;padding:0}
+.era-p li{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#b9b6b0;padding:7px 0;border-top:1px solid #2c2b28}
+.era-p li b{color:var(--paper);font-weight:400}
+.era-p .here{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:10px;color:var(--ink);background:var(--spark);border-radius:6px;padding:5px 12px;text-transform:uppercase;letter-spacing:.12em}
+.tl-foot{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7a7873}
+@media (max-width:900px),(prefers-reduced-motion:reduce){
+  .tl{height:auto}
+  .tl-pin{position:static;height:auto;padding:8vh 0;gap:3vh}
+  .tl-track{overflow-x:auto;transform:none!important;-webkit-overflow-scrolling:touch}
+  .era-p{width:84vw;grid-template-columns:1fr}
+}
+
 .rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
 .rv.in{opacity:1;transform:none}
 @media (max-width:900px){
@@ -219,32 +254,73 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
     </div>
   </div>
 
-  <div class="wrap roll">
-    <div class="bar">
-      <span class="mono"><b>The roll</b> · career, frame by frame</span>
-      <span class="mono" style="color:#8f8d88">Four eras</span>
+  <section class="tl" id="career">
+    <div class="tl-pin">
+      <div class="wrap tl-head">
+        <h2>DJ, the <span class="serif swap" id="eraWord">creative.</span></h2>
+        <span class="tl-count"><b id="eraNo">01</b> / 04 · the road here · scroll to travel</span>
+      </div>
+      <div class="wrap"><div class="tl-rail"><div class="fill" id="tlFill"></div>
+        <span class="node" style="left:12%"></span><span class="node" style="left:38%"></span><span class="node" style="left:64%"></span><span class="node" style="left:90%"></span>
+      </div></div>
+      <div class="tl-track" id="tlTrack">
+        <article class="era-p" data-word="creative.">
+          <div class="ph"><img src="/gallery/full/p-034.jpg" alt="On set, agency era" loading="lazy"><span class="cap">ERA 01 · THE AGENCY YEARS</span></div>
+          <div>
+            <span class="no">\ Era 01 · Drake Cooper · Boise</span>
+            <h3>Drake Cooper</h3>
+            <p class="role">agency creative</p>
+            <ul>
+              <li><b>Learned speed:</b> concepting daily</li>
+              <li><b>Sold work</b> in the room</li>
+              <li><b>Shipped campaigns</b> on real deadlines</li>
+            </ul>
+          </div>
+        </article>
+        <article class="era-p" data-word="consultant.">
+          <div class="ph"><img src="/case-studies/buck-the-quo/gallery/chop-board.jpg" alt="Buck the Quo" loading="lazy"><span class="cap">ERA 02 · THE CONSULTING YEARS</span></div>
+          <div>
+            <span class="no">\ Era 02 · Buck the Quo</span>
+            <h3>Buck the Quo</h3>
+            <p class="role">creative consultant</p>
+            <ul>
+              <li><b>Emmy-winning</b> film series ✳</li>
+              <li><b>Senior creative</b> on the hook for outcomes</li>
+              <li><b>Story-first</b> consulting, proven on air</li>
+            </ul>
+          </div>
+        </article>
+        <article class="era-p" data-word="director.">
+          <div class="ph"><img src="/case-studies/art-of-visuals/gallery/xperia-01.jpg" alt="Art of Visuals era" loading="lazy"><span class="cap">ERA 03 · THE SCALE YEARS</span></div>
+          <div>
+            <span class="no">\ Era 03 · Art of Visuals</span>
+            <h3>Art of Visuals</h3>
+            <p class="role">creative director</p>
+            <ul>
+              <li><b>4x</b> agency revenue growth</li>
+              <li><b>2M+</b> audience scaled</li>
+              <li><b>Up to 50</b> contractors led · on camera</li>
+            </ul>
+          </div>
+        </article>
+        <article class="era-p" data-word="founder.">
+          <div class="ph"><img src="/about/team.jpg" alt="Monuments crew" loading="lazy"><span class="cap">ERA 04 · NOW</span></div>
+          <div>
+            <span class="no">\ Era 04 · Monuments · LA / Boise</span>
+            <h3>Monuments</h3>
+            <p class="role">founder + creative director</p>
+            <ul>
+              <li><b>Own production company</b> + consultancy</li>
+              <li><b>Tess</b> keeps it on the rails</li>
+              <li><b>Less agency,</b> more band</li>
+            </ul>
+            <span class="here">● You are here</span>
+          </div>
+        </article>
+      </div>
+      <div class="wrap tl-foot">Drake Cooper → Buck the Quo → Art of Visuals → Monuments</div>
     </div>
-    <div class="litrow era">
-      <span class="id">Era 01<br>The systems years</span>
-      <div class="strip"><img src="/gallery/thumb/p-041.jpg" alt=""><img src="/gallery/thumb/p-009.jpg" alt=""><img src="/gallery/thumb/p-037.jpg" alt=""></div>
-      <div><h3>UX Design</h3><p>Where I learned systems. Research, wireframes, and why people do what they do. Every campaign I run still starts with that question.</p></div>
-    </div>
-    <div class="litrow era">
-      <span class="id">Era 02<br>The speed years</span>
-      <div class="strip"><img src="/gallery/thumb/p-034.jpg" alt=""><img src="/gallery/thumb/p-043.jpg" alt=""><img src="/gallery/thumb/p-012.jpg" alt=""></div>
-      <div><h3>Agency Creative</h3><p>Where I learned speed. Concepting daily, selling work in the room, shipping campaigns for global brands on real deadlines.</p></div>
-    </div>
-    <div class="litrow era">
-      <span class="id">Era 03<br>The scale years</span>
-      <div class="strip"><img src="/gallery/thumb/p-040.jpg" alt=""><img src="/gallery/thumb/p-002.jpg" alt=""><img src="/gallery/thumb/p-038.jpg" alt=""></div>
-      <div><h3>Creative Director</h3><p>Where I learned scale. On camera and behind it: leading teams of up to 50 contractors, growing agency revenue 4x, and directing an Emmy-winning film series.</p></div>
-    </div>
-    <div class="litrow era">
-      <span class="id">Era 04<br>Now</span>
-      <div class="strip"><img src="/gallery/thumb/p-053.jpg" alt=""><img src="/gallery/thumb/p-098.jpg" alt=""><img src="/gallery/thumb/p-061.jpg" alt=""></div>
-      <div><h3><span class="co">Monuments</span></h3><p>My own studio and consultancy. Me, Tess keeping the operation moving, and a trusted crew of makers who come in when the work calls for it.</p><span class="here">● You are here</span></div>
-    </div>
-  </div>
+  </section>
 </section>
 
 <section class="crew">
@@ -349,6 +425,39 @@ if(mag&&matchMedia('(pointer:fine)').matches){
 }
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
+
+// career timeline scrub
+(function(){
+  const sec=document.querySelector('.tl'),track=document.getElementById('tlTrack'),
+        word=document.getElementById('eraWord'),no=document.getElementById('eraNo'),
+        fill=document.getElementById('tlFill'),nodes=[...document.querySelectorAll('.tl-rail .node')];
+  if(!sec||!track)return;
+  const eras=[...track.children];let cur=-1;
+  function setEra(i){
+    if(i===cur)return;cur=i;
+    word.textContent=eras[i].dataset.word;
+    word.classList.remove('swap');void word.offsetWidth;word.classList.add('swap');
+    no.textContent=String(i+1).padStart(2,'0');
+    nodes.forEach((n,j)=>n.classList.toggle('hit',j<=i));
+  }
+  setEra(0);
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches||innerWidth<=900)return;
+  let k=false;
+  addEventListener('scroll',()=>{
+    if(k)return;k=true;
+    requestAnimationFrame(()=>{
+      const vh=innerHeight,r=sec.getBoundingClientRect();
+      const total=r.height-vh;
+      const p=Math.min(1,Math.max(0,-r.top/total));
+      const max=track.scrollWidth-innerWidth+innerWidth*0.06;
+      track.style.transform=`translateX(${-p*max}px)`;
+      fill.style.width=(p*100)+'%';
+      setEra(Math.min(eras.length-1,Math.floor(p*eras.length)));
+      k=false;
+    });
+  },{passive:true});
+})();
+
 
 // footer under-reveal sizing
 (function(){
