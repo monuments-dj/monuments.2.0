@@ -99,7 +99,8 @@ h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400
 
 /* sun CTA on ink */
 .cta{position:relative;background:var(--ink);color:var(--paper);padding:19vh 0;text-align:center;overflow:hidden}
-.cta .sun{position:absolute;left:50%;top:50%;width:min(88vw,900px);aspect-ratio:1;transform:translate(-50%,-50%);animation:spin 80s linear infinite;opacity:.16}
+.cta .emblem{width:112px;aspect-ratio:1;margin:0 auto 30px;display:block;animation:spin 70s linear infinite}
+.cta .emblem g{fill:var(--paper)}
 .cta .inner{position:relative;z-index:1}
 .cta .kick{color:var(--rose)}
 .cta .big{font-weight:800;font-size:clamp(48px,8.4vw,124px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:20px}
@@ -211,13 +212,8 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
 </section>
 
 <section class="cta">
-  <svg class="sun" viewBox="0 0 200 200" aria-hidden="true">
-    <g fill="#F5F3EF">
-      <circle cx="100" cy="100" r="14"/>
-      <g id="rays"></g>
-    </g>
-  </svg>
   <div class="inner wrap">
+    <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
     <span class="kick mono rv">✳ One conversation, no deck required</span>
     <div class="big rv">Tell me what<br>you're <span class="serif">building.</span></div>
     <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
@@ -240,7 +236,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
 // sun rays
 (function(){
   const g=document.getElementById('rays');let s='';
-  for(let i=0;i<24;i++){const a=i*15;s+=`<rect x="98.6" y="22" width="2.8" height="46" rx="1.4" transform="rotate(${a} 100 100)"/>`}
+  for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}
   g.innerHTML=s;
 })();
 

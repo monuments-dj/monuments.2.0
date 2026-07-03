@@ -100,9 +100,9 @@ h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400
 
 .cta{position:relative;background:var(--ink);color:var(--paper);padding:19vh 0;text-align:center;overflow:hidden}
 body.paper .cta{background:var(--paper);color:var(--ink)}
-.cta .sun{position:absolute;left:50%;top:50%;width:min(88vw,900px);aspect-ratio:1;transform:translate(-50%,-50%);animation:spin 80s linear infinite;opacity:.16}
-.cta .sun g{fill:var(--paper)}
-body.paper .cta .sun g{fill:var(--ink)}
+.cta .emblem{width:112px;aspect-ratio:1;margin:0 auto 30px;display:block;animation:spin 70s linear infinite}
+.cta .emblem g{fill:var(--paper)}
+body.paper .cta .emblem g{fill:var(--ink)}
 .cta .inner{position:relative;z-index:1}
 .cta .kick{color:var(--spark)}
 body.paper .cta .kick{color:var(--struct)}
@@ -206,8 +206,8 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 </section>
 
 <section class="cta">
-  <svg class="sun" viewBox="0 0 200 200" aria-hidden="true"><g><circle cx="100" cy="100" r="14"/><g id="rays"></g></g></svg>
   <div class="inner wrap">
+    <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
     <span class="kick mono">✳ One conversation, no deck required</span>
     <div class="big">Tell me what<br>you're <span class="serif">building.</span></div>
     <a class="pill magnetic" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
@@ -367,7 +367,7 @@ $('#combo').addEventListener('click',()=>{navigator.clipboard.writeText($('#comb
 $('#ctlHd').addEventListener('click',()=>{$('#ctl').classList.toggle('min');$('#ctlTog').textContent=$('#ctl').classList.contains('min')?'[+]':'[–]'});
 
 /* ---------- page furniture (same as the cut) ---------- */
-(function(){const g=document.getElementById('rays');let s='';for(let i=0;i<24;i++){s+=`<rect x="98.6" y="22" width="2.8" height="46" rx="1.4" transform="rotate(${i*15} 100 100)"/>`}g.innerHTML=s})();
+(function(){const g=document.getElementById('rays');let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s})();
 const POOL=['p-001','p-004','p-008','p-011','p-013','p-017','p-021','p-023','p-025','p-028','p-029','p-030','p-038','p-043','p-044','p-049','p-054','p-057','p-058','p-061','p-066','p-067','p-069','p-076','p-090','p-094','p-098','p-099'];
 const NOTES=['USE THIS','THE ONE','HOLD','PRINT IT'];
 const shuffled=POOL.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]).slice(0,12);
