@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import NextProject from '../../components/NextProject.astro';
 
-// === SONY — THIS MOMENT (editorial) — /lab/sony-this-moment ===
+// === SONY - THIS MOMENT (editorial) - /lab/sony-this-moment ===
 // The reimagined-Blue-Cross editorial model on the real Sony Audio campaign:
 // chapter kickers + narrow columns, color-blocked chapters, a pinned insight
 // scene with a marker underline, a drifting photo collage, credits, and a
@@ -28,11 +28,11 @@ const meta = [
   { k: 'Creative Direction', v: 'DJ Ramirez' },
 ];
 ---
-<Base title="Sony — This Moment — a pause in the noise — monuments">
+<Base title="Sony This Moment: a pause in the noise · monuments">
   <main class="tmx">
     <!-- HERO CHAPTER (dark) -->
     <header class="tmx-hero">
-      <img class="tmx-hero-img" src={g[8]} alt="Sony — This Moment campaign still" data-drift="6" />
+      <img class="tmx-hero-img" src={g[8]} alt="Sony This Moment campaign still" data-drift="6" />
       <div class="tmx-hero-scrim" aria-hidden="true"></div>
       <div class="tmx-hero-inner">
         <p class="tmx-eyebrow fade">Sony Audio · creative direction</p>
@@ -41,7 +41,7 @@ const meta = [
       </div>
     </header>
 
-    <!-- CHAPTER 01 — THE IDEA (cream) -->
+    <!-- CHAPTER 01 - THE IDEA (cream) -->
     <section class="tmx-ch tmx-ch-cream">
       <div class="tmx-cols">
         <p class="tmx-kicker fade">01 · The idea</p>
@@ -51,7 +51,7 @@ const meta = [
         </div>
       </div>
       <figure class="tmx-wide fade">
-        <img src={g[3]} alt="Sony — This Moment campaign still" loading="lazy" data-drift="8" />
+        <img src={g[3]} alt="Sony This Moment campaign still" loading="lazy" data-drift="8" />
       </figure>
     </section>
 
@@ -67,7 +67,7 @@ const meta = [
       </div>
     </section>
 
-    <!-- CHAPTER 02 — THE WORK (cream, drifting collage) -->
+    <!-- CHAPTER 02 - THE WORK (cream, drifting collage) -->
     <section class="tmx-ch tmx-ch-cream tmx-over">
       <div class="tmx-cols">
         <p class="tmx-kicker fade">02 · The work</p>
@@ -79,13 +79,13 @@ const meta = [
       <div class="tmx-collage">
         {collage.map((c) => (
           <figure class="tmx-cell" style={`--w:${c.w}%; --x:${c.x}%; --y:${c.y}%`}>
-            <img src={c.src} alt="Sony — This Moment campaign still" loading="lazy" data-drift={String(c.v)} />
+            <img src={c.src} alt="Sony This Moment campaign still" loading="lazy" data-drift={String(c.v)} />
           </figure>
         ))}
       </div>
     </section>
 
-    <!-- CHAPTER 03 — THE CRAFT (deep tint band) -->
+    <!-- CHAPTER 03 - THE CRAFT (deep tint band) -->
     <section class="tmx-run">
       <div class="tmx-run-inner">
         <p class="tmx-kicker fade">03 · The craft</p>
@@ -114,7 +114,7 @@ const meta = [
       </div>
     </section>
 
-    <!-- NEXT PROJECT — reusable hand-off: growing media cluster + scroll-to-next -->
+    <!-- NEXT PROJECT - reusable hand-off: growing media cluster + scroll-to-next -->
     <NextProject
       href="/lab/turnstile"
       name="Turnstile"

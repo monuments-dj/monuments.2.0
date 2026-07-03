@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import CreditsBar from '../../components/CreditsBar.astro';
 
-// === /lab/credits — the credits bar, 3 variants × light/dark ===
+// === /lab/credits - the credits bar, 3 variants × light/dark ===
 // simple → standard → full, each shown on a light page and a dark page. DJ picks the
 // complexity + confirms the tone treatment; then it ships per-page (prop-driven).
 const variants = [
@@ -11,12 +11,12 @@ const variants = [
   { v: 'full',     label: 'Full', note: 'Client · Agency · Role · Year, plus the team with roles.' },
 ];
 ---
-<Base title="Credits bar — the Lab">
+<Base title="Credits bar, the Lab">
   <main class="crlab">
     <header class="crlab-head">
       <a class="crlab-back" href="/lab">&larr; The Lab</a>
       <h1>Project credits bar</h1>
-      <p>Full-bleed, black-or-light. Three levels — simple to full — shown on a light page and a dark page. Pick a complexity and a tone and I'll ship it on every work + case-study page.</p>
+      <p>Full-bleed, black-or-light. Three levels, simple to full, shown on a light page and a dark page. Pick a complexity and a tone and I'll ship it on every work + case-study page.</p>
     </header>
 
     <!-- ON A LIGHT PAGE -->

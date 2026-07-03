@@ -4,7 +4,7 @@ import WorkScope from '../../components/work/WorkScope.astro';
 import WorkQuote from '../../components/work/WorkQuote.astro';
 import WorkCredits from '../../components/work/WorkCredits.astro';
 
-// Kit preview — renders the first reusable work-page components from sample data,
+// Kit preview - renders the first reusable work-page components from sample data,
 // so DJ can review the two he asked for (Scope + Credits) without touching a live
 // page. These become `{type:'scope'}` / `{type:'credits'}` sections in WorkLayout.
 const scope = {
@@ -30,14 +30,14 @@ const quote = {
   attribution: 'The idea behind the campaign.',
 };
 ---
-<Base title="Work kit — components — monuments">
+<Base title="Work kit: components · monuments">
   <main class="kit">
     <header class="kit-head">
       <h1>Work-page kit</h1>
-      <p>Reusable, self-contained components for the work template — each is data-driven and category-agnostic. The two new ones you asked for: <strong>Scope</strong> ("what I did for them") and <strong>Credits</strong>. Every section is an entry in a per-project data object, so order + content are data.</p>
+      <p>Reusable, self-contained components for the work template. Each is data-driven and category-agnostic. The two new ones you asked for: <strong>Scope</strong> ("what I did for them") and <strong>Credits</strong>. Every section is an entry in a per-project data object, so order + content are data.</p>
     </header>
 
-    <p class="kit-label">Scope — "what I did for them"</p>
+    <p class="kit-label">Scope: "what I did for them"</p>
     <WorkScope heading={scope.heading} body={scope.body} services={scope.services} />
 
     <p class="kit-label">Quote</p>

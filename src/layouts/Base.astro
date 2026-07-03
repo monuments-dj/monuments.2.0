@@ -112,7 +112,7 @@ const { title = 'monuments', loader = false } = Astro.props;
       // Typewriter: type "Monuments", backspace it, then type the tagline — replays on scroll-in
       if (wm) {
         wm.textContent = '';
-        wm.setAttribute('aria-label', 'Monuments — built to be remembered');
+        wm.setAttribute('aria-label', 'Monuments. Built to be remembered.');
         const txt = document.createElement('span'); txt.className = 'fw-text'; txt.setAttribute('aria-hidden', 'true');
         const caret = document.createElement('span'); caret.className = 'fw-caret'; caret.setAttribute('aria-hidden', 'true');
         wm.append(txt, caret);

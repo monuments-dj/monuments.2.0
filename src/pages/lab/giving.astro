@@ -5,10 +5,10 @@ import BrandTicker from '../../components/BrandTicker.astro';
 import FloatingHand from '../../components/FloatingHand.astro';
 import ShapePile from '../../components/ShapePile.astro';
 
-// === GIVING — /lab/giving ===
+// === GIVING - /lab/giving ===
 // Full rebuild from the "Giving Back" stub. Frames the studio's craft as a tool
 // for good: community, mentorship, documentary/mission work, pro-bono creative.
-// Same shipped architecture as /lab/about — drifting hero photo wall + FloatingHand,
+// Same shipped architecture as /lab/about - drifting hero photo wall + FloatingHand,
 // a PINNED manifesto scene with a deep-parallax photo bed, three "ways we give"
 // blocks with real frames, a documentary-mission range band, and a quiet closing
 // CTA with a ShapePile flourish. Every surface/text/accent is tokenized so the
@@ -18,11 +18,11 @@ import ShapePile from '../../components/ShapePile.astro';
 // >>> DJ-EDITABLE PLACEHOLDER COPY <<<
 // DJ has not supplied giving copy yet. Everything below in `*Copy` and the inline
 // strings is strong placeholder written in his voice so the page feels real and
-// shippable. Swap any of it freely — the layout will hold. Numbers in `givingStats`
+// shippable. Swap any of it freely - the layout will hold. Numbers in `givingStats`
 // are illustrative; replace with real figures (or delete the stat) before going live.
 // ============================================================================
 
-// Illustrative, honest-feeling counters. NOT verified figures — DJ to confirm or cut.
+// Illustrative, honest-feeling counters. NOT verified figures - DJ to confirm or cut.
 const givingStats = [
   { n: 'Pro bono', l: "creative for causes we believe in, built to the same standard as paid work." },
   { n: '3', l: 'continents of documentary and mission work, from Nepal to Uganda to Europe.' },
@@ -30,7 +30,7 @@ const givingStats = [
   { n: 'Open door', l: "for the next generation of makers who can't buy their way in." },
 ];
 
-// The three ways we give — each gets a real frame.
+// The three ways we give - each gets a real frame.
 const ways = [
   {
     k: '01',
@@ -52,7 +52,7 @@ const ways = [
   },
 ];
 
-// Hero drifting photo wall — curated real frames, varied orientation.
+// Hero drifting photo wall - curated real frames, varied orientation.
 const wall = [
   { src: '/gallery/full/p-014.jpg', drift: 14, ar: '3/4' },
   { src: '/gallery/full/p-066.jpg', drift: -10, ar: '16/10' },
@@ -60,12 +60,12 @@ const wall = [
   { src: '/gallery/full/p-027.jpg', drift: -16, ar: '16/10' },
 ];
 
-// Montage columns (pinned manifesto's parallax photo bed) — travel at different rates.
+// Montage columns (pinned manifesto's parallax photo bed) - travel at different rates.
 const colA = ['/galaxy/gx-03.jpg', '/gallery/full/p-046.jpg', '/galaxy/gx-12.jpg', '/gallery/full/p-091.jpg'];
 const colB = ['/gallery/full/p-019.jpg', '/galaxy/gx-21.jpg', '/gallery/full/p-063.jpg', '/galaxy/gx-08.jpg'];
 const colC = ['/galaxy/gx-16.jpg', '/gallery/full/p-077.jpg', '/galaxy/gx-25.jpg', '/gallery/full/p-009.jpg'];
 ---
-<Base title="Giving — monuments">
+<Base title="Giving · monuments">
   <main class="gv">
     <!-- HERO: studio voice, drifting photo wall, floating hand -->
     <header class="gv-hero">

@@ -3,11 +3,11 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import BrandTicker from '../../components/BrandTicker.astro';
 
-// === WORK V3 — /lab/work ===
+// === WORK V3 - /lab/work ===
 // DJ: the horizontal-scroll version "looked nothing like the example" (exoape).
 // Reworked to exoape's work model: a clean VERTICAL reel of large, staggered
 // project cards. Each has inner-image parallax, the contextual "View" cursor on
-// hover (data-cursor), and a "Brand — descriptor" caption. Tokenized colors.
+// hover (data-cursor), and a "Brand descriptor" caption. Tokenized colors.
 
 const projects = [
   { slug: 'sony-this-moment',   brand: 'Sony',                desc: 'This Moment',            img: '/case-studies/sony-this-moment/gallery/tm-01.jpg',  align: 'left'  },
@@ -20,7 +20,7 @@ const projects = [
   { slug: 'clothing-merch',     brand: 'Clothing & Merch',    desc: 'Built to be worn',       img: '/case-studies/clothing-merch/gallery/cm-01.jpg',    align: 'right' },
 ];
 ---
-<Base title="Work — monuments">
+<Base title="Work · monuments">
   <main class="wk">
     <!-- INTRO -->
     <header class="wk-intro">
@@ -30,7 +30,7 @@ const projects = [
       <span class="wk-scrollcue" aria-hidden="true">Scroll</span>
     </header>
 
-    <!-- SHOWREEL — the actual reel (DJ's YouTube). Muted ambient loop; click to
+    <!-- SHOWREEL - the actual reel (DJ's YouTube). Muted ambient loop; click to
          play with sound. The contextual cursor reads "Play" over it. -->
     <section class="wk-showreel" data-cursor="Play">
       <div class="wk-reel-frame" data-reel>
@@ -45,16 +45,16 @@ const projects = [
       <p class="wk-reel-cap">The reel</p>
     </section>
 
-    <!-- THE REEL — staggered vertical project cards w/ View cursor + parallax -->
+    <!-- THE REEL - staggered vertical project cards w/ View cursor + parallax -->
     <section class="wk-reel">
       {projects.map((p, i) => (
         <a class={`wk-card wk-${p.align}`} href={`/work/${p.slug}`} data-card>
           <figure class="wk-card-media">
-            <img src={p.img} alt={`${p.brand} — ${p.desc}`} loading={i < 2 ? 'eager' : 'lazy'} data-pimg />
+            <img src={p.img} alt={`${p.brand}, ${p.desc}`} loading={i < 2 ? 'eager' : 'lazy'} data-pimg />
             <span class="wk-card-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
           </figure>
           <div class="wk-card-meta">
-            <span class="wk-card-name">{p.brand} <em>— {p.desc}</em></span>
+            <span class="wk-card-name">{p.brand} <em>{p.desc}</em></span>
             <span class="wk-card-go" aria-hidden="true">View <span>↗</span></span>
           </div>
         </a>

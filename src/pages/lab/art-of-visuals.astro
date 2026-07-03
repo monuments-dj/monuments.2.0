@@ -15,14 +15,14 @@ import CaseCredits from '../../components/CaseCredits.astro';
 // credits, next-project hand-off. Patterns cloned from adorama-music.astro.
 //
 // ⚠️ COPY STATUS: the ONLY hard fact stated as fact is "grew agency revenue ~4x."
-// Everything else — exact revenue figures, the year span, DJ's exact title, headcount,
+// Everything else (exact revenue figures, the year span, DJ's exact title, headcount,
 // the full client roster beyond what the assets clearly show (Sony / Xperia / Stansport),
-// the supporting stat values — is a believable DRAFT and PLACEHOLDER for DJ's real
+// the supporting stat values) is a believable DRAFT and PLACEHOLDER for DJ's real
 // numbers. Do not treat the non-4x stats as verified. Swap them.
 
 const G = '/case-studies/art-of-visuals/gallery';
 
-// Supporting stats. ⚠️ Only "4x" is verified. The rest are PLACEHOLDER — DJ to confirm.
+// Supporting stats. ⚠️ Only "4x" is verified. The rest are PLACEHOLDER, DJ to confirm.
 const stats = [
   { n: '4x',   l: 'agency revenue growth I helped drive', real: true },
   { n: '5+',   l: 'brands I led creative for (PLACEHOLDER)', real: false },
@@ -39,7 +39,7 @@ const gallery = [
 const did = [
   { k: 'Strategy',        v: 'Shaped what the agency sold and who it sold to, then packaged it into an offer brands actually bought.' },
   { k: 'Creative Direction', v: 'Owned the creative across the roster, from first pitch to final delivery.' },
-  { k: 'New Business',    v: 'Turned the community and the reel into a pipeline — the growth engine behind the 4x.' },
+  { k: 'New Business',    v: 'Turned the community and the reel into a pipeline. The growth engine behind the 4x.' },
   { k: 'Client Lead',    v: 'The point of contact brands trusted, which is what turned one project into the next.' },
 ];
 
@@ -49,7 +49,7 @@ const credits = [
   { k: 'Clients', v: 'Sony · Xperia · Stansport' }, // ⚠️ expand with real roster
   { k: 'Scope', v: 'Strategy · Creative · New business' },
   { k: 'Outcome', v: '~4x agency revenue' },
-  { k: 'Years', v: '2019–2022' },              // ⚠️ confirm span
+  { k: 'Years', v: '2019-2022' },              // ⚠️ confirm span
 ];
 ---
 <Base title="Art of Visuals, the Lab">
@@ -65,7 +65,7 @@ const credits = [
         <p class="aov-eyebrow fade"><span class="aov-mark" aria-hidden="true">+</span>Case study &middot; Agency growth</p>
         <h1 class="aov-h1 split">I grew the agency <em>4x.</em></h1>
         <p class="aov-tag fade">Not one campaign. A book of business.</p>
-        <p class="aov-meta fade">At Art of Visuals I led creative as the agency scaled its revenue roughly four times over. This is the story under that number: the offer we built, the brands we won, and the work — Sony, Xperia, and more — that made it repeatable.</p>
+        <p class="aov-meta fade">At Art of Visuals I led creative as the agency scaled its revenue roughly four times over. This is the story under that number: the offer we built, the brands we won, and the work that made it repeatable: Sony, Xperia, and more.</p>
       </div>
       <div class="aov-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
@@ -89,13 +89,13 @@ const credits = [
       <div class="aov-story-head">
         <p class="aov-kicker fade"><span class="aov-mark" aria-hidden="true">+</span>How it happened</p>
         <h2 class="aov-story-title split">A community, turned into a <em>creative business.</em></h2>
-        <p class="aov-story-sub fade">Art of Visuals had reach and a real audience. My job was to turn that into work brands would pay for — and then make it grow.</p>
+        <p class="aov-story-sub fade">Art of Visuals had reach and a real audience. My job was to turn that into work brands would pay for, and then make it grow.</p>
       </div>
       <ol class="aov-steps">
         <li class="aov-step fade">
           <span class="aov-step-n">01</span>
           <h3 class="aov-step-t split">Built the offer.</h3>
-          <p class="aov-step-d">I shaped what the agency actually sold — strategy plus production a brand could trust — and made it something a marketing lead could say yes to fast.</p>
+          <p class="aov-step-d">I shaped what the agency actually sold, strategy plus production a brand could trust, and made it something a marketing lead could say yes to fast.</p>
         </li>
         <li class="aov-step fade">
           <span class="aov-step-n">02</span>
@@ -105,7 +105,7 @@ const credits = [
         <li class="aov-step fade">
           <span class="aov-step-n">03</span>
           <h3 class="aov-step-t split">Made it repeat.</h3>
-          <p class="aov-step-d">Being the client's point of contact meant one project became three. That retention — not any single hit — is what multiplied the revenue.</p>
+          <p class="aov-step-d">Being the client's point of contact meant one project became three. That retention, not any single hit, is what multiplied the revenue.</p>
         </li>
       </ol>
     </section>
@@ -134,7 +134,7 @@ const credits = [
     <section class="aov-role">
       <p class="aov-kicker fade"><span class="aov-mark" aria-hidden="true">+</span>The role</p>
       <h2 class="aov-role-h split">Part creative director, part <em>growth engine.</em></h2>
-      <p class="aov-role-body fade">I was not just making the work — I was building the business that made the work possible. Strategy, the pitch, the shoot, and the relationship after, all in one seat. That's the range I bring to an agency: creative that stands up, and a nose for what turns it into revenue.</p>
+      <p class="aov-role-body fade">I was not just making the work. I was building the business that made the work possible. Strategy, the pitch, the shoot, and the relationship after, all in one seat. That's the range I bring to an agency: creative that stands up, and a nose for what turns it into revenue.</p>
       <ul class="aov-did">
         {did.map((d) => (
           <li class="fade"><span class="aov-did-k">{d.k}</span><span class="aov-did-v">{d.v}</span></li>

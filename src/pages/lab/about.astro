@@ -4,7 +4,7 @@ import LabFx from '../../components/LabFx.astro';
 import BrandTicker from '../../components/BrandTicker.astro';
 import FloatingHand from '../../components/FloatingHand.astro';
 
-// === ABOUT V3 — /lab/about ===
+// === ABOUT V3 - /lab/about ===
 // Full rebuild. First-person is allowed on About (brand doc). Image-rich:
 // a drifting hero photo wall, parallax montage columns, a PINNED credo scene
 // with a deep-parallax photo bed, the real team frame, and a documentary-range
@@ -35,7 +35,7 @@ const pillars = [
     d: "Big picture and fine detail at the same time. Ideas that perform, not just ones that look good in a deck." },
 ];
 
-// Hero drifting photo wall — a curated mix of real frames, varied orientation.
+// Hero drifting photo wall: a curated mix of real frames, varied orientation.
 const wall = [
   { src: '/gallery/full/p-020.jpg', drift: 14, ar: '3/4' },
   { src: '/gallery/full/p-070.jpg', drift: -10, ar: '16/10' },
@@ -43,13 +43,13 @@ const wall = [
   { src: '/gallery/full/p-005.jpg', drift: -16, ar: '16/10' },
 ];
 
-// Montage columns (the pinned scene's parallax photo bed) — three columns of
+// Montage columns (the pinned scene's parallax photo bed): three columns of
 // real frames that travel at different rates behind the credo.
 const colA = ['/gallery/full/p-001.jpg', '/gallery/full/p-030.jpg', '/gallery/full/p-060.jpg', '/gallery/full/p-090.jpg'];
 const colB = ['/gallery/full/p-020.jpg', '/gallery/full/p-050.jpg', '/gallery/full/p-080.jpg', '/gallery/full/p-010.jpg'];
 const colC = ['/gallery/full/p-040.jpg', '/gallery/full/p-070.jpg', '/gallery/full/p-100.jpg', '/gallery/full/p-015.jpg'];
 ---
-<Base title="About — monuments">
+<Base title="About · monuments">
   <main class="ab3">
     <!-- HERO: first person, with a drifting photo wall and the floating hand -->
     <header class="ab3-hero">
@@ -72,7 +72,7 @@ const colC = ['/gallery/full/p-040.jpg', '/gallery/full/p-070.jpg', '/gallery/fu
     <!-- BRAND TICKER -->
     <BrandTicker tone="white" />
 
-    <!-- STATS — light band, 4-up; numbers tick up on scroll -->
+    <!-- STATS: light band, 4-up; numbers tick up on scroll -->
     <section class="ab3-stats">
       <div class="ab3-stats-inner">
         <div class="ab3-stats-grid">
@@ -156,7 +156,7 @@ const colC = ['/gallery/full/p-040.jpg', '/gallery/full/p-070.jpg', '/gallery/fu
     </section>
 
     <script>
-      // Credo montage — randomize the background photos on every visit.
+      // Credo montage: randomize the background photos on every visit.
       // DJ: to use a specific album later, just replace POOL with that list
       // (or point it at a folder of files). Math.random is client-side, so the
       // mix changes each load. Reduced-motion users still get a random still set.

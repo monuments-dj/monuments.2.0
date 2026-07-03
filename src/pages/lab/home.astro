@@ -4,7 +4,7 @@ import LabFx from '../../components/LabFx.astro';
 import FloatingHand from '../../components/FloatingHand.astro';
 import BrandTicker from '../../components/BrandTicker.astro';
 
-// === HOMEPAGE V3 — /lab/home ===
+// === HOMEPAGE V3 - /lab/home ===
 // DJ feedback rebuild. Brings back the mouse-tracked SIGHT SOUND AND EMOTION
 // headline (he liked it more than the line-by-line build), adds the red
 // FloatingHand over the hero, drops in the scroll-velocity BrandTicker, KEEPS
@@ -57,11 +57,11 @@ const services = [
   { t: 'AI systems', d: 'Audit, automate, deploy. Your business, brought up to speed.', href: '/lab/ai', tag: 'new' },
 ];
 ---
-<Base title="monuments — sight, sound and emotion">
+<Base title="monuments: sight, sound and emotion">
 
   <main class="hm">
     <!-- ============================================================
-         SCENE 1 — SIGHT SOUND AND EMOTION (mouse-tracked tilt hero)
+         SCENE 1 - SIGHT SOUND AND EMOTION (mouse-tracked tilt hero)
          The whole block tilts toward the cursor as one rigid unit over
          a darkened bg video. FloatingHand floats over the type.
          ============================================================ -->
@@ -94,12 +94,12 @@ const services = [
     </section>
 
     <!-- ============================================================
-         BRAND TICKER — scroll-velocity logo marquee, logos link out.
+         BRAND TICKER - scroll-velocity logo marquee, logos link out.
          ============================================================ -->
     <BrandTicker tone="white" />
 
     <!-- ============================================================
-         SHOWREEL — the scroll-zoom DJ loves, mechanics unchanged.
+         SHOWREEL - the scroll-zoom DJ loves, mechanics unchanged.
          ============================================================ -->
     <section class="showreel">
       <div class="reel-stage">
@@ -132,7 +132,7 @@ const services = [
     </section>
 
     <!-- ============================================================
-         WORK — full-viewport brand-world scenes. Each is pinned in its
+         WORK - full-viewport brand-world scenes. Each is pinned in its
          own atmosphere; media travels SLOWER than the type (~0.5x), and
          scenes overlap at the seams (sheet-over handoff).
          ============================================================ -->
@@ -161,7 +161,7 @@ const services = [
     </div>
 
     <!-- ============================================================
-         SERVICES — CD first, AI systems linked. Marker underline draws
+         SERVICES - CD first, AI systems linked. Marker underline draws
          on hover. Each row reveals on scroll.
          ============================================================ -->
     <section class="hm-sv">
@@ -188,7 +188,7 @@ const services = [
     </section>
 
     <!-- ============================================================
-         CLOSING CTA — start a conversation. Second hand for spice.
+         CLOSING CTA - start a conversation. Second hand for spice.
          ============================================================ -->
     <section class="hm-end">
       <FloatingHand side="left" top="6vh" />
@@ -209,7 +209,7 @@ const services = [
   .hm-cta-ghost { color: var(--fg); background: transparent; border: 1px solid rgb(var(--fg-rgb) / 0.35); }
   .hm-cta-link { color: var(--fg); background: transparent; border: 1px solid rgb(var(--fg-rgb) / 0.4); padding: 13px 24px; }
 
-  /* ===================== HERO — mouse-tracked tilt ===================== */
+  /* ===================== HERO - mouse-tracked tilt ===================== */
   .hm-hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; perspective: 900px; }
   .hm-hero-video { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
   .hm-hero-video iframe { position: absolute; top: 50%; left: 50%; width: 178vh; min-width: 100%; height: 100vh; min-height: 56.25vw; transform: translate(-50%, -50%); }
@@ -253,7 +253,7 @@ const services = [
   .hm-scrollcue { position: absolute; left: 50%; bottom: 14px; z-index: 3; transform: translateX(-50%); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.5); animation: cueBob 2.4s ease-in-out infinite; }
   @keyframes cueBob { 0%,100% { transform: translate(-50%, 0); opacity: 0.5; } 50% { transform: translate(-50%, 6px); opacity: 1; } }
 
-  /* ===================== WORK — brand worlds (pinned + parallax) ===================== */
+  /* ===================== WORK - brand worlds (pinned + parallax) ===================== */
   .hm-worlds { position: relative; }
   .hm-world {
     position: relative; display: block; height: 130vh;
@@ -330,7 +330,7 @@ const services = [
   .fade { opacity: 0; transform: translateY(26px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
   .fade.on { opacity: 1; transform: none; }
 
-  /* split util (type-clip fix — overhang + descenders never get cut) */
+  /* split util (type-clip fix - overhang + descenders never get cut) */
   .hm :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
   .hm :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); will-change: transform; }
   .hm :global(.split.on .wi) { transform: none; }
@@ -388,7 +388,7 @@ const services = [
   }), { threshold: 0.3 });
   document.querySelectorAll('.split, .fade').forEach((el) => io.observe(el));
 
-  // ---------- HERO — mouse-tracked rigid tilt ----------
+  // ---------- HERO - mouse-tracked rigid tilt ----------
   (function () {
     const inner = document.getElementById('hero-tilt');
     if (!inner || reduced) return;
@@ -406,7 +406,7 @@ const services = [
     })();
   })();
 
-  // ---------- WORK worlds — pinned scene parallax (media slower than type) ----------
+  // ---------- WORK worlds - pinned scene parallax (media slower than type) ----------
   const worlds = [...document.querySelectorAll('[data-world]')];
   let ticking = false;
   const onScroll = () => {
@@ -440,7 +440,7 @@ const services = [
     onScroll();
   }
 
-  // ---------- Showreel — scroll-zoom (carried over, mechanics unchanged) ----------
+  // ---------- Showreel - scroll-zoom (carried over, mechanics unchanged) ----------
   (function () {
     const section = document.querySelector('.showreel');
     const zoom = document.getElementById('reelZoom');

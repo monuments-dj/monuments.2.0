@@ -5,12 +5,12 @@ import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
 import CaseCredits from '../../components/CaseCredits.astro';
 
-// === /lab/fearless — SCAFFOLD (content coming from DJ) ===
+// === /lab/fearless - SCAFFOLD (content coming from DJ) ===
 // Structure is in place, matching the other /lab/* case studies. Everything below is a
 // PLACEHOLDER skeleton so DJ can see the shape and drop real content in. Image slots are
 // neutral placeholder tiles (no broken <img>) until real assets land.
 //
-// ⚠️ TODO(DJ) — send me:
+// ⚠️ TODO(DJ) - send me:
 //   (1) what "Fearless" is (brand / campaign / project?) + the one-line premise
 //   (2) DJ's role + the collaborators/agency
 //   (3) the headline NUMBER(s) for the results band
@@ -19,29 +19,29 @@ import CaseCredits from '../../components/CaseCredits.astro';
 // Then I'll swap the placeholders, drop the images into /public/case-studies/fearless/,
 // and promote it into the Work grid + home like the others.
 
-const accent = '#ff4d3d'; // placeholder accent — change to Fearless's real brand color
+const accent = '#ff4d3d'; // placeholder accent - change to Fearless's real brand color
 
 // Placeholder credits (swap with real).
 const credits = [
   { k: 'Client', v: 'PLACEHOLDER' },
   { k: 'Role', v: 'PLACEHOLDER' },
   { k: 'Scope', v: 'PLACEHOLDER' },
-  { k: 'Year', v: '20—' },
+  { k: 'Year', v: '20XX' },
 ];
-// Placeholder results — only fill these with real numbers.
+// Placeholder results - only fill these with real numbers.
 const stats = [
-  { n: '—', l: 'headline result (PLACEHOLDER)' },
-  { n: '—', l: 'supporting stat (PLACEHOLDER)' },
-  { n: '—', l: 'supporting stat (PLACEHOLDER)' },
+  { n: 'XX', l: 'headline result (PLACEHOLDER)' },
+  { n: 'XX', l: 'supporting stat (PLACEHOLDER)' },
+  { n: 'XX', l: 'supporting stat (PLACEHOLDER)' },
 ];
 const steps = [
-  { n: '01', t: 'The problem', d: 'PLACEHOLDER — what Fearless needed to solve, in a sentence.' },
-  { n: '02', t: 'The idea', d: 'PLACEHOLDER — the creative move that made it work.' },
-  { n: '03', t: 'The build', d: 'PLACEHOLDER — what I actually made and led.' },
+  { n: '01', t: 'The problem', d: 'PLACEHOLDER: what Fearless needed to solve, in a sentence.' },
+  { n: '02', t: 'The idea', d: 'PLACEHOLDER: the creative move that made it work.' },
+  { n: '03', t: 'The build', d: 'PLACEHOLDER: what I actually made and led.' },
 ];
 const galleryCount = 6; // placeholder tiles until real stills land
 ---
-<Base title="Fearless (draft) — the Lab">
+<Base title="Fearless (draft), the Lab">
   <main class="fl" style={`--fl-accent:${accent}`}>
     <!-- HERO -->
     <header class="fl-hero">

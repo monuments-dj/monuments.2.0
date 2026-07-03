@@ -4,7 +4,7 @@ import LabFx from '../../components/LabFx.astro';
 import BrandTicker from '../../components/BrandTicker.astro';
 import AttentionHourglass from '../../components/AttentionHourglass.astro';
 
-// === SERVICES V3 — /lab/services ===
+// === SERVICES V3 - /lab/services ===
 // Rebuilt on DJ's REAL services taxonomy (scrubbed from the live site), split
 // into AGENCY + PRODUCTION, with creative direction emphasized FIRST. Adds the
 // new AI SYSTEMS feature block (links the /lab/ai offer), a pinned statement
@@ -35,7 +35,7 @@ const steps = [
   { t: 'Ship', d: 'On time, in every format, with nothing lost between the idea and the screen.' },
 ];
 
-// Hero montage — real campaign stills, mixed across Sony / Blue Cross /
+// Hero montage - real campaign stills, mixed across Sony / Blue Cross /
 // Flashpoint / Clothing, varied orientation. Sits behind a heavy scrim so the
 // headline reads clean; drifts SLOWER than the type for parallax depth.
 const heroMontage = [
@@ -47,7 +47,7 @@ const heroMontage = [
   { src: '/case-studies/sony-xperia-summer/gallery/xp-05.jpg', drift: -6, ar: '3/4' },
 ];
 
-// Full-bleed image band between the capability rows — a horizontal strip of
+// Full-bleed image band between the capability rows - a horizontal strip of
 // campaign frames as a visual breather. Mixed sources, light parallax.
 const bandFrames = [
   '/case-studies/sony-this-moment/gallery/tm-01.jpg',
@@ -58,10 +58,10 @@ const bandFrames = [
   '/case-studies/blue-cross/gallery/bci-18.jpg',
 ];
 ---
-<Base title="Services — monuments">
+<Base title="Services · monuments">
   <main class="sv3">
 
-    <!-- HERO — campaign montage under a scrim, headline stays crisp -->
+    <!-- HERO - campaign montage under a scrim, headline stays crisp -->
     <header class="sv3-hero">
       <div class="sv3-hero-montage" aria-hidden="true">
         {heroMontage.map((m) => (
@@ -99,7 +99,7 @@ const bandFrames = [
       </ul>
     </section>
 
-    <!-- FULL-BLEED IMAGE BAND — the work, as a breather between the two rows -->
+    <!-- FULL-BLEED IMAGE BAND - the work, as a breather between the two rows -->
     <section class="sv3-band" aria-hidden="true">
       <div class="sv3-band-track" data-drift="7">
         {bandFrames.map((src) => (
@@ -139,7 +139,7 @@ const bandFrames = [
       </div>
     </section>
 
-    <!-- ATTENTION HOURGLASS — light beat: the 8-second window, why craft matters -->
+    <!-- ATTENTION HOURGLASS - light beat: the 8-second window, why craft matters -->
     <section class="on-paper" style="background:var(--paper); color:var(--ink);">
       <AttentionHourglass />
     </section>
@@ -198,7 +198,7 @@ const bandFrames = [
   /* HERO */
   .sv3-hero { position: relative; min-height: 92vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; padding: 160px 0 9vh; }
 
-  /* Campaign montage — an asymmetric collage that drifts slower than the type */
+  /* Campaign montage - an asymmetric collage that drifts slower than the type */
   .sv3-hero-montage { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
   .sv3-hm-frame { position: absolute; margin: 0; border-radius: 6px; overflow: hidden; box-shadow: 0 30px 80px rgb(0 0 0 / 0.5); will-change: transform; }
   .sv3-hm-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -209,7 +209,7 @@ const bandFrames = [
   .sv3-hm-frame:nth-child(5) { left: 5vw;   bottom: 5vh; width: clamp(150px, 15vw, 270px); opacity: 0.6; }
   .sv3-hm-frame:nth-child(6) { left: 23vw;  top: 6vh;  width: clamp(130px, 13vw, 230px); opacity: 0.5; }
 
-  /* Scrim — keeps the headline crisp over the photos */
+  /* Scrim - keeps the headline crisp over the photos */
   .sv3-hero-scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(180deg, rgb(var(--ink-rgb) / 0.62) 0%, rgb(var(--ink-rgb) / 0.7) 46%, rgb(var(--ink-rgb) / 0.82) 100%); }
   .sv3-hero-img { position: absolute; inset: -12% 0 0; z-index: 1; pointer-events: none; will-change: transform;
@@ -258,7 +258,7 @@ const bandFrames = [
   /* The next section slides OVER the pinned beat (seam overlap). */
   .sv3-ai { position: relative; z-index: 3; margin-top: -100vh; }
 
-  /* AI SYSTEMS FEATURE BLOCK — its own atmosphere (paper-on-ink inversion) */
+  /* AI SYSTEMS FEATURE BLOCK - its own atmosphere (paper-on-ink inversion) */
   .sv3-ai { background: var(--paper); color: var(--ink); overflow: hidden; }
   .sv3-ai-glow { position: absolute; inset: -20% -10% auto auto; width: 60vw; height: 60vw; z-index: 0; pointer-events: none; will-change: transform;
     background: radial-gradient(circle at 70% 30%, var(--accent), transparent 60%); opacity: 0.12; }

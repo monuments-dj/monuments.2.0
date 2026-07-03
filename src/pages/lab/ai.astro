@@ -4,7 +4,7 @@ import LabFx from '../../components/LabFx.astro';
 import FloatingHand from '../../components/FloatingHand.astro';
 import AIWorkflowDemo from '../../components/AIWorkflowDemo.astro';
 
-// === AI LAB — /lab/ai — direction 1, pinned-scene build ===
+// === AI LAB - /lab/ai - direction 1, pinned-scene build ===
 // Audit → automate → deploy for non-technical service businesses.
 // Motion model = the measured reference laws (REFERENCES.md "motion map"):
 // pinned scenes, scroll-scrubbed + reversible composition, sheet-over handoffs,
@@ -55,9 +55,9 @@ const proof = [
 ];
 const stamps = [0, 1, 2, 3, 4, 5, 6];
 ---
-<Base title="AI, without the overwhelm — monuments">
+<Base title="AI, without the overwhelm · monuments">
 
-  <!-- KINETIC LOAD INTRO — stacks and multiplies, curtain lifts into the page. -->
+  <!-- KINETIC LOAD INTRO: stacks and multiplies, curtain lifts into the page. -->
   <div class="ai-intro" id="aiIntro" aria-hidden="true">
     <div class="ai-intro-stack">
       <span class="ai-intro-eyebrow">the tools just went</span>
@@ -96,7 +96,7 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
       </div>
     </header>
 
-    <!-- SCENE 1 — THE ERA (pinned, white). Scroll composes:
+    <!-- SCENE 1 - THE ERA (pinned, white). Scroll composes:
          statement lights word by word → exits up → "That era just ended." lands
          over a scroll-driven WILD stamp cascade → payoff line. Reversible. -->
     <section class="scn scn-era" data-scene="era">
@@ -114,7 +114,7 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
       </div>
     </section>
 
-    <!-- SCENE 2 — THE QUESTIONS (pinned, black). Q1 lands word by word, holds,
+    <!-- SCENE 2 - THE QUESTIONS (pinned, black). Q1 lands word by word, holds,
          exits up while Q2 rises from below. Slides in OVER the era stage. -->
     <section class="scn scn-q" data-scene="q">
       <div class="scn-stage scn-stage-q">
@@ -126,7 +126,7 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
     <!-- Everything after the scenes rides above them (sheet-over handoff). -->
     <div class="ai-after">
 
-      <!-- SERVICES — tilted cards (lusion-pattern, monuments-flavored) -->
+      <!-- SERVICES: tilted cards (lusion-pattern, monuments-flavored) -->
       <section class="ai-sv">
         <div class="ai-sv-head fade">
           <p class="ai-eyebrow">How it works</p>
@@ -150,7 +150,7 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
         </div>
       </section>
 
-      <!-- CAN YOUR AI DO THIS? — interactive capability demo -->
+      <!-- CAN YOUR AI DO THIS? Interactive capability demo -->
       <AIWorkflowDemo />
 
       <!-- WHO IT'S FOR -->
@@ -162,7 +162,7 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
         </div>
       </section>
 
-      <!-- PROOF — this site is the demo -->
+      <!-- PROOF: this site is the demo -->
       <section class="ai-proof">
         <div class="ai-proof-head">
           <p class="ai-eyebrow fade">Proof, not promises</p>
@@ -206,14 +206,14 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
   @keyframes aiFadeIn { to { opacity: 1; } }
   @media (prefers-reduced-motion: reduce) { .ai-intro { display: none; } }
 
-  /* SPLIT — word-mask entrance for non-scene display copy */
+  /* SPLIT: word-mask entrance for non-scene display copy */
   .ai-page :global(.split .w) { display: inline-block; overflow: clip; overflow-clip-margin: 0.22em; vertical-align: top; padding: 0.1em 0.14em; margin: -0.1em -0.14em; }
   .ai-page :global(.split .wi) { display: inline-block; transform: translateY(135%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wd) * 0.04s); will-change: transform; }
   .ai-page :global(.split.on .wi) { transform: none; }
 
   /* HERO */
   .ai-hero { position: relative; min-height: 92vh; display: flex; flex-direction: column; justify-content: center; padding: 160px var(--pad) 80px; overflow: hidden; isolation: isolate; }
-  /* Ambient reel bed — full-bleed video covered + heavy ink scrim, behind copy. */
+  /* Ambient reel bed: full-bleed video covered + heavy ink scrim, behind copy. */
   .ai-hero-reel { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; background: var(--ink); }
   .ai-hero-video { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     width: 177.78vh; min-width: 100%; height: 100vh; min-height: 56.25vw;
@@ -234,7 +234,7 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
   .scn { position: relative; }
   .scn-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
 
-  /* Scene 1 — ERA. 340vh parent: 140vh of scrub + 100vh handoff window. */
+  /* Scene 1 - ERA. 340vh parent: 140vh of scrub + 100vh handoff window. */
   .scn-era { height: 340vh; z-index: 1; }
   .scn-stage-era { background: var(--white); color: var(--ink); }
   .era-s1 { position: absolute; max-width: 21ch; padding: 0 var(--pad); font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 52px); line-height: 1.16; letter-spacing: -0.02em; text-align: center; will-change: transform, opacity; }
@@ -248,7 +248,7 @@ const stamps = [0, 1, 2, 3, 4, 5, 6];
   .era-s3 { position: absolute; bottom: 12vh; left: 50%; transform: translateX(-50%); max-width: 560px; padding: 0 var(--pad); text-align: center; opacity: 0; will-change: opacity; }
   .ai-era-body { font-size: 16px; line-height: 1.75; font-weight: 300; color: rgb(var(--ink-rgb) / 0.75); }
 
-  /* Scene 2 — QUESTIONS. Slides over the era stage; services slides over this. */
+  /* Scene 2 - QUESTIONS. Slides over the era stage; services slides over this. */
   .scn-q { height: 360vh; z-index: 2; margin-top: -100vh; }
   .scn-stage-q { background: var(--black); }
   .q { position: absolute; font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(38px, 6vw, 88px); line-height: 1.05; letter-spacing: -0.025em; text-align: center; max-width: 16ch; padding: 0 var(--pad); will-change: transform, opacity; }

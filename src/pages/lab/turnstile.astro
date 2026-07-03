@@ -5,11 +5,11 @@ import BrandTicker from '../../components/BrandTicker.astro';
 import FloatingHand from '../../components/FloatingHand.astro';
 import ShapePile from '../../components/ShapePile.astro';
 
-// === TURNSTILE REIMAGINED — /lab/turnstile ===
+// === TURNSTILE REIMAGINED - /lab/turnstile ===
 // The reimagined-Blue-Cross editorial model on the Turnstile band: chapter
 // kickers + narrow columns, color-blocked chapters, a pinned insight scene with
 // marker underline, a drifting collage of product + BTS stills, credits, and the
-// portal-grow next-project ending to Waffle Me Up. Energy is loud and bold — a
+// portal-grow next-project ending to Waffle Me Up. Energy is loud and bold - a
 // band that does not whisper. Copy = real case-study text, restructured.
 
 const products = Array.from({ length: 8 }, (_, i) => `/case-studies/turnstile/products/prod-${String(i + 1).padStart(2, '0')}.jpg`);
@@ -32,7 +32,7 @@ const ticker = [
   { name: 'No whisper' },
 ];
 ---
-<Base title="Turnstile Audio — built to be heard — monuments">
+<Base title="Turnstile Audio: built to be heard · monuments">
   <main class="tsx">
     <!-- HERO CHAPTER (dark) -->
     <header class="tsx-hero">
@@ -48,7 +48,7 @@ const ticker = [
       <FloatingHand side="right" top="16vh" />
     </header>
 
-    <!-- CHAPTER 01 — THE BRIEF (cream) -->
+    <!-- CHAPTER 01 - THE BRIEF (cream) -->
     <section class="tsx-ch tsx-ch-cream">
       <div class="tsx-cols">
         <p class="tsx-kicker fade">01 · The brief</p>
@@ -62,7 +62,7 @@ const ticker = [
       </figure>
     </section>
 
-    <!-- PINNED INSIGHT SCENE (deep) — marker underline -->
+    <!-- PINNED INSIGHT SCENE (deep) - marker underline -->
     <section class="tsx-insight scn" data-scene="insight">
       <div class="scn-stage tsx-insight-stage">
         <div class="tsx-insight-band">
@@ -74,7 +74,7 @@ const ticker = [
       </div>
     </section>
 
-    <!-- CHAPTER 02 — THE WORK (cream, drifting collage) -->
+    <!-- CHAPTER 02 - THE WORK (cream, drifting collage) -->
     <section class="tsx-ch tsx-ch-cream tsx-over">
       <div class="tsx-cols">
         <p class="tsx-kicker fade">02 · The work</p>
@@ -97,7 +97,7 @@ const ticker = [
       <BrandTicker brands={ticker} speed={70} tone="white" />
     </section>
 
-    <!-- CHAPTER 03 — THE RUN (deep stats band) -->
+    <!-- CHAPTER 03 - THE RUN (deep stats band) -->
     <section class="tsx-run">
       <div class="tsx-run-inner">
         <p class="tsx-kicker fade">03 · The run</p>
@@ -136,7 +136,7 @@ const ticker = [
       <ShapePile />
     </section>
 
-    <!-- NEXT PROJECT — portal grow -->
+    <!-- NEXT PROJECT - portal grow -->
     <section class="tsx-next" data-portal>
       <div class="tsx-next-stage">
         <p class="tsx-kicker tsx-next-k">Next project</p>
@@ -157,7 +157,7 @@ const ticker = [
   .tsx-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(var(--fg-rgb) / 0.6); }
   .tsx-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
 
-  /* HERO — loud, oversized */
+  /* HERO - loud, oversized */
   .tsx-hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden; }
   .tsx-hero-img { position: absolute; inset: -8% 0; width: 100%; height: 116%; object-fit: cover; }
   .tsx-hero-scrim { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.32), rgba(0,0,0,0.82)); }

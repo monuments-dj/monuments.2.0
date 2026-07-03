@@ -94,7 +94,7 @@ function toProject(slug: string, r: any): Project {
 
   return {
     slug,
-    title: `${r.title}${r.client ? ' — ' + r.client : ''} — monuments`,
+    title: `${r.title}${r.client ? ' · ' + r.client : ''} · monuments`,
     header: {
       variant: 'wh',
       image: r.headerImage ?? gallery[gallery.length - 1] ?? gallery[0] ?? '',

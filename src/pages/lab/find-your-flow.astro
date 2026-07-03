@@ -1,9 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-// MOTION LAB — FIND YOUR FLOW credits section. Two scroll-reactive variants
+// MOTION LAB - FIND YOUR FLOW credits section. Two scroll-reactive variants
 // stacked for A/B. Pick one → it becomes the real WorkCredits component, then
-// this sandbox gets deleted. Credits data borrowed from Sony — This Moment.
+// this sandbox gets deleted. Credits data borrowed from Sony - This Moment.
 const credits = [
   { k: 'Agency', v: 'Art of Visuals' },
   { k: 'Production', v: 'MGX Creative' },
@@ -14,16 +14,16 @@ const credits = [
 ];
 const ringText = 'FIND · YOUR · FLOW · FIND · YOUR · FLOW · FIND · YOUR · FLOW · ';
 ---
-<Base title="FIND YOUR FLOW — motion lab — monuments">
+<Base title="FIND YOUR FLOW · motion lab · monuments">
   <main class="fyf-lab">
     <header class="fyf-lab-head">
-      <h1>FIND YOUR FLOW — motion options</h1>
+      <h1>FIND YOUR FLOW: motion options</h1>
       <p>Scroll through all three. Pick the one that feels right and I'll bake it into the real component.</p>
     </header>
 
-    <!-- VARIANT A — Scroll-dial -->
+    <!-- VARIANT A - Scroll-dial -->
     <section class="fyf-block" data-fyf="dial">
-      <span class="fyf-tag">A · Scroll-dial — ring spin tracks scroll velocity</span>
+      <span class="fyf-tag">A · Scroll-dial: ring spin tracks scroll velocity</span>
       <div class="fyf-row">
         <div class="fyf-ring-wrap">
           <svg class="fyf-ring" data-ring="dial" viewBox="0 0 240 240" aria-hidden="true">
@@ -39,9 +39,9 @@ const ringText = 'FIND · YOUR · FLOW · FIND · YOUR · FLOW · FIND · YOUR �
       </div>
     </section>
 
-    <!-- VARIANT B — Draw-in seal -->
+    <!-- VARIANT B - Draw-in seal -->
     <section class="fyf-block" data-fyf="seal">
-      <span class="fyf-tag">B · Draw-in seal — ring + stroke draw on as it enters, slow drift, hover the card</span>
+      <span class="fyf-tag">B · Draw-in seal: ring + stroke draw on as it enters, slow drift, hover the card</span>
       <div class="fyf-row">
         <div class="fyf-ring-wrap">
           <svg class="fyf-ring fyf-ring--seal" viewBox="0 0 240 240" aria-hidden="true">
@@ -58,9 +58,9 @@ const ringText = 'FIND · YOUR · FLOW · FIND · YOUR · FLOW · FIND · YOUR �
       </div>
     </section>
 
-    <!-- VARIANT C — Counter-rotor -->
+    <!-- VARIANT C - Counter-rotor -->
     <section class="fyf-block" data-fyf="rotor">
-      <span class="fyf-tag">C · Counter-rotor — two rings spin opposite ways, scroll widens the contrast, hover eases them to a stop</span>
+      <span class="fyf-tag">C · Counter-rotor: two rings spin opposite ways, scroll widens the contrast, hover eases them to a stop</span>
       <div class="fyf-row">
         <div class="fyf-ring-wrap">
           <svg class="fyf-ring fyf-ring--rotor" viewBox="0 0 240 240" aria-hidden="true">
@@ -100,7 +100,7 @@ const ringText = 'FIND · YOUR · FLOW · FIND · YOUR · FLOW · FIND · YOUR �
     .fyf-cred-k { font-weight: 600; }
     .fyf-cred-v { color: rgba(20,21,25,0.7); }
 
-    /* Variant B — draw-in seal */
+    /* Variant B - draw-in seal */
     .fyf-ring--seal .fyf-ring-text { opacity: 0; transition: opacity 1.1s ease 0.3s; }
     .fyf-block.is-in .fyf-ring--seal .fyf-ring-text { opacity: 1; }
     .fyf-stroke { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 605; stroke-dashoffset: 605; transition: stroke-dashoffset 1.5s cubic-bezier(.16,1,.3,1) 0.1s; }
