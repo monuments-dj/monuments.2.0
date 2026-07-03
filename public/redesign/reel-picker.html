@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reel A/B Picker</title>
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Bricolage+Grotesque:wght@600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}
+body{background:#161514;color:#F5F3EF;font:400 14px/1.5 'Bricolage Grotesque',sans-serif;padding:40px clamp(20px,4vw,50px) 140px}
+.mono{font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+h1{font-weight:800;font-size:clamp(28px,4vw,54px);letter-spacing:-.03em;text-transform:uppercase}
+p.sub{color:#8f8d88;max-width:64ch;margin:14px 0 40px}
+.proj{margin-bottom:56px;border-top:1px solid #2c2b29;padding-top:22px}
+.proj h2{font-weight:600;font-size:22px;margin-bottom:4px}
+.proj .st{color:#8f8d88;margin-bottom:14px}
+.proj .st b{font-weight:400}
+.proj .st b.a{color:#3ddc84}.proj .st b.b{color:#2438E8;background:#F5F3EF;padding:0 6px}
+.gridp{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.cand{position:relative;cursor:pointer;background:#fff;padding:4px 4px 4px;border:3px solid transparent}
+.cand img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.cand.a{border-color:#3ddc84}.cand.b{border-color:#2438E8}
+.cand .tag{position:absolute;top:8px;left:8px;font-family:'Fragment Mono',monospace;font-size:11px;padding:3px 8px;border-radius:4px;display:none}
+.cand.a .tag{display:block;background:#3ddc84;color:#161514}
+.cand.b .tag{display:block;background:#2438E8;color:#F5F3EF}
+#out{position:fixed;left:0;right:0;bottom:0;background:#0e0d0c;border-top:1px solid #2c2b29;padding:16px clamp(20px,4vw,50px);display:flex;gap:16px;align-items:center}
+#out textarea{flex:1;background:#232220;color:#EFA1AD;border:1px solid #3a3936;border-radius:8px;font:11px/1.5 'Fragment Mono',monospace;padding:10px;height:64px;resize:none}
+#out button{font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:#F5F3EF;color:#161514;border:none;border-radius:99px;padding:14px 22px;cursor:pointer}
+</style></head><body>
+<h1>Reel A/B picker</h1>
+<p class="sub">For each project: first click = the A image (default state, green). Second click = the B image (hover state, cobalt). Click a selected frame again to clear it. The string at the bottom updates live; copy it and send it to Claude, and the reel gets rebuilt with your picks.</p>
+<div id="projects"></div>
+<div id="out"><textarea id="txt" readonly></textarea><button id="copy">Copy picks</button></div>
+<script>
+const DATA=[{"name": "Art of Visuals", "slug": "art-of-visuals", "imgs": ["/case-studies/art-of-visuals/gallery/podcast-cover.jpg", "/case-studies/art-of-visuals/gallery/stansport-01.jpg", "/case-studies/art-of-visuals/gallery/xm3-bts.jpg", "/case-studies/art-of-visuals/gallery/xm4-01.jpg", "/case-studies/art-of-visuals/gallery/xm5-01.jpg", "/case-studies/art-of-visuals/gallery/xperia-01.jpg", "/case-studies/art-of-visuals/gallery/xperia-02.jpg", "/case-studies/art-of-visuals/gallery/yt-flowstate.jpg", "/case-studies/art-of-visuals/gallery/yt-thismoment.jpg"]}, {"name": "Sony \u00b7 This Moment", "slug": "sony-this-moment", "imgs": ["/case-studies/sony-this-moment/gallery/tm-01.jpg", "/case-studies/sony-this-moment/gallery/tm-02.jpg", "/case-studies/sony-this-moment/gallery/tm-03.jpg", "/case-studies/sony-this-moment/gallery/tm-04.jpg", "/case-studies/sony-this-moment/gallery/tm-05.jpg", "/case-studies/sony-this-moment/gallery/tm-06.jpg", "/case-studies/sony-this-moment/gallery/tm-07.jpg", "/case-studies/sony-this-moment/gallery/tm-08.jpg", "/case-studies/sony-this-moment/gallery/tm-09.jpg"]}, {"name": "Blue Cross of Idaho", "slug": "blue-cross", "imgs": ["/case-studies/blue-cross/gallery/bci-02.jpg", "/case-studies/blue-cross/gallery/bci-03.jpg", "/case-studies/blue-cross/gallery/bci-07.jpg", "/case-studies/blue-cross/gallery/bci-08.jpg", "/case-studies/blue-cross/gallery/bci-09.jpg", "/case-studies/blue-cross/gallery/bci-10.jpg", "/case-studies/blue-cross/gallery/bci-11.jpg", "/case-studies/blue-cross/gallery/bci-12.jpg", "/case-studies/blue-cross/gallery/bci-13.jpg", "/case-studies/blue-cross/gallery/bci-14.jpg", "/case-studies/blue-cross/gallery/bci-16.jpg", "/case-studies/blue-cross/gallery/bci-17.jpg", "/case-studies/blue-cross/gallery/bci-18.jpg", "/case-studies/blue-cross/gallery/bci-19.jpg", "/case-studies/blue-cross/gallery/bci-20.jpg", "/case-studies/blue-cross/gallery/bci-21.jpg", "/case-studies/blue-cross/gallery/bci-22.jpg", "/case-studies/blue-cross/gallery/bci-23.jpg", "/case-studies/blue-cross/gallery/bci-24.jpg", "/case-studies/blue-cross/gallery/bci-25.jpg"]}, {"name": "Donut \u00d7 Zumiez", "slug": "donut-zumiez", "imgs": ["/case-studies/donut-zumiez/gallery/dz-01.jpg", "/case-studies/donut-zumiez/gallery/dz-02.jpg", "/case-studies/donut-zumiez/gallery/dz-03.jpg", "/case-studies/donut-zumiez/gallery/dz-04.jpg", "/case-studies/donut-zumiez/gallery/film-01.jpg", "/case-studies/donut-zumiez/gallery/merch.jpg", "/case-studies/donut-zumiez/gallery/product-shirt.jpg", "/case-studies/donut-zumiez/gallery/yt-launch.jpg", "/case-studies/donut-zumiez/gallery/yt-ptcruiser.jpg", "/case-studies/donut-zumiez/products/graffiti-tee.png", "/case-studies/donut-zumiez/products/jort.jpg", "/case-studies/donut-zumiez/products/sticker-pack.png", "/case-studies/donut-zumiez/products/work-shirt.jpg"]}, {"name": "Turnstile Audio", "slug": "turnstile", "imgs": ["/case-studies/turnstile/products/prod-01.jpg", "/case-studies/turnstile/products/prod-02.jpg", "/case-studies/turnstile/products/prod-03.jpg", "/case-studies/turnstile/products/prod-04.jpg", "/case-studies/turnstile/products/prod-05.jpg", "/case-studies/turnstile/products/prod-06.jpg", "/case-studies/turnstile/products/prod-07.jpg", "/case-studies/turnstile/products/prod-08.jpg", "/case-studies/turnstile/bts/bts-01.jpg", "/case-studies/turnstile/bts/bts-02.jpg", "/case-studies/turnstile/bts/bts-03.jpg", "/case-studies/turnstile/bts/bts-04.jpg", "/case-studies/turnstile/bts/bts-05.jpg", "/case-studies/turnstile/bts/bts-06.jpg", "/case-studies/turnstile/bts/bts-07.jpg", "/case-studies/turnstile/bts/bts-08.jpg", "/case-studies/turnstile/bts/bts-09.jpg", "/case-studies/turnstile/bts/bts-10.jpg", "/case-studies/turnstile/brand/palette.png", "/case-studies/turnstile/brand/wordmark.png"]}, {"name": "DW Drums", "slug": "dw-drums", "imgs": ["/case-studies/dw-drums/gallery/emotional-split.jpg", "/case-studies/dw-drums/gallery/face-off.jpg", "/case-studies/dw-drums/gallery/spread-01.jpg", "/case-studies/dw-drums/gallery/spread-02.jpg", "/case-studies/dw-drums/gallery/spread-03.jpg", "/case-studies/dw-drums/gallery/spread-04.jpg", "/case-studies/dw-drums/gallery/spread-05.jpg", "/case-studies/dw-drums/gallery/spread-06.jpg", "/case-studies/dw-drums/gallery/spread-07.jpg", "/case-studies/dw-drums/gallery/spread-08.jpg", "/case-studies/dw-drums/gallery/spread-09.jpg", "/case-studies/dw-drums/gallery/spread-10.jpg"]}, {"name": "AC Boise", "slug": "ac-boise", "imgs": ["/case-studies/ac-boise/gallery/away-01.jpg", "/case-studies/ac-boise/gallery/away-02.jpg", "/case-studies/ac-boise/gallery/crest.jpg", "/case-studies/ac-boise/gallery/home-01.jpg", "/case-studies/ac-boise/gallery/home-02.jpg", "/case-studies/ac-boise/gallery/keeper-01.jpg", "/case-studies/ac-boise/gallery/yt-away.jpg", "/case-studies/ac-boise/gallery/yt-keeper.jpg"]}, {"name": "Adorama Music", "slug": "adorama-music", "imgs": ["/case-studies/adorama-music/gallery/am-01.jpg", "/case-studies/adorama-music/gallery/am-02.jpg", "/case-studies/adorama-music/gallery/am-03.jpg", "/case-studies/adorama-music/gallery/am-04.jpg", "/case-studies/adorama-music/gallery/am-05.jpg", "/case-studies/adorama-music/gallery/am-06.jpg", "/case-studies/adorama-music/gallery/am-07.jpg", "/case-studies/adorama-music/gallery/am-08.jpg", "/case-studies/adorama-music/gallery/am-09.jpg", "/case-studies/adorama-music/gallery/am-10.jpg", "/case-studies/adorama-music/gallery/am-11.jpg", "/case-studies/adorama-music/gallery/am-12.jpg", "/case-studies/adorama-music/gallery/am-13.jpg", "/case-studies/adorama-music/gallery/am-14.jpg", "/case-studies/adorama-music/gallery/am-15.jpg", "/case-studies/adorama-music/gallery/am-16.jpg", "/case-studies/adorama-music/gallery/am-17.jpg", "/case-studies/adorama-music/gallery/am-18.jpg", "/case-studies/adorama-music/gallery/am-19.jpg", "/case-studies/adorama-music/gallery/am-20.jpg"]}, {"name": "Buck the Quo", "slug": "buck-the-quo", "imgs": ["/case-studies/buck-the-quo/gallery/chop-board.jpg", "/case-studies/buck-the-quo/gallery/container-coaster.jpg", "/case-studies/buck-the-quo/gallery/container-front.jpg", "/case-studies/buck-the-quo/gallery/future-sign.jpg", "/case-studies/buck-the-quo/gallery/hero.jpg", "/case-studies/buck-the-quo/gallery/merch-backpack.jpg", "/case-studies/buck-the-quo/gallery/merch-beanie.jpg", "/case-studies/buck-the-quo/gallery/merch-dadhat.jpg", "/case-studies/buck-the-quo/gallery/merch-drawstring.jpg", "/case-studies/buck-the-quo/gallery/merch-flag.jpg", "/case-studies/buck-the-quo/gallery/merch-glasses.jpg", "/case-studies/buck-the-quo/gallery/merch-shirt.jpg", "/case-studies/buck-the-quo/gallery/merch-sticker.jpg", "/case-studies/buck-the-quo/gallery/merch-sunglass-boxes.jpg", "/case-studies/buck-the-quo/gallery/saddle.jpg", "/case-studies/buck-the-quo/gallery/web-iphone.jpg", "/case-studies/buck-the-quo/emmy/emmy-bos.png", "/case-studies/buck-the-quo/emmy/emmy-gold.png", "/case-studies/buck-the-quo/emmy/emmy-silver.png"]}];
+const picks={};
+const wrap=document.getElementById('projects');
+DATA.forEach(p=>{
+  picks[p.slug]={a:null,b:null};
+  const d=document.createElement('div');d.className='proj';
+  d.innerHTML=`<h2>${p.name}</h2><p class="st mono">A (default): <b class="a" data-s="${p.slug}" data-k="a">none</b> · B (hover): <b class="b" data-s="${p.slug}" data-k="b">none</b></p>
+  <div class="gridp">${p.imgs.map(src=>`<figure class="cand" data-src="${src}"><span class="tag"></span><img src="${src}" loading="lazy"></figure>`).join('')}</div>`;
+  wrap.appendChild(d);
+  d.querySelectorAll('.cand').forEach(c=>c.addEventListener('click',()=>{
+    const src=c.dataset.src,st=picks[p.slug];
+    if(st.a===src){st.a=null}else if(st.b===src){st.b=null}
+    else if(!st.a){st.a=src}else if(!st.b){st.b=src}
+    else{st.b=src}
+    d.querySelectorAll('.cand').forEach(x=>{
+      x.classList.toggle('a',picks[p.slug].a===x.dataset.src);
+      x.classList.toggle('b',picks[p.slug].b===x.dataset.src);
+      x.querySelector('.tag').textContent=picks[p.slug].a===x.dataset.src?'A':'B';
+    });
+    d.querySelector('b.a').textContent=st.a?st.a.split('/').pop():'none';
+    d.querySelector('b.b').textContent=st.b?st.b.split('/').pop():'none';
+    out();
+  }));
+});
+function out(){
+  const lines=Object.entries(picks).filter(([,v])=>v.a||v.b).map(([k,v])=>`${k}: A=${v.a||'-'} B=${v.b||'-'}`);
+  document.getElementById('txt').value=lines.join('\n')||'(no picks yet)';
+}
+out();
+document.getElementById('copy').addEventListener('click',()=>{navigator.clipboard.writeText(document.getElementById('txt').value)});
+</script></body></html>

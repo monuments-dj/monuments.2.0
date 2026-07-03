@@ -88,6 +88,27 @@ body.lensed .rowp.match{opacity:1}
 body.lensed .rowp.match .id{color:var(--red)}
 .rowp{transition:background .3s,padding-left .4s cubic-bezier(.22,1,.36,1),opacity .45s,filter .45s}
 
+/* view toggle + sortable grid */
+.viewbar{border-bottom:1px solid var(--line);background:var(--paper)}
+.viewbar .in{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 0}
+.viewbar .grp{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.viewbar .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-right:6px}
+.viewbar button{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:99px;padding:8px 14px;color:#55524c;cursor:pointer;transition:all .25s}
+.viewbar button:hover{border-color:var(--ink);color:var(--ink)}
+.viewbar button.on{background:var(--struct);border-color:var(--struct);color:var(--paper)}
+#grid{display:none;grid-template-columns:repeat(3,1fr);gap:18px;padding:5vh 0 9vh}
+body.gridview #grid{display:grid}
+body.gridview .arch .group{display:none}
+body.gridview .arch{padding-bottom:0}
+.gcard{background:#fff;border:1px solid var(--line);padding:8px 8px 0;display:block;will-change:transform}
+.gcard img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.92);transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.gcard:hover img{transform:scale(1.03)}
+.gcard .band{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 4px}
+.gcard .band .t{font-weight:var(--dispw2);font-size:clamp(15px,1.3vw,19px);letter-spacing:-.01em}
+.gcard .band .f{font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase;text-align:right}
+.gcard.flip{transition:transform .55s cubic-bezier(.22,1,.36,1)}
+@media (max-width:900px){#grid{grid-template-columns:1fr 1fr}}
+
 /* the archive: taxonomy groups + rows */
 .arch{padding:7vh 0 9vh}
 .group{padding-top:6vh}
@@ -238,6 +259,20 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   </div>
 </div>
 
+<div class="viewbar">
+  <div class="wrap in">
+    <div class="grp"><span class="lab">\ View</span>
+      <button data-view="index" class="on">Index</button>
+      <button data-view="grid">Grid</button>
+    </div>
+    <div class="grp" id="sorters" style="display:none"><span class="lab">\ Sort</span>
+      <button data-sort="new" class="on">Newest</button>
+      <button data-sort="az">A–Z</button>
+      <button data-sort="disc">Discipline</button>
+    </div>
+  </div>
+</div>
+
 <section class="arch wrap">
 
   <div class="group">
@@ -302,6 +337,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   </div>
 
 </section>
+<div class="wrap"><div id="grid"></div></div>
 <div id="preview"><img alt=""><span class="cap"></span></div>
 
 <div class="strip" aria-hidden="true">
@@ -358,6 +394,60 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     rows.forEach(r=>r.classList.toggle('match',(r.dataset.disc||'').split(',').includes(d)));
   }
   btns.forEach(b=>b.addEventListener('click',()=>set(b.dataset.d)));
+})();
+
+// grid view: sortable portfolio (FLIP reorder)
+(function(){
+  const rows=[...document.querySelectorAll('.rowp')];
+  const grid=document.getElementById('grid');
+  const DISC_ORDER=['commercial','cd','photo','experiential','campaign','oncam'];
+  const items=rows.map((r,i)=>({
+    href:r.getAttribute('href'),img:r.dataset.img,disc:(r.dataset.disc||'').split(','),
+    title:r.querySelector('.t').textContent.trim(),
+    fmt:(r.querySelector('.fmt')?.textContent||'').replace(/\\/,'').trim(),
+    yr:parseInt(r.querySelector('.yr')?.textContent||'0',10),id:r.querySelector('.id')?.textContent.trim()||'' ,idx:i}));
+  function el(it){const a=document.createElement('a');a.className='gcard';a.href=it.href;a.dataset.key=it.idx;a.dataset.disc=it.disc.join(',');
+    a.innerHTML=`<img src="${it.img}" alt="${it.title}" loading="lazy"><div class="band"><span class="t">${it.title}</span><span class="f">${it.yr||''}</span></div>`;return a}
+  items.forEach(it=>grid.appendChild(el(it)));
+  let sort='new';
+  function currentFilter(){const on=document.querySelector('#lens button.on');return on?on.dataset.d:'all'}
+  function apply(animate=true){
+    const first=new Map([...grid.children].map(c=>[c.dataset.key,c.getBoundingClientRect()]));
+    let list=[...grid.children];
+    const d=currentFilter();
+    list.forEach(c=>{c.style.display=(d==='all'||c.dataset.disc.split(',').includes(d))?'':'none'});
+    const vis=list.filter(c=>c.style.display!=='none');
+    const key=c=>items[+c.dataset.key];
+    vis.sort((a,b)=>{
+      if(sort==='az')return key(a).title.localeCompare(key(b).title);
+      if(sort==='disc')return DISC_ORDER.indexOf(key(a).disc[0])-DISC_ORDER.indexOf(key(b).disc[0])||key(b).yr-key(a).yr;
+      return key(b).yr-key(a).yr;
+    });
+    vis.forEach(c=>grid.appendChild(c));
+    if(!animate||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+    vis.forEach(c=>{
+      const f=first.get(c.dataset.key),l=c.getBoundingClientRect();
+      if(!f)return;const dx=f.left-l.left,dy=f.top-l.top;
+      if(!dx&&!dy)return;
+      c.classList.remove('flip');c.style.transform=`translate(${dx}px,${dy}px)`;
+      void c.offsetWidth;c.classList.add('flip');c.style.transform='';
+    });
+  }
+  document.querySelectorAll('.viewbar button[data-view]').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.viewbar button[data-view]').forEach(x=>x.classList.toggle('on',x===b));
+    const gridOn=b.dataset.view==='grid';
+    document.body.classList.toggle('gridview',gridOn);
+    document.getElementById('sorters').style.display=gridOn?'':'none';
+    if(gridOn)apply(false);
+  }));
+  document.querySelectorAll('#sorters button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('#sorters button').forEach(x=>x.classList.toggle('on',x===b));
+    sort=b.dataset.sort;apply();
+  }));
+  // lens buttons also drive the grid when grid view is on
+  document.querySelectorAll('#lens button').forEach(b=>b.addEventListener('click',()=>{
+    if(document.body.classList.contains('gridview'))setTimeout(()=>apply(),0);
+  }));
 })();
 
 // scroll-lit rows
