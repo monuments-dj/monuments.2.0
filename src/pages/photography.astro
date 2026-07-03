@@ -58,6 +58,14 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
 .hero .shuffle{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);background:none;border:1px solid var(--red);border-radius:99px;padding:10px 18px;cursor:pointer}
 .hero .shuffle:hover{background:var(--red);color:var(--paper)}
 .sheetbar{border-bottom:2px solid var(--ink);padding-bottom:12px;display:flex;justify-content:space-between;align-items:baseline}
+.chips{display:flex;align-items:baseline;gap:10px 12px;flex-wrap:wrap;padding:16px 0 4px}
+.chips .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-right:6px}
+.chips button{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:99px;padding:8px 14px;color:#55524c;cursor:pointer;transition:all .25s}
+.chips button:hover{border-color:var(--ink);color:var(--ink)}
+.chips button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.chips button b{font-weight:400;color:var(--red)}
+.chips button.on b{color:var(--spark)}
+.fr.flip{transition:transform .5s cubic-bezier(.22,1,.36,1)}
 .sheetbar .mono b{color:var(--red)}
 .frames{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:18px 0 10vh}
 .fr{position:relative;background:#fff;padding:7px 7px 24px;border:1px solid var(--line);cursor:zoom-in;opacity:0;transform:translateY(14px)}
@@ -96,6 +104,12 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
 </header>
 <section class="wrap">
   <div class="sheetbar"><span class="mono"><b>Contact sheet</b> · the full roll</span><span class="mono" style="color:#8f8d88" id="count"></span></div>
+  <div class="chips" id="cats"><span class="lab">\ Categories</span></div>
+  <div class="chips" id="sorts"><span class="lab">\ Sort</span>
+    <button data-s="roll" class="on">Roll order</button>
+    <button data-s="shuffle">Shuffle</button>
+    <button data-s="cat">By category</button>
+  </div>
   <div class="frames" id="frames"></div>
 </section>
 <div id="lb" role="dialog"><button class="x" id="lbX">Close ✕</button><button class="nav prev" id="lbP">←</button><img alt=""><button class="nav next" id="lbN">→</button><span class="cap"></span></div>
@@ -120,33 +134,73 @@ function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'Americ
 clock();setInterval(clock,30000);
 
 (function(){
-  const N=100, ids=Array.from({length:N},(_,i)=>String(i+1).padStart(3,'0'));
-  const el=document.getElementById('frames');let order=[...ids];
+  const N=100, CATS=['Brand','Editorial','Food','Motion','Non-Profit'];
+  const ids=Array.from({length:N},(_,i)=>String(i+1).padStart(3,'0'));
+  const cat=id=>CATS[Math.min(CATS.length-1,Math.floor((parseInt(id,10)-1)/Math.ceil(N/CATS.length)))];
+  const el=document.getElementById('frames');
+  let order=[...ids], activeCat='All', sort='roll';
   function render(){
     el.innerHTML=order.map((id,i)=>`
-      <figure class="fr" data-id="${id}" style="transition-delay:${(i%18)*30}ms">
+      <figure class="fr show" data-id="${id}" data-cat="${cat(id)}">
         <img src="/gallery/thumb/p-${id}.jpg" alt="Frame ${id}" loading="lazy" onerror="this.closest('.fr').remove()">
-        <figcaption class="cap">FR-${id} · P-${id}</figcaption>
+        <figcaption class="cap">FR-${id} · ${cat(id).toUpperCase()}</figcaption>
       </figure>`).join('');
-    document.getElementById('count').textContent=el.children.length+' frames · click to inspect';
-    const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io2.unobserve(e.target)}}),{rootMargin:'0px 0px 200px 0px'});
-    [...el.children].forEach(f=>io2.observe(f));
+    applyFilter(false);
   }
+  function visibleIds(){return [...el.children].filter(f=>f.style.display!=='none').map(f=>f.dataset.id)}
+  function count(){document.getElementById('count').textContent=visibleIds().length+' frames · click to inspect'}
+  function applyFilter(animate=true){
+    const first=animate?new Map([...el.children].map(c=>[c.dataset.id,c.getBoundingClientRect()])):null;
+    [...el.children].forEach(f=>{f.style.display=(activeCat==='All'||f.dataset.cat===activeCat)?'':'none'});
+    count();
+    if(!animate||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+    [...el.children].forEach(c=>{
+      if(c.style.display==='none')return;
+      const f=first.get(c.dataset.id);if(!f)return;
+      const l=c.getBoundingClientRect(),dx=f.left-l.left,dy=f.top-l.top;
+      if(!dx&&!dy)return;
+      c.classList.remove('flip');c.style.transform=`translate(${dx}px,${dy}px)`;
+      void c.offsetWidth;c.classList.add('flip');c.style.transform='';
+    });
+  }
+  function setSort(s){
+    sort=s;
+    if(s==='roll')order=[...ids];
+    else if(s==='shuffle')order=order.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+    else if(s==='cat')order=[...order].sort((a,b)=>CATS.indexOf(cat(a))-CATS.indexOf(cat(b))||parseInt(a)-parseInt(b));
+    render();
+    document.querySelectorAll('#sorts button').forEach(b=>b.classList.toggle('on',b.dataset.s===s));
+  }
+  // build category chips with counts
+  const catsBar=document.getElementById('cats');
+  ['All',...CATS].forEach(c=>{
+    const n=c==='All'?N:ids.filter(id=>cat(id)===c).length;
+    const b=document.createElement('button');b.dataset.c=c;b.innerHTML=`${c} <b>${String(n).padStart(2,'0')}</b>`;
+    if(c==='All')b.classList.add('on');
+    b.addEventListener('click',()=>{activeCat=c;
+      document.querySelectorAll('#cats button').forEach(x=>x.classList.toggle('on',x===b));
+      applyFilter();});
+    catsBar.appendChild(b);
+  });
+  document.querySelectorAll('#sorts button').forEach(b=>b.addEventListener('click',()=>setSort(b.dataset.s)));
+  const heroShuffle=document.getElementById('shuffle');
+  if(heroShuffle)heroShuffle.addEventListener('click',()=>{setSort('shuffle');scrollTo({top:document.querySelector('.sheetbar').offsetTop-80,behavior:'smooth'})});
   render();
-  document.getElementById('shuffle').addEventListener('click',()=>{order=order.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);render();scrollTo({top:document.querySelector('.sheetbar').offsetTop-80,behavior:'smooth'})});
-  // lightbox
-  const lb=document.getElementById('lb'),img=lb.querySelector('img'),cap=lb.querySelector('.cap');let cur=0;
-  function openAt(i){cur=(i+order.length)%order.length;const id=order[cur];
-    img.src=`/gallery/full/p-${id}.jpg`;cap.textContent=`P-${id} · MONUMENTS ARCHIVE · ${cur+1}/${order.length}`;
+  // lightbox over the VISIBLE sequence
+  const lb=document.getElementById('lb'),img=lb.querySelector('img'),cap=lb.querySelector('.cap');let cur=0,seq=[];
+  function openAt(i){seq=visibleIds();cur=(i+seq.length)%seq.length;const id=seq[cur];
+    img.src=`/gallery/full/p-${id}.jpg`;cap.textContent=`P-${id} · ${cat(id).toUpperCase()} · MONUMENTS ARCHIVE · ${cur+1}/${seq.length}`;
     lb.classList.add('on');document.body.style.overflow='hidden'}
+  function nav(d){cur=(cur+d+seq.length)%seq.length;const id=seq[cur];
+    img.src=`/gallery/full/p-${id}.jpg`;cap.textContent=`P-${id} · ${cat(id).toUpperCase()} · MONUMENTS ARCHIVE · ${cur+1}/${seq.length}`}
   function close(){lb.classList.remove('on');img.src='';document.body.style.overflow=''}
-  el.addEventListener('click',e=>{const f=e.target.closest('.fr');if(f)openAt(order.indexOf(f.dataset.id))});
+  el.addEventListener('click',e=>{const f=e.target.closest('.fr');if(f)openAt(visibleIds().indexOf(f.dataset.id))});
   document.getElementById('lbX').addEventListener('click',close);
-  document.getElementById('lbP').addEventListener('click',()=>openAt(cur-1));
-  document.getElementById('lbN').addEventListener('click',()=>openAt(cur+1));
+  document.getElementById('lbP').addEventListener('click',()=>nav(-1));
+  document.getElementById('lbN').addEventListener('click',()=>nav(1));
   lb.addEventListener('click',e=>{if(e.target===lb)close()});
   addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;
-    if(e.key==='Escape')close();if(e.key==='ArrowLeft')openAt(cur-1);if(e.key==='ArrowRight')openAt(cur+1)});
+    if(e.key==='Escape')close();if(e.key==='ArrowLeft')nav(-1);if(e.key==='ArrowRight')nav(1)});
 })();
 
 </script>

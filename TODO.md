@@ -1,6 +1,19 @@
 # TODO — current state (2026-07-03)
 
-## 🚀 THE SWAP IS DONE: the converged cut IS the real site now
+## 🚀 THE SWAP IS DONE + POST-SWAP FEATURES (state as of 2026-07-03 late)
+Post-swap adds, all LIVE: about career TIMELINE (pinned scrub, Drake Cooper→Buck the Quo→
+AOV→Monuments, "DJ, the ___" rewriting line — ⚠️ YEARS + exact DC/BTQ titles TK from DJ);
+/work grid view (Index/Grid toggle, Newest/A–Z/Discipline FLIP sort, lens filters grid);
+reel cards: client LOGOS on strips + A/B HOVER images (defaults mine; DJ picks via
+/redesign/reel-picker.html → paste string back); /photography: DJ's original 5 categories
+(Brand/Editorial/Food/Motion/Non-Profit — ⚠️ placeholder 20-per-category chunking until DJ
+sorts real photos) + Roll/Shuffle/Category sort + filtered lightbox; home brands ticker
+moved up (after stat band); "Built to be ___" reel line; eye tile tracks cursor; sound
+toggle on hero reel; giving folded into /about ("Some stories are not for sale.").
+AWAITING DJ: reel-picker string, timeline years/titles, discipline tags review, Q3 badge,
+social handles, Sony spot link, photo category sorting.
+
+## (older) THE SWAP IS DONE: the converged cut IS the real site now
 DJ said "lets swap it" → /, /work, /about, /services, /contact, /photography + case routes
 (sony-this-moment, art-of-visuals NEW, blue-cross) are cut pages as full-document .astro
 (scripts is:inline, styles is:global, links rewritten). All 9 routes verified + live.
