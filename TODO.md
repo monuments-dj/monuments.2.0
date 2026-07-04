@@ -11,9 +11,19 @@ sorts real photos) + Roll/Shuffle/Category sort + filtered lightbox; home brands
 moved up (after stat band); "Built to be ___" reel line; eye tile tracks cursor; sound
 toggle on hero reel; giving folded into /about ("Some stories are not for sale.").
 AWAITING DJ: timeline years/titles + A/B/C pick (/redesign/timeline-{a,b,c}.html), discipline
-tags review, Sony spot link, photo-to-category sorting (real photos), face pick, cover picks
+tags review, photo-to-category sorting (real photos), face pick, cover picks
 (/redesign/cover-picker.html), ORIGINAL PHOTOS at 2500px+ for the quality re-cut (gallery fulls
 are 1600px, soft on retina in the lightbox; no clean WP mapping, 60 imgs there vs 100 here).
+✅ SONY SPOT CLOSED 2026-07-03: KIi8cBOlU50 confirmed via oEmbed = the real XM4 This Moment
+spot; wired. Flow State (CS5UXhe17O4) + Xperia (PRO-I _RGvpwyYLTI) also wired w/ AOV impact
+numbers + real campaign copy (64304cd). NEW PAGES: /work/sony-xm5 (influencer activation,
+1.3M/118K/9%, self-hosted stills, NO artofvisuals links per DJ) + /work/on-camera (11 hosting
+tapes, cue-timestamped click-to-play, one-at-a-time). /work index now 17 projects.
+⚠️ CONFIRM W/ DJ: This Moment year (campaign is 2020/XM4, page chrome says 2023 + credits
+Malikyar/MGX from old site data); on-camera cue times trusted from DJ's links; Mr B Baby =
+Michelle captions inferred; ng6yrFTrcnU has no HD poster (frame grab would fix); MC-2022-05
++ MC-2026-07 case codes invented to fit convention. AOV has more excavatable writeups
+(XM4 gear highlight, XM5 blog, Xperia 1 IV launch, /case-studies hub) for future pages.
 ✅ 2026-07-03 (late): /work REBUILT per DJ: all 15 projects wired to real pages (12 dead hrefs
 fixed), GRID = default view, natural-aspect 3-col masonry cards w/ client logos + discipline +
 year, rose LOGO slider replaces photo strip + top black ticker, covers seeded from DJ's reel
