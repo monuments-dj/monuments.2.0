@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timeline B · The Draw</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+}
+*{margin:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+
+/* grain, same treatment as m-about */
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+
+/* variant chrome: which study am I looking at */
+.vtag{position:fixed;top:18px;left:20px;z-index:80;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--spark);padding:5px 10px;border-radius:5px}
+.vnav{position:fixed;bottom:18px;right:20px;z-index:80;display:flex;gap:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+.vnav a,.vnav span{background:#1d1c1a;border:1px solid var(--lined);border-radius:5px;padding:5px 10px;color:var(--paper)}
+.vnav span{background:var(--spark);color:var(--ink);border-color:var(--spark)}
+.vnav a:hover{border-color:var(--spark);color:var(--spark)}
+
+/* intro band: one heading, then straight into the road */
+.intro{height:86svh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:22px;text-align:center;padding:0 var(--pad)}
+.intro .kick{color:var(--spark)}
+.intro h1{font-weight:var(--dispw);font-size:clamp(40px,7.4vw,108px);line-height:.94;letter-spacing:-.035em;text-transform:uppercase}
+.intro h1 .serif{color:var(--spark)}
+.intro h1 .ln{display:block;overflow:hidden}
+.intro h1 .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.intro h1 .ln:nth-child(2)>span{animation-delay:.12s}
+@keyframes rise{to{transform:translateY(0)}}
+.intro .cue{color:var(--dim);opacity:0;animation:fade 1s .7s forwards}
+.intro .cue i{font-style:normal;display:inline-block;animation:dip 1.6s ease-in-out infinite}
+@keyframes fade{to{opacity:1}}
+@keyframes dip{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* the draw: tall scroll section, pinned viewport, panning world */
+.tl{height:520svh;position:relative;background:var(--ink)}
+.tl-pin{position:sticky;top:0;height:100svh;overflow:hidden}
+.world{position:absolute;left:0;top:0;width:4400px;height:100%;will-change:transform;
+background:repeating-linear-gradient(to top,transparent 0 119px,rgba(245,243,239,.04) 119px 120px)}
+.world svg{position:absolute;left:0;top:0;display:block;overflow:visible}
+.ghost{fill:none;stroke:#3a3833;stroke-width:2;stroke-dasharray:3 7;stroke-linecap:round}
+.drawn{fill:none;stroke:var(--spark);stroke-width:3;stroke-linecap:round}
+.tip{position:absolute;left:0;top:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--spark);box-shadow:0 0 16px 3px rgba(239,161,173,.75);will-change:transform}
+.tip::after{content:'';position:absolute;inset:4px;border-radius:50%;background:#fff;opacity:.85}
+.mile0{position:absolute;transform:translate(-50%,16px);font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#5d5b56;white-space:nowrap}
+
+/* pinned header: the rewriting word + counter */
+.tl-head{position:absolute;left:var(--pad);right:var(--pad);top:24px;z-index:6;display:flex;justify-content:space-between;align-items:baseline;gap:24px;pointer-events:none}
+.tl-head h2{font-weight:var(--dispw);font-size:clamp(24px,2.6vw,38px);letter-spacing:-.03em;text-transform:uppercase;white-space:nowrap}
+.tl-head h2 .serif{color:var(--spark);display:inline-block;min-width:6ch;opacity:.38;transition:opacity .4s}
+.tl-head.live h2 .serif{opacity:1}
+.tl-head h2 .serif.swap{animation:wordIn .45s cubic-bezier(.22,1,.36,1)}
+@keyframes wordIn{0%{opacity:0;transform:translateY(60%)}100%{opacity:1;transform:none}}
+.tl-cnt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.tl-cnt b{color:var(--spark);font-weight:400}
+.tl-foot{position:absolute;left:0;right:0;bottom:22px;z-index:6;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#7a7873;pointer-events:none}
+
+/* stations: node on the line, 20XX below, card rises above */
+.st{position:absolute;width:0;height:0}
+.node{position:absolute;left:0;top:0;width:11px;height:11px;transform:translate(-50%,-50%);border-radius:50%;background:#3a3835;border:2px solid #4a4844;transition:background .35s,border-color .35s,box-shadow .35s}
+.node::after{content:'';position:absolute;inset:-9px;border-radius:50%;border:1px solid rgba(239,161,173,.55);opacity:0;transform:scale(.4);transition:opacity .4s,transform .5s cubic-bezier(.22,1,.36,1)}
+.st.lit .node{background:var(--spark);border-color:var(--spark);box-shadow:0 0 18px rgba(239,161,173,.7)}
+.st.lit .node::after{opacity:1;transform:scale(1)}
+.yr{position:absolute;left:0;top:0;transform:translate(-50%,16px);font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--dim);border:1px dashed #4a4844;border-radius:4px;padding:3px 9px;white-space:nowrap;transition:color .35s,border-color .35s}
+.st.lit .yr{color:var(--spark);border-color:rgba(239,161,173,.6)}
+
+.card{position:absolute;left:-60px;bottom:26px;width:400px;background:#1d1c1a;border:1px solid var(--lined);padding:12px 12px 16px;opacity:0;transform:translateY(34px);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.card::before{content:'';position:absolute;left:60px;bottom:-26px;width:1px;height:26px;background:rgba(239,161,173,.5);transform:scaleY(0);transform-origin:bottom;transition:transform .4s .1s}
+.st.on .card{opacity:1;transform:translateY(0)}
+.st.on .card::before{transform:scaleY(1)}
+.st.past .card{opacity:0;transform:translateY(8px) scale(.97)}
+.card .ph{position:relative;background:#fff;padding:6px 6px 20px;margin-bottom:12px}
+.card .ph img{width:100%;aspect-ratio:2.6/1;object-fit:cover;display:block;filter:grayscale(.25) saturate(.9)}
+.card .ph .cap{position:absolute;left:8px;bottom:4px;font-family:var(--mono);font-size:9px;color:#8f8d88;text-transform:uppercase;letter-spacing:.06em}
+.card h3{font-weight:var(--dispw);font-size:26px;letter-spacing:-.03em;line-height:1;text-transform:uppercase}
+.card .role{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;color:var(--spark);margin:3px 0 8px}
+.card ul{list-style:none;margin:0;padding:0}
+.card li{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#b9b6b0;padding:5px 0;border-top:1px solid #2c2b28}
+.card li b{color:var(--paper);font-weight:400}
+.card .here{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:10px;color:var(--ink);background:var(--spark);border-radius:6px;padding:4px 11px;text-transform:uppercase;letter-spacing:.12em}
+
+.stub{position:absolute;left:0;bottom:20px;transform:translate(-50%,8px);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8a8781;background:#1d1c1a;border:1px solid var(--lined);border-radius:5px;padding:4px 10px;white-space:nowrap;opacity:0;transition:opacity .5s .15s,transform .5s .15s cubic-bezier(.22,1,.36,1)}
+.st.past .stub{opacity:.85;transform:translate(-50%,0)}
+
+/* outro band */
+.outro{height:72svh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:16px;text-align:center;padding:0 var(--pad)}
+.outro h2{font-weight:var(--dispw);font-size:clamp(30px,4.6vw,64px);letter-spacing:-.03em;text-transform:uppercase}
+.outro h2 .serif{color:var(--spark)}
+.outro .mono{color:var(--dim)}
+
+/* flat fallback: small screens or reduced motion, vertical road, no pin */
+@media (max-width:900px),(prefers-reduced-motion:reduce){
+  .tl{height:auto}
+  .tl-pin{position:static;height:auto;overflow:visible;padding:6vh 0 8vh}
+  .world{position:static;width:auto;height:auto;background:none;transform:none!important}
+  .world svg,.tip,.mile0,.stub{display:none}
+  .tl-head{position:sticky;top:0;left:0;right:0;background:var(--ink);padding:14px var(--pad);z-index:5;flex-wrap:wrap;gap:8px}
+  .tl-head h2 .serif{opacity:1}
+  .tl-foot{position:static;padding-top:5vh}
+  .st{position:relative;width:auto;height:auto;left:auto!important;top:auto!important;margin:0 var(--pad) 0 calc(var(--pad) + 6px);padding:26px 0 40px 26px;border-left:2px solid #33312e}
+  .node{left:-2px;top:34px;transform:translate(-50%,0);background:var(--spark);border-color:var(--spark)}
+  .node::after{display:none}
+  .yr{position:static;display:inline-block;transform:none;margin-bottom:12px;color:var(--spark);border-color:rgba(239,161,173,.6)}
+  .card{position:static;left:auto;bottom:auto;width:100%;max-width:520px;opacity:1;transform:none;pointer-events:auto}
+  .card::before{display:none}
+  .st.past .card{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .intro h1 .ln>span{transform:none}.intro .cue{opacity:1}.grain{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<span class="vtag">Timeline B · The Draw</span>
+<nav class="vnav" aria-label="Variant switcher">
+  <a href="timeline-a.html">◀ A</a><span>B</span><a href="timeline-c.html">C ▶</a>
+</nav>
+
+<header class="intro">
+  <span class="mono kick">✳ Career timeline · motion study B</span>
+  <h1>
+    <span class="ln"><span>Ten years.</span></span>
+    <span class="ln"><span><span class="serif">One line.</span></span></span>
+  </h1>
+  <span class="mono cue">Scroll. The road draws itself <i>↓</i></span>
+</header>
+
+<section class="tl" id="road">
+  <div class="tl-pin" id="pin">
+    <div class="tl-head" id="head">
+      <h2>DJ, the <span class="serif" id="word">creative.</span></h2>
+      <span class="tl-cnt"><b id="cnt">00</b> / 04 · the road here · scroll to travel</span>
+    </div>
+
+    <div class="world" id="world">
+      <svg id="roadSvg" xmlns="http://www.w3.org/2000/svg">
+        <path class="ghost" id="ghost" d=""/>
+        <path class="drawn" id="drawn" d=""/>
+      </svg>
+      <span class="mile0" id="mile0">\ mile zero</span>
+      <div class="tip" id="tip" aria-hidden="true"></div>
+
+      <article class="st" data-word="creative." data-x="620" data-y="700">
+        <span class="node" aria-hidden="true"></span>
+        <span class="yr">20XX</span>
+        <span class="stub">01 · Drake Cooper</span>
+        <div class="card">
+          <div class="ph"><img src="/gallery/full/p-034.jpg" alt="On set, agency era" loading="lazy"><span class="cap">ERA 01 · THE AGENCY YEARS</span></div>
+          <h3>Drake Cooper</h3>
+          <p class="role">agency creative</p>
+          <ul>
+            <li><b>Learned speed:</b> concepting daily</li>
+            <li><b>Sold work</b> in the room</li>
+            <li><b>Shipped campaigns</b> on real deadlines</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="st" data-word="consultant." data-x="1720" data-y="660">
+        <span class="node" aria-hidden="true"></span>
+        <span class="yr">20XX</span>
+        <span class="stub">02 · Buck the Quo</span>
+        <div class="card">
+          <div class="ph"><img src="/case-studies/buck-the-quo/gallery/chop-board.jpg" alt="Buck the Quo" loading="lazy"><span class="cap">ERA 02 · THE CONSULTING YEARS</span></div>
+          <h3>Buck the Quo</h3>
+          <p class="role">creative consultant</p>
+          <ul>
+            <li><b>Emmy-winning</b> film series ✳</li>
+            <li><b>Senior creative</b> on the hook for outcomes</li>
+            <li><b>Story-first</b> consulting, proven on air</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="st" data-word="director." data-x="2820" data-y="584">
+        <span class="node" aria-hidden="true"></span>
+        <span class="yr">20XX</span>
+        <span class="stub">03 · Art of Visuals</span>
+        <div class="card">
+          <div class="ph"><img src="/case-studies/art-of-visuals/gallery/xperia-01.jpg" alt="Art of Visuals era" loading="lazy"><span class="cap">ERA 03 · THE SCALE YEARS</span></div>
+          <h3>Art of Visuals</h3>
+          <p class="role">creative director</p>
+          <ul>
+            <li><b>4x</b> agency revenue growth</li>
+            <li><b>2M+</b> audience scaled</li>
+            <li><b>Up to 50</b> contractors led · on camera</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="st" data-word="founder." data-x="3920" data-y="515">
+        <span class="node" aria-hidden="true"></span>
+        <span class="yr">20XX</span>
+        <span class="stub">04 · Monuments</span>
+        <div class="card">
+          <div class="ph"><img src="/about/team.jpg" alt="Monuments crew" loading="lazy"><span class="cap">ERA 04 · NOW</span></div>
+          <h3>Monuments</h3>
+          <p class="role">founder + creative director</p>
+          <ul>
+            <li><b>Own production company</b> + consultancy</li>
+            <li><b>Tess</b> keeps it on the rails</li>
+            <li><b>Less agency,</b> more band</li>
+          </ul>
+          <span class="here">● You are here</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="tl-foot">Drake Cooper → Buck the Quo → Art of Visuals → Monuments</div>
+  </div>
+</section>
+
+<footer class="outro">
+  <h2>Still <span class="serif">drawing.</span></h2>
+  <span class="mono">Monuments · LA / Boise · the line continues</span>
+</footer>
+
+<script>
+(function(){
+  var WORLD_W = 4400;
+  var flat = matchMedia('(max-width:900px)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tl = document.getElementById('road');
+  var world = document.getElementById('world');
+  var svg = document.getElementById('roadSvg');
+  var ghost = document.getElementById('ghost');
+  var drawn = document.getElementById('drawn');
+  var tip = document.getElementById('tip');
+  var mile0 = document.getElementById('mile0');
+  var head = document.getElementById('head');
+  var word = document.getElementById('word');
+  var cnt = document.getElementById('cnt');
+  var sts = Array.prototype.slice.call(document.querySelectorAll('.st'));
+  var words = sts.map(function(s){ return s.getAttribute('data-word'); });
+
+  /* flat mode: vertical list, word swap via observer, everything lit */
+  if (flat) {
+    sts.forEach(function(s){ s.classList.add('lit','on'); });
+    head.classList.add('live');
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (en.isIntersecting) {
+            var i = sts.indexOf(en.target);
+            setWord(i);
+          }
+        });
+      }, { rootMargin: '-40% 0px -50% 0px' });
+      sts.forEach(function(s){ io.observe(s); });
+    } else {
+      setWord(3);
+    }
+    return;
+  }
+
+  /* desktop: build path geometry in pixel space, scrub with scroll */
+  var L = 0, stationLen = [], vw = 0, vh = 0, maxTx = 0;
+  var startPt = { x: 120, y: 740 };
+
+  function sy(y, h){ return (y / 1000 * h).toFixed(1); }
+
+  function build(){
+    vw = window.innerWidth;
+    vh = window.innerHeight;
+    maxTx = WORLD_W - vw;
+    var d = 'M 120 ' + sy(740,vh) +
+      ' C 320 ' + sy(738,vh) + ', 460 ' + sy(706,vh) + ', 620 ' + sy(700,vh) +
+      ' S 980 ' + sy(748,vh) + ', 1160 ' + sy(738,vh) +
+      ' C 1340 ' + sy(728,vh) + ', 1520 ' + sy(668,vh) + ', 1720 ' + sy(660,vh) +
+      ' S 2080 ' + sy(700,vh) + ', 2260 ' + sy(688,vh) +
+      ' C 2440 ' + sy(676,vh) + ', 2620 ' + sy(592,vh) + ', 2820 ' + sy(584,vh) +
+      ' S 3180 ' + sy(620,vh) + ', 3360 ' + sy(604,vh) +
+      ' C 3540 ' + sy(588,vh) + ', 3720 ' + sy(528,vh) + ', 3920 ' + sy(515,vh);
+    ghost.setAttribute('d', d);
+    drawn.setAttribute('d', d);
+    svg.setAttribute('viewBox', '0 0 ' + WORLD_W + ' ' + vh);
+    svg.setAttribute('width', WORLD_W);
+    svg.setAttribute('height', vh);
+    L = drawn.getTotalLength();
+    drawn.style.strokeDasharray = L + ' ' + L;
+    drawn.style.strokeDashoffset = L;
+    mile0.style.left = startPt.x + 'px';
+    mile0.style.top = (startPt.y / 1000 * vh) + 'px';
+
+    /* station anchors + path length at each station x (x is monotonic) */
+    stationLen = sts.map(function(s){
+      var x = Number(s.getAttribute('data-x'));
+      var y = Number(s.getAttribute('data-y'));
+      s.style.left = x + 'px';
+      s.style.top = (y / 1000 * vh) + 'px';
+      var lo = 0, hi = L;
+      for (var i = 0; i < 36; i++) {
+        var mid = (lo + hi) / 2;
+        if (drawn.getPointAtLength(mid).x < x) lo = mid; else hi = mid;
+      }
+      return (lo + hi) / 2;
+    });
+  }
+
+  var lastIdx = -2;
+  function setWord(i){
+    var idx = Math.max(i, 0);
+    if (word.textContent !== words[idx]) {
+      word.textContent = words[idx];
+      word.classList.remove('swap');
+      void word.offsetWidth;
+      word.classList.add('swap');
+    }
+    cnt.textContent = i < 0 ? '00' : '0' + (i + 1);
+    head.classList.toggle('live', i >= 0);
+  }
+
+  function apply(p){
+    var t = Math.min(Math.max((p - 0.02) / 0.92, 0), 1);
+    var len = t * L;
+    drawn.style.strokeDashoffset = (L - len);
+    var pt = drawn.getPointAtLength(len);
+    tip.style.transform = 'translate(' + pt.x + 'px,' + pt.y + 'px)';
+    var tx = Math.min(Math.max(pt.x - vw * 0.42, 0), maxTx);
+    world.style.transform = 'translate3d(' + (-tx) + 'px,0,0)';
+
+    var ai = -1;
+    for (var i = 0; i < stationLen.length; i++) {
+      if (len >= stationLen[i] - 2) ai = i;
+    }
+    if (ai !== lastIdx) {
+      sts.forEach(function(s, j){
+        s.classList.toggle('lit', j <= ai);
+        s.classList.toggle('on', j === ai);
+        s.classList.toggle('past', j < ai);
+      });
+      setWord(ai);
+      lastIdx = ai;
+    }
+  }
+
+  var target = 0, cur = -1;
+  function readProgress(){
+    var r = tl.getBoundingClientRect();
+    var span = r.height - vh;
+    return span > 0 ? Math.min(Math.max(-r.top / span, 0), 1) : 0;
+  }
+  function loop(){
+    target = readProgress();
+    if (cur < 0) cur = target;
+    cur += (target - cur) * 0.18;
+    if (Math.abs(target - cur) < 0.0004) cur = target;
+    apply(cur);
+    requestAnimationFrame(loop);
+  }
+
+  build();
+  apply(0);
+  requestAnimationFrame(loop);
+
+  var rt;
+  window.addEventListener('resize', function(){
+    clearTimeout(rt);
+    rt = setTimeout(function(){
+      var flatNow = matchMedia('(max-width:900px)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (flatNow !== flat) { location.reload(); return; }
+      build();
+      lastIdx = -2;
+      apply(cur < 0 ? 0 : cur);
+    }, 120);
+  });
+})();
+</script>
+</body>
+</html>

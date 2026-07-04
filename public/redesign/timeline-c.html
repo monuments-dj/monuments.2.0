@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timeline C · The Spine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+}
+*{margin:0;box-sizing:border-box}
+html,body{background:var(--ink)}
+body{color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+a{color:inherit;text-decoration:none}
+.serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+
+/* grain, lifted from m-about */
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+
+/* variant chrome: which page am I on + jump to siblings */
+.vtag{position:fixed;top:16px;left:18px;z-index:80;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:rgba(22,21,20,.72);border:1px solid #3a3835;padding:7px 11px;backdrop-filter:blur(4px)}
+.vtag b{color:var(--spark);font-weight:400}
+.vnav{position:fixed;right:18px;bottom:16px;z-index:80;display:flex;gap:8px}
+.vnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--paper);background:rgba(22,21,20,.72);border:1px solid #3a3835;padding:7px 11px;backdrop-filter:blur(4px);transition:border-color .25s,color .25s}
+.vnav a:hover{border-color:var(--spark);color:var(--spark)}
+
+/* intro band: one line, then get on the road */
+.intro{padding:20vh var(--pad) 12vh;text-align:center}
+.intro .kick{color:var(--dim);margin-bottom:22px}
+.intro .kick i{font-style:normal;color:var(--spark)}
+.intro h1{font-weight:var(--dispw);font-size:clamp(42px,7vw,108px);line-height:.94;letter-spacing:-.035em;text-transform:uppercase}
+.intro h1 .serif{color:var(--spark)}
+.intro .hint{margin-top:26px;color:#7a7873}
+
+/* the spine section: tall runway, pinned stage */
+.tlsec{height:540svh;position:relative}
+.pin{position:sticky;top:0;height:100svh;overflow:hidden}
+
+/* HUD: swap headline left, counter right */
+.hud{position:absolute;left:0;right:0;top:0;z-index:4;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:64px var(--pad) 0;pointer-events:none}
+.hud .say{font-weight:var(--dispw);font-size:clamp(20px,2.3vw,34px);letter-spacing:-.02em;text-transform:uppercase;line-height:1}
+.hud .say .serif{color:var(--spark);display:inline-block;min-width:5.5ch;text-align:left}
+.hud .say .serif.swap{animation:wordIn .45s cubic-bezier(.22,1,.36,1)}
+@keyframes wordIn{0%{opacity:0;transform:translateY(60%)}100%{opacity:1;transform:none}}
+.hud .count{font-size:12px;color:var(--dim)}
+.hud .count b{color:var(--spark);font-weight:400;font-size:16px}
+
+/* the spine itself: always there, always full width */
+.spine{position:absolute;left:0;right:0;top:50%;height:3px;background:#3a3835;z-index:2;transform:translateY(-50%)}
+.spine .fill{position:absolute;left:0;top:0;bottom:0;width:6%;background:var(--spark)}
+.spine .fill::after{content:"";position:absolute;right:0;top:50%;transform:translate(50%,-50%);width:3px;height:20px;background:var(--spark)}
+
+/* the moving road */
+.track{position:absolute;inset:0}
+.yr,.station{will-change:transform}
+
+/* mile markers: giant ghost year slots riding the line */
+.yr{position:absolute;left:calc(var(--x)*1vw);top:50%;z-index:1;pointer-events:none}
+.yr span{display:block;transform:translate(-50%,-54%);font-weight:var(--dispw);font-size:clamp(120px,17vw,250px);line-height:1;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px rgba(245,243,239,.26);white-space:nowrap}
+.yr span i{font-style:normal;-webkit-text-stroke:1.5px rgba(239,161,173,.5)}
+.yr em{position:absolute;left:0;top:calc(50% + clamp(60px,8.5vw,125px) - 40px);width:100%;text-align:center;transform:translateX(-50%);font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.yr em b{color:var(--spark);font-weight:400}
+
+/* stations: content hangs off the line */
+.station{position:absolute;left:calc(var(--x)*1vw - 19vw);top:0;height:100%;width:38vw;z-index:3;opacity:.38;transition:opacity .45s}
+.station.on{opacity:1}
+.station .dot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:11px;height:11px;border-radius:50%;background:#4a4741;z-index:3;transition:background .3s,box-shadow .3s}
+.station.on .dot{background:var(--spark);box-shadow:0 0 0 7px rgba(239,161,173,.14)}
+.blk{position:absolute;left:50%;transform:translateX(-50%);width:min(32vw,430px);text-align:center}
+.blk.above{bottom:calc(50% + 36px)}
+.blk.below{top:calc(50% + 36px)}
+.blk.above::after{content:"";position:absolute;left:50%;bottom:-28px;width:1px;height:20px;background:#4a4741}
+.blk.below::before{content:"";position:absolute;left:50%;top:-28px;width:1px;height:20px;background:#4a4741}
+.blk .no{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--struct);margin:6px 0}
+.blk h3{font-weight:var(--dispw);font-size:clamp(24px,2.5vw,40px);letter-spacing:-.03em;line-height:.98;text-transform:uppercase;margin:6px 0 2px}
+.blk .role{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(17px,1.6vw,23px);color:var(--spark);margin:4px 0 10px}
+.blk .ph{display:inline-block;background:#fff;padding:6px 6px 20px;position:relative}
+.blk .ph img{width:clamp(150px,14vw,220px);aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(.25) saturate(.9)}
+.blk .ph .cap{position:absolute;left:8px;bottom:5px;font-family:var(--mono);font-size:8.5px;color:#8f8d88;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+.blk ul{list-style:none;margin:0 auto;padding:0;display:inline-block;text-align:left;min-width:min(26vw,340px)}
+.blk li{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#b9b6b0;padding:7px 0;border-top:1px solid var(--lined)}
+.blk li b{color:var(--paper);font-weight:400}
+.blk .here{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:10px;color:var(--ink);background:var(--spark);border-radius:6px;padding:5px 12px;text-transform:uppercase;letter-spacing:.12em}
+
+.guide{position:absolute;left:0;right:0;bottom:26px;z-index:4;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#7a7873}
+
+/* outro: short and out */
+.outro{padding:16vh var(--pad) 20vh;text-align:center}
+.outro .k{color:#7a7873;margin-bottom:18px}
+.outro h2{font-weight:var(--dispw);font-size:clamp(30px,4.6vw,68px);letter-spacing:-.03em;line-height:.96;text-transform:uppercase}
+.outro h2 .serif{color:var(--spark)}
+.outro p{margin-top:20px;color:var(--dim)}
+
+/* fallback: mobile + reduced motion get a calm vertical read */
+@media (max-width:900px),(prefers-reduced-motion:reduce){
+  .grain{animation:none}
+  .tlsec{height:auto}
+  .pin{position:static;height:auto;overflow:visible;padding:4vh 0 2vh}
+  .hud{position:static;padding:0 var(--pad) 6vh}
+  .spine{display:none}
+  .track{position:static;display:flex;flex-direction:column;gap:8vh;padding:0 var(--pad)}
+  .yr{position:static;transform:none!important;pointer-events:auto}
+  .yr span{transform:none;font-size:clamp(64px,17vw,130px);text-align:left}
+  .yr em{position:static;transform:none;display:block;text-align:left;margin-top:4px}
+  .station{position:static;transform:none!important;width:auto;height:auto;opacity:1;border-left:2px solid #3a3835;padding-left:18px}
+  .station .dot{display:none}
+  .blk{position:static;transform:none;width:auto;text-align:left}
+  .blk.above::after,.blk.below::before{display:none}
+  .blk .ph{margin-top:10px}
+  .blk ul{display:block;min-width:0}
+  .guide{position:static;padding:8vh var(--pad) 0}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<span class="vtag">Timeline <b>C</b> · The Spine</span>
+<nav class="vnav" aria-label="Other variants">
+  <a href="timeline-b.html">&lsaquo; Timeline B</a>
+  <a href="timeline-a.html">Timeline A &rsaquo;</a>
+</nav>
+
+<header class="intro">
+  <p class="mono kick"><i>&#10035;</i> About · the career timeline · study C</p>
+  <h1>Follow <span class="serif">the line.</span></h1>
+  <p class="mono hint">Scroll to travel &darr;</p>
+</header>
+
+<section class="tlsec" id="spineSec">
+  <div class="pin">
+    <div class="hud">
+      <h2 class="say">DJ, the <span class="serif" id="word">creative.</span></h2>
+      <span class="count mono"><b id="cNo">01</b> / 04</span>
+    </div>
+
+    <div class="spine" aria-hidden="true"><div class="fill" id="fill"></div></div>
+
+    <div class="track" id="track">
+
+      <div class="yr" style="--x:50" aria-hidden="true"><span>20<i>XX</i></span><em><b>&#10035;</b> year TBD</em></div>
+      <article class="station on" style="--x:50">
+        <span class="dot"></span>
+        <div class="blk above">
+          <span class="ph"><img src="/gallery/full/p-034.jpg" alt="On set, agency era" loading="eager"><span class="cap">ERA 01 · THE AGENCY YEARS</span></span>
+          <span class="no">Era 01 · Drake Cooper · Boise</span>
+          <h3>Drake Cooper</h3>
+        </div>
+        <div class="blk below">
+          <p class="role">agency creative</p>
+          <ul>
+            <li><b>Learned speed:</b> concepting daily</li>
+            <li><b>Sold work</b> in the room</li>
+            <li><b>Shipped campaigns</b> on real deadlines</li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="yr" style="--x:101.75" aria-hidden="true"><span>20<i>XX</i></span><em><b>&#10035;</b> year TBD</em></div>
+      <article class="station" style="--x:140">
+        <span class="dot"></span>
+        <div class="blk above">
+          <p class="role">creative consultant</p>
+          <ul>
+            <li><b>Emmy-winning</b> film series &#10035;</li>
+            <li><b>Senior creative</b> on the hook for outcomes</li>
+            <li><b>Story-first</b> consulting, proven on air</li>
+          </ul>
+        </div>
+        <div class="blk below">
+          <span class="no">Era 02 · Buck the Quo</span>
+          <h3>Buck the Quo</h3>
+          <span class="ph"><img src="/case-studies/buck-the-quo/gallery/chop-board.jpg" alt="Buck the Quo" loading="lazy"><span class="cap">ERA 02 · THE CONSULTING YEARS</span></span>
+        </div>
+      </article>
+
+      <div class="yr" style="--x:205.25" aria-hidden="true"><span>20<i>XX</i></span><em><b>&#10035;</b> year TBD</em></div>
+      <article class="station" style="--x:230">
+        <span class="dot"></span>
+        <div class="blk above">
+          <span class="ph"><img src="/case-studies/art-of-visuals/gallery/xperia-01.jpg" alt="Art of Visuals era" loading="lazy"><span class="cap">ERA 03 · THE SCALE YEARS</span></span>
+          <span class="no">Era 03 · Art of Visuals</span>
+          <h3>Art of Visuals</h3>
+        </div>
+        <div class="blk below">
+          <p class="role">creative director</p>
+          <ul>
+            <li><b>4x</b> agency revenue growth</li>
+            <li><b>2M+</b> audience scaled</li>
+            <li><b>Up to 50</b> contractors led · on camera</li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="yr" style="--x:308.75" aria-hidden="true"><span>20<i>XX</i></span><em><b>&#10035;</b> year TBD</em></div>
+      <article class="station" style="--x:320">
+        <span class="dot"></span>
+        <div class="blk above">
+          <p class="role">founder + creative director</p>
+          <ul>
+            <li><b>Own production company</b> + consultancy</li>
+            <li><b>Tess</b> keeps it on the rails</li>
+            <li><b>Less agency,</b> more band</li>
+          </ul>
+          <br>
+          <span class="here">&#9679; You are here</span>
+        </div>
+        <div class="blk below">
+          <span class="no">Era 04 · Monuments · LA / Boise</span>
+          <h3>Monuments</h3>
+          <span class="ph"><img src="/about/team.jpg" alt="Monuments crew" loading="lazy"><span class="cap">ERA 04 · NOW</span></span>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="guide">Drake Cooper &rarr; Buck the Quo &rarr; Art of Visuals &rarr; Monuments</p>
+  </div>
+</section>
+
+<footer class="outro">
+  <p class="mono k">End of the line · for now</p>
+  <h2>Still <span class="serif">being drawn.</span></h2>
+  <p class="mono">Monuments · LA / Boise · Est. MMXXVI</p>
+</footer>
+
+<script>
+(function(){
+  var sec = document.getElementById('spineSec');
+  var yrs = [].slice.call(document.querySelectorAll('.yr'));
+  var sts = [].slice.call(document.querySelectorAll('.station'));
+  var fill = document.getElementById('fill');
+  var word = document.getElementById('word');
+  var cNo = document.getElementById('cNo');
+  var WORDS = ['creative.','consultant.','director.','founder.'];
+  var TRAVEL = 270;            /* cards travel, in vw */
+  var FAST = 1.15;             /* numeral layer speed multiplier */
+  var cur = 0, tgt = 0, idx = 0;
+
+  var fbq = matchMedia('(max-width:900px)');
+  var rmq = matchMedia('(prefers-reduced-motion: reduce)');
+  function isFb(){ return fbq.matches || rmq.matches; }
+
+  function measure(){
+    var total = sec.offsetHeight - innerHeight;
+    if (total < 1) { tgt = 0; return; }
+    var top = sec.getBoundingClientRect().top;
+    tgt = Math.min(1, Math.max(0, -top / total));
+  }
+
+  function setIdx(i){
+    if (i === idx) return;
+    idx = i;
+    word.textContent = WORDS[i];
+    word.classList.remove('swap');
+    void word.offsetWidth;
+    word.classList.add('swap');
+    cNo.textContent = ('0' + (i + 1)).slice(-2);
+    for (var j = 0; j < sts.length; j++) sts[j].classList.toggle('on', j === i);
+  }
+
+  function apply(p){
+    var vw = innerWidth / 100;
+    var txC = -p * TRAVEL * vw;
+    var txN = txC * FAST;
+    for (var i = 0; i < sts.length; i++) sts[i].style.transform = 'translate3d(' + txC + 'px,0,0)';
+    for (var k = 0; k < yrs.length; k++) yrs[k].style.transform = 'translate3d(' + txN + 'px,0,0)';
+    fill.style.width = (6 + 94 * p) + '%';
+    setIdx(Math.max(0, Math.min(3, Math.round(p * 3))));
+  }
+
+  function loop(){
+    if (!isFb()){
+      measure();
+      cur += (tgt - cur) * 0.14;
+      if (Math.abs(tgt - cur) < 0.0005) cur = tgt;
+      apply(cur);
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timeline A · The Road</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+  --road:#33312e; --roadlit:#4a4843;
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+a{color:inherit;text-decoration:none}
+.serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+
+/* grain, lifted from m-about */
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+
+/* variant chrome */
+.vtag{position:fixed;top:14px;left:16px;z-index:80;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);border:1px solid #45423e;border-radius:6px;padding:6px 11px;background:rgba(22,21,20,.82);backdrop-filter:blur(3px)}
+.vtag b{color:var(--spark);font-weight:400}
+.vnav{position:fixed;bottom:16px;right:16px;z-index:80;display:flex;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.vnav a{border:1px solid #45423e;border-radius:6px;padding:6px 11px;background:rgba(22,21,20,.82);color:#b9b6b0;transition:color .25s,border-color .25s}
+.vnav a:hover{color:var(--spark);border-color:var(--spark)}
+
+/* intro band */
+.intro{min-height:72svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:20px;padding:0 var(--pad)}
+.intro .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--spark)}
+.intro h1{font-weight:var(--dispw);font-size:clamp(34px,5.6vw,84px);letter-spacing:-.03em;line-height:.96;text-transform:uppercase}
+.intro h1 .serif{color:var(--spark)}
+.intro .hint{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+
+/* the road: pinned scrub */
+.road{height:560svh;position:relative;background:var(--ink)}
+.pin{position:sticky;top:0;height:100svh;overflow:hidden}
+
+.rd-head{position:absolute;left:0;right:0;top:0;padding:58px var(--pad) 0;display:flex;justify-content:space-between;align-items:baseline;gap:26px;z-index:6}
+.rd-head h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,48px);letter-spacing:-.03em;text-transform:uppercase}
+.rd-head h2 .serif{color:var(--spark);display:inline-block;min-width:6ch;text-align:left}
+.rd-head h2 .serif.swap{animation:wordIn .45s cubic-bezier(.22,1,.36,1)}
+@keyframes wordIn{0%{opacity:0;transform:translateY(60%)}100%{opacity:1;transform:none}}
+.rd-count{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;white-space:nowrap}
+.rd-count b{color:var(--spark);font-weight:400}
+
+.rd-foot{position:absolute;left:0;right:0;bottom:20px;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#7a7873;z-index:6}
+
+/* static line + traveled trail */
+.rd-line{position:absolute;left:0;right:0;top:50%;height:2px;background:var(--road);transform:translateY(-50%);z-index:1}
+.rd-trail{position:absolute;left:0;width:50%;top:50%;height:2px;background:var(--spark);opacity:.38;transform:translateY(-50%);z-index:2}
+
+/* the world that streams past the marker */
+.world{position:absolute;left:0;top:50%;height:0;z-index:3;will-change:transform}
+.world .tick{position:absolute;top:-4px;width:1px;height:8px;background:#3d3b37}
+.world .tick.maj{top:-7px;height:14px;background:#55524d}
+.world .tlab{position:absolute;top:9px;transform:translateX(-50%);font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:#55524d;white-space:nowrap}
+.station{position:absolute;top:0}
+.station .nd{position:absolute;left:0;top:0;transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;border:2px solid #55524d;background:var(--ink);transition:border-color .3s,background .3s,box-shadow .3s}
+.station.hit .nd{border-color:var(--spark);background:var(--spark);box-shadow:0 0 22px rgba(239,161,173,.55)}
+.station .yr{position:absolute;left:0;bottom:26px;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:#c9c6bf;border:1px dashed #5a5751;border-radius:5px;padding:3px 9px;background:rgba(245,243,239,.04);white-space:nowrap}
+.station.hit .yr{color:var(--ink);background:var(--spark);border-color:var(--spark)}
+.station .ap{position:absolute;left:0;top:16px;transform:translateX(-50%);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8f8d88;white-space:nowrap}
+
+/* fixed traveler at center */
+.mk{position:absolute;left:50%;top:50%;z-index:5;transform:translate(-50%,-50%)}
+.mk .dot{display:block;width:13px;height:13px;border-radius:50%;background:var(--spark);box-shadow:0 0 18px rgba(239,161,173,.7)}
+.mk .ring{position:absolute;left:50%;top:50%;width:13px;height:13px;border-radius:50%;border:1px solid var(--spark);transform:translate(-50%,-50%);animation:pulse 2.2s cubic-bezier(.22,1,.36,1) infinite}
+@keyframes pulse{0%{opacity:.8;width:13px;height:13px}100%{opacity:0;width:64px;height:64px}}
+.mk .tag{position:absolute;left:50%;top:30px;transform:translateX(-50%);font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--spark);background:var(--ink);padding:2px 7px;border:1px solid rgba(239,161,173,.4);border-radius:5px}
+
+/* era content, docked around the line */
+.era-c{position:absolute;inset:0;z-index:4;opacity:0;visibility:hidden;pointer-events:none}
+.era-c .above{position:absolute;left:50%;bottom:calc(50% + 78px);transform:translateX(-50%)}
+.era-c .below{position:absolute;left:50%;top:calc(50% + 46px);transform:translateX(-50%)}
+.era-c .txt{width:min(620px,66vw);text-align:center}
+.era-c .no{font-family:var(--mono);font-size:10.5px;color:#7d8cf0;text-transform:uppercase;letter-spacing:.12em}
+.era-c h3{font-weight:var(--dispw);font-size:clamp(26px,3vw,44px);letter-spacing:-.03em;line-height:.98;text-transform:uppercase;margin:8px 0 2px}
+.era-c .role{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(17px,1.6vw,22px);color:var(--spark);margin-bottom:10px}
+.era-c ul{list-style:none;margin:0;padding:0}
+.era-c li{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#b9b6b0;padding:4px 0}
+.era-c li b{color:var(--paper);font-weight:400}
+.era-c .here{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--ink);background:var(--spark);border-radius:6px;padding:5px 12px;text-transform:uppercase;letter-spacing:.12em}
+.era-c .ph{background:#fff;padding:7px 7px 22px;box-shadow:0 18px 44px rgba(0,0,0,.45);position:relative}
+.era-c .above .ph{transform:rotate(-1.2deg)}
+.era-c .below .ph{transform:rotate(1.1deg)}
+.era-c .ph img{display:block;height:clamp(130px,19vh,220px);width:auto;max-width:42vw;object-fit:cover;filter:grayscale(.25) saturate(.9)}
+.era-c .ph .cap{position:absolute;left:9px;bottom:5px;font-family:var(--mono);font-size:9px;color:#8f8d88;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+
+/* outro band */
+.outro{min-height:56svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:16px;padding:0 var(--pad)}
+.outro h2{font-weight:var(--dispw);font-size:clamp(28px,4.2vw,64px);letter-spacing:-.03em;text-transform:uppercase}
+.outro h2 .serif{color:var(--spark)}
+.outro .mono{color:var(--dim)}
+
+/* mobile + reduced motion: vertical fallback, no pin */
+.fallback{display:none}
+@media (max-width:900px),(prefers-reduced-motion:reduce){
+  .road{height:auto}
+  .pin{position:static;height:auto;overflow:visible}
+  .rd-head,.rd-foot,.rd-line,.rd-trail,.world,.mk,.era-c{display:none}
+  .mk .ring,.grain{animation:none}
+  .fallback{display:block;padding:10vh var(--pad) 12vh;max-width:640px;margin:0 auto}
+  .fallback .fh{font-weight:var(--dispw);font-size:clamp(26px,7vw,40px);letter-spacing:-.03em;text-transform:uppercase;margin-bottom:6vh}
+  .fallback .fh .serif{color:var(--spark)}
+  .f-era{position:relative;padding:0 0 7vh 34px;border-left:2px solid var(--road)}
+  .f-era:last-child{border-left-color:var(--spark);padding-bottom:2vh}
+  .f-era .fnd{position:absolute;left:-10px;top:2px;width:18px;height:18px;border-radius:50%;border:2px solid #55524d;background:var(--ink)}
+  .f-era:last-child .fnd{border-color:var(--spark);background:var(--spark)}
+  .f-era .yr{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:#c9c6bf;border:1px dashed #5a5751;border-radius:5px;padding:3px 9px;margin-bottom:12px}
+  .f-era .no{font-family:var(--mono);font-size:10.5px;color:#7d8cf0;text-transform:uppercase;letter-spacing:.12em;display:block}
+  .f-era h3{font-weight:var(--dispw);font-size:clamp(24px,6.4vw,36px);letter-spacing:-.03em;text-transform:uppercase;margin:8px 0 2px}
+  .f-era .role{font-family:'Instrument Serif',serif;font-style:italic;font-size:19px;color:var(--spark);margin-bottom:12px}
+  .f-era ul{list-style:none;margin:0 0 16px;padding:0}
+  .f-era li{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#b9b6b0;padding:5px 0;border-top:1px solid #2c2b28}
+  .f-era li b{color:var(--paper);font-weight:400}
+  .f-era .ph{background:#fff;padding:7px 7px 22px;display:inline-block;position:relative}
+  .f-era .ph img{display:block;width:100%;max-width:340px;aspect-ratio:4/3;object-fit:cover;filter:grayscale(.25) saturate(.9)}
+  .f-era .ph .cap{position:absolute;left:9px;bottom:5px;font-family:var(--mono);font-size:9px;color:#8f8d88;text-transform:uppercase}
+  .f-era .here{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:10px;color:var(--ink);background:var(--spark);border-radius:6px;padding:5px 12px;text-transform:uppercase;letter-spacing:.12em}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="vtag">TIMELINE <b>A</b> · THE ROAD</div>
+<nav class="vnav">
+  <a href="timeline-c.html">&larr; TIMELINE C</a>
+  <a href="timeline-b.html">TIMELINE B &rarr;</a>
+</nav>
+
+<section class="intro">
+  <span class="k">&#10035; Motion study 01 · one line, four eras</span>
+  <h1>The road <span class="serif">here.</span></h1>
+  <span class="hint">Scroll to travel &darr;</span>
+</section>
+
+<section class="road" id="road">
+  <div class="pin">
+    <div class="rd-head">
+      <h2>DJ, the <span class="serif" id="eraWord">...</span></h2>
+      <span class="rd-count"><b id="eraNo">00</b> / 04 · the road here · scroll to travel</span>
+    </div>
+
+    <div class="rd-line" aria-hidden="true"></div>
+    <div class="rd-trail" aria-hidden="true"></div>
+
+    <div class="world" id="world" aria-hidden="true">
+      <div class="station" data-i="0">
+        <span class="yr">20XX</span><span class="nd"></span><span class="ap">Era 01 · Drake Cooper</span>
+      </div>
+      <div class="station" data-i="1">
+        <span class="yr">20XX</span><span class="nd"></span><span class="ap">Era 02 · Buck the Quo</span>
+      </div>
+      <div class="station" data-i="2">
+        <span class="yr">20XX</span><span class="nd"></span><span class="ap">Era 03 · Art of Visuals</span>
+      </div>
+      <div class="station" data-i="3">
+        <span class="yr">20XX</span><span class="nd"></span><span class="ap">Era 04 · Monuments</span>
+      </div>
+    </div>
+
+    <div class="mk" aria-hidden="true">
+      <span class="ring"></span>
+      <span class="dot"></span>
+      <span class="tag">DJ</span>
+    </div>
+
+    <article class="era-c" data-i="0">
+      <div class="above">
+        <div class="ph"><img src="/gallery/full/p-034.jpg" alt="On set, agency era" loading="eager"><span class="cap">ERA 01 · THE AGENCY YEARS</span></div>
+      </div>
+      <div class="below">
+        <div class="txt">
+          <span class="no">\ Era 01 · Drake Cooper · Boise</span>
+          <h3>Drake Cooper</h3>
+          <p class="role">agency creative</p>
+          <ul>
+            <li><b>Learned speed:</b> concepting daily</li>
+            <li><b>Sold work</b> in the room</li>
+            <li><b>Shipped campaigns</b> on real deadlines</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="era-c" data-i="1">
+      <div class="above">
+        <div class="txt">
+          <span class="no">\ Era 02 · Buck the Quo</span>
+          <h3>Buck the Quo</h3>
+          <p class="role">creative consultant</p>
+          <ul>
+            <li><b>Emmy-winning</b> film series &#10035;</li>
+            <li><b>Senior creative</b> on the hook for outcomes</li>
+            <li><b>Story-first</b> consulting, proven on air</li>
+          </ul>
+        </div>
+      </div>
+      <div class="below">
+        <div class="ph"><img src="/case-studies/buck-the-quo/gallery/chop-board.jpg" alt="Buck the Quo" loading="lazy"><span class="cap">ERA 02 · THE CONSULTING YEARS</span></div>
+      </div>
+    </article>
+
+    <article class="era-c" data-i="2">
+      <div class="above">
+        <div class="ph"><img src="/case-studies/art-of-visuals/gallery/xperia-01.jpg" alt="Art of Visuals era" loading="lazy"><span class="cap">ERA 03 · THE SCALE YEARS</span></div>
+      </div>
+      <div class="below">
+        <div class="txt">
+          <span class="no">\ Era 03 · Art of Visuals</span>
+          <h3>Art of Visuals</h3>
+          <p class="role">creative director</p>
+          <ul>
+            <li><b>4x</b> agency revenue growth</li>
+            <li><b>2M+</b> audience scaled</li>
+            <li><b>Up to 50</b> contractors led · on camera</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="era-c" data-i="3">
+      <div class="above">
+        <div class="txt">
+          <span class="no">\ Era 04 · Monuments · LA / Boise</span>
+          <h3>Monuments</h3>
+          <p class="role">founder + creative director</p>
+          <ul>
+            <li><b>Own production company</b> + consultancy</li>
+            <li><b>Tess</b> keeps it on the rails</li>
+            <li><b>Less agency,</b> more band</li>
+          </ul>
+          <span class="here">&#9679; You are here</span>
+        </div>
+      </div>
+      <div class="below">
+        <div class="ph"><img src="/about/team.jpg" alt="Monuments crew" loading="lazy"><span class="cap">ERA 04 · NOW</span></div>
+      </div>
+    </article>
+
+    <div class="rd-foot">Drake Cooper &rarr; Buck the Quo &rarr; Art of Visuals &rarr; Monuments</div>
+  </div>
+
+  <div class="fallback">
+    <h2 class="fh">DJ, the <span class="serif">road so far.</span></h2>
+    <div class="f-era">
+      <span class="fnd"></span><span class="yr">20XX</span>
+      <span class="no">\ Era 01 · Drake Cooper · Boise</span>
+      <h3>Drake Cooper</h3>
+      <p class="role">agency creative</p>
+      <ul>
+        <li><b>Learned speed:</b> concepting daily</li>
+        <li><b>Sold work</b> in the room</li>
+        <li><b>Shipped campaigns</b> on real deadlines</li>
+      </ul>
+      <div class="ph"><img src="/gallery/full/p-034.jpg" alt="On set, agency era" loading="lazy"><span class="cap">ERA 01 · THE AGENCY YEARS</span></div>
+    </div>
+    <div class="f-era">
+      <span class="fnd"></span><span class="yr">20XX</span>
+      <span class="no">\ Era 02 · Buck the Quo</span>
+      <h3>Buck the Quo</h3>
+      <p class="role">creative consultant</p>
+      <ul>
+        <li><b>Emmy-winning</b> film series &#10035;</li>
+        <li><b>Senior creative</b> on the hook for outcomes</li>
+        <li><b>Story-first</b> consulting, proven on air</li>
+      </ul>
+      <div class="ph"><img src="/case-studies/buck-the-quo/gallery/chop-board.jpg" alt="Buck the Quo" loading="lazy"><span class="cap">ERA 02 · THE CONSULTING YEARS</span></div>
+    </div>
+    <div class="f-era">
+      <span class="fnd"></span><span class="yr">20XX</span>
+      <span class="no">\ Era 03 · Art of Visuals</span>
+      <h3>Art of Visuals</h3>
+      <p class="role">creative director</p>
+      <ul>
+        <li><b>4x</b> agency revenue growth</li>
+        <li><b>2M+</b> audience scaled</li>
+        <li><b>Up to 50</b> contractors led · on camera</li>
+      </ul>
+      <div class="ph"><img src="/case-studies/art-of-visuals/gallery/xperia-01.jpg" alt="Art of Visuals era" loading="lazy"><span class="cap">ERA 03 · THE SCALE YEARS</span></div>
+    </div>
+    <div class="f-era">
+      <span class="fnd"></span><span class="yr">20XX</span>
+      <span class="no">\ Era 04 · Monuments · LA / Boise</span>
+      <h3>Monuments</h3>
+      <p class="role">founder + creative director</p>
+      <ul>
+        <li><b>Own production company</b> + consultancy</li>
+        <li><b>Tess</b> keeps it on the rails</li>
+        <li><b>Less agency,</b> more band</li>
+      </ul>
+      <div class="ph"><img src="/about/team.jpg" alt="Monuments crew" loading="lazy"><span class="cap">ERA 04 · NOW</span></div>
+      <br><span class="here">&#9679; You are here</span>
+    </div>
+  </div>
+</section>
+
+<section class="outro">
+  <h2>End of the line, <span class="serif">so far.</span></h2>
+  <span class="mono">Monuments · still building &#10035;</span>
+</section>
+
+<script>
+(() => {
+  var L = 6000;                       /* road length in px of travel */
+  var DOCKS = [0.12, 0.38, 0.64, 0.88];  /* progress where each station docks */
+  var W = 0.075;                      /* dock window: fade in/out width in progress units */
+  var WORDS = ['creative.', 'consultant.', 'director.', 'founder.'];
+
+  var sec = document.getElementById('road');
+  var world = document.getElementById('world');
+  var wordEl = document.getElementById('eraWord');
+  var noEl = document.getElementById('eraNo');
+  var eras = [].slice.call(document.querySelectorAll('.era-c'));
+  var stations = [].slice.call(document.querySelectorAll('.station'));
+  var aps = stations.map(function (s) { return s.querySelector('.ap'); });
+
+  var isFallback = function () {
+    return matchMedia('(max-width:900px)').matches ||
+           matchMedia('(prefers-reduced-motion: reduce)').matches;
+  };
+
+  /* build the road: minor ticks every 120px, major tick + 20XX label every 600px */
+  var html = '';
+  for (var u = -900; u <= L + 1400; u += 120) {
+    var maj = Math.round(u / 120) % 5 === 0;
+    html += '<i class="tick' + (maj ? ' maj' : '') + '" style="left:' + u + 'px"></i>';
+    if (maj) html += '<span class="tlab" style="left:' + u + 'px">20XX</span>';
+  }
+  world.insertAdjacentHTML('afterbegin', html);
+  stations.forEach(function (s, i) { s.style.left = (DOCKS[i] * L) + 'px'; });
+
+  var lastWord = -2;
+  var clamp = function (v) { return Math.max(0, Math.min(1, v)); };
+
+  function update() {
+    if (isFallback()) return;
+    var total = sec.offsetHeight - innerHeight;
+    var p = clamp(-sec.getBoundingClientRect().top / total);
+    world.style.transform = 'translate3d(' + (innerWidth / 2 - p * L) + 'px,0,0)';
+
+    for (var i = 0; i < 4; i++) {
+      var a = 1 - Math.abs(p - DOCKS[i]) / W;
+      if (i === 3 && p >= DOCKS[i]) a = 1;   /* Monuments stays lit at the end */
+      a = clamp(a);
+      var e = a * a * (3 - 2 * a);           /* smoothstep ease */
+      var era = eras[i];
+      era.style.opacity = e;
+      era.style.visibility = a > 0 ? 'visible' : 'hidden';
+      era.querySelector('.above').style.transform = 'translate(-50%,' + ((1 - e) * -16) + 'px)';
+      era.querySelector('.below').style.transform = 'translate(-50%,' + ((1 - e) * 16) + 'px)';
+      stations[i].classList.toggle('hit', a > 0.55);
+      aps[i].style.opacity = 1 - e;          /* approach label yields to the docked card */
+    }
+
+    /* headline word: last station reached, reversible */
+    var cur = -1;
+    for (var j = 0; j < 4; j++) { if (p >= DOCKS[j] - 0.03) cur = j; }
+    if (cur !== lastWord) {
+      lastWord = cur;
+      wordEl.textContent = cur < 0 ? '...' : WORDS[cur];
+      noEl.textContent = cur < 0 ? '00' : ('0' + (cur + 1));
+      wordEl.classList.remove('swap'); void wordEl.offsetWidth; wordEl.classList.add('swap');
+    }
+  }
+
+  var raf = 0;
+  var onScroll = function () {
+    if (raf) return;
+    raf = requestAnimationFrame(function () { raf = 0; update(); });
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+})();
+</script>
+</body>
+</html>
