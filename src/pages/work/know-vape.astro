@@ -153,17 +153,20 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .epsec .ehead .sub{margin-top:20px;max-width:56ch;color:var(--dim);font-size:17px}
 .epsec .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined)}
 .epsec .bar .mono b{color:var(--spark)}
-.eps{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(28px,4vw,64px)}
-.ep{border-bottom:1px solid var(--lined)}
-.ep-link{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(14px,2vw,26px);align-items:center;padding:clamp(18px,2.2vw,26px) 4px;transition:padding-left .35s cubic-bezier(.22,1,.36,1)}
-.ep-link:hover{padding-left:16px}
-.ep-n{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--red)}
-.ep-body{display:flex;flex-direction:column;gap:5px}
-.ep-t{font-weight:var(--dispw2);font-size:clamp(18px,1.9vw,26px);line-height:1.08;letter-spacing:-.02em;text-transform:uppercase;transition:color .25s}
-.ep-d{font-size:14.5px;line-height:1.5;color:var(--dim)}
-.ep-go{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);transition:color .25s,transform .3s}
+.eps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.2vw,28px)}
+.ep-link{display:block}
+.ep-thumb{display:block;position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;cursor:pointer}
+.ep-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72);transition:transform .7s cubic-bezier(.22,1,.36,1),filter .3s}
+.ep-link:hover .ep-thumb img{transform:scale(1.04);filter:brightness(.9)}
+.ep-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;border:1.5px solid rgba(245,243,239,.85);display:grid;place-items:center;color:var(--paper);font-size:15px;background:rgba(22,21,20,.32);backdrop-filter:blur(5px);transition:background .3s,color .3s,transform .3s}
+.ep-link:hover .ep-play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.08)}
+.ep-n{position:absolute;left:12px;top:11px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--paper);background:rgba(22,21,20,.5);padding:3px 7px}
+.ep-meta{display:block;padding:12px 2px 4px}
+.ep-t{display:block;font-weight:var(--dispw2);font-size:clamp(17px,1.5vw,22px);line-height:1.06;letter-spacing:-.02em;text-transform:uppercase;transition:color .25s}
+.ep-d{display:block;margin-top:6px;font-size:13.5px;line-height:1.45;color:var(--dim)}
 .ep-link:hover .ep-t{color:var(--spark)}
-.ep-link:hover .ep-go{color:var(--paper);transform:translate(3px,-3px)}
+@media (max-width:900px){.eps{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.eps{grid-template-columns:1fr}}
 
 /* full-bleed parallax break */
 .break{position:relative;height:52svh;overflow:hidden}
@@ -331,12 +334,15 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
              data-screen-cap={`Myth vs Fact: ${e.t} · Idaho Public Television`}
              data-screen-link={e.url} data-screen-link-label="Also on PBS ↗"
              aria-label={`Play Myth vs Fact: ${e.t}`}>
-            <span class="ep-n">{String(i + 1).padStart(2, '0')}</span>
-            <span class="ep-body">
+            <span class="ep-thumb">
+              <img src={e.poster} alt={`Myth vs Fact: ${e.t}`} loading="lazy">
+              <span class="ep-n">{String(i + 1).padStart(2, '0')}</span>
+              <span class="ep-play" aria-hidden="true">▶</span>
+            </span>
+            <span class="ep-meta">
               <span class="ep-t">{e.t}</span>
               <span class="ep-d">{e.d}</span>
             </span>
-            <span class="ep-go" aria-hidden="true">Play ✳</span>
           </a>
         </li>
       ))}
