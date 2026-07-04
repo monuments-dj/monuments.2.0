@@ -10,8 +10,13 @@ reel cards: client LOGOS on strips + A/B HOVER images (defaults mine; DJ picks v
 sorts real photos) + Roll/Shuffle/Category sort + filtered lightbox; home brands ticker
 moved up (after stat band); "Built to be ___" reel line; eye tile tracks cursor; sound
 toggle on hero reel; giving folded into /about ("Some stories are not for sale.").
-AWAITING DJ: timeline years/titles, discipline tags review, Q3 badge,
-social handles, Sony spot link, photo category sorting, face pick.
+AWAITING DJ: timeline years/titles, discipline tags review, Sony spot link,
+photo-to-category sorting (real photos), face pick, /work grid-default call.
+✅ DONE 2026-07-03: Q badge = "Booking Q3 + Q4" on /contact (055b85d). Social links wired
+from old WordPress site: IG/TikTok @djthecd + LinkedIn in/djthecd (5df59cd). /photography
+REBUILT as 5 category rolls (sticky jump nav + scrollspy, natural-height masonry, lightbox
+scoped per roll) per DJ's "split by type" call; mapping still placeholder 20-per-chunk.
+Timeline "line you travel" A/B/C variants building at /redesign/timeline-{a,b,c}.html.
 ✅ REEL A/B PICKS WIRED 2026-07-03: DJ's picker string applied to all 7 reel cards on /
 (blue-cross + turnstile weren't in the picker, keep defaults). All 14 images verified 200.
 
