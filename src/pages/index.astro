@@ -183,15 +183,16 @@ a.bt-item:hover .bt-logo{filter:none!important;opacity:1}
 .bt-white .bt-logo{filter:brightness(0) invert(1)}
 
 /* sun CTA on ink */
-.cta{position:relative;background:var(--ink);color:var(--paper);padding:19vh 0;text-align:center;overflow:hidden}
-.cta .emblem{width:112px;aspect-ratio:1;margin:0 auto 30px;display:block;animation:spin 70s linear infinite}
+.cta{position:relative;background:var(--ink);color:var(--paper);padding:9vh 0;overflow:hidden}
+.cta .inner{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:clamp(28px,5vw,72px)}
+.cta .emblem{width:90px;flex:0 0 90px;aspect-ratio:1;display:block;animation:spin 70s linear infinite}
 .cta .emblem g{fill:var(--paper)}
-.cta .inner{position:relative;z-index:1}
 .cta .kick{color:var(--spark)}
-.cta .big{font-weight:var(--dispw);font-size:clamp(48px,8.4vw,124px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:20px}
+.cta .big{font-weight:var(--dispw);font-size:clamp(38px,5.8vw,82px);letter-spacing:-.035em;line-height:.92;text-transform:uppercase;margin-top:14px}
 .cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
-.cta .pill{display:inline-flex;margin-top:44px;padding:20px 38px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
+.cta .pill{display:inline-flex;margin-top:26px;padding:15px 30px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
 .cta .pill:hover{background:var(--spark)}
+@media (max-width:760px){.cta .emblem{display:none}}
 
 /* condensed banner */
 .banner{background:var(--ink);border-top:1px solid var(--lined);padding:5vh 0 4vh;overflow:hidden}
@@ -398,10 +399,12 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <section class="cta">
   <div class="inner wrap">
+    <div class="cta-txt">
+      <span class="kick mono rv">✳ One conversation, no deck required</span>
+      <div class="big" data-split>Let's build something<br>great, <span class="serif">together.</span></div>
+      <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
+    </div>
     <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
-    <span class="kick mono rv">✳ One conversation, no deck required</span>
-    <div class="big" data-split>Tell me what<br>you're <span class="serif">building.</span></div>
-    <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
   </div>
 </section>
 

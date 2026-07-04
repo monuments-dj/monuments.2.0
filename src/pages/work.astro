@@ -55,6 +55,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero .sub p{max-width:44ch;color:#4c4a45}
 .hero .count{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88;text-align:right;line-height:2}
 .hero .count b{color:var(--ink);font-weight:400}
+/* hero contact-sheet spill: the archive leaking through the paper */
+.hero .wrap{position:relative;z-index:2}
+.hero .spill{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hero .spill .frm{position:absolute;left:var(--l);top:var(--t);width:var(--w);background:#fff;padding:6px 6px 20px;box-shadow:0 14px 34px rgba(20,20,20,.13);opacity:.5;transform:rotate(var(--r));will-change:transform}
+.hero .spill .frm img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(.4) saturate(.85) contrast(.96)}
+.hero .spill::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(245,243,239,0) 36%,rgba(245,243,239,.5) 66%,rgba(245,243,239,.85) 100%)}
+@media (max-width:900px){
+  .hero .spill .frm{width:calc(var(--w)*.6)}
+  .hero .spill .frm:nth-child(n+6){display:none}
+}
 
 /* stat band */
 .statrow{background:var(--struct)}
@@ -101,6 +111,11 @@ body.gridview .arch{padding-bottom:0}
 .gcard .band .cats{display:block;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;line-height:1.7;margin-top:3px}
 .gcard .band img.lg{height:17px;width:auto;max-width:86px;object-fit:contain;filter:brightness(0);opacity:.72;flex:none}
 .gcard.flip{transition:transform .55s cubic-bezier(.22,1,.36,1)}
+/* video preview cards: fixed 16:9 media area, iframe fades in over the poster */
+.gcard.vcard .iw{position:relative;aspect-ratio:16/9}
+.gcard.vcard img.cv{position:absolute;inset:0;height:100%;object-fit:cover}
+.gcard.vcard iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;opacity:0;transition:opacity .5s ease}
+.gcard.vcard iframe.live{opacity:1}
 @media (max-width:900px){#grid{columns:2}}
 @media (max-width:560px){#grid{columns:1}}
 
@@ -142,13 +157,14 @@ body.gridview .arch{padding-bottom:0}
 .strip .lgi:hover img{opacity:1}
 
 /* cta on ink */
-.cta{position:relative;background:var(--ink);color:var(--paper);padding:15vh 0 16vh;text-align:center;overflow:hidden}
-.cta .emblem{width:112px;aspect-ratio:1;margin:0 auto 30px;display:block;animation:spin 70s linear infinite}
+.cta{position:relative;background:var(--ink);color:var(--paper);padding:7vh 0 8vh;text-align:center;overflow:hidden}
+.cta .emblem{position:absolute;right:clamp(28px,4vw,64px);top:50%;width:88px;aspect-ratio:1;margin-top:-44px;display:block;animation:spin 70s linear infinite}
 .cta .emblem g{fill:var(--paper)}
+@media (max-width:1200px){.cta .emblem{display:none}}
 .cta .kick{color:var(--spark)}
-.cta .big{font-weight:var(--dispw);font-size:clamp(44px,7.6vw,112px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:20px}
+.cta .big{font-weight:var(--dispw);font-size:clamp(40px,6.4vw,94px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:14px}
 .cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
-.cta .pill{display:inline-flex;margin-top:42px;padding:20px 38px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
+.cta .pill{display:inline-flex;margin-top:26px;padding:17px 34px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
 .cta .pill:hover{background:var(--spark)}
 footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
 footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
@@ -188,6 +204,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
 <div class="over">
 <header class="hero">
+  <div class="spill" id="spill" aria-hidden="true"></div>
   <div class="wrap">
     <span class="kick mono">Work · DJ Ramirez · Monuments</span>
     <h1>
@@ -249,13 +266,13 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
     <a class="rowp litrow" href="/work/art-of-visuals" data-img="/case-studies/art-of-visuals/gallery/xm3-bts.jpg" data-cap="MC-2024-01 · GREW THE AGENCY 4X" data-disc="cd,campaign,oncam" data-logo="/logos/art-of-visuals.png">
       <span class="id">MC-2024-01 ✳</span><span class="t">Art of <span class="serif">Visuals</span></span><span class="fmt"><i>\</i> Brand campaign <b class="mx">4x</b></span><span class="yr">2024</span>
     </a>
-    <a class="rowp litrow" href="/work/sony-this-moment" data-img="/case-studies/sony-this-moment/gallery/tm-05.jpg" data-cap="MC-2023-06 · SONY AUDIO" data-disc="cd,photo,campaign" data-logo="/logos/sony.png">
+    <a class="rowp litrow" href="/work/sony-this-moment" data-img="/case-studies/sony-this-moment/gallery/tm-05.jpg" data-video="KIi8cBOlU50" data-cap="MC-2023-06 · SONY AUDIO" data-disc="cd,photo,campaign" data-logo="/logos/sony.png">
       <span class="id">MC-2023-06 ✳</span><span class="t">Sony · This <span class="serif">Moment</span></span><span class="fmt"><i>\</i> Campaign film + stills</span><span class="yr">2023</span>
     </a>
     <a class="rowp litrow" href="/work/blue-cross" data-img="/case-studies/blue-cross/bc-2.jpg" data-cap="MC-2023-04 · REAL PEOPLE, REAL STAKES" data-disc="cd,photo,campaign,commercial" data-logo="/logos/blue-cross.png">
       <span class="id">MC-2023-04 ✳</span><span class="t">Blue Cross <span class="serif">of Idaho</span></span><span class="fmt"><i>\</i> Documentary campaign <b class="mx">1 week · 23 frames</b></span><span class="yr">2023</span>
     </a>
-    <a class="rowp litrow" href="/work/adorama-music" data-img="/case-studies/adorama-music/gallery/am-01.jpg" data-cap="MC-2022-07 · 160M+ IMPRESSIONS" data-disc="cd,commercial,campaign" data-logo="/logos/adorama.png">
+    <a class="rowp litrow" href="/work/adorama-music" data-img="/case-studies/adorama-music/gallery/am-01.jpg" data-video="l1RBdpQ8vi8" data-cap="MC-2022-07 · 160M+ IMPRESSIONS" data-disc="cd,commercial,campaign" data-logo="/logos/adorama.png">
       <span class="id">MC-2022-07 ✳</span><span class="t">Adorama <span class="serif">Music</span></span><span class="fmt"><i>\</i> Content series <b class="mx">160M+</b></span><span class="yr">2022</span>
     </a>
   </div>
@@ -265,23 +282,23 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
     <a class="rowp litrow" href="/work/buck-the-quo" data-img="/case-studies/buck-the-quo/gallery/container-front.jpg" data-cap="MC-2021-03 · EMMY-WINNING SERIES" data-disc="commercial,cd,oncam">
       <span class="id">MC-2021-03 ✳</span><span class="t">Buck the <span class="serif">Quo</span></span><span class="fmt"><i>\</i> Film series · Emmy</span><span class="yr">2021</span>
     </a>
-    <a class="rowp litrow" href="/work/sony-xperia-summer" data-img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" data-cap="MC-2022-02 · SONY XPERIA" data-disc="campaign,photo,commercial" data-logo="/logos/sony.png">
+    <a class="rowp litrow" href="/work/sony-xperia-summer" data-img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" data-video="_RGvpwyYLTI" data-cap="MC-2022-02 · SONY XPERIA" data-disc="campaign,photo,commercial" data-logo="/logos/sony.png">
       <span class="id">MC-2022-02</span><span class="t">Xperia <span class="serif">Summer</span></span><span class="fmt"><i>\</i> Product campaign</span><span class="yr">2022</span>
     </a>
-    <a class="rowp litrow" href="/work/donut-zumiez" data-img="/case-studies/donut-zumiez/gallery/film-01.jpg" data-cap="MC-2023-08 · DONUT X ZUMIEZ" data-disc="campaign,experiential,cd" data-logo="/logos/donut-media.svg">
+    <a class="rowp litrow" href="/work/donut-zumiez" data-img="/case-studies/donut-zumiez/gallery/film-01.jpg" data-video="2eUYg_P5rfc" data-cap="MC-2023-08 · DONUT X ZUMIEZ" data-disc="campaign,experiential,cd" data-logo="/logos/donut-media.svg">
       <span class="id">MC-2023-08</span><span class="t">Donut × <span class="serif">Zumiez</span></span><span class="fmt"><i>\</i> Retail collab</span><span class="yr">2023</span>
     </a>
     <a class="rowp litrow" href="/work/ac-boise" data-img="/case-studies/ac-boise/gallery/home-01.jpg" data-cap="MC-2024-05 · KIT REVEAL" data-disc="experiential,campaign,cd" data-logo="/case-studies/ac-boise/gallery/logo.png">
       <span class="id">MC-2024-05</span><span class="t">AC <span class="serif">Boise</span></span><span class="fmt"><i>\</i> Kit reveal · Experiential</span><span class="yr">2024</span>
     </a>
-    <a class="rowp litrow" href="/work/sony-xm5" data-img="/case-studies/sony-xm5/gallery/xm5-03.jpg" data-cap="MC-2022-05 · CREATIVITY STARTS WITH INSPIRATION" data-disc="campaign,cd" data-logo="/logos/sony.png">
+    <a class="rowp litrow" href="/work/sony-xm5" data-img="/case-studies/sony-xm5/gallery/xm5-03.jpg" data-video="yiTB54QWHO0" data-cap="MC-2022-05 · CREATIVITY STARTS WITH INSPIRATION" data-disc="campaign,cd" data-logo="/logos/sony.png">
       <span class="id">MC-2022-05</span><span class="t">Sony <span class="serif">XM5</span></span><span class="fmt"><i>\</i> Influencer campaign <b class="mx">1.3M</b></span><span class="yr">2022</span>
     </a>
   </div>
 
   <div class="group">
     <div class="bar"><span class="mono"><b>\ Films &amp; series</b> · the longer stories</span><span class="mono" style="color:#8f8d88">10-13</span></div>
-    <a class="rowp litrow" href="/work/sony-flow-state" data-img="/case-studies/sony-flow-state/gallery/fs-05.jpg" data-cap="MC-2023-07 · SONY AUDIO" data-disc="commercial,cd" data-logo="/logos/sony.png">
+    <a class="rowp litrow" href="/work/sony-flow-state" data-img="/case-studies/sony-flow-state/gallery/fs-05.jpg" data-video="CS5UXhe17O4" data-cap="MC-2023-07 · SONY AUDIO" data-disc="commercial,cd" data-logo="/logos/sony.png">
       <span class="id">MC-2023-07</span><span class="t">Sony · Flow <span class="serif">State</span></span><span class="fmt"><i>\</i> Campaign film</span><span class="yr">2023</span>
     </a>
     <a class="rowp litrow" href="/work/dw-drums" data-img="/case-studies/dw-drums/gallery/face-off.jpg" data-cap="MC-2022-04 · DW DRUMS" data-disc="commercial,photo" data-logo="/logos/dw-drums.png">
@@ -290,7 +307,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
     <a class="rowp litrow" href="/work/know-vape" data-img="/case-studies/know-vape/gallery/banner.jpg" data-cap="MC-2021-06 · PUBLIC HEALTH" data-disc="campaign,commercial,cd">
       <span class="id">MC-2021-06</span><span class="t">Know <span class="serif">Vape</span></span><span class="fmt"><i>\</i> PSA campaign</span><span class="yr">2021</span>
     </a>
-    <a class="rowp litrow" href="/work/on-camera" data-img="/case-studies/on-camera/posters/nk-_UwGuRlE.jpg" data-cap="MC-2026-07 · 11 TAPES, CUED TO MY ENTRANCE" data-disc="oncam">
+    <a class="rowp litrow" href="/work/on-camera" data-img="/case-studies/on-camera/posters/nk-_UwGuRlE.jpg" data-video="nk-_UwGuRlE" data-vstart="29" data-cap="MC-2026-07 · 11 TAPES, CUED TO MY ENTRANCE" data-disc="oncam">
       <span class="id">MC-2026-07</span><span class="t">On <span class="serif">Camera</span></span><span class="fmt"><i>\</i> Hosting + presenting · 11 tapes</span><span class="yr">2023</span>
     </a>
   </div>
@@ -303,7 +320,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
     <a class="rowp litrow" href="/work/flashpoint" data-img="/case-studies/flashpoint/gallery/fp-01.jpg" data-cap="MC-2020-02 · FLASHPOINT" data-disc="cd,campaign" data-logo="/logos/flashpoint.png">
       <span class="id">MC-2020-02</span><span class="t">Flash<span class="serif">point</span></span><span class="fmt"><i>\</i> Brand build</span><span class="yr">2020</span>
     </a>
-    <a class="rowp litrow" href="/work/waffle-me-up" data-img="/case-studies/waffle-me-up/cover.jpg" data-cap="MC-2019-05 · WAFFLE ME UP" data-disc="cd,experiential,photo" data-logo="/case-studies/waffle-me-up/logo.png">
+    <a class="rowp litrow" href="/work/waffle-me-up" data-img="/case-studies/waffle-me-up/cover.jpg" data-video="LI496YXDIRE" data-cap="MC-2019-05 · WAFFLE ME UP" data-disc="cd,experiential,photo" data-logo="/case-studies/waffle-me-up/logo.png">
       <span class="id">MC-2019-05</span><span class="t">Waffle <span class="serif">Me Up</span></span><span class="fmt"><i>\</i> Brand + spatial</span><span class="yr">2019</span>
     </a>
     <a class="rowp litrow" href="/work/clothing-merch" data-img="/case-studies/clothing-merch/gallery/cm-01.jpg" data-cap="MC-2020-08 · APPAREL" data-disc="cd,photo">
@@ -323,7 +340,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
   <div class="wrap">
     <span class="kick mono rv">✳ One conversation, no deck required</span>
-    <div class="big" data-split>Tell me what<br>you're <span class="serif">building.</span></div>
+    <div class="big" data-split>Let's build something<br>great, <span class="serif">together.</span></div>
     <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
   </div>
 </section>
@@ -341,6 +358,37 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
 <script is:inline>
 (function(){const g=document.getElementById('rays');let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s})();
+
+// hero contact-sheet spill: frames pulled from the archive rows themselves
+(function(){
+  const spill=document.getElementById('spill');if(!spill)return;
+  const imgs=[...document.querySelectorAll('.rowp')].map(r=>r.dataset.img).filter(Boolean);
+  if(!imgs.length)return;
+  // slot: [left%, top%, width px, rotate deg, drift speed]
+  const SLOTS=[
+    [-2,4,225,-7,-.10],[13,-6,185,4,.07],[29,9,165,-3,-.05],[45,-7,210,6,.09],
+    [61,7,180,-5,-.08],[79,-4,225,3,.06],[87,32,205,-6,-.11],[68,46,230,5,.08],
+    [38,44,170,-4,-.06],[4,38,150,8,.10]
+  ];
+  const pick=[0,1,2,3,4,6,7,10,12,14]; // spread across the roll
+  const frames=SLOTS.map((s,i)=>{
+    const el=document.createElement('span');el.className='frm';
+    el.style.cssText=`--l:${s[0]}%;--t:${s[1]}%;--w:${s[2]}px;--r:${s[3]}deg`;
+    el.dataset.sp=s[4];
+    el.innerHTML=`<img src="${imgs[pick[i]%imgs.length]}" alt="" loading="lazy" decoding="async">`;
+    spill.appendChild(el);return el;
+  });
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const hero=document.querySelector('.hero');let tick=false;
+  function drift(){
+    const y=scrollY;
+    if(y<hero.offsetHeight+240)frames.forEach(f=>{
+      f.style.transform=`translate3d(0,${(y*f.dataset.sp).toFixed(1)}px,0) rotate(${f.style.getPropertyValue('--r')})`;
+    });
+    tick=false;
+  }
+  addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(drift)}},{passive:true});
+})();
 
 // rose logo slider: every brand on file
 (function(){
@@ -379,16 +427,19 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   const DISC_LABEL={commercial:'Commercial directing',cd:'Creative direction',photo:'Photography',experiential:'Experiential',campaign:'Campaign development',oncam:'On-camera'};
   const items=rows.map((r,i)=>({
     href:r.getAttribute('href'),img:r.dataset.img,logo:r.dataset.logo||'',disc:(r.dataset.disc||'').split(','),
+    video:r.dataset.video||'',vstart:r.dataset.vstart||'',
     title:r.querySelector('.t').textContent.trim(),
     fmt:(r.querySelector('.fmt')?.textContent||'').replace(/\\/,'').trim(),
     yr:parseInt(r.querySelector('.yr')?.textContent||'0',10),id:r.querySelector('.id')?.textContent.trim()||'' ,idx:i}));
-  function el(it){const a=document.createElement('a');a.className='gcard';a.href=it.href;a.dataset.key=it.idx;a.dataset.disc=it.disc.join(',');
+  function el(it){const a=document.createElement('a');a.className='gcard'+(it.video?' vcard':'');a.href=it.href;a.dataset.key=it.idx;a.dataset.disc=it.disc.join(',');
+    if(it.video){a.dataset.video=it.video;if(it.vstart)a.dataset.vstart=it.vstart}
     const cats=it.disc.map(d=>DISC_LABEL[d]).filter(Boolean).join(' · ');
     a.innerHTML=`<span class="iw"><img class="cv" src="${it.img}" alt="${it.title}" loading="lazy"></span><div class="band"><span class="lft"><span class="t">${it.title}</span><span class="cats">${cats}</span></span>${it.logo?`<img class="lg" src="${it.logo}" alt="">`:''}</div>`;return a}
   items.forEach(it=>grid.appendChild(el(it)));
   let sort='new';
   function currentFilter(){const on=document.querySelector('#lens button.on');return on?on.dataset.d:'all'}
   function apply(animate=true){
+    window.__vprevOff?.(); // pause video previews: DOM moves reload iframes
     const first=new Map([...grid.children].map(c=>[c.dataset.key,c.getBoundingClientRect()]));
     let list=[...grid.children];
     const d=currentFilter();
@@ -401,7 +452,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
       return key(b).yr-key(a).yr;
     });
     vis.forEach(c=>grid.appendChild(c));
-    if(!animate||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+    if(!animate||matchMedia('(prefers-reduced-motion:reduce)').matches){window.__vprevOn?.();return}
     vis.forEach(c=>{
       const f=first.get(c.dataset.key),l=c.getBoundingClientRect();
       if(!f)return;const dx=f.left-l.left,dy=f.top-l.top;
@@ -409,6 +460,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
       c.classList.remove('flip');c.style.transform=`translate(${dx}px,${dy}px)`;
       void c.offsetWidth;c.classList.add('flip');c.style.transform='';
     });
+    setTimeout(()=>window.__vprevOn?.(),600); // remount after the FLIP settles
   }
   document.querySelectorAll('.viewbar button[data-view]').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('.viewbar button[data-view]').forEach(x=>x.classList.toggle('on',x===b));
@@ -428,6 +480,33 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   document.querySelectorAll('#lens button').forEach(b=>b.addEventListener('click',()=>{
     if(document.body.classList.contains('gridview'))setTimeout(()=>apply(),0);
   }));
+})();
+
+// grid video previews: muted loops that mount in view, unmount out of view (max 6, FIFO)
+(function(){
+  const mq=matchMedia('(min-width:901px)'),rm=matchMedia('(prefers-reduced-motion:reduce)');
+  const cards=[...document.querySelectorAll('#grid .gcard.vcard')];
+  if(!cards.length)return;
+  const MAX=6;let mounted=[];
+  function mount(c){
+    if(c.querySelector('iframe'))return;
+    while(mounted.length>=MAX)unmount(mounted[0]); // FIFO: oldest preview yields
+    const id=c.dataset.video,st=c.dataset.vstart;
+    const f=document.createElement('iframe');
+    f.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1${st?`&start=${st}`:''}`;
+    f.allow='autoplay; encrypted-media';f.loading='lazy';f.tabIndex=-1;f.setAttribute('aria-hidden','true');f.title='Case film preview';
+    f.addEventListener('load',()=>setTimeout(()=>f.classList.add('live'),450));
+    c.querySelector('.iw').appendChild(f);mounted.push(c);
+  }
+  function unmount(c){const f=c.querySelector('iframe');if(f)f.remove();mounted=mounted.filter(x=>x!==c)}
+  const vio=new IntersectionObserver(es=>{
+    if(!mq.matches||rm.matches)return;
+    es.forEach(e=>e.isIntersecting?mount(e.target):unmount(e.target));
+  },{rootMargin:'80px 0px 80px 0px',threshold:.01});
+  window.__vprevOn=()=>{if(!mq.matches||rm.matches)return;cards.forEach(c=>vio.observe(c))};
+  window.__vprevOff=()=>{vio.disconnect();mounted.slice().forEach(unmount)};
+  if(mq.matches&&!rm.matches)window.__vprevOn();
+  mq.addEventListener?.('change',()=>{(mq.matches&&!rm.matches)?window.__vprevOn():window.__vprevOff()});
 })();
 
 // scroll-lit rows
@@ -477,7 +556,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 // split-line rise
 (function(){
   const els=document.querySelectorAll('[data-split]');
-  els.forEach(el=>{el.innerHTML=el.innerHTML.split(/<br\s*\/?>/i).map(l=>`<span class="sl"><span>${l}</span></span>`).join('')});
+  els.forEach(el=>{el.innerHTML=el.innerHTML.split(/<br[^>]*>/i).map(l=>`<span class="sl"><span>${l}</span></span>`).join('')});
   const io3=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io3.unobserve(e.target)}}),{threshold:.2});
   els.forEach(el=>io3.observe(el));
 })();

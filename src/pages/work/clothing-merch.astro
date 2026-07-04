@@ -1,12 +1,13 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
+import ScreenRoom from '../../components/ScreenRoom.astro';
 
 // === Clothing & Merch · THE CUT case page ===
 // Words ported verbatim from the v1 page (monuments.cc/portfolio/clothing-merch rebuild).
 // cm-01..20: Creative Space apparel line. cm-21..23: cap detail + tee line sheets.
 // cm-24..26: DW drummers collection (tee, cap, tote).
-// The two Instagram reels from the source page ship as poster links out (no embed).
+// The two Instagram reels play inline via ScreenRoom (IG embed + Open-on-Instagram fallback).
 ---
 <!doctype html>
 <html lang="en">
@@ -224,18 +225,18 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   <div class="wrap">
     <div class="bar">
       <span class="mono"><b>The reels</b> · the line in the wild</span>
-      <span class="mono" style="color:#8f8d88">Opens on Instagram ↗</span>
+      <span class="mono" style="color:#8f8d88">Play them right here ✳</span>
     </div>
     <div class="reelgrid">
-      <a class="posterreel" href="https://www.instagram.com/reel/ClkAMQVpxa6/" target="_blank" rel="noopener" aria-label="Open the Creative Space apparel reel on Instagram">
+      <a class="posterreel" href="https://www.instagram.com/reel/ClkAMQVpxa6/" data-screen data-screen-cap="Creative Space · The line · Instagram" target="_blank" rel="noopener" aria-label="Play the Creative Space apparel reel">
         <img src="/case-studies/clothing-merch/gallery/cm-05.jpg" alt="Reel poster: the Creative Space crop crewneck worn on set" loading="lazy">
-        <span class="play">Open · The reel</span>
+        <span class="play">Play · The reel</span>
         <span class="fcap">✳ Creative Space · The line</span>
         <span class="fout">IG / ClkAMQVpxa6</span>
       </a>
-      <a class="posterreel" href="https://www.instagram.com/reel/Cl9hIJ-vS-b/" target="_blank" rel="noopener" aria-label="Open the Creative Space drop reel on Instagram">
+      <a class="posterreel" href="https://www.instagram.com/reel/Cl9hIJ-vS-b/" data-screen data-screen-cap="Creative Space · The drop · Instagram" target="_blank" rel="noopener" aria-label="Play the Creative Space drop reel">
         <img src="/case-studies/clothing-merch/gallery/cm-18.jpg" alt="Reel poster: the Creative Space tee with the yellow flower mark, worn on model" loading="lazy">
-        <span class="play">Open · The reel</span>
+        <span class="play">Play · The reel</span>
         <span class="fcap">✳ Creative Space · The drop</span>
         <span class="fout">IG / Cl9hIJ-vS-b</span>
       </a>
@@ -292,6 +293,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 </section>
 </div><!--/over-->
 
+<ScreenRoom />
 <div class="underfoot">
 <NextFile
   href="/work/art-of-visuals"

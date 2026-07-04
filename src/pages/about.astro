@@ -125,6 +125,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .step h4{font-weight:var(--dispw);font-size:clamp(20px,2.2vw,30px);letter-spacing:-.02em;text-transform:uppercase}
 .step p{color:#4c4a45;max-width:56ch}
 
+/* giving back link (paper section) */
+.giveBtn{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:14px 28px;border:2px solid var(--ink);border-radius:99px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);transition:background .3s,color .3s,gap .3s}
+.giveBtn:hover{background:var(--ink);color:var(--paper);gap:16px}
+
 /* cta */
 .cta{position:relative;background:var(--ink);color:var(--paper);padding:16vh 0;text-align:center;overflow:hidden}
 .cta .emblem{width:112px;aspect-ratio:1;margin:0 auto 30px;display:block;animation:spin 70s linear infinite}
@@ -215,7 +219,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
 <div class="over">
 <header class="hero">
-  <img src="/gallery/full/p-049.jpg" alt="">
+  <img src="/about/hero-set.jpg" alt="The crew watching playback on set, warehouse light" fetchpriority="high">
   <div class="t">
     <span class="ln"><span>I build monuments</span></span>
     <span class="ln"><span>with <span class="serif">my friends</span><span class="spark">.</span></span></span>
@@ -291,7 +295,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
           </div>
         </article>
         <article class="era-p" data-word="director.">
-          <div class="ph"><img src="/case-studies/art-of-visuals/gallery/xperia-01.jpg" alt="Art of Visuals era" loading="lazy"><span class="cap">ERA 03 · THE SCALE YEARS</span></div>
+          <div class="ph"><img src="/about/warehouse.jpg" alt="Art of Visuals era, warehouse set" loading="lazy"><span class="cap">ERA 03 · THE SCALE YEARS</span></div>
           <div>
             <span class="no">\ Era 03 · Art of Visuals</span>
             <h3>Art of Visuals</h3>
@@ -349,7 +353,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 <section class="paper">
   <div class="wrap" style="display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;padding:11vh 0;align-items:center">
     <div class="rv" style="background:#fff;border:1px solid var(--line);padding:10px 10px 30px;transform:rotate(-1.2deg);box-shadow:0 24px 60px rgba(20,20,20,.12)">
-      <img src="/gallery/full/p-005.jpg" alt="Documentary work abroad" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.9)">
+      <img src="/case-studies/giving/gv-01.jpg" alt="Schoolkids in Uganda, documentary trip" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.9)">
       <span style="position:absolute;margin-top:6px;font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em">NEPAL · UGANDA · EUROPE · THE GIVING SIDE</span>
     </div>
     <div class="rv">
@@ -357,6 +361,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
       <h3 style="font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin:14px 0 18px">Some stories are not <span class="serif" style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none">for sale.</span></h3>
       <p style="color:#4c4a45;max-width:52ch;margin-bottom:1em">We have carried cameras through Nepal, Uganda, and across Europe for work that was never about selling anything. Those trips taught us patience, respect for the subject, and how to disappear so a true story can show up.</p>
       <p style="color:#4c4a45;max-width:52ch">We still take that work when it matters, and we bring everything that pressure taught us to it.</p>
+      <a class="giveBtn" href="/giving">Giving back <span aria-hidden="true">&rarr;</span></a>
     </div>
   </div>
 </section>

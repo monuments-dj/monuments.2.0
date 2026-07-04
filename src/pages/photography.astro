@@ -18,7 +18,7 @@
   --spark:var(--rose); --struct:var(--cobalt);
   /* v5: the page IS the folder. cool archive-grey desk, silver 90s chrome, dark grey outline */
   --desk:#b3b2ae; --face:#d5d4d0; --fback:#c6c5c1; --fink:#3a3936;
-  --sunken:#e9e8e5; --bevL:#fbfaf8; --bevD:#7a7973; --film:#1a1917; --teal:#008080;
+  --sunken:#e9e8e5; --bevL:#fbfaf8; --bevD:#7a7973; --film:#1a1917; --denim:#3E6E94;
 }
 *{margin:0;box-sizing:border-box}
 body{background:var(--desk);color:var(--ink);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -54,14 +54,15 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.hero h1 .ln>span{transform:none}.rv{opacity:1;transform:none}.grain{animation:none}
 .frames{overflow-x:auto;scrollbar-width:none}.frames::-webkit-scrollbar{display:none}.reel{transform:none!important}}
 
-.hero{background:var(--teal);border-bottom:2px solid var(--fink);padding:13vh 0 8vh;box-shadow:inset 0 -14px 30px rgba(0,45,45,.25)}
+/* the desktop band: brand-book denim, close cousin of the Win98 desktop blue */
+.hero{background:var(--denim);border-bottom:2px solid var(--fink);padding:13vh 0 8vh;box-shadow:inset 0 -14px 30px rgba(16,34,50,.28)}
 .hero-in{max-width:1380px;margin:0 auto}
-.hero .kick{color:rgba(245,243,239,.75)}
+.hero .kick{color:rgba(245,243,239,.95)}
 .hero h1{font-weight:var(--dispw);font-size:clamp(52px,9.4vw,140px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:14px;color:var(--paper)}
 /* the numeral line goes bitmap: pixel type on the 95 desktop */
 .hero h1 .num{font-family:'Silkscreen',var(--mono);font-weight:700;font-size:.62em;letter-spacing:.01em;line-height:1.05;display:inline-block}
 .hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-top:4vh}
-.hero .sub p{max-width:44ch;color:rgba(245,243,239,.85)}
+.hero .sub p{max-width:44ch;color:rgba(245,243,239,.95)}
 /* hero word swap when a tab is switched */
 .hero h1 .serif.swap{animation:wordIn .5s cubic-bezier(.22,1,.36,1)}
 .hero h1 .num.swap{display:inline-block;animation:wordIn .5s cubic-bezier(.22,1,.36,1)}
@@ -72,11 +73,13 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
    column is the full 1380px at cap while the h1 caps at 140px ("ONE HUNDRED" =
    ~849px); 420+40 gap leaves >=110px slack, the headline never wraps. Left column
    stays minmax(0,1fr) so long tab-swapped words ("frames of non-profit.") wrap
-   inside their column instead of colliding with the window. */
+   inside their column instead of colliding with the window. At >=1100px the
+   window spans both grid rows so the desktop-icon row (.dicons) slots in under
+   the copy without pushing the window around. */
 .hero-lay{display:flex;flex-direction:column;align-items:flex-start}
 .pviewer{--tilt:0deg;position:relative;z-index:4;width:100%;max-width:380px;margin-top:46px;padding:4px;
   background:var(--face);border:2px solid var(--fink);transform:rotate(var(--tilt));
-  box-shadow:inset 1px 1px 0 rgba(255,255,255,.78),inset -1px -1px 0 rgba(72,71,66,.3),0 26px 44px -18px rgba(38,38,36,.55)}
+  box-shadow:inset 1px 1px 0 rgba(255,255,255,.78),inset -1px -1px 0 rgba(72,71,66,.3),0 26px 44px -18px rgba(15,31,46,.62)}
 .pviewer.rv{transform:translateY(28px) rotate(var(--tilt));transition-delay:.6s}
 .pviewer.rv.in{transform:rotate(var(--tilt))}
 .pv-bar{display:flex;align-items:center;gap:9px;padding:5px 7px;background:var(--sunken);
@@ -98,9 +101,33 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
   background:var(--sunken);border:2px solid;border-color:var(--bevD) var(--bevL) var(--bevL) var(--bevD)}
 @media (min-width:1100px){
   .hero-lay{display:grid;grid-template-columns:minmax(0,1fr) min(420px,34vw);gap:clamp(28px,2.6vw,40px);align-items:center}
-  .pviewer{--tilt:-.6deg;margin-top:0;max-width:none;justify-self:end}
+  .hero-copy{grid-column:1;grid-row:1}
+  .pviewer{--tilt:-.6deg;margin-top:0;max-width:none;justify-self:end;grid-column:2;grid-row:1/3}
+  .dicons{grid-column:1;grid-row:2;align-self:end;margin-top:0}
 }
 @media (prefers-reduced-motion:reduce){.pviewer.rv{opacity:1;transform:rotate(var(--tilt))}}
+
+/* DESKTOP ICONS: Win9x shortcuts sitting on the denim desk under the headline.
+   Each one is a real button: it switches the matching folder tab below, then
+   scrolls down to the folder. Labels get the classic selected-label treatment
+   (cobalt block + dotted border) on hover and keyboard focus. */
+.dicons{position:relative;z-index:3;display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 14px;margin-top:44px}
+.dicon{display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:8px 4px 9px;
+  background:none;border:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dicon svg{width:48px;height:48px;display:block;overflow:visible;filter:drop-shadow(0 2px 0 rgba(15,31,46,.38));transition:transform .12s}
+.dicon:hover svg{transform:translateY(-1px)}
+.dicon:active svg{transform:translateY(1px)}
+.dicon .dlabel{font-family:var(--mono);font-size:10px;line-height:1.35;letter-spacing:.03em;color:var(--paper);
+  text-align:center;padding:1px 5px;border:1px dotted transparent}
+.dicon:hover .dlabel{background:rgba(15,31,46,.4)}
+.dicon:focus-visible{outline:none}
+.dicon:focus-visible .dlabel{background:var(--cobalt);border-color:var(--paper)}
+@media (max-width:900px){
+  .dicons{gap:2px 4px;margin-top:36px;padding:0 10px}
+  .dicon{width:78px;gap:5px;padding:6px 2px 7px}
+  .dicon svg{width:38px;height:38px}
+  .dicon .dlabel{font-size:9px}
+}
 
 /* THE FOLDER: the whole page body is one big archive-grey folder, 90s tab control on top */
 .folderzone{padding:0 14px;position:relative}
@@ -220,6 +247,53 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
       </button>
       <div class="pv-status" id="pvStatus">P-001.JPG · 1 of 100 · 2.1 MB</div>
     </aside>
+    <nav class="dicons rv" aria-label="Desktop shortcuts to the photo folders">
+      <button class="dicon" type="button" data-goto="all" aria-label="djs_photos.jpg, open the full archive folder">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M11 4h18l8 8v32H11z" fill="var(--paper)" stroke="var(--fink)" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M29 4v8h8" fill="var(--fback)" stroke="var(--fink)" stroke-width="2" stroke-linejoin="round"/>
+          <rect x="15" y="16" width="18" height="13" fill="#fff" stroke="var(--fink)" stroke-width="1.5"/>
+          <circle cx="28.5" cy="20" r="2.3" fill="var(--rose)"/>
+          <path d="M15.8 28.2 21 21.5l3.6 4 2.6-2.9 5 5.6z" fill="var(--cobalt)"/>
+          <text x="24" y="40.5" text-anchor="middle" font-family="'Silkscreen',monospace" font-size="7" fill="var(--fink)">JPG</text>
+        </svg>
+        <span class="dlabel">djs_photos.jpg</span>
+      </button>
+      <button class="dicon" type="button" data-goto="brand" aria-label="Open the brand photos folder">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M4 12h13l4 4h23v25H4z" fill="#c9ab6a" stroke="var(--fink)" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M4 18h40v23H4z" fill="#e2cd92" stroke="var(--fink)" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M6.5 20.5h35" stroke="rgba(245,243,239,.6)" stroke-width="1.5"/>
+          <g stroke="var(--red)" stroke-width="2.2" stroke-linecap="round">
+            <path d="M24 25.5v9"/><path d="M19.5 30h9"/><path d="M20.9 26.9l6.2 6.2"/><path d="M27.1 26.9l-6.2 6.2"/>
+          </g>
+        </svg>
+        <span class="dlabel">brand photos</span>
+      </button>
+      <button class="dicon" type="button" data-goto="editorial" aria-label="Open the editorial folder">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <g transform="rotate(-20 24 31)">
+            <path d="M4 31A20 8.5 0 0 1 44 31" fill="none" stroke="var(--rose)" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+          </g>
+          <text x="24" y="44.5" text-anchor="middle" font-family="'Instrument Serif',serif" font-size="61" fill="var(--paper)">e</text>
+          <g transform="rotate(-20 24 31)">
+            <path d="M4 31A20 8.5 0 0 0 44 31" fill="none" stroke="var(--rose)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="24" cy="39.5" r="2.6" fill="var(--cobalt)" stroke="var(--paper)" stroke-width="1.2"/>
+          </g>
+        </svg>
+        <span class="dlabel">editorial</span>
+      </button>
+      <button class="dicon" type="button" data-goto="motion" aria-label="Open the motion folder">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M4 12h13l4 4h23v25H4z" fill="#c9ab6a" stroke="var(--fink)" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M4 18h40v23H4z" fill="#e2cd92" stroke="var(--fink)" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M6.5 20.5h35" stroke="rgba(245,243,239,.6)" stroke-width="1.5"/>
+          <circle cx="36" cy="35" r="8.5" fill="var(--cobalt)" stroke="var(--fink)" stroke-width="2"/>
+          <path d="M33.4 31.4l7 3.6-7 3.6z" fill="var(--paper)"/>
+        </svg>
+        <span class="dlabel">motion</span>
+      </button>
+    </nav>
   </div>
   </div>
 </header>
@@ -405,6 +479,14 @@ clock();setInterval(clock,30000);
     firstPick=false;
   }
   row.addEventListener('click',e=>{const b=e.target.closest('.ftab');if(b)select(b.dataset.key)});
+  // hero desktop icons: same select(), then ride down to the folder
+  const goFolder=document.querySelector('.folderzone');
+  document.querySelectorAll('.dicon').forEach(b=>b.addEventListener('click',()=>{
+    select(b.dataset.goto);
+    if(!goFolder)return;
+    if(window.lenis&&window.lenis.scrollTo)window.lenis.scrollTo(goFolder);
+    else goFolder.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+  }));
   addEventListener('hashchange',()=>{const k=location.hash.slice(1).toLowerCase();if(byKey[k])select(k,false)});
   let rzT=0,rzW=innerWidth;
   addEventListener('resize',()=>{clearTimeout(rzT);rzT=setTimeout(()=>{

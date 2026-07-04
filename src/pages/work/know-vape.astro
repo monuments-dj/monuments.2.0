@@ -1,6 +1,7 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
+import ScreenRoom from '../../components/ScreenRoom.astro';
 
 // === /work/know-vape · THE CUT case page ===
 // Emmy-winning case study for KNOW VAPE, Idaho Public Television's statewide youth
@@ -8,19 +9,24 @@ import NextFile from '../../components/NextFile.astro';
 // spots; the CAMPAIGN won the 2024 Northwest Regional Emmy (Community Outreach,
 // Small Market, NATAS Northwest). Campaign-level award: the page says his spots were
 // PART OF the Emmy-winning campaign. Do not overclaim.
-// Episodes live on PBS (video.wkno.org) and cannot be embedded cleanly, so the film
-// block and the episode grid are EXTERNAL links, not youtube-nocookie injections.
+// The six spots are SELF-HOSTED mp4s (PBS's own 720p renditions of DJ's work for
+// client Idaho Public Television) and play right on the page through ScreenRoom.
+// Every trigger keeps a real video.idahoptv.org href as the no-JS / new-tab
+// fallback, and the bars keep "Also on PBS" links for provenance.
 
-const HERO_EP = 'https://video.wkno.org/video/know-vape-myth-vs-fact-vapor-h5git8/'; // "Vapor" spot
-// The six Myth vs Fact spots DJ directed (canonical URLs per DJ; all verified live).
+const SPOTS = '/case-studies/know-vape/spots';
+const SHOW_URL = 'https://video.idahoptv.org/show/know-vape/'; // the client's own PBS show page
+// The six Myth vs Fact spots DJ directed. file/poster are local; url is the
+// PBS watch page on Idaho Public Television's own player (all verified live).
 const episodes = [
-  { t: 'Vapor',    d: 'Vapes are just water vapor? It’s an aerosol of chemicals.', url: 'https://video.wkno.org/video/know-vape-myth-vs-fact-vapor-h5git8/' },
-  { t: 'Nicotine', d: 'The addiction the flavors are built to hide.', url: 'https://video.wkno.org/video/know-vape-myth-vs-fact-nicotine-ymwf0l/' },
-  { t: 'Safety',   d: '“Safer than cigarettes” is the wrong bar.', url: 'https://video.wkno.org/video/know-vape-myth-vs-fact-safety-bw4khy/' },
-  { t: 'Anxiety',  d: 'The vape-to-calm loop, pulled apart.', url: 'https://video.wkno.org/video/know-vape-myth-vs-fact-anxiety-4c2k2p/' },
-  { t: 'Drugs',    d: 'What else ends up in the device.', url: 'https://video.wkno.org/video/know-vape-myth-vs-fact-drugs-4cfubf/' },
-  { t: 'Smoking Cessation Device', d: 'Not the quit-tool it’s sold as.', url: 'https://video.wkno.org/video/know-vape-myth-vs-fact-0wqr4a/' },
+  { t: 'Vapor',    d: 'Vapes are just water vapor? It’s an aerosol of chemicals.', file: `${SPOTS}/vapor.mp4`,     poster: `${SPOTS}/vapor-poster.jpg`,     url: 'https://video.idahoptv.org/video/know-vape-myth-vs-fact-vapor-h5git8/' },
+  { t: 'Nicotine', d: 'The addiction the flavors are built to hide.', file: `${SPOTS}/nicotine.mp4`,  poster: `${SPOTS}/nicotine-poster.jpg`,  url: 'https://video.idahoptv.org/video/know-vape-myth-vs-fact-nicotine-ymwf0l/' },
+  { t: 'Safety',   d: '“Safer than cigarettes” is the wrong bar.', file: `${SPOTS}/safety.mp4`,    poster: `${SPOTS}/safety-poster.jpg`,    url: 'https://video.idahoptv.org/video/know-vape-myth-vs-fact-safety-bw4khy/' },
+  { t: 'Anxiety',  d: 'The vape-to-calm loop, pulled apart.', file: `${SPOTS}/anxiety.mp4`,   poster: `${SPOTS}/anxiety-poster.jpg`,   url: 'https://video.idahoptv.org/video/know-vape-myth-vs-fact-anxiety-4c2k2p/' },
+  { t: 'Drugs',    d: 'What else ends up in the device.', file: `${SPOTS}/drugs.mp4`,     poster: `${SPOTS}/drugs-poster.jpg`,     url: 'https://video.idahoptv.org/video/know-vape-myth-vs-fact-drugs-4cfubf/' },
+  { t: 'Smoking Cessation Device', d: 'Not the quit-tool it’s sold as.', file: `${SPOTS}/cessation.mp4`, poster: `${SPOTS}/cessation-poster.jpg`, url: 'https://video.idahoptv.org/video/know-vape-myth-vs-fact-0wqr4a/' },
 ];
+const hero = episodes[0]; // the film block plays the "Vapor" spot
 const G = '/case-studies/know-vape/gallery';
 // contact sheet: the six-poster system + the campaign in the wild
 const frames = [
@@ -123,7 +129,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .story .body a{border-bottom:1px solid var(--line)}
 .story .body a:hover{color:var(--struct);border-color:var(--struct)}
 
-/* film block: 16:9 poster, opens on PBS (external, no clean embed) */
+/* film block: 16:9 poster, plays right here in the ScreenRoom (PBS href fallback) */
 .film{background:var(--ink);padding:11vh 0 4vh}
 .film .fhead{margin-bottom:clamp(28px,5vh,48px);max-width:820px}
 .film .fhead .k{color:var(--spark)}
@@ -138,7 +144,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .poster16:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
 .poster16 .fcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
 
-/* the six spots: lined index, every row opens on PBS */
+/* the six spots: lined index, every row plays right here (PBS href fallback) */
 .epsec{background:var(--ink);padding:5vh 0 12vh}
 .epsec .ehead{max-width:820px;margin-bottom:clamp(26px,4vh,42px)}
 .epsec .ehead .k{color:var(--spark)}
@@ -292,11 +298,15 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
     </div>
     <div class="bar">
       <span class="mono"><b>The film</b> · Myth vs Fact: Vapor</span>
-      <span class="mono" style="color:#8f8d88">Plays on PBS ↗</span>
+      <a class="mono" style="color:#8f8d88" href={hero.url} target="_blank" rel="noopener">Also on PBS ↗</a>
     </div>
-    <a class="poster16" href={HERO_EP} target="_blank" rel="noopener" aria-label="Watch Vapor, a Know Vape: Myth vs Fact spot, on PBS">
+    <a class="poster16" href={hero.url} target="_blank" rel="noopener"
+       data-screen={hero.file} data-screen-poster={hero.poster}
+       data-screen-cap="Myth vs Fact: Vapor · Idaho Public Television"
+       data-screen-link={hero.url} data-screen-link-label="Also on PBS ↗"
+       aria-label="Play Vapor, a Know Vape: Myth vs Fact spot">
       <img src={`${G}/hero.jpg`} alt="Know Vape: Myth vs Fact video still" loading="lazy" decoding="async">
-      <span class="play">Watch · on PBS</span>
+      <span class="play">Play · right here</span>
       <span class="fcap">✳ Myth vs Fact: Vapor · Idaho Public Television</span>
     </a>
   </div>
@@ -310,19 +320,23 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
       <p class="sub">Each one takes a myth teens actually believe and puts the fact next to it, fast enough to survive a feed. I directed all six.</p>
     </div>
     <div class="bar">
-      <span class="mono"><b>The index</b> · every spot opens on PBS</span>
-      <span class="mono" style="color:#8f8d88">video.wkno.org ↗</span>
+      <span class="mono"><b>The index</b> · six spots · play them right here</span>
+      <a class="mono" style="color:#8f8d88" href={SHOW_URL} target="_blank" rel="noopener">Also on PBS ↗</a>
     </div>
     <ol class="eps">
       {episodes.map((e, i) => (
         <li class="ep rv">
-          <a class="ep-link" href={e.url} target="_blank" rel="noopener" aria-label={`Watch Myth vs Fact: ${e.t} on PBS`}>
+          <a class="ep-link" href={e.url} target="_blank" rel="noopener"
+             data-screen={e.file} data-screen-poster={e.poster}
+             data-screen-cap={`Myth vs Fact: ${e.t} · Idaho Public Television`}
+             data-screen-link={e.url} data-screen-link-label="Also on PBS ↗"
+             aria-label={`Play Myth vs Fact: ${e.t}`}>
             <span class="ep-n">{String(i + 1).padStart(2, '0')}</span>
             <span class="ep-body">
               <span class="ep-t">{e.t}</span>
               <span class="ep-d">{e.d}</span>
             </span>
-            <span class="ep-go" aria-hidden="true">PBS ↗</span>
+            <span class="ep-go" aria-hidden="true">Play ✳</span>
           </a>
         </li>
       ))}
@@ -406,6 +420,8 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   </div>
 </footer>
 </div><!--/underfoot-->
+
+<ScreenRoom />
 
 <script is:inline>
 // contact sheet reveal

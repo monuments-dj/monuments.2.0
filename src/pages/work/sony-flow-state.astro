@@ -88,20 +88,20 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
    corners chrome (carried over from the v1 page, same reason). */
 .hero .vwrap{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .9s ease}
 .hero .vwrap.is-playing{opacity:1}
-.hero .vwrap iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:max(100vw,177.78vh);height:max(100vh,56.25vw);border:0}
+.hero .vwrap iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:max(100vw,177.78vh);height:max(100vh,56.25vw);border:0;filter:brightness(.75)}
 .hero .vwrap::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(22,21,20,.62),rgba(22,21,20,.44) 30%,rgba(22,21,20,.44))}
 .hero .vwrap::before{content:'';position:absolute;inset:-100%;z-index:2;pointer-events:none;opacity:.5;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:280px 280px;animation:grainShift 1.1s steps(6) infinite}
 .hero .scrim{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 44%,rgba(22,21,20,.5),rgba(22,21,20,.14) 58%,rgba(22,21,20,.42))}
-.hero .t{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(56px,11.5vw,168px);line-height:.88;letter-spacing:-.035em;text-transform:uppercase}
+.hero .t{position:absolute;z-index:3;left:50%;top:46%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(56px,11.5vw,168px);line-height:.88;letter-spacing:-.035em;text-transform:uppercase}
 .hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
 .hero .t .spark{color:var(--spark)}
 .hero .t .ln{display:block;overflow:hidden}
 .hero .t .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
 .hero .t .ln:nth-child(2)>span{animation-delay:.12s}
 @keyframes rise{to{transform:translateY(0)}}
-.hero .nfo{position:absolute;right:var(--pad);bottom:11vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
+.hero .nfo{position:absolute;z-index:3;right:var(--pad);bottom:11vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
 .hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
-.hero .kck{position:absolute;left:var(--pad);bottom:11vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);opacity:0;animation:fade 1s .7s forwards;line-height:1.9}
+.hero .kck{position:absolute;z-index:3;left:var(--pad);bottom:11vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);opacity:0;animation:fade 1s .7s forwards;line-height:1.9}
 .hero .kck b{color:var(--spark);font-weight:400}
 @keyframes fade{to{opacity:1}}
 

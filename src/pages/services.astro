@@ -99,14 +99,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @keyframes driftx{to{transform:translateX(-50%)}}
 
 /* cta on ink */
-.cta{position:relative;background:var(--ink);color:var(--paper);padding:15vh 0 16vh;text-align:center;overflow:hidden;border-top:1px solid var(--lined)}
-.cta .emblem{width:112px;aspect-ratio:1;margin:0 auto 30px;display:block;animation:spin 70s linear infinite}
+.cta{position:relative;background:var(--ink);color:var(--paper);padding:7vh 0 8vh;overflow:hidden;border-top:1px solid var(--lined)}
+.cta .inner{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:clamp(28px,5vw,72px)}
+.cta .emblem{width:90px;flex:0 0 90px;aspect-ratio:1;display:block;animation:spin 70s linear infinite}
 .cta .emblem g{fill:var(--paper)}
 .cta .kick{color:var(--spark)}
-.cta .big{font-weight:var(--dispw);font-size:clamp(44px,7.6vw,112px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:20px}
+.cta .big{font-weight:var(--dispw);font-size:clamp(38px,5.8vw,82px);letter-spacing:-.035em;line-height:.92;text-transform:uppercase;margin-top:14px}
 .cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
-.cta .pill{display:inline-flex;margin-top:42px;padding:20px 38px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
+.cta .pill{display:inline-flex;margin-top:26px;padding:15px 30px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
 .cta .pill:hover{background:var(--spark)}
+@media (max-width:760px){.cta .emblem{display:none}}
 footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
 footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
@@ -229,11 +231,13 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 </div>
 
 <section class="cta">
-  <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
-  <div class="wrap">
-    <span class="kick mono rv">✳ One conversation, no deck required</span>
-    <div class="big" data-split>Tell me what<br>you're <span class="serif">building.</span></div>
-    <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
+  <div class="wrap inner">
+    <div class="cta-txt">
+      <span class="kick mono rv">✳ One conversation, no deck required</span>
+      <div class="big" data-split>Let's build something<br>great, <span class="serif">together.</span></div>
+      <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
+    </div>
+    <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
   </div>
 </section>
 

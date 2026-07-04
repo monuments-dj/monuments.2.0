@@ -9,15 +9,20 @@
 // Usage: import once per page, drop <ScreenRoom /> anywhere in the markup, then
 // mark any link or element with data-screen. The value (or, if empty, the href)
 // is the source: a YouTube URL (watch / youtu.be / shorts / embed, honors t= and
-// start=), a bare YouTube id, a Vimeo URL or numeric id, or an Instagram
+// start=), a bare YouTube id, a Vimeo URL or numeric id, an Instagram
 // reel/post URL (best effort embed, with an "Open on Instagram" line under the
-// stage as the fallback). Optional data-screen-cap="..." shows a mono caption
-// under the stage. Any OTHER host (e.g. PBS episode pages) is NOT intercepted:
-// the link navigates normally. Keep a real href on triggers so no-JS and
-// middle-click still reach the video.
+// stage as the fallback), or a VIDEO FILE (a value ending in .mp4, or any
+// same-site path starting with "/"): those play in a native <video controls
+// autoplay playsinline> on the stage, no third-party iframe at all. For files,
+// optional data-screen-poster="..." sets the poster frame and optional
+// data-screen-link="..." (+ data-screen-link-label) adds a source link under
+// the stage (e.g. "Also on PBS ↗"). Optional data-screen-cap="..." shows a
+// mono caption under the stage. Any OTHER host is NOT intercepted: the link
+// navigates normally. Keep a real href on triggers so no-JS and middle-click
+// still reach the video.
 //
 // Close ✕, ESC, or a click on the dark ground all stop playback outright:
-// the iframe is removed, not just hidden. One instance per page.
+// the iframe (or video) is removed, not just hidden. One instance per page.
 ---
 <div class="screenroom" data-screenroom role="dialog" aria-modal="true" aria-label="Video player" aria-hidden="true">
   <div class="sr-top">
@@ -51,7 +56,8 @@
 .sr-frame{position:relative;width:min(92vw,1200px,calc((100vh - 128px)*16/9));aspect-ratio:16/9;background:#000;box-shadow:0 40px 120px rgba(0,0,0,.6)}
 /* Instagram reels are vertical: swap the stage to 9:16, best effort. */
 .screenroom.is-vert .sr-frame{width:min(92vw,420px,calc((100vh - 128px)*9/16));aspect-ratio:9/16}
-.sr-mount,.sr-mount :global(iframe){position:absolute;inset:0;width:100%;height:100%;border:0}
+.sr-mount,.sr-mount :global(iframe),.sr-mount :global(video){position:absolute;inset:0;width:100%;height:100%;border:0}
+.sr-mount :global(video){object-fit:contain;background:#000}
 
 .sr-foot{flex:0 0 56px;display:flex;align-items:flex-start;justify-content:center;padding:14px max(24px,4vmin) 0}
 .sr-cap{font-family:var(--mono,var(--mono2,'Fragment Mono',monospace));font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88;text-align:center}
@@ -86,6 +92,8 @@
   function parse(raw) {
     if (!raw) return null;
     raw = raw.trim();
+    // a video FILE: any .mp4 (path or full URL) or any same-site path ("/...")
+    if (/\.mp4($|[?#])/i.test(raw) || raw.charAt(0) === '/') return { kind: 'mp4', url: raw };
     if (YT_ID.test(raw)) return { kind: 'youtube', id: raw, start: 0 };
     if (/^\d{6,}$/.test(raw)) return { kind: 'vimeo', id: raw };
     var u;
@@ -123,22 +131,37 @@
     return 'https://www.instagram.com/' + src.seg + '/' + src.id + '/embed/';
   }
 
-  function open(src, cap) {
+  function open(src, cap, opts) {
+    opts = opts || {};
     room.classList.toggle('is-vert', src.kind === 'instagram');
-    var ifr = document.createElement('iframe');
-    ifr.src = embedUrl(src);
-    ifr.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
-    ifr.allowFullscreen = true;
-    ifr.title = cap || 'Video player';
+    var el;
+    if (src.kind === 'mp4') {
+      el = document.createElement('video');
+      el.src = src.url;
+      el.controls = true;
+      el.autoplay = true;
+      el.playsInline = true;
+      el.setAttribute('playsinline', '');
+      el.preload = 'auto';
+      if (opts.poster) el.poster = opts.poster;
+      el.setAttribute('aria-label', cap || 'Video player');
+    } else {
+      el = document.createElement('iframe');
+      el.src = embedUrl(src);
+      el.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+      el.allowFullscreen = true;
+      el.title = cap || 'Video player';
+    }
     mount.innerHTML = '';
-    mount.appendChild(ifr);
+    mount.appendChild(el);
     capEl.innerHTML = '';
     if (cap) capEl.appendChild(document.createTextNode(cap));
-    if (src.kind === 'instagram') {
+    var linkHref = src.kind === 'instagram' ? src.url : opts.link;
+    if (linkHref) {
       if (cap) capEl.appendChild(document.createTextNode(' · '));
       var a = document.createElement('a');
-      a.href = src.url; a.target = '_blank'; a.rel = 'noopener';
-      a.textContent = 'Open on Instagram ↗';
+      a.href = linkHref; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = src.kind === 'instagram' ? 'Open on Instagram ↗' : (opts.linkLabel || 'Watch at the source ↗');
       capEl.appendChild(a);
     }
     room.classList.add('on');
@@ -152,7 +175,9 @@
     if (!room.classList.contains('on')) return;
     room.classList.remove('on');
     room.setAttribute('aria-hidden', 'true');
-    mount.innerHTML = ''; // removes the iframe: playback stops outright
+    var vid = mount.querySelector('video');
+    if (vid) { vid.pause(); vid.removeAttribute('src'); vid.load(); } // stop file playback dead
+    mount.innerHTML = ''; // removes the iframe/video: playback stops outright
     capEl.innerHTML = '';
     document.body.style.overflow = '';
     if (window.lenis) window.lenis.start();
@@ -169,7 +194,11 @@
     if (!src) return; // not a playable source: normal navigation
     e.preventDefault();
     lastTrigger = t;
-    open(src, t.getAttribute('data-screen-cap') || '');
+    open(src, t.getAttribute('data-screen-cap') || '', {
+      poster: t.getAttribute('data-screen-poster') || '',
+      link: t.getAttribute('data-screen-link') || '',
+      linkLabel: t.getAttribute('data-screen-link-label') || ''
+    });
   });
 
   room.addEventListener('click', function (e) {

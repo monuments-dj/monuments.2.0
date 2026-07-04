@@ -1,26 +1,20 @@
 ---
 // ON CAMERA · hosting + presenting reel wall
-// Every embed is cued (?start=) to the second DJ steps in front of the lens.
 import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 const videos = [
-  { id:'nk-_UwGuRlE', start:29,  title:'Sony Xperia 5 IV: The best 4k 120fps Slow motion camera under 1k?', channel:'Art of Visuals' },
-  { id:'QZEZIVB5AOE', start:106, title:'Sony Wide Angle Lens Shootout | 14mm | 20mm | 35mm', channel:'Art of Visuals' },
-  { id:'TkZSkaD5C0A', start:43,  title:'Sony Xperia 1 IV Review: the new king of 4K 120', channel:'Art of Visuals' },
-  { id:'jdyrrj9mpow', start:0,   title:'Xperia PRO-I | Is this for professionals?', channel:'Art of Visuals' },
-  { id:'r0jqawFpKxM', start:272, title:'Creative Perspective ft. Tommy Lundberg | AOV: To the Point', channel:'Art of Visuals' },
-  { id:'_RGvpwyYLTI', start:37,  title:"Sony's Xperia PRO-I: A Cinematographers Dream?", channel:'Art of Visuals' },
-  { id:'jOlqVeZCfCw', start:31,  title:'5 Ripkeys to Success ft. Paul Ripke | AOV: To the Point', channel:'Art of Visuals' },
-  { id:'5Z4-SzRvul8', start:0,   title:'Sony Alpha a7SIII Reviewed after shooting Sony XM4 Headphones Commercial | AOV Gear Highlights', channel:'Art of Visuals' },
-  { id:'TiGJ7wPlWtc', start:0,   title:'Film x Street Photography ft. Kill the City | AOV: To the Point', channel:'Art of Visuals' },
-  { id:'ng6yrFTrcnU', start:0,   title:'Sony x AOV | NYC Creative Space Recap', channel:'Art of Visuals' },
-  { id:'uj3UEBlzZK8', start:0,   title:'Setting Up Eye AF (Eye Autofocus) on a Sony Camera | AOV: To The Point', channel:'Art of Visuals' },
+  { id:'nk-_UwGuRlE', title:'Sony Xperia 5 IV: The best 4k 120fps Slow motion camera under 1k?', channel:'Art of Visuals' },
+  { id:'QZEZIVB5AOE', title:'Sony Wide Angle Lens Shootout | 14mm | 20mm | 35mm', channel:'Art of Visuals' },
+  { id:'TkZSkaD5C0A', title:'Sony Xperia 1 IV Review: the new king of 4K 120', channel:'Art of Visuals' },
+  { id:'jdyrrj9mpow', title:'Xperia PRO-I | Is this for professionals?', channel:'Art of Visuals' },
+  { id:'r0jqawFpKxM', title:'Creative Perspective ft. Tommy Lundberg | AOV: To the Point', channel:'Art of Visuals' },
+  { id:'_RGvpwyYLTI', title:"Sony's Xperia PRO-I: A Cinematographers Dream?", channel:'Art of Visuals' },
+  { id:'jOlqVeZCfCw', title:'5 Ripkeys to Success ft. Paul Ripke | AOV: To the Point', channel:'Art of Visuals' },
+  { id:'5Z4-SzRvul8', title:'Sony Alpha a7SIII Reviewed after shooting Sony XM4 Headphones Commercial | AOV Gear Highlights', channel:'Art of Visuals' },
+  { id:'TiGJ7wPlWtc', title:'Film x Street Photography ft. Kill the City | AOV: To the Point', channel:'Art of Visuals' },
+  { id:'ng6yrFTrcnU', title:'Sony x AOV | NYC Creative Space Recap', channel:'Art of Visuals' },
+  { id:'uj3UEBlzZK8', title:'Setting Up Eye AF (Eye Autofocus) on a Sony Camera | AOV: To The Point', channel:'Art of Visuals' },
 ];
-const cue = (s) => {
-  if (!s) return 'from the top';
-  const m = Math.floor(s / 60), ss = String(s % 60).padStart(2, '0');
-  return `in at ${m}:${ss}`;
-};
 ---
 <!doctype html>
 <html lang="en">
@@ -73,7 +67,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-media-video{position:absolute;inset:0;overflow:hidden;opacity:0;transition:opacity .9s ease}
 .hero-media-video.is-playing{opacity:1}
-.hero-media-video iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:max(100vw,177.78vh);height:max(100vh,56.25vw);border:0}
+.hero-media-video iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:max(100vw,177.78vh);height:max(100vh,56.25vw);border:0;filter:brightness(.75)}
 .hero-grad{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(22,21,20,.30),rgba(22,21,20,.62) 58%,rgba(22,21,20,.9));pointer-events:none}
 .hero>.wrap{position:relative;z-index:2}
 .hero .kck{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);line-height:1.9;opacity:0;animation:fade 1s .55s forwards}
@@ -87,7 +81,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @keyframes rise{to{transform:translateY(0)}}
 .hero .intro{max-width:62ch;color:#b9b6b0;font-size:clamp(17px,1.5vw,20px);line-height:1.6;opacity:0;animation:fade 1s .8s forwards}
 .hero .intro b{color:var(--paper);font-weight:var(--dispw2)}
-.hero .nfo{position:absolute;right:var(--pad);bottom:9vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .95s forwards}
+.hero .nfo{position:absolute;z-index:2;right:var(--pad);bottom:9vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .95s forwards}
 .hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
 @keyframes fade{to{opacity:1}}
 
@@ -106,7 +100,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
 .story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
 
-/* the wall: cued tapes on ink */
+/* the wall: tapes on ink */
 .wall{background:var(--ink);padding:10vh 0 12vh}
 .wall .bar{display:flex;justify-content:space-between;align-items:baseline;gap:18px;flex-wrap:wrap;padding-bottom:12px;border-bottom:2px solid var(--paper);margin-bottom:26px}
 .wall .bar .mono b{color:var(--spark)}
@@ -128,7 +122,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .vid .cap{display:flex;justify-content:space-between;gap:18px;align-items:baseline;padding-top:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;line-height:1.75}
 .vid .cap .t{color:var(--paper)}
 .vid .cap .t i{font-style:normal;color:var(--dim);display:block}
-.vid .cap .cue{color:var(--spark);white-space:nowrap}
 .vid.feat .cap{font-size:11.5px}
 
 /* off-camera stills: prints scattered between the tapes */
@@ -204,15 +197,15 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
 <div class="over">
 <header class="hero">
-  <!-- Header loop: the featured tape (cued to DJ's entrance) as a DIM background layer
-       under the huge type. Poster + video live inside one .35-opacity container so the
-       dim treatment is identical before and after the video fades in; the video reveals
-       only once it's actually PLAYING (YT IFrame API state 1, no blind timers). -->
+  <!-- Header loop: the featured tape as a DIM background layer under the huge type.
+       Poster + video live inside one dim container so the treatment is identical before
+       and after the video fades in; the video reveals only once it's actually PLAYING
+       (YT IFrame API state 1, no blind timers). -->
   <div class="hero-media" aria-hidden="true">
     <img src="/case-studies/on-camera/posters/nk-_UwGuRlE.jpg" alt="">
     <div class="hero-media-video" data-hero-video>
       <iframe id="ocHeaderVideo" title="On camera header loop"
-        src="https://www.youtube-nocookie.com/embed/nk-_UwGuRlE?autoplay=1&mute=1&loop=1&playlist=nk-_UwGuRlE&start=29&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
+        src="https://www.youtube-nocookie.com/embed/nk-_UwGuRlE?autoplay=1&mute=1&loop=1&playlist=nk-_UwGuRlE&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
         frameborder="0" allow="autoplay; encrypted-media; picture-in-picture"></iframe>
     </div>
   </div>
@@ -250,7 +243,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
       <h2>Press play. I show up <span class="serif">right on cue.</span></h2>
     </div>
     <div class="body rv">
-      <p>Every tape on this wall is cued to the second I step in front of the lens. No scrubbing, no guessing which one is me. Hit play on any of them and you get me doing the job: hosting, explaining, interviewing, presenting.</p>
+      <p>Hit play on any of them and you get me doing the job: hosting, explaining, interviewing, presenting.</p>
       <p>The range runs from technical gear breakdowns for Sony, to sit-down podcast episodes with working photographers and filmmakers, to event recaps where I carried the story on camera. Same voice that shapes the campaigns, just in front of the glass this time.</p>
     </div>
   </div>
@@ -259,20 +252,19 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 <section class="wall">
   <div class="wrap">
     <div class="bar">
-      <span class="mono"><b>The reel wall</b> · 11 tapes · cued to my entrance</span>
+      <span class="mono"><b>The reel wall</b> · 11 tapes</span>
       <span class="mono dim">One deck plays at a time</span>
     </div>
     <div class="vgrid">
       {videos.slice(0, 1).map((v) => (
-        <article class="vid rv feat" data-id={v.id} data-start={String(v.start)} data-title={v.title}>
+        <article class="vid rv feat" data-id={v.id} data-title={v.title}>
           <div class="ph">
             <img src={`/case-studies/on-camera/posters/${v.id}.jpg`} alt={`${v.title} poster`} loading="eager">
-            <span class="tag">TAPE-01 · {cue(v.start)}</span>
+            <span class="tag">TAPE-01</span>
             <button class="play" type="button" aria-label={`Play ${v.title}`}>Play · Featured</button>
           </div>
           <div class="cap">
             <span class="t">{v.title}<i>{v.channel} · YouTube</i></span>
-            <span class="cue">✳ {cue(v.start)}</span>
           </div>
         </article>
       ))}
@@ -314,15 +306,14 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
     </div>
     <div class="vgrid" id="vgrid">
       {videos.slice(1, 5).map((v, i) => (
-        <article class="vid rv" data-id={v.id} data-start={String(v.start)} data-title={v.title} style={`--d:${(i % 4) * 60}ms`}>
+        <article class="vid rv" data-id={v.id} data-title={v.title} style={`--d:${(i % 4) * 60}ms`}>
           <div class="ph">
             <img src={`/case-studies/on-camera/posters/${v.id}.jpg`} alt={`${v.title} poster`} loading="lazy">
-            <span class="tag">TAPE-{String(i + 2).padStart(2, '0')} · {cue(v.start)}</span>
+            <span class="tag">TAPE-{String(i + 2).padStart(2, '0')}</span>
             <button class="play" type="button" aria-label={`Play ${v.title}`}>Play</button>
           </div>
           <div class="cap">
             <span class="t">{v.title}<i>{v.channel} · YouTube</i></span>
-            <span class="cue">✳ {cue(v.start)}</span>
           </div>
         </article>
       ))}
@@ -336,15 +327,14 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
     <div class="vgrid">
       {videos.slice(5, 9).map((v, i) => (
-        <article class="vid rv" data-id={v.id} data-start={String(v.start)} data-title={v.title} style={`--d:${(i % 4) * 60}ms`}>
+        <article class="vid rv" data-id={v.id} data-title={v.title} style={`--d:${(i % 4) * 60}ms`}>
           <div class="ph">
             <img src={`/case-studies/on-camera/posters/${v.id}.jpg`} alt={`${v.title} poster`} loading="lazy">
-            <span class="tag">TAPE-{String(i + 6).padStart(2, '0')} · {cue(v.start)}</span>
+            <span class="tag">TAPE-{String(i + 6).padStart(2, '0')}</span>
             <button class="play" type="button" aria-label={`Play ${v.title}`}>Play</button>
           </div>
           <div class="cap">
             <span class="t">{v.title}<i>{v.channel} · YouTube</i></span>
-            <span class="cue">✳ {cue(v.start)}</span>
           </div>
         </article>
       ))}
@@ -357,15 +347,14 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
     <div class="vgrid">
       {videos.slice(9).map((v, i) => (
-        <article class="vid rv" data-id={v.id} data-start={String(v.start)} data-title={v.title} style={`--d:${(i % 4) * 60}ms`}>
+        <article class="vid rv" data-id={v.id} data-title={v.title} style={`--d:${(i % 4) * 60}ms`}>
           <div class="ph">
             <img src={`/case-studies/on-camera/posters/${v.id}.jpg`} alt={`${v.title} poster`} loading="lazy">
-            <span class="tag">TAPE-{String(i + 10).padStart(2, '0')} · {cue(v.start)}</span>
+            <span class="tag">TAPE-{String(i + 10).padStart(2, '0')}</span>
             <button class="play" type="button" aria-label={`Play ${v.title}`}>Play</button>
           </div>
           <div class="cap">
             <span class="t">{v.title}<i>{v.channel} · YouTube</i></span>
-            <span class="cue">✳ {cue(v.start)}</span>
           </div>
         </article>
       ))}
@@ -411,7 +400,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
-// the wall: click a tape, poster swaps for a nocookie embed cued to DJ's entrance.
+// the wall: click a tape, poster swaps for a nocookie embed, playing from the top.
 // one deck at a time: starting a new tape puts the previous one back on its poster.
 (function(){
   let current=null;
@@ -425,9 +414,9 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     card.querySelector('.ph').addEventListener('click',()=>{
       if(card.classList.contains('on'))return;
       if(current)stop(current);
-      const id=card.dataset.id,start=card.dataset.start||'0';
+      const id=card.dataset.id;
       const f=document.createElement('iframe');
-      f.src=`https://www.youtube-nocookie.com/embed/${id}?start=${start}&autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+      f.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
       f.allow='autoplay; encrypted-media; fullscreen';
       f.allowFullscreen=true;
       f.title=card.dataset.title||'Video';
