@@ -119,6 +119,14 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .vid .cap .cue{color:var(--spark);white-space:nowrap}
 .vid.feat .cap{font-size:11.5px}
 
+/* off-camera stills: prints scattered between the tapes */
+.stills{display:flex;justify-content:center;align-items:flex-start;gap:clamp(14px,2vw,26px);margin:56px 0}
+.stillfr{background:#fff;padding:7px 7px 26px;box-shadow:0 22px 54px rgba(0,0,0,.5);transform:rotate(-1.1deg);margin:0}
+.stills .stillfr:nth-child(2n){transform:rotate(.9deg)}
+.stillfr img{height:clamp(220px,24vw,330px);width:auto;display:block;filter:saturate(.94)}
+.stillfr .scap{font-family:var(--mono);font-size:9px;letter-spacing:.09em;color:var(--dim);text-transform:uppercase;padding:8px 2px 0;display:block}
+@media (max-width:900px){.stills{overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;padding-bottom:8px}.stillfr img{height:200px}}
+
 /* the podcast: Creator Clubhouse */
 .pod{padding:5vh 0 7vh}
 .pod .bar{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid #33312e;padding-bottom:12px;margin-bottom:34px}
@@ -285,11 +293,54 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
       <span class="mono dim">\ Tapes 02-11 · the rest of the roll</span>
     </div>
     <div class="vgrid" id="vgrid">
-      {videos.slice(1).map((v, i) => (
+      {videos.slice(1, 5).map((v, i) => (
         <article class="vid rv" data-id={v.id} data-start={String(v.start)} data-title={v.title} style={`--d:${(i % 4) * 60}ms`}>
           <div class="ph">
             <img src={`/case-studies/on-camera/posters/${v.id}.jpg`} alt={`${v.title} poster`} loading="lazy">
             <span class="tag">TAPE-{String(i + 2).padStart(2, '0')} · {cue(v.start)}</span>
+            <button class="play" type="button" aria-label={`Play ${v.title}`}>Play</button>
+          </div>
+          <div class="cap">
+            <span class="t">{v.title}<i>{v.channel} · YouTube</i></span>
+            <span class="cue">✳ {cue(v.start)}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="stills rv" aria-label="Off camera stills">
+      <figure class="stillfr"><img src="/case-studies/on-camera/stills/still-01.jpg" alt="DJ on set holding the slate" loading="lazy"><figcaption class="scap">OFF CAMERA · 01 · SLATE IN HAND</figcaption></figure>
+      <figure class="stillfr"><img src="/case-studies/on-camera/stills/still-02.jpg" alt="DJ presenting camera gear to the lens" loading="lazy"><figcaption class="scap">OFF CAMERA · 02 · SHOW AND TELL</figcaption></figure>
+      <figure class="stillfr"><img src="/case-studies/on-camera/stills/still-03.jpg" alt="DJ with the camera and mic rig on his shoulder" loading="lazy"><figcaption class="scap">OFF CAMERA · 03 · RIG UP</figcaption></figure>
+    </div>
+
+    <div class="vgrid">
+      {videos.slice(5, 9).map((v, i) => (
+        <article class="vid rv" data-id={v.id} data-start={String(v.start)} data-title={v.title} style={`--d:${(i % 4) * 60}ms`}>
+          <div class="ph">
+            <img src={`/case-studies/on-camera/posters/${v.id}.jpg`} alt={`${v.title} poster`} loading="lazy">
+            <span class="tag">TAPE-{String(i + 6).padStart(2, '0')} · {cue(v.start)}</span>
+            <button class="play" type="button" aria-label={`Play ${v.title}`}>Play</button>
+          </div>
+          <div class="cap">
+            <span class="t">{v.title}<i>{v.channel} · YouTube</i></span>
+            <span class="cue">✳ {cue(v.start)}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="stills rv" aria-label="Off camera stills">
+      <figure class="stillfr"><img src="/case-studies/on-camera/stills/still-04.jpg" alt="DJ looking up from the studio floor mid setup" loading="lazy"><figcaption class="scap">OFF CAMERA · 04 · MID SETUP</figcaption></figure>
+      <figure class="stillfr"><img src="/case-studies/on-camera/stills/still-05.jpg" alt="The crew laughing in the studio" loading="lazy"><figcaption class="scap">OFF CAMERA · 05 · THE CREW</figcaption></figure>
+    </div>
+
+    <div class="vgrid">
+      {videos.slice(9).map((v, i) => (
+        <article class="vid rv" data-id={v.id} data-start={String(v.start)} data-title={v.title} style={`--d:${(i % 4) * 60}ms`}>
+          <div class="ph">
+            <img src={`/case-studies/on-camera/posters/${v.id}.jpg`} alt={`${v.title} poster`} loading="lazy">
+            <span class="tag">TAPE-{String(i + 10).padStart(2, '0')} · {cue(v.start)}</span>
             <button class="play" type="button" aria-label={`Play ${v.title}`}>Play</button>
           </div>
           <div class="cap">
