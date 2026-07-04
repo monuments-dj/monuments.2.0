@@ -1,0 +1,619 @@
+---
+import CallSheet from '../../components/CallSheet.astro';
+import NextFile from '../../components/NextFile.astro';
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adorama Music · Monuments</title>
+<meta name="description" content="Adorama Music: The Journey. The brand film that launched Adorama Music, 160M+ social impressions inside the #CreateNoMatterWhat campaign. Directed by DJ Ramirez.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style is:global>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:20px;left:22px;pointer-events:auto}
+.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
+.corners .c1 i{font-style:normal;color:#fff;display:inline-block;animation:spin 7s linear infinite}
+.corners .c2{top:26px;right:22px;pointer-events:auto}
+.corners .c2 a{font-size:21px;letter-spacing:.06em}
+.corners .c2 a{margin-left:22px}
+.corners .c3{bottom:20px;left:22px}
+.corners .c4{bottom:20px;right:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
+
+/* hero: the tagline set inside the stage photograph, film loop underneath */
+.hero{position:relative;height:100svh;overflow:hidden;background:var(--ink)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) brightness(.72)}
+/* header loop: 16:9 iframe oversized to cover the hero, centered, chromeless. Sits above
+   the poster still, below the radial scrim (source order). ::after matches the poster's
+   dim so the type keeps its contrast once the film is running. */
+.hero .vwrap{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .9s ease}
+.hero .vwrap.is-playing{opacity:1}
+.hero .vwrap iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:max(100vw,177.78vh);height:max(100vh,56.25vw);border:0}
+.hero .vwrap::after{content:'';position:absolute;inset:0;z-index:1;background:rgba(22,21,20,.5)}
+.hero .vwrap::before{content:'';position:absolute;inset:-100%;z-index:2;pointer-events:none;opacity:.5;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:280px 280px;animation:grainShift 1.1s steps(6) infinite}
+.hero .scrim{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 44%,rgba(22,21,20,.44),rgba(22,21,20,.12) 58%,rgba(22,21,20,.46))}
+.hero .t{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(40px,7.5vw,112px);line-height:.94;letter-spacing:-.035em;text-transform:uppercase}
+.hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero .t .spark{color:var(--spark)}
+.hero .t .ln{display:block;overflow:hidden}
+.hero .t .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero .t .ln:nth-child(2)>span{animation-delay:.12s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .nfo{position:absolute;right:var(--pad);bottom:11vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
+.hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
+.hero .kck{position:absolute;left:var(--pad);bottom:11vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);opacity:0;animation:fade 1s .7s forwards;line-height:1.9}
+.hero .kck b{color:var(--spark);font-weight:400}
+@keyframes fade{to{opacity:1}}
+
+/* results first: cobalt scoreboard under the hero */
+.statrow{background:var(--struct);color:var(--paper)}
+/* child combinator on purpose: the reveal observer adds .in to every .rv, and the
+   descendant selector would turn each revealed .stat into its own flex row */
+.statrow>.in{display:flex;justify-content:space-between;align-items:flex-end;gap:34px;flex-wrap:wrap;padding:42px 0 34px}
+.stat b{display:block;font-weight:var(--dispw);font-size:clamp(38px,4.8vw,72px);letter-spacing:-.03em;line-height:.92}
+.stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);display:block;margin-top:8px;max-width:26ch}
+.statrow .foot{padding:0 0 36px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);line-height:2;max-width:74ch}
+.statrow .foot b{font-weight:400;color:var(--paper)}
+.rolerow{background:var(--ink);border-bottom:1px solid var(--lined)}
+.rolerow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rolerow b{color:var(--paper);font-weight:400}
+
+/* story on paper */
+.paper{background:var(--paper);color:var(--ink)}
+.story{display:grid;grid-template-columns:.62fr 1.38fr;gap:64px;padding:11vh 0 9vh;align-items:start}
+.story .side{position:sticky;top:14vh}
+.story .side .k{color:var(--red)}
+.story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
+.story h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
+.story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
+
+/* the role ledger under the role story */
+.did{list-style:none;margin:0;padding:0 0 11vh}
+.did li{display:grid;grid-template-columns:220px 1fr;gap:clamp(16px,3vw,44px);align-items:baseline;padding:18px 4px;border-top:1px solid var(--line)}
+.did li:last-child{border-bottom:1px solid var(--line)}
+.did .dk{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.did .dv{font-weight:var(--dispw2);font-size:clamp(17px,1.7vw,23px);letter-spacing:-.015em;line-height:1.3;color:var(--ink)}
+@media (max-width:700px){.did li{grid-template-columns:1fr;gap:6px}}
+
+/* film block: 16:9 click-to-play, iframe injected in place */
+.film{background:var(--ink);padding:9vh 0 10vh}
+.film .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:16px}
+.film .bar .mono b{color:var(--spark)}
+.poster16{position:relative;aspect-ratio:16/9;overflow:hidden;cursor:pointer;background:#000}
+.poster16 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.78);transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.poster16:hover img{transform:scale(1.03)}
+.poster16 .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.7;padding:0 12px;color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s}
+.poster16:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
+.poster16 .fcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
+.poster16.playing{cursor:default}
+.poster16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* the journey: three rooms on ink, contact-sheet frames + numbered beats */
+.journey{background:var(--ink);padding:2vh 0 11vh}
+.journey .head{max-width:760px;padding:6vh 0 8vh}
+.journey .head .k{color:var(--red)}
+.journey h2{font-weight:var(--dispw);font-size:clamp(34px,5.4vw,84px);letter-spacing:-.035em;line-height:.94;text-transform:uppercase;margin-top:14px}
+.journey h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.journey .head p{margin-top:22px;color:#b3b0a9;max-width:56ch;font-size:clamp(16px,1.4vw,19px)}
+.scene{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,72px);align-items:center;margin-top:clamp(56px,9vh,110px)}
+.scene:first-of-type{margin-top:0}
+.scene.rev .smedia{order:2}
+.smedia{background:#FCFBF7;padding:10px 10px 30px;transform:rotate(-1deg);box-shadow:0 2px 4px rgba(0,0,0,.35),0 22px 54px rgba(0,0,0,.5);transition:transform .6s cubic-bezier(.22,1,.36,1);position:relative}
+.scene.rev .smedia{transform:rotate(1deg)}
+.smedia:hover{transform:rotate(0) scale(1.015)}
+.smedia img{width:100%;height:auto;display:block;filter:saturate(.97)}
+.smedia .cap{position:absolute;left:11px;bottom:7px;font-family:var(--mono);font-size:9px;color:#8a877f;text-transform:uppercase;letter-spacing:.1em}
+.stext .sn{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.stext .sk{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:14px}
+.stext h3{font-weight:var(--dispw);font-size:clamp(26px,3vw,44px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;margin-top:12px}
+.stext h3 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.stext p{margin-top:16px;color:#b3b0a9;max-width:44ch;font-size:17px}
+@media (max-width:900px){.scene,.scene.rev{grid-template-columns:1fr}.scene.rev .smedia{order:0}}
+
+/* full-bleed parallax break */
+.break{position:relative;height:88svh;overflow:hidden}
+.break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;will-change:transform}
+.break .cap{position:absolute;left:var(--pad);bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85);background:rgba(22,21,20,.5);padding:5px 10px}
+
+/* gallery: contact-sheet frames, masonry columns, develop-the-roll expander */
+.gal{padding:0 0 11vh}
+.gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:16px}
+.gal .bar .mono b{color:var(--red)}
+.frames{columns:3;column-gap:14px}
+.fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;margin-bottom:14px;break-inside:avoid;opacity:0;transform:translateY(16px) rotate(-.6deg)}
+.frames.show .fr{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
+.frames.show .fr.pre{opacity:0;transform:translateY(16px) rotate(-.6deg)}
+.fr img{width:100%;height:auto;display:block;filter:saturate(.96)}
+.fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
+.frames.show .fr:hover{transform:rotate(-1deg) scale(1.03);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
+.develop{display:flex;justify-content:center;margin-top:26px}
+.develop button{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:none;border:1px solid var(--ink);border-radius:99px;padding:13px 26px;cursor:pointer;transition:background .3s,color .3s}
+.develop button:hover{background:var(--ink);color:var(--paper)}
+.develop button b{color:var(--red);font-weight:400}
+.develop button:hover b{color:var(--spark)}
+
+/* behind the film: small screening + two set frames */
+.bts{background:var(--ink);padding:9vh 0 10vh}
+.bts .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:16px}
+.bts .bar .mono b{color:var(--spark)}
+.btsrow{display:grid;grid-template-columns:1.66fr 1fr;gap:14px;align-items:stretch}
+.btsrow .poster16 .play{width:96px;height:96px;font-size:9.5px}
+.btsthumbs{display:grid;grid-template-rows:1fr 1fr;gap:14px}
+.btsthumbs figure{position:relative;margin:0;overflow:hidden;background:#000}
+.btsthumbs img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85) saturate(.96);transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.btsthumbs figure:hover img{transform:scale(1.04)}
+.btsthumbs .cap{position:absolute;left:12px;bottom:10px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.85)}
+@media (max-width:900px){.btsrow{grid-template-columns:1fr}.btsthumbs{grid-template-rows:auto;grid-template-columns:1fr 1fr}.btsthumbs img{aspect-ratio:16/9}}
+
+/* quote on rose */
+.quote{background:var(--spark);color:var(--ink);padding:15vh 0}
+.quote p.q{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(28px,4vw,58px);line-height:1.14;max-width:24ch}
+.quote p.q b{font-weight:400;font-style:normal;font-family:var(--disp);font-weight:var(--dispw);text-transform:uppercase;font-size:.86em;letter-spacing:-.02em}
+.quote .who{margin-top:28px;color:rgba(22,21,20,.6)}
+
+/* credits: the call sheet slip (CallSheet.astro) */
+.credits{padding:10vh 0}
+
+/* next case file closer: NextFile.astro (under-reveal target) */
+footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
+footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
+
+.over{position:relative;z-index:1;background:inherit}
+.underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:900px){
+  .story{grid-template-columns:1fr}.story .side{position:static}
+  .statrow>.in{justify-content:flex-start;gap:28px 44px}
+  .frames{columns:2}
+  .hero .kck{display:none}
+}
+@media (max-width:560px){.frames{columns:1}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero .t .ln>span{transform:none}.hero .nfo,.hero .kck{opacity:1}.rv{opacity:1;transform:none}
+  .grain{animation:none}.frames .fr{opacity:1;transform:none}
+  .hero .vwrap{display:none}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="companion" aria-hidden="true">✳</div>
+
+<div class="corners">
+  <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/lab">Lab</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a></span>
+  <span class="c3">MC-2022-07 · Adorama Music: The Journey · Brand film</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<div class="over">
+<header class="hero">
+  <img src="/case-studies/adorama-music/gallery/am-09.jpg" alt="A drummer from behind, facing the stage lights, in Adorama Music: The Journey">
+  <!-- Header loop: the muted brand film under the type. The am-09 still above is the
+       poster; the video fades in only once it's actually PLAYING (YT IFrame API state 1,
+       no blind timers), so the hero never flashes the black YouTube loading state. The
+       radial scrim below stays on top of the video. -->
+  <div class="vwrap" data-hero-video aria-hidden="true">
+    <iframe id="amHeaderVideo" title="Adorama Music header loop"
+      src="https://www.youtube-nocookie.com/embed/l1RBdpQ8vi8?autoplay=1&mute=1&loop=1&playlist=l1RBdpQ8vi8&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
+      frameborder="0" allow="autoplay; encrypted-media; picture-in-picture"></iframe>
+  </div>
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="t">
+    <span class="ln"><span>Wherever you're from.</span></span>
+    <span class="ln"><span>Wherever <span class="serif">you'll go</span><span class="spark">.</span></span></span>
+  </div>
+  <div class="kck">
+    <b>\ Case file</b><br>
+    Adorama Music: The Journey · Brand film<br>
+    #CreateNoMatterWhat · 2020
+  </div>
+  <div class="nfo">
+    <span class="h">NFO</span><br>
+    Client · Adorama<br>
+    Role · Director + Creative Direction<br>
+    Agency · Art of Visuals<br>
+    Frame · MC-2022-07
+  </div>
+</header>
+
+<div class="statrow">
+  <div class="wrap in">
+    <div class="stat rv"><b>160M+</b><span>Social impressions</span></div>
+    <div class="stat rv"><b>3.4M+</b><span>Engagements</span></div>
+    <div class="stat rv"><b>113K+</b><span>Film views</span></div>
+    <div class="stat rv"><b>50K+</b><span>Posts tagged #CreateNoMatterWhat</span></div>
+  </div>
+  <div class="wrap">
+    <p class="foot rv">Part of Adorama's #CreateNoMatterWhat campaign, <b>a Shorty Awards finalist.</b> It moved Adorama <b>from a retailer to a creative ally,</b> and spun off into the AMPLIFIED and Behind the Music series.</p>
+  </div>
+</div>
+
+<div class="rolerow">
+  <div class="wrap in">
+    <span><b>Client</b> · Adorama</span>
+    <span><b>My part</b> · Director + creative direction</span>
+    <span><b>Agency</b> · Art of Visuals</span>
+    <span><b>Campaign</b> · #CreateNoMatterWhat</span>
+    <span><b>Year</b> · 2020</span>
+  </div>
+</div>
+
+<section class="paper">
+  <div class="wrap story">
+    <div class="side rv">
+      <span class="k mono">\ The film</span>
+      <h2>The <span class="serif">Journey.</span></h2>
+    </div>
+    <div class="body rv">
+      <p>The film that launched Adorama Music, part of the #CreateNoMatterWhat campaign. It follows musicians from the garage, to the studio, to the stage, on one idea: gear is only as good as the stories it helps you tell.</p>
+    </div>
+  </div>
+</section>
+
+<section class="film">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>The film</b> · Adorama Music: The Journey</span>
+      <span class="mono" style="color:#8f8d88">Click to play</span>
+    </div>
+    <div class="poster16" data-film data-video="l1RBdpQ8vi8" data-title="Adorama Music: The Journey · brand film" id="filmPoster">
+      <img src="/case-studies/adorama-music/gallery/am-07.jpg" alt="Film poster: a stage keyboard rig under blue light" width="2048" height="1366" loading="lazy">
+      <span class="play">Play · The film</span>
+      <span class="fcap">✳ Adorama Music: The Journey · 2020</span>
+    </div>
+  </div>
+</section>
+
+<section class="journey">
+  <div class="wrap">
+    <div class="head">
+      <span class="k mono rv">\ The journey</span>
+      <h2 class="rv">Garage. Studio. <span class="serif">Stage.</span></h2>
+      <p class="rv">Three rooms, one through-line: keep going. The film moves with the band as the gear gets better and the rooms get bigger, but the reason never changes.</p>
+    </div>
+
+    <div class="scene">
+      <figure class="smedia rv">
+        <img src="/case-studies/adorama-music/gallery/am-03.jpg" alt="Garage: writing on a MIDI keyboard on a bed" width="2048" height="1366" loading="lazy">
+        <figcaption class="cap">SC-01 · Garage · The Journey</figcaption>
+      </figure>
+      <div class="stext rv">
+        <span class="sn">Scene 01</span>
+        <span class="sk">Garage</span>
+        <h3>Where it <span class="serif">starts</span></h3>
+        <p>Cheap gear, loud rooms, and the first songs nobody asked for. The beginning is rough on purpose.</p>
+      </div>
+    </div>
+
+    <div class="scene rev">
+      <figure class="smedia rv">
+        <img src="/case-studies/adorama-music/gallery/am-08.jpg" alt="Studio: the drummer behind the kit, mics up" width="2048" height="1366" loading="lazy">
+        <figcaption class="cap">SC-02 · Studio · The Journey</figcaption>
+      </figure>
+      <div class="stext rv">
+        <span class="sn">Scene 02</span>
+        <span class="sk">Studio</span>
+        <h3>Where it <span class="serif">sharpens</span></h3>
+        <p>The take after the take after the take. The slow work of turning a feeling into a record.</p>
+      </div>
+    </div>
+
+    <div class="scene">
+      <figure class="smedia rv">
+        <img src="/case-studies/adorama-music/gallery/am-13.jpg" alt="Stage: the singer at her keyboard under the lights" width="2048" height="1366" loading="lazy">
+        <figcaption class="cap">SC-03 · Stage · The Journey</figcaption>
+      </figure>
+      <div class="stext rv">
+        <span class="sn">Scene 03</span>
+        <span class="sk">Stage</span>
+        <h3>Where it <span class="serif">lands</span></h3>
+        <p>Lights up, room full, the same players a long way from the garage. Same drive, bigger room.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="break">
+  <img class="plx" src="/case-studies/adorama-music/gallery/am-31.jpg" alt="Band rehearsal: the drummer mid-hit, guitarist behind" width="2048" height="1366" loading="lazy">
+  <span class="cap">✳ Adorama Music: The Journey · #CreateNoMatterWhat</span>
+</div>
+
+<section class="paper">
+  <div class="wrap story">
+    <div class="side rv">
+      <span class="k mono">\ The role</span>
+      <h2>Strategy, the shoot, and the <span class="serif">client in the room.</span></h2>
+    </div>
+    <div class="body rv">
+      <p>I led Adorama Music: The Journey as creative director. I set the strategy, directed the photo and video, shot a chunk of the stills myself, and was Adorama's main point of contact from the first call to the final cut. Rad Animal came on to help with the production.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <ul class="did rv">
+      <li><span class="dk">Strategy</span><span class="dv">Shaped what the campaign needed to say, and to whom.</span></li>
+      <li><span class="dk">Creative Direction</span><span class="dv">Owned the creative from concept through final delivery.</span></li>
+      <li><span class="dk">Photo + Video</span><span class="dv">Directed the shoot and shot a portion of the stills.</span></li>
+      <li><span class="dk">Client Lead</span><span class="dv">Adorama's main point of contact, start to finish.</span></li>
+    </ul>
+  </div>
+
+  <div class="wrap gal">
+    <div class="bar">
+      <span class="mono"><b>Contact sheet</b> · Shot like the music sounds.</span>
+      <span class="mono" style="color:#8f8d88" id="galCount">38 frames · hover to inspect</span>
+    </div>
+    <div class="frames" id="frames"></div>
+    <div class="develop">
+      <button type="button" id="developBtn"><b>✳</b> Develop the full roll · 23 more frames</button>
+    </div>
+  </div>
+</section>
+
+<section class="bts">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>Behind the film</b> · the second cut, from the set</span>
+      <span class="mono" style="color:#8f8d88">Click to play</span>
+    </div>
+    <div class="btsrow">
+      <div class="poster16" data-film data-video="i_hGj3rKH7k" data-title="Adorama Music · behind the film" id="btsPoster">
+        <img src="/case-studies/adorama-music/gallery/am-37.jpg" alt="Behind the scenes of Adorama Music: The Journey" width="1024" height="683" loading="lazy">
+        <span class="play">Play · Behind the film</span>
+        <span class="fcap">✳ Behind the film · Adorama Music: The Journey</span>
+      </div>
+      <div class="btsthumbs">
+        <figure>
+          <img src="/case-studies/adorama-music/gallery/am-36.jpg" alt="On set: crew between takes" width="800" height="534" loading="lazy">
+          <span class="cap">Set frame 01</span>
+        </figure>
+        <figure>
+          <img src="/case-studies/adorama-music/gallery/am-38.jpg" alt="On set: lining up the shot" width="800" height="534" loading="lazy">
+          <span class="cap">Set frame 02</span>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="wrap">
+    <p class="q rv">"Gear is only as good as <b>the stories it helps you tell.</b>"</p>
+    <p class="who mono rv">The one idea the film hangs on</p>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap credits rv">
+    <CallSheet
+      code="MC-2022-07"
+      sub="Adorama · Adorama Music: The Journey · Brand film"
+      filed="MMXX"
+      tone="light"
+      rows={[
+        { k: 'Client', v: 'Adorama' },
+        { k: 'Agency', v: 'Art of Visuals' },
+        { k: 'Director + creative direction', v: 'DJ Ramirez', select: true },
+      ]}
+    />
+  </div>
+</section>
+</div><!--/over-->
+
+<div class="underfoot">
+<NextFile
+  href="/work/buck-the-quo"
+  name="Buck the Quo"
+  img="/case-studies/buck-the-quo/gallery/container-front.jpg"
+  code="MC-2021-03"
+/>
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
+    <span class="blk">built to be remembered</span>
+    <span>Case template</span>
+  </div>
+</footer>
+</div><!--/underfoot-->
+
+<script is:inline>
+// contact sheet: the FULL 38-frame roll. 15 curated selects up front, the other 23
+// develop on demand (appended on click so the lazy images never load until asked for).
+(function(){
+  var G='/case-studies/adorama-music/gallery/';
+  // [file, w, h, caption] - portraits 33-35 break the 3:2 rhythm on purpose
+  var selects=[
+    ['am-02.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-04.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-05.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-06.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-10.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-33.jpg',1366,2048,'#CreateNoMatterWhat'],
+    ['am-11.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-12.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-34.jpg',1366,2048,'#CreateNoMatterWhat'],
+    ['am-14.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-15.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-35.jpg',1366,2048,'#CreateNoMatterWhat'],
+    ['am-16.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-17.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-19.jpg',2048,1366,'#CreateNoMatterWhat']
+  ];
+  var roll=[
+    ['am-18.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-20.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-21.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-22.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-23.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-24.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-25.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-26.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-27.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-28.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-29.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-30.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-31.jpg',2048,1366,'Rehearsal · Mid-hit'],
+    ['am-32.jpg',2048,1366,'#CreateNoMatterWhat'],
+    ['am-01.jpg',2048,1366,'Studio · Piano takes'],
+    ['am-03.jpg',2048,1366,'Garage · First songs'],
+    ['am-07.jpg',2048,1366,'Stage · The rig'],
+    ['am-08.jpg',2048,1366,'Studio · Behind the kit'],
+    ['am-09.jpg',2048,1366,'Stage · Facing the lights'],
+    ['am-13.jpg',2048,1366,'Stage · Lights up'],
+    ['am-36.jpg',800,534,'On set · Behind the film'],
+    ['am-37.jpg',1024,683,'On set · Behind the film'],
+    ['am-38.jpg',800,534,'On set · Behind the film']
+  ];
+  var el=document.getElementById('frames');
+  function frame(s,i){
+    return '<figure class="fr" style="--d:'+(i%15)*45+'ms">'
+      +'<img src="'+G+s[0]+'" alt="Adorama Music: The Journey, '+s[3]+'" width="'+s[1]+'" height="'+s[2]+'" loading="lazy">'
+      +'<figcaption class="cap">FR-'+String(i+1).padStart(2,'0')+' · '+s[3]+'</figcaption></figure>';
+  }
+  el.innerHTML=selects.map(frame).join('');
+  new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
+
+  var btn=document.getElementById('developBtn');
+  btn.addEventListener('click',function(){
+    var t=document.createElement('template');
+    t.innerHTML=roll.map(function(s,i){return frame(s,i+selects.length)}).join('');
+    var frs=Array.prototype.slice.call(t.content.querySelectorAll('.fr'));
+    frs.forEach(function(f,i){f.classList.add('pre');f.style.setProperty('--d',(i%12)*40+'ms')});
+    el.appendChild(t.content);
+    el.classList.add('show');
+    void el.offsetHeight; // commit the .pre state before releasing it
+    requestAnimationFrame(function(){frs.forEach(function(f){f.classList.remove('pre')})});
+    btn.parentElement.remove();
+    var c=document.getElementById('galCount');
+    if(c)c.textContent='Full roll · 38 frames';
+  },{once:true});
+})();
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// hero layers + break parallax + companion
+(function(){
+  const hImg=document.querySelector('.hero>img'),hT=document.querySelector('.hero .t'),
+        nfo=document.querySelector('.hero .nfo'),kck=document.querySelector('.hero .kck'),
+        brk=document.querySelector('.break img'),c=document.querySelector('.companion');
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  let k=false;
+  addEventListener('scroll',()=>{
+    if(k)return;k=true;
+    requestAnimationFrame(()=>{
+      const y=scrollY,vh=innerHeight;
+      if(y<vh){
+        hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
+        hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
+        hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));
+        if(nfo)nfo.style.transform=`translateY(${y*-.16}px)`;
+        if(kck)kck.style.transform=`translateY(${y*-.06}px)`;
+      }
+      const r=brk.parentElement.getBoundingClientRect();
+      if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;brk.style.transform=`translateY(${p*-56}px)`}
+      if(c)c.style.transform=`translateY(${(Math.sin(y/420)*34).toFixed(1)}px) rotate(${(y*0.22).toFixed(1)}deg)`;
+      k=false;
+    });
+  },{passive:true});
+})();
+
+// under-reveal sizing
+(function(){
+  const uf=document.querySelector('.underfoot'),over=document.querySelector('.over');
+  function size(){ if(matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)').matches){over.style.marginBottom='0px';return}
+    over.style.marginBottom=uf.offsetHeight+'px'; }
+  size();addEventListener('resize',size);setTimeout(size,600);
+})();
+function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
+clock();setInterval(clock,30000);
+
+// films: click-to-play, privacy-enhanced embed injected in place (main film + behind the film)
+document.querySelectorAll('[data-film]').forEach(function(poster){
+  poster.addEventListener('click',function(){
+    if(poster.classList.contains('playing'))return;
+    poster.classList.add('playing');
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+poster.dataset.video+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    f.allow='autoplay; encrypted-media; fullscreen';
+    f.allowFullscreen=true;
+    f.title=poster.dataset.title||'Campaign film';
+    poster.innerHTML='';
+    poster.appendChild(f);
+  });
+});
+
+// header loop: reveal only once it's actually PLAYING (poster still shows until then),
+// so the hero never flashes the black YouTube loading state. Event + short state-poll
+// backup, NO blind timer - if it never plays, the poster stays. Ported from waffle-me-up
+// (this exact mechanism fixed a prod-only black flash there). Reduced-motion keeps the poster.
+(function () {
+  var wrap = document.querySelector('[data-hero-video]');
+  if (!wrap) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var shown = false;
+  function reveal() { if (!shown) { shown = true; wrap.classList.add('is-playing'); } }
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+  window.onYouTubeIframeAPIReady = function () {
+    try {
+      var p = new YT.Player('amHeaderVideo', {
+        events: {
+          onReady: function () {
+            // YouTube can auto-enable captions on muted autoplay - keep the hero clean
+            try { p.unloadModule('captions'); p.unloadModule('cc'); } catch (_) {}
+            try { p.playVideo(); } catch (_) {}
+          },
+          onStateChange: function (e) { if (e.data === 1) { try { p.unloadModule('captions'); p.unloadModule('cc'); } catch (_) {} reveal(); } },
+          // YT loads the captions module on its own schedule for muted autoplay -
+          // onApiChange fires exactly when it appears, so unload it right there
+          onApiChange: function () { try { p.unloadModule('captions'); p.unloadModule('cc'); } catch (_) {} }
+        }
+      });
+      var tries = 0;
+      var iv = setInterval(function () {
+        tries++;
+        try { if (p.getPlayerState && p.getPlayerState() === 1) reveal(); } catch (_) {}
+        if (shown || tries > 40) clearInterval(iv); // stop polling after ~12s (poster stays)
+      }, 300);
+    } catch (_) {}
+  };
+})();
+</script>
+<script is:inline src="/redesign/switcher.js" defer></script>
+</body>
+</html>

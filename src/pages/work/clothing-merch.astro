@@ -1,82 +1,392 @@
 ---
-import Base from '../../layouts/Base.astro';
 import CallSheet from '../../components/CallSheet.astro';
+import NextFile from '../../components/NextFile.astro';
 
-// === Clothing & Merch - faithful rebuild of monuments.cc/portfolio/clothing-merch ===
-// Real apparel designs pulled from the live site into /public/case-studies/clothing-merch.
-const g = Array.from({ length: 26 }, (_, i) => `/case-studies/clothing-merch/gallery/cm-${String(i + 1).padStart(2, '0')}.jpg`);
+// === Clothing & Merch · THE CUT case page ===
+// Words ported verbatim from the v1 page (monuments.cc/portfolio/clothing-merch rebuild).
 // cm-01..20: Creative Space apparel line. cm-21..23: cap detail + tee line sheets.
 // cm-24..26: DW drummers collection (tee, cap, tote).
-const credits = [
-  { k: 'Client', v: 'Mixed' },
-  { k: 'Creative Director', v: 'DJ Ramirez', select: true },
-  { k: 'Services', v: 'Design · Print · Fulfill' },
-];
+// The two Instagram reels from the source page ship as poster links out (no embed).
 ---
-<Base title="Clothing & Merch · monuments">
-  <article class="bc-page">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clothing & Merch · Monuments</title>
+<meta name="description" content="Clothing and merch design for a range of clients. Design, print, fulfill: apparel lines built as lasting symbols of identity. Creative direction by DJ Ramirez.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style is:global>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
 
-    <!-- HERO (full-bleed image) -->
-    <header class="bc-hero">
-      <img class="bc-hero-img" src={g[0]} alt="Apparel design" />
-      <div class="bc-hero-inner">
-        <p class="bc-hero-eyebrow">Creative Direction / Design</p>
-        <h1 class="bc-hero-title">Apparel<br>Design</h1>
-        <p class="bc-hero-lede">Merch worth wearing: a meaningful extension of the brand.</p>
-      </div>
-    </header>
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
 
-    <!-- INTRO -->
-    <section class="bc-intro fade">
-      <p>For a range of clients, I've had the chance to design clothing and merch that connects with their brand story, brings their community closer, and feels genuinely wearable. From concept to production, I make sure each piece reflects not just a logo or a message, but a meaningful extension of the brand itself.</p>
-    </section>
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:20px;left:22px;pointer-events:auto}
+.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
+.corners .c1 i{font-style:normal;color:#fff;display:inline-block;animation:spin 7s linear infinite}
+.corners .c2{top:26px;right:22px;pointer-events:auto}
+.corners .c2 a{font-size:21px;letter-spacing:.06em}
+.corners .c2 a{margin-left:22px}
+.corners .c3{bottom:20px;left:22px}
+.corners .c4{bottom:20px;right:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
 
-    <!-- INSIGHT QUOTE -->
-    <section class="bc-quote fade">
-      <p>By blending design with purpose, I've helped clients turn their merch lines into <span class="bc-quote-em">lasting symbols of their identity.</span></p>
-      <p class="bc-quote-attr">Design · Print · Fulfill.</p>
-    </section>
+/* hero: the corduroy cap over the lemon tree, title dropped into the photograph */
+.hero{position:relative;height:100svh;overflow:hidden;background:var(--ink)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) brightness(.62)}
+.hero .scrim{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 44%,rgba(22,21,20,.5),rgba(22,21,20,.16) 58%,rgba(22,21,20,.44))}
+.hero .t{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(52px,10.4vw,158px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase}
+.hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero .t .spark{color:var(--spark)}
+.hero .t .ln{display:block;overflow:hidden}
+.hero .t .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero .t .ln:nth-child(2)>span{animation-delay:.12s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .nfo{position:absolute;right:var(--pad);bottom:11vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
+.hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
+.hero .kck{position:absolute;left:var(--pad);bottom:11vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);opacity:0;animation:fade 1s .7s forwards;line-height:1.9}
+.hero .kck b{color:var(--spark);font-weight:400}
+@keyframes fade{to{opacity:1}}
 
-    <!-- GALLERY GRID -->
-    <section class="cs2-products">
-      <span class="cs2-check" aria-hidden="true">WEAR THE WORK</span>
-      <div class="cs2-prod-grid">
-        {g.map((src) => <figure class="cs2-prod"><img src={src} alt="" loading="lazy" /></figure>)}
-      </div>
-    </section>
+/* the working method: cobalt band, design to print to fulfill */
+.statrow{background:var(--struct);color:var(--paper)}
+.statrow>.in{display:flex;justify-content:space-between;align-items:flex-end;gap:34px;flex-wrap:wrap;padding:42px 0 38px}
+.stat b{display:block;font-weight:var(--dispw);font-size:clamp(38px,4.8vw,72px);letter-spacing:-.03em;line-height:.92;text-transform:uppercase}
+.stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);display:block;margin-top:8px}
+.stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);line-height:1.9;max-width:24ch}
+.stat .note b{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--paper);display:inline;letter-spacing:.08em;text-transform:uppercase}
+.rolerow{background:var(--ink);border-bottom:1px solid var(--lined)}
+.rolerow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rolerow b{color:var(--paper);font-weight:400}
 
-    <!-- EXECUTION -->
-    <section class="bc-exec fade">
-      <h2 class="bc-exec-h">Everyday, limited-edition, and functional.</h2>
-      <div class="bc-exec-b">
-        <p>I dive into understanding each audience and what kind of wearables would resonate, whether it's everyday apparel, limited-edition pieces, or functional gear. Every line starts with the people who'll wear it.</p>
-      </div>
-    </section>
+/* story on paper */
+.paper{background:var(--paper);color:var(--ink)}
+.story{display:grid;grid-template-columns:.62fr 1.38fr;gap:64px;padding:11vh 0 7vh;align-items:start}
+.story .side{position:sticky;top:14vh}
+.story .side .k{color:var(--red)}
+.story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
+.story h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
+.story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
+.story .body a{border-bottom:1px solid var(--line)}
+.story .body a:hover{color:var(--struct);border-color:var(--struct)}
 
-    <!-- CREDITS: the call sheet slip -->
-    <div class="bc-callsheet fade">
-      <CallSheet
-        code="MC-2020-08"
-        sub="Clothing & Merch · Apparel + print"
-        filed="MMXX"
-        tone="light"
-        rows={credits}
-      />
-    </div>
+/* the reels: two Instagram reels from the source page, posters linking out */
+.film{background:var(--ink);padding:9vh 0 10vh}
+.film .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:16px}
+.film .bar .mono b{color:var(--spark)}
+.reelgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.posterreel{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:#000;cursor:pointer}
+.posterreel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.82);transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.posterreel:hover img{transform:scale(1.03)}
+.posterreel .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.7;padding:0 12px;color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s}
+.posterreel:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
+.posterreel .fcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
+.posterreel .fout{position:absolute;right:18px;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
+@media (max-width:700px){.reelgrid{grid-template-columns:1fr}}
 
-    <!-- NEXT -->
-    <a class="cs-next" href="/work/turnstile">
-      <span class="cs-next-k">Next project</span>
-      <span class="cs-next-t">Turnstile Audio <span class="cs-next-arrow">→</span></span>
-    </a>
+/* full-bleed parallax break */
+.break{position:relative;height:88svh;overflow:hidden}
+.break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;will-change:transform}
+.break .cap{position:absolute;left:var(--pad);bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85);background:rgba(22,21,20,.5);padding:5px 10px}
 
-  </article>
-</Base>
+/* gallery: 26-frame contact sheet, masonry columns for mixed portrait + line sheets */
+.gal{padding:9vh 0}
+.gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:16px}
+.gal .bar .mono b{color:var(--red)}
+.frames{columns:3;column-gap:14px}
+.fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;margin-bottom:14px;break-inside:avoid;opacity:0;transform:translateY(16px) rotate(-.6deg)}
+.frames.show .fr{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
+.fr img{width:100%;height:auto;display:block;filter:saturate(.96)}
+.fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
+.frames.show .fr:hover{transform:rotate(-1deg) scale(1.03);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
 
-<style>
-  /* Credits call sheet: same column rhythm the old .bc-meta block held. */
-  .bc-callsheet { max-width: var(--wrap); margin: 0 auto; padding: 30px var(--pad) 110px; }
-  @media (max-width: 760px) {
-    .bc-callsheet { padding: 24px 24px 60px; }
-  }
+/* quote on rose */
+.quote{background:var(--spark);color:var(--ink);padding:15vh 0}
+.quote p.q{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(28px,4vw,58px);line-height:1.14;max-width:24ch}
+.quote p.q b{font-weight:400;font-style:normal;font-family:var(--disp);font-weight:var(--dispw);text-transform:uppercase;font-size:.86em;letter-spacing:-.02em}
+.quote .who{margin-top:28px;color:rgba(22,21,20,.6)}
+
+/* credits: the call sheet slip (CallSheet.astro) */
+.credits{padding:10vh 0}
+
+/* next case file closer: NextFile.astro (under-reveal target) */
+footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
+footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
+
+.over{position:relative;z-index:1;background:inherit}
+.underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:900px){
+  .story{grid-template-columns:1fr}.story .side{position:static}
+  .statrow>.in{justify-content:flex-start;gap:28px 44px}
+  .frames{columns:2}
+  .hero .kck{display:none}
+}
+@media (max-width:560px){.frames{columns:1}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero .t .ln>span{transform:none}.hero .nfo,.hero .kck{opacity:1}.rv{opacity:1;transform:none}
+  .grain{animation:none}.frames .fr{opacity:1;transform:none}
+}
 </style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="companion" aria-hidden="true">✳</div>
+
+<div class="corners">
+  <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/lab">Lab</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a></span>
+  <span class="c3">MC-2020-08 · Clothing & Merch · Apparel + print</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<div class="over">
+<header class="hero">
+  <img src="/case-studies/clothing-merch/gallery/cm-04.jpg" alt="The NYC corduroy cap held up in front of a lemon tree, I NEED SOME SPACE stitched across the crown">
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="t">
+    <span class="ln"><span>Apparel</span></span>
+    <span class="ln"><span><span class="serif">design</span><span class="spark">.</span></span></span>
+  </div>
+  <div class="kck">
+    <b>\ Creative Direction / Design</b><br>
+    Merch worth wearing: a meaningful<br>
+    extension of the brand.
+  </div>
+  <div class="nfo">
+    <span class="h">NFO</span><br>
+    Client · Mixed<br>
+    Role · Creative Director<br>
+    Services · Design · Print · Fulfill<br>
+    Frame · MC-2020-08
+  </div>
+</header>
+
+<div class="statrow">
+  <div class="wrap in">
+    <div class="stat rv"><b>Design</b><span>01 · The concept</span></div>
+    <div class="stat rv"><b>Print</b><span>02 · The production</span></div>
+    <div class="stat rv"><b>Fulfill</b><span>03 · The delivery</span></div>
+    <div class="stat rv"><p class="note">One line, <b>concept to production</b>, for a range of clients</p></div>
+  </div>
+</div>
+
+<div class="rolerow">
+  <div class="wrap in">
+    <span><b>Client</b> · Mixed</span>
+    <span><b>My part</b> · Creative Director · concept to production</span>
+    <span><b>Lines</b> · Creative Space · NYC · DW Drums</span>
+    <span><b>Services</b> · Design · Print · Fulfill</span>
+    <span><b>Filed</b> · MMXX</span>
+  </div>
+</div>
+
+<section class="paper">
+  <div class="wrap story">
+    <div class="side rv">
+      <span class="k mono">\ The idea</span>
+      <h2>Merch worth wearing: a meaningful extension of the <span class="serif">brand.</span></h2>
+    </div>
+    <div class="body rv">
+      <p>For a range of clients, I've had the chance to design clothing and merch that connects with their brand story, brings their community closer, and feels genuinely wearable. From concept to production, I make sure each piece reflects not just a logo or a message, but a meaningful extension of the brand itself.</p>
+    </div>
+  </div>
+</section>
+
+<section class="film">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>The reels</b> · the line in the wild</span>
+      <span class="mono" style="color:#8f8d88">Opens on Instagram ↗</span>
+    </div>
+    <div class="reelgrid">
+      <a class="posterreel" href="https://www.instagram.com/reel/ClkAMQVpxa6/" target="_blank" rel="noopener" aria-label="Open the Creative Space apparel reel on Instagram">
+        <img src="/case-studies/clothing-merch/gallery/cm-05.jpg" alt="Reel poster: the Creative Space crop crewneck worn on set" loading="lazy">
+        <span class="play">Open · The reel</span>
+        <span class="fcap">✳ Creative Space · The line</span>
+        <span class="fout">IG / ClkAMQVpxa6</span>
+      </a>
+      <a class="posterreel" href="https://www.instagram.com/reel/Cl9hIJ-vS-b/" target="_blank" rel="noopener" aria-label="Open the Creative Space drop reel on Instagram">
+        <img src="/case-studies/clothing-merch/gallery/cm-18.jpg" alt="Reel poster: the Creative Space tee with the yellow flower mark, worn on model" loading="lazy">
+        <span class="play">Open · The reel</span>
+        <span class="fcap">✳ Creative Space · The drop</span>
+        <span class="fout">IG / Cl9hIJ-vS-b</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="break">
+  <img class="plx" src="/case-studies/clothing-merch/gallery/cm-01.jpg" alt="The Creative Space hoodie back print: a red flower under the words art is chaos taking shape">
+  <span class="cap">✳ Creative Space · Art is chaos taking shape · Sony & Art of Visuals</span>
+</div>
+
+<section class="paper">
+  <div class="wrap story">
+    <div class="side rv">
+      <span class="k mono">\ The audience</span>
+      <h2>Everyday, limited-edition, and <span class="serif">functional.</span></h2>
+    </div>
+    <div class="body rv">
+      <p>I dive into understanding each audience and what kind of wearables would resonate, whether it's everyday apparel, limited-edition pieces, or functional gear. Every line starts with the people who'll wear it.</p>
+    </div>
+  </div>
+
+  <div class="wrap gal">
+    <div class="bar">
+      <span class="mono"><b>Wear the work</b> · selects from every line</span>
+      <span class="mono" style="color:#8f8d88">26 frames · hover to inspect</span>
+    </div>
+    <div class="frames" id="frames"></div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="wrap">
+    <p class="q rv">By blending design with purpose, I've helped clients turn their merch lines into <b>lasting symbols of their identity.</b></p>
+    <p class="who mono rv">Design · Print · Fulfill.</p>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap credits rv">
+    <CallSheet
+      code="MC-2020-08"
+      sub="Clothing & Merch · Apparel + print"
+      filed="MMXX"
+      tone="light"
+      rows={[
+        { k: 'Client', v: 'Mixed' },
+        { k: 'Creative Director', v: 'DJ Ramirez', select: true },
+        { k: 'Services', v: 'Design · Print · Fulfill' },
+      ]}
+    />
+  </div>
+</section>
+</div><!--/over-->
+
+<div class="underfoot">
+<NextFile
+  href="/work/art-of-visuals"
+  name="Art of Visuals"
+  img="/case-studies/art-of-visuals/gallery/xm3-bts.jpg"
+  code="MC-2024-01"
+/>
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
+    <span class="blk">built to be remembered</span>
+    <span>Case template</span>
+  </div>
+</footer>
+</div><!--/underfoot-->
+
+<script is:inline>
+// gallery: all 26 frames from the v1 page, masonry columns, line captions
+(function(){
+  const shots=[
+    ['cm-01.jpg','Creative Space · Hoodie back',1228,1600],
+    ['cm-02.jpg','Line sheet · Hats',1600,903],
+    ['cm-03.jpg','Creative Space · Hoodie',1411,1600],
+    ['cm-04.jpg','NYC cap · Corduroy',1225,1600],
+    ['cm-05.jpg','Creative Space · Crewneck',1004,1600],
+    ['cm-06.jpg','Patches · The set',1134,1600],
+    ['cm-07.jpg','Patches · New here',1121,1600],
+    ['cm-08.jpg','Creative Space · Tee front',1171,1600],
+    ['cm-09.jpg','Creative Space · Tee back',1146,1600],
+    ['cm-10.jpg','Patch · Creator',1600,566],
+    ['cm-11.jpg','Patch · Storyteller',1600,571],
+    ['cm-12.jpg','Patch · Human',1600,603],
+    ['cm-13.jpg','Line sheet · The marks',1600,875],
+    ['cm-14.jpg','Line sheet · Hoodies',1600,905],
+    ['cm-15.jpg','Line sheet · Tees',1600,897],
+    ['cm-16.jpg','Line sheet · Tote',1600,881],
+    ['cm-17.jpg','Line sheet · Patches',1600,873],
+    ['cm-18.jpg','Creative Space · On model',1208,1600],
+    ['cm-19.jpg','NYC tee · On model',1114,1600],
+    ['cm-20.jpg','NYC cap · In hand',1131,1600],
+    ['cm-21.jpg','NYC cap · Back',498,509],
+    ['cm-22.jpg','Line sheet · Crewneck',2000,1124],
+    ['cm-23.jpg','Line sheet · Crewneck back',2000,1121],
+    ['cm-24.jpg','DW Drums · Tee',2000,1245],
+    ['cm-25.jpg','DW Drums · Snapback',2000,1162],
+    ['cm-26.jpg','DW Drums · Tote',2000,1802]
+  ];
+  const el=document.getElementById('frames');
+  el.innerHTML=shots.map((s,i)=>`
+    <figure class="fr" style="--d:${i*45}ms">
+      <img src="/case-studies/clothing-merch/gallery/${s[0]}" alt="Apparel design: ${s[1]}" width="${s[2]}" height="${s[3]}" loading="lazy">
+      <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · ${s[1]}</figcaption>
+    </figure>`).join('');
+  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
+})();
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// hero layers + break parallax + companion
+(function(){
+  const hImg=document.querySelector('.hero>img'),hT=document.querySelector('.hero .t'),
+        nfo=document.querySelector('.hero .nfo'),kck=document.querySelector('.hero .kck'),
+        brk=document.querySelector('.break img'),c=document.querySelector('.companion');
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  let k=false;
+  addEventListener('scroll',()=>{
+    if(k)return;k=true;
+    requestAnimationFrame(()=>{
+      const y=scrollY,vh=innerHeight;
+      if(y<vh){
+        hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
+        hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
+        hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));
+        if(nfo)nfo.style.transform=`translateY(${y*-.16}px)`;
+        if(kck)kck.style.transform=`translateY(${y*-.06}px)`;
+      }
+      if(brk){const r=brk.parentElement.getBoundingClientRect();
+      if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;brk.style.transform=`translateY(${p*-56}px)`}}
+      if(c)c.style.transform=`translateY(${(Math.sin(y/420)*34).toFixed(1)}px) rotate(${(y*0.22).toFixed(1)}deg)`;
+      k=false;
+    });
+  },{passive:true});
+})();
+
+// under-reveal sizing
+(function(){
+  const uf=document.querySelector('.underfoot'),over=document.querySelector('.over');
+  function size(){ if(matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)').matches){over.style.marginBottom='0px';return}
+    over.style.marginBottom=uf.offsetHeight+'px'; }
+  size();addEventListener('resize',size);setTimeout(size,600);
+})();
+function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
+clock();setInterval(clock,30000);
+</script>
+<script is:inline src="/redesign/switcher.js" defer></script>
+</body>
+</html>

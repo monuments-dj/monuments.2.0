@@ -1,0 +1,142 @@
+---
+// NextFile.astro · the shared bottom-of-page NEXT CASE FILE closer for the cut pages.
+// Dark ink full-width band: mono kicker with the red spark, giant next-project name
+// (Bricolage 800 uppercase with an Instrument Serif italic splice on the last word),
+// a white-framed cover thumb, and a thin progress rail that fills as the visitor
+// overscrolls at page bottom. Rail full (default 120px of overscroll past the end)
+// carries to the next case file; a click anywhere on the band goes immediately.
+// Ported from NextProject.astro (the v1 scroll-to-end hand-off DJ loved), rebuilt
+// in the CUT language. Self-contained: no Lenis/GSAP, token fallbacks so it renders
+// on any page, reduced-motion = click only.
+//   <NextFile href name img code threshold />
+interface Props {
+  href: string;
+  name: string;
+  img: string;
+  code: string;
+  threshold?: number; // overscroll px past page bottom before it carries over
+}
+const { href, name, img, code, threshold = 120 } = Astro.props;
+const words = name.trim().split(/\s+/);
+const last = words.pop();
+const head = words.join(' ');
+---
+<section class="nextfile" data-nextfile data-nf-href={href} data-nf-threshold={threshold}>
+  <a class="nf-link" href={href} data-nf-link aria-label={`Next case file: ${name}`}>
+    <div class="nf-wrap">
+      <div class="nf-kicker mono"><i class="mk" aria-hidden="true">&#10035;</i> Next case file &middot; {code}</div>
+      <div class="nf-row">
+        <span class="nf-thumb" aria-hidden="true">
+          <img src={img} alt="" loading="lazy" decoding="async" />
+          <span class="nf-thumbcap mono">{code}</span>
+        </span>
+        <span class="nf-name">{head ? head + ' ' : ''}<span class="serif">{last}</span></span>
+      </div>
+      <div class="nf-rail" data-nf-rail aria-hidden="true"><span class="nf-fill" data-nf-fill></span></div>
+      <div class="nf-foot mono">
+        <span class="nf-hint nf-hint-scroll">keep scrolling, or click</span>
+        <span class="nf-hint nf-hint-click">click to open the file</span>
+        <span class="nf-open">Open file <i class="nf-arrow" aria-hidden="true">&rarr;</i></span>
+      </div>
+    </div>
+  </a>
+</section>
+
+<style>
+.nextfile{position:relative;background:var(--ink,#161514);color:var(--paper,#F5F3EF);overflow:hidden}
+.nf-link{display:block;color:inherit;text-decoration:none}
+.nf-wrap{max-width:var(--wrap,1380px);margin:0 auto;padding:clamp(60px,11vh,120px) var(--pad,clamp(22px,4.6vw,44px)) clamp(44px,8vh,84px)}
+.mono{font-family:var(--mono,'Fragment Mono',monospace);font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:400}
+.nf-kicker{color:var(--dim,#8f8d88)}
+.nf-kicker .mk{font-style:normal;color:var(--red,#E0311A)}
+
+.nf-row{display:flex;align-items:center;gap:clamp(20px,3.4vw,48px);margin-top:clamp(22px,4vh,38px)}
+.nf-thumb{position:relative;flex:0 0 auto;width:clamp(88px,10.5vw,150px);background:#FCFBF7;padding:6px 6px 20px;transform:rotate(-2.2deg);box-shadow:0 2px 4px rgba(0,0,0,.4),0 14px 34px rgba(0,0,0,.5);transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.nf-thumb img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.96)}
+.nf-thumbcap{position:absolute;left:7px;bottom:4px;font-size:7.5px;letter-spacing:.14em;color:var(--dim,#8f8d88)}
+.nf-link:hover .nf-thumb{transform:rotate(1deg) scale(1.05)}
+.nf-name{display:block;font-family:var(--disp,'Bricolage Grotesque',sans-serif);font-weight:var(--dispw,800);font-size:clamp(44px,8.4vw,124px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;transition:color .3s}
+.nf-name .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.nf-link:hover .nf-name{color:var(--spark,#EFA1AD)}
+
+.nf-rail{position:relative;height:2px;margin-top:clamp(30px,5.5vh,54px);background:rgba(245,243,239,.16);overflow:hidden}
+.nf-fill{position:absolute;top:0;left:0;bottom:0;width:calc(var(--nf-fill,0)*100%);background:var(--red,#E0311A);transition:width .1s linear}
+.nf-foot{display:flex;justify-content:space-between;align-items:baseline;gap:18px;margin-top:14px;color:var(--dim,#8f8d88)}
+.nf-hint-click{display:none}
+.nf-open{color:var(--paper,#F5F3EF)}
+.nf-arrow{font-style:normal;display:inline-block;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.nf-link:hover .nf-arrow{transform:translateX(6px)}
+.nextfile.is-full .nf-hint-scroll,.nextfile.is-full .nf-open{color:var(--red,#E0311A)}
+.nextfile.is-full .nf-arrow{animation:nfPulse 1s ease-in-out infinite}
+@keyframes nfPulse{0%,100%{transform:translateX(6px)}50%{transform:translateX(14px)}}
+
+@media (max-width:700px){
+  .nf-row{align-items:flex-start;gap:18px}
+  .nf-thumb{margin-top:6px}
+}
+@media (prefers-reduced-motion:reduce){
+  .nf-rail{display:none}
+  .nf-hint-scroll{display:none}
+  .nf-hint-click{display:inline}
+  .nf-thumb,.nf-arrow{transition:none}
+  .nextfile.is-full .nf-arrow{animation:none}
+}
+</style>
+
+<script is:inline>
+// scroll-to-end hand-off: once the page is scrolled to its very bottom, further
+// wheel/touch overscroll fills the rail (--nf-fill 0..1); full = carry to the next
+// case file. Scrolling back up (or lifting the finger early) resets. Skips entirely
+// under reduced motion (click only) and never fires while a lightbox/modal has the
+// page locked (body overflow hidden).
+(function () {
+  var nf = document.querySelector('[data-nextfile]');
+  if (!nf) return;
+  var href = nf.getAttribute('data-nf-href');
+  var threshold = Number(nf.getAttribute('data-nf-threshold')) || 120;
+  if (!href) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var over = 0, fired = false;
+  function atBottom() {
+    var d = document.documentElement;
+    return window.scrollY + window.innerHeight >= d.scrollHeight - 2;
+  }
+  function locked() { return document.body.style.overflow === 'hidden'; }
+  function set(p) {
+    nf.style.setProperty('--nf-fill', p.toFixed(3));
+    nf.classList.toggle('is-full', p >= 1);
+  }
+  function reset() { if (over !== 0 && !fired) { over = 0; set(0); } }
+  function bump(dy) {
+    if (fired || locked()) return;
+    if (!atBottom()) { reset(); return; }
+    over = Math.max(0, over + dy);
+    var p = Math.min(1, over / threshold);
+    set(p);
+    if (p >= 1) {
+      fired = true;
+      setTimeout(function () { location.href = href; }, 160);
+    }
+  }
+
+  addEventListener('wheel', function (e) {
+    if (e.deltaY > 0) bump(e.deltaY);
+    else if (e.deltaY < 0) reset();
+  }, { passive: true });
+
+  var ty = null;
+  addEventListener('touchstart', function (e) { ty = e.touches[0].clientY; }, { passive: true });
+  addEventListener('touchmove', function (e) {
+    if (ty === null) return;
+    var y = e.touches[0].clientY, dy = ty - y;
+    ty = y;
+    if (dy > 0) bump(dy * 1.5);
+    else if (dy < 0) reset();
+  }, { passive: true });
+  addEventListener('touchend', function () { ty = null; reset(); }, { passive: true });
+
+  // leaving the bottom by any means drains the rail
+  addEventListener('scroll', function () { if (!atBottom()) reset(); }, { passive: true });
+})();
+</script>

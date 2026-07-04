@@ -2,6 +2,7 @@
 // ON CAMERA · hosting + presenting reel wall
 // Every embed is cued (?start=) to the second DJ steps in front of the lens.
 import CallSheet from '../../components/CallSheet.astro';
+import NextFile from '../../components/NextFile.astro';
 const videos = [
   { id:'nk-_UwGuRlE', start:29,  title:'Sony Xperia 5 IV: The best 4k 120fps Slow motion camera under 1k?', channel:'Art of Visuals' },
   { id:'QZEZIVB5AOE', start:106, title:'Sony Wide Angle Lens Shootout | 14mm | 20mm | 35mm', channel:'Art of Visuals' },
@@ -92,7 +93,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* cobalt at-a-glance band */
 .statrow{background:var(--struct)}
-.statrow .in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:26px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72)}
+.statrow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:26px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72)}
 .statrow b{color:var(--paper);font-weight:400}
 
 /* story on paper */
@@ -164,13 +165,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .pod .follow:hover{border-color:var(--spark);color:var(--spark)}
 @media (max-width:900px){.pod .lay{grid-template-columns:1fr;gap:30px}.pod .art{max-width:280px}}
 
-/* next + footer */
-.next{background:var(--ink);color:var(--paper);padding:13vh 0 12vh;text-align:center;position:relative;overflow:hidden}
-.next .k{color:var(--spark);display:block}
-.next .big{font-weight:var(--dispw);font-size:clamp(44px,8.4vw,124px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:18px;display:inline-block;transition:color .3s}
-.next .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
-.next a:hover .big{color:var(--spark)}
-.next .arrow{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:22px}
+/* next case file closer: NextFile.astro (under-reveal target) */
 footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
 footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
@@ -397,13 +392,12 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 </div><!--/over-->
 
 <div class="underfoot">
-<section class="next">
-  <a href="/work">
-    <span class="k mono">✳ Next · the full roll</span>
-    <span class="big">All <span class="serif">work</span></span>
-    <span class="arrow">Back to case files →</span>
-  </a>
-</section>
+<NextFile
+  href="/work/turnstile"
+  name="Turnstile Audio"
+  img="/case-studies/turnstile/products/prod-01.jpg"
+  code="MC-2023-02"
+/>
 <footer>
   <div class="wrap row mono">
     <span>Monuments © MMXXVI · ELMT.NO.004259</span>

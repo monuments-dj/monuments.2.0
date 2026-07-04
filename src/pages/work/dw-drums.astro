@@ -7,19 +7,20 @@ import NextFile from '../../components/NextFile.astro';
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blue Cross of Idaho · Monuments</title>
+<title>DW Drums · Monuments</title>
+<meta name="description" content="DW Drums DWe campaign. Two worlds, one seam: every spread tears down the middle. Creative direction and design by DJ Ramirez.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
 <style is:global>
 :root{
   --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --teal:#2FB8A0;
   --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
   --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
   --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
-  --dispcond:var(--disp); --condstretch:75%;
   --mono:'Fragment Mono',monospace;
-  --spark:var(--rose); --struct:var(--cobalt);
+  --spark:var(--teal); --struct:var(--cobalt);
 }
 *{margin:0;box-sizing:border-box}
 body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -46,73 +47,67 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
 @media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
 
-/* hero: title IN the campaign photograph (work stays in color) */
+/* hero: the face-off spread carries the page; the torn seam in the artwork sits under the type */
 .hero{position:relative;height:100svh;overflow:hidden;background:var(--ink)}
-.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.02) brightness(.82)}
-.hero .t{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(60px,12.4vw,182px);line-height:.86;letter-spacing:-.035em;text-transform:uppercase;mix-blend-mode:screen}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) brightness(.62)}
+.hero .scrim{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 44%,rgba(22,21,20,.5),rgba(22,21,20,.16) 58%,rgba(22,21,20,.46))}
+.hero .t{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(40px,8.2vw,120px);line-height:.92;letter-spacing:-.035em;text-transform:uppercase}
 .hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
-.hero .t .spark{color:var(--spark);mix-blend-mode:normal}
+.hero .t .spark{color:var(--teal)}
 .hero .t .ln{display:block;overflow:hidden}
 .hero .t .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
 .hero .t .ln:nth-child(2)>span{animation-delay:.12s}
 @keyframes rise{to{transform:translateY(0)}}
 .hero .nfo{position:absolute;right:var(--pad);bottom:11vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
-.hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
+.hero .nfo .h{color:var(--ink);background:var(--teal);padding:1px 7px;display:inline-block;margin-bottom:8px}
 .hero .kck{position:absolute;left:var(--pad);bottom:11vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);opacity:0;animation:fade 1s .7s forwards;line-height:1.9}
-.hero .kck b{color:var(--spark);font-weight:400}
+.hero .kck b{color:var(--teal);font-weight:400}
 @keyframes fade{to{opacity:1}}
 
-/* cobalt at-a-glance band */
-.statrow{background:var(--struct)}
-.statrow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:26px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72)}
-.statrow b{color:var(--paper);font-weight:400}
+/* the torn seam: a white ripped strip between bands, echoing the campaign device */
+.seam{height:32px;background:#FCFBF7;position:relative;z-index:2;
+clip-path:polygon(0 18%,4% 4%,8% 26%,13% 8%,18% 30%,23% 6%,28% 24%,33% 10%,38% 32%,43% 2%,48% 22%,53% 8%,58% 28%,63% 6%,68% 26%,73% 12%,78% 30%,83% 4%,88% 24%,93% 10%,100% 20%,100% 78%,95% 96%,90% 72%,85% 94%,80% 70%,75% 92%,70% 74%,65% 98%,60% 72%,55% 92%,50% 70%,45% 94%,40% 76%,35% 96%,30% 70%,25% 90%,20% 72%,15% 96%,10% 74%,5% 90%,0 76%)}
+
+/* concept first: the three worlds on the teal band, where the scoreboard usually sits */
+.splitrow{background:var(--teal);color:var(--ink)}
+.splitrow .band{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.4vw,54px);padding:56px 0 52px}
+.world .n{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(22,21,20,.62)}
+.world b{display:block;margin-top:10px;font-weight:var(--dispw);font-size:clamp(24px,2.7vw,42px);letter-spacing:-.025em;line-height:1;text-transform:uppercase}
+.world b i{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--paper);padding:0 .1em;text-transform:none}
+.world p{margin-top:12px;font-size:15px;line-height:1.55;font-weight:var(--dispw2);color:rgba(22,21,20,.78);max-width:34ch}
+
+.rolerow{background:var(--ink);border-bottom:1px solid var(--lined)}
+.rolerow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rolerow b{color:var(--paper);font-weight:400}
 
 /* story on paper */
 .paper{background:var(--paper);color:var(--ink)}
 .story{display:grid;grid-template-columns:.62fr 1.38fr;gap:64px;padding:11vh 0 7vh;align-items:start}
 .story .side{position:sticky;top:14vh}
-.story .side .k{color:var(--red)}
+.story .side .k{color:var(--teal)}
 .story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
 .story h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
 .story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
 .story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
 
-/* film block */
-.film{position:relative;background:var(--ink);padding:0}
-.film .poster{position:relative;height:92svh;overflow:hidden;cursor:pointer}
-.film .poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72);transition:transform .8s cubic-bezier(.22,1,.36,1)}
-.film .poster:hover img{transform:scale(1.03)}
-.film .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s}
-.film .poster:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
-.film .fcap{position:absolute;left:var(--pad);bottom:24px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
-#reelbox{position:fixed;inset:0;z-index:96;background:rgba(12,11,10,.96);display:none;align-items:center;justify-content:center;padding:4vmin}
-#reelbox.on{display:flex}
-#reelbox .frame{position:relative;width:min(92vw,1500px);aspect-ratio:16/9;background:#000;box-shadow:0 40px 120px rgba(0,0,0,.6)}
-#reelbox iframe{width:100%;height:100%;border:0}
-#reelbox .x{position:absolute;top:-42px;right:0;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:none;border:1px solid rgba(245,243,239,.4);border-radius:99px;padding:8px 16px;cursor:pointer}
-#reelbox .x:hover{background:var(--paper);color:var(--ink)}
-#reelbox .cap{position:absolute;bottom:-34px;left:0;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88}
-
 /* full-bleed parallax break */
-.break{position:relative;height:88svh;overflow:hidden}
+.break{position:relative;height:88svh;overflow:hidden;background:var(--ink)}
 .break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;will-change:transform}
 .break .cap{position:absolute;left:var(--pad);bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85);background:rgba(22,21,20,.5);padding:5px 10px}
 
-/* gallery: contact-sheet frames */
+/* gallery: contact-sheet frames, two masonry columns so the spreads stay big and uncropped */
 .gal{padding:9vh 0}
 .gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:16px}
 .gal .bar .mono b{color:var(--red)}
-.frames{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;grid-auto-flow:dense}
-.fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;opacity:0;transform:translateY(16px) rotate(-.6deg)}
+.frames{columns:2;column-gap:16px}
+.fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;margin-bottom:16px;break-inside:avoid;opacity:0;transform:translateY(16px) rotate(-.6deg)}
 .frames.show .fr{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
-.fr img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.96)}
+.fr img{width:100%;height:auto;display:block;filter:saturate(.96)}
 .fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
-.frames.show .fr:hover{transform:rotate(-1deg) scale(1.03);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
-.fr.wide{grid-column:span 2}
-.fr.wide img{aspect-ratio:8/4.6}
+.frames.show .fr:hover{transform:rotate(-1deg) scale(1.02);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
 
-/* quote on rose */
-.quote{background:var(--spark);color:var(--ink);padding:15vh 0}
+/* the pull quote on the teal band */
+.quote{background:var(--teal);color:var(--ink);padding:15vh 0}
 .quote p.q{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(28px,4vw,58px);line-height:1.14;max-width:24ch}
 .quote p.q b{font-weight:400;font-style:normal;font-family:var(--disp);font-weight:var(--dispw);text-transform:uppercase;font-size:.86em;letter-spacing:-.02em}
 .quote .who{margin-top:28px;color:rgba(22,21,20,.6)}
@@ -123,7 +118,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 /* next case file closer: NextFile.astro (under-reveal target) */
 footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
 footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
+footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--teal);text-transform:lowercase}
 
 .over{position:relative;z-index:1;background:inherit}
 .underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
@@ -133,9 +128,10 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 .rv.in{opacity:1;transform:none}
 @media (max-width:900px){
   .story{grid-template-columns:1fr}.story .side{position:static}
-  .frames{grid-template-columns:1fr 1fr}.fr.wide{grid-column:span 2}
+  .splitrow .band{grid-template-columns:1fr;gap:30px}
   .hero .kck{display:none}
 }
+@media (max-width:560px){.frames{columns:1}}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .hero .t .ln>span{transform:none}.hero .nfo,.hero .kck{opacity:1}.rv{opacity:1;transform:none}
@@ -150,72 +146,97 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 <div class="corners">
   <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
   <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/lab">Lab</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a></span>
-  <span class="c3">MC-2023-04 · Blue Cross of Idaho · with OMEK</span>
+  <span class="c3">MC-2022-04 · DW Drums · DWe campaign</span>
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
 <div class="over">
 <header class="hero">
-  <img src="/case-studies/blue-cross/bc-2.jpg" alt="Blue Cross of Idaho campaign still">
+  <img src="/case-studies/dw-drums/gallery/face-off.jpg" alt="DWe face-off spread: a studio engineer at the console and a drummer mid-hit, torn down the middle">
+  <div class="scrim" aria-hidden="true"></div>
   <div class="t">
-    <span class="ln"><span>Real</span></span>
-    <span class="ln"><span><span class="serif">people</span><span class="spark">.</span></span></span>
+    <span class="ln"><span>Engineer approved.</span></span>
+    <span class="ln"><span>Drummer <span class="serif">tested</span><span class="spark">.</span></span></span>
   </div>
   <div class="kck">
     <b>\ Case file</b><br>
-    Blue Cross of Idaho × OMEK<br>
-    Stills campaign · 2023
+    DW Drums · DWe · Split-screen campaign<br>
+    Two worlds, one seam
   </div>
   <div class="nfo">
     <span class="h">NFO</span><br>
-    Client · Blue Cross of Idaho<br>
-    Role · Creative Direction<br>
-    Agency · OMEK<br>
-    Frame · MC-2023-04
+    Client · DW Drums<br>
+    Role · Creative direction + design<br>
+    Agency · Art of Visuals<br>
+    Frame · MC-2022-04
   </div>
 </header>
 
-<div class="statrow">
+<div class="seam" aria-hidden="true"></div>
+
+<div class="splitrow">
+  <div class="wrap band">
+    <div class="world rv">
+      <span class="n">01</span>
+      <b>Engineer<i>/</i>Drummer</b>
+      <p>Approved and tested. The person who dials the sound in, and the person who beats it up on stage.</p>
+    </div>
+    <div class="world rv">
+      <span class="n">02</span>
+      <b>Plug In<i>/</i>Rock Out</b>
+      <p>The quiet studio kit and the loud live one, the same DWe rig playing both roles.</p>
+    </div>
+    <div class="world rv">
+      <span class="n">03</span>
+      <b>Acoustic<i>/</i>Electric</b>
+      <p>A hybrid kit that refuses to pick a side, so the campaign refused to as well.</p>
+    </div>
+  </div>
+</div>
+
+<div class="rolerow">
   <div class="wrap in">
-    <span><b>Client</b> · Blue Cross of Idaho</span>
-    <span><b>Role</b> · Creative direction</span>
-    <span><b>Deliverables</b> · Campaign stills</span>
-    <span><b>Year</b> · 2023</span>
+    <span><b>Client</b> · DW Drums</span>
+    <span><b>My part</b> · Creative direction + design</span>
+    <span><b>Agency</b> · Art of Visuals</span>
+    <span><b>File</b> · MC-2022-04</span>
+    <span><b>Filed</b> · MMXXIII</span>
   </div>
 </div>
 
 <section class="paper">
   <div class="wrap story">
     <div class="side rv">
-      <span class="k mono">\ The brief</span>
-      <h2>Make a health brand feel like the <span class="serif">people it serves.</span></h2>
+      <span class="k mono">\ The idea</span>
+      <h2>Two worlds, <span class="serif">one seam.</span></h2>
     </div>
     <div class="body rv">
-      <p>Blue Cross needed a campaign that authentically represented their most valued asset: their customers. The brief was to highlight the diversity and individuality of their customer base in a relatable, human way, with visuals that resonate emotionally by capturing everyday moments in a variety of settings.</p>
+      <p>DW built a kit that refuses to choose: a real acoustic set that's also a full electronic rig. They brought me in to answer one question, how do you show a product that lives in two worlds? My answer was to stop choosing. Every layout tears down the middle and lets both sides share the page.</p>
+      <p>DWe is a hybrid: a real DW kit that plugs in. So the campaign never picked a side. Every spread rips down the middle and puts two opposites face to face, the tear itself doing the talking.</p>
     </div>
   </div>
 </section>
 
 <div class="break">
-  <img class="plx" src="/case-studies/blue-cross/bc-28.jpg" alt="Blue Cross campaign photography">
-  <span class="cap">✳ Blue Cross of Idaho · everyday moments, real settings</span>
+  <img class="plx" src="/case-studies/dw-drums/gallery/spread-02.jpg" alt="DWe spread: Plug In / Rock Out, the kit and the R-TAP amp split by a zipper seam">
+  <span class="cap">✳ Plug In / Rock Out · DWe · DW Drums</span>
 </div>
 
 <section class="paper">
   <div class="wrap story">
     <div class="side rv">
-      <span class="k mono">\ The job</span>
-      <h2>A week on location, person by <span class="serif">person.</span></h2>
+      <span class="k mono">\ The role</span>
+      <h2>Strategy first, then <span class="serif">designed it out.</span></h2>
     </div>
     <div class="body rv">
-      <p>In partnership with OMEK agency, I helped with creative direction and assisted in execution of the campaign, from initial concept through final image selection. Over the course of a week, we captured authentic moments in a variety of locations: local shops, homes, and outdoor areas, highlighting the personal connection Blue Cross has with its customers.</p>
+      <p>DW came to me with a product that was genuinely hard to explain: one kit that's both a real acoustic set and a full electronic rig. I led it as Creative Director and designer, with Art of Visuals for DW Drums. The work was strategy before craft, how do you make someone feel "two worlds, one kit" before they read a single word? I landed on the split: tear every layout down the middle, put the two sides face to face, and let the seam carry the idea. Then I designed it out, spread by spread.</p>
     </div>
   </div>
 
   <div class="wrap gal">
     <div class="bar">
-      <span class="mono"><b>Contact sheet</b> · selects from the campaign</span>
-      <span class="mono" style="color:#8f8d88">23 frames · hover to inspect</span>
+      <span class="mono"><b>The spreads</b> · the campaign, uncropped</span>
+      <span class="mono" style="color:#8f8d88">11 spreads · hover to inspect</span>
     </div>
     <div class="frames" id="frames"></div>
   </div>
@@ -223,23 +244,22 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
 <section class="quote">
   <div class="wrap">
-    <p class="q rv">"Health insurance isn't just about coverage. It's about <b>knowing and caring for people as individuals.</b>"</p>
-    <p class="who mono rv">The insight the campaign hinged on</p>
+    <p class="q rv">"Every layout <b>tears down the middle</b> and lets both sides share the page."</p>
+    <p class="who mono rv">The device that carried the campaign</p>
   </div>
 </section>
 
 <section class="paper">
   <div class="wrap credits rv">
     <CallSheet
-      code="MC-2023-04"
-      sub="Blue Cross of Idaho · Real people · Stills campaign"
+      code="MC-2022-04"
+      sub="DW Drums · DWe · Two worlds, one seam"
       filed="MMXXIII"
       tone="light"
       rows={[
-        { k: 'Client', v: 'Blue Cross of Idaho' },
-        { k: 'Agency', v: 'OMEK' },
-        { k: 'Creative direction', v: 'DJ Ramirez', select: true },
-        { k: 'Format', v: 'Campaign stills · a week on location' },
+        { k: 'Client', v: 'DW Drums' },
+        { k: 'Agency', v: 'Art of Visuals' },
+        { k: 'Creative direction + design', v: 'DJ Ramirez', select: true },
       ]}
     />
   </div>
@@ -248,29 +268,41 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
 <div class="underfoot">
 <NextFile
-  href="/work/adorama-music"
-  name="Adorama Music"
-  img="/case-studies/adorama-music/gallery/am-01.jpg"
-  code="MC-2022-07"
+  href="/work/know-vape"
+  name="Know Vape"
+  img="/case-studies/know-vape/gallery/banner.jpg"
+  code="MC-2021-06"
 />
 <footer>
   <div class="wrap row mono">
     <span>Monuments © MMXXVI · ELMT.NO.004259</span>
     <span class="blk">built to be remembered</span>
-    <span>Case: Blue Cross</span>
+    <span>Case template</span>
   </div>
 </footer>
 </div><!--/underfoot-->
 
 <script is:inline>
-// gallery: 9 real frames, wide frame every 4th
+// gallery: all 11 spreads, masonry columns, uncropped; captions quote each spread's headline
 (function(){
-  const imgs=['bci-02', 'bci-03', 'bci-07', 'bci-08', 'bci-09', 'bci-10', 'bci-11', 'bci-12', 'bci-13', 'bci-14', 'bci-16', 'bci-17', 'bci-18', 'bci-19', 'bci-20', 'bci-21', 'bci-22', 'bci-23', 'bci-24', 'bci-25', 'bci-26', 'bci-27', 'bci-28'].map(n=>`/case-studies/blue-cross/gallery/${n}.jpg`);
+  const shots=[
+    ['face-off.jpg','Engineer Approved / Drummer Tested',1800,1213],
+    ['spread-01.jpg','Beauty, Brains And A Whole Lotta Fun',1800,1203],
+    ['spread-02.jpg','Plug In / Rock Out · The zipper',1800,1212],
+    ['spread-03.jpg','Plug In / Rock Out · The zipper',1800,1207],
+    ['spread-04.jpg','Free-Range Organic Tone',1138,1800],
+    ['spread-05.jpg','Plug In / Rock Out',1800,1200],
+    ['spread-06.jpg','Plug In / Rock Out · The tear',1800,1206],
+    ['spread-07.jpg','Plug In / Rock Out · The tear',1800,1203],
+    ['spread-08.jpg','Trust The Process',1800,1196],
+    ['spread-09.jpg','More Than Just Drums',1128,1800],
+    ['spread-10.jpg','Built For Wherever The Road Takes You',1130,1800]
+  ];
   const el=document.getElementById('frames');
-  el.innerHTML=imgs.map((src,i)=>`
-    <figure class="fr${i%4===0?' wide':''}" style="--d:${i*45}ms">
-      <img src="${src}" alt="Blue Cross frame ${i+1}" loading="lazy">
-      <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · BCI ARCHIVE</figcaption>
+  el.innerHTML=shots.map((s,i)=>`
+    <figure class="fr" style="--d:${i*45}ms">
+      <img src="/case-studies/dw-drums/gallery/${s[0]}" alt="DWe campaign spread: ${s[1]}" width="${s[2]}" height="${s[3]}" loading="lazy">
+      <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · ${s[1]}</figcaption>
     </figure>`).join('');
   new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
 })();
@@ -296,8 +328,8 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
         if(nfo)nfo.style.transform=`translateY(${y*-.16}px)`;
         if(kck)kck.style.transform=`translateY(${y*-.06}px)`;
       }
-      const r=brk.parentElement.getBoundingClientRect();
-      if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;brk.style.transform=`translateY(${p*-56}px)`}
+      if(brk){const r=brk.parentElement.getBoundingClientRect();
+      if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;brk.style.transform=`translateY(${p*-56}px)`}}
       if(c)c.style.transform=`translateY(${(Math.sin(y/420)*34).toFixed(1)}px) rotate(${(y*0.22).toFixed(1)}deg)`;
       k=false;
     });
@@ -313,7 +345,6 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 })();
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
-
 </script>
 <script is:inline src="/redesign/switcher.js" defer></script>
 </body>

@@ -1,4 +1,17 @@
-# TODO — current state (2026-07-03)
+# TODO — current state (2026-07-04)
+
+## 🚀 THE BIG MIGRATION IS DONE (2026-07-04, wf_52a51129)
+ALL 17 case pages are cut-design full-document pages at /work/*: six NEW routes poured from
+lab pages (buck-the-quo, adorama-music, know-vape, donut-zumiez, ac-boise, dw-drums), six
+legacy pages REBUILT in place (turnstile, flashpoint, waffle-me-up, clothing-merch,
+sony-flow-state, sony-xperia-summer), five already-cut pages wired. NEW: NextFile.astro =
+DJ's v1 bottom-of-page auto-advance (gated overscroll fills a rail then navigates; click
+works; skips when a lightbox is open) chained across all 17 in /work index order, looping.
+/work grid + home reel cards re-pointed to the new routes. Fixed a latent .statrow .in
+reveal-observer collision on every cut page (child-combinator scope). All 17 verified: 200,
+call sheet w/ red star, correct chain hrefs, zero page errors. Lab pages left as-is
+(museum; retire or redirect later). COPY PASS IS NEXT per DJ. Placeholders intentionally
+ship (DJ: "throw all placeholders in").
 
 ## 🚀 THE SWAP IS DONE + POST-SWAP FEATURES (state as of 2026-07-03 late)
 Post-swap adds, all LIVE: about career TIMELINE (pinned scrub, Drake Cooper→Buck the Quo→

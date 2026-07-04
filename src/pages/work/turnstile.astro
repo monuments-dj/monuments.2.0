@@ -1,131 +1,493 @@
 ---
-import Base from '../../layouts/Base.astro';
 import CallSheet from '../../components/CallSheet.astro';
+import NextFile from '../../components/NextFile.astro';
 
-// === Turnstile Audio - faithful rebuild of monuments.cc/portfolio/turnstile ===
-// Real assets pulled from the live site into /public/case-studies/turnstile/{bts,products,brand}.
-const bts = Array.from({ length: 10 }, (_, i) => `/case-studies/turnstile/bts/bts-${String(i + 1).padStart(2, '0')}.jpg`);
-const products = Array.from({ length: 8 }, (_, i) => `/case-studies/turnstile/products/prod-${String(i + 1).padStart(2, '0')}.jpg`);
-const services = ['Brand Identity', 'Logo Design', 'Brand Positioning', 'Consulting'];
-const tags = ['Brand Development'];
+// === TURNSTILE AUDIO · cut case page ===
+// Rebuilt in place on the sony-xm5 model: full-document cut page, ink/paper/cobalt/rose,
+// grain, corners chrome, under-reveal NextFile closer. Copy merged verbatim from the old
+// /work/turnstile page + the stronger beats of /lab/turnstile. No film exists for this
+// case, so the media story is carried by the brand plates + two galleries (kit + BTS).
+
+const bts = [
+  ['bts-01.jpg', 'Sideline rig · shotgun on the long lens', 768, 512],
+  ['bts-02.jpg', 'Field test · dusk', 768, 960],
+  ['bts-03.jpg', 'Hands on · in the studio', 768, 512],
+  ['bts-04.jpg', 'Creator session', 768, 512],
+  ['bts-05.jpg', 'Fit check · studio headphones', 768, 960],
+  ['bts-06.jpg', 'At the DAW', 768, 512],
+  ['bts-07.jpg', 'Take one · full volume', 768, 960],
+  ['bts-08.jpg', 'Gain check', 768, 512],
+  ['bts-09.jpg', 'On the boom arm', 768, 512],
+  ['bts-10.jpg', 'The stream setup', 768, 1152],
+];
+
+const kit = [
+  ['prod-01.jpg', 'Studio condenser · black'],
+  ['prod-02.jpg', 'Studio condenser · silver'],
+  ['prod-03.jpg', 'Broadcast dynamic'],
+  ['prod-04.jpg', 'USB studio mic'],
+  ['prod-05.jpg', 'Studio headphones'],
+  ['prod-06.jpg', 'Studio headphones · folded'],
+  ['prod-07.jpg', 'On camera shotgun'],
+  ['prod-08.jpg', 'Shotgun mic'],
+];
+
+const scope = ['Brand Identity', 'Logo Design', 'Brand Positioning', 'Consulting'];
 ---
-<Base title="Turnstile Audio · monuments">
-  <article class="cs2">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turnstile Audio · Monuments</title>
+<meta name="description" content="Turnstile Audio brand identity and product launch for Adorama. One mark, a full kit, two weeks from concept to launch. Creative direction by DJ Ramirez.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style is:global>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
 
-    <!-- HERO -->
-    <header class="cs2-hero">
-      <div class="cs2-hero-bg" style={`background-image:url(${bts[1]})`}></div>
-      <div class="cs2-hero-scrim"></div>
-      <div class="cs2-hero-inner">
-        <h1 class="cs2-hero-title">Turnstile<br>Audio</h1>
-        <div class="cs2-hero-foot">
-          <div class="cs2-tags">{tags.map((t) => <span class="cs2-tag">{t}</span>)}</div>
-          <a class="cs2-allwork" href="/work">All Work <span aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-      <img class="cs2-hero-mark" src="/case-studies/turnstile/brand/logo-mark.png" alt="Turnstile mark" />
-    </header>
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
 
-    <!-- INTRO: services sidebar + lead -->
-    <section class="cs2-intro fade">
-      <aside class="cs2-side">
-        <h2 class="cs2-side-h">Turnstile Audio: crafting a brand that hits all the right notes.</h2>
-        <ul class="cs2-services">{services.map((s) => <li>{s}</li>)}</ul>
-      </aside>
-      <div class="cs2-intro-body">
-        <p>When Turnstile Audio came to me, they wanted a brand identity that struck the perfect balance: clean, simple, and inspired by the legendary audio brands of the past, but fresh enough to stand out in today's market. They didn't want flashy. They wanted timeless. Something that communicated quality and craftsmanship without overcomplicating things, and felt welcoming to both up-and-coming creators and seasoned pros alike.</p>
-        <p class="cs2-intro-kick">Our timeline? Two weeks to design, iterate, and launch.</p>
-      </div>
-    </section>
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:20px;left:22px;pointer-events:auto}
+.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
+.corners .c1 i{font-style:normal;color:#fff;display:inline-block;animation:spin 7s linear infinite}
+.corners .c2{top:26px;right:22px;pointer-events:auto}
+.corners .c2 a{font-size:21px;letter-spacing:.06em}
+.corners .c2 a{margin-left:22px}
+.corners .c3{bottom:20px;left:22px}
+.corners .c4{bottom:20px;right:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
 
-    <!-- LOGO CARD + lockups -->
-    <section class="cs2-logo fade">
-      <div class="cs2-logo-card">
-        <img src="/case-studies/turnstile/brand/wordmark.png" alt="Turnstile Audio" />
-      </div>
-      <div class="cs2-logo-aside">
-        <img class="cs2-wordmark" src="/case-studies/turnstile/brand/wordmark.png" alt="Turnstile Audio wordmark" />
-        <p class="cs2-logo-note">A single mark, three weights: confident, geometric, built to last just like the gear.</p>
-      </div>
-    </section>
+/* hero: title in the field-test photograph, scrim keeps it readable at dusk */
+.hero{position:relative;height:100svh;overflow:hidden;background:var(--ink)}
+.hero>img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.04) brightness(.6)}
+.hero .scrim{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 44%,rgba(22,21,20,.5),rgba(22,21,20,.16) 58%,rgba(22,21,20,.46))}
+.hero .mark{position:absolute;right:calc(var(--pad) + 6px);top:13vh;width:clamp(54px,7.4vw,118px);z-index:2;filter:drop-shadow(0 18px 44px rgba(0,0,0,.55));opacity:0;animation:fade 1s .55s forwards;will-change:transform}
+.hero .t{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(46px,9.4vw,138px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;z-index:2}
+.hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero .t .spark{color:var(--spark)}
+.hero .t .ln{display:block;overflow:hidden}
+.hero .t .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero .t .ln:nth-child(2)>span{animation-delay:.12s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .nfo{position:absolute;right:var(--pad);bottom:11vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards;z-index:2}
+.hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
+.hero .kck{position:absolute;left:var(--pad);bottom:11vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);opacity:0;animation:fade 1s .7s forwards;line-height:1.9;z-index:2}
+.hero .kck b{color:var(--spark);font-weight:400}
+@keyframes fade{to{opacity:1}}
 
-    <!-- BTS PHOTO GRID -->
-    <section class="cs2-gallery">
-      <div class="cs2-gallery-badge" aria-hidden="true">
-        <svg viewBox="0 0 100 100"><defs><path id="tsBadge" d="M50,50 m-34,0 a34,34 0 1,1 68,0 a34,34 0 1,1 -68,0" /></defs>
-          <text><textPath href="#tsBadge" startOffset="0%">IN ACTION · BEHIND THE BUILD · </textPath></text>
-        </svg>
-      </div>
-      <div class="cs2-grid">
-        {bts.map((src, i) => <figure class={`cs2-cell c-${i % 6}`}><img src={src} alt="" loading="lazy" /></figure>)}
-      </div>
-    </section>
+/* the run, first: cobalt scoreboard under the hero */
+.statrow{background:var(--struct);color:var(--paper)}
+.statrow>.in{display:flex;justify-content:space-between;align-items:flex-end;gap:34px;flex-wrap:wrap;padding:42px 0 38px}
+.stat b{display:block;font-weight:var(--dispw);font-size:clamp(38px,4.8vw,72px);letter-spacing:-.03em;line-height:.92;text-transform:uppercase}
+.stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);display:block;margin-top:8px}
+.stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);line-height:1.9;max-width:24ch}
+.stat .note b{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--paper);display:inline;letter-spacing:.08em;text-transform:uppercase}
+.rolerow{background:var(--ink);border-bottom:1px solid var(--lined)}
+.rolerow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rolerow b{color:var(--paper);font-weight:400}
 
-    <!-- CONCEPT / DESIGN / DELIVER -->
-    <section class="cs2-cdd fade">
-      <h2 class="cs2-cdd-head"><span class="on">Concept</span> <span>Design</span> <span>Deliver</span></h2>
-      <div class="cs2-cdd-cols">
-        <div class="cs2-cdd-col">
-          <p>When Turnstile Audio came to me, they wanted a brand identity that struck the perfect balance: clean, simple, and inspired by the legendary audio brands of the past, but fresh enough to stand out in today's market. They didn't want flashy. They wanted timeless.</p>
-          <p>We took a deep dive into the world of vintage audio brands and what made them iconic and enduring, then built something confident, modern, and a little nostalgic, without trying too hard.</p>
-        </div>
-        <div class="cs2-cdd-col">
-          <p class="cs2-obj-h">Objectives</p>
-          <ul class="cs2-obj">
-            <li>Craft a brand identity that captures Turnstile's ethos of precision, quality, and affordability.</li>
-            <li>Design something that feels understated but undeniably cool, a nod to the classics.</li>
-            <li>Let the gear be the star; the brand quietly amplifies the message under a two-week timeline.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+/* story on paper */
+.paper{background:var(--paper);color:var(--ink)}
+.story{display:grid;grid-template-columns:.62fr 1.38fr;gap:64px;padding:11vh 0 7vh;align-items:start}
+.story .side{position:sticky;top:14vh}
+.story .side .k{color:var(--red)}
+.story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
+.story h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
+.story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
+.story .body a{border-bottom:1px solid var(--line)}
+.story .body a:hover{color:var(--struct);border-color:var(--struct)}
+.scope{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+.scope .sk{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--red);margin-right:6px}
+.scope span:not(.sk){font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:#4c4a45;border:1px solid var(--line);background:#fff;padding:7px 13px}
+.obj{margin-top:30px;border-top:2px solid var(--ink);padding-top:18px;max-width:60ch}
+.obj .ok{color:var(--red)}
+.obj ul{list-style:none;margin-top:14px}
+.obj li{position:relative;padding-left:26px;margin-bottom:12px;color:#4c4a45;font-size:16.5px;line-height:1.55}
+.obj li::before{content:'\2733';position:absolute;left:0;top:4px;font-size:12px;color:var(--red)}
 
-    <!-- CREDITS: the call sheet slip -->
-    <div class="cs2-callsheet fade">
-      <CallSheet
-        code="MC-2023-02"
-        sub="Adorama · Turnstile Audio · Brand development"
-        filed="MMXXIII"
-        tone="light"
-        rows={[
-          { k: 'Agency', v: 'Art of Visuals' },
-          { k: 'Client', v: 'Adorama' },
-          { k: 'Creative Direction', v: 'DJ Ramirez', select: true },
-        ]}
-      />
-    </div>
+/* the identity: brand plates on ink */
+.brand{background:var(--ink);padding:9vh 0 10vh}
+.brand .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:16px}
+.brand .bar .mono b{color:var(--spark)}
+.plates{display:grid;grid-template-columns:1.45fr .95fr .6fr;grid-template-rows:auto auto;gap:14px}
+.plate{position:relative;margin:0;border:1px solid var(--lined);background:#1c1b1a;display:flex;align-items:center;justify-content:center;padding:clamp(20px,3vw,40px) clamp(20px,3vw,40px) 40px;min-height:210px;overflow:hidden}
+.plate img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.plate .pcap{position:absolute;left:13px;bottom:10px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.p-word{grid-column:1;grid-row:1}
+.p-sound{grid-column:2;grid-row:1;padding:0 0 0}
+.p-sound img{width:100%;height:100%;object-fit:cover;max-height:none}
+.p-pal{grid-column:1;grid-row:2;padding:0}
+.p-pal img{width:100%;height:100%;object-fit:cover;max-height:none}
+.p-sound .pcap,.p-pal .pcap{background:rgba(22,21,20,.85);padding:4px 9px;left:10px;bottom:10px}
+.p-pal .pcap{bottom:auto;top:10px}
+.p-note{grid-column:2;grid-row:2;flex-direction:column;align-items:flex-start;justify-content:center;gap:14px;padding:clamp(22px,2.6vw,36px)}
+.p-note .k{color:var(--red)}
+.p-note p{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(19px,1.7vw,25px);line-height:1.4;color:var(--paper)}
+.p-glove{grid-column:3;grid-row:1/3}
+.p-glove img{max-height:560px}
 
-    <!-- PRODUCT GRID -->
-    <section class="cs2-products">
-      <span class="cs2-check" aria-hidden="true">CHECK CHECK</span>
-      <div class="cs2-prod-grid">
-        {products.map((src) => <figure class="cs2-prod"><img src={src} alt="" loading="lazy" /></figure>)}
-      </div>
-    </section>
+/* kit gallery: the product line on paper, contact-sheet cells + rubber stamp */
+.gal{padding:9vh 0;position:relative}
+.gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:16px}
+.gal .bar .mono b{color:var(--red)}
+.kitlead{color:#4c4a45;font-size:18px;max-width:60ch;margin-bottom:26px}
+.kitwrap{position:relative}
+.kit{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kc{position:relative;background:#fff;border:1px solid var(--line);padding:10px 10px 30px;opacity:0;transform:translateY(16px)}
+.kit.show .kc{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
+.kc img{width:100%;height:auto;display:block;filter:saturate(.96)}
+.kc .cap{position:absolute;left:11px;bottom:8px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}
+.kit.show .kc:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(20,20,20,.16);z-index:2;transition-delay:0ms}
+.chk{position:absolute;top:-30px;right:6px;transform:rotate(6deg);border:2px solid var(--red);border-radius:4px;color:var(--red);font-family:var(--mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;padding:10px 16px 9px;opacity:.55;mix-blend-mode:multiply;z-index:3;pointer-events:none}
 
-    <!-- NEXT PROJECT -->
-    <a class="cs2-next" href="/work/blue-cross">
-      <div class="cs2-next-bg" style={`background-image:url(${bts[8]})`}></div>
-      <div class="cs2-next-scrim"></div>
-      <div class="cs2-next-inner">
-        <span class="cs2-next-k">Next project</span>
-        <span class="cs2-next-t">Blue Cross of Idaho <span aria-hidden="true">→</span></span>
-      </div>
-    </a>
+/* full-bleed parallax break */
+.break{position:relative;height:82svh;overflow:hidden;background:var(--ink)}
+.break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;will-change:transform}
+.break .cap{position:absolute;left:var(--pad);bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85);background:rgba(22,21,20,.5);padding:5px 10px}
 
-    <!-- CTA -->
-    <section class="cs2-cta">
-      <p>Let's build something great together.</p>
-      <a href="/contact" class="cs2-cta-link">Let's Talk <span aria-hidden="true">↗</span></a>
-    </section>
+/* BTS gallery: contact-sheet frames, masonry columns, spinning set badge */
+.frames{columns:3;column-gap:14px}
+.fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;margin-bottom:14px;break-inside:avoid;opacity:0;transform:translateY(16px) rotate(-.6deg)}
+.frames.show .fr{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
+.fr img{width:100%;height:auto;display:block;filter:saturate(.96)}
+.fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
+.frames.show .fr:hover{transform:rotate(-1deg) scale(1.03);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
+.badge{position:absolute;right:var(--pad);top:-59px;width:118px;height:118px;z-index:3;animation:spin 18s linear infinite;pointer-events:none}
+.badge text{font-family:var(--mono);font-size:10px;letter-spacing:.13em;fill:var(--red);text-transform:uppercase}
 
-  </article>
-</Base>
+/* quote on rose */
+.quote{background:var(--spark);color:var(--ink);padding:15vh 0}
+.quote p.q{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(28px,4vw,58px);line-height:1.14;max-width:24ch}
+.quote p.q b{font-weight:400;font-style:normal;font-family:var(--disp);font-weight:var(--dispw);text-transform:uppercase;font-size:.86em;letter-spacing:-.02em}
+.quote .who{margin-top:28px;color:rgba(22,21,20,.6)}
 
-<style>
-  /* Credits call sheet: keeps the white band + rhythm the old .cs2-credits block held. */
-  .cs2-callsheet { background: var(--white); padding: 30px 100px 100px; }
-  @media (max-width: 760px) {
-    .cs2-callsheet { padding: 24px 24px 60px; }
-  }
+/* credits: the call sheet slip + the standing invitation */
+.credits{padding:10vh 0 4vh}
+.cta{text-align:center;padding:2vh 0 12vh}
+.cta p{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(24px,3vw,42px);line-height:1.2;color:var(--ink)}
+.cta a{display:inline-block;margin-top:22px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1.5px solid var(--ink);padding:12px 26px;transition:background .3s,color .3s}
+.cta a:hover{background:var(--ink);color:var(--paper)}
+
+/* next case file closer: NextFile.astro (under-reveal target) */
+footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
+footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
+
+.over{position:relative;z-index:1;background:inherit}
+.underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:900px){
+  .story{grid-template-columns:1fr}.story .side{position:static}
+  .statrow>.in{justify-content:flex-start;gap:28px 44px}
+  .plates{grid-template-columns:1fr 1fr}
+  .p-word{grid-column:1/3;grid-row:1}
+  .p-sound{grid-column:1;grid-row:2}
+  .p-note{grid-column:2;grid-row:2}
+  .p-pal{grid-column:1/3;grid-row:3}
+  .p-glove{grid-column:1/3;grid-row:4}
+  .p-glove img{max-height:420px}
+  .kit{grid-template-columns:repeat(2,1fr)}
+  .frames{columns:2}
+  .hero .kck{display:none}
+  .badge{display:none}
+}
+@media (max-width:560px){.frames{columns:1}.kit{grid-template-columns:1fr}.plates{grid-template-columns:1fr}.p-word,.p-sound,.p-note,.p-pal,.p-glove{grid-column:1;grid-row:auto}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero .t .ln>span{transform:none}.hero .nfo,.hero .kck,.hero .mark{opacity:1}.rv{opacity:1;transform:none}
+  .grain{animation:none}.frames .fr,.kit .kc{opacity:1;transform:none}
+}
 </style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="companion" aria-hidden="true">✳</div>
+
+<div class="corners">
+  <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/lab">Lab</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a></span>
+  <span class="c3">MC-2023-02 · Turnstile Audio · Brand development</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<div class="over">
+<header class="hero">
+  <img class="bg" src="/case-studies/turnstile/bts/bts-02.jpg" alt="Turnstile Audio shotgun mic on a camera rig at a dusk field shoot">
+  <div class="scrim" aria-hidden="true"></div>
+  <img class="mark" src="/case-studies/turnstile/brand/logo-mark.png" alt="" aria-hidden="true">
+  <div class="t">
+    <span class="ln"><span>Built to be</span></span>
+    <span class="ln"><span><span class="serif">heard</span><span class="spark">.</span></span></span>
+  </div>
+  <div class="kck">
+    <b>\ Case file</b><br>
+    Turnstile Audio · Brand identity + product launch<br>
+    Brand, identity, content, campaign · 2023
+  </div>
+  <div class="nfo">
+    <span class="h">NFO</span><br>
+    Client · Adorama<br>
+    Role · Creative Director<br>
+    Agency · Art of Visuals<br>
+    Frame · MC-2023-02
+  </div>
+</header>
+
+<div class="statrow">
+  <div class="wrap in">
+    <div class="stat rv"><b>2 wks</b><span>Concept to launch</span></div>
+    <div class="stat rv"><b>1 mark</b><span>Three weights, one voice</span></div>
+    <div class="stat rv"><b>Full kit</b><span>Identity, content, campaign</span></div>
+    <div class="stat rv"><p class="note">They didn't want flashy. They wanted <b>timeless.</b></p></div>
+  </div>
+</div>
+
+<div class="rolerow">
+  <div class="wrap in">
+    <span><b>Client</b> · Adorama</span>
+    <span><b>My part</b> · Creative Director</span>
+    <span><b>Brand</b> · Turnstile Audio</span>
+    <span><b>Creative</b> · Art of Visuals</span>
+    <span><b>Year</b> · 2023</span>
+  </div>
+</div>
+
+<section class="paper">
+  <div class="wrap story">
+    <div class="side rv">
+      <span class="k mono">\ The brief</span>
+      <h2>Crafting a brand that hits all the right <span class="serif">notes.</span></h2>
+    </div>
+    <div class="body rv">
+      <p>When Turnstile Audio came to me, they wanted a brand identity that struck the perfect balance: clean, simple, and inspired by the legendary audio brands of the past, but fresh enough to stand out in today's market. They didn't want flashy. They wanted timeless. Something that communicated quality and craftsmanship without overcomplicating things, and felt welcoming to both up-and-coming creators and seasoned pros alike.</p>
+      <p>A name that earns the volume it asks for. Our timeline? Two weeks to design, iterate, and launch.</p>
+      <div class="scope">
+        <span class="sk">\ Scope</span>
+        {scope.map((s) => <span>{s}</span>)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="brand">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>The identity</b> · kit of parts</span>
+      <span class="mono" style="color:#8f8d88">Wordmark · Palette · Mark</span>
+    </div>
+    <div class="plates">
+      <figure class="plate p-word rv">
+        <img src="/case-studies/turnstile/brand/wordmark.png" alt="Turnstile Audio circle mark in four lockups" width="974" height="178">
+        <figcaption class="pcap">BR-01 · The mark · four lockups</figcaption>
+      </figure>
+      <figure class="plate p-sound rv">
+        <img src="/case-studies/turnstile/sound.webp" alt="Turnstile Audio sound bars mark on black" width="800" height="600" loading="lazy">
+        <figcaption class="pcap">BR-02 · Sound mark</figcaption>
+      </figure>
+      <figure class="plate p-glove rv">
+        <img src="/case-studies/turnstile/brand/logo-mark.png" alt="Turnstile campaign object, red twisted glove" width="359" height="693" loading="lazy">
+        <figcaption class="pcap">BR-04 · Campaign object</figcaption>
+      </figure>
+      <figure class="plate p-pal rv">
+        <img src="/case-studies/turnstile/brand/palette.png" alt="Turnstile Audio palette board: denim, chartreuse and red swatches" width="1600" height="966" loading="lazy">
+        <figcaption class="pcap">BR-03 · Palette · precision, modernized</figcaption>
+      </figure>
+      <div class="plate p-note rv">
+        <span class="k mono">\ The mark</span>
+        <p>A single mark, three weights: confident, geometric, built to last just like the gear.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap story">
+    <div class="side rv">
+      <span class="k mono">\ The work</span>
+      <h2>Concept. Design. <span class="serif">Deliver.</span></h2>
+    </div>
+    <div class="body rv">
+      <p>Identity first. A single confident wordmark, geometric and built to last just like the gear, paired with a mark that reads from across a loud room. Then the content: product photography shot so the metal and the message hit at the same time.</p>
+      <p>Then the campaign. We took a deep dive into the world of vintage audio brands, what made them iconic and enduring, then built something modern and a little nostalgic without trying too hard. The brand quietly amplifies; the gear is the star.</p>
+      <div class="obj">
+        <span class="ok mono">\ Objectives</span>
+        <ul>
+          <li>Craft a brand identity that captures Turnstile's ethos of precision, quality, and affordability.</li>
+          <li>Design something that feels understated but undeniably cool, a nod to the classics.</li>
+          <li>Let the gear be the star; the brand quietly amplifies the message under a two-week timeline.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap gal">
+    <div class="bar">
+      <span class="mono"><b>The kit</b> · every piece in the line</span>
+      <span class="mono" style="color:#8f8d88">8 products · studio frames</span>
+    </div>
+    <p class="kitlead rv">The gear, shot like it sounds. Clean, confident, understated but undeniably cool, a nod to the classics.</p>
+    <div class="kitwrap">
+      <span class="chk" aria-hidden="true">Check check</span>
+      <div class="kit" id="kit">
+        {kit.map(([file, cap], i) => (
+          <figure class="kc" style={`--d:${i * 45}ms`}>
+            <img src={`/case-studies/turnstile/products/${file}`} alt={`Turnstile Audio product: ${cap}`} width="640" height="640" loading="lazy">
+            <figcaption class="cap">PC-{String(i + 1).padStart(2, '0')} · {cap}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="break">
+  <img class="plx" src="/case-studies/turnstile/bts/bts-07.jpg" alt="A vocalist at full volume into a Turnstile Audio mic, blue studio light">
+  <span class="cap">✳ Take one · Turnstile Audio · In the studio</span>
+</div>
+
+<section class="paper">
+  <div class="wrap gal">
+    <div class="badge" aria-hidden="true">
+      <svg viewBox="0 0 100 100">
+        <defs><path id="tsBadge" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/></defs>
+        <text><textPath href="#tsBadge">In action · Behind the build ·</textPath></text>
+      </svg>
+    </div>
+    <div class="bar">
+      <span class="mono"><b>In action</b> · behind the build</span>
+      <span class="mono" style="color:#8f8d88">10 frames · hover to inspect</span>
+    </div>
+    <div class="frames" id="frames">
+      {bts.map(([file, cap, w, h], i) => (
+        <figure class="fr" style={`--d:${i * 45}ms`}>
+          <img src={`/case-studies/turnstile/bts/${file}`} alt={`Turnstile Audio in action: ${cap}`} width={w} height={h} loading="lazy">
+          <figcaption class="cap">FR-{String(i + 1).padStart(2, '0')} · {cap}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="wrap">
+    <p class="q rv">"A band's gear isn't a product line. It's <b>the sound it makes</b> before anyone plays a note."</p>
+    <p class="who mono rv">The insight behind the identity</p>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap credits rv">
+    <CallSheet
+      code="MC-2023-02"
+      sub="Adorama · Turnstile Audio · Brand development"
+      filed="MMXXIII"
+      tone="light"
+      rows={[
+        { k: 'Agency', v: 'Art of Visuals' },
+        { k: 'Client', v: 'Adorama' },
+        { k: 'Creative Direction', v: 'DJ Ramirez', select: true },
+      ]}
+    />
+  </div>
+  <div class="wrap cta rv">
+    <p>Let's build something great together.</p>
+    <a href="/contact">Let's Talk <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+</div><!--/over-->
+
+<div class="underfoot">
+<NextFile
+  href="/work/flashpoint"
+  name="Flashpoint"
+  img="/case-studies/flashpoint/gallery/fp-01.jpg"
+  code="MC-2020-02"
+/>
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
+    <span class="blk">built to be remembered</span>
+    <span>Case file MC-2023-02</span>
+  </div>
+</footer>
+</div><!--/underfoot-->
+
+<script is:inline>
+// staggered contact-sheet reveals for both galleries
+(function(){
+  [['kit'],['frames']].forEach(function(pair){
+    var el=document.getElementById(pair[0]);
+    if(!el)return;
+    new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
+  });
+})();
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// hero layers + break parallax + companion
+(function(){
+  const hImg=document.querySelector('.hero>img.bg'),hT=document.querySelector('.hero .t'),
+        nfo=document.querySelector('.hero .nfo'),kck=document.querySelector('.hero .kck'),
+        mark=document.querySelector('.hero .mark'),
+        brk=document.querySelector('.break img'),c=document.querySelector('.companion');
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  let k=false;
+  addEventListener('scroll',()=>{
+    if(k)return;k=true;
+    requestAnimationFrame(()=>{
+      const y=scrollY,vh=innerHeight;
+      if(y<vh){
+        hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
+        hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
+        hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));
+        if(nfo)nfo.style.transform=`translateY(${y*-.16}px)`;
+        if(kck)kck.style.transform=`translateY(${y*-.06}px)`;
+        if(mark)mark.style.transform=`translateY(${y*.14}px) rotate(${(y*.02).toFixed(2)}deg)`;
+      }
+      const r=brk.parentElement.getBoundingClientRect();
+      if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;brk.style.transform=`translateY(${p*-56}px)`}
+      if(c)c.style.transform=`translateY(${(Math.sin(y/420)*34).toFixed(1)}px) rotate(${(y*0.22).toFixed(1)}deg)`;
+      k=false;
+    });
+  },{passive:true});
+})();
+
+// under-reveal sizing
+(function(){
+  const uf=document.querySelector('.underfoot'),over=document.querySelector('.over');
+  function size(){ if(matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)').matches){over.style.marginBottom='0px';return}
+    over.style.marginBottom=uf.offsetHeight+'px'; }
+  size();addEventListener('resize',size);setTimeout(size,600);
+})();
+function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
+clock();setInterval(clock,30000);
+</script>
+<script is:inline src="/redesign/switcher.js" defer></script>
+</body>
+</html>

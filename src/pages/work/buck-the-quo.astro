@@ -1,0 +1,501 @@
+---
+import CallSheet from '../../components/CallSheet.astro';
+import NextFile from '../../components/NextFile.astro';
+
+// === /work/buck-the-quo · THE CUT case page ===
+// Ported from /lab/buck-the-quo (copy verbatim, structure reworked into the cut model).
+// Experiential flagship: More In Store, 18,000+ conversations, Rocky Advertising Awards
+// badges as-is (award name pending DJ). No campaign film on the source page, so no film
+// block; the activation scenes on ink carry the middle of the page instead.
+
+const G = '/case-studies/buck-the-quo/gallery';
+const scenes = [
+  { img: `${G}/container-front.jpg`, n: '01', k: 'The space', t: 'A shipping container that pulled up like a', last: 'store', d: 'It traveled the state and parked where teens already were: fairs, events, the places adults usually skip. From the outside it read like a drop, not a lecture.' },
+  { img: `${G}/future-sign.jpg`,     n: '02', k: 'The hook',  t: 'A room built around one',                     last: 'word',  d: 'FUTURE in neon, merch worth wearing, a saddle that said I AM, I CAN, I WILL. The space earned a few minutes of attention, then used them well.' },
+  { img: `${G}/chop-board.jpg`,      n: '03', k: 'The turn',  t: 'The merch was the doorway, the conversation was the', last: 'point', d: 'Teens only, no parents, no teachers. A simple writing exercise opened a real talk about what they actually wanted their life to look like, with a near-peer who listened instead of advised.' },
+];
+const frames = [
+  { f: 'container-coaster.jpg',   c: 'The container · Parked at the fair', w: 2048, h: 1138 },
+  { f: 'merch-shirt.jpg',         c: 'The tee · Script back print',        w: 2048, h: 1138 },
+  { f: 'merch-glasses.jpg',       c: 'The shades',                         w: 2048, h: 1138 },
+  { f: 'web-iphone.jpg',          c: 'buckthequo.com · Full scroll',       w: 780,  h: 6017, web: true },
+  { f: 'merch-backpack.jpg',      c: 'The backpack',                       w: 2048, h: 1138 },
+  { f: 'merch-beanie.jpg',        c: 'The beanie',                         w: 2048, h: 1138 },
+  { f: 'merch-dadhat.jpg',        c: 'The dad hat',                        w: 2048, h: 1138 },
+  { f: 'merch-flag.jpg',          c: 'The flag · Carried home',            w: 2048, h: 1138 },
+  { f: 'merch-sticker.jpg',       c: 'The sticker · In the wild',          w: 2048, h: 1138 },
+  { f: 'merch-drawstring.jpg',    c: 'The drawstring · Games row',         w: 2048, h: 1138 },
+  { f: 'merch-sunglass-boxes.jpg',c: 'The wall of shades · In store',      w: 2048, h: 1138 },
+];
+const did = [
+  { k: 'Photo + Video',      v: 'Shot the majority of the campaign’s stills and motion.' },
+  { k: 'The activation',     v: 'Worked the More In Store retail experience on the ground.' },
+  { k: 'Games + Giveaways',  v: 'Hosted the games and giveaways that pulled teens in.' },
+  { k: 'Social',             v: 'Responded in the brand’s voice across the channels.' },
+  { k: 'Focus Groups',       v: 'Ran focus groups to keep the work true to its audience.' },
+  { k: 'Influencer Program', v: 'Helped build and run the teen influencer program.' },
+  { k: 'YouTube Show',       v: 'Directed the weekly series.' },
+];
+const awards = [
+  { img: '/case-studies/buck-the-quo/emmy/emmy-gold.png',   k: 'Gold' },
+  { img: '/case-studies/buck-the-quo/emmy/emmy-silver.png', k: 'Silver' },
+  { img: '/case-studies/buck-the-quo/emmy/emmy-bos.png',    k: 'Best of Show' },
+];
+// Crew data confirmed by DJ (2026-07-03). Do not change.
+const credits = [
+  { k: 'Client', v: 'Albertson Family Foundation' },
+  { k: 'Agency', v: 'Drake Cooper' },
+  { k: 'Shooter + editor', v: 'DJ Ramirez', select: true },
+  { k: 'Socials + field experiential', v: 'DJ Ramirez' },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buck the Quo · Monuments</title>
+<meta name="description" content="A statewide campaign to lift Idaho's college-going rate by talking with teens instead of at them. I directed the experiential build that turned a hard conversation about the future into one 18,000+ teens chose to have.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style is:global>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:20px;left:22px;pointer-events:auto}
+.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
+.corners .c1 i{font-style:normal;color:#fff;display:inline-block;animation:spin 7s linear infinite}
+.corners .c2{top:26px;right:22px;pointer-events:auto}
+.corners .c2 a{font-size:21px;letter-spacing:.06em}
+.corners .c2 a{margin-left:22px}
+.corners .c3{bottom:20px;left:22px}
+.corners .c4{bottom:20px;right:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
+
+/* hero: the flag photograph, title + campaign line in the frame */
+.hero{position:relative;height:100svh;overflow:hidden;background:var(--ink)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) brightness(.62)}
+.hero .scrim{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 44%,rgba(22,21,20,.52),rgba(22,21,20,.16) 58%,rgba(22,21,20,.44))}
+.hero .t{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(48px,10.4vw,152px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase}
+.hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero .t .spark{color:var(--spark)}
+.hero .t .ln{display:block;overflow:hidden}
+.hero .t .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero .t .ln:nth-child(2)>span{animation-delay:.12s}
+.hero .t .tag{margin-top:clamp(16px,3vh,30px);font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;font-size:clamp(20px,2.3vw,34px);line-height:1.25}
+.hero .t .tag>span{animation-delay:.26s}
+.hero .t .tag .em{color:var(--spark)}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .nfo{position:absolute;right:var(--pad);bottom:11vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
+.hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
+.hero .kck{position:absolute;left:var(--pad);bottom:11vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);opacity:0;animation:fade 1s .7s forwards;line-height:1.9}
+.hero .kck b{color:var(--spark);font-weight:400}
+@keyframes fade{to{opacity:1}}
+
+/* results first: cobalt scoreboard under the hero */
+.statrow{background:var(--struct);color:var(--paper)}
+/* >.in: the reveal observer also adds .in to the .stat.rv children, so the flex rule
+   must only hit the direct wrap or the stats themselves turn into flex rows */
+.statrow>.in{display:flex;justify-content:space-between;align-items:flex-end;gap:34px;flex-wrap:wrap;padding:42px 0 38px}
+.stat b{display:block;font-weight:var(--dispw);font-size:clamp(38px,4.8vw,72px);letter-spacing:-.03em;line-height:.92}
+.stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);display:block;margin-top:8px;max-width:26ch}
+.stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);line-height:1.9;max-width:26ch}
+.stat .note b{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--paper);display:inline;letter-spacing:.08em}
+.rolerow{background:var(--ink);border-bottom:1px solid var(--lined)}
+.rolerow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rolerow b{color:var(--paper);font-weight:400}
+
+/* story on paper */
+.paper{background:var(--paper);color:var(--ink)}
+.story{display:grid;grid-template-columns:.62fr 1.38fr;gap:64px;padding:11vh 0 7vh;align-items:start}
+.story .side{position:sticky;top:14vh}
+.story .side .k{color:var(--red)}
+.story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
+.story h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
+.story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
+.stat46{display:flex;align-items:baseline;gap:16px;margin-top:30px}
+.stat46 b{font-weight:var(--dispw);font-size:clamp(46px,5.2vw,84px);letter-spacing:-.04em;line-height:1;color:var(--red)}
+.stat46 span{font-size:13.5px;line-height:1.5;color:#6f6d68;max-width:22ch}
+
+/* the activation: More In Store scenes on ink */
+.act{background:var(--ink);color:var(--paper);padding:11vh 0 4vh}
+.act .head{max-width:860px}
+.act .head .k{color:var(--spark)}
+.act .head h2{font-weight:var(--dispw);font-size:clamp(32px,5vw,72px);letter-spacing:-.035em;line-height:.96;text-transform:uppercase;margin-top:16px}
+.act .head h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.act .head .sub{margin-top:22px;max-width:56ch;font-size:18px;color:rgba(245,243,239,.68)}
+.scenes{margin-top:8vh}
+.scene{display:grid;grid-template-columns:1.18fr .82fr;gap:clamp(28px,4.4vw,70px);align-items:center;padding:7vh 0;border-top:1px solid var(--lined)}
+.scene.rev .shot{order:2}
+.shot{position:relative;overflow:hidden;margin:0}
+.shot img{width:100%;height:auto;display:block;filter:contrast(1.02) brightness(.94);transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.scene:hover .shot img{transform:scale(1.025)}
+.shot .cap{position:absolute;left:14px;bottom:12px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85);background:rgba(22,21,20,.55);padding:5px 10px}
+.scene .num{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--red)}
+.scene .num i{font-style:normal;color:var(--spark)}
+.scene h3{font-weight:var(--dispw2);font-size:clamp(22px,2.5vw,38px);letter-spacing:-.025em;line-height:1.06;text-transform:uppercase;margin-top:14px;max-width:20ch}
+.scene h3 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.scene .d{margin-top:16px;max-width:48ch;font-size:16.5px;color:rgba(245,243,239,.7)}
+
+/* full-bleed parallax break: the saddle */
+.break{position:relative;height:88svh;overflow:hidden}
+.break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;will-change:transform}
+.break .cap{position:absolute;left:var(--pad);bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85);background:rgba(22,21,20,.5);padding:5px 10px}
+
+/* the triad: the message that carried it */
+.triad{background:var(--paper);color:var(--ink);padding:14vh 0 13vh;text-align:center}
+.triad .k{color:var(--red)}
+.triad .words{display:flex;flex-direction:column;align-items:center;gap:clamp(2px,1vh,12px);margin:clamp(28px,4.4vw,54px) 0;font-weight:var(--dispw);font-size:clamp(52px,11vw,172px);line-height:.92;letter-spacing:-.045em;text-transform:uppercase}
+.tw{color:rgba(22,21,20,.12);transform:translateY(.18em);transition:color .6s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+.tw.on{transform:translateY(0)}
+.tw.lit:nth-child(1){color:var(--red)}
+.tw.lit:nth-child(2){color:var(--struct)}
+.tw.lit:nth-child(3){color:var(--ink)}
+.triad .sub{max-width:52ch;margin:0 auto;font-size:18px;color:#4c4a45}
+
+/* my part ledger */
+.did{padding:1vh 0 10vh}
+.did .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:4px}
+.did .bar .mono b{color:var(--red)}
+.did .row{display:grid;grid-template-columns:230px 1fr;gap:26px;align-items:baseline;padding:17px 0 15px;border-bottom:1px solid var(--line)}
+.did .row .dk{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--struct)}
+.did .row .dv{font-size:clamp(17px,1.6vw,22px);letter-spacing:-.015em;line-height:1.35;color:var(--ink)}
+
+/* gallery: contact-sheet frames, masonry columns */
+.gal{padding:9vh 0}
+.gal .ghead .k{color:var(--red)}
+.gal .ghead h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin:14px 0 36px;max-width:22ch}
+.gal .ghead h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:16px}
+.gal .bar .mono b{color:var(--red)}
+.frames{columns:3;column-gap:14px}
+.fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;margin-bottom:14px;break-inside:avoid;opacity:0;transform:translateY(16px) rotate(-.6deg)}
+.frames.show .fr{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
+.fr img{width:100%;height:auto;display:block;filter:saturate(.96)}
+.fr.web img{height:540px;object-fit:cover;object-position:top center}
+.fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
+.frames.show .fr:hover{transform:rotate(-1deg) scale(1.03);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
+
+/* recognition on rose */
+.aw{background:var(--spark);color:var(--ink);padding:13vh 0}
+.aw .k{color:var(--red)}
+.aw h2{font-weight:var(--dispw);font-size:clamp(30px,4.6vw,64px);letter-spacing:-.035em;line-height:.98;text-transform:uppercase;margin-top:14px}
+.aw h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.badges{display:flex;flex-wrap:wrap;gap:clamp(32px,6vw,86px);margin-top:clamp(40px,6vh,64px)}
+.badge{margin:0;display:flex;flex-direction:column;align-items:center;gap:16px}
+.badge img{width:clamp(100px,12vw,152px);height:auto;display:block;filter:drop-shadow(0 18px 34px rgba(22,21,20,.28))}
+.badge figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(22,21,20,.62)}
+
+/* credits: the call sheet slip (CallSheet.astro) */
+.credits{padding:10vh 0}
+
+/* next case file closer: NextFile.astro (under-reveal target) */
+footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
+footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
+
+.over{position:relative;z-index:1;background:inherit}
+.underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:900px){
+  .story{grid-template-columns:1fr}.story .side{position:static}
+  .statrow>.in{justify-content:flex-start;gap:28px 44px}
+  .frames{columns:2}
+  .hero .kck{display:none}
+  .scene,.scene.rev{grid-template-columns:1fr;gap:20px;padding:6vh 0}
+  .scene.rev .shot{order:0}
+  .did .row{grid-template-columns:1fr;gap:6px}
+}
+@media (max-width:560px){.frames{columns:1}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero .t .ln>span{transform:none}.hero .nfo,.hero .kck{opacity:1}.rv{opacity:1;transform:none}
+  .grain{animation:none}.frames .fr{opacity:1;transform:none}
+  .tw{transform:none;color:var(--ink)}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="companion" aria-hidden="true">✳</div>
+
+<div class="corners">
+  <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/lab">Lab</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a></span>
+  <span class="c3">MC-2021-03 · Buck the Quo · Experiential campaign</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<div class="over">
+<header class="hero">
+  <img src={`${G}/hero.jpg`} alt="A teen waving a giant yellow Buck the Quo flag outside the More In Store container at the fair">
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="t">
+    <span class="ln"><span>Buck</span></span>
+    <span class="ln"><span>the <span class="serif">Quo</span><span class="spark">.</span></span></span>
+    <span class="ln tag"><span>I am. I can. <span class="em">I will.</span></span></span>
+  </div>
+  <div class="kck">
+    <b>\ Case file</b><br>
+    Buck the Quo · Statewide experiential campaign<br>
+    More In Store · 18,000+ conversations
+  </div>
+  <div class="nfo">
+    <span class="h">NFO</span><br>
+    Client · Albertson Family Foundation<br>
+    Role · Shooter + editor<br>
+    Agency · Drake Cooper<br>
+    Frame · MC-2021-03
+  </div>
+</header>
+
+<div class="statrow">
+  <div class="wrap in">
+    <div class="stat rv"><b>18,000+</b><span>one-on-one conversations with Idaho teens</span></div>
+    <div class="stat rv"><b>1 in 2</b><span>teens knew Buck the Quo</span></div>
+    <div class="stat rv"><b>88%</b><span>favorability among teens who knew it</span></div>
+    <div class="stat rv"><p class="note">Rocky Advertising Awards · <b>Gold · Silver · Best of Show</b></p></div>
+  </div>
+</div>
+
+<div class="rolerow">
+  <div class="wrap in">
+    <span><b>Client</b> · Albertson Family Foundation</span>
+    <span><b>My part</b> · Shooter + editor · socials + field experiential</span>
+    <span><b>Agency</b> · Drake Cooper</span>
+    <span><b>Activation</b> · More In Store</span>
+    <span><b>Filed</b> · MMXV to MMXVIII</span>
+  </div>
+</div>
+
+<section class="paper">
+  <div class="wrap story">
+    <div class="side rv">
+      <span class="k mono">\ The problem</span>
+      <h2>Stop wagging the <span class="serif">finger.</span></h2>
+      <p class="stat46"><b>46%</b><span>of Idaho grads went on after high school. One of the lowest rates in the country.</span></p>
+    </div>
+    <div class="body rv">
+      <p>A statewide campaign to lift Idaho's college-going rate by talking with teens instead of at them. I directed the experiential build that turned a hard conversation about the future into one 18,000+ teens chose to have.</p>
+      <p>The usual fix is an adult telling a teen what they should do. The campaign had a name for those people: They Sayers. Nobody listens to a They Sayer.</p>
+      <p>So Buck the Quo did the opposite. It talked to the teens themselves, not their parents, not their teachers, and treated them like the people actually making the decision. The brand had to feel like theirs before it could change a single mind.</p>
+    </div>
+  </div>
+</section>
+
+<section class="act">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="k mono">\ The activation · More In Store</span>
+      <h2>Meet them where they <span class="serif">are.</span></h2>
+      <p class="sub">Most of this campaign happened in person. A mock-retail space that traveled Idaho, turned a heavy subject into a place teens chose to walk into, and earned a real conversation once they did.</p>
+    </div>
+    <div class="scenes">
+      {scenes.map((s, i) => (
+        <div class={`scene rv ${i % 2 ? 'rev' : ''}`}>
+          <figure class="shot">
+            <img src={s.img} alt={`${s.t} ${s.last}`} width="2048" height="1138" loading="lazy" decoding="async">
+            <span class="cap">SC-{s.n} · {s.k}</span>
+          </figure>
+          <div class="txt">
+            <span class="num">{s.n} <i>\</i> {s.k}</span>
+            <h3>{s.t + ' '}<span class="serif">{s.last}</span></h3>
+            <p class="d">{s.d}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<div class="break">
+  <img class="plx" src={`${G}/saddle.jpg`} alt="A worn leather saddle painted with I AM, I CAN, I WILL and a Made in Idaho plate">
+  <span class="cap">✳ I am, I can, I will · The saddle inside More In Store</span>
+</div>
+
+<section class="triad">
+  <div class="wrap">
+    <span class="k mono rv">\ The message that carried it</span>
+    <h2 class="words" data-triad>
+      <span class="tw">I am</span>
+      <span class="tw">I can</span>
+      <span class="tw">I will</span>
+    </h2>
+    <p class="sub rv">Not a slogan pointed at teens. A line they could say back. Confidence first, instructions never.</p>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap story">
+    <div class="side rv">
+      <span class="k mono">\ My part</span>
+      <h2>From the agency floor to the <span class="serif">director's seat.</span></h2>
+    </div>
+    <div class="body rv">
+      <p>I started on Buck the Quo as part of Drake Cooper, then stayed with the campaign as a consultant as it grew. Over its run I worked nearly every side of it: behind the camera for the bulk of the photo and video, on the floor of the More In Store activation, in the room for the focus groups that kept it honest, and in the brand's replies across social. I directed the campaign's YouTube show.</p>
+    </div>
+  </div>
+
+  <div class="wrap did rv">
+    <div class="bar">
+      <span class="mono"><b>The ledger</b> · seven jobs on one campaign</span>
+      <span class="mono" style="color:#8f8d88">07 entries</span>
+    </div>
+    {did.map((d) => (
+      <div class="row">
+        <span class="dk">{d.k}</span>
+        <span class="dv">{d.v}</span>
+      </div>
+    ))}
+  </div>
+
+  <div class="wrap gal">
+    <div class="ghead rv">
+      <span class="k mono">\ What they took home</span>
+      <h2>A brand teens actually <span class="serif">wanted to wear.</span></h2>
+    </div>
+    <div class="bar">
+      <span class="mono"><b>Contact sheet</b> · the merch + the container</span>
+      <span class="mono" style="color:#8f8d88">11 frames · hover to inspect</span>
+    </div>
+    <div class="frames" id="frames">
+      {frames.map((s, i) => (
+        <figure class={`fr ${s.web ? 'web' : ''}`} style={`--d:${i * 45}ms`}>
+          <img src={`${G}/${s.f}`} alt={`Buck the Quo: ${s.c}`} width={s.w} height={s.h} loading="lazy">
+          <figcaption class="cap">FR-{String(i + 1).padStart(2, '0')} · {s.c}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="aw">
+  <div class="wrap">
+    <span class="k mono rv">\ Recognition</span>
+    <h2 class="rv">Rocky Advertising <span class="serif">Awards.</span></h2>
+    <div class="badges rv">
+      {awards.map((a) => (
+        <figure class="badge">
+          <img src={a.img} alt={`Rocky Advertising Award, ${a.k}`} width="981" height="1422" loading="lazy" decoding="async">
+          <figcaption>{a.k}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap credits rv">
+    <CallSheet
+      code="MC-2021-03"
+      sub="Albertson Family Foundation · Buck the Quo · Experiential"
+      filed="MMXV-MMXVIII"
+      tone="light"
+      rows={credits}
+    />
+  </div>
+</section>
+</div><!--/over-->
+
+<div class="underfoot">
+<NextFile
+  href="/work/sony-xperia-summer"
+  name="Xperia Summer"
+  img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg"
+  code="MC-2022-02"
+/>
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
+    <span class="blk">built to be remembered</span>
+    <span>Case file MC-2021-03</span>
+  </div>
+</footer>
+</div><!--/underfoot-->
+
+<script is:inline>
+// reveals
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// contact sheet: staggered frame drop-in once the sheet scrolls into view
+(function(){
+  const el=document.getElementById('frames');
+  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
+})();
+
+// triad: each line slides up + lights in its colour, staggered
+(function(){
+  const words=[...document.querySelectorAll('.tw')];
+  if(!words.length)return;
+  const tio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+    words.forEach((w,i)=>setTimeout(()=>w.classList.add('on','lit'),i*240));
+    tio.disconnect();
+  }})},{threshold:.5});
+  tio.observe(document.querySelector('[data-triad]'));
+})();
+
+// hero layers + break parallax + companion
+(function(){
+  const hImg=document.querySelector('.hero>img'),hT=document.querySelector('.hero .t'),
+        nfo=document.querySelector('.hero .nfo'),kck=document.querySelector('.hero .kck'),
+        brk=document.querySelector('.break img'),c=document.querySelector('.companion');
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  let k=false;
+  addEventListener('scroll',()=>{
+    if(k)return;k=true;
+    requestAnimationFrame(()=>{
+      const y=scrollY,vh=innerHeight;
+      if(y<vh){
+        hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
+        hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
+        hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));
+        if(nfo)nfo.style.transform=`translateY(${y*-.16}px)`;
+        if(kck)kck.style.transform=`translateY(${y*-.06}px)`;
+      }
+      const r=brk.parentElement.getBoundingClientRect();
+      if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;brk.style.transform=`translateY(${p*-56}px)`}
+      if(c)c.style.transform=`translateY(${(Math.sin(y/420)*34).toFixed(1)}px) rotate(${(y*0.22).toFixed(1)}deg)`;
+      k=false;
+    });
+  },{passive:true});
+})();
+
+// under-reveal sizing
+(function(){
+  const uf=document.querySelector('.underfoot'),over=document.querySelector('.over');
+  function size(){ if(matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)').matches){over.style.marginBottom='0px';return}
+    over.style.marginBottom=uf.offsetHeight+'px'; }
+  size();addEventListener('resize',size);setTimeout(size,600);
+})();
+function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
+clock();setInterval(clock,30000);
+</script>
+<script is:inline src="/redesign/switcher.js" defer></script>
+</body>
+</html>

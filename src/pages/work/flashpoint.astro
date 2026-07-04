@@ -1,133 +1,446 @@
 ---
-import Base from '../../layouts/Base.astro';
 import CallSheet from '../../components/CallSheet.astro';
+import NextFile from '../../components/NextFile.astro';
 
-// === Flashpoint - faithful rebuild of monuments.cc/portfolio/flashpoint ===
-// Real assets pulled from the live site into /public/case-studies/flashpoint.
-const gallery = Array.from({ length: 24 }, (_, i) => `/case-studies/flashpoint/gallery/fp-${String(i + 1).padStart(2, '0')}.jpg`);
-// fp-01..08: campaign comps (ads, billboard, packaging, one-sheet, boxes, brand shot).
-// fp-09..24: studio product shots (strobes, power packs, stands, cases) for the product grid.
+// === Flashpoint · THE CUT case page ===
+// Full rebrand for Adorama's photography-gear label. Assets in /public/case-studies/flashpoint.
+// fp-01..08 are the campaign comps (trade ads, billboard, packaging, one-sheet, brand shot):
+// they get the hero placements. fp-09..24 are square product stills: the contact-sheet line.
+const G = '/case-studies/flashpoint/gallery';
+const comps = [
+  { src: 'fp-04.jpg', cap: 'COMP-04 · Packaging · The shipper box', cls: 'w2', w: 1800, h: 1414, alt: 'Flashpoint shipper box packaging comp in teal and white' },
+  { src: 'fp-01.jpg', cap: 'COMP-01 · Print · Trade ad, teal', cls: '', w: 1800, h: 1199, alt: 'Flashpoint magazine trade ad comp, teal colorway' },
+  { src: 'fp-02.jpg', cap: 'COMP-02 · Print · Trade ad, orange', cls: '', w: 1800, h: 1199, alt: 'Flashpoint magazine trade ad comp, orange colorway' },
+  { src: 'fp-06.jpg', cap: 'COMP-06 · Packaging · Xplor Power 2400 Pro', cls: '', w: 1800, h: 1800, alt: 'Flashpoint Xplor Power 2400 Pro power pack box' },
+  { src: 'fp-07.jpg', cap: 'COMP-07 · Packaging · R2 Nano Remote', cls: '', w: 1800, h: 1800, alt: 'Flashpoint R2 Nano Remote box, orange colorway' },
+  { src: 'fp-05.jpg', cap: 'COMP-05 · Print · Product one-sheet', cls: 'off', w: 1800, h: 1199, alt: 'Flashpoint FV150 product one-sheet comp' },
+];
+const prods = Array.from({ length: 16 }, (_, i) => i + 9); // fp-09..fp-24
 const services = ['Brand Identity', 'Logo Design', 'Brand Positioning', 'Packaging Design', 'Product Design', 'Messaging'];
-const tags = ['Full Rebrand'];
-const credits = [
-  { k: 'Agency', v: 'Art of Visuals' },
-  { k: 'Client', v: 'Adorama' },
-  { k: 'Art Director', v: 'Dannie Nicholson' },
-  { k: 'Creative Direction', v: 'DJ Ramirez', select: true },
+const spanned = [
+  'A fresh brand image and updated messaging.',
+  'A redesigned website for improved user experience.',
+  'Revamped packaging reflecting the updated visual identity.',
+  'Powerful out-of-home (OOH) advertising campaigns.',
 ];
 ---
-<Base title="Flashpoint · monuments">
-  <article class="cs2">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flashpoint · Monuments</title>
+<meta name="description" content="Flashpoint full rebrand for Adorama. Identity, packaging, product, and messaging pulled into one voice. Creative direction by DJ Ramirez.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style is:global>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --fp-teal:#16a3ab; --fp-orange:#f0612a;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
 
-    <!-- HERO -->
-    <header class="cs2-hero">
-      <div class="cs2-hero-bg" style={`background-image:url(${gallery[0]})`}></div>
-      <div class="cs2-hero-scrim"></div>
-      <div class="cs2-hero-inner">
-        <h1 class="cs2-hero-title">Flash<br>point</h1>
-        <div class="cs2-hero-foot">
-          <div class="cs2-tags">{tags.map((t) => <span class="cs2-tag">{t}</span>)}</div>
-          <a class="cs2-allwork" href="/work">All Work <span aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-    </header>
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
 
-    <!-- INTRO: services sidebar + lead -->
-    <section class="cs2-intro fade">
-      <aside class="cs2-side">
-        <h2 class="cs2-side-h">Imagine, illuminate, create: a full rebrand for Flashpoint.</h2>
-        <ul class="cs2-services">{services.map((s) => <li>{s}</li>)}</ul>
-      </aside>
-      <div class="cs2-intro-body">
-        <p>Flashpoint, a private label under Adorama, offers top-quality lighting and photography gear at affordable prices, catering to both pros and enthusiasts. Despite its strong reputation, the brand needed a fresh look to stay relevant in the fast-changing photography industry. As Creative Director, DJ led the project, working closely with his team at Art of Visuals to revamp Flashpoint's identity.</p>
-        <p class="cs2-intro-kick">Together, they crafted a modern, cohesive image that reinforced Flashpoint's standing as a trusted leader in the photography world.</p>
-      </div>
-    </section>
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:20px;left:22px;pointer-events:auto}
+.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
+.corners .c1 i{font-style:normal;color:#fff;display:inline-block;animation:spin 7s linear infinite}
+.corners .c2{top:26px;right:22px;pointer-events:auto}
+.corners .c2 a{font-size:21px;letter-spacing:.06em}
+.corners .c2 a{margin-left:22px}
+.corners .c3{bottom:20px;left:22px}
+.corners .c4{bottom:20px;right:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
 
-    <!-- FEATURE CARD (packaging) -->
-    <section class="cs2-logo fade">
-      <div class="cs2-logo-card">
-        <img src={gallery[3]} alt="Flashpoint packaging system" />
-      </div>
-      <div class="cs2-logo-aside">
-        <p class="cs2-logo-note">A confident new system: packaging, product, and messaging pulled into one voice that says innovation, quality, and value.</p>
-      </div>
-    </section>
+/* hero: the OOH comp is the money shot, the brand triad rides on top of it */
+.hero{position:relative;height:100svh;overflow:hidden;background:var(--ink)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) brightness(.6)}
+.hero .scrim{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 44%,rgba(22,21,20,.52),rgba(22,21,20,.18) 58%,rgba(22,21,20,.46))}
+.hero .t{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(46px,9vw,138px);line-height:.92;letter-spacing:-.035em;text-transform:uppercase}
+.hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero .t .spark{color:var(--spark)}
+.hero .t .ln{display:block;overflow:hidden}
+.hero .t .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero .t .ln:nth-child(2)>span{animation-delay:.12s}
+.hero .t .ln:nth-child(3)>span{animation-delay:.24s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .nfo{position:absolute;right:var(--pad);bottom:11vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
+.hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
+.hero .kck{position:absolute;left:var(--pad);bottom:11vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);opacity:0;animation:fade 1s .7s forwards;line-height:1.9}
+.hero .kck b{color:var(--spark);font-weight:400}
+@keyframes fade{to{opacity:1}}
 
-    <!-- PHOTO GRID -->
-    <section class="cs2-gallery">
-      <div class="cs2-gallery-badge" aria-hidden="true">
-        <svg viewBox="0 0 100 100"><defs><path id="fpBadge" d="M50,50 m-34,0 a34,34 0 1,1 68,0 a34,34 0 1,1 -68,0" /></defs>
-          <text><textPath href="#fpBadge" startOffset="0%">IMAGINE · ILLUMINATE · CREATE · </textPath></text>
-        </svg>
-      </div>
-      <div class="cs2-grid">
-        {gallery.slice(0, 8).map((src, i) => <figure class={`cs2-cell c-${i % 6}`}><img src={src} alt="" loading="lazy" /></figure>)}
-      </div>
-    </section>
+/* scope first: cobalt scoreboard under the hero */
+.statrow{background:var(--struct);color:var(--paper)}
+.statrow>.in{display:flex;justify-content:space-between;align-items:flex-end;gap:34px;flex-wrap:wrap;padding:42px 0 38px}
+.stat b{display:block;font-weight:var(--dispw);font-size:clamp(38px,4.8vw,72px);letter-spacing:-.03em;line-height:.92}
+.stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);display:block;margin-top:8px}
+.stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);line-height:1.9;max-width:26ch}
+.stat .note b{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--paper);display:inline;letter-spacing:.08em}
+.rolerow{background:var(--ink);border-bottom:1px solid var(--lined)}
+.rolerow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rolerow b{color:var(--paper);font-weight:400}
 
-    <!-- IMAGINE / ILLUMINATE / CREATE -->
-    <section class="cs2-cdd fade">
-      <h2 class="cs2-cdd-head"><span class="on">Imagine</span> <span>Illuminate</span> <span>Create</span></h2>
-      <div class="cs2-cdd-cols">
-        <div class="cs2-cdd-col">
-          <p>The primary objective was to revitalize Flashpoint's market presence, ensuring that it became synonymous with innovation, quality, and value in the world of photography.</p>
-          <p>This was a top-to-bottom effort: a fresh brand image, sharper messaging, and a visual identity that could carry across every surface, from the box on the shelf to the billboard on the street.</p>
-        </div>
-        <div class="cs2-cdd-col">
-          <p class="cs2-obj-h">The work spanned</p>
-          <ul class="cs2-obj">
-            <li>A fresh brand image and updated messaging.</li>
-            <li>A redesigned website for improved user experience.</li>
-            <li>Revamped packaging reflecting the updated visual identity.</li>
-            <li>Powerful out-of-home (OOH) advertising campaigns.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+/* story on paper, sticky side heads */
+.paper{background:var(--paper);color:var(--ink)}
+.story{display:grid;grid-template-columns:.62fr 1.38fr;gap:64px;padding:11vh 0 9vh;align-items:start}
+.story .side{position:sticky;top:14vh}
+.story .side .k{color:var(--red)}
+.story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
+.story h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.story .svc{list-style:none;margin:26px 0 0;padding:0}
+.story .svc li{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#6d6a64;padding:9px 0;border-top:1px solid var(--line)}
+.story .svc li i{font-style:normal;color:var(--red);margin-right:10px}
+.story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
+.story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
 
-    <!-- CREDITS: the call sheet slip -->
-    <div class="cs2-callsheet fade">
-      <CallSheet
-        code="MC-2020-02"
-        sub="Adorama · Flashpoint · Full rebrand"
-        filed="MMXX"
-        tone="light"
-        rows={credits}
-      />
-    </div>
+/* the comps wall: presentation boards, white-framed, on ink */
+.comps{background:var(--ink);padding:9vh 0 10vh}
+.comps .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:22px}
+.comps .bar .mono b{color:var(--spark)}
+.cwall{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.2vw,26px)}
+.cfr{position:relative;background:#FCFBF7;padding:10px 10px 32px;opacity:0;transform:translateY(24px)}
+.cfr.in{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.cfr img{width:100%;height:auto;display:block;filter:saturate(.98)}
+.cfr .cap{position:absolute;left:11px;bottom:9px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.cfr .cap b{color:var(--red);font-weight:400}
+.cfr.w2{grid-column:1/-1}
+.cfr.off{grid-column:1/-1;width:min(76%,940px);margin-left:auto}
+.cfr:hover{z-index:2}
+.cfr:hover img{filter:saturate(1.04)}
 
-    <!-- PRODUCT GRID -->
-    <section class="cs2-products">
-      <span class="cs2-check" aria-hidden="true">LIGHT IT UP</span>
-      <div class="cs2-prod-grid">
-        {gallery.slice(8).map((src) => <figure class="cs2-prod"><img src={src} alt="" loading="lazy" /></figure>)}
-      </div>
-    </section>
+/* full-bleed parallax break */
+.break{position:relative;height:88svh;overflow:hidden}
+.break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;will-change:transform}
+.break .cap{position:absolute;left:var(--pad);bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85);background:rgba(22,21,20,.5);padding:5px 10px}
 
-    <!-- NEXT PROJECT -->
-    <a class="cs2-next" href="/work/sony-this-moment">
-      <div class="cs2-next-bg" style={`background-image:url(${gallery[2]})`}></div>
-      <div class="cs2-next-scrim"></div>
-      <div class="cs2-next-inner">
-        <span class="cs2-next-k">Next project</span>
-        <span class="cs2-next-t">Sony This Moment <span aria-hidden="true">→</span></span>
-      </div>
-    </a>
+/* the triad: the words light up in the brand's own colors */
+.triad{padding:13vh 0 11vh;text-align:center}
+.triad .k{color:var(--red)}
+.triadhead{display:flex;flex-direction:column;align-items:center;gap:clamp(2px,.8vh,10px);margin:clamp(26px,4vw,50px) 0;font-weight:var(--dispw);font-size:clamp(48px,10.4vw,158px);line-height:.94;letter-spacing:-.04em;text-transform:uppercase}
+.triadhead .tw{color:rgba(22,21,20,.13);transform:translateY(.18em);transition:color .6s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+.triadhead .tw.on{transform:translateY(0)}
+.triadhead .tw.lit:nth-child(1){color:var(--fp-orange)}
+.triadhead .tw.lit:nth-child(2){color:var(--fp-teal)}
+.triadhead .tw.lit:nth-child(3){color:var(--ink)}
+.cdd{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,5vw,80px);text-align:left;max-width:1080px;margin:0 auto;padding-top:2vh}
+.cdd .colA p{color:#4c4a45;max-width:56ch;margin-bottom:1.2em;font-size:18px}
+.cdd .colA p:first-child{font-size:clamp(19px,1.7vw,23px);line-height:1.5;color:var(--ink)}
+.cdd .objh{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--red)}
+.cdd ol{list-style:none;margin:10px 0 0;padding:0}
+.cdd ol li{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:baseline;padding:16px 0 14px;border-top:1px solid var(--line);font-size:16.5px;line-height:1.45;color:var(--ink)}
+.cdd ol li:last-child{border-bottom:1px solid var(--line)}
+.cdd ol li .n{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--fp-teal)}
 
-    <!-- CTA -->
-    <section class="cs2-cta">
-      <p>Let's build something great together.</p>
-      <a href="/contact" class="cs2-cta-link">Let's Talk <span aria-hidden="true">↗</span></a>
-    </section>
+/* the line: 16-frame product contact sheet */
+.gal{padding:2vh 0 11vh}
+.gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:16px}
+.gal .bar .mono b{color:var(--red)}
+.prodgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;opacity:0;transform:translateY(16px) rotate(-.6deg)}
+.fr.in{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.fr img{width:100%;height:auto;display:block;filter:saturate(.96)}
+.fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
+.fr.in:hover{transform:rotate(-1deg) scale(1.04);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms!important}
 
-  </article>
-</Base>
+/* quote on rose */
+.quote{background:var(--spark);color:var(--ink);padding:15vh 0}
+.quote p.q{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(28px,4vw,58px);line-height:1.14;max-width:26ch}
+.quote p.q b{font-weight:400;font-style:normal;font-family:var(--disp);font-weight:var(--dispw);text-transform:uppercase;font-size:.86em;letter-spacing:-.02em}
+.quote .who{margin-top:28px;color:rgba(22,21,20,.6)}
 
-<style>
-  /* Credits call sheet: keeps the white band + rhythm the old .cs2-credits block held. */
-  .cs2-callsheet { background: var(--white); padding: 30px 100px 100px; }
-  @media (max-width: 760px) {
-    .cs2-callsheet { padding: 24px 24px 60px; }
-  }
+/* credits: the call sheet slip */
+.credits{padding:10vh 0}
+
+/* the ask: cobalt hand-off band */
+.cta{background:var(--struct);color:var(--paper);padding:12vh 0}
+.cta .in{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.cta .big{font-weight:var(--dispw);font-size:clamp(28px,4.2vw,60px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;max-width:16ch}
+.cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.cta a.talk{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1.5px solid rgba(245,243,239,.75);padding:16px 26px;border-radius:50%;transition:background .3s,color .3s,transform .3s;display:inline-block}
+.cta a.talk:hover{background:var(--paper);color:var(--struct);transform:scale(1.05)}
+
+footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
+footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
+
+.over{position:relative;z-index:1;background:inherit}
+.underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:900px){
+  .story{grid-template-columns:1fr}.story .side{position:static}
+  .statrow>.in{justify-content:flex-start;gap:28px 44px}
+  .cdd{grid-template-columns:1fr}
+  .prodgrid{grid-template-columns:repeat(2,1fr)}
+  .cfr.off{width:100%}
+  .cta .in{justify-content:flex-start}
+  .hero .kck{display:none}
+}
+@media (max-width:560px){.prodgrid{grid-template-columns:1fr}.cwall{grid-template-columns:1fr}.cfr.w2,.cfr.off{grid-column:auto}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero .t .ln>span{transform:none}.hero .nfo,.hero .kck{opacity:1}.rv{opacity:1;transform:none}
+  .grain{animation:none}.fr,.cfr{opacity:1;transform:none}
+  .triadhead .tw{transform:none;color:var(--ink)}
+  .triadhead .tw:nth-child(1){color:var(--fp-orange)}
+  .triadhead .tw:nth-child(2){color:var(--fp-teal)}
+}
 </style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="companion" aria-hidden="true">✳</div>
+
+<div class="corners">
+  <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/lab">Lab</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a></span>
+  <span class="c3">MC-2020-02 · Flashpoint · Full rebrand for Adorama</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<div class="over">
+<header class="hero">
+  <img src={`${G}/fp-03.jpg`} alt="Flashpoint billboard comp on a city building: We got you." fetchpriority="high">
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="t">
+    <span class="ln"><span>Imagine.</span></span>
+    <span class="ln"><span>Illuminate.</span></span>
+    <span class="ln"><span><span class="serif">Create</span><span class="spark">.</span></span></span>
+  </div>
+  <div class="kck">
+    <b>\ Case file</b><br>
+    Flashpoint · Full rebrand for Adorama<br>
+    Identity · Packaging · OOH · 2020
+  </div>
+  <div class="nfo">
+    <span class="h">NFO</span><br>
+    Client · Adorama<br>
+    Role · Creative Director<br>
+    Agency · Art of Visuals<br>
+    Frame · MC-2020-02
+  </div>
+</header>
+
+<div class="statrow">
+  <div class="wrap in">
+    <div class="stat rv"><b>Full</b><span>Top-to-bottom rebrand</span></div>
+    <div class="stat rv"><b>06</b><span>Disciplines, one system</span></div>
+    <div class="stat rv"><b>24</b><span>Frames in the file</span></div>
+    <div class="stat rv"><p class="note">One voice from <b>the box on the shelf</b> to <b>the billboard on the street</b></p></div>
+  </div>
+</div>
+
+<div class="rolerow">
+  <div class="wrap in">
+    <span><b>Client</b> · Adorama</span>
+    <span><b>My part</b> · Creative Director</span>
+    <span><b>Art Director</b> · Dannie Nicholson</span>
+    <span><b>Agency</b> · Art of Visuals</span>
+    <span><b>Year</b> · 2020</span>
+  </div>
+</div>
+
+<section class="paper">
+  <div class="wrap story">
+    <div class="side rv">
+      <span class="k mono">\ The brief</span>
+      <h2>Imagine, illuminate, create: a full rebrand for <span class="serif">Flashpoint.</span></h2>
+      <ul class="svc">
+        {services.map((s) => <li><i>✳</i>{s}</li>)}
+      </ul>
+    </div>
+    <div class="body rv">
+      <p>Flashpoint, a private label under Adorama, offers top-quality lighting and photography gear at affordable prices, catering to both pros and enthusiasts. Despite its strong reputation, the brand needed a fresh look to stay relevant in the fast-changing photography industry. As Creative Director, DJ led the project, working closely with his team at Art of Visuals to revamp Flashpoint's identity.</p>
+      <p>Together, they crafted a modern, cohesive image that reinforced Flashpoint's standing as a trusted leader in the photography world.</p>
+    </div>
+  </div>
+</section>
+
+<section class="comps">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>The comps</b> · one voice, every surface</span>
+      <span class="mono" style="color:#8f8d88">Presentation boards · MMXX</span>
+    </div>
+    <div class="cwall">
+      {comps.map((c) => (
+        <figure class={`cfr ${c.cls}`}>
+          <img src={`${G}/${c.src}`} alt={c.alt} width={c.w} height={c.h} loading="lazy">
+          <figcaption class="cap"><b>{c.cap.split(' · ')[0]}</b> · {c.cap.split(' · ').slice(1).join(' · ')}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<div class="break">
+  <img class="plx" src={`${G}/fp-08.jpg`} alt="Brand shot: a woman with headphones lying on a floor covered in photo prints and magazines">
+  <span class="cap">✳ Imagine, illuminate, create · The brand in the wild</span>
+</div>
+
+<section class="paper">
+  <div class="wrap triad" data-triad>
+    <span class="k mono">\ The idea</span>
+    <h2 class="triadhead" aria-label="Imagine Illuminate Create">
+      <span class="tw">Imagine</span>
+      <span class="tw">Illuminate</span>
+      <span class="tw">Create</span>
+    </h2>
+    <div class="cdd">
+      <div class="colA rv">
+        <p>The primary objective was to revitalize Flashpoint's market presence, ensuring that it became synonymous with innovation, quality, and value in the world of photography.</p>
+        <p>This was a top-to-bottom effort: a fresh brand image, sharper messaging, and a visual identity that could carry across every surface, from the box on the shelf to the billboard on the street.</p>
+      </div>
+      <div class="colB rv">
+        <span class="objh">The work spanned</span>
+        <ol>
+          {spanned.map((s, i) => (
+            <li><span class="n">0{i + 1}</span><span>{s}</span></li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap gal">
+    <div class="bar">
+      <span class="mono"><b>Light it up</b> · the product line in the new system</span>
+      <span class="mono" style="color:#8f8d88">16 frames · hover to inspect</span>
+    </div>
+    <div class="prodgrid">
+      {prods.map((n, i) => (
+        <figure class="fr rv" style={`transition-delay:${(i % 4) * 60}ms`}>
+          <img src={`${G}/fp-${String(n).padStart(2, '0')}.jpg`} alt={`Flashpoint product still, frame ${n}`} width="1200" height="1200" loading="lazy">
+          <figcaption class="cap">FR-{String(n).padStart(2, '0')} · The line</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="wrap">
+    <p class="q rv">"A confident new system: packaging, product, and messaging pulled into <b>one voice</b> that says innovation, quality, and value."</p>
+    <p class="who mono rv">The system in one line</p>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap credits rv">
+    <CallSheet
+      code="MC-2020-02"
+      sub="Adorama · Flashpoint · Full rebrand"
+      filed="MMXX"
+      tone="light"
+      rows={[
+        { k: 'Agency', v: 'Art of Visuals' },
+        { k: 'Client', v: 'Adorama' },
+        { k: 'Art Director', v: 'Dannie Nicholson' },
+        { k: 'Creative Direction', v: 'DJ Ramirez', select: true },
+      ]}
+    />
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap in rv">
+    <p class="big">Let's build something <span class="serif">great</span> together.</p>
+    <a class="talk" href="/contact">Let's Talk ↗</a>
+  </div>
+</section>
+</div><!--/over-->
+
+<div class="underfoot">
+<NextFile
+  href="/work/waffle-me-up"
+  name="Waffle Me Up"
+  img="/case-studies/waffle-me-up/cover.jpg"
+  code="MC-2019-05"
+/>
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
+    <span class="blk">built to be remembered</span>
+    <span>Case file MC-2020-02</span>
+  </div>
+</footer>
+</div><!--/underfoot-->
+
+<script is:inline>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv,.cfr,.fr').forEach(el=>io.observe(el));
+
+// hero layers + break parallax + companion
+(function(){
+  const hImg=document.querySelector('.hero>img'),hT=document.querySelector('.hero .t'),
+        nfo=document.querySelector('.hero .nfo'),kck=document.querySelector('.hero .kck'),
+        brk=document.querySelector('.break img'),c=document.querySelector('.companion');
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  let k=false;
+  addEventListener('scroll',()=>{
+    if(k)return;k=true;
+    requestAnimationFrame(()=>{
+      const y=scrollY,vh=innerHeight;
+      if(y<vh){
+        hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
+        hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
+        hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));
+        if(nfo)nfo.style.transform=`translateY(${y*-.16}px)`;
+        if(kck)kck.style.transform=`translateY(${y*-.06}px)`;
+      }
+      const r=brk.parentElement.getBoundingClientRect();
+      if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;brk.style.transform=`translateY(${p*-56}px)`}
+      if(c)c.style.transform=`translateY(${(Math.sin(y/420)*34).toFixed(1)}px) rotate(${(y*0.22).toFixed(1)}deg)`;
+      k=false;
+    });
+  },{passive:true});
+})();
+
+// the triad: each word slides up and lights in its brand color, staggered
+(function(){
+  const head=document.querySelector('[data-triad] .triadhead');
+  if(!head)return;
+  const ws=[...head.querySelectorAll('.tw')];
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const tio=new IntersectionObserver((es)=>{es.forEach(e=>{
+    if(e.isIntersecting){
+      ws.forEach((w,i)=>setTimeout(()=>w.classList.add('on','lit'),i*220));
+      tio.disconnect();
+    }
+  })},{threshold:.5});
+  tio.observe(head);
+})();
+
+// under-reveal sizing
+(function(){
+  const uf=document.querySelector('.underfoot'),over=document.querySelector('.over');
+  function size(){ if(matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)').matches){over.style.marginBottom='0px';return}
+    over.style.marginBottom=uf.offsetHeight+'px'; }
+  size();addEventListener('resize',size);setTimeout(size,600);
+})();
+function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
+clock();setInterval(clock,30000);
+</script>
+<script is:inline src="/redesign/switcher.js" defer></script>
+</body>
+</html>
