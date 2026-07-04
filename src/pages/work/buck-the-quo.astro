@@ -139,6 +139,20 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .stat46 b{font-weight:var(--dispw);font-size:clamp(46px,5.2vw,84px);letter-spacing:-.04em;line-height:1;color:var(--red)}
 .stat46 span{font-size:13.5px;line-height:1.5;color:#6f6d68;max-width:22ch}
 
+/* the film: front and center, big centered click-to-play */
+.film{background:var(--ink);padding:8vh 0 9vh}
+.film .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:18px}
+.film .bar .mono b{color:var(--spark)}
+.poster16{position:relative;aspect-ratio:16/9;overflow:hidden;cursor:pointer;background:#000}
+.poster16 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.8);transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.poster16:hover img{transform:scale(1.03)}
+.poster16 .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:132px;height:132px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.7;padding:0 12px;color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s}
+.poster16:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
+.poster16 .fcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
+.poster16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.poster16.playing{cursor:default}
+.poster16.playing .play,.poster16.playing .fcap{display:none}
+
 /* the activation: More In Store scenes on ink */
 .act{background:var(--ink);color:var(--paper);padding:11vh 0 4vh}
 .act .head{max-width:860px}
@@ -292,6 +306,20 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
     <span><b>Filed</b> · MMXV to MMXVIII</span>
   </div>
 </div>
+
+<section class="film">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>The film</b> · Hella Bright Highlights</span>
+      <span class="mono" style="color:#8f8d88">Buck the Quo · play it here</span>
+    </div>
+    <div class="poster16" data-film="nNcLIN5uIO8" data-title="Hella Bright Highlights · Buck the Quo">
+      <img src="/case-studies/buck-the-quo/gallery/film-poster.jpg" alt="Buck the Quo: Hella Bright Highlights film poster">
+      <span class="play">Play · The film</span>
+      <span class="fcap">✳ Hella Bright Highlights · Buck the Quo</span>
+    </div>
+  </div>
+</section>
 
 <section class="paper">
   <div class="wrap story">
@@ -495,6 +523,18 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 })();
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
+</script>
+<script is:inline>
+  // front-and-center film: poster until clicked, then the privacy-enhanced embed
+  document.querySelectorAll('.poster16[data-film]').forEach(poster=>{
+    poster.addEventListener('click',()=>{
+      if(poster.classList.contains('playing'))return;
+      const f=document.createElement('iframe');
+      f.src=`https://www.youtube-nocookie.com/embed/${poster.dataset.film}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+      f.allow='autoplay; encrypted-media; fullscreen';f.allowFullscreen=true;f.title=poster.dataset.title||'Film';
+      poster.appendChild(f);poster.classList.add('playing');
+    });
+  });
 </script>
 <script is:inline src="/redesign/switcher.js" defer></script>
 </body>
