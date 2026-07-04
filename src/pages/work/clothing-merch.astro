@@ -1,13 +1,12 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
-import ScreenRoom from '../../components/ScreenRoom.astro';
 
 // === Clothing & Merch · THE CUT case page ===
 // Words ported verbatim from the v1 page (monuments.cc/portfolio/clothing-merch rebuild).
 // cm-01..20: Creative Space apparel line. cm-21..23: cap detail + tee line sheets.
 // cm-24..26: DW drummers collection (tee, cap, tote).
-// The two Instagram reels play inline via ScreenRoom (IG embed + Open-on-Instagram fallback).
+// The two Instagram reels are embedded inline (IG /embed/ iframes, play without leaving).
 ---
 <!doctype html>
 <html lang="en">
@@ -99,6 +98,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .film .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:16px}
 .film .bar .mono b{color:var(--spark)}
 .reelgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.reelembed{background:#fff;border:1px solid var(--lined);overflow:hidden}
+.reelembed iframe{display:block;width:100%;height:min(78vh,720px);border:0}
+@media (max-width:700px){.reelgrid{grid-template-columns:1fr}.reelembed iframe{height:640px}}
 .posterreel{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:#000;cursor:pointer}
 .posterreel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.82);transition:transform .8s cubic-bezier(.22,1,.36,1)}
 .posterreel:hover img{transform:scale(1.03)}
@@ -243,25 +245,15 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
       <span class="mono" style="color:#8f8d88">Play them right here ✳</span>
     </div>
     <div class="reelgrid">
-      <a class="posterreel" href="https://www.instagram.com/reel/ClkAMQVpxa6/" data-screen data-screen-cap="Creative Space · The line · Instagram" target="_blank" rel="noopener" aria-label="Play the Creative Space apparel reel">
-        <img src="/case-studies/clothing-merch/gallery/cm-05.jpg" alt="Reel poster: the Creative Space crop crewneck worn on set" loading="lazy">
-        <span class="play">Play · The reel</span>
-        <span class="fcap">✳ Creative Space · The line</span>
-        <span class="fout">IG / ClkAMQVpxa6</span>
-      </a>
-      <a class="posterreel" href="https://www.instagram.com/reel/Cl9hIJ-vS-b/" data-screen data-screen-cap="Creative Space · The drop · Instagram" target="_blank" rel="noopener" aria-label="Play the Creative Space drop reel">
-        <img src="/case-studies/clothing-merch/gallery/cm-18.jpg" alt="Reel poster: the Creative Space tee with the yellow flower mark, worn on model" loading="lazy">
-        <span class="play">Play · The reel</span>
-        <span class="fcap">✳ Creative Space · The drop</span>
-        <span class="fout">IG / Cl9hIJ-vS-b</span>
-      </a>
+      <div class="reelembed"><iframe src="https://www.instagram.com/reel/ClkAMQVpxa6/embed/" loading="lazy" scrolling="no" allowtransparency="true" title="Creative Space apparel reel on Instagram"></iframe></div>
+      <div class="reelembed"><iframe src="https://www.instagram.com/reel/Cl9hIJ-vS-b/embed/" loading="lazy" scrolling="no" allowtransparency="true" title="Creative Space drop reel on Instagram"></iframe></div>
     </div>
   </div>
 </section>
 
 <div class="break">
-  <img class="plx" src="/case-studies/clothing-merch/gallery/cm-01.jpg" alt="The Creative Space hoodie back print: a red flower under the words art is chaos taking shape">
-  <span class="cap">✳ Creative Space · Art is chaos taking shape · Sony & Art of Visuals</span>
+  <img class="plx" src="/case-studies/clothing-merch/sparrow/sparrow-hero.jpg" alt="The Sparrow apparel line: the full crew in the field, The Sparrow script overlaid">
+  <span class="cap">✳ The Sparrow · Fearless · Angelus Temple LA</span>
 </div>
 
 <section class="paper">
@@ -291,7 +283,6 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
       <span class="mono" style="color:#8f8d88">Line + lookbook</span>
     </div>
   </div>
-  <figure class="sp-hero"><img src="/case-studies/clothing-merch/sparrow/sparrow-hero.jpg" alt="The Sparrow apparel line: the full crew in the field, The Sparrow script overlaid" loading="lazy"></figure>
   <div class="wrap sp-looks">
     <figure><img src="/case-studies/clothing-merch/sparrow/sparrow-look-01.jpg" alt="The Sparrow lookbook spread: the line shot in the field with the product grid" loading="lazy"></figure>
     <figure><img src="/case-studies/clothing-merch/sparrow/sparrow-look-02.jpg" alt="The Sparrow lookbook: Fearless denim, fleece, and drop tees" loading="lazy"></figure>
@@ -323,7 +314,6 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 </section>
 </div><!--/over-->
 
-<ScreenRoom />
 <div class="underfoot">
 <NextFile
   href="/work/art-of-visuals"
