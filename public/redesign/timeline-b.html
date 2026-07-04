@@ -107,6 +107,13 @@ background:repeating-linear-gradient(to top,transparent 0 119px,rgba(245,243,239
 .outro h2 .serif{color:var(--spark)}
 .outro .mono{color:var(--dim)}
 
+/* short viewports: slimmer cards so station 4 clears the header */
+@media (max-height:840px) and (min-width:901px){
+  .card{width:370px}
+  .card .ph img{aspect-ratio:3.2/1}
+  .card li{padding:4px 0}
+}
+
 /* flat fallback: small screens or reduced motion, vertical road, no pin */
 @media (max-width:900px),(prefers-reduced-motion:reduce){
   .tl{height:auto}
@@ -209,7 +216,7 @@ background:repeating-linear-gradient(to top,transparent 0 119px,rgba(245,243,239
         </div>
       </article>
 
-      <article class="st" data-word="founder." data-x="3920" data-y="515">
+      <article class="st" data-word="founder." data-x="3920" data-y="535">
         <span class="node" aria-hidden="true"></span>
         <span class="yr">20XX</span>
         <span class="stub">04 · Monuments</span>
@@ -290,7 +297,7 @@ background:repeating-linear-gradient(to top,transparent 0 119px,rgba(245,243,239
       ' S 2080 ' + sy(700,vh) + ', 2260 ' + sy(688,vh) +
       ' C 2440 ' + sy(676,vh) + ', 2620 ' + sy(592,vh) + ', 2820 ' + sy(584,vh) +
       ' S 3180 ' + sy(620,vh) + ', 3360 ' + sy(604,vh) +
-      ' C 3540 ' + sy(588,vh) + ', 3720 ' + sy(528,vh) + ', 3920 ' + sy(515,vh);
+      ' C 3540 ' + sy(590,vh) + ', 3720 ' + sy(548,vh) + ', 3920 ' + sy(535,vh);
     ghost.setAttribute('d', d);
     drawn.setAttribute('d', d);
     svg.setAttribute('viewBox', '0 0 ' + WORLD_W + ' ' + vh);
@@ -331,7 +338,7 @@ background:repeating-linear-gradient(to top,transparent 0 119px,rgba(245,243,239
   }
 
   function apply(p){
-    var t = Math.min(Math.max((p - 0.02) / 0.92, 0), 1);
+    var t = Math.min(Math.max((p - 0.02) / 0.87, 0), 1);
     var len = t * L;
     drawn.style.strokeDashoffset = (L - len);
     var pt = drawn.getPointAtLength(len);
@@ -339,18 +346,26 @@ background:repeating-linear-gradient(to top,transparent 0 119px,rgba(245,243,239
     var tx = Math.min(Math.max(pt.x - vw * 0.42, 0), maxTx);
     world.style.transform = 'translate3d(' + (-tx) + 'px,0,0)';
 
+    /* ai = last station the tip has passed. A card stays up while the tip is
+       within DEMOTE length units past its node, then settles to a stub while
+       still on screen. The final station never settles. */
+    var DEMOTE = 500;
     var ai = -1;
     for (var i = 0; i < stationLen.length; i++) {
       if (len >= stationLen[i] - 2) ai = i;
     }
-    if (ai !== lastIdx) {
+    var last = stationLen.length - 1;
+    var settled = ai >= 0 && ai < last && (len - stationLen[ai]) > DEMOTE;
+    var state = ai * 2 + (settled ? 1 : 0);
+    if (state !== lastIdx) {
       sts.forEach(function(s, j){
+        var up = j === ai && (!settled || j === last);
         s.classList.toggle('lit', j <= ai);
-        s.classList.toggle('on', j === ai);
-        s.classList.toggle('past', j < ai);
+        s.classList.toggle('on', up);
+        s.classList.toggle('past', j <= ai && !up);
       });
       setWord(ai);
-      lastIdx = ai;
+      lastIdx = state;
     }
   }
 

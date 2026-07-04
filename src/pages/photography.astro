@@ -55,38 +55,78 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
 .hero h1{font-weight:var(--dispw);font-size:clamp(52px,9.4vw,140px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:14px}
 .hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-top:4vh}
 .hero .sub p{max-width:44ch;color:#4c4a45}
-@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-/* sticky category index: jump to a roll, scrollspy highlights where you are */
-.catnav{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:2px solid var(--ink)}
-.catnav .in{max-width:var(--wrap);margin:0 auto;display:flex;align-items:baseline;gap:24px;overflow-x:auto;padding:15px var(--pad) 13px;-webkit-overflow-scrolling:touch}
-.catnav .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
-.catnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#55524c;white-space:nowrap;padding-bottom:4px;border-bottom:2px solid transparent;transition:color .25s,border-color .25s}
-.catnav a b{font-weight:400;color:var(--red)}
-.catnav a:hover{color:var(--ink)}
-.catnav a.on{color:var(--ink);border-bottom-color:var(--red)}
-/* a roll = one photo type: header band + natural-height masonry */
-.roll{padding:8vh 0 2vh;scroll-margin-top:70px}
-.roll:last-of-type{padding-bottom:10vh}
-.rollhead{display:flex;justify-content:space-between;align-items:end;gap:14px 40px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:20px}
-.rollhead .no{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
-.rollhead h2{font-weight:var(--dispw);font-size:clamp(36px,5.4vw,76px);line-height:.92;letter-spacing:-.03em;text-transform:uppercase;margin-top:6px}
-.rollhead p{max-width:46ch;color:#4c4a45;padding-bottom:4px}
+/* hero word swap when a folder is pulled */
+.hero{padding-bottom:9vh}
+.hero h1 .serif.swap{animation:wordIn .5s cubic-bezier(.22,1,.36,1)}
+.hero h1 .num.swap{display:inline-block;animation:wordIn .5s cubic-bezier(.22,1,.36,1)}
+@keyframes wordIn{0%{opacity:0;transform:translateY(55%)}100%{opacity:1;transform:none}}
+/* THE DRAWER: manila folders seen edge-on; the active one lifts open */
+.drawer{background:var(--ink);position:relative}
+.drawer .cap{max-width:var(--wrap);margin:0 auto;padding:16px var(--pad) 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88}
+.drawer .cap b{font-weight:400;color:var(--red)}
+.drawer .bin{max-width:var(--wrap);margin:0 auto;padding:36px var(--pad) 0}
+.drawer .lip{position:relative;z-index:35;height:16px;background:linear-gradient(180deg,#28251f,#191816);border-top:1px solid #3d3a34;box-shadow:0 -10px 20px rgba(0,0,0,.35)}
+.folderrow{display:flex;align-items:flex-end}
+.folder{position:relative;flex:1 1 0;min-width:0;height:128px;background:none;border:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent;transform-origin:50% 100%;transform:translateY(10px);filter:brightness(.85) saturate(.92);transition:transform .42s cubic-bezier(.22,1,.36,1),filter .42s cubic-bezier(.22,1,.36,1)}
+.folder+.folder{margin-left:-30px}
+.folder:hover{transform:translateY(2px);filter:brightness(.96) saturate(.97)}
+.folder:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+.folder.on{transform:translateY(-16px) rotate(-1.1deg);filter:none;z-index:30!important}
+.folder .fbody{position:absolute;left:0;right:0;top:29px;bottom:0;display:block;border:1px solid #a8946a;border-bottom:none;border-radius:9px 9px 0 0;background:linear-gradient(180deg,#e5d3a9 0%,#d9c69b 34%,#cbb687 100%);box-shadow:inset 0 1px 0 rgba(250,240,214,.85),inset 0 -20px 26px rgba(105,86,48,.16),-16px 0 24px -14px rgba(10,9,8,.6)}
+.folder.on .fbody{background:linear-gradient(180deg,#eddcb4 0%,#e0cea3 34%,#d2bd8e 100%);box-shadow:inset 0 1px 0 rgba(252,244,220,.9),inset 0 -20px 26px rgba(105,86,48,.14),0 26px 38px -12px rgba(10,9,8,.75),-16px 0 24px -14px rgba(10,9,8,.6)}
+/* flap hint: the lighter inner face you see once the folder is open */
+.folder .fbody::before{content:"";position:absolute;left:5px;right:5px;top:0;height:0;border-radius:7px 7px 0 0;background:linear-gradient(180deg,#f5eac8,#e7d7ae);box-shadow:inset 0 -1px 0 rgba(150,124,78,.45);opacity:0;transition:height .42s cubic-bezier(.22,1,.36,1),opacity .32s}
+.folder.on .fbody::before{height:18px;opacity:1}
+.folder .ftab{position:absolute;top:0;left:max(2px,calc((100% - 158px)*var(--tabf,0)));height:31px;max-width:calc(100% - 4px);padding:0 13px;z-index:2;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;overflow:hidden;background:linear-gradient(180deg,#ecdeb8,#dcc99e);border:1px solid #a8946a;border-bottom:none;border-radius:7px 7px 0 0;font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#43371f}
+.folder.on .ftab{background:linear-gradient(180deg,#f3e7c4,#e4d3a8)}
+.folder .fdot{width:7px;height:7px;border-radius:50%;background:var(--red);flex:0 0 auto;opacity:0;transform:scale(.4);transition:opacity .3s,transform .3s}
+.folder.on .fdot{opacity:1;transform:none}
+.folder .fno{position:absolute;left:13px;bottom:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:rgba(100,81,44,.6);pointer-events:none}
+.folder .fstamp{position:absolute;right:12px;bottom:11px;transform:rotate(-7deg);font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:rgba(100,81,44,.62);border:1px solid rgba(100,81,44,.45);border-radius:2px;padding:2px 6px;pointer-events:none}
+/* the sheet: the open folder's spilled contents + its index card */
+.sheet{padding:6px 0 10vh}
+.indexcard{position:relative;z-index:5;width:min(600px,100%);margin:-18px 0 30px;background:#fff;border:1px solid var(--line);border-radius:2px;box-shadow:0 18px 40px rgba(16,15,14,.18),0 2px 6px rgba(16,15,14,.08);padding:12px 18px 13px;transform:translateX(var(--cardx,0px)) rotate(-.5deg);transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.indexcard .ictop{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:8px;border-bottom:1.5px solid rgba(224,49,26,.5)}
+.indexcard .ictop .mono b{font-weight:400;color:var(--red)}
+.indexcard .icblurb{font-family:'Instrument Serif',serif;font-style:italic;font-size:17px;color:#4c4a45;line-height:26px;min-height:26px;padding-top:3px;background-image:repeating-linear-gradient(180deg,transparent 0,transparent 25px,rgba(36,56,232,.16) 25px,rgba(36,56,232,.16) 26px)}
 .masonry{columns:4;column-gap:12px}
 .fr{position:relative;background:#fff;padding:7px 7px 24px;border:1px solid var(--line);cursor:zoom-in;break-inside:avoid;margin:0 0 12px;opacity:0;transform:translateY(14px)}
 .fr.show{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
 .fr img{width:100%;height:auto;display:block;filter:saturate(.92)}
 .fr .cap{position:absolute;left:8px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
 .fr:hover{transform:rotate(-1deg) scale(1.04);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2}
-#lb{position:fixed;inset:0;z-index:96;background:rgba(12,11,10,.96);display:none;align-items:center;justify-content:center;padding:4vmin}
-#lb.on{display:flex}
-#lb img{max-width:92vw;max-height:84vh;box-shadow:0 40px 120px rgba(0,0,0,.6)}
-#lb .cap{position:absolute;bottom:26px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88}
-#lb .x{position:absolute;top:22px;right:22px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:none;border:1px solid rgba(245,243,239,.4);border-radius:99px;padding:8px 16px;cursor:pointer}
-#lb .nav{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:22px;color:var(--paper);background:none;border:none;cursor:pointer;padding:20px}
-#lb .prev{left:8px}#lb .next{right:8px}
+.fr:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+/* DJ's filmstrip lightbox, carried over from the old site + retinted to the cut */
+.pg-lightbox{position:fixed;inset:0;z-index:96;display:none;flex-direction:column;background:rgba(16,15,14,.96);backdrop-filter:blur(4px)}
+.pg-lightbox.open{display:flex}
+.pg-lb-strip{flex:1 1 auto;min-height:0;overflow-x:auto;overflow-y:hidden;display:flex;align-items:center;cursor:grab;scrollbar-width:none;-ms-overflow-style:none}
+.pg-lb-strip::-webkit-scrollbar{display:none}
+.pg-lb-strip.dragging{cursor:grabbing}
+.pg-lb-track{display:flex;align-items:center;gap:3vw;padding:0 16vw;height:100%}
+.pg-lb-slide{flex:0 0 auto;height:100%;min-width:24vw;display:flex;align-items:center;justify-content:center}
+.pg-lb-photo{height:88%;width:auto;max-width:92vw;object-fit:contain;user-select:none;-webkit-user-drag:none;background:#fff;padding:7px;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.pg-lb-close{position:absolute;top:22px;right:24px;z-index:5;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:rgba(0,0,0,.25);border:1px solid rgba(245,243,239,.35);border-radius:99px;padding:9px 16px;cursor:pointer;transition:background .2s}
+.pg-lb-close:hover{background:rgba(245,243,239,.14)}
+.pg-lb-bar{flex:0 0 auto;display:flex;align-items:center;justify-content:center;gap:34px;padding:18px 0 30px}
+.pg-lb-arrow{background:none;border:none;color:var(--paper);font-size:24px;line-height:1;cursor:pointer;padding:4px 12px;opacity:.6;transition:opacity .2s,transform .2s}
+.pg-lb-arrow:hover{opacity:1;transform:scale(1.18)}
+.pg-lb-counter{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8f8d88;font-variant-numeric:tabular-nums;min-width:140px;text-align:center}
+.pg-lb-counter b{font-weight:400;color:var(--red)}
 @media (max-width:1100px){.masonry{columns:3}}
-@media (max-width:760px){.masonry{columns:2}.roll{scroll-margin-top:62px}.catnav .in{gap:18px}}
-
+@media (max-width:760px){.masonry{columns:2}
+  .pg-lb-slide{min-width:55vw}.pg-lb-photo{height:76%}.pg-lb-track{gap:5vw;padding:0 10vw}.pg-lb-arrow{font-size:30px}
+  /* the drawer collapses to a scrollable tab row: tabs only, no folder bodies */
+  .drawer .bin{padding:14px var(--pad) 16px}
+  .folderrow{overflow-x:auto;scrollbar-width:none;gap:8px;align-items:stretch}
+  .folderrow::-webkit-scrollbar{display:none}
+  .folder{flex:0 0 auto;height:36px;transform:none;filter:none;opacity:.62;transition:opacity .3s}
+  .folder+.folder{margin-left:0}
+  .folder:hover{transform:none;filter:none}
+  .folder.on{transform:none;filter:none;opacity:1}
+  .folder .fbody{display:none}
+  .folder .ftab{position:static;height:36px;max-width:none;border-bottom:1px solid #a8946a;border-radius:6px}
+  .indexcard{margin-top:-8px}
+}
 </style>
 </head>
 <body>
@@ -95,20 +135,41 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
 <div class="corners">
   <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
   <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/lab">Lab</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a></span>
-  <span class="c3">The photo archive · five rolls · one hundred frames</span>
+  <span class="c3">The photo archive · six folders · one hundred frames</span>
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
 <header class="hero wrap">
   <span class="kick mono">Photography · DJ Ramirez · Monuments</span>
-  <h1><span class="ln"><span>One hundred</span></span><span class="ln"><span><span class="serif">frames</span>.</span></span></h1>
+  <h1><span class="ln"><span class="num" id="rollNum">One hundred</span></span><span class="ln"><span><span class="serif" id="rollWord">frames</span>.</span></span></h1>
   <div class="sub">
-    <p class="rv">The photo archive. Campaign stills, editorial work, and the frames between takes. Photography is one output of directed work, never the whole story. Five rolls, split by type: jump straight to the one you came for.</p>
+    <p class="rv">The photo archive. Campaign stills, editorial work, and the frames between takes. Photography is one output of directed work, never the whole story. Pull a folder from the drawer below, or dig through the whole archive.</p>
   </div>
 </header>
-<nav class="catnav" id="catnav" aria-label="Photo types"><div class="in"><span class="lab">\ The rolls</span></div></nav>
-<main id="rolls"></main>
-<div id="lb" role="dialog"><button class="x" id="lbX">Close ✕</button><button class="nav prev" id="lbP">←</button><img alt=""><button class="nav next" id="lbN">→</button><span class="cap"></span></div>
+<section class="drawer" aria-label="The archive drawer">
+  <div class="cap">\ <b>The drawer</b> · pull a folder</div>
+  <div class="bin"><div class="folderrow" id="folderRow" role="tablist" aria-label="Photo folders"></div></div>
+  <div class="lip" aria-hidden="true"></div>
+</section>
+<section class="sheet wrap">
+  <div class="indexcard" id="indexCard">
+    <div class="ictop">
+      <span class="mono"><b id="icRoll">ROLLS 01-05</b> · <span id="sheetName">THE FULL ARCHIVE</span> · <span id="sheetCount">100 FRAMES</span></span>
+      <span class="mono" style="color:#8f8d88">Monuments archive</span>
+    </div>
+    <p class="icblurb" id="sheetBlurb">Everything, newest first. Five rolls tipped out onto one sheet.</p>
+  </div>
+  <div class="masonry" id="masonry"></div>
+</section>
+<div class="pg-lightbox" id="pglb" role="dialog" aria-hidden="true">
+  <button class="pg-lb-close" id="lbX">Close ✕</button>
+  <div class="pg-lb-strip" id="lbStrip"><div class="pg-lb-track" id="lbTrack"></div></div>
+  <div class="pg-lb-bar">
+    <button class="pg-lb-arrow" id="lbP" aria-label="Previous">←</button>
+    <span class="pg-lb-counter" id="lbCounter"></span>
+    <button class="pg-lb-arrow" id="lbN" aria-label="Next">→</button>
+  </div>
+</div>
 <footer>
   <div class="wrap row mono">
     <span>Monuments © MMXXVI · ELMT.NO.004259</span>
@@ -142,53 +203,201 @@ clock();setInterval(clock,30000);
   ];
   const slug=n=>n.toLowerCase().replace(/[^a-z]+/g,'-');
   CATS.forEach((c,i)=>{c.ids=Array.from({length:CHUNK},(_,k)=>String(i*CHUNK+k+1).padStart(3,'0'))});
-  // build the rolls: one section per photo type, masonry inside
-  document.getElementById('rolls').innerHTML=CATS.map((c,i)=>`
-    <section class="roll" id="cat-${slug(c.name)}" data-cat="${c.name}">
-      <div class="wrap rollhead">
-        <div><span class="no">\\ Roll 0${i+1} of 0${CATS.length} · ${c.ids.length} frames</span><h2>${c.name}</h2></div>
-        <p>${c.blurb}</p>
-      </div>
-      <div class="wrap"><div class="masonry">${c.ids.map(id=>`
-        <figure class="fr show" data-id="${id}">
-          <img src="/gallery/thumb/p-${id}.jpg" alt="${c.name} frame ${id}" loading="lazy" onerror="this.closest('.fr').remove()">
-          <figcaption class="cap">FR-${id} · ${c.name.toUpperCase()}</figcaption>
-        </figure>`).join('')}
-      </div></div>
-    </section>`).join('');
-  // jump nav + scrollspy
-  const nav=document.querySelector('#catnav .in');
-  CATS.forEach(c=>{const a=document.createElement('a');a.href=`#cat-${slug(c.name)}`;
-    a.innerHTML=`${c.name} <b>${c.ids.length}</b>`;nav.appendChild(a)});
-  const links=[...nav.querySelectorAll('a')];
-  const spy=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
-    const id='#'+e.target.id;
-    links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')===id));
-  }})},{rootMargin:'-35% 0px -60% 0px'});
-  document.querySelectorAll('.roll').forEach(s=>spy.observe(s));
-  // lightbox scoped to the roll you clicked in: Food pages through Food only
-  const lb=document.getElementById('lb'),img=lb.querySelector('img'),cap=lb.querySelector('.cap');
-  let cur=0,seq=[],rollName='';
-  function show(){const id=seq[cur];img.src=`/gallery/full/p-${id}.jpg`;
-    cap.textContent=`P-${id} · ${rollName.toUpperCase()} · ${cur+1}/${seq.length} · MONUMENTS ARCHIVE`}
-  function openAt(i){cur=(i+seq.length)%seq.length;show();
-    lb.classList.add('on');document.body.style.overflow='hidden'}
-  function nudge(d){cur=(cur+d+seq.length)%seq.length;show()}
-  function close(){lb.classList.remove('on');img.src='';document.body.style.overflow=''}
-  document.getElementById('rolls').addEventListener('click',e=>{
-    const f=e.target.closest('.fr');if(!f)return;
-    const sec=f.closest('.roll');rollName=sec.dataset.cat;
-    seq=[...sec.querySelectorAll('.fr')].map(x=>x.dataset.id);
-    openAt(seq.indexOf(f.dataset.id));
+  const FOLDERS=[{
+    key:'all',name:'The full archive',tab:'Full archive',counter:'ARCHIVE',
+    num:'One hundred',word:'frames',roll:'ROLLS 01-05',
+    blurb:'Everything, newest first. Five rolls tipped out onto one sheet.',
+    ids:CATS.reduce((a,c)=>a.concat(c.ids),[])
+  }].concat(CATS.map((c,i)=>({
+    key:slug(c.name),name:c.name,tab:c.name,counter:c.name.toUpperCase(),
+    num:'Twenty',word:'frames of '+c.name.toLowerCase(),roll:'ROLL 0'+(i+1),
+    blurb:c.blurb,ids:c.ids
+  })));
+  const byKey={};FOLDERS.forEach(f=>{byKey[f.key]=f});
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const row=document.getElementById('folderRow'),grid=document.getElementById('masonry'),
+        card=document.getElementById('indexCard'),
+        num=document.getElementById('rollNum'),word=document.getElementById('rollWord'),
+        icRoll=document.getElementById('icRoll'),icName=document.getElementById('sheetName'),
+        icCount=document.getElementById('sheetCount'),icBlurb=document.getElementById('sheetBlurb');
+
+  // build the drawer: six manila folders, staggered tabs like a real file drawer
+  row.innerHTML=FOLDERS.map((f,i)=>
+    '<button class="folder" type="button" role="tab" aria-selected="false" data-key="'+f.key+'"'+
+    ' style="--tabf:'+[0,.5,1][i%3]+';z-index:'+(i+10)+'" aria-label="Open the '+f.name+' folder, '+f.ids.length+' frames">'+
+      '<span class="ftab">'+f.tab+' · '+f.ids.length+'<i class="fdot" aria-hidden="true"></i></span>'+
+      '<span class="fbody" aria-hidden="true">'+
+        '<span class="fno">'+(f.key==='all'?'00':'0'+i)+'</span>'+
+        '<span class="fstamp">Monuments archive</span>'+
+      '</span>'+
+    '</button>').join('');
+  const folders=[...row.children];
+
+  let active=null,firstPick=true;
+  function swapHero(f){
+    num.textContent=f.num;word.textContent=f.word;
+    if(reduce||firstPick)return;
+    [num,word].forEach(el=>{el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')});
+  }
+  function renderCard(f){
+    icRoll.textContent=f.roll;icName.textContent=f.name.toUpperCase();
+    icCount.textContent=f.ids.length+' FRAMES';icBlurb.textContent=f.blurb;
+  }
+  // slide the index card under the folder that just opened (desktop only)
+  function moveCard(){
+    if(!active)return;
+    if(matchMedia('(max-width:760px)').matches){card.style.setProperty('--cardx','0px');return}
+    const b=row.querySelector('.folder.on');if(!b)return;
+    const sheet=card.parentElement,cs=getComputedStyle(sheet),
+          padL=parseFloat(cs.paddingLeft)||0,padR=parseFloat(cs.paddingRight)||0,
+          max=Math.max(0,sheet.clientWidth-padL-padR-card.offsetWidth),
+          x=Math.max(0,Math.min(max,b.getBoundingClientRect().left-sheet.getBoundingClientRect().left-padL));
+    card.style.setProperty('--cardx',Math.round(x)+'px');
+  }
+  function renderGrid(f){
+    grid.innerHTML=f.ids.map(id=>
+      '<figure class="fr" data-id="'+id+'" data-full="/gallery/full/p-'+id+'.jpg" tabindex="0" aria-label="Open frame '+id+'">'+
+        '<img src="/gallery/thumb/p-'+id+'.jpg" alt="'+f.name+' frame '+id+'" loading="lazy" onerror="this.closest(\'.fr\').remove()">'+
+        '<figcaption class="cap">FR-'+id+' · '+f.name.toUpperCase()+'</figcaption>'+
+      '</figure>').join('');
+    const frs=[...grid.children];
+    if(reduce){frs.forEach(el=>el.classList.add('show'));return}
+    // deal the prints out with a small stagger, like pulling them from the folder
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      frs.forEach((el,i)=>{
+        el.style.transitionDelay=Math.min(i*26,600)+'ms';
+        el.classList.add('show');
+        el.addEventListener('transitionend',()=>{el.style.transitionDelay=''},{once:true});
+      });
+    }));
+  }
+  function select(key,setHash){
+    const f=byKey[key]||byKey.all;
+    if(active===f)return;
+    active=f;
+    folders.forEach(b=>{const on=b.dataset.key===f.key;b.classList.toggle('on',on);b.setAttribute('aria-selected',on?'true':'false')});
+    swapHero(f);renderCard(f);renderGrid(f);moveCard();
+    if(setHash!==false)history.replaceState(null,'','#'+f.key);
+    firstPick=false;
+  }
+  row.addEventListener('click',e=>{const b=e.target.closest('.folder');if(b)select(b.dataset.key)});
+  addEventListener('hashchange',()=>{const k=location.hash.slice(1).toLowerCase();if(byKey[k])select(k,false)});
+  let rzT=0;
+  addEventListener('resize',()=>{clearTimeout(rzT);rzT=setTimeout(moveCard,120)});
+  const initKey=location.hash.slice(1).toLowerCase();
+  select(byKey[initKey]?initKey:'all',false);
+
+  // DJ's filmstrip lightbox: auto-drift + grab momentum, scoped to the open folder
+  const lb=document.getElementById('pglb'),strip=document.getElementById('lbStrip'),
+        track=document.getElementById('lbTrack'),counter=document.getElementById('lbCounter');
+  let list=[],dir=1,hover=false,busy=false,momRaf=0;
+  function centered(){
+    const c=strip.scrollLeft+strip.clientWidth/2;
+    let best=0,bd=Infinity;
+    for(let i=0;i<track.children.length;i++){
+      const ph=track.children[i],m=ph.offsetLeft+ph.offsetWidth/2,d=Math.abs(m-c);
+      if(d<bd){bd=d;best=i}
+    }
+    return best;
+  }
+  function setCounter(){if(list.length)counter.innerHTML=(centered()+1)+' / '+list.length+' · <b>'+(active?active.counter:'')+'</b>'}
+  function centerOn(i,smooth){
+    i=Math.max(0,Math.min(track.children.length-1,i));
+    const ph=track.children[i];if(!ph)return;
+    const left=ph.offsetLeft-(strip.clientWidth-ph.offsetWidth)/2;
+    if(smooth)strip.scrollTo({left:left,behavior:'smooth'});else strip.scrollLeft=left;
+  }
+  function nudge(d){busy=true;centerOn(centered()+d,true);setTimeout(()=>{busy=false},650)}
+  strip.addEventListener('scroll',setCounter,{passive:true});
+  function openLb(fig){
+    const figs=[...grid.querySelectorAll('.fr')];
+    const start=Math.max(0,figs.indexOf(fig));
+    list=figs;track.innerHTML='';
+    figs.forEach(t=>{
+      const sl=document.createElement('div');sl.className='pg-lb-slide';
+      const im=document.createElement('img');im.className='pg-lb-photo';
+      im.src=t.getAttribute('data-full');im.alt='';im.draggable=false;
+      sl.appendChild(im);track.appendChild(sl);
+    });
+    lb.classList.add('open');lb.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';if(window.lenis)window.lenis.stop();
+    busy=true;dir=1;
+    const recenter=()=>{centerOn(start,false);setCounter()};
+    recenter();requestAnimationFrame(recenter);
+    const im=track.children[start]&&track.children[start].querySelector('img');
+    if(im&&!im.complete)im.addEventListener('load',recenter,{once:true});
+    setTimeout(recenter,250);
+    setTimeout(()=>{recenter();busy=false},720);
+  }
+  function closeLb(){
+    lb.classList.remove('open');lb.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';if(window.lenis)window.lenis.start();
+  }
+  grid.addEventListener('click',e=>{const fig=e.target.closest('.fr');if(fig)openLb(fig)});
+  grid.addEventListener('keydown',e=>{
+    if(e.key!=='Enter'&&e.key!==' ')return;
+    const fig=e.target.closest('.fr');if(fig){e.preventDefault();openLb(fig)}
   });
-  document.getElementById('lbX').addEventListener('click',close);
+  document.getElementById('lbX').addEventListener('click',closeLb);
   document.getElementById('lbP').addEventListener('click',()=>nudge(-1));
   document.getElementById('lbN').addEventListener('click',()=>nudge(1));
-  lb.addEventListener('click',e=>{if(e.target===lb)close()});
-  addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;
-    if(e.key==='Escape')close();if(e.key==='ArrowLeft')nudge(-1);if(e.key==='ArrowRight')nudge(1)});
+  addEventListener('keydown',e=>{
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')closeLb();
+    else if(e.key==='ArrowRight')nudge(1);
+    else if(e.key==='ArrowLeft')nudge(-1);
+  });
+  // gentle auto-drift; pauses while hovering the photos or interacting.
+  // driftX keeps a float position because scrollLeft rounds to whole pixels
+  // on 1x displays and a .45px step would never accumulate otherwise.
+  strip.addEventListener('pointerenter',()=>{hover=true});
+  strip.addEventListener('pointerleave',()=>{hover=false});
+  let driftX=null;
+  (function frame(){
+    if(lb.classList.contains('open')&&!hover&&!busy&&!reduce){
+      const max=strip.scrollWidth-strip.clientWidth;
+      if(max>2){
+        if(driftX===null||Math.abs(driftX-strip.scrollLeft)>1.5)driftX=strip.scrollLeft;
+        driftX+=.45*dir;
+        if(driftX>=max){driftX=max;dir=-1}else if(driftX<=0){driftX=0;dir=1}
+        strip.scrollLeft=driftX;
+      }
+    }else{driftX=null}
+    requestAnimationFrame(frame);
+  })();
+  // grab + weighted momentum
+  (function(){
+    let down=false,sx=0,ss=0,lx=0,v=0,captured=false;
+    strip.addEventListener('pointerdown',e=>{
+      if(e.pointerType!=='mouse')return;
+      cancelAnimationFrame(momRaf);down=true;busy=true;captured=false;
+      sx=e.clientX;lx=e.clientX;v=0;ss=strip.scrollLeft;
+    });
+    strip.addEventListener('pointermove',e=>{
+      if(!down)return;
+      const dx=e.clientX-sx;
+      if(!captured&&Math.abs(dx)>6){captured=true;strip.classList.add('dragging');try{strip.setPointerCapture(e.pointerId)}catch(_){}}
+      v=e.clientX-lx;lx=e.clientX;strip.scrollLeft=ss-dx;
+    });
+    const up=()=>{
+      if(!down)return;down=false;strip.classList.remove('dragging');
+      const max=strip.scrollWidth-strip.clientWidth;
+      let vel=-v*1.6;
+      (function glide(){
+        if(Math.abs(vel)<.4){busy=false;return}
+        let x=strip.scrollLeft+vel;
+        if(x<=0){x=0;vel=0}else if(x>=max){x=max;vel=0}
+        strip.scrollLeft=x;vel*=.94;momRaf=requestAnimationFrame(glide);
+      })();
+    };
+    strip.addEventListener('pointerup',up);
+    strip.addEventListener('pointercancel',up);
+    strip.addEventListener('wheel',e=>{
+      const d=Math.abs(e.deltaX)>=Math.abs(e.deltaY)?e.deltaX:e.deltaY;
+      e.preventDefault();strip.scrollLeft+=d;
+    },{passive:false});
+  })();
 })();
-
 </script>
 <script is:inline src="/redesign/switcher.js" defer></script>
 </body>

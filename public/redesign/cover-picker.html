@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cover Picker</title>
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Bricolage+Grotesque:wght@600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}
+body{background:#161514;color:#F5F3EF;font:400 14px/1.5 'Bricolage Grotesque',sans-serif;padding:40px clamp(20px,4vw,50px) 160px}
+.mono{font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+h1{font-weight:800;font-size:clamp(28px,4vw,54px);letter-spacing:-.03em;text-transform:uppercase}
+p.sub{color:#8f8d88;max-width:64ch;margin:14px 0 40px}
+.proj{margin-bottom:56px;border-top:1px solid #2c2b29;padding-top:22px}
+.proj h2{font-family:'Fragment Mono',monospace;font-weight:400;font-size:15px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.proj .st{color:#8f8d88;margin-bottom:14px}
+.proj .st b{font-weight:400;color:#F5F3EF}
+.proj .st b.chg{color:#E0311A;background:#F5F3EF;padding:0 6px}
+.gridp{display:flex;flex-wrap:wrap;gap:8px}
+.cand{position:relative;cursor:pointer;background:#fff;padding:3px;border:3px solid transparent}
+.cand img{height:180px;width:auto;display:block}
+.cand.sel{border-color:#E0311A}
+.cand .tag{position:absolute;top:7px;left:7px;font-family:'Fragment Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:4px;display:none}
+.cand.cur .tag{display:block;background:#161514;color:#F5F3EF;opacity:.85}
+.cand.sel .tag{display:block;background:#E0311A;color:#F5F3EF;opacity:1}
+#out{position:fixed;left:0;right:0;bottom:0;background:#0e0d0c;border-top:1px solid #2c2b29;padding:16px clamp(20px,4vw,50px);display:flex;gap:16px;align-items:center}
+#out textarea{flex:1;background:#232220;color:#EFA1AD;border:1px solid #3a3936;border-radius:8px;font:11px/1.5 'Fragment Mono',monospace;padding:10px;height:84px;resize:none}
+#out .side{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+#out .count{font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8f8d88;text-align:center}
+#out button{font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:#F5F3EF;color:#161514;border:none;border-radius:99px;padding:14px 22px;cursor:pointer}
+</style></head><body>
+<h1>Cover picker</h1>
+<p class="sub">One cover per project. The frame with the red border is the pick; the small dark tag marks what the work grid uses today. Click any frame to make it the new cover, click the current one to keep things as they are. The string at the bottom lists only the projects you changed. Copy it and send it to Claude, and the grid cards get rebuilt with your picks.</p>
+<div id="projects"></div>
+<div id="out"><textarea id="txt" readonly></textarea><div class="side"><span class="count" id="count">0 changed</span><button id="copy">Copy changes</button></div></div>
+<script>
+const seq=(base,pre,from,to,ext)=>{const a=[];for(let i=from;i<=to;i++)a.push(base+'/'+pre+String(i).padStart(2,'0')+'.'+(ext||'jpg'));return a};
+const DATA=[
+{slug:'art-of-visuals',current:'/case-studies/art-of-visuals/gallery/xm3-bts.jpg',
+ imgs:['podcast-cover','stansport-01','xm3-bts','xm4-01','xm5-01','xperia-01','xperia-02','yt-flowstate','yt-thismoment'].map(n=>'/case-studies/art-of-visuals/gallery/'+n+'.jpg')},
+{slug:'sony-this-moment',current:'/case-studies/sony-this-moment/gallery/tm-05.jpg',
+ imgs:seq('/case-studies/sony-this-moment/gallery','tm-',1,9)},
+{slug:'blue-cross',current:'/case-studies/blue-cross/bc-2.jpg',
+ imgs:['bc-2','bc-22','bc-24','bc-28'].map(n=>'/case-studies/blue-cross/'+n+'.jpg')
+ .concat([2,3,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,27,28].map(i=>'/case-studies/blue-cross/gallery/bci-'+String(i).padStart(2,'0')+'.jpg'))},
+{slug:'adorama-music',current:'/case-studies/adorama-music/gallery/am-01.jpg',
+ imgs:seq('/case-studies/adorama-music/gallery','am-',1,38)},
+{slug:'buck-the-quo',current:'/case-studies/buck-the-quo/gallery/container-front.jpg',
+ imgs:['chop-board','container-coaster','container-front','future-sign','hero','merch-backpack','merch-beanie','merch-dadhat','merch-drawstring','merch-flag','merch-glasses','merch-shirt','merch-sticker','merch-sunglass-boxes','saddle','web-iphone'].map(n=>'/case-studies/buck-the-quo/gallery/'+n+'.jpg')
+ .concat(['emmy-bos','emmy-gold','emmy-silver'].map(n=>'/case-studies/buck-the-quo/emmy/'+n+'.png'))},
+{slug:'sony-xperia-summer',current:'/case-studies/sony-xperia-summer/gallery/xp-01.jpg',
+ imgs:seq('/case-studies/sony-xperia-summer/gallery','xp-',1,14)},
+{slug:'donut-zumiez',current:'/case-studies/donut-zumiez/gallery/film-01.jpg',
+ imgs:['dz-01','dz-02','dz-03','dz-04','film-01','merch','product-shirt','yt-launch','yt-ptcruiser'].map(n=>'/case-studies/donut-zumiez/gallery/'+n+'.jpg')
+ .concat(['graffiti-tee.png','jort.jpg','sticker-pack.png','work-shirt.jpg'].map(n=>'/case-studies/donut-zumiez/products/'+n))},
+{slug:'ac-boise',current:'/case-studies/ac-boise/gallery/home-01.jpg',
+ imgs:['away-01','away-02','crest','home-01','home-02','keeper-01','yt-away','yt-keeper'].map(n=>'/case-studies/ac-boise/gallery/'+n+'.jpg')},
+{slug:'sony-flow-state',current:'/case-studies/sony-flow-state/gallery/fs-05.jpg',
+ imgs:seq('/case-studies/sony-flow-state/gallery','fs-',1,15)},
+{slug:'dw-drums',current:'/case-studies/dw-drums/gallery/face-off.jpg',
+ imgs:['emotional-split','face-off'].map(n=>'/case-studies/dw-drums/gallery/'+n+'.jpg')
+ .concat(seq('/case-studies/dw-drums/gallery','spread-',1,10))},
+{slug:'know-vape',current:'/case-studies/know-vape/gallery/banner.jpg',
+ imgs:['banner.jpg','hero.jpg','poster-01.png','poster-02.png','poster-03.png','poster-04.png','poster-05.png','poster-06.png','teens-01.jpg','teens-02.jpg'].map(n=>'/case-studies/know-vape/gallery/'+n)},
+{slug:'turnstile',current:'/case-studies/turnstile/products/prod-01.jpg',
+ imgs:seq('/case-studies/turnstile/products','prod-',1,8)
+ .concat(seq('/case-studies/turnstile/bts','bts-',1,10))
+ .concat(['/case-studies/turnstile/sound.webp'])},
+{slug:'flashpoint',current:'/case-studies/flashpoint/gallery/fp-01.jpg',
+ imgs:seq('/case-studies/flashpoint/gallery','fp-',1,7)},
+{slug:'waffle-me-up',current:'/case-studies/waffle-me-up/cover.jpg',
+ imgs:['/case-studies/waffle-me-up/cover.jpg'].concat(seq('/case-studies/waffle-me-up/gallery','wmu-',1,8))},
+{slug:'clothing-merch',current:'/case-studies/clothing-merch/gallery/cm-01.jpg',
+ imgs:seq('/case-studies/clothing-merch/gallery','cm-',1,20)}
+];
+const picks={};
+const wrap=document.getElementById('projects');
+DATA.forEach(p=>{
+  picks[p.slug]=p.current;
+  const d=document.createElement('div');d.className='proj';
+  d.innerHTML=`<h2>${p.slug}</h2><p class="st">Cover: <b>${p.current.split('/').pop()}</b></p>
+  <div class="gridp">${p.imgs.map(src=>`<figure class="cand${src===p.current?' cur sel':''}" data-src="${src}"><span class="tag">${src===p.current?'current':''}</span><img src="${src}" loading="lazy" alt=""></figure>`).join('')}</div>`;
+  wrap.appendChild(d);
+  const paint=()=>{
+    d.querySelectorAll('.cand').forEach(x=>{
+      const sel=picks[p.slug]===x.dataset.src,cur=x.classList.contains('cur');
+      x.classList.toggle('sel',sel);
+      x.querySelector('.tag').textContent=cur?'current':(sel?'new cover':'');
+    });
+    const b=d.querySelector('.st b'),changed=picks[p.slug]!==p.current;
+    b.textContent=picks[p.slug].split('/').pop()+(changed?' (changed)':'');
+    b.classList.toggle('chg',changed);
+  };
+  d.querySelectorAll('.cand').forEach(c=>c.addEventListener('click',()=>{
+    picks[p.slug]=c.dataset.src;
+    paint();out();
+  }));
+});
+function out(){
+  const lines=DATA.filter(p=>picks[p.slug]!==p.current).map(p=>`${p.slug}=${picks[p.slug]}`);
+  document.getElementById('txt').value=lines.join('\n')||'no changes yet';
+  document.getElementById('count').textContent=lines.length+' changed';
+}
+out();
+document.getElementById('copy').addEventListener('click',()=>{
+  navigator.clipboard.writeText(document.getElementById('txt').value);
+  const b=document.getElementById('copy');b.textContent='Copied';setTimeout(()=>{b.textContent='Copy changes'},1200);
+});
+</script></body></html>

@@ -353,7 +353,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     if (isFallback()) return;
     var total = sec.offsetHeight - innerHeight;
     var p = clamp(-sec.getBoundingClientRect().top / total);
-    world.style.transform = 'translate3d(' + (innerWidth / 2 - p * L) + 'px,0,0)';
+    /* the road stops once the Monuments station docks: you have arrived */
+    var pw = Math.min(p, DOCKS[3]);
+    world.style.transform = 'translate3d(' + (innerWidth / 2 - pw * L) + 'px,0,0)';
 
     for (var i = 0; i < 4; i++) {
       var a = 1 - Math.abs(p - DOCKS[i]) / W;

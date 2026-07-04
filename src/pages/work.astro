@@ -64,15 +64,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 
 /* brands scroller (lab BrandTicker, ported) */
-.brand-ticker{overflow:hidden;padding:clamp(20px,2.8vw,36px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.bt-track{display:flex;align-items:center;gap:clamp(40px,5vw,88px);width:max-content;will-change:transform;transform:translate3d(0,0,0)}
-.bt-item{flex:0 0 auto;display:inline-flex;align-items:center;height:clamp(22px,2.4vw,34px);transition:transform .25s}
-a.bt-item:hover{transform:translateY(-2px)}
-.bt-logo{height:100%;width:auto;max-width:calc(clamp(22px,2.4vw,34px)*5.2);object-fit:contain;display:block;opacity:.78;transition:filter .3s,opacity .25s}
-a.bt-item:hover .bt-logo{filter:none!important;opacity:1}
-@media (prefers-reduced-motion:reduce){.bt-track{transform:none!important}}
-.brand-ticker.bt-black{background:var(--paper);border-bottom:1px solid var(--line)}
-.bt-black .bt-logo{filter:brightness(0)}
 
 /* discipline lens: highlight, don't hide */
 .lens{border-bottom:1px solid var(--line);background:var(--paper)}
@@ -96,18 +87,22 @@ body.lensed .rowp.match .id{color:var(--red)}
 .viewbar button{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:99px;padding:8px 14px;color:#55524c;cursor:pointer;transition:all .25s}
 .viewbar button:hover{border-color:var(--ink);color:var(--ink)}
 .viewbar button.on{background:var(--struct);border-color:var(--struct);color:var(--paper)}
-#grid{display:none;grid-template-columns:repeat(3,1fr);gap:18px;padding:5vh 0 9vh}
-body.gridview #grid{display:grid}
+#grid{display:none;columns:3;column-gap:16px;padding:5vh 0 9vh}
+body.gridview #grid{display:block}
 body.gridview .arch .group{display:none}
 body.gridview .arch{padding-bottom:0}
-.gcard{background:#fff;border:1px solid var(--line);padding:8px 8px 0;display:block;will-change:transform}
-.gcard img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.92);transition:transform .5s cubic-bezier(.22,1,.36,1)}
-.gcard:hover img{transform:scale(1.03)}
-.gcard .band{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 4px}
-.gcard .band .t{font-weight:var(--dispw2);font-size:clamp(15px,1.3vw,19px);letter-spacing:-.01em}
-.gcard .band .f{font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase;text-align:right}
+.gcard{background:#fff;border:1px solid var(--line);padding:8px 8px 0;display:block;break-inside:avoid;margin:0 0 16px;will-change:transform}
+.gcard .iw{display:block;overflow:hidden}
+.gcard img.cv{width:100%;height:auto;display:block;filter:saturate(.92);transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.gcard:hover img.cv{transform:scale(1.03)}
+.gcard .band{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 4px}
+.gcard .band .t{display:flex;align-items:center;gap:10px;font-weight:var(--dispw2);font-size:clamp(15px,1.3vw,19px);letter-spacing:-.01em;min-width:0}
+.gcard .band .t img.lg{height:15px;width:auto;max-width:74px;object-fit:contain;filter:brightness(0);opacity:.8;flex:none}
+.gcard .band .f{font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase;text-align:right;line-height:1.6;flex:none}
+.gcard .band .f b{font-weight:400;color:var(--red)}
 .gcard.flip{transition:transform .55s cubic-bezier(.22,1,.36,1)}
-@media (max-width:900px){#grid{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){#grid{columns:2}}
+@media (max-width:560px){#grid{columns:1}}
 
 /* the archive: taxonomy groups + rows */
 .arch{padding:7vh 0 9vh}
@@ -137,14 +132,14 @@ body.gridview .arch{padding-bottom:0}
 #preview.on{opacity:1;transform:scale(1) rotate(-1.5deg)}
 @media (max-width:900px),(prefers-reduced-motion:reduce){#preview{display:none}}
 
-/* rose interlude: the sheet strip */
-.strip{background:var(--spark);padding:9vh 0;overflow:hidden}
-.strip .track{display:flex;width:max-content;animation:drift 40s linear infinite}
+/* rose interlude: the logo slider (replaces the old photo strip + top ticker) */
+.strip{background:var(--spark);padding:44px 0;overflow:hidden}
+.strip .track{display:flex;align-items:center;width:max-content;animation:drift 36s linear infinite}
 .strip:hover .track{animation-play-state:paused}
 @keyframes drift{to{transform:translateX(-50%)}}
-.strip .fr{background:#fff;padding:6px 6px 20px;flex:none;position:relative;box-shadow:0 14px 34px rgba(20,20,20,.16);margin-right:14px}
-.strip .fr img{height:180px;width:auto;display:block;filter:saturate(.92)}
-.strip .fr .cap{position:absolute;left:7px;bottom:4px;font-family:var(--mono);font-size:8.5px;color:var(--dim);text-transform:uppercase}
+.strip .lgi{flex:none;display:inline-flex;align-items:center;height:clamp(24px,2.6vw,38px);margin-right:clamp(48px,6vw,96px)}
+.strip .lgi img{height:100%;width:auto;max-width:200px;object-fit:contain;display:block;filter:brightness(0);opacity:.85;transition:opacity .25s}
+.strip .lgi:hover img{opacity:1}
 
 /* cta on ink */
 .cta{position:relative;background:var(--ink);color:var(--paper);padding:15vh 0 16vh;text-align:center;overflow:hidden}
@@ -203,7 +198,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
       <p>Campaigns, films, and brand builds from the last decade. Every entry is real, shipped, and accounted for. Hover to inspect.</p>
       <div class="count mono">
         <span><b>15</b> projects on file</span><br>
-        <span><b>4</b> categories</span><br>
+        <span><b>6</b> disciplines</span><br>
         <span><b>✳</b> selects marked</span>
       </div>
     </div>
@@ -219,32 +214,6 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   </div>
 </div>
 
-<div class="brand-ticker bt-black" data-speed="28" aria-label="Brands worked with">
-  <div class="bt-track">
-    <a class="bt-item" href="https://www.sony.com" target="_blank" rel="noopener" aria-label="Sony"><img class="bt-logo" src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.intel.com" target="_blank" rel="noopener" aria-label="Intel"><img class="bt-logo" src="/logos/intel.png" alt="Intel" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Adorama"><img class="bt-logo" src="/logos/adorama.png" alt="Adorama" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.msi.com" target="_blank" rel="noopener" aria-label="MSI"><img class="bt-logo" src="/logos/msi.png" alt="MSI" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.lexar.com" target="_blank" rel="noopener" aria-label="Lexar"><img class="bt-logo" src="/logos/lexar.png" alt="Lexar" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Flashpoint"><img class="bt-logo" src="/logos/flashpoint.png" alt="Flashpoint" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://artofvisuals.com" target="_blank" rel="noopener" aria-label="Art of Visuals"><img class="bt-logo" src="/logos/art-of-visuals.png" alt="Art of Visuals" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.bcidaho.com" target="_blank" rel="noopener" aria-label="Blue Cross of Idaho"><img class="bt-logo" src="/logos/blue-cross.png" alt="Blue Cross of Idaho" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://donut.media" target="_blank" rel="noopener" aria-label="Donut Media"><img class="bt-logo" src="/logos/donut-media.svg" alt="Donut Media" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.dwdrums.com" target="_blank" rel="noopener" aria-label="DW Drums"><img class="bt-logo" src="/logos/dw-drums.png" alt="DW Drums" loading="lazy" decoding="async"></a>
-    <span class="bt-item"><img class="bt-logo" src="/logos/against.png" alt="Against" loading="lazy" decoding="async"></span>
-    <a class="bt-item" href="https://www.sony.com" target="_blank" rel="noopener" aria-label="Sony"><img class="bt-logo" src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.intel.com" target="_blank" rel="noopener" aria-label="Intel"><img class="bt-logo" src="/logos/intel.png" alt="Intel" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Adorama"><img class="bt-logo" src="/logos/adorama.png" alt="Adorama" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.msi.com" target="_blank" rel="noopener" aria-label="MSI"><img class="bt-logo" src="/logos/msi.png" alt="MSI" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.lexar.com" target="_blank" rel="noopener" aria-label="Lexar"><img class="bt-logo" src="/logos/lexar.png" alt="Lexar" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.adorama.com" target="_blank" rel="noopener" aria-label="Flashpoint"><img class="bt-logo" src="/logos/flashpoint.png" alt="Flashpoint" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://artofvisuals.com" target="_blank" rel="noopener" aria-label="Art of Visuals"><img class="bt-logo" src="/logos/art-of-visuals.png" alt="Art of Visuals" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.bcidaho.com" target="_blank" rel="noopener" aria-label="Blue Cross of Idaho"><img class="bt-logo" src="/logos/blue-cross.png" alt="Blue Cross of Idaho" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://donut.media" target="_blank" rel="noopener" aria-label="Donut Media"><img class="bt-logo" src="/logos/donut-media.svg" alt="Donut Media" loading="lazy" decoding="async"></a>
-    <a class="bt-item" href="https://www.dwdrums.com" target="_blank" rel="noopener" aria-label="DW Drums"><img class="bt-logo" src="/logos/dw-drums.png" alt="DW Drums" loading="lazy" decoding="async"></a>
-    <span class="bt-item"><img class="bt-logo" src="/logos/against.png" alt="Against" loading="lazy" decoding="async"></span>
-  </div>
-</div>
 
 <div class="lens">
   <div class="wrap in" id="lens">
@@ -262,10 +231,10 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 <div class="viewbar">
   <div class="wrap in">
     <div class="grp"><span class="lab">\ View</span>
-      <button data-view="index" class="on">Index</button>
-      <button data-view="grid">Grid</button>
+      <button data-view="grid" class="on">Grid</button>
+      <button data-view="index">Index</button>
     </div>
-    <div class="grp" id="sorters" style="display:none"><span class="lab">\ Sort</span>
+    <div class="grp" id="sorters"><span class="lab">\ Sort</span>
       <button data-sort="new" class="on">Newest</button>
       <button data-sort="az">A-Z</button>
       <button data-sort="disc">Discipline</button>
@@ -277,61 +246,61 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
   <div class="group">
     <div class="bar"><span class="mono"><b>\ Selected</b> · the ones to see first</span><span class="mono" style="color:#8f8d88">01-04</span></div>
-    <a class="rowp litrow" href="/work/art-of-visuals" data-img="/case-studies/art-of-visuals/gallery/podcast-cover.jpg" data-cap="MC-2024-01 · GREW THE AGENCY 4X" data-disc="cd,campaign,oncam">
+    <a class="rowp litrow" href="/work/art-of-visuals" data-img="/case-studies/art-of-visuals/gallery/xm3-bts.jpg" data-cap="MC-2024-01 · GREW THE AGENCY 4X" data-disc="cd,campaign,oncam" data-logo="/logos/art-of-visuals.png">
       <span class="id">MC-2024-01 ✳</span><span class="t">Art of <span class="serif">Visuals</span></span><span class="fmt"><i>\</i> Brand campaign <b class="mx">4x</b></span><span class="yr">2024</span>
     </a>
-    <a class="rowp litrow" href="/work/sony-this-moment" data-img="/case-studies/sony-this-moment/gallery/tm-09.jpg" data-cap="MC-2023-06 · SONY AUDIO" data-disc="cd,photo,campaign">
+    <a class="rowp litrow" href="/work/sony-this-moment" data-img="/case-studies/sony-this-moment/gallery/tm-05.jpg" data-cap="MC-2023-06 · SONY AUDIO" data-disc="cd,photo,campaign" data-logo="/logos/sony.png">
       <span class="id">MC-2023-06 ✳</span><span class="t">Sony · This <span class="serif">Moment</span></span><span class="fmt"><i>\</i> Campaign film + stills</span><span class="yr">2023</span>
     </a>
-    <a class="rowp litrow" href="/work/blue-cross" data-img="/case-studies/blue-cross/bc-2.jpg" data-cap="MC-2023-04 · REAL PEOPLE, REAL STAKES" data-disc="cd,photo,campaign,commercial">
+    <a class="rowp litrow" href="/work/blue-cross" data-img="/case-studies/blue-cross/bc-2.jpg" data-cap="MC-2023-04 · REAL PEOPLE, REAL STAKES" data-disc="cd,photo,campaign,commercial" data-logo="/logos/blue-cross.png">
       <span class="id">MC-2023-04 ✳</span><span class="t">Blue Cross <span class="serif">of Idaho</span></span><span class="fmt"><i>\</i> Documentary campaign <b class="mx">1 week · 23 frames</b></span><span class="yr">2023</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/adorama-music/gallery/am-01.jpg" data-cap="MC-2022-07 · 160M+ IMPRESSIONS" data-disc="cd,commercial,campaign">
+    <a class="rowp litrow" href="/lab/adorama-music" data-img="/case-studies/adorama-music/gallery/am-01.jpg" data-cap="MC-2022-07 · 160M+ IMPRESSIONS" data-disc="cd,commercial,campaign" data-logo="/logos/adorama.png">
       <span class="id">MC-2022-07 ✳</span><span class="t">Adorama <span class="serif">Music</span></span><span class="fmt"><i>\</i> Content series <b class="mx">160M+</b></span><span class="yr">2022</span>
     </a>
   </div>
 
   <div class="group">
     <div class="bar"><span class="mono"><b>\ Campaigns</b> · integrated + experiential</span><span class="mono" style="color:#8f8d88">05-08</span></div>
-    <a class="rowp litrow" href="#" data-img="/case-studies/buck-the-quo/gallery/chop-board.jpg" data-cap="MC-2021-03 · EMMY-WINNING SERIES" data-disc="commercial,cd,oncam">
+    <a class="rowp litrow" href="/lab/buck-the-quo" data-img="/case-studies/buck-the-quo/gallery/container-front.jpg" data-cap="MC-2021-03 · EMMY-WINNING SERIES" data-disc="commercial,cd,oncam">
       <span class="id">MC-2021-03 ✳</span><span class="t">Buck the <span class="serif">Quo</span></span><span class="fmt"><i>\</i> Film series · Emmy</span><span class="yr">2021</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" data-cap="MC-2022-02 · SONY XPERIA" data-disc="campaign,photo,commercial">
+    <a class="rowp litrow" href="/work/sony-xperia-summer" data-img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" data-cap="MC-2022-02 · SONY XPERIA" data-disc="campaign,photo,commercial" data-logo="/logos/sony.png">
       <span class="id">MC-2022-02</span><span class="t">Xperia <span class="serif">Summer</span></span><span class="fmt"><i>\</i> Product campaign</span><span class="yr">2022</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/donut-zumiez/gallery/dz-01.jpg" data-cap="MC-2023-08 · DONUT X ZUMIEZ" data-disc="campaign,experiential,cd">
+    <a class="rowp litrow" href="/lab/donut-zumiez" data-img="/case-studies/donut-zumiez/gallery/film-01.jpg" data-cap="MC-2023-08 · DONUT X ZUMIEZ" data-disc="campaign,experiential,cd" data-logo="/logos/donut-media.svg">
       <span class="id">MC-2023-08</span><span class="t">Donut × <span class="serif">Zumiez</span></span><span class="fmt"><i>\</i> Retail collab</span><span class="yr">2023</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/ac-boise/gallery/away-01.jpg" data-cap="MC-2024-05 · KIT REVEAL" data-disc="experiential,campaign,cd">
+    <a class="rowp litrow" href="/lab/ac-boise" data-img="/case-studies/ac-boise/gallery/home-01.jpg" data-cap="MC-2024-05 · KIT REVEAL" data-disc="experiential,campaign,cd" data-logo="/case-studies/ac-boise/gallery/logo.png">
       <span class="id">MC-2024-05</span><span class="t">AC <span class="serif">Boise</span></span><span class="fmt"><i>\</i> Kit reveal · Experiential</span><span class="yr">2024</span>
     </a>
   </div>
 
   <div class="group">
     <div class="bar"><span class="mono"><b>\ Films &amp; series</b> · the longer stories</span><span class="mono" style="color:#8f8d88">09-11</span></div>
-    <a class="rowp litrow" href="#" data-img="/case-studies/sony-flow-state/gallery/fs-01.jpg" data-cap="MC-2023-07 · SONY AUDIO" data-disc="commercial,cd">
+    <a class="rowp litrow" href="/work/sony-flow-state" data-img="/case-studies/sony-flow-state/gallery/fs-05.jpg" data-cap="MC-2023-07 · SONY AUDIO" data-disc="commercial,cd" data-logo="/logos/sony.png">
       <span class="id">MC-2023-07</span><span class="t">Sony · Flow <span class="serif">State</span></span><span class="fmt"><i>\</i> Campaign film</span><span class="yr">2023</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/dw-drums/gallery/emotional-split.jpg" data-cap="MC-2022-04 · DW DRUMS" data-disc="commercial,photo">
+    <a class="rowp litrow" href="/lab/dw-drums" data-img="/case-studies/dw-drums/gallery/face-off.jpg" data-cap="MC-2022-04 · DW DRUMS" data-disc="commercial,photo" data-logo="/logos/dw-drums.png">
       <span class="id">MC-2022-04</span><span class="t">DW <span class="serif">Drums</span></span><span class="fmt"><i>\</i> Brand film</span><span class="yr">2022</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/know-vape/gallery/banner.jpg" data-cap="MC-2021-06 · PUBLIC HEALTH" data-disc="campaign,commercial,cd">
+    <a class="rowp litrow" href="/lab/know-vape" data-img="/case-studies/know-vape/gallery/banner.jpg" data-cap="MC-2021-06 · PUBLIC HEALTH" data-disc="campaign,commercial,cd">
       <span class="id">MC-2021-06</span><span class="t">Know <span class="serif">Vape</span></span><span class="fmt"><i>\</i> PSA campaign</span><span class="yr">2021</span>
     </a>
   </div>
 
   <div class="group">
     <div class="bar"><span class="mono"><b>\ Brand &amp; product</b> · zero to shelf</span><span class="mono" style="color:#8f8d88">12-15</span></div>
-    <a class="rowp litrow" href="#" data-img="/case-studies/turnstile/products/prod-01.jpg" data-cap="MC-2023-02 · TURNSTILE AUDIO" data-disc="cd,campaign,photo">
+    <a class="rowp litrow" href="/work/turnstile" data-img="/case-studies/turnstile/products/prod-01.jpg" data-cap="MC-2023-02 · TURNSTILE AUDIO" data-disc="cd,campaign,photo" data-logo="/case-studies/turnstile/brand/wordmark.png">
       <span class="id">MC-2023-02</span><span class="t">Turnstile <span class="serif">Audio</span></span><span class="fmt"><i>\</i> Brand + product launch</span><span class="yr">2023</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/flashpoint/gallery/fp-01.jpg" data-cap="MC-2020-02 · FLASHPOINT" data-disc="cd,campaign">
+    <a class="rowp litrow" href="/work/flashpoint" data-img="/case-studies/flashpoint/gallery/fp-01.jpg" data-cap="MC-2020-02 · FLASHPOINT" data-disc="cd,campaign" data-logo="/logos/flashpoint.png">
       <span class="id">MC-2020-02</span><span class="t">Flash<span class="serif">point</span></span><span class="fmt"><i>\</i> Brand build</span><span class="yr">2020</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/waffle-me-up/cover.jpg" data-cap="MC-2019-05 · WAFFLE ME UP" data-disc="cd,experiential,photo">
+    <a class="rowp litrow" href="/work/waffle-me-up" data-img="/case-studies/waffle-me-up/cover.jpg" data-cap="MC-2019-05 · WAFFLE ME UP" data-disc="cd,experiential,photo" data-logo="/case-studies/waffle-me-up/logo.png">
       <span class="id">MC-2019-05</span><span class="t">Waffle <span class="serif">Me Up</span></span><span class="fmt"><i>\</i> Brand + spatial</span><span class="yr">2019</span>
     </a>
-    <a class="rowp litrow" href="#" data-img="/case-studies/clothing-merch/gallery/cm-01.jpg" data-cap="MC-2020-08 · APPAREL" data-disc="cd,photo">
+    <a class="rowp litrow" href="/work/clothing-merch" data-img="/case-studies/clothing-merch/gallery/cm-01.jpg" data-cap="MC-2020-08 · APPAREL" data-disc="cd,photo">
       <span class="id">MC-2020-08</span><span class="t">Clothing &amp; <span class="serif">Merch</span></span><span class="fmt"><i>\</i> Apparel + print</span><span class="yr">2020</span>
     </a>
   </div>
@@ -367,11 +336,11 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 <script is:inline>
 (function(){const g=document.getElementById('rays');let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s})();
 
-// strip: pull covers from the index rows themselves (single source of truth)
+// rose logo slider: every brand on file
 (function(){
-  const rows=[...document.querySelectorAll('.rowp')];
-  const frs=rows.map((r,i)=>`<div class="fr"><img src="${r.dataset.img}" alt="" loading="lazy"><span class="cap">FR-${String(i+1).padStart(2,'0')} · ${r.querySelector('.t').textContent.trim().toUpperCase().slice(0,22)}</span></div>`).join('');
-  document.getElementById('stripTrack').innerHTML=frs+frs;
+  const LOGOS=[['Sony','/logos/sony.png'],['Intel','/logos/intel.png'],['Adorama','/logos/adorama.png'],['MSI','/logos/msi.png'],['Lexar','/logos/lexar.png'],['Flashpoint','/logos/flashpoint.png'],['Art of Visuals','/logos/art-of-visuals.png'],['Blue Cross of Idaho','/logos/blue-cross.png'],['Donut Media','/logos/donut-media.svg'],['DW Drums','/logos/dw-drums.png'],['Against','/logos/against.png']];
+  const t=LOGOS.map(([n,s])=>`<span class="lgi"><img src="${s}" alt="${n}" loading="lazy"></span>`).join('');
+  document.getElementById('stripTrack').innerHTML=t+t;
 })();
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
@@ -401,13 +370,14 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   const rows=[...document.querySelectorAll('.rowp')];
   const grid=document.getElementById('grid');
   const DISC_ORDER=['commercial','cd','photo','experiential','campaign','oncam'];
+  const DISC_LABEL={commercial:'Commercial directing',cd:'Creative direction',photo:'Photography',experiential:'Experiential',campaign:'Campaign development',oncam:'On-camera'};
   const items=rows.map((r,i)=>({
-    href:r.getAttribute('href'),img:r.dataset.img,disc:(r.dataset.disc||'').split(','),
+    href:r.getAttribute('href'),img:r.dataset.img,logo:r.dataset.logo||'',disc:(r.dataset.disc||'').split(','),
     title:r.querySelector('.t').textContent.trim(),
     fmt:(r.querySelector('.fmt')?.textContent||'').replace(/\\/,'').trim(),
     yr:parseInt(r.querySelector('.yr')?.textContent||'0',10),id:r.querySelector('.id')?.textContent.trim()||'' ,idx:i}));
   function el(it){const a=document.createElement('a');a.className='gcard';a.href=it.href;a.dataset.key=it.idx;a.dataset.disc=it.disc.join(',');
-    a.innerHTML=`<img src="${it.img}" alt="${it.title}" loading="lazy"><div class="band"><span class="t">${it.title}</span><span class="f">${it.yr||''}</span></div>`;return a}
+    a.innerHTML=`<span class="iw"><img class="cv" src="${it.img}" alt="${it.title}" loading="lazy"></span><div class="band"><span class="t">${it.logo?`<img class="lg" src="${it.logo}" alt="">`:''}<span>${it.title}</span></span><span class="f">${DISC_LABEL[it.disc[0]]||''}<br><b>${it.yr||''}</b></span></div>`;return a}
   items.forEach(it=>grid.appendChild(el(it)));
   let sort='new';
   function currentFilter(){const on=document.querySelector('#lens button.on');return on?on.dataset.d:'all'}
@@ -440,6 +410,9 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     document.getElementById('sorters').style.display=gridOn?'':'none';
     if(gridOn)apply(false);
   }));
+  // grid is the default view
+  document.body.classList.add('gridview');
+  apply(false);
   document.querySelectorAll('#sorters button').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('#sorters button').forEach(x=>x.classList.toggle('on',x===b));
     sort=b.dataset.sort;apply();
@@ -528,7 +501,6 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
 </script>
-<script is:inline src="/redesign/ticker.js" defer></script>
 <script is:inline src="/redesign/switcher.js" defer></script>
 </body>
 </html>

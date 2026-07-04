@@ -10,8 +10,20 @@ reel cards: client LOGOS on strips + A/B HOVER images (defaults mine; DJ picks v
 sorts real photos) + Roll/Shuffle/Category sort + filtered lightbox; home brands ticker
 moved up (after stat band); "Built to be ___" reel line; eye tile tracks cursor; sound
 toggle on hero reel; giving folded into /about ("Some stories are not for sale.").
-AWAITING DJ: timeline years/titles, discipline tags review, Sony spot link,
-photo-to-category sorting (real photos), face pick, /work grid-default call.
+AWAITING DJ: timeline years/titles + A/B/C pick (/redesign/timeline-{a,b,c}.html), discipline
+tags review, Sony spot link, photo-to-category sorting (real photos), face pick, cover picks
+(/redesign/cover-picker.html), ORIGINAL PHOTOS at 2500px+ for the quality re-cut (gallery fulls
+are 1600px, soft on retina in the lightbox; no clean WP mapping, 60 imgs there vs 100 here).
+✅ 2026-07-03 (late): /work REBUILT per DJ: all 15 projects wired to real pages (12 dead hrefs
+fixed), GRID = default view, natural-aspect 3-col masonry cards w/ client logos + discipline +
+year, rose LOGO slider replaces photo strip + top black ticker, covers seeded from DJ's reel
+picks (flow-state→fs-05, turnstile wordmark logo). /photography REBUILT as the MANILA FOLDER
+DRAWER (DJ: "digging through archives"): 6 folders in an ink drawer, active folder lifts open
+w/ red dot, index-card sheet header, per-folder masonry re-deal, hero words swap ("Twenty
+frames of food"), old filmstrip lightbox (auto-drift + grab momentum) ported + retinted +
+DPR bug fixed, hash routing. Cover-picker tool built + hub Tools section added (reel-picker
+now linked too). ⚠️ flashpoint fp-08.jpg is a saved HTML page, not an image (unreferenced;
+replace or delete).
 ✅ DONE 2026-07-03: Q badge = "Booking Q3 + Q4" on /contact (055b85d). Social links wired
 from old WordPress site: IG/TikTok @djthecd + LinkedIn in/djthecd (5df59cd). /photography
 REBUILT as 5 category rolls (sticky jump nav + scrollspy, natural-height masonry, lightbox
