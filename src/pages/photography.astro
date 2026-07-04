@@ -270,16 +270,22 @@ clock();setInterval(clock,30000);
     for(let s=0;s<k;s++){const size=Math.ceil((n-i)/(k-s));out.push(ids.slice(i,i+size));i+=size}
     return out;
   }
+  function frameHTML(set,f,clone){
+    return set.map(id=>
+      '<figure class="fr" data-id="'+id+'" data-full="/gallery/full/p-'+id+'.jpg"'+
+        (clone?' data-clone="1" aria-hidden="true"':' tabindex="0" aria-label="Open frame '+id+'"')+'>'+
+        '<img src="/gallery/thumb/p-'+id+'.jpg" alt="'+(clone?'':f.name+' frame '+id)+'" loading="lazy" onerror="this.closest(\'.fr\').remove()">'+
+        '<figcaption class="cap">FR-'+id+'</figcaption>'+
+      '</figure>').join('');
+  }
   function renderStrips(f){
     const holes=Math.ceil((grid.clientWidth||innerWidth)/24)+6;
     const holeRow='<span class="sprk" aria-hidden="true">'+'<i></i>'.repeat(holes)+'</span>';
+    // pan-capable strips get a hidden second copy of the set so the loop wraps seamlessly
+    const canPan=!reduce&&matchMedia('(min-width:761px)').matches;
     grid.innerHTML=chunks(f.ids,10).map((set,s)=>
       '<div class="strip" style="animation-delay:'+(reduce?0:Math.min(s*30,240))+'ms">'+holeRow+
-        '<div class="frames"><div class="reel">'+set.map(id=>
-          '<figure class="fr" data-id="'+id+'" data-full="/gallery/full/p-'+id+'.jpg" tabindex="0" aria-label="Open frame '+id+'">'+
-            '<img src="/gallery/thumb/p-'+id+'.jpg" alt="'+f.name+' frame '+id+'" loading="lazy" onerror="this.closest(\'.fr\').remove()">'+
-            '<figcaption class="cap">FR-'+id+'</figcaption>'+
-          '</figure>').join('')+'</div></div>'+
+        '<div class="frames"><div class="reel">'+frameHTML(set,f,false)+(canPan?frameHTML(set,f,true):'')+'</div></div>'+
         holeRow+
         '<span class="stock" aria-hidden="true">MNMTS 400 · '+f.roll+'</span>'+
       '</div>').join('');
@@ -298,18 +304,15 @@ clock();setInterval(clock,30000);
     grid.querySelectorAll('.strip').forEach(st=>{
       const vp=st.querySelector('.frames'),reel=st.querySelector('.reel');
       if(!vp||!reel)return;
-      const pan=st._pan={x:0,d:1,v:0,max:0,raf:0,last:0,hov:false};
-      const SPEED=45,EDGE=90; /* slow projector pace; brake into the ends */
+      const pan=st._pan={x:0,v:0,loop:0,raf:0,last:0,hov:false};
+      const SPEED=45; /* slow projector pace, one direction, forever */
       const apply=()=>{reel.style.transform='translate3d('+(-pan.x).toFixed(2)+'px,0,0)'};
       const tick=t=>{
         const dt=Math.min((t-pan.last)/1000,.05);pan.last=t;
         pan.v+=((pan.hov?SPEED:0)-pan.v)*Math.min(1,dt*5); /* ease up / roll to a stop */
-        if(pan.max>2&&pan.v>.3){
-          const ahead=pan.d>0?pan.max-pan.x:pan.x;
-          const brake=Math.max(.22,Math.min(1,ahead/EDGE));
-          pan.x+=pan.v*brake*dt*pan.d;
-          if(pan.x>=pan.max){pan.x=pan.max;pan.d=-1}
-          else if(pan.x<=0){pan.x=0;pan.d=1}
+        if(pan.loop>2&&pan.v>.3){
+          pan.x+=pan.v*dt;
+          if(pan.x>=pan.loop)pan.x-=pan.loop; /* seamless wrap: one set has passed */
           apply();
         }
         if(!pan.hov&&pan.v<.3){pan.raf=0;return}
@@ -318,8 +321,9 @@ clock();setInterval(clock,30000);
       st.addEventListener('mouseenter',()=>{
         if(matchMedia('(max-width:760px)').matches)return;
         pan.hov=true;
-        pan.max=Math.max(0,reel.offsetWidth-vp.clientWidth); /* measured once per hover, not per frame */
-        pan.x=Math.min(pan.x,pan.max);
+        const fc=reel.querySelector('[data-clone]');
+        pan.loop=fc?fc.offsetLeft:0; /* the loop period, measured once per hover */
+        if(pan.loop&&pan.x>=pan.loop)pan.x%=pan.loop;
         if(!pan.raf){pan.last=performance.now();pan.raf=requestAnimationFrame(tick)}
       });
       st.addEventListener('mouseleave',()=>{pan.hov=false});
@@ -375,7 +379,8 @@ clock();setInterval(clock,30000);
   function nudge(d){busy=true;centerOn(centered()+d,true);setTimeout(()=>{busy=false},650)}
   strip.addEventListener('scroll',setCounter,{passive:true});
   function openLb(fig){
-    const figs=[...grid.querySelectorAll('.fr')];
+    if(fig.dataset.clone)fig=grid.querySelector('.fr[data-id="'+fig.dataset.id+'"]:not([data-clone])')||fig;
+    const figs=[...grid.querySelectorAll('.fr:not([data-clone])')];
     const start=Math.max(0,figs.indexOf(fig));
     list=figs;track.innerHTML='';
     figs.forEach(t=>{
