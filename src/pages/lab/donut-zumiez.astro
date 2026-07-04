@@ -4,6 +4,7 @@ import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
 import CallSheet from '../../components/CallSheet.astro';
+import ScreenRoom from '../../components/ScreenRoom.astro';
 
 // === /lab/donut-zumiez ===
 // LIGHTER "Selected Work" case study. In 2023 DJ shot and edited the launch films
@@ -85,20 +86,21 @@ const credits = [
       />
     </div>
 
-    <!-- THE FILMS: the three cuts DJ directed, now linking to YouTube -->
+    <!-- THE FILMS: the three cuts DJ shot and edited. Posters play in the shared
+         ScreenRoom lightbox (data-screen); the href stays for no-JS / middle-click. -->
     <section class="dz-film">
       <div class="dz-film-head">
         <p class="dz-kicker fade"><span class="dz-mark" aria-hidden="true">+</span>The films</p>
         <h2 class="dz-film-title split">Loud, fast, <em>and funny.</em></h2>
       </div>
-      <a class="dz-stage fade" href={filmMain.url} target="_blank" rel="noopener" data-cursor="Play" aria-label="Watch the Donut x Zumiez launch film on YouTube">
+      <a class="dz-stage fade" href={filmMain.url} target="_blank" rel="noopener" data-screen data-screen-cap={`Donut x Zumiez · ${filmMain.cap} · 2023`} data-cursor="Play" aria-label="Play the Donut x Zumiez launch film">
         <img src={filmMain.poster} alt="Donut x Zumiez launch film" loading="lazy" decoding="async" />
         <span class="dz-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
         <span class="dz-film-cap">{filmMain.cap} &middot; 2023</span>
       </a>
       <div class="dz-more-films">
         {filmMore.map((f) => (
-          <a class="dz-mf fade" href={f.url} target="_blank" rel="noopener" data-cursor="Play" aria-label={`Watch ${f.cap} on YouTube`}>
+          <a class="dz-mf fade" href={f.url} target="_blank" rel="noopener" data-screen data-screen-cap={`Donut x Zumiez · ${f.cap}`} data-cursor="Play" aria-label={`Play ${f.cap}`}>
             <img src={f.poster} alt={f.cap} loading="lazy" decoding="async" />
             <span class="dz-play dz-play-sm" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
             <span class="dz-film-cap">{f.cap}</span>
@@ -163,6 +165,7 @@ const credits = [
     />
 
     <Lightbox />
+    <ScreenRoom />
   </main>
   <LabFx />
 </Base>

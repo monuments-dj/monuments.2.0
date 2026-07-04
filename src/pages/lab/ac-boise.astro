@@ -4,13 +4,14 @@ import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
 import CallSheet from '../../components/CallSheet.astro';
+import ScreenRoom from '../../components/ScreenRoom.astro';
 
 // === /lab/ac-boise ===
 // LIGHTER "Selected Work" case study. DJ directed the kit-reveal campaign for AC Boise,
 // a USL League One pro soccer club. Hero line: "This kit is Boise." Kit maker = Hummel,
 // brand/creative partner = Against. There was an Instagram reel for the reveal. Bold,
 // civic-proud, sport. Cloned lean from adorama-music.astro: hero, reel poster
-// (non-linking), kit gallery + lightbox, short role, credits, next-project.
+// (plays in the shared ScreenRoom), kit gallery + lightbox, short role, credits, next-project.
 //
 // ⚠️ COPY STATUS: needs DJ's specifics (exact role split, which kits, any numbers, the
 // reel URL). KNOWN FACTS used: club = AC Boise; league = USL League One; kit maker =
@@ -19,6 +20,10 @@ import CallSheet from '../../components/CallSheet.astro';
 // invent attendance/views/sales/awards.
 
 const G = '/case-studies/ac-boise/gallery';
+
+// The reveal reel. Plays in the shared ScreenRoom lightbox (best-effort IG embed
+// with an "Open on Instagram" fallback line under the stage).
+const REEL = 'https://www.instagram.com/reel/DR04D0ZDOjV/';
 
 const gallery = [
   `${G}/home-02.jpg`, `${G}/away-01.jpg`, `${G}/keeper-01.jpg`, `${G}/away-02.jpg`,
@@ -67,19 +72,17 @@ const credits = [
       />
     </div>
 
-    <!-- THE REEL (poster, non-linking until a real URL lands) -->
+    <!-- THE REEL: plays in the shared ScreenRoom; href stays for no-JS / middle-click -->
     <section class="acb-film">
       <div class="acb-film-head">
         <p class="acb-kicker fade"><span class="acb-mark" aria-hidden="true">+</span>The reveal</p>
         <h2 class="acb-film-title split">Shot like the city <em>wears it.</em></h2>
       </div>
-      <figure class="acb-stage fade" data-cursor="Play" aria-label="AC Boise kit reveal reel (poster)">
+      <a class="acb-stage fade" href={REEL} target="_blank" rel="noopener" data-screen data-screen-cap="AC Boise · Kit reveal" data-cursor="Play" aria-label="Play the AC Boise kit reveal reel">
         <img src={`${G}/yt-away.jpg`} alt="AC Boise kit reveal" loading="lazy" decoding="async" />
         <span class="acb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
-        <figcaption class="acb-film-cap">Kit reveal &middot; Instagram</figcaption>
-      </figure>
-      <!-- ⚠️ TODO: swap this <figure> for a linking <a> once DJ gives a clean reel/video
-           URL. IG reel id on record: DR04D0ZDOjV (not cleanly embeddable as-is). -->
+        <span class="acb-film-cap">Kit reveal &middot; Instagram</span>
+      </a>
     </section>
 
     <!-- KIT GALLERY -->
@@ -122,6 +125,7 @@ const credits = [
     />
 
     <Lightbox />
+    <ScreenRoom />
   </main>
   <LabFx />
 </Base>

@@ -4,6 +4,7 @@ import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
 import CallSheet from '../../components/CallSheet.astro';
+import ScreenRoom from '../../components/ScreenRoom.astro';
 
 // === /lab/art-of-visuals ===
 // FLAGSHIP case study. This is the BUSINESS-IMPACT story, not a single deliverable:
@@ -30,10 +31,17 @@ const stats = [
   { n: '3 yrs', l: 'building + running the agency offer (PLACEHOLDER)', real: false },
 ];
 
-// The stills selects → editorial grid → shared Lightbox.
+// The selects → editorial grid. Stills open the shared image Lightbox; the
+// yt-* film poster plays its film in the shared ScreenRoom (This Moment,
+// YouTube id KIi8cBOlU50, same spot as /work/sony-this-moment).
 const gallery = [
-  `${G}/xperia-01.jpg`, `${G}/xm4-01.jpg`, `${G}/xperia-02.jpg`, `${G}/xm3-bts.jpg`,
-  `${G}/yt-thismoment.jpg`, `${G}/stansport-01.jpg`, `${G}/podcast-cover.jpg`,
+  { img: `${G}/xperia-01.jpg` },
+  { img: `${G}/xm4-01.jpg` },
+  { img: `${G}/xperia-02.jpg` },
+  { img: `${G}/xm3-bts.jpg` },
+  { img: `${G}/yt-thismoment.jpg`, video: 'https://youtu.be/KIi8cBOlU50', cap: 'Sony · This Moment · campaign film' },
+  { img: `${G}/stansport-01.jpg` },
+  { img: `${G}/podcast-cover.jpg` },
 ];
 
 const did = [
@@ -125,16 +133,22 @@ const credits = [
         <p class="aov-gal-sub fade">A slice of the campaigns the agency shipped while it scaled. Sony headphones, Xperia, and the branded content in between.</p>
       </div>
       <div class="aov-grid">
-        {gallery.map((src, i) => (
+        {gallery.map((g, i) => (
           <figure class="aov-cell fade" data-drift={3 + (i % 3) * 2}>
-            <a href={src} data-lb-full={src} data-lb-group="aov" data-cursor="View" aria-label="Open image">
-              <img src={src} alt="" loading="lazy" decoding="async" />
-            </a>
+            {g.video ? (
+              <a href={g.video} target="_blank" rel="noopener" data-screen data-screen-cap={g.cap} data-cursor="Play" aria-label={`Play ${g.cap}`}>
+                <img src={g.img} alt="" loading="lazy" decoding="async" />
+              </a>
+            ) : (
+              <a href={g.img} data-lb-full={g.img} data-lb-group="aov" data-cursor="View" aria-label="Open image">
+                <img src={g.img} alt="" loading="lazy" decoding="async" />
+              </a>
+            )}
           </figure>
         ))}
       </div>
-      <!-- ⚠️ TODO: yt-flowstate.jpg / yt-thismoment.jpg are YouTube poster stills. If DJ
-           supplies the real watch URLs, promote one to a linking "film" tile like adorama. -->
+      <!-- The yt-thismoment tile plays the This Moment spot in the ScreenRoom. If a
+           yt-flowstate tile ever lands here, its film is YouTube id CS5UXhe17O4. -->
     </section>
 
     <!-- THE ROLE -->
@@ -160,6 +174,7 @@ const credits = [
     />
 
     <Lightbox />
+    <ScreenRoom />
   </main>
   <LabFx />
 </Base>

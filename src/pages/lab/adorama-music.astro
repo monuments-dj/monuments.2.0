@@ -4,6 +4,7 @@ import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
 import CallSheet from '../../components/CallSheet.astro';
+import ScreenRoom from '../../components/ScreenRoom.astro';
 
 // === /lab/adorama-music ===
 // SCAFFOLD case study for "Adorama Music: The Journey" (2020), a branded film for Adorama
@@ -93,7 +94,7 @@ const credits = [
         <p class="am-kicker fade"><span class="am-mark" aria-hidden="true">+</span>The film</p>
         <h2 class="am-film-title split">The Journey.</h2>
       </div>
-      <a class="am-stage fade" href={FILM} target="_blank" rel="noopener" data-cursor="Play" aria-label="Watch Adorama Music: The Journey on YouTube">
+      <a class="am-stage fade" href={FILM} target="_blank" rel="noopener" data-screen data-screen-cap="Adorama Music: The Journey · 2020" data-cursor="Play" aria-label="Play Adorama Music: The Journey">
         <img src={`${G}/am-07.jpg`} alt="Adorama Music: The Journey" loading="lazy" decoding="async" />
         <span class="am-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
         <span class="am-film-cap">Adorama Music: The Journey &middot; 2020</span>
@@ -147,7 +148,7 @@ const credits = [
     <section class="am-bts">
       <p class="am-kicker fade"><span class="am-mark" aria-hidden="true">+</span>Behind the film</p>
       <div class="am-bts-row">
-        <a class="am-bts-stage fade" href={BTS} target="_blank" rel="noopener" data-cursor="Play" aria-label="Watch the behind-the-scenes cut on YouTube">
+        <a class="am-bts-stage fade" href={BTS} target="_blank" rel="noopener" data-screen data-screen-cap="Adorama Music · Behind the film" data-cursor="Play" aria-label="Play the behind-the-scenes cut">
           <img src={`${G}/am-37.jpg`} alt="Behind the scenes of Adorama Music: The Journey" loading="lazy" decoding="async" />
           <span class="am-play am-play-sm" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
           <span class="am-film-cap">Behind the film</span>
@@ -183,6 +184,7 @@ const credits = [
     />
 
     <Lightbox />
+    <ScreenRoom />
   </main>
   <LabFx />
 </Base>

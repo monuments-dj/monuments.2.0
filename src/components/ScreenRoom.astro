@@ -1,0 +1,183 @@
+---
+// ScreenRoom.astro · the site-wide video screening room.
+// DJ's rule: any video link on the portfolio just PLAYS when you click it,
+// nothing walks you off to YouTube. One shared lightbox for every page.
+// Self-contained (markup + styles + script), works on BOTH full-document cut
+// pages and Base-layout lab pages: tokens resolve on the cut pages, fallbacks
+// carry Base, the same trick as CallSheet.astro.
+//
+// Usage: import once per page, drop <ScreenRoom /> anywhere in the markup, then
+// mark any link or element with data-screen. The value (or, if empty, the href)
+// is the source: a YouTube URL (watch / youtu.be / shorts / embed, honors t= and
+// start=), a bare YouTube id, a Vimeo URL or numeric id, or an Instagram
+// reel/post URL (best effort embed, with an "Open on Instagram" line under the
+// stage as the fallback). Optional data-screen-cap="..." shows a mono caption
+// under the stage. Any OTHER host (e.g. PBS episode pages) is NOT intercepted:
+// the link navigates normally. Keep a real href on triggers so no-JS and
+// middle-click still reach the video.
+//
+// Close ✕, ESC, or a click on the dark ground all stop playback outright:
+// the iframe is removed, not just hidden. One instance per page.
+---
+<div class="screenroom" data-screenroom role="dialog" aria-modal="true" aria-label="Video player" aria-hidden="true">
+  <div class="sr-top">
+    <button class="sr-close" type="button" data-sr-close>Close ✕</button>
+  </div>
+  <div class="sr-stage">
+    <div class="sr-frame" data-sr-frame>
+      <div class="sr-mount" data-sr-mount></div>
+    </div>
+  </div>
+  <div class="sr-foot">
+    <span class="sr-cap" data-sr-cap></span>
+  </div>
+</div>
+
+<style>
+/* The room: fixed dark ground, flex column so the Close pill lives in a reserved
+   top zone (like the photo lightbox's 70px strip offset) and can NEVER overlap
+   the stage. */
+.screenroom{position:fixed;inset:0;z-index:3200;display:none;flex-direction:column;background:rgba(22,21,20,.96);backdrop-filter:blur(4px)}
+.screenroom.on{display:flex;animation:srFade .25s ease}
+@keyframes srFade{from{opacity:0}to{opacity:1}}
+
+.sr-top{flex:0 0 64px;display:flex;align-items:center;justify-content:flex-end;padding:0 max(24px,4vmin)}
+.sr-close{font-family:var(--mono,var(--mono2,'Fragment Mono',monospace));font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#F5F3EF;background:none;border:1px solid rgba(245,243,239,.4);border-radius:99px;padding:8px 16px;cursor:pointer;transition:background .2s,color .2s}
+.sr-close:hover{background:#F5F3EF;color:#161514}
+
+.sr-stage{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:0 4vw}
+/* 16:9 stage, capped at 1200px / 92vw, and never taller than the room minus the
+   reserved top + caption zones (the width term with the 16/9 factor handles that). */
+.sr-frame{position:relative;width:min(92vw,1200px,calc((100vh - 128px)*16/9));aspect-ratio:16/9;background:#000;box-shadow:0 40px 120px rgba(0,0,0,.6)}
+/* Instagram reels are vertical: swap the stage to 9:16, best effort. */
+.screenroom.is-vert .sr-frame{width:min(92vw,420px,calc((100vh - 128px)*9/16));aspect-ratio:9/16}
+.sr-mount,.sr-mount :global(iframe){position:absolute;inset:0;width:100%;height:100%;border:0}
+
+.sr-foot{flex:0 0 56px;display:flex;align-items:flex-start;justify-content:center;padding:14px max(24px,4vmin) 0}
+.sr-cap{font-family:var(--mono,var(--mono2,'Fragment Mono',monospace));font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88;text-align:center}
+.sr-cap :global(a){color:#F5F3EF;text-decoration:none;border-bottom:1px solid rgba(245,243,239,.35)}
+.sr-cap :global(a:hover){border-bottom-color:#F5F3EF}
+
+@media (prefers-reduced-motion:reduce){.screenroom.on{animation:none}}
+</style>
+
+<script is:inline>
+(function () {
+  if (window.__screenRoom) return;
+  var room = document.querySelector('[data-screenroom]');
+  if (!room) return;
+  window.__screenRoom = true;
+  var mount = room.querySelector('[data-sr-mount]');
+  var capEl = room.querySelector('[data-sr-cap]');
+  var closeBtn = room.querySelector('[data-sr-close]');
+  var lastTrigger = null;
+
+  // "90" / "90s" / "1m30s" / "1h2m3s" -> seconds
+  function parseTime(v) {
+    if (!v) return 0;
+    if (/^\d+$/.test(v)) return parseInt(v, 10);
+    var m = v.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s?)?$/);
+    if (!m) return 0;
+    return (parseInt(m[1] || 0, 10) * 3600) + (parseInt(m[2] || 0, 10) * 60) + parseInt(m[3] || 0, 10);
+  }
+
+  var YT_ID = /^[A-Za-z0-9_-]{11}$/;
+
+  function parse(raw) {
+    if (!raw) return null;
+    raw = raw.trim();
+    if (YT_ID.test(raw)) return { kind: 'youtube', id: raw, start: 0 };
+    if (/^\d{6,}$/.test(raw)) return { kind: 'vimeo', id: raw };
+    var u;
+    try { u = new URL(raw, location.href); } catch (e) { return null; }
+    var host = u.hostname.replace(/^(www|m)\./, '');
+    var id, mm;
+    if (host === 'youtu.be') {
+      id = (u.pathname.split('/')[1] || '').slice(0, 11);
+      if (YT_ID.test(id)) return { kind: 'youtube', id: id, start: parseTime(u.searchParams.get('t') || u.searchParams.get('start')) };
+    }
+    if (host === 'youtube.com' || host === 'youtube-nocookie.com') {
+      id = u.pathname === '/watch' ? (u.searchParams.get('v') || '') : ((mm = u.pathname.match(/^\/(shorts|embed|live)\/([A-Za-z0-9_-]{11})/)) ? mm[2] : '');
+      if (YT_ID.test(id)) return { kind: 'youtube', id: id, start: parseTime(u.searchParams.get('t') || u.searchParams.get('start')) };
+    }
+    if (host === 'vimeo.com' || host === 'player.vimeo.com') {
+      mm = u.pathname.match(/(\d{6,})/);
+      if (mm) return { kind: 'vimeo', id: mm[1] };
+    }
+    if (host === 'instagram.com') {
+      mm = u.pathname.match(/^\/(reel|reels|p|tv)\/([A-Za-z0-9_-]+)/);
+      if (mm) {
+        var seg = mm[1] === 'p' ? 'p' : 'reel';
+        return { kind: 'instagram', id: mm[2], url: 'https://www.instagram.com/' + seg + '/' + mm[2] + '/', seg: seg };
+      }
+    }
+    return null; // unknown host: do not intercept, let the link navigate
+  }
+
+  function embedUrl(src) {
+    if (src.kind === 'youtube') {
+      return 'https://www.youtube-nocookie.com/embed/' + src.id +
+        '?autoplay=1&rel=0&modestbranding=1&playsinline=1' + (src.start ? '&start=' + src.start : '');
+    }
+    if (src.kind === 'vimeo') return 'https://player.vimeo.com/video/' + src.id + '?autoplay=1';
+    return 'https://www.instagram.com/' + src.seg + '/' + src.id + '/embed/';
+  }
+
+  function open(src, cap) {
+    room.classList.toggle('is-vert', src.kind === 'instagram');
+    var ifr = document.createElement('iframe');
+    ifr.src = embedUrl(src);
+    ifr.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+    ifr.allowFullscreen = true;
+    ifr.title = cap || 'Video player';
+    mount.innerHTML = '';
+    mount.appendChild(ifr);
+    capEl.innerHTML = '';
+    if (cap) capEl.appendChild(document.createTextNode(cap));
+    if (src.kind === 'instagram') {
+      if (cap) capEl.appendChild(document.createTextNode(' · '));
+      var a = document.createElement('a');
+      a.href = src.url; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = 'Open on Instagram ↗';
+      capEl.appendChild(a);
+    }
+    room.classList.add('on');
+    room.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (window.lenis) window.lenis.stop();
+    closeBtn.focus({ preventScroll: true });
+  }
+
+  function close() {
+    if (!room.classList.contains('on')) return;
+    room.classList.remove('on');
+    room.setAttribute('aria-hidden', 'true');
+    mount.innerHTML = ''; // removes the iframe: playback stops outright
+    capEl.innerHTML = '';
+    document.body.style.overflow = '';
+    if (window.lenis) window.lenis.start();
+    if (lastTrigger && lastTrigger.focus) { lastTrigger.focus({ preventScroll: true }); lastTrigger = null; }
+  }
+
+  // Event delegation: any [data-screen] element, added now or later.
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; // respect open-in-new-tab
+    var t = e.target && e.target.closest ? e.target.closest('[data-screen]') : null;
+    if (!t) return;
+    var src = parse(t.getAttribute('data-screen') || t.getAttribute('href') || '');
+    if (!src) return; // not a playable source: normal navigation
+    e.preventDefault();
+    lastTrigger = t;
+    open(src, t.getAttribute('data-screen-cap') || '');
+  });
+
+  room.addEventListener('click', function (e) {
+    if (e.target.closest('[data-sr-frame]')) return; // clicks on the stage stay
+    if (e.target.closest('a')) return;               // the Instagram fallback link
+    close();
+  });
+  closeBtn.addEventListener('click', close);
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+})();
+</script>
