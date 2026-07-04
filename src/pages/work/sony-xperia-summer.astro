@@ -10,6 +10,7 @@ const meta = [
   { k: 'Director / Creative Director', v: 'DJ Ramirez' },
   { k: 'DP', v: 'Komin Kovatonic' },
   { k: 'Stills', v: 'DJ Ramirez' },
+  { k: 'Deliverables', v: 'Videography · Photography · Amplification' },
 ];
 ---
 <Base title="Sony · Summer w/ Xperia · monuments">
@@ -25,9 +26,39 @@ const meta = [
       </div>
     </header>
 
+    <!-- IMPACT (results first, from the Xperia PRO-I launch report) -->
+    <section class="bc-impact fade" aria-label="Campaign results">
+      <div class="bc-impact-in">
+        <div class="bc-impact-item"><span class="bc-impact-n">3.6M</span><span class="bc-impact-l">Impressions</span></div>
+        <div class="bc-impact-item"><span class="bc-impact-n">569K</span><span class="bc-impact-l">Actions taken</span></div>
+        <div class="bc-impact-item"><span class="bc-impact-n">15.54%</span><span class="bc-impact-l">Engagement rate</span></div>
+      </div>
+      <p class="bc-impact-cap">Measured on the Xperia PRO-I launch, the same partnership · industry calls 3.5 to 6% high · AOV channels + amplification</p>
+    </section>
+
     <!-- INTRO -->
     <section class="bc-intro fade">
-      <p>Sony wanted to show off the Xperia 5 IV's pro-level camera features in real-life settings that would resonate with everyday creators. Our mission was to capture the magic of summer through the lens of Xperia, demonstrating how the phone could handle any moment thrown its way.</p>
+      <p>Sony kept coming back to Art of Visuals for its Xperia launches, and I creative directed the run: the PRO-I, the 1 III, and a summer with the 5 IV. The mission never changed: show that a phone can hold cinema-grade work in real life, not in a lab, and capture the magic of summer through the lens of Xperia.</p>
+    </section>
+
+    <!-- FILM: the actual launch spot -->
+    <section class="bc-film fade" aria-label="Campaign film">
+      <div class="bc-film-frame" id="xpFilm">
+        <button class="bc-film-poster" id="xpPlay" type="button" aria-label="Play the Xperia launch film">
+          <img src={g[6]} alt="Sony Xperia launch film" loading="lazy" />
+          <span class="bc-film-pill">Play · The Spot</span>
+        </button>
+      </div>
+      <p class="bc-film-cap">The launch film · Sony's Xperia PRO-I: A Cinematographer's Dream</p>
+    </section>
+
+    <!-- THE PARTNERSHIP -->
+    <section class="bc-exec fade">
+      <h2 class="bc-exec-h">One partnership, a run of launches.</h2>
+      <div class="bc-exec-b">
+        <p>For the Xperia PRO-I we opened with a first look film, A Cinematographer's Dream, then kept the story going for six months: travel vlogs, mobile photography, four highlight videos, and 50+ images distributed across AOV's channels, from posts and Stories to Reels, IGTV, and YouTube. That launch alone made 3.6 million impressions and 569 thousand actions, with an engagement rate more than triple what industry standards consider high.</p>
+        <p>The Xperia 1 III got the same treatment over four months: a first look, a short documentary shot on the phone, a Sedona takeover, and 24 hours in NYC. Summer with Xperia was the next chapter of that run, built on everything the launches taught us.</p>
+      </div>
     </section>
 
     <!-- SHOT -->
@@ -119,4 +150,52 @@ const meta = [
     </a>
 
   </article>
+
+  <script is:inline>
+    // Click-to-play film block: poster (real campaign still) until the spot is requested,
+    // then swap in the privacy-enhanced YouTube embed. No timers, no autoplay before click.
+    (function () {
+      var btn = document.getElementById('xpPlay');
+      var frame = document.getElementById('xpFilm');
+      if (!btn || !frame) return;
+      btn.addEventListener('click', function () {
+        var ifr = document.createElement('iframe');
+        ifr.src = 'https://www.youtube-nocookie.com/embed/_RGvpwyYLTI?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+        ifr.title = "Sony's Xperia PRO-I: A Cinematographer's Dream, the launch film";
+        ifr.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+        ifr.setAttribute('allowfullscreen', '');
+        // inline pointer-events beats the Lenis "iframe { pointer-events:none }" rule
+        ifr.setAttribute('style', 'position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:auto;');
+        frame.replaceChildren(ifr);
+      }, { once: true });
+    })();
+  </script>
 </Base>
+
+<style>
+  /* Results band: dark like .bc-quote so it reads as one system with the page. */
+  .bc-impact { background: #0d0f14; color: var(--white); padding: clamp(52px, 7vw, 88px) var(--pad); }
+  .bc-impact-in { max-width: var(--wrap); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .bc-impact-n { display: block; font-weight: 600; font-size: clamp(42px, 6vw, 86px); letter-spacing: -0.03em; line-height: 1; }
+  .bc-impact-l { display: block; margin-top: 12px; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(252, 252, 252, 0.55); }
+  .bc-impact-cap { max-width: var(--wrap); margin: 40px auto 0; font-family: var(--mono2); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(252, 252, 252, 0.45); }
+
+  /* Film block: 16:9 poster frame, mono pill, iframe swapped in on click. */
+  .bc-film { max-width: var(--wrap); margin: 0 auto 26px; padding: 0 var(--pad); }
+  .bc-film-frame { position: relative; aspect-ratio: 16 / 9; background: #0d0f14; border-radius: 2px; overflow: hidden; }
+  .bc-film-poster { position: absolute; inset: 0; width: 100%; height: 100%; display: block; padding: 0; border: 0; background: none; cursor: pointer; }
+  .bc-film-poster img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.76); transition: transform 0.7s ease, filter 0.4s ease; }
+  .bc-film-poster:hover img { transform: scale(1.025); filter: brightness(0.9); }
+  .bc-film-pill { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-family: var(--mono2); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; white-space: nowrap; color: var(--white); border: 1px solid rgba(252, 252, 252, 0.65); border-radius: 999px; padding: 13px 24px; background: rgba(13, 15, 20, 0.45); backdrop-filter: blur(6px); transition: background 0.3s ease, color 0.3s ease; }
+  .bc-film-poster:hover .bc-film-pill { background: var(--white); color: #0d0f14; }
+  .bc-film-cap { margin-top: 12px; font-family: var(--mono2); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(20, 21, 25, 0.55); }
+  @media (max-width: 760px) {
+    .bc-impact { padding: 48px 24px; }
+    .bc-impact-in { grid-template-columns: 1fr; gap: 28px; }
+    .bc-film { padding: 0 24px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bc-film-poster img, .bc-film-pill { transition: none; }
+    .bc-film-poster:hover img { transform: none; }
+  }
+</style>

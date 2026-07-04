@@ -11,6 +11,7 @@ const meta = [
   { k: 'Creative Director', v: 'DJ Ramirez' },
   { k: 'DP', v: 'Joachim Zunke' },
   { k: 'Stills', v: 'Claire LeJune' },
+  { k: 'Deliverables', v: 'Videography · Photography · Amplification' },
 ];
 ---
 <Base title="Sony · Flow State · monuments">
@@ -26,9 +27,30 @@ const meta = [
       </div>
     </header>
 
+    <!-- IMPACT (results first, straight from the campaign report) -->
+    <section class="bc-impact fade" aria-label="Campaign results">
+      <div class="bc-impact-in">
+        <div class="bc-impact-item"><span class="bc-impact-n">1.6M</span><span class="bc-impact-l">Impressions</span></div>
+        <div class="bc-impact-item"><span class="bc-impact-n">204K</span><span class="bc-impact-l">Actions taken</span></div>
+        <div class="bc-impact-item"><span class="bc-impact-n">12.61%</span><span class="bc-impact-l">Engagement rate</span></div>
+      </div>
+      <p class="bc-impact-cap">Omni-channel amplification · Instagram, YouTube + Facebook · reposted by @sony · industry calls 3.5 to 6% high</p>
+    </section>
+
     <!-- INTRO -->
     <section class="bc-intro fade">
-      <p>Sony partnered with Art of Visuals to craft a campaign that underscores the value of taking time, trusting the process, and rediscovering inspiration. This initiative encourages creators to embrace moments of pause, demonstrating that true creativity flourishes when given the space to breathe and align with the natural flow of inspiration.</p>
+      <p>Sony brought Art of Visuals in to put the WH-1000XM3 headphones at the center of the creative process, a tool for the work, not another gadget. I pitched Flow State: five creatives, a director, a painter, a drummer, a ballet dancer, and a hip-hop dancer, each stuck in the noise until the headphones go on and the flow arrives.</p>
+    </section>
+
+    <!-- FILM: the actual spot -->
+    <section class="bc-film fade" aria-label="Campaign film">
+      <div class="bc-film-frame" id="fsFilm">
+        <button class="bc-film-poster" id="fsPlay" type="button" aria-label="Play the Flow State commercial">
+          <img src={g[6]} alt="Flow State, the hero film" loading="lazy" />
+          <span class="bc-film-pill">Play · The Spot</span>
+        </button>
+      </div>
+      <p class="bc-film-cap">The hero film · Flow State · published on Sony Electronics' own channel</p>
     </section>
 
     <!-- CAMPAIGN SHOT -->
@@ -42,10 +64,10 @@ const meta = [
       <img src={g[3]} alt="Sony Flow State" loading="lazy" />
     </div>
 
-    <!-- INSIGHT QUOTE -->
+    <!-- INSIGHT QUOTE (verbatim, from the campaign write-up) -->
     <section class="bc-quote fade">
-      <p>Casting, creative briefs, even helping compose the music: <span class="bc-quote-em">every aspect aligned to Sony's identity.</span></p>
-      <p class="bc-quote-attr">Creative Director + Co-Director.</p>
+      <p>Headphones don't make you more creative. Like a paintbrush or camera, <span class="bc-quote-em">they're a tool in the creative process.</span> With fully immersive noise canceling, a clean aesthetic, and all-day wearability, the WH-1000XM3s are a great companion for creatives who need to consistently operate in flow.</p>
+      <p class="bc-quote-attr">DJ Ramirez, Creative Director, Art of Visuals</p>
     </section>
 
     <!-- CAMPAIGN PAIR 2 -->
@@ -58,8 +80,8 @@ const meta = [
     <section class="bc-exec fade">
       <h2 class="bc-exec-h">A crew of thirty, one vision.</h2>
       <div class="bc-exec-b">
-        <p>As the Creative Director and Co-Director of this campaign, my responsibilities included developing the initial pitch, managing a film crew of 30+, and overseeing both video and still photography. This included casting, creative briefs, and helping compose the music.</p>
-        <p>I ensured that every aspect of the production aligned with Sony's brand identity and that the products were showcased in their best light, from the first frame to final delivery.</p>
+        <p>As the Creative Director and Co-Director of this campaign, my responsibilities included developing the initial pitch, managing a film crew of 30+, and overseeing both video and still photography. This included casting, creative briefs, and helping compose the music. Every aspect of the production had to align with Sony's brand identity and show the product in its best light, from the first frame to final delivery.</p>
+        <p>The full package was a hero film, hero imagery, and a gear highlight video, pushed everywhere AOV lives: Instagram, YouTube, Facebook, the newsletter, and the podcast. Sony published the film on its own channel and reposted the work on the @sony feed. It pulled 1.6 million impressions and 204 thousand actions, with an engagement rate more than double what the industry considers high.</p>
       </div>
     </section>
 
@@ -102,4 +124,52 @@ const meta = [
     </a>
 
   </article>
+
+  <script is:inline>
+    // Click-to-play film block: poster (real campaign still) until DJ's spot is requested,
+    // then swap in the privacy-enhanced YouTube embed. No timers, no autoplay before click.
+    (function () {
+      var btn = document.getElementById('fsPlay');
+      var frame = document.getElementById('fsFilm');
+      if (!btn || !frame) return;
+      btn.addEventListener('click', function () {
+        var ifr = document.createElement('iframe');
+        ifr.src = 'https://www.youtube-nocookie.com/embed/CS5UXhe17O4?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+        ifr.title = 'Flow State, the Sony WH-1000XM3 hero film';
+        ifr.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+        ifr.setAttribute('allowfullscreen', '');
+        // inline pointer-events beats the Lenis "iframe { pointer-events:none }" rule
+        ifr.setAttribute('style', 'position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:auto;');
+        frame.replaceChildren(ifr);
+      }, { once: true });
+    })();
+  </script>
 </Base>
+
+<style>
+  /* Results band: dark like .bc-quote so it reads as one system with the page. */
+  .bc-impact { background: #0d0f14; color: var(--white); padding: clamp(52px, 7vw, 88px) var(--pad); }
+  .bc-impact-in { max-width: var(--wrap); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .bc-impact-n { display: block; font-weight: 600; font-size: clamp(42px, 6vw, 86px); letter-spacing: -0.03em; line-height: 1; }
+  .bc-impact-l { display: block; margin-top: 12px; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(252, 252, 252, 0.55); }
+  .bc-impact-cap { max-width: var(--wrap); margin: 40px auto 0; font-family: var(--mono2); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(252, 252, 252, 0.45); }
+
+  /* Film block: 16:9 poster frame, mono pill, iframe swapped in on click. */
+  .bc-film { max-width: var(--wrap); margin: 0 auto 26px; padding: 0 var(--pad); }
+  .bc-film-frame { position: relative; aspect-ratio: 16 / 9; background: #0d0f14; border-radius: 2px; overflow: hidden; }
+  .bc-film-poster { position: absolute; inset: 0; width: 100%; height: 100%; display: block; padding: 0; border: 0; background: none; cursor: pointer; }
+  .bc-film-poster img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.76); transition: transform 0.7s ease, filter 0.4s ease; }
+  .bc-film-poster:hover img { transform: scale(1.025); filter: brightness(0.9); }
+  .bc-film-pill { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-family: var(--mono2); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; white-space: nowrap; color: var(--white); border: 1px solid rgba(252, 252, 252, 0.65); border-radius: 999px; padding: 13px 24px; background: rgba(13, 15, 20, 0.45); backdrop-filter: blur(6px); transition: background 0.3s ease, color 0.3s ease; }
+  .bc-film-poster:hover .bc-film-pill { background: var(--white); color: #0d0f14; }
+  .bc-film-cap { margin-top: 12px; font-family: var(--mono2); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(20, 21, 25, 0.55); }
+  @media (max-width: 760px) {
+    .bc-impact { padding: 48px 24px; }
+    .bc-impact-in { grid-template-columns: 1fr; gap: 28px; }
+    .bc-film { padding: 0 24px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bc-film-poster img, .bc-film-pill { transition: none; }
+    .bc-film-poster:hover img { transform: none; }
+  }
+</style>

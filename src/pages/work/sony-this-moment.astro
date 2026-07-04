@@ -78,7 +78,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .film .poster{position:relative;height:92svh;overflow:hidden;cursor:pointer}
 .film .poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72);transition:transform .8s cubic-bezier(.22,1,.36,1)}
 .film .poster:hover img{transform:scale(1.03)}
-.film .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s}
+.film .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.7;padding:0 12px;color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s}
 .film .poster:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
 .film .fcap{position:absolute;left:var(--pad);bottom:24px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
 #reelbox{position:fixed;inset:0;z-index:96;background:rgba(12,11,10,.96);display:none;align-items:center;justify-content:center;padding:4vmin}
@@ -167,7 +167,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   <div class="frame">
     <button class="x" id="reelClose" type="button">Close ✕</button>
     <div id="reelMount"></div>
-    <span class="cap">Sony · This Moment · stand-in: studio reel</span>
+    <span class="cap">Sony · This Moment · campaign film</span>
   </div>
 </div>
 
@@ -197,6 +197,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
     <span><b>Client</b> · Sony Audio</span>
     <span><b>Role</b> · Creative direction</span>
     <span><b>Deliverables</b> · Film + stills + social</span>
+    <span><b>Talent</b> · Audrie Storme · Karl Shakur · Eric Rubens</span>
     <span><b>Year</b> · 2023</span>
   </div>
 </div>
@@ -208,17 +209,17 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
       <h2>When the world gets noisy, make <span class="serif">quiet</span> desirable.</h2>
     </div>
     <div class="body rv">
-      <p>Feeling overwhelmed shouldn't be the norm, but it's a feeling we can all relate to. When the world gets noisy, headphones aren't just a piece of tech, they're a device for creating an environment, a moment of peace and serenity no matter where you are or what may be happening around you. Along with Art of Visuals, I teamed up with Sony to highlight this moment. This moment is for you.</p>
-      <p>Sony partnered with Art of Visuals to craft a campaign that underscores the value of taking time, trusting the process, and rediscovering inspiration. The initiative encourages creators to embrace moments of pause, demonstrating that true creativity flourishes when given the space to breathe.</p>
+      <p>Feeling overwhelmed shouldn't be the norm, but it's a feeling we can all relate to. When the world gets noisy, Sony's WH-1000XM4 noise-canceling headphones aren't just a piece of tech, they're a device for creating an environment, a moment of peace and serenity no matter where you are or what may be happening around you. At Art of Visuals, I teamed up with Sony to capture that moment. This moment is for you.</p>
+      <p>The film follows three creators we cast because they fit the story naturally: Audrie Storme, Karl Shakur, and Eric Rubens. Each one moves through their own version of a chaotic day, overwhelmed, anxious, frustrated, until the headphones go on. Eric finds his moment alone on a sailboat in the middle of the ocean at sunset. Audrie finds hers at home, surrounded by her music and her art. Karl escapes the city to a rooftop over downtown LA and dances the tension out.</p>
     </div>
   </div>
 </section>
 
-<section class="film" data-video="">
+<section class="film" data-video="KIi8cBOlU50">
   <div class="poster" id="filmPoster">
-    <img src="/case-studies/sony-this-moment/gallery/tm-02.jpg" alt="This Moment campaign film poster">
-    <span class="play">Play film</span>
-    <span class="fcap">✳ Campaign film · :60 cut to :30 / :15 ads · stand-in: studio reel until the spot link lands</span>
+    <img src="/case-studies/sony-this-moment/gallery/tm-03.jpg" alt="This Moment campaign film poster">
+    <span class="play">Play · The Spot</span>
+    <span class="fcap">✳ The spot · This Moment · Sony WH-1000XM4 · Art of Visuals</span>
   </div>
 </section>
 
@@ -249,8 +250,8 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
 <section class="quote">
   <div class="wrap">
-    <p class="q rv">"True creativity flourishes when given <b>the space to breathe</b> and align with the natural flow of inspiration."</p>
-    <p class="who mono rv">The idea behind the campaign</p>
+    <p class="q rv">"More than just another pair of headphones, they're <b>a device for creating an environment,</b> a moment of peace and serenity no matter where you are."</p>
+    <p class="who mono rv">The insight that built the spot</p>
   </div>
 </section>
 
@@ -338,14 +339,15 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 })();
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
-// film lightbox (uses data-video id if set, else the studio reel as stand-in)
+// film lightbox: the real spot (This Moment · Sony WH-1000XM4) via data-video,
+// privacy-enhanced embed; studio reel only as a fallback if the id is ever cleared
 (function(){
   const REEL='VMubUUZ2tdU';
   const sec=document.querySelector('.film');
   const vid=(sec&&sec.dataset.video)||REEL;
   const box=document.getElementById('reelbox'),mount=document.getElementById('reelMount');
   function open(){
-    mount.innerHTML=`<iframe src="https://www.youtube.com/embed/${vid}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Campaign film"></iframe>`;
+    mount.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Campaign film"></iframe>`;
     box.classList.add('on');document.body.style.overflow='hidden';
   }
   function close(){box.classList.remove('on');mount.innerHTML='';document.body.style.overflow=''}
