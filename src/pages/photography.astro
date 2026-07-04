@@ -16,9 +16,12 @@
   --dispcond:var(--disp); --condstretch:75%;
   --mono:'Fragment Mono',monospace;
   --spark:var(--rose); --struct:var(--cobalt);
+  /* v4: the page IS the folder. manila desk, lighter front face, warm ink outline */
+  --manila:#dbc79a; --face:#efe2ba; --fback:#d2bc8a; --fink:#3b2f18;
+  --sunken:#f7eecd; --bevL:#fff8e2; --bevD:#8a744a; --film:#1a1917;
 }
 *{margin:0;box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--manila);color:var(--ink);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
 .wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 a{color:inherit;text-decoration:none}
@@ -45,57 +48,68 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
 .rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
 .rv.in{opacity:1;transform:none}
-footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0}
+footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:30px 0;position:relative;z-index:3}
 footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text-transform:lowercase}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.hero h1 .ln>span{transform:none}.rv{opacity:1;transform:none}.grain{animation:none}}
 
-.hero{padding:16vh 0 6vh}
+.hero{padding:15vh 0 6vh}
 .hero .kick{color:var(--red)}
 .hero h1{font-weight:var(--dispw);font-size:clamp(52px,9.4vw,140px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:14px}
 .hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-top:4vh}
-.hero .sub p{max-width:44ch;color:#4c4a45}
-/* hero word swap when a folder is pulled */
-.hero{padding-bottom:9vh}
+.hero .sub p{max-width:44ch;color:#57492b}
+/* hero word swap when a tab is switched */
 .hero h1 .serif.swap{animation:wordIn .5s cubic-bezier(.22,1,.36,1)}
 .hero h1 .num.swap{display:inline-block;animation:wordIn .5s cubic-bezier(.22,1,.36,1)}
 @keyframes wordIn{0%{opacity:0;transform:translateY(55%)}100%{opacity:1;transform:none}}
-/* THE DRAWER: manila folders seen edge-on; the active one lifts open */
-.drawer{background:var(--ink);position:relative}
-.drawer .cap{max-width:var(--wrap);margin:0 auto;padding:16px var(--pad) 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88}
-.drawer .cap b{font-weight:400;color:var(--red)}
-.drawer .bin{max-width:var(--wrap);margin:0 auto;padding:36px var(--pad) 0}
-.drawer .lip{position:relative;z-index:35;height:16px;background:linear-gradient(180deg,#28251f,#191816);border-top:1px solid #3d3a34;box-shadow:0 -10px 20px rgba(0,0,0,.35)}
-.folderrow{display:flex;align-items:flex-end}
-.folder{position:relative;flex:1 1 0;min-width:0;height:128px;background:none;border:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent;transform-origin:50% 100%;transform:translateY(10px);filter:brightness(.85) saturate(.92);transition:transform .42s cubic-bezier(.22,1,.36,1),filter .42s cubic-bezier(.22,1,.36,1)}
-.folder+.folder{margin-left:-30px}
-.folder:hover{transform:translateY(2px);filter:brightness(.96) saturate(.97)}
-.folder:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
-.folder.on{transform:translateY(-16px) rotate(-1.1deg);filter:none;z-index:30!important}
-.folder .fbody{position:absolute;left:0;right:0;top:29px;bottom:0;display:block;border:1px solid #a8946a;border-bottom:none;border-radius:9px 9px 0 0;background:linear-gradient(180deg,#e5d3a9 0%,#d9c69b 34%,#cbb687 100%);box-shadow:inset 0 1px 0 rgba(250,240,214,.85),inset 0 -20px 26px rgba(105,86,48,.16),-16px 0 24px -14px rgba(10,9,8,.6)}
-.folder.on .fbody{background:linear-gradient(180deg,#eddcb4 0%,#e0cea3 34%,#d2bd8e 100%);box-shadow:inset 0 1px 0 rgba(252,244,220,.9),inset 0 -20px 26px rgba(105,86,48,.14),0 26px 38px -12px rgba(10,9,8,.75),-16px 0 24px -14px rgba(10,9,8,.6)}
-/* flap hint: the lighter inner face you see once the folder is open */
-.folder .fbody::before{content:"";position:absolute;left:5px;right:5px;top:0;height:0;border-radius:7px 7px 0 0;background:linear-gradient(180deg,#f5eac8,#e7d7ae);box-shadow:inset 0 -1px 0 rgba(150,124,78,.45);opacity:0;transition:height .42s cubic-bezier(.22,1,.36,1),opacity .32s}
-.folder.on .fbody::before{height:18px;opacity:1}
-.folder .ftab{position:absolute;top:0;left:max(2px,calc((100% - 158px)*var(--tabf,0)));height:31px;max-width:calc(100% - 4px);padding:0 13px;z-index:2;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;overflow:hidden;background:linear-gradient(180deg,#ecdeb8,#dcc99e);border:1px solid #a8946a;border-bottom:none;border-radius:7px 7px 0 0;font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#43371f}
-.folder.on .ftab{background:linear-gradient(180deg,#f3e7c4,#e4d3a8)}
-.folder .fdot{width:7px;height:7px;border-radius:50%;background:var(--red);flex:0 0 auto;opacity:0;transform:scale(.4);transition:opacity .3s,transform .3s}
-.folder.on .fdot{opacity:1;transform:none}
-.folder .fno{position:absolute;left:13px;bottom:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:rgba(100,81,44,.6);pointer-events:none}
-.folder .fstamp{position:absolute;right:12px;bottom:11px;transform:rotate(-7deg);font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:rgba(100,81,44,.62);border:1px solid rgba(100,81,44,.45);border-radius:2px;padding:2px 6px;pointer-events:none}
-/* the sheet: the open folder's spilled contents + its index card */
-.sheet{padding:6px 0 10vh}
-.indexcard{position:relative;z-index:5;width:min(600px,100%);margin:-18px 0 30px;background:#fff;border:1px solid var(--line);border-radius:2px;box-shadow:0 18px 40px rgba(16,15,14,.18),0 2px 6px rgba(16,15,14,.08);padding:12px 18px 13px;transform:translateX(var(--cardx,0px)) rotate(-.5deg);transition:transform .45s cubic-bezier(.22,1,.36,1)}
-.indexcard .ictop{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:8px;border-bottom:1.5px solid rgba(224,49,26,.5)}
-.indexcard .ictop .mono b{font-weight:400;color:var(--red)}
-.indexcard .icblurb{font-family:'Instrument Serif',serif;font-style:italic;font-size:17px;color:#4c4a45;line-height:26px;min-height:26px;padding-top:3px;background-image:repeating-linear-gradient(180deg,transparent 0,transparent 25px,rgba(36,56,232,.16) 25px,rgba(36,56,232,.16) 26px)}
-.masonry{columns:4;column-gap:12px}
-.fr{position:relative;background:#fff;padding:7px 7px 24px;border:1px solid var(--line);cursor:zoom-in;break-inside:avoid;margin:0 0 12px;opacity:0;transform:translateY(14px)}
-.fr.show{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
-.fr img{width:100%;height:auto;display:block;filter:saturate(.92)}
-.fr .cap{position:absolute;left:8px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
-.fr:hover{transform:rotate(-1deg) scale(1.04);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2}
-.fr:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+
+/* THE FOLDER: the whole page body is one big manila folder, 90s tab control on top */
+.folderzone{padding:0 14px;position:relative}
+.fshell{position:relative;max-width:1680px;margin:0 auto}
+/* the back panel: the thin darker strip you see rising above the front edge */
+.fback{position:absolute;left:0;right:0;top:29px;height:44px;z-index:1;background:var(--fback);border:2px solid var(--fink);border-bottom:none;border-radius:16px 16px 0 0;box-shadow:inset 0 2px 0 rgba(255,250,228,.5)}
+/* the tab row: simple switchable 90s Windows tabs sitting on the folder's top edge */
+.ftabs{position:relative;z-index:3;display:flex;align-items:flex-end;gap:5px;min-height:42px;padding:0 26px}
+.ftab{position:relative;display:inline-flex;align-items:center;height:34px;padding:0 15px;white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#544726;
+  background:#d6c293;border:2px solid var(--fink);border-bottom:none;border-radius:7px 7px 0 0;
+  box-shadow:inset 1px 1px 0 rgba(255,249,226,.65),inset -1px -1px 0 rgba(92,72,38,.28);
+  transition:background .12s,height .12s,color .12s}
+.ftab:hover{background:#e2d1a2}
+.ftab.on{height:42px;margin-bottom:-2px;padding-bottom:2px;z-index:4;color:#2c2313;background:var(--face);
+  box-shadow:inset 1px 1px 0 rgba(255,252,235,.9),inset -1px 0 0 rgba(92,72,38,.16)}
+.ftab.on::after{content:"";position:absolute;inset:4px 4px 6px;border:1px dotted rgba(60,46,20,.5);border-radius:3px;pointer-events:none}
+.ftab:focus-visible{outline:1px dotted var(--fink);outline-offset:-5px}
+/* the front face: lighter manila, ink outline, rounded top corners, runs to the footer */
+.fbody{position:relative;z-index:2;min-height:55vh;background:var(--face);border:2px solid var(--fink);border-bottom:none;border-radius:12px 12px 0 0;
+  box-shadow:inset 0 1px 0 rgba(255,252,235,.8),0 18px 44px -20px rgba(60,42,12,.55)}
+.fhead{display:flex;align-items:center;gap:10px;padding:16px 22px 0}
+.flabel{color:#6b5a33;font-size:10px}
+.fpathbar{flex:1;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#3a2f18;background:var(--sunken);padding:6px 12px;
+  border:2px solid;border-color:var(--bevD) var(--bevL) var(--bevL) var(--bevD);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fblurb{font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;color:#5f5130;padding:10px 24px 18px}
+/* FILM STRIPS: charcoal bands, punched sprocket holes, frames edge-to-edge */
+.strips{padding:0 22px}
+.strip{position:relative;background:var(--film);border-radius:3px;padding:8px 12px 7px;box-shadow:0 14px 30px -12px rgba(60,42,12,.5);animation:stripIn .16s ease-out both}
+.strip+.strip{margin-top:16px}
+.strip:nth-child(even){transform:rotate(.25deg)}
+.strip:nth-child(odd){transform:rotate(-.2deg)}
+@keyframes stripIn{from{opacity:0}to{opacity:1}}
+.sprk{display:flex;gap:13px;height:8px;overflow:hidden;margin:2px}
+.sprk i{flex:0 0 11px;height:8px;border-radius:2px;background:var(--face)}
+.frames{display:flex;gap:3px;margin-top:6px;padding-bottom:22px;min-width:0}
+.fr{position:relative;flex:var(--r,1.5) 1 0%;aspect-ratio:var(--r,1.5);min-width:0;margin:0;background:#0d0c0b;cursor:zoom-in}
+.fr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92)}
+.fr::after{content:"";position:absolute;inset:3px;border:1px dotted transparent;pointer-events:none;z-index:2}
+.fr:hover img{filter:saturate(1) brightness(1.05)}
+.fr:hover::after,.fr:focus-visible::after{border-color:rgba(247,238,205,.9)}
+.fr:focus-visible{outline:none}
+.fr .cap{position:absolute;left:2px;bottom:-17px;font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:#c6b080;pointer-events:none;white-space:nowrap}
+.strip .stock{position:absolute;right:16px;bottom:19px;font-family:var(--mono);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:#8f7c4f;pointer-events:none}
+/* the beveled status bar at the folder's bottom */
+.fstatus{display:flex;gap:4px;flex-wrap:wrap;padding:26px 10px 10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:#463a20}
+.fstatus .seg{background:#e7d8ab;border:2px solid;border-color:var(--bevD) var(--bevL) var(--bevL) var(--bevD);padding:4px 12px;white-space:nowrap}
+.fstatus .seg.grow{flex:1 1 auto}
 /* DJ's filmstrip lightbox, carried over from the old site + retinted to the cut */
 .pg-lightbox{position:fixed;inset:0;z-index:96;display:none;flex-direction:column;background:rgba(16,15,14,.96);backdrop-filter:blur(4px)}
 .pg-lightbox.open{display:flex}
@@ -112,20 +126,24 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
 .pg-lb-arrow:hover{opacity:1;transform:scale(1.18)}
 .pg-lb-counter{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8f8d88;font-variant-numeric:tabular-nums;min-width:140px;text-align:center}
 .pg-lb-counter b{font-weight:400;color:var(--red)}
-@media (max-width:1100px){.masonry{columns:3}}
-@media (max-width:760px){.masonry{columns:2}
+@media (max-width:1000px){.ftab{padding:0 9px;font-size:9.5px}}
+@media (max-width:760px){
   .pg-lb-slide{min-width:55vw}.pg-lb-photo{height:76%}.pg-lb-track{gap:5vw;padding:0 10vw}.pg-lb-arrow{font-size:30px}
-  /* the drawer collapses to a scrollable tab row: tabs only, no folder bodies */
-  .drawer .bin{padding:14px var(--pad) 16px}
-  .folderrow{overflow-x:auto;scrollbar-width:none;gap:8px;align-items:stretch}
-  .folderrow::-webkit-scrollbar{display:none}
-  .folder{flex:0 0 auto;height:36px;transform:none;filter:none;opacity:.62;transition:opacity .3s}
-  .folder+.folder{margin-left:0}
-  .folder:hover{transform:none;filter:none}
-  .folder.on{transform:none;filter:none;opacity:1}
-  .folder .fbody{display:none}
-  .folder .ftab{position:static;height:36px;max-width:none;border-bottom:1px solid #a8946a;border-radius:6px}
-  .indexcard{margin-top:-8px}
+  /* the tab row scrolls sideways; each strip scrolls sideways too */
+  .folderzone{padding:0 8px}
+  .fback{top:22px}
+  .ftabs{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:0 12px;min-height:36px}
+  .ftabs::-webkit-scrollbar{display:none}
+  .ftab{flex:0 0 auto;height:30px;padding:0 12px;font-size:10px}
+  .ftab.on{height:36px}
+  .flabel{display:none}
+  .fhead{padding:12px 12px 0}
+  .fblurb{padding:8px 14px 14px;font-size:15px}
+  .strips{padding:0 10px}
+  .frames{overflow-x:auto;scrollbar-width:none}
+  .frames::-webkit-scrollbar{display:none}
+  .fr{flex:0 0 auto;height:140px}
+  .fstatus{padding:20px 8px 8px}
 }
 </style>
 </head>
@@ -135,7 +153,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
 <div class="corners">
   <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
   <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/lab">Lab</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a></span>
-  <span class="c3">The photo archive · six folders · one hundred frames</span>
+  <span class="c3">The photo archive · one folder · six tabs · one hundred frames</span>
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
@@ -143,23 +161,27 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
   <span class="kick mono">Photography · DJ Ramirez · Monuments</span>
   <h1><span class="ln"><span class="num" id="rollNum">One hundred</span></span><span class="ln"><span><span class="serif" id="rollWord">frames</span>.</span></span></h1>
   <div class="sub">
-    <p class="rv">The photo archive. Campaign stills, editorial work, and the frames between takes. Photography is one output of directed work, never the whole story. Pull a folder from the drawer below, or dig through the whole archive.</p>
+    <p class="rv">The photo archive. Campaign stills, editorial work, and the frames between takes. Photography is one output of directed work, never the whole story. Click through the tabs below, or flip through the whole roll.</p>
   </div>
 </header>
-<section class="drawer" aria-label="The archive drawer">
-  <div class="cap">\ <b>The drawer</b> · pull a folder</div>
-  <div class="bin"><div class="folderrow" id="folderRow" role="tablist" aria-label="Photo folders"></div></div>
-  <div class="lip" aria-hidden="true"></div>
-</section>
-<section class="sheet wrap">
-  <div class="indexcard" id="indexCard">
-    <div class="ictop">
-      <span class="mono"><b id="icRoll">ROLLS 01-05</b> · <span id="sheetName">THE FULL ARCHIVE</span> · <span id="sheetCount">100 FRAMES</span></span>
-      <span class="mono" style="color:#8f8d88">Monuments archive</span>
+<section class="folderzone" aria-label="The archive folder">
+  <div class="fshell">
+    <div class="fback" aria-hidden="true"></div>
+    <div class="ftabs" id="ftabs" role="tablist" aria-label="Photo folders"></div>
+    <div class="fbody">
+      <div class="fhead">
+        <span class="flabel mono">Address</span>
+        <span class="fpathbar" id="fpath">C:\MONUMENTS\ARCHIVE</span>
+      </div>
+      <p class="fblurb" id="fblurb">Everything, newest first. Five rolls spliced into one long reel.</p>
+      <div class="strips" id="strips"></div>
+      <div class="fstatus">
+        <span class="seg" id="stCount">100 object(s)</span>
+        <span class="seg" id="stSize">213.5 MB</span>
+        <span class="seg grow">double-click to inspect</span>
+      </div>
     </div>
-    <p class="icblurb" id="sheetBlurb">Everything, newest first. Five rolls tipped out onto one sheet.</p>
   </div>
-  <div class="masonry" id="masonry"></div>
 </section>
 <div class="pg-lightbox" id="pglb" role="dialog" aria-hidden="true">
   <button class="pg-lb-close" id="lbX">Close ✕</button>
@@ -206,7 +228,7 @@ clock();setInterval(clock,30000);
   const FOLDERS=[{
     key:'all',name:'The full archive',tab:'Full archive',counter:'ARCHIVE',
     num:'One hundred',word:'frames',roll:'ROLLS 01-05',
-    blurb:'Everything, newest first. Five rolls tipped out onto one sheet.',
+    blurb:'Everything, newest first. Five rolls spliced into one long reel.',
     ids:CATS.reduce((a,c)=>a.concat(c.ids),[])
   }].concat(CATS.map((c,i)=>({
     key:slug(c.name),name:c.name,tab:c.name,counter:c.name.toUpperCase(),
@@ -215,23 +237,16 @@ clock();setInterval(clock,30000);
   })));
   const byKey={};FOLDERS.forEach(f=>{byKey[f.key]=f});
   const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  const row=document.getElementById('folderRow'),grid=document.getElementById('masonry'),
-        card=document.getElementById('indexCard'),
+  const row=document.getElementById('ftabs'),grid=document.getElementById('strips'),
         num=document.getElementById('rollNum'),word=document.getElementById('rollWord'),
-        icRoll=document.getElementById('icRoll'),icName=document.getElementById('sheetName'),
-        icCount=document.getElementById('sheetCount'),icBlurb=document.getElementById('sheetBlurb');
+        fpath=document.getElementById('fpath'),fblurb=document.getElementById('fblurb'),
+        stCount=document.getElementById('stCount'),stSize=document.getElementById('stSize');
 
-  // build the drawer: six manila folders, staggered tabs like a real file drawer
-  row.innerHTML=FOLDERS.map((f,i)=>
-    '<button class="folder" type="button" role="tab" aria-selected="false" data-key="'+f.key+'"'+
-    ' style="--tabf:'+[0,.5,1][i%3]+';z-index:'+(i+10)+'" aria-label="Open the '+f.name+' folder, '+f.ids.length+' frames">'+
-      '<span class="ftab">'+f.tab+' · '+f.ids.length+'<i class="fdot" aria-hidden="true"></i></span>'+
-      '<span class="fbody" aria-hidden="true">'+
-        '<span class="fno">'+(f.key==='all'?'00':'0'+i)+'</span>'+
-        '<span class="fstamp">Monuments archive</span>'+
-      '</span>'+
-    '</button>').join('');
-  const folders=[...row.children];
+  // build the tab row: six simple switchable tabs on the folder's top edge
+  row.innerHTML=FOLDERS.map(f=>
+    '<button class="ftab" type="button" role="tab" aria-selected="false" data-key="'+f.key+'"'+
+    ' aria-label="Open the '+f.name+' tab, '+f.ids.length+' frames">'+f.tab+' · '+f.ids.length+'</button>').join('');
+  const tabs=[...row.children];
 
   let active=null,firstPick=true;
   function swapHero(f){
@@ -239,55 +254,56 @@ clock();setInterval(clock,30000);
     if(reduce||firstPick)return;
     [num,word].forEach(el=>{el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')});
   }
-  function renderCard(f){
-    icRoll.textContent=f.roll;icName.textContent=f.name.toUpperCase();
-    icCount.textContent=f.ids.length+' FRAMES';icBlurb.textContent=f.blurb;
+  function renderMeta(f){
+    fpath.textContent='C:\\MONUMENTS\\ARCHIVE'+(f.key==='all'?'':'\\'+f.counter.replace(/\s/g,'-'));
+    fblurb.textContent=f.blurb;
+    stCount.textContent=f.ids.length+' object(s)';
+    stSize.textContent=(f.ids.length*2.135).toFixed(1)+' MB';
   }
-  // slide the index card under the folder that just opened (desktop only)
-  function moveCard(){
-    if(!active)return;
-    if(matchMedia('(max-width:760px)').matches){card.style.setProperty('--cardx','0px');return}
-    const b=row.querySelector('.folder.on');if(!b)return;
-    const sheet=card.parentElement,cs=getComputedStyle(sheet),
-          padL=parseFloat(cs.paddingLeft)||0,padR=parseFloat(cs.paddingRight)||0,
-          max=Math.max(0,sheet.clientWidth-padL-padR-card.offsetWidth),
-          x=Math.max(0,Math.min(max,b.getBoundingClientRect().left-sheet.getBoundingClientRect().left-padL));
-    card.style.setProperty('--cardx',Math.round(x)+'px');
+  // split a roll into film strips of ~4 frames, sizes spread evenly
+  function chunks(ids,target){
+    const n=ids.length,k=Math.max(1,Math.round(n/target)),out=[];
+    let i=0;
+    for(let s=0;s<k;s++){const size=Math.ceil((n-i)/(k-s));out.push(ids.slice(i,i+size));i+=size}
+    return out;
   }
-  function renderGrid(f){
-    grid.innerHTML=f.ids.map(id=>
-      '<figure class="fr" data-id="'+id+'" data-full="/gallery/full/p-'+id+'.jpg" tabindex="0" aria-label="Open frame '+id+'">'+
-        '<img src="/gallery/thumb/p-'+id+'.jpg" alt="'+f.name+' frame '+id+'" loading="lazy" onerror="this.closest(\'.fr\').remove()">'+
-        '<figcaption class="cap">FR-'+id+' · '+f.name.toUpperCase()+'</figcaption>'+
-      '</figure>').join('');
-    const frs=[...grid.children];
-    if(reduce){frs.forEach(el=>el.classList.add('show'));return}
-    // deal the prints out with a small stagger, like pulling them from the folder
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{
-      frs.forEach((el,i)=>{
-        el.style.transitionDelay=Math.min(i*26,600)+'ms';
-        el.classList.add('show');
-        el.addEventListener('transitionend',()=>{el.style.transitionDelay=''},{once:true});
-      });
-    }));
+  function renderStrips(f){
+    const holes=Math.ceil((grid.clientWidth||innerWidth)/24)+6;
+    const holeRow='<span class="sprk" aria-hidden="true">'+'<i></i>'.repeat(holes)+'</span>';
+    grid.innerHTML=chunks(f.ids,4).map((set,s)=>
+      '<div class="strip" style="animation-delay:'+(reduce?0:Math.min(s*30,240))+'ms">'+holeRow+
+        '<div class="frames">'+set.map(id=>
+          '<figure class="fr" data-id="'+id+'" data-full="/gallery/full/p-'+id+'.jpg" tabindex="0" aria-label="Open frame '+id+'">'+
+            '<img src="/gallery/thumb/p-'+id+'.jpg" alt="'+f.name+' frame '+id+'" loading="lazy" onerror="this.closest(\'.fr\').remove()">'+
+            '<figcaption class="cap">FR-'+id+'</figcaption>'+
+          '</figure>').join('')+'</div>'+
+        holeRow+
+        '<span class="stock" aria-hidden="true">MNMTS 400 · '+f.roll+'</span>'+
+      '</div>').join('');
+    // real aspect ratios once each thumb reports in; strips stay justified edge-to-edge
+    grid.querySelectorAll('.fr img').forEach(im=>{
+      const fit=()=>{const fig=im.closest('.fr');if(fig&&im.naturalWidth&&im.naturalHeight)fig.style.setProperty('--r',(im.naturalWidth/im.naturalHeight).toFixed(4))};
+      if(im.complete)fit();else im.addEventListener('load',fit,{once:true});
+    });
   }
   function select(key,setHash){
     const f=byKey[key]||byKey.all;
     if(active===f)return;
     active=f;
-    folders.forEach(b=>{const on=b.dataset.key===f.key;b.classList.toggle('on',on);b.setAttribute('aria-selected',on?'true':'false')});
-    swapHero(f);renderCard(f);renderGrid(f);moveCard();
+    tabs.forEach(b=>{const on=b.dataset.key===f.key;b.classList.toggle('on',on);b.setAttribute('aria-selected',on?'true':'false')});
+    swapHero(f);renderMeta(f);renderStrips(f);
     if(setHash!==false)history.replaceState(null,'','#'+f.key);
     firstPick=false;
   }
-  row.addEventListener('click',e=>{const b=e.target.closest('.folder');if(b)select(b.dataset.key)});
+  row.addEventListener('click',e=>{const b=e.target.closest('.ftab');if(b)select(b.dataset.key)});
   addEventListener('hashchange',()=>{const k=location.hash.slice(1).toLowerCase();if(byKey[k])select(k,false)});
-  let rzT=0;
-  addEventListener('resize',()=>{clearTimeout(rzT);rzT=setTimeout(moveCard,120)});
+  let rzT=0,rzW=innerWidth;
+  addEventListener('resize',()=>{clearTimeout(rzT);rzT=setTimeout(()=>{
+    if(Math.abs(innerWidth-rzW)>120){rzW=innerWidth;if(active)renderStrips(active)}},250)});
   const initKey=location.hash.slice(1).toLowerCase();
   select(byKey[initKey]?initKey:'all',false);
 
-  // DJ's filmstrip lightbox: auto-drift + grab momentum, scoped to the open folder
+  // DJ's filmstrip lightbox: auto-drift + grab momentum, scoped to the open tab
   const lb=document.getElementById('pglb'),strip=document.getElementById('lbStrip'),
         track=document.getElementById('lbTrack'),counter=document.getElementById('lbCounter');
   let list=[],dir=1,hover=false,busy=false,momRaf=0;
