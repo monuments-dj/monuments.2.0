@@ -95,11 +95,11 @@ body.gridview .arch{padding-bottom:0}
 .gcard .iw{display:block;overflow:hidden}
 .gcard img.cv{width:100%;height:auto;display:block;filter:saturate(.92);transition:transform .5s cubic-bezier(.22,1,.36,1)}
 .gcard:hover img.cv{transform:scale(1.03)}
-.gcard .band{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 4px}
-.gcard .band .t{display:flex;align-items:center;gap:10px;font-weight:var(--dispw2);font-size:clamp(15px,1.3vw,19px);letter-spacing:-.01em;min-width:0}
-.gcard .band .t img.lg{height:15px;width:auto;max-width:74px;object-fit:contain;filter:brightness(0);opacity:.8;flex:none}
-.gcard .band .f{font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase;text-align:right;line-height:1.6;flex:none}
-.gcard .band .f b{font-weight:400;color:var(--red)}
+.gcard .band{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 4px}
+.gcard .band .lft{min-width:0}
+.gcard .band .t{display:block;font-weight:var(--dispw2);font-size:clamp(15px,1.3vw,19px);letter-spacing:-.01em}
+.gcard .band .cats{display:block;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;line-height:1.7;margin-top:3px}
+.gcard .band img.lg{height:17px;width:auto;max-width:86px;object-fit:contain;filter:brightness(0);opacity:.72;flex:none}
 .gcard.flip{transition:transform .55s cubic-bezier(.22,1,.36,1)}
 @media (max-width:900px){#grid{columns:2}}
 @media (max-width:560px){#grid{columns:1}}
@@ -377,7 +377,8 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     fmt:(r.querySelector('.fmt')?.textContent||'').replace(/\\/,'').trim(),
     yr:parseInt(r.querySelector('.yr')?.textContent||'0',10),id:r.querySelector('.id')?.textContent.trim()||'' ,idx:i}));
   function el(it){const a=document.createElement('a');a.className='gcard';a.href=it.href;a.dataset.key=it.idx;a.dataset.disc=it.disc.join(',');
-    a.innerHTML=`<span class="iw"><img class="cv" src="${it.img}" alt="${it.title}" loading="lazy"></span><div class="band"><span class="t">${it.logo?`<img class="lg" src="${it.logo}" alt="">`:''}<span>${it.title}</span></span><span class="f">${DISC_LABEL[it.disc[0]]||''}<br><b>${it.yr||''}</b></span></div>`;return a}
+    const cats=it.disc.map(d=>DISC_LABEL[d]).filter(Boolean).join(' · ');
+    a.innerHTML=`<span class="iw"><img class="cv" src="${it.img}" alt="${it.title}" loading="lazy"></span><div class="band"><span class="lft"><span class="t">${it.title}</span><span class="cats">${cats}</span></span>${it.logo?`<img class="lg" src="${it.logo}" alt="">`:''}</div>`;return a}
   items.forEach(it=>grid.appendChild(el(it)));
   let sort='new';
   function currentFilter(){const on=document.querySelector('#lens button.on');return on?on.dataset.d:'all'}
