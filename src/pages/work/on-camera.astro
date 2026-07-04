@@ -1,6 +1,7 @@
 ---
 // ON CAMERA · hosting + presenting reel wall
 // Every embed is cued (?start=) to the second DJ steps in front of the lens.
+import CallSheet from '../../components/CallSheet.astro';
 const videos = [
   { id:'nk-_UwGuRlE', start:29,  title:'Sony Xperia 5 IV: The best 4k 120fps Slow motion camera under 1k?', channel:'Art of Visuals' },
   { id:'QZEZIVB5AOE', start:106, title:'Sony Wide Angle Lens Shootout | 14mm | 20mm | 35mm', channel:'Art of Visuals' },
@@ -350,6 +351,22 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
         </article>
       ))}
     </div>
+  </div>
+</section>
+
+<section class="wall" style="padding-top:0">
+  <div class="wrap">
+    <CallSheet
+      code="MC-2026-07"
+      sub="Hosting · presenting · 11 tapes"
+      filed="MMXXVI"
+      rows={[
+        { k: 'Host + presenter', v: 'DJ Ramirez', select: true },
+        { k: 'Channel', v: 'Art of Visuals' },
+        { k: 'Podcast', v: 'Creator Clubhouse' },
+        { k: 'Co-hosts', v: 'Prince McClinton · Viera Reid' },
+      ]}
+    />
   </div>
 </section>
 

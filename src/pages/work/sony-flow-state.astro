@@ -1,14 +1,15 @@
 ---
 import Base from '../../layouts/Base.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === Sony - Flow State - faithful rebuild of monuments.cc/portfolio/sony-flow-state-2 ===
 // Real campaign stills pulled from the live site into /public/case-studies/sony-flow-state.
 const g = Array.from({ length: 15 }, (_, i) => `/case-studies/sony-flow-state/gallery/fs-${String(i + 1).padStart(2, '0')}.jpg`);
-const meta = [
+const credits = [
   { k: 'Client', v: 'Sony Audio' },
   { k: 'Agency', v: 'Art of Visuals' },
   { k: 'Directors', v: 'Krizia Vega + DJ Ramirez' },
-  { k: 'Creative Director', v: 'DJ Ramirez' },
+  { k: 'Creative Director', v: 'DJ Ramirez', select: true },
   { k: 'DP', v: 'Joachim Zunke' },
   { k: 'Stills', v: 'Claire LeJune' },
   { k: 'Deliverables', v: 'Videography · Photography · Amplification' },
@@ -107,14 +108,15 @@ const meta = [
       <img src={g[14]} alt="Sony Flow State" loading="lazy" />
     </figure>
 
-    <!-- META -->
-    <div class="bc-meta fade">
-      {meta.map((m) => (
-        <div class="cs-meta-item">
-          <span class="cs-meta-k">{m.k}</span>
-          <span class="cs-meta-v">{m.v}</span>
-        </div>
-      ))}
+    <!-- CREDITS: the call sheet slip -->
+    <div class="bc-callsheet fade">
+      <CallSheet
+        code="MC-2023-07"
+        sub="Sony Audio · Flow State · WH-1000XM3"
+        filed="MMXXIII"
+        tone="light"
+        rows={credits}
+      />
     </div>
 
     <!-- NEXT -->
@@ -163,10 +165,14 @@ const meta = [
   .bc-film-pill { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-family: var(--mono2); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; white-space: nowrap; color: var(--white); border: 1px solid rgba(252, 252, 252, 0.65); border-radius: 999px; padding: 13px 24px; background: rgba(13, 15, 20, 0.45); backdrop-filter: blur(6px); transition: background 0.3s ease, color 0.3s ease; }
   .bc-film-poster:hover .bc-film-pill { background: var(--white); color: #0d0f14; }
   .bc-film-cap { margin-top: 12px; font-family: var(--mono2); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(20, 21, 25, 0.55); }
+  /* Credits call sheet: same column rhythm the old .bc-meta block held. */
+  .bc-callsheet { max-width: var(--wrap); margin: 0 auto; padding: 30px var(--pad) 110px; }
+
   @media (max-width: 760px) {
     .bc-impact { padding: 48px 24px; }
     .bc-impact-in { grid-template-columns: 1fr; gap: 28px; }
     .bc-film { padding: 0 24px; }
+    .bc-callsheet { padding: 24px 24px 60px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .bc-film-poster img, .bc-film-pill { transition: none; }

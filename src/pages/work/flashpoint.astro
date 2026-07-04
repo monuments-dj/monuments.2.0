@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === Flashpoint - faithful rebuild of monuments.cc/portfolio/flashpoint ===
 // Real assets pulled from the live site into /public/case-studies/flashpoint.
@@ -10,7 +11,7 @@ const credits = [
   { k: 'Agency', v: 'Art of Visuals' },
   { k: 'Client', v: 'Adorama' },
   { k: 'Art Director', v: 'Dannie Nicholson' },
-  { k: 'Creative Direction', v: 'DJ Ramirez' },
+  { k: 'Creative Direction', v: 'DJ Ramirez', select: true },
 ];
 ---
 <Base title="Flashpoint · monuments">
@@ -83,9 +84,15 @@ const credits = [
       </div>
     </section>
 
-    <!-- CREDITS -->
-    <div class="cs2-credits fade">
-      {credits.map((c) => <div><span>{c.k}</span>{c.v}</div>)}
+    <!-- CREDITS: the call sheet slip -->
+    <div class="cs2-callsheet fade">
+      <CallSheet
+        code="MC-2020-02"
+        sub="Adorama · Flashpoint · Full rebrand"
+        filed="MMXX"
+        tone="light"
+        rows={credits}
+      />
     </div>
 
     <!-- PRODUCT GRID -->
@@ -114,3 +121,11 @@ const credits = [
 
   </article>
 </Base>
+
+<style>
+  /* Credits call sheet: keeps the white band + rhythm the old .cs2-credits block held. */
+  .cs2-callsheet { background: var(--white); padding: 30px 100px 100px; }
+  @media (max-width: 760px) {
+    .cs2-callsheet { padding: 24px 24px 60px; }
+  }
+</style>

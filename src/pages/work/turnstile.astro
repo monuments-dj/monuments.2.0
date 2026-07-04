@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === Turnstile Audio - faithful rebuild of monuments.cc/portfolio/turnstile ===
 // Real assets pulled from the live site into /public/case-studies/turnstile/{bts,products,brand}.
@@ -79,11 +80,19 @@ const tags = ['Brand Development'];
       </div>
     </section>
 
-    <!-- CREDITS -->
-    <div class="cs2-credits fade">
-      <div><span>Agency</span>Art of Visuals</div>
-      <div><span>Client</span>Adorama</div>
-      <div><span>Creative Direction</span>DJ Ramirez</div>
+    <!-- CREDITS: the call sheet slip -->
+    <div class="cs2-callsheet fade">
+      <CallSheet
+        code="MC-2023-02"
+        sub="Adorama · Turnstile Audio · Brand development"
+        filed="MMXXIII"
+        tone="light"
+        rows={[
+          { k: 'Agency', v: 'Art of Visuals' },
+          { k: 'Client', v: 'Adorama' },
+          { k: 'Creative Direction', v: 'DJ Ramirez', select: true },
+        ]}
+      />
     </div>
 
     <!-- PRODUCT GRID -->
@@ -112,3 +121,11 @@ const tags = ['Brand Development'];
 
   </article>
 </Base>
+
+<style>
+  /* Credits call sheet: keeps the white band + rhythm the old .cs2-credits block held. */
+  .cs2-callsheet { background: var(--white); padding: 30px 100px 100px; }
+  @media (max-width: 760px) {
+    .cs2-callsheet { padding: 24px 24px 60px; }
+  }
+</style>

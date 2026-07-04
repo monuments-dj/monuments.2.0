@@ -1,12 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === Clothing & Merch - faithful rebuild of monuments.cc/portfolio/clothing-merch ===
 // Real apparel designs pulled from the live site into /public/case-studies/clothing-merch.
 const g = Array.from({ length: 18 }, (_, i) => `/case-studies/clothing-merch/gallery/cm-${String(i + 1).padStart(2, '0')}.jpg`);
-const meta = [
+const credits = [
   { k: 'Client', v: 'Mixed' },
-  { k: 'Creative Director', v: 'DJ Ramirez' },
+  { k: 'Creative Director', v: 'DJ Ramirez', select: true },
   { k: 'Services', v: 'Design · Print · Fulfill' },
 ];
 ---
@@ -50,14 +51,15 @@ const meta = [
       </div>
     </section>
 
-    <!-- META -->
-    <div class="bc-meta fade">
-      {meta.map((m) => (
-        <div class="cs-meta-item">
-          <span class="cs-meta-k">{m.k}</span>
-          <span class="cs-meta-v">{m.v}</span>
-        </div>
-      ))}
+    <!-- CREDITS: the call sheet slip -->
+    <div class="bc-callsheet fade">
+      <CallSheet
+        code="MC-2020-08"
+        sub="Clothing & Merch · Apparel + print"
+        filed="MMXX"
+        tone="light"
+        rows={credits}
+      />
     </div>
 
     <!-- NEXT -->
@@ -68,3 +70,11 @@ const meta = [
 
   </article>
 </Base>
+
+<style>
+  /* Credits call sheet: same column rhythm the old .bc-meta block held. */
+  .bc-callsheet { max-width: var(--wrap); margin: 0 auto; padding: 30px var(--pad) 110px; }
+  @media (max-width: 760px) {
+    .bc-callsheet { padding: 24px 24px 60px; }
+  }
+</style>

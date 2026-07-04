@@ -10,9 +10,15 @@ reel cards: client LOGOS on strips + A/B HOVER images (defaults mine; DJ picks v
 sorts real photos) + Roll/Shuffle/Category sort + filtered lightbox; home brands ticker
 moved up (after stat band); "Built to be ___" reel line; eye tile tracks cursor; sound
 toggle on hero reel; giving folded into /about ("Some stories are not for sale.").
+✅ CREDITS DECIDED 2026-07-03: DJ picked C "The Call Sheet" from /redesign/credits-mockup.html
+("absolutely love this"). CallSheet.astro built (exact port: tape, red rule, ruled rows, red ✳
+select, ARCHIVE stamp) + rolled to ALL 11 /work pages 1:1 (old .crow/.bc-meta/.cs2 ledgers
+replaced; on-camera got its first slip; cobalt ✳ convention now RED site-wide). Real data only;
+DJ still owes the extended crew names ("With" lists) to fatten the slips. Lab pages still on
+old credits (roll later if wanted).
 AWAITING DJ: timeline years/titles + A/B/C pick (/redesign/timeline-{a,b,c}.html), discipline
 tags review, photo-to-category sorting (real photos), face pick, cover picks
-(/redesign/cover-picker.html), ORIGINAL PHOTOS at 2500px+ for the quality re-cut (gallery fulls
+(/redesign/cover-picker.html), crew names per project, ORIGINAL PHOTOS at 2500px+ for the quality re-cut (gallery fulls
 are 1600px, soft on retina in the lightbox; no clean WP mapping, 60 imgs there vs 100 here).
 ✅ SONY SPOT CLOSED 2026-07-03: KIi8cBOlU50 confirmed via oEmbed = the real XM4 This Moment
 spot; wired. Flow State (CS5UXhe17O4) + Xperia (PRO-I _RGvpwyYLTI) also wired w/ AOV impact

@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === Waffle Me Up - faithful rebuild of monuments.cc/portfolio/waffle-me-up ===
 // Real assets pulled from the live site into /public/case-studies/waffle-me-up.
@@ -88,11 +89,19 @@ const tags = ['Brand Refresh'];
       </div>
     </section>
 
-    <!-- CREDITS -->
-    <div class="cs2-credits fade">
-      <div><span>Client</span>Waffle Me Up</div>
-      <div><span>Creative Direction</span>DJ Ramirez</div>
-      <div><span>Discipline</span>Brand · Photo · E-Commerce</div>
+    <!-- CREDITS: the call sheet slip -->
+    <div class="cs2-callsheet fade">
+      <CallSheet
+        code="MC-2019-05"
+        sub="Waffle Me Up · Brand refresh"
+        filed="MMXIX"
+        tone="light"
+        rows={[
+          { k: 'Client', v: 'Waffle Me Up' },
+          { k: 'Creative Direction', v: 'DJ Ramirez', select: true },
+          { k: 'Discipline', v: 'Brand · Photo · E-Commerce' },
+        ]}
+      />
     </div>
 
     <!-- PRODUCT / EDITORIAL GRID -->
@@ -170,5 +179,11 @@ const tags = ['Brand Refresh'];
   @media (prefers-reduced-motion: reduce) {
     /* honor reduced-motion: hide the loop, fall back to the poster image */
     .cs2-hero-video { display: none; }
+  }
+
+  /* Credits call sheet: keeps the white band + rhythm the old .cs2-credits block held. */
+  .cs2-callsheet { background: var(--white); padding: 30px 100px 100px; }
+  @media (max-width: 760px) {
+    .cs2-callsheet { padding: 24px 24px 60px; }
   }
 </style>
