@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cut · Credits picker · 4 concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --mono:'Fragment Mono',monospace;
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:120px}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+.serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+
+/* page header */
+.top{padding:9vh 0 6vh;border-bottom:1px solid var(--lined)}
+.top .k{color:var(--red);display:block;margin-bottom:18px}
+.top h1{font-weight:var(--dispw);font-size:clamp(38px,6vw,88px);line-height:.92;letter-spacing:-.035em;text-transform:uppercase}
+.top h1 .serif{font-size:1.02em}
+.top p.sub{margin-top:22px;max-width:70ch;color:#a9a7a2;font-size:16px}
+.top p.sub b{color:var(--paper);font-weight:var(--dispw2)}
+
+/* concept heads (clickable pickers) */
+.chead{cursor:pointer;border:2px solid transparent;transition:border-color .2s,background .2s;background:var(--ink)}
+.chead .in{max-width:var(--wrap);margin:0 auto;padding:34px var(--pad) 30px;display:grid;grid-template-columns:auto 1fr auto;gap:30px;align-items:start}
+.chead .ltr{font-weight:var(--dispw);font-size:clamp(46px,5vw,74px);line-height:.86;letter-spacing:-.03em;color:var(--red)}
+.chead h2{font-weight:var(--dispw);font-size:clamp(24px,3vw,42px);letter-spacing:-.03em;line-height:1;text-transform:uppercase}
+.chead h2 .serif{color:var(--rose)}
+.chead .why{margin-top:10px;color:#a9a7a2;font-size:15px;max-width:74ch;line-height:1.5}
+.chead .hint{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding-top:12px;white-space:nowrap}
+.chead:hover{border-color:var(--lined)}
+.chead.sel{border-color:var(--red)}
+.chead.sel .hint{color:var(--red)}
+
+/* bands */
+.band{position:relative;padding:7vh 0 8vh}
+.band.light{background:var(--paper);color:var(--ink)}
+.band.dark{background:var(--ink);color:var(--paper)}
+.btag{display:block;margin-bottom:5vh;color:var(--dim)}
+.btag b{color:var(--red);font-weight:400}
+.state{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:0 0 10px}
+.smp{font-family:var(--mono);font-size:7.5px;letter-spacing:.14em;color:var(--dim);border:1px solid currentColor;border-radius:2px;padding:1px 4px;margin-left:7px;vertical-align:2px;opacity:.75}
+.mk{font-style:normal;color:var(--red)}
+
+/* A · the strip */
+.fakehero{position:relative;height:32vh;min-height:230px;overflow:hidden;background:var(--ink)}
+.fakehero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.02) brightness(.72)}
+.fakehero .t{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--paper);font-weight:var(--dispw);font-size:clamp(36px,5.4vw,74px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;mix-blend-mode:screen;white-space:nowrap}
+.fakehero .cap{position:absolute;left:var(--pad);bottom:14px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.75)}
+.stripblock{margin-top:0}
+.strip{border-bottom:1px solid var(--line)}
+.strip:first-of-type{border-top:0}
+.strip .in{max-width:var(--wrap);margin:0 auto;padding:13px var(--pad);display:flex;flex-wrap:wrap;column-gap:24px;row-gap:3px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;line-height:2}
+.strip .p{white-space:nowrap}
+.strip .r{color:var(--dim);margin-right:8px}
+.strip .n{color:var(--ink)}
+.band.dark .strip{border-color:var(--lined)}
+.band.dark .strip .n{color:var(--paper)}
+.stripstate{max-width:var(--wrap);margin:5vh auto 0;padding:0 var(--pad)}
+
+/* B · the ledger */
+.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.ledger .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.band.dark .ledger .bar{border-bottom-color:var(--paper)}
+.ledger .bar .mono b{color:var(--red);font-weight:400}
+.ledger .bar .roll{color:var(--dim)}
+.crow{display:flex;justify-content:space-between;align-items:baseline;gap:26px;padding:15px 0;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+.band.dark .crow{border-bottom-color:var(--lined)}
+.crow .k{color:var(--dim);flex-shrink:0}
+.crow .v{color:var(--ink);text-align:right}
+.band.dark .crow .v{color:var(--paper)}
+.crow.me .k{color:var(--red)}
+
+/* C · the call sheet */
+.sheets{display:flex;gap:70px;justify-content:center;align-items:flex-start;flex-wrap:wrap;padding:3vh 0 4vh}
+.sheet{position:relative;width:430px;max-width:100%;background:#FCFBF7;color:var(--ink);padding:24px 28px 66px;transform:rotate(-1.4deg);
+box-shadow:0 1px 2px rgba(22,21,20,.14),0 6px 14px rgba(22,21,20,.12),0 22px 48px rgba(22,21,20,.20)}
+.sheet.b{transform:rotate(1.1deg)}
+.band.dark .sheet{box-shadow:0 1px 2px rgba(0,0,0,.4),0 10px 24px rgba(0,0,0,.45),0 30px 70px rgba(0,0,0,.55)}
+.sheet .tape{position:absolute;top:-13px;left:50%;transform:translateX(-50%) rotate(-2deg);width:96px;height:27px;background:rgba(230,222,203,.6);box-shadow:0 1px 2px rgba(22,21,20,.08);backdrop-filter:blur(1px)}
+.band.dark .sheet .tape{background:rgba(230,222,203,.5)}
+.sheet .shead{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+.sheet .shead .lft{font-weight:400}
+.sheet .shead .rgt{color:var(--dim)}
+.sheet .ssub{font-family:var(--mono);font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin-top:5px}
+.sheet .redrule{border-top:2px solid var(--red);margin:12px -28px 6px;opacity:.85}
+.srow{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:10px 0 8px;border-bottom:1px solid rgba(36,56,232,.18)}
+.srow .r{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);flex-shrink:0}
+.srow .n{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink);text-align:right}
+.sheet .sfoot{position:absolute;left:28px;right:150px;bottom:16px;font-family:var(--mono);font-size:7.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);line-height:1.7}
+.sheet .stamp{position:absolute;right:16px;bottom:22px;transform:rotate(-7deg);border:2px solid var(--red);border-radius:4px;color:var(--red);font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:7px 12px 6px;text-align:center;opacity:.55;mix-blend-mode:multiply;line-height:1.6}
+.sheet .stamp small{display:block;font-size:7px;letter-spacing:.3em}
+
+/* D · the end credits */
+.dgrid{display:grid;grid-template-columns:1fr 1fr}
+.dcol{padding:5vh var(--pad) 3vh;text-align:center}
+.dcol+.dcol{border-left:1px solid var(--lined)}
+.dcol .state{margin-bottom:7vh}
+.cred{margin:0 auto 42px}
+.cred .r{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.cred .n{display:block;font-weight:var(--dispw2);font-size:21px;letter-spacing:-.01em;line-height:1.25;text-transform:uppercase;color:var(--paper)}
+.cred.me{margin-bottom:56px}
+.cred.me .n{font-weight:var(--dispw);font-size:clamp(30px,3vw,44px);letter-spacing:-.03em;line-height:1}
+.cred.me .n .serif{font-size:1.04em}
+.cred .n .tln{display:block}
+.dcamp{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:6vh}
+.dfin{margin-top:26px;padding-top:26px;position:relative}
+.dfin::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:44px;border-top:1px solid var(--lined)}
+.dfin .m{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--paper)}
+.dfin .m i{font-style:normal;color:var(--rose)}
+
+/* fixed pick bar */
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:80;background:#0e0d0c;border-top:1px solid #2c2b29;padding:16px clamp(20px,4vw,50px);display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+#bar .pick{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}
+#bar .hint{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+#bar button{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:var(--paper);color:var(--ink);border:none;border-radius:99px;padding:13px 22px;cursor:pointer}
+#bar button:hover{background:var(--rose)}
+
+footer.pg{border-top:1px solid var(--lined);padding:30px 0}
+footer.pg .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;color:var(--dim)}
+footer.pg .blk{font-family:'Pirata One',serif;font-size:24px;color:var(--rose);text-transform:lowercase}
+
+@media (max-width:960px){
+  .bgrid{grid-template-columns:1fr;gap:48px}
+  .dgrid{grid-template-columns:1fr}
+  .dcol+.dcol{border-left:0;border-top:1px solid var(--lined)}
+  .chead .in{grid-template-columns:auto 1fr}
+  .chead .hint{display:none}
+}
+@media (prefers-reduced-motion:reduce){.grain{animation:none}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="wrap">
+    <span class="k mono">\ Working tool · credits picker · the converged cut</span>
+    <h1>Credits · 4 concepts · <span class="serif">pick one.</span></h1>
+    <p class="sub">One credits treatment for every case page. Each concept is shown on <b>paper</b> and on <b>ink</b> with real This Moment data, plus an extended crew state to judge depth. Rows tagged <b>SMP</b> are sample data, not real credits. Click a concept label to select it, then copy the letter from the bar below and paste it back.</p>
+  </div>
+</header>
+
+<!-- ══════════ A · THE STRIP ══════════ -->
+<section class="concept" id="cA">
+  <div class="chead" data-letter="A">
+    <div class="in">
+      <span class="ltr">A</span>
+      <div>
+        <h2>The <span class="serif">strip</span></h2>
+        <p class="why">One thin ribbon directly under the case hero. The whole crew in a single scannable line; nobody scrolls for it, nobody trips over it.</p>
+      </div>
+      <span class="hint">\ Tap to pick</span>
+    </div>
+  </div>
+
+  <div class="band light">
+    <span class="btag mono wrap" style="display:block"><b>\ A</b> · on paper · sits under the hero</span>
+    <div class="fakehero">
+      <img src="/case-studies/sony-this-moment/gallery/tm-09.jpg" alt="This Moment hero stand-in">
+      <span class="t">This <span class="serif">moment</span><span class="mk" style="color:var(--rose)">.</span></span>
+      <span class="cap">\ Hero stand-in · the strip sits directly below</span>
+    </div>
+    <div class="strip" style="border-top:0">
+      <div class="in">
+        <span class="p"><span class="r">Client</span><span class="n">Sony Audio</span></span>
+        <span class="p"><span class="r">Creative direction</span><span class="n"><i class="mk">✳</i> DJ Ramirez</span></span>
+        <span class="p"><span class="r">Production</span><span class="n">MGX Creative</span></span>
+        <span class="p"><span class="r">Director</span><span class="n">Daniel Malikyar</span></span>
+        <span class="p"><span class="r">Stills</span><span class="n">Claire LeJune</span></span>
+        <span class="p"><span class="r">Campaign</span><span class="n">This Moment · WH-1000XM4</span></span>
+        <span class="p"><span class="r">Frame</span><span class="n">MC-2023-06</span></span>
+      </div>
+    </div>
+    <div class="stripstate"><span class="state">\ State 02 · extended crew · smp rows are sample data</span></div>
+    <div class="strip" style="border-top:1px solid var(--line)">
+      <div class="in">
+        <span class="p"><span class="r">Client</span><span class="n">Sony Audio</span></span>
+        <span class="p"><span class="r">Creative direction</span><span class="n"><i class="mk">✳</i> DJ Ramirez</span></span>
+        <span class="p"><span class="r">Production</span><span class="n">MGX Creative</span></span>
+        <span class="p"><span class="r">Director</span><span class="n">Daniel Malikyar</span></span>
+        <span class="p"><span class="r">Stills</span><span class="n">Claire LeJune</span></span>
+        <span class="p"><span class="r">Edit</span><span class="n">J. Fielding</span><span class="smp">smp</span></span>
+        <span class="p"><span class="r">Color</span><span class="n">M. Okada</span><span class="smp">smp</span></span>
+        <span class="p"><span class="r">Sound</span><span class="n">S. Alvarez</span><span class="smp">smp</span></span>
+        <span class="p"><span class="r">Talent</span><span class="n">Audrie Storme · Karl Shakur · Eric Rubens</span><span class="smp">smp</span></span>
+        <span class="p"><span class="r">Frame</span><span class="n">MC-2023-06</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="band dark">
+    <span class="btag mono wrap" style="display:block"><b>\ A</b> · on ink · same ribbon, dark case</span>
+    <div class="fakehero" style="border-bottom:1px solid var(--lined)">
+      <img src="/case-studies/sony-this-moment/gallery/tm-02.jpg" alt="This Moment hero stand-in dark">
+      <span class="t">This <span class="serif">moment</span><span class="mk" style="color:var(--rose)">.</span></span>
+      <span class="cap">\ Hero stand-in · the strip sits directly below</span>
+    </div>
+    <div class="strip" style="border-top:0">
+      <div class="in">
+        <span class="p"><span class="r">Client</span><span class="n">Sony Audio</span></span>
+        <span class="p"><span class="r">Creative direction</span><span class="n"><i class="mk">✳</i> DJ Ramirez</span></span>
+        <span class="p"><span class="r">Production</span><span class="n">MGX Creative</span></span>
+        <span class="p"><span class="r">Director</span><span class="n">Daniel Malikyar</span></span>
+        <span class="p"><span class="r">Stills</span><span class="n">Claire LeJune</span></span>
+        <span class="p"><span class="r">Campaign</span><span class="n">This Moment · WH-1000XM4</span></span>
+        <span class="p"><span class="r">Frame</span><span class="n">MC-2023-06</span></span>
+      </div>
+    </div>
+    <div class="stripstate"><span class="state">\ State 02 · extended crew · smp rows are sample data</span></div>
+    <div class="strip" style="border-top:1px solid var(--lined)">
+      <div class="in">
+        <span class="p"><span class="r">Client</span><span class="n">Sony Audio</span></span>
+        <span class="p"><span class="r">Creative direction</span><span class="n"><i class="mk">✳</i> DJ Ramirez</span></span>
+        <span class="p"><span class="r">Production</span><span class="n">MGX Creative</span></span>
+        <span class="p"><span class="r">Director</span><span class="n">Daniel Malikyar</span></span>
+        <span class="p"><span class="r">Stills</span><span class="n">Claire LeJune</span></span>
+        <span class="p"><span class="r">Edit</span><span class="n">J. Fielding</span><span class="smp">smp</span></span>
+        <span class="p"><span class="r">Color</span><span class="n">M. Okada</span><span class="smp">smp</span></span>
+        <span class="p"><span class="r">Sound</span><span class="n">S. Alvarez</span><span class="smp">smp</span></span>
+        <span class="p"><span class="r">Talent</span><span class="n">Audrie Storme · Karl Shakur · Eric Rubens</span><span class="smp">smp</span></span>
+        <span class="p"><span class="r">Frame</span><span class="n">MC-2023-06</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ B · THE LEDGER ══════════ -->
+<section class="concept" id="cB">
+  <div class="chead" data-letter="B">
+    <div class="in">
+      <span class="ltr">B</span>
+      <div>
+        <h2>The <span class="serif">ledger</span></h2>
+        <p class="why">The current key/value rows, refined: keys dim on the left, names flush right, hairline rules, your row keyed in red. Quietly archival, zero risk.</p>
+      </div>
+      <span class="hint">\ Tap to pick</span>
+    </div>
+  </div>
+
+  <div class="band light">
+    <div class="wrap">
+      <span class="btag mono"><b>\ B</b> · on paper · compact + extended side by side</span>
+      <div class="bgrid">
+        <div class="ledger">
+          <span class="state">\ State 01 · compact · 5 rows</span>
+          <div class="bar">
+            <span class="mono"><b>Credits</b> · who made it</span>
+            <span class="mono roll">This Moment · MC-2023-06</span>
+          </div>
+          <div class="crow"><span class="k">Client</span><span class="v">Sony Audio</span></div>
+          <div class="crow me"><span class="k">Creative direction</span><span class="v"><i class="mk">✳</i> DJ Ramirez</span></div>
+          <div class="crow"><span class="k">Production</span><span class="v">MGX Creative</span></div>
+          <div class="crow"><span class="k">Director</span><span class="v">Daniel Malikyar</span></div>
+          <div class="crow"><span class="k">Stills</span><span class="v">Claire LeJune</span></div>
+        </div>
+        <div class="ledger">
+          <span class="state">\ State 02 · extended · 10 rows · smp = sample</span>
+          <div class="bar">
+            <span class="mono"><b>Credits</b> · who made it</span>
+            <span class="mono roll">Roll MMXXIII</span>
+          </div>
+          <div class="crow"><span class="k">Client</span><span class="v">Sony Audio</span></div>
+          <div class="crow"><span class="k">Campaign</span><span class="v">This Moment · WH-1000XM4</span></div>
+          <div class="crow me"><span class="k">Creative direction</span><span class="v"><i class="mk">✳</i> DJ Ramirez</span></div>
+          <div class="crow"><span class="k">Production</span><span class="v">MGX Creative</span></div>
+          <div class="crow"><span class="k">Director</span><span class="v">Daniel Malikyar</span></div>
+          <div class="crow"><span class="k">Stills</span><span class="v">Claire LeJune</span></div>
+          <div class="crow"><span class="k">Edit<span class="smp">smp</span></span><span class="v">J. Fielding</span></div>
+          <div class="crow"><span class="k">Color<span class="smp">smp</span></span><span class="v">M. Okada</span></div>
+          <div class="crow"><span class="k">Sound<span class="smp">smp</span></span><span class="v">S. Alvarez</span></div>
+          <div class="crow"><span class="k">Talent<span class="smp">smp</span></span><span class="v">Audrie Storme · Karl Shakur · Eric Rubens</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="band dark">
+    <div class="wrap">
+      <span class="btag mono"><b>\ B</b> · on ink · same ledger on a dark case</span>
+      <div class="bgrid">
+        <div class="ledger">
+          <span class="state">\ State 01 · compact · 5 rows</span>
+          <div class="bar">
+            <span class="mono"><b>Credits</b> · who made it</span>
+            <span class="mono roll">This Moment · MC-2023-06</span>
+          </div>
+          <div class="crow"><span class="k">Client</span><span class="v">Sony Audio</span></div>
+          <div class="crow me"><span class="k">Creative direction</span><span class="v"><i class="mk">✳</i> DJ Ramirez</span></div>
+          <div class="crow"><span class="k">Production</span><span class="v">MGX Creative</span></div>
+          <div class="crow"><span class="k">Director</span><span class="v">Daniel Malikyar</span></div>
+          <div class="crow"><span class="k">Stills</span><span class="v">Claire LeJune</span></div>
+        </div>
+        <div class="ledger">
+          <span class="state">\ State 02 · extended · 10 rows · smp = sample</span>
+          <div class="bar">
+            <span class="mono"><b>Credits</b> · who made it</span>
+            <span class="mono roll">Roll MMXXIII</span>
+          </div>
+          <div class="crow"><span class="k">Client</span><span class="v">Sony Audio</span></div>
+          <div class="crow"><span class="k">Campaign</span><span class="v">This Moment · WH-1000XM4</span></div>
+          <div class="crow me"><span class="k">Creative direction</span><span class="v"><i class="mk">✳</i> DJ Ramirez</span></div>
+          <div class="crow"><span class="k">Production</span><span class="v">MGX Creative</span></div>
+          <div class="crow"><span class="k">Director</span><span class="v">Daniel Malikyar</span></div>
+          <div class="crow"><span class="k">Stills</span><span class="v">Claire LeJune</span></div>
+          <div class="crow"><span class="k">Edit<span class="smp">smp</span></span><span class="v">J. Fielding</span></div>
+          <div class="crow"><span class="k">Color<span class="smp">smp</span></span><span class="v">M. Okada</span></div>
+          <div class="crow"><span class="k">Sound<span class="smp">smp</span></span><span class="v">S. Alvarez</span></div>
+          <div class="crow"><span class="k">Talent<span class="smp">smp</span></span><span class="v">Audrie Storme · Karl Shakur · Eric Rubens</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ C · THE CALL SHEET ══════════ -->
+<section class="concept" id="cC">
+  <div class="chead" data-letter="C">
+    <div class="in">
+      <span class="ltr">C</span>
+      <div>
+        <h2>The call <span class="serif">sheet</span></h2>
+        <p class="why">An archival object: a production slip filed on the page, red rule, ruled rows, rubber stamp. Extends the manila-folder world of the photo page onto work pages.</p>
+      </div>
+      <span class="hint">\ Tap to pick</span>
+    </div>
+  </div>
+
+  <div class="band light">
+    <div class="wrap">
+      <span class="btag mono"><b>\ C</b> · on paper · compact + extended slips</span>
+      <div class="sheets">
+        <div class="sheet">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="shead"><span class="lft">Crew manifest</span><span class="rgt">MC-2023-06</span></div>
+          <div class="ssub">Sony Audio · This Moment · WH-1000XM4</div>
+          <div class="redrule" aria-hidden="true"></div>
+          <div class="srow"><span class="r">Client</span><span class="n">Sony Audio</span></div>
+          <div class="srow"><span class="r">Creative direction</span><span class="n"><i class="mk">✳</i> DJ Ramirez</span></div>
+          <div class="srow"><span class="r">Production</span><span class="n">MGX Creative</span></div>
+          <div class="srow"><span class="r">Director</span><span class="n">Daniel Malikyar</span></div>
+          <div class="srow"><span class="r">Stills</span><span class="n">Claire LeJune</span></div>
+          <span class="sfoot">Filed MMXXIII · state 01 · compact</span>
+          <span class="stamp">Monuments<small>Archive</small></span>
+        </div>
+        <div class="sheet b">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="shead"><span class="lft">Crew manifest</span><span class="rgt">MC-2023-06</span></div>
+          <div class="ssub">Sony Audio · This Moment · WH-1000XM4</div>
+          <div class="redrule" aria-hidden="true"></div>
+          <div class="srow"><span class="r">Client</span><span class="n">Sony Audio</span></div>
+          <div class="srow"><span class="r">Creative direction</span><span class="n"><i class="mk">✳</i> DJ Ramirez</span></div>
+          <div class="srow"><span class="r">Production</span><span class="n">MGX Creative</span></div>
+          <div class="srow"><span class="r">Director</span><span class="n">Daniel Malikyar</span></div>
+          <div class="srow"><span class="r">Stills</span><span class="n">Claire LeJune</span></div>
+          <div class="srow"><span class="r">Edit<span class="smp">smp</span></span><span class="n">J. Fielding</span></div>
+          <div class="srow"><span class="r">Color<span class="smp">smp</span></span><span class="n">M. Okada</span></div>
+          <div class="srow"><span class="r">Sound<span class="smp">smp</span></span><span class="n">S. Alvarez</span></div>
+          <div class="srow"><span class="r">Talent 01<span class="smp">smp</span></span><span class="n">Audrie Storme</span></div>
+          <div class="srow"><span class="r">Talent 02<span class="smp">smp</span></span><span class="n">Karl Shakur</span></div>
+          <div class="srow"><span class="r">Talent 03<span class="smp">smp</span></span><span class="n">Eric Rubens</span></div>
+          <span class="sfoot">Filed MMXXIII · state 02 · extended crew</span>
+          <span class="stamp">Monuments<small>Archive</small></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="band dark">
+    <div class="wrap">
+      <span class="btag mono"><b>\ C</b> · on ink · the slip pops off a dark case</span>
+      <div class="sheets">
+        <div class="sheet">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="shead"><span class="lft">Crew manifest</span><span class="rgt">MC-2023-06</span></div>
+          <div class="ssub">Sony Audio · This Moment · WH-1000XM4</div>
+          <div class="redrule" aria-hidden="true"></div>
+          <div class="srow"><span class="r">Client</span><span class="n">Sony Audio</span></div>
+          <div class="srow"><span class="r">Creative direction</span><span class="n"><i class="mk">✳</i> DJ Ramirez</span></div>
+          <div class="srow"><span class="r">Production</span><span class="n">MGX Creative</span></div>
+          <div class="srow"><span class="r">Director</span><span class="n">Daniel Malikyar</span></div>
+          <div class="srow"><span class="r">Stills</span><span class="n">Claire LeJune</span></div>
+          <span class="sfoot">Filed MMXXIII · state 01 · compact</span>
+          <span class="stamp">Monuments<small>Archive</small></span>
+        </div>
+        <div class="sheet b">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="shead"><span class="lft">Crew manifest</span><span class="rgt">MC-2023-06</span></div>
+          <div class="ssub">Sony Audio · This Moment · WH-1000XM4</div>
+          <div class="redrule" aria-hidden="true"></div>
+          <div class="srow"><span class="r">Client</span><span class="n">Sony Audio</span></div>
+          <div class="srow"><span class="r">Creative direction</span><span class="n"><i class="mk">✳</i> DJ Ramirez</span></div>
+          <div class="srow"><span class="r">Production</span><span class="n">MGX Creative</span></div>
+          <div class="srow"><span class="r">Director</span><span class="n">Daniel Malikyar</span></div>
+          <div class="srow"><span class="r">Stills</span><span class="n">Claire LeJune</span></div>
+          <div class="srow"><span class="r">Edit<span class="smp">smp</span></span><span class="n">J. Fielding</span></div>
+          <div class="srow"><span class="r">Color<span class="smp">smp</span></span><span class="n">M. Okada</span></div>
+          <div class="srow"><span class="r">Sound<span class="smp">smp</span></span><span class="n">S. Alvarez</span></div>
+          <div class="srow"><span class="r">Talent 01<span class="smp">smp</span></span><span class="n">Audrie Storme</span></div>
+          <div class="srow"><span class="r">Talent 02<span class="smp">smp</span></span><span class="n">Karl Shakur</span></div>
+          <div class="srow"><span class="r">Talent 03<span class="smp">smp</span></span><span class="n">Eric Rubens</span></div>
+          <span class="sfoot">Filed MMXXIII · state 02 · extended crew</span>
+          <span class="stamp">Monuments<small>Archive</small></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ D · THE END CREDITS ══════════ -->
+<section class="concept" id="cD">
+  <div class="chead" data-letter="D">
+    <div class="in">
+      <span class="ltr">D</span>
+      <div>
+        <h2>The end <span class="serif">credits</span></h2>
+        <p class="why">A cinematic closing card for the end of each case: film-credit stacking on ink, your card first. Dark only; it is inherently an end-of-page moment.</p>
+      </div>
+      <span class="hint">\ Tap to pick</span>
+    </div>
+  </div>
+
+  <div class="band dark">
+    <div class="wrap">
+      <span class="btag mono"><b>\ D</b> · on ink only · compact + extended</span>
+      <div class="dgrid">
+        <div class="dcol">
+          <span class="state">\ State 01 · compact</span>
+          <div class="cred me">
+            <span class="r">\ Creative direction</span>
+            <span class="n"><i class="mk">✳</i> DJ <span class="serif">Ramirez</span></span>
+          </div>
+          <div class="cred"><span class="r">\ Director</span><span class="n">Daniel Malikyar</span></div>
+          <div class="cred"><span class="r">\ Production</span><span class="n">MGX Creative</span></div>
+          <div class="cred"><span class="r">\ Stills</span><span class="n">Claire LeJune</span></div>
+          <div class="cred"><span class="r">\ Client</span><span class="n">Sony Audio</span></div>
+          <div class="dcamp">This Moment · WH-1000XM4 · MC-2023-06</div>
+          <div class="dfin"><span class="m">M<i>✳</i>NUMENTS · MMXXIII</span></div>
+        </div>
+        <div class="dcol">
+          <span class="state">\ State 02 · extended · smp rows are sample data</span>
+          <div class="cred me">
+            <span class="r">\ Creative direction</span>
+            <span class="n"><i class="mk">✳</i> DJ <span class="serif">Ramirez</span></span>
+          </div>
+          <div class="cred"><span class="r">\ Director</span><span class="n">Daniel Malikyar</span></div>
+          <div class="cred"><span class="r">\ Production</span><span class="n">MGX Creative</span></div>
+          <div class="cred"><span class="r">\ Stills</span><span class="n">Claire LeJune</span></div>
+          <div class="cred"><span class="r">\ Edit<span class="smp">smp</span></span><span class="n">J. Fielding</span></div>
+          <div class="cred"><span class="r">\ Color<span class="smp">smp</span></span><span class="n">M. Okada</span></div>
+          <div class="cred"><span class="r">\ Sound<span class="smp">smp</span></span><span class="n">S. Alvarez</span></div>
+          <div class="cred"><span class="r">\ Talent<span class="smp">smp</span></span><span class="n"><span class="tln">Audrie Storme</span><span class="tln">Karl Shakur</span><span class="tln">Eric Rubens</span></span></div>
+          <div class="cred"><span class="r">\ Client</span><span class="n">Sony Audio</span></div>
+          <div class="dcamp">This Moment · WH-1000XM4 · MC-2023-06</div>
+          <div class="dfin"><span class="m">M<i>✳</i>NUMENTS · MMXXIII</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="pg">
+  <div class="wrap row mono">
+    <span>Credits picker · one treatment ships on every case page</span>
+    <span class="blk">built to be remembered</span>
+    <span>Converged cut · working tool</span>
+  </div>
+</footer>
+
+<div id="bar">
+  <span class="pick" id="pickTxt">PICK: none yet</span>
+  <span class="hint">Click a concept label to select · copy · paste the letter back to Claude, notes welcome</span>
+  <button id="copyBtn" type="button">Copy pick</button>
+</div>
+
+<script>
+(function(){
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.chead'));
+  var pick=null;
+  var txt=document.getElementById('pickTxt');
+  heads.forEach(function(h){
+    h.addEventListener('click',function(){
+      heads.forEach(function(x){
+        x.classList.remove('sel');
+        x.querySelector('.hint').textContent='\\ Tap to pick';
+      });
+      h.classList.add('sel');
+      h.querySelector('.hint').textContent='✳ Picked';
+      pick=h.dataset.letter;
+      txt.textContent='PICK: '+pick;
+    });
+  });
+  var btn=document.getElementById('copyBtn');
+  btn.addEventListener('click',function(){
+    var out='CREDITS PICK: '+(pick||'none');
+    function done(){var old=btn.textContent;btn.textContent='Copied ✓';setTimeout(function(){btn.textContent=old},1400)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(out).then(done,function(){fallback()});
+    }else{fallback()}
+    function fallback(){
+      var ta=document.createElement('textarea');ta.value=out;document.body.appendChild(ta);
+      ta.select();try{document.execCommand('copy')}catch(e){}
+      document.body.removeChild(ta);done();
+    }
+  });
+})();
+</script>
+</body>
+</html>
