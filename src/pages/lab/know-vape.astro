@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
-import CaseCredits from '../../components/CaseCredits.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === /lab/know-vape ===
 // Emmy-winning case study for KNOW VAPE, Idaho Public Television's statewide youth anti-vaping
@@ -38,13 +38,11 @@ const posters = [
   `${G}/poster-01.png`, `${G}/poster-02.png`, `${G}/poster-03.png`,
   `${G}/poster-04.png`, `${G}/poster-05.png`, `${G}/poster-06.png`,
 ];
+// Crew data confirmed by DJ (2026-07-03).
 const credits = [
   { k: 'Client', v: 'Idaho Public Television' },
-  { k: 'Role', v: 'Director' },
-  { k: 'Series', v: 'Myth vs Fact · 6 spots' },
-  { k: 'Campaign award', v: '2024 NW Emmy · Community Outreach' },
-  { k: 'Year', v: '2023' },
-  { k: 'Partners', v: 'Idaho Millennium Fund · Health Districts' },
+  { k: 'Production', v: 'Frame by Frame' },
+  { k: 'Director', v: 'DJ Ramirez', select: true },
 ];
 ---
 <Base title="Know Vape, the Lab">
@@ -65,8 +63,16 @@ const credits = [
       <div class="kv-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
 
-    <!-- CREDITS STRIP: role at a glance, close to the top -->
-    <CaseCredits items={credits} accent="#15c98a" />
+    <!-- CREDITS: the call sheet slip (CallSheet.astro) -->
+    <div class="kv-callsheet fade">
+      <CallSheet
+        code="MC-2021-06"
+        sub="Idaho Public Television · Know Vape · Myth vs Fact"
+        filed="MMXXIII"
+        tone="dark"
+        rows={credits}
+      />
+    </div>
 
     <!-- THE FILM / SERIES -->
     <section class="kv-film">
@@ -193,6 +199,9 @@ const credits = [
 
   /* ---------- shared section frame ---------- */
   .kv-film, .kv-eps, .kv-brief, .kv-system, .kv-role, .kv-award, .kv-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+
+  /* ---------- CALL SHEET (credits slip) ---------- */
+  .kv-callsheet { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(36px, 5vw, 64px) var(--pad) 0; }
   /* the film + episodes read as one unit: tighten the gap between them */
   .kv-film { padding-bottom: clamp(28px, 4vw, 56px); }
   .kv-eps { padding-top: clamp(40px, 6vw, 80px); }

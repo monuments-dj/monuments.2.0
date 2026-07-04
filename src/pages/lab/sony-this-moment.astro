@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import NextProject from '../../components/NextProject.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === SONY - THIS MOMENT (editorial) - /lab/sony-this-moment ===
 // The reimagined-Blue-Cross editorial model on the real Sony Audio campaign:
@@ -20,12 +21,15 @@ const collage = [
   { src: g[2], w: 30, x: 12, y: 54,  v: 8 },
   { src: g[5], w: 40, x: 50, y: 60,  v: 5 },
 ];
+// Mirrors the call sheet on /work/sony-this-moment, plus the Agency row
+// (confirmed by DJ, 2026-07-03).
 const meta = [
   { k: 'Client', v: 'Sony Audio' },
   { k: 'Agency', v: 'Art of Visuals' },
+  { k: 'Creative direction', v: 'DJ Ramirez', select: true },
   { k: 'Production', v: 'MGX Creative' },
   { k: 'Director', v: 'Daniel Malikyar' },
-  { k: 'Creative Direction', v: 'DJ Ramirez' },
+  { k: 'Stills', v: 'Claire LeJune' },
 ];
 ---
 <Base title="Sony This Moment: a pause in the noise · monuments">
@@ -102,14 +106,14 @@ const meta = [
       <div class="tmx-cols">
         <p class="tmx-kicker fade">04 · Credits</p>
         <div class="tmx-col fade">
-          <dl class="tmx-credits">
-            {meta.map((m) => (
-              <div class="tmx-credit">
-                <dt>{m.k}</dt>
-                <dd>{m.v}</dd>
-              </div>
-            ))}
-          </dl>
+          <!-- The call sheet slip (CallSheet.astro) -->
+          <CallSheet
+            code="MC-2023-06"
+            sub="Sony Audio · This Moment · WH-1000XM4"
+            filed="MMXXIII"
+            tone="light"
+            rows={meta}
+          />
         </div>
       </div>
     </section>

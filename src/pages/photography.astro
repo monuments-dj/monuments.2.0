@@ -6,7 +6,7 @@
 <title>Photography · Monuments</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 <style is:global>
 :root{
   --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
@@ -18,7 +18,7 @@
   --spark:var(--rose); --struct:var(--cobalt);
   /* v5: the page IS the folder. cool archive-grey desk, silver 90s chrome, dark grey outline */
   --desk:#b3b2ae; --face:#d5d4d0; --fback:#c6c5c1; --fink:#3a3936;
-  --sunken:#e9e8e5; --bevL:#fbfaf8; --bevD:#7a7973; --film:#1a1917;
+  --sunken:#e9e8e5; --bevL:#fbfaf8; --bevD:#7a7973; --film:#1a1917; --teal:#008080;
 }
 *{margin:0;box-sizing:border-box}
 body{background:var(--desk);color:var(--ink);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -54,11 +54,14 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.hero h1 .ln>span{transform:none}.rv{opacity:1;transform:none}.grain{animation:none}
 .frames{overflow-x:auto;scrollbar-width:none}.frames::-webkit-scrollbar{display:none}.reel{transform:none!important}}
 
-.hero{padding:15vh 0 6vh}
-.hero .kick{color:var(--red)}
-.hero h1{font-weight:var(--dispw);font-size:clamp(52px,9.4vw,140px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:14px}
+.hero{background:var(--teal);border-bottom:2px solid var(--fink);padding:13vh 0 8vh;box-shadow:inset 0 -14px 30px rgba(0,45,45,.25)}
+.hero-in{max-width:1380px;margin:0 auto}
+.hero .kick{color:rgba(245,243,239,.75)}
+.hero h1{font-weight:var(--dispw);font-size:clamp(52px,9.4vw,140px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:14px;color:var(--paper)}
+/* the numeral line goes bitmap: pixel type on the 95 desktop */
+.hero h1 .num{font-family:'Silkscreen',var(--mono);font-weight:700;font-size:.62em;letter-spacing:.01em;line-height:1.05;display:inline-block}
 .hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-top:4vh}
-.hero .sub p{max-width:44ch;color:#3f3e39}
+.hero .sub p{max-width:44ch;color:rgba(245,243,239,.85)}
 /* hero word swap when a tab is switched */
 .hero h1 .serif.swap{animation:wordIn .5s cubic-bezier(.22,1,.36,1)}
 .hero h1 .num.swap{display:inline-block;animation:wordIn .5s cubic-bezier(.22,1,.36,1)}
@@ -195,7 +198,8 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
-<header class="hero wrap">
+<header class="hero">
+  <div class="hero-in">
   <div class="hero-lay">
     <div class="hero-copy">
       <span class="kick mono">Photography · DJ Ramirez · Monuments</span>
@@ -216,6 +220,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--rose);text
       </button>
       <div class="pv-status" id="pvStatus">P-001.JPG · 1 of 100 · 2.1 MB</div>
     </aside>
+  </div>
   </div>
 </header>
 <section class="folderzone" aria-label="The archive folder">

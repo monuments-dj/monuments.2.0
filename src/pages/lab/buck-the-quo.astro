@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
-import CaseCredits from '../../components/CaseCredits.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === /lab/buck-the-quo ===
 // Experiential case study for Buck the Quo, a social-change campaign for the J.A. and
@@ -53,11 +53,12 @@ const emmys = [
   { img: '/case-studies/buck-the-quo/emmy/emmy-silver.png', k: 'Silver' },
   { img: '/case-studies/buck-the-quo/emmy/emmy-bos.png', k: 'Best of Show' },
 ];
+// Crew data confirmed by DJ (2026-07-03).
 const credits = [
   { k: 'Client', v: 'Albertson Family Foundation' },
   { k: 'Agency', v: 'Drake Cooper' },
-  { k: 'Role', v: 'Director, Experiential' },
-  { k: 'Years', v: '2015 to 2018' },
+  { k: 'Shooter + editor', v: 'DJ Ramirez', select: true },
+  { k: 'Socials + field experiential', v: 'DJ Ramirez' },
 ];
 ---
 <Base title="Buck the Quo, the Lab">
@@ -78,8 +79,16 @@ const credits = [
       <div class="bq-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
 
-    <!-- CREDITS STRIP: role at a glance, close to the top -->
-    <CaseCredits items={credits} accent="#ec3a7d" />
+    <!-- CREDITS: the call sheet slip (CallSheet.astro) -->
+    <div class="bq-callsheet fade">
+      <CallSheet
+        code="MC-2021-03"
+        sub="Albertson Family Foundation · Buck the Quo · Experiential"
+        filed="MMXV-MMXVIII"
+        tone="light"
+        rows={credits}
+      />
+    </div>
 
     <!-- RESULTS FIRST: lead with the number -->
     <section class="bq-stats">
@@ -234,6 +243,9 @@ const credits = [
 
   /* ---------- shared section frame ---------- */
   .bq-brief, .bq-scenes, .bq-concept, .bq-system, .bq-role, .bq-awards, .bq-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+
+  /* ---------- CALL SHEET (credits slip) ---------- */
+  .bq-callsheet { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(36px, 5vw, 64px) var(--pad) 0; }
 
   /* ---------- PROBLEM ---------- */
   .bq-brief { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(36px, 6vw, 100px); align-items: start; }

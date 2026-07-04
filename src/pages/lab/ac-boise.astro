@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
-import CaseCredits from '../../components/CaseCredits.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === /lab/ac-boise ===
 // LIGHTER "Selected Work" case study. DJ directed the kit-reveal campaign for AC Boise,
@@ -31,13 +31,11 @@ const did = [
   { k: 'Partners',  v: 'Worked alongside Hummel on the kits and Against on the brand.' },
 ];
 
+// Crew data confirmed by DJ (2026-07-03): the client was Against (the brand),
+// not the club; DJ directed and edited.
 const credits = [
-  { k: 'Client', v: 'AC Boise' },
-  { k: 'League', v: 'USL League One' },
-  { k: 'Kit', v: 'Hummel' },
-  { k: 'Brand partner', v: 'Against' },
-  { k: 'Role', v: 'Director' },        // ⚠️ confirm exact role
-  { k: 'Format', v: 'Kit reveal · IG reel' },
+  { k: 'Client', v: 'Against' },
+  { k: 'Director + editor', v: 'DJ Ramirez', select: true },
 ];
 ---
 <Base title="AC Boise, the Lab">
@@ -58,8 +56,16 @@ const credits = [
       <div class="acb-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
 
-    <!-- CREDITS STRIP: role at a glance, close to the top -->
-    <CaseCredits items={credits} accent="#f26722" />
+    <!-- CREDITS: the call sheet slip (CallSheet.astro) -->
+    <div class="acb-callsheet fade">
+      <CallSheet
+        code="MC-2024-05"
+        sub="AC Boise · USL League One · Kit reveal"
+        filed="MMXXIV"
+        tone="dark"
+        rows={credits}
+      />
+    </div>
 
     <!-- THE REEL (poster, non-linking until a real URL lands) -->
     <section class="acb-film">
@@ -151,6 +157,9 @@ const credits = [
 
   /* ---------- shared section frame ---------- */
   .acb-film, .acb-gallery, .acb-role, .acb-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+
+  /* ---------- CALL SHEET (credits slip) ---------- */
+  .acb-callsheet { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(36px, 5vw, 64px) var(--pad) 0; }
 
   /* ---------- THE REEL ---------- */
   .acb-film-head { max-width: 640px; margin-bottom: clamp(34px, 4vw, 56px); }

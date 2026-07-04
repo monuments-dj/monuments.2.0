@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === BLUE CROSS REIMAGINED - /lab/blue-cross ===
 // The exoape-columbia editorial model (REFERENCES.md motion map) on DJ's real
@@ -100,6 +101,27 @@ const collage = [
         {wall.map((src) => (
           <figure class="bcx-brick fade"><img src={src} alt="Blue Cross of Idaho campaign still" loading="lazy" /></figure>
         ))}
+      </div>
+    </section>
+
+    <!-- CHAPTER 05 - CREDITS (cream, the call sheet slip; rows mirror /work/blue-cross) -->
+    <section class="bcx-ch bcx-ch-cream">
+      <div class="bcx-cols">
+        <p class="bcx-kicker fade">05 · Credits</p>
+        <div class="bcx-col fade">
+          <CallSheet
+            code="MC-2023-04"
+            sub="Blue Cross of Idaho · Real people · Stills campaign"
+            filed="MMXXIII"
+            tone="light"
+            rows={[
+              { k: 'Client', v: 'Blue Cross of Idaho' },
+              { k: 'Agency', v: 'OMEK' },
+              { k: 'Creative direction', v: 'DJ Ramirez', select: true },
+              { k: 'Format', v: 'Campaign stills · a week on location' },
+            ]}
+          />
+        </div>
       </div>
     </section>
 

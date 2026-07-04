@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === /lab/flashpoint - TEST PAGE ===
 // A light-forward lab case study for the Flashpoint rebrand (Adorama's photography-gear
@@ -22,11 +23,12 @@ const spanned = [
   'Revamped packaging that carries the new identity.',
   'Out-of-home campaigns with real presence on the street.',
 ];
+// Mirrors the call sheet on /work/flashpoint (the locked twin).
 const credits = [
   { k: 'Agency', v: 'Art of Visuals' },
   { k: 'Client', v: 'Adorama' },
   { k: 'Art Director', v: 'Dannie Nicholson' },
-  { k: 'Creative Direction', v: 'DJ Ramirez' },
+  { k: 'Creative Direction', v: 'DJ Ramirez', select: true },
 ];
 ---
 <Base title="Flashpoint, the Lab">
@@ -100,13 +102,15 @@ const credits = [
       </ol>
     </section>
 
-    <!-- CREDITS -->
-    <section class="fp-credits">
-      <dl class="fp-cred-list">
-        {credits.map((c) => (
-          <div class="fp-cred fade"><dt>{c.k}</dt><dd>{c.v}</dd></div>
-        ))}
-      </dl>
+    <!-- CREDITS: the call sheet slip (CallSheet.astro) -->
+    <section class="fp-credits fade">
+      <CallSheet
+        code="MC-2020-02"
+        sub="Adorama · Flashpoint · Full rebrand"
+        filed="MMXX"
+        tone="light"
+        rows={credits}
+      />
     </section>
 
     <!-- NEXT PROJECT - reusable hand-off: growing media cluster + scroll-to-next -->

@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
-import CaseCredits from '../../components/CaseCredits.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === /lab/adorama-music ===
 // SCAFFOLD case study for "Adorama Music: The Journey" (2020), a branded film for Adorama
@@ -39,13 +39,12 @@ const stats = [
   { n: '113K+', l: 'film views' },
   { n: '50K+', l: 'posts tagged #CreateNoMatterWhat' },
 ];
+// Crew data confirmed by DJ (2026-07-03): Adorama ran the full series; AOV had
+// one part of it, the launch of Adorama Music.
 const credits = [
   { k: 'Client', v: 'Adorama' },
-  { k: 'Studio', v: 'Art of Visuals' },
-  { k: 'Role', v: 'Creative Director' },
-  { k: 'Campaign', v: '#CreateNoMatterWhat' },
-  { k: 'Production', v: 'Rad Animal' },
-  { k: 'Year', v: '2020' },
+  { k: 'Agency', v: 'Art of Visuals' },
+  { k: 'Director + creative direction', v: 'DJ Ramirez', select: true },
 ];
 ---
 <Base title="Adorama Music, the Lab">
@@ -66,8 +65,16 @@ const credits = [
       <div class="am-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
 
-    <!-- CREDITS STRIP: role at a glance, close to the top -->
-    <CaseCredits items={credits} accent="#e8a23a" />
+    <!-- CREDITS: the call sheet slip (CallSheet.astro) -->
+    <div class="am-callsheet fade">
+      <CallSheet
+        code="MC-2022-07"
+        sub="Adorama · Adorama Music: The Journey · Brand film"
+        filed="MMXX"
+        tone="dark"
+        rows={credits}
+      />
+    </div>
 
     <!-- RESULTS FIRST: lead with the number -->
     <section class="am-results">
@@ -211,6 +218,9 @@ const credits = [
 
   /* ---------- shared section frame ---------- */
   .am-film, .am-bts, .am-scenes, .am-gallery, .am-results, .am-role, .am-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+
+  /* ---------- CALL SHEET (credits slip) ---------- */
+  .am-callsheet { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(36px, 5vw, 64px) var(--pad) 0; }
 
   /* ---------- THE FILM ---------- */
   .am-film-head { max-width: 640px; margin-bottom: clamp(34px, 4vw, 56px); }

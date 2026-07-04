@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
-import CaseCredits from '../../components/CaseCredits.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === /lab/art-of-visuals ===
 // FLAGSHIP case study. This is the BUSINESS-IMPACT story, not a single deliverable:
@@ -43,13 +43,12 @@ const did = [
   { k: 'Client Lead',    v: 'The point of contact brands trusted, which is what turned one project into the next.' },
 ];
 
+// Mirrors the call sheet on /work/art-of-visuals (the locked twin).
 const credits = [
-  { k: 'Company', v: 'Art of Visuals' },
-  { k: 'Role', v: 'Creative Director' },       // ⚠️ confirm exact title
-  { k: 'Clients', v: 'Sony · Xperia · Stansport' }, // ⚠️ expand with real roster
-  { k: 'Scope', v: 'Strategy · Creative · New business' },
-  { k: 'Outcome', v: '~4x agency revenue' },
-  { k: 'Years', v: '2019-2022' },              // ⚠️ confirm span
+  { k: 'Strategy', v: 'Shaped what the agency sold, then packaged it into an offer brands actually bought' },
+  { k: 'Creative direction', v: 'Owned the creative across the roster, first pitch to final delivery', select: true },
+  { k: 'New business', v: 'Turned the community and the reel into a pipeline: the growth engine behind the 4x' },
+  { k: 'Client lead', v: 'The point of contact brands trusted, which turned one project into the next' },
 ];
 ---
 <Base title="Art of Visuals, the Lab">
@@ -70,8 +69,16 @@ const credits = [
       <div class="aov-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
 
-    <!-- CREDITS STRIP: role at a glance, close to the top -->
-    <CaseCredits items={credits} accent="#3b7de8" />
+    <!-- CREDITS: the call sheet slip (CallSheet.astro) -->
+    <div class="aov-callsheet fade">
+      <CallSheet
+        code="MC-2024-01"
+        sub="Art of Visuals · The 4x era"
+        filed="MMXXI-MMXXIV"
+        tone="dark"
+        rows={credits}
+      />
+    </div>
 
     <!-- RESULTS (leads, per hiring-portfolio rule) -->
     <section class="aov-results">
@@ -188,6 +195,9 @@ const credits = [
 
   /* ---------- shared section frame ---------- */
   .aov-results, .aov-story, .aov-gallery, .aov-role, .aov-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+
+  /* ---------- CALL SHEET (credits slip) ---------- */
+  .aov-callsheet { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(36px, 5vw, 64px) var(--pad) 0; }
 
   /* ---------- RESULTS ---------- */
   .aov-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(18px, 2.5vw, 40px); margin: clamp(34px, 4vw, 56px) 0 0; border-top: 1px solid rgb(var(--fg-rgb) / 0.14); }

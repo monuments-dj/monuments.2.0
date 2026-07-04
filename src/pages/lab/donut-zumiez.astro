@@ -3,23 +3,23 @@ import Base from '../../layouts/Base.astro';
 import LabFx from '../../components/LabFx.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import NextProject from '../../components/NextProject.astro';
-import CaseCredits from '../../components/CaseCredits.astro';
+import CallSheet from '../../components/CallSheet.astro';
 
 // === /lab/donut-zumiez ===
-// LIGHTER "Selected Work" case study. In 2023 DJ directed the launch films + merch
-// campaign for a Donut x Zumiez collaboration (Donut = car-culture media brand;
+// LIGHTER "Selected Work" case study. In 2023 DJ shot and edited the launch films
+// for a Donut x Zumiez collaboration (Donut = car-culture media brand;
 // Zumiez = skate/streetwear retailer). Playful, streetwear, car-culture energy.
 // Cloned lean from adorama-music.astro: hero, film poster (non-linking), stills
 // gallery + lightbox, short role, credits, next-project. No multi-scene journey.
 //
-// ⚠️ COPY STATUS: needs DJ's specifics (which films, his exact role split, any
-// numbers). No verified hard numbers exist for this one - copy is premise + craft,
-// results-light, DRAFT. Do not invent views/sales/awards. Swap the film poster for a
-// real YouTube URL when DJ provides it (see TODO by the poster).
+// ⚠️ COPY STATUS: role CONFIRMED by DJ (2026-07-03): shooter + editor (not director);
+// copy aligned to that. Still needs: which poster matches which cut, any numbers.
+// No verified hard numbers exist for this one - copy is premise + craft,
+// results-light, DRAFT. Do not invent views/sales/awards.
 
 const G = '/case-studies/donut-zumiez/gallery';
 
-// The three cuts DJ directed for the drop (his uploads). Main = the launch film.
+// The three cuts DJ shot and edited for the drop (his uploads). Main = the launch film.
 // ⚠️ TODO(DJ): confirm which poster + caption matches which cut. Raw titles were
 // "DONUT X ZUMIEZ YT", "CROY DONUT COLLAB", "DONUT RMS".
 const filmMain = { poster: `${G}/yt-launch.jpg`, url: 'https://youtu.be/2eUYg_P5rfc', cap: 'Launch film' };
@@ -43,16 +43,17 @@ const gallery = [
 ];
 
 const did = [
-  { k: 'Direction', v: 'Directed the launch films: the tone, the shots, the cut.' },
-  { k: 'Concept',   v: 'Landed on car-culture-meets-skate as the through-line the drop could own.' },
-  { k: 'Campaign',  v: 'Tied the films to the merch so the whole thing read as one release.' },
+  { k: 'Camera',   v: 'Shot the launch films: the energy, the frames, the coverage.' },
+  { k: 'Edit',     v: 'Cut the films: the pace, the humor, the beats that land.' },
+  { k: 'Campaign', v: 'Tied the films to the merch so the whole thing read as one release.' },
 ];
 
+// Crew data confirmed by DJ (2026-07-03): shooter + editor on the launch films.
 const credits = [
-  { k: 'Brands', v: 'Donut · Zumiez' },
-  { k: 'Role', v: 'Director' },          // ⚠️ confirm exact role
-  { k: 'Scope', v: 'Launch films · Merch campaign' },
-  { k: 'Year', v: '2023' },
+  { k: 'Client', v: 'Donut Media' },
+  { k: 'Agency', v: 'Donut Media' },
+  { k: 'Shooter', v: 'DJ Ramirez', select: true },
+  { k: 'Editor', v: 'DJ Ramirez' },
 ];
 ---
 <Base title="Donut x Zumiez, the Lab">
@@ -68,13 +69,21 @@ const credits = [
         <p class="dz-eyebrow fade"><span class="dz-mark" aria-hidden="true">+</span>Selected work &middot; Launch films</p>
         <h1 class="dz-h1 split">Donut <em>&times;</em> Zumiez</h1>
         <p class="dz-tag fade">Car culture, cut for the skate shop.</p>
-        <p class="dz-meta fade">I directed the launch films for the Donut x Zumiez drop, a collaboration between a car-culture media brand and a streetwear retailer. The films and the merch shipped as one release, built to live natively in feeds.</p>
+        <p class="dz-meta fade">I shot and edited the launch films for the Donut x Zumiez drop, a collaboration between a car-culture media brand and a streetwear retailer. The films and the merch shipped as one release, built to live natively in feeds.</p>
       </div>
       <div class="dz-cue fade" data-cursor="Scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </header>
 
-    <!-- CREDITS STRIP: role at a glance, close to the top -->
-    <CaseCredits items={credits} accent="#ff5a3c" />
+    <!-- CREDITS: the call sheet slip (CallSheet.astro) -->
+    <div class="dz-callsheet fade">
+      <CallSheet
+        code="MC-2023-08"
+        sub="Donut Media × Zumiez · Launch films"
+        filed="MMXXIII"
+        tone="dark"
+        rows={credits}
+      />
+    </div>
 
     <!-- THE FILMS: the three cuts DJ directed, now linking to YouTube -->
     <section class="dz-film">
@@ -134,8 +143,8 @@ const credits = [
     <!-- THE ROLE -->
     <section class="dz-role">
       <p class="dz-kicker fade"><span class="dz-mark" aria-hidden="true">+</span>The role</p>
-      <h2 class="dz-role-h split">Directed the films, <em>owned the tone.</em></h2>
-      <p class="dz-role-body fade">A collab like this only works if it feels native to both worlds at once. My job was to find the tone that let a car brand and a skate retailer share the same frame, then direct films that earned a spot in the feed instead of interrupting it.</p>
+      <h2 class="dz-role-h split">Shot and cut the films, <em>owned the tone.</em></h2>
+      <p class="dz-role-body fade">A collab like this only works if it feels native to both worlds at once. My job was to find the tone that let a car brand and a skate retailer share the same frame, then shoot and cut films that earned a spot in the feed instead of interrupting it.</p>
       <ul class="dz-did">
         {did.map((d) => (
           <li class="fade"><span class="dz-did-k">{d.k}</span><span class="dz-did-v">{d.v}</span></li>
@@ -189,6 +198,9 @@ const credits = [
 
   /* ---------- shared section frame ---------- */
   .dz-film, .dz-merch, .dz-gallery, .dz-role, .dz-credits { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 160px) var(--pad); }
+
+  /* ---------- CALL SHEET (credits slip) ---------- */
+  .dz-callsheet { max-width: var(--wrap, 1300px); margin: 0 auto; padding: clamp(36px, 5vw, 64px) var(--pad) 0; }
 
   /* ---------- THE MERCH (product cards) ---------- */
   .dz-prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 1.8vw, 26px); }
