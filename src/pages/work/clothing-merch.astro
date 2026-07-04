@@ -4,7 +4,9 @@ import CallSheet from '../../components/CallSheet.astro';
 
 // === Clothing & Merch - faithful rebuild of monuments.cc/portfolio/clothing-merch ===
 // Real apparel designs pulled from the live site into /public/case-studies/clothing-merch.
-const g = Array.from({ length: 18 }, (_, i) => `/case-studies/clothing-merch/gallery/cm-${String(i + 1).padStart(2, '0')}.jpg`);
+const g = Array.from({ length: 26 }, (_, i) => `/case-studies/clothing-merch/gallery/cm-${String(i + 1).padStart(2, '0')}.jpg`);
+// cm-01..20: Creative Space apparel line. cm-21..23: cap detail + tee line sheets.
+// cm-24..26: DW drummers collection (tee, cap, tote).
 const credits = [
   { k: 'Client', v: 'Mixed' },
   { k: 'Creative Director', v: 'DJ Ramirez', select: true },
