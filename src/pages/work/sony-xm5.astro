@@ -1,6 +1,7 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
+import ScreenRoom from '../../components/ScreenRoom.astro';
 ---
 <!doctype html>
 <html lang="en">
@@ -268,7 +269,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
       <span class="mono"><b>Film 02</b> · Mr B Baby · the same arc on a wall</span>
       <span class="mono" style="color:#8f8d88">Click to play</span>
     </div>
-    <p class="fintro rv">The second creator is Michelle, better known as Mr B Baby. Her film takes the same arc to a mural wall. <a href="https://www.instagram.com/p/CjimA-tpjnc/" target="_blank" rel="noopener">See the finished mural ↗</a></p>
+    <p class="fintro rv">The second creator is Michelle, better known as Mr B Baby. Her film takes the same arc to a mural wall. <a href="https://www.instagram.com/p/CjimA-tpjnc/" data-screen data-screen-cap="Mr B Baby · the finished mural · Instagram" target="_blank" rel="noopener">See the finished mural ↗</a></p>
     <div class="poster16" data-film="1Rl5rX4iiQQ" data-title="Mr B Baby · Sony WH-1000XM5 campaign film">
       <img src="/case-studies/sony-xm5/gallery/yt-michelle.jpg" alt="Campaign film poster: Mr B Baby at work on her mural">
       <span class="play">Play · The film</span>
@@ -342,6 +343,8 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
         { k: 'Client', v: 'Sony Electronics' },
         { k: 'Creative direction', v: 'DJ Ramirez', select: true },
         { k: 'Casting + scripts', v: 'DJ Ramirez' },
+        { k: 'Production', v: 'MGX Creative' },
+        { k: 'Direction', v: 'DJ Ramirez + Daniel Malikyar' },
         { k: 'Agency', v: 'Art of Visuals' },
         { k: 'Talent 01', v: 'Gawx Art' },
         { k: 'Talent 02', v: 'Rudy Willingham' },
@@ -353,6 +356,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 </div><!--/over-->
 
 <div class="underfoot">
+<ScreenRoom />
 <NextFile
   href="/work/sony-flow-state"
   name="Sony Flow State"
