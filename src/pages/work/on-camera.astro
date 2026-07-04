@@ -65,6 +65,15 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* hero: type-led, the statement IS the poster */
 .hero{position:relative;min-height:92svh;display:flex;align-items:flex-end;padding:20vh 0 9vh;background:var(--ink);overflow:hidden}
+/* header loop: dim media layer on the ink, under a gradient, under the type. The 16:9
+   iframe is oversized to cover and centered; pointer-events off on the whole layer. */
+.hero-media{position:absolute;inset:0;opacity:.35;pointer-events:none}
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-media-video{position:absolute;inset:0;overflow:hidden;opacity:0;transition:opacity .9s ease}
+.hero-media-video.is-playing{opacity:1}
+.hero-media-video iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:177.78vh;height:100vh;min-width:100%;min-height:100%;border:0}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(22,21,20,.30),rgba(22,21,20,.62) 58%,rgba(22,21,20,.9));pointer-events:none}
+.hero>.wrap{position:relative;z-index:2}
 .hero .kck{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);line-height:1.9;opacity:0;animation:fade 1s .55s forwards}
 .hero .kck b{color:var(--spark);font-weight:400}
 .hero h1{font-weight:var(--dispw);font-size:clamp(64px,13.4vw,196px);line-height:.85;letter-spacing:-.035em;text-transform:uppercase;color:var(--paper);margin:18px 0 30px}
@@ -182,6 +191,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   *,*::before,*::after{animation:none!important;transition:none!important}
   .hero h1 .ln>span{transform:none}.hero .kck,.hero .intro,.hero .nfo{opacity:1}.rv{opacity:1;transform:none}
   .grain{animation:none}
+  .hero-media-video{display:none}
 }
 </style>
 </head>
@@ -198,6 +208,19 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
 <div class="over">
 <header class="hero">
+  <!-- Header loop: the featured tape (cued to DJ's entrance) as a DIM background layer
+       under the huge type. Poster + video live inside one .35-opacity container so the
+       dim treatment is identical before and after the video fades in; the video reveals
+       only once it's actually PLAYING (YT IFrame API state 1, no blind timers). -->
+  <div class="hero-media" aria-hidden="true">
+    <img src="/case-studies/on-camera/posters/nk-_UwGuRlE.jpg" alt="">
+    <div class="hero-media-video" data-hero-video>
+      <iframe id="ocHeaderVideo" title="On camera header loop"
+        src="https://www.youtube-nocookie.com/embed/nk-_UwGuRlE?autoplay=1&mute=1&loop=1&playlist=nk-_UwGuRlE&start=29&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
+        frameborder="0" allow="autoplay; encrypted-media; picture-in-picture"></iframe>
+    </div>
+  </div>
+  <div class="hero-grad" aria-hidden="true"></div>
   <div class="wrap" style="width:100%">
     <div class="kck"><b>\ Case file</b> · Hosting · Presenting · DJ Ramirez</div>
     <h1>
@@ -474,6 +497,44 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 })();
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
+
+// header loop: reveal only once it's actually PLAYING (poster still shows until then),
+// so the hero never flashes the black YouTube loading state. Event + short state-poll
+// backup, NO blind timer - if it never plays, the poster stays. Ported from waffle-me-up
+// (this exact mechanism fixed a prod-only black flash there). Reduced-motion keeps the poster.
+(function () {
+  var wrap = document.querySelector('[data-hero-video]');
+  if (!wrap) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var shown = false;
+  function reveal() { if (!shown) { shown = true; wrap.classList.add('is-playing'); } }
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+  window.onYouTubeIframeAPIReady = function () {
+    try {
+      var p = new YT.Player('ocHeaderVideo', {
+        events: {
+          onReady: function () {
+            // YouTube can auto-enable captions on muted autoplay - keep the hero clean
+            try { p.unloadModule('captions'); p.unloadModule('cc'); } catch (_) {}
+            try { p.playVideo(); } catch (_) {}
+          },
+          onStateChange: function (e) { if (e.data === 1) { try { p.unloadModule('captions'); p.unloadModule('cc'); } catch (_) {} reveal(); } },
+          // YT loads the captions module on its own schedule for muted autoplay -
+          // onApiChange fires exactly when it appears, so unload it right there
+          onApiChange: function () { try { p.unloadModule('captions'); p.unloadModule('cc'); } catch (_) {} }
+        }
+      });
+      var tries = 0;
+      var iv = setInterval(function () {
+        tries++;
+        try { if (p.getPlayerState && p.getPlayerState() === 1) reveal(); } catch (_) {}
+        if (shown || tries > 40) clearInterval(iv); // stop polling after ~12s (poster stays)
+      }, 300);
+    } catch (_) {}
+  };
+})();
 </script>
 <script is:inline src="/redesign/switcher.js" defer></script>
 </body>

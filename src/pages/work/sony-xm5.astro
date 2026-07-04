@@ -48,6 +48,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 /* hero: title in the campaign photograph, scrim keeps it readable on the bright wall */
 .hero{position:relative;height:100svh;overflow:hidden;background:var(--ink)}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) brightness(.66)}
+/* header loop: 16:9 iframe oversized to cover the hero, centered, chromeless. Sits above
+   the poster still, below the radial scrim (source order). ::after matches the poster's
+   brightness(.66) dim so the type keeps its contrast once the film is running. */
+.hero .vwrap{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .9s ease}
+.hero .vwrap.is-playing{opacity:1}
+.hero .vwrap iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:177.78vh;height:100vh;min-width:100%;min-height:100%;border:0}
+.hero .vwrap::after{content:'';position:absolute;inset:0;background:rgba(22,21,20,.34)}
 .hero .scrim{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 44%,rgba(22,21,20,.5),rgba(22,21,20,.14) 58%,rgba(22,21,20,.42))}
 .hero .t{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(44px,8.6vw,128px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase}
 .hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
@@ -151,6 +158,7 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   *,*::before,*::after{animation:none!important;transition:none!important}
   .hero .t .ln>span{transform:none}.hero .nfo,.hero .kck{opacity:1}.rv{opacity:1;transform:none}
   .grain{animation:none}.frames .fr{opacity:1;transform:none}
+  .hero .vwrap{display:none}
 }
 </style>
 </head>
@@ -168,6 +176,15 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 <div class="over">
 <header class="hero">
   <img src="/case-studies/sony-xm5/gallery/xm5-03.jpg" alt="Gawx Art putting on the Sony WH-1000XM5 in front of a wall of his artwork">
+  <!-- Header loop: the muted campaign film under the type. The xm5-03 still above is the
+       poster; the video fades in only once it's actually PLAYING (YT IFrame API state 1,
+       no blind timers), so the hero never flashes the black YouTube loading state. The
+       radial scrim below stays on top of the video. -->
+  <div class="vwrap" data-hero-video aria-hidden="true">
+    <iframe id="xm5HeaderVideo" title="Sony XM5 header loop"
+      src="https://www.youtube-nocookie.com/embed/yiTB54QWHO0?autoplay=1&mute=1&loop=1&playlist=yiTB54QWHO0&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
+      frameborder="0" allow="autoplay; encrypted-media; picture-in-picture"></iframe>
+  </div>
   <div class="scrim" aria-hidden="true"></div>
   <div class="t">
     <span class="ln"><span>Creativity starts</span></span>
@@ -382,6 +399,44 @@ clock();setInterval(clock,30000);
     poster.innerHTML='';
     poster.appendChild(f);
   });
+})();
+
+// header loop: reveal only once it's actually PLAYING (poster still shows until then),
+// so the hero never flashes the black YouTube loading state. Event + short state-poll
+// backup, NO blind timer - if it never plays, the poster stays. Ported from waffle-me-up
+// (this exact mechanism fixed a prod-only black flash there). Reduced-motion keeps the poster.
+(function () {
+  var wrap = document.querySelector('[data-hero-video]');
+  if (!wrap) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var shown = false;
+  function reveal() { if (!shown) { shown = true; wrap.classList.add('is-playing'); } }
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+  window.onYouTubeIframeAPIReady = function () {
+    try {
+      var p = new YT.Player('xm5HeaderVideo', {
+        events: {
+          onReady: function () {
+            // YouTube can auto-enable captions on muted autoplay - keep the hero clean
+            try { p.unloadModule('captions'); p.unloadModule('cc'); } catch (_) {}
+            try { p.playVideo(); } catch (_) {}
+          },
+          onStateChange: function (e) { if (e.data === 1) { try { p.unloadModule('captions'); p.unloadModule('cc'); } catch (_) {} reveal(); } },
+          // YT loads the captions module on its own schedule for muted autoplay -
+          // onApiChange fires exactly when it appears, so unload it right there
+          onApiChange: function () { try { p.unloadModule('captions'); p.unloadModule('cc'); } catch (_) {} }
+        }
+      });
+      var tries = 0;
+      var iv = setInterval(function () {
+        tries++;
+        try { if (p.getPlayerState && p.getPlayerState() === 1) reveal(); } catch (_) {}
+        if (shown || tries > 40) clearInterval(iv); // stop polling after ~12s (poster stays)
+      }, 300);
+    } catch (_) {}
+  };
 })();
 </script>
 <script is:inline src="/redesign/switcher.js" defer></script>

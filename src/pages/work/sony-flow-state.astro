@@ -8,9 +8,11 @@ const g = Array.from({ length: 15 }, (_, i) => `/case-studies/sony-flow-state/ga
 const credits = [
   { k: 'Client', v: 'Sony Audio' },
   { k: 'Agency', v: 'Art of Visuals' },
-  { k: 'Directors', v: 'Krizia Vega + DJ Ramirez' },
-  { k: 'Creative Director', v: 'DJ Ramirez', select: true },
+  { k: 'Director / Creative Director', v: 'DJ Ramirez', select: true },
+  { k: 'Co-director', v: 'Krizia Vega' },
+  { k: 'Production', v: 'BlackStar ENT' },
   { k: 'DP', v: 'Joachim Zunke' },
+  { k: 'Color', v: 'Arianna Shining Star' },
   { k: 'Stills', v: 'Claire LeJune' },
   { k: 'Deliverables', v: 'Videography · Photography · Amplification' },
 ];
@@ -21,6 +23,18 @@ const credits = [
     <!-- HERO (full-bleed image) -->
     <header class="bc-hero">
       <img class="bc-hero-img" src={g[1]} alt="Sony Flow State campaign" />
+      <!-- Header loop: the muted hero film under the type. The still above is the poster;
+           the video fades in only once it's actually PLAYING (YT IFrame API state 1, no
+           blind timers), so the hero never flashes the black YouTube loading state. The
+           bc-hero::after gradient scrim stays on top of the video. -->
+      <div class="bc-hero-video" data-hero-video aria-hidden="true">
+        <iframe
+          id="fsHeroVideo"
+          title="Flow State header loop"
+          src="https://www.youtube-nocookie.com/embed/CS5UXhe17O4?autoplay=1&mute=1&loop=1&playlist=CS5UXhe17O4&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
+          frameborder="0"
+          allow="autoplay; encrypted-media; picture-in-picture"></iframe>
+      </div>
       <div class="bc-hero-inner">
         <p class="bc-hero-eyebrow">Sony Audio · Creative Direction</p>
         <h1 class="bc-hero-title">Flow State</h1>
@@ -146,9 +160,62 @@ const credits = [
       }, { once: true });
     })();
   </script>
+
+  <script is:inline>
+    // Header loop: reveal only once it's actually PLAYING (poster still shows until then),
+    // so the hero never flashes the black YouTube loading state. Event + short state-poll
+    // backup, NO blind timer - if it never plays, the poster stays. Ported from waffle-me-up
+    // (this exact mechanism fixed a prod-only black flash there). Reduced-motion keeps the poster.
+    (function () {
+      var wrap = document.querySelector('[data-hero-video]');
+      if (!wrap) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var shown = false;
+      function reveal() { if (!shown) { shown = true; wrap.classList.add('is-playing'); } }
+      var tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+      window.onYouTubeIframeAPIReady = function () {
+        try {
+          var p = new YT.Player('fsHeroVideo', {
+            events: {
+              onReady: function () {
+                // YouTube can auto-enable captions on muted autoplay - keep the hero clean
+                try { p.unloadModule('captions'); p.unloadModule('cc'); } catch (_) {}
+                try { p.playVideo(); } catch (_) {}
+              },
+              onStateChange: function (e) { if (e.data === 1) { try { p.unloadModule('captions'); p.unloadModule('cc'); } catch (_) {} reveal(); } },
+              // YT loads the captions module on its own schedule for muted autoplay -
+              // onApiChange fires exactly when it appears, so unload it right there
+              onApiChange: function () { try { p.unloadModule('captions'); p.unloadModule('cc'); } catch (_) {} }
+            }
+          });
+          var tries = 0;
+          var iv = setInterval(function () {
+            tries++;
+            try { if (p.getPlayerState && p.getPlayerState() === 1) reveal(); } catch (_) {}
+            if (shown || tries > 40) clearInterval(iv); // stop polling after ~12s (poster stays)
+          }, 300);
+        } catch (_) {}
+      };
+    })();
+  </script>
 </Base>
 
 <style>
+  /* Header loop: full-bleed muted YouTube iframe over the poster still, under the
+     bc-hero::after scrim (source order handles the layering). 16:9 iframe is sized
+     larger than the hero and centered so it covers with no letterbox bars. */
+  .bc-hero-video { position: absolute; inset: 0; overflow: hidden; pointer-events: none; opacity: 0; transition: opacity 0.9s ease; }
+  .bc-hero-video.is-playing { opacity: 1; }
+  /* Extra top dim on the VIDEO layer only (poster look unchanged): the film has bright
+     lens-flare frames that wash out the header logo, so hold the top down while playing. */
+  .bc-hero-video::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,11,14,0.4), rgba(10,11,14,0) 30%); }
+  .bc-hero-video iframe {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 177.78vh; height: 100vh; min-width: 100%; min-height: 100%; border: 0;
+  }
+
   /* Results band: dark like .bc-quote so it reads as one system with the page. */
   .bc-impact { background: #0d0f14; color: var(--white); padding: clamp(52px, 7vw, 88px) var(--pad); }
   .bc-impact-in { max-width: var(--wrap); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
@@ -175,6 +242,8 @@ const credits = [
     .bc-callsheet { padding: 24px 24px 60px; }
   }
   @media (prefers-reduced-motion: reduce) {
+    /* honor reduced-motion: hide the loop, fall back to the poster image */
+    .bc-hero-video { display: none; }
     .bc-film-poster img, .bc-film-pill { transition: none; }
     .bc-film-poster:hover img { transform: none; }
   }
