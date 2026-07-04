@@ -19,10 +19,11 @@ spot; wired. Flow State (CS5UXhe17O4) + Xperia (PRO-I _RGvpwyYLTI) also wired w/
 numbers + real campaign copy (64304cd). NEW PAGES: /work/sony-xm5 (influencer activation,
 1.3M/118K/9%, self-hosted stills, NO artofvisuals links per DJ) + /work/on-camera (11 hosting
 tapes, cue-timestamped click-to-play, one-at-a-time). /work index now 17 projects.
-⚠️ CONFIRM W/ DJ: This Moment year (campaign is 2020/XM4, page chrome says 2023 + credits
-Malikyar/MGX from old site data); on-camera cue times trusted from DJ's links; Mr B Baby =
-Michelle captions inferred; ng6yrFTrcnU has no HD poster (frame grab would fix); MC-2022-05
-+ MC-2026-07 case codes invented to fit convention. AOV has more excavatable writeups
+✅ DJ CONFIRMED 2026-07-03: MGX = production company, DJ was CD on ALL Sony work (XM5 role
+upgraded to Creative Director; This Moment credits already correct). Mr B Baby = Michelle
+(captions right). ⚠️ STILL CONFIRM: This Moment YEAR (campaign 2020/XM4 vs page chrome 2023);
+on-camera cue times trusted from DJ's links; ng6yrFTrcnU has no HD poster (frame grab would
+fix); MC-2022-05 + MC-2026-07 case codes invented to fit convention. AOV has more excavatable writeups
 (XM4 gear highlight, XM5 blog, Xperia 1 IV launch, /case-studies hub) for future pages.
 ✅ 2026-07-03 (late): /work REBUILT per DJ: all 15 projects wired to real pages (12 dead hrefs
 fixed), GRID = default view, natural-aspect 3-col masonry cards w/ client logos + discipline +
