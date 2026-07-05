@@ -95,9 +95,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* hero: the flag photograph, title + campaign line in the frame */
 .hero{position:relative;height:82svh;min-height:600px;overflow:hidden;background:var(--ink)}
-.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) brightness(.62)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) brightness(0.5)}
 .hero .scrim{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 44%,rgba(22,21,20,.52),rgba(22,21,20,.16) 58%,rgba(22,21,20,.44))}
-.hero .t{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(48px,9.4vw,125px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase}
+.hero .t{z-index:72;position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(48px,9.4vw,125px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase}
 .hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
 .hero .t .spark{color:var(--spark)}
 .hero .t .ln{display:block;overflow:hidden}
@@ -107,9 +107,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero .t .tag>span{animation-delay:.26s}
 .hero .t .tag .em{color:var(--spark)}
 @keyframes rise{to{transform:translateY(0)}}
-.hero .nfo{position:absolute;right:var(--pad);bottom:11vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
+.hero .nfo{z-index:72;position:absolute;right:var(--pad);bottom:11vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
 .hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
-.hero .kck{position:absolute;left:var(--pad);bottom:11vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);opacity:0;animation:fade 1s .7s forwards;line-height:1.9}
+.hero .kck{z-index:72;position:absolute;left:var(--pad);bottom:11vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);opacity:0;animation:fade 1s .7s forwards;line-height:1.9}
 .hero .kck b{color:var(--spark);font-weight:400}
 @keyframes fade{to{opacity:1}}
 
@@ -256,7 +256,6 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 </style>
 </head>
 <body>
-<div class="grain" aria-hidden="true"></div>
 <div class="companion" aria-hidden="true">✳</div>
 
 <div class="corners">
