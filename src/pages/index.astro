@@ -121,7 +121,7 @@ h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400
 /* pinned horizontal reel (tinywins grammar) */
 .reel{height:760svh;position:relative;background:var(--ink);color:var(--paper)}
 .reel-pin{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:5vh}
-.reel-head{display:flex;justify-content:space-between;align-items:baseline;gap:30px;flex-wrap:wrap;width:100%}
+.reel-head{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;width:100%;text-align:center}
 .reel-head h2{font-weight:var(--dispw);font-size:clamp(28px,3.6vw,52px);letter-spacing:-.03em;text-transform:uppercase;color:var(--paper)}
 .reel-head h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;color:var(--spark);display:inline-block;min-width:4.2ch}
 .reel-head h2 .serif.swap{animation:wordIn .45s cubic-bezier(.22,1,.36,1)}
@@ -140,8 +140,9 @@ h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400
 .reel-card .rc-meta{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 6px}
 .reel-card .rc-meta .t{font-weight:var(--dispw2);font-size:clamp(18px,1.8vw,26px);letter-spacing:-.02em}
 .reel-card .rc-meta .mono{color:var(--dim);font-size:9.5px}
-.reel-foot{display:block;color:var(--spark);text-align:center;transition:color .3s}
+.reel-foot{display:block;color:rgba(245,243,239,.66);text-align:center;transition:color .3s}
 .reel-foot:hover{color:var(--paper)}
+.reel-foot .rf-lnk{color:var(--spark)}
 @media (max-width:900px),(prefers-reduced-motion:reduce){
   .reel{height:auto}
   .reel-pin{position:static;height:auto;padding:8vh 0}
@@ -385,7 +386,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
           <div class="rc-meta"><span class="t">Buck the Quo</span><span class="mono">MC-2021-03 · Film series · Emmy ✳</span></div>
         </a>
       </div>
-      <a class="wrap reel-foot mono" href="/work">Scroll to scrub · full archive on /work ↗</a>
+      <a class="wrap reel-foot mono" href="/work">Scroll to scrub · full archive on <span class="rf-lnk">/work</span> ↗</a>
     </div>
   </section>
 
@@ -412,9 +413,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/over-->
 <div class="underfoot">
 <div class="gwm" aria-hidden="true">M<span>✳</span>NUMENTS</div>
-<div class="banner" aria-hidden="true">
-  <div class="big"><span>Built to be remembered</span><i>Built to be remembered</i><span>Built to be remembered</span><i>Built to be remembered</i></div>
-</div>
 
 <footer>
   <div class="wrap row mono">
