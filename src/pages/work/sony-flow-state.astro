@@ -107,13 +107,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* results first: cobalt scoreboard under the hero */
 .statrow{background:var(--struct);color:var(--paper)}
-.statrow>.in{display:flex;justify-content:space-between;align-items:flex-end;gap:34px;flex-wrap:wrap;padding:18px 0 16px}
+.statrow>.in{display:flex;justify-content:space-between;align-items:flex-end;gap:34px;flex-wrap:wrap;padding:18px var(--pad) 16px}
 .stat b{display:block;font-weight:var(--dispw);font-size:clamp(26px,2.7vw,42px);letter-spacing:-.03em;line-height:.92}
 .stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);display:block;margin-top:8px}
 .stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);line-height:1.9;max-width:34ch}
 .stat .note b{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--paper);display:inline;letter-spacing:.08em}
 .rolerow{background:var(--ink);border-bottom:1px solid var(--lined)}
-.rolerow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rolerow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px var(--pad);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
 .rolerow b{color:var(--paper);font-weight:400}
 
 /* story on paper */
@@ -141,8 +141,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* full-bleed parallax break */
 .break{position:relative;height:52svh;overflow:hidden}
-.break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;will-change:transform}
-.break .cap{position:absolute;left:var(--pad);bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85);background:rgba(22,21,20,.5);padding:5px 10px}
+.break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;object-position:50% 50%;will-change:transform}
+.break .cap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.92);background:rgba(22,21,20,.42);padding:6px 12px;backdrop-filter:blur(2px)}
 
 /* gallery: contact-sheet frames, masonry columns for mixed portrait + landscape */
 .gal{padding:9vh 0}
@@ -188,9 +188,34 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   .grain{animation:none}.frames .fr{opacity:1;transform:none}
   .hero .vwrap{display:none}
 }
+
+/* mobile nav — CSS-only hamburger -> fullscreen menu */
+.navburger,.mnav{display:none}
+.instagram-media,.instagram-media iframe{max-width:100%!important}
+.instagram-media{min-width:0!important}
+@media (max-width:680px){
+  .corners .c2{display:none}
+  .corners .c1 b{font-size:23px}
+  .corners .c3,.corners .c4{display:none}
+  .hero .t,.hero h1{width:100%!important;font-size:clamp(32px,8.8vw,48px)!important;padding:0 16px}
+  .navburger{display:flex;position:fixed;top:19px;right:19px;z-index:81;flex-direction:column;justify-content:center;gap:5px;width:34px;height:34px;cursor:pointer;mix-blend-mode:difference}
+  .navburger span{display:block;height:2px;width:24px;background:#fff;border-radius:2px;transition:transform .3s cubic-bezier(.76,0,.24,1),opacity .2s}
+  #navtog:checked ~ .navburger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  #navtog:checked ~ .navburger span:nth-child(2){opacity:0}
+  #navtog:checked ~ .navburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mnav{display:flex;position:fixed;inset:0;z-index:80;background:var(--ink);flex-direction:column;justify-content:center;gap:2px;padding:0 var(--pad);transform:translateY(-100%);transition:transform .55s cubic-bezier(.76,0,.24,1)}
+  #navtog:checked ~ .mnav{transform:none}
+  .mnav a{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(34px,12vw,58px);line-height:1.05;text-transform:uppercase;letter-spacing:-.02em;color:var(--paper)}
+  .mnav a:active{color:var(--spark)}
+  .mnav .mnav-foot{margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+}
 </style>
 </head>
 <body>
+<input type="checkbox" id="navtog" class="navtog-in" hidden>
+<label for="navtog" class="navburger" aria-label="Menu"><span></span><span></span><span></span></label>
+<nav class="mnav" aria-label="Mobile menu"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/lab">Lab</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a><span class="mnav-foot">monuments.cc@gmail.com</span></nav>
+
 <div class="companion" aria-hidden="true">✳</div>
 
 <div class="corners">
@@ -359,7 +384,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 (function(){
   const hImg=document.querySelector('.hero>img'),hT=document.querySelector('.hero .t'),
         nfo=document.querySelector('.hero .nfo'),kck=document.querySelector('.hero .kck'),
-        brk=document.querySelector('.break img'),c=document.querySelector('.companion');
+        brk=document.querySelectorAll('.break img'),c=document.querySelector('.companion');
   if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
   let k=false;
   addEventListener('scroll',()=>{
@@ -373,8 +398,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
         if(nfo)nfo.style.transform=`translateY(${y*-.16}px)`;
         if(kck)kck.style.transform=`translateY(${y*-.06}px)`;
       }
-      const r=brk.parentElement.getBoundingClientRect();
-      if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;brk.style.transform=`translateY(${p*-56}px)`}
+      brk.forEach(b=>{const r=b.parentElement.getBoundingClientRect();if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;b.style.transform=`translateY(${p*-56}px)`}});
       if(c)c.style.transform=`translateY(${(Math.sin(y/420)*34).toFixed(1)}px) rotate(${(y*0.22).toFixed(1)}deg)`;
       k=false;
     });
