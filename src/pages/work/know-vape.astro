@@ -28,11 +28,18 @@ const episodes = [
 ];
 const hero = episodes[0]; // the film block plays the "Vapor" spot
 const G = '/case-studies/know-vape/gallery';
+const CAM = '/case-studies/know-vape/campaign';
+const GFX = '/case-studies/know-vape/gfx';
+const BTS = '/case-studies/know-vape/bts';
+const campaign = Array.from({ length: 12 }, (_, i) => `${CAM}/cam-${String(i + 1).padStart(2, '0')}.jpg`);
+const gfx = ['gfx-01', 'gfx-02', 'gfx-03'].map((n) => `${GFX}/${n}.jpg`);
+const bts = ['bts-01', 'bts-02', 'bts-03', 'bts-04', 'bts-05'].map((n) => `${BTS}/${n}.mp4`);
 // Crew data confirmed by DJ (2026-07-03).
 const credits = [
   { k: 'Client', v: 'Idaho Public Television' },
   { k: 'Production', v: 'Frame by Frame' },
-  { k: 'Director', v: 'DJ Ramirez', select: true },
+  { k: 'Director + Photography', v: 'DJ Ramirez', select: true },
+  { k: 'Brand design + motion GFX', v: 'Isabel Sarhad' },
 ];
 ---
 <!doctype html>
@@ -191,6 +198,45 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .award h2{font-weight:var(--dispw);font-size:clamp(34px,5.4vw,84px);letter-spacing:-.035em;line-height:.96;text-transform:uppercase;margin-top:16px;max-width:14ch}
 .award h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
 .award .note{margin-top:30px;max-width:58ch;font-size:clamp(17px,1.7vw,22px);line-height:1.55;color:rgba(22,21,20,.78)}
+
+/* campaign stills: masonry gallery on ink */
+.camsec{background:var(--ink);color:var(--paper);padding:11vh 0 10vh}
+.camsec .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:26px}
+.camsec .bar .mono b{color:var(--spark)}
+.camlead{max-width:60ch;margin-bottom:36px}
+.camlead h2{font-weight:var(--dispw);font-size:clamp(28px,3.4vw,48px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-bottom:16px}
+.camlead h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;color:var(--spark)}
+.camlead p{color:#c9c6c0;font-size:clamp(16px,1.5vw,19px);line-height:1.62}
+.camgal{columns:3;column-gap:14px}
+.camgal img{width:100%;height:auto;display:block;margin-bottom:14px;break-inside:avoid;filter:saturate(.98)}
+@media(max-width:900px){.camgal{columns:2}}
+@media(max-width:560px){.camgal{columns:1}}
+
+/* gfx: the campaign system built on my frames */
+.gfxsec{background:var(--paper);color:var(--ink);padding:11vh 0}
+.gfxsec .lead{max-width:56ch;margin-bottom:30px}
+.gfxsec .k{color:var(--red)}
+.gfxsec h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.04;text-transform:uppercase;margin:12px 0 14px}
+.gfxsec h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.gfxsec .lead p{color:#4c4a45;font-size:clamp(16px,1.5vw,19px);line-height:1.6}
+.gfxgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.gfxgrid figure{margin:0;overflow:hidden;background:#000;border:1px solid var(--line)}
+.gfxgrid img{width:100%;height:100%;object-fit:cover;display:block}
+.gfxgrid figure:first-child{grid-column:1 / -1;aspect-ratio:16/7}
+@media(max-width:700px){.gfxgrid{grid-template-columns:1fr}.gfxgrid figure:first-child{aspect-ratio:auto}}
+
+/* bts reel: silent scrolling film strip near the bottom */
+.btssec{background:var(--ink);color:var(--paper);padding:10vh 0 11vh;overflow:hidden}
+.btssec .bar{display:flex;justify-content:space-between;align-items:baseline;max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 18px}
+.btssec .bar .mono b{color:var(--spark)}
+.btsreel{overflow:hidden;width:100%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.btstrack{display:flex;gap:14px;width:max-content;animation:btsDrift 46s linear infinite;padding-left:14px}
+.btssec:hover .btstrack{animation-play-state:paused}
+.btstile{flex:0 0 auto;position:relative;background:#000}
+.btstile video{height:min(42vh,330px);width:auto;display:block;background:#000;filter:contrast(1.03) saturate(.95)}
+.btstile .tag{position:absolute;left:10px;bottom:10px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.9);background:rgba(22,21,20,.5);padding:3px 8px}
+@keyframes btsDrift{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.btstrack{animation:none}}
 
 /* credits: the call sheet slip (CallSheet.astro) */
 .credits{padding:10vh 0}
@@ -389,11 +435,58 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
 </section>
 
+<section class="camsec">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>The stills</b> · web, social + OOH</span>
+      <span class="mono" style="color:#8f8d88">Shot by DJ · 12 frames</span>
+    </div>
+    <div class="camlead rv">
+      <h2>I shot the campaign, <span class="serif">too.</span></h2>
+      <p>Directing the spots was only half of it. I also shot the campaign's stills, the frames that ran on the web, across social, and on billboards around Idaho. The brief moved away from fear and lectures toward something truer: real slices of teenage life in Idaho. Practices and portraits, friends and the quiet ordinary moments worth protecting. I photographed them like they mattered, because they do.</p>
+    </div>
+    <div class="camgal">
+      {campaign.map((src, i) => (
+        <img src={src} alt={`Know Vape campaign still, Idaho teen life, frame ${i + 1}`} loading="lazy" decoding="async" />
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="gfxsec">
+  <div class="wrap">
+    <div class="lead rv">
+      <span class="k mono">\ The system</span>
+      <h2>My frames, the campaign <span class="serif">system.</span></h2>
+      <p>The Know Vape identity dropped straight onto the photography: stat overlays, the wordmark lockup, the tagline. Brand design and motion graphics by Isabel Sarhad, built on the images I shot.</p>
+    </div>
+    <div class="gfxgrid">
+      {gfx.map((src, i) => (
+        <figure><img src={src} alt={`Know Vape campaign graphic ${i + 1}`} loading="lazy" decoding="async" /></figure>
+      ))}
+    </div>
+  </div>
+</section>
+
 <section class="award">
   <div class="wrap">
     <span class="k mono rv">\ Recognition</span>
     <h2 class="rv">Part of an <span class="serif">Emmy-winning</span> campaign.</h2>
     <p class="note rv">Know Vape won the 2024 Northwest Regional Emmy for Community Outreach (Small Market), from the NATAS Northwest chapter. The Myth vs Fact spots DJ directed were part of that campaign, public-media storytelling that met teens where they are and earned its reach.</p>
+  </div>
+</section>
+
+<section class="btssec">
+  <div class="bar">
+    <span class="mono"><b>Behind the scenes</b> · on set, sound off</span>
+    <span class="mono" style="color:#8f8d88">✳ the make</span>
+  </div>
+  <div class="btsreel">
+    <div class="btstrack">
+      {[...bts, ...bts].map((src) => (
+        <div class="btstile"><video src={src} autoplay muted loop playsinline preload="metadata"></video></div>
+      ))}
+    </div>
   </div>
 </section>
 
@@ -478,6 +571,15 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   let i=0;
   v.addEventListener('ended',function(){ i=(i+1)%spots.length; v.src=S+spots[i]+'.mp4'; v.load(); v.play().catch(function(){}); });
   v.play().catch(function(){});
+})();
+// bts reel: only play the silent clips while the strip is on screen
+(function(){
+  const sec=document.querySelector('.btssec'); if(!sec)return;
+  const vids=sec.querySelectorAll('video');
+  const io=new IntersectionObserver(function(es){es.forEach(function(e){
+    vids.forEach(function(v){ if(e.isIntersecting){ v.play().catch(function(){}); } else { v.pause(); } });
+  })},{threshold:.05});
+  io.observe(sec);
 })();
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
