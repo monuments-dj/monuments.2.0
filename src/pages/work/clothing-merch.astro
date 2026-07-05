@@ -97,10 +97,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .film{background:var(--ink);padding:9vh 0 10vh}
 .film .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:16px}
 .film .bar .mono b{color:var(--spark)}
-.reelgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.reelembed{background:#fff;border:1px solid var(--lined);overflow:hidden}
-.reelembed iframe{display:block;width:100%;height:min(78vh,720px);border:0}
-@media (max-width:700px){.reelgrid{grid-template-columns:1fr}.reelembed iframe{height:640px}}
+.reelgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.reelgrid .instagram-media{margin:0 auto!important}
+@media (max-width:700px){.reelgrid{grid-template-columns:1fr}}
 .posterreel{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:#000;cursor:pointer}
 .posterreel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.82);transition:transform .8s cubic-bezier(.22,1,.36,1)}
 .posterreel:hover img{transform:scale(1.03)}
@@ -245,8 +244,8 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
       <span class="mono" style="color:#8f8d88">Play them right here ✳</span>
     </div>
     <div class="reelgrid">
-      <div class="reelembed"><iframe src="https://www.instagram.com/reel/ClkAMQVpxa6/embed/" loading="lazy" scrolling="no" allowtransparency="true" title="Creative Space apparel reel on Instagram"></iframe></div>
-      <div class="reelembed"><iframe src="https://www.instagram.com/reel/Cl9hIJ-vS-b/embed/" loading="lazy" scrolling="no" allowtransparency="true" title="Creative Space drop reel on Instagram"></iframe></div>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/ClkAMQVpxa6/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,.5),0 1px 10px 0 rgba(0,0,0,.15);margin:0 auto;max-width:540px;min-width:326px;padding:0;width:100%"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Cl9hIJ-vS-b/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,.5),0 1px 10px 0 rgba(0,0,0,.15);margin:0 auto;max-width:540px;min-width:326px;padding:0;width:100%"></blockquote>
     </div>
   </div>
 </section>
@@ -417,6 +416,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
 </script>
+<script is:inline async src="https://www.instagram.com/embed.js"></script>
 <script is:inline src="/redesign/switcher.js" defer></script>
 </body>
 </html>
