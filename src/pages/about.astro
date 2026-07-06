@@ -73,8 +73,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .file{display:grid;grid-template-columns:.58fr 1.42fr;gap:64px;padding:11vh 0;align-items:start}
 .file .photo{background:#fff;border:1px solid var(--line);padding:10px 10px 34px;transform:rotate(-1.4deg);position:relative;box-shadow:0 24px 60px rgba(20,20,20,.12)}
 .file .photo img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:grayscale(.2) saturate(.9)}
+.file .photo video{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:grayscale(.22) saturate(.92);background:#111}
+.file .photo .lead-tag{position:absolute;top:18px;left:16px;z-index:2;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(20,20,20,.5);padding:3px 7px;pointer-events:none}
+.file .photo .lead-tag i{color:var(--red);font-style:normal}
 .file .photo .cap{position:absolute;left:12px;bottom:9px;font-family:var(--mono);font-size:10px;color:var(--dim)}
-.file .photo .stamp{position:absolute;top:16px;right:-14px;font-family:var(--mono);font-size:10px;color:var(--red);border:2px solid var(--red);border-radius:6px;padding:5px 10px;transform:rotate(6deg);background:var(--paper)}
+.file .photo .stamp{position:absolute;z-index:3;top:16px;right:-14px;font-family:var(--mono);font-size:10px;color:var(--red);border:2px solid var(--red);border-radius:6px;padding:5px 10px;transform:rotate(6deg);background:var(--paper)}
 .file h2{font-weight:var(--dispw);font-size:clamp(28px,3.4vw,48px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin:14px 0 22px}
 .file h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
 .file p{color:#4c4a45;max-width:58ch;margin-bottom:1.15em;font-size:18px}
@@ -283,8 +286,9 @@ footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:
 <section class="paper">
   <div class="wrap file">
     <div class="photo rv">
-      <span class="stamp">Approved</span>
-      <img src="/gallery/full/p-054.jpg" alt="DJ Ramirez">
+      <span class="stamp">Rolling</span>
+      <span class="lead-tag"><i>&#9654;</i> On set &middot; silent</span>
+      <video id="leadVid" muted playsinline poster="/about/lead/ld-01.jpg" aria-label="DJ directing on set, no sound"></video>
       <span class="cap">SUBJECT-001 · RAMIREZ, DJ · CREATIVE DIRECTOR</span>
     </div>
     <div class="rv">
@@ -576,6 +580,22 @@ clock();setInterval(clock,30000);
     vids.forEach(function(v){ if(e.isIntersecting){ v.play().catch(function(){}); } else { v.pause(); } });
   })},{threshold:.05});
   io.observe(sec);
+})();
+</script>
+<script is:inline>
+// "Directing is the job" viewer: cycle the muted on-set clips of DJ leading,
+// play only while the frame is on screen. No sound, ever.
+(function(){
+  var v=document.getElementById('leadVid'); if(!v) return;
+  var clips=['/about/lead/ld-01.mp4','/about/lead/ld-02.mp4','/about/lead/ld-03.mp4'];
+  var i=0; v.muted=true;
+  function load(k){ i=((k%clips.length)+clips.length)%clips.length; v.src=clips[i]; var p=v.play(); if(p&&p.catch)p.catch(function(){}); }
+  v.addEventListener('ended',function(){ load(i+1); });
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){
+    if(en.isIntersecting){ if(!v.getAttribute('src')){ load(0); } else { var p=v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { v.pause(); }
+  });},{threshold:.3});
+  io.observe(v);
 })();
 </script>
 </body>
