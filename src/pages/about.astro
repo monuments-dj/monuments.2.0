@@ -34,15 +34,18 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 .corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
 .corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
-.corners .c1{top:20px;left:22px;pointer-events:auto}
+.corners .c1{top:20px;left:38px;pointer-events:auto}
 .corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
 .corners .c1 i{font-style:normal;color:var(--spark);display:inline-block;animation:spin 7s linear infinite}
 .corners .c2{top:26px;right:22px;pointer-events:auto}
-.corners .c2 a{font-size:21px;letter-spacing:.06em}
+.corners .c2 a{font-size:15px;letter-spacing:.06em}
 .corners .c2 a{margin-left:22px}
 .corners .c3{bottom:20px;left:22px}
 .corners .c4{bottom:20px;right:22px}
 @keyframes spin{to{transform:rotate(360deg)}}
+.corners .c2 a{position:relative;padding-bottom:3px;transition:opacity .3s}
+.corners .c2 a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .42s cubic-bezier(.22,1,.36,1)}
+.corners .c2 a:hover::after{transform:scaleX(1);transform-origin:left}
 
 /* hero: type in the photograph */
 .hero{position:relative;height:100svh;overflow:hidden;background:var(--ink)}
