@@ -136,11 +136,19 @@ h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400
 .ticks i{width:2px;height:10px;background:#4a4844;transition:height .3s,background .3s}
 .ticks i.on{height:22px;background:var(--spark)}
 .reel-track{display:flex;gap:4vw;padding:0 var(--pad);will-change:transform}
-.reel-card{flex:0 0 auto;width:min(56vw,720px);background:#fff;border:1px solid var(--line);padding:9px 9px 0;box-shadow:0 30px 70px rgba(0,0,0,.4);color:var(--ink);will-change:transform}
-.reel-card .imgs{position:relative;display:block}
-.reel-card .imgs img{width:100%;height:52svh;object-fit:cover;display:block;filter:saturate(.9)}
+.reel-card{position:relative;flex:0 0 auto;width:min(48vw,580px);background:#fff;border:1px solid var(--line);padding:9px 9px 0;box-shadow:0 30px 70px rgba(0,0,0,.4);color:var(--ink);will-change:transform}
+.reel-card .imgs{position:relative;display:block;overflow:hidden}
+.reel-card .imgs img{width:100%;height:44svh;object-fit:cover;display:block;filter:saturate(.9)}
 .reel-card .imgs .b{position:absolute;inset:0;opacity:0;transition:opacity .5s cubic-bezier(.22,1,.36,1)}
 .reel-card:hover .imgs .b{opacity:1}
+.reel-card .imgs video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;transition:opacity .5s cubic-bezier(.22,1,.36,1)}
+.reel-card .imgs video.live{opacity:1}
+.rc-panel{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:26px 18px 15px;background:linear-gradient(to top,rgba(22,21,20,.94),rgba(22,21,20,.7) 66%,transparent);color:var(--paper);opacity:0;transform:translateY(12px);transition:opacity .42s cubic-bezier(.22,1,.36,1),transform .42s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.reel-card:hover .rc-panel{opacity:1;transform:none}
+.rc-panel .role{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--spark);margin-bottom:9px}
+.rc-panel ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.rc-panel li{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;text-transform:uppercase;color:rgba(245,243,239,.92);display:flex;gap:8px}
+.rc-panel li::before{content:'✳';color:var(--spark);flex:none}
 .rc-meta .t{display:flex;align-items:center;gap:10px}
 .rc-meta .lg{height:20px;width:auto;max-width:92px;object-fit:contain;filter:brightness(0);opacity:.85}
 .reel-card .rc-meta{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 6px}
@@ -373,39 +381,39 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <div class="ticks" id="ticks" aria-hidden="true"></div>
       </div>
       <div class="reel-track" id="reelTrack">
-        <a class="reel-card" href="/work/art-of-visuals" data-word="bigger.">
+        <a class="reel-card" href="/work/art-of-visuals" data-role="Creative Director" data-stats="4x agency revenue|2M+ audience scaled|Sony · Xperia roster" data-word="bigger.">
           <span class="imgs"><img class="a" src="/case-studies/art-of-visuals/gallery/xm3-bts.jpg" alt="Art of Visuals" loading="lazy"><img class="b" src="/case-studies/art-of-visuals/gallery/podcast-cover.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t"><img class="lg" src="/logos/art-of-visuals.png" alt="">Art of Visuals</span><span class="mono">MC-2024-01 · Brand campaign · 4x</span></div>
         </a>
-        <a class="reel-card" href="/work/sony-this-moment" data-word="felt.">
+        <a class="reel-card" href="/work/sony-this-moment" data-role="Creative Direction" data-stats="Sony Audio campaign|Film + stills|with Art of Visuals" data-snip="/snips/sony-this-moment.mp4" data-word="felt.">
           <span class="imgs"><img class="a" src="/case-studies/sony-this-moment/gallery/tm-05.jpg" alt="Sony · This Moment" loading="lazy"><img class="b" src="/case-studies/sony-this-moment/gallery/tm-04.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t"><img class="lg" src="/logos/sony.png" alt="">Sony · This Moment</span><span class="mono">MC-2023-06 · Campaign film + stills</span></div>
         </a>
-        <a class="reel-card" href="/work/blue-cross" data-word="human.">
+        <a class="reel-card" href="/work/blue-cross" data-role="Creative Direction" data-stats="Real people, real Idaho|Documentary campaign|with OMEK" data-word="human.">
           <span class="imgs"><img class="a" src="/case-studies/blue-cross/bc-2.jpg" alt="Blue Cross of Idaho" loading="lazy"><img class="b" src="/case-studies/blue-cross/gallery/bci-09.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t"><img class="lg" src="/logos/blue-cross.png" alt="">Blue Cross of Idaho</span><span class="mono">MC-2023-04 · Documentary campaign</span></div>
         </a>
-        <a class="reel-card" href="/work/donut-zumiez" data-word="fast.">
+        <a class="reel-card" href="/work/donut-zumiez" data-role="Creative Direction" data-stats="Donut × Zumiez collab|Retail + merch|Film + stills" data-snip="/snips/donut-zumiez.mp4" data-word="fast.">
           <span class="imgs"><img class="a" src="/case-studies/donut-zumiez/gallery/film-01.jpg" alt="Donut × Zumiez" loading="lazy"><img class="b" src="/case-studies/donut-zumiez/gallery/merch.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t"><img class="lg" src="/logos/donut-media.svg" alt="">Donut × Zumiez</span><span class="mono">MC-2023-08 · Retail collab</span></div>
         </a>
-        <a class="reel-card" href="/work/turnstile" data-word="heard.">
+        <a class="reel-card" href="/work/turnstile" data-role="Creative Direction" data-stats="Full brand system|Product launch|Naming to packaging" data-word="heard.">
           <span class="imgs"><img class="a" src="/case-studies/turnstile/products/prod-01.jpg" alt="Turnstile Audio" loading="lazy"><img class="b" src="/case-studies/turnstile/bts/bts-02.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t"><img class="lg" src="/case-studies/turnstile/logo.png" alt="">Turnstile Audio</span><span class="mono">MC-2023-02 · Brand + product launch</span></div>
         </a>
-        <a class="reel-card" href="/work/dw-drums" data-word="played.">
+        <a class="reel-card" href="/work/dw-drums" data-role="Director" data-stats="Brand film|Drummer-tested" data-word="played.">
           <span class="imgs"><img class="a" src="/case-studies/dw-drums/gallery/face-off.jpg" alt="DW Drums" loading="lazy"><img class="b" src="/case-studies/dw-drums/gallery/spread-10.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t"><img class="lg" src="/logos/dw-drums.png" alt="">DW Drums</span><span class="mono">MC-2022-04 · Brand film</span></div>
         </a>
-        <a class="reel-card" href="/work/ac-boise" data-word="worn.">
+        <a class="reel-card" href="/work/ac-boise" data-role="Experiential" data-stats="Kit reveal activation|Athletic Club Boise" data-word="worn.">
           <span class="imgs"><img class="a" src="/case-studies/ac-boise/gallery/home-01.jpg" alt="AC Boise" loading="lazy"><img class="b" src="/case-studies/ac-boise/gallery/home-02.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t"><img class="lg" src="/case-studies/ac-boise/gallery/logo.png" alt="">AC Boise</span><span class="mono">MC-2024-05 · Kit reveal · Experiential</span></div>
         </a>
-        <a class="reel-card" href="/work/adorama-music" data-word="loud.">
+        <a class="reel-card" href="/work/adorama-music" data-role="Director + Creative Direction" data-stats="160M+ impressions|3.4M+ engagements|Shorty Awards finalist" data-snip="/snips/adorama-music.mp4" data-word="loud.">
           <span class="imgs"><img class="a" src="/case-studies/adorama-music/gallery/am-01.jpg" alt="Adorama Music" loading="lazy"><img class="b" src="/case-studies/adorama-music/gallery/am-18.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t"><img class="lg" src="/logos/adorama.png" alt="">Adorama Music</span><span class="mono">MC-2022-07 · Content series</span></div>
         </a>
-        <a class="reel-card" href="/work/buck-the-quo" data-word="remembered.">
+        <a class="reel-card" href="/work/buck-the-quo" data-role="Shooter + field experiential" data-stats="18,000+ conversations|Emmy-winning campaign|Statewide activation" data-word="remembered.">
           <span class="imgs"><img class="a" src="/case-studies/buck-the-quo/gallery/container-front.jpg" alt="Buck the Quo" loading="lazy"><img class="b" src="/case-studies/buck-the-quo/gallery/container-coaster.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t">Buck the Quo</span><span class="mono">MC-2021-03 · Film series · Emmy ✳</span></div>
         </a>
@@ -481,10 +489,11 @@ const TILES=[
   `<div class="tile"><img src="/gallery/thumb/p-067.jpg" alt=""></div>`,
   `<div class="tile ink stat"><b>4x</b><span>revenue growth</span></div>`,
   `<div class="tile"><img src="/gallery/thumb/p-040.jpg" alt=""></div>`,
-  `<div class="tile ros band">Less agency.<br>More band.</div>`,
+  `<div class="tile ros band">Less agency.<br>More rock &amp; roll.</div>`,
   `<div class="tile"><img src="/gallery/thumb/p-021.jpg" alt=""></div>`,
   `<div class="tile cob">✳</div>`,
   `<div class="tile"><img src="/gallery/thumb/p-069.jpg" alt=""></div>`,
+  `<div class="tile ros band">Every great story<br>is a human story.</div>`,
   `<div class="tile blk">m</div>`,
   `<div class="tile"><img src="/gallery/thumb/p-090.jpg" alt=""></div>`,
 ];
@@ -626,6 +635,27 @@ clock();setInterval(clock,30000);
   els.forEach(el=>io.observe(el));
 })();
 
+// reel cards: hover reveals the achievements panel + plays the case snippet (muted)
+(function(){
+  document.querySelectorAll('.reel-card').forEach(function(card){
+    var imgs=card.querySelector('.imgs'); if(!imgs) return;
+    var role=card.dataset.role, stats=(card.dataset.stats||'').split('|').filter(Boolean);
+    if(role||stats.length){
+      var panel=document.createElement('div'); panel.className='rc-panel';
+      panel.innerHTML=(role?'<span class="role">'+role+'</span>':'')+(stats.length?'<ul>'+stats.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>':'');
+      imgs.appendChild(panel);
+    }
+    var snip=card.dataset.snip;
+    if(snip){
+      card.addEventListener('mouseenter',function(){
+        if(card.querySelector('.imgs video')) return;
+        var v=document.createElement('video'); v.src=snip; v.muted=true; v.loop=true; v.playsInline=true;
+        v.setAttribute('playsinline',''); v.setAttribute('aria-hidden','true'); v.preload='metadata';
+        imgs.appendChild(v); v.play().then(function(){v.classList.add('live');}).catch(function(){});
+      });
+    }
+  });
+})();
 
 // pinned reel scrub (tinywins grammar)
 (function(){
