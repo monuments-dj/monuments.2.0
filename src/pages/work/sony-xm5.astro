@@ -191,6 +191,11 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
   .mnav a:active{color:var(--spark)}
   .mnav .mnav-foot{margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
 }
+
+/* footer dock: the floating descriptor + LA clock settle into the footer at page end */
+.foot-dock{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 18px}
+.foot-dock .fd-clock{color:var(--dim)}
+body.at-foot .corners .c3,body.at-foot .corners .c4{opacity:0;transition:opacity .5s ease}
 </style>
 </head>
 <body>
@@ -511,6 +516,23 @@ clock();setInterval(clock,30000);
       }, 300);
     } catch (_) {}
   };
+})();
+</script>
+<script is:inline>
+// footer dock: mirror the corner descriptor + LA clock into the footer, and fade the
+// floating pair once the visitor is truly at the bottom, so the page-end reads intentional.
+(function(){
+  var c3=document.querySelector('.corners .c3'),foot=document.querySelector('footer');
+  if(!foot||!c3)return;
+  var dock=document.createElement('div');dock.className='foot-dock';
+  var d=document.createElement('span');d.className='fd-desc';d.textContent=c3.textContent.trim();
+  var k=document.createElement('span');k.className='fd-clock';
+  dock.appendChild(d);dock.appendChild(k);foot.insertBefore(dock,foot.firstChild);
+  function tick(){var t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});k.textContent='LA '+t;}
+  tick();setInterval(tick,30000);
+  function atBottom(){return window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-4;}
+  function upd(){document.body.classList.toggle('at-foot',atBottom());}
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd,{passive:true});setTimeout(upd,400);
 })();
 </script>
 </body>
