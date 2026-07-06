@@ -24,3 +24,5 @@ tools/snaps/
 /tools/reel3.mjs
 /tools/leadsnap.mjs
 /tools/footsnap.mjs
+/tools/igdiff.mjs
+/tools/os9full.mjs
