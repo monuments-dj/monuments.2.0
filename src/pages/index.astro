@@ -208,10 +208,13 @@ a.bt-item:hover .bt-logo{filter:none!important;opacity:1}
 .banner .big i{font-style:normal;color:transparent;-webkit-text-stroke:1.5px var(--paper)}
 
 .gwm{background:var(--ink);color:var(--paper);font-weight:var(--dispw);font-size:15.5vw;letter-spacing:-.04em;line-height:.62;text-align:center;overflow:hidden;padding-top:2vw}
-.gwm span{color:var(--spark)}
+.gwm span{color:var(--spark);display:inline-block;transform-origin:50% 54%}
+body.at-foot .gwm span{animation:sparkRelease 1.2s cubic-bezier(.12,.9,.25,1)}
+@keyframes sparkRelease{from{transform:rotate(0)}to{transform:rotate(720deg)}}
+@media (prefers-reduced-motion:reduce){body.at-foot .gwm span{animation:none}}
 footer{background:var(--ink);border-top:1px solid var(--lined);padding:30px 0}
 footer .row{display:flex;justify-content:space-between;align-items:center;color:var(--dim);flex-wrap:wrap;gap:12px}
-footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);text-transform:lowercase}
+footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--dim);text-transform:none}
 
 
 /* film grain: the texture layer */
@@ -592,6 +595,12 @@ clock();setInterval(clock,30000);
   function size(){ if(matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)').matches){over.style.marginBottom='0px';return}
     over.style.marginBottom=uf.offsetHeight+'px'; }
   size();addEventListener('resize',size);setTimeout(size,600);
+})();
+// at-foot: the wordmark spark does a pressure-release spin once you reach the bottom
+(function(){
+  function atBottom(){return window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-4;}
+  function upd(){document.body.classList.toggle('at-foot',atBottom());}
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd,{passive:true});setTimeout(upd,500);
 })();
 // spark companion: drifts + rotates with scroll
 (function(){
