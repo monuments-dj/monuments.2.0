@@ -46,29 +46,23 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
 @media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
 
-/* hero: statement on paper */
-.hero{position:relative;min-height:78svh;display:flex;align-items:flex-end;padding:14vh 0 7vh;border-bottom:2px solid var(--ink);overflow:hidden}
-.hero .kick{color:var(--red)}
-.hero h1{font-weight:var(--dispw);font-size:clamp(56px,10.4vw,152px);line-height:.88;letter-spacing:-.035em;text-transform:uppercase;margin-top:16px}
+/* hero: video header (the reel, trimmed), shorter so the work peeks below */
+.hero{position:relative;min-height:58svh;display:flex;align-items:flex-end;padding:16vh 0 6vh;overflow:hidden;background:var(--ink);color:var(--paper)}
+.hero-vid{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;filter:brightness(.52) contrast(1.04) saturate(.94)}
+.hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(22,21,20,.42),rgba(22,21,20,.18) 42%,rgba(22,21,20,.82))}
+.hero .wrap{position:relative;z-index:2}
+.hero .kick{color:var(--spark)}
+.hero h1{font-weight:var(--dispw);font-size:clamp(52px,9vw,132px);line-height:.88;letter-spacing:-.035em;text-transform:uppercase;margin-top:14px;color:var(--paper)}
 .hero h1 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
 .hero h1 .ln{display:block;overflow:hidden}
 .hero h1 .ln>span{display:block;transform:translateY(112%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
 .hero h1 .ln:nth-child(2)>span{animation-delay:.12s}
 @keyframes rise{to{transform:translateY(0)}}
-.hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-top:5vh;width:100%}
-.hero .sub p{max-width:44ch;color:#4c4a45}
-.hero .count{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88;text-align:right;line-height:2}
-.hero .count b{color:var(--ink);font-weight:400}
-/* hero contact-sheet spill: the archive leaking through the paper */
-.hero .wrap{position:relative;z-index:2}
-.hero .spill{position:absolute;inset:0;z-index:0;pointer-events:none}
-.hero .spill .frm{position:absolute;left:var(--l);top:var(--t);width:var(--w);background:#fff;padding:6px 6px 20px;box-shadow:0 14px 34px rgba(20,20,20,.13);opacity:.5;transform:rotate(var(--r));will-change:transform}
-.hero .spill .frm img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(.4) saturate(.85) contrast(.96)}
-.hero .spill::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(245,243,239,0) 36%,rgba(245,243,239,.5) 66%,rgba(245,243,239,.85) 100%)}
-@media (max-width:900px){
-  .hero .spill .frm{width:calc(var(--w)*.6)}
-  .hero .spill .frm:nth-child(n+6){display:none}
-}
+.hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-top:4vh;width:100%}
+.hero .sub p{max-width:44ch;color:#c9c6c0}
+.hero .count{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:rgba(245,243,239,.58);text-align:right;line-height:2}
+.hero .count b{color:var(--paper);font-weight:400}
+@media (prefers-reduced-motion:reduce){.hero-vid{display:none}}
 
 /* stat band */
 .statrow{background:var(--struct)}
@@ -213,7 +207,10 @@ footer .blk{font-family:'Pirata One',serif;font-size:26px;color:var(--spark);tex
 
 <div class="over">
 <header class="hero">
-  <div class="spill" id="spill" aria-hidden="true"></div>
+  <video class="hero-vid" autoplay muted loop playsinline preload="auto" poster="/reel/work-reel-poster.jpg" aria-hidden="true">
+    <source src="/reel/work-reel.mp4" type="video/mp4">
+  </video>
+  <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <span class="kick mono">Work · DJ Ramirez · Monuments</span>
     <h1>
