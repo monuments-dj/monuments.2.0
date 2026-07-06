@@ -18,3 +18,4 @@ npm-debug.log*
 tools/snaps/
 /tools/reel.mjs
 /tools/reel3.mjs
+/tools/igsnap.mjs
