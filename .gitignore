@@ -19,3 +19,6 @@ tools/snaps/
 /tools/reel.mjs
 /tools/reel3.mjs
 /tools/igsnap.mjs
+/tools/os9snap.mjs
+/tools/os9check.mjs
+/tools/reel3.mjs
