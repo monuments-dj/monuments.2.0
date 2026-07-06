@@ -120,8 +120,8 @@ body.gridview .arch{padding-bottom:0}
 /* video preview cards: fixed 16:9 media area, iframe fades in over the poster */
 .gcard.vcard .iw{position:relative;aspect-ratio:16/9}
 .gcard.vcard img.cv{position:absolute;inset:0;height:100%;object-fit:cover}
-.gcard.vcard iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;opacity:0;transition:opacity .5s ease}
-.gcard.vcard iframe.live{opacity:1}
+.gcard.vcard iframe,.gcard.vcard video{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;pointer-events:none;opacity:0;transition:opacity .5s ease}
+.gcard.vcard iframe.live,.gcard.vcard video.live{opacity:1}
 @media (max-width:900px){#grid{columns:2}}
 @media (max-width:560px){#grid{columns:1}}
 
@@ -295,13 +295,13 @@ body.at-foot .corners .c3,body.at-foot .corners .c4{opacity:0;transition:opacity
     <a class="rowp litrow" href="/work/art-of-visuals" data-img="/case-studies/art-of-visuals/gallery/xm3-bts.jpg" data-cap="MC-2024-01 · GREW THE AGENCY 4X" data-disc="cd,campaign,oncam" data-logo="/logos/art-of-visuals.png">
       <span class="id">MC-2024-01 ✳</span><span class="t">Art of <span class="serif">Visuals</span></span><span class="fmt"><i>\</i> Brand campaign <b class="mx">4x</b></span><span class="yr">2024</span>
     </a>
-    <a class="rowp litrow" href="/work/sony-this-moment" data-img="/case-studies/sony-this-moment/gallery/tm-05.jpg" data-video="KIi8cBOlU50" data-cap="MC-2023-06 · SONY AUDIO" data-disc="cd,photo,campaign" data-logo="/logos/sony.png">
+    <a class="rowp litrow" href="/work/sony-this-moment" data-snip="/snips/sony-this-moment.mp4" data-img="/case-studies/sony-this-moment/gallery/tm-05.jpg" data-video="KIi8cBOlU50" data-cap="MC-2023-06 · SONY AUDIO" data-disc="cd,photo,campaign" data-logo="/logos/sony.png">
       <span class="id">MC-2023-06 ✳</span><span class="t">Sony · This <span class="serif">Moment</span></span><span class="fmt"><i>\</i> Campaign film + stills</span><span class="yr">2023</span>
     </a>
     <a class="rowp litrow" href="/work/blue-cross" data-img="/case-studies/blue-cross/bc-2.jpg" data-cap="MC-2023-04 · REAL PEOPLE, REAL STAKES" data-disc="cd,photo,campaign,commercial" data-logo="/logos/blue-cross.png">
       <span class="id">MC-2023-04 ✳</span><span class="t">Blue Cross <span class="serif">of Idaho</span></span><span class="fmt"><i>\</i> Documentary campaign <b class="mx">1 week · 23 frames</b></span><span class="yr">2023</span>
     </a>
-    <a class="rowp litrow" href="/work/adorama-music" data-img="/case-studies/adorama-music/gallery/am-01.jpg" data-video="l1RBdpQ8vi8" data-cap="MC-2022-07 · 160M+ IMPRESSIONS" data-disc="cd,commercial,campaign" data-logo="/logos/adorama.png">
+    <a class="rowp litrow" href="/work/adorama-music" data-snip="/snips/adorama-music.mp4" data-img="/case-studies/adorama-music/gallery/am-01.jpg" data-video="l1RBdpQ8vi8" data-cap="MC-2022-07 · 160M+ IMPRESSIONS" data-disc="cd,commercial,campaign" data-logo="/logos/adorama.png">
       <span class="id">MC-2022-07 ✳</span><span class="t">Adorama <span class="serif">Music</span></span><span class="fmt"><i>\</i> Content series <b class="mx">160M+</b></span><span class="yr">2022</span>
     </a>
   </div>
@@ -311,23 +311,23 @@ body.at-foot .corners .c3,body.at-foot .corners .c4{opacity:0;transition:opacity
     <a class="rowp litrow" href="/work/buck-the-quo" data-img="/case-studies/buck-the-quo/gallery/container-front.jpg" data-cap="MC-2021-03 · EMMY-WINNING SERIES" data-disc="commercial,cd,oncam">
       <span class="id">MC-2021-03 ✳</span><span class="t">Buck the <span class="serif">Quo</span></span><span class="fmt"><i>\</i> Film series · Emmy</span><span class="yr">2021</span>
     </a>
-    <a class="rowp litrow" href="/work/sony-xperia-summer" data-img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" data-video="_RGvpwyYLTI" data-cap="MC-2022-02 · SONY XPERIA" data-disc="campaign,photo,commercial" data-logo="/logos/sony.png">
+    <a class="rowp litrow" href="/work/sony-xperia-summer" data-snip="/snips/sony-xperia-summer.mp4" data-img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" data-video="_RGvpwyYLTI" data-cap="MC-2022-02 · SONY XPERIA" data-disc="campaign,photo,commercial" data-logo="/logos/sony.png">
       <span class="id">MC-2022-02</span><span class="t">Xperia <span class="serif">Summer</span></span><span class="fmt"><i>\</i> Product campaign</span><span class="yr">2022</span>
     </a>
-    <a class="rowp litrow" href="/work/donut-zumiez" data-img="/case-studies/donut-zumiez/gallery/film-01.jpg" data-video="2eUYg_P5rfc" data-cap="MC-2023-08 · DONUT X ZUMIEZ" data-disc="campaign,experiential,cd" data-logo="/logos/donut-media.svg">
+    <a class="rowp litrow" href="/work/donut-zumiez" data-snip="/snips/donut-zumiez.mp4" data-img="/case-studies/donut-zumiez/gallery/film-01.jpg" data-video="2eUYg_P5rfc" data-cap="MC-2023-08 · DONUT X ZUMIEZ" data-disc="campaign,experiential,cd" data-logo="/logos/donut-media.svg">
       <span class="id">MC-2023-08</span><span class="t">Donut × <span class="serif">Zumiez</span></span><span class="fmt"><i>\</i> Retail collab</span><span class="yr">2023</span>
     </a>
     <a class="rowp litrow" href="/work/ac-boise" data-img="/case-studies/ac-boise/gallery/home-01.jpg" data-cap="MC-2024-05 · KIT REVEAL" data-disc="experiential,campaign,cd" data-logo="/case-studies/ac-boise/gallery/logo.png">
       <span class="id">MC-2024-05</span><span class="t">AC <span class="serif">Boise</span></span><span class="fmt"><i>\</i> Kit reveal · Experiential</span><span class="yr">2024</span>
     </a>
-    <a class="rowp litrow" href="/work/sony-xm5" data-img="/case-studies/sony-xm5/gallery/xm5-03.jpg" data-video="yiTB54QWHO0" data-cap="MC-2022-05 · CREATIVITY STARTS WITH INSPIRATION" data-disc="campaign,cd" data-logo="/logos/sony.png">
+    <a class="rowp litrow" href="/work/sony-xm5" data-snip="/snips/sony-xm5.mp4" data-img="/case-studies/sony-xm5/gallery/xm5-03.jpg" data-video="yiTB54QWHO0" data-cap="MC-2022-05 · CREATIVITY STARTS WITH INSPIRATION" data-disc="campaign,cd" data-logo="/logos/sony.png">
       <span class="id">MC-2022-05</span><span class="t">Sony <span class="serif">XM5</span></span><span class="fmt"><i>\</i> Influencer campaign <b class="mx">1.3M</b></span><span class="yr">2022</span>
     </a>
   </div>
 
   <div class="group">
     <div class="bar"><span class="mono"><b>\ Films &amp; series</b> · the longer stories</span><span class="mono" style="color:#8f8d88">10-13</span></div>
-    <a class="rowp litrow" href="/work/sony-flow-state" data-img="/case-studies/sony-flow-state/gallery/fs-05.jpg" data-video="CS5UXhe17O4" data-cap="MC-2023-07 · SONY AUDIO" data-disc="commercial,cd" data-logo="/logos/sony.png">
+    <a class="rowp litrow" href="/work/sony-flow-state" data-snip="/snips/sony-flow-state.mp4" data-img="/case-studies/sony-flow-state/gallery/fs-05.jpg" data-video="CS5UXhe17O4" data-cap="MC-2023-07 · SONY AUDIO" data-disc="commercial,cd" data-logo="/logos/sony.png">
       <span class="id">MC-2023-07</span><span class="t">Sony · Flow <span class="serif">State</span></span><span class="fmt"><i>\</i> Campaign film</span><span class="yr">2023</span>
     </a>
     <a class="rowp litrow" href="/work/dw-drums" data-img="/case-studies/dw-drums/gallery/face-off.jpg" data-cap="MC-2022-04 · DW DRUMS" data-disc="commercial,photo" data-logo="/logos/dw-drums.png">
@@ -336,7 +336,7 @@ body.at-foot .corners .c3,body.at-foot .corners .c4{opacity:0;transition:opacity
     <a class="rowp litrow" href="/work/know-vape" data-img="/case-studies/know-vape/gallery/banner.jpg" data-cap="MC-2021-06 · PUBLIC HEALTH" data-disc="campaign,commercial,cd">
       <span class="id">MC-2021-06</span><span class="t">Know <span class="serif">Vape</span></span><span class="fmt"><i>\</i> PSA campaign</span><span class="yr">2021</span>
     </a>
-    <a class="rowp litrow" href="/work/on-camera" data-img="/case-studies/on-camera/posters/nk-_UwGuRlE.jpg" data-video="nk-_UwGuRlE" data-vstart="29" data-cap="MC-2026-07 · 11 TAPES, CUED TO MY ENTRANCE" data-disc="oncam">
+    <a class="rowp litrow" href="/work/on-camera" data-snip="/snips/on-camera.mp4" data-img="/case-studies/on-camera/posters/nk-_UwGuRlE.jpg" data-video="nk-_UwGuRlE" data-vstart="29" data-cap="MC-2026-07 · 11 TAPES, CUED TO MY ENTRANCE" data-disc="oncam">
       <span class="id">MC-2026-07</span><span class="t">On <span class="serif">Camera</span></span><span class="fmt"><i>\</i> Hosting + presenting · 11 tapes</span><span class="yr">2023</span>
     </a>
   </div>
@@ -349,7 +349,7 @@ body.at-foot .corners .c3,body.at-foot .corners .c4{opacity:0;transition:opacity
     <a class="rowp litrow" href="/work/flashpoint" data-img="/case-studies/flashpoint/gallery/fp-01.jpg" data-cap="MC-2020-02 · FLASHPOINT" data-disc="cd,campaign" data-logo="/logos/flashpoint.png">
       <span class="id">MC-2020-02</span><span class="t">Flash<span class="serif">point</span></span><span class="fmt"><i>\</i> Brand build</span><span class="yr">2020</span>
     </a>
-    <a class="rowp litrow" href="/work/waffle-me-up" data-img="/case-studies/waffle-me-up/cover.jpg" data-video="LI496YXDIRE" data-cap="MC-2019-05 · WAFFLE ME UP" data-disc="cd,experiential,photo" data-logo="/case-studies/waffle-me-up/logo.png">
+    <a class="rowp litrow" href="/work/waffle-me-up" data-snip="/snips/waffle-me-up.mp4" data-img="/case-studies/waffle-me-up/cover.jpg" data-video="LI496YXDIRE" data-cap="MC-2019-05 · WAFFLE ME UP" data-disc="cd,experiential,photo" data-logo="/case-studies/waffle-me-up/logo.png">
       <span class="id">MC-2019-05</span><span class="t">Waffle <span class="serif">Me Up</span></span><span class="fmt"><i>\</i> Brand + spatial</span><span class="yr">2019</span>
     </a>
     <a class="rowp litrow" href="/work/clothing-merch" data-img="/case-studies/clothing-merch/gallery/cm-01.jpg" data-cap="MC-2020-08 · APPAREL" data-disc="cd,photo">
@@ -456,12 +456,13 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   const DISC_LABEL={commercial:'Commercial directing',cd:'Creative direction',photo:'Photography',experiential:'Experiential',campaign:'Campaign development',oncam:'On-camera'};
   const items=rows.map((r,i)=>({
     href:r.getAttribute('href'),img:r.dataset.img,logo:r.dataset.logo||'',disc:(r.dataset.disc||'').split(','),
-    video:r.dataset.video||'',vstart:r.dataset.vstart||'',
+    video:r.dataset.video||'',vstart:r.dataset.vstart||'',snip:r.dataset.snip||'',
     title:r.querySelector('.t').textContent.trim(),
     fmt:(r.querySelector('.fmt')?.textContent||'').replace(/\\/,'').trim(),
     yr:parseInt(r.querySelector('.yr')?.textContent||'0',10),id:r.querySelector('.id')?.textContent.trim()||'' ,idx:i}));
-  function el(it){const a=document.createElement('a');a.className='gcard'+(it.video?' vcard':'');a.href=it.href;a.dataset.key=it.idx;a.dataset.disc=it.disc.join(',');
+  function el(it){const a=document.createElement('a');a.className='gcard'+((it.snip||it.video)?' vcard':'');a.href=it.href;a.dataset.key=it.idx;a.dataset.disc=it.disc.join(',');
     if(it.video){a.dataset.video=it.video;if(it.vstart)a.dataset.vstart=it.vstart}
+    if(it.snip)a.dataset.snip=it.snip;
     const cats=it.disc.map(d=>DISC_LABEL[d]).filter(Boolean).join(' · ');
     a.innerHTML=`<span class="iw"><img class="cv" src="${it.img}" alt="${it.title}" loading="lazy"></span><div class="band"><span class="lft"><span class="t">${it.title}</span><span class="cats">${cats}</span></span>${it.logo?`<img class="lg" src="${it.logo}" alt="">`:''}</div>`;return a}
   items.forEach(it=>grid.appendChild(el(it)));
@@ -518,16 +519,25 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   if(!cards.length)return;
   const MAX=6;let mounted=[];
   function mount(c){
-    if(c.querySelector('iframe'))return;
+    if(c.querySelector('iframe,video'))return;
     while(mounted.length>=MAX)unmount(mounted[0]); // FIFO: oldest preview yields
-    const id=c.dataset.video,st=c.dataset.vstart;
-    const f=document.createElement('iframe');
-    f.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1${st?`&start=${st}`:''}`;
-    f.allow='autoplay; encrypted-media';f.loading='lazy';f.tabIndex=-1;f.setAttribute('aria-hidden','true');f.title='Case film preview';
-    f.addEventListener('load',()=>setTimeout(()=>f.classList.add('live'),450));
-    c.querySelector('.iw').appendChild(f);mounted.push(c);
+    let el;
+    if(c.dataset.snip){ // self-hosted 5s key-moment snippet: clean, no YouTube chrome
+      el=document.createElement('video');
+      el.src=c.dataset.snip;el.muted=true;el.loop=true;el.autoplay=true;el.playsInline=true;el.preload='metadata';
+      el.setAttribute('playsinline','');el.setAttribute('aria-hidden','true');el.tabIndex=-1;
+      el.addEventListener('loadeddata',()=>setTimeout(()=>el.classList.add('live'),120));
+      el.play().catch(function(){});
+    } else {
+      const id=c.dataset.video,st=c.dataset.vstart;
+      el=document.createElement('iframe');
+      el.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1${st?`&start=${st}`:''}`;
+      el.allow='autoplay; encrypted-media';el.loading='lazy';el.tabIndex=-1;el.setAttribute('aria-hidden','true');el.title='Case film preview';
+      el.addEventListener('load',()=>setTimeout(()=>el.classList.add('live'),450));
+    }
+    c.querySelector('.iw').appendChild(el);mounted.push(c);
   }
-  function unmount(c){const f=c.querySelector('iframe');if(f)f.remove();mounted=mounted.filter(x=>x!==c)}
+  function unmount(c){const f=c.querySelector('iframe,video');if(f)f.remove();mounted=mounted.filter(x=>x!==c)}
   const vio=new IntersectionObserver(es=>{
     if(!mq.matches||rm.matches)return;
     es.forEach(e=>e.isIntersecting?mount(e.target):unmount(e.target));
