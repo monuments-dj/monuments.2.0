@@ -51,10 +51,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
 @media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
 
-/* hero: typographic ink hero, no photograph yet - the campaign wordmark carries it.
-   A giant cobalt spark sits behind the title in place of imagery. */
+/* hero: the campaign film runs muted under the type; the cobalt spark rides on top */
 .hero{position:relative;height:82svh;min-height:600px;overflow:hidden;background:var(--ink)}
-.hero .mark{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:71;font-size:clamp(340px,52vw,760px);line-height:1;color:var(--struct);opacity:.28;pointer-events:none;user-select:none;will-change:transform}
+.hero .heroloop{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.02) brightness(.42) saturate(.92)}
+.hero .mark{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:71;font-size:clamp(340px,52vw,760px);line-height:1;color:var(--struct);opacity:.28;mix-blend-mode:screen;pointer-events:none;user-select:none;will-change:transform}
 .hero .t{z-index:72;position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(44px,8.5vw,113px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase}
 .hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
 .hero .t .spark{color:var(--spark)}
@@ -98,8 +98,21 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .film .bar .mono b{color:var(--spark)}
 .film h2{font-weight:var(--dispw);font-size:clamp(28px,4.2vw,62px);letter-spacing:-.03em;line-height:.98;text-transform:uppercase;margin:26px 0 40px;max-width:16ch}
 .film h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
-.filmframe{position:relative;aspect-ratio:16/9;max-width:960px;margin:0 auto;background:#000;border:1px solid var(--lined);display:flex;align-items:center;justify-content:center}
-.filmframe .fcap{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.85);text-align:center;padding:0 16px}
+.film .flead{max-width:64ch;color:#cbc8c2;font-size:17px;margin:0 0 40px}
+.film .flead b{color:var(--paper);font-weight:var(--dispw2)}
+/* click-to-play film frames: poster + play chip, iframe injected on click */
+.filmframe{position:relative;aspect-ratio:16/9;background:#000;border:1px solid var(--lined);overflow:hidden;cursor:pointer}
+.filmframe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.95);transition:transform .6s cubic-bezier(.22,1,.36,1),opacity .4s}
+.filmframe:hover img{transform:scale(1.02)}
+.filmframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.filmframe .chip{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);border:1px solid rgba(245,243,239,.55);border-radius:99px;padding:12px 20px;background:rgba(22,21,20,.45);backdrop-filter:blur(5px);pointer-events:none;transition:background .3s}
+.filmframe:hover .chip{background:rgba(22,21,20,.7)}
+.filmframe .chip .dot{width:7px;height:7px;border-radius:50%;background:var(--red)}
+.filmframe .fcap{position:absolute;left:12px;bottom:10px;z-index:2;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.85);text-shadow:0 1px 6px rgba(0,0,0,.6);pointer-events:none}
+.filmgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.spotgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.spotgrid .filmframe .chip{padding:9px 15px;font-size:9.5px}
+@media (max-width:860px){.filmgrid,.spotgrid{grid-template-columns:1fr}}
 
 /* gallery: contact-sheet frames, masonry columns - placeholder cards until stills land */
 .gal{padding:9vh 0}
@@ -109,6 +122,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;margin-bottom:14px;break-inside:avoid;opacity:0;transform:translateY(16px) rotate(-.6deg)}
 .frames.show .fr{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
 .fr .ph{width:100%;background:#e9e6df;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.fr img{width:100%;display:block;filter:saturate(.95)}
 .fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
 .frames.show .fr:hover{transform:rotate(-1deg) scale(1.03);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
 
@@ -180,6 +194,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <div class="over">
 <header class="hero">
+  <video class="heroloop" src="/case-studies/cwi/hero-loop.mp4" poster="/case-studies/cwi/hero-poster.jpg" muted loop playsinline autoplay aria-hidden="true"></video>
   <span class="mark" aria-hidden="true">✳</span>
   <div class="t">
     <span class="ln"><span>Let's get</span></span>
@@ -238,9 +253,35 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <span class="mono"><b>The films</b> · Let's Get Started</span>
     </div>
     <h2 class="rv in">Play them <span class="serif">here</span></h2>
-    <!-- TODO: hero film embed pending DJ's pick of the lead spot -->
-    <div class="filmframe">
-      <span class="fcap">✳ Let's Get Started · College of Western Idaho</span>
+    <!-- Researched from Against's public case study (goagainst.com/college-of-western-idaho-campaign): the hero
+         spot opens on "I am not good enough" and reverses the sentence at the midpoint; it aired during the
+         Academy Awards. DJ: confirm the wording below before launch. -->
+    <p class="flead rv in">The hero spot opens on a line no school would touch: <b>"I am not good enough."</b> Halfway through, the sentence runs in reverse and the doubt flips into the decision. No campus tour, no stock smiles. It aired during the Oscars.</p>
+    <div class="filmgrid">
+      <div class="filmframe" data-yt="2tms4kQWevk">
+        <img src="/case-studies/cwi/poster-anthem.jpg" alt="Let's Get Started campaign hype film" loading="lazy">
+        <span class="chip"><span class="dot"></span>Play · Campaign hype :60</span>
+        <span class="fcap">✳ Let's Get Started · MMXXIII</span>
+      </div>
+      <div class="filmframe" data-yt="34tvLtSKidw">
+        <img src="/case-studies/cwi/poster-20.jpg" alt="Let's Get Started 2.0 hero film" loading="lazy">
+        <span class="chip"><span class="dot"></span>Play · Let's Get Started 2.0</span>
+        <span class="fcap">✳ Phase two · MMXXV</span>
+      </div>
+    </div>
+    <div class="spotgrid">
+      <div class="filmframe" data-yt="v_1ZuNOXfJs">
+        <img src="https://i.ytimg.com/vi/v_1ZuNOXfJs/hqdefault.jpg" alt="Engineering program spot" loading="lazy">
+        <span class="chip"><span class="dot"></span>Engineering :30</span>
+      </div>
+      <div class="filmframe" data-yt="Qu0zXNco6Zc">
+        <img src="https://i.ytimg.com/vi/Qu0zXNco6Zc/hqdefault.jpg" alt="Artificial Intelligence program spot" loading="lazy">
+        <span class="chip"><span class="dot"></span>Artificial Intelligence</span>
+      </div>
+      <div class="filmframe" data-yt="c0owTMu9Mo0">
+        <img src="https://i.ytimg.com/vi/c0owTMu9Mo0/hqdefault.jpg" alt="Nursing program spot" loading="lazy">
+        <span class="chip"><span class="dot"></span>Nursing</span>
+      </div>
     </div>
   </div>
 </section>
@@ -254,6 +295,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="body rv">
       <p>Most campaigns retire in a quarter.</p>
       <p>This one launched in March 2023 and hasn't come down: sixteen-plus films across broadcast, social, and program spots, refreshed season over season. A campaign doesn't hold the air that long on luck. The thinking held.</p>
+      <!-- Researched, sourced: LGS 2.0 launch (cwi.edu newsroom, Mar 25 2025); ninth consecutive semester of
+           enrollment growth (idahoednews.org, Oct 2025 + cwi.edu newsroom, Oct 13 2025). Phrased as context,
+           not causation. DJ: confirm you want this line before launch. -->
+      <p>In 2025 it grew into a second chapter, Let's Get Started 2.0, built on real student stories. Alongside the run, CWI has posted <b>nine straight semesters of enrollment growth</b>.</p>
     </div>
   </div>
 
@@ -270,17 +315,19 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
   <div class="wrap gal">
     <div class="bar">
-      <span class="mono"><b>Contact sheet</b> · selects from the series</span>
-      <span class="mono" style="color:#8f8d88">Frames pending</span>
+      <span class="mono"><b>Contact sheet</b> · frames from the series</span>
+      <span class="mono" style="color:#8f8d88">Pulled from the films · DJ's stills to follow</span>
     </div>
-    <!-- TODO: stills pending, DJ to supply selects from the series -->
     <div class="frames" id="frames">
-      <figure class="fr" style="--d:0ms"><div class="ph" style="aspect-ratio:4/5">✳</div><figcaption class="cap">FR-01 · Still pending</figcaption></figure>
-      <figure class="fr" style="--d:45ms"><div class="ph" style="aspect-ratio:16/9">✳</div><figcaption class="cap">FR-02 · Still pending</figcaption></figure>
-      <figure class="fr" style="--d:90ms"><div class="ph" style="aspect-ratio:1/1">✳</div><figcaption class="cap">FR-03 · Still pending</figcaption></figure>
-      <figure class="fr" style="--d:135ms"><div class="ph" style="aspect-ratio:3/4">✳</div><figcaption class="cap">FR-04 · Still pending</figcaption></figure>
-      <figure class="fr" style="--d:180ms"><div class="ph" style="aspect-ratio:16/9">✳</div><figcaption class="cap">FR-05 · Still pending</figcaption></figure>
-      <figure class="fr" style="--d:225ms"><div class="ph" style="aspect-ratio:4/5">✳</div><figcaption class="cap">FR-06 · Still pending</figcaption></figure>
+      <figure class="fr" style="--d:0ms"><img src="/case-studies/cwi/frames/cw-01.jpg" alt="Let's Get Started campaign frame" loading="lazy"><figcaption class="cap">FR-01 · The decision</figcaption></figure>
+      <figure class="fr" style="--d:45ms"><img src="/case-studies/cwi/frames/cw-02.jpg" alt="Dental assisting program frame" loading="lazy"><figcaption class="cap">FR-02 · Dental assisting</figcaption></figure>
+      <figure class="fr" style="--d:90ms"><img src="/case-studies/cwi/frames/cw-03.jpg" alt="Nursing program frame" loading="lazy"><figcaption class="cap">FR-03 · Nursing</figcaption></figure>
+      <figure class="fr" style="--d:135ms"><img src="/case-studies/cwi/frames/cw-04.jpg" alt="Engineering program frame" loading="lazy"><figcaption class="cap">FR-04 · Engineering</figcaption></figure>
+      <figure class="fr" style="--d:180ms"><img src="/case-studies/cwi/frames/cw-05.jpg" alt="You've got this frame" loading="lazy"><figcaption class="cap">FR-05 · You've got this</figcaption></figure>
+      <figure class="fr" style="--d:225ms"><img src="/case-studies/cwi/frames/cw-06.jpg" alt="Student portrait frame" loading="lazy"><figcaption class="cap">FR-06 · The lift</figcaption></figure>
+      <figure class="fr" style="--d:270ms"><img src="/case-studies/cwi/frames/cw-07.jpg" alt="Lets Get Started 2.0 frame" loading="lazy"><figcaption class="cap">FR-07 · Phase two</figcaption></figure>
+      <figure class="fr" style="--d:315ms"><img src="/case-studies/cwi/frames/cw-08.jpg" alt="Lets Get Started 2.0 story frame" loading="lazy"><figcaption class="cap">FR-08 · Student stories</figcaption></figure>
+      <figure class="fr" style="--d:360ms"><img src="/case-studies/cwi/frames/cw-09.jpg" alt="Lets Get Started 2.0 closing frame" loading="lazy"><figcaption class="cap">FR-09 · Still running</figcaption></figure>
     </div>
   </div>
 </section>
@@ -328,6 +375,25 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// films: click swaps the poster for the YouTube embed, one playing at a time
+(function(){
+  var playing=null;
+  document.querySelectorAll('.filmframe[data-yt]').forEach(function(f){
+    f.addEventListener('click',function(){
+      if(f.querySelector('iframe'))return;
+      if(playing){var old=playing.querySelector('iframe');if(old)old.remove();playing.classList.remove('live');}
+      var id=f.getAttribute('data-yt');
+      var ifr=document.createElement('iframe');
+      ifr.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';
+      ifr.allow='autoplay; encrypted-media; fullscreen';
+      ifr.setAttribute('allowfullscreen','');
+      ifr.title='Let’s Get Started film';
+      f.appendChild(ifr);
+      playing=f;
+    });
+  });
+})();
 
 // hero layers (typographic: the cobalt mark stands in for the photograph) + companion
 (function(){

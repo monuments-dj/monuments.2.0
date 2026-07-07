@@ -39,3 +39,4 @@ tools/snaps/
 /tools/rcptdbg.mjs
 /tools/rcpterr.mjs
 /tools/ioclip.mjs
+/tools/cwisnap.mjs
