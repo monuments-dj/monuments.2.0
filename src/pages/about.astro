@@ -21,7 +21,7 @@ const bts = Array.from({ length: 15 }, (_, i) => `/about-bts/abts-${String(i + 1
   --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
   --dispcond:var(--disp); --condstretch:75%;
   --mono:'Fragment Mono',monospace;
-  --spark:var(--rose); --struct:var(--cobalt);
+  --spark:var(--rose); --struct:var(--rose); --on-rgb:22,21,20;
 }
 *{margin:0;box-sizing:border-box}
 body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -64,9 +64,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @keyframes fade{to{opacity:1}}
 
 .statrow{background:var(--struct)}
-.statrow .in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:26px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72)}
-.statrow b{color:var(--paper);font-weight:400}
-.statrow i{font-style:normal;color:var(--paper)}
+.statrow .in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:26px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.72)}
+.statrow b{color:rgb(var(--on-rgb));font-weight:400}
+.statrow i{font-style:normal;color:rgb(var(--on-rgb))}
 
 /* subject file on paper */
 .paper{background:var(--paper);color:var(--ink)}
@@ -124,13 +124,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .crew .cap p{max-width:52ch;margin-top:12px;color:rgba(245,243,239,.85)}
 
 /* how I work - struct color block */
-.how-band{background:var(--struct);color:var(--paper)}
-.how-band .bar{border-bottom-color:var(--paper)!important}
-.how-band .bar .mono{color:rgba(245,243,239,.75)}
-.how-band .bar .mono b{color:var(--paper)}
+.how-band{background:var(--struct);color:rgb(var(--on-rgb))}
+.how-band .bar{border-bottom-color:rgb(var(--on-rgb))!important}
+.how-band .bar .mono{color:rgba(var(--on-rgb),.72)}
+.how-band .bar .mono b{color:rgb(var(--on-rgb))}
 .how-band .step{border-bottom-color:rgba(245,243,239,.28)}
 .how-band .step:hover{background:rgba(245,243,239,.08)}
-.how-band .step .n{color:var(--paper)}
+.how-band .step .n{color:rgb(var(--on-rgb))}
 .how-band .step h4{color:var(--paper)}
 .how-band .step p{color:rgba(245,243,239,.82)}
 
@@ -176,13 +176,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 /* THE RECEIPTS: an actual printed receipt on the cobalt desk. The site speaks in
    paper artifacts (call sheets, case files, polaroids); the career stats come as
    a thermal till slip that PRINTS on scroll (steps() clip = printer feed). */
-.receipts{background:var(--struct);color:var(--paper);padding:12vh 0;overflow:hidden}
+.receipts{background:var(--struct);color:rgb(var(--on-rgb));padding:12vh 0;overflow:hidden}
 .receipts .rlay{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,430px);gap:clamp(40px,5vw,90px);align-items:center}
 .receipts .rk{color:rgba(245,243,239,.85);display:block}
 .receipts h2{font-weight:var(--dispw);font-size:clamp(30px,3.8vw,58px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;margin:14px 0 18px}
-.receipts h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;color:var(--rose)}
-.receipts .rsub{color:rgba(245,243,239,.8);max-width:44ch;font-size:17px}
-.receipts .rfoot{margin-top:26px;font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:rgba(245,243,239,.55)}
+.receipts h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;color:rgba(var(--on-rgb),.62)}
+.receipts .rsub{color:rgba(var(--on-rgb),.78);max-width:44ch;font-size:17px}
+.receipts .rfoot{margin-top:26px;font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:rgba(var(--on-rgb),.55)}
 
 /* the slip */
 .rcpt-hold{position:relative;justify-self:end;width:100%;max-width:420px;filter:drop-shadow(0 30px 44px rgba(10,16,40,.45))}
@@ -360,7 +360,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <div class="rcpt">
           <div class="rhead">
             <span class="wm">M<i>✳</i>NUMENTS</span>
-            <span class="sub">The receipts · Subject-001<br>Ramirez, DJ · Creative Director<br>Roll 2016-2026</span>
+            <span class="sub">The receipts · Subject-001<br>Ramirez, DJ · Creative Director<br>Roll 2016-2026 · ten years behind the camera<br>Monuments, est. MMXXII · the name on the last four</span>
           </div>
           <ul>
             <li><span class="nm">Agency revenue grown as creative director</span><span class="dots"></span><span class="vl">4x</span><span class="note">Art of Visuals &middot; four years</span></li>

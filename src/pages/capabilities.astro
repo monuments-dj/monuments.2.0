@@ -19,7 +19,7 @@ import PageFooter from '../components/PageFooter.astro';
   --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
   --dispcond:var(--disp); --condstretch:75%;
   --mono:'Fragment Mono',monospace;
-  --spark:var(--rose); --struct:var(--cobalt);
+  --spark:var(--rose); --struct:var(--rose); --on-rgb:22,21,20;
 }
 *{margin:0;box-sizing:border-box}
 body{background:var(--paper);color:var(--ink);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -105,9 +105,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .srow.litrow{transition:background .3s,padding-left .4s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1)}
 
 /* process band on ink */
-.proc{background:var(--struct);color:var(--paper);padding:11vh 0}
+.proc{background:var(--struct);color:rgb(var(--on-rgb));padding:11vh 0}
 .proc .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:13px;border-bottom:1px solid rgba(245,243,239,.35)}
-.proc .bar .mono b{color:var(--paper)}
+.proc .bar .mono b{color:rgb(var(--on-rgb))}
 .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:44px}
 .pstep .n{font-family:var(--mono);font-size:11px;color:var(--ink);background:var(--paper);display:inline-block;padding:2px 8px}
 .pstep h4{font-weight:var(--dispw);font-size:clamp(20px,2.1vw,28px);letter-spacing:-.02em;text-transform:uppercase;margin:14px 0 10px}
@@ -221,10 +221,17 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <section class="refuse wrap">
   <div class="big rv">Less agency, <span class="serif">more rock &amp; roll.</span></div>
-  <!-- Refusals: DJ's confirmed two; more candidates awaiting his pick (LAUNCH.md) -->
+  <!-- The refusals: DJ approved all nine, 2026-07-07 -->
   <ul class="rv">
     <li><i>✳</i>I don't do deck theater.</li>
     <li><i>✳</i>I don't lead with gear talk. I lead with the idea.</li>
+    <li><i>✳</i>I don't chase trends. I study why they happen.</li>
+    <li><i>✳</i>I don't hide behind process.</li>
+    <li><i>✳</i>I don't automate the human parts.</li>
+    <li><i>✳</i>I don't speak in acronyms.</li>
+    <li><i>✳</i>I don't pitch work I wouldn't ship.</li>
+    <li><i>✳</i>I don't bill for meetings about meetings.</li>
+    <li><i>✳</i>I don't need the biggest budget in the room to make the best thing in it.</li>
   </ul>
 </section>
 

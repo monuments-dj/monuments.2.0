@@ -73,6 +73,11 @@ Every item below traces to one or both. The domain swap is the finish line and h
 3. **404 page** — on-brand, one hour, prevents a dead end.
 4. Not recommended now: blog/journal (goes stale), separate reel page (home owns it), press page (awards live in the cases).
 
+## D2 · Color system (DJ 2026-07-07)
+- [x] **Blue killed site-wide.** Accent repointed cobalt → rose; all 11 bands + the ticker now pink with dark text (themeable via `--struct` + `--on-rgb`). Default accent = rose.
+- [x] **Homepage reel fixed:** cards reformatted to a consistent logo/title/code stack (was baseline-float wrap mess); scrub now starts flush on card 1 and ends flush on the last (removed the 6vw over-scroll "extra slot").
+- [ ] **REMOVE the accent switcher before launch** — the temp pill lives in `src/components/PageFooter.astro` (marked with a TEMP comment). It's DJ's tool to land the 2-color system. When he picks: set that accent as the permanent default in each page's `:root` and delete the switcher markup/style/script from PageFooter. (Case-page per-brand tints like dw-drums teal are untouched.)
+
 ## F · Pre-flight QA (Claude, before swap)
 - [ ] Full-site click pass at 1440 + 390 (every page, every CTA, NextFile chain loop).
 - [ ] All snips/videos play muted + lazy; no 404s in network log.

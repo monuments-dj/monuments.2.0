@@ -13,10 +13,55 @@ const { tag } = Astro.props;
     <span>{tag}</span>
   </div>
 </footer>
+
+<!-- TEMP design tool: global accent switcher (remove before launch, see LAUNCH.md). -->
+<div class="acctool" id="acctool">
+  <span class="acctool-l">accent</span>
+  <button data-acc="rose" style="--sw:#EFA1AD" title="Rose" aria-label="Rose accent"></button>
+  <button data-acc="cobalt" style="--sw:#2438E8" title="Cobalt" aria-label="Cobalt accent"></button>
+  <button data-acc="red" style="--sw:#E0311A" title="Red" aria-label="Red accent"></button>
+  <button data-acc="ink" style="--sw:#161514" title="Ink" aria-label="Ink accent"></button>
+  <button class="acctool-x" title="Hide (until you clear site data)" aria-label="Hide accent switcher">&times;</button>
+</div>
+
 <style>
 .pfoot{background:var(--ink,#161514);color:var(--dim,#8f8d88);border-top:1px solid var(--lined,#2c2b29);padding:34px 0 18px;position:relative;z-index:3}
 .pfoot .row{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:8px 22px;
   max-width:var(--wrap,1380px);margin:0 auto;padding-left:var(--pad,clamp(22px,4.6vw,44px));padding-right:var(--pad,clamp(22px,4.6vw,44px))}
 .pfoot span{font-family:var(--mono,'Fragment Mono',monospace);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim,#8f8d88)}
 .pfoot .blk{text-transform:none}
+
+.acctool{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:90;display:flex;align-items:center;gap:8px;
+  padding:7px 9px 7px 12px;background:rgba(22,21,20,.82);backdrop-filter:blur(8px);border:1px solid rgba(245,243,239,.16);border-radius:99px;
+  font-family:var(--mono,monospace);opacity:.42;transition:opacity .3s}
+.acctool:hover{opacity:1}
+.acctool-l{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#8f8d88;margin-right:2px}
+.acctool [data-acc]{width:16px;height:16px;border-radius:50%;border:1px solid rgba(245,243,239,.25);background:var(--sw);cursor:pointer;padding:0;transition:transform .2s}
+.acctool [data-acc]:hover{transform:scale(1.18)}
+.acctool [data-acc].on{box-shadow:0 0 0 2px rgba(22,21,20,.82),0 0 0 3.5px #F5F3EF}
+.acctool-x{background:none;border:0;color:#8f8d88;font-size:15px;line-height:1;cursor:pointer;padding:0 2px 0 4px}
+.acctool-x:hover{color:#F5F3EF}
+@media (max-width:680px){.acctool{bottom:8px;padding:6px 8px}.acctool-l{display:none}}
 </style>
+
+<script is:inline>
+(function(){
+  var ACC={rose:['#EFA1AD','22,21,20'],cobalt:['#2438E8','245,243,239'],red:['#E0311A','245,243,239'],ink:['#161514','245,243,239']};
+  var root=document.documentElement, tool=document.getElementById('acctool');
+  function apply(a){
+    var v=ACC[a]||ACC.rose;
+    root.style.setProperty('--struct',v[0]);
+    root.style.setProperty('--on-rgb',v[1]);
+    root.setAttribute('data-accent',a);
+    if(tool)tool.querySelectorAll('[data-acc]').forEach(function(b){b.classList.toggle('on',b.dataset.acc===a);});
+  }
+  var saved=localStorage.getItem('mnmt-accent')||'rose';
+  apply(saved);
+  if(!tool)return;
+  if(localStorage.getItem('mnmt-acctool')==='off'){tool.style.display='none';}
+  tool.querySelectorAll('[data-acc]').forEach(function(b){
+    b.addEventListener('click',function(){apply(b.dataset.acc);localStorage.setItem('mnmt-accent',b.dataset.acc);});
+  });
+  tool.querySelector('.acctool-x').addEventListener('click',function(){tool.style.display='none';localStorage.setItem('mnmt-acctool','off');});
+})();
+</script>
