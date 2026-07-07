@@ -1,4 +1,54 @@
-# TODO — current state (2026-07-04)
+# TODO — current state (2026-07-07)
+
+## 🚀 COPY HANDOFF v3 APPLIED SITE-WIDE (2026-07-07, wf_d632cf34)
+DJ edited copy in a Google Doc (tools/copy-new.md is the saved handoff; tools/copy-export.md
+is the pre-edit baseline; tools/copy-parts/ per-page). ALL APPLIED + PUSHED:
+- HOME: taste-thesis hero ("The tools are / everywhere. / Taste isn't.✳"), title/NFO =
+  Creative Director · Integrated campaigns · film · stills · experiential · Est. MMXXII,
+  118.24° W fix, What I Do rewrite ("Culture is talking."), "Built to be remembered.",
+  reel cards resynced (Buck the Quo = ROCKYS not Emmy; Adorama = "Inside a 160M+ campaign"),
+  CTA "worth remembering."
+- ABOUT: hero sub CUT, Short Version rewritten (h2 cut, lead para), career timeline
+  RELOCATED to /lab/career-timeline (Era 02 = "Best of Show at the Rockys ✳"), NEW
+  "The receipts" cobalt ledger (8 stats) + "In the room" 2x2. CTA stays "Tell me what
+  you're building."
+- SERVICES: "In to serve the work, not steal the show." hero; offers 5→8 (Integrated
+  Campaigns rename + NEW Brand Building/Experiential/Photography/AI Systems; End-to-End
+  Production folded into closing line "Production comes standard... Tess keeps it on the
+  rails."); CWI in marquee.
+- WORK: "The work." hero, 30-commercials sub (⚠️ TODO confirm count), 18 projects,
+  CWI archive row.
+- NEW /work/cwi-lets-get-started (typographic spark hero, film/stills PLACEHOLDERS),
+  chained Buck the Quo → CWI → Xperia Summer.
+- Ticker: "Emmy-winning Know Vape campaign" + "3.6M+ impressions on a single launch".
+LOCKED (from doc): I-voice; Emmy=Know Vape only, BTQ=Rockys; Est. MMXXII; CTA "worth
+remembering." site-wide (About/Contact keep theirs); stat rule "only what DJ would say in
+an interview"; AI = service 08 + own page (copy PENDING, DO NOT BUILD YET).
+AWAITING DJ (his PENDING list): AI page copy; Photography/Giving/Contact pass; 17-case-study
+stat audit (On Camera podcast 300K → 16-30K monthly at peak; Know Vape + Flashpoint
+third-person→I); CWI assets (role confirm, hero film, stills, 5-yr contract mention).
+
+## ALSO THIS SESSION (2026-07-05/06)
+- PHOTOGRAPHY: early-Mac OS9 desktop hero. Self-hosted ChicagoFLF (public/fonts/), Chicago
+  headline (pixel/serif splice killed), classic Mac menu bar (Apple logo + nav + LA clock,
+  ≥681px), pinstripe title bars, draggable windows (BTS movie = MOV10150 trimmed :09 muted,
+  Gear list, Stickies note typing CYCLING quotes: Cartier-Bresson then Ansel Adams), Mac
+  colons path, "DJ's Photos". Visual-first pass; DJ liked it. MORE QUOTES WELCOME (add to
+  QUOTES array in photography.astro).
+- HOME reel enhanced: cards 48vw/44svh, hover achievements panel (data-role/data-stats),
+  snippet plays on hover; ticker "2 to 30+ creatives led per team"; tiles "rock & roll" +
+  "every great story is a human story".
+- ABOUT "Directing is the job" photo → muted cycling viewer of DJ leading
+  (/about/lead/ld-01..03, confirmed DJ in 01+02; 03 = his set, wide — DJ may swap).
+- FOOTER normalized site-wide (contact/photography/dw-drums Pirata → small mono; about +
+  index space-between → centered baseline; photography descriptor shortened). ⚠️ Footer is
+  still inline-per-page; consider a shared component to stop the drift.
+- IG EMBEDS ROOT-CAUSED: bars = OLD /tv/ IGTV permalinks (bar out even bare) + my demo grid
+  squeezed to 326px. sony-this-moment has 2 dead-format /tv/ links; clothing-merch has 2
+  /reel/ links (Cl9hIJ-vS-b looks DEAD). AWAITING DJ: fresh post/reel links for both pages.
+  /lab/ig-embed = diagnostic page (its "unfixable" note is now WRONG — retire or fix).
+- Copy pipeline: Google Doc export via Drive MCP works. Original export doc:
+  docs.google.com/document/d/1Z8y4Wb3RDCkY_CJuCcA7MP4u7ktErGDWikwKvHk7-6A
 
 ## 🚀 THE BIG MIGRATION IS DONE (2026-07-04, wf_52a51129)
 ALL 17 case pages are cut-design full-document pages at /work/*: six NEW routes poured from

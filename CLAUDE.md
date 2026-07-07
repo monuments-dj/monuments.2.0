@@ -58,14 +58,18 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
-## Active work (2026-06-30): THE SITE IS NOW DJ'S HIRING PORTFOLIO
-Real goal (memory `site-goal-agency-job` + `monuments-copy` = SOURCE OF TRUTH): a portfolio to get DJ
-HIRED at an agency/brand. Audience = hiring managers. POSITIONING LOCKED: **Brand Experience /
-Experiential Creative Director** (campaigns + experiential), lead with the NUMBER, AI is a tool NOT
-the headline, first-person "I" voice. Case studies at `/lab/*`: buck-the-quo + adorama-music PUSHED,
-know-vape built (has a TODO). NEXT: build the **Art of Visuals** flagship (4x revenue), a **Selected
-Work** grid (Donut x Zumiez, AC Boise kit reveal), recut flagships results-first, add a hire-me kit,
-rework the home hero. Full detail: TODO.md top block. Older /lab-redesign context below.
+## Active work (2026-07-07): COPY v3 APPLIED · POSITIONING = CREATIVE DIRECTOR
+Goal unchanged: portfolio to get DJ HIRED (audience = hiring managers). POSITIONING UPDATED per
+DJ's copy handoff (tools/copy-new.md = LOCKED source): **Creative Director**, sub-line "Integrated
+campaigns · film · stills · experiential", hero thesis "The tools are everywhere. Taste isn't.",
+I-voice, Emmy=Know Vape only / Buck the Quo=Rockys, Est. MMXXII. All 18 case pages at `/work/*`
+(NEW: cwi-lets-get-started, placeholders pending assets). Photography = early-Mac OS9 hero.
+AWAITING DJ: AI page copy (offer 08 exists, page NOT built), CWI assets, fresh IG links
+(sony-this-moment + clothing-merch), Photography/Giving/Contact copy pass, case stat audit.
+Full detail: TODO.md top block. Older context below.
+
+## Active work (2026-06-30, historical): hiring-portfolio pivot
+Case studies were then at /lab/*; all since migrated to /work/*. See TODO.md.
 
 ## Active work (2026-06-14, historical): see TODO.md
 **CURRENT: the `/lab/*` v2 redesign + first promotions to production.** GSAP ScrollTrigger is the
