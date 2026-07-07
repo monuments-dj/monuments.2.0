@@ -1,0 +1,240 @@
+---
+// Career timeline · relocated from /about (2026-07). Pinned scroll-scrub through the eras.
+// Lab draft: not linked from the nav.
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Career timeline · Monuments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style is:global>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --dispcond:var(--disp); --condstretch:75%;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--cobalt);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:20px;left:38px;pointer-events:auto}
+.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
+.corners .c1 i{font-style:normal;color:var(--spark);display:inline-block;animation:spin 7s linear infinite}
+.corners .c2{top:26px;right:22px;pointer-events:auto}
+.corners .c2 a{font-size:15px;letter-spacing:.06em}
+.corners .c2 a{margin-left:22px}
+.corners .c3{bottom:20px;left:22px}
+.corners .c4{bottom:20px;right:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.corners .c2 a{position:relative;padding-bottom:3px;transition:opacity .3s}
+.corners .c2 a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .42s cubic-bezier(.22,1,.36,1)}
+.corners .c2 a:hover::after{transform:scaleX(1);transform-origin:left}
+
+/* career timeline: pinned scroll-scrub through the eras */
+.tl{height:520svh;position:relative;background:var(--ink);color:var(--paper)}
+.tl-pin{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:4vh}
+.tl-head{width:100%;display:flex;justify-content:space-between;align-items:baseline;gap:30px;flex-wrap:wrap}
+.tl-head h2{font-weight:var(--dispw);font-size:clamp(26px,3.4vw,50px);letter-spacing:-.03em;text-transform:uppercase;color:var(--paper)}
+.tl-head h2 .serif{color:var(--spark);display:inline-block;min-width:5ch}
+.tl-head h2 .serif.swap{animation:wordIn .45s cubic-bezier(.22,1,.36,1)}
+@keyframes wordIn{0%{opacity:0;transform:translateY(60%)}100%{opacity:1;transform:none}}
+.tl-count{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+.tl-count b{color:var(--spark);font-weight:400}
+.tl-rail{width:100%;height:2px;background:#33312e;position:relative}
+.tl-rail .fill{position:absolute;left:0;top:0;bottom:0;background:var(--spark);width:0%}
+.tl-rail .node{position:absolute;top:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:#33312e;transition:background .3s}
+.tl-rail .node.hit{background:var(--spark)}
+.tl-track{display:flex;gap:5vw;will-change:transform;padding:0 var(--pad)}
+.era-p{flex:0 0 auto;width:min(62vw,860px);display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;background:#1d1c1a;border:1px solid var(--lined);padding:30px}
+.era-p .ph{position:relative;background:#fff;padding:7px 7px 24px}
+.era-p .ph img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(.25) saturate(.9)}
+.era-p .ph .cap{position:absolute;left:9px;bottom:5px;font-family:var(--mono);font-size:9px;color:#8f8d88;text-transform:uppercase}
+.era-p .no{font-family:var(--mono);font-size:10.5px;color:var(--struct);text-transform:uppercase;letter-spacing:.1em}
+.era-p h3{font-weight:var(--dispw);font-size:clamp(24px,2.8vw,42px);letter-spacing:-.03em;line-height:.98;text-transform:uppercase;margin:10px 0 4px;color:var(--paper)}
+.era-p .role{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,1.7vw,24px);color:var(--spark);margin-bottom:14px}
+.era-p ul{list-style:none;margin:0;padding:0}
+.era-p li{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#b9b6b0;padding:7px 0;border-top:1px solid #2c2b28}
+.era-p li b{color:var(--paper);font-weight:400}
+.era-p .here{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:10px;color:var(--ink);background:var(--spark);border-radius:6px;padding:5px 12px;text-transform:uppercase;letter-spacing:.12em}
+.tl-foot{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7a7873}
+@media (max-width:900px),(prefers-reduced-motion:reduce){
+  .tl{height:auto}
+  .tl-pin{position:static;height:auto;padding:8vh 0;gap:3vh}
+  .tl-track{overflow-x:auto;transform:none!important;-webkit-overflow-scrolling:touch}
+  .era-p{width:84vw;grid-template-columns:1fr}
+}
+
+footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:34px 0 18px}
+footer .row{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:8px 22px}
+footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--dim);text-transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .grain{animation:none}
+}
+
+/* mobile nav · CSS-only hamburger -> fullscreen menu */
+.navburger,.mnav{display:none}
+@media (max-width:680px){
+  .corners .c2{display:none}
+  .corners .c1 b{font-size:23px}
+  .corners .c3,.corners .c4{display:none}
+  .navburger{display:flex;position:fixed;top:19px;right:19px;z-index:81;flex-direction:column;justify-content:center;gap:5px;width:34px;height:34px;cursor:pointer;mix-blend-mode:difference}
+  .navburger span{display:block;height:2px;width:24px;background:#fff;border-radius:2px;transition:transform .3s cubic-bezier(.76,0,.24,1),opacity .2s}
+  #navtog:checked ~ .navburger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  #navtog:checked ~ .navburger span:nth-child(2){opacity:0}
+  #navtog:checked ~ .navburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mnav{display:flex;position:fixed;inset:0;z-index:80;background:var(--ink);flex-direction:column;justify-content:center;gap:2px;padding:0 var(--pad);transform:translateY(-100%);transition:transform .55s cubic-bezier(.76,0,.24,1)}
+  #navtog:checked ~ .mnav{transform:none}
+  .mnav a{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(34px,12vw,58px);line-height:1.05;text-transform:uppercase;letter-spacing:-.02em;color:var(--paper)}
+  .mnav a:active{color:var(--spark)}
+  .mnav .mnav-foot{margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+}
+</style>
+</head>
+<body>
+<input type="checkbox" id="navtog" class="navtog-in" hidden>
+<label for="navtog" class="navburger" aria-label="Menu"><span></span><span></span><span></span></label>
+<nav class="mnav" aria-label="Mobile menu"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a><span class="mnav-foot">monuments.cc@gmail.com</span></nav>
+
+<div class="grain" aria-hidden="true"></div>
+
+<div class="corners">
+  <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a></span>
+  <span class="c3">Lab · career timeline · relocated from /about</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<section class="tl" id="career">
+  <div class="tl-pin">
+    <div class="wrap tl-head">
+      <h2>DJ, the <span class="serif swap" id="eraWord">creative.</span></h2>
+      <span class="tl-count"><b id="eraNo">01</b> / 04 · the road here · scroll to travel</span>
+    </div>
+    <div class="wrap"><div class="tl-rail"><div class="fill" id="tlFill"></div>
+      <span class="node" style="left:12%"></span><span class="node" style="left:38%"></span><span class="node" style="left:64%"></span><span class="node" style="left:90%"></span>
+    </div></div>
+    <div class="tl-track" id="tlTrack">
+      <article class="era-p" data-word="creative.">
+        <div class="ph"><img src="/gallery/full/p-034.jpg" alt="On set, agency era" loading="lazy"><span class="cap">ERA 01 · THE AGENCY YEARS</span></div>
+        <div>
+          <span class="no">\ Era 01 · Drake Cooper · Boise</span>
+          <h3>Drake Cooper</h3>
+          <p class="role">agency creative</p>
+          <ul>
+            <li><b>Learned speed:</b> concepting daily</li>
+            <li><b>Sold work</b> in the room</li>
+            <li><b>Shipped campaigns</b> on real deadlines</li>
+          </ul>
+        </div>
+      </article>
+      <article class="era-p" data-word="consultant.">
+        <div class="ph"><img src="/case-studies/buck-the-quo/gallery/chop-board.jpg" alt="Buck the Quo" loading="lazy"><span class="cap">ERA 02 · THE CONSULTING YEARS</span></div>
+        <div>
+          <span class="no">\ Era 02 · Buck the Quo</span>
+          <h3>Buck the Quo</h3>
+          <p class="role">creative consultant</p>
+          <ul>
+            <li><b>Best of Show</b> at the Rockys ✳</li>
+            <li><b>Senior creative</b> on the hook for outcomes</li>
+            <li><b>Story-first</b> consulting, proven on air</li>
+          </ul>
+        </div>
+      </article>
+      <article class="era-p" data-word="director.">
+        <div class="ph"><img src="/about/warehouse.jpg" alt="Art of Visuals era, warehouse set" loading="lazy"><span class="cap">ERA 03 · THE SCALE YEARS</span></div>
+        <div>
+          <span class="no">\ Era 03 · Art of Visuals</span>
+          <h3>Art of Visuals</h3>
+          <p class="role">creative director</p>
+          <ul>
+            <li><b>4x</b> agency revenue growth</li>
+            <li><b>2M+</b> audience scaled</li>
+            <li><b>Up to 30</b> creatives led · on camera</li>
+          </ul>
+        </div>
+      </article>
+      <article class="era-p" data-word="founder.">
+        <div class="ph"><img src="/about/team.jpg" alt="Monuments crew" loading="lazy"><span class="cap">ERA 04 · NOW</span></div>
+        <div>
+          <span class="no">\ Era 04 · Monuments · LA / Boise</span>
+          <h3>Monuments</h3>
+          <p class="role">founder + creative director</p>
+          <ul>
+            <li><b>Own production company</b> + consultancy</li>
+            <li><b>Tess</b> keeps it on the rails</li>
+            <li><b>Less agency,</b> more band</li>
+          </ul>
+          <span class="here">● You are here</span>
+        </div>
+      </article>
+    </div>
+    <div class="wrap tl-foot">Drake Cooper → Buck the Quo → Art of Visuals → Monuments</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row mono">
+    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
+    <span class="blk">built to be remembered</span>
+    <span>Career timeline</span>
+  </div>
+</footer>
+
+<script is:inline>
+function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
+clock();setInterval(clock,30000);
+
+// career timeline scrub
+(function(){
+  const sec=document.querySelector('.tl'),track=document.getElementById('tlTrack'),
+        word=document.getElementById('eraWord'),no=document.getElementById('eraNo'),
+        fill=document.getElementById('tlFill'),nodes=[...document.querySelectorAll('.tl-rail .node')];
+  if(!sec||!track)return;
+  const eras=[...track.children];let cur=-1;
+  function setEra(i){
+    if(i===cur)return;cur=i;
+    word.textContent=eras[i].dataset.word;
+    word.classList.remove('swap');void word.offsetWidth;word.classList.add('swap');
+    no.textContent=String(i+1).padStart(2,'0');
+    nodes.forEach((n,j)=>n.classList.toggle('hit',j<=i));
+  }
+  setEra(0);
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches||innerWidth<=900)return;
+  let k=false;
+  addEventListener('scroll',()=>{
+    if(k)return;k=true;
+    requestAnimationFrame(()=>{
+      const vh=innerHeight,r=sec.getBoundingClientRect();
+      const total=r.height-vh;
+      const p=Math.min(1,Math.max(0,-r.top/total));
+      const max=track.scrollWidth-innerWidth+innerWidth*0.06;
+      track.style.transform=`translateX(${-p*max}px)`;
+      fill.style.width=(p*100)+'%';
+      setEra(Math.min(eras.length-1,Math.floor(p*eras.length)));
+      k=false;
+    });
+  },{passive:true});
+})();
+</script>
+</body>
+</html>

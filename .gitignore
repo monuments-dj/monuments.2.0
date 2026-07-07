@@ -30,3 +30,5 @@ tools/snaps/
 /tools/os9full.mjs
 /tools/footcheck.mjs
 /tools/foot1.mjs
+/tools/copysnap.mjs
+/tools/rcpt.mjs

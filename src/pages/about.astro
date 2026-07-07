@@ -60,7 +60,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @keyframes rise{to{transform:translateY(0)}}
 .hero .nfo{position:absolute;right:var(--pad);bottom:12vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
 .hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
-.hero .sub{position:absolute;left:var(--pad);bottom:12vh;max-width:40ch;color:#d9d6d0;font-size:16px;opacity:0;animation:fade 1s .7s forwards}
 @keyframes fade{to{opacity:1}}
 
 .statrow{background:var(--struct)}
@@ -78,9 +77,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .file .photo .lead-tag i{color:var(--red);font-style:normal}
 .file .photo .cap{position:absolute;left:12px;bottom:9px;font-family:var(--mono);font-size:10px;color:var(--dim)}
 .file .photo .stamp{position:absolute;z-index:3;top:16px;right:-14px;font-family:var(--mono);font-size:10px;color:var(--red);border:2px solid var(--red);border-radius:6px;padding:5px 10px;transform:rotate(6deg);background:var(--paper)}
-.file h2{font-weight:var(--dispw);font-size:clamp(28px,3.4vw,48px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin:14px 0 22px}
-.file h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
 .file p{color:#4c4a45;max-width:58ch;margin-bottom:1.15em;font-size:18px}
+.file p.lead{color:var(--ink);font-weight:var(--dispw2);font-size:clamp(22px,2.4vw,32px);line-height:1.25;letter-spacing:-.015em;max-width:30ch;margin:14px 0 22px}
 
 /* the roll: career eras as film strips */
 .roll{padding:2vh 0 10vh}
@@ -169,39 +167,20 @@ footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:
 @media (prefers-reduced-motion:reduce){[data-split] .sl>span{transform:none}}
 
 
-/* career timeline: pinned scroll-scrub through the eras */
-.tl{height:520svh;position:relative;background:var(--ink);color:var(--paper)}
-.tl-pin{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:4vh}
-.tl-head{width:100%;display:flex;justify-content:space-between;align-items:baseline;gap:30px;flex-wrap:wrap}
-.tl-head h2{font-weight:var(--dispw);font-size:clamp(26px,3.4vw,50px);letter-spacing:-.03em;text-transform:uppercase;color:var(--paper)}
-.tl-head h2 .serif{color:var(--spark);display:inline-block;min-width:5ch}
-.tl-head h2 .serif.swap{animation:wordIn .45s cubic-bezier(.22,1,.36,1)}
-@keyframes wordIn{0%{opacity:0;transform:translateY(60%)}100%{opacity:1;transform:none}}
-.tl-count{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
-.tl-count b{color:var(--spark);font-weight:400}
-.tl-rail{width:100%;height:2px;background:#33312e;position:relative}
-.tl-rail .fill{position:absolute;left:0;top:0;bottom:0;background:var(--spark);width:0%}
-.tl-rail .node{position:absolute;top:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:#33312e;transition:background .3s}
-.tl-rail .node.hit{background:var(--spark)}
-.tl-track{display:flex;gap:5vw;will-change:transform;padding:0 var(--pad)}
-.era-p{flex:0 0 auto;width:min(62vw,860px);display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;background:#1d1c1a;border:1px solid var(--lined);padding:30px}
-.era-p .ph{position:relative;background:#fff;padding:7px 7px 24px}
-.era-p .ph img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(.25) saturate(.9)}
-.era-p .ph .cap{position:absolute;left:9px;bottom:5px;font-family:var(--mono);font-size:9px;color:#8f8d88;text-transform:uppercase}
-.era-p .no{font-family:var(--mono);font-size:10.5px;color:var(--struct);text-transform:uppercase;letter-spacing:.1em}
-.era-p h3{font-weight:var(--dispw);font-size:clamp(24px,2.8vw,42px);letter-spacing:-.03em;line-height:.98;text-transform:uppercase;margin:10px 0 4px;color:var(--paper)}
-.era-p .role{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,1.7vw,24px);color:var(--spark);margin-bottom:14px}
-.era-p ul{list-style:none;margin:0;padding:0}
-.era-p li{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#b9b6b0;padding:7px 0;border-top:1px solid #2c2b28}
-.era-p li b{color:var(--paper);font-weight:400}
-.era-p .here{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:10px;color:var(--ink);background:var(--spark);border-radius:6px;padding:5px 12px;text-transform:uppercase;letter-spacing:.12em}
-.tl-foot{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7a7873}
-@media (max-width:900px),(prefers-reduced-motion:reduce){
-  .tl{height:auto}
-  .tl-pin{position:static;height:auto;padding:8vh 0;gap:3vh}
-  .tl-track{overflow-x:auto;transform:none!important;-webkit-overflow-scrolling:touch}
-  .era-p{width:84vw;grid-template-columns:1fr}
-}
+/* the receipts: cobalt stat band (statrow pattern, gridded) */
+.receipts{background:var(--struct);color:var(--paper);padding:9vh 0}
+.receipts .rk{color:var(--paper);display:block}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 54px;margin-top:22px}
+.ritem{display:flex;gap:14px;align-items:baseline;padding:17px 0;border-top:1px solid rgba(245,243,239,.28);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72)}
+.ritem b{color:var(--paper);font-weight:400;flex:0 0 auto}
+@media (max-width:900px){.rgrid{grid-template-columns:1fr}}
+
+/* in the room: four seats, paper grid */
+.room{padding:11vh 0}
+.roomgrid{display:grid;grid-template-columns:1fr 1fr;gap:44px 64px;margin-top:30px}
+.roomgrid h4{font-weight:var(--dispw);font-size:clamp(20px,2.2vw,30px);letter-spacing:-.02em;text-transform:uppercase}
+.roomgrid p{color:#4c4a45;max-width:46ch;margin-top:8px}
+@media (max-width:900px){.roomgrid{grid-template-columns:1fr;gap:30px}}
 
 .rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
 .rv.in{opacity:1;transform:none}
@@ -209,18 +188,18 @@ footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:
   .file{grid-template-columns:1fr}
   .era{grid-template-columns:1fr;gap:14px}
   .step{grid-template-columns:1fr;gap:8px}
-  .hero .sub{display:none}.hero .nfo{right:auto;left:var(--pad)}
+  .hero .nfo{right:auto;left:var(--pad)}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
-  .hero .t .ln>span{transform:none}.hero .nfo,.hero .sub{opacity:1}.rv{opacity:1;transform:none}.grain{animation:none}
+  .hero .t .ln>span{transform:none}.hero .nfo{opacity:1}.rv{opacity:1;transform:none}.grain{animation:none}
 }
 
 /* footer dock: the floating descriptor + LA clock settle into the footer at page end */
 .foot-dock{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 18px}
 .foot-dock .fd-clock{color:var(--dim)}
 
-/* mobile nav — CSS-only hamburger -> fullscreen menu */
+/* mobile nav · CSS-only hamburger -> fullscreen menu */
 .navburger,.mnav{display:none}
 @media (max-width:680px){
   .corners .c2{display:none}
@@ -271,13 +250,12 @@ footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:
     <span class="ln"><span>I build monuments</span></span>
     <span class="ln"><span>with <span class="serif">my friends</span><span class="spark">.</span></span></span>
   </div>
-  <p class="sub">I'm DJ Ramirez, a creative director. Ten years of wrong briefs, tight timelines, and real stakes. I learned to love that pressure.</p>
   <div class="nfo">
     <span class="h">NFO</span><br>
     Ramirez, DJ · Subject-001<br>
-    Brand Experience &amp;<br>
-    Experiential Creative Director<br>
-    LA / Boise · Est. MMXXVI
+    Creative Director<br>
+    Integrated campaigns · film · stills · experiential<br>
+    LA / Boise · Est. MMXXII
   </div>
 </header>
 
@@ -293,79 +271,37 @@ footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:
     </div>
     <div class="rv">
       <span class="mono" style="color:var(--red)">✳ The short version</span>
-      <h2>Directing is the job. <span class="serif">Caring</span> is the method.</h2>
-      <p>I started in UX, learned the craft in agencies, and earned the title the loud way: on camera, on set, on the hook for the number. Now I run Monuments, a production studio and consultancy based between Los Angeles and Boise.</p>
-      <p>I plug in at the senior level: strategy, creative direction, integrated content. For brands that want to show up in culture and mean it, and for the agencies that serve them.</p>
+      <p class="lead">I'm DJ Ramirez, a creative director. I run Monuments with a small crew and a long list of friends.</p>
+      <p>The last decade: Sony, Intel, Adorama, an Emmy-winning campaign. I've run the room and I've taken a seat in it, whichever the work needed. Clients tend to come back. I like that stat more than the big ones.</p>
+      <p>Half my tools are AI now. The taste is still mine. Ten years in, still taking notes.</p>
     </div>
   </div>
 
-  <section class="tl" id="career">
-    <div class="tl-pin">
-      <div class="wrap tl-head">
-        <h2>DJ, the <span class="serif swap" id="eraWord">creative.</span></h2>
-        <span class="tl-count"><b id="eraNo">01</b> / 04 · the road here · scroll to travel</span>
+  <section class="receipts">
+    <div class="wrap">
+      <span class="mono rk rv">\ The receipts</span>
+      <div class="rgrid">
+        <div class="ritem litrow"><b>4x</b><span>agency revenue grown as creative director</span></div>
+        <div class="ritem litrow"><b>Creative leadership</b><span>from a duo to a full production, scaled to the job</span></div>
+        <div class="ritem litrow"><b>2M+</b><span>audience built, comfortable at scale</span></div>
+        <div class="ritem litrow"><b>3.6M+</b><span>impressions on a single Sony launch</span></div>
+        <div class="ritem litrow"><b>2-4x</b><span>industry-high engagement, verified across Sony campaigns</span></div>
+        <div class="ritem litrow"><b>Repeat clients</b><span>Sony ×4 · Adorama ×3 · one project becomes three</span></div>
+        <div class="ritem litrow"><b>Culture-shifting education campaigns</b><span>an Emmy, a Best of Show, and one still airing three years later</span></div>
+        <div class="ritem litrow"><b>Sony · Intel · Adorama · MSI · Blue Cross · CWI</b><span>the roster</span></div>
       </div>
-      <div class="wrap"><div class="tl-rail"><div class="fill" id="tlFill"></div>
-        <span class="node" style="left:12%"></span><span class="node" style="left:38%"></span><span class="node" style="left:64%"></span><span class="node" style="left:90%"></span>
-      </div></div>
-      <div class="tl-track" id="tlTrack">
-        <article class="era-p" data-word="creative.">
-          <div class="ph"><img src="/gallery/full/p-034.jpg" alt="On set, agency era" loading="lazy"><span class="cap">ERA 01 · THE AGENCY YEARS</span></div>
-          <div>
-            <span class="no">\ Era 01 · Drake Cooper · Boise</span>
-            <h3>Drake Cooper</h3>
-            <p class="role">agency creative</p>
-            <ul>
-              <li><b>Learned speed:</b> concepting daily</li>
-              <li><b>Sold work</b> in the room</li>
-              <li><b>Shipped campaigns</b> on real deadlines</li>
-            </ul>
-          </div>
-        </article>
-        <article class="era-p" data-word="consultant.">
-          <div class="ph"><img src="/case-studies/buck-the-quo/gallery/chop-board.jpg" alt="Buck the Quo" loading="lazy"><span class="cap">ERA 02 · THE CONSULTING YEARS</span></div>
-          <div>
-            <span class="no">\ Era 02 · Buck the Quo</span>
-            <h3>Buck the Quo</h3>
-            <p class="role">creative consultant</p>
-            <ul>
-              <li><b>Emmy-winning</b> film series ✳</li>
-              <li><b>Senior creative</b> on the hook for outcomes</li>
-              <li><b>Story-first</b> consulting, proven on air</li>
-            </ul>
-          </div>
-        </article>
-        <article class="era-p" data-word="director.">
-          <div class="ph"><img src="/about/warehouse.jpg" alt="Art of Visuals era, warehouse set" loading="lazy"><span class="cap">ERA 03 · THE SCALE YEARS</span></div>
-          <div>
-            <span class="no">\ Era 03 · Art of Visuals</span>
-            <h3>Art of Visuals</h3>
-            <p class="role">creative director</p>
-            <ul>
-              <li><b>4x</b> agency revenue growth</li>
-              <li><b>2M+</b> audience scaled</li>
-              <li><b>Up to 30</b> creatives led · on camera</li>
-            </ul>
-          </div>
-        </article>
-        <article class="era-p" data-word="founder.">
-          <div class="ph"><img src="/about/team.jpg" alt="Monuments crew" loading="lazy"><span class="cap">ERA 04 · NOW</span></div>
-          <div>
-            <span class="no">\ Era 04 · Monuments · LA / Boise</span>
-            <h3>Monuments</h3>
-            <p class="role">founder + creative director</p>
-            <ul>
-              <li><b>Own production company</b> + consultancy</li>
-              <li><b>Tess</b> keeps it on the rails</li>
-              <li><b>Less agency,</b> more band</li>
-            </ul>
-            <span class="here">● You are here</span>
-          </div>
-        </article>
-      </div>
-      <div class="wrap tl-foot">Drake Cooper → Buck the Quo → Art of Visuals → Monuments</div>
     </div>
   </section>
+
+  <div class="wrap room">
+    <span class="mono" style="color:var(--red)">\ In the room</span>
+    <div class="roomgrid">
+      <div class="rv"><h4>The pitch.</h4><p>Sold work to Sony and Adorama in the room, then directed what I sold.</p></div>
+      <div class="rv"><h4>The team.</h4><p>Lead when it's needed, plug in when it's not. Ego's not on the call sheet.</p></div>
+      <div class="rv"><h4>The client.</h4><p>One project becomes three. Sony came back four times.</p></div>
+      <div class="rv"><h4>The camera.</h4><p>Hosted for Sony, co-hosted a weekly podcast interviewing CMOs and working creatives. Comfortable carrying a brand's voice with the red light on.</p></div>
+    </div>
+  </div>
 </section>
 
 <section class="crew">
@@ -485,39 +421,6 @@ if(mag&&matchMedia('(pointer:fine)').matches){
 }
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
-
-// career timeline scrub
-(function(){
-  const sec=document.querySelector('.tl'),track=document.getElementById('tlTrack'),
-        word=document.getElementById('eraWord'),no=document.getElementById('eraNo'),
-        fill=document.getElementById('tlFill'),nodes=[...document.querySelectorAll('.tl-rail .node')];
-  if(!sec||!track)return;
-  const eras=[...track.children];let cur=-1;
-  function setEra(i){
-    if(i===cur)return;cur=i;
-    word.textContent=eras[i].dataset.word;
-    word.classList.remove('swap');void word.offsetWidth;word.classList.add('swap');
-    no.textContent=String(i+1).padStart(2,'0');
-    nodes.forEach((n,j)=>n.classList.toggle('hit',j<=i));
-  }
-  setEra(0);
-  if(matchMedia('(prefers-reduced-motion:reduce)').matches||innerWidth<=900)return;
-  let k=false;
-  addEventListener('scroll',()=>{
-    if(k)return;k=true;
-    requestAnimationFrame(()=>{
-      const vh=innerHeight,r=sec.getBoundingClientRect();
-      const total=r.height-vh;
-      const p=Math.min(1,Math.max(0,-r.top/total));
-      const max=track.scrollWidth-innerWidth+innerWidth*0.06;
-      track.style.transform=`translateX(${-p*max}px)`;
-      fill.style.width=(p*100)+'%';
-      setEra(Math.min(eras.length-1,Math.floor(p*eras.length)));
-      k=false;
-    });
-  },{passive:true});
-})();
-
 
 // footer under-reveal sizing
 (function(){
