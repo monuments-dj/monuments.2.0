@@ -178,7 +178,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* the slip */
 .rcpt-hold{position:relative;justify-self:end;width:100%;max-width:420px;filter:drop-shadow(0 30px 44px rgba(10,16,40,.45))}
-.rcpt{position:relative;background:#FCFBF7;color:#26251f;padding:30px 26px 26px;transform:rotate(1.3deg);
+.rcpt{position:relative;background:#FCFBF7;color:#26251f;padding:30px 26px 26px;
   background-image:repeating-linear-gradient(0deg,rgba(38,37,31,.022) 0 1px,transparent 1px 3px)}
 .rcpt::before,.rcpt::after{content:"";position:absolute;left:0;right:0;height:11px;pointer-events:none}
 .rcpt::before{bottom:100%;background:linear-gradient(135deg,#FCFBF7 8px,transparent 0) 0 0/16px 16px repeat-x,linear-gradient(-135deg,#FCFBF7 8px,transparent 0) 8px 0/16px 16px repeat-x}
@@ -204,19 +204,30 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .rcpt .tot .grand .nm,.rcpt .tot .grand .vl{font-size:12.5px;color:var(--red);font-weight:400}
 .rcpt .barcode{height:34px;margin:16px 6px 8px;background:repeating-linear-gradient(90deg,#26251f 0 2px,transparent 2px 5px,#26251f 5px 6px,transparent 6px 11px,#26251f 11px 14px,transparent 14px 17px)}
 .rcpt .rtag{display:block;text-align:center;font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:#8a857a;line-height:2}
-.rcpt .stamp2{position:absolute;top:18px;right:-16px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);border:2px solid var(--red);border-radius:6px;padding:5px 10px;transform:rotate(7deg);background:rgba(252,251,247,.85)}
 @media (max-width:900px){
-  .receipts .rlay{grid-template-columns:1fr}
-  .rcpt-hold{justify-self:center;max-width:400px}
+  .receipts{padding:9vh 0}
+  .receipts .rlay{grid-template-columns:1fr;gap:34px}
+  .rcpt-hold{justify-self:center;max-width:min(400px,100%)}
+  .rcpt{padding:24px 18px 20px}
 }
 @media (prefers-reduced-motion:reduce){.rcpt-hold{clip-path:none!important}.receipts.in .rcpt-hold{transition:none}}
 
-/* in the room: four seats, paper grid */
-.room{padding:11vh 0}
-.roomgrid{display:grid;grid-template-columns:1fr 1fr;gap:44px 64px;margin-top:30px}
-.roomgrid h4{font-weight:var(--dispw);font-size:clamp(20px,2.2vw,30px);letter-spacing:-.02em;text-transform:uppercase}
-.roomgrid p{color:#4c4a45;max-width:46ch;margin-top:8px}
-@media (max-width:900px){.roomgrid{grid-template-columns:1fr;gap:30px}}
+/* in the room: four ruled ledger rows (the services-index pattern, minus hover).
+   Number · bold seat · proof, one baseline; stacks cleanly on mobile. */
+.room{padding:11vh 0 12vh}
+.room .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.room .bar .mono b{color:var(--red)}
+.roomrow{display:grid;grid-template-columns:74px minmax(150px,.55fr) 1.45fr;gap:10px 34px;align-items:baseline;padding:26px 0;border-bottom:1px solid var(--line)}
+.roomrow .no{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--dim)}
+.roomrow .no i{font-style:normal;color:var(--red)}
+.roomrow h4{font-weight:var(--dispw);font-size:clamp(19px,1.9vw,26px);letter-spacing:-.02em;text-transform:uppercase;line-height:1.05}
+.roomrow p{color:#4c4a45;max-width:58ch;font-size:16.5px}
+@media (max-width:760px){
+  .roomrow{grid-template-columns:1fr;gap:6px;padding:20px 0}
+  .roomrow .no{order:1}
+  .roomrow h4{order:2}
+  .roomrow p{order:3}
+}
 
 .rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
 .rv.in{opacity:1;transform:none}
@@ -323,7 +334,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       </div>
       <div class="rcpt-hold">
         <div class="rcpt">
-          <span class="stamp2">Verified</span>
           <div class="rhead">
             <span class="wm">M<i>✳</i>NUMENTS</span>
             <span class="sub">The receipts · Subject-001<br>Ramirez, DJ · Creative Director<br>Roll 2016-2026</span>
@@ -345,19 +355,36 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
             <li class="grand"><span class="nm">Total</span><span class="dots"></span><span class="vl">Worth remembering</span></li>
           </ul>
           <div class="barcode" aria-hidden="true"></div>
-          <span class="rtag">Est. MMXXII &middot; LA / Boise &middot; no refunds on taste</span>
+          <span class="rtag">Est. MMXXII &middot; LA / Boise</span>
         </div>
       </div>
     </div>
   </section>
 
   <div class="wrap room">
-    <span class="mono" style="color:var(--red)">\ In the room</span>
-    <div class="roomgrid">
-      <div class="rv"><h4>The pitch.</h4><p>Sold work to Sony and Adorama in the room, then directed what I sold.</p></div>
-      <div class="rv"><h4>The team.</h4><p>Lead when it's needed, plug in when it's not. Ego's not on the call sheet.</p></div>
-      <div class="rv"><h4>The client.</h4><p>One project becomes three. Sony came back four times.</p></div>
-      <div class="rv"><h4>The camera.</h4><p>Hosted for Sony, co-hosted a weekly podcast interviewing CMOs and working creatives. Comfortable carrying a brand's voice with the red light on.</p></div>
+    <div class="bar">
+      <span class="mono"><b>\ In the room</b> · where I'm useful</span>
+      <span class="mono" style="color:var(--dim)">Four seats</span>
+    </div>
+    <div class="roomrow rv">
+      <span class="no"><i>\</i> 01</span>
+      <h4>The pitch</h4>
+      <p>Sold work to Sony and Adorama in the room, then directed what I sold.</p>
+    </div>
+    <div class="roomrow rv">
+      <span class="no"><i>\</i> 02</span>
+      <h4>The team</h4>
+      <p>Lead when it's needed, plug in when it's not. Ego's not on the call sheet.</p>
+    </div>
+    <div class="roomrow rv">
+      <span class="no"><i>\</i> 03</span>
+      <h4>The client</h4>
+      <p>One project becomes three. Sony came back four times.</p>
+    </div>
+    <div class="roomrow rv">
+      <span class="no"><i>\</i> 04</span>
+      <h4>The camera</h4>
+      <p>Hosted for Sony, co-hosted a weekly podcast interviewing CMOs and working creatives. Comfortable carrying a brand's voice with the red light on.</p>
     </div>
   </div>
 </section>
