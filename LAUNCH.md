@@ -25,27 +25,27 @@ Every item below traces to one or both. The domain swap is the finish line and h
 ## A · Launch blockers — build fixes (Claude)
 - [ ] **Home: proof is hover-only.** Role + achievements on reel cards never render on touch; surface role + one stat persistently on every card (mobile especially).
 - [ ] **AOV flagship: placeholder film.** "Play film" plays a hardcoded stand-in reel; caption literally says "stand-in: studio reel"; "the reel that sold the room" appears twice. Needs the real AOV reel (DJ owes the link/file) + copy dedupe.
-- [ ] **Work index: 30 commercials vs 18 projects** one line apart. Reconcile (DJ: give the real commercial count or drop the number).
+- [x] Work hero · RESOLVED: now "30 campaigns"
 - [ ] **Work index: On Camera row ID "MC-2026-07" dated 2023.** Align the catalog ID.
-- [ ] **On Camera: "Tapes · 11" vs "12 tapes"** (12 actually render). Reconcile to 12.
+- [x] On Camera tape count · FIXED: 12 everywhere
 - [ ] **Contact: "Not ready to fill out a form? Cool."** No form exists. Cut or rewrite the line.
 - [ ] **Services: "Tess keeps it on the rails"** is an unexplained name to strangers. Give Tess one identifying clause or move her to About (she's introduced there).
-- [ ] **Buck the Quo: award art vs award name.** Badge files are emmy-*.png rendered as "Rocky Advertising Awards". If the artwork shows Emmy statuettes this visually breaks the locked Emmy=Know Vape rule. Swap art or confirm.
+- [x] BTQ award art · CLEARED: files are misnamed emmy-*.png but the artwork IS Rockies art; awards line now "every category won · Best of Show" per DJ
 - [ ] **Buck the Quo: role framing** ("directed the experiential build" vs "Shooter + editor" vs "on the ground") must reconcile to one story.
 - [ ] **Photography: fake taxonomy.** Tabs claim Brand/Editorial/Food/Motion/Non-Profit but frames are bucketed by ID number. Blocked on DJ's real categorization (see C) — then wire real buckets.
 - [ ] **Photography: no CTA.** Add a next step at the end of the archive.
 - [ ] Sweep all 18 /work rows: every data-img, data-snip, poster, and film asset resolves (Know Vape's full inventory included).
 
 ## B · Claims to verify or soften (DJ — the stat rule is yours)
-- [ ] "4x agency revenue" — the flagship rests on it. Timeframe/attribution you'd say in an interview.
-- [ ] "2-4x industry-high engagement, verified across Sony campaigns" — 2-4x vs WHAT benchmark, verified by WHOM.
-- [ ] "2M+ audience built" — yours or the brand's? One clause fixes it.
-- [ ] "Inside a 160M+ campaign" (Adorama) — fine as campaign context; confirm wording.
-- [ ] "18,000+ conversations" (BTQ) — source you'd cite.
-- [ ] On Camera "audiences spanning 2M+ followers" — attribute or cut.
-- [ ] CWI researched claims: "aired during the Oscars" + "nine straight semesters of enrollment growth" (sources in code comments) — confirm you're comfortable owning them.
+- [x] "4x agency revenue" · RESOLVED: Art of Visuals, over four years · applied on receipt, home reel, AOV case.
+- [x] "2-4x engagement" · SOFTENED per DJ: now "above benchmark across Sony campaigns" (industry-high/verified cut).
+- [x] "2M+" · RESOLVED: the brand's audience, engaged by DJ · now "brand audience engaged" in ticker + receipt.
+- [x] "Inside a 160M+ campaign" · kept as campaign context (DJ ok)
+- [x] "18,000+ conversations" · RESOLVED: Drake Cooper campaign research, now attributed on the BTQ stat.
+- [x] On Camera audience · RESOLVED: AOV 1.9M IG+YT, 200K second channel, 30K podcast peak · applied; 300K podcast claim corrected
+- [x] CWI researched claims · DJ KEEPS both ("find more if you can" — extra sourced facts queued: fall 2024→2025 +6.8% enrollment, grad rate 36% vs 27%, transfer +7.6%).
 - [ ] "Est. MMXXII" vs "a decade / Roll 2016-2026" — one clarifying word so the studio's age and your career don't read as the same claim.
-- [ ] Rocky Awards exact name + tiers for BTQ ("Best of Show at the Rockys").
+- [x] Rockys · RESOLVED per DJ: won every category entered + Best of Show, cited on Drake Cooper's site · applied.
 
 ## C · Assets DJ owes
 - [ ] **AOV reel** (the real one) — unblocks the flagship.
@@ -59,7 +59,7 @@ Every item below traces to one or both. The domain swap is the finish line and h
 
 ## D · Build queue (Claude, DJ-directed 2026-07-07)
 - [x] **About creed — APPROVED + SHIPPED 2026-07-07.** The Short Version is now The Creed: four locked beliefs stacked, supports in DJ's own words. (Proposal doc: PHILOSOPHY.md.)
-- [ ] **Services collapse (decision 2, AWAITING DJ):** 8 offers → 3 belief-led buckets; needs his yes + his "what I don't do" lines. Proposal in PHILOSOPHY.md.
+- [x] **Services collapse — APPROVED + SHIPPED 2026-07-07 as /capabilities** (renamed per DJ): refusals opener ("Less agency, more rock & roll." + 2 confirmed refusals, more candidates awaiting his pick), three belief-led doors, offers demoted to rows, /services redirects. Nav swept site-wide.
 - [ ] **X > Y ladder (decision 3, AWAITING DJ):** adopt as site device? Which lines?
 - [ ] **Work page: redesign thumbnails** + write a small blurb per case study + the words "case study" must appear on the page.
 - [ ] **Home: bring back OG homepage elements** — DJ to point at which (old WordPress home? /lab/home? the pre-v3 hero?). List candidates for him.

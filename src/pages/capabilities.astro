@@ -7,7 +7,7 @@ import PageFooter from '../components/PageFooter.astro';
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<title>Services · Monuments</title>
+<title>Capabilities · Monuments</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
@@ -66,6 +66,20 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* services index: giant rows + cursor-trailing preview */
 .svc{padding:8vh 0 4vh}
+/* the refusals: the negative definition opens the page (W+K shape, DJ's words) */
+.refuse{padding:9vh 0 2vh}
+.refuse .big{font-weight:var(--dispw);font-size:clamp(30px,4.4vw,64px);letter-spacing:-.03em;line-height:1;text-transform:uppercase}
+.refuse .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;color:#b96a77}
+.refuse ul{list-style:none;margin:22px 0 0;padding:0;display:flex;gap:10px 34px;flex-wrap:wrap}
+.refuse li{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#55524c}
+.refuse li i{font-style:normal;color:var(--red);margin-right:8px}
+
+/* door heads: three belief-led buckets over the rows */
+.doorhead{margin-top:8vh;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.doorhead:first-of-type{margin-top:0}
+.doorhead .dk{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+.doorhead h3{font-weight:var(--dispw);font-size:clamp(24px,2.9vw,42px);letter-spacing:-.028em;line-height:1.04;text-transform:uppercase;margin-top:8px}
+.doorhead h3 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
 .svc .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:13px;border-bottom:2px solid var(--ink)}
 .svc .bar .mono b{color:var(--red)}
 .srow{position:relative;display:grid;grid-template-columns:110px 1fr auto;gap:26px;align-items:baseline;padding:40px 0;border-bottom:1px solid var(--line);transition:background .3s,padding-left .4s cubic-bezier(.22,1,.36,1)}
@@ -173,15 +187,15 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <body>
 <input type="checkbox" id="navtog" class="navtog-in" hidden>
 <label for="navtog" class="navburger" aria-label="Menu"><span></span><span></span><span></span></label>
-<nav class="mnav" aria-label="Mobile menu"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a><span class="mnav-foot">monuments.cc@gmail.com</span></nav>
+<nav class="mnav" aria-label="Mobile menu"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/about">About</a><a href="/capabilities">Capabilities</a><a href="/contact">Contact</a><span class="mnav-foot">monuments.cc@gmail.com</span></nav>
 
 <div class="grain" aria-hidden="true"></div>
 <div class="companion" aria-hidden="true">✳</div>
 
 <div class="corners">
   <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
-  <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/about">About</a><a href="/services">Services</a><a href="/contact">Contact</a></span>
-  <span class="c3">Services · in to serve the work</span>
+  <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/about">About</a><a href="/capabilities">Capabilities</a><a href="/contact">Contact</a></span>
+  <span class="c3">Capabilities · in to serve the work</span>
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
@@ -189,7 +203,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <header class="hero">
   <svg class="sunwm" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays2"></g></svg>
   <div class="wrap inner">
-    <span class="kick mono">Services · DJ Ramirez · Monuments</span>
+    <span class="kick mono">Capabilities · DJ Ramirez · Monuments</span>
     <h1>
       <span class="ln"><span>In to serve the work,</span></span>
       <span class="ln"><span><span class="serif">not steal the show</span>.</span></span>
@@ -205,53 +219,76 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </header>
 
+<section class="refuse wrap">
+  <div class="big rv">Less agency, <span class="serif">more rock &amp; roll.</span></div>
+  <!-- Refusals: DJ's confirmed two; more candidates awaiting his pick (LAUNCH.md) -->
+  <ul class="rv">
+    <li><i>✳</i>I don't do deck theater.</li>
+    <li><i>✳</i>I don't lead with gear talk. I lead with the idea.</li>
+  </ul>
+</section>
+
 <section class="svc wrap" id="services">
   <div class="bar">
-    <span class="mono"><b>The offer</b> · eight ways in</span>
+    <span class="mono"><b>Capabilities</b> · three doors, eight crafts</span>
     <span class="mono" style="color:#8f8d88">Hover to preview</span>
   </div>
 
-  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-044.jpg" data-cap="SVC-01 · THE CALL IN THE ROOM">
+  <div class="doorhead rv">
+    <span class="dk">Door 01 · Direction &amp; Brand</span>
+    <h3>The senior thinking that locks <span class="serif">what the work says.</span></h3>
+  </div>
+  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-044.jpg" data-cap="CAP-01 · THE CALL IN THE ROOM">
     <span class="no">\ 01</span>
     <span class="t">Creative <span class="serif">Direction</span></span>
-    <span class="d">Strategy, concept, and the call in the room. The senior thinking that locks what the work says.</span>
+    <span class="d">Strategy, concept, and the call in the room.</span>
   </a>
-  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-002.jpg" data-cap="SVC-02 · ON SET">
+  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-002.jpg" data-cap="CAP-02 · ON SET">
     <span class="no">\ 02</span>
     <span class="t">Direction</span>
     <span class="d">On set and on camera. Performance, pacing, and the moment that makes the cut.</span>
   </a>
-  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-061.jpg" data-cap="SVC-03 · BUILT TO TRAVEL">
+  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-044.jpg" data-cap="CAP-03 · ZERO TO SHELF">
     <span class="no">\ 03</span>
-    <span class="t">Integrated <span class="serif">Campaigns</span></span>
-    <span class="d">One story built to travel: film, stills, social, and the moment people show up for.</span>
-  </a>
-  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-044.jpg" data-cap="SVC-04 · ZERO TO SHELF">
-    <span class="no">\ 04</span>
     <span class="t">Brand <span class="serif">Building</span></span>
     <span class="d">Naming to packaging. Identity systems that hold up long after launch day.</span>
   </a>
-  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-053.jpg" data-cap="SVC-05 · THE ROOM ITSELF">
-    <span class="no">\ 05</span>
-    <span class="t">Experiential</span>
-    <span class="d">Work people walk into. Containers, kit reveals, rooms built to earn a real conversation.</span>
-  </a>
-  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-001.jpg" data-cap="SVC-06 · THE FRAMES BETWEEN">
-    <span class="no">\ 06</span>
-    <span class="t">Photography</span>
-    <span class="d">Campaign stills, editorial, and the frames between takes. Shot like the film, not alongside it.</span>
-  </a>
-  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-041.jpg" data-cap="SVC-07 · YOUR TEAM, MY RECEIPTS">
-    <span class="no">\ 07</span>
+  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-041.jpg" data-cap="CAP-04 · YOUR TEAM, MY RECEIPTS">
+    <span class="no">\ 04</span>
     <span class="t">Creative <span class="serif">Consulting</span></span>
     <span class="d">Your team, my experience. Audits, sprints, and getting the work unstuck.</span>
   </a>
-  <a class="litrow srow" href="/ai" data-img="/gallery/full/p-061.jpg" data-cap="SVC-08 · HUMAN + MACHINE">
+
+  <div class="doorhead rv">
+    <span class="dk">Door 02 · Campaigns &amp; Content</span>
+    <h3>One story, <span class="serif">built to travel.</span></h3>
+  </div>
+  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-061.jpg" data-cap="CAP-05 · BUILT TO TRAVEL">
+    <span class="no">\ 05</span>
+    <span class="t">Integrated <span class="serif">Campaigns</span></span>
+    <span class="d">Film, stills, social, and the moment people show up for.</span>
+  </a>
+  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-053.jpg" data-cap="CAP-06 · THE ROOM ITSELF">
+    <span class="no">\ 06</span>
+    <span class="t">Experiential</span>
+    <span class="d">Work people walk into. Containers, kit reveals, rooms built to earn a real conversation.</span>
+  </a>
+  <a class="litrow srow" href="/contact" data-img="/gallery/full/p-001.jpg" data-cap="CAP-07 · THE FRAMES BETWEEN">
+    <span class="no">\ 07</span>
+    <span class="t">Photography</span>
+    <span class="d">Campaign stills, editorial, and the frames between takes. Shot like the film, not alongside it.</span>
+  </a>
+
+  <div class="doorhead rv">
+    <span class="dk">Door 03 · AI Systems</span>
+    <h3>AI is a tool, <span class="serif">not a solution.</span></h3>
+  </div>
+  <a class="litrow srow" href="/ai" data-img="/gallery/full/p-061.jpg" data-cap="CAP-08 · HUMAN + MACHINE">
     <span class="no">\ 08</span>
     <span class="t">AI <span class="serif">Systems</span></span>
     <span class="d">I build AI into creative and business workflows without losing the plot: audits, pilots, and systems your team actually uses. The taste stays human.</span>
   </a>
-  <p class="litrow note mono">Production comes standard on all of it. Tess keeps it on the rails.</p>
+  <p class="litrow note mono">Production comes standard on all of it. Tess, my project manager, keeps it on the rails.</p>
 </section>
 <div id="preview"><img alt=""><span class="cap"></span></div>
 
@@ -290,7 +327,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 </div><!--/over-->
 <div class="underfoot">
-<PageFooter tag="Services" />
+<PageFooter tag="Capabilities" />
 </div><!--/underfoot-->
 
 <script is:inline>

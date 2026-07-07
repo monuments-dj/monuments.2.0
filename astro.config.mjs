@@ -21,5 +21,7 @@ export default defineConfig({
     allowedDomains: [{ hostname: 'monuments-2-0.vercel.app' }],
   },
   integrations: [react(), keystatic()],
+  // /services renamed to /capabilities (DJ, 2026-07-07); keep old links alive
+  redirects: { '/services': '/capabilities' },
   adapter: vercel(),
 });
