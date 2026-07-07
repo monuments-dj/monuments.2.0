@@ -79,7 +79,15 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .file .photo .cap{position:absolute;left:12px;bottom:9px;font-family:var(--mono);font-size:10px;color:var(--dim)}
 .file .photo .stamp{position:absolute;z-index:3;top:16px;right:-14px;font-family:var(--mono);font-size:10px;color:var(--red);border:2px solid var(--red);border-radius:6px;padding:5px 10px;transform:rotate(6deg);background:var(--paper)}
 .file p{color:#4c4a45;max-width:58ch;margin-bottom:1.15em;font-size:18px}
-.file p.lead{color:var(--ink);font-weight:var(--dispw2);font-size:clamp(22px,2.4vw,32px);line-height:1.25;letter-spacing:-.015em;max-width:30ch;margin:14px 0 22px}
+/* THE CREED: DJ's four locked beliefs, stacked. Belief big with the serif turn;
+   one supporting line under each, all in his own locked words. */
+.creed-intro{color:#4c4a45;max-width:52ch;font-size:18px;margin:14px 0 6px}
+.creed{list-style:none;margin:0;padding:0}
+.creed li{padding:26px 0;border-bottom:1px solid var(--line)}
+.creed li:last-child{border-bottom:none}
+.creed b{display:block;font-weight:var(--dispw);font-size:clamp(24px,2.8vw,40px);letter-spacing:-.028em;line-height:1.04;text-transform:uppercase;color:var(--ink)}
+.creed b .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;color:#b96a77}
+.creed li>span{display:block;margin-top:8px;color:#4c4a45;font-size:16.5px;max-width:52ch}
 
 /* the roll: career eras as film strips */
 .roll{padding:2vh 0 10vh}
@@ -317,10 +325,26 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <span class="cap">SUBJECT-001 · RAMIREZ, DJ · CREATIVE DIRECTOR</span>
     </div>
     <div class="rv">
-      <span class="mono" style="color:var(--red)">✳ The short version</span>
-      <p class="lead">I'm DJ Ramirez, a creative director. I run Monuments with a small crew and a long list of friends.</p>
-      <p>The last decade: Sony, Intel, Adorama, an Emmy-winning campaign. I've run the room and I've taken a seat in it, whichever the work needed. Clients tend to come back. I like that stat more than the big ones.</p>
-      <p>Half my tools are AI now. The taste is still mine. Ten years in, still taking notes.</p>
+      <span class="mono" style="color:var(--red)">✳ The creed</span>
+      <p class="creed-intro">I'm DJ Ramirez, a creative director. I run Monuments with a small crew and a long list of friends. Four things I believe:</p>
+      <ul class="creed">
+        <li class="rv">
+          <b>The tools are everywhere. <span class="serif">Taste isn't.</span></b>
+          <span>Half my tools are AI now. The taste is still mine.</span>
+        </li>
+        <li class="rv">
+          <b>AI is a tool, <span class="serif">not a solution.</span></b>
+          <span>I directed people before I directed AI.</span>
+        </li>
+        <li class="rv">
+          <b>Every great story is a <span class="serif">human story.</span></b>
+          <span>The point is the story. The moment. Always has been.</span>
+        </li>
+        <li class="rv">
+          <b>Less agency, <span class="serif">more rock &amp; roll.</span></b>
+          <span>I show up to serve the work, not the other way around.</span>
+        </li>
+      </ul>
     </div>
   </div>
 
@@ -329,7 +353,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <div class="rside rv">
         <span class="mono rk">\ The receipts</span>
         <h2>A decade, <span class="serif">itemized.</span></h2>
-        <p class="rsub">Numbers out of context are noise. These are the ones that held up in rooms that mattered, kept on file like everything else here.</p>
+        <p class="rsub">The last decade: Sony, Intel, Adorama, an Emmy-winning campaign. I've run the room and I've taken a seat in it, whichever the work needed. Clients tend to come back. I like that stat more than the big ones.</p>
         <span class="rfoot">✳ Nothing on this slip I wouldn't say in an interview.</span>
       </div>
       <div class="rcpt-hold">
