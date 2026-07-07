@@ -35,3 +35,7 @@ tools/snaps/
 /tools/photobreak.mjs
 /tools/photoverify.mjs
 /tools/numcheck*.mjs
+/tools/rcptsnap.mjs
+/tools/rcptdbg.mjs
+/tools/rcpterr.mjs
+/tools/ioclip.mjs

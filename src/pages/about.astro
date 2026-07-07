@@ -165,13 +165,51 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @media (prefers-reduced-motion:reduce){[data-split] .sl>span{transform:none}}
 
 
-/* the receipts: cobalt stat band (statrow pattern, gridded) */
-.receipts{background:var(--struct);color:var(--paper);padding:9vh 0}
-.receipts .rk{color:var(--paper);display:block}
-.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 54px;margin-top:22px}
-.ritem{display:flex;gap:14px;align-items:baseline;padding:17px 0;border-top:1px solid rgba(245,243,239,.28);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72)}
-.ritem b{color:var(--paper);font-weight:400;flex:0 0 auto}
-@media (max-width:900px){.rgrid{grid-template-columns:1fr}}
+/* THE RECEIPTS: an actual printed receipt on the cobalt desk. The site speaks in
+   paper artifacts (call sheets, case files, polaroids); the career stats come as
+   a thermal till slip that PRINTS on scroll (steps() clip = printer feed). */
+.receipts{background:var(--struct);color:var(--paper);padding:12vh 0;overflow:hidden}
+.receipts .rlay{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,430px);gap:clamp(40px,5vw,90px);align-items:center}
+.receipts .rk{color:rgba(245,243,239,.85);display:block}
+.receipts h2{font-weight:var(--dispw);font-size:clamp(30px,3.8vw,58px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;margin:14px 0 18px}
+.receipts h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;color:var(--rose)}
+.receipts .rsub{color:rgba(245,243,239,.8);max-width:44ch;font-size:17px}
+.receipts .rfoot{margin-top:26px;font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:rgba(245,243,239,.55)}
+
+/* the slip */
+.rcpt-hold{position:relative;justify-self:end;width:100%;max-width:420px;filter:drop-shadow(0 30px 44px rgba(10,16,40,.45))}
+.rcpt{position:relative;background:#FCFBF7;color:#26251f;padding:30px 26px 26px;transform:rotate(1.3deg);
+  background-image:repeating-linear-gradient(0deg,rgba(38,37,31,.022) 0 1px,transparent 1px 3px)}
+.rcpt::before,.rcpt::after{content:"";position:absolute;left:0;right:0;height:11px;pointer-events:none}
+.rcpt::before{bottom:100%;background:linear-gradient(135deg,#FCFBF7 8px,transparent 0) 0 0/16px 16px repeat-x,linear-gradient(-135deg,#FCFBF7 8px,transparent 0) 8px 0/16px 16px repeat-x}
+.rcpt::after{top:100%;background:linear-gradient(45deg,#FCFBF7 8px,transparent 0) 0 0/16px 16px repeat-x,linear-gradient(-45deg,#FCFBF7 8px,transparent 0) 8px 0/16px 16px repeat-x}
+/* print-on-scroll: the clip retracts in printer-feed steps. NOTE: the observer
+   watches the SECTION, not the slip — Chromium counts an element's own clip-path
+   against its intersection ratio, so a fully-clipped slip never crosses threshold. */
+.rcpt-hold{clip-path:inset(0 0 101% 0)}
+.receipts.in .rcpt-hold{clip-path:inset(-16px -28px -20px -28px);transition:clip-path 2.1s steps(22,end) .3s}
+.rcpt .rhead{text-align:center;padding-bottom:14px;border-bottom:1px dashed #b9b2a2}
+.rcpt .rhead .wm{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:19px;letter-spacing:-.01em;color:#161514;margin-bottom:4px}
+.rcpt .rhead .wm i{font-style:normal;color:var(--red)}
+.rcpt .rhead .sub{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#8a857a;margin-top:6px;line-height:1.9}
+.rcpt ul{list-style:none;margin:14px 0 0;padding:0}
+.rcpt li{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;padding:7.5px 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#3d3b34;line-height:1.5}
+.rcpt li .nm{flex:0 1 auto}
+.rcpt li .dots{flex:1 0 12px;border-bottom:2px dotted #c4bdac;transform:translateY(-3px)}
+.rcpt li .vl{flex:0 0 auto;text-align:right;color:#161514;max-width:46%}
+.rcpt li .note{display:block;width:100%;font-size:9px;color:#8a857a;letter-spacing:.08em;margin-top:2px}
+.rcpt li.wide{flex-wrap:wrap}
+.rcpt .rdiv{border:none;border-top:1px dashed #b9b2a2;margin:12px 0 4px}
+.rcpt .tot li{padding:5px 0}
+.rcpt .tot .grand .nm,.rcpt .tot .grand .vl{font-size:12.5px;color:var(--red);font-weight:400}
+.rcpt .barcode{height:34px;margin:16px 6px 8px;background:repeating-linear-gradient(90deg,#26251f 0 2px,transparent 2px 5px,#26251f 5px 6px,transparent 6px 11px,#26251f 11px 14px,transparent 14px 17px)}
+.rcpt .rtag{display:block;text-align:center;font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:#8a857a;line-height:2}
+.rcpt .stamp2{position:absolute;top:18px;right:-16px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);border:2px solid var(--red);border-radius:6px;padding:5px 10px;transform:rotate(7deg);background:rgba(252,251,247,.85)}
+@media (max-width:900px){
+  .receipts .rlay{grid-template-columns:1fr}
+  .rcpt-hold{justify-self:center;max-width:400px}
+}
+@media (prefers-reduced-motion:reduce){.rcpt-hold{clip-path:none!important}.receipts.in .rcpt-hold{transition:none}}
 
 /* in the room: four seats, paper grid */
 .room{padding:11vh 0}
@@ -276,17 +314,39 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 
   <section class="receipts">
-    <div class="wrap">
-      <span class="mono rk rv">\ The receipts</span>
-      <div class="rgrid">
-        <div class="ritem litrow"><b>4x</b><span>agency revenue grown as creative director</span></div>
-        <div class="ritem litrow"><b>Creative leadership</b><span>from a duo to a full production, scaled to the job</span></div>
-        <div class="ritem litrow"><b>2M+</b><span>audience built, comfortable at scale</span></div>
-        <div class="ritem litrow"><b>3.6M+</b><span>impressions on a single Sony launch</span></div>
-        <div class="ritem litrow"><b>2-4x</b><span>industry-high engagement, verified across Sony campaigns</span></div>
-        <div class="ritem litrow"><b>Repeat clients</b><span>Sony ×4 · Adorama ×3 · one project becomes three</span></div>
-        <div class="ritem litrow"><b>Culture-shifting education campaigns</b><span>an Emmy, a Best of Show, and one still airing three years later</span></div>
-        <div class="ritem litrow"><b>Sony · Intel · Adorama · MSI · Blue Cross · CWI</b><span>the roster</span></div>
+    <div class="wrap rlay">
+      <div class="rside rv">
+        <span class="mono rk">\ The receipts</span>
+        <h2>A decade, <span class="serif">itemized.</span></h2>
+        <p class="rsub">Numbers out of context are noise. These are the ones that held up in rooms that mattered, kept on file like everything else here.</p>
+        <span class="rfoot">✳ Nothing on this slip I wouldn't say in an interview.</span>
+      </div>
+      <div class="rcpt-hold">
+        <div class="rcpt">
+          <span class="stamp2">Verified</span>
+          <div class="rhead">
+            <span class="wm">M<i>✳</i>NUMENTS</span>
+            <span class="sub">The receipts · Subject-001<br>Ramirez, DJ · Creative Director<br>Roll 2016-2026</span>
+          </div>
+          <ul>
+            <li><span class="nm">Agency revenue grown as creative director</span><span class="dots"></span><span class="vl">4x</span></li>
+            <li><span class="nm">Creative leadership</span><span class="dots"></span><span class="vl">Duo to full production</span><span class="note">scaled to the job</span></li>
+            <li><span class="nm">Audience built, comfortable at scale</span><span class="dots"></span><span class="vl">2M+</span></li>
+            <li><span class="nm">Impressions on a single Sony launch</span><span class="dots"></span><span class="vl">3.6M+</span></li>
+            <li><span class="nm">Industry-high engagement, verified across Sony campaigns</span><span class="dots"></span><span class="vl">2-4x</span></li>
+            <li><span class="nm">Repeat clients</span><span class="dots"></span><span class="vl">Sony &times;4 &middot; Adorama &times;3</span><span class="note">one project becomes three</span></li>
+            <li class="wide"><span class="nm">Culture-shifting education campaigns</span><span class="dots"></span><span class="vl">An Emmy + a Best of Show</span><span class="note">and one still airing three years later</span></li>
+            <li class="wide"><span class="nm">The roster</span><span class="dots"></span><span class="vl">Sony &middot; Intel &middot; Adorama &middot; MSI &middot; Blue Cross &middot; CWI</span></li>
+          </ul>
+          <hr class="rdiv">
+          <ul class="tot">
+            <li><span class="nm">Subtotal</span><span class="dots"></span><span class="vl">One decade</span></li>
+            <li><span class="nm">Taste</span><span class="dots"></span><span class="vl">Not for sale</span></li>
+            <li class="grand"><span class="nm">Total</span><span class="dots"></span><span class="vl">Worth remembering</span></li>
+          </ul>
+          <div class="barcode" aria-hidden="true"></div>
+          <span class="rtag">Est. MMXXII &middot; LA / Boise &middot; no refunds on taste</span>
+        </div>
       </div>
     </div>
   </section>
@@ -379,7 +439,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <script is:inline>
 (function(){const g=document.getElementById('rays');let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s})();
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
-document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+document.querySelectorAll('.rv, .receipts').forEach(el=>io.observe(el));
 
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
   const hImg=document.querySelector('.hero>img'),hT=document.querySelector('.hero .t'),crew=document.querySelector('.crew img');
