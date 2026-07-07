@@ -58,7 +58,9 @@ Every item below traces to one or both. The domain swap is the finish line and h
 - [ ] Crew names ("With" lists) for the call sheets.
 
 ## D · Build queue (Claude, DJ-directed 2026-07-07)
-- [ ] **Philosophy elevation: About + Services.** References locked: Ogilvy, Day One, Laundry Service, Belief Agency, W+K. Research running; deliverable = a POV/manifesto proposal for DJ's approval BEFORE any copy changes (the v3 copy is locked until he signs the new direction). Goal: pages that could attract big work, not a service menu.
+- [x] **About creed — APPROVED + SHIPPED 2026-07-07.** The Short Version is now The Creed: four locked beliefs stacked, supports in DJ's own words. (Proposal doc: PHILOSOPHY.md.)
+- [ ] **Services collapse (decision 2, AWAITING DJ):** 8 offers → 3 belief-led buckets; needs his yes + his "what I don't do" lines. Proposal in PHILOSOPHY.md.
+- [ ] **X > Y ladder (decision 3, AWAITING DJ):** adopt as site device? Which lines?
 - [ ] **Work page: redesign thumbnails** + write a small blurb per case study + the words "case study" must appear on the page.
 - [ ] **Home: bring back OG homepage elements** — DJ to point at which (old WordPress home? /lab/home? the pre-v3 hero?). List candidates for him.
 - [ ] **Bring back the reel scroller from the last design** (ReelReveal.astro exists in components; confirm this is the one).
