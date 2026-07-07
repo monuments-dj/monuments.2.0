@@ -32,3 +32,6 @@ tools/snaps/
 /tools/foot1.mjs
 /tools/copysnap.mjs
 /tools/rcpt.mjs
+/tools/photobreak.mjs
+/tools/photoverify.mjs
+/tools/numcheck*.mjs

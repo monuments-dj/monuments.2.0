@@ -1,5 +1,6 @@
 ---
 import AchievementsTicker from '../components/AchievementsTicker.astro';
+import PageFooter from '../components/PageFooter.astro';
 const bts = Array.from({ length: 15 }, (_, i) => `/about-bts/abts-${String(i + 1).padStart(2, '0')}.mp4`);
 ---
 <!doctype html>
@@ -147,9 +148,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
 .cta .pill{display:inline-flex;margin-top:42px;padding:20px 38px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
 .cta .pill:hover{background:var(--spark)}
-footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:34px 0 18px}
-footer .row{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:8px 22px}
-footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--dim);text-transform:none}
 
 
 /* footer under-reveal (tinywins) */
@@ -375,13 +373,7 @@ footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:
 
 </div><!--/over-->
 <div class="underfoot">
-<footer>
-  <div class="wrap row mono">
-    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
-    <span class="blk">built to be remembered</span>
-    <span>About</span>
-  </div>
-</footer>
+<PageFooter tag="About" />
 </div><!--/underfoot-->
 
 <script is:inline>

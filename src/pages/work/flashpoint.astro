@@ -1,6 +1,7 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
+import PageFooter from '../../components/PageFooter.astro';
 
 // === Flashpoint · THE CUT case page ===
 // Full rebrand for Adorama's photography-gear label. Assets in /public/case-studies/flashpoint.
@@ -181,10 +182,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
 .cta a.talk{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1.5px solid rgba(245,243,239,.75);padding:16px 26px;border-radius:50%;transition:background .3s,color .3s,transform .3s;display:inline-block}
 .cta a.talk:hover{background:var(--paper);color:var(--struct);transform:scale(1.05)}
-
-footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:34px 0 18px}
-footer .row{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:8px 22px}
-footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--dim);text-transform:none}
 
 .over{position:relative;z-index:1;background:inherit}
 .underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
@@ -408,13 +405,7 @@ footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:
   img="/case-studies/waffle-me-up/cover.jpg"
   code="MC-2019-05"
 />
-<footer>
-  <div class="wrap row mono">
-    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
-    <span class="blk">built to be remembered</span>
-    <span>Case file MC-2020-02</span>
-  </div>
-</footer>
+<PageFooter tag="Case file MC-2020-02" />
 </div><!--/underfoot-->
 
 <script is:inline>

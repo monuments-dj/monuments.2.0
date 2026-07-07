@@ -1,0 +1,22 @@
+---
+// PageFooter.astro · the one true footer, one baseline, centered.
+// `tag` is the per-page sign-off (DJ likes that it differs on every page:
+// "Photography", "About", "Case file MC-2023-05"...). Styling lives HERE so
+// pages can never drift apart again. Self-contained: no reliance on page .wrap.
+interface Props { tag: string; }
+const { tag } = Astro.props;
+---
+<footer class="pfoot">
+  <div class="row">
+    <span>Monuments &copy; MMXXVI &middot; ELMT.NO.004259</span>
+    <span class="blk">built to be remembered</span>
+    <span>{tag}</span>
+  </div>
+</footer>
+<style>
+.pfoot{background:var(--ink,#161514);color:var(--dim,#8f8d88);border-top:1px solid var(--lined,#2c2b29);padding:34px 0 18px;position:relative;z-index:3}
+.pfoot .row{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:8px 22px;
+  max-width:var(--wrap,1380px);margin:0 auto;padding-left:var(--pad,clamp(22px,4.6vw,44px));padding-right:var(--pad,clamp(22px,4.6vw,44px))}
+.pfoot span{font-family:var(--mono,'Fragment Mono',monospace);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim,#8f8d88)}
+.pfoot .blk{text-transform:none}
+</style>

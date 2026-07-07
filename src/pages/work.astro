@@ -1,5 +1,6 @@
 ---
 import AchievementsTicker from '../components/AchievementsTicker.astro';
+import PageFooter from '../components/PageFooter.astro';
 ---
 <!doctype html>
 <html lang="en">
@@ -172,9 +173,6 @@ body.gridview .arch{padding-bottom:0}
 .cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
 .cta .pill{display:inline-flex;margin-top:26px;padding:17px 34px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
 .cta .pill:hover{background:var(--spark)}
-footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:34px 0 18px}
-footer .row{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:8px 22px}
-footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--dim);text-transform:none}
 
 .over{position:relative;z-index:1;background:inherit}
 .underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
@@ -379,13 +377,7 @@ footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:
 </div><!--/over-->
 
 <div class="underfoot">
-<footer>
-  <div class="wrap row mono">
-    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
-    <span class="blk">built to be remembered</span>
-    <span>Work</span>
-  </div>
-</footer>
+<PageFooter tag="Work" />
 </div><!--/underfoot-->
 
 <script is:inline>

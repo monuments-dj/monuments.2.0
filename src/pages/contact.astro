@@ -1,3 +1,6 @@
+---
+import PageFooter from '../components/PageFooter.astro';
+---
 <!doctype html>
 <html lang="en">
 <head>
@@ -49,9 +52,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
 .rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
 .rv.in{opacity:1;transform:none}
-footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:34px 0 18px}
-footer .row{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:8px 22px}
-footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--dim);text-transform:none}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.hero h1 .ln>span{transform:none}.rv{opacity:1;transform:none}.grain{animation:none}}
 
 .hero{min-height:86svh;display:flex;flex-direction:column;justify-content:center;text-align:center;position:relative}
@@ -120,13 +120,7 @@ footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:
   <a href="https://www.tiktok.com/@djthecd" target="_blank" rel="noopener"><b>TikTok</b> · @djthecd</a>
   <a href="https://www.linkedin.com/in/djthecd/" target="_blank" rel="noopener"><b>LinkedIn</b> · in/djthecd</a>
 </div>
-<footer>
-  <div class="wrap row mono">
-    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
-    <span class="blk">built to be remembered</span>
-    <span>Contact</span>
-  </div>
-</footer>
+<PageFooter tag="Contact" />
 <script is:inline>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));

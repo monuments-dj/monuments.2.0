@@ -2,6 +2,7 @@
 import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import ScreenRoom from '../../components/ScreenRoom.astro';
+import PageFooter from '../../components/PageFooter.astro';
 
 // === /work/know-vape · THE CUT case page ===
 // Emmy-winning case study for KNOW VAPE, Idaho Public Television's statewide youth
@@ -246,10 +247,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .credits{padding:10vh 0}
 
 /* next case file closer: NextFile.astro (under-reveal target) */
-footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:34px 0 18px}
-footer .row{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:8px 22px}
-footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--dim);text-transform:none}
-
 .over{position:relative;z-index:1;background:inherit}
 .underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
 @media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
@@ -516,13 +513,7 @@ footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:
   img="/case-studies/on-camera/posters/nk-_UwGuRlE.jpg"
   code="MC-2026-07"
 />
-<footer>
-  <div class="wrap row mono">
-    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
-    <span class="blk">built to be remembered</span>
-    <span>Case file MC-2021-06</span>
-  </div>
-</footer>
+<PageFooter tag="Case file MC-2021-06" />
 </div><!--/underfoot-->
 
 <ScreenRoom />

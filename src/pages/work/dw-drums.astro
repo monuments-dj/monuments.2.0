@@ -1,6 +1,7 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
+import PageFooter from '../../components/PageFooter.astro';
 ---
 <!doctype html>
 <html lang="en">
@@ -121,10 +122,6 @@ clip-path:polygon(0 18%,4% 4%,8% 26%,13% 8%,18% 30%,23% 6%,28% 24%,33% 10%,38% 3
 .credits{padding:10vh 0}
 
 /* next case file closer: NextFile.astro (under-reveal target) */
-footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:34px 0 18px}
-footer .row{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:8px 22px}
-footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--dim);text-transform:none}
-
 .over{position:relative;z-index:1;background:inherit}
 .underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
 @media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
@@ -304,13 +301,7 @@ footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:
   img="/case-studies/know-vape/gallery/banner.jpg"
   code="MC-2021-06"
 />
-<footer>
-  <div class="wrap row mono">
-    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
-    <span class="blk">built to be remembered</span>
-    <span>Case template</span>
-  </div>
-</footer>
+<PageFooter tag="Case file MC-2022-04" />
 </div><!--/underfoot-->
 
 <script is:inline>

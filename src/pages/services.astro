@@ -1,3 +1,6 @@
+---
+import PageFooter from '../components/PageFooter.astro';
+---
 <!doctype html>
 <html lang="en">
 <head>
@@ -114,9 +117,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .cta .pill{display:inline-flex;margin-top:26px;padding:15px 30px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
 .cta .pill:hover{background:var(--spark)}
 @media (max-width:760px){.cta .emblem{display:none}}
-footer{background:var(--ink);color:var(--dim);border-top:1px solid var(--lined);padding:34px 0 18px}
-footer .row{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:8px 22px}
-footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--dim);text-transform:none}
 
 
 /* footer under-reveal (tinywins) */
@@ -290,13 +290,7 @@ footer .blk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:
 
 </div><!--/over-->
 <div class="underfoot">
-<footer>
-  <div class="wrap row mono">
-    <span>Monuments © MMXXVI · ELMT.NO.004259</span>
-    <span class="blk">built to be remembered</span>
-    <span>Services</span>
-  </div>
-</footer>
+<PageFooter tag="Services" />
 </div><!--/underfoot-->
 
 <script is:inline>
