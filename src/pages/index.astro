@@ -139,6 +139,8 @@ h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400
 .ticks i.on{height:22px;background:var(--spark)}
 .reel-track{display:flex;gap:4vw;padding:0 var(--pad);will-change:transform}
 .reel-card{position:relative;flex:0 0 auto;width:min(48vw,580px);background:#fff;border:1px solid var(--line);padding:9px 9px 0;box-shadow:0 30px 70px rgba(0,0,0,.4);color:var(--ink);will-change:transform}
+/* empty lead-in slot so the first project starts in the active spot, not jammed left */
+.reel-card.spacer{visibility:hidden;background:none;border:none;box-shadow:none;padding:0;pointer-events:none;width:min(40vw,520px)}
 .reel-card .imgs{position:relative;display:block;overflow:hidden}
 .reel-card .imgs img{width:100%;height:44svh;object-fit:cover;display:block;filter:saturate(.9)}
 .reel-card .imgs .b{position:absolute;inset:0;opacity:0;transition:opacity .5s cubic-bezier(.22,1,.36,1)}
@@ -381,6 +383,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <div class="ticks" id="ticks" aria-hidden="true"></div>
       </div>
       <div class="reel-track" id="reelTrack">
+        <span class="reel-card spacer" aria-hidden="true"></span>
         <a class="reel-card" href="/work/art-of-visuals" data-role="Creative Director" data-stats="4x revenue in four years|2M+ brand audience|Sony · Xperia roster" data-word="remembered.">
           <span class="imgs"><img class="a" src="/case-studies/art-of-visuals/gallery/xm3-bts.jpg" alt="Art of Visuals" loading="lazy"><img class="b" src="/case-studies/art-of-visuals/gallery/podcast-cover.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t"><img class="lg" src="/logos/art-of-visuals.png" alt="">Art of Visuals</span><span class="mono">MC-2024-01 · Brand campaign · 4x</span></div>
@@ -656,7 +659,7 @@ clock();setInterval(clock,30000);
   const sec=document.querySelector('.reel'),track=document.getElementById('reelTrack'),
         word=document.getElementById('feelWord'),ticks=document.getElementById('ticks');
   if(!sec||!track)return;
-  const cards=[...track.children];
+  const cards=[...track.querySelectorAll('.reel-card:not(.spacer)')];
   ticks.innerHTML=cards.map(()=>'<i></i>').join('');
   const tickEls=[...ticks.children];
   let cur=-1;
