@@ -1,6 +1,31 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
+import SocialWall from '../../components/SocialWall.astro';
+// Real community response to Flow State, carried over from artofvisuals.com/sonyxm3flowstate
+// ("A look beyond the numbers"). Comments transcribed from the AOV case page.
+const flowComments = [
+  { u: 'kennyjenkinz', t: 'Turned out unreal.' },
+  { u: 'morgylove', t: 'The sheer amount of talent on the AOV team is insane. Killer work!' },
+  { u: 'tommylundberg', t: 'The sound design is so rad.', l: 5 },
+  { u: 'learnfilmmaking', t: 'Wow, amazing job guys!! @artofvisuals @sony', l: 5 },
+  { u: 'fudojahic', t: 'So sick boys! I love this.', l: 5 },
+  { u: 'benmurphy.photography', t: 'Got these at the beginning of the year and I am absolutely blown away with the comfort, sound quality, and ability to cancel out noise. Not sure what I would do without them now.', l: 6 },
+  { u: 'kylevandever', t: 'The best headphones in the game. I bought the new ones because of AOV.', l: 3 },
+  { u: 'thevancityphotographer', t: 'Wow, absolutely incredible. Guys ceases to impress.' },
+  { u: 'addybora', t: 'Never wanted to buy headphones more than after seeing this set.' },
+  { u: 'danielledemure', t: 'Goosebumps!!' },
+  { u: 'heyhannerd', t: 'Noise cancellation has been a travel essential for me. Gonna have to check these out now. Beautiful video!!' },
+  { u: 'christianguiton', t: 'These are amazing!!!', l: 4 },
+  { u: 'sillylilsyd', t: 'So sick @artofvisuals, you all are killin it. And those headphones are the best out there.' },
+  { u: 'jashsak', t: 'Whaaa, you magician. Loved your episode. You killed it.' },
+  { u: 'ren_chao_', t: 'Best damn headphones, period.' },
+  { u: 'captainbunz', t: 'Loved this video. Very informative and well said.' },
+  { u: 'ladybaguette', t: 'Such sick headphones, I need a pair stat!!' },
+  { u: 'abbyspears7', t: 'Good job team!!! This is amazing!!', l: 3 },
+  { u: 'jnsilva', t: 'Literally cannot exist without these headphones!' },
+  { u: 'victorpetrini', t: 'My plan is to get featured here some day.' },
+];
 import PageFooter from '../../components/PageFooter.astro';
 
 // === Sony · Flow State · THE CUT case file ===
@@ -344,6 +369,12 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <p class="who mono rv">DJ Ramirez, Creative Director, Art of Visuals</p>
   </div>
 </section>
+
+<SocialWall
+  title="A look beyond the numbers"
+  intro="The real impact of a campaign isn't in the metrics, it's in the reaction. The response to Flow State was unmatched, bringing the community together around the creative journey."
+  comments={flowComments}
+/>
 
 <section class="paper">
   <div class="wrap credits rv">
