@@ -46,3 +46,5 @@ tools/snaps/
 /tools/capsnap.mjs
 /tools/reelcolor.mjs
 /tools/swall.mjs
+/tools/amflow.mjs
+/tools/amgal.mjs

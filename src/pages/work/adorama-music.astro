@@ -167,6 +167,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .develop button:hover{background:var(--ink);color:var(--paper)}
 .develop button b{color:var(--red);font-weight:400}
 .develop button:hover b{color:var(--spark)}
+.gal.mid{padding:12vh 0}
+/* breaks that split the long roll into runs */
+.pullq{background:var(--ink);color:var(--paper);padding:14vh 0;text-align:center}
+.pullq .q{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(38px,7vw,104px);line-height:.98;letter-spacing:-.02em;max-width:16ch;margin:0 auto}
+.pullq .q .hl{color:var(--spark)}
+.pullq .who{margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.statbeat{background:var(--struct);color:rgb(var(--on-rgb))}
+.statbeat .in{display:flex;justify-content:center;gap:clamp(34px,7vw,100px);flex-wrap:wrap;text-align:center;padding:10vh var(--pad)}
+.statbeat b{display:block;font-weight:var(--dispw);font-size:clamp(40px,5.6vw,86px);letter-spacing:-.04em;line-height:.85}
+.statbeat span{display:block;margin-top:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:rgba(var(--on-rgb),.72);max-width:22ch}
 
 /* behind the film: small screening + two set frames */
 .bts{background:var(--ink);padding:9vh 0 10vh}
@@ -409,12 +419,35 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <div class="wrap gal">
     <div class="bar">
       <span class="mono"><b>Contact sheet</b> · Shot like the music sounds.</span>
-      <span class="mono" style="color:#8f8d88" id="galCount">38 frames · hover to inspect</span>
+      <span class="mono" style="color:#8f8d88">The full roll</span>
     </div>
-    <div class="frames" id="frames"></div>
-    <div class="develop">
-      <button type="button" id="developBtn"><b>✳</b> Develop the full roll · 23 more frames</button>
-    </div>
+    <div class="frames" id="framesA"></div>
+  </div>
+</section>
+
+<section class="pullq">
+  <div class="wrap">
+    <p class="q rv">Create <span class="hl">no matter what.</span></p>
+    <p class="who rv">#CreateNoMatterWhat &middot; the line the whole campaign hangs on</p>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap gal mid">
+    <div class="frames" id="framesB"></div>
+  </div>
+</section>
+
+<section class="statbeat">
+  <div class="in">
+    <div class="rv"><b>160M+</b><span>impressions on one film about not quitting</span></div>
+    <div class="rv"><b>50K+</b><span>posts tagged #CreateNoMatterWhat</span></div>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap gal mid">
+    <div class="frames" id="framesC"></div>
   </div>
 </section>
 
@@ -479,76 +512,23 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/underfoot-->
 
 <script is:inline>
-// contact sheet: the FULL 38-frame roll. 15 curated selects up front, the other 23
-// develop on demand (appended on click so the lazy images never load until asked for).
+// contact sheet: the full roll, all visible, split into three runs down the page
+// (broken by a pull quote + a stat beat). Featured frames (hero/scenes/break/bts)
+// live in their own sections; these runs carry the remaining 29 selects.
 (function(){
   var G='/case-studies/adorama-music/gallery/';
-  // [file, w, h, caption] - portraits 33-35 break the 3:2 rhythm on purpose
-  var selects=[
-    ['am-02.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-04.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-05.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-06.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-10.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-33.jpg',1366,2048,'#CreateNoMatterWhat'],
-    ['am-11.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-12.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-34.jpg',1366,2048,'#CreateNoMatterWhat'],
-    ['am-14.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-15.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-35.jpg',1366,2048,'#CreateNoMatterWhat'],
-    ['am-16.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-17.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-19.jpg',2048,1366,'#CreateNoMatterWhat']
-  ];
-  var roll=[
-    ['am-18.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-20.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-21.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-22.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-23.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-24.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-25.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-26.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-27.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-28.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-29.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-30.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-31.jpg',2048,1366,'Rehearsal · Mid-hit'],
-    ['am-32.jpg',2048,1366,'#CreateNoMatterWhat'],
-    ['am-01.jpg',2048,1366,'Studio · Piano takes'],
-    ['am-03.jpg',2048,1366,'Garage · First songs'],
-    ['am-07.jpg',2048,1366,'Stage · The rig'],
-    ['am-08.jpg',2048,1366,'Studio · Behind the kit'],
-    ['am-09.jpg',2048,1366,'Stage · Facing the lights'],
-    ['am-13.jpg',2048,1366,'Stage · Lights up'],
-    ['am-36.jpg',800,534,'On set · Behind the film'],
-    ['am-37.jpg',1024,683,'On set · Behind the film'],
-    ['am-38.jpg',800,534,'On set · Behind the film']
-  ];
-  var el=document.getElementById('frames');
-  function frame(s,i){
-    return '<figure class="fr" style="--d:'+(i%15)*45+'ms">'
-      +'<img src="'+G+s[0]+'" alt="Adorama Music: The Journey, '+s[3]+'" width="'+s[1]+'" height="'+s[2]+'" loading="lazy">'
-      +'<figcaption class="cap">FR-'+String(i+1).padStart(2,'0')+' · '+s[3]+'</figcaption></figure>';
+  function build(id,list){
+    var el=document.getElementById(id); if(!el)return;
+    el.innerHTML=list.map(function(f,i){
+      return '<figure class="fr" style="--d:'+(i%10)*45+'ms">'
+        +'<img src="'+G+'am-'+String(f[0]).padStart(2,'0')+'.jpg" alt="Adorama Music: The Journey" width="'+f[1]+'" height="'+f[2]+'" loading="lazy">'
+        +'<figcaption class="cap">'+f[3]+'</figcaption></figure>';
+    }).join('');
+    new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){el.classList.add('show');o.disconnect();}});},{threshold:.04,rootMargin:'0px 0px 140px 0px'}).observe(el);
   }
-  el.innerHTML=selects.map(frame).join('');
-  new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
-
-  var btn=document.getElementById('developBtn');
-  btn.addEventListener('click',function(){
-    var t=document.createElement('template');
-    t.innerHTML=roll.map(function(s,i){return frame(s,i+selects.length)}).join('');
-    var frs=Array.prototype.slice.call(t.content.querySelectorAll('.fr'));
-    frs.forEach(function(f,i){f.classList.add('pre');f.style.setProperty('--d',(i%12)*40+'ms')});
-    el.appendChild(t.content);
-    el.classList.add('show');
-    void el.offsetHeight; // commit the .pre state before releasing it
-    requestAnimationFrame(function(){frs.forEach(function(f){f.classList.remove('pre')})});
-    btn.parentElement.remove();
-    var c=document.getElementById('galCount');
-    if(c)c.textContent='Full roll · 38 frames';
-  },{once:true});
+  build('framesA',[[1,2048,1366,'Studio'],[2,2048,1366,'Garage'],[4,2048,1366,'Garage'],[5,2048,1366,'Garage'],[6,2048,1366,'Garage'],[10,2048,1366,'Garage'],[11,2048,1366,'Studio'],[12,2048,1366,'Studio'],[14,2048,1366,'Studio'],[15,2048,1366,'Studio'],[16,2048,1366,'Studio']]);
+  build('framesB',[[17,2048,1366,'Studio'],[18,2048,1366,'Studio'],[19,2048,1366,'Studio'],[20,2048,1366,'Studio'],[21,2048,1366,'Stage'],[22,2048,1366,'Stage'],[23,2048,1366,'Stage'],[24,2048,1366,'Stage'],[25,2048,1366,'Stage'],[26,2048,1366,'Stage']]);
+  build('framesC',[[27,2048,1366,'Stage'],[28,2048,1366,'Stage'],[29,2048,1366,'Stage'],[30,2048,1366,'Stage'],[32,2048,1366,'Stage'],[33,1366,2048,'Rehearsal'],[34,1366,2048,'Rehearsal'],[35,1366,2048,'Rehearsal']]);
 })();
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
