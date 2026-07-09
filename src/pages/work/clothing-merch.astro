@@ -405,7 +405,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
 // hero layers + break parallax + companion
 (function(){
-  const hImg=document.querySelector('.hero>img'),hT=document.querySelector('.hero .t'),
+  const hImg=document.querySelector('.hero>video, .hero>img'),hT=document.querySelector('.hero .t'),
         nfo=document.querySelector('.hero .nfo'),kck=document.querySelector('.hero .kck'),
         brk=document.querySelectorAll('.break img'),c=document.querySelector('.companion');
   if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
@@ -415,9 +415,9 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     requestAnimationFrame(()=>{
       const y=scrollY,vh=innerHeight;
       if(y<vh){
-        hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
-        hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
-        hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));
+        if(hImg)hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
+        if(hT){hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
+        hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));}
         if(nfo)nfo.style.transform=`translateY(${y*-.16}px)`;
         if(kck)kck.style.transform=`translateY(${y*-.06}px)`;
       }

@@ -1,37 +1,49 @@
-# TODO — current state (2026-07-08)
+# TODO - current state (2026-07-08)
 
 ## 🚀 THIS SESSION (2026-07-08)
 SHIPPED + PUSHED:
+- **Killed the wrong 160M+ Adorama figure (8b81e0a)** - DJ flagged it; purged sitewide
+  (stat band, statbeat break, home reel, /work row, meta, /lab). Statbeat is now a single
+  #CreateNoMatterWhat beat; top band 3.4M+/113K+/50K+.
+- **Full-site launch-readiness AUDIT (26 pages, 154 findings)** → `AUDIT-2026-07-08.md` +
+  folded into LAUNCH.md (sections A/B/H). Fixed same-day: clothing-merch parallax CRASH
+  (hero `<video>` but script queried `.hero>img`, threw on scroll → froze all motion),
+  CWI "stills to follow" placeholder, Contact phantom-form line, Rockies→Rockys,
+  sony-xm5 title case, on-camera grammar. **NEW must-verify: "3.6M+ impressions on a single
+  launch"** (home ticker + About receipt + Xperia) - same class as the wrong 160M+.
+  Big open buckets from the audit: I-voice slips (Flashpoint/Know Vape 3rd-person, etc.),
+  per-page date/file-code + role-title inconsistencies, duplicated pull-quotes = body copy
+  (donut/dw-drums/sony-this-moment), AOV flagship stand-in reel, photography fake taxonomy.
 - **Descender clip fixed SITE-WIDE (4ea50bd).** The `.ln` hero reveal + `.sl` scroll-CTA
-  reveal both mask each line in `overflow:hidden`; at the tight display line-height (.9–.94)
+  reveal both mask each line in `overflow:hidden`; at the tight display line-height (.9-.94)
   that sheared off the last line's italic-serif descenders (g/y/p, the italic Q tail) and the
   low accent dot. All-caps lines hid it; the serif signature line ("you'll go.", "people.",
   "remembering.") exposed it. Fix = `padding-bottom:.18em;margin-bottom:-.18em` on every
   `.ln`/`.sl` mask (reveals descenders, spacing unchanged) + reveal offset `112%→125%` (hidden
   line clears the taller mask, no pre-animation peek). Applied to all 26 hero headers + 5
   CTAs; verified visually on every one (see tools/snaps/verify/MONTAGE-*.png). **This is now a
-  standing rule — see CSS-MAP.md "Reveal-mask descenders" before adding any new masked header.**
+  standing rule - see CSS-MAP.md "Reveal-mask descenders" before adding any new masked header.**
 - **Adorama AOV pass:** all 38 gallery images visible, distributed into 3 contact-sheet runs
   broken by a pull-quote + stat beat; captions are now sequential FR-01…FR-29 frame numbers
   (the old Studio/Garage/Stage labels were assigned by run position and mislabeled the photos);
-  "behind the film" reframed to "The cutdowns" (product cutdowns by brand, not BTS — only the
+  "behind the film" reframed to "The cutdowns" (product cutdowns by brand, not BTS - only the
   Beat Machine spot i_hGj3rKH7k is wired). Sony This Moment / Flow State stats confirmed present
   from v3; NEW SocialWall.astro "beyond the numbers" audience-comment wall on sony-flow-state.
 - **Accent = pink, themeable.** Killed the cobalt accent → rose site-wide; `--struct` +
   `--on-rgb` drive band bg + on-band text. TEMP accent switcher lives in PageFooter.astro
   (fixed bottom-center pill, rose/cobalt/red/ink, localStorage `mnmt-accent`). ⚠️ **DJ still
-  owes an accent pick — then bake the winner into `:root` and DELETE the switcher** (flagged in
+  owes an accent pick - then bake the winner into `:root` and DELETE the switcher** (flagged in
   LAUNCH.md).
-- **Footer → PageFooter.astro** shared component (per-page sign-off text via `tag` prop) — stops
+- **Footer → PageFooter.astro** shared component (per-page sign-off text via `tag` prop) - stops
   the inline-footer drift noted last session. Rides on every page.
 - Home reel: EMPTY lead-in slot so the first project starts already in the hovered/active
   position; formatting resynced; flush ends.
 - About: NEW creed (4 beliefs); "The receipts" rebuilt numbers-first (the printed-slip gimmick
-  was scrapped — DJ: "not it"); "In the room" → ledger rows.
+  was scrapped - DJ: "not it"); "In the room" → ledger rows.
 - Services → **Capabilities** (collapsed + renamed; `/services`→`/capabilities` redirect in
   astro.config); refusals opener + 9 refusal lines.
 - **/ai** page built around DJ's "AI is a tool, not a solution… won't buy you taste; I directed
-  people before I directed AI." (copy is my draft of his concept — may want his pass.)
+  people before I directed AI." (copy is my draft of his concept - may want his pass.)
 - Dual-mandate grade (wf, 13 agents) → LAUNCH.md checklist + PHILOSOPHY.md.
 
 AWAITING DJ (unblocks queued work):
@@ -47,7 +59,7 @@ QUEUE (approved / requested, not built):
   Home/Contact · optional: apply the gallery→quote→gallery→stat template to Buck the Quo /
   Know Vape.
 - Minor spotted-in-passing: /capabilities hero copy "In to serve the work," reads slightly
-  oddly — confirm intended vs "Here to serve the work,".
+  oddly - confirm intended vs "Here to serve the work,".
 
 ## 🚀 COPY HANDOFF v3 APPLIED SITE-WIDE (2026-07-07, wf_d632cf34)
 DJ edited copy in a Google Doc (tools/copy-new.md is the saved handoff; tools/copy-export.md
@@ -88,14 +100,14 @@ third-person→I); CWI assets (role confirm, hero film, stills, 5-yr contract me
   snippet plays on hover; ticker "2 to 30+ creatives led per team"; tiles "rock & roll" +
   "every great story is a human story".
 - ABOUT "Directing is the job" photo → muted cycling viewer of DJ leading
-  (/about/lead/ld-01..03, confirmed DJ in 01+02; 03 = his set, wide — DJ may swap).
+  (/about/lead/ld-01..03, confirmed DJ in 01+02; 03 = his set, wide - DJ may swap).
 - FOOTER normalized site-wide (contact/photography/dw-drums Pirata → small mono; about +
   index space-between → centered baseline; photography descriptor shortened). ⚠️ Footer is
   still inline-per-page; consider a shared component to stop the drift.
 - IG EMBEDS ROOT-CAUSED: bars = OLD /tv/ IGTV permalinks (bar out even bare) + my demo grid
   squeezed to 326px. sony-this-moment has 2 dead-format /tv/ links; clothing-merch has 2
   /reel/ links (Cl9hIJ-vS-b looks DEAD). AWAITING DJ: fresh post/reel links for both pages.
-  /lab/ig-embed = diagnostic page (its "unfixable" note is now WRONG — retire or fix).
+  /lab/ig-embed = diagnostic page (its "unfixable" note is now WRONG - retire or fix).
 - Copy pipeline: Google Doc export via Drive MCP works. Original export doc:
   docs.google.com/document/d/1Z8y4Wb3RDCkY_CJuCcA7MP4u7ktErGDWikwKvHk7-6A
 
@@ -114,11 +126,11 @@ ship (DJ: "throw all placeholders in").
 
 ## 🚀 THE SWAP IS DONE + POST-SWAP FEATURES (state as of 2026-07-03 late)
 Post-swap adds, all LIVE: about career TIMELINE (pinned scrub, Drake Cooper→Buck the Quo→
-AOV→Monuments, "DJ, the ___" rewriting line — ⚠️ YEARS + exact DC/BTQ titles TK from DJ);
-/work grid view (Index/Grid toggle, Newest/A–Z/Discipline FLIP sort, lens filters grid);
+AOV→Monuments, "DJ, the ___" rewriting line - ⚠️ YEARS + exact DC/BTQ titles TK from DJ);
+/work grid view (Index/Grid toggle, Newest/A-Z/Discipline FLIP sort, lens filters grid);
 reel cards: client LOGOS on strips + A/B HOVER images (defaults mine; DJ picks via
 /redesign/reel-picker.html → paste string back); /photography: DJ's original 5 categories
-(Brand/Editorial/Food/Motion/Non-Profit — ⚠️ placeholder 20-per-category chunking until DJ
+(Brand/Editorial/Food/Motion/Non-Profit - ⚠️ placeholder 20-per-category chunking until DJ
 sorts real photos) + Roll/Shuffle/Category sort + filtered lightbox; home brands ticker
 moved up (after stat band); "Built to be ___" reel line; eye tile tracks cursor; sound
 toggle on hero reel; giving folded into /about ("Some stories are not for sale.").
@@ -171,26 +183,26 @@ face pick (Bricolage default), self-host reel, djthecd.com alt
 skin (memory: djthecd-personal-site). ✅ EM-DASH SWEEP DONE 2026-07-03 (5c7c876): 227 dashes
 cleared site-wide (lab/*, legacy work/*, main pages, titles, alt text, work.ts title builder,
 Base aria-label); only CSS-comment dashes remain (never rendered); /redesign/*.html mockups
-intentionally NOT swept (museum pieces). Domain monuments.cc still WordPress — swap is a
+intentionally NOT swept (museum pieces). Domain monuments.cc still WordPress - swap is a
 separate deliberate step.
 
-## ════ SESSION 2026-07-02/03 :: THE CONVERGED CUT — NEARLY LOCKED, MIGRATION NEXT ════
+## ════ SESSION 2026-07-02/03 :: THE CONVERGED CUT - NEARLY LOCKED, MIGRATION NEXT ════
 The redesign converged. Everything lives at `public/redesign/` (hub: /redesign/), system docs
 in `redesign/01..06.md`. DJ: "designwise this cut is feeling pretty close."
 - ✅ THE CUT (m-home / m-about / m-services / m-work / m-work-sony): Bricolage + Fragment Mono
   + Instrument Serif splices, rose/cobalt accents, color blocking, grain, type-in-photo heroes.
 - ✅ MOTION (measured from DJ's 4 reference sites via motion.mjs, doc: redesign/06):
   pinned scroll-scrubbed work reel ("Built to be bigger/felt/human/fast/heard/played/worn/
-  loud/remembered." — 9 best projects, Emmy closer), scroll-lit rows, scramble hovers, footer
+  loud/remembered." - 9 best projects, Emmy closer), scroll-lit rows, scramble hovers, footer
   under-reveal, spark companion, velocity marquees (with decay), split-line CTAs, parallax layers.
 - ✅ VIDEO: reel (YT VMubUUZ2tdU) as m-home hero bg + sound-on lightbox; Sony case has a film
   block with `data-video` slot (currently plays reel as LABELED STAND-IN).
 - ✅ WORK: m-work = taxonomy archive + DISCIPLINE LENS (6 disciplines highlight/dim, live
-  counts — ⚠️ discipline tags per project are MY GUESSES, DJ must review data-disc attrs).
+  counts - ⚠️ discipline tags per project are MY GUESSES, DJ must review data-disc attrs).
   m-work-sony = case TEMPLATE built from content/work/sony-this-moment.json.
 - ✅ Brands ticker (lab BrandTicker ported to public/redesign/ticker.js) on m-work + m-home.
 - ✅ Tiles strip: brand-book EYE (blink + spark pupil), "4x revenue growth", "Less agency.
-  More band.", blackletter m — DJ loves these.
+  More band.", blackletter m - DJ loves these.
 - ✅ PROMOTED TO REAL SITE already: converged tokens in global.css + fonts in Base.astro,
   /about fully converted, /lab display face swapped, nav wordmark = M✳NUMENTS (32px).
 - ✅ Playground + switcher.js on every cut page (9 faces incl. Adobe kit use.typekit.net/aos2vlu).
@@ -204,7 +216,7 @@ NEXT (in order):
 4. Known accepted tradeoffs: corner-spark monochrome on paper pages; YT branding on hero video;
    preview MCP throttles rAF (verify motion via Playwright/motion.mjs, NOT preview_eval).
 
-## ════ SESSION 2026-07-01 (later) :: REDESIGN KIT — AWAITING DJ'S A/B/C PICK ════
+## ════ SESSION 2026-07-01 (later) :: REDESIGN KIT - AWAITING DJ'S A/B/C PICK ════
 DJ asked for a design overhaul: more references, harder-hitting design, career arc shown
 digitally. Delivered (commit 8ec1a9b, LIVE):
 - ✅ `redesign/01-references.md` (16 refs), `02-diagnosis.md` (measured audit of the deploy:
@@ -221,9 +233,9 @@ digitally. Delivered (commit 8ec1a9b, LIVE):
 ## ════ SESSION 2026-07-01 :: PORTFOLIO SCAFFOLD PASS (autonomous) ════
 DJ said "move on all of them, scaffold the site first, rework design as pages are created,
 message me with roadblocks." Built + PUSHED (commit 7d1bc8c → Vercel preview):
-- ✅ `/lab/art-of-visuals` — FLAGSHIP, results-first, leads with "I grew the agency 4x."
+- ✅ `/lab/art-of-visuals` - FLAGSHIP, results-first, leads with "I grew the agency 4x."
   Real assets (Sony/Xperia/XM/Stansport/Creator Clubhouse). Cloned the adorama pattern.
-- ✅ `/lab/donut-zumiez` + `/lab/ac-boise` — lighter Selected Work case pages (real assets;
+- ✅ `/lab/donut-zumiez` + `/lab/ac-boise` - lighter Selected Work case pages (real assets;
   film/reel posters are NON-linking pending real video URLs).
 - ✅ Lab hub: added the AOV flagship tile + a new **Selected Work** section (Donut, AC Boise,
   Sony This Moment, Sony Flow State).
@@ -236,7 +248,7 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
   the NUMBER leads (Adorama 160M+/3.4M+/113K+/50K+; BTQ 18,000+/1-in-2/88%), shifted hero+role
   copy to first-person "I". Pushed.
 - ⚠️ VOICE: know-vape.astro is still third-person ("DJ directed...") while every other case study
-  is now first-person "I" — flip for consistency (quick; offered to DJ).
+  is now first-person "I" - flip for consistency (quick; offered to DJ).
 - ✅ THIN CREDITS STRIP: new reusable CaseCredits.astro added under the hero of all 6 case studies
   (role at a glance, accent-emphasized, auto light/dark). Bottom credits <dl> removed (promoted).
 - ✅ LAUNCHED / PROMOTED INTO MAIN SITE (DJ: "promote into main site" + "launch now, fill in live",
@@ -245,17 +257,17 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
   leads with the 6 case studies. Live monuments.cc WordPress UNTOUCHED. Placeholders still flagged
   in-file and to fill live: AOV stat numbers, Donut/AC Boise video URLs, LinkedIn URL + one-pager PDF.
 - ✅ WAFFLE ME UP header video: DJ's "WEB HEADER" YouTube loop (LI496YXDIRE) now runs as the muted
-  autoplay hero background (poster holds until PLAYING, then fades in — no black load flash). Caught +
+  autoplay hero background (poster holds until PLAYING, then fades in - no black load flash). Caught +
   fixed a PROD-ONLY black flash (blind reveal timer) by revealing only on the real PLAYING state;
   verified on the live Vercel deploy in a real browser. Reusable pattern for header loops elsewhere.
-- ✅ DONUT × ZUMIEZ films wired: DJ gave 3 cuts — launch film (2eUYg_P5rfc) is the main linked
+- ✅ DONUT × ZUMIEZ films wired: DJ gave 3 cuts - launch film (2eUYg_P5rfc) is the main linked
   player; Croy collab (HEx3bUYCwdk) + the cut (UwM3_jGjz6Q) as a 2-up row. All 200. In-file TODO
   to confirm which poster/caption maps to which cut.
-- ⏳ CREDITS BAR — iterated per DJ. First 3-variant version was "hideous"; replaced with ONE
+- ⏳ CREDITS BAR - iterated per DJ. First 3-variant version was "hideous"; replaced with ONE
   full-bleed bar, then (per DJ) rebuilt as CreditsBar with tone ('dark'|'light') + variant
   ('simple'|'standard'|'full'). Compare all 6 at /lab/credits (light-page band + dark-page band).
   Removed the old CreditsVariants. AWAITING DJ: (a) pick complexity + confirm tone handling,
-  (b) the per-project CREATORS (the "With"/Team names+roles) for each case study — the one thing
+  (b) the per-project CREATORS (the "With"/Team names+roles) for each case study - the one thing
   I don't have. Then wire the winner onto every /work + /lab page, prop-driven, tone per page.
 - ✅ DONUT merch: pulled 4 real product shots from donut.media (work shirt/jort/tee/stickers),
   web-optimized, added a "The product I made films for" section linking to the product pages.
@@ -263,7 +275,7 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
   Full case-study structure w/ PLACEHOLDER copy + dashed image slots + Draft badge + in-file TODO.
   NEED FROM DJ: what Fearless is + premise, role/collaborators, headline number(s), assets (hero +
   stills + any video), year/credits. Then swap placeholders, add images, promote to Work/home.
-- ✅ FILE PIPELINE PROVEN: Dropbox folder links work — flip dl=0→dl=1 (I do it automatically),
+- ✅ FILE PIPELINE PROVEN: Dropbox folder links work - flip dl=0→dl=1 (I do it automatically),
   curl the zip, unzip, sips-optimize. DJ can just paste Dropbox links as-is going forward. Also:
   local paths on his Mac (I read directly) and direct file URLs both work; Drive "view" / dl=0
   preview links do NOT (they return HTML).
@@ -273,31 +285,31 @@ Build clean (~30 routes), all verified at 1440px with tools/snap.mjs.
   accent. Added to the /lab hub v2 grid. ⚠️ NEED FROM DJ before promoting to Work/home: his exact
   ROLE + agency/collaborators, whether it SHIPPED or was a pitch/spec (layouts still lorem-ipsum),
   and any RESULTS. Also: ~9 Midjourney concept comps were held OUT of the gallery (AI-as-tool
-  positioning) — available if DJ wants an "exploration" section.
+  positioning) - available if DJ wants an "exploration" section.
   ✅ STORY CONFIRMED + PROMOTED (2026-07-01): Client DW Drums, Agency Art of Visuals, DJ = Creative
   Director + Designer. Brief = show one hybrid kit (acoustic + electronic) living in two worlds;
   split-screen is his strategic solution. Real hero/role/credits copy in; promoted to Work grid
   (tagline "One kit, two worlds") + home slider. Still optional/open: shipped-vs-spec + any results.
-- 🧭 DECISION (2026-07-01): VIDEO stays on YouTube for now — all of it (Waffle/home header loops
+- 🧭 DECISION (2026-07-01): VIDEO stays on YouTube for now - all of it (Waffle/home header loops
   AND case-study films). DJ declined self-hosting (revisit later if the YouTube branding grates).
   Do NOT re-pitch self-hosting / a video CDN unprompted. Waffle keeps its YT-embed + fade-on-play.
 
 **⛔ ROADBLOCKS / needs DJ (all flagged as in-file `⚠️ TODO` comments):**
-1. AOV: only "4x" is real — the other 3 stat values (5+, 100M+, 3yrs) + role title + year span
+1. AOV: only "4x" is real - the other 3 stat values (5+, 100M+, 3yrs) + role title + year span
    + client roster are PLACEHOLDER. Give me the real numbers/titles.
 2. Video URLs: Donut launch films (2 cuts) + AC Boise IG reel (id DR04D0ZDOjV) render as
-   non-linking posters — need clean watch/embed URLs to make them play.
+   non-linking posters - need clean watch/embed URLs to make them play.
 3. Contact hire-kit: real **LinkedIn URL** (placeholder points to linkedin.com), and a hosted
    **resume/one-pager PDF** (currently a mailto) → drop a PDF at /public and I'll wire it.
 4. Know Vape: DONE except reach numbers. DJ directed all 6 Myth vs Fact spots (IdahoPTV 2023),
    linked episode grid uses DJ's video.wkno.org URLs (verified). Emmy = 2024 NW Regional
-   (NATAS NW), Community Outreach/Small Market, CAMPAIGN-level — framed honestly ("part of an
+   (NATAS NW), Community Outreach/Small Market, CAMPAIGN-level - framed honestly ("part of an
    Emmy-winning campaign"; DJ not on the public Emmy credit list, so no personal-Emmy claim).
    ✅ DJ DECIDED (2026-07-01): keep the "part of the Emmy-winning campaign" framing (he can't
    confirm his spots were in the submission, and isn't on the credit list, but they're Know
    Vape-branded so "part of" is defensible). Do NOT escalate to a personal/craft Emmy claim.
    ⚠️ ONLY LEFT: reach/impression numbers for the Award section (optional).
-5. ⚙️ `caffeinate` + the dev server (localhost:4321) are still running — kill when fully done.
+5. ⚙️ `caffeinate` + the dev server (localhost:4321) are still running - kill when fully done.
 
 
 ## ════ SESSION 2026-06-30 :: CAREER PIVOT + case studies + portfolio strategy ════
@@ -314,7 +326,7 @@ AI-resistant through 2030 (Forrester: ~7.5% agency jobs to AI by 2030; creative 
 contracting (~-15% projected 2026); money moved in-house + to experiential specialists. Ride the LA
 mega-event window (World Cup 2026 / Super Bowl 2027 / LA28). Lean audio/sports/music/gaming/DTC, NOT
 legacy film/TV (contracting). Founder "flight-risk" bias is REAL (Rutgers 2024, successful founders
-penalized MORE) — beat it with REFERRALS + "joining to build" framing, not cold apps. Comp anchors:
+penalized MORE) - beat it with REFERRALS + "joining to build" framing, not cold apps. Comp anchors:
 exp CD ~$94-160K, LA CD ~$133-213K, VP/ECD ~$193-350K+; awards = ~$50K premium.
 
 **Case studies built this session (all `/lab`, in the hub `v2` grid):**
@@ -329,13 +341,13 @@ exp CD ~$94-160K, LA CD ~$133-213K, VP/ECD ~$193-350K+; awards = ~$50K premium.
 
 **PORTFOLIO STRATEGY (agreed):** a few FLAGSHIP deep case studies told as RESULTS (problem→strategy→
 build→execution→NUMBER) + a lighter **"Selected Work" grid** for range (don't reel-dump). Flagships:
-Buck the Quo, Adorama, Know Vape, and **Art of Visuals — NOT BUILT YET, build it** (4x agency revenue
+Buck the Quo, Adorama, Know Vape, and **Art of Visuals - NOT BUILT YET, build it** (4x agency revenue
 is DJ's single most marketable number). Selected Work: Donut x Zumiez (2023 launch films DJ directed),
 AC Boise kit-reveal (IG reel DR04D0ZDOjV = "This kit is Boise", USL League One, Hummel + Against), the
 Sony launches, etc.
 
 **Assets on disk (all web-sized, in `public/case-studies/<slug>/gallery/`):** buck-the-quo (19),
-adorama-music (38), know-vape (10). NEW — SOURCED + DOWNLOADED 2026-06-30 (a sourcing workflow found
+adorama-music (38), know-vape (10). NEW - SOURCED + DOWNLOADED 2026-06-30 (a sourcing workflow found
 these, verified downloadable): donut-zumiez (9: dz-01..04 car-meet, product-shirt, film-01, merch,
 yt-launch, yt-ptcruiser), ac-boise (9: home-01/02, away-01/02, keeper-01, crest, logo.png, yt-away,
 yt-keeper), art-of-visuals (9: xm5-01, xm4-01, xm3-bts, xperia-01/02, stansport-01, podcast-cover,
@@ -348,23 +360,23 @@ yt-thismoment, yt-flowstate). The `yt-*.jpg` are YouTube poster stills for the v
 - Art of Visuals: YT `KIi8cBOlU50` (This Moment/XM4) + `CS5UXhe17O4` (Flow State/XM3) + `l1RBdpQ8vi8`
   (Adorama, already used elsewhere) + `sdFbORd-6wE` / `wZCPlSlN9Oo` (Xperia) + Vimeo `809843534` (agency reel).
   ⚠️ Sourcing could NOT confirm Intel / MSI / Sonos / DW Drums assets, and can't confirm WHICH cuts DJ
-  directed on Donut or AC Boise-away/keeper — verify all attribution with DJ before publishing.
+  directed on Donut or AC Boise-away/keeper - verify all attribution with DJ before publishing.
 
 **Also shipped earlier this session (PUSHED):** homepage mobile overflow fix (`.trusted` grid +
 menu fit on phones); the homepage **RECENT WORK slider** (`RecentProjects.astro`, promoted from
 `/lab/project-detail`: white, compact, minimal scrubber; mobile = autoplay scroll-snap carousel,
-hardened by an adversarial-review workflow — 6 real bugs fixed); added **Lab** to the main menu;
+hardened by an adversarial-review workflow - 6 real bugs fixed); added **Lab** to the main menu;
 `astro.config` `server: { host: true }` for phone testing; AGAINST logo is intentional (not upside-down).
 
 **NEXT (in order):**
 1. Finish **Know Vape** once DJ confirms the specifics (films / Nic Sick / Emmy category+year / reach).
-2. Build the **Art of Visuals** flagship (source assets first) — the 4x-revenue business-impact story.
+2. Build the **Art of Visuals** flagship (source assets first) - the 4x-revenue business-impact story.
 3. Build a **Selected Work** grid; add Donut x Zumiez + AC Boise + the Sony launches as entries.
 4. **Recut the flagships results-first** (lead with the number) per the hiring-portfolio research;
    shift copy to first-person "I" per `monuments-copy`.
 5. Add the **hire-me kit**: an "open to [roles]" line + prominent contact/LinkedIn + a resume/one-pager.
 6. Rework the **HOME hero** to the locked positioning + a 3-number band above the fold.
-7. ⚙️ `caffeinate` is running (keeps the Mac awake) — kill it when done. New chat can turn it off.
+7. ⚙️ `caffeinate` is running (keeps the Mac awake) - kill it when done. New chat can turn it off.
 
 **Quick start:** `cd monuments-site && npm run dev` → http://localhost:4321 · `npm run build`
 (builds clean, ~30 routes). Read `CLAUDE.md` first (shorthand + the VISUAL-TRUTH workflow),
@@ -410,16 +422,16 @@ URL across requests until the new build is consistent before judging.
 **⏳ OPEN / NEXT:**
 1. **Reel:** wire a self-hosted MP4 into `.rr-panel` for real click-to-play + crisp takeover (DJ
    to send the reel file, or pull from the YouTube showreel `VMubUUZ2tdU`).
-2. **About horizontal scroll — VERIFIED on the LIVE deploy (2026-06-13, DJ's real browser via
+2. **About horizontal scroll - VERIFIED on the LIVE deploy (2026-06-13, DJ's real browser via
    Claude-in-Chrome + real-Chromium snap).** ScrollTrigger pin-spacer present (padding-bottom =
    computed amount, 730px @1920px); section stays pinned (sectionTop=0) the whole range; track
    translates frame-accurate 0 to -730 @1920 (every 25% step within 1px of expected); no console
    errors; renders clean (photos loaded). Snap: `tools/snaps/about-howiwork-mid/`. ⚠️ PERF NOT yet
-   numbered — the rAF/FPS probe got throttled because the tab was backgrounded (rAF pauses when
+   numbered - the rAF/FPS probe got throttled because the tab was backgrounded (rAF pauses when
    hidden). Behavior is frame-accurate (good sign); a true smoothness read needs the tab FOREGROUND
    (DJ scrolls it) or a real-Chromium FPS script. Watch perf on that heavy page (credo + parallax + pin).
 3. **Roll the exoape light-forward pass onto the other lab pages** (hub done; follow `EXOAPE-PASS.md`).
-4. **Pattern library — Element 03 NEXT-PROJECT HANDOFF SHIPPED + verified (2026-06-13, commit
+4. **Pattern library - Element 03 NEXT-PROJECT HANDOFF SHIPPED + verified (2026-06-13, commit
    34c0219).** Exoape grow→handoff: current project hero grows, next project's card rises from
    beneath and takes over with its title (DJ's starred next-project ask, IDEAS.md). Scroll-scrubbed
    + a Scrub dial to freeze any frame; 3 takeover styles (rise/grow/curtain) + rise-distance and
@@ -439,16 +451,16 @@ URL across requests until the new build is consistent before judging.
    (Sony This Moment, tm-01→tm-09) scrubs sideways on scroll (GSAP ScrollTrigger via `gsap-lenis.js`).
    Each panel = a device-framed still + chapter title/description; HUD = counter + bottom progress
    hairline + prev/next arrows (arrows lenis.scrollTo the next slice). Consistent frame-left layout
-   so a frame stays on screen at every handoff (alternating left a void at the midpoint — fixed).
+   so a frame stays on screen at every handoff (alternating left a void at the midpoint - fixed).
    Reference capture: `tools/snaps/ref-lusion-of_the_oak/` (snap.mjs `--steps`, 21 frames). Dark/
    cinematic (--bg/--fg), reduced-motion + ≤820px fall back to a vertical stack. Real-Chromium
    verified: pin holds, track 0→-7200 frame-accurate, counter 01→06, no console errors, images load.
-6. **`NextProject.astro` — the standard work-page project-nav component (2026-06-14, DJ loves it).**
+6. **`NextProject.astro` - the standard work-page project-nav component (2026-06-14, DJ loves it).**
    Reusable next-project hand-off: the clean scroller (caption + big next name + tag + filling rail,
    `is-full` lights the cue) PLUS a MEDIA CLUSTER (a video-preview frame + 2 peeking photos) that
    starts small and GROWS as you scroll (`--np-g` scale 0.34→1 near-linear, `--np-mo` opacity).
    Scroll-to-end carries to the next project via a SHORT gated overscroll (`threshold` prop, default
-   100px, was 320 — much snappier) or click. Props: href/name/tag/accent/poster/video?/photos/threshold.
+   100px, was 320 - much snappier) or click. Props: href/name/tag/accent/poster/video?/photos/threshold.
    `video` optional (mp4); without it the poster frame is the video slot (awaiting real reels). LIVE on
    `/lab/sony-this-moment` (→Turnstile, red, turnstile bts/products media) and `/lab/flashpoint`
    (→This Moment, teal, sony tm media). Inline tmx-np/fp-np removed. Real-Chromium verified on both:
@@ -471,20 +483,20 @@ URL across requests until the new build is consistent before judging.
    dead `.showreel/.reel-*` CSS in global.css + the dead showreel/reel-control JS in index.astro can be
    cleaned up later). Component is self-contained: hard-coded dark colours (home has no --bg/--fg
    tokens), GSAP ScrollTrigger pin/scrub bridged to Lenis via `src/scripts/gsap-lenis.js` (the bridge
-   waits for window.lenis, so the prod script order is safe — the reel-saga fix holds). POSTER STILL
+   waits for window.lenis, so the prod script order is safe - the reel-saga fix holds). POSTER STILL
    for now (DJ chose "replace, poster for now"); pass `video=` / a self-hosted MP4 later for real play.
    Real-Chromium verified LOCAL: reveal pins (stageTop=0), panel scales 0.26→1, Play/Reel words slide
    in then fade, the EXISTING rwork reel still scrubs (track -53→-1096), no console errors. ⚠️ Domain
-   monuments.cc still WordPress/untouched — this only changes the Vercel `/` build. NOT yet componentized
+   monuments.cc still WordPress/untouched - this only changes the Vercel `/` build. NOT yet componentized
    with the lab's inline reel (PatternLibrary still has its own copy; dedupe later).
 9. **Loader REDESIGNED (2026-06-14, DJ's ask).** Replaced the old MONUMENTS-word + raster-M + bar loader
-   with: black field, a SPINNING METALLIC M (the "#2 conic metal sweep" — DJ A/B-picked it from 6 variants
+   with: black field, a SPINNING METALLIC M (the "#2 conic metal sweep" - DJ A/B-picked it from 6 variants
    a metallic-m-loader workflow generated), flanked by CREATIVE / PRODUCTION / AI. `Loader.astro` (SVG +
    chrome/conic/spec gradients) + the loader CSS in `global.css` (`.ldr-*` + `#ldrConicRot`/`#ldrSpecMove`
    + keyframes). Progress + curtain dismiss UNCHANGED (Base.astro drives `#loader-bar`/`#loader-pct` then
    `.done`). Real-Chromium verified: shows, words animate, progress fills, curtain dismisses + reveals hero,
    no console errors; reduced-motion holds a still frame. Shows on `/` only (index.astro `loader={true}`).
-   ⚠️ THE M IS A PLACEHOLDER geometric mark — DJ is vectorizing the real one; swap is one line: replace
+   ⚠️ THE M IS A PLACEHOLDER geometric mark - DJ is vectorizing the real one; swap is one line: replace
    `<path id="ldrMPath" d="…">` in Loader.astro (same 0 0 120 100 viewBox), then update/delete `.edge`.
 10. **BRAND BOOK INTEGRATED into the lab (2026-06-14, overnight).** DJ sent the brand book v0.8
    (`~/Downloads/monuments-brand-book.html`; see memory `monuments-brand-book`). Built `BrandWorld.astro`,
@@ -492,8 +504,8 @@ URL across requests until the new build is consistent before judging.
    wordmark (eye blinks, spark spins), the ink/paper/denim/rose palette, the auto-cycling symbol family,
    a soft eye-sun, voice + Space Mono colophon. Added Archivo + Space Mono (Base font link) and
    `--denim`/`--rose`/`--brand-ink`/`--brand-paper` tokens. Picked from 4 generated concepts; the other 3
-   (**sun-playground** — interactive generative soft-sun + symbol grid, very lab-native; **block-noise**;
-   **wordmark-hero**) are PARKED at `public/brand-lab/*.html` (local only, not deployed — view at
+   (**sun-playground** - interactive generative soft-sun + symbol grid, very lab-native; **block-noise**;
+   **wordmark-hero**) are PARKED at `public/brand-lab/*.html` (local only, not deployed - view at
    `localhost:4321/brand-lab/<name>.html`). DJ may want one added. Real-Chromium verified: generators fire,
    symbol cycle runs, no console errors, reads as a clean dark beat in the lab.
 11. **CODE TIGHTENED (2026-06-14, overnight).** Removed the dead scroll-zoom showreel CSS (`.showreel`/
@@ -501,9 +513,9 @@ URL across requests until the new build is consistent before judging.
    over when the home moved to ReelReveal; kept the hero YouTube control. Verified the home is intact (hero,
    tilt, testimonials, reel reveal, rwork, loader all present, no console errors). NOT deduped: the lab's
    inline reel vs ReelReveal are intentionally different (the lab one reskins with LabFx, the home one is
-   fixed-dark) — leave them.
+   fixed-dark) - leave them.
 12. **BRAND color PRESET + dark `/lab` hero (2026-06-14).** Added the 9th LabFx preset **`brand`**
-   (ink/denim/rose) to the picker — generate via `tools/gen-palettes.mjs` (denim #3E6E94 was
+   (ink/denim/rose) to the picker - generate via `tools/gen-palettes.mjs` (denim #3E6E94 was
    Leonardo-lifted to #527da0 for AA on ink), wired through `LabFx.astro` (`THEMES` array + a `.fx-sw`
    swatch + `:root.theme-brand`). Made the `/lab` HERO a darker version that reads off `--bg`/`--fg`
    tokens, so it retints with whatever preset is active. Real-Chromium verified across presets, brand
@@ -514,7 +526,7 @@ URL across requests until the new build is consistent before judging.
    `.bw .inner` to `var(--wrap,1300px)`, added `min-width:0` to `.bw .hero > div` (so the wordmark
    can't force the track/tagline wider), capped the wordmark at `clamp(36px,10vw,150px)`. Verified
    flush + clip-free with Archivo loaded at 375 / 768 / 1024 / 1440 / 1920 / 2200px.
-14. **CODE TIGHTENED — verified dead-code sweep (2026-06-14, commit 2a5ba64).** Multi-agent adversarial
+14. **CODE TIGHTENED - verified dead-code sweep (2026-06-14, commit 2a5ba64).** Multi-agent adversarial
    audit over this session's files (each removal grep-proven unreferenced across src/public/tools).
    Removed 13 dead items: legacy `.work-grid`/`.work-card`/`.work` home rules (home is `.rwork-*` now)
    + the `.work-card` reduced-motion entry; 7 orphan `cs-` label comments + the TEMP movement-toggle
@@ -529,7 +541,7 @@ URL across requests until the new build is consistent before judging.
 scroll offset in real Chromium), `tools/snap-themes.mjs`. The headless Claude-preview pauses rAF
 and cannot composite a Lenis scroll, so use these (real Chromium) to capture motion.
 
-## ════ SESSION 2026-06-13 — the /lab v2 redesign is the live work ════
+## ════ SESSION 2026-06-13 - the /lab v2 redesign is the live work ════
 **Everything new lives at `/lab/*` (the originals at `/`, `/work`, `/about`, etc. are UNTOUCHED
 until DJ promotes a page). Hub: `/lab` (a public "Laboratory" showcase). Each change is its own
 commit = clean rollback. Deployed: https://monuments-2-0.vercel.app/lab**
@@ -547,10 +559,10 @@ airplane on scroll, "Can your AI do this?" demo), `/lab/blue-cross` + `/lab/sony
 **Shipped components (src/components/):** LabFx (theme tokens + grain + contextual cursor +
 4-preset color selector), FloatingHand (tiny red hand, flies diagonally on scroll behind text),
 BrandTicker (scroll-velocity logo marquee; `tone="white"|"black"`, live `data-speed`),
-WeavingLine (REMOVED from pages, DJ hated it — file still exists), ShapePile (physics shapes),
+WeavingLine (REMOVED from pages, DJ hated it - file still exists), ShapePile (physics shapes),
 AttentionHourglass (8s drain + flip), AIWorkflowDemo (cycling capability demo). Tools:
 `tools/snap.mjs` (full-page capture + measured geometry) and `tools/motion.mjs` (frame-by-frame
-scroll filmstrips) — ALWAYS use these to judge motion before/after; DJ has twice called out work
+scroll filmstrips) - ALWAYS use these to judge motion before/after; DJ has twice called out work
 done without actually looking.
 
 **The system:** tokenized colors via LabFx on `:root` (lab-only). Default theme "monument" =
@@ -565,53 +577,53 @@ media slower than type (REFERENCES.md). Voice: studio "we", no em dashes, CD-fir
   LabFx presets from a tool.
 - DJ to send a specific photo album for the about-credo background (currently random from
   /gallery/full; swap the POOL in about.astro's montage script).
-- Donut Media + DW Drums ticker logos are agent-crafted approximations — swap real marks.
+- Donut Media + DW Drums ticker logos are agent-crafted approximations - swap real marks.
 - DJ rewrites the AI-page copy himself (going-wild voice). Showreel = self-host the MP4 later.
 - Promote chosen /lab pages onto the real routes when DJ signs off.
 
 ## ──────── older sessions below (historical) ────────
 
 **DJ's style:** precise designer feedback, fast iteration. Replicate-first (match the real
-monuments.cc, THEN optimize — don't redesign unprompted). Can't watch video. Estimate effort
-before big tasks. Verify in-browser via Claude Preview MCP (name `monuments`, port 4321) — the
+monuments.cc, THEN optimize - don't redesign unprompted). Can't watch video. Estimate effort
+before big tasks. Verify in-browser via Claude Preview MCP (name `monuments`, port 4321) - the
 headless preview renders narrow (~755px) and pauses rAF when hidden, so read the DOM/computed
 styles and trust DJ's real screen for fine spacing.
 
-## SESSION 2026-06-08/09 — what changed (read this first)
-**Strategic context (NEW — memory `site-builder-vision`):** monuments is DJ's *learning vehicle + template #1* for a **category-based website-builder / site-factory** (client fills a form + uploads images → point a domain → auto-build a site by business category). So **build components + data model GENERIC / multi-site-ready, not monuments-specific**; theme by category via `--` tokens; per-client editing = a git-based CMS (Keystatic-style); reuse, don't reinvent.
+## SESSION 2026-06-08/09 - what changed (read this first)
+**Strategic context (NEW - memory `site-builder-vision`):** monuments is DJ's *learning vehicle + template #1* for a **category-based website-builder / site-factory** (client fills a form + uploads images → point a domain → auto-build a site by business category). So **build components + data model GENERIC / multi-site-ready, not monuments-specific**; theme by category via `--` tokens; per-client editing = a git-based CMS (Keystatic-style); reuse, don't reinvent.
 
 **Shipped this session:**
 - Real bug fixed: `--pad` was `--pad: var(--pad)` (circular) → killed padding on EVERY work section. Now `clamp(24px,5vw,40px)`. (This was the "spacing" complaint.)
 - `CSS-MAP.md` (repo root): audited line-map of all of global.css + a confirmed **dead-code list** to delete (old `.work` grid, old `.ab-*`, orphan `.cs-*` scaffold, `.menu-close`, `.pg-modes`, unused `--warm`/`--gray-bg`). CSS is otherwise structurally clean.
 - Sony This Moment gallery: **continuous auto-scroll filmstrip** carousel (CSS-only marquee, hover-pause) + a **masonry** with a dark text-block cell that **randomizes its slot each page load**.
-- `/lab/find-your-flow`: FIND YOUR FLOW credits ring built as **3 motion options A/B/C** to compare live — A scroll-dial, B draw-in seal, C counter-rotor.
-- `/lab/work-kit`: first reusable, SELF-CONTAINED (scoped-style) work components — **WorkScope** ("what I did for them": heading+body+services list), **WorkCredits**, **WorkQuote** — + generic `src/data/work/types.ts` (Section/Project model with BOTH `scope` and `credits` as section types). Additive; no live page touched.
+- `/lab/find-your-flow`: FIND YOUR FLOW credits ring built as **3 motion options A/B/C** to compare live - A scroll-dial, B draw-in seal, C counter-rotor.
+- `/lab/work-kit`: first reusable, SELF-CONTAINED (scoped-style) work components - **WorkScope** ("what I did for them": heading+body+services list), **WorkCredits**, **WorkQuote** - + generic `src/data/work/types.ts` (Section/Project model with BOTH `scope` and `credits` as section types). Additive; no live page touched.
 
-- **Keystatic CMS — GitHub-mode browser login WORKING (2026-06-10).** `/keystatic` admin, collections **Work projects** + **Testimonials** + singleton **Site settings** (`keystatic.config.ts`; content under `content/`). React + `@keystatic/astro` + `@astrojs/vercel@8` adapter are added in `astro.config.mjs` but the integrations are **dev-gated** (`!process.argv.includes('build')`) so the production build stays **pure-static** (verified). Storage auto-switches local-in-dev / GitHub-on-deploy via `import.meta.env.DEV`. GitHub App "Monuments CC CMS" created + installed on the repo (Contents+PR read/write); 3 Vercel env vars set (KEYSTATIC_GITHUB_CLIENT_ID/SECRET + KEYSTATIC_SECRET, Sensitive/Production). Fixed an OAuth `redirect_uri=localhost` bug via `security.allowedDomains:[{hostname:'monuments-2-0.vercel.app'}]` in astro.config (Astro 5 host-injection guard). DJ logged in OK. Login from anywhere: monuments-2-0.vercel.app/keystatic.
+- **Keystatic CMS - GitHub-mode browser login WORKING (2026-06-10).** `/keystatic` admin, collections **Work projects** + **Testimonials** + singleton **Site settings** (`keystatic.config.ts`; content under `content/`). React + `@keystatic/astro` + `@astrojs/vercel@8` adapter are added in `astro.config.mjs` but the integrations are **dev-gated** (`!process.argv.includes('build')`) so the production build stays **pure-static** (verified). Storage auto-switches local-in-dev / GitHub-on-deploy via `import.meta.env.DEV`. GitHub App "Monuments CC CMS" created + installed on the repo (Contents+PR read/write); 3 Vercel env vars set (KEYSTATIC_GITHUB_CLIENT_ID/SECRET + KEYSTATIC_SECRET, Sensitive/Production). Fixed an OAuth `redirect_uri=localhost` bug via `security.allowedDomains:[{hostname:'monuments-2-0.vercel.app'}]` in astro.config (Astro 5 host-injection guard). DJ logged in OK. Login from anywhere: monuments-2-0.vercel.app/keystatic.
 
 **⏳ Decisions waiting on DJ:**
 1. FIND YOUR FLOW: pick A / B / C (or a mix) at `/lab/find-your-flow`.
-2. ✅ RESOLVED — CMS = Keystatic GitHub mode (built + login working, see above).
+2. ✅ RESOLVED - CMS = Keystatic GitHub mode (built + login working, see above).
 
-## SESSION 2026-06-10 (cont.) — CMS→pages pipeline WIRED
+## SESSION 2026-06-10 (cont.) - CMS→pages pipeline WIRED
 **The reader/adapter/WorkLayout pipeline is built + proven end-to-end.**
-- `src/lib/work.ts` — `createReader(@keystatic/core/reader)` over `content/work/*`; `toProject()` ADAPTS the flat Keystatic record → the generic `Project` (header + ordered `sections[]`, `src/data/work/types.ts`). This is the only seam that knows Keystatic field names. Exports `listWorkSlugs` / `getProject` / `getAllProjects`.
-- `src/components/work/WorkLayout.astro` — dispatches `project.sections` by `type`, reusing the **global** `.wh / .wk-intro / .wk-carousel / .wk-masonry / .bc-quote / .bc-meta / .cs-next` classes so a CMS page matches the locked Sony ref pixel-for-pixel (verified: same grid cols, 42s `wkScroll`, 3-col masonry, accent emphasis, `#e0322d` circle). Masonry images are Lightbox triggers.
-- `src/components/Lightbox.astro` — the photography `.pg-*` filmstrip lightbox LIFTED into a shared component (auto-drift + grab-momentum + keyboard). Binds to any `[data-lb-full]` trigger, grouped by `[data-lb-group]`. (Photography still has its own inline copy — entangled w/ lane drag-guard; migrate it onto this later.)
+- `src/lib/work.ts` - `createReader(@keystatic/core/reader)` over `content/work/*`; `toProject()` ADAPTS the flat Keystatic record → the generic `Project` (header + ordered `sections[]`, `src/data/work/types.ts`). This is the only seam that knows Keystatic field names. Exports `listWorkSlugs` / `getProject` / `getAllProjects`.
+- `src/components/work/WorkLayout.astro` - dispatches `project.sections` by `type`, reusing the **global** `.wh / .wk-intro / .wk-carousel / .wk-masonry / .bc-quote / .bc-meta / .cs-next` classes so a CMS page matches the locked Sony ref pixel-for-pixel (verified: same grid cols, 42s `wkScroll`, 3-col masonry, accent emphasis, `#e0322d` circle). Masonry images are Lightbox triggers.
+- `src/components/Lightbox.astro` - the photography `.pg-*` filmstrip lightbox LIFTED into a shared component (auto-drift + grab-momentum + keyboard). Binds to any `[data-lb-full]` trigger, grouped by `[data-lb-group]`. (Photography still has its own inline copy - entangled w/ lane drag-guard; migrate it onto this later.)
 - Added `quote{}` object to `keystatic.config.ts` (the `bc-quote` was the only non-CMS field) + a new `IntroSection` (`wk-intro` grid) to `types.ts`, distinct from `ScopeSection` (services-list/Flashpoint).
 - **Seed:** `content/work/sony-this-moment.json` (real Sony content). NOTE on-disk path: data-only collection → **flat `content/work/<slug>.json`**, NOT a `<slug>/index.json` dir.
-- **Comparison route:** `/work-preview/[slug]` renders the CMS page via WorkLayout. Locked `/work/sony-this-moment` is UNTOUCHED — A/B them at 1440 before flipping real routes.
-- ✅ Build clean (18 pages). `/work-preview/sony-this-moment` prerenders to **pure-static** `index.html` (CMS content baked in, 0 react islands) — static posture preserved.
+- **Comparison route:** `/work-preview/[slug]` renders the CMS page via WorkLayout. Locked `/work/sony-this-moment` is UNTOUCHED - A/B them at 1440 before flipping real routes.
+- ✅ Build clean (18 pages). `/work-preview/sony-this-moment` prerenders to **pure-static** `index.html` (CMS content baked in, 0 react islands) - static posture preserved.
 - ⚠️ **DOC FIX:** `astro.config.mjs` is NO LONGER dev-gated (that approach is gone). Current: Vercel adapter always on, **public pages prerendered/static, only `/keystatic` + auth API are serverless.** HANDOFF.md's "dev-gated pure-static build" text is stale.
 
 **NEXT (in order):**
 - [ ] **DJ A/B check** `/work-preview/sony-this-moment` vs locked `/work/sony-this-moment` at 1440 → if it matches, flip real `/work/[slug]` onto WorkLayout (sony LAST, it's the ref).
 - [ ] Roll real projects into the CMS (clothing-merch = proof, then bc family, cs2 family). Each work page becomes a `content/work/<slug>.json`.
 - [ ] Reuse `Lightbox.astro` on the photography page too (retire its inline copy) once the work flow is locked.
-- [ ] Finish the kit (WorkScope is wired into WorkLayout for the services/Flashpoint variant; WorkQuote/WorkCredits superseded by the global `.bc-quote/.bc-meta` for the Sony family — decide whether to keep them).
-- [x] ✅ DONE 2026-06-12 — dead CSS swept (all CSS-MAP candidates re-grepped + removed, ~110 lines; build verified clean).
+- [ ] Finish the kit (WorkScope is wired into WorkLayout for the services/Flashpoint variant; WorkQuote/WorkCredits superseded by the global `.bc-quote/.bc-meta` for the Sony family - decide whether to keep them).
+- [x] ✅ DONE 2026-06-12 - dead CSS swept (all CSS-MAP candidates re-grepped + removed, ~110 lines; build verified clean).
 
-## SESSION 2026-06-12 — Blue Cross clone + full QC pass
+## SESSION 2026-06-12 - Blue Cross clone + full QC pass
 - **`/work/blue-cross` REBUILT as a faithful clone of monuments.cc/portfolio/blue-cross-2** (verified against the live page in-browser): `.wh` header (firefighter hero = bci-02, BCBS logo `/logos/blue-cross.png`, red `--wh-circle`, real intro copy) → page-scoped `.bx-scope` copy band (services list left / two paragraphs right, like live) → `.wk-carousel` (live swiper order: bci-22/24/02/28) → full 23-image `.wk-masonry` in live order → **new `WorkNext.astro`** (giant-ghost-text next-project teaser cloned from the live template; reusable, scoped styles). NOTE: local bci-NN numbering == live Blue-Cross-Of-IdahoNN numbering.
 - **QC pass (all clean):** `npm run build` 18 pages no errors; all 19 routes 200 + 404 works; zero console errors/warnings on every page (home, work, photography, about, contact, giving, both labs, all case studies); zero failed network requests; zero broken internal links/assets (only flag: `/about/dj.jpg` inside an intentional HTML comment placeholder); no console.log/TODO/debugger anywhere in src.
 - ⏳ DJ to A/B `/work/blue-cross` vs the live page, then approve cloning the remaining work pages.
@@ -623,12 +635,12 @@ styles and trust DJ's real screen for fine spacing.
   Contact, About, Services all built.
 - Menu patches: vintage set (Idaho [straight], LA, AI handshake, No Risk No Story, race,
   film). Camera patch emojis sized down.
-- **Layout system:** every section uses `--wrap` (1300px) + `--pad` (clamp 24–40px),
+- **Layout system:** every section uses `--wrap` (1300px) + `--pad` (clamp 24-40px),
   centered. Sections fit the column UNLESS deliberately full-width (hero img, dark quote band).
 
-## IN PROGRESS — work-page refinement (this is the active task)
+## IN PROGRESS - work-page refinement (this is the active task)
 Refining the work/case-study pages to match the real monuments.cc, one at a time.
-**Sony "This Moment" is the reference build** — pattern to roll to the others:
+**Sony "This Moment" is the reference build** - pattern to roll to the others:
 - `.wh-*` work header: full-bleed campaign image, big uppercase title (top), client logo
   + italic role with a hand-drawn **marker circle** that draws in / holds / fades / redraws
   (~5s loop). Circle colour is per-page via inline `style="--wh-circle:#xxx"`.
@@ -638,28 +650,28 @@ Refining the work/case-study pages to match the real monuments.cc, one at a time
 **NEXT:** roll the `.wh-*` header + `.wk-intro` pattern to the other work pages, each with
 its own `--wh-circle` colour + client logo:
 - [ ] sony-flow-state, sony-xperia-summer, flashpoint, waffle-me-up, clothing-merch, blue-cross, turnstile
-- [x] **FIND YOUR FLOW** credits ring — BUILT as 3 motion options at `/lab/find-your-flow`
-  (A scroll-dial / B draw-in seal / C counter-rotor). ⏳ DJ to pick — see SESSION block above.
+- [x] **FIND YOUR FLOW** credits ring - BUILT as 3 motion options at `/lab/find-your-flow`
+  (A scroll-dial / B draw-in seal / C counter-rotor). ⏳ DJ to pick - see SESSION block above.
 
 ## Open / lower priority
 - About + Services: DJ is matching these to the real site via **Cowork** (separate tool).
-  Coordinate — pull before editing if Cowork has been active (pre-push hook blocks stale pushes).
+  Coordinate - pull before editing if Cowork has been active (pre-push hook blocks stale pushes).
 - Brand-doc conflicts still unresolved: photo-vs-film positioning, Tess section, featured-work list.
 - Self-host showreel MP4 when DJ provides it. (NOTE: `against.png` renders inverted
-  by design — that's the actual AGAINST mark, confirmed by DJ. Do NOT "fix"/flip it.)
+  by design - that's the actual AGAINST mark, confirmed by DJ. Do NOT "fix"/flip it.)
 - Real DJ/Tess headshots → swap into About placeholder tiles (`/public/about/`).
 
-## SESSION 2026-06-12 (cont.) — V2 LAB PAGES BUILT (autonomous run, DJ to review)
+## SESSION 2026-06-12 (cont.) - V2 LAB PAGES BUILT (autonomous run, DJ to review)
 All new versions live at /lab/* (originals untouched; every page = its own commit
 for rollback). Built on the measured motion system (REFERENCES.md): pinned scenes,
 scrubbed reversible motion, sheet-over handoffs, marker accents.
-- /lab/ai — pinned ERA + QUESTIONS scenes, WILD stamp cascade, tilt cards
-- /lab/home — line-by-line hero build + marker circle over video, showreel kept,
+- /lab/ai - pinned ERA + QUESTIONS scenes, WILD stamp cascade, tilt cards
+- /lab/home - line-by-line hero build + marker circle over video, showreel kept,
   brand-world work bands, services rows (incl. AI), trusted grid
-- /lab/work — exoape-style portals (grow → handoff), index list w/ hover thumbs
-- /lab/blue-cross — editorial chapters, pinned insight scene, collage, stats,
+- /lab/work - exoape-style portals (grow → handoff), index list w/ hover thumbs
+- /lab/blue-cross - editorial chapters, pinned insight scene, collage, stats,
   frame wall, portal-grow next-project ending
-- /lab/about — pinned credo scene, drifting galaxy media, team tiles
-- /lab/services — CD-first rows w/ marker underlines, cream AI block, process strip
-- /lab/contact — giant marker-underlined email, expect cards, draggable patches
+- /lab/about - pinned credo scene, drifting galaxy media, team tiles
+- /lab/services - CD-first rows w/ marker underlines, cream AI block, process strip
+- /lab/contact - giant marker-underlined email, expect cards, draggable patches
 ⏳ DJ: review each, punch-list or promote to real routes.
