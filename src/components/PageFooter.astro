@@ -3,9 +3,11 @@
 // `tag` is the per-page sign-off (DJ likes that it differs on every page:
 // "Photography", "About", "Case file MC-2023-05"...). Styling lives HERE so
 // pages can never drift apart again. Self-contained: no reliance on page .wrap.
+import MenuTakeover from './MenuTakeover.astro';
 interface Props { tag: string; }
 const { tag } = Astro.props;
 ---
+<MenuTakeover />
 <footer class="pfoot">
   <div class="row">
     <span>Monuments &copy; MMXXVI &middot; ELMT.NO.004259</span>

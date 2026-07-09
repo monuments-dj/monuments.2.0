@@ -1,0 +1,157 @@
+---
+// MenuTakeover.astro · the sitewide nav: one "Menu" trigger (desktop + mobile),
+// fullscreen ink takeover with staggered lines, hover preview stills, and the
+// meta footer. Rides on every page via PageFooter. Replaces the per-page corner
+// links + CSS hamburger (hidden globally below) — the IA outgrew a listed nav.
+const links = [
+  { n: '01', t: 'Work',         href: '/work',         sub: '18 case files',            img: '/reel/work-reel-poster.jpg' },
+  { n: '02', t: 'Photography',  href: '/photography',  sub: 'the stills archive',       img: '/gallery/full/p-044.jpg' },
+  { n: '03', t: 'About',        href: '/about',        sub: 'the subject file',         img: '/about/hero-set.jpg' },
+  { n: '04', t: 'Capabilities', href: '/capabilities', sub: 'what I do',                img: '/about/dj-film.jpg' },
+  { n: '05', t: 'AI',           href: '/ai',           sub: 'a tool, not a solution',   img: '/about/studio-console.jpg' },
+  { n: '06', t: 'Giving',       href: '/giving',       sub: 'work that gives back',     img: '/case-studies/giving/gv-01.jpg' },
+  { n: '07', t: 'Contact',      href: '/contact',      sub: 'our journey starts here',  img: '/contact/ct-01.jpg' },
+];
+---
+<button class="mt-trig" id="mtTrig" type="button" aria-expanded="false" aria-controls="mtOv" aria-label="Open menu">
+  <span class="mt-ic" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="mt-lb">Menu</span>
+</button>
+
+<div class="mt-ov" id="mtOv" role="dialog" aria-modal="true" aria-label="Site menu">
+  <div class="mt-grid">
+    <nav class="mt-nav" aria-label="Primary">
+      {links.map((l, i) => (
+        <a class="mt-item" href={l.href} data-img={l.img} style={`--i:${i}`}>
+          <span class="mt-line">
+            <span class="mt-no">{l.n}</span>
+            <span class="mt-word">{l.t}</span>
+            <span class="mt-sub serif">{l.sub}</span>
+          </span>
+        </a>
+      ))}
+      <a class="mt-hire" href="/hire" style={`--i:${links.length}`}>
+        <span class="mt-line"><span class="mt-dot" aria-hidden="true"></span>Hiring? The one-page brief &rarr;</span>
+      </a>
+    </nav>
+    <div class="mt-prev" aria-hidden="true">
+      <img id="mtPrev" src={links[0].img} alt="">
+      <span class="mt-cap" id="mtCap">\ The index</span>
+    </div>
+  </div>
+  <div class="mt-meta">
+    <a class="mt-pill" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
+    <div class="mt-soc">
+      <a href="https://www.instagram.com/djthecd" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@djthecd" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.linkedin.com/in/djthecd/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <span class="mt-geo">34.05&deg; N &middot; 118.24&deg; W &middot; LA / Boise &middot; <b id="mtClock">LA --:--</b></span>
+  </div>
+</div>
+
+<style is:global>
+/* retire the legacy per-page nav: corner links + CSS hamburger overlay */
+.corners .c2{display:none!important}
+.navburger,.mnav,.navtog-in{display:none!important}
+
+/* trigger */
+.mt-trig{position:fixed;top:22px;right:22px;z-index:92;display:flex;align-items:center;gap:10px;background:none;border:0;cursor:pointer;padding:8px 4px;mix-blend-mode:difference;color:#fff}
+.mt-trig .mt-lb{font-family:var(--mono,'Fragment Mono',monospace);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#fff}
+.mt-ic{display:flex;flex-direction:column;justify-content:center;gap:5px;width:26px}
+.mt-ic i{display:block;height:2px;width:100%;background:#fff;border-radius:2px;transition:transform .34s cubic-bezier(.76,0,.24,1),opacity .2s}
+body.mt-open .mt-ic i:nth-child(1){transform:translateY(7px) rotate(45deg)}
+body.mt-open .mt-ic i:nth-child(2){opacity:0}
+body.mt-open .mt-ic i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+body.mt-open .mt-trig{mix-blend-mode:normal}
+
+/* overlay */
+.mt-ov{position:fixed;inset:0;z-index:88;background:#161514;color:#F5F3EF;transform:translateY(-102%);transition:transform .62s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column;justify-content:space-between;padding:calc(24px + 6vh) var(--pad,clamp(22px,4.6vw,44px)) 26px;visibility:hidden}
+body.mt-open .mt-ov{transform:none;visibility:visible}
+body.mt-open{overflow:hidden}
+.mt-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(30px,5vw,90px);align-items:center;flex:1;min-height:0;max-width:var(--wrap,1380px);width:100%;margin:0 auto}
+.mt-nav{display:flex;flex-direction:column}
+.mt-item{display:block;text-decoration:none;color:inherit;border-bottom:1px solid rgba(245,243,239,.12);padding:clamp(8px,1.4vh,14px) 0}
+.mt-item:first-child{border-top:1px solid rgba(245,243,239,.12)}
+.mt-line{display:flex;align-items:baseline;gap:16px;overflow:hidden}
+.mt-item .mt-line>*{transform:translateY(130%);transition:transform .6s cubic-bezier(.22,1,.36,1);transition-delay:calc(.12s + var(--i)*.055s)}
+body.mt-open .mt-item .mt-line>*{transform:none}
+.mt-no{font-family:var(--mono,'Fragment Mono',monospace);font-size:10.5px;letter-spacing:.1em;color:#8f8d88;flex:none;transform-origin:left bottom}
+.mt-word{font-family:var(--disp,'Bricolage Grotesque',sans-serif);font-weight:800;font-size:clamp(30px,4.6vw,58px);line-height:1;letter-spacing:-.03em;text-transform:uppercase;transition:color .3s,transform .6s cubic-bezier(.22,1,.36,1)}
+.mt-sub{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(14px,1.4vw,19px);color:#8f8d88;margin-left:auto;text-align:right}
+.mt-item:hover .mt-word{color:var(--spark,#EFA1AD)}
+.mt-item:hover .mt-line{padding-left:10px}
+.mt-line{transition:padding-left .4s cubic-bezier(.22,1,.36,1)}
+.mt-hire{display:block;text-decoration:none;color:#F5F3EF;margin-top:22px;overflow:hidden}
+.mt-hire .mt-line{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono,'Fragment Mono',monospace);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(245,243,239,.35);border-radius:99px;padding:12px 20px;transform:translateY(160%);transition:transform .6s cubic-bezier(.22,1,.36,1),border-color .3s,color .3s;transition-delay:calc(.12s + var(--i)*.055s)}
+body.mt-open .mt-hire .mt-line{transform:none}
+.mt-hire:hover .mt-line{border-color:var(--spark,#EFA1AD);color:var(--spark,#EFA1AD)}
+.mt-dot{width:7px;height:7px;border-radius:50%;background:#3ddc84;flex:none}
+
+/* preview */
+.mt-prev{position:relative;aspect-ratio:4/3;overflow:hidden;background:#1c1b1a;opacity:0;transform:scale(.97);transition:opacity .5s .3s,transform .6s .3s cubic-bezier(.22,1,.36,1)}
+body.mt-open .mt-prev{opacity:1;transform:none}
+.mt-prev img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.15) contrast(1.04) brightness(.88);transition:opacity .28s}
+.mt-prev img.sw{opacity:0}
+.mt-cap{position:absolute;left:12px;bottom:10px;font-family:var(--mono,'Fragment Mono',monospace);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.85);background:rgba(22,21,20,.6);padding:3px 8px}
+/* meta */
+.mt-meta{display:flex;align-items:center;gap:18px 30px;flex-wrap:wrap;max-width:var(--wrap,1380px);width:100%;margin:0 auto;padding-top:20px;border-top:1px solid rgba(245,243,239,.12);opacity:0;transition:opacity .5s .42s}
+body.mt-open .mt-meta{opacity:1}
+.mt-pill{display:inline-flex;padding:13px 24px;background:#F5F3EF;color:#161514;border-radius:99px;font-family:var(--mono,'Fragment Mono',monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .3s}
+.mt-pill:hover{background:var(--spark,#EFA1AD)}
+.mt-soc{display:flex;gap:20px}
+.mt-soc a{font-family:var(--mono,'Fragment Mono',monospace);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88;text-decoration:none;border-bottom:1px solid rgba(245,243,239,.2);padding-bottom:2px}
+.mt-soc a:hover{color:#F5F3EF;border-color:var(--spark,#EFA1AD)}
+.mt-geo{margin-left:auto;font-family:var(--mono,'Fragment Mono',monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88}
+.mt-geo b{color:#F5F3EF;font-weight:400}
+
+@media (max-width:900px){
+  .mt-grid{grid-template-columns:1fr;align-items:start;padding-top:2vh}
+  .mt-prev{display:none}
+  .mt-word{font-size:clamp(34px,8.6vw,58px)}
+  .mt-sub{display:none}
+  .mt-geo{margin-left:0;flex-basis:100%}
+  .mt-meta{gap:14px 22px}
+}
+@media (prefers-reduced-motion:reduce){
+  .mt-ov{transition:none}
+  .mt-item .mt-line>*,.mt-hire .mt-line{transform:none!important;transition:none}
+  .mt-prev{opacity:1;transform:none;transition:none}
+  .mt-meta{opacity:1;transition:none}
+}
+</style>
+
+<script is:inline>
+(function(){
+  if(window.__mtInit)return; window.__mtInit=1;
+  var trig=document.getElementById('mtTrig'),ov=document.getElementById('mtOv');
+  if(!trig||!ov)return;
+  // hoist out of any page wrapper (.underfoot etc. create low stacking contexts
+  // that would trap the fixed trigger/overlay beneath the page content)
+  document.body.appendChild(trig); document.body.appendChild(ov);
+  function set(open){
+    document.body.classList.toggle('mt-open',open);
+    trig.setAttribute('aria-expanded',open?'true':'false');
+    trig.setAttribute('aria-label',open?'Close menu':'Open menu');
+    var lb=trig.querySelector('.mt-lb'); if(lb)lb.textContent=open?'Close':'Menu';
+    if(open){var f=ov.querySelector('.mt-item'); if(f)f.focus({preventScroll:true});}
+  }
+  trig.addEventListener('click',function(){set(!document.body.classList.contains('mt-open'))});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('mt-open'))set(false)});
+  ov.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
+  // hover preview swap (fine pointers only)
+  var img=document.getElementById('mtPrev'),cap=document.getElementById('mtCap');
+  if(img&&matchMedia('(pointer:fine)').matches){
+    ov.querySelectorAll('.mt-item').forEach(function(a){
+      a.addEventListener('mouseenter',function(){
+        var s=a.getAttribute('data-img'); if(!s||img.getAttribute('src')===s)return;
+        img.classList.add('sw');
+        setTimeout(function(){img.src=s;img.onload=function(){img.classList.remove('sw')};},140);
+        if(cap)cap.textContent='\\ '+a.querySelector('.mt-word').textContent;
+      });
+    });
+  }
+  function ck(){var c=document.getElementById('mtClock');if(!c)return;c.textContent='LA '+new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'})}
+  ck();setInterval(ck,30000);
+})();
+</script>
