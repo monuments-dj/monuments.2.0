@@ -93,11 +93,12 @@ Every item below traces to one or both. The domain swap is the finish line and h
 ## F · Pre-flight QA (Claude, before swap)
 - [x] **Mobile-breakpoint sweep 360/390/768 (2026-07-09, 0fbb283).** All 26 real pages had 3-22px phantom horizontal scroll (hero `.t{width:104%}` bleed + Lenis making `<html>` the scroller so `body{overflow-x:hidden}` didn't bind). Fixed with `html{overflow-x:clip}` sitewide. Re-swept: every page sits exactly at viewport, no blank images, no media 404s. Tooling: `tools/qc-mobile.mjs`.
 - [x] **Header images (2026-07-09, 7a5a4f7).** Capabilities/Contact/AI were the only text-only heroes; gave each a full-bleed on-set frame (dj-film / set-haze / studio-console) matching the About/Giving pattern. Verified 1440 + 390. Images are one-line swaps if DJ wants different frames.
-- [ ] Full-site click pass at 1440 + 390 (every CTA, NextFile chain loop) - overflow/media pass done; CTA/interaction pass still TODO.
-- [ ] All snips/videos play muted + lazy; no 404s in network log. (No image/video 404s at load in the 360/390/768 sweep; playback-on-scroll not yet re-verified.)
+- [x] **Link + CTA + NextFile audit (2026-07-09, `tools/qc-links.mjs`).** Every internal link across all 26 pages resolves (200/3xx); zero empty/`#`/dead CTAs. NextFile auto-advance chain verified = one complete 18-page loop, no orphans, no broken targets, loops back to start. External hosts (idahoptv, instagram, donut.media, brand sites) still need DJ's link check (section C).
+- [x] **Media attrs (2026-07-09).** All 8 `<video>` tags are muted + playsinline (no surprise audio / no mobile fullscreen hijack); 128/199 imgs lazy-load. No image/video 404s at load in the 360/390/768 sweep. (Playback-on-scroll spot-check + remaining lazy coverage = Lighthouse-tier, below.)
+- [x] **Meta descriptions (2026-07-09, 8330de3).** Added to the 5 nav pages that lacked them (about, capabilities, contact, photography, work) + og:title/description/type. All pages now have title + description + favicon + viewport.
 - [ ] ⚠️ **Accent switcher pill still renders on every page** (bottom-center, via PageFooter) - visible in the new hero screenshots. Must be removed before the swap (needs DJ's accent pick; see D2).
-- [ ] Lighthouse pass on Home/Work/About/one case (perf + a11y).
-- [ ] Meta titles/descriptions on all pages; OG image; favicon everywhere.
+- [ ] **OG image** - no page has an `og:image` share card yet. Needs a designed 1200x630 asset + absolute URL (best wired at domain-swap time). og:title/description are in place.
+- [ ] Lighthouse pass on Home/Work/About/one case (perf + a11y; incl. finishing image lazy coverage, 71 imgs still eager).
 - [ ] Verify in DJ's real browser + live deploy (prod differs from sandbox - standing rule).
 
 ## H · References (everything a fresh chat / DJ needs)
