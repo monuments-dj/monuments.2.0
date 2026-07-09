@@ -51,7 +51,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .rv.in{opacity:1;transform:none}
 
 /* hero: the thesis, plain, on ink */
-.hero{min-height:88svh;display:flex;flex-direction:column;justify-content:center;padding:16vh 0 10vh}
+.hero{min-height:88svh;display:flex;flex-direction:column;justify-content:center;padding:16vh 0 10vh;position:relative;overflow:hidden;background:var(--ink)}
+.hero>.herobg{position:absolute;top:0;height:100%;left:50%;width:100vw;transform:translateX(-50%);object-fit:cover;filter:contrast(1.04) brightness(.46);z-index:0}
+.hero>.scrim{position:absolute;top:0;height:100%;left:50%;width:100vw;transform:translateX(-50%);background:radial-gradient(ellipse at 40% 40%,rgba(22,21,20,.44),rgba(22,21,20,.34) 52%,rgba(22,21,20,.7));z-index:1;pointer-events:none}
+.hero>*:not(.herobg):not(.scrim){position:relative;z-index:2}
 .hero .kick{color:var(--spark);margin-bottom:26px}
 .hero h1{font-weight:var(--dispw);font-size:clamp(46px,8.2vw,124px);line-height:.94;letter-spacing:-.035em;text-transform:uppercase}
 .hero h1 .serif{color:var(--spark)}
@@ -137,6 +140,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 <header class="hero">
+  <img class="herobg" src="/about/studio-console.jpg" alt="DJ directing a shoot in a recording studio, mixing console and monitors" fetchpriority="high">
+  <div class="scrim" aria-hidden="true"></div>
   <div class="wrap">
     <span class="kick mono">AI · DJ Ramirez · Monuments</span>
     <h1>

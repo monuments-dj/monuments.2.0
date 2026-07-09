@@ -48,7 +48,15 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .corners .c2 a:hover::after{transform:scaleX(1);transform-origin:left}
 
 /* hero: statement on paper, sun emblem watermark */
-.hero{position:relative;min-height:86svh;display:flex;align-items:center;overflow:hidden;border-bottom:2px solid var(--ink)}
+.hero{position:relative;min-height:86svh;display:flex;align-items:center;overflow:hidden;border-bottom:none;background:var(--ink)}
+.hero>.herobg{position:absolute;top:0;height:100%;left:50%;width:100vw;transform:translateX(-50%);object-fit:cover;object-position:60% 50%;filter:contrast(1.05) brightness(.44);z-index:0}
+.hero>.scrim{position:absolute;top:0;height:100%;left:50%;width:100vw;transform:translateX(-50%);background:linear-gradient(100deg,rgba(22,21,20,.82),rgba(22,21,20,.42) 52%,rgba(22,21,20,.5)),linear-gradient(0deg,rgba(22,21,20,.68),rgba(22,21,20,0) 44%);z-index:1;pointer-events:none}
+.hero>*:not(.herobg):not(.scrim){position:relative;z-index:2}
+.hero .sunwm{display:none}
+.hero h1{color:var(--paper)}
+.hero .sub p{color:rgba(245,243,239,.9);text-shadow:0 1px 20px rgba(22,21,20,.7)}
+.hero .sub .lead{color:rgba(245,243,239,.66);text-shadow:0 1px 16px rgba(22,21,20,.6)}
+.hero .sub .lead b{color:var(--paper)}
 .hero .sunwm{position:absolute;right:-8%;top:50%;width:min(46vw,560px);aspect-ratio:1;transform:translateY(-50%);opacity:.08;animation:spin 90s linear infinite}
 .hero .sunwm g{fill:var(--ink)}
 .hero .inner{position:relative;z-index:1;padding-top:8vh}
@@ -201,6 +209,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <div class="over">
 <header class="hero">
+  <img class="herobg" src="/about/dj-film.jpg" alt="DJ directing on set, a small crew filming behind him" fetchpriority="high">
+  <div class="scrim" aria-hidden="true"></div>
   <svg class="sunwm" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays2"></g></svg>
   <div class="wrap inner">
     <span class="kick mono">Capabilities · DJ Ramirez · Monuments</span>
