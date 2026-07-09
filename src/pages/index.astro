@@ -428,7 +428,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <section class="reel" id="work">
     <div class="reel-pin">
       <div class="wrap reel-head">
-        <h2>Built to be <span class="serif" id="feelWord">remembered.</span></h2>
+        <h2>Built to <span id="feelLead">be</span> <span class="serif" id="feelWord">remembered.</span></h2>
         <div class="ticks" id="ticks" aria-hidden="true"></div>
       </div>
       <div class="reel-track" id="reelTrack">
@@ -465,7 +465,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
           <span class="imgs"><img class="a" src="/case-studies/adorama-music/gallery/am-01.jpg" alt="Adorama Music" loading="lazy"><img class="b" src="/case-studies/adorama-music/gallery/am-18.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t"><img class="lg" src="/logos/adorama.png" alt="">Adorama Music</span><span class="mono">MC-2022-07 · Content series</span></div>
         </a>
-        <a class="reel-card" href="/work/buck-the-quo" data-role="Shooter + field experiential" data-stats="18,000+ conversations|Rocky Awards Best of Show|Statewide activation" data-word="remembered.">
+        <a class="reel-card" href="/work/buck-the-quo" data-role="Shooter + field experiential" data-stats="18,000+ conversations|Rockys Best of Show|Statewide activation" data-lead="make" data-word="a difference.">
           <span class="imgs"><img class="a" src="/case-studies/buck-the-quo/gallery/container-front.jpg" alt="Buck the Quo" loading="lazy"><img class="b" src="/case-studies/buck-the-quo/gallery/container-coaster.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t">Buck the Quo</span><span class="mono">MC-2021-03 · Film series · Best of Show ✳</span></div>
         </a>
@@ -755,7 +755,7 @@ clock();setInterval(clock,30000);
 // pinned reel scrub (tinywins grammar)
 (function(){
   const sec=document.querySelector('.reel'),track=document.getElementById('reelTrack'),
-        word=document.getElementById('feelWord'),ticks=document.getElementById('ticks');
+        word=document.getElementById('feelWord'),lead=document.getElementById('feelLead'),ticks=document.getElementById('ticks');
   if(!sec||!track)return;
   const cards=[...track.querySelectorAll('.reel-card:not(.spacer)')];
   ticks.innerHTML=cards.map(()=>'<i></i>').join('');
@@ -764,6 +764,7 @@ clock();setInterval(clock,30000);
   function setWord(i){
     if(i===cur)return;cur=i;
     word.textContent=cards[i].dataset.word;
+    if(lead)lead.textContent=cards[i].dataset.lead||'be';
     word.classList.remove('swap');void word.offsetWidth;word.classList.add('swap');
     tickEls.forEach((el,j)=>el.classList.toggle('on',j===i));
   }
@@ -775,8 +776,13 @@ clock();setInterval(clock,30000);
     requestAnimationFrame(()=>{
       const vh=innerHeight,r=sec.getBoundingClientRect();
       const total=r.height-vh;
-      const p=Math.min(1,Math.max(0,-r.top/total));
-      const max=Math.max(0,track.scrollWidth-innerWidth);
+      const p0=Math.min(1,Math.max(0,-r.top/total));
+      // hold the last 6% so the end state reads; end CENTERED on the last card
+      // (Buck the Quo lines up under the headline) instead of flush-right.
+      const p=Math.min(1,p0/0.94);
+      const lastC=cards[cards.length-1];
+      const off=lastC.getBoundingClientRect().left-track.getBoundingClientRect().left;
+      const max=Math.max(0,off+lastC.offsetWidth/2-innerWidth/2);
       track.style.transform=`translateX(${-p*max}px)`;
       const rv=(p-(window.__rp||p))*140;window.__rp=p;
       cards.forEach((c,i)=>{c.style.transform=`translateY(${(Math.sin(p*5+i*1.7)*12).toFixed(1)}px) rotate(${(Math.max(-2.4,Math.min(2.4,rv))*(i%2?-.5:.5)).toFixed(2)}deg)`});
