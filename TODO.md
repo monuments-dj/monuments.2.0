@@ -1,4 +1,53 @@
-# TODO — current state (2026-07-07)
+# TODO — current state (2026-07-08)
+
+## 🚀 THIS SESSION (2026-07-08)
+SHIPPED + PUSHED:
+- **Descender clip fixed SITE-WIDE (4ea50bd).** The `.ln` hero reveal + `.sl` scroll-CTA
+  reveal both mask each line in `overflow:hidden`; at the tight display line-height (.9–.94)
+  that sheared off the last line's italic-serif descenders (g/y/p, the italic Q tail) and the
+  low accent dot. All-caps lines hid it; the serif signature line ("you'll go.", "people.",
+  "remembering.") exposed it. Fix = `padding-bottom:.18em;margin-bottom:-.18em` on every
+  `.ln`/`.sl` mask (reveals descenders, spacing unchanged) + reveal offset `112%→125%` (hidden
+  line clears the taller mask, no pre-animation peek). Applied to all 26 hero headers + 5
+  CTAs; verified visually on every one (see tools/snaps/verify/MONTAGE-*.png). **This is now a
+  standing rule — see CSS-MAP.md "Reveal-mask descenders" before adding any new masked header.**
+- **Adorama AOV pass:** all 38 gallery images visible, distributed into 3 contact-sheet runs
+  broken by a pull-quote + stat beat; captions are now sequential FR-01…FR-29 frame numbers
+  (the old Studio/Garage/Stage labels were assigned by run position and mislabeled the photos);
+  "behind the film" reframed to "The cutdowns" (product cutdowns by brand, not BTS — only the
+  Beat Machine spot i_hGj3rKH7k is wired). Sony This Moment / Flow State stats confirmed present
+  from v3; NEW SocialWall.astro "beyond the numbers" audience-comment wall on sony-flow-state.
+- **Accent = pink, themeable.** Killed the cobalt accent → rose site-wide; `--struct` +
+  `--on-rgb` drive band bg + on-band text. TEMP accent switcher lives in PageFooter.astro
+  (fixed bottom-center pill, rose/cobalt/red/ink, localStorage `mnmt-accent`). ⚠️ **DJ still
+  owes an accent pick — then bake the winner into `:root` and DELETE the switcher** (flagged in
+  LAUNCH.md).
+- **Footer → PageFooter.astro** shared component (per-page sign-off text via `tag` prop) — stops
+  the inline-footer drift noted last session. Rides on every page.
+- Home reel: EMPTY lead-in slot so the first project starts already in the hovered/active
+  position; formatting resynced; flush ends.
+- About: NEW creed (4 beliefs); "The receipts" rebuilt numbers-first (the printed-slip gimmick
+  was scrapped — DJ: "not it"); "In the room" → ledger rows.
+- Services → **Capabilities** (collapsed + renamed; `/services`→`/capabilities` redirect in
+  astro.config); refusals opener + 9 refusal lines.
+- **/ai** page built around DJ's "AI is a tool, not a solution… won't buy you taste; I directed
+  people before I directed AI." (copy is my draft of his concept — may want his pass.)
+- Dual-mandate grade (wf, 13 agents) → LAUNCH.md checklist + PHILOSOPHY.md.
+
+AWAITING DJ (unblocks queued work):
+- **Accent pick** from the switcher → bake in + remove switcher.
+- **AOV reel link** (unlocks the flagship reel + confirms 4 homepage IG swaps).
+- Other **Adorama brand-cutdown video IDs** (only Beat Machine wired).
+- Green-light details for **/hire** page (APPROVED, not built yet).
+
+QUEUE (approved / requested, not built):
+- /hire page · OG homepage "sight, sound and emotion" header · move ReelReveal play-button
+  reveal onto homepage · /work thumbnail redesign + blurbs + "case study" label · photo
+  categorization (DJ giving folders) · Home hover-proof mobile fix · recruiter route on
+  Home/Contact · optional: apply the gallery→quote→gallery→stat template to Buck the Quo /
+  Know Vape.
+- Minor spotted-in-passing: /capabilities hero copy "In to serve the work," reads slightly
+  oddly — confirm intended vs "Here to serve the work,".
 
 ## 🚀 COPY HANDOFF v3 APPLIED SITE-WIDE (2026-07-07, wf_d632cf34)
 DJ edited copy in a Google Doc (tools/copy-new.md is the saved handoff; tools/copy-export.md

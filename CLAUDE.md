@@ -58,7 +58,16 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
-## Active work (2026-07-07): COPY v3 APPLIED · POSITIONING = CREATIVE DIRECTOR
+## Active work (2026-07-08): DESCENDER CLIP FIXED SITE-WIDE · ACCENT = PINK (pending DJ's pick)
+Latest session (full detail: TODO.md top block): fixed hero + CTA reveal masks clipping italic-serif
+descenders on every header (padding-bottom on `.ln`/`.sl` masks; see CSS-MAP.md "Reveal-mask
+descenders" gotcha before adding any masked header). Accent switched cobalt→ROSE site-wide + a TEMP
+accent switcher pill in PageFooter.astro — **DJ owes an accent pick, then bake it into `:root` and
+DELETE the switcher** (LAUNCH.md). Footer is now the shared PageFooter.astro component. Adorama got
+the full AOV pass (all 38 imgs, FR-numbered contact sheet, "The cutdowns"). AWAITING DJ: accent pick ·
+AOV reel link · Adorama brand-cutdown video IDs · /hire green-light (approved, unbuilt).
+
+## Active work (2026-07-07, historical): COPY v3 APPLIED · POSITIONING = CREATIVE DIRECTOR
 Goal unchanged: portfolio to get DJ HIRED (audience = hiring managers). POSITIONING UPDATED per
 DJ's copy handoff (tools/copy-new.md = LOCKED source): **Creative Director**, sub-line "Integrated
 campaigns · film · stills · experiential", hero thesis "The tools are everywhere. Taste isn't.",

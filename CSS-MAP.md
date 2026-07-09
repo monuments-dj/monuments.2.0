@@ -62,3 +62,21 @@ Jump-to index so edits go straight to the right ~20 lines instead of grepping a 
 
 ## Components plan
 The work pages are 3 families sharing a tail: `.wh/.wk` (sony-this-moment only), `.bc-*` (blue-cross, flow-state, xperia, clothing-merch), `.cs2-*` (turnstile, flashpoint, waffle). Componentization plan → `src/components/work/` + `src/data/work/` (see chat / templating work). Rollout: scaffold → clothing-merch → bc family → cs2 family → sony-this-moment (locked ref) last.
+
+## ⚠️ Cross-page gotcha: Reveal-mask descenders (added 2026-07-08)
+The hero headers (`.hero .t .ln` / `.hero h1 .ln`) and the scroll-in CTAs
+(`[data-split] .sl`) reveal each line by wrapping it in `overflow:hidden` and
+sliding an inner `<span>` up from `translateY(125%)`. That mask clips the line
+box — so at the tight display line-height (.9–.94) any DESCENDER (italic-serif
+g/y/p/j, the italic Q tail, the low accent dot on the signature line) gets
+SHEARED OFF. All-caps lines have no descenders so the bug hides; the italic
+`.serif` last line exposes it. This was clipping nearly every header before
+4ea50bd.
+RULE when adding/editing any masked header: keep the mask room —
+`.ln`/`.sl { overflow:hidden; padding-bottom:.18em; margin-bottom:-.18em }`
+(reveals descenders, spacing unchanged) and the inner span at
+`transform:translateY(125%)` (clears the taller mask, no pre-animation peek).
+Don't reintroduce a bare `overflow:hidden` mask with `translateY(112%)`.
+Verify VISUALLY — this is ink overflow, so getBoundingClientRect shows 0px
+(rect == mask); only a screenshot reveals the clip. Sweep tooling:
+tools/verify-heads.mjs + tools/build-montage.mjs → tools/snaps/verify/.
