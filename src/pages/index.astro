@@ -2,6 +2,7 @@
 import AchievementsTicker from '../components/AchievementsTicker.astro';
 import PageFooter from '../components/PageFooter.astro';
 import FloatingHand from '../components/FloatingHand.astro';
+import Testimonials from '../components/Testimonials.astro';
 ---
 <!doctype html>
 <html lang="en">
@@ -64,6 +65,24 @@ a{color:inherit;text-decoration:none}
 #reelbox .x{position:absolute;top:-42px;right:0;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:none;border:1px solid rgba(245,243,239,.4);border-radius:99px;padding:8px 16px;cursor:pointer}
 #reelbox .x:hover{background:var(--paper);color:var(--ink)}
 #reelbox .cap{position:absolute;bottom:-34px;left:0;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88}
+/* Play/Reel scrub reveal (ReelReveal port): sticky stage, scroll drives the take-over */
+.rr{position:relative;height:300svh;background:#0b0b0a;color:var(--paper)}
+.rr-pin{position:sticky;top:0;height:100svh;overflow:hidden}
+.rr-kick{position:absolute;top:clamp(28px,6vh,64px);left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:center;gap:10px;letter-spacing:.12em;color:rgba(245,243,239,.7)}
+.rr-kick span{color:var(--spark)}
+.rr-panel{position:absolute;left:50%;top:50%;width:100vw;aspect-ratio:16/10;max-height:100svh;padding:0;border:0;cursor:pointer;overflow:hidden;border-radius:8px;background:#000;transform:translate(-50%,-50%) scale(.26);transform-origin:center;will-change:transform;z-index:2;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.rr-panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) saturate(.95)}
+.rr-play{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;z-index:3;pointer-events:none;display:flex;align-items:center;justify-content:center;color:var(--paper);background:rgba(245,243,239,.14);border:1px solid rgba(245,243,239,.55);backdrop-filter:blur(5px)}
+.rr-word{position:absolute;top:50%;z-index:3;font-weight:var(--dispw);font-size:clamp(44px,10vw,150px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;white-space:nowrap;opacity:0;will-change:transform,opacity;color:var(--paper);transform:translateY(-50%)}
+.rr-word .serif{text-transform:none;letter-spacing:-.01em}
+.rr-l{left:clamp(16px,8vw,150px)}
+.rr-r{right:clamp(16px,8vw,150px)}
+.rr-cap{position:absolute;bottom:clamp(28px,6vh,64px);left:0;right:0;z-index:4;text-align:center;max-width:46ch;margin:0 auto;padding:0 var(--pad);letter-spacing:.1em;color:rgba(245,243,239,.6)}
+@media (prefers-reduced-motion:reduce){
+  .rr{height:100svh}
+  .rr-panel{transform:translate(-50%,-50%) scale(.42)!important}
+  .rr-word{opacity:1!important}.rr-l{transform:translateY(-50%)!important}.rr-r{transform:translateY(-50%)!important}
+}
 
 /* hero: type IN the photograph */
 .hero{position:relative;height:80svh;min-height:560px;overflow:hidden;background:var(--ink)}
@@ -374,6 +393,23 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </div>
 
+<!-- The Play/Reel reveal, ported from ReelReveal.astro (the pre-cut homepage build DJ
+     kept asking for): the stage pins while scroll scrubs the words in from the sides
+     and the film panel scales up to take the viewport. Vanilla sticky-scrub port of
+     the original GSAP timeline (same beats: words 0-.45, panel .45-1, words out .62). -->
+<section class="rr" aria-label="Showreel">
+  <div class="rr-pin">
+    <p class="rr-kick mono"><span aria-hidden="true">✳</span> Work in motion</p>
+    <button class="rr-panel" id="rrPanel" type="button" aria-label="Play the reel, sound on">
+      <img src="/case-studies/sony-this-moment/gallery/tm-04.jpg" alt="Showreel still" loading="lazy" decoding="async">
+      <span class="rr-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+    </button>
+    <span class="rr-word rr-l" aria-hidden="true">Play</span>
+    <span class="rr-word rr-r" aria-hidden="true"><span class="serif">reel.</span></span>
+    <p class="rr-cap mono">Press play, and turn it up. Half the story is in the sound.</p>
+  </div>
+</section>
+
 <section class="paper">
   <div class="wrap say">
     <span class="kick mono rv">\ What I do</span>
@@ -447,6 +483,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
+<Testimonials />
+
 <section class="cta">
   <div class="inner wrap">
     <div class="cta-txt">
@@ -480,6 +518,33 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     inner.style.transform=`translate3d(${tx}px,${ty}px,0) rotateX(${rx}deg) rotateY(${ry}deg)`;
     requestAnimationFrame(tick);
   })();
+})();
+</script>
+<script is:inline>
+// Play/Reel scrub: same beats as the original GSAP timeline, driven by native scroll.
+// words slide in over p 0-.45, panel scales .26->1 over p .45-1, words fade out at .62.
+(function(){
+  const sec=document.querySelector('.rr');
+  if(!sec||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const panel=document.getElementById('rrPanel'),wl=sec.querySelector('.rr-l'),wr=sec.querySelector('.rr-r');
+  let raf=null;
+  function upd(){
+    raf=null;
+    const r=sec.getBoundingClientRect();
+    const total=r.height-innerHeight; if(total<=0)return;
+    const p=Math.min(1,Math.max(0,-r.top/total));
+    const wp=Math.min(1,p/0.45);
+    const wo=p<0.62?1:Math.max(0,1-(p-0.62)/0.22);
+    const wx=(1-wp)*260;
+    wl.style.transform=`translate(${-wx}%,-50%)`;
+    wr.style.transform=`translate(${wx}%,-50%)`;
+    wl.style.opacity=wr.style.opacity=(Math.min(1,wp*1.5)*wo).toFixed(3);
+    const pp=Math.min(1,Math.max(0,(p-0.45)/0.55));
+    panel.style.transform=`translate(-50%,-50%) scale(${(0.26+0.74*pp).toFixed(4)})`;
+  }
+  function req(){if(!raf)raf=requestAnimationFrame(upd)}
+  addEventListener('scroll',req,{passive:true});addEventListener('resize',req,{passive:true});
+  upd();
 })();
 </script>
 <script is:inline>
@@ -617,8 +682,11 @@ clock();setInterval(clock,30000);
     box.classList.add('on');document.body.style.overflow='hidden';
   }
   function close(){box.classList.remove('on');mount.innerHTML='';document.body.style.overflow=''}
+  window.__openReel=open;
   const pr=document.getElementById('playReel');
   if(pr)pr.addEventListener('click',open);
+  const rp=document.getElementById('rrPanel');
+  if(rp)rp.addEventListener('click',open);
   document.getElementById('reelClose').addEventListener('click',close);
   box.addEventListener('click',e=>{if(e.target===box)close()});
   addEventListener('keydown',e=>{if(e.key==='Escape')close()});

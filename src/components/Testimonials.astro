@@ -1,0 +1,56 @@
+---
+// Testimonials.astro · "In their words" — pull-quote wall, shared by Home + About.
+// PLACEHOLDER STATE: DJ is collecting the real quotes. Cards render the name/role
+// with an explicit "quote incoming" line — never fabricate words under a real name.
+// When a quote lands: paste it into `q` and delete the placeholder flag per person.
+// Roles below: Krizia + Prince are confirmed from case-page credits; the rest are
+// TODO (DJ to confirm how each person should be billed).
+interface Person { name: string; role: string; q?: string; }
+interface Props { tag?: string; }
+const { tag = 'pull quotes · incoming' } = Astro.props;
+const people: Person[] = [
+  { name: 'Krizia Vega',      role: 'Co-director · Sony Flow State' },
+  { name: 'Chris House',      role: 'Collaborator' },
+  { name: 'Kish',             role: 'Collaborator' },
+  { name: 'Alex Stevens',     role: 'Collaborator' },
+  { name: 'Prince McClinton', role: 'Co-host · Creator Clubhouse' },
+  { name: 'Jennie Meyers',    role: 'Collaborator' },
+];
+---
+<section class="tst">
+  <div class="wrap">
+    <div class="tst-bar">
+      <span class="mono"><b>\ In their words</b> · the people in the room</span>
+      <span class="mono tst-tag">{tag}</span>
+    </div>
+    <div class="tst-grid">
+      {people.map((p, i) => (
+        <figure class="tst-card rv" style={`--i:${i}`}>
+          <p class="tst-q">{p.q ?? <span class="tst-ph">&ldquo;&nbsp;&hellip;&nbsp;&rdquo;</span>}</p>
+          <figcaption>
+            <span class="tst-n">{p.name}</span>
+            <span class="tst-r mono">{p.role}</span>
+            {!p.q && <span class="tst-chip mono">quote incoming</span>}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.tst{background:var(--ink,#161514);color:var(--paper,#F5F3EF);padding:11vh 0 12vh}
+.tst-bar{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--lined,#2c2b29);margin-bottom:26px}
+.tst-bar .mono b{color:var(--spark,#EFA1AD)}
+.tst-tag{color:#8f8d88}
+.tst-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tst-card{margin:0;background:rgba(245,243,239,.04);border:1px solid rgba(245,243,239,.1);border-radius:11px;padding:26px 22px 20px;display:flex;flex-direction:column;gap:18px;min-height:190px}
+.tst-q{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(19px,1.9vw,25px);line-height:1.4;letter-spacing:-.01em;flex:1}
+.tst-ph{color:rgba(245,243,239,.28)}
+.tst-card figcaption{display:flex;flex-direction:column;gap:4px}
+.tst-n{font-weight:var(--dispw2,600);font-size:15.5px;letter-spacing:-.01em}
+.tst-r{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88}
+.tst-chip{align-self:flex-start;margin-top:6px;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--spark,#EFA1AD);border:1px solid rgba(239,161,173,.4);border-radius:99px;padding:3px 9px}
+@media (max-width:960px){.tst-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.tst-grid{grid-template-columns:1fr}}
+</style>
