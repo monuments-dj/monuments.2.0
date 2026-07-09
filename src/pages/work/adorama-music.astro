@@ -469,11 +469,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <div class="btsthumbs">
         <figure>
           <img src="/case-studies/adorama-music/gallery/am-36.jpg" alt="Adorama Music campaign still" width="800" height="534" loading="lazy">
-          <span class="cap">The campaign</span>
         </figure>
         <figure>
           <img src="/case-studies/adorama-music/gallery/am-38.jpg" alt="Adorama Music campaign still" width="800" height="534" loading="lazy">
-          <span class="cap">The campaign</span>
         </figure>
       </div>
     </div>
@@ -520,18 +518,18 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 // live in their own sections; these runs carry the remaining 29 selects.
 (function(){
   var G='/case-studies/adorama-music/gallery/';
-  function build(id,list){
+  function build(id,list,start){
     var el=document.getElementById(id); if(!el)return;
     el.innerHTML=list.map(function(f,i){
       return '<figure class="fr" style="--d:'+(i%10)*45+'ms">'
-        +'<img src="'+G+'am-'+String(f[0]).padStart(2,'0')+'.jpg" alt="Adorama Music: The Journey" width="'+f[1]+'" height="'+f[2]+'" loading="lazy">'
-        +'<figcaption class="cap">'+f[3]+'</figcaption></figure>';
+        +'<img src="'+G+'am-'+String(f[0]).padStart(2,'0')+'.jpg" alt="Adorama Music: The Journey, in the '+f[3].toLowerCase()+'" width="'+f[1]+'" height="'+f[2]+'" loading="lazy">'
+        +'<figcaption class="cap">FR-'+String(start+i).padStart(2,'0')+'</figcaption></figure>';
     }).join('');
     new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){el.classList.add('show');o.disconnect();}});},{threshold:.04,rootMargin:'0px 0px 140px 0px'}).observe(el);
   }
-  build('framesA',[[1,2048,1366,'Studio'],[2,2048,1366,'Garage'],[4,2048,1366,'Garage'],[5,2048,1366,'Garage'],[6,2048,1366,'Garage'],[10,2048,1366,'Garage'],[11,2048,1366,'Studio'],[12,2048,1366,'Studio'],[14,2048,1366,'Studio'],[15,2048,1366,'Studio'],[16,2048,1366,'Studio']]);
-  build('framesB',[[17,2048,1366,'Studio'],[18,2048,1366,'Studio'],[19,2048,1366,'Studio'],[20,2048,1366,'Studio'],[21,2048,1366,'Stage'],[22,2048,1366,'Stage'],[23,2048,1366,'Stage'],[24,2048,1366,'Stage'],[25,2048,1366,'Stage'],[26,2048,1366,'Stage']]);
-  build('framesC',[[27,2048,1366,'Stage'],[28,2048,1366,'Stage'],[29,2048,1366,'Stage'],[30,2048,1366,'Stage'],[32,2048,1366,'Stage'],[33,1366,2048,'Rehearsal'],[34,1366,2048,'Rehearsal'],[35,1366,2048,'Rehearsal']]);
+  build('framesA',[[1,2048,1366,'Studio'],[2,2048,1366,'Garage'],[4,2048,1366,'Garage'],[5,2048,1366,'Garage'],[6,2048,1366,'Garage'],[10,2048,1366,'Garage'],[11,2048,1366,'Studio'],[12,2048,1366,'Studio'],[14,2048,1366,'Studio'],[15,2048,1366,'Studio'],[16,2048,1366,'Studio']],1);
+  build('framesB',[[17,2048,1366,'Studio'],[18,2048,1366,'Studio'],[19,2048,1366,'Studio'],[20,2048,1366,'Studio'],[21,2048,1366,'Stage'],[22,2048,1366,'Stage'],[23,2048,1366,'Stage'],[24,2048,1366,'Stage'],[25,2048,1366,'Stage'],[26,2048,1366,'Stage']],12);
+  build('framesC',[[27,2048,1366,'Stage'],[28,2048,1366,'Stage'],[29,2048,1366,'Stage'],[30,2048,1366,'Stage'],[32,2048,1366,'Stage'],[33,1366,2048,'Rehearsal'],[34,1366,2048,'Rehearsal'],[35,1366,2048,'Rehearsal']],22);
 })();
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
