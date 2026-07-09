@@ -61,7 +61,12 @@ Every item below traces to one or both. The domain swap is the finish line and h
 
 ## C · Assets DJ owes
 - [ ] **AOV reel** (the real one) - unblocks the flagship.
-- [ ] **Fresh IG links** - Sony This Moment ×2, Clothing/Merch ×2 (old /tv/ format = the black bars).
+- [x] **IG links reconciled against the LIVE WordPress portfolio (2026-07-09, a5de9b4 + c21488c).** Method: curl each `monuments.cc/portfolio/*` page, extract the real embeds. Findings + fixes:
+  - **Summer w/ Xperia** - was MISSING all 6 real reels (page only showed the PRO-I film). Added all 6 from the live page. **This was DJ's repeated ask.**
+  - **Clothing/Merch** - the 2 reels already match the live page. No change.
+  - **Sony This Moment** - the 2 `/tv/` embeds were dead phantoms NOT on the live page (live uses the YouTube spot KIi8cBOlU50, already featured). Removed the dead section.
+  - **Can't cross-check** (not on the live WP portfolio): ac-boise `/reel/DR04D0ZDOjV`, sony-xm5 `/p/CjimA-tpjnc`. Current formats; DJ to confirm they resolve.
+  - ⚠️ IG embeds don't fully hydrate in the headless sandbox - **DJ must confirm all render on the live Vercel deploy in his real browser.**
 - [ ] **Photo categorization** - Claude will propose buckets for all 100 frames (vision pass); DJ corrects. Then real tabs.
 - [ ] **Buck the Quo: more/better images** (DJ's ask 2026-07-07).
 - [ ] **CWI**: role confirm (Director + Editor?), his own stills if wanted over film frames.
