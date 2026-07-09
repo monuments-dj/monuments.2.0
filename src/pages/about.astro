@@ -74,7 +74,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* subject file on paper */
 .paper{background:var(--paper);color:var(--ink)}
-.file{display:grid;grid-template-columns:.58fr 1.42fr;gap:64px;padding:11vh 0;align-items:start}
+.file{display:grid;grid-template-columns:.58fr 1.42fr;gap:64px;padding:11vh 0;align-items:center}
 .file .photo{background:#fff;border:1px solid var(--line);padding:10px 10px 34px;transform:rotate(-1.4deg);position:relative;box-shadow:0 24px 60px rgba(20,20,20,.12)}
 .file .photo img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:grayscale(.2) saturate(.9)}
 .file .photo video{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:grayscale(.22) saturate(.92);background:#111}
@@ -302,8 +302,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <div class="wrap file">
     <div class="photo rv">
       <span class="stamp">Rolling</span>
-      <span class="lead-tag"><i>&#9654;</i> On set &middot; silent</span>
-      <video id="leadVid" muted playsinline poster="/about/lead/ld-01.jpg" aria-label="DJ directing on set, no sound"></video>
+      <span class="lead-tag"><i>&#9654;</i> Los Angeles &middot; silent</span>
+      <video id="leadVid" muted playsinline loop poster="/about/dj-ramirez.jpg" aria-label="DJ Ramirez on an LA street, camera in hand"></video>
       <span class="cap">SUBJECT-001 · RAMIREZ, DJ · CREATIVE DIRECTOR</span>
     </div>
     <div class="rv">
@@ -564,12 +564,9 @@ clock();setInterval(clock,30000);
 // play only while the frame is on screen. No sound, ever.
 (function(){
   var v=document.getElementById('leadVid'); if(!v) return;
-  var clips=['/about/lead/ld-01.mp4','/about/lead/ld-02.mp4','/about/lead/ld-03.mp4'];
-  var i=0; v.muted=true;
-  function load(k){ i=((k%clips.length)+clips.length)%clips.length; v.src=clips[i]; var p=v.play(); if(p&&p.catch)p.catch(function(){}); }
-  v.addEventListener('ended',function(){ load(i+1); });
+  v.muted=true;
   var io=new IntersectionObserver(function(es){es.forEach(function(en){
-    if(en.isIntersecting){ if(!v.getAttribute('src')){ load(0); } else { var p=v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    if(en.isIntersecting){ if(!v.getAttribute('src')){ v.src='/about/dj-ramirez.mp4'; } var p=v.play(); if(p&&p.catch)p.catch(function(){}); }
     else { v.pause(); }
   });},{threshold:.3});
   io.observe(v);
