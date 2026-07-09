@@ -55,7 +55,8 @@ Every item below traces to one or both. The domain swap is the finish line and h
 - [x] CWI researched claims · DJ KEEPS both ("find more if you can" - extra sourced facts queued: fall 2024→2025 +6.8% enrollment, grad rate 36% vs 27%, transfer +7.6%).
 - [ ] **"3.6M+ impressions on a single launch"** - NEW (audit 07-08). Renders on the home ticker, the About "receipts", and Xperia. Unverified, same class as the killed 160M+. Confirm the number + which launch, or cut/soften.
 - [ ] **Est. MMXXII (2022) vs "opened 2016" / "a decade"** - About's corner label says "opened 2016 · still active" while the hero NFO says Est. MMXXII; reconcile studio-age vs career-length so they don't read as one contradictory claim.
-- [ ] **Voice: I-voice slips to third-person / "we"** on Flashpoint + Know Vape ("DJ directed/led…"), Capabilities ("our standards", "We lock"), Turnstile, Giving (studio "we"), Photography (impersonal). Flip to first person (Flashpoint + Know Vape were already on your list) or confirm the "we" is deliberate (Tess/team).
+- [~] **Voice: I-voice slips to third-person / "we"** - FLIPPED 2026-07-08 (99ee7b8): Flashpoint (story rewritten first-person + boilerplate trimmed), Know Vape (3 blocks "DJ directed"->"I directed"), Capabilities ("our standards"->"my", "We lock"->"I lock"), Turnstile ("Our timeline"/"We took"->"My"/"I"). STILL DJ'S CALL: Giving (whole page studio "we" - may be a deliberate crew-voice exception) + Photography (impersonal third person - may be intentional archive tone). Confirm those two or say flip them.
+  - Also normalized role-title casing to title case within blue-cross / sony-this-moment / adorama-music ("Creative direction"->"Creative Direction", matches each page's NFO).
 - [x] Rockys · RESOLVED per DJ: won every category entered + Best of Show, cited on Drake Cooper's site · applied.
 
 ## C · Assets DJ owes
