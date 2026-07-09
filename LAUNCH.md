@@ -85,7 +85,7 @@ Every item below traces to one or both. The domain swap is the finish line and h
 - [ ] **Password-protected work area** - decision below (E).
 
 ## E · New pages (proposed, DJ decides)
-1. **/hire (or /cv)** - the single biggest goal-1 gap: a one-pager a recruiter can skim/download. Role target, three headline numbers, selected work, availability. PRIORITY.
+1. [x] **/hire - BUILT + SHIPPED 2026-07-09 (8f3163c).** Recruiter one-pager at `/hire`: role target (Creative Director, senior agency role), three verified headline numbers (Emmy / 4x agency revenue / 2 to 30+ creatives led), What I bring, 5 selected-work links, client roster, availability + email + LinkedIn/IG, and a "Save this page as PDF" button (print stylesheet tuned to a clean single page). **Not yet linked in nav** - the recruiter route (a "for agencies" door on Home + Contact) is the follow-up that makes it discoverable; DJ to say where it should live.
 2. **/vault - password-protected work.** Recommendation: ONE gated page listing NDA/unreleased work as mini-cases (thumb + blurb + role + numbers), not full case pages per project. One password, serverless-cookie gate (real protection, not hide-the-div). Full case pages later only for pieces that earn it.
 3. **404 page** - on-brand, one hour, prevents a dead end.
 4. Not recommended now: blog/journal (goes stale), separate reel page (home owns it), press page (awards live in the cases).
