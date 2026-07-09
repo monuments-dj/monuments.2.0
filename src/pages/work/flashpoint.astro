@@ -5,26 +5,36 @@ import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 
 // === Flashpoint · THE CUT case page ===
-// Full rebrand for Adorama's photography-gear label. Assets in /public/case-studies/flashpoint.
-// fp-01..08 are the campaign comps (trade ads, billboard, packaging, one-sheet, brand shot):
-// they get the hero placements. fp-09..24 are square product stills: the contact-sheet line.
+// Full rebrand for Adorama's photography-gear label, through Art of Visuals.
+// IA: brief -> idea -> the four fronts as numbered chapters (look+message /
+// website / packaging / street) -> the channels -> the line. One ground per act:
+// ink hero block, paper brief, white showcase, rose close. DJ also designed and
+// built the new flashpointlighting.com and set up the socials: both still live,
+// so the site chapter uses a July 2026 capture of the real thing as proof.
+// Assets: /gallery fp-01..08 comps + fp-09..24 product stills; /site web-hero.jpg
+// (live capture) + tile-1..3.jpg (the category tiles from the site he designed).
 const G = '/case-studies/flashpoint/gallery';
-const comps = [
-  { src: 'fp-04.jpg', cap: 'COMP-04 · Packaging · The shipper box', cls: 'w2', w: 1800, h: 1414, alt: 'Flashpoint shipper box packaging comp in teal and white' },
-  { src: 'fp-01.jpg', cap: 'COMP-01 · Print · Trade ad, teal', cls: '', w: 1800, h: 1199, alt: 'Flashpoint magazine trade ad comp, teal colorway' },
-  { src: 'fp-02.jpg', cap: 'COMP-02 · Print · Trade ad, orange', cls: '', w: 1800, h: 1199, alt: 'Flashpoint magazine trade ad comp, orange colorway' },
-  { src: 'fp-06.jpg', cap: 'COMP-06 · Packaging · Xplor Power 2400 Pro', cls: '', w: 1800, h: 1800, alt: 'Flashpoint Xplor Power 2400 Pro power pack box' },
-  { src: 'fp-07.jpg', cap: 'COMP-07 · Packaging · R2 Nano Remote', cls: '', w: 1800, h: 1800, alt: 'Flashpoint R2 Nano Remote box, orange colorway' },
-  { src: 'fp-05.jpg', cap: 'COMP-05 · Print · Product one-sheet', cls: 'off', w: 1800, h: 1199, alt: 'Flashpoint FV150 product one-sheet comp' },
+const S = '/case-studies/flashpoint/site';
+const services = ['Brand Identity', 'Logo Design', 'Brand Positioning', 'Messaging', 'Packaging Design', 'Product Design', 'Web Design', 'Social Launch'];
+const fronts = [
+  { n: '01', t: 'A fresh brand image and updated messaging.' },
+  { n: '02', t: 'A new website, designed and built by me.' },
+  { n: '03', t: 'Packaging revamped to carry the identity.' },
+  { n: '04', t: 'Out-of-home campaigns with real reach.' },
+];
+const tiles = [
+  { img: 'tile-1.jpg', l: 'Lighting', alt: 'Flashpoint category tile: strobe on a teal circle' },
+  { img: 'tile-2.jpg', l: 'Studio Gear', alt: 'Flashpoint category tile: apple boxes on an amber circle' },
+  { img: 'tile-3.jpg', l: 'Accessories', alt: 'Flashpoint category tile: R2 remote on an orange circle' },
+];
+// IG story-highlight chips: the brand's circle mark in the four system colors
+const chips = [
+  { c: '#f0612a', l: 'Remote' },
+  { c: '#16a3ab', l: 'Flash' },
+  { c: '#1b1a19', l: 'Accessories' },
+  { c: '#f2a516', l: 'Stands' },
 ];
 const prods = Array.from({ length: 16 }, (_, i) => i + 9); // fp-09..fp-24
-const services = ['Brand Identity', 'Logo Design', 'Brand Positioning', 'Packaging Design', 'Product Design', 'Messaging'];
-const spanned = [
-  'A fresh brand image and updated messaging.',
-  'A redesigned website for improved user experience.',
-  'Revamped packaging reflecting the updated visual identity.',
-  'Powerful out-of-home (OOH) advertising campaigns.',
-];
 ---
 <!doctype html>
 <html lang="en">
@@ -33,15 +43,15 @@ const spanned = [
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>Flashpoint · Monuments</title>
-<meta name="description" content="Flashpoint full rebrand for Adorama. Identity, packaging, product, and messaging pulled into one voice. Creative direction by DJ Ramirez.">
+<meta name="description" content="Flashpoint full rebrand for Adorama, through Art of Visuals. Identity, packaging, OOH, a new website, and the social launch. Creative direction by DJ Ramirez.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
 <style is:global>
 :root{
-  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8;
   --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
-  --fp-teal:#16a3ab; --fp-orange:#f0612a;
+  --fp-teal:#16a3ab; --fp-orange:#f0612a; --fp-amber:#f2a516;
   --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
   --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
   --mono:'Fragment Mono',monospace;
@@ -93,7 +103,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero .kck b{color:var(--spark);font-weight:400}
 @keyframes fade{to{opacity:1}}
 
-/* scope first: cobalt scoreboard under the hero */
+/* scope first: scoreboard under the hero */
 .statrow{background:var(--struct);color:var(--paper)}
 .statrow>.in{display:flex;justify-content:flex-start;align-items:flex-end;gap:clamp(30px,4.6vw,64px);flex-wrap:wrap;padding:20px var(--pad) 18px}
 .statrow .stat:has(.note){margin-left:auto}
@@ -101,51 +111,34 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @media(max-width:900px){.statrow .stat:has(.note){margin-left:0}.statrow .stat .note{text-align:left}}
 .stat b{display:block;font-weight:var(--dispw);font-size:clamp(26px,2.7vw,42px);letter-spacing:-.03em;line-height:.92}
 .stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);display:block;margin-top:8px}
-.stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);line-height:1.9;max-width:26ch}
+.stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);line-height:1.9;max-width:28ch}
 .stat .note b{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--paper);display:inline;letter-spacing:.08em}
 .rolerow{background:var(--ink);border-bottom:1px solid var(--lined)}
 .rolerow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px var(--pad);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
 .rolerow b{color:var(--paper);font-weight:400}
 
-/* story on paper, sticky side heads */
+/* the brief on paper */
 .paper{background:var(--paper);color:var(--ink)}
 .story{display:grid;grid-template-columns:.62fr 1.38fr;gap:56px 64px;padding:12vh 0;align-items:center}
 .story .side{position:static}
 .story .body.rv{transition-delay:.12s}
-.story .side .k{color:var(--red)}
+.story .side .k{color:var(--fp-orange)}
 .story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
 .story h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
 .story .svc{list-style:none;margin:26px 0 0;padding:0}
 .story .svc li{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#6d6a64;padding:9px 0;border-top:1px solid var(--line)}
-.story .svc li i{font-style:normal;color:var(--red);margin-right:10px}
+.story .svc li i{font-style:normal;color:var(--fp-orange);margin-right:10px}
 .story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
 .story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
 
-/* the comps wall: presentation boards, white-framed, on ink */
-.comps{background:var(--ink);padding:9vh 0 10vh}
-.comps .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:22px}
-.comps .bar .mono b{color:var(--spark)}
-.cwall{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.2vw,26px)}
-.cfr{position:relative;background:#FCFBF7;padding:10px 10px 32px;opacity:0;transform:translateY(24px)}
-.cfr.in{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
-.cfr img{width:100%;height:auto;display:block;filter:saturate(.98)}
-.cfr .cap{position:absolute;left:11px;bottom:9px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
-.cfr .cap b{color:var(--red);font-weight:400}
-.cfr.w2{grid-column:1/-1}
-.cfr.off{grid-column:1/-1;width:min(76%,940px);margin-left:auto}
-.cfr:hover{z-index:2}
-.cfr:hover img{filter:saturate(1.04)}
-
-/* full-bleed parallax break */
-.break{position:relative;height:52svh;overflow:hidden}
-.break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;object-position:50% 50%;will-change:transform}
-.break .cap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.92);background:rgba(22,21,20,.42);padding:6px 12px;backdrop-filter:blur(2px)}
+/* the showcase ground: everything from the idea to the line sits on white */
+.white{background:#fff;color:var(--ink)}
 
 /* the triad: the words light up in the brand's own colors */
-.triad{padding:13vh 0 11vh;text-align:center}
-.triad .k{color:var(--red)}
+.triad{padding:12vh 0 9vh;text-align:center}
+.triad .k{color:var(--fp-orange)}
 .triadhead{display:flex;flex-direction:column;align-items:center;gap:clamp(2px,.8vh,10px);margin:clamp(26px,4vw,50px) 0;font-weight:var(--dispw);font-size:clamp(48px,10.4vw,158px);line-height:.94;letter-spacing:-.04em;text-transform:uppercase}
-.triadhead .tw{color:rgba(22,21,20,.13);transform:translateY(.18em);transition:color .6s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+.triadhead .tw{color:rgba(22,21,20,.1);transform:translateY(.18em);transition:color .6s ease,transform .7s cubic-bezier(.16,1,.3,1)}
 .triadhead .tw.on{transform:translateY(0)}
 .triadhead .tw.lit:nth-child(1){color:var(--fp-orange)}
 .triadhead .tw.lit:nth-child(2){color:var(--fp-teal)}
@@ -153,27 +146,83 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .cdd{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,5vw,80px);text-align:left;max-width:1080px;margin:0 auto;padding-top:2vh}
 .cdd .colA p{color:#4c4a45;max-width:56ch;margin-bottom:1.2em;font-size:18px}
 .cdd .colA p:first-child{font-size:clamp(19px,1.7vw,23px);line-height:1.5;color:var(--ink)}
-.cdd .objh{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--red)}
+.cdd .objh{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--fp-orange)}
 .cdd ol{list-style:none;margin:10px 0 0;padding:0}
 .cdd ol li{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:baseline;padding:16px 0 14px;border-top:1px solid var(--line);font-size:16.5px;line-height:1.45;color:var(--ink)}
 .cdd ol li:last-child{border-bottom:1px solid var(--line)}
 .cdd ol li .n{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--fp-teal)}
+.cdd .plus{margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6d6a64;line-height:1.9}
+.cdd .plus b{color:var(--fp-orange);font-weight:400}
 
-/* the line: 16-frame product contact sheet */
-.gal{padding:2vh 0 11vh}
+/* the fronts: numbered chapters, one header device for the whole page */
+.front{padding:7vh 0 8vh}
+.fhead{display:grid;grid-template-columns:auto 1fr auto;gap:6px 28px;align-items:baseline;border-top:2px solid var(--ink);padding-top:20px;margin-bottom:clamp(26px,4vh,40px)}
+.fhead .fn{grid-column:1;grid-row:1/3;font-family:var(--mono);font-size:clamp(34px,3.6vw,54px);line-height:.9;color:var(--fp-orange)}
+.fhead h3{grid-column:2;grid-row:1;font-weight:var(--dispw);font-size:clamp(24px,2.9vw,40px);letter-spacing:-.03em;line-height:1;text-transform:uppercase}
+.fhead h3 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.fhead .dek{grid-column:2/4;grid-row:2;color:#6d6a64;font-size:16px;max-width:62ch}
+.fhead .tag{grid-column:3;grid-row:1;justify-self:end;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+@media(max-width:900px){.fhead{grid-template-columns:1fr}.fhead .fn,.fhead h3,.fhead .dek{grid-column:1;grid-row:auto}.fhead .tag{display:none}}
+
+/* plates: borderless frames on white, mono caption under-left */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.2vw,26px)}
+.pl{position:relative;opacity:0;transform:translateY(22px)}
+.pl.in{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.pl img{width:100%;height:auto;display:block}
+.pl .cap{display:block;padding:9px 0 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.pl .cap b{color:var(--fp-orange);font-weight:400}
+.pl.doc img{border:1px solid var(--line)}
+.pl.off{width:min(76%,940px);margin-left:auto}
+.stack>.pl{margin-bottom:clamp(20px,3vh,32px)}
+.stack>.pl:last-child{margin-bottom:0}
+
+/* full-bleed parallax breaks */
+.break{position:relative;height:52svh;overflow:hidden}
+.break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;object-position:50% 50%;will-change:transform}
+.break .cap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.92);background:rgba(22,21,20,.42);padding:6px 12px;backdrop-filter:blur(2px)}
+
+/* front 02: the site he built, framed in a browser, plus its own category tiles */
+.browser{border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 26px 70px rgba(22,21,20,.12);background:#fff}
+.browser .bbar{display:flex;align-items:center;gap:6px;padding:11px 16px;background:#faf9f6;border-bottom:1px solid var(--line)}
+.browser .bbar i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.browser .burl{margin:0 auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:#6d6a64;background:#fff;border:1px solid var(--line);border-radius:99px;padding:3px 22px}
+.browser img{width:100%;height:auto;display:block}
+.tiles3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,26px);margin-top:clamp(22px,3.4vh,36px)}
+.tile{text-align:center}
+.tile img{width:100%;height:auto;display:block}
+.tile .tl{display:block;margin-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--ink)}
+.sitelinkrow{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-top:clamp(20px,3vh,30px)}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid var(--ink);border-radius:99px;padding:11px 20px;transition:background .3s,color .3s}
+.pill:hover{background:var(--ink);color:var(--paper)}
+.sitelinkrow .note{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+
+/* the channels: the socials he set up, chips wear the system marks */
+.chan{padding:7vh 0 9vh}
+.chan .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,70px);align-items:center}
+.chan p.body{color:#4c4a45;font-size:18px;max-width:54ch;margin-top:16px}
+.chan .igstats{display:flex;gap:clamp(24px,3vw,44px);margin-top:26px;flex-wrap:wrap}
+.chan .igstats div b{display:block;font-weight:var(--dispw);font-size:clamp(24px,2.3vw,36px);letter-spacing:-.03em;line-height:.95}
+.chan .igstats div span{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);display:block;margin-top:7px}
+.chan .pill{margin-top:28px}
+.chiprow{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,22px)}
+.chip{text-align:center}
+.chip svg{width:100%;max-width:120px;height:auto;display:block;margin:0 auto;border-radius:50%;box-shadow:0 10px 30px rgba(22,21,20,.10)}
+.chip .cl{display:block;margin-top:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#6d6a64}
+.chan .chapcap{margin-top:20px;text-align:center;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+
+/* the line: 16-frame contact sheet floating on the same white */
+.gal{padding:0 0 11vh}
 .gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:16px}
-.gal .bar .mono b{color:var(--red)}
+.gal .bar .mono b{color:var(--fp-orange)}
 .prodgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-/* the line floats on pure white: no borders, no card chrome, shots blend seamless */
-.prodsec{background:#fff;color:var(--ink);padding:9vh 0 10vh}
+.prodsec{background:#fff;color:var(--ink);padding:7vh 0 0}
 .prodsec .fr{border:none;background:#fff;padding:0 0 24px;transform:translateY(16px) rotate(0deg)}
 .prodsec .fr.in{transform:none}
 .prodsec .fr.in:hover{transform:scale(1.035);box-shadow:none;rotate:0deg}
-.fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;opacity:0;transform:translateY(16px) rotate(-.6deg)}
-.fr.in{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.fr{position:relative;background:#fff;padding:8px 8px 26px;opacity:0;transform:translateY(16px)}
+.fr.in{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
 .fr img{width:100%;height:auto;display:block;filter:saturate(.96)}
 .fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
-.fr.in:hover{transform:rotate(-1deg) scale(1.04);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms!important}
 
 /* quote on rose */
 .quote{background:var(--spark);color:var(--ink);padding:15vh 0}
@@ -184,7 +233,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 /* credits: the call sheet slip */
 .credits{padding:10vh 0}
 
-/* the ask: cobalt hand-off band */
+/* the ask: hand-off band */
 .cta{background:var(--struct);color:var(--paper);padding:12vh 0}
 .cta .in{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
 .cta .big{font-weight:var(--dispw);font-size:clamp(28px,4.2vw,60px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;max-width:16ch}
@@ -202,16 +251,22 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   .story{grid-template-columns:1fr}.story .side{position:static}
   .statrow>.in{justify-content:flex-start;gap:28px 44px}
   .cdd{grid-template-columns:1fr}
+  .duo{grid-template-columns:1fr}
+  .pl.off{width:100%}
   .prodgrid{grid-template-columns:repeat(2,1fr)}
-  .cfr.off{width:100%}
+  .chan .grid{grid-template-columns:1fr}
   .cta .in{justify-content:flex-start}
   .hero .kck{display:none}
 }
-@media (max-width:560px){.prodgrid{grid-template-columns:1fr}.cwall{grid-template-columns:1fr}.cfr.w2,.cfr.off{grid-column:auto}}
+@media (max-width:560px){
+  .prodgrid{grid-template-columns:1fr}
+  .tiles3{grid-template-columns:1fr;max-width:320px;margin-left:auto;margin-right:auto}
+  .chiprow{grid-template-columns:repeat(2,1fr)}
+}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .hero .t .ln>span{transform:none}.hero .nfo,.hero .kck{opacity:1}.rv{opacity:1;transform:none}
-  .grain{animation:none}.fr,.cfr{opacity:1;transform:none}
+  .grain{animation:none}.fr,.pl{opacity:1;transform:none}
   .triadhead .tw{transform:none;color:var(--ink)}
   .triadhead .tw:nth-child(1){color:var(--fp-orange)}
   .triadhead .tw:nth-child(2){color:var(--fp-teal)}
@@ -263,12 +318,12 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <span class="ln"><span>Imagine.</span></span>
     <span class="ln"><span>Illuminate.</span></span>
     <span class="ln"><span><span class="serif">Create</span><span class="spark">.</span></span></span>
-    <RoleTag text="full rebrand" />
+    <RoleTag text="rebrand · website · socials" />
   </div>
   <div class="kck">
     <b>\ Case file</b><br>
     Flashpoint · Full rebrand for Adorama<br>
-    Identity · Packaging · OOH · 2020
+    Identity · Packaging · Web · Social · OOH · 2020
   </div>
   <div class="nfo">
     <span class="h">NFO</span><br>
@@ -282,16 +337,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="statrow">
   <div class="wrap in">
     <div class="stat rv"><b>Full</b><span>Top-to-bottom rebrand</span></div>
-    <div class="stat rv"><b>06</b><span>Disciplines, one system</span></div>
-    <div class="stat rv"><b>24</b><span>Frames in the file</span></div>
-    <div class="stat rv"><p class="note">One voice from <b>the box on the shelf</b> to <b>the billboard on the street</b></p></div>
+    <div class="stat rv"><b>04</b><span>Fronts at once</span></div>
+    <div class="stat rv"><b>20K+</b><span>Followers on the channels I set up</span></div>
+    <div class="stat rv"><p class="note">The site I built in 2020 is <b>still live</b> at <b>flashpointlighting.com</b></p></div>
   </div>
 </div>
 
 <div class="rolerow">
   <div class="wrap in">
     <span><b>Client</b> · Adorama</span>
-    <span><b>My part</b> · Creative Director</span>
+    <span><b>My part</b> · Creative Director · site + socials</span>
     <span><b>Art Director</b> · Dannie Nicholson</span>
     <span><b>Agency</b> · Art of Visuals</span>
     <span><b>Year</b> · 2020</span>
@@ -308,36 +363,14 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       </ul>
     </div>
     <div class="body rv">
-      <p>Flashpoint is Adorama's private label, lighting and photography gear built to punch above its price for pros and enthusiasts alike. Strong reputation, dated look. As Creative Director, I led the rebrand with my team at Art of Visuals, pulling the identity into one voice.</p>
-      <p>The objective: revitalize Flashpoint's market presence and make the name synonymous with innovation, quality, and value in the world of photography. The rebrand hit four fronts at once: a fresh brand image and updated messaging, a redesigned website, revamped packaging, and out-of-home campaigns with real reach.</p>
-      <p>The result was a modern, cohesive image that reinforced Flashpoint's standing as a name photographers trust.</p>
+      <p>Flashpoint is Adorama's private label: lighting and photography gear built to punch above its price, for pros and enthusiasts alike. Strong reputation, dated look. The project came through Art of Visuals, and I led it as Creative Director with Dannie Nicholson on art direction.</p>
+      <p>Together we took the rebrand across four fronts at once: a fresh brand image and updated messaging, a new website, revamped packaging, and out-of-home with real reach. Two of those fronts were mine hands-on. I designed and built the new flashpointlighting.com, and I set up the brand's social channels.</p>
+      <p>Six years on, the system is still earning its keep. The site is still live, the channels have passed 20,000 followers, and Flashpoint still reads like a name photographers trust.</p>
     </div>
   </div>
 </section>
 
-<section class="comps">
-  <div class="wrap">
-    <div class="bar">
-      <span class="mono"><b>The comps</b> · one voice, every surface</span>
-      <span class="mono" style="color:#8f8d88">Presentation boards · MMXX</span>
-    </div>
-    <div class="cwall">
-      {comps.map((c) => (
-        <figure class={`cfr ${c.cls}`}>
-          <img src={`${G}/${c.src}`} alt={c.alt} width={c.w} height={c.h} loading="lazy">
-          <figcaption class="cap"><b>{c.cap.split(' · ')[0]}</b> · {c.cap.split(' · ').slice(1).join(' · ')}</figcaption>
-        </figure>
-      ))}
-    </div>
-  </div>
-</section>
-
-<div class="break">
-  <img class="plx" src={`${G}/fp-08.jpg`} alt="Brand shot: a woman with headphones lying on a floor covered in photo prints and magazines">
-  <span class="cap">✳ Imagine, illuminate, create · The brand in the wild</span>
-</div>
-
-<section class="paper">
+<section class="white">
   <div class="wrap triad" data-triad>
     <span class="k mono">\ The idea</span>
     <h2 class="triadhead" aria-label="Imagine Illuminate Create">
@@ -347,16 +380,137 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </h2>
     <div class="cdd">
       <div class="colA rv">
-        <p>The primary objective was to revitalize Flashpoint's market presence, ensuring that it became synonymous with innovation, quality, and value in the world of photography.</p>
-        <p>This was a top-to-bottom effort: a fresh brand image, sharper messaging, and a visual identity that could carry across every surface, from the box on the shelf to the billboard on the street.</p>
+        <p>The objective: revitalize Flashpoint's market presence and make the name synonymous with innovation, quality, and value in the world of photography.</p>
+        <p>This was a top-to-bottom effort: a fresh brand image, sharper messaging, and a visual identity that could carry across every surface, from the box on the shelf to the billboard on the street. The four fronts below are how it shipped, and they are the chapters of this file.</p>
       </div>
       <div class="colB rv">
-        <span class="objh">The work spanned</span>
+        <span class="objh">The four fronts</span>
         <ol>
-          {spanned.map((s, i) => (
-            <li><span class="n">0{i + 1}</span><span>{s}</span></li>
+          {fronts.map((f) => (
+            <li><span class="n">{f.n}</span><span>{f.t}</span></li>
           ))}
         </ol>
+        <p class="plus"><b>+</b> And one more that stuck: I set up the social channels alongside the launch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="white front">
+  <div class="wrap">
+    <div class="fhead rv">
+      <span class="fn">01</span>
+      <h3>The look + <span class="serif">the message.</span></h3>
+      <span class="tag">Front 01 · Brand image + messaging</span>
+      <p class="dek">One voice on every surface: the ads read like the box, the box reads like the billboard.</p>
+    </div>
+    <div class="duo">
+      <figure class="pl"><img src={`${G}/fp-01.jpg`} alt="Flashpoint magazine trade ad comp, teal colorway" width="1800" height="1199" loading="lazy"><figcaption class="cap"><b>COMP-01</b> · Print · Trade ad, teal</figcaption></figure>
+      <figure class="pl" style="transition-delay:80ms"><img src={`${G}/fp-02.jpg`} alt="Flashpoint magazine trade ad comp, orange colorway" width="1800" height="1199" loading="lazy"><figcaption class="cap"><b>COMP-02</b> · Print · Trade ad, orange</figcaption></figure>
+    </div>
+    <div class="stack" style="margin-top:clamp(20px,3vh,32px)">
+      <figure class="pl doc off"><img src={`${G}/fp-05.jpg`} alt="Flashpoint FV150 product one-sheet comp" width="1800" height="1199" loading="lazy"><figcaption class="cap"><b>COMP-05</b> · Print · Product one-sheet</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="break">
+  <img class="plx" src={`${G}/fp-08.jpg`} alt="Brand shot: a woman with headphones lying on a floor covered in photo prints and magazines">
+  <span class="cap">✳ Imagine, illuminate, create · The brand in the wild</span>
+</div>
+
+<section class="white front">
+  <div class="wrap">
+    <div class="fhead rv">
+      <span class="fn">02</span>
+      <h3>The <span class="serif">website.</span></h3>
+      <span class="tag">Front 02 · Design + build · by me</span>
+      <p class="dek">I designed and built the new flashpointlighting.com. Six years on, it is still the site they run.</p>
+    </div>
+    <figure class="pl">
+      <div class="browser">
+        <div class="bbar"><i></i><i></i><i></i><span class="burl">flashpointlighting.com</span></div>
+        <img src={`${S}/web-hero.jpg`} alt="flashpointlighting.com homepage: Imagine, Illuminate, Create over a tiled pool photograph" width="1440" height="722" loading="lazy">
+      </div>
+      <figcaption class="cap"><b>WEB-01</b> · The live site · Captured July 2026</figcaption>
+    </figure>
+    <div class="tiles3">
+      {tiles.map((t, i) => (
+        <figure class="pl tile" style={`transition-delay:${i * 90}ms`}>
+          <img src={`${S}/${t.img}`} alt={t.alt} width="900" height="900" loading="lazy">
+          <span class="tl">{t.l}</span>
+        </figure>
+      ))}
+    </div>
+    <div class="sitelinkrow rv">
+      <a class="pill" href="https://www.flashpointlighting.com/" target="_blank" rel="noopener">Visit the live site ↗</a>
+      <span class="note">Category system · product on the circle · the mark at work</span>
+    </div>
+  </div>
+</section>
+
+<section class="white front">
+  <div class="wrap">
+    <div class="fhead rv">
+      <span class="fn">03</span>
+      <h3>The <span class="serif">packaging.</span></h3>
+      <span class="tag">Front 03 · The box on the shelf</span>
+      <p class="dek">The shelf got the same voice as the street: revamped boxes that carry the identity into your hands.</p>
+    </div>
+    <div class="stack">
+      <figure class="pl"><img src={`${G}/fp-04.jpg`} alt="Flashpoint shipper box packaging comp in teal and white" width="1800" height="1414" loading="lazy"><figcaption class="cap"><b>COMP-04</b> · Packaging · The shipper box</figcaption></figure>
+    </div>
+    <div class="duo" style="margin-top:clamp(20px,3vh,32px)">
+      <figure class="pl"><img src={`${G}/fp-06.jpg`} alt="Flashpoint Xplor Power 2400 Pro power pack box" width="1800" height="1800" loading="lazy"><figcaption class="cap"><b>COMP-06</b> · Packaging · Xplor Power 2400 Pro</figcaption></figure>
+      <figure class="pl" style="transition-delay:80ms"><img src={`${G}/fp-07.jpg`} alt="Flashpoint R2 Nano Remote box, orange colorway" width="1800" height="1800" loading="lazy"><figcaption class="cap"><b>COMP-07</b> · Packaging · R2 Nano Remote</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="white front" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="fhead rv" style="margin-bottom:clamp(20px,3vh,30px)">
+      <span class="fn">04</span>
+      <h3>The <span class="serif">street.</span></h3>
+      <span class="tag">Front 04 · Out-of-home</span>
+      <p class="dek">OOH with real reach: the new face, up at city scale.</p>
+    </div>
+  </div>
+</section>
+<div class="break">
+  <img class="plx" src={`${G}/fp-03.jpg`} alt="Flashpoint billboard comp on a city building: We got you.">
+  <span class="cap">✳ OOH · We got you · The new face at city scale</span>
+</div>
+
+<section class="white chan">
+  <div class="wrap">
+    <div class="grid">
+      <div class="rv">
+        <span class="k mono" style="color:var(--fp-orange)">\ And the channels</span>
+        <h3 style="font-weight:var(--dispw);font-size:clamp(24px,2.9vw,40px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;margin-top:12px">Set up, launched, <span class="serif" style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none">still growing.</span></h3>
+        <p class="body">Alongside the launch I set up Flashpoint's social channels and gave them the system to grow with. Today the account is past 20,000 followers, and the story highlights still wear the circle marks from this identity.</p>
+        <div class="igstats">
+          <div><b>625</b><span>Posts</span></div>
+          <div><b>20.2K</b><span>Followers today</span></div>
+          <div><b>MMXX</b><span>Set up + launched</span></div>
+        </div>
+        <a class="pill" href="https://www.instagram.com/flashpointlighting/" target="_blank" rel="noopener">@flashpointlighting ↗</a>
+      </div>
+      <div class="rv" style="transition-delay:.12s">
+        <div class="chiprow">
+          {chips.map((c, i) => (
+            <figure class="chip">
+              <svg viewBox="0 0 100 100" role="img" aria-label={`Flashpoint story highlight mark, ${c.l}`}>
+                <circle cx="50" cy="50" r="47" fill={c.c} />
+                <circle cx="50" cy="50" r="20" fill="#fff" />
+                <rect x="-10" y="42.5" width="120" height="15" rx="7.5" fill="#fff" transform={`rotate(-38 50 50)`} />
+                <circle cx="50" cy="50" r="11.5" fill={c.c} />
+              </svg>
+              <span class="cl">{c.l}</span>
+            </figure>
+          ))}
+        </div>
+        <p class="chapcap">The story-highlight covers · the mark in the four system colors</p>
       </div>
     </div>
   </div>
@@ -381,7 +535,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <section class="quote">
   <div class="wrap">
-    <p class="q rv">"A confident new system: packaging, product, and messaging pulled into <b>one voice</b> that says innovation, quality, and value."</p>
+    <p class="q rv">"Identity, packaging, website, and channels pulled into <b>one voice</b> that says innovation, quality, and value."</p>
     <p class="who mono rv">The system in one line</p>
   </div>
 </section>
@@ -398,6 +552,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         { k: 'Client', v: 'Adorama' },
         { k: 'Art Director', v: 'Dannie Nicholson' },
         { k: 'Creative Direction', v: 'DJ Ramirez', select: true },
+        { k: 'Website + Social Launch', v: 'DJ Ramirez' },
       ]}
     />
   </div>
@@ -423,7 +578,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <script is:inline>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
-document.querySelectorAll('.rv,.cfr,.fr').forEach(el=>io.observe(el));
+document.querySelectorAll('.rv,.pl,.fr').forEach(el=>io.observe(el));
 
 // hero layers + break parallax + companion
 (function(){
