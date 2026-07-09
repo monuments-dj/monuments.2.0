@@ -2,6 +2,27 @@
 import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
+import SocialWall from '../../components/SocialWall.astro';
+
+// Fan reaction to the kit-reveal drop on Instagram (@acboise). The reveal ran
+// hardest on IG, so the reaction lives here as social proof.
+const acbComments = [
+  { u: 'kateandnicolewentthere', t: 'Okay Boise. Welcome to the party. UTFH ❤️', l: 8 },
+  { u: 'doubletappub', t: "Let's Goooo!", l: 6 },
+  { u: 'pitchsideperegrinespodcast', t: "Very solid work @acboise @hummelnorthamerica. Can't wait to see the away kit!", l: 5 },
+  { u: 'wilsonkowaleski', t: 'Congrats to the whole team, this thing came out 🔥', l: 4 },
+  { u: 'parker_bills', t: 'This is 🔥', l: 4 },
+  { u: 'colebuckhart', t: 'Absolute cinema', l: 3 },
+  { u: 'tiascottt', t: 'so fire', l: 3 },
+  { u: 'trosebart', t: 'Soooooo goooooood 👏', l: 3 },
+  { u: 'saintalphonsushealth', t: 'Look at those kits! ⚽🔥 Ready for the next chapter of Boise history.', l: 3 },
+  { u: 'henry7madsen', t: 'How do I buy one?', l: 2 },
+  { u: 'extant.co', t: 'How can I hook the team up with haircuts for the first game of the season? 👀', l: 2 },
+  { u: 'dyehardbyers', t: 'This video is LEGIT! Hell yeah, Boise!! 😍🔥', l: 1 },
+  { u: 'owenbushway1', t: "As a Hearts fan I'm excited to see what Boise does in season 1. Welcome to the USL.", l: 1 },
+  { u: 'arlettebaggs', t: "Can't wait for the season to start and catch some games! Lets go Boise! 🔥", l: 1 },
+  { u: 'runriot.official', t: 'BRAV.O ⚡', l: 1 },
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -99,7 +120,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .film .bar .mono b{color:var(--spark)}
 .film h2{font-weight:var(--dispw);font-size:clamp(28px,4.2vw,62px);letter-spacing:-.03em;line-height:.98;text-transform:uppercase;margin:26px 0 40px;max-width:16ch}
 .film h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
-.posterreel{position:relative;display:block;aspect-ratio:1/1;overflow:hidden;background:#000;max-width:760px;margin:0 auto;cursor:pointer}
+.posterreel{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:#000;max-width:980px;margin:0 auto;cursor:pointer}
+.posterreel iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
 .posterreel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.82);transition:transform .8s cubic-bezier(.22,1,.36,1)}
 .posterreel:hover img{transform:scale(1.03)}
 .posterreel .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.7;padding:0 12px;color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s}
@@ -247,18 +269,23 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <section class="film">
   <div class="wrap">
     <div class="bar">
-      <span class="mono"><b>The reveal</b> · Home kit · Instagram reel</span>
-      <span class="mono" style="color:#8f8d88">Opens on Instagram ↗</span>
+      <span class="mono"><b>The reveal</b> · Home kit · The official jersey video</span>
+      <span class="mono" style="color:#8f8d88">Click to play</span>
     </div>
     <h2 class="rv in">Shot like the city <span class="serif">wears it.</span></h2>
-    <a class="posterreel" href="https://www.instagram.com/reel/DR04D0ZDOjV/" target="_blank" rel="noopener" aria-label="Open the AC Boise kit reveal reel on Instagram">
-      <img src="/case-studies/ac-boise/gallery/home-01.jpg" alt="Kit reveal poster: a tattoo artist wearing the AC Boise home kit in his shop">
-      <span class="play">Open · The reel</span>
-      <span class="fcap">✳ This kit is Boise · Kit reveal</span>
-      <span class="fout">IG / DR04D0ZDOjV</span>
-    </a>
+    <div class="posterreel" id="acbFilm" data-yt="dTzb_Ck8vJ4" role="button" tabindex="0" aria-label="Play the AC Boise home kit reveal video">
+      <img src="/case-studies/ac-boise/gallery/home-01.jpg" alt="Kit reveal: the AC Boise home kit, shot in the city">
+      <span class="play">Play · The reveal</span>
+      <span class="fcap">✳ This kit is Boise · Home kit reveal · AC Boise × Hummel</span>
+    </div>
   </div>
 </section>
+
+<SocialWall
+  title="The city showed up."
+  intro="The reveal hit hardest on Instagram. Fans, local shops, the league, and other clubs filled the comments the moment the home kit dropped."
+  comments={acbComments}
+/>
 
 <div class="break">
   <img class="plx" src="/case-studies/ac-boise/gallery/crest.jpg" alt="The AC Boise crest, annotated: mountain peak, Basque influence, star garnet, agriculture fields, peregrine falcon, Treasure Valley">
@@ -383,6 +410,22 @@ clock();setInterval(clock,30000);
   function atBottom(){return window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-4;}
   function upd(){document.body.classList.toggle('at-foot',atBottom());}
   addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd,{passive:true});setTimeout(upd,400);
+})();
+</script>
+<script is:inline>
+// click-to-play: swap the reveal poster for the YouTube jersey video on click/enter
+(function(){
+  var el=document.getElementById('acbFilm'); if(!el) return;
+  function play(){
+    if(el.dataset.playing) return; el.dataset.playing='1';
+    var id=el.getAttribute('data-yt');
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3';
+    f.title='AC Boise home kit reveal'; f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen'; f.setAttribute('allowfullscreen','');
+    el.appendChild(f);
+  }
+  el.addEventListener('click',play);
+  el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();play();}});
 })();
 </script>
 </body>
