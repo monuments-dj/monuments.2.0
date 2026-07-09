@@ -91,8 +91,11 @@ Every item below traces to one or both. The domain swap is the finish line and h
 - [ ] **REMOVE the accent switcher before launch** - the temp pill lives in `src/components/PageFooter.astro` (marked with a TEMP comment). It's DJ's tool to land the 2-color system. When he picks: set that accent as the permanent default in each page's `:root` and delete the switcher markup/style/script from PageFooter. (Case-page per-brand tints like dw-drums teal are untouched.)
 
 ## F · Pre-flight QA (Claude, before swap)
-- [ ] Full-site click pass at 1440 + 390 (every page, every CTA, NextFile chain loop).
-- [ ] All snips/videos play muted + lazy; no 404s in network log.
+- [x] **Mobile-breakpoint sweep 360/390/768 (2026-07-09, 0fbb283).** All 26 real pages had 3-22px phantom horizontal scroll (hero `.t{width:104%}` bleed + Lenis making `<html>` the scroller so `body{overflow-x:hidden}` didn't bind). Fixed with `html{overflow-x:clip}` sitewide. Re-swept: every page sits exactly at viewport, no blank images, no media 404s. Tooling: `tools/qc-mobile.mjs`.
+- [x] **Header images (2026-07-09, 7a5a4f7).** Capabilities/Contact/AI were the only text-only heroes; gave each a full-bleed on-set frame (dj-film / set-haze / studio-console) matching the About/Giving pattern. Verified 1440 + 390. Images are one-line swaps if DJ wants different frames.
+- [ ] Full-site click pass at 1440 + 390 (every CTA, NextFile chain loop) - overflow/media pass done; CTA/interaction pass still TODO.
+- [ ] All snips/videos play muted + lazy; no 404s in network log. (No image/video 404s at load in the 360/390/768 sweep; playback-on-scroll not yet re-verified.)
+- [ ] ⚠️ **Accent switcher pill still renders on every page** (bottom-center, via PageFooter) - visible in the new hero screenshots. Must be removed before the swap (needs DJ's accent pick; see D2).
 - [ ] Lighthouse pass on Home/Work/About/one case (perf + a11y).
 - [ ] Meta titles/descriptions on all pages; OG image; favicon everywhere.
 - [ ] Verify in DJ's real browser + live deploy (prod differs from sandbox - standing rule).
