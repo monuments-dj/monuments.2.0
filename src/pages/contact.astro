@@ -59,11 +59,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.hero h1 .ln>span{transform:none}.rv{opacity:1;transform:none}.grain{animation:none}}
 
 .hero{min-height:86svh;display:flex;flex-direction:column;justify-content:center;text-align:center;position:relative;background:var(--ink)}
-.hero>.herobg{position:absolute;top:0;height:100%;left:50%;width:100vw;transform:translateX(-50%);object-fit:cover;filter:contrast(1.04) brightness(.46) grayscale(.1);z-index:0}
+.hero>.herobg{position:absolute;top:0;height:100%;left:50%;width:100vw;transform:translateX(-50%);object-fit:cover;object-position:50% 42%;filter:contrast(1.03) brightness(.54);z-index:0}
 .hero>.scrim{position:absolute;top:0;height:100%;left:50%;width:100vw;transform:translateX(-50%);background:radial-gradient(ellipse at 50% 42%,rgba(22,21,20,.4),rgba(22,21,20,.32) 52%,rgba(22,21,20,.7));z-index:1;pointer-events:none}
 .hero>*:not(.herobg):not(.scrim){position:relative;z-index:2}
-.emblem{width:112px;aspect-ratio:1;margin:0 auto 30px;display:block;animation:spin 70s linear infinite}
-.emblem g{fill:var(--paper)}
+.altmark{width:clamp(84px,10vw,122px);height:auto;margin:0 auto 26px;display:block;filter:drop-shadow(0 8px 26px rgba(0,0,0,.55))}
 .hero .kick{color:var(--spark)}
 .hero h1{font-weight:var(--dispw);font-size:clamp(48px,8.6vw,128px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:20px;color:var(--paper)}
 .pill{display:inline-flex;margin:44px auto 0;padding:22px 42px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
@@ -115,9 +114,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 <header class="hero wrap">
-  <img class="herobg" src="/about/set-haze.jpg" alt="The crew on set in haze and backlight, black and white" fetchpriority="high">
+  <img class="herobg" src="/contact/ct-01.jpg" alt="On set: a shoot in a warm, moody studio, camera rolling" fetchpriority="high">
   <div class="scrim" aria-hidden="true"></div>
-  <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
+  <img class="altmark" src="/brand/alt-mark.png" alt="Monuments masthead mark" width="345" height="238">
   <span class="kick mono">✳ Contact · one conversation, no deck required</span>
   <h1><span class="ln"><span>Tell me what</span></span><span class="ln"><span>you're <span class="serif">building</span>.</span></span></h1>
   <a class="pill magnetic" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
@@ -143,7 +142,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
 
-(function(){const g=document.getElementById('rays');let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s})();
+(function(){const g=document.getElementById('rays');if(!g)return;let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s})();
 (function(){
   const mag=document.querySelector('.magnetic');
   if(!mag||!matchMedia('(pointer:fine)').matches)return;
