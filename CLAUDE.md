@@ -58,14 +58,23 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
-## Active work (2026-07-08): DESCENDER CLIP FIXED SITE-WIDE · ACCENT = PINK (pending DJ's pick)
-Latest session (full detail: TODO.md top block): fixed hero + CTA reveal masks clipping italic-serif
-descenders on every header (padding-bottom on `.ln`/`.sl` masks; see CSS-MAP.md "Reveal-mask
-descenders" gotcha before adding any masked header). Accent switched cobalt→ROSE site-wide + a TEMP
-accent switcher pill in PageFooter.astro — **DJ owes an accent pick, then bake it into `:root` and
-DELETE the switcher** (LAUNCH.md). Footer is now the shared PageFooter.astro component. Adorama got
-the full AOV pass (all 38 imgs, FR-numbered contact sheet, "The cutdowns"). AWAITING DJ: accent pick ·
-AOV reel link · Adorama brand-cutdown video IDs · /hire green-light (approved, unbuilt).
+## Active work (2026-07-08): HOME STRETCH toward the domain swap · full launch punch list exists
+Goal unchanged: portfolio to get DJ HIRED inside agencies (goal 1) + sell clients on his work/taste
+(goal 2). **The launch punch list is now consolidated: [LAUNCH.md](LAUNCH.md) (checklist + References)
++ [AUDIT-2026-07-08.md](AUDIT-2026-07-08.md) (full 26-page, 154-finding review). Read both.**
+This session shipped: (a) hero + CTA reveal masks were clipping italic-serif descenders on every
+header, fixed sitewide (padding-bottom on `.ln`/`.sl`; see CSS-MAP.md "Reveal-mask descenders" before
+adding any masked header); (b) accent cobalt to ROSE sitewide + a TEMP accent switcher pill in
+PageFooter.astro (**DJ owes an accent pick, then bake into `:root` and DELETE the switcher**); (c)
+footer is now the shared PageFooter.astro; (d) Adorama AOV pass (38 imgs, FR-numbered contact sheet,
+"The cutdowns"); (e) **killed the wrong 160M+ stat sitewide**; (f) 26-page audit + 7 safe fixes
+(clothing-merch parallax CRASH, CWI/Contact visible placeholders, Rockys/title-case/grammar typos).
+AWAITING DJ: accent pick (+delete switcher) · **verify "3.6M+ impressions" stat** (same class as the
+wrong 160M+) · reconcile Est. 2016-vs-MMXXII · AOV reel · photo folders · fresh IG links (sony-this-
+moment + clothing-merch) · Adorama cutdown video IDs · /hire green-light.
+ON CLAUDE next (no new input needed, from the audit): flip I-voice slips (Flashpoint/Know Vape 3rd-
+person), rewrite duplicate pull-quotes (donut/dw-drums/sony-this-moment), reconcile per-page date/
+file-code + role-title inconsistencies, build the approved /hire page.
 
 ## Active work (2026-07-07, historical): COPY v3 APPLIED · POSITIONING = CREATIVE DIRECTOR
 Goal unchanged: portfolio to get DJ HIRED (audience = hiring managers). POSITIONING UPDATED per
