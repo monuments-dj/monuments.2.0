@@ -3,6 +3,7 @@
 import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
+import RoleTag from '../../components/RoleTag.astro';
 const videos = [
   { id:'nk-_UwGuRlE', title:'Sony Xperia 5 IV: The best 4k 120fps Slow motion camera under 1k?', channel:'Art of Visuals' },
   { id:'QZEZIVB5AOE', title:'Sony Wide Angle Lens Shootout | 14mm | 20mm | 35mm', channel:'Art of Visuals' },
@@ -85,6 +86,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em}
 .hero h1 .ln>span{display:block;transform:translateY(125%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
 .hero h1 .ln:nth-child(2)>span{animation-delay:.12s}
+.hero .role-tag{text-align:left;margin-top:-12px;margin-bottom:28px}
 @keyframes rise{to{transform:translateY(0)}}
 .hero .intro{z-index:72;max-width:62ch;color:#b9b6b0;font-size:clamp(17px,1.5vw,20px);line-height:1.6;opacity:0;animation:fade 1s .8s forwards}
 .hero .intro b{color:var(--paper);font-weight:var(--dispw2)}
@@ -246,6 +248,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <span class="ln"><span>On</span></span>
       <span class="ln"><span><span class="serif">camera</span><span class="spark">.</span></span></span>
     </h1>
+    <RoleTag text="host + presenter" />
     <p class="intro">I direct, but I'm just as comfortable in front of the camera. Live, on video, and on podcasts, I've fronted Art of Visuals' audience: 1.9M across Instagram and YouTube, a 200K second channel, and a weekly podcast at 30K a month. Hosting gear breakdowns for Sony, presenting campaign films, talking craft with other filmmakers. Representing a brand comes naturally. <b>I carry its voice when the red light is on.</b></p>
   </div>
   <div class="nfo">

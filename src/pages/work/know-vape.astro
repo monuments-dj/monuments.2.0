@@ -3,6 +3,7 @@ import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import ScreenRoom from '../../components/ScreenRoom.astro';
 import PageFooter from '../../components/PageFooter.astro';
+import RoleTag from '../../components/RoleTag.astro';
 
 // === /work/know-vape · THE CUT case page ===
 // Emmy-winning case study for KNOW VAPE, Idaho Public Television's statewide youth
@@ -318,6 +319,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <div class="t">
     <span class="ln"><span>Be smart.</span></span>
     <span class="ln"><span>Don't <span class="serif">start</span><span class="spark">.</span></span></span>
+    <RoleTag text="directed the films" />
   </div>
   <div class="kck">
     <b>\ Case file</b><br>
@@ -464,7 +466,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="lead rv">
       <span class="k mono">\ The system</span>
       <h2>My frames, the campaign <span class="serif">system.</span></h2>
-      <p>The Know Vape identity dropped straight onto the photography: stat overlays, the wordmark lockup, the tagline. Brand design and motion graphics by Isabel Sarhad, built on the images I shot.</p>
+      <p>Focus on the facts: the teen vaping numbers were staggering, and showing them without a lecture was paramount to the campaign. The system dropped those facts into imagery teens already knew, into their worlds, and delivered the truth without the finger wagging. Brand design and motion graphics by Isabel Sarhad, built on the images I shot.</p>
     </div>
     <div class="gfxgrid">
       {gfx.map((src, i) => (
@@ -489,7 +491,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
   <div class="btsreel">
     <div class="btstrack">
-      {[...bts, ...bts].map((src) => (
+      {[...bts, ...bts, ...bts, ...bts].map((src) => (
         <div class="btstile"><video src={src} autoplay muted loop playsinline preload="metadata"></video></div>
       ))}
     </div>
