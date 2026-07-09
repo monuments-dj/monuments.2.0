@@ -49,31 +49,43 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .corners .c2 a:hover::after{transform:scaleX(1);transform-origin:left}
 .companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
 @media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
-.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em}
-.hero h1 .ln>span{display:block;transform:translateY(125%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
-.hero h1 .ln:nth-child(2)>span{animation-delay:.12s}
+.journey h1 .ln{display:block;overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em}
+.journey h1 .ln>span{display:block;transform:translateY(125%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.journey h1 .ln:nth-child(2)>span{animation-delay:.12s}
 @keyframes rise{to{transform:translateY(0)}}
 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
 .rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
 .rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.hero h1 .ln>span{transform:none}.rv{opacity:1;transform:none}.grain{animation:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.journey h1 .ln>span{transform:none}.rv{opacity:1;transform:none}.grain{animation:none}}
 
-.hero{min-height:86svh;display:flex;flex-direction:column;justify-content:center;text-align:center;position:relative;background:var(--ink)}
-.hero>.herobg{position:absolute;top:0;height:100%;left:50%;width:100vw;transform:translateX(-50%);object-fit:cover;object-position:50% 42%;filter:contrast(1.03) brightness(.54);z-index:0}
-.hero>.scrim{position:absolute;top:0;height:100%;left:50%;width:100vw;transform:translateX(-50%);background:radial-gradient(ellipse at 50% 42%,rgba(22,21,20,.4),rgba(22,21,20,.32) 52%,rgba(22,21,20,.7));z-index:1;pointer-events:none}
-.hero>*:not(.herobg):not(.scrim){position:relative;z-index:2}
-.altmark{width:clamp(84px,10vw,122px);height:auto;margin:0 auto 26px;display:block;filter:drop-shadow(0 8px 26px rgba(0,0,0,.55))}
-.hero .kick{color:var(--spark)}
-.hero h1{font-weight:var(--dispw);font-size:clamp(48px,8.6vw,128px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:20px;color:var(--paper)}
-.pill{display:inline-flex;margin:44px auto 0;padding:22px 42px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
-.pill:hover{background:var(--spark)}
-.avail{margin-top:26px;color:var(--dim);font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase}
-.avail b{color:#3ddc84;font-weight:400}
-.alt{margin-top:9vh;color:#8f8d88;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
-.alt a{color:var(--spark);border-bottom:1px solid var(--spark)}
-.meta{display:flex;justify-content:center;gap:44px;flex-wrap:wrap;padding:8vh 0 10vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
-.meta b{color:var(--paper);font-weight:400}
-.meta a:hover b{color:var(--spark)}
+/* 3-up photo band, like the live contact: three columns cycling through the on-set archive */
+.band3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;height:54svh;min-height:340px;background:var(--ink)}
+.b3col{position:relative;overflow:hidden}
+.b3col img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.78) contrast(1.03);opacity:0;transition:opacity .9s ease}
+.b3col img.on{opacity:1}
+@media (max-width:680px){.band3{height:34svh;min-height:220px}}
+
+/* the journey: paper section under the band (live layout, cut type) */
+.journey{background:var(--paper);color:var(--ink);padding:11vh 0 12vh}
+.jgrid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(40px,6vw,110px);align-items:center}
+@media (max-width:860px){.jgrid{grid-template-columns:1fr;gap:8vh}}
+.journey .kick{color:var(--red);display:block}
+.journey h1{font-weight:var(--dispw);font-size:clamp(52px,8.4vw,124px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:22px;color:var(--ink)}
+.pill{display:inline-flex;margin:44px 0 0;padding:22px 42px;background:var(--ink);color:var(--paper);border-radius:99px;font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s,color .3s;will-change:transform}
+.pill:hover{background:var(--spark);color:var(--ink)}
+.avail{margin-top:24px;color:#8f8d88;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase}
+.avail b{color:#1eb96f;font-weight:400}
+.jside{display:flex;flex-direction:column;align-items:flex-start}
+.mwire{width:clamp(150px,15vw,220px);height:auto;display:block;margin-bottom:34px;animation:mfloat 7s ease-in-out infinite}
+@keyframes mfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.jside .tel{font-family:var(--mono);font-size:13px;letter-spacing:.08em;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.jside .tel:hover{color:var(--red);border-color:var(--red)}
+.jside .addr{margin-top:16px;color:#4c4a45;font-size:16px;line-height:1.7}
+.jside .fl{margin-top:34px;color:#8f8d88;letter-spacing:.14em}
+.jside .socials{margin-top:10px;display:flex;flex-direction:column;gap:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+.jside .socials a{border-bottom:1px solid var(--line);padding:5px 0;width:max-content}
+.jside .socials a b{font-weight:400}
+.jside .socials a:hover{color:var(--red)}
 
 
 /* footer dock: the floating descriptor + LA clock settle into the footer at page end */
@@ -113,21 +125,50 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
-<header class="hero wrap">
-  <img class="herobg" src="/contact/ct-01.jpg" alt="On set: a shoot in a warm, moody studio, camera rolling" fetchpriority="high">
-  <div class="scrim" aria-hidden="true"></div>
-  <img class="altmark" src="/brand/alt-mark.png" alt="Monuments masthead mark" width="345" height="238">
-  <span class="kick mono">✳ Contact · one conversation, no deck required</span>
-  <h1><span class="ln"><span>Tell me what</span></span><span class="ln"><span>you're <span class="serif">building</span>.</span></span></h1>
-  <a class="pill magnetic" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
-  <p class="avail"><b>●</b> Booking Q3 + Q4 · LA / Boise</p>
-  <p class="alt rv">Prefer to just email? Always open. <a href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a></p>
+<header class="band3" aria-label="On set with Monuments">
+  <div class="b3col" data-col="0">
+    <img class="on" src="/contact/ct-01.jpg" alt="On set: a shoot in a warm, moody studio" fetchpriority="high">
+    <img src="/contact/ct-04.jpg" alt="On set: camera operator in the studio" loading="lazy">
+    <img src="/contact/ct-07.jpg" alt="On set: a singer performing for camera" loading="lazy">
+    <img src="/contact/ct-10.jpg" alt="On set: behind the scenes" loading="lazy">
+    <img src="/contact/ct-13.jpg" alt="On set: Sony Flow State shoot" loading="lazy">
+  </div>
+  <div class="b3col" data-col="1">
+    <img class="on" src="/contact/ct-02.jpg" alt="On set: crew at work" fetchpriority="high">
+    <img src="/contact/ct-05.jpg" alt="On set: gimbal operator and talent on the cyc" loading="lazy">
+    <img src="/contact/ct-08.jpg" alt="On set: behind the scenes" loading="lazy">
+    <img src="/contact/ct-11.jpg" alt="On set: behind the scenes" loading="lazy">
+    <img src="/contact/ct-14.jpg" alt="On set: Sony Flow State shoot" loading="lazy">
+  </div>
+  <div class="b3col" data-col="2">
+    <img class="on" src="/contact/ct-03.jpg" alt="On set: camera build in the studio" fetchpriority="high">
+    <img src="/contact/ct-06.jpg" alt="On set: a living-room shoot" loading="lazy">
+    <img src="/contact/ct-09.jpg" alt="On set: behind the scenes" loading="lazy">
+    <img src="/contact/ct-12.jpg" alt="On set: Sony select" loading="lazy">
+  </div>
 </header>
-<div class="meta rv">
-  <a href="https://www.instagram.com/djthecd" target="_blank" rel="noopener"><b>Instagram</b> · @djthecd</a>
-  <a href="https://www.tiktok.com/@djthecd" target="_blank" rel="noopener"><b>TikTok</b> · @djthecd</a>
-  <a href="https://www.linkedin.com/in/djthecd/" target="_blank" rel="noopener"><b>LinkedIn</b> · in/djthecd</a>
-</div>
+
+<section class="journey">
+  <div class="wrap jgrid">
+    <div>
+      <span class="kick mono">✳ Contact · one conversation, no deck required</span>
+      <h1><span class="ln"><span>Our journey</span></span><span class="ln"><span>starts <span class="serif">here.</span></span></span></h1>
+      <a class="pill magnetic" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
+      <p class="avail"><b>●</b> Booking Q3 + Q4 · LA / Boise</p>
+    </div>
+    <div class="jside rv">
+      <img class="mwire" src="/brand/m-wire.svg" alt="Monuments wireframe M" width="280" height="297">
+      <a class="tel" href="tel:+12082494912">+1 (208) 249 4912</a>
+      <p class="addr">2401 S. Santa Fe Ave #201,<br>Los Angeles CA 90058</p>
+      <span class="fl mono">Follow</span>
+      <div class="socials">
+        <a href="https://www.instagram.com/djthecd" target="_blank" rel="noopener"><b>Instagram</b> · @djthecd</a>
+        <a href="https://www.tiktok.com/@djthecd" target="_blank" rel="noopener"><b>TikTok</b> · @djthecd</a>
+        <a href="https://www.linkedin.com/in/djthecd/" target="_blank" rel="noopener"><b>LinkedIn</b> · in/djthecd</a>
+      </div>
+    </div>
+  </div>
+</section>
 <PageFooter tag="Contact" />
 <script is:inline>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
@@ -143,6 +184,18 @@ function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'Americ
 clock();setInterval(clock,30000);
 
 (function(){const g=document.getElementById('rays');if(!g)return;let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s})();
+// 3-up band: each column cycles its photos with a fade (like the live page's slideshow),
+// staggered per column so no two columns swap at once. Reduced motion: static firsts.
+(function(){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  document.querySelectorAll('.b3col').forEach((col,ci)=>{
+    const imgs=[...col.querySelectorAll('img')]; if(imgs.length<2)return;
+    let i=0;
+    setTimeout(()=>{setInterval(()=>{
+      imgs[i].classList.remove('on'); i=(i+1)%imgs.length; imgs[i].classList.add('on');
+    },4200)},ci*1400);
+  });
+})();
 (function(){
   const mag=document.querySelector('.magnetic');
   if(!mag||!matchMedia('(pointer:fine)').matches)return;
