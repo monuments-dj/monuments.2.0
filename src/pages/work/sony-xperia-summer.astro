@@ -107,7 +107,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* results first: cobalt scoreboard under the hero */
 .statrow{background:var(--struct);color:var(--paper)}
-.statrow>.in{display:flex;justify-content:space-between;align-items:flex-end;gap:34px;flex-wrap:wrap;padding:18px var(--pad) 16px}
+.statrow>.in{display:flex;justify-content:flex-start;align-items:flex-end;gap:clamp(30px,4.6vw,64px);flex-wrap:wrap;padding:20px var(--pad) 18px}
+.statrow .stat:has(.note){margin-left:auto}
+.statrow .stat .note{text-align:right}
+@media(max-width:900px){.statrow .stat:has(.note){margin-left:0}.statrow .stat .note{text-align:left}}
 .stat b{display:block;font-weight:var(--dispw);font-size:clamp(26px,2.7vw,42px);letter-spacing:-.03em;line-height:.92}
 .stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);display:block;margin-top:8px}
 .stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);line-height:1.9;max-width:34ch}

@@ -72,7 +72,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
    NB: >.in only - the reveal observer also adds .in to the .stat.rv children, so the
    flex rule must only hit the direct wrap or the stats turn into flex rows. */
 .statrow{background:var(--struct);color:rgb(var(--on-rgb))}
-.statrow>.in{display:flex;justify-content:space-between;align-items:flex-end;gap:34px;flex-wrap:wrap;padding:18px var(--pad) 16px}
+.statrow>.in{display:flex;justify-content:flex-start;align-items:flex-end;gap:clamp(30px,4.6vw,64px);flex-wrap:wrap;padding:20px var(--pad) 18px}
+.statrow .stat:has(.note){margin-left:auto}
+.statrow .stat .note{text-align:right}
+@media(max-width:900px){.statrow .stat:has(.note){margin-left:0}.statrow .stat .note{text-align:left}}
 .stat b{display:block;font-weight:var(--dispw);font-size:clamp(26px,2.7vw,42px);letter-spacing:-.03em;line-height:.92}
 .stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.72);display:block;margin-top:8px;max-width:26ch}
 .rolerow{background:var(--ink);border-bottom:1px solid var(--lined)}
