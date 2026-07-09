@@ -164,6 +164,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:16px}
 .gal .bar .mono b{color:var(--red)}
 .prodgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+/* the line floats on pure white: no borders, no card chrome, shots blend seamless */
+.prodsec{background:#fff;color:var(--ink);padding:9vh 0 10vh}
+.prodsec .fr{border:none;background:#fff;padding:0 0 24px;transform:translateY(16px) rotate(0deg)}
+.prodsec .fr.in{transform:none}
+.prodsec .fr.in:hover{transform:scale(1.035);box-shadow:none;rotate:0deg}
 .fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;opacity:0;transform:translateY(16px) rotate(-.6deg)}
 .fr.in{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s}
 .fr img{width:100%;height:auto;display:block;filter:saturate(.96)}
@@ -355,7 +360,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       </div>
     </div>
   </div>
+</section>
 
+<section class="prodsec">
   <div class="wrap gal">
     <div class="bar">
       <span class="mono"><b>Light it up</b> · the product line in the new system</span>
