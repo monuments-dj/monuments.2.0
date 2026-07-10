@@ -5,17 +5,20 @@
 // When a quote lands: paste it into `q` and delete the placeholder flag per person.
 // Roles below: Krizia + Prince are confirmed from case-page credits; the rest are
 // TODO (DJ to confirm how each person should be billed).
-interface Person { name: string; role: string; q?: string; }
+interface Person { name: string; role: string; q?: string; ph?: boolean; }
 interface Props { tag?: string; }
 const { tag = 'pull quotes · incoming' } = Astro.props;
+// ph = lorem stand-in so the wall reads as designed; the chip stays until the
+// real quote lands. Swap q + drop ph per person. NEVER write a real-sounding
+// quote under a real name.
 const people: Person[] = [
-  { name: 'Krizia Vega',      role: 'Co-director · Sony Flow State' },
-  { name: 'Chris House',      role: 'Collaborator' },
-  { name: 'Kish',             role: 'Collaborator' },
-  { name: 'Alex Stevens',     role: 'Collaborator' },
-  { name: 'Prince McClinton', role: 'Co-host · Creator Clubhouse' },
-  { name: 'Jennie Meyers',    role: 'Collaborator' },
-  { name: 'Tess',             role: 'Project manager · Monuments' },
+  { name: 'Krizia Vega',      role: 'Co-director · Sony Flow State', ph: true, q: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.' },
+  { name: 'Chris House',      role: 'Collaborator', ph: true, q: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.' },
+  { name: 'Kish',             role: 'Collaborator', ph: true, q: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.' },
+  { name: 'Alex Stevens',     role: 'Collaborator', ph: true, q: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
+  { name: 'Prince McClinton', role: 'Co-host · Creator Clubhouse', ph: true, q: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.' },
+  { name: 'Jennie Meyers',    role: 'Collaborator', ph: true, q: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.' },
+  { name: 'Tess',             role: 'Project manager · Monuments', ph: true, q: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.' },
 ];
 ---
 <section class="tst">
@@ -27,11 +30,11 @@ const people: Person[] = [
     <div class="tst-grid">
       {people.map((p, i) => (
         <figure class="tst-card rv" style={`--i:${i}`}>
-          <p class="tst-q">{p.q ?? <span class="tst-ph">&ldquo;&nbsp;&hellip;&nbsp;&rdquo;</span>}</p>
+          <p class={`tst-q ${p.ph ? 'ph' : ''}`}>{p.q ? `“${p.q}”` : <span class="tst-ph">&ldquo;&nbsp;&hellip;&nbsp;&rdquo;</span>}</p>
           <figcaption>
             <span class="tst-n">{p.name}</span>
             <span class="tst-r mono">{p.role}</span>
-            {!p.q && <span class="tst-chip mono">quote incoming</span>}
+            {(p.ph || !p.q) && <span class="tst-chip mono">quote incoming</span>}
           </figcaption>
         </figure>
       ))}
@@ -48,6 +51,7 @@ const people: Person[] = [
 .tst-card{margin:0;background:rgba(245,243,239,.04);border:1px solid rgba(245,243,239,.1);border-radius:11px;padding:26px 22px 20px;display:flex;flex-direction:column;gap:18px;min-height:190px}
 .tst-q{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:clamp(19px,1.9vw,25px);line-height:1.4;letter-spacing:-.01em;flex:1}
 .tst-ph{color:rgba(245,243,239,.28)}
+.tst-q.ph{color:rgba(245,243,239,.38)}
 .tst-card figcaption{display:flex;flex-direction:column;gap:4px}
 .tst-n{font-weight:var(--dispw2,600);font-size:15.5px;letter-spacing:-.01em}
 .tst-r{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88}

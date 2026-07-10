@@ -428,12 +428,12 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <section class="reel" id="work">
     <div class="reel-pin">
       <div class="wrap reel-head">
-        <h2>Built to <span id="feelLead">be</span> <span class="serif" id="feelWord">remembered.</span></h2>
+        <h2>Built <span id="feelTo">to</span> <span id="feelLead">be</span> <span class="serif" id="feelWord">remembered.</span></h2>
         <div class="ticks" id="ticks" aria-hidden="true"></div>
       </div>
       <div class="reel-track" id="reelTrack">
         <span class="reel-card spacer" aria-hidden="true"></span>
-        <a class="reel-card" href="/work/art-of-visuals" data-role="Creative Director" data-stats="4x revenue in four years|2M+ brand audience|Sony · Intel · MSI · Adorama +" data-word="remembered.">
+        <a class="reel-card" href="/work/art-of-visuals" data-role="Previous role · Creative Director" data-stats="4x agency revenue|Roster · Sony · Intel · MSI · Adorama +|Daily + weekly content engine" data-lead="" data-word="scale.">
           <span class="imgs"><img class="a" src="/case-studies/art-of-visuals/gallery/xm3-bts.jpg" alt="Art of Visuals" loading="lazy"><img class="b" src="/case-studies/art-of-visuals/gallery/podcast-cover.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t"><img class="lg" src="/logos/art-of-visuals.png" alt="">Art of Visuals</span><span class="mono">MC-2024-01 · Brand campaign · 4x</span></div>
         </a>
@@ -468,6 +468,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <a class="reel-card" href="/work/clothing-merch" data-role="Creative Direction · Design" data-stats="Design · print · market|Lines for Creative Space · NYC · DW|Directed the shoot" data-snip="/snips/clothing-merch.mp4" data-word="lived in.">
           <span class="imgs"><img class="a" src="/case-studies/clothing-merch/gallery/cm-01.jpg" alt="Clothing and merch" loading="lazy"><img class="b" src="/case-studies/clothing-merch/sparrow/sparrow-hero.jpg" alt="" loading="lazy"></span>
           <div class="rc-meta"><span class="t">Clothing &amp; Merch</span><span class="mono">MC-2020-08 · Apparel + merch lines</span></div>
+        </a>
+        <a class="reel-card" href="/photography" data-role="Photographer" data-stats="100 frames in the archive|Campaign stills + editorial|Sony a7S III · Leica M240" data-to="for" data-lead="" data-word="the moment.">
+          <span class="imgs"><img class="a" src="/gallery/full/p-044.jpg" alt="Photography archive" loading="lazy"><img class="b" src="/gallery/full/p-078.jpg" alt="" loading="lazy"></span>
+          <div class="rc-meta"><span class="t">Photography</span><span class="mono">100 frames · the stills archive</span></div>
         </a>
         <a class="reel-card" href="/work/buck-the-quo" data-role="Shooter + field experiential" data-stats="18,000+ conversations|Rockys Best of Show|Statewide activation" data-lead="make" data-word="a difference.">
           <span class="imgs"><img class="a" src="/case-studies/buck-the-quo/gallery/container-front.jpg" alt="Buck the Quo" loading="lazy"><img class="b" src="/case-studies/buck-the-quo/gallery/container-coaster.jpg" alt="" loading="lazy"></span>
@@ -759,7 +763,8 @@ clock();setInterval(clock,30000);
 // pinned reel scrub (tinywins grammar)
 (function(){
   const sec=document.querySelector('.reel'),track=document.getElementById('reelTrack'),
-        word=document.getElementById('feelWord'),lead=document.getElementById('feelLead'),ticks=document.getElementById('ticks');
+        word=document.getElementById('feelWord'),lead=document.getElementById('feelLead'),
+        fto=document.getElementById('feelTo'),ticks=document.getElementById('ticks');
   if(!sec||!track)return;
   const cards=[...track.querySelectorAll('.reel-card:not(.spacer)')];
   ticks.innerHTML=cards.map(()=>'<i></i>').join('');
@@ -768,7 +773,8 @@ clock();setInterval(clock,30000);
   function setWord(i){
     if(i===cur)return;cur=i;
     word.textContent=cards[i].dataset.word;
-    if(lead)lead.textContent=cards[i].dataset.lead||'be';
+    if(fto)fto.textContent=cards[i].dataset.to||'to';
+    if(lead)lead.textContent=('lead' in cards[i].dataset)?cards[i].dataset.lead:'be';
     word.classList.remove('swap');void word.offsetWidth;word.classList.add('swap');
     tickEls.forEach((el,j)=>el.classList.toggle('on',j===i));
   }
