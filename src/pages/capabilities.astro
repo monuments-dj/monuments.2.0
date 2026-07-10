@@ -58,9 +58,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero>*:not(.herobg):not(.scrim){position:relative;z-index:2}
 .hero .sunwm{display:none}
 .hero h1{color:var(--paper)}
-.hero .sub p{color:rgba(245,243,239,.9);text-shadow:0 1px 20px rgba(22,21,20,.7)}
-.hero .sub .lead{color:rgba(245,243,239,.66);text-shadow:0 1px 16px rgba(22,21,20,.6)}
-.hero .sub .lead b{color:var(--paper)}
 .hero .sunwm{position:absolute;right:-8%;top:50%;width:min(46vw,560px);aspect-ratio:1;transform:translateY(-50%);opacity:.08;animation:spin 90s linear infinite}
 .hero .sunwm g{fill:var(--ink)}
 .hero .inner{position:relative;z-index:1;padding-top:8vh}
@@ -75,6 +72,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero .sub p{max-width:46ch;color:#4c4a45;font-size:17px}
 .hero .sub .lead{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88;text-align:right;line-height:2}
 .hero .sub .lead b{color:var(--ink);font-weight:400}
+/* on-set hero is dark: these must beat the base colors above */
+.hero .sub p{color:rgba(245,243,239,.9);text-shadow:0 1px 20px rgba(22,21,20,.7)}
+.hero .sub .lead{color:rgba(245,243,239,.66);text-shadow:0 1px 16px rgba(22,21,20,.6)}
+.hero .sub .lead b{color:var(--paper)}
 
 /* services index: giant rows + cursor-trailing preview */
 .svc{padding:8vh 0 4vh}
