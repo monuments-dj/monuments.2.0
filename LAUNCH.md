@@ -11,6 +11,24 @@ Every item below traces to one or both. The domain swap is the finish line and h
 > case, on-camera grammar. **New must-verify:** "3.6M+ impressions on a single launch" (home ticker +
 > About receipt + Xperia) - same class of number as the 160M+ that turned out wrong.
 
+> **2026-07-09 mega-session.** Shipped: Flashpoint IA rebuild (Adorama project, website + socials
+> chapters, live-site proof); statrow/rolerow fixed on all 20 band pages at every accent; **B/W is
+> the working default, pink killed** (accent switcher keeps rose/cobalt/red for compare); **type
+> switcher = five full pairings** (01 CUT · 02 TINY Inter×Fraunces · 03 HAUS Instrument×Instrument ·
+> 04 WIDE Archivo×Spectral · 05 MDRN Satoshi×Gambetta), all three type roles tokenized sitewide;
+> **/template "The Kit" element library** (in the menu, temp); menu takeover full-width; /hire built
+> out (DJ photos, 8-scene marquee, Emmy/Rockys/4x/2-30+ band, brand slider, Adorama·Flashpoint row,
+> reel link); work-page typewriter line; video previews for ACB/Turnstile/Clothing + XM5 recut clean;
+> homepage Photography + Clothing cards, AoV "built to scale", reel words land at 16%; photo page
+> macbar killed + hero capped + mobile extras hidden; This Moment bridge copy + 19-frame sheet; XM5
+> cutdowns section (3 creators, 18 delivered) + BTS tile; Flow State 22 selects + comment wall +
+> 24-tile BTS wall + banner rebalance; about strip 18 clips; testimonials hold lorem stand-ins;
+> BTS library archived at ~/Monuments-Social/bts-library/.
+> **NEW DJ DECISIONS OWED:** font pairing pick (01-05) · confirm B/W (then bake tokens, delete
+> switcher + Kit menu line) · real quotes for the 7 testimonial names + roles for Chris House/Kish/
+> Alex Stevens/Jennie Meyers · red kickers stay or go in B/W · real-browser motion pass (reel scrub,
+> typewriter, marquees, cutdown players).
+
 ## Page grades (hiring / client)
 
 | Page | Hiring | Client | One-line verdict |

@@ -58,7 +58,14 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
-## Active work (2026-07-08): HOME STRETCH toward the domain swap · full launch punch list exists
+## Active work (2026-07-09): identity decisions OPEN (font pairing + B/W) · see LAUNCH.md 07-09 block
+B/W is the working default (pink dead); five type pairings live in the switcher pill; /template =
+the element library (fix elements THERE first, then propagate); band system accent-proof on all 20
+pages. DJ owes: pairing pick, B/W confirm (then bake + delete switcher), testimonial quotes,
+real-browser motion pass. Case-page media keeps landing via Dropbox drops; durable BTS pool:
+~/Monuments-Social/bts-library/.
+
+## Active work (2026-07-08, historical): HOME STRETCH toward the domain swap · full launch punch list exists
 Goal unchanged: portfolio to get DJ HIRED inside agencies (goal 1) + sell clients on his work/taste
 (goal 2). **The launch punch list is now consolidated: [LAUNCH.md](LAUNCH.md) (checklist + References)
 + [AUDIT-2026-07-08.md](AUDIT-2026-07-08.md) (full 26-page, 154-finding review). Read both.**
