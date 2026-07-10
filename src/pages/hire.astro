@@ -25,7 +25,7 @@ import PageFooter from '../components/PageFooter.astro';
   --spark:var(--rose); --struct:var(--rose); --on-rgb:22,21,20;
 }
 *{margin:0;box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}html{overflow-x:clip}
+body{background:var(--paper);color:var(--ink);font-family:var(--body,var(--disp));font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}html{overflow-x:clip}
 .mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
 .wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 a{color:inherit;text-decoration:none}
@@ -67,7 +67,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero{padding:18vh 0 7vh;position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(30px,5vw,80px);align-items:center}
 .hero .ey{color:var(--red);margin-bottom:26px;display:block}
 .hero h1{font-weight:var(--dispw);font-size:clamp(46px,7vw,102px);line-height:.9;letter-spacing:-.038em;text-transform:uppercase}
-.hero h1 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;color:var(--ink)}
+.hero h1 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;color:var(--ink)}
 .hero .lede{margin-top:34px;max-width:60ch;color:#4c4a45;font-size:clamp(17px,1.7vw,21px);line-height:1.55}
 .hero .lede b{color:var(--ink);font-weight:var(--dispw2)}
 .heroshot{position:relative;background:#fff;padding:12px 12px 44px;box-shadow:0 22px 60px rgba(22,21,20,.16);transform:rotate(1.4deg);justify-self:end;width:min(100%,440px)}
@@ -119,7 +119,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .close{background:var(--ink);color:var(--paper);padding:11vh 0 12vh}
 .close .avail{color:#3ddc84;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:22px}
 .close h2{font-weight:var(--dispw);font-size:clamp(30px,4.4vw,58px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;max-width:16ch}
-.close h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;color:var(--rose)}
+.close h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;color:var(--rose)}
 .close .row{display:flex;flex-wrap:wrap;gap:16px 20px;align-items:center;margin-top:44px}
 .pill{display:inline-flex;padding:20px 38px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;transition:background .3s;will-change:transform}
 .pill:hover{background:var(--rose)}

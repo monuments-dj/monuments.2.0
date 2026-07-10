@@ -23,7 +23,7 @@
   --spark:var(--rose); --struct:var(--cobalt);
 }
 *{margin:0;box-sizing:border-box}
-body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--ink);color:var(--paper);font-family:var(--body,var(--disp));font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
 .wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 a{color:inherit;text-decoration:none}
@@ -69,7 +69,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .era-p .ph .cap{position:absolute;left:9px;bottom:5px;font-family:var(--mono);font-size:9px;color:#8f8d88;text-transform:uppercase}
 .era-p .no{font-family:var(--mono);font-size:10.5px;color:var(--struct);text-transform:uppercase;letter-spacing:.1em}
 .era-p h3{font-weight:var(--dispw);font-size:clamp(24px,2.8vw,42px);letter-spacing:-.03em;line-height:.98;text-transform:uppercase;margin:10px 0 4px;color:var(--paper)}
-.era-p .role{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,1.7vw,24px);color:var(--spark);margin-bottom:14px}
+.era-p .role{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:clamp(18px,1.7vw,24px);color:var(--spark);margin-bottom:14px}
 .era-p ul{list-style:none;margin:0;padding:0}
 .era-p li{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#b9b6b0;padding:7px 0;border-top:1px solid #2c2b28}
 .era-p li b{color:var(--paper);font-weight:400}

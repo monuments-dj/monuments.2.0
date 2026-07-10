@@ -9,7 +9,7 @@ const { text } = Astro.props;
 <span class="role-tag"><span class="rt-txt">{text}<svg class="rt-line" viewBox="0 0 220 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8 C 44 3.5, 92 10, 134 6 C 168 2.8, 198 6.5, 216 5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span></span>
 
 <style is:global>
-.role-tag{display:block;margin-top:clamp(14px,2.4vh,26px);text-align:center;font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(17px,1.8vw,25px);letter-spacing:0;line-height:1;text-transform:none;color:var(--paper,#F5F3EF);opacity:0;animation:rtIn .7s .85s cubic-bezier(.22,1,.36,1) forwards;position:relative;z-index:73}
+.role-tag{display:block;margin-top:clamp(14px,2.4vh,26px);text-align:center;font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;font-size:clamp(17px,1.8vw,25px);letter-spacing:0;line-height:1;text-transform:none;color:var(--paper,#F5F3EF);opacity:0;animation:rtIn .7s .85s cubic-bezier(.22,1,.36,1) forwards;position:relative;z-index:73}
 .role-tag .rt-txt{display:inline-block;position:relative;padding:0 5px 7px}
 .rt-line{position:absolute;left:-4px;bottom:-3px;width:calc(100% + 8px);height:11px;color:var(--spark,#EFA1AD);overflow:visible}
 .rt-line path{stroke-dasharray:460;stroke-dashoffset:460;animation:rtDraw 1s 1.15s cubic-bezier(.45,0,.2,1) forwards}

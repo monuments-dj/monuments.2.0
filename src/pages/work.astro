@@ -27,7 +27,7 @@ import PageFooter from '../components/PageFooter.astro';
   --spark:var(--rose); --struct:var(--rose); --on-rgb:22,21,20;
 }
 *{margin:0;box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}html{overflow-x:clip}
+body{background:var(--paper);color:var(--ink);font-family:var(--body,var(--disp));font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}html{overflow-x:clip}
 .mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
 .wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 a{color:inherit;text-decoration:none}
@@ -61,7 +61,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero .wrap{position:relative;z-index:2}
 .hero .kick{color:var(--spark)}
 .hero h1{font-weight:var(--dispw);font-size:clamp(52px,9vw,132px);line-height:.88;letter-spacing:-.035em;text-transform:uppercase;margin-top:14px;color:var(--paper)}
-.hero h1 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero h1 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
 .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em}
 .hero h1 .ln>span{display:block;transform:translateY(125%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
 .hero h1 .ln:nth-child(2)>span{animation-delay:.12s}
@@ -141,7 +141,7 @@ body.gridview .arch{padding-bottom:0}
 .rowp:hover .id{color:var(--red)}
 .rowp .t{font-weight:var(--dispw);font-size:clamp(26px,3.8vw,54px);letter-spacing:-.03em;line-height:.95;text-transform:uppercase;transition:color .3s}
 .rowp:hover .t{color:var(--struct)}
-.rowp .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.rowp .t .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
 .rowp .fmt{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
 .rowp .fmt i{font-style:normal;color:var(--struct)}
 .rowp .fmt b.mx{font-weight:400;color:var(--red);margin-left:10px}
@@ -174,7 +174,7 @@ body.gridview .arch{padding-bottom:0}
 @media (max-width:1200px){.cta .emblem{display:none}}
 .cta .kick{color:var(--spark)}
 .cta .big{font-weight:var(--dispw);font-size:clamp(40px,6.4vw,94px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:14px}
-.cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.cta .big .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
 .cta .pill{display:inline-flex;margin-top:26px;padding:17px 34px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
 .cta .pill:hover{background:var(--spark)}
 

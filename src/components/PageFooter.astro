@@ -28,12 +28,11 @@ const { tag } = Astro.props;
   <button data-acc="cobalt" style="--sw:#2438E8" title="Cobalt" aria-label="Cobalt accent"></button>
   <button data-acc="red" style="--sw:#E0311A" title="Red" aria-label="Red accent"></button>
   <span class="acctool-l acctool-div">type</span>
-  <button data-font="bricolage" title="Bricolage Grotesque (current)">BG</button>
-  <button data-font="instrument" title="Instrument Sans (pairs with the serif)">IS</button>
-  <button data-font="satoshi" title="Satoshi (Fontshare)">SA</button>
-  <button data-font="archivo" title="Archivo (brand book)">AR</button>
-  <button data-font="schibsted" title="Schibsted Grotesk">SG</button>
-  <button data-font="inter" title="Inter">IN</button>
+  <button data-font="cut" title="01 CUT (current) · Bricolage Grotesque everything + Instrument Serif accent">01</button>
+  <button data-font="tiny" title="02 TINY · Inter headers + body, Fraunces italic accent · tinywins DNA (Suisse Intl x ABC Gramercy)">02</button>
+  <button data-font="haus" title="03 HAUS · Instrument Sans headers + body, Instrument Serif accent · one foundry, Lausanne/Aeonik lane (Unusual, lusion)">03</button>
+  <button data-font="wide" title="04 WIDE · Archivo Expanded headers, Archivo body, Spectral italic accent · GT America lane (mssngpeces) + Against's serif">04</button>
+  <button data-font="mdrn" title="05 MDRN · Satoshi headers + body, Gambetta italic accent · Fontshare, portfolio-modern">05</button>
   <button class="acctool-x" title="Hide (until you clear site data)" aria-label="Hide switcher">&times;</button>
 </div>
 
@@ -71,14 +70,23 @@ const { tag } = Astro.props;
     cobalt:['#2438E8','245,243,239','#EFA1AD'],
     red:['#E0311A','245,243,239','#EFA1AD']
   };
-  // display-font candidates: [css family, dispw, dispw2, stylesheet href ('' = ships with pages)]
-  var FONTS={
-    bricolage:["'Bricolage Grotesque',sans-serif",'800','600',''],
-    instrument:["'Instrument Sans',sans-serif",'700','600','https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&display=swap'],
-    satoshi:["'Satoshi',sans-serif",'900','700','https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap'],
-    archivo:["'Archivo',sans-serif",'800','600','https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap'],
-    schibsted:["'Schibsted Grotesk',sans-serif",'800','600','https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap'],
-    inter:["'Inter',sans-serif",'800','600','https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap']
+  // type PAIRINGS, grounded in the 2026-07-09 recon of DJ's target agencies +
+  // taste refs. Each is a full three-font system: disp (headers/titles),
+  // body (copy), serif (the italic accent voice). Fragment Mono stays: it is
+  // the fourth voice (meta), and the market runs the same play (lusion, D1A,
+  // The Many all pair a grotesk with a mono).
+  // {d:[family,dispw,dispw2], b:family|null, s:family|null, css:[hrefs]}
+  // null = page default (Bricolage / Instrument Serif).
+  var PAIRS={
+    cut:{d:["'Bricolage Grotesque',sans-serif",'800','600'],b:null,s:null,css:[]},
+    tiny:{d:["'Inter',sans-serif",'800','650'],b:"'Inter',sans-serif",s:"'Fraunces',serif",
+      css:['https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap']},
+    haus:{d:["'Instrument Sans',sans-serif",'700','600'],b:"'Instrument Sans',sans-serif",s:"'Instrument Serif',serif",
+      css:['https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&display=swap']},
+    wide:{d:["'Archivo',sans-serif",'800','600'],b:"'Archivo',sans-serif",s:"'Spectral',serif",
+      css:['https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap']},
+    mdrn:{d:["'Satoshi',sans-serif",'900','700'],b:"'Satoshi',sans-serif",s:"'Gambetta',serif",
+      css:['https://api.fontshare.com/v2/css?f[]=satoshi@400,401,500,700,701,900,901&f[]=gambetta@400,401,500,501&display=swap']}
   };
   var root=document.documentElement, tool=document.getElementById('acctool');
   // guard rules for B/W: the rose quote bands flip to ink so nothing renders pink
@@ -97,19 +105,25 @@ const { tag } = Astro.props;
     if(tool)tool.querySelectorAll('[data-acc]').forEach(function(b){b.classList.toggle('on',b.dataset.acc===a);});
   }
   function applyFont(f){
-    var v=FONTS[f]||FONTS.bricolage;
-    if(v[3]&&!document.getElementById('mnmt-font-'+f)){
-      var l=document.createElement('link');l.id='mnmt-font-'+f;l.rel='stylesheet';l.href=v[3];
-      document.head.appendChild(l);
-    }
-    root.style.setProperty('--disp',v[0]);
-    root.style.setProperty('--dispw',v[1]);
-    root.style.setProperty('--dispw2',v[2]);
+    if(!PAIRS[f])f='cut';
+    var v=PAIRS[f];
+    v.css.forEach(function(href,i){
+      var id='mnmt-font-'+f+'-'+i;
+      if(!document.getElementById(id)){
+        var l=document.createElement('link');l.id=id;l.rel='stylesheet';l.href=href;
+        document.head.appendChild(l);
+      }
+    });
+    root.style.setProperty('--disp',v.d[0]);
+    root.style.setProperty('--dispw',v.d[1]);
+    root.style.setProperty('--dispw2',v.d[2]);
+    if(v.b)root.style.setProperty('--body',v.b);else root.style.removeProperty('--body');
+    if(v.s)root.style.setProperty('--serif',v.s);else root.style.removeProperty('--serif');
     root.setAttribute('data-font',f);
     if(tool)tool.querySelectorAll('[data-font]').forEach(function(b){b.classList.toggle('on',b.dataset.font===f);});
   }
   applyAcc(localStorage.getItem('mnmt-accent')||'bw');
-  applyFont(localStorage.getItem('mnmt-font')||'bricolage');
+  applyFont(localStorage.getItem('mnmt-font')||'cut');
   if(!tool)return;
   if(localStorage.getItem('mnmt-acctool')==='off'){tool.style.display='none';}
   tool.querySelectorAll('[data-acc]').forEach(function(b){

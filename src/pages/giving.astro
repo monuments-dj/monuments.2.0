@@ -23,7 +23,7 @@ import PageFooter from '../components/PageFooter.astro';
   --spark:var(--rose); --struct:var(--rose); --on-rgb:22,21,20;
 }
 *{margin:0;box-sizing:border-box}
-body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--ink);color:var(--paper);font-family:var(--body,var(--disp));font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
 .wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 a{color:inherit;text-decoration:none}
@@ -55,7 +55,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) brightness(.62)}
 .hero .scrim{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 44%,rgba(22,21,20,.44),rgba(22,21,20,.12) 58%,rgba(22,21,20,.4))}
 .hero .t{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(38px,6.6vw,100px);line-height:.92;letter-spacing:-.035em;text-transform:uppercase}
-.hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero .t .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
 .hero .t .spark{color:var(--spark)}
 .hero .t .ln{display:block;overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em}
 .hero .t .ln>span{display:block;transform:translateY(125%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
@@ -79,7 +79,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .story .side{position:sticky;top:14vh}
 .story .side .k{color:var(--red)}
 .story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
-.story h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.story h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
 .story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
 .story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
 
@@ -99,7 +99,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* quote on rose */
 .quote{background:var(--spark);color:var(--ink);padding:15vh 0}
-.quote p.q{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(28px,4vw,58px);line-height:1.14;max-width:24ch}
+.quote p.q{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;font-size:clamp(28px,4vw,58px);line-height:1.14;max-width:24ch}
 .quote p.q b{font-weight:400;font-style:normal;font-family:var(--disp);font-weight:var(--dispw);text-transform:uppercase;font-size:.86em;letter-spacing:-.02em}
 .quote .who{margin-top:28px;color:rgba(22,21,20,.6)}
 
@@ -112,7 +112,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .range{background:var(--ink);color:var(--paper);padding:14vh 0}
 .range .k{color:var(--spark)}
 .range h2{font-weight:var(--dispw);font-size:clamp(28px,3.8vw,56px);letter-spacing:-.03em;line-height:1.04;text-transform:uppercase;margin-top:14px;max-width:22ch}
-.range h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;color:var(--spark)}
+.range h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;color:var(--spark)}
 .range p.b{margin-top:22px;max-width:54ch;color:rgba(245,243,239,.82)}
 
 /* gallery: contact-sheet frames, masonry columns for mixed portrait + landscape */
@@ -132,7 +132,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .cta .emblem g{fill:var(--paper)}
 .cta .kick{color:var(--spark)}
 .cta .big{font-weight:var(--dispw);font-size:clamp(40px,7vw,104px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:20px}
-.cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.cta .big .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
 .cta .sub{margin:26px auto 0;max-width:42ch;color:#b9b6b0}
 .cta .pill{display:inline-flex;margin-top:42px;padding:20px 38px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
 .cta .pill:hover{background:var(--spark)}
