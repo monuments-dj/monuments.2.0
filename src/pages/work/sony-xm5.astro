@@ -127,6 +127,8 @@ a{color:inherit;text-decoration:none}
 .poster16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
 /* the cutdowns: three creators, sound on click, one at a time */
+.igwrap{max-width:560px;margin:0 auto}
+.igwrap .instagram-media{margin:0 auto!important}
 .cutgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .cut{position:relative;cursor:pointer}
 .cut video{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#000}
@@ -353,6 +355,18 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
+<section class="film igfeed">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>On the feed</b> · the launch on Instagram</span>
+      <span class="mono" style="color:#8f8d88">Tap to play with sound</span>
+    </div>
+    <div class="igwrap rv">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Chp1T5bPNwd/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,.5),0 1px 10px 0 rgba(0,0,0,.15);margin:0 auto;max-width:540px;min-width:326px;padding:0;width:100%"></blockquote>
+    </div>
+  </div>
+</section>
+
 <section class="paper">
   <div class="wrap story">
     <div class="side rv">
@@ -413,7 +427,8 @@ a{color:inherit;text-decoration:none}
       rows={[
         { k: 'Client', v: 'Sony Electronics' },
         { k: 'Creative direction', v: 'DJ Ramirez', select: true },
-        { k: 'Casting + scripts', v: 'DJ Ramirez' },
+        { k: 'Casting + scripts', v: 'Art of Visuals' },
+        { k: 'Influencer activation', v: 'Art of Visuals' },
         { k: 'Production', v: 'MGX Creative' },
         { k: 'Direction', v: 'DJ Ramirez + Daniel Malikyar' },
         { k: 'Agency', v: 'Art of Visuals' },
@@ -576,5 +591,6 @@ clock();setInterval(clock,30000);
   addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd,{passive:true});setTimeout(upd,400);
 })();
 </script>
+<script is:inline async src="https://www.instagram.com/embed.js"></script>
 </body>
 </html>
