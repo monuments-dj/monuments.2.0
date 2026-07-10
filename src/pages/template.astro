@@ -151,6 +151,7 @@ a{color:inherit;text-decoration:none}
 .cta{background:var(--struct);color:rgb(var(--on-rgb));padding:10vh 0}
 .cta .in{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
 .cta .big{font-weight:var(--dispw);font-size:clamp(28px,4.2vw,60px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;max-width:16ch}
+.cta .ck{display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:rgba(var(--on-rgb),.7);margin-bottom:14px}
 .cta .big .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
 .cta a.talk{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1.5px solid rgba(var(--on-rgb),.75);padding:16px 26px;border-radius:50%;transition:background .3s,color .3s,transform .3s;display:inline-block}
 .cta a.talk:hover{background:rgb(var(--on-rgb));color:var(--struct);transform:scale(1.05)}
@@ -282,8 +283,11 @@ a{color:inherit;text-decoration:none}
 <div class="spec"><div class="wrap"><span class="id">ELEMENT 11 · CTA BAND</span><span class="use">the hand-off · accent ground, text rides --on-rgb · round talk button</span></div></div>
 <section class="cta">
   <div class="wrap in">
-    <p class="big">Let's build something <span class="serif">great</span> together.</p>
-    <a class="talk" href="/contact">Let's Talk ↗</a>
+    <div>
+      <span class="ck mono">✳ Being forgettable is expensive</span>
+      <p class="big">Let's build something<br><span class="serif">worth remembering.</span></p>
+    </div>
+    <a class="talk" href="/contact">Let's talk ↗</a>
   </div>
 </section>
 
