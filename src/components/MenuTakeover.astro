@@ -33,6 +33,10 @@ const links = [
       <a class="mt-hire" href="/hire" style={`--i:${links.length}`}>
         <span class="mt-line"><span class="mt-dot" aria-hidden="true"></span>Hiring? The one-page brief &rarr;</span>
       </a>
+      <!-- TEMP while the identity decisions are open: quick way into the element library -->
+      <a class="mt-hire mt-kit" href="/template" style={`--i:${links.length + 1}`}>
+        <span class="mt-line">The Kit &middot; element library &rarr;</span>
+      </a>
     </nav>
     <div class="mt-prev" aria-hidden="true">
       <img id="mtPrev" src={links[0].img} alt="">
@@ -87,6 +91,9 @@ body.mt-open .mt-item .mt-line>*{transform:none}
 body.mt-open .mt-hire .mt-line{transform:none}
 .mt-hire:hover .mt-line{border-color:var(--spark,#EFA1AD);color:var(--spark,#EFA1AD)}
 .mt-dot{width:7px;height:7px;border-radius:50%;background:#3ddc84;flex:none}
+.mt-kit{margin-top:12px}
+.mt-kit .mt-line{border-style:dashed;border-color:rgba(245,243,239,.22);color:#8f8d88}
+.mt-kit:hover .mt-line{border-color:rgba(245,243,239,.6);color:#F5F3EF}
 
 /* preview */
 .mt-prev{position:relative;aspect-ratio:4/3;overflow:hidden;background:#1c1b1a;opacity:0;transform:scale(.97);transition:opacity .5s .3s,transform .6s .3s cubic-bezier(.22,1,.36,1)}
