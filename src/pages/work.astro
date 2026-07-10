@@ -66,8 +66,17 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero h1 .ln>span{display:block;transform:translateY(125%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
 .hero h1 .ln:nth-child(2)>span{animation-delay:.12s}
 @keyframes rise{to{transform:translateY(0)}}
-.hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-top:16px;width:100%}
-.hero .sub p{max-width:44ch;color:#c9c6c0}
+.hero .sub{position:relative;margin-top:16px;width:100%;text-align:center;min-height:1.8em}
+.hero .sub p{color:#c9c6c0;position:absolute;left:0;right:0;top:0;margin:0}
+.hero .sub .l1{overflow:hidden}
+.hero .sub .l1 span,.hero .sub .l1{transition:transform .7s cubic-bezier(.6,0,.3,1),opacity .6s}
+.hero .sub .l1.out{transform:translateY(-16px);opacity:0}
+.hero .sub .l2{opacity:0}
+.hero .sub .l2.on{opacity:1}
+.tcrt{display:inline-block;width:2px;height:.95em;background:var(--spark);margin-left:3px;vertical-align:-.12em;animation:tblink 1s steps(1) infinite}
+.tcrt.off{display:none}
+@keyframes tblink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.hero .sub .l1{display:none}.hero .sub .l2{opacity:1}.tcrt{display:none}}
 .hero .count{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:rgba(245,243,239,.58);text-align:right;line-height:2}
 .hero .count b{color:var(--paper);font-weight:400}
 @media (prefers-reduced-motion:reduce){.hero-vid{display:none}}
@@ -248,7 +257,8 @@ body.gridview .arch{padding-bottom:0}
       <span class="ln"><span>The <span class="serif">work</span>.</span></span>
     </h1>
     <div class="sub">
-      <p>A problem defined, is a problem half solved.</p>
+      <p class="l1" id="wkOld">A problem defined, is a problem half solved.</p>
+      <p class="l2" id="wkNew" aria-label="Life is a continuous exercise in creative problem solving."><span id="wkType"></span><i class="tcrt" aria-hidden="true"></i></p>
     </div>
   </div>
 </header>
@@ -614,6 +624,23 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     anims().forEach(a=>a.playbackRate=Math.max(a.playbackRate,1+vel));
     if(!decaying){decaying=true;requestAnimationFrame(decay)}
   },{passive:true});
+})();
+// the hero line: the old proverb scrolls out, the new one types in
+(function(){
+  var o=document.getElementById('wkOld'),n=document.getElementById('wkNew'),t=document.getElementById('wkType');
+  if(!o||!n||!t)return;
+  var TXT2='Life is a continuous exercise in creative problem solving.';
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){t.textContent=TXT2;return;}
+  var TXT='Life is a continuous exercise in creative problem solving.';
+  setTimeout(function(){o.classList.add('out');},1500);
+  setTimeout(function(){
+    n.classList.add('on');
+    var i=0;
+    (function tick(){
+      if(i<=TXT.length){t.textContent=TXT.slice(0,i);i++;setTimeout(tick,i<8?46:26);}
+      else{setTimeout(function(){n.querySelector('.tcrt').classList.add('off');},1800);}
+    })();
+  },2050);
 })();
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
