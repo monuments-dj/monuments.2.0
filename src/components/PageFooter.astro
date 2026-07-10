@@ -143,3 +143,36 @@ const { tag } = Astro.props;
   tool.querySelector('.acctool-x').addEventListener('click',function(){tool.style.display='none';localStorage.setItem('mnmt-acctool','off');});
 })();
 </script>
+
+<script is:inline>
+// play-when-visible: the sitewide default for every autoplay loop. Videos keep
+// their autoplay attribute (progressive enhancement if this script dies), but
+// the observer pauses anything off-screen and resumes it on entry. Dynamic
+// videos (hover snips, grid cards) are adopted via MutationObserver. Reduced
+// motion means decorative loops stay paused entirely.
+(function(){
+  var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var v=e.target;
+      if(reduced){v.pause();return;}
+      if(e.isIntersecting){if(v.paused)v.play().catch(function(){});}
+      else if(!v.paused)v.pause();
+    });
+  },{rootMargin:'220px 340px',threshold:0.01});
+  function adopt(v){
+    if(v.__vio)return; v.__vio=true;
+    io.observe(v);
+    if(reduced)v.removeAttribute('autoplay');
+  }
+  function scan(root){(root.querySelectorAll?root:document).querySelectorAll('video[autoplay]').forEach(adopt);}
+  scan(document);
+  new MutationObserver(function(ms){
+    ms.forEach(function(m){m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.tagName==='VIDEO'&&n.hasAttribute('autoplay'))adopt(n);
+      else if(n.querySelectorAll)n.querySelectorAll('video[autoplay]').forEach(adopt);
+    });});
+  }).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
