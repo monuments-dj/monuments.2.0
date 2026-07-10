@@ -203,6 +203,7 @@ const { tag } = Astro.props;
     return Math.max(2,Math.round((h+gap)/(UNIT+gap)));
   }
   function pack(el){
+    if(el.children.length<2)return; // single-item containers stay as authored
     if(!el.dataset.cols){
       var pre=getComputedStyle(el);
       el.dataset.cols=parseInt(pre.columnCount)||3;
@@ -211,17 +212,25 @@ const { tag } = Astro.props;
     // re-read the responsive column count from the fallback stylesheet each time
     el.style.columns='';el.style.display='';
     var cols=parseInt(getComputedStyle(el).columnCount)||parseInt(el.dataset.cols)||3;
+    // thin sheets read better one column narrower (5 tiles across 3 cols = a dead column)
+    if(cols>2&&el.children.length<=cols+2)cols=cols-1;
     var gap=parseFloat(el.dataset.gap);
     el.style.display='grid';
     el.style.columns='auto';
     el.style.gridTemplateColumns='repeat('+cols+',1fr)';
     el.style.gridAutoRows=UNIT+'px';
-    el.style.gridAutoFlow='dense';
     el.style.alignItems='start';
     el.style.gap=gap+'px';
+    // shortest-column placement: even bottoms beat strict source order
+    var colH=[];for(var i=0;i<cols;i++)colH.push(0);
     [...el.children].forEach(function(it){
+      var sp=span(it,gap);
+      var c=0;for(var i=1;i<cols;i++)if(colH[i]<colH[c])c=i;
       it.style.marginBottom='0';
-      it.style.gridRowEnd='span '+span(it,gap);
+      it.style.gridColumn=String(c+1);
+      it.style.gridRowStart=String(colH[c]+1);
+      it.style.gridRowEnd='span '+sp;
+      colH[c]+=sp;
     });
   }
   function packAll(){document.querySelectorAll('.frames').forEach(pack);}

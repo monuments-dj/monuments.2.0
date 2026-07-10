@@ -1,8 +1,9 @@
 import { chromium } from 'playwright';
 const browser = await chromium.launch();
 const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
-for (const r of ['sony-xm5','sony-flow-state','sony-this-moment','flashpoint']) {
-  await page.goto('http://localhost:4321/work/' + r, { waitUntil: 'domcontentloaded' }).catch(()=>null);
+const routes=['work/adorama-music','work/art-of-visuals','work/blue-cross','work/buck-the-quo','work/clothing-merch','work/cwi-lets-get-started','work/donut-zumiez','work/dw-drums','work/flashpoint','work/know-vape','work/on-camera','work/sony-flow-state','work/sony-this-moment','work/sony-xm5','work/sony-xperia-summer','work/turnstile','work/waffle-me-up','about','giving','hire','template','ai','contact','photography','work',''];
+for (const r of routes) {
+  await page.goto('http://localhost:4321/' + r, { waitUntil: 'domcontentloaded' }).catch(()=>null);
   await page.waitForTimeout(1000);
   const sheets = await page.evaluate(async () => {
     const out = [];
