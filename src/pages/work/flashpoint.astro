@@ -104,17 +104,17 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @keyframes fade{to{opacity:1}}
 
 /* scope first: scoreboard under the hero */
-.statrow{background:var(--struct);color:var(--paper)}
+.statrow{background:var(--struct);color:rgb(var(--on-rgb));border-bottom:1px solid rgba(var(--on-rgb),.18)}
 .statrow>.in{display:flex;justify-content:flex-start;align-items:flex-end;gap:clamp(30px,4.6vw,64px);flex-wrap:wrap;padding:20px var(--pad) 18px}
 .statrow .stat:has(.note){margin-left:auto}
 .statrow .stat .note{text-align:right}
 @media(max-width:900px){.statrow .stat:has(.note){margin-left:0}.statrow .stat .note{text-align:left}}
 .stat b{display:block;font-weight:var(--dispw);font-size:clamp(26px,2.7vw,42px);letter-spacing:-.03em;line-height:.92}
-.stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);display:block;margin-top:8px}
-.stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);line-height:1.9;max-width:28ch}
-.stat .note b{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--paper);display:inline;letter-spacing:.08em}
+.stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66);display:block;margin-top:8px}
+.stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66);line-height:1.9;max-width:28ch}
+.stat .note b{font-family:var(--mono);font-size:11px;font-weight:400;color:rgb(var(--on-rgb));display:inline;letter-spacing:.08em}
 .rolerow{background:var(--ink);border-bottom:1px solid var(--lined)}
-.rolerow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px var(--pad);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rolerow>.in{display:flex;justify-content:flex-start;gap:12px 44px;flex-wrap:wrap;padding:22px var(--pad);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
 .rolerow b{color:var(--paper);font-weight:400}
 
 /* the brief on paper */
@@ -234,12 +234,12 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .credits{padding:10vh 0}
 
 /* the ask: hand-off band */
-.cta{background:var(--struct);color:var(--paper);padding:12vh 0}
+.cta{background:var(--struct);color:rgb(var(--on-rgb));padding:12vh 0}
 .cta .in{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
 .cta .big{font-weight:var(--dispw);font-size:clamp(28px,4.2vw,60px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;max-width:16ch}
 .cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
-.cta a.talk{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1.5px solid rgba(245,243,239,.75);padding:16px 26px;border-radius:50%;transition:background .3s,color .3s,transform .3s;display:inline-block}
-.cta a.talk:hover{background:var(--paper);color:var(--struct);transform:scale(1.05)}
+.cta a.talk{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1.5px solid rgba(var(--on-rgb),.75);padding:16px 26px;border-radius:50%;transition:background .3s,color .3s,transform .3s;display:inline-block}
+.cta a.talk:hover{background:rgb(var(--on-rgb));color:var(--struct);transform:scale(1.05)}
 
 .over{position:relative;z-index:1;background:inherit}
 .underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}

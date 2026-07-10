@@ -70,9 +70,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @keyframes fade{to{opacity:1}}
 
 /* cobalt at-a-glance band */
-.statrow{background:var(--struct)}
-.statrow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:16px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72)}
-.statrow b{color:var(--paper);font-weight:400}
+.statrow{background:var(--struct);color:rgb(var(--on-rgb));border-bottom:1px solid rgba(var(--on-rgb),.18)}
+.statrow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:16px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66)}
+.statrow b{color:rgb(var(--on-rgb));font-weight:400}
 
 /* story on paper */
 .paper{background:var(--paper);color:var(--ink)}

@@ -79,17 +79,17 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @keyframes fade{to{opacity:1}}
 
 /* the file in numbers: cobalt band under the hero */
-.statrow{background:var(--struct);color:var(--paper)}
+.statrow{background:var(--struct);color:rgb(var(--on-rgb));border-bottom:1px solid rgba(var(--on-rgb),.18)}
 .statrow>.in{display:flex;justify-content:flex-start;align-items:flex-end;gap:clamp(30px,4.6vw,64px);flex-wrap:wrap;padding:20px var(--pad) 18px}
 .statrow .stat:has(.note){margin-left:auto}
 .statrow .stat .note{text-align:right}
 @media(max-width:900px){.statrow .stat:has(.note){margin-left:0}.statrow .stat .note{text-align:left}}
 .stat b{display:block;font-weight:var(--dispw);font-size:clamp(26px,2.7vw,42px);letter-spacing:-.03em;line-height:.92}
-.stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);display:block;margin-top:8px}
-.stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);line-height:1.9;max-width:26ch}
-.stat .note b{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--paper);display:inline;letter-spacing:.08em}
+.stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66);display:block;margin-top:8px}
+.stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66);line-height:1.9;max-width:26ch}
+.stat .note b{font-family:var(--mono);font-size:11px;font-weight:400;color:rgb(var(--on-rgb));display:inline;letter-spacing:.08em}
 .rolerow{background:var(--ink);border-bottom:1px solid var(--lined)}
-.rolerow>.in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:22px var(--pad);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rolerow>.in{display:flex;justify-content:flex-start;gap:12px 44px;flex-wrap:wrap;padding:22px var(--pad);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
 .rolerow b{color:var(--paper);font-weight:400}
 
 /* story on paper */
