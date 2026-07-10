@@ -158,9 +158,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .igsnd{position:absolute;left:12px;top:12px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:rgba(22,21,20,.6);padding:5px 10px;border-radius:99px;backdrop-filter:blur(2px)}
 .igout{position:absolute;right:12px;bottom:12px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:rgba(22,21,20,.6);padding:6px 11px;border-radius:99px;backdrop-filter:blur(2px);transition:background .3s}
 .igout:hover{background:rgba(22,21,20,.9)}
-.morereels{display:flex;gap:22px;flex-wrap:wrap;margin-top:22px;color:#8f8d88;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
-.morereels a{color:var(--paper);border-bottom:1px solid rgba(245,243,239,.35);padding-bottom:2px}
-.morereels a:hover{color:var(--spark);border-color:var(--spark)}
+.reelgrid .instagram-media{margin:0 auto!important;max-width:100%!important;min-width:0!important}
 @media (max-width:900px){.reelgrid{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.reelgrid{grid-template-columns:1fr}}
 .poster16.playing{cursor:default}
@@ -397,7 +395,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <div class="wrap">
     <div class="bar">
       <span class="mono"><b>The reels</b> · Summer with Xperia, shot on the 5 IV</span>
-      <span class="mono" style="color:#8f8d88">Six cuts · three playing here, three on the grid ✳</span>
+      <span class="mono" style="color:#8f8d88">Six cuts · sound on tap ✳</span>
     </div>
     <div class="reelgrid">
       <div class="igtile" data-ig>
@@ -415,12 +413,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <span class="igsnd mono" aria-hidden="true">▶ Sound</span>
         <a class="igout mono" href="https://www.instagram.com/reel/ClMp6vDMIzr/" target="_blank" rel="noopener">On Instagram ↗</a>
       </div>
-    </div>
-    <div class="morereels mono rv">
-      <span>More from the series ·</span>
-      <a href="https://www.instagram.com/reel/CmFFM2JvssL/" target="_blank" rel="noopener">Reel 04 ↗</a>
-      <a href="https://www.instagram.com/reel/Ck2EqXcvIx5/" target="_blank" rel="noopener">Reel 05 ↗</a>
-      <a href="https://www.instagram.com/reel/Ci-tQMgvZnU/" target="_blank" rel="noopener">Reel 06 ↗</a>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/CmFFM2JvssL/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,.5),0 1px 10px 0 rgba(0,0,0,.15);margin:0 auto;max-width:540px;min-width:326px;padding:0;width:100%"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Ck2EqXcvIx5/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,.5),0 1px 10px 0 rgba(0,0,0,.15);margin:0 auto;max-width:540px;min-width:326px;padding:0;width:100%"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Ci-tQMgvZnU/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,.5),0 1px 10px 0 rgba(0,0,0,.15);margin:0 auto;max-width:540px;min-width:326px;padding:0;width:100%"></blockquote>
     </div>
   </div>
 </section>
@@ -621,5 +616,6 @@ clock();setInterval(clock,30000);
   addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd,{passive:true});setTimeout(upd,400);
 })();
 </script>
+<script is:inline async src="https://www.instagram.com/embed.js"></script>
 </body>
 </html>
