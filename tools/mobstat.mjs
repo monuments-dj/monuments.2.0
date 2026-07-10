@@ -1,0 +1,10 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs'; import path from 'node:path';
+const dir=path.join('tools','snaps','diag'); fs.mkdirSync(dir,{recursive:true});
+const b=await chromium.launch();
+const p=await b.newPage({viewport:{width:390,height:844}});
+await p.goto('http://localhost:4321/work/flashpoint',{waitUntil:'domcontentloaded'}).catch(()=>{});
+await p.waitForTimeout(1400);
+const s=await p.$('.statrow'); await s.scrollIntoViewIfNeeded(); await p.waitForTimeout(400);
+await s.screenshot({path:path.join(dir,'fp-stat-390.png')});
+await p.close(); await b.close(); console.log('done');

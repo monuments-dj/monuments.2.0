@@ -1,0 +1,10 @@
+import { chromium } from 'playwright';
+const b=await chromium.launch();
+const p=await b.newPage({viewport:{width:1440,height:900}});
+await p.goto('http://localhost:4321/about',{waitUntil:'domcontentloaded'}).catch(()=>{});
+await p.waitForTimeout(1500);
+const s=await p.$('.btssec'); await s.scrollIntoViewIfNeeded(); await p.waitForTimeout(2500);
+const st=await p.evaluate(()=>{const vs=[...document.querySelectorAll('.btstile video')];return{count:vs.length,playing:vs.filter(v=>!v.paused&&v.readyState>=2).length}});
+console.log('tiles:',JSON.stringify(st));
+await s.screenshot({path:'tools/snaps/menu/bts-new.png'});
+await b.close();console.log('done');

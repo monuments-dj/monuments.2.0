@@ -1,0 +1,10 @@
+import { chromium } from 'playwright';
+const browser = await chromium.launch();
+const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+await page.goto('http://localhost:4321/work/sony-xm5', { waitUntil: 'domcontentloaded' });
+await page.waitForTimeout(1200);
+const t = page.locator('.igfeed');
+await t.scrollIntoViewIfNeeded(); await page.waitForTimeout(900);
+const box = await t.boundingBox();
+await page.screenshot({ path: '/tmp/ig-fixed.png', clip: { x: 0, y: box.y, width: 1440, height: Math.min(box.height, 880) } });
+await browser.close(); console.log('ok');

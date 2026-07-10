@@ -1,0 +1,10 @@
+import { chromium } from 'playwright';
+const b=await chromium.launch();
+const p=await b.newPage({viewport:{width:1440,height:900}});
+await p.goto('http://localhost:4321/work/flashpoint',{waitUntil:'domcontentloaded'}).catch(()=>{});
+await p.waitForTimeout(1500);
+const s=await p.$('.prodsec'); await s.scrollIntoViewIfNeeded(); await p.waitForTimeout(900);
+await p.screenshot({path:'tools/snaps/tags/prodsec-white.png'});
+const chk=await p.evaluate(()=>{const sec=document.querySelector('.prodsec');const fr=sec.querySelector('.fr');const cs=getComputedStyle(fr);return{secBg:getComputedStyle(sec).backgroundColor,frBorder:cs.borderTopWidth,frBg:cs.backgroundColor}});
+console.log(JSON.stringify(chk));
+await b.close();

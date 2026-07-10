@@ -1,0 +1,10 @@
+import { chromium } from 'playwright';
+const b=await chromium.launch();
+const p=await b.newPage({viewport:{width:1440,height:900}});
+await p.goto('http://localhost:4321/capabilities',{waitUntil:'domcontentloaded'}).catch(()=>{});
+await p.waitForTimeout(1200);
+const k=await p.$('.kit'); await k.scrollIntoViewIfNeeded(); await p.waitForTimeout(600);
+const txt=await p.evaluate(()=>[...document.querySelectorAll('.kitcol li')].map(l=>l.textContent.trim()));
+console.log(JSON.stringify(txt));
+await k.screenshot({path:'tools/snaps/rr/kit-fixed.png'});
+await b.close();
