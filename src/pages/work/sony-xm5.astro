@@ -126,6 +126,15 @@ a{color:inherit;text-decoration:none}
 .poster16.playing{cursor:default}
 .poster16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
+/* the cutdowns: three creators, sound on click, one at a time */
+.cutgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cut{position:relative;cursor:pointer}
+.cut video{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#000}
+.cut .pl{position:absolute;left:50%;top:calc(50% - 14px);transform:translate(-50%,-50%);font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:rgba(22,21,20,.55);padding:6px 12px;backdrop-filter:blur(2px);pointer-events:none;transition:opacity .3s;white-space:nowrap}
+.cut.playing .pl{opacity:0}
+.cut .ccap{display:block;padding:8px 0 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+@media (max-width:900px){.cutgrid{grid-template-columns:1fr}}
+
 /* full-bleed parallax break */
 .break{position:relative;height:52svh;overflow:hidden}
 .break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;object-position:50% 50%;will-change:transform}
@@ -145,6 +154,7 @@ a{color:inherit;text-decoration:none}
 .fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;margin-bottom:14px;break-inside:avoid;opacity:0;transform:translateY(16px) rotate(-.6deg)}
 .frames.show .fr{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
 .fr img{width:100%;height:auto;display:block;filter:saturate(.96)}
+.fr video{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
 .fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
 .frames.show .fr:hover{transform:rotate(-1deg) scale(1.03);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
 
@@ -317,6 +327,32 @@ a{color:inherit;text-decoration:none}
   <span class="cap">✳ Mr B Baby · Creativity starts with inspiration · Sony WH-1000XM5</span>
 </div>
 
+<section class="film cuts">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>The cutdowns</b> · the launch, cut for social</span>
+      <span class="mono" style="color:#8f8d88">18 delivered · creator + product · :07 :15 :30</span>
+    </div>
+    <div class="cutgrid">
+      <div class="cut rv" tabindex="0" role="button" aria-label="Play the Gawx Art creator cut">
+        <video src="/case-studies/sony-xm5/cutdowns/gawx-creator-15.mp4" poster="/case-studies/sony-xm5/cutdowns/gawx-creator-15-poster.jpg" preload="none" playsinline></video>
+        <span class="pl">▶ Play · :15</span>
+        <span class="ccap">CUT-01 · Gawx Art · Creator cut · :15</span>
+      </div>
+      <div class="cut rv" tabindex="0" role="button" aria-label="Play the Mr B Baby creator cut" style="transition-delay:80ms">
+        <video src="/case-studies/sony-xm5/cutdowns/mrbbaby-creator-30.mp4" poster="/case-studies/sony-xm5/cutdowns/mrbbaby-creator-30-poster.jpg" preload="none" playsinline></video>
+        <span class="pl">▶ Play · :30</span>
+        <span class="ccap">CUT-02 · Mr B Baby · Creator cut · :30</span>
+      </div>
+      <div class="cut rv" tabindex="0" role="button" aria-label="Play the Rudy creator cut" style="transition-delay:160ms">
+        <video src="/case-studies/sony-xm5/cutdowns/rudy-creator-15.mp4" poster="/case-studies/sony-xm5/cutdowns/rudy-creator-15-poster.jpg" preload="none" playsinline></video>
+        <span class="pl">▶ Play · :15</span>
+        <span class="ccap">CUT-03 · Rudy · Creator cut · :15</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="paper">
   <div class="wrap story">
     <div class="side rv">
@@ -342,9 +378,10 @@ a{color:inherit;text-decoration:none}
   <div class="wrap gal">
     <div class="bar">
       <span class="mono"><b>On set</b> · behind the activation</span>
-      <span class="mono" style="color:#8f8d88">10 frames · the shoot in motion</span>
+      <span class="mono" style="color:#8f8d88">11 frames · the shoot in motion</span>
     </div>
     <div class="frames show">
+      <figure class="fr vidfr"><video src="/case-studies/sony-xm5/bts/bts-clip.mp4" autoplay muted loop playsinline aria-label="Behind the scenes: filming on the street corner"></video><figcaption class="cap">On set · in motion</figcaption></figure>
       <figure class="fr"><img src="/case-studies/sony-xm5/bts/bts-01.jpg" alt="Gawx Art facing his wall of artwork on set" loading="lazy"><figcaption class="cap">On set · Gawx at the wall</figcaption></figure>
       <figure class="fr"><img src="/case-studies/sony-xm5/bts/bts-03.jpg" alt="The WH-1000XM5 held up on set under the lights" loading="lazy"><figcaption class="cap">On set · the product</figcaption></figure>
       <figure class="fr"><img src="/case-studies/sony-xm5/bts/bts-04.jpg" alt="Full camera crew and gear on the outdoor shoot" loading="lazy"><figcaption class="cap">On set · the crew</figcaption></figure>
@@ -459,6 +496,19 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     over.style.marginBottom=uf.offsetHeight+'px'; }
   size();addEventListener('resize',size);setTimeout(size,600);
 })();
+// cutdowns: click = sound on, one at a time
+document.querySelectorAll('.cut').forEach(function(c){
+  var v=c.querySelector('video');
+  function toggle(){
+    if(v.paused){
+      document.querySelectorAll('.cut video').forEach(function(o){if(o!==v){o.pause();o.closest('.cut').classList.remove('playing');}});
+      v.muted=false;v.play();c.classList.add('playing');
+    }else{v.pause();c.classList.remove('playing');}
+  }
+  c.addEventListener('click',toggle);
+  c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+  v.addEventListener('ended',function(){c.classList.remove('playing');});
+});
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
 
