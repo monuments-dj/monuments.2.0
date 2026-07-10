@@ -92,7 +92,7 @@ const { tag } = Astro.props;
   // guard rules for B/W: the rose quote bands flip to ink so nothing renders pink
   if(!document.getElementById('mnmt-bw-guard')){
     var g=document.createElement('style');g.id='mnmt-bw-guard';
-    g.textContent='html[data-accent="bw"] .quote{background:var(--ink)!important;color:var(--paper)!important}html[data-accent="bw"] .quote .who{color:rgba(245,243,239,.55)!important}';
+    g.textContent='html[data-accent="bw"] .quote{background:var(--paper)!important;color:var(--ink)!important}html[data-accent="bw"] .quote .who{color:rgba(22,21,20,.55)!important}';
     document.head.appendChild(g);
   }
   function applyAcc(a){
