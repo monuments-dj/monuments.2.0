@@ -59,7 +59,35 @@ const frames = [
   ['fs-12.jpg', 1206, 1800],
   ['fs-13.jpg', 1800, 1200],
   ['fs-14.jpg', 1190, 1800],
+  ['fs-16.jpg', 1400, 934],
+  ['fs-19.jpg', 1400, 2098],
   ['fs-15.jpg', 1800, 1201],
+  ['fs-20.jpg', 1400, 2084],
+  ['fs-17.jpg', 1400, 934],
+  ['fs-21.jpg', 1400, 2074],
+  ['fs-23.jpg', 1400, 2100],
+  ['fs-18.jpg', 1400, 934],
+  ['fs-22.jpg', 1400, 2052],
+  ['fs-24.jpg', 1400, 2100],
+  ['fs-25.jpg', 1400, 934],
+];
+// the wall: real comments from the Art of Visuals x Sony post, DJ's screenshot 2026-07-09
+const fsComments = [
+  { u: 'jayrmcdonald', t: 'THUE ABSOLUTELY SLAYS 😍😍😍 10/10!! Also need to try these headphones! Need the noise cancelling for flying 🙌', l: 4 },
+  { u: 'morgylove', t: 'The sheer amount of talent on the AOV team is insane. Killer work!', l: 1 },
+  { u: 'kennyjenkinz', t: 'Turned out unreal', l: 2 },
+  { u: 'benmurphy.photography', t: "I got these headphones at the beginning of the year, and I am absolutely blown away with their comfort, sound quality and ability to cancel out noise. Not sure what I'd do without them now haha", l: 6 },
+  { u: 'tommylundberg', t: 'The sound design is so rad', l: 5 },
+  { u: 'learnfilmmaking', t: 'Wow amazing job guys!! @artofvisuals @sony 🎥🔥🙌', l: 5 },
+  { u: 'addybora', t: 'Never wanted to buy headphones more than after seeing this set 😂' },
+  { u: 'gear.visuals', t: 'Crazy backlit portrait 😍' },
+  { u: 'kylevandever', t: 'The best headphones in the game I bought the new ones because AOV 🤘', l: 3 },
+  { u: 'heyhannerd', t: 'Noise cancellation has been an travel essential for me for sure, gonna have to check these out now!! Beautiful video!!', l: 1 },
+  { u: 'simplelifeglamour', t: 'When headphones turn into eye candy hard core. These images are 🔥🔥😍🙌', l: 2 },
+  { u: 'ultrabrad', t: 'Alright the photos turned out sick 😂', l: 2 },
+  { u: 'thevancityphotographer', t: 'Wow absolutely incredible guys ceases to impress', l: 1 },
+  { u: 'captainbunz', t: 'Loved this video. Very informative and well said.', l: 1 },
+  { u: 'danielledemure', t: 'Goosebumps!!', l: 1 },
 ];
 ---
 <!doctype html>
@@ -355,7 +383,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <div class="wrap gal">
     <div class="bar">
       <span class="mono"><b>Contact sheet</b> · selects from the campaign</span>
-      <span class="mono" style="color:#8f8d88">12 frames · hover to inspect</span>
+      <span class="mono" style="color:#8f8d88">22 frames · hover to inspect</span>
     </div>
     <div class="frames" id="frames">
       {frames.map((s, i) => (
@@ -367,6 +395,12 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </div>
 </section>
+
+<SocialWall
+  title="The comments came in hot."
+  intro="When Art of Visuals posted the campaign set, the thread filled up: photographers on the light, editors on the sound design, and a lot of people suddenly needing headphones."
+  comments={fsComments}
+/>
 
 <section class="quote">
   <div class="wrap">
