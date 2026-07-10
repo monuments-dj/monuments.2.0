@@ -24,10 +24,23 @@ Every item below traces to one or both. The domain swap is the finish line and h
 > cutdowns section (3 creators, 18 delivered) + BTS tile; Flow State 22 selects + comment wall +
 > 24-tile BTS wall + banner rebalance; about strip 18 clips; testimonials hold lorem stand-ins;
 > BTS library archived at ~/Monuments-Social/bts-library/.
+> **Late 07-09/07-10 additions:** locked CTA system applied verbatim sitewide (closed kicker set,
+> button always "Let's talk ↗", contact page = four mailto doors, no form); B/W scoreboard inverts
+> to paper on case pages; B/W failure sweep (tools/bw-sweep.mjs) killed 5 real bug classes; heroes
+> meet-in-the-middle at 78svh + air before the work grid; EVERY film poster on every case page now
+> carries a muted preview loop (tools/motioncheck.mjs verifies; new snips cut for buck-the-quo +
+> know-vape, all six KV episode thumbs loop their own footage); IG reels self-hosted where IG allows
+> (xm5 launch reel cropped to content; xperia = 3 live tiles + 3 official embeds); play-when-visible
+> is the sitewide default for all autoplay video (observer in PageFooter, reduced-motion = no
+> decorative autoplay); Flow State = deepest case (22 selects, 24-tile BTS wall, comment wall);
+> XM5 = cutdowns section + BTS tile + reel; hire = photos/marquee/brand slider/4-stat band.
+> **STILL STATIC (need footage or a snip pass):** adorama Beat Machine cutdown, CWI program spots
+> x3 (Engineering/AI/Nursing), donut Croy + The cut.
 > **NEW DJ DECISIONS OWED:** font pairing pick (01-05) · confirm B/W (then bake tokens, delete
 > switcher + Kit menu line) · real quotes for the 7 testimonial names + roles for Chris House/Kish/
 > Alex Stevens/Jennie Meyers · red kickers stay or go in B/W · real-browser motion pass (reel scrub,
-> typewriter, marquees, cutdown players).
+> typewriter, marquees, cutdown players, IG embeds on xperia) · confirm the three API-walled xperia
+> reels still exist on IG.
 
 ## Page grades (hiring / client)
 
