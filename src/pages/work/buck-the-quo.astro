@@ -162,6 +162,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .poster16:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
 .poster16 .fcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
 .poster16 iframe,.poster16 video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;object-fit:contain}
+.poster16 .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;background:transparent}
+.poster16.playing .pvid{display:none}
 .poster16.playing{cursor:default}
 .poster16.playing .play,.poster16.playing .fcap{display:none}
 .poster16+.poster16{margin-top:14px}
@@ -367,11 +369,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
     <div class="poster16" data-src="/case-studies/buck-the-quo/films/film-01.mp4" data-title="Hella Bright Highlights · Buck the Quo">
       <img src="/case-studies/buck-the-quo/gallery/film-poster.jpg" alt="Buck the Quo: Hella Bright Highlights film poster">
+      <video class="pvid" src="/snips/buck-the-quo.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
       <span class="play">Play · Highlights</span>
       <span class="fcap">✳ Hella Bright Highlights · Buck the Quo</span>
     </div>
     <div class="poster16" data-src="/case-studies/buck-the-quo/films/film-02.mp4" data-title="Buck the Quo On Tour">
       <img src="/case-studies/buck-the-quo/gallery/film2-poster.jpg" alt="Buck the Quo On Tour film poster">
+      <video class="pvid" src="/snips/buck-the-quo-tour.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
       <span class="play">Play · On Tour</span>
       <span class="fcap">✳ Buck the Quo On Tour</span>
     </div>

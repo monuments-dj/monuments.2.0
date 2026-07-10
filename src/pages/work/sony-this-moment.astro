@@ -99,6 +99,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .film .poster{position:relative;height:92svh;overflow:hidden;cursor:pointer}
 .film .poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72);transition:transform .8s cubic-bezier(.22,1,.36,1)}
 .film .poster:hover img{transform:scale(1.03)}
+.film .poster .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .film .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.7;padding:0 12px;color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s}
 .film .poster:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
 .film .fcap{position:absolute;left:var(--pad);bottom:24px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
@@ -265,6 +266,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <section class="film" data-video="KIi8cBOlU50">
   <div class="poster" id="filmPoster">
     <img src="/case-studies/sony-this-moment/gallery/tm-03.jpg" alt="This Moment campaign film poster">
+    <video class="pvid" src="/snips/sony-this-moment.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
     <span class="play">Play · The Spot</span>
     <span class="fcap">✳ The spot · This Moment · Sony WH-1000XM4 · Art of Visuals</span>
   </div>

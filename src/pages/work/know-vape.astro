@@ -153,6 +153,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .poster16 .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.7;padding:0 12px;color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s}
 .poster16:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
 .poster16 .fcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
+.poster16 .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 
 /* the six spots: lined index, every row plays right here (PBS href fallback) */
 .epsec{background:var(--ink);padding:5vh 0 12vh}
@@ -171,6 +172,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .ep-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;border:1.5px solid rgba(245,243,239,.85);display:grid;place-items:center;color:var(--paper);font-size:15px;background:rgba(22,21,20,.32);backdrop-filter:blur(5px);transition:background .3s,color .3s,transform .3s}
 .ep-link:hover .ep-play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.08)}
 .ep-n{position:absolute;left:12px;top:11px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--paper);background:rgba(22,21,20,.5);padding:3px 7px}
+.ep-thumb .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .ep-meta{display:block;padding:12px 2px 4px}
 .ep-t{display:block;font-weight:var(--dispw2);font-size:clamp(17px,1.5vw,22px);line-height:1.06;letter-spacing:-.02em;text-transform:uppercase;transition:color .25s}
 .ep-d{display:block;margin-top:6px;font-size:13.5px;line-height:1.45;color:var(--dim)}
@@ -384,6 +386,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
        data-screen-link={hero.url} data-screen-link-label="Also on PBS ↗"
        aria-label="Play Vapor, a Know Vape: Myth vs Fact spot">
       <img src={`${G}/hero.jpg`} alt="Know Vape: Myth vs Fact video still" loading="lazy" decoding="async">
+      <video class="pvid" src="/snips/know-vape.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
       <span class="play">Play · right here</span>
       <span class="fcap">✳ Myth vs Fact: Vapor · Idaho Public Television</span>
     </a>
@@ -411,6 +414,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
              aria-label={`Play Myth vs Fact: ${e.t}`}>
             <span class="ep-thumb">
               <img src={e.poster} alt={`Myth vs Fact: ${e.t}`} loading="lazy">
+              <video class="pvid" src={e.file} autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
               <span class="ep-n">{String(i + 1).padStart(2, '0')}</span>
               <span class="ep-play" aria-hidden="true">▶</span>
             </span>

@@ -114,6 +114,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .poster16 .fcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
 .poster16.playing{cursor:default}
 .poster16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* muted looping preview between the poster still and the play chip */
+.poster16 .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.poster16.playing .pvid{display:none}
 /* the other two cuts, 2-up under the launch film */
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
 .duo .poster16 .play{width:88px;height:88px;font-size:9px;letter-spacing:.12em;line-height:1.5;padding:0 8px}
@@ -283,6 +286,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
     <div class="poster16" data-film="2eUYg_P5rfc" data-film-title="Donut x Zumiez launch film">
       <img src="/case-studies/donut-zumiez/gallery/yt-launch.jpg" alt="Donut x Zumiez launch film poster">
+      <video class="pvid" src="/snips/donut-zumiez.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
       <span class="play">Play · Launch film</span>
       <span class="fcap">✳ Launch film · Donut × Zumiez · 2023</span>
     </div>

@@ -125,6 +125,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .posterreel iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
 .posterreel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.82);transition:transform .8s cubic-bezier(.22,1,.36,1)}
 .posterreel:hover img{transform:scale(1.03)}
+.posterreel .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.posterreel[data-playing] .pvid{display:none}
 .posterreel .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.7;padding:0 12px;color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s}
 .posterreel:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
 .posterreel .fcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
@@ -277,6 +279,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <h2 class="rv in">Shot like the city <span class="serif">wears it.</span></h2>
     <div class="posterreel" id="acbFilm" data-yt="dTzb_Ck8vJ4" role="button" tabindex="0" aria-label="Play the AC Boise home kit reveal video">
       <img src="/case-studies/ac-boise/gallery/home-01.jpg" alt="Kit reveal: the AC Boise home kit, shot in the city">
+      <video class="pvid" src="/snips/ac-boise.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
       <span class="play">Play · The reveal</span>
       <span class="fcap">✳ This kit is Boise · Home kit reveal · AC Boise × Hummel</span>
     </div>

@@ -121,7 +121,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .vid .ph{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;cursor:pointer}
 .vid .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.8) saturate(.96);transition:transform .8s cubic-bezier(.22,1,.36,1),filter .35s}
 .vid .ph:hover img{transform:scale(1.03);filter:brightness(.95) saturate(1)}
-.vid .ph iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid .ph .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.vid.on .pvid{display:none}
+.vid .ph iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2}
 .vid .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:92px;height:92px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.7;padding:0 10px;color:var(--paper);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);cursor:pointer;transition:background .3s,color .3s,transform .3s}
 .vid.feat .play{width:118px;height:118px;font-size:10.5px}
 .vid .ph:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
@@ -293,6 +295,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <article class="vid rv feat" data-id={v.id} data-title={v.title}>
           <div class="ph">
             <img src={`/case-studies/on-camera/posters/${v.id}.jpg`} alt={`${v.title} poster`} loading="eager">
+            <video class="pvid" src="/snips/on-camera.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
             <span class="tag">TAPE-01</span>
             <button class="play" type="button" aria-label={`Play ${v.title}`}>Play · Featured</button>
           </div>

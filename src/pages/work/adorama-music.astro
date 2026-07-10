@@ -126,7 +126,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .poster16:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
 .poster16 .fcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
 .poster16.playing{cursor:default}
-.poster16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.poster16 .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.poster16.playing .pvid{display:none}
+.poster16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
 
 /* the journey: three rooms on ink, contact-sheet frames + numbered beats */
 .journey{background:var(--ink);padding:2vh 0 11vh}
@@ -342,6 +344,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
     <div class="poster16" data-film data-video="l1RBdpQ8vi8" data-title="Adorama Music: The Journey · brand film" id="filmPoster">
       <img src="/case-studies/adorama-music/gallery/am-07.jpg" alt="Film poster: a stage keyboard rig under blue light" width="2048" height="1366" loading="lazy">
+      <video class="pvid" src="/snips/adorama-music.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
       <span class="play">Play · The film</span>
       <span class="fcap">✳ Adorama Music: The Journey · 2020</span>
     </div>

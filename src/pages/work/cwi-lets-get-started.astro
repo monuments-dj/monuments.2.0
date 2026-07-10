@@ -108,7 +108,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .filmframe{position:relative;aspect-ratio:16/9;background:#000;border:1px solid var(--lined);overflow:hidden;cursor:pointer}
 .filmframe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.95);transition:transform .6s cubic-bezier(.22,1,.36,1),opacity .4s}
 .filmframe:hover img{transform:scale(1.02)}
-.filmframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.filmframe .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.filmframe:has(iframe) .pvid{display:none}
+.filmframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
 .filmframe .chip{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);border:1px solid rgba(245,243,239,.55);border-radius:99px;padding:12px 20px;background:rgba(22,21,20,.45);backdrop-filter:blur(5px);pointer-events:none;transition:background .3s}
 .filmframe:hover .chip{background:rgba(22,21,20,.7)}
 .filmframe .chip .dot{width:7px;height:7px;border-radius:50%;background:var(--red)}
@@ -265,6 +267,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="filmgrid">
       <div class="filmframe" data-yt="2tms4kQWevk">
         <img src="/case-studies/cwi/poster-anthem.jpg" alt="Let's Get Started hype film" loading="lazy">
+        <video class="pvid" src="/snips/cwi.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
         <span class="chip"><span class="dot"></span>Play · The hype film</span>
         <span class="fcap">✳ Let's Get Started · Directed by me · MMXXIII</span>
       </div>

@@ -200,7 +200,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .poster16:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
 .poster16 .fcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
 .poster16.playing{cursor:default}
-.poster16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.poster16 .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.poster16.playing .pvid{display:none}
+.poster16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
 
 /* full-bleed parallax break */
 .break{position:relative;height:52svh;overflow:hidden}
@@ -249,7 +251,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   .hero .vwrap{display:none}
 }
 
-/* mobile nav — CSS-only hamburger -> fullscreen menu */
+/* mobile nav: CSS-only hamburger -> fullscreen menu */
 .navburger,.mnav{display:none}
 @media (max-width:680px){
   .corners .c2{display:none}
@@ -358,6 +360,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
     <div class="poster16" id="filmPoster">
       <img src="/case-studies/sony-flow-state/gallery/fs-07.jpg" alt="Flow State, the hero film">
+      <video class="pvid" src="/snips/sony-flow-state.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
       <span class="play">Play · The Spot</span>
       <span class="fcap">✳ The hero film · Flow State · published on Sony Electronics' own channel</span>
     </div>
