@@ -414,7 +414,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
              aria-label={`Play Myth vs Fact: ${e.t}`}>
             <span class="ep-thumb">
               <img src={e.poster} alt={`Myth vs Fact: ${e.t}`} loading="lazy">
-              <video class="pvid" src={e.file} autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+              <video class="pvid" src={e.file.replace('.mp4', '-loop.mp4').replace('/spots/', '/spots/loops/')} autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
               <span class="ep-n">{String(i + 1).padStart(2, '0')}</span>
               <span class="ep-play" aria-hidden="true">▶</span>
             </span>
