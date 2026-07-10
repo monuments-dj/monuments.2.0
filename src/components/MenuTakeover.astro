@@ -73,7 +73,7 @@ body.mt-open .mt-trig{mix-blend-mode:normal}
 .mt-ov{position:fixed;inset:0;z-index:88;background:#161514;color:#F5F3EF;transform:translateY(-102%);transition:transform .62s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column;justify-content:space-between;padding:calc(24px + 6vh) var(--pad,clamp(22px,4.6vw,44px)) 26px;visibility:hidden}
 body.mt-open .mt-ov{transform:none;visibility:visible}
 body.mt-open{overflow:hidden}
-.mt-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(30px,5vw,90px);align-items:center;flex:1;min-height:0;max-width:var(--wrap,1380px);width:100%;margin:0 auto}
+.mt-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(30px,5vw,90px);align-items:center;flex:1;min-height:0;width:100%}
 .mt-nav{display:flex;flex-direction:column}
 .mt-item{display:block;text-decoration:none;color:inherit;border-bottom:1px solid rgba(245,243,239,.12);padding:clamp(8px,1.4vh,14px) 0}
 .mt-item:first-child{border-top:1px solid rgba(245,243,239,.12)}
@@ -102,7 +102,7 @@ body.mt-open .mt-prev{opacity:1;transform:none}
 .mt-prev img.sw{opacity:0}
 .mt-cap{position:absolute;left:12px;bottom:10px;font-family:var(--mono,'Fragment Mono',monospace);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.85);background:rgba(22,21,20,.6);padding:3px 8px}
 /* meta */
-.mt-meta{display:flex;align-items:center;gap:18px 30px;flex-wrap:wrap;max-width:var(--wrap,1380px);width:100%;margin:0 auto;padding-top:20px;border-top:1px solid rgba(245,243,239,.12);opacity:0;transition:opacity .5s .42s}
+.mt-meta{display:flex;align-items:center;gap:18px 30px;flex-wrap:wrap;width:100%;padding-top:20px;border-top:1px solid rgba(245,243,239,.12);opacity:0;transition:opacity .5s .42s}
 body.mt-open .mt-meta{opacity:1}
 .mt-pill{display:inline-flex;padding:13px 24px;background:#F5F3EF;color:#161514;border-radius:99px;font-family:var(--mono,'Fragment Mono',monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .3s}
 .mt-pill:hover{background:var(--spark,#EFA1AD)}
