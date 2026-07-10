@@ -16,14 +16,25 @@ const { tag } = Astro.props;
   </div>
 </footer>
 
-<!-- TEMP design tool: global accent switcher (remove before launch, see LAUNCH.md). -->
+<!-- TEMP design tool: accent + type switcher (remove before launch, see LAUNCH.md).
+     Accent: B/W is the working default (DJ 2026-07-09: kill the pink for now, let the
+     work speak); rose/cobalt/red stay for comparison. B/W = struct+quote go ink, spark
+     goes paper, band text rides --on-rgb. Type: display-font candidates, all free
+     (Google/Fontshare); serif + mono stay, they are identity anchors. -->
 <div class="acctool" id="acctool">
   <span class="acctool-l">accent</span>
+  <button data-acc="bw" style="--sw:linear-gradient(135deg,#161514 50%,#F5F3EF 50%)" title="Black + white" aria-label="Black and white accent"></button>
   <button data-acc="rose" style="--sw:#EFA1AD" title="Rose" aria-label="Rose accent"></button>
   <button data-acc="cobalt" style="--sw:#2438E8" title="Cobalt" aria-label="Cobalt accent"></button>
   <button data-acc="red" style="--sw:#E0311A" title="Red" aria-label="Red accent"></button>
-  <button data-acc="ink" style="--sw:#161514" title="Ink" aria-label="Ink accent"></button>
-  <button class="acctool-x" title="Hide (until you clear site data)" aria-label="Hide accent switcher">&times;</button>
+  <span class="acctool-l acctool-div">type</span>
+  <button data-font="bricolage" title="Bricolage Grotesque (current)">BG</button>
+  <button data-font="instrument" title="Instrument Sans (pairs with the serif)">IS</button>
+  <button data-font="satoshi" title="Satoshi (Fontshare)">SA</button>
+  <button data-font="archivo" title="Archivo (brand book)">AR</button>
+  <button data-font="schibsted" title="Schibsted Grotesk">SG</button>
+  <button data-font="inter" title="Inter">IN</button>
+  <button class="acctool-x" title="Hide (until you clear site data)" aria-label="Hide switcher">&times;</button>
 </div>
 
 <style>
@@ -38,9 +49,13 @@ const { tag } = Astro.props;
   font-family:var(--mono,monospace);opacity:.42;transition:opacity .3s}
 .acctool:hover{opacity:1}
 .acctool-l{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#8f8d88;margin-right:2px}
+.acctool-div{margin-left:8px;padding-left:10px;border-left:1px solid rgba(245,243,239,.18)}
 .acctool [data-acc]{width:16px;height:16px;border-radius:50%;border:1px solid rgba(245,243,239,.25);background:var(--sw);cursor:pointer;padding:0;transition:transform .2s}
 .acctool [data-acc]:hover{transform:scale(1.18)}
 .acctool [data-acc].on{box-shadow:0 0 0 2px rgba(22,21,20,.82),0 0 0 3.5px #F5F3EF}
+.acctool [data-font]{background:none;border:1px solid rgba(245,243,239,.22);border-radius:6px;color:#b5b2ac;font-family:var(--mono,monospace);font-size:8.5px;letter-spacing:.06em;padding:3px 5px;cursor:pointer;transition:color .2s,border-color .2s}
+.acctool [data-font]:hover{color:#F5F3EF;border-color:rgba(245,243,239,.5)}
+.acctool [data-font].on{color:#161514;background:#F5F3EF;border-color:#F5F3EF}
 .acctool-x{background:none;border:0;color:#8f8d88;font-size:15px;line-height:1;cursor:pointer;padding:0 2px 0 4px}
 .acctool-x:hover{color:#F5F3EF}
 @media (max-width:680px){.acctool{bottom:8px;padding:6px 8px}.acctool-l{display:none}}
@@ -48,21 +63,60 @@ const { tag } = Astro.props;
 
 <script is:inline>
 (function(){
-  var ACC={rose:['#EFA1AD','22,21,20'],cobalt:['#2438E8','245,243,239'],red:['#E0311A','245,243,239'],ink:['#161514','245,243,239']};
+  // accents: [struct, on-rgb, spark]. B/W is the working default: pink dies, the
+  // accent bands go ink with paper type, the quote bands flip via the injected guard.
+  var ACC={
+    bw:['#161514','245,243,239','#F5F3EF'],
+    rose:['#EFA1AD','22,21,20','#EFA1AD'],
+    cobalt:['#2438E8','245,243,239','#EFA1AD'],
+    red:['#E0311A','245,243,239','#EFA1AD']
+  };
+  // display-font candidates: [css family, dispw, dispw2, stylesheet href ('' = ships with pages)]
+  var FONTS={
+    bricolage:["'Bricolage Grotesque',sans-serif",'800','600',''],
+    instrument:["'Instrument Sans',sans-serif",'700','600','https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&display=swap'],
+    satoshi:["'Satoshi',sans-serif",'900','700','https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap'],
+    archivo:["'Archivo',sans-serif",'800','600','https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap'],
+    schibsted:["'Schibsted Grotesk',sans-serif",'800','600','https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap'],
+    inter:["'Inter',sans-serif",'800','600','https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap']
+  };
   var root=document.documentElement, tool=document.getElementById('acctool');
-  function apply(a){
-    var v=ACC[a]||ACC.rose;
+  // guard rules for B/W: the rose quote bands flip to ink so nothing renders pink
+  if(!document.getElementById('mnmt-bw-guard')){
+    var g=document.createElement('style');g.id='mnmt-bw-guard';
+    g.textContent='html[data-accent="bw"] .quote{background:var(--ink)!important;color:var(--paper)!important}html[data-accent="bw"] .quote .who{color:rgba(245,243,239,.55)!important}';
+    document.head.appendChild(g);
+  }
+  function applyAcc(a){
+    if(a==='ink')a='bw'; // migrate the old saved value
+    var v=ACC[a]||ACC.bw;
     root.style.setProperty('--struct',v[0]);
     root.style.setProperty('--on-rgb',v[1]);
+    root.style.setProperty('--spark',v[2]);
     root.setAttribute('data-accent',a);
     if(tool)tool.querySelectorAll('[data-acc]').forEach(function(b){b.classList.toggle('on',b.dataset.acc===a);});
   }
-  var saved=localStorage.getItem('mnmt-accent')||'rose';
-  apply(saved);
+  function applyFont(f){
+    var v=FONTS[f]||FONTS.bricolage;
+    if(v[3]&&!document.getElementById('mnmt-font-'+f)){
+      var l=document.createElement('link');l.id='mnmt-font-'+f;l.rel='stylesheet';l.href=v[3];
+      document.head.appendChild(l);
+    }
+    root.style.setProperty('--disp',v[0]);
+    root.style.setProperty('--dispw',v[1]);
+    root.style.setProperty('--dispw2',v[2]);
+    root.setAttribute('data-font',f);
+    if(tool)tool.querySelectorAll('[data-font]').forEach(function(b){b.classList.toggle('on',b.dataset.font===f);});
+  }
+  applyAcc(localStorage.getItem('mnmt-accent')||'bw');
+  applyFont(localStorage.getItem('mnmt-font')||'bricolage');
   if(!tool)return;
   if(localStorage.getItem('mnmt-acctool')==='off'){tool.style.display='none';}
   tool.querySelectorAll('[data-acc]').forEach(function(b){
-    b.addEventListener('click',function(){apply(b.dataset.acc);localStorage.setItem('mnmt-accent',b.dataset.acc);});
+    b.addEventListener('click',function(){applyAcc(b.dataset.acc);localStorage.setItem('mnmt-accent',b.dataset.acc);});
+  });
+  tool.querySelectorAll('[data-font]').forEach(function(b){
+    b.addEventListener('click',function(){applyFont(b.dataset.font);localStorage.setItem('mnmt-font',b.dataset.font);});
   });
   tool.querySelector('.acctool-x').addEventListener('click',function(){tool.style.display='none';localStorage.setItem('mnmt-acctool','off');});
 })();

@@ -63,20 +63,34 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   .corners .c2{display:none}
 }
 
-/* hero */
-.hero{padding:20vh 0 7vh;position:relative}
-.hero .ey{color:var(--red);margin-bottom:26px}
-.hero h1{font-weight:var(--dispw);font-size:clamp(46px,8.2vw,116px);line-height:.9;letter-spacing:-.038em;text-transform:uppercase}
+/* hero: the brief left, the person right */
+.hero{padding:18vh 0 7vh;position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(30px,5vw,80px);align-items:center}
+.hero .ey{color:var(--red);margin-bottom:26px;display:block}
+.hero h1{font-weight:var(--dispw);font-size:clamp(46px,7vw,102px);line-height:.9;letter-spacing:-.038em;text-transform:uppercase}
 .hero h1 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;color:var(--ink)}
 .hero .lede{margin-top:34px;max-width:60ch;color:#4c4a45;font-size:clamp(17px,1.7vw,21px);line-height:1.55}
 .hero .lede b{color:var(--ink);font-weight:var(--dispw2)}
+.heroshot{position:relative;background:#fff;padding:12px 12px 44px;box-shadow:0 22px 60px rgba(22,21,20,.16);transform:rotate(1.4deg);justify-self:end;width:min(100%,440px)}
+.heroshot img{width:100%;height:auto;display:block;aspect-ratio:4/5;object-fit:cover}
+.heroshot .cap{position:absolute;left:14px;bottom:13px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.heroshot .cap b{color:var(--red);font-weight:400}
+@media (max-width:860px){.hero{grid-template-columns:1fr;padding-top:16vh}.heroshot{justify-self:start;transform:rotate(-1.2deg);width:min(100%,360px)}}
 
-/* headline stat band (rose) */
-.band{background:var(--struct);color:var(--ink)}
+/* headline stat band on the accent (text rides --on-rgb so every accent reads) */
+.band{background:var(--struct);color:rgb(var(--on-rgb));border-top:1px solid rgba(var(--on-rgb),.14);border-bottom:1px solid rgba(var(--on-rgb),.14)}
 .band .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;padding:38px var(--pad)}
 .band .st b{display:block;font-weight:var(--dispw);font-size:clamp(38px,5.4vw,74px);letter-spacing:-.04em;line-height:.92;text-transform:uppercase}
-.band .st span{display:block;margin-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(22,21,20,.72);line-height:1.7;max-width:30ch}
+.band .st span{display:block;margin-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(var(--on-rgb),.72);line-height:1.7;max-width:30ch}
 @media (max-width:720px){.band .grid{grid-template-columns:1fr;gap:22px}}
+
+/* on set: proof of presence, three frames */
+.strip{padding:8vh 0 0}
+.strip .k{color:var(--red);display:block;margin-bottom:18px}
+.strip .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,24px)}
+.strip figure{margin:0;position:relative}
+.strip img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block}
+.strip figcaption{padding:8px 0 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+@media (max-width:720px){.strip .row3{grid-template-columns:1fr}}
 
 /* body two-col */
 .main{padding:9vh 0 4vh;display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,90px)}
@@ -120,7 +134,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 /* print: the downloadable one-pager */
 .printhead{display:none}
 @media print{
-  .corners,.grain,.companion,.navburger,.mnav,.navtog-in,.printbtn,.acctool,footer,.close .links{display:none!important}
+  .corners,.grain,.companion,.navburger,.mnav,.navtog-in,.printbtn,.acctool,footer,.close .links,.heroshot,.strip{display:none!important}
+  .hero{display:block}
   @page{margin:10mm}
   html,body{background:#fff!important;color:#000!important;font-size:9.5pt;line-height:1.38}
   .printhead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5px solid #000;padding-bottom:5pt;margin-bottom:9pt}
@@ -155,10 +170,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 <section class="hero wrap">
-  <div class="printhead"><b>DJ Ramirez · Creative Director</b><span>monuments.cc@gmail.com · LA / Boise</span></div>
-  <span class="ey mono rv">✳ Hire · a one-page brief for agencies</span>
-  <h1 class="rv">Creative Director.<br><span class="serif">Open to the right room.</span></h1>
-  <p class="lede rv">I lead integrated campaigns, film, stills, and experiential from concept to delivery. I'm looking for a senior creative role inside an agency that wants <b>a point of view, not just a pair of hands.</b></p>
+  <div>
+    <div class="printhead"><b>DJ Ramirez · Creative Director</b><span>monuments.cc@gmail.com · LA / Boise</span></div>
+    <span class="ey mono rv">✳ Hire · a one-page brief for agencies</span>
+    <h1 class="rv">Creative Director.<br><span class="serif">Open to the right room.</span></h1>
+    <p class="lede rv">I lead integrated campaigns, film, stills, and experiential from concept to delivery. I'm looking for a senior creative role inside an agency that wants <b>a point of view, not just a pair of hands.</b></p>
+  </div>
+  <figure class="heroshot rv">
+    <img src="/about/dj-film.jpg" alt="DJ Ramirez on set, directing behind the camera" width="880" height="1100" fetchpriority="high">
+    <figcaption class="cap"><b>DJ Ramirez</b> · on set · Los Angeles</figcaption>
+  </figure>
 </section>
 
 <div class="band">
@@ -166,6 +187,15 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="st rv"><b>Emmy</b><span>2024 Northwest Regional Emmy, for the Know Vape campaign</span></div>
     <div class="st rv"><b>4&times;</b><span>Agency revenue grown as Creative Director at Art of Visuals</span></div>
     <div class="st rv"><b>2 &rarr; 30+</b><span>Creatives led per team, brief to delivery</span></div>
+  </div>
+</div>
+
+<div class="strip wrap">
+  <span class="k mono rv">\ On set · behind it and on it</span>
+  <div class="row3">
+    <figure class="rv"><img src="/about/hero-set.jpg" alt="DJ Ramirez running a set" loading="lazy"><figcaption>The room I run · production</figcaption></figure>
+    <figure class="rv" style="transition-delay:80ms"><img src="/about/team.jpg" alt="DJ Ramirez with the crew" loading="lazy"><figcaption>The crew · 2 to 30+</figcaption></figure>
+    <figure class="rv" style="transition-delay:160ms"><img src="/about/set-cameras.jpg" alt="Camera builds on set" loading="lazy"><figcaption>The tools · camera to cut</figcaption></figure>
   </div>
 </div>
 
@@ -202,13 +232,15 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <h2 class="rv">Booking Q3 + Q4. <span class="serif">Let's talk.</span></h2>
     <div class="row rv">
       <a class="pill magnetic" href="mailto:monuments.cc@gmail.com?subject=Creative%20Director%20role">monuments.cc@gmail.com</a>
+      <a class="printbtn" href="/#reel" style="text-decoration:none">Watch the reel &nearr;</a>
       <button class="printbtn" id="savepdf" type="button">Save this page as PDF &darr;</button>
     </div>
     <div class="links rv">
       <span>LA / Boise · will travel</span>
       <a href="https://www.linkedin.com/in/djthecd/" target="_blank" rel="noopener"><b>LinkedIn</b> · in/djthecd</a>
       <a href="https://www.instagram.com/djthecd" target="_blank" rel="noopener"><b>Instagram</b> · @djthecd</a>
-      <a href="/work"><b>Work</b> · monuments.cc/work</a>
+      <a href="/work"><b>Work</b> · the case files</a>
+      <a href="/capabilities"><b>Capabilities</b> · the full kit</a>
     </div>
   </div>
 </section>

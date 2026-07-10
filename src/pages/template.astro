@@ -1,0 +1,290 @@
+---
+import CallSheet from '../components/CallSheet.astro';
+import PageFooter from '../components/PageFooter.astro';
+import RoleTag from '../components/RoleTag.astro';
+
+// === THE KIT · case-page element library ===
+// The single source of truth for case-page elements. When an element needs a fix
+// or a new page needs building, pull the markup + CSS from HERE, not from another
+// page (that is how the drift happened). Every element consumes the identity
+// tokens (--disp/--dispw, --spark/--struct/--on-rgb), so the accent + type
+// switcher previews the whole system live on this one page.
+// Not linked from nav. noindex. Placeholder media borrowed from existing assets.
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>The Kit · element library · Monuments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style is:global>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--rose); --on-rgb:22,21,20;
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}html{overflow-x:clip}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+
+/* library chrome: the spec tag above every element */
+.spec{background:var(--ink);border-top:1px dashed var(--lined);padding:34px 0 12px}
+.spec .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.spec .id{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--spark)}
+.spec .use{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);max-width:70ch}
+.libhead{padding:16vh 0 8vh;text-align:left}
+.libhead h1{font-weight:var(--dispw);font-size:clamp(40px,6.4vw,92px);line-height:.92;letter-spacing:-.035em;text-transform:uppercase}
+.libhead h1 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.libhead p{margin-top:20px;color:var(--dim);max-width:62ch}
+.libhead .k{color:var(--spark);display:block;margin-bottom:18px}
+
+/* ELEMENT 01 · case hero */
+.hero{position:relative;height:70svh;min-height:520px;overflow:hidden;background:var(--ink)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) brightness(0.5)}
+.hero .scrim{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 44%,rgba(22,21,20,.52),rgba(22,21,20,.18) 58%,rgba(22,21,20,.46))}
+.hero .t{z-index:72;position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(46px,8.1vw,113px);line-height:.92;letter-spacing:-.035em;text-transform:uppercase}
+.hero .t .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero .t .spark{color:var(--spark)}
+.hero .t .ln{display:block;overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em}
+.hero .t .ln>span{display:block}
+.hero .kck{z-index:72;position:absolute;left:var(--pad);bottom:9vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);line-height:1.9}
+.hero .kck b{color:var(--spark);font-weight:400}
+.hero .nfo{z-index:72;position:absolute;right:var(--pad);bottom:9vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper)}
+.hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
+
+/* ELEMENT 02 · statrow + rolerow (accent-proof: text rides --on-rgb) */
+.statrow{background:var(--struct);color:rgb(var(--on-rgb));border-bottom:1px solid rgba(var(--on-rgb),.18)}
+.statrow>.in{display:flex;justify-content:flex-start;align-items:flex-end;gap:clamp(30px,4.6vw,64px);flex-wrap:wrap;padding:20px var(--pad) 18px}
+.statrow .stat:has(.note){margin-left:auto}
+.statrow .stat .note{text-align:right}
+@media(max-width:900px){.statrow .stat:has(.note){margin-left:0}.statrow .stat .note{text-align:left}}
+.stat b{display:block;font-weight:var(--dispw);font-size:clamp(26px,2.7vw,42px);letter-spacing:-.03em;line-height:.92}
+.stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66);display:block;margin-top:8px}
+.stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66);line-height:1.9;max-width:28ch}
+.stat .note b{font-family:var(--mono);font-size:11px;font-weight:400;color:rgb(var(--on-rgb));display:inline;letter-spacing:.08em}
+.rolerow{background:var(--ink);border-bottom:1px solid var(--lined)}
+.rolerow>.in{display:flex;justify-content:flex-start;gap:12px 44px;flex-wrap:wrap;padding:22px var(--pad);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rolerow b{color:var(--paper);font-weight:400}
+
+/* ELEMENT 03 · the brief on paper */
+.paper{background:var(--paper);color:var(--ink)}
+.story{display:grid;grid-template-columns:.62fr 1.38fr;gap:56px 64px;padding:10vh 0;align-items:center}
+.story .side .k{color:var(--red)}
+.story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
+.story h2 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.story .svc{list-style:none;margin:26px 0 0;padding:0}
+.story .svc li{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#6d6a64;padding:9px 0;border-top:1px solid var(--line)}
+.story .svc li i{font-style:normal;color:var(--red);margin-right:10px}
+.story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
+.story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
+@media (max-width:900px){.story{grid-template-columns:1fr}}
+
+/* ELEMENT 04 · chapter head (the fhead device) */
+.white{background:#fff;color:var(--ink)}
+.front{padding:7vh 0 8vh}
+.fhead{display:grid;grid-template-columns:auto 1fr auto;gap:6px 28px;align-items:baseline;border-top:2px solid var(--ink);padding-top:20px;margin-bottom:clamp(26px,4vh,40px)}
+.fhead .fn{grid-column:1;grid-row:1/3;font-family:var(--mono);font-size:clamp(34px,3.6vw,54px);line-height:.9;color:var(--red)}
+.fhead h3{grid-column:2;grid-row:1;font-weight:var(--dispw);font-size:clamp(24px,2.9vw,40px);letter-spacing:-.03em;line-height:1;text-transform:uppercase}
+.fhead h3 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.fhead .dek{grid-column:2/4;grid-row:2;color:#6d6a64;font-size:16px;max-width:62ch}
+.fhead .tag{grid-column:3;grid-row:1;justify-self:end;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+@media(max-width:900px){.fhead{grid-template-columns:1fr}.fhead .fn,.fhead h3,.fhead .dek{grid-column:1;grid-row:auto}.fhead .tag{display:none}}
+
+/* ELEMENT 05 · plates (borderless frames on white; .doc adds a hairline) */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.2vw,26px)}
+.pl{position:relative}
+.pl img{width:100%;height:auto;display:block}
+.pl .cap{display:block;padding:9px 0 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.pl .cap b{color:var(--red);font-weight:400}
+.pl.doc img{border:1px solid var(--line)}
+.pl.off{width:min(76%,940px);margin-left:auto}
+@media (max-width:900px){.duo{grid-template-columns:1fr}.pl.off{width:100%}}
+
+/* ELEMENT 06 · full-bleed break */
+.break{position:relative;height:44svh;overflow:hidden}
+.break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;object-position:50% 50%}
+.break .cap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.92);background:rgba(22,21,20,.42);padding:6px 12px;backdrop-filter:blur(2px)}
+
+/* ELEMENT 07 · browser frame */
+.browser{border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 26px 70px rgba(22,21,20,.12);background:#fff;max-width:980px}
+.browser .bbar{display:flex;align-items:center;gap:6px;padding:11px 16px;background:#faf9f6;border-bottom:1px solid var(--line)}
+.browser .bbar i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.browser .burl{margin:0 auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:#6d6a64;background:#fff;border:1px solid var(--line);border-radius:99px;padding:3px 22px}
+.browser img{width:100%;height:auto;display:block}
+
+/* ELEMENT 08 · quote band (flips to ink automatically in B/W mode) */
+.quote{background:var(--spark);color:var(--ink);padding:11vh 0}
+.quote p.q{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(28px,4vw,58px);line-height:1.14;max-width:26ch}
+.quote p.q b{font-style:normal;font-family:var(--disp);font-weight:var(--dispw);text-transform:uppercase;font-size:.86em;letter-spacing:-.02em}
+.quote .who{margin-top:28px;color:rgba(22,21,20,.6)}
+
+/* ELEMENT 09 · testimonial card */
+.tstwrap{padding:8vh 0}
+.tst-card{margin:0;background:rgba(245,243,239,.04);border:1px solid rgba(245,243,239,.1);border-radius:11px;padding:26px 22px 20px;display:flex;flex-direction:column;gap:18px;min-height:190px;max-width:420px}
+.tst-q{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(19px,1.9vw,25px);line-height:1.4;flex:1}
+.tst-ph{color:rgba(245,243,239,.28)}
+.tst-card figcaption{display:flex;flex-direction:column;gap:4px}
+.tst-n{font-weight:var(--dispw2);font-size:15.5px}
+.tst-r{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88;font-family:var(--mono)}
+.tst-chip{align-self:flex-start;margin-top:6px;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--spark);border:1px solid rgba(245,243,239,.25);border-radius:99px;padding:3px 9px}
+
+/* ELEMENT 10 · pills + buttons */
+.pillrow{display:flex;gap:16px;flex-wrap:wrap;align-items:center;padding:8vh 0}
+.pill-dark{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid var(--ink);border-radius:99px;padding:11px 20px;transition:background .3s,color .3s;color:var(--ink)}
+.pill-dark:hover{background:var(--ink);color:var(--paper)}
+.pill-light{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid rgba(245,243,239,.6);border-radius:99px;padding:11px 20px;transition:background .3s,color .3s;color:var(--paper)}
+.pill-light:hover{background:var(--paper);color:var(--ink)}
+
+/* ELEMENT 11 · CTA hand-off band */
+.cta{background:var(--struct);color:rgb(var(--on-rgb));padding:10vh 0}
+.cta .in{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.cta .big{font-weight:var(--dispw);font-size:clamp(28px,4.2vw,60px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;max-width:16ch}
+.cta .big .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none}
+.cta a.talk{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1.5px solid rgba(var(--on-rgb),.75);padding:16px 26px;border-radius:50%;transition:background .3s,color .3s,transform .3s;display:inline-block}
+.cta a.talk:hover{background:rgb(var(--on-rgb));color:var(--struct);transform:scale(1.05)}
+
+.credits{padding:8vh 0}
+</style>
+</head>
+<body>
+
+<div class="libhead">
+  <div class="wrap">
+    <span class="k mono">\ The kit · internal · not linked</span>
+    <h1>Case-page <span class="serif">elements.</span></h1>
+    <p>The single source of truth. Build new case pages by pulling elements from here; fix an element here first, then propagate. Every element rides the identity tokens, so the accent + type switcher (bottom center) previews the whole system on this one page.</p>
+  </div>
+</div>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 01 · CASE HERO</span><span class="use">70svh image hero · 3-line title, serif accent line last · kck bottom-left, NFO bottom-right · RoleTag under title</span></div></div>
+<header class="hero">
+  <img src="/case-studies/flashpoint/gallery/fp-03.jpg" alt="Placeholder hero image">
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="t">
+    <span class="ln"><span>Headline line,</span></span>
+    <span class="ln"><span><span class="serif">payoff</span><span class="spark">.</span></span></span>
+    <RoleTag text="what I did on this one" />
+  </div>
+  <div class="kck"><b>\ Case file</b><br>Client · The project in one line<br>Discipline · Discipline · Year</div>
+  <div class="nfo"><span class="h">NFO</span><br>Client · Name<br>Role · Creative Director<br>Frame · MC-20XX-XX</div>
+</header>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 02 · STATROW + ROLEROW</span><span class="use">Scoreboard on the accent: text rides --on-rgb so every accent reads · note right-aligned · rolerow flows left, never space-between</span></div></div>
+<div class="statrow">
+  <div class="wrap in">
+    <div class="stat"><b>Big</b><span>What it counts</span></div>
+    <div class="stat"><b>04</b><span>Another count</span></div>
+    <div class="stat"><b>20K+</b><span>A third count</span></div>
+    <div class="stat"><p class="note">One supporting line with <b>the emphasis</b> inline</p></div>
+  </div>
+</div>
+<div class="rolerow">
+  <div class="wrap in">
+    <span><b>Client</b> · Name</span>
+    <span><b>My part</b> · Creative Director</span>
+    <span><b>Agency</b> · If through one</span>
+    <span><b>Year</b> · 20XX</span>
+  </div>
+</div>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 03 · THE BRIEF</span><span class="use">Paper ground · kicker + display h2 + services list left, body right · first paragraph is the lede size</span></div></div>
+<section class="paper">
+  <div class="wrap story">
+    <div class="side">
+      <span class="k mono">\ The brief</span>
+      <h2>What this project was, in one <span class="serif">line.</span></h2>
+      <ul class="svc"><li><i>✳</i>Service one</li><li><i>✳</i>Service two</li><li><i>✳</i>Service three</li></ul>
+    </div>
+    <div class="body">
+      <p>The lede paragraph: client, context, and DJ's role, scoped honestly. If through an agency, say so here.</p>
+      <p>The supporting paragraph carries the objective once. It does not repeat later; later sections reference it.</p>
+    </div>
+  </div>
+</section>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 04 · CHAPTER HEAD</span><span class="use">White ground · numbered fhead on a 2px rule: mono number, display title, right tag, dek · numbers tie back to the brief's index</span></div></div>
+<section class="white front">
+  <div class="wrap">
+    <div class="fhead">
+      <span class="fn">01</span>
+      <h3>The chapter <span class="serif">title.</span></h3>
+      <span class="tag">Front 01 · What this chapter is</span>
+      <p class="dek">One line on what this chapter shows and why it mattered.</p>
+    </div>
+
+    <div class="spec" style="background:none;border:none;padding:0 0 12px"><span class="id">ELEMENT 05 · PLATES</span>&nbsp;&nbsp;<span class="use">duo grid · .off offset wide · .doc hairline for white documents · mono caption under-left</span></div>
+    <div class="duo">
+      <figure class="pl"><img src="/case-studies/flashpoint/gallery/fp-01.jpg" alt="Placeholder plate"><figcaption class="cap"><b>COMP-01</b> · What this frame is</figcaption></figure>
+      <figure class="pl"><img src="/case-studies/flashpoint/gallery/fp-02.jpg" alt="Placeholder plate"><figcaption class="cap"><b>COMP-02</b> · What this frame is</figcaption></figure>
+    </div>
+
+    <div class="spec" style="background:none;border:none;padding:26px 0 12px"><span class="id">ELEMENT 07 · BROWSER FRAME</span>&nbsp;&nbsp;<span class="use">for live sites and web work · url pill center · caption below like any plate</span></div>
+    <figure class="pl">
+      <div class="browser">
+        <div class="bbar"><i></i><i></i><i></i><span class="burl">example.com</span></div>
+        <img src="/case-studies/flashpoint/site/web-hero.jpg" alt="Placeholder website capture">
+      </div>
+      <figcaption class="cap"><b>WEB-01</b> · The live site · Captured when</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 06 · FULL-BLEED BREAK</span><span class="use">between chapters · parallax on the real pages · centered mono caption chip</span></div></div>
+<div class="break">
+  <img src="/case-studies/flashpoint/gallery/fp-08.jpg" alt="Placeholder break image">
+  <span class="cap">✳ The break caption · context in one line</span>
+</div>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 08 · QUOTE BAND</span><span class="use">the system in one line · spark ground (flips to ink automatically in B/W mode) · serif italic + display bold emphasis</span></div></div>
+<section class="quote">
+  <div class="wrap">
+    <p class="q">"The whole project summed up in one serif line with <b>the bold bit</b> carrying the point."</p>
+    <p class="who mono">Who said it, or what this line is</p>
+  </div>
+</section>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 09 · TESTIMONIAL CARD</span><span class="use">ink ground · serif quote, name + role, chip while the quote is pending · NEVER fabricate a quote under a real name</span></div></div>
+<div class="tstwrap"><div class="wrap">
+  <figure class="tst-card">
+    <p class="tst-q"><span class="tst-ph">&ldquo;&nbsp;&hellip;&nbsp;&rdquo;</span></p>
+    <figcaption><span class="tst-n">Name Here</span><span class="tst-r">Role · Project</span><span class="tst-chip">quote incoming</span></figcaption>
+  </figure>
+</div></div>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 10 · PILLS</span><span class="use">mono uppercase, radius 99 · dark-on-light and light-on-dark variants · arrows for outbound</span></div></div>
+<section class="paper"><div class="wrap pillrow">
+  <a class="pill-dark" href="#top">Pill on light ↗</a>
+  <span style="background:var(--ink);border-radius:8px;padding:14px 18px;display:inline-flex"><a class="pill-light" href="#top">Pill on dark ↗</a></span>
+</div></section>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 12 · CALL SHEET</span><span class="use">credits slip · agency + client + collaborators + DJ's row marked select · keep roles truthful</span></div></div>
+<section class="paper"><div class="wrap credits">
+  <CallSheet code="MC-20XX-XX" sub="Client · Project · Scope" filed="MMXX" tone="light"
+    rows={[
+      { k: 'Client', v: 'Name' },
+      { k: 'Collaborator', v: 'Name · role' },
+      { k: 'Creative Direction', v: 'DJ Ramirez', select: true },
+    ]} />
+</div></section>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 11 · CTA BAND</span><span class="use">the hand-off · accent ground, text rides --on-rgb · round talk button</span></div></div>
+<section class="cta">
+  <div class="wrap in">
+    <p class="big">Let's build something <span class="serif">great</span> together.</p>
+    <a class="talk" href="/contact">Let's Talk ↗</a>
+  </div>
+</section>
+
+<PageFooter tag="The kit · element library" />
+</body>
+</html>
