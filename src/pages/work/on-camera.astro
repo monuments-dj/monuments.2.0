@@ -295,7 +295,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <article class="vid rv feat" data-id={v.id} data-title={v.title}>
           <div class="ph">
             <img src={`/case-studies/on-camera/posters/${v.id}.jpg`} alt={`${v.title} poster`} loading="eager">
-            <video class="pvid" src="/snips/on-camera.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+            <video class="pvid" src="/snips/on-camera.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
             <span class="tag">TAPE-01</span>
             <button class="play" type="button" aria-label={`Play ${v.title}`}>Play · Featured</button>
           </div>
