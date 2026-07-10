@@ -1,5 +1,19 @@
 ---
 import PageFooter from '../components/PageFooter.astro';
+// brand slider: same roster as the homepage ticker, ink logos on paper here.
+const brands = [
+  { l: 'Sony', img: 'sony.png', href: 'https://www.sony.com' },
+  { l: 'Intel', img: 'intel.png', href: 'https://www.intel.com' },
+  { l: 'Adorama', img: 'adorama.png', href: 'https://www.adorama.com' },
+  { l: 'MSI', img: 'msi.png', href: 'https://www.msi.com' },
+  { l: 'Lexar', img: 'lexar.png', href: 'https://www.lexar.com' },
+  { l: 'Flashpoint', img: 'flashpoint.png', href: 'https://www.flashpointlighting.com' },
+  { l: 'Art of Visuals', img: 'art-of-visuals.png', href: 'https://artofvisuals.com' },
+  { l: 'Blue Cross of Idaho', img: 'blue-cross.png', href: 'https://www.bcidaho.com' },
+  { l: 'Donut Media', img: 'donut-media.svg', href: 'https://donut.media' },
+  { l: 'DW Drums', img: 'dw-drums.png', href: 'https://www.dwdrums.com' },
+  { l: 'Against', img: 'against.png', href: 'https://goagainst.com' },
+];
 // on-set strip: eight different rooms, natural aspect, slow marquee.
 // ct-09 leads (DJ on the rig); every frame is a different scene on purpose.
 const shots = [
@@ -127,11 +141,19 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .work a .d{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--dim);text-align:right;line-height:1.6}
 .work .all{margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--ink);display:inline-block;padding-bottom:2px}
 
-/* roster */
+/* roster: kicker + brand slider (ink logos on paper, edge-faded, pause on hover) */
 .roster{padding:2vh 0 8vh}
 .roster .k{color:var(--red);display:block;margin-bottom:14px}
-.roster .names{font-weight:var(--dispw2);font-size:clamp(19px,2.4vw,32px);letter-spacing:-.02em;line-height:1.28;max-width:24ch}
-.roster .names .dot{color:var(--rose)}
+.roster .names{display:none;font-weight:var(--dispw2);font-size:clamp(19px,2.4vw,32px);letter-spacing:-.02em;line-height:1.28}
+.brand-ticker{overflow:hidden;padding:clamp(18px,2.4vw,30px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.bt-track{display:flex;align-items:center;width:max-content;animation:btmq 38s linear infinite}
+.brand-ticker:hover .bt-track{animation-play-state:paused}
+.bt-item{flex:0 0 auto;display:inline-flex;align-items:center;height:clamp(24px,2.6vw,36px);margin-right:clamp(44px,5.4vw,92px);transition:transform .25s}
+a.bt-item:hover{transform:translateY(-2px)}
+.bt-logo{height:100%;width:auto;max-width:calc(clamp(24px,2.6vw,36px)*5.2);object-fit:contain;display:block;filter:brightness(0);opacity:.7;transition:opacity .25s}
+a.bt-item:hover .bt-logo{opacity:1}
+@keyframes btmq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.bt-track{animation:none}.brand-ticker{overflow-x:auto}}
 
 /* availability + contact */
 .close{background:var(--ink);color:var(--paper);padding:11vh 0 12vh}
@@ -152,7 +174,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 /* print: the downloadable one-pager */
 .printhead{display:none}
 @media print{
-  .corners,.grain,.companion,.navburger,.mnav,.navtog-in,.printbtn,.acctool,footer,.close .links,.heroshot,.strip{display:none!important}
+  .corners,.grain,.companion,.navburger,.mnav,.navtog-in,.printbtn,.acctool,footer,.close .links,.heroshot,.strip,.brand-ticker{display:none!important}
+  .roster .names{display:block}
   .hero{display:block}
   @page{margin:10mm}
   html,body{background:#fff!important;color:#000!important;font-size:9.5pt;line-height:1.38}
@@ -237,15 +260,23 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <a class="rv" href="/work/buck-the-quo"><span class="t">Buck the Quo</span><span class="d">Statewide experiential · Albertson Family Foundation<br>Best of Show at the Rockys</span></a>
     <a class="rv" href="/work/know-vape"><span class="t">Know Vape</span><span class="d">Idaho Public Television · anti-vaping films<br>2024 Northwest Regional Emmy</span></a>
     <a class="rv" href="/work/sony-flow-state"><span class="t">Sony · Flow State</span><span class="d">Sony Audio launch film<br>Published on Sony's own channel</span></a>
+    <a class="rv" href="/work/flashpoint"><span class="t">Adorama · Flashpoint</span><span class="d">Full rebrand of Adorama's lighting label<br>Identity, packaging, OOH, website + socials</span></a>
     <a class="rv" href="/work/art-of-visuals"><span class="t">Art of Visuals</span><span class="d">Creative Director · agency + audience<br>Grew the agency 4x</span></a>
     <a class="rv" href="/work/cwi-lets-get-started"><span class="t">Let's Get Started</span><span class="d">College of Western Idaho · directed the campaign films<br>with Against</span></a>
     <a class="all" href="/work">See the full body of work &rarr;</a>
   </div>
 </div>
 
-<div class="roster wrap rv">
-  <span class="k mono">\ In the room with</span>
-  <p class="names">Sony <span class="dot">·</span> Intel <span class="dot">·</span> Adorama <span class="dot">·</span> MSI <span class="dot">·</span> Blue Cross of Idaho <span class="dot">·</span> College of Western Idaho <span class="dot">·</span> DW Drums <span class="dot">·</span> Art of Visuals</p>
+<div class="roster rv">
+  <div class="wrap"><span class="k mono">\ In the room with</span></div>
+  <div class="brand-ticker" aria-label="Brands worked with">
+    <div class="bt-track">
+      {[...brands, ...brands].map((b) => (
+        <a class="bt-item" href={b.href} target="_blank" rel="noopener" aria-label={b.l}><img class="bt-logo" src={`/logos/${b.img}`} alt={b.l} loading="lazy" decoding="async"></a>
+      ))}
+    </div>
+  </div>
+  <p class="names wrap">Sony · Intel · Adorama · MSI · Lexar · Flashpoint · Blue Cross of Idaho · College of Western Idaho · Donut Media · DW Drums · Art of Visuals</p>
 </div>
 
 <section class="close">
