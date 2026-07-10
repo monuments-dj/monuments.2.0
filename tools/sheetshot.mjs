@@ -1,0 +1,22 @@
+import { chromium } from 'playwright';
+const browser = await chromium.launch();
+const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+await page.addInitScript(() => localStorage.setItem('mnmt-accent','bw'));
+await page.goto('http://localhost:4321/work/sony-xm5', { waitUntil: 'domcontentloaded' });
+await page.waitForTimeout(2500);
+const el = page.locator('#frames');
+await el.scrollIntoViewIfNeeded();
+await page.waitForTimeout(2500);
+const m = await page.evaluate(() => {
+  const f = document.getElementById('frames');
+  const items = [...f.children];
+  const bottoms = {};
+  items.forEach(it => { const r = it.getBoundingClientRect(); const col = Math.round(r.left / 100); bottoms[col] = Math.max(bottoms[col] || 0, Math.round(r.bottom)); });
+  const bs = Object.values(bottoms);
+  const igv = f.querySelector('.igtile video');
+  return {items: items.length, display: getComputedStyle(f).display, colBottomSpread: Math.max(...bs) - Math.min(...bs), reelInSheet: !!igv, reelPlaying: igv && !igv.paused};
+});
+const box = await el.boundingBox();
+await page.screenshot({ path: '/tmp/xm5-sheet.png', clip: { x: 0, y: Math.max(0, box.y - 60), width: 1440, height: Math.min(box.height + 120, 880) } });
+console.log(JSON.stringify(m));
+await browser.close();

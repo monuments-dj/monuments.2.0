@@ -176,3 +176,68 @@ const { tag } = Astro.props;
   }).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
+
+<script is:inline>
+// masonry packer: the .frames contact sheets use CSS columns as the no-JS
+// fallback; this converts each sheet to a dense row-span grid so no column
+// ends early. Spans are ESTIMATED from width/height attributes before media
+// loads, then corrected on every load + resize until stable.
+(function(){
+  var UNIT=8;
+  function span(it,gap){
+    // grid stretches items to their span, so rect.height lies: content height
+    // lives in scrollHeight (or the attr-based estimate before media loads)
+    var r=it.getBoundingClientRect();
+    var h=it.scrollHeight;
+    var media=it.querySelector('img,video');
+    if(media){
+      var mr=media.getBoundingClientRect();
+      var w0=parseFloat(media.getAttribute('width')),h0=parseFloat(media.getAttribute('height'));
+      if(mr.height<20&&w0>0&&h0>0){
+        var cs=getComputedStyle(it);
+        var padV=(parseFloat(cs.paddingTop)||0)+(parseFloat(cs.paddingBottom)||0);
+        var padH=(parseFloat(cs.paddingLeft)||0)+(parseFloat(cs.paddingRight)||0);
+        h=Math.max(h,(r.width-padH)*h0/w0+padV);
+      }
+    }
+    return Math.max(2,Math.round((h+gap)/(UNIT+gap)));
+  }
+  function pack(el){
+    if(!el.dataset.cols){
+      var pre=getComputedStyle(el);
+      el.dataset.cols=parseInt(pre.columnCount)||3;
+      var g=parseFloat(pre.columnGap);el.dataset.gap=isNaN(g)?14:g;
+    }
+    // re-read the responsive column count from the fallback stylesheet each time
+    el.style.columns='';el.style.display='';
+    var cols=parseInt(getComputedStyle(el).columnCount)||parseInt(el.dataset.cols)||3;
+    var gap=parseFloat(el.dataset.gap);
+    el.style.display='grid';
+    el.style.columns='auto';
+    el.style.gridTemplateColumns='repeat('+cols+',1fr)';
+    el.style.gridAutoRows=UNIT+'px';
+    el.style.gridAutoFlow='dense';
+    el.style.alignItems='start';
+    el.style.gap=gap+'px';
+    [...el.children].forEach(function(it){
+      it.style.marginBottom='0';
+      it.style.gridRowEnd='span '+span(it,gap);
+    });
+  }
+  function packAll(){document.querySelectorAll('.frames').forEach(pack);}
+  var t;function lazyPack(){clearTimeout(t);t=setTimeout(packAll,100);}
+  function boot(){
+    packAll();
+    [400,1000,2200,4000].forEach(function(ms){setTimeout(packAll,ms);});
+    document.addEventListener('load',function(e){
+      if(e.target&&e.target.matches&&e.target.matches('.frames img'))lazyPack();
+    },true);
+    document.addEventListener('loadedmetadata',function(e){
+      if(e.target&&e.target.matches&&e.target.matches('.frames video'))lazyPack();
+    },true);
+    addEventListener('resize',lazyPack);
+    new MutationObserver(lazyPack).observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
