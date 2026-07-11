@@ -2,6 +2,7 @@
 import AchievementsTicker from '../components/AchievementsTicker.astro';
 import PageFooter from '../components/PageFooter.astro';
 import Testimonials from '../components/Testimonials.astro';
+import WorldMap from '../components/WorldMap.astro';
 const bts = Array.from({ length: 18 }, (_, i) => `/about-bts/abts-${String(i + 1).padStart(2, '0')}.mp4`);
 ---
 <!doctype html>
@@ -93,6 +94,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .creed b{display:block;font-weight:var(--dispw);font-size:clamp(20px,2.2vw,31px);letter-spacing:-.028em;line-height:1.04;text-transform:uppercase;color:var(--ink)}
 .creed b .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;color:var(--ink)}
 .creed li>span{display:block;margin-top:5px;color:#4c4a45;font-size:15.5px;max-width:52ch}
+/* the long version: DJ's locked piece, set as a quiet read */
+.lstory{background:var(--paper);padding:10vh 0 9vh}
+.lstory .lk{display:block;color:var(--red);letter-spacing:.12em;margin-bottom:26px}
+.lstory .lbody{max-width:64ch}
+.lstory .lbody p{color:#3d3b37;font-size:clamp(16.5px,1.35vw,19px);line-height:1.7;margin:0 0 22px}
+.lstory .lclose{font-weight:var(--dispw);font-size:clamp(22px,2.4vw,34px);letter-spacing:-.025em;line-height:1.2;text-transform:uppercase;color:var(--ink)!important;margin-top:34px}
+.lstory .lclose .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
 
 /* the roll: career eras as film strips */
 .roll{padding:2vh 0 10vh}
@@ -120,7 +128,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* crew: full-bleed with parallax */
 .crew{position:relative;height:86svh;overflow:hidden}
-.crew img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;filter:grayscale(.25) brightness(.75);will-change:transform}
+/* overscan trimmed 124%->108%: the only copy of team.jpg is 1400px wide and the
+   old parallax inset was blowing it ~1.8x soft (DJ flagged). Sharper until the
+   original lands in the BTS pool, then swap the file and restore travel. */
+.crew img{position:absolute;inset:-4% 0;width:100%;height:108%;object-fit:cover;filter:grayscale(.25) brightness(.75);will-change:transform}
 .crew .grade{position:absolute;inset:0;background:linear-gradient(6deg,rgba(22,21,20,.82),transparent 52%)}
 .crew .cap{position:absolute;left:var(--pad);right:var(--pad);bottom:42px;color:var(--paper)}
 .crew .cap .k{color:var(--spark)}
@@ -354,6 +365,20 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </section>
 
+  <!-- The long version: DJ's locked piece, verbatim (2026-07-11). -->
+  <section class="lstory">
+    <div class="wrap">
+      <span class="mono lk rv">\ The long version</span>
+      <div class="lbody">
+        <p class="rv">People ask me what I do, and fifteen years in, it's somehow gotten harder to answer. The short version: I sell big ideas, then do whatever it takes to make them real. The honest version: I love telling stories. That's it. That's the whole secret.</p>
+        <p class="rv">We're all handed different tools. Mine was a camera. Photo and video came naturally, but I'm not technical at all, and I never cared to be. What hooked me was what the camera unlocked. It was a key to the world: access to people, places, and stories I had no business being close to. So when people ask if I'm a photographer, I say kinda. I'm a storyteller who knows how to use a camera.</p>
+        <p class="rv">Where it all comes together is the marriage of two crafts: storytelling and building. Building brands, building campaigns, building experiences people actually show up for. That intersection is genuinely magical to me, and it's where I've lived for fifteen years. Honestly, I'm not good at much else. Luckily, it keeps me busy: one month it's a nonprofit in Uganda, the next it's directing commercials shaping the future of education in Idaho, sometimes it's on camera on location in New York.</p>
+        <p class="rv">But here's my problem with advertising: it evaporates. Here one day, gone the next. If you make an ad about a tree falling in the forest and nobody likes it, did anyone care? I refuse to spend a career making things designed to be forgotten. What I obsess over is the other kind: shaping culture, helping people make complicated decisions about their future, giving a voice to people who can't speak up for themselves. Work that stands the test of time. Things worth remembering. That's the legacy I'm after.</p>
+        <p class="lclose rv">Monuments. <span class="serif">A sign that something mattered enough to be remembered.</span></p>
+      </div>
+    </div>
+  </section>
+
   <div class="wrap room">
     <div class="bar">
       <span class="mono"><b>\ In the room</b> · where I'm useful</span>
@@ -398,6 +423,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
+<WorldMap />
+
 <section class="how-band">
   <div class="wrap how">
     <div class="bar">
@@ -427,10 +454,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
-<section style="background:var(--spark);color:var(--ink);padding:14vh 0">
-  <div class="wrap">
-    <p class="rv" style="font-weight:var(--dispw);font-size:clamp(30px,4.4vw,64px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;max-width:16ch">A man who chases two rabbits <span style="font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none">doesn't eat.</span></p>
-    <p class="rv" style="margin-top:22px;max-width:52ch;color:rgba(22,21,20,.75)">Figure out your box. Make it worth being in. The work that lasts comes from taking something ordinary and examining it like it's the first time you've seen it.</p>
+<!-- rabbits band: darker ground, centered, half the height (DJ 2026-07-11) -->
+<section style="background:#e7e4dc;color:var(--ink);padding:7vh 0">
+  <div class="wrap" style="text-align:center">
+    <p class="rv" style="font-weight:var(--dispw);font-size:clamp(28px,4vw,58px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;max-width:18ch;margin:0 auto">A man who chases two rabbits <span style="font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none">doesn't eat.</span></p>
+    <p class="rv" style="margin:18px auto 0;max-width:52ch;color:rgba(22,21,20,.75)">Figure out your box. Make it worth being in. The work that lasts comes from taking something ordinary and examining it like it's the first time you've seen it.</p>
   </div>
 </section>
 

@@ -280,6 +280,7 @@ body.gridview .arch{padding-bottom:0}
     <button data-d="photo">Photography <b></b></button>
     <button data-d="experiential">Experiential <b></b></button>
     <button data-d="campaign">Campaign development <b></b></button>
+    <button data-d="edit">Editing + animation <b></b></button>
     <button data-d="oncam">On-camera <b></b></button>
   </div>
 </div>
@@ -327,7 +328,7 @@ body.gridview .arch{padding-bottom:0}
     <a class="rowp litrow" href="/work/sony-xperia-summer" data-snip="/snips/sony-xperia-summer.mp4" data-img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" data-video="_RGvpwyYLTI" data-cap="MC-2022-02 · SONY XPERIA" data-disc="cd,campaign,photo,commercial" data-logo="/logos/sony.png">
       <span class="id">MC-2022-02</span><span class="t">Xperia <span class="serif">Summer</span></span><span class="fmt"><i>\</i> Product campaign</span><span class="yr">2022</span>
     </a>
-    <a class="rowp litrow" href="/work/donut-zumiez" data-snip="/snips/donut-zumiez.mp4" data-img="/case-studies/donut-zumiez/gallery/film-01.jpg" data-video="2eUYg_P5rfc" data-cap="MC-2023-08 · DONUT X ZUMIEZ" data-disc="campaign,experiential" data-logo="/logos/donut-media.svg">
+    <a class="rowp litrow" href="/work/donut-zumiez" data-snip="/snips/donut-zumiez.mp4" data-img="/case-studies/donut-zumiez/gallery/film-01.jpg" data-video="2eUYg_P5rfc" data-cap="MC-2023-08 · DONUT X ZUMIEZ" data-disc="edit" data-logo="/logos/donut-media.svg">
       <span class="id">MC-2023-08</span><span class="t">Donut × <span class="serif">Zumiez</span></span><span class="fmt"><i>\</i> Retail collab</span><span class="yr">2023</span>
     </a>
     <a class="rowp litrow" href="/work/ac-boise" data-snip="/snips/ac-boise.mp4" data-img="/case-studies/ac-boise/gallery/home-01.jpg" data-cap="MC-2024-05 · KIT REVEAL" data-disc="experiential,campaign" data-logo="/case-studies/ac-boise/gallery/logo.png">
@@ -459,8 +460,8 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 (function(){
   const rows=[...document.querySelectorAll('.rowp')];
   const grid=document.getElementById('grid');
-  const DISC_ORDER=['commercial','cd','photo','experiential','campaign','oncam'];
-  const DISC_LABEL={commercial:'Commercial directing',cd:'Creative direction',photo:'Photography',experiential:'Experiential',campaign:'Campaign development',oncam:'On-camera'};
+  const DISC_ORDER=['commercial','cd','photo','experiential','campaign','edit','oncam'];
+  const DISC_LABEL={commercial:'Commercial directing',cd:'Creative direction',photo:'Photography',experiential:'Experiential',campaign:'Campaign development',edit:'Editing + animation',oncam:'On-camera'};
   const items=rows.map((r,i)=>({
     href:r.getAttribute('href'),img:r.dataset.img,logo:r.dataset.logo||'',disc:(r.dataset.disc||'').split(','),
     video:r.dataset.video||'',vstart:r.dataset.vstart||'',snip:r.dataset.snip||'',

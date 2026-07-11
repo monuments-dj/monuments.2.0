@@ -1,0 +1,30 @@
+import { chromium } from 'playwright';
+const OUT = '/private/tmp/claude-501/-Users-djram/abc733fd-fce9-49c7-98d1-5aef704e6f0e/scratchpad/shots';
+const b = await chromium.launch();
+const errs = [];
+const p = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+p.on('pageerror', e => errs.push(String(e)));
+await p.goto('http://localhost:4322/about', { waitUntil: 'domcontentloaded' });
+await p.waitForTimeout(1500);
+await p.evaluate(() => document.querySelector('.wmap').scrollIntoView({ block: 'center' }));
+await p.waitForTimeout(700);
+await p.hover('.pin[data-place="Uganda"]');
+await p.waitForTimeout(400);
+await p.screenshot({ path: `${OUT}/worldmap.png` });
+await p.evaluate(() => document.querySelector('.lstory').scrollIntoView({ block: 'center' }));
+await p.waitForTimeout(600);
+await p.screenshot({ path: `${OUT}/lstory.png` });
+await p.evaluate(() => { const els = [...document.querySelectorAll('section')]; const rb = els.find(s => s.textContent.includes('two rabbits')); rb.scrollIntoView({ block: 'center' }); });
+await p.waitForTimeout(600);
+await p.screenshot({ path: `${OUT}/rabbits.png` });
+// work: donut tags + edit lens
+await p.goto('http://localhost:4322/work', { waitUntil: 'domcontentloaded' });
+await p.waitForTimeout(1200);
+const wk = await p.evaluate(() => {
+  const d = document.querySelector('a[href="/work/donut-zumiez"]').dataset.disc;
+  const btn = [...document.querySelectorAll('.lens button')].find(b => b.textContent.includes('Editing'));
+  const card = [...document.querySelectorAll('#grid .gcard')].find(c => c.textContent.includes('Donut'));
+  return { donutDisc: d, editBtn: btn ? btn.textContent.trim() : null, cats: card ? card.querySelector('.cats').textContent.trim() : null };
+});
+console.log(JSON.stringify({ wk, errs: errs.length ? errs : 'none' }));
+await b.close();
