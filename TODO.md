@@ -1,6 +1,65 @@
-# TODO - current state (2026-07-11)
+# TODO - current state (2026-07-11, END OF DAY · handoff)
 
-## 🚀 THIS SESSION (2026-07-11 · DJ's feedback batch, 13 items)
+## 🚀 THIS SESSION part 2 (2026-07-11 afternoon/evening · the live-feedback marathon)
+SHIPPED after the 13-item morning batch (each verified + pushed individually; prod = monuments-2-0.vercel.app):
+- **Credits truth pass, CLOSED.** DJ corrected all 18 projects' roles once; every surface
+  now agrees (case pages, /work tags, home cards, hire links). `tools/credits-audit.mjs`
+  generates CREDITS-AUDIT.md and auto-flags mismatches - currently ZERO. New discipline
+  in the vocabulary: `edit` (Editing + animation) - donut-zumiez wears it alone.
+- **Capabilities page rebuilt hard:** hero sub = page summary ("Scrappy by nature, nothing
+  behind the curtain...") + "Never · gear talk or jargon"; refusals recut 9→7 in hiring
+  order (scrappy opens); three doors → flat "What I do" → then re-thought as a 3-col
+  PROOF-CARD GRID (case image always visible, whole card links to the case); kit list
+  has per-tool context notes + Figma/Photoshop + Capture One/Lightroom/Darkroom row;
+  NEW ROLODEX section ("I've got a guy for that.", 27 flipping index cards incl. DJ's
+  real ones: pilot, pet wrangler, cinema lens architect, gang consultant, 3D bling,
+  grill maker, big game tracker, fire dancers, goat shepherd Dubai, sandboarding Jordan,
+  motorcycle builder Portugal); Tess production note dead.
+- **Home:** Built-to-X reel flipped to PAPER; hero = DJ's REAL PNG lockup off monuments.cc
+  at measured geometry (x305 y213 w848 @1440, pixel-identical; the old headline was never
+  live type); hero 100svh; PLAY reel = original scrub with retimed wake-ups (zoom starts on
+  arrival, words are arrival-only flourish, lock = 55vw muted AUTOPLAYING self-hosted reel,
+  ride ends ~90vw+ filling the space, words at 3.5vw, "Showreel" caption); reel MODAL fixed
+  (YT-boots-hidden tiny-video bug + #reelMount collapse); first-paint hero cover fixed
+  (hero-media img had no sizing); card snips AUTOPLAY on scroll (no hover gate).
+- **About:** receipts rewritten per DJ + 2 new rows (Leading with passion / Cause based);
+  room rows 02+03 (giving-a-shit / span-decades); rabbits band centered+darker+half-height;
+  hardcoded pink #b96a77 killed sitewide (4 spots); "silent" tag dead; THE LONG VERSION
+  (DJ's locked piece) added after receipts; WORLD MAP component (Natural Earth 110m land,
+  exact equirectangular pin math, 20 pins, hover labels; generator: tools/make-worldmap.mjs;
+  photo-per-pin slot ready); crew img overscan 124→108 (ONLY copy is 1400px - original owed).
+- **Sitewide:** spinning rays emblems KILLED on every CTA + capabilities sun watermark
+  (DJ wants the simple kicker/headline/talk grammar); TYPE-GUARD fix - headlines only
+  declared weight and inherited body family, so display fonts NEVER landed (why the
+  switcher looked dead); switcher now lives ONLY on /template (The Kit) - picks persist
+  sitewide via localStorage; testimonials = 4 live treatments behind a section picker
+  (wall/theater/roster/crawl); menu numbering 01 Home → 08 Contact.
+- **Docs/infra:** CASE-INTAKE.md (one sheet per campaign feeds every surface);
+  MOTION.md (the parallax language: drift · window reveal · pin+scrub + the dwell rule);
+  CLAUDE.md gained the ⛔ repeat-corrections block (test at resting offsets · fix the
+  class not the instance · his words = the scope).
+- **Grain investigated on DJ's challenge:** never touched, on all 9 pages since the swap,
+  verified painting via pixel-diff. Reads quieter because surfaces changed under it.
+  Offer open: bump 0.11→0.16 ink / 0.09→0.13 paper on his word.
+
+WAITING ON DJ (the decision stack):
+1. TYPE pick 01-08 on /template (the switcher actually switches now - GRIT=Anton is the
+   loud test) - or call for the paid-font round (PP Neue Montreal / Söhne / Suisse).
+2. B/W confirm → bake tokens, delete switcher + Kit menu line.
+3. Testimonial treatment: wall / theater / roster / crawl (picker on the section).
+4. Real quotes for the 7 names (everything holds honest lorem + "quote incoming" chips).
+5. Crew photo ORIGINAL → drop into ~/Monuments-Social/bts-library/ (web copy is 1400px, soft).
+6. Photography OS9 page: re-skin to the cut / leave as wildcard / retire (analysis given).
+7. Grain: louder or leave.
+8. Standing verify list: 3.6M+ impressions stat · AOV real reel · photo categorization ·
+   red kickers · IG links (ac-boise, xm5) · Est. MMXXII vs opened-2016 · rolodex geography
+   copy (Jordan/Dubai exceed the stated map) · map pin photos.
+
+NEXT (Claude, no DJ input needed): OG share image (1200x630) · Lighthouse pass (71 imgs
+still eager) · photo-bucket proposal (vision pass over the 100 frames) · optional: snips
+on the capability proof cards.
+
+## Session part 1 (2026-07-11 morning · DJ's feedback batch, 13 items)
 SHIPPED (all verified 1440+390, bw-sweep/motioncheck/packcheck clean, builds):
 - **Home hero = the old-site grammar.** Staggered SIGHT/SOUND/AND/EMOTION on their own axes
   (AND one step smaller, per the reference), descriptor tucked beside EMOTION, bottom-left

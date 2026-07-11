@@ -75,14 +75,17 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
-## Active work (2026-07-11): DJ's 13-item feedback batch SHIPPED (see TODO.md top block)
-Home hero = old-site staggered grammar (SIGHT/SOUND/AND/EMOTION + corner blocks); reel sits
-under the culture line; PLAY reel. = the ORIGINAL 300svh pin+scrub (window-reveal experiment
-reverted per DJ - that ride is locked; parallax language = MOTION.md, 3 moves);
-work hero centered for real + typewriter cycles DJ's lines; menu = hiring order w/ 01 Home;
-capabilities refusals = numbered ledger; contact addr = 6180 Aldama St + spinning wire M;
-type switcher ROUND 2 (06 GRIT Anton · 07 CLSH Clash Display · 08 SPCE Space Grotesk) after
-DJ passed on 01-05. Switcher pill = bottom 86px + drag grip. Type/B-W/red-kickers still DJ's call.
+## Active work (2026-07-11 EOD): full-day live-feedback marathon SHIPPED · see TODO.md top block
+Home hero = DJ's REAL PNG lockup (never was live type - Asset-6 off monuments.cc, pixel-matched);
+PLAY reel = original scrub, retimed wake-ups, autoplaying muted self-hosted reel, locks 55vw,
+fills ~90vw at max, modal tiny-video bug fixed. Capabilities = proof-card GRID + rolodex
+("I've got a guy for that.", 27 cards) + kit w/ context notes. About = receipts rewrite + the
+long version + WORLD MAP (tools/make-worldmap.mjs) + rabbits recut. Credits/tags truth pass
+CLOSED (tools/credits-audit.mjs = zero mismatches; new `edit` discipline). Spirals killed
+sitewide. TYPE-GUARD fixed (display fonts finally land on headlines); switcher lives ONLY on
+/template now, picks persist sitewide. Testimonials = 4 treatments behind section picker.
+DJ's decision stack + Claude's next moves: TODO.md top block. CASE-INTAKE.md = new-campaign
+intake. Crew photo original still owed (bts-library).
 
 ## Active work (2026-07-10, historical): identity decisions OPEN (font pairing + B/W) · see LAUNCH.md 07-09 block
 B/W default (pink dead; case-page scoreboards invert to PAPER in B/W); five type pairings in the
