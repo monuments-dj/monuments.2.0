@@ -58,7 +58,15 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
-## Active work (2026-07-10): identity decisions OPEN (font pairing + B/W) · see LAUNCH.md 07-09 block
+## Active work (2026-07-11): DJ's 13-item feedback batch SHIPPED (see TODO.md top block)
+Home hero = old-site staggered grammar (SIGHT/SOUND/AND/EMOTION + corner blocks); reel sits
+under the culture line; PLAY reel. is a window reveal (parallax language = MOTION.md, 3 moves);
+work hero centered for real + typewriter cycles DJ's lines; menu = hiring order w/ 01 Home;
+capabilities refusals = numbered ledger; contact addr = 6180 Aldama St + spinning wire M;
+type switcher ROUND 2 (06 GRIT Anton · 07 CLSH Clash Display · 08 SPCE Space Grotesk) after
+DJ passed on 01-05. Switcher pill = bottom 86px + drag grip. Type/B-W/red-kickers still DJ's call.
+
+## Active work (2026-07-10, historical): identity decisions OPEN (font pairing + B/W) · see LAUNCH.md 07-09 block
 B/W default (pink dead; case-page scoreboards invert to PAPER in B/W); five type pairings in the
 switcher pill; /template = the element library (fix elements THERE first, then propagate); locked
 CTA system sitewide (closed kicker set, button always "Let's talk ↗", contact = 4 mailto doors);

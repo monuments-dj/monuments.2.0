@@ -1,6 +1,42 @@
-# TODO - current state (2026-07-10)
+# TODO - current state (2026-07-11)
 
-## 🚀 THIS SESSION (2026-07-10 · snip pass + LAUNCH A leftovers)
+## 🚀 THIS SESSION (2026-07-11 · DJ's feedback batch, 13 items)
+SHIPPED (all verified 1440+390, bw-sweep/motioncheck/packcheck clean, builds):
+- **Home hero = the old-site grammar.** Staggered SIGHT/SOUND/AND/EMOTION on their own axes
+  (AND one step smaller, per the reference), descriptor tucked beside EMOTION, bottom-left
+  kicker + thesis copy + "Let's talk ↗", bottom-right "See the work ↗", play/sound pills
+  center. NFO block retired from the hero (data lives in ticker + About). Tilt + parallax kept.
+- **Home order per DJ:** culture-is-talking line → the Built-to-X reel → contact sheet.
+  Tile marquee grew to 19 tiles: +4 verified stat tiles (Emmy · 18K+ · 2→30+ · Sony ×4/Adorama ×3)
+  +4 photos.
+- **PLAY reel. = window reveal, not a 300svh pin.** One viewport; panel rises at 0.7x with
+  counter-drifting image, words drift in from ±24%. The parallax language is now written
+  down in **MOTION.md** (3 moves: drift · window reveal · pin+scrub, with tokens + rules).
+- **Work hero actually centered** (the wrap was hugging content inside the flex hero and
+  re-centering as the typewriter grew - now width:100% + one text-align axis) and the
+  typewriter **cycles 4 of DJ's own lines** (problem-solving · problem-defined · tools/taste ·
+  culture-is-talking).
+- **Photography hero cut 78→62svh** (desk stage 500→430-500px); archive arrives sooner.
+- **Menu = hiring order + Home link:** 01 Home · 02 Work · 03 About · 04 Capabilities · 05 AI ·
+  06 Photography · 07 Giving · 08 Contact; overlay now fits 8 rows (svh-capped word size,
+  overflow-y backstop) - the kit/email pill collision is gone.
+- **Capabilities:** hero clamp 9.4vw/138 → 6.2vw/92 ("so fucking huge" fixed); refusals
+  redesigned from scattered mono to a numbered 01-09 manifesto ledger (rule-separated rows).
+- **Contact:** h1 down to 5.8vw/84; address corrected to **6180 Aldama Street, LA 90042**;
+  the wireframe M does a continuous 360 rotateY (11s, reduced-motion off).
+- **About crew rewritten verbatim to DJ's copy** ("Less agency, more rock and roll." + the
+  two paragraphs: decade crew/Tess/2-to-30 + Sony×4/Adorama×3/encore line).
+- **ai.astro:** "Money still can't buy taste." → **"Tools don't buy taste."**
+- **Switcher pill unblocked:** raised to bottom 86px (DJ's dock was covering it) + drag grip
+  (⠿, position persists per session). **Type round 2 added: 06 GRIT (Anton condensed poster
+  caps - the old-site hero DNA) · 07 CLSH (Clash Display/General Sans/Sentient) · 08 SPCE
+  (Space Grotesk/Inter)** - DJ called 01-05 "still bullshit," so these are three new lanes.
+
+WAITING ON DJ: type pick from 01-08 (or kill list) · B/W confirm → bake + delete switcher +
+Kit menu line · real testimonial quotes · red kickers stay/go · real-browser motion pass
+(hero stagger, window reveal, contact M spin, quote cycle) · 3.6M+ ticker stat still unverified.
+
+## Previous session (2026-07-10 · snip pass + LAUNCH A leftovers)
 SHIPPED:
 - **Snip pass COMPLETE.** The six remaining static posters loop their own footage (adorama
   Beat Machine, CWI Engineering/AI/Nursing, donut Croy + The cut) **plus the CWI main spot**
