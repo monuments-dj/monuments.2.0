@@ -27,7 +27,7 @@ experiential · campaign (development) · oncam.
 
 ## blue-cross
 - case page Role lines: Creative Direction
-- /work row: "\ Documentary campaign 1 week · 23 frames" · tags [cd,photo,campaign,commercial] · hover "MC-2023-04 · REAL PEOPLE, REAL STAKES"
+- /work row: "\ Documentary campaign 1 week · 23 frames" · tags [cd,photo,campaign] · hover "MC-2023-04 · REAL PEOPLE, REAL STAKES"
 - home card: role "Creative Direction" · stats "Real people, real Idaho|Documentary campaign|with OMEK"
 - CORRECT (leave blank if right): 
 
@@ -55,7 +55,7 @@ experiential · campaign (development) · oncam.
 ## donut-zumiez
 - case page Role lines: Editor · animation + video edit
 - case page My part: Editor · animation + video edit
-- /work row: "\ Retail collab" · tags [campaign,experiential] · hover "MC-2023-08 · DONUT X ZUMIEZ"
+- /work row: "\ Retail collab" · tags [edit] · hover "MC-2023-08 · DONUT X ZUMIEZ"
 - home card: role "Editor" · stats "Edited the collab video|Animation + video edit|Retail + merch"
 - CORRECT (leave blank if right): 
 
@@ -120,5 +120,5 @@ experiential · campaign (development) · oncam.
 ## waffle-me-up
 - case page Role lines: Creative Director
 - case page My part: Creative Director · brand + photo + web
-- /work row: "\ Brand + spatial" · tags [cd,experiential,photo] · hover "MC-2019-05 · WAFFLE ME UP"
+- /work row: "\ Brand + spatial" · tags [cd,photo] · hover "MC-2019-05 · WAFFLE ME UP"
 - CORRECT (leave blank if right): 

@@ -479,7 +479,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </section>
 
 <section class="cta">
-  <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
   <div class="wrap">
     <span class="kick mono rv">✳ One conversation, no deck required</span>
     <div class="big" data-split>Tell me what<br>you're <span class="serif">building.</span></div>
@@ -493,7 +492,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/underfoot-->
 
 <script is:inline>
-(function(){const g=document.getElementById('rays');let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s})();
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 

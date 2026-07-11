@@ -253,7 +253,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <header class="hero">
   <img class="herobg" src="/about/dj-film.jpg" alt="DJ directing on set, a small crew filming behind him" fetchpriority="high">
   <div class="scrim" aria-hidden="true"></div>
-  <svg class="sunwm" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays2"></g></svg>
   <div class="wrap inner">
     <span class="kick mono">Capabilities · DJ Ramirez · Monuments</span>
     <h1>
@@ -476,10 +475,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <div class="rcard"><b>Goat shepherd</b><span class="mono">Dubai</span></div>
         <div class="rcard"><b>Fire dancers</b><span class="mono">Los Angeles</span></div>
         <div class="rcard"><b>Big game tracker</b><span class="mono">Idaho</span></div>
+        <div class="rcard"><b>Custom grill maker</b><span class="mono">San Diego</span></div>
       </div>
     </div>
     <div class="rolotxt rv">
-      <h3>Always a person <span class="serif">for that.</span></h3>
+      <h3>I've got a guy <span class="serif">for that.</span></h3>
       <p>I pride myself on having a guy, a girl, a person for it. Fifteen-plus years between Boise, LA, New York, Europe, Japan, and China builds a deep bench of creative talent. However weird the job gets, I've usually got someone who has done it, and done it well.</p>
     </div>
   </div>
@@ -499,7 +499,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <div class="big" data-split>Let's build something<br><span class="serif">worth remembering.</span></div>
       <a class="pill magnetic rv" href="mailto:monuments.cc@gmail.com">Let's talk ↗</a>
     </div>
-    <svg class="emblem" viewBox="-100 -100 200 200" aria-hidden="true"><g id="rays"></g></svg>
   </div>
 </section>
 
@@ -509,9 +508,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/underfoot-->
 
 <script is:inline>
-function buildRays(id){const g=document.getElementById(id);let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s}
-buildRays('rays');buildRays('rays2');
-
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
