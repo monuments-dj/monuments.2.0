@@ -43,8 +43,11 @@ Every item below traces to one or both. The domain swap is the finish line and h
 > xperia grid = all six reels (3 self-hosted + 3 official embeds per DJ, IG blocks the file API
 > but not the embed iframe). Break-image rule: portrait comps need explicit object-position;
 > flat-lays/wides are the natural break citizens.
-> **STILL STATIC (need footage or a snip pass):** adorama Beat Machine cutdown, CWI program spots
-> x3 (Engineering/AI/Nursing), donut Croy + The cut.
+> **SNIP PASS COMPLETE (2026-07-10):** the six remaining static posters now loop their own footage
+> (adorama Beat Machine, CWI Engineering/AI/Nursing, donut Croy + The cut) plus the CWI main spot,
+> which had been missed. All cut text-free (or ending on the complete "Let's Get Started" lockup),
+> 960x540, 0.4-0.9MB each, preload=none. motioncheck: ALL PASS, every poster on every case page
+> now plays itself.
 > **NEW DJ DECISIONS OWED:** font pairing pick (01-05) · confirm B/W (then bake tokens, delete
 > switcher + Kit menu line) · real quotes for the 7 testimonial names + roles for Chris House/Kish/
 > Alex Stevens/Jennie Meyers · red kickers stay or go in B/W · real-browser motion pass (reel scrub,
@@ -70,17 +73,17 @@ Every item below traces to one or both. The domain swap is the finish line and h
 | On Camera | B | B | 11 vs 12 tapes contradiction |
 
 ## A · Launch blockers - build fixes (Claude)
-- [ ] **Home: proof is hover-only.** Role + achievements on reel cards never render on touch; surface role + one stat persistently on every card (mobile especially).
+- [x] **Home: proof is hover-only.** · **FIXED 2026-07-10** - every reel card now carries a persistent proof line on the card face (role · headline stat, `.rc-proof`, ✳-prefixed above the code line) so touch gets the proof without hover. The fuller hover panel stays as the desktop bonus.
 - [ ] **AOV flagship: placeholder film.** "Play film" plays a hardcoded stand-in reel; caption literally says "stand-in: studio reel"; "the reel that sold the room" appears twice. Needs the real AOV reel (DJ owes the link/file) + copy dedupe.
 - [x] Work hero · RESOLVED: now "30 campaigns"
-- [ ] **Work index: On Camera row ID "MC-2026-07" dated 2023.** Align the catalog ID.
+- [x] **Work index: On Camera row ID "MC-2026-07" dated 2023.** · **FIXED 2026-07-10** - the on-camera page itself is internally consistent (code MC-2026-07, CallSheet filed MMXXVI, 12 tapes); the stale piece was the /work row. Row now reads year 2026 + 12 tapes (was 2023 + 11), which also grounds the index's "roll 2016-2026" span.
 - [x] On Camera tape count · FIXED: 12 everywhere
 - [x] Contact phantom-form line · **FIXED 2026-07-08** → "Prefer to just email? Always open."
-- [ ] **Services: "Tess keeps it on the rails"** is an unexplained name to strangers. Give Tess one identifying clause or move her to About (she's introduced there).
+- [x] **Services: "Tess keeps it on the rails"** · **RESOLVED** - the identifying clause already shipped 2026-07-07 (4b3d182): capabilities now reads "Tess, my project manager, keeps it on the rails." Still DJ's: confirm she's OK being named publicly (audit 🟡).
 - [x] BTQ award art · CLEARED: files are misnamed emmy-*.png but the artwork IS Rockies art; awards line now "every category won · Best of Show" per DJ
 - [ ] **Buck the Quo: role framing** ("directed the experiential build" vs "Shooter + editor" vs "on the ground") must reconcile to one story.
 - [ ] **Photography: fake taxonomy.** Tabs claim Brand/Editorial/Food/Motion/Non-Profit but frames are bucketed by ID number. Blocked on DJ's real categorization (see C) - then wire real buckets.
-- [ ] **Photography: no CTA.** Add a next step at the end of the archive.
+- [x] **Photography: no CTA.** · **FIXED 2026-07-10** - Kit ELEMENT 11 CTA band added after the archive folder (kicker "✳ Being forgettable is expensive", locked "worth remembering." headline, "Let's talk ↗" → /contact). Verified 1440 + 390, inverts correctly in B/W.
 - [x] Asset sweep · **DONE 2026-07-08**: 145/147 referenced assets exist; the only gaps are photography's runtime placeholder thumbs (`/gallery/thumb/${id}.jpg`) = the real-photos task. All 9 video snips present.
 - [x] **Clothing/Merch: parallax crash** · **FIXED 2026-07-08** - hero is a `<video>` but the script queried `.hero>img` (null) and threw on first scroll, freezing ALL scroll motion + a console error. Now targets the video + null-guarded; verified.
 - [x] **CWI: "DJ's stills to follow"** visible coming-soon label · **FIXED 2026-07-08** (dropped; also fixed a third-person slip on an I-voice page).

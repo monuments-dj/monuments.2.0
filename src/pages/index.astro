@@ -181,12 +181,16 @@ h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;fo
 .rc-panel ul{list-style:none;display:flex;flex-direction:column;gap:5px}
 .rc-panel li{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;text-transform:uppercase;color:rgba(245,243,239,.92);display:flex;gap:8px}
 .rc-panel li::before{content:'✳';color:var(--spark);flex:none}
-/* meta = a clean left-aligned stack: logo, title, code. Fixed height so every
+/* meta = a clean left-aligned stack: logo, title, proof, code. Fixed height so every
    card is identical regardless of how the title wraps (kills the baseline float). */
-.reel-card .rc-meta{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:16px 9px 8px;min-height:104px}
+.reel-card .rc-meta{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:16px 9px 8px;min-height:118px}
 .rc-meta .t{display:flex;flex-direction:column;align-items:flex-start;gap:10px;font-weight:var(--dispw2);font-size:clamp(17px,1.6vw,22px);letter-spacing:-.02em;line-height:1.05}
 .rc-meta .lg{height:15px;width:auto;max-width:120px;object-fit:contain;object-position:left center;filter:brightness(0);opacity:.9;display:block}
 .reel-card .rc-meta .mono{margin-top:auto;color:var(--dim);font-size:9px;letter-spacing:.07em}
+/* persistent proof line (role · headline stat) — visible without hover, so touch gets it */
+.reel-card .rc-meta .rc-proof{margin-top:auto;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#54524d}
+.reel-card .rc-meta .rc-proof::before{content:'✳ ';color:var(--struct)}
+.reel-card .rc-meta .rc-proof + .mono{margin-top:0}
 .reel-foot{display:block;color:rgba(245,243,239,.66);text-align:center;transition:color .3s}
 .reel-foot:hover{color:var(--paper)}
 .reel-foot .rf-lnk{color:var(--spark)}
@@ -738,7 +742,9 @@ clock();setInterval(clock,30000);
   els.forEach(el=>io.observe(el));
 })();
 
-// reel cards: hover reveals the achievements panel + plays the case snippet (muted)
+// reel cards: hover reveals the achievements panel + plays the case snippet (muted).
+// role + headline stat ALSO render persistently on the card face (rc-proof) so the
+// proof survives touch screens, where hover never fires (launch blocker A).
 (function(){
   document.querySelectorAll('.reel-card').forEach(function(card){
     var imgs=card.querySelector('.imgs'); if(!imgs) return;
@@ -747,6 +753,13 @@ clock();setInterval(clock,30000);
       var panel=document.createElement('div'); panel.className='rc-panel';
       panel.innerHTML=(role?'<span class="role">'+role+'</span>':'')+(stats.length?'<ul>'+stats.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>':'');
       imgs.appendChild(panel);
+    }
+    var meta=card.querySelector('.rc-meta');
+    if(meta&&(role||stats.length)){
+      var proof=document.createElement('span'); proof.className='rc-proof mono';
+      proof.textContent=[role,stats[0]].filter(Boolean).join(' · ');
+      var code=meta.querySelector(':scope > .mono');
+      meta.insertBefore(proof, code||null);
     }
     var snip=card.dataset.snip;
     if(snip){

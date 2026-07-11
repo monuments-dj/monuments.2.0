@@ -9,6 +9,13 @@
       "autoPort": false
     },
     {
+      "name": "monuments-b",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "4322"],
+      "port": 4322,
+      "autoPort": false
+    },
+    {
       "name": "dashboard",
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8741"],

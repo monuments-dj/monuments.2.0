@@ -1,6 +1,27 @@
-# TODO - current state (2026-07-08)
+# TODO - current state (2026-07-10)
 
-## 🚀 THIS SESSION (2026-07-08)
+## 🚀 THIS SESSION (2026-07-10 · snip pass + LAUNCH A leftovers)
+SHIPPED:
+- **Snip pass COMPLETE.** The six remaining static posters loop their own footage (adorama
+  Beat Machine, CWI Engineering/AI/Nursing, donut Croy + The cut) **plus the CWI main spot**
+  (missed by the earlier passes). Recipe: yt-dlp (current standalone, old pip build hit
+  YouTube's PO-token wall) + ffmpeg-static, 960x540 crf26 muted, 0.4-0.9MB, preload=none.
+  Windows picked frame-by-frame off contact sheets: text-free, no endcards, no shop-now
+  supers; Engineering deliberately ends on the complete "Let's Get Started" lockup.
+  motioncheck: ALL PASS (every poster on every case page plays itself, pauses off-screen).
+- **Home cards: proof survives touch.** Persistent `.rc-proof` line (role · headline stat)
+  on every reel card face; hover panel unchanged as desktop bonus. Verified 1440 + 390.
+- **Photography CTA.** Kit ELEMENT 11 band closes the archive (locked copy, → /contact).
+- **On Camera /work row** aligned to its own page: 2026 + 12 tapes (was 2023 + 11).
+- **Tess clause** confirmed already shipped 07-07 (4b3d182); LAUNCH checkbox closed.
+- Checks run: motioncheck + bw-sweep + packcheck all clean (bw-sweep pink:1/page = the TEMP
+  switcher pill's own rose swatch; home text:N = hover-panel children behind the detector's
+  parent-opacity blind spot, pre-existing).
+STILL DJ'S (unchanged): font pairing pick · B/W confirm (bake + delete switcher + Kit menu
+line) · testimonial quotes + roles · red kickers stay/go · real-browser motion pass · 3 API-
+walled xperia reels exist? · real AOV reel.
+
+## 🚀 PREVIOUS SESSION (2026-07-08)
 SHIPPED + PUSHED:
 - **Killed the wrong 160M+ Adorama figure (8b81e0a)** - DJ flagged it; purged sitewide
   (stat band, statbeat break, home reel, /work row, meta, /lab). Statbeat is now a single

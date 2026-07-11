@@ -67,8 +67,10 @@ sheet is packed by the global masonry script - all three systems live in PageFoo
 tools/motioncheck.mjs + bw-sweep.mjs + packcheck.mjs). Heroes = 78svh middle size. Initial page
 payloads carry zero below-fold video bytes (pvid preload=none over posters).
 DJ owes: pairing pick, B/W confirm (then bake + delete switcher + Kit menu line), testimonial
-quotes, real-browser motion pass. Durable BTS pool: ~/Monuments-Social/bts-library/. Still static
-(need footage): adorama Beat Machine, CWI program spots x3, donut secondary films x2.
+quotes, real-browser motion pass. Durable BTS pool: ~/Monuments-Social/bts-library/. Snip pass
+COMPLETE 2026-07-10: every film poster sitewide now loops its own footage (motioncheck ALL PASS);
+LAUNCH section A build leftovers also closed (touch proof line on home cards, Photography CTA,
+On Camera row 2026/12 tapes, Tess clause confirmed shipped).
 
 ## Active work (2026-07-08, historical): HOME STRETCH toward the domain swap · full launch punch list exists
 Goal unchanged: portfolio to get DJ HIRED inside agencies (goal 1) + sell clients on his work/taste
