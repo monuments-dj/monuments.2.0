@@ -50,7 +50,7 @@ a{color:inherit;text-decoration:none}
 .hero-media{position:absolute;inset:0;will-change:transform}
 .hero-media iframe{position:absolute;top:50%;left:50%;width:max(100vw,178svh);height:max(100svh,56.25vw);transform:translate(-50%,-50%);pointer-events:none;border:0;filter:grayscale(1) contrast(1.05) brightness(.8);opacity:0;transition:opacity 1.2s}
 .hero-media.live iframe{opacity:1}
-.hero-media img{transition:opacity 1.2s}
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05) brightness(.8);transition:opacity 1.2s}
 .hero-media.live img{opacity:0}
 .playreel{position:absolute;left:50%;bottom:12vh;transform:translateX(-50%);z-index:2;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);border:1px solid rgba(245,243,239,.55);border-radius:99px;padding:13px 22px;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);cursor:pointer;transition:background .3s,color .3s}
 .playreel:hover{background:var(--paper);color:var(--ink)}
@@ -60,6 +60,7 @@ a{color:inherit;text-decoration:none}
 #reelbox{position:fixed;inset:0;z-index:96;background:rgba(12,11,10,.96);display:none;align-items:center;justify-content:center;padding:4vmin}
 #reelbox.on{display:flex}
 #reelbox .frame{position:relative;width:min(92vw,1500px);aspect-ratio:16/9;background:#000;box-shadow:0 40px 120px rgba(0,0,0,.6)}
+#reelMount{position:absolute;inset:0} /* iframe's 100% must resolve against the 16/9 frame, not an auto-height div */
 #reelbox iframe{width:100%;height:100%;border:0}
 #reelbox .x{position:absolute;top:-42px;right:0;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:none;border:1px solid rgba(245,243,239,.4);border-radius:99px;padding:8px 16px;cursor:pointer}
 #reelbox .x:hover{background:var(--paper);color:var(--ink)}
@@ -707,8 +708,13 @@ clock();setInterval(clock,30000);
   }
   const box=document.getElementById('reelbox'),mount=document.getElementById('reelMount');
   function open(){
-    mount.innerHTML=`<iframe src="https://www.youtube.com/embed/${REEL}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Showreel"></iframe>`;
+    // show the box FIRST, inject after layout settles: YT sizes its video off
+    // the iframe's initial box, and injecting while display:none boots it 0x0
+    // (the "tiny reel" bug DJ hit).
     box.classList.add('on');document.body.style.overflow='hidden';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      mount.innerHTML=`<iframe src="https://www.youtube.com/embed/${REEL}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Showreel"></iframe>`;
+    }));
   }
   function close(){box.classList.remove('on');mount.innerHTML='';document.body.style.overflow=''}
   window.__openReel=open;
