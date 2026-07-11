@@ -73,12 +73,12 @@ a{color:inherit;text-decoration:none}
    "Showreel" sits beneath throughout. Words = arrival flourish only. */
 .rr{position:relative;height:300svh;background:#0b0b0a;color:var(--paper)}
 .rr-pin{position:sticky;top:0;height:100svh;overflow:hidden}
-.rr-panel{position:absolute;left:50%;top:47%;width:min(84vw,1420px);aspect-ratio:16/9;max-height:80svh;padding:0;border:0;cursor:pointer;overflow:hidden;border-radius:8px;background:#000;transform:translate(-50%,-50%) scale(.655);transform-origin:center;will-change:transform;z-index:2;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.rr-panel{position:absolute;left:50%;top:47%;width:min(96vw,1800px);aspect-ratio:16/9;max-height:90svh;padding:0;border:0;cursor:pointer;overflow:hidden;border-radius:8px;background:#000;transform:translate(-50%,-50%) scale(.573);transform-origin:center;will-change:transform;z-index:2;box-shadow:0 30px 70px rgba(0,0,0,.5)}
 .rr-panel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) saturate(.95)}
 .rr-word{position:absolute;top:50%;z-index:3;font-weight:var(--dispw);font-size:clamp(44px,10vw,150px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;white-space:nowrap;opacity:0;will-change:transform,opacity;color:var(--paper);transform:translateY(-50%)}
 .rr-word .serif{text-transform:none;letter-spacing:-.01em}
-.rr-l{left:clamp(16px,8vw,150px)}
-.rr-r{right:clamp(16px,8vw,150px)}
+.rr-l{left:clamp(10px,3.5vw,64px)}
+.rr-r{right:clamp(10px,3.5vw,64px)}
 .rr-cap{position:absolute;bottom:clamp(26px,5vh,56px);left:0;right:0;z-index:4;text-align:center;margin:0 auto;font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:rgba(245,243,239,.8)}
 @media (prefers-reduced-motion:reduce){
   .rr{height:100svh}
@@ -567,7 +567,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     wr.style.transform=`translate(${wx}%,-50%)`;
     wl.style.opacity=wr.style.opacity=(Math.min(1,wp*1.5)*wo).toFixed(3);
     const arrive=Math.min(1,Math.max(0,raw));
-    const s=p>0 ? 0.655+0.345*p : 0.60+0.055*arrive;
+    // lock stays 55vw (.573 of the 96vw base); the ride now ends near full-bleed
+    const s=p>0 ? 0.573+0.427*p : 0.525+0.048*arrive;
     const dy=(1-arrive)*10;
     panel.style.transform=`translate(-50%,-50%) translateY(${dy.toFixed(2)}vh) scale(${s.toFixed(4)})`;
   }
@@ -784,14 +785,20 @@ clock();setInterval(clock,30000);
       var code=meta.querySelector(':scope > .mono');
       meta.insertBefore(proof, code||null);
     }
+    // cards that HAVE motion SHOW motion (DJ 2026-07-11): snips mount and
+    // autoplay when the card scrolls into view - no hover gate. The sitewide
+    // play-when-visible observer (PageFooter) adopts them for pause/resume.
     var snip=card.dataset.snip;
-    if(snip){
-      card.addEventListener('mouseenter',function(){
-        if(card.querySelector('.imgs video')) return;
-        var v=document.createElement('video'); v.src=snip; v.muted=true; v.loop=true; v.playsInline=true;
-        v.setAttribute('playsinline',''); v.setAttribute('aria-hidden','true'); v.preload='metadata';
-        imgs.appendChild(v); v.play().then(function(){v.classList.add('live');}).catch(function(){});
-      });
+    if(snip&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+      new IntersectionObserver(function(es,o){
+        es.forEach(function(e){
+          if(!e.isIntersecting||card.querySelector('.imgs video'))return;
+          var v=document.createElement('video'); v.src=snip; v.muted=true; v.loop=true; v.playsInline=true;
+          v.setAttribute('autoplay',''); v.setAttribute('playsinline',''); v.setAttribute('aria-hidden','true'); v.preload='none';
+          imgs.appendChild(v); v.play().then(function(){v.classList.add('live');}).catch(function(){});
+          o.disconnect();
+        });
+      },{threshold:.25}).observe(card);
     }
   });
 })();

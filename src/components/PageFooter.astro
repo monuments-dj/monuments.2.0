@@ -168,7 +168,11 @@ const { tag } = Astro.props;
   applyAcc(localStorage.getItem('mnmt-accent')||'bw');
   applyFont(localStorage.getItem('mnmt-font')||'cut');
   if(!tool)return;
-  if(localStorage.getItem('mnmt-acctool')==='off'){tool.style.display='none';}
+  // the switcher lives on THE KIT only (DJ 2026-07-11: it's a typography
+  // SYSTEM workbench, not a sitewide toy) - picks still apply everywhere
+  // via localStorage, set them on /template and browse.
+  if(location.pathname.replace(/\/+$/,'')!=='/template'){tool.style.display='none';}
+  else if(localStorage.getItem('mnmt-acctool')==='off'){tool.style.display='none';}
   tool.querySelectorAll('[data-acc]').forEach(function(b){
     b.addEventListener('click',function(){applyAcc(b.dataset.acc);localStorage.setItem('mnmt-accent',b.dataset.acc);});
   });
