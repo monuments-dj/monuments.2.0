@@ -9,9 +9,10 @@ SHIPPED (all verified 1440+390, bw-sweep/motioncheck/packcheck clean, builds):
 - **Home order per DJ:** culture-is-talking line → the Built-to-X reel → contact sheet.
   Tile marquee grew to 19 tiles: +4 verified stat tiles (Emmy · 18K+ · 2→30+ · Sony ×4/Adorama ×3)
   +4 photos.
-- **PLAY reel. = window reveal, not a 300svh pin.** One viewport; panel rises at 0.7x with
-  counter-drifting image, words drift in from ±24%. The parallax language is now written
-  down in **MOTION.md** (3 moves: drift · window reveal · pin+scrub, with tokens + rules).
+- **PLAY reel.: window-reveal experiment tried, then REVERTED same day per DJ** ("u lost
+  the original vibe") - the original 300svh pin+scrub is back byte-identical and is now
+  marked locked in the code. The parallax language lives in **MOTION.md** (3 moves: drift ·
+  window reveal · pin+scrub); window reveal stays in the kit, currently used nowhere.
 - **Work hero actually centered** (the wrap was hugging content inside the flex hero and
   re-centering as the typewriter grew - now width:100% + one text-align axis) and the
   typewriter **cycles 4 of DJ's own lines** (problem-solving · problem-defined · tools/taste ·

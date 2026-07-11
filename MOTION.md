@@ -21,19 +21,22 @@ reveal completes at raw 1.25 - just past docking - then the composed frame HOLDS
 sticky stage for ~0.45 viewport before scrolling away. The hold is not optional: without
 it the settled composition exists for exactly one scroll position and every real visitor
 catches the section mid-flight (caught by DJ 2026-07-11). Toll: ~0.7 extra viewport.
-Used: the PLAY reel. section on home (the reference build).
+Used: NOWHERE yet. It was tried on the PLAY reel. and DJ reverted it same day - the
+original pin+scrub IS that section's vibe. This move stays in the kit for future sections.
 Tokens: section 170svh, stage sticky 100svh · e=raw/1.25 · panel 30vh @ scale .92→1 ·
 media -9% counter · words ±24% land e .75 · caption fade e .5-1.
 
 **3. Pin + scrub** (a ride, use sparingly)
 The section pins and scroll drives a timeline (filmstrip, horizontal walk). This is the
 expensive move: it costs the visitor scroll distance, so it must PAY (real content, not
-an entrance). Max one per page. Used: the Built-to-X work reel on home (the only one),
-About "How I work" horizontal walk.
+an entrance). Used: the PLAY reel. reveal (300svh - words fly in over p 0-.16, panel
+scales .26→1 over .45-1; DJ's locked vibe, reverted back 2026-07-11 after the window-reveal
+experiment) + the Built-to-X filmstrip on home, About "How I work" horizontal walk.
 
 ## Rules
-- Entrances are move 2, never move 3. A section may not pin just to arrive.
-- One pin per page, max. Everything else is drift or window reveal.
+- Home carries TWO pins by DJ's explicit call (the reel reveal + the filmstrip); everywhere
+  else: one pin per page, max, and a section may not pin JUST to arrive unless the arrival
+  is the show (the reel reveal is the sanctioned example).
 - prefers-reduced-motion: all three collapse to static (opacity 1, transform none).
 - Travel distances in vh/%, never px, so they scale.
 - The masked-line text reveal (.ln rise) is typography, not parallax; it stacks fine

@@ -60,7 +60,8 @@ use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px`
 
 ## Active work (2026-07-11): DJ's 13-item feedback batch SHIPPED (see TODO.md top block)
 Home hero = old-site staggered grammar (SIGHT/SOUND/AND/EMOTION + corner blocks); reel sits
-under the culture line; PLAY reel. is a window reveal (parallax language = MOTION.md, 3 moves);
+under the culture line; PLAY reel. = the ORIGINAL 300svh pin+scrub (window-reveal experiment
+reverted per DJ - that ride is locked; parallax language = MOTION.md, 3 moves);
 work hero centered for real + typewriter cycles DJ's lines; menu = hiring order w/ 01 Home;
 capabilities refusals = numbered ledger; contact addr = 6180 Aldama St + spinning wire M;
 type switcher ROUND 2 (06 GRIT Anton · 07 CLSH Clash Display · 08 SPCE Space Grotesk) after
