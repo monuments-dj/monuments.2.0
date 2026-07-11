@@ -62,8 +62,10 @@ use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px`
 B/W default (pink dead; case-page scoreboards invert to PAPER in B/W); five type pairings in the
 switcher pill; /template = the element library (fix elements THERE first, then propagate); locked
 CTA system sitewide (closed kicker set, button always "Let's talk ↗", contact = 4 mailto doors);
-EVERY video plays without a click and play-when-visible is the global default (observer in
-PageFooter; verify with tools/motioncheck.mjs + tools/bw-sweep.mjs). Heroes = 78svh middle size.
+EVERY video plays without a click, play-when-visible is the global default, and every .frames
+sheet is packed by the global masonry script - all three systems live in PageFooter.astro (verify:
+tools/motioncheck.mjs + bw-sweep.mjs + packcheck.mjs). Heroes = 78svh middle size. Initial page
+payloads carry zero below-fold video bytes (pvid preload=none over posters).
 DJ owes: pairing pick, B/W confirm (then bake + delete switcher + Kit menu line), testimonial
 quotes, real-browser motion pass. Durable BTS pool: ~/Monuments-Social/bts-library/. Still static
 (need footage): adorama Beat Machine, CWI program spots x3, donut secondary films x2.

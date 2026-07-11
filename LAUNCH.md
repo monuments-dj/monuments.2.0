@@ -34,6 +34,15 @@ Every item below traces to one or both. The domain swap is the finish line and h
 > is the sitewide default for all autoplay video (observer in PageFooter, reduced-motion = no
 > decorative autoplay); Flow State = deepest case (22 selects, 24-tile BTS wall, comment wall);
 > XM5 = cutdowns section + BTS tile + reel; hire = photos/marquee/brand slider/4-stat band.
+> **Final 07-10 additions:** global masonry packer in PageFooter (every .frames sheet = balanced
+> shortest-column grid, thin sheets drop a column, single-item containers skipped; verify with
+> tools/packcheck.mjs - all 27 routes clean); XM5 launch reel lives IN the contact sheet (FR-11,
+> cropped to content, sound on tap); video weight pass (work hero reel 11->5.5MB, clothing hero
+> 11->1.5MB, KV episode thumbs loop 5s cuts not full episodes, every .pvid preload=none - initial
+> page payload has zero below-fold video bytes; buck films left alone, re-encoding inflated them);
+> xperia grid = all six reels (3 self-hosted + 3 official embeds per DJ, IG blocks the file API
+> but not the embed iframe). Break-image rule: portrait comps need explicit object-position;
+> flat-lays/wides are the natural break citizens.
 > **STILL STATIC (need footage or a snip pass):** adorama Beat Machine cutdown, CWI program spots
 > x3 (Engineering/AI/Nursing), donut Croy + The cut.
 > **NEW DJ DECISIONS OWED:** font pairing pick (01-05) · confirm B/W (then bake tokens, delete
