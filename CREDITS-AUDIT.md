@@ -8,9 +8,8 @@ experiential · campaign (development) · oncam.
 ## ac-boise
 - case page Role lines: Director · the launch film
 - case page My part: Directed the launch film
-- /work row: "\ Kit reveal film · with Against" · tags [experiential,campaign,cd] · hover "MC-2024-05 · KIT REVEAL"
+- /work row: "\ Kit reveal film · with Against" · tags [experiential,campaign] · hover "MC-2024-05 · KIT REVEAL"
 - home card: role "Director · the launch film" · stats "Directed the launch film|Social + in-person launch|with Against"
-- ⚠ MISMATCH: /work tags say creative direction, the page itself never does (the Know Vape pattern)
 - CORRECT (leave blank if right): 
 
 ## adorama-music
@@ -33,12 +32,11 @@ experiential · campaign (development) · oncam.
 - CORRECT (leave blank if right): 
 
 ## buck-the-quo
-- case page Role lines: Shooter + editor
-- case page My part: Shooter + editor · socials + field experiential
-- call sheet: Client: Albertson Family Foundation · Agency: Drake Cooper · Shooter + editor: DJ Ramirez · Socials + field experiential: DJ Ramirez
-- /work row: "\ Film series · Rockys" · tags [commercial,cd,oncam] · hover "MC-2021-03 · BEST OF SHOW AT THE ROCKYS"
-- home card: role "Shooter + field experiential" · stats "18,000+ conversations|Rockys Best of Show|Statewide activation"
-- ⚠ MISMATCH: /work tags say creative direction, the page itself never does (the Know Vape pattern)
+- case page Role lines: Shooter + editor · Agency-side creative · Consultant
+- case page My part: Shooter + editor · agency-side creative · consultant · socials + field experiential
+- call sheet: Client: Albertson Family Foundation · Agency: Drake Cooper · Shooter + editor: DJ Ramirez · Agency-side creative · Consultant: DJ Ramirez · Socials + field experiential: DJ Ramirez
+- /work row: "\ Film series · Rockys" · tags [commercial,experiential,oncam] · hover "MC-2021-03 · BEST OF SHOW AT THE ROCKYS"
+- home card: role "Shooter + editor · Agency-side creative" · stats "18,000+ conversations|Rockys Best of Show|Statewide activation"
 - CORRECT (leave blank if right): 
 
 ## clothing-merch
@@ -51,24 +49,21 @@ experiential · campaign (development) · oncam.
 ## cwi-lets-get-started
 - case page Role lines: Director · Let's Get Started films
 - case page My part: Director · the Let's Get Started films
-- /work row: "\ Enrollment campaign 3 yrs on air" · tags [campaign,commercial,cd] · hover "MC-2023-05 · 3 YRS ON AIR"
-- ⚠ MISMATCH: /work tags say creative direction, the page itself never does (the Know Vape pattern)
+- /work row: "\ Enrollment campaign 3 yrs on air" · tags [campaign,commercial] · hover "MC-2023-05 · 3 YRS ON AIR"
 - CORRECT (leave blank if right): 
 
 ## donut-zumiez
 - case page Role lines: Editor · animation + video edit
 - case page My part: Editor · animation + video edit
-- /work row: "\ Retail collab" · tags [campaign,experiential,cd] · hover "MC-2023-08 · DONUT X ZUMIEZ"
+- /work row: "\ Retail collab" · tags [campaign,experiential] · hover "MC-2023-08 · DONUT X ZUMIEZ"
 - home card: role "Editor" · stats "Edited the collab video|Animation + video edit|Retail + merch"
-- ⚠ MISMATCH: /work tags say creative direction, the page itself never does (the Know Vape pattern)
 - CORRECT (leave blank if right): 
 
 ## dw-drums
 - case page Role lines: Creative direction + design
 - case page My part: Creative direction + design
-- /work row: "\ Product launch · Design" · tags [commercial,photo] · hover "MC-2022-04 · DW DRUMS"
+- /work row: "\ Product launch · Design" · tags [cd,commercial,photo] · hover "MC-2022-04 · DW DRUMS"
 - home card: role "Creative direction + design" · stats "Design-thinking workshop|How to launch a new product|Drummer-tested"
-- ⚠ MISMATCH: page claims creative direction but the /work tags do not
 - CORRECT (leave blank if right): 
 
 ## flashpoint
@@ -112,8 +107,7 @@ experiential · campaign (development) · oncam.
 - case page Role lines: Director / Creative Director
 - case page My part: Director / Creative Director
 - call sheet: Client: Sony Xperia · Agency: Art of Visuals · Director / Creative Director: DJ Ramirez · DP: Casey Levins · Editor: Komin Kovatonic · Stills: DJ Ramirez · Deliverables: Videography · Photography · Amplification
-- /work row: "\ Product campaign" · tags [campaign,photo,commercial] · hover "MC-2022-02 · SONY XPERIA"
-- ⚠ MISMATCH: page claims creative direction but the /work tags do not
+- /work row: "\ Product campaign" · tags [cd,campaign,photo,commercial] · hover "MC-2022-02 · SONY XPERIA"
 - CORRECT (leave blank if right): 
 
 ## turnstile
