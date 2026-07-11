@@ -29,11 +29,11 @@ media -9% counter · words ±24% land e .75 · caption fade e .5-1.
 **3. Pin + scrub** (a ride, use sparingly)
 The section pins and scroll drives a timeline (filmstrip, horizontal walk). This is the
 expensive move: it costs the visitor scroll distance, so it must PAY (real content, not
-an entrance). Used: the PLAY reel. reveal (300svh; DJ's locked vibe, reverted back 2026-07-11 after the
-window-reveal experiment, then retimed per DJ: words slide in DURING the arrival and land
-just before the dock, the panel zoom starts on arrival at r.top=.25ih and rides .26→1
-across the whole pin, words fade at pinned p .62) + the Built-to-X filmstrip on home,
-About "How I work" horizontal walk.
+an entrance). Used: the PLAY reel. reveal (300svh; matched by measurement to monuments.cc 2026-07-11:
+the muted reel is ALREADY PLAYING and 55vw when the stage locks - panel base 84vw at
+scale .655 - grows to 84vw across the pin, "Showreel" caption beneath throughout;
+PLAY / reel. are an arrival-only flourish, in over raw .45-.77, fully out before the
+dock) + the Built-to-X filmstrip on home, About "How I work" horizontal walk.
 
 ## Rules
 - Home carries TWO pins by DJ's explicit call (the reel reveal + the filmstrip); everywhere
