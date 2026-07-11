@@ -128,12 +128,14 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .kit{padding:9vh 0 4vh}
 .kit .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:13px;border-bottom:2px solid var(--ink)}
 .kit .bar .mono b{color:var(--red)}
-.kitgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:34px}
+.kitgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:34px}
 .kitcol .kh{display:block;color:var(--red);letter-spacing:.12em;margin-bottom:12px}
 .kitcol ul{list-style:none;margin:0;padding:0}
-.kitcol li{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#55524c;padding:9px 0;border-bottom:1px solid var(--line)}
+.kitcol li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#55524c;padding:9px 0;border-bottom:1px solid var(--line)}
 .kitcol li:first-child{border-top:1px solid var(--line)}
-@media (max-width:760px){.kitgrid{grid-template-columns:1fr;gap:18px}}
+.kitcol .kn{font-size:10px;letter-spacing:.04em;text-transform:none;color:#8f8d88;text-align:right;flex:none;max-width:52%}
+@media (max-width:1000px){.kitgrid{grid-template-columns:1fr 1fr;gap:20px}}
+@media (max-width:560px){.kitgrid{grid-template-columns:1fr;gap:18px}}
 .pstep .n{font-family:var(--mono);font-size:11px;color:var(--ink);background:var(--paper);display:inline-block;padding:2px 8px}
 .pstep h4{font-weight:var(--dispw);font-size:clamp(20px,2.1vw,28px);letter-spacing:-.02em;text-transform:uppercase;margin:14px 0 10px}
 .pstep p{color:rgba(245,243,239,.82);font-size:15.5px;max-width:34ch}
@@ -347,30 +349,40 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <span class="mono"><b>The kit</b> · fluent in</span>
     <span class="mono" style="color:var(--dim)">The tools are everywhere. This is my rotation.</span>
   </div>
+  <!-- Every tool carries its context (DJ 2026-07-11: "I don't even know WTF
+       to do with this" - bare names read as gear talk, the note says what
+       each one is FOR). Camera-body notes match the photography Gear window. -->
   <div class="kitgrid">
     <div class="kitcol rv">
       <span class="kh mono">\ Direct + shoot</span>
       <ul>
-        <li>Sony a7S III</li>
-        <li>Leica M240</li>
-        <li>Zeiss primes</li>
-        <li>Gimbal</li>
+        <li>Sony a7S III <span class="kn">motion · low light</span></li>
+        <li>Leica M240 <span class="kn">rangefinder · stills</span></li>
+        <li>Zeiss primes <span class="kn">the whole set</span></li>
+        <li>Gimbal <span class="kn">movement without a crew</span></li>
       </ul>
     </div>
     <div class="kitcol rv">
       <span class="kh mono">\ Cut + finish</span>
       <ul>
-        <li>DaVinci Resolve</li>
-        <li>Capture One + Darkroom</li>
-        <li>Frame.io</li>
+        <li>DaVinci Resolve <span class="kn">the edit and the grade</span></li>
+        <li>Capture One + Lightroom + Darkroom <span class="kn">stills, capture to color</span></li>
+        <li>Frame.io <span class="kn">client review, versioned</span></li>
+      </ul>
+    </div>
+    <div class="kitcol rv">
+      <span class="kh mono">\ Design</span>
+      <ul>
+        <li>Figma <span class="kn">decks, systems, UX</span></li>
+        <li>Photoshop <span class="kn">comps, retouch, finish</span></li>
       </ul>
     </div>
     <div class="kitcol rv">
       <span class="kh mono">\ Build + AI</span>
       <ul>
-        <li>Claude Code</li>
-        <li>Codex + OpenClaw</li>
-        <li>Airtable + automation</li>
+        <li>Claude Code <span class="kn">sites, tools, agents</span></li>
+        <li>Codex + OpenClaw <span class="kn">the automation bench</span></li>
+        <li>Airtable + automation <span class="kn">pipelines and trackers</span></li>
       </ul>
     </div>
   </div>
