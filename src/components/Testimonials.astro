@@ -1,16 +1,15 @@
 ---
-// Testimonials.astro · "In their words" — pull-quote wall, shared by Home + About.
+// Testimonials.astro · "In their words" — shared by Home + About.
+// FOUR live treatments behind a TEMP picker (DJ 2026-07-11: "boring af, find a
+// cooler UX") — wall (the old grid, default) · theater · roster · crawl.
+// DJ flips the picker chip on the live section, picks one, then the losers +
+// the picker get deleted and the winner becomes the only markup.
 // PLACEHOLDER STATE: DJ is collecting the real quotes. Cards render the name/role
-// with an explicit "quote incoming" line — never fabricate words under a real name.
+// with an explicit "quote incoming" chip — never fabricate words under a real name.
 // When a quote lands: paste it into `q` and delete the placeholder flag per person.
-// Roles below: Krizia + Prince are confirmed from case-page credits; the rest are
-// TODO (DJ to confirm how each person should be billed).
 interface Person { name: string; role: string; q?: string; ph?: boolean; }
 interface Props { tag?: string; }
 const { tag = 'pull quotes · incoming' } = Astro.props;
-// ph = lorem stand-in so the wall reads as designed; the chip stays until the
-// real quote lands. Swap q + drop ph per person. NEVER write a real-sounding
-// quote under a real name.
 const people: Person[] = [
   { name: 'Krizia Vega',      role: 'Co-director · Sony Flow State', ph: true, q: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.' },
   { name: 'Chris House',      role: 'Collaborator', ph: true, q: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.' },
@@ -21,13 +20,22 @@ const people: Person[] = [
   { name: 'Tess',             role: 'Project manager · Monuments', ph: true, q: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.' },
 ];
 ---
-<section class="tst">
+<section class="tst" id="tst" data-tm="wall">
   <div class="wrap">
     <div class="tst-bar">
       <span class="mono"><b>\ In their words</b> · the people in the room</span>
+      <!-- TEMP variant picker: delete with the losing variants once DJ picks -->
+      <span class="tst-pick mono" id="tstPick" aria-label="Testimonial layout picker (temp)">
+        <button data-tm="wall" class="on">wall</button>
+        <button data-tm="theater">theater</button>
+        <button data-tm="roster">roster</button>
+        <button data-tm="crawl">crawl</button>
+      </span>
       <span class="mono tst-tag">{tag}</span>
     </div>
-    <div class="tst-grid">
+
+    <!-- WALL · the original grid -->
+    <div class="tst-grid tst-v" data-v="wall">
       {people.map((p, i) => (
         <figure class="tst-card rv" style={`--i:${i}`}>
           <p class={`tst-q ${p.ph ? 'ph' : ''}`}>{p.q ? `“${p.q}”` : <span class="tst-ph">&ldquo;&nbsp;&hellip;&nbsp;&rdquo;</span>}</p>
@@ -39,23 +47,225 @@ const people: Person[] = [
         </figure>
       ))}
     </div>
+
+    <!-- THEATER · one voice at a time, center stage -->
+    <div class="tst-thr tst-v" data-v="theater" hidden>
+      <div class="tst-stage" id="thrStage" aria-live="polite">
+        {people.map((p, i) => (
+          <figure class={`tst-slide ${i === 0 ? 'live' : ''}`} data-i={i}>
+            <p class={`tst-big ${p.ph ? 'ph' : ''}`}><span class="tst-ln"><span>“{p.q}”</span></span></p>
+            <figcaption>
+              <span class="tst-n">{p.name}</span>
+              <span class="tst-r mono">{p.role}</span>
+              {(p.ph || !p.q) && <span class="tst-chip mono">quote incoming</span>}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <div class="tst-thr-nav">
+        <button class="tst-arrow mono" id="thrPrev" aria-label="Previous quote">←</button>
+        <span class="tst-ticks" id="thrTicks" aria-hidden="true">
+          {people.map((_, i) => <i class={i === 0 ? 'on' : ''}></i>)}
+        </span>
+        <button class="tst-arrow mono" id="thrNext" aria-label="Next quote">→</button>
+      </div>
+    </div>
+
+    <!-- ROSTER · names first, quote on hover/tap -->
+    <div class="tst-ros tst-v" data-v="roster" hidden>
+      <ul class="tst-names" id="rosNames">
+        {people.map((p, i) => (
+          <li><button class={`tst-name ${i === 0 ? 'on' : ''}`} data-i={i}>
+            <span class="tst-no mono">{String(i + 1).padStart(2, '0')}</span>
+            <span class="tst-nm">{p.name}</span>
+            <span class="tst-rl mono">{p.role}</span>
+          </button></li>
+        ))}
+      </ul>
+      <div class="tst-side" id="rosSide">
+        {people.map((p, i) => (
+          <figure class={`tst-sq ${i === 0 ? 'live' : ''}`} data-i={i}>
+            <p class={`tst-q ${p.ph ? 'ph' : ''}`}>“{p.q}”</p>
+            {(p.ph || !p.q) && <span class="tst-chip mono">quote incoming</span>}
+          </figure>
+        ))}
+      </div>
+    </div>
+
+    <!-- CRAWL · the credits roll -->
+    <div class="tst-crl tst-v" data-v="crawl" hidden>
+      <div class="tst-window" id="crlWin">
+        <div class="tst-roll" id="crlRoll">
+          {[...people, ...people].map((p) => (
+            <figure class="tst-cr">
+              <p class={`tst-q ${p.ph ? 'ph' : ''}`}>“{p.q}”</p>
+              <figcaption>
+                <span class="tst-n">{p.name}</span>
+                <span class="tst-r mono">{p.role}</span>
+                {(p.ph || !p.q) && <span class="tst-chip mono">quote incoming</span>}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <div class="tst-fade top" aria-hidden="true"></div>
+        <div class="tst-fade bot" aria-hidden="true"></div>
+      </div>
+    </div>
   </div>
 </section>
 
 <style>
 .tst{background:var(--ink,#161514);color:var(--paper,#F5F3EF);padding:8vh 0 7vh}
-.tst-bar{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--lined,#2c2b29);margin-bottom:26px}
+.tst-bar{display:flex;justify-content:space-between;align-items:baseline;gap:14px 20px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--lined,#2c2b29);margin-bottom:26px}
 .tst-bar .mono b{color:var(--spark,#EFA1AD)}
 .tst-tag{color:#8f8d88}
-.tst-grid{columns:3;column-gap:16px}
-.tst-card{margin:0 0 16px;break-inside:avoid;background:rgba(245,243,239,.04);border:1px solid rgba(245,243,239,.1);border-radius:11px;padding:26px 22px 20px;display:flex;flex-direction:column;gap:18px}
-.tst-q{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:clamp(19px,1.9vw,25px);line-height:1.4;letter-spacing:-.01em;flex:1}
+.tst-pick{display:inline-flex;gap:6px}
+.tst-pick button{font-family:var(--mono,monospace);font-size:9px;letter-spacing:.1em;text-transform:uppercase;background:none;border:1px solid rgba(245,243,239,.22);border-radius:99px;padding:4px 10px;color:#8f8d88;cursor:pointer;transition:color .2s,border-color .2s}
+.tst-pick button:hover{color:var(--paper,#F5F3EF);border-color:rgba(245,243,239,.5)}
+.tst-pick button.on{color:var(--ink,#161514);background:var(--paper,#F5F3EF);border-color:var(--paper,#F5F3EF)}
+
+/* shared bits */
+.tst-v[hidden]{display:none!important} /* author display rules must not beat [hidden] */
+.tst-q{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:clamp(19px,1.9vw,25px);line-height:1.4;letter-spacing:-.01em}
 .tst-ph{color:rgba(245,243,239,.28)}
 .tst-q.ph{color:rgba(245,243,239,.38)}
-.tst-card figcaption{display:flex;flex-direction:column;gap:4px}
 .tst-n{font-weight:var(--dispw2,600);font-size:15.5px;letter-spacing:-.01em}
 .tst-r{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88}
-.tst-chip{align-self:flex-start;margin-top:6px;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--spark,#EFA1AD);border:1px solid color-mix(in srgb, var(--spark,#EFA1AD) 42%, transparent);border-radius:99px;padding:3px 9px}
+.tst-chip{align-self:flex-start;margin-top:6px;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--spark,#EFA1AD);border:1px solid color-mix(in srgb, var(--spark,#EFA1AD) 42%, transparent);border-radius:99px;padding:3px 9px;width:max-content}
+
+/* WALL */
+.tst-grid{columns:3;column-gap:16px}
+.tst-card{margin:0 0 16px;break-inside:avoid;background:rgba(245,243,239,.04);border:1px solid rgba(245,243,239,.1);border-radius:11px;padding:26px 22px 20px;display:flex;flex-direction:column;gap:18px}
+.tst-card .tst-q{flex:1}
+.tst-card figcaption{display:flex;flex-direction:column;gap:4px}
 @media (max-width:960px){.tst-grid{columns:2}}
 @media (max-width:560px){.tst-grid{columns:1}}
+
+/* THEATER */
+.tst-thr{padding:5vh 0 2vh}
+.tst-stage{position:relative;min-height:clamp(230px,30vw,330px)}
+.tst-slide{position:absolute;inset:0;margin:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:22px;visibility:hidden}
+.tst-slide.live{visibility:visible}
+.tst-big{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:clamp(24px,3.4vw,46px);line-height:1.25;letter-spacing:-.015em;max-width:26ch;margin:0}
+.tst-big.ph{color:rgba(245,243,239,.42)}
+.tst-ln{display:block;overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em}
+.tst-ln>span{display:block;transform:translateY(115%)}
+.tst-slide.live .tst-ln>span{animation:tstRise .8s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes tstRise{to{transform:translateY(0)}}
+.tst-slide figcaption{display:flex;flex-direction:column;align-items:center;gap:4px}
+.tst-slide .tst-chip{align-self:center}
+.tst-thr-nav{display:flex;justify-content:center;align-items:center;gap:22px;margin-top:26px}
+.tst-arrow{background:none;border:1px solid rgba(245,243,239,.3);border-radius:50%;width:38px;height:38px;color:var(--paper,#F5F3EF);cursor:pointer;transition:background .25s,color .25s}
+.tst-arrow:hover{background:var(--paper,#F5F3EF);color:var(--ink,#161514)}
+.tst-ticks{display:flex;gap:6px}
+.tst-ticks i{display:block;width:14px;height:2px;background:rgba(245,243,239,.22);transition:background .3s}
+.tst-ticks i.on{background:var(--spark,#EFA1AD)}
+
+/* ROSTER */
+.tst-ros{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,64px);align-items:start;padding-top:2vh}
+.tst-names{list-style:none;margin:0;padding:0}
+.tst-name{display:flex;align-items:baseline;gap:14px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid rgba(245,243,239,.12);padding:13px 2px;color:inherit;cursor:pointer}
+.tst-name .tst-no{font-size:9.5px;color:#8f8d88;flex:none}
+.tst-name .tst-nm{font-weight:var(--dispw2,600);font-size:clamp(19px,1.9vw,27px);letter-spacing:-.015em;transition:color .25s,transform .35s cubic-bezier(.22,1,.36,1)}
+.tst-name .tst-rl{margin-left:auto;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88;text-align:right}
+.tst-name:hover .tst-nm,.tst-name.on .tst-nm{color:var(--spark,#EFA1AD);transform:translateX(8px)}
+.tst-side{position:relative;min-height:240px}
+.tst-sq{position:absolute;inset:0;margin:0;display:flex;flex-direction:column;gap:16px;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .5s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.tst-sq.live{opacity:1;transform:none}
+.tst-sq .tst-q{font-size:clamp(21px,2.1vw,29px)}
+@media (max-width:860px){.tst-ros{grid-template-columns:1fr}.tst-side{min-height:200px}}
+
+/* CRAWL */
+.tst-window{position:relative;height:clamp(300px,44vh,420px);overflow:hidden}
+.tst-roll{display:flex;flex-direction:column;gap:34px;will-change:transform}
+.tst-cr{margin:0;max-width:56ch}
+.tst-cr figcaption{display:flex;align-items:baseline;gap:12px;margin-top:8px;flex-wrap:wrap}
+.tst-cr .tst-chip{margin-top:0}
+.tst-fade{position:absolute;left:0;right:0;height:64px;pointer-events:none}
+.tst-fade.top{top:0;background:linear-gradient(to bottom,var(--ink,#161514),transparent)}
+.tst-fade.bot{bottom:0;background:linear-gradient(to top,var(--ink,#161514),transparent)}
+
+@media (prefers-reduced-motion:reduce){
+  .tst-ln>span{transform:none;animation:none!important}
+  .tst-sq{transition:none}
+}
 </style>
+
+<script is:inline>
+// TEMP testimonial variant system — picker + per-variant behavior. Deleted
+// (with the losing markup) once DJ picks. localStorage mnmt-tst persists the
+// flip across pages/sessions so Home + About stay in sync while he compares.
+(function(){
+  if(window.__tstInit)return; window.__tstInit=1;
+  var sec=document.getElementById('tst'); if(!sec)return;
+  var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var pick=document.getElementById('tstPick');
+  function setV(v){
+    sec.setAttribute('data-tm',v);
+    sec.querySelectorAll('.tst-v').forEach(function(el){el.hidden=el.getAttribute('data-v')!==v;});
+    pick.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.tm===v);});
+    try{localStorage.setItem('mnmt-tst',v);}catch(e){}
+  }
+  pick.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){setV(b.dataset.tm);});
+  });
+  var saved='wall';
+  try{saved=localStorage.getItem('mnmt-tst')||'wall';}catch(e){}
+  setV(saved);
+
+  // THEATER: auto-advance while visible; arrows; mask re-rise per swap
+  var slides=[...sec.querySelectorAll('.tst-slide')],ticks=[...sec.querySelectorAll('.tst-ticks i')],ti=0,timer=null;
+  function show(i){
+    ti=(i+slides.length)%slides.length;
+    slides.forEach(function(s,j){
+      var live=j===ti;
+      s.classList.remove('live');
+      if(live){void s.offsetWidth;s.classList.add('live');} // retrigger the rise
+    });
+    ticks.forEach(function(t,j){t.classList.toggle('on',j===ti);});
+  }
+  function arm(){if(timer||reduced)return;timer=setInterval(function(){show(ti+1);},6200);}
+  function disarm(){clearInterval(timer);timer=null;}
+  var prev=document.getElementById('thrPrev'),next=document.getElementById('thrNext');
+  if(prev)prev.addEventListener('click',function(){disarm();show(ti-1);});
+  if(next)next.addEventListener('click',function(){disarm();show(ti+1);});
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting&&sec.getAttribute('data-tm')==='theater')arm();else disarm();
+    });
+  },{threshold:.25}).observe(sec);
+  var thr=sec.querySelector('.tst-thr');
+  if(thr){thr.addEventListener('mouseenter',disarm);thr.addEventListener('mouseleave',function(){if(sec.getAttribute('data-tm')==='theater')arm();});}
+
+  // ROSTER: hover/focus/tap a name -> its quote takes the side stage
+  var names=[...sec.querySelectorAll('.tst-name')],sqs=[...sec.querySelectorAll('.tst-sq')];
+  function ros(i){
+    names.forEach(function(n,j){n.classList.toggle('on',j===i);});
+    sqs.forEach(function(s,j){s.classList.toggle('live',j===i);});
+  }
+  names.forEach(function(n,i){
+    n.addEventListener('mouseenter',function(){ros(i);});
+    n.addEventListener('focus',function(){ros(i);});
+    n.addEventListener('click',function(){ros(i);});
+  });
+
+  // CRAWL: slow credits roll, seamless via doubled content, pause on hover
+  var win=document.getElementById('crlWin'),roll=document.getElementById('crlRoll');
+  if(win&&roll&&!reduced){
+    var y=0,paused=false,vis=false,raf=null;
+    function step(){
+      raf=null;
+      if(vis&&!paused&&sec.getAttribute('data-tm')==='crawl'){
+        y+=0.4; var half=roll.scrollHeight/2;
+        if(y>=half)y-=half;
+        roll.style.transform='translateY('+(-y)+'px)';
+      }
+      raf=requestAnimationFrame(step);
+    }
+    win.addEventListener('mouseenter',function(){paused=true;});
+    win.addEventListener('mouseleave',function(){paused=false;});
+    new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;});},{threshold:.05}).observe(win);
+    requestAnimationFrame(step);
+  }
+})();
+</script>
