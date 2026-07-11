@@ -126,6 +126,18 @@ const { tag } = Astro.props;
       'html[data-accent="bw"] .statrow:has(+ .rolerow) .stat .note b{color:#161514!important}';
     document.head.appendChild(g);
   }
+  // type guard: nearly every headline on the site declares only a WEIGHT and
+  // inherits its family from body - so display fonts never landed on display
+  // type when a pairing split them (DJ: "don't see any fonts changing").
+  // This binds all display-role type to the --disp token. .serif spans keep
+  // their own family (higher specificity + own declaration).
+  if(!document.getElementById('mnmt-type-guard')){
+    var tg=document.createElement('style');tg.id='mnmt-type-guard';
+    tg.textContent='h1,h2,h3,h4,.big,.rowp .t,.rc-meta .t,.capcard .t,.gcard .band .t,'+
+      '.rcard b,.tst-big,.tst-name .tst-nm,.tst-n,.rr-word,.reel-head h2,.refuse li,'+
+      '.lclose,.rec-row .v,.doorhead h3{font-family:var(--disp,\'Bricolage Grotesque\',sans-serif)}';
+    document.head.appendChild(tg);
+  }
   function applyAcc(a){
     if(a==='ink')a='bw'; // migrate the old saved value
     var v=ACC[a]||ACC.bw;
