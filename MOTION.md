@@ -12,13 +12,18 @@ The media inside a fixed frame moves slower than the page (image at 0.9x) or cou
 down at .22x while the type counter-drifts up), the About crew image (.plx).
 Tokens: bg 0.9x · media counter -0.08 to -0.12x · never more than 12% travel.
 
-**2. Window reveal** (arrival)
+**2. Window reveal** (arrival + a short hold)
 A section enters and its layers land at different speeds: the panel/content rises slower
 than the page (~0.7x, i.e. 30vh of catch-up), the media inside counter-drifts ~9%, side
-elements drift in from ±24% and land by e=.75, captions fade last (e .5-1). Progress e =
-how far the section's top has entered the viewport (0 at the fold, 1 docked). No pin, one
-viewport tall, no scroll toll. Used: the PLAY reel. section on home (the reference build).
-Tokens: panel 30vh @ scale .92→1 · media -9% counter · words ±24% · caption fade e .5-1.
+elements drift in from ±24%, captions fade last. Progress rides TOTAL entry travel
+(raw = viewports traveled since the section's top crossed the fold; 1 = docked) and the
+reveal completes at raw 1.25 - just past docking - then the composed frame HOLDS under a
+sticky stage for ~0.45 viewport before scrolling away. The hold is not optional: without
+it the settled composition exists for exactly one scroll position and every real visitor
+catches the section mid-flight (caught by DJ 2026-07-11). Toll: ~0.7 extra viewport.
+Used: the PLAY reel. section on home (the reference build).
+Tokens: section 170svh, stage sticky 100svh · e=raw/1.25 · panel 30vh @ scale .92→1 ·
+media -9% counter · words ±24% land e .75 · caption fade e .5-1.
 
 **3. Pin + scrub** (a ride, use sparingly)
 The section pins and scroll drives a timeline (filmstrip, horizontal walk). This is the
