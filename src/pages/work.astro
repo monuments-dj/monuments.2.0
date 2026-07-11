@@ -58,7 +58,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero{position:relative;min-height:72svh;display:flex;align-items:flex-end;padding:15vh 0 8vh;overflow:hidden;background:var(--ink);color:var(--paper)}
 .hero-vid{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;filter:brightness(.52) contrast(1.04) saturate(.94)}
 .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(22,21,20,.42),rgba(22,21,20,.18) 42%,rgba(22,21,20,.82))}
-.hero .wrap{position:relative;z-index:2}
+/* width:100% + one text-align: the wrap is a flex item, so without an explicit
+   width it hugs content and re-centers as the typewriter grows — the recurring
+   "why is this not centered" wobble. Everything now shares one true axis. */
+.hero .wrap{position:relative;z-index:2;width:100%;text-align:center}
 .hero .kick{color:var(--spark)}
 .hero h1{font-weight:var(--dispw);font-size:clamp(52px,9vw,132px);line-height:.88;letter-spacing:-.035em;text-transform:uppercase;margin-top:14px;color:var(--paper)}
 .hero h1 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
@@ -71,7 +74,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero .sub .l1{overflow:hidden}
 .hero .sub .l1 span,.hero .sub .l1{transition:transform .7s cubic-bezier(.6,0,.3,1),opacity .6s}
 .hero .sub .l1.out{transform:translateY(-16px);opacity:0}
-.hero .sub .l2{opacity:0}
+.hero .sub .l2{opacity:0;transition:opacity .45s}
 .hero .sub .l2.on{opacity:1}
 .tcrt{display:inline-block;width:2px;height:.95em;background:var(--spark);margin-left:3px;vertical-align:-.12em;animation:tblink 1s steps(1) infinite}
 .tcrt.off{display:none}
@@ -625,22 +628,38 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(!decaying){decaying=true;requestAnimationFrame(decay)}
   },{passive:true});
 })();
-// the hero line: the old proverb scrolls out, the new one types in
+// the hero line: the old proverb scrolls out, then the typewriter CYCLES through
+// DJ's lines (his own site copy only) — type, hold, fade, next, loop.
 (function(){
   var o=document.getElementById('wkOld'),n=document.getElementById('wkNew'),t=document.getElementById('wkType');
   if(!o||!n||!t)return;
-  var TXT2='Life is a continuous exercise in creative problem solving.';
-  if(matchMedia('(prefers-reduced-motion:reduce)').matches){t.textContent=TXT2;return;}
-  var TXT='Life is a continuous exercise in creative problem solving.';
-  setTimeout(function(){o.classList.add('out');},1500);
-  setTimeout(function(){
-    n.classList.add('on');
+  var QUOTES=[
+    'Life is a continuous exercise in creative problem solving.',
+    'A problem defined is a problem half solved.',
+    "The tools are everywhere. Taste isn't.",
+    "Culture is talking. Most brands aren't listening."
+  ];
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){t.textContent=QUOTES[0];return;}
+  var crt=n.querySelector('.tcrt'),q=0;
+  function typeQuote(){
+    var TXT=QUOTES[q];crt.classList.remove('off');
     var i=0;
     (function tick(){
       if(i<=TXT.length){t.textContent=TXT.slice(0,i);i++;setTimeout(tick,i<8?46:26);}
-      else{setTimeout(function(){n.querySelector('.tcrt').classList.add('off');},1800);}
+      else{
+        setTimeout(function(){crt.classList.add('off');},1600);
+        setTimeout(function(){
+          n.classList.remove('on');            // fade the line out
+          setTimeout(function(){
+            t.textContent='';q=(q+1)%QUOTES.length;
+            n.classList.add('on');typeQuote(); // and type the next one
+          },520);
+        },4600);
+      }
     })();
-  },2050);
+  }
+  setTimeout(function(){o.classList.add('out');},1500);
+  setTimeout(function(){n.classList.add('on');typeQuote();},2050);
 })();
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);

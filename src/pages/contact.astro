@@ -76,14 +76,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .doors .arr{font-family:var(--mono);font-size:16px;transition:transform .3s cubic-bezier(.22,1,.36,1)}
 .doors a:hover{padding-left:10px}
 .doors a:hover .arr{transform:translateX(6px)}
-.journey h1{font-weight:var(--dispw);font-size:clamp(52px,8.4vw,124px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:22px;color:var(--ink)}
+.journey h1{font-weight:var(--dispw);font-size:clamp(38px,5.8vw,84px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:22px;color:var(--ink)}
 .pill{display:inline-flex;margin:44px 0 0;padding:22px 42px;background:var(--ink);color:var(--paper);border-radius:99px;font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s,color .3s;will-change:transform}
 .pill:hover{background:var(--spark);color:var(--ink)}
 .avail{margin-top:24px;color:#8f8d88;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase}
 .avail b{color:#1eb96f;font-weight:400}
 .jside{display:flex;flex-direction:column;align-items:flex-start}
-.mwire{width:clamp(150px,15vw,220px);height:auto;display:block;margin-bottom:34px;animation:mfloat 7s ease-in-out infinite}
-@keyframes mfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.jside{perspective:1100px}
+.mwire{width:clamp(150px,15vw,220px);height:auto;display:block;margin-bottom:34px;animation:mspin 11s linear infinite;transform-style:preserve-3d;backface-visibility:visible}
+@keyframes mspin{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}
+@media (prefers-reduced-motion:reduce){.mwire{animation:none}}
 .jside .tel{font-family:var(--mono);font-size:13px;letter-spacing:.08em;border-bottom:1px solid var(--ink);padding-bottom:2px}
 .jside .tel:hover{color:var(--red);border-color:var(--red)}
 .jside .addr{margin-top:16px;color:#4c4a45;font-size:16px;line-height:1.7}
@@ -170,7 +172,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="jside rv">
       <img class="mwire" src="/brand/m-wire.svg" alt="Monuments wireframe M" width="280" height="297">
       <a class="tel" href="tel:+12082494912">+1 (208) 249 4912</a>
-      <p class="addr">2401 S. Santa Fe Ave #201,<br>Los Angeles CA 90058</p>
+      <p class="addr">6180 Aldama Street,<br>Los Angeles CA 90042</p>
       <span class="fl mono">Follow</span>
       <div class="socials">
         <a href="https://www.instagram.com/djthecd" target="_blank" rel="noopener"><b>Instagram</b> · @djthecd</a>

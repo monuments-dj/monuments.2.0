@@ -3,14 +3,18 @@
 // fullscreen ink takeover with staggered lines, hover preview stills, and the
 // meta footer. Rides on every page via PageFooter. Replaces the per-page corner
 // links + CSS hamburger (hidden globally below) — the IA outgrew a listed nav.
+// Ordered for the hiring path: proof first (Work), then the person (About),
+// then scope (Capabilities), differentiator (AI), craft depth (Photography),
+// values (Giving), action last (Contact). Home so nobody is stranded.
 const links = [
-  { n: '01', t: 'Work',         href: '/work',         sub: '18 case files',            img: '/reel/work-reel-poster.jpg' },
-  { n: '02', t: 'Photography',  href: '/photography',  sub: 'the stills archive',       img: '/gallery/full/p-044.jpg' },
+  { n: '01', t: 'Home',         href: '/',             sub: 'the front door',           img: '/gallery/full/p-013.jpg' },
+  { n: '02', t: 'Work',         href: '/work',         sub: '18 case files',            img: '/reel/work-reel-poster.jpg' },
   { n: '03', t: 'About',        href: '/about',        sub: 'the subject file',         img: '/about/hero-set.jpg' },
   { n: '04', t: 'Capabilities', href: '/capabilities', sub: 'what I do',                img: '/about/dj-film.jpg' },
   { n: '05', t: 'AI',           href: '/ai',           sub: 'a tool, not a solution',   img: '/about/studio-console.jpg' },
-  { n: '06', t: 'Giving',       href: '/giving',       sub: 'work that gives back',     img: '/case-studies/giving/gv-01.jpg' },
-  { n: '07', t: 'Contact',      href: '/contact',      sub: 'our journey starts here',  img: '/contact/ct-01.jpg' },
+  { n: '06', t: 'Photography',  href: '/photography',  sub: 'the stills archive',       img: '/gallery/full/p-044.jpg' },
+  { n: '07', t: 'Giving',       href: '/giving',       sub: 'work that gives back',     img: '/case-studies/giving/gv-01.jpg' },
+  { n: '08', t: 'Contact',      href: '/contact',      sub: 'our journey starts here',  img: '/contact/ct-01.jpg' },
 ];
 ---
 <button class="mt-trig" id="mtTrig" type="button" aria-expanded="false" aria-controls="mtOv" aria-label="Open menu">
@@ -70,7 +74,7 @@ body.mt-open .mt-ic i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 body.mt-open .mt-trig{mix-blend-mode:normal}
 
 /* overlay */
-.mt-ov{position:fixed;inset:0;z-index:88;background:#161514;color:#F5F3EF;transform:translateY(-102%);transition:transform .62s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column;justify-content:space-between;padding:calc(24px + 6vh) var(--pad,clamp(22px,4.6vw,44px)) 26px;visibility:hidden}
+.mt-ov{position:fixed;inset:0;z-index:88;background:#161514;color:#F5F3EF;transform:translateY(-102%);transition:transform .62s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column;justify-content:space-between;padding:calc(24px + 5vh) var(--pad,clamp(22px,4.6vw,44px)) 26px;visibility:hidden;overflow-y:auto;overscroll-behavior:contain}
 body.mt-open .mt-ov{transform:none;visibility:visible}
 body.mt-open{overflow:hidden}
 .mt-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(30px,5vw,90px);align-items:center;flex:1;min-height:0;width:100%}
@@ -81,17 +85,17 @@ body.mt-open{overflow:hidden}
 .mt-item .mt-line>*{transform:translateY(130%);transition:transform .6s cubic-bezier(.22,1,.36,1);transition-delay:calc(.12s + var(--i)*.055s)}
 body.mt-open .mt-item .mt-line>*{transform:none}
 .mt-no{font-family:var(--mono,'Fragment Mono',monospace);font-size:10.5px;letter-spacing:.1em;color:#8f8d88;flex:none;transform-origin:left bottom}
-.mt-word{font-family:var(--disp,'Bricolage Grotesque',sans-serif);font-weight:800;font-size:clamp(30px,4.6vw,58px);line-height:1;letter-spacing:-.03em;text-transform:uppercase;transition:color .3s,transform .6s cubic-bezier(.22,1,.36,1)}
+.mt-word{font-family:var(--disp,'Bricolage Grotesque',sans-serif);font-weight:800;font-size:min(clamp(28px,4.2vw,54px),5svh);line-height:1;letter-spacing:-.03em;text-transform:uppercase;transition:color .3s,transform .6s cubic-bezier(.22,1,.36,1)}
 .mt-sub{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:clamp(14px,1.4vw,19px);color:#8f8d88;margin-left:auto;text-align:right}
 .mt-item:hover .mt-word{color:var(--spark,#EFA1AD)}
 .mt-item:hover .mt-line{padding-left:10px}
 .mt-line{transition:padding-left .4s cubic-bezier(.22,1,.36,1)}
-.mt-hire{display:block;text-decoration:none;color:#F5F3EF;margin-top:22px;overflow:hidden}
+.mt-hire{display:block;text-decoration:none;color:#F5F3EF;margin-top:16px;overflow:hidden}
 .mt-hire .mt-line{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono,'Fragment Mono',monospace);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(245,243,239,.35);border-radius:99px;padding:12px 20px;transform:translateY(160%);transition:transform .6s cubic-bezier(.22,1,.36,1),border-color .3s,color .3s;transition-delay:calc(.12s + var(--i)*.055s)}
 body.mt-open .mt-hire .mt-line{transform:none}
 .mt-hire:hover .mt-line{border-color:var(--spark,#EFA1AD);color:var(--spark,#EFA1AD)}
 .mt-dot{width:7px;height:7px;border-radius:50%;background:#3ddc84;flex:none}
-.mt-kit{margin-top:12px}
+.mt-kit{margin-top:10px}
 .mt-kit .mt-line{border-style:dashed;border-color:rgba(245,243,239,.22);color:#8f8d88}
 .mt-kit:hover .mt-line{border-color:rgba(245,243,239,.6);color:#F5F3EF}
 
@@ -102,7 +106,7 @@ body.mt-open .mt-prev{opacity:1;transform:none}
 .mt-prev img.sw{opacity:0}
 .mt-cap{position:absolute;left:12px;bottom:10px;font-family:var(--mono,'Fragment Mono',monospace);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.85);background:rgba(22,21,20,.6);padding:3px 8px}
 /* meta */
-.mt-meta{display:flex;align-items:center;gap:18px 30px;flex-wrap:wrap;width:100%;padding-top:20px;border-top:1px solid rgba(245,243,239,.12);opacity:0;transition:opacity .5s .42s}
+.mt-meta{display:flex;align-items:center;gap:18px 30px;flex-wrap:wrap;width:100%;margin-top:18px;padding-top:20px;border-top:1px solid rgba(245,243,239,.12);opacity:0;transition:opacity .5s .42s}
 body.mt-open .mt-meta{opacity:1}
 .mt-pill{display:inline-flex;padding:13px 24px;background:#F5F3EF;color:#161514;border-radius:99px;font-family:var(--mono,'Fragment Mono',monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .3s}
 .mt-pill:hover{background:var(--spark,#EFA1AD)}

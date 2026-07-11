@@ -66,12 +66,15 @@ a{color:inherit;text-decoration:none}
 #reelbox .x:hover{background:var(--paper);color:var(--ink)}
 #reelbox .cap{position:absolute;bottom:-34px;left:0;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88}
 /* Play/Reel scrub reveal (ReelReveal port): sticky stage, scroll drives the take-over */
-.rr{position:relative;height:300svh;background:#0b0b0a;color:var(--paper)}
-.rr-pin{position:sticky;top:0;height:100svh;overflow:hidden}
+/* parallax window reveal (no pin): as the section arrives, the panel rises
+   slower than the page (0.7x) while its image counter-drifts inside the frame
+   and the words drift in from the sides. One viewport, no scroll toll. */
+.rr{position:relative;height:100svh;background:#0b0b0a;color:var(--paper);overflow:clip}
+.rr-pin{position:relative;height:100%;overflow:hidden}
 .rr-kick{position:absolute;top:clamp(28px,6vh,64px);left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:center;gap:10px;letter-spacing:.12em;color:rgba(245,243,239,.7)}
 .rr-kick span{color:var(--spark)}
-.rr-panel{position:absolute;left:50%;top:50%;width:100vw;aspect-ratio:16/10;max-height:100svh;padding:0;border:0;cursor:pointer;overflow:hidden;border-radius:8px;background:#000;transform:translate(-50%,-50%) scale(.26);transform-origin:center;will-change:transform;z-index:2;box-shadow:0 30px 70px rgba(0,0,0,.5)}
-.rr-panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) saturate(.95)}
+.rr-panel{position:absolute;left:50%;top:50%;width:min(80vw,1280px);aspect-ratio:16/10;max-height:76svh;padding:0;border:0;cursor:pointer;overflow:hidden;border-radius:8px;background:#000;transform:translate(-50%,-50%);transform-origin:center;will-change:transform;z-index:2;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.rr-panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) saturate(.95);transform:scale(1.14);will-change:transform}
 .rr-play{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;z-index:3;pointer-events:none;display:flex;align-items:center;justify-content:center;color:var(--paper);background:rgba(245,243,239,.14);border:1px solid rgba(245,243,239,.55);backdrop-filter:blur(5px)}
 .rr-word{position:absolute;top:50%;z-index:3;font-weight:var(--dispw);font-size:clamp(44px,10vw,150px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;white-space:nowrap;opacity:0;will-change:transform,opacity;color:var(--paper);transform:translateY(-50%)}
 .rr-word .serif{text-transform:none;letter-spacing:-.01em}
@@ -87,13 +90,17 @@ a{color:inherit;text-decoration:none}
 /* hero: type IN the photograph */
 .hero{position:relative;height:80svh;min-height:560px;overflow:hidden;background:var(--ink)}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05) brightness(.9)}
-.hero .t{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:100%;max-width:var(--wrap);padding:0 var(--pad);text-align:center;z-index:2;perspective:1100px}
-.hero-tilt{display:flex;flex-direction:column;align-items:center;justify-content:center;transform-style:preserve-3d;will-change:transform;color:var(--paper);text-shadow:0 18px 60px rgba(22,21,20,.55)}
-.hero-word{display:block;position:relative;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(42px,9.4vw,140px);line-height:.92;letter-spacing:-.035em;text-transform:uppercase;opacity:0;animation:hwIn .9s cubic-bezier(.22,1,.36,1) forwards}
-.hero-word:nth-child(2){animation-delay:.08s}
-.hero-word:nth-child(3){animation-delay:.16s}
-.hero-word:nth-child(4){animation-delay:.24s}
-.hero-word .hero-word-sub{display:inline-block;vertical-align:middle;margin-left:.5em;font-family:var(--mono);font-size:clamp(10px,1vw,14px);font-weight:400;line-height:1.25;letter-spacing:.16em;text-transform:uppercase;text-align:left;color:var(--spark);text-shadow:none;transform:translateZ(40px)}
+/* the old-site grammar: staggered lines on their own axes, descriptor tucked
+   beside EMOTION, copy block bottom-left, See-the-work bottom-right */
+.hero .t{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:100%;max-width:var(--wrap);padding:0 var(--pad);text-align:left;z-index:2;perspective:1100px}
+.hero-tilt{display:flex;flex-direction:column;align-items:flex-start;gap:.05em;transform-style:preserve-3d;will-change:transform;color:var(--paper);text-shadow:0 18px 60px rgba(22,21,20,.55)}
+.hero-word{display:block;position:relative;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(38px,7vw,108px);line-height:.94;letter-spacing:-.03em;text-transform:uppercase;opacity:0;animation:hwIn .9s cubic-bezier(.22,1,.36,1) forwards}
+.hw1{margin-left:26%}
+.hw2{margin-left:3%;animation-delay:.08s}
+.hw3{margin-left:37%;animation-delay:.16s}
+.hero-row{display:flex;align-items:center;gap:clamp(18px,3vw,54px);margin-left:37%}
+.hero-row .hero-word{animation-delay:.24s}
+.hero-word-sub{display:block;font-family:var(--mono);font-size:clamp(10px,.9vw,13px);font-weight:400;line-height:1.55;letter-spacing:.16em;text-transform:uppercase;text-align:left;color:var(--spark);text-shadow:none;opacity:0;animation:hwIn .9s .34s cubic-bezier(.22,1,.36,1) forwards;transform:translateZ(40px)}
 @keyframes hwIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.hero-tilt{transform:none!important}.hero-word{animation:none;opacity:1}}
 .hero .t .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
@@ -103,10 +110,16 @@ a{color:inherit;text-decoration:none}
 .hero .t .ln:nth-child(2)>span{animation-delay:.12s}
 .hero .t .ln:nth-child(3)>span{animation-delay:.24s}
 @keyframes rise{to{transform:translateY(0)}}
-.hero .nfo{position:absolute;right:var(--pad);bottom:12vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .9s forwards}
-.hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
+.hero-bottom{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:26px;padding:0 var(--pad) 40px;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
+.hb-left{max-width:390px}
+.hb-kick{display:block;color:var(--paper);font-size:12px;letter-spacing:.11em;margin-bottom:13px}
+.hb-desc{color:#d9d6d0;font-size:15.5px;line-height:1.65;margin:0}
+.hb-cta{display:inline-block;margin-top:18px;color:var(--paper);border-bottom:1px solid rgba(245,243,239,.6);padding-bottom:3px;font-size:12px;letter-spacing:.12em;transition:color .3s,border-color .3s}
+.hb-see{color:var(--paper);border-bottom:1px solid rgba(245,243,239,.6);padding-bottom:3px;font-size:12px;letter-spacing:.12em;transition:color .3s,border-color .3s}
+.hb-cta:hover,.hb-see:hover{color:var(--spark);border-color:var(--spark)}
+.hb-mid{display:flex;gap:12px}
+.hb-mid .playreel{position:static;transform:none}
 @keyframes fade{to{opacity:1}}
-.hero .sub{position:absolute;left:var(--pad);bottom:12vh;max-width:40ch;color:#d9d6d0;font-size:16px;opacity:0;animation:fade 1s .8s forwards}
 
 /* plain stat row (tinywins move) */
 .statrow{background:var(--struct);color:rgb(var(--on-rgb));border-top:none;border-bottom:1px solid rgba(var(--on-rgb),.18)}
@@ -290,11 +303,14 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @media (max-width:900px){
   .frames{grid-template-columns:repeat(3,1fr)}
   .rowp{grid-template-columns:1fr auto}.rowp .id,.rowp .th{display:none}
-  .hero .sub{display:none}.hero .nfo{right:auto;left:var(--pad)}
+  .hero-bottom{flex-direction:column;align-items:flex-start;gap:20px;padding-bottom:28px}
+  .hb-mid{order:3}
+  .hero-word{font-size:clamp(34px,8.6vw,64px)}
+  .hw1{margin-left:14%}.hw3,.hero-row{margin-left:22%}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
-  .hero .t .ln>span{transform:none}.hero .nfo,.hero .sub{opacity:1}.rv{opacity:1;transform:none}
+  .hero .t .ln>span{transform:none}.hero-bottom{opacity:1}.hero-word-sub{opacity:1}.rv{opacity:1;transform:none}
   .banner .big,.tiles .track{animation:none!important}
 }
 
@@ -345,26 +361,28 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <div class="hero-media" id="heroMedia">
     <img src="/gallery/full/p-013.jpg" alt="">
   </div>
-  <FloatingHand side="right" top="13vh" />
-  <div style="position:absolute;left:50%;bottom:12vh;transform:translateX(-50%);z-index:2;display:flex;gap:12px">
-    <button class="playreel" id="playReel" type="button" style="position:static;transform:none"><span class="dot"></span>Play the reel</button>
-    <button class="playreel" id="soundTog" type="button" style="position:static;transform:none"><span class="dot"></span>Sound off</button>
-  </div>
   <div class="t">
     <div class="hero-tilt" id="hero-tilt">
-      <span class="hero-word">Sight</span>
-      <span class="hero-word">Sound</span>
-      <span class="hero-word">and <span class="hero-word-sub">The Creative<br>Portfolio<br>of DJ Ramirez</span></span>
-      <span class="hero-word">Emotion</span>
+      <span class="hero-word hw1">Sight</span>
+      <span class="hero-word hw2">Sound</span>
+      <span class="hero-word hw3">and</span>
+      <span class="hero-row">
+        <span class="hero-word-sub">The Creative<br>Portfolio<br>of DJ Ramirez</span>
+        <span class="hero-word">Emotion</span>
+      </span>
     </div>
   </div>
-  <p class="sub">AI gave everyone the tools. It didn't give everyone taste. I direct integrated campaigns and films, from the first idea to the final frame.</p>
-  <div class="nfo">
-    <span class="h">NFO</span><br>
-    DJ Ramirez<br>
-    Creative Director<br>
-    Integrated campaigns · film · stills · experiential<br>
-    Roll 2016-2026 · Est. MMXXII
+  <div class="hero-bottom">
+    <div class="hb-left">
+      <span class="hb-kick mono">Creative Direction · Integrated Campaigns</span>
+      <p class="hb-desc">AI gave everyone the tools. It didn't give everyone taste. I direct integrated campaigns and films, from the first idea to the final frame.</p>
+      <a class="hb-cta mono" href="mailto:monuments.cc@gmail.com">Let's talk ↗</a>
+    </div>
+    <div class="hb-mid">
+      <button class="playreel" id="playReel" type="button"><span class="dot"></span>Play the reel</button>
+      <button class="playreel" id="soundTog" type="button"><span class="dot"></span>Sound off</button>
+    </div>
+    <a class="hb-see mono" href="/work">See the work ↗</a>
   </div>
 </header>
 
@@ -419,14 +437,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <span class="kick mono rv">\ What I do</span>
     <p class="big rv">Culture is talking. Most brands <span class="serif">aren't listening.</span></p>
     <p class="rest rv">I help brands and agencies shout into the void of culture without losing their voice. Part agency partner, part outside brain, part <span class="serif">creative mercenary</span>. From directing commercials to photography to full-scale creative direction, I turn ideas into work that <b>sticks</b>.</p>
-  </div>
-
-  <div class="wrap sheet">
-    <div class="bar">
-      <span class="mono"><b>Contact sheet 01</b> · selects from the last decade</span>
-      <span class="mono">Refresh to reshuffle ↻</span>
-    </div>
-    <div class="frames" id="frames"></div>
   </div>
 
   <section class="reel" id="work">
@@ -485,6 +495,14 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <a class="wrap reel-foot mono" href="/work">Scroll to scrub · full archive on <span class="rf-lnk">/work</span> ↗</a>
     </div>
   </section>
+
+  <div class="wrap sheet">
+    <div class="bar">
+      <span class="mono"><b>Contact sheet 01</b> · selects from the last decade</span>
+      <span class="mono">Refresh to reshuffle ↻</span>
+    </div>
+    <div class="frames" id="frames"></div>
+  </div>
 
   <div class="wrap" style="padding:12vh 0 10vh">
     <p class="rv" style="font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:clamp(26px,3.4vw,48px);line-height:1.2;max-width:26ch;color:var(--ink)">"I shoot but I'm not a shooter. I direct but it's not the point. The point is the story. The moment. <span style="color:#b96a77">Always has been."</span></p>
@@ -595,11 +613,19 @@ const TILES=[
   `<div class="tile"><img src="/gallery/thumb/p-040.jpg" alt=""></div>`,
   `<div class="tile ros band">Less agency.<br>More rock &amp; roll.</div>`,
   `<div class="tile"><img src="/gallery/thumb/p-021.jpg" alt=""></div>`,
+  `<div class="tile ink stat"><b>Emmy</b><span>Know Vape campaign</span></div>`,
+  `<div class="tile"><img src="/gallery/thumb/p-013.jpg" alt=""></div>`,
   `<div class="tile cob">✳</div>`,
   `<div class="tile"><img src="/gallery/thumb/p-069.jpg" alt=""></div>`,
+  `<div class="tile ink stat"><b>18K+</b><span>conversations started</span></div>`,
+  `<div class="tile"><img src="/gallery/thumb/p-054.jpg" alt=""></div>`,
   `<div class="tile ros band">Every great story<br>is a human story.</div>`,
+  `<div class="tile"><img src="/gallery/thumb/p-098.jpg" alt=""></div>`,
+  `<div class="tile ink stat"><b>2→30+</b><span>creatives led</span></div>`,
   `<div class="tile blk">m</div>`,
   `<div class="tile"><img src="/gallery/thumb/p-090.jpg" alt=""></div>`,
+  `<div class="tile ink stat"><b>Sony ×4</b><span>came back · Adorama ×3</span></div>`,
+  `<div class="tile"><img src="/gallery/thumb/p-030.jpg" alt=""></div>`,
 ];
 document.getElementById('tiles').innerHTML=TILES.join('')+TILES.join('');
 

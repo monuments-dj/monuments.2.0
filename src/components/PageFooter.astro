@@ -22,6 +22,7 @@ const { tag } = Astro.props;
      goes paper, band text rides --on-rgb. Type: display-font candidates, all free
      (Google/Fontshare); serif + mono stay, they are identity anchors. -->
 <div class="acctool" id="acctool">
+  <span class="acctool-grip" id="accgrip" title="Drag to move" aria-hidden="true">⠿</span>
   <span class="acctool-l">accent</span>
   <button data-acc="bw" style="--sw:linear-gradient(135deg,#161514 50%,#F5F3EF 50%)" title="Black + white" aria-label="Black and white accent"></button>
   <button data-acc="rose" style="--sw:#EFA1AD" title="Rose" aria-label="Rose accent"></button>
@@ -33,6 +34,9 @@ const { tag } = Astro.props;
   <button data-font="haus" title="03 HAUS · Instrument Sans headers + body, Instrument Serif accent · one foundry, Lausanne/Aeonik lane (Unusual, lusion)">03</button>
   <button data-font="wide" title="04 WIDE · Archivo Expanded headers, Archivo body, Spectral italic accent · GT America lane (mssngpeces) + Against's serif">04</button>
   <button data-font="mdrn" title="05 MDRN · Satoshi headers + body, Gambetta italic accent · Fontshare, portfolio-modern">05</button>
+  <button data-font="grit" title="06 GRIT · Anton condensed poster caps (the old-site hero DNA) + Inter body + Instrument Serif accent">06</button>
+  <button data-font="clsh" title="07 CLSH · Clash Display headers + General Sans body + Sentient italic accent · Fontshare character-grotesk">07</button>
+  <button data-font="spce" title="08 SPCE · Space Grotesk headers + Inter body + Instrument Serif accent · technical quirk">08</button>
   <button class="acctool-x" title="Hide (until you clear site data)" aria-label="Hide switcher">&times;</button>
 </div>
 
@@ -43,10 +47,15 @@ const { tag } = Astro.props;
 .pfoot span{font-family:var(--mono,'Fragment Mono',monospace);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim,#8f8d88)}
 .pfoot .blk{text-transform:none}
 
-.acctool{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:90;display:flex;align-items:center;gap:8px;
-  padding:7px 9px 7px 12px;background:rgba(22,21,20,.82);backdrop-filter:blur(8px);border:1px solid rgba(245,243,239,.16);border-radius:99px;
+/* sits ABOVE dock/toolbar territory (DJ's dock was covering it at bottom:12px)
+   and carries a drag grip so it can be moved off anything it overlaps */
+.acctool{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);z-index:90;display:flex;align-items:center;gap:8px;
+  padding:7px 9px 7px 8px;background:rgba(22,21,20,.82);backdrop-filter:blur(8px);border:1px solid rgba(245,243,239,.16);border-radius:99px;
   font-family:var(--mono,monospace);opacity:.42;transition:opacity .3s}
 .acctool:hover{opacity:1}
+.acctool-grip{color:#8f8d88;font-size:12px;cursor:grab;padding:0 2px;user-select:none;touch-action:none}
+.acctool-grip:active{cursor:grabbing;color:#F5F3EF}
+.acctool.dragging{transition:none;opacity:1}
 .acctool-l{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#8f8d88;margin-right:2px}
 .acctool-div{margin-left:8px;padding-left:10px;border-left:1px solid rgba(245,243,239,.18)}
 .acctool [data-acc]{width:16px;height:16px;border-radius:50%;border:1px solid rgba(245,243,239,.25);background:var(--sw);cursor:pointer;padding:0;transition:transform .2s}
@@ -57,7 +66,7 @@ const { tag } = Astro.props;
 .acctool [data-font].on{color:#161514;background:#F5F3EF;border-color:#F5F3EF}
 .acctool-x{background:none;border:0;color:#8f8d88;font-size:15px;line-height:1;cursor:pointer;padding:0 2px 0 4px}
 .acctool-x:hover{color:#F5F3EF}
-@media (max-width:680px){.acctool{bottom:8px;padding:6px 8px}.acctool-l{display:none}}
+@media (max-width:680px){.acctool{bottom:72px;padding:6px 8px}.acctool-l{display:none}}
 </style>
 
 <script is:inline>
@@ -86,7 +95,21 @@ const { tag } = Astro.props;
     wide:{d:["'Archivo',sans-serif",'800','600'],b:"'Archivo',sans-serif",s:"'Spectral',serif",
       css:['https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap']},
     mdrn:{d:["'Satoshi',sans-serif",'900','700'],b:"'Satoshi',sans-serif",s:"'Gambetta',serif",
-      css:['https://api.fontshare.com/v2/css?f[]=satoshi@400,401,500,700,701,900,901&f[]=gambetta@400,401,500,501&display=swap']}
+      css:['https://api.fontshare.com/v2/css?f[]=satoshi@400,401,500,700,701,900,901&f[]=gambetta@400,401,500,501&display=swap']},
+    // round two (2026-07-11): DJ passed on 01-05 ("still bullshit"), so three
+    // pairings from lanes the first five never touched:
+    // 06 GRIT = condensed poster caps, the old-site hero DNA (Anton is the free
+    //    Founders-Condensed lane), quiet Inter body, Instrument Serif stays.
+    grit:{d:["'Anton',sans-serif",'400','400'],b:"'Inter',sans-serif",s:null,
+      css:['https://fonts.googleapis.com/css2?family=Anton&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap']},
+    // 07 CLSH = Clash Display, the character-grotesk portfolio lane (Fontshare),
+    //    General Sans body, Sentient italic accent.
+    clsh:{d:["'Clash Display',sans-serif",'600','500'],b:"'General Sans',sans-serif",s:"'Sentient',serif",
+      css:['https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,401,500,501&f[]=sentient@400,401&display=swap']},
+    // 08 SPCE = Space Grotesk, the technical-quirk lane (lusion adjacent),
+    //    Inter body, Instrument Serif stays.
+    spce:{d:["'Space Grotesk',sans-serif",'700','500'],b:"'Inter',sans-serif",s:null,
+      css:['https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap']}
   };
   var root=document.documentElement, tool=document.getElementById('acctool');
   // guard rules for B/W: the rose quote bands flip to ink so nothing renders pink
@@ -141,6 +164,29 @@ const { tag } = Astro.props;
     b.addEventListener('click',function(){applyFont(b.dataset.font);localStorage.setItem('mnmt-font',b.dataset.font);});
   });
   tool.querySelector('.acctool-x').addEventListener('click',function(){tool.style.display='none';localStorage.setItem('mnmt-acctool','off');});
+  // drag grip: DJ's dock was covering the pill; grab ⠿ and park it anywhere.
+  // Position persists for the session so it stays put across pages.
+  var grip=document.getElementById('accgrip');
+  if(grip){
+    var saved=sessionStorage.getItem('mnmt-acctool-pos');
+    if(saved){try{var p=JSON.parse(saved);tool.style.left=p.l;tool.style.top=p.t;tool.style.bottom='auto';tool.style.transform='none';}catch(e){}}
+    grip.addEventListener('pointerdown',function(e){
+      e.preventDefault();grip.setPointerCapture(e.pointerId);
+      var r=tool.getBoundingClientRect(),dx=e.clientX-r.left,dy=e.clientY-r.top;
+      tool.classList.add('dragging');
+      function mv(ev){
+        var l=Math.min(Math.max(4,ev.clientX-dx),innerWidth-r.width-4);
+        var t=Math.min(Math.max(4,ev.clientY-dy),innerHeight-r.height-4);
+        tool.style.left=l+'px';tool.style.top=t+'px';tool.style.bottom='auto';tool.style.transform='none';
+      }
+      function up(){
+        tool.classList.remove('dragging');
+        sessionStorage.setItem('mnmt-acctool-pos',JSON.stringify({l:tool.style.left,t:tool.style.top}));
+        grip.removeEventListener('pointermove',mv);grip.removeEventListener('pointerup',up);
+      }
+      grip.addEventListener('pointermove',mv);grip.addEventListener('pointerup',up);
+    });
+  }
 })();
 </script>
 
