@@ -36,6 +36,23 @@ on the repo for now (no need to sync-check every turn) and **auto-push at the en
 change set is approved** — commit + push when a change feels done, no need to ask. Keep the
 live site polished; each deploy is a clean rollback point.
 
+## ⛔ CORRECTIONS DJ HAS MADE REPEATEDLY — never make him say these again (2026-07-11)
+He said it directly: "I've corrected the same things over and over, it's exhausting."
+The three repeat classes and the rule that kills each:
+1. **Sandbox lied, his browser didn't.** Anything involving scroll position, pinning,
+   fixed overlays, or where-things-sit-at-rest MUST be tested at arbitrary RESTING scroll
+   offsets (not just the perfect frame), and flagged for his real-browser pass. The
+   window-reveal shipped "verified" and was broken at every real stop point. The switcher
+   pill was "fine" while his dock covered it.
+2. **Fix the CLASS, not the instance.** When he corrects something (type too big, label
+   off, spacing dead), grep for the same pattern SITEWIDE and list every other instance
+   in the reply - he decides once. He had to flag oversized display type page by page
+   (capabilities, contact, work) because each fix stayed local. There is no shared display
+   scale; until one is baked, any new hero type ≤ ~7.6vw / 112px max.
+3. **His words are the scope.** Execute exactly what the note says; anything adjacent
+   goes in the reply as a list, NOT into the commit. "It comes in weird" meant fix the
+   timing, not replace the ride (that revert cost him a day of vibe).
+
 ## 🔍 VISUAL TRUTH FIRST — never clone or judge a page from its HTML
 DJ's rule (2026-06-12): before cloning/judging ANY page, capture what's actually
 rendered: `node tools/snap.mjs <url> <name> [width=1440] [--sections]` →
