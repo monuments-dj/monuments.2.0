@@ -136,6 +136,27 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .kitcol .kn{font-size:10px;letter-spacing:.04em;text-transform:none;color:#8f8d88;text-align:right;flex:none;max-width:52%}
 @media (max-width:1000px){.kitgrid{grid-template-columns:1fr 1fr;gap:20px}}
 @media (max-width:560px){.kitgrid{grid-template-columns:1fr;gap:18px}}
+
+/* the rolodex: index cards flipping over an axle (the one non-text moment) */
+.rolo{padding:4vh 0 6vh}
+.rolo .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:13px;border-bottom:2px solid var(--ink)}
+.rolo .bar .mono b{color:var(--red)}
+.rologrid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4vw,64px);align-items:center;margin-top:34px}
+.rolotxt h3{font-weight:var(--dispw);font-size:clamp(24px,2.9vw,42px);letter-spacing:-.028em;line-height:1.04;text-transform:uppercase}
+.rolotxt h3 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.rolotxt p{margin-top:16px;color:#4c4a45;max-width:48ch}
+.rolodex{position:relative;height:262px;perspective:1000px}
+.raxle{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);width:min(360px,86%);height:10px;border-radius:6px;background:var(--ink)}
+.rcard{position:absolute;left:50%;bottom:30px;transform:translateX(-50%) rotateX(104deg);transform-origin:50% 100%;width:min(320px,78vw);height:192px;background:#fff;border:1px solid var(--line);border-radius:10px 10px 4px 4px;box-shadow:0 14px 34px rgba(20,20,20,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;backface-visibility:hidden;opacity:0;transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .3s;will-change:transform}
+.rcard.live{transform:translateX(-50%) rotateX(0);opacity:1}
+.rcard.out{transform:translateX(-50%) rotateX(-104deg);opacity:0}
+.rcard::before,.rcard::after{content:'';position:absolute;bottom:9px;width:10px;height:10px;border-radius:50%;background:var(--paper);border:1px solid var(--line)}
+.rcard::before{left:calc(50% - 64px)}
+.rcard::after{left:calc(50% + 54px)}
+.rcard b{font-weight:var(--dispw2);font-size:clamp(22px,2vw,30px);letter-spacing:-.02em}
+.rcard .mono{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8f8d88}
+@media (max-width:860px){.rologrid{grid-template-columns:1fr;gap:22px}.rolodex{height:236px}}
+@media (prefers-reduced-motion:reduce){.rcard{transition:none}}
 .pstep .n{font-family:var(--mono);font-size:11px;color:var(--ink);background:var(--paper);display:inline-block;padding:2px 8px}
 .pstep h4{font-weight:var(--dispw);font-size:clamp(20px,2.1vw,28px);letter-spacing:-.02em;text-transform:uppercase;margin:14px 0 10px}
 .pstep p{color:rgba(245,243,239,.82);font-size:15.5px;max-width:34ch}
@@ -388,6 +409,34 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
+<!-- The rolodex: DJ 2026-07-11. The cards are ILLUSTRATIVE craft+city pairs
+     (edit the list freely) - the claim is the network, not the named individuals. -->
+<section class="rolo wrap">
+  <div class="bar">
+    <span class="mono"><b>The rolodex</b> · a person for that</span>
+    <span class="mono" style="color:#8f8d88">Boise · LA · NY · Europe · Japan · China</span>
+  </div>
+  <div class="rologrid">
+    <div class="rolotxt rv">
+      <h3>Always a person <span class="serif">for that.</span></h3>
+      <p>I pride myself on having a guy, a girl, a person for it. Fifteen-plus years between Boise, LA, New York, Europe, Japan, and China builds a deep bench of creative talent. However weird the job gets, I've usually got someone who has done it, and done it well.</p>
+    </div>
+    <div class="rolodex rv" id="rolodex" aria-label="A rotating index of the network">
+      <div class="raxle" aria-hidden="true"></div>
+      <div class="rcards">
+        <div class="rcard live"><b>Colorist</b><span class="mono">Tokyo</span></div>
+        <div class="rcard"><b>Gaffer</b><span class="mono">Boise</span></div>
+        <div class="rcard"><b>Set builder</b><span class="mono">Los Angeles</span></div>
+        <div class="rcard"><b>3D animator</b><span class="mono">New York</span></div>
+        <div class="rcard"><b>Stylist</b><span class="mono">Milan</span></div>
+        <div class="rcard"><b>Producer</b><span class="mono">Shanghai</span></div>
+        <div class="rcard"><b>Composer</b><span class="mono">Berlin</span></div>
+        <div class="rcard"><b>Drone pilot</b><span class="mono">Idaho</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="cli" aria-hidden="true">
   <div class="track">
     <span>Sony</span><i>✳</i><span>Intel</span><i>✳</i><span>Adorama</span><i>✳</i><span>MSI</span><i>✳</i><span>Lexar</span><i>✳</i><span>Blue Cross of Idaho</span><i>✳</i><span>Art of Visuals</span><i>✳</i><span>DW Drums</span><i>✳</i><span>College of Western Idaho</span><i>✳</i>
@@ -523,6 +572,31 @@ clock();setInterval(clock,30000);
   function atBottom(){return window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-4;}
   function upd(){document.body.classList.toggle('at-foot',atBottom());}
   addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd,{passive:true});setTimeout(upd,400);
+})();
+</script>
+<script is:inline>
+// the rolodex: cards flip over the axle while the section is on screen.
+// Hover holds the current card (so it can be read); reduced motion = static.
+(function(){
+  var box=document.getElementById('rolodex'); if(!box)return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var cards=Array.prototype.slice.call(box.querySelectorAll('.rcard')),i=0,t=null,hov=false;
+  function step(){
+    if(hov)return;
+    var cur=cards[i],nx=cards[(i+1)%cards.length];
+    cur.classList.remove('live');cur.classList.add('out');
+    setTimeout(function(){cur.classList.remove('out');},560);
+    nx.classList.add('live');
+    i=(i+1)%cards.length;
+  }
+  box.addEventListener('mouseenter',function(){hov=true;});
+  box.addEventListener('mouseleave',function(){hov=false;});
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){if(!t)t=setInterval(step,2000);}
+      else{clearInterval(t);t=null;}
+    });
+  },{threshold:.3}).observe(box);
 })();
 </script>
 </body>
