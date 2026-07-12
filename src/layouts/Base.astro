@@ -6,6 +6,9 @@ import Menu from '../components/Menu.astro';
 import Footer from '../components/Footer.astro';
 
 const { title = 'monuments', loader = false } = Astro.props;
+const ogDesc = 'The creative portfolio of DJ Ramirez. Creative Director. Integrated campaigns, film, stills, experiential. LA / Boise.';
+const ogUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://monuments-2-0.vercel.app').href;
+const ogImg = new URL('/og/card.jpg', Astro.site ?? 'https://monuments-2-0.vercel.app').href;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +16,19 @@ const { title = 'monuments', loader = false } = Astro.props;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
+  <meta name="description" content={ogDesc} />
+  <link rel="canonical" href={ogUrl} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Monuments" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={ogDesc} />
+  <meta property="og:url" content={ogUrl} />
+  <meta property="og:image" content={ogImg} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={ogImg} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Archivo:wght@400;600;800;900&family=Space+Mono:wght@400;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet" />
 </head>
 <body>

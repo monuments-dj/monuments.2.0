@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1200px; height:630px; overflow:hidden; }
+  body {
+    background:#0A0A0A;
+    font-family:'Fragment Mono', monospace;
+    position:relative;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+  }
+  /* grain sits under everything textual */
+  .grain {
+    position:absolute; inset:0; z-index:0; opacity:.09; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  }
+  .stack { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; margin-top:-14px; }
+  .lockup { width:920px; display:block; }
+  .nfo {
+    margin-top:58px; color:#F4F4F2; opacity:.85;
+    font-size:21px; letter-spacing:.22em; white-space:nowrap;
+  }
+  .nfo .star { color:#E0311A; }
+  .foot {
+    position:absolute; z-index:1; bottom:44px; left:0; right:0;
+    display:flex; justify-content:center;
+    color:#F4F4F2; opacity:.42; font-size:16px; letter-spacing:.3em;
+  }
+</style>
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="stack">
+    <img class="lockup" src="../public/hero/sight-sound-emotion.png" alt="">
+    <div class="nfo">RAMIREZ, DJ <span class="star">✳</span> CREATIVE DIRECTOR · LA / BOISE</div>
+  </div>
+  <div class="foot">MONUMENTS.CC</div>
+</body>
+</html>
