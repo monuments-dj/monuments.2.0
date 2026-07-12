@@ -75,7 +75,14 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
-## Active work (2026-07-11 EOD): full-day live-feedback marathon SHIPPED · see TODO.md top block
+## Active work (2026-07-11 LATE): night batch SHIPPED · see TODO.md top block
+OG card+meta sitewide (re-run tools/add-og.mjs at domain swap) · 66 imgs lazy · map v2
+(grey-on-paper, pin photos, Paris/Berlin) · proof cards play snips · MOTION LAB on
+/template (5 languages, DJ PICKS ONE → then bake sitewide) · GRAIN v2 (below-text,
+tune --grain-paper/--grain-media in PageFooter) · media-tags.json + tools/tag-media.mjs.
+⚠️ html{overflow-x:clip} kills sticky - see CSS-MAP gotcha before ANY pinned section.
+
+## Active work (2026-07-11 EOD, historical): full-day live-feedback marathon SHIPPED · see TODO.md
 Home hero = DJ's REAL PNG lockup (never was live type - Asset-6 off monuments.cc, pixel-matched);
 PLAY reel = original scrub, retimed wake-ups, autoplaying muted self-hosted reel, locks 55vw,
 fills ~90vw at max, modal tiny-video bug fixed. Capabilities = proof-card GRID + rolodex

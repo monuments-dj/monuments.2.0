@@ -1,6 +1,42 @@
-# TODO - current state (2026-07-11, END OF DAY · handoff)
+# TODO - current state (2026-07-11, LATE NIGHT · autonomous batch SHIPPED)
 
-## 🚀 THIS SESSION part 2 (2026-07-11 afternoon/evening · the live-feedback marathon)
+## 🚀 THIS SESSION part 3 (2026-07-11 night · DJ's 7-item batch, all pushed + live)
+Commits da6df23→3382fb2, each verified individually (build + resting-offset shots):
+- **OG share card + social meta.** public/og/card.jpg (lockup on ink, NFO line);
+  tools/add-og.mjs stamps description/canonical/og/twitter into all 30 own-head pages
+  (idempotent markers; RE-RUN WITH NEW SITE AFTER THE DOMAIN SWAP); Base.astro covers
+  lab. 6 pages' older hand-written og meta deduped, their richer copy adopted.
+- **Lazy-load pass:** 66 below-fold imgs → loading=lazy (tools/lazy-pass.mjs; heroes/
+  fetchpriority stay eager); NEW tools/restshots.mjs = resting-offset verifier.
+- **World map v2 (About):** grey land on PAPER, Antarctica dropped + viewBox cropped
+  ~73N..56S (twisted polar shapes gone), Paris+Berlin pins, hover tip = best-guess
+  photo(s) per pin from the archive. Fixed: ring pulse now scales around its pin
+  (transform-box), injected tip imgs needed :global (Astro scoping), .wm-tip[hidden]
+  (author display beat the UA rule → stray black blob). tools/mapcheck.mjs verifies.
+- **Capability proof cards play their snips** (5 film crafts, same pvid recipe; B/W at
+  rest, color on hover); motioncheck now takes a base URL + covers /capabilities: ALL PASS.
+- **MOTION LAB = ELEMENT 13 on /template.** Homepage elements (thesis title, stats, duo,
+  CTA) under FIVE selectable languages: 01 Settle · 02 Rise · 03 Drift · 04 Lock (pins
+  240svh, scroll assembles) · 05 Snap. Sticky picker + replay, persists (mnmt-mlab).
+  THE TITLE ENTRANCES DJ HATES ARE THE CENTERPIECE - his pick becomes the sitewide
+  grammar (bake = separate pass). ⚠️ Found+fixed on Kit: html{overflow-x:clip} silently
+  kills position:sticky (see CSS-MAP gotcha); 25 pages still carry the dormant combo -
+  normalize when the language bakes.
+- **GRAIN v2 (PageFooter, sitewide):** old fixed .grain overlay RETIRED (painted over
+  type). Light bands = moving multiply grain BELOW text (isolation + ::before z:-1);
+  media frames = stronger overlay film grain under captions. Tune --grain-paper (.10) /
+  --grain-media (.13) only - DJ's "grain louder?" decision is now those two numbers.
+- **Media tags:** content/media-tags.json = all 100 archive + 16 giving frames tagged
+  from a real vision pass (location guesses marked '?'); tools/tag-media.mjs (mdls-based,
+  zero-dep) adds shoot-date/camera meta + clusters shoots by day + lists untagged.
+  Run it on every new image drop. Web copies kept DATE+CAMERA, GPS is stripped.
+NEEDS DJ'S REAL BROWSER (the standing rule): motion lab all 5 languages (esp. 04 Lock
+scrub feel + sticky bar), map hover tips, grain visibility at his screen brightness,
+proof-card snips autoplay.
+DECISION ADDED TO THE STACK: motion language pick 01-05 on /template (then I bake it
+sitewide + normalize the overflow combo + retire the lab picker).
+
+## 🚀 Session part 2 (2026-07-11 afternoon/evening · the live-feedback marathon)
 SHIPPED after the 13-item morning batch (each verified + pushed individually; prod = monuments-2-0.vercel.app):
 - **Credits truth pass, CLOSED.** DJ corrected all 18 projects' roles once; every surface
   now agrees (case pages, /work tags, home cards, hire links). `tools/credits-audit.mjs`
