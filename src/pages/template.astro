@@ -616,7 +616,7 @@ a{color:inherit;text-decoration:none}
         <img loading="lazy" decoding="async" src={w.img} alt={w.title}>
         <div class="hs-in wrap">
           <h2>{w.title}</h2>
-          <p class="hs-blurb">{w.logline}</p>
+          <p class="hs-blurb" data-rm>{w.logline}</p>
           <span class="hs-did">{w.role}</span>
           {w.logo ? <span class="hs-logochip"><img class="hs-logo" src={`/logos/${w.logo}-color.png`} alt={w.slug}></span> : null}
         </div>
@@ -821,7 +821,7 @@ a{color:inherit;text-decoration:none}
             {w.logo ? <img class={`hc-logo${w.logoColor ? ' is-color' : ''}`} src={`/logos/${w.logo}-${w.logoColor ? 'color' : 'black'}.png`} alt={w.client}> : null}
             <b class="hc-title">{w.title}</b>
             <span class="hc-role">{w.role}</span>
-            <p class="hc-log">{w.logline}</p>
+            <p class="hc-log" data-rm>{w.logline}</p>
           </div>
         </a>
       ))}
@@ -908,6 +908,29 @@ a{color:inherit;text-decoration:none}
 })();
 </script>
 
+<script is:inline>
+// read-more: clamp long loglines on the index cards + header blurb, inject a toggle only when the copy overflows
+(function(){
+  function init(el){
+    if(el.dataset.rmInit) return;
+    if(el.scrollHeight <= el.clientHeight + 2) return; // fits within the clamp, no toggle needed
+    el.dataset.rmInit='1';
+    var inLink = !!el.closest('a');
+    var btn=document.createElement(inLink ? 'span' : 'button');
+    btn.className='rm-btn'; btn.textContent='Read more';
+    if(inLink){ btn.setAttribute('role','button'); btn.tabIndex=0; } else { btn.type='button'; }
+    function toggle(e){ if(e){ e.preventDefault(); e.stopPropagation(); }
+      var open=el.classList.toggle('rm-open'); btn.textContent=open?'Read less':'Read more'; }
+    btn.addEventListener('click', toggle);
+    if(inLink) btn.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' ') toggle(e); });
+    el.insertAdjacentElement('afterend', btn);
+  }
+  function run(){ [].slice.call(document.querySelectorAll('[data-rm]')).forEach(init); }
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ requestAnimationFrame(run); }); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
 <!-- shared lightbox overlay for ELEMENT 26 (masonry gallery B) -->
 <div class="lbox" id="kitLbox" role="dialog" aria-modal="true" aria-label="Image viewer">
   <button type="button" class="lb-close" aria-label="Close">✕</button>
@@ -942,7 +965,7 @@ a{color:inherit;text-decoration:none}
     hs.addEventListener('mouseleave',function(){if(!editing)reset();});
     var editBtn=document.getElementById('hsEdit'),exportBtn=document.getElementById('hsExport'),note=document.getElementById('hsNote'),editing=false;
     editBtn.addEventListener('click',function(){
-      editing=!editing;editBtn.classList.toggle('on',editing);
+      editing=!editing;editBtn.classList.toggle('on',editing);hs.classList.toggle('editing',editing);
       slides.forEach(function(s){s.querySelector('.hs-did').contentEditable=editing;s.querySelector('.hs-blurb').contentEditable=editing;});
       note.textContent=editing?'editing · change any role or blurb, then Export':'edit the role + blurb inline, then export';
       if(editing){if(timer)clearInterval(timer);}else{reset();}
@@ -1002,7 +1025,11 @@ a{color:inherit;text-decoration:none}
 .hs-did{display:block;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--spark)}
 .hs-logochip{display:inline-flex;align-self:flex-start;margin-top:20px;background:var(--paper);padding:9px 15px;border-radius:5px;box-shadow:0 6px 20px rgba(0,0,0,.28)}
 .hs-logo{height:22px;width:auto;display:block}
-.hs-blurb{margin-top:20px;max-width:52ch;color:rgba(245,243,239,.82);font-size:clamp(14px,1.1vw,16px);line-height:1.6}
+.hs-blurb{margin-top:20px;max-width:52ch;color:rgba(245,243,239,.82);font-size:clamp(14px,1.1vw,16px);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.hs-blurb.rm-open{-webkit-line-clamp:unset;overflow:visible}
+.hs-in .rm-btn{color:var(--paper);margin-top:12px}
+.hslider.editing .hs-blurb{-webkit-line-clamp:unset;overflow:visible}
+.hslider.editing .hs-in .rm-btn{display:none}
 .hs-did[contenteditable="true"],.hs-blurb[contenteditable="true"]{outline:1px dashed rgba(239,161,173,.85);outline-offset:5px;cursor:text;border-radius:2px}
 .hs-tools{position:absolute;top:20px;right:var(--pad);z-index:6;display:flex;align-items:center;gap:10px}
 .hs-tools button{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(10,10,10,.5);border:1px solid rgba(245,243,239,.3);border-radius:99px;padding:8px 14px;cursor:pointer;backdrop-filter:blur(4px);transition:background .3s,color .3s}
@@ -1127,7 +1154,11 @@ a{color:inherit;text-decoration:none}
 .hcard .hc-logo.is-color{height:30px}
 .hc-title{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(20px,1.9vw,29px);letter-spacing:-.02em;text-transform:uppercase;line-height:1.04;color:var(--ink)}
 .hc-role{display:block;margin-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;line-height:1.5;color:var(--insRed,var(--red))}
-.hc-log{margin:14px 0 0;font-size:14px;line-height:1.5;color:rgba(22,21,20,.72);max-width:60ch}
+.hc-log{margin:14px 0 0;font-size:14px;line-height:1.5;color:rgba(22,21,20,.72);max-width:60ch;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.hc-log.rm-open{-webkit-line-clamp:unset;overflow:visible}
+/* read-more: clamps long copy on the cards + header, expands on click */
+.rm-btn{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--red);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.rm-btn:hover{opacity:.65}
 @media(max-width:720px){
   .hcards{grid-template-columns:1fr;gap:20px}
   .hc-title{font-size:clamp(21px,6vw,26px)}
