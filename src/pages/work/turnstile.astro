@@ -170,19 +170,35 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .p-note p{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:clamp(19px,1.7vw,25px);line-height:1.4;color:var(--paper)}
 
 
-/* kit gallery: the product line on paper, contact-sheet cells + rubber stamp */
-.gal{padding:9vh 0;position:relative}
-.gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:16px}
-.gal .bar .mono b{color:var(--red)}
-.kitlead{color:#4c4a45;font-size:18px;max-width:60ch;margin-bottom:26px}
-.kitwrap{position:relative}
-.kit{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.kc{position:relative;background:#fff;border:1px solid var(--line);padding:10px 10px 30px;opacity:0;transform:translateY(16px)}
-.kit.show .kc{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
-.kc img{width:100%;height:auto;display:block;filter:saturate(.96)}
-.kc .cap{position:absolute;left:11px;bottom:8px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}
-.kit.show .kc:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(20,20,20,.16);z-index:2;transition-delay:0ms}
-.chk{position:absolute;top:-30px;right:6px;transform:rotate(6deg);border:2px solid var(--red);border-radius:4px;color:var(--red);font-family:var(--mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;padding:10px 16px 9px;opacity:.55;mix-blend-mode:multiply;z-index:3;pointer-events:none}
+/* Concept/Design/Deliver auto-switcher */
+.cdd{padding:12vh 0 11vh}
+.cdd-head{display:flex;gap:clamp(20px,3.4vw,54px);flex-wrap:wrap;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:18px}
+.cdd-word{position:relative;background:none;border:0;padding:0 0 6px;cursor:pointer;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(30px,5.2vw,74px);letter-spacing:-.035em;line-height:1;text-transform:uppercase;color:rgba(22,21,20,.15);transition:color .5s cubic-bezier(.22,1,.36,1)}
+.cdd-word.on{color:var(--ink)}
+.cdd-word .cdd-bar{position:absolute;left:0;bottom:-19px;height:2px;width:0;background:var(--red);transition:none}
+.cdd-word.on .cdd-bar{width:100%;transition:width 4.6s linear}
+.cdd-stage{margin-top:6vh;display:grid}
+.cdd-panel{grid-area:1/1;display:grid;grid-template-columns:1fr 1fr;gap:44px 64px;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.cdd-panel.on{opacity:1;transform:none;pointer-events:auto}
+.cdd-col p{color:#4c4a45;font-size:clamp(15px,1.15vw,17px);line-height:1.62;margin-bottom:1em}
+.cdd-col p b{color:var(--ink);font-weight:var(--dispw2)}
+.cdd-col p:first-child{font-size:clamp(16px,1.3vw,19px);color:var(--ink)}
+@media (max-width:820px){.cdd-panel{position:relative;grid-template-columns:1fr;gap:20px;opacity:1;transform:none;pointer-events:auto;display:none}.cdd-panel.on{display:grid}.cdd-stage{min-height:0}}
+@media (prefers-reduced-motion:reduce){.cdd-word .cdd-bar{transition:none}}
+
+/* the kit: clean white product grid + vertical MIC CHECK gutter text */
+.kitsec{position:relative;background:#fff;color:var(--ink);padding:10vh 0 12vh;overflow:hidden}
+.kithead{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:6vh}
+.kithead .mono b{color:var(--red)}
+.kithead .kitdim{color:#8f8d88}
+.miccheck{position:absolute;left:calc(var(--pad) - 8px);top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;font-family:var(--mono);font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:rgba(22,21,20,.24);pointer-events:none;z-index:1}
+.kit{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(24px,3.4vw,60px);max-width:1060px;margin:0 auto}
+.kc{margin:0;opacity:0;transform:translateY(18px);flex:1 1 240px;max-width:300px;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+.kit.show .kc{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);transition-delay:var(--d,0ms)}
+.kc img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.kit.show .kc:hover img{transform:scale(1.06)}
+@media (max-width:820px){.kc{flex:1 1 200px;max-width:260px}.miccheck{display:none}}
+@media (max-width:480px){.kc{flex:1 1 100%;max-width:260px}}
 
 /* full-bleed parallax break */
 .break{position:relative;height:52svh;overflow:hidden;background:var(--ink)}
@@ -366,42 +382,62 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
-<section class="paper">
-  <div class="wrap story">
-    <div class="side rv">
-      <span class="k mono">\ The work</span>
-      <h2>Concept. Design. <span class="serif">Deliver.</span></h2>
+<!-- Concept / Design / Deliver auto-switcher (DJ 2026-07-12): the brand-deck
+     narrative, VERBATIM (was paraphrased + missing Design/Deliver before).
+     Auto-cycles; click a word to jump; pauses on hover. Em dashes removed per
+     DJ's standing rule. Mirrored as ELEMENT 22 on the Kit. -->
+<section class="cdd paper" id="cdd" data-i="0">
+  <div class="wrap">
+    <div class="cdd-head" role="tablist" aria-label="Concept, Design, Deliver">
+      <button class="cdd-word on" data-i="0" role="tab">Concept<i class="cdd-bar" aria-hidden="true"></i></button>
+      <button class="cdd-word" data-i="1" role="tab">Design<i class="cdd-bar" aria-hidden="true"></i></button>
+      <button class="cdd-word" data-i="2" role="tab">Deliver<i class="cdd-bar" aria-hidden="true"></i></button>
     </div>
-    <div class="body rv">
-      <p>Identity first. A single confident wordmark, geometric and built to last just like the gear, paired with a mark that reads from across a loud room. Then the content: product photography shot so the metal and the message hit at the same time.</p>
-      <p>Then the campaign. I took a deep dive into the world of vintage audio brands, what made them iconic and enduring, then built something modern and a little nostalgic without trying too hard. The brand quietly amplifies; the gear is the star.</p>
-      <div class="obj">
-        <span class="ok mono">\ Objectives</span>
-        <ul>
-          <li>Craft a brand identity that captures Turnstile's ethos of precision, quality, and affordability.</li>
-          <li>Design something that feels understated but undeniably cool, a nod to the classics.</li>
-          <li>Let the gear be the star; the brand quietly amplifies the message under a two-week timeline.</li>
-        </ul>
+    <div class="cdd-stage">
+      <div class="cdd-panel on" data-i="0">
+        <div class="cdd-col">
+          <p>When Turnstile Audio came to me, they wanted a brand identity that struck the perfect balance: clean, simple, and inspired by legendary audio brands of the past, but fresh enough to stand out in today's market. They didn't want flashy; they wanted timeless, something that communicated their core values of quality and craftsmanship without overcomplicating things. The brand had to feel welcoming to both up-and-coming creators and seasoned pros alike.</p>
+        </div>
+        <div class="cdd-col">
+          <p><b>Objectives.</b> Craft a brand identity that captures Turnstile's ethos of precision, quality, and affordability. Design something that feels understated but undeniably cool, with a nod to the classic audio gear brands like Neumann and Shure. Make sure the brand speaks to both the budget-conscious and the experienced pro, uniting them under a shared love for great sound at a fair price.</p>
+        </div>
+      </div>
+      <div class="cdd-panel" data-i="1">
+        <div class="cdd-col">
+          <p>We took a deep dive into the world of vintage audio brands, looking at what made them iconic and enduring. With that inspiration in mind, we set out to build a brand identity for Turnstile that was confident, modern, and a little nostalgic, all without trying too hard.</p>
+        </div>
+        <div class="cdd-col">
+          <p><b>Logo Design.</b> The logo needed to be simple, but pack a punch. We went for sleek, geometric shapes and clean typography, something that said, "We mean business," without being loud about it. The end result? A logo that feels professional and dependable, built to last just like Turnstile's gear.</p>
+          <p><b>Typography &amp; Color Palette.</b> We kept the fonts sharp and straightforward, opting for a sans-serif typeface that says "trustworthy" without feeling stiff. As for colors, we went for neutral tones with a few metallic accents to give it that sleek, high-end vibe. It's all about letting the gear be the star of the show, with the brand quietly amplifying the message.</p>
+        </div>
+      </div>
+      <div class="cdd-panel" data-i="2">
+        <div class="cdd-col">
+          <p>The new Turnstile Audio brand identity hit all the right notes. The fresh, understated design resonated with both emerging creators and seasoned pros, positioning Turnstile as the go-to choice for high-quality, affordable audio gear. The brand launch was a hit, driving engagement and sparking buzz on social media, all while boosting initial sales. Proof that a simple, thoughtful brand can make a big impact.</p>
+        </div>
+        <div class="cdd-col">
+          <p><b>Conclusion.</b> Turnstile Audio's brand identity now reflects their passion for delivering premium recording gear at a fair price. By blending a nod to audio legends with a modern twist, we helped create a brand that strikes the perfect chord with creators everywhere. Whether you're new to recording or a pro in the studio, Turnstile Audio makes sure you sound your best, without emptying your wallet.</p>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>The kit</b> · every piece in the line</span>
-      <span class="mono" style="color:#8f8d88">8 products · studio frames</span>
+<!-- The kit: clean white product grid (reference-matched; the contact-sheet
+     chrome + "Check check" stamp are gone). Vertical MIC CHECK runs the gutter. -->
+<section class="kitsec">
+  <span class="miccheck" aria-hidden="true">MIC CHECK · ONE TWO ✳</span>
+  <div class="wrap">
+    <div class="kithead">
+      <span class="mono"><b>\ The kit</b> · every piece in the line</span>
+      <span class="mono kitdim">Turnstile Audio · the product family</span>
     </div>
-    <p class="kitlead rv">The gear, shot like it sounds. Clean, confident, understated but undeniably cool, a nod to the classics.</p>
-    <div class="kitwrap">
-      <span class="chk" aria-hidden="true">Check check</span>
-      <div class="kit" id="kit">
-        {kit.map(([file, cap], i) => (
-          <figure class="kc" style={`--d:${i * 45}ms`}>
-            <img src={`/case-studies/turnstile/products/${file}`} alt={`Turnstile Audio product: ${cap}`} width="640" height="640" loading="lazy">
-            <figcaption class="cap">PC-{String(i + 1).padStart(2, '0')} · {cap}</figcaption>
-          </figure>
-        ))}
-      </div>
+    <div class="kit" id="kit">
+      {kit.map(([file, cap], i) => (
+        <figure class="kc" style={`--d:${i * 60}ms`}>
+          <img src={`/case-studies/turnstile/products/${file}`} alt={`Turnstile Audio product: ${cap}`} width="640" height="640" loading="lazy">
+        </figure>
+      ))}
     </div>
   </div>
 </section>
@@ -481,6 +517,27 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     if(!el)return;
     new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
   });
+})();
+
+// Concept/Design/Deliver switcher: auto-cycle (bar-timed), click to jump, pause on hover
+(function(){
+  var sec=document.getElementById('cdd');if(!sec)return;
+  var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var words=[].slice.call(sec.querySelectorAll('.cdd-word')),
+      panels=[].slice.call(sec.querySelectorAll('.cdd-panel')),
+      cur=0,timer=null,vis=false,paused=false;
+  function show(i){
+    cur=(i+panels.length)%panels.length;
+    words.forEach(function(w,j){w.classList.toggle('on',j===cur);});
+    panels.forEach(function(p,j){p.classList.toggle('on',j===cur);});
+    sec.setAttribute('data-i',cur);
+  }
+  function arm(){if(timer||reduced)return;timer=setInterval(function(){if(vis&&!paused)show(cur+1);},4600);}
+  function disarm(){clearInterval(timer);timer=null;}
+  words.forEach(function(w,i){w.addEventListener('click',function(){disarm();show(i);arm();});});
+  sec.addEventListener('mouseenter',function(){paused=true;});
+  sec.addEventListener('mouseleave',function(){paused=false;});
+  new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;vis?arm():disarm();});},{threshold:.2}).observe(sec);
 })();
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});

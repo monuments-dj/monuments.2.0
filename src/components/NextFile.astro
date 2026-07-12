@@ -89,7 +89,7 @@ const head = words.join(' ');
 // Deliberate scroll-to-end hand-off. At the very bottom, extra downward scroll fills
 // the rail, but: each gesture adds only a capped amount, the rail drains continuously
 // when you stop, and it must sit FULL for ~0.5s before it carries over. So a flick or
-// momentum scroll can't trigger it — only a sustained, intentional push does. The foot
+// momentum scroll can't trigger it; only a sustained, intentional push does. The foot
 // "Back" always returns you where you came from. Reduced motion = click only.
 (function () {
   var nf = document.querySelector('[data-nextfile]');
