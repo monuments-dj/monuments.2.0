@@ -313,7 +313,7 @@ body.gridview .arch{padding-bottom:0}
 
   <div class="group">
     <div class="bar"><span class="mono"><b>\ Selected</b> · the ones to see first</span><span class="mono" style="color:#8f8d88">01-04</span></div>
-    <a class="rowp litrow" href="/work/art-of-visuals" data-img="/case-studies/art-of-visuals/gallery/xm3-bts.jpg" data-cap="MC-2024-01 · GREW THE AGENCY 4X" data-disc="cd,campaign,oncam" data-logo="/logos/art-of-visuals.png">
+    <a class="rowp litrow" href="/work/art-of-visuals" data-snip="/snips/art-of-visuals.mp4" data-img="/case-studies/art-of-visuals/gallery/xm3-bts.jpg" data-cap="MC-2024-01 · GREW THE AGENCY 4X" data-disc="cd,campaign,oncam" data-logo="/logos/art-of-visuals.png">
       <span class="id">MC-2024-01 ✳</span><span class="t">Art of <span class="serif">Visuals</span></span><span class="fmt"><i>\</i> Brand campaign <b class="mx">4x</b></span><span class="yr">2024</span>
     </a>
     <a class="rowp litrow" href="/work/sony-this-moment" data-snip="/snips/sony-this-moment.mp4" data-img="/case-studies/sony-this-moment/gallery/tm-05.jpg" data-video="KIi8cBOlU50" data-cap="MC-2023-06 · SONY AUDIO" data-disc="cd,photo,campaign" data-logo="/logos/sony.png">
@@ -536,7 +536,13 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   const MAX=6;let mounted=[];
   function mount(c){
     if(c.querySelector('iframe,video'))return;
-    while(mounted.length>=MAX)unmount(mounted[0]); // FIFO: oldest preview yields
+    // evict only previews that have left the screen; a straight FIFO evicted
+    // still-visible cards (7+ vcards in range -> one stayed blank while in view)
+    while(mounted.length>=MAX){
+      const off=mounted.find(x=>{const r=x.getBoundingClientRect();return r.bottom<-80||r.top>innerHeight+80});
+      if(!off)break; // everything mounted is on screen: exceed the cap briefly
+      unmount(off);
+    }
     let el;
     if(c.dataset.snip){ // self-hosted 5s key-moment snippet: clean, no YouTube chrome
       el=document.createElement('video');
