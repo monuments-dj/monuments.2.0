@@ -46,7 +46,12 @@ import RoleTag from '../components/RoleTag.astro';
   --spark:var(--rose); --struct:var(--rose); --on-rgb:22,21,20;
 }
 *{margin:0;box-sizing:border-box}
-body{background:var(--ink);color:var(--paper);font-family:var(--body,var(--disp));font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}html{overflow-x:clip}
+/* NOTE: html{overflow-x:clip} would block body's overflow from propagating to
+   the viewport, making body the scroll container and silently KILLING every
+   position:sticky inside it (the motion lab's pin + bar). Home has no html
+   override for the same reason. If a pinned section ever fails site-wide,
+   check for this combo first. */
+body{background:var(--ink);color:var(--paper);font-family:var(--body,var(--disp));font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
 .wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 a{color:inherit;text-decoration:none}
@@ -304,6 +309,278 @@ a{color:inherit;text-decoration:none}
     <a class="talk" href="/contact">Let's talk ↗</a>
   </div>
 </section>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 13 · MOTION LAB</span><span class="use">five motion languages on the same homepage elements · pick ONE, it becomes the sitewide grammar · switcher + replay below · lives on the Kit only</span></div></div>
+<section class="mlab" id="mlab" data-motion="settle">
+  <div class="mlab-bar">
+    <div class="wrap mlab-bar-in">
+      <span class="mono mlab-k">\ Motion lab</span>
+      <div class="mlab-btns" role="tablist" aria-label="Motion language">
+        <button data-mo="settle" class="on">01 Settle</button>
+        <button data-mo="rise">02 Rise</button>
+        <button data-mo="drift">03 Drift</button>
+        <button data-mo="lock">04 Lock</button>
+        <button data-mo="snap">05 Snap</button>
+      </div>
+      <button class="mlab-replay mono" id="mlabReplay" type="button">↺ Replay</button>
+    </div>
+    <div class="wrap"><p class="mono mlab-desc" id="mlabDesc">01 · Everything settles in: soft fade, small lift, blur clears. Calm, fast, invisible.</p></div>
+  </div>
+
+  <!-- M-A · the title block (the entrance DJ hates is THIS moment, fixed 5 ways) -->
+  <div class="mlab-lockseg" id="mlabLockseg">
+    <div class="mlab-stage">
+      <div class="wrap mlab-title">
+        <span class="mono mk m-el" style="--d:.05s">✳ The thesis · same words, five entrances</span>
+        <h2 class="mh">
+          <span class="mline m-el" style="--d:.12s"><span class="mi"><span class="w">The</span> <span class="w">tools</span> <span class="w">are</span> <span class="w">everywhere.</span></span></span>
+          <span class="mline m-el" style="--d:.22s"><span class="mi"><span class="w">Taste</span> <span class="w serif">isn't.</span><span class="w spark">✳</span></span></span>
+        </h2>
+        <p class="mlede m-el" style="--d:.34s">Culture is talking. The feeds are flooded and attention is earned, not bought. I make the work people choose to remember.</p>
+        <div class="mimg m-el" style="--d:.44s">
+          <img loading="lazy" decoding="async" src="/case-studies/sony-this-moment/gallery/tm-05.jpg" alt="Sony This Moment frame">
+          <span class="cap mono">✳ This Moment · Sony · the frame that made the cut</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- M-B · stat row on the accent -->
+  <div class="statrow mlab-stats">
+    <div class="in">
+      <div class="stat m-el" style="--d:.05s"><b data-n="1" data-fmt="emmy">Emmy</b><span>Know Vape campaign</span></div>
+      <div class="stat m-el" style="--d:.15s"><b data-n="18000" data-fmt="k">18K+</b><span>conversations · Buck the Quo</span></div>
+      <div class="stat m-el" style="--d:.25s"><b data-n="30" data-fmt="range">2→30+</b><span>creatives led per team</span></div>
+      <div class="stat m-el" style="--d:.35s"><b data-n="4" data-fmt="x">4×</b><span>agency revenue as CD</span></div>
+    </div>
+  </div>
+
+  <!-- M-C · duo strip (floats at split speeds) -->
+  <section class="paper mlab-duo">
+    <div class="wrap duo">
+      <figure class="pl m-el mfloat-a" style="--d:.08s"><img loading="lazy" decoding="async" src="/gallery/full/p-017.jpg" alt="On set, red dress and the Porsche"><figcaption class="cap"><b>FR-01</b> · The set builds the story</figcaption></figure>
+      <figure class="pl m-el mfloat-b" style="--d:.2s"><img loading="lazy" decoding="async" src="/gallery/full/p-034.jpg" alt="Crew on the field"><figcaption class="cap"><b>FR-02</b> · The crew makes the day</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- M-D · the hand-off line -->
+  <section class="mlab-cta">
+    <div class="wrap">
+      <p class="mcta">
+        <span class="mline m-el" style="--d:.05s"><span class="mi"><span class="w">Let's</span> <span class="w">build</span> <span class="w">something</span></span></span>
+        <span class="mline m-el" style="--d:.17s"><span class="mi"><span class="w serif">worth</span> <span class="w serif">remembering.</span></span></span>
+      </p>
+      <a class="talk m-el" style="--d:.3s" href="/contact">Let's talk ↗</a>
+    </div>
+  </section>
+</section>
+
+<style is:global>
+/* ── ELEMENT 13 · MOTION LAB ──────────────────────────────────────────────
+   Five languages, one set of homepage elements. The picked language becomes
+   the sitewide grammar (bake later; this section is the test bench).
+   Engine: .m-el enters when .in lands (IO); modes restyle the SAME markup. */
+.mlab{background:var(--ink);color:var(--paper)}
+.mlab-bar{position:sticky;top:0;z-index:80;background:rgba(22,21,20,.92);backdrop-filter:blur(10px);border-top:1px dashed var(--lined);border-bottom:1px solid var(--lined);padding:12px 0 10px}
+.mlab-bar-in{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.mlab-k{color:var(--spark)}
+.mlab-btns{display:flex;gap:8px;flex-wrap:wrap}
+.mlab-btns button{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;background:none;border:1px solid var(--lined);color:var(--dim);border-radius:99px;padding:7px 14px;cursor:pointer;transition:all .25s}
+.mlab-btns button:hover{color:var(--paper);border-color:var(--dim)}
+.mlab-btns button.on{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.mlab-replay{margin-left:auto;background:none;border:1px dashed var(--lined);color:var(--dim);border-radius:99px;padding:7px 14px;cursor:pointer;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase}
+.mlab-replay:hover{color:var(--paper);border-color:var(--dim)}
+.mlab-desc{color:var(--dim);padding-top:8px;font-size:10px}
+.mlab-title{padding:13vh 0 10vh;max-width:1380px}
+.mlab-title .mk{display:block;color:var(--spark)}
+.mh{font-weight:var(--dispw);font-size:clamp(44px,7vw,104px);line-height:.94;letter-spacing:-.035em;text-transform:uppercase;margin-top:20px}
+.mh .serif,.mcta .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.mh .spark{color:var(--spark)}
+.mline{display:block;overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em} /* mask keeps descender room (CSS-MAP rule) */
+.mline .mi{display:block}
+.mlede{margin-top:26px;color:var(--dim);max-width:52ch;font-size:clamp(16px,1.35vw,19px);line-height:1.6}
+.mimg{margin-top:7vh;position:relative;overflow:hidden}
+.mimg img{width:100%;aspect-ratio:21/9;object-fit:cover;display:block}
+.mimg .cap{display:block;padding:10px 2px;color:var(--dim);font-size:10px}
+.mlab-stats{position:relative}
+.mlab-duo{padding:9vh 0}
+.mlab-cta{padding:11vh 0 13vh;background:var(--ink)}
+.mcta{font-weight:var(--dispw);font-size:clamp(34px,4.6vw,66px);line-height:.98;letter-spacing:-.03em;text-transform:uppercase}
+.mlab-cta .talk{display:inline-flex;margin-top:34px}
+
+/* base state: hidden until .in (per mode below); reduced-motion = everything on */
+.mlab .m-el{will-change:transform,opacity,filter}
+@media (prefers-reduced-motion:reduce){.mlab .m-el,.mlab .m-el .mi,.mlab .m-el .w{opacity:1!important;transform:none!important;filter:none!important;animation:none!important;transition:none!important}}
+
+/* 01 SETTLE · soft fade, 12px lift, blur clears (block-level, no masks) */
+[data-motion="settle"] .m-el{opacity:0;transform:translateY(14px);filter:blur(6px);transition:opacity .9s cubic-bezier(.25,.8,.3,1) var(--d,0s),transform .9s cubic-bezier(.25,.8,.3,1) var(--d,0s),filter .9s cubic-bezier(.25,.8,.3,1) var(--d,0s)}
+[data-motion="settle"] .m-el.in{opacity:1;transform:none;filter:none}
+
+/* 02 RISE · the masked line rise, re-timed (expo ease, short travel, real stagger) */
+[data-motion="rise"] .m-el{opacity:0;transition:opacity .01s var(--d,0s)}
+[data-motion="rise"] .m-el.in{opacity:1}
+[data-motion="rise"] .mline .mi{transform:translateY(118%);transition:transform 1.05s cubic-bezier(.19,1,.22,1) var(--d,0s)}
+[data-motion="rise"] .m-el.in .mi{transform:none}
+[data-motion="rise"] .mk.m-el,[data-motion="rise"] .mlede.m-el,[data-motion="rise"] .mimg.m-el,[data-motion="rise"] .stat.m-el,[data-motion="rise"] .pl.m-el,[data-motion="rise"] .talk.m-el{transform:translateY(22px);transition:opacity .8s cubic-bezier(.19,1,.22,1) var(--d,0s),transform .8s cubic-bezier(.19,1,.22,1) var(--d,0s)}
+[data-motion="rise"] .m-el.in{transform:none}
+
+/* 03 DRIFT · ambient float-up entries; JS adds continuous parallax counter-drift */
+[data-motion="drift"] .m-el{opacity:0;transform:translateY(56px) scale(.985);transition:opacity 1.15s cubic-bezier(.22,1,.36,1) var(--d,0s),transform 1.15s cubic-bezier(.22,1,.36,1) var(--d,0s)}
+[data-motion="drift"] .m-el.in{opacity:1;transform:none}
+[data-motion="drift"] .mimg img{transform:scale(1.12)} /* headroom for the counter-drift */
+
+/* 04 LOCK · the title segment pins; scroll assembles it (JS drives --p).
+   Order matters: the blanket .m-el neutralizer comes FIRST so the calc
+   rules below win the tie; post-pin sections keep the rise entrance. */
+[data-motion="lock"] .m-el{opacity:1}
+[data-motion="lock"] .mlab-lockseg{height:240svh}
+[data-motion="lock"] .mlab-stage{position:sticky;top:0;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+[data-motion="lock"] .mlab-title{padding:0}
+[data-motion="lock"] .mimg img{aspect-ratio:auto;height:min(30svh,340px);width:100%;object-fit:cover} /* stage must fit 100svh */
+[data-motion="lock"] .mh .mline:nth-child(1) .mi{transform:translateX(calc((1 - var(--p,0)) * -26%));opacity:calc(var(--p,0) * 2)}
+[data-motion="lock"] .mh .mline:nth-child(2) .mi{transform:translateX(calc((1 - var(--p,0)) * 26%));opacity:calc(var(--p,0) * 2)}
+[data-motion="lock"] .mk{opacity:calc(var(--p,0) * 3 - .2)}
+[data-motion="lock"] .mlede{opacity:calc(var(--p,0) * 2.4 - 1);transform:translateY(calc((1 - var(--p,0)) * 30px))}
+[data-motion="lock"] .mimg{opacity:calc(var(--p,0) * 2.6 - 1.3);transform:scale(calc(.86 + var(--p,0) * .14));transform-origin:50% 80%}
+[data-motion="lock"] .mlab-stats .m-el,[data-motion="lock"] .mlab-duo .m-el,[data-motion="lock"] .mlab-cta .m-el{opacity:0;transition:opacity .8s cubic-bezier(.19,1,.22,1) var(--d,0s),transform .8s cubic-bezier(.19,1,.22,1) var(--d,0s);transform:translateY(22px)}
+[data-motion="lock"] .mlab-stats .m-el.in,[data-motion="lock"] .mlab-duo .m-el.in,[data-motion="lock"] .mlab-cta .m-el.in{opacity:1;transform:none}
+
+/* 05 SNAP · hard word flips, images stamp with an outline flash, no soft tweens */
+[data-motion="snap"] .m-el{opacity:0}
+[data-motion="snap"] .m-el.in{opacity:1}
+[data-motion="snap"] .m-el .w{visibility:hidden}
+[data-motion="snap"] .m-el.in .w{visibility:visible;animation:mSnapW .01s steps(1) both;animation-delay:calc(var(--d,0s) + var(--wd,0s))}
+[data-motion="snap"] .mimg.m-el.in,[data-motion="snap"] .pl.m-el.in{animation:mStamp .34s steps(2) var(--d,0s) both}
+[data-motion="snap"] .pl.m-el.in img{animation:mSettleRot .5s cubic-bezier(.34,1.56,.64,1) calc(var(--d,0s) + .1s) both}
+[data-motion="snap"] .stat.m-el.in b{animation:mStamp .3s steps(2) var(--d,0s) both}
+@keyframes mSnapW{from{visibility:hidden}to{visibility:visible}}
+@keyframes mStamp{0%{outline:2px solid var(--spark);outline-offset:6px;transform:scale(1.02)}100%{outline:0 solid transparent;outline-offset:0;transform:none}}
+@keyframes mSettleRot{from{transform:rotate(.5deg)}to{transform:none}}
+
+@media (max-width:680px){.mlab-replay{margin-left:0}.mimg img{aspect-ratio:16/10}}
+</style>
+
+<script is:inline>
+/* MOTION LAB engine · Kit-only. Modes restyle the same .m-el set; IO drives
+   entrances, rAF drives drift parallax + the lock scrub. Persist: mnmt-mlab. */
+(function(){
+  var lab=document.getElementById('mlab');if(!lab)return;
+  var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var DESC={
+    settle:"01 · Everything settles in: soft fade, small lift, blur clears. Calm, fast, invisible.",
+    rise:"02 · The masked line rise, re-timed: expo ease, short travel, honest stagger. The current grammar done right.",
+    drift:"03 · Ambient parallax: elements float up on entry, media counter-drifts as you scroll. Never stops moving, never shouts.",
+    lock:"04 · The screen locks and scroll assembles the thesis: lines slide in from the wings, the frame scales up, then the page lets go.",
+    snap:"05 · No tweens. Words flip on like a slate board, frames stamp with a flash, everything lands with attitude."
+  };
+  var desc=document.getElementById('mlabDesc'),btns=[].slice.call(lab.querySelectorAll('.mlab-btns button'));
+  var els=[].slice.call(lab.querySelectorAll('.m-el'));
+  var lockseg=document.getElementById('mlabLockseg');
+
+  // word delays for SNAP (checkerboard-ish flip order)
+  [].slice.call(lab.querySelectorAll('.m-el')).forEach(function(el){
+    [].slice.call(el.querySelectorAll('.w')).forEach(function(w,i){w.style.setProperty('--wd',(i*0.07+((i%3)*0.02))+'s');});
+  });
+
+  // stat count-up on entry (all modes but lock-scrub; lock counts by progress)
+  function countStat(b,t){ // t: 0..1
+    var n=+b.getAttribute('data-n'),fmt=b.getAttribute('data-fmt');
+    var v=Math.round(n*t);
+    if(fmt==='k')b.textContent=(v>=1000?(Math.round(v/100)/10)+'K':v)+(t>=1?'+':'');
+    else if(fmt==='x')b.textContent=v+'×';
+    else if(fmt==='range')b.textContent='2→'+v+(t>=1?'+':'');
+    else if(fmt==='emmy')b.textContent=t>=1?'Emmy':['E','Em','Emm','Emmy'][Math.min(3,Math.floor(t*4))];
+  }
+  function animateStats(){
+    if(reduced)return;
+    [].slice.call(lab.querySelectorAll('.stat b[data-n]')).forEach(function(b){
+      var st=null;
+      function step(ts){if(!st)st=ts;var t=Math.min(1,(ts-st)/900);countStat(b,t);if(t<1)requestAnimationFrame(step);}
+      requestAnimationFrame(step);
+    });
+  }
+
+  // entrance observer
+  var io;
+  function observe(){
+    if(io)io.disconnect();
+    io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        if(e.target.classList.contains('stat'))animateStats._once||(animateStats(),animateStats._once=true);
+        io.unobserve(e.target);
+      }
+    });},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el){io.observe(el);});
+  }
+
+  function mode(){return lab.getAttribute('data-motion');}
+  function reset(){
+    animateStats._once=false;
+    els.forEach(function(el){el.classList.remove('in');});
+    // force reflow so re-added .in re-runs transitions/animations
+    void lab.offsetHeight;
+    if(reduced){els.forEach(function(el){el.classList.add('in');});return;}
+    observe();
+  }
+
+  // picker
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    btns.forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+    lab.setAttribute('data-motion',b.getAttribute('data-mo'));
+    try{localStorage.setItem('mnmt-mlab',b.getAttribute('data-mo'));}catch(e){}
+    desc.textContent=DESC[b.getAttribute('data-mo')];
+    reset();
+  });});
+  var saved=null;try{saved=localStorage.getItem('mnmt-mlab');}catch(e){}
+  if(saved&&DESC[saved]){var b=btns.filter(function(x){return x.getAttribute('data-mo')===saved;})[0];if(b)b.click();}
+
+  document.getElementById('mlabReplay').addEventListener('click',function(){
+    var top=lab.getBoundingClientRect().top+scrollY-60;
+    scrollTo({top:top,behavior:'auto'});
+    reset();
+  });
+
+  // rAF: drift parallax + lock scrub (scoped to the lab, cheap when idle)
+  var ticking=false;
+  function frame(){
+    ticking=false;
+    var m=mode();
+    if(reduced)return;
+    if(m==='drift'){
+      var img=lab.querySelector('.mimg img');
+      if(img){var r=img.parentElement.getBoundingClientRect();
+        var t=(r.top+r.height/2-innerHeight/2)/innerHeight; // -0.5..0.5-ish
+        img.style.transform='scale(1.12) translateY('+(t*7)+'%)';}
+      var fa=lab.querySelector('.mfloat-a'),fb=lab.querySelector('.mfloat-b');
+      [[fa,-4.5],[fb,4.5]].forEach(function(p){if(!p[0])return;var r=p[0].getBoundingClientRect();
+        var t=(r.top+r.height/2-innerHeight/2)/innerHeight;
+        p[0].style.setProperty('transform','translateY('+(t*p[1]*10)+'px)');});
+      var mh=lab.querySelector('.mh');
+      if(mh){var r2=mh.getBoundingClientRect();var t2=(r2.top-innerHeight*.3)/innerHeight;
+        if(mh.parentElement.querySelector('.mk'))mh.style.transform='translateY('+(Math.max(-1,Math.min(1,t2))*-14)+'px)';}
+    } else {
+      var img2=lab.querySelector('.mimg img');if(img2)img2.style.transform='';
+      ['.mfloat-a','.mfloat-b','.mh'].forEach(function(s){var el=lab.querySelector(s);if(el)el.style.transform='';});
+    }
+    if(m==='lock'&&lockseg){
+      var r3=lockseg.getBoundingClientRect();
+      var total=lockseg.offsetHeight-innerHeight;
+      var p=total>0?Math.max(0,Math.min(1,-r3.top/total)):1;
+      lockseg.style.setProperty('--p',p.toFixed(4));
+      [].slice.call(lab.querySelectorAll('.mlab-stats .stat b[data-n]')).forEach(function(b){/* stats flow post-pin normally */});
+    }
+  }
+  function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(frame);}}
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll,{passive:true});
+
+  if(reduced){els.forEach(function(el){el.classList.add('in');});}
+  else observe();
+  onScroll();
+})();
+</script>
 
 <PageFooter tag="The kit · element library" />
 </body>
