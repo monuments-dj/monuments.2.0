@@ -80,7 +80,15 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
-## Active work (2026-07-12 early): Kit = FULL style library (21 elements + pattern index)
+## Active work (2026-07-12 mid): Turnstile + Flow State batch shipped
+Flow State: BTS un-squished (needs intrinsic width/height for the packer), missed intro +
+IG proof (real @sonyelectronics posts) at top, exact credit copy CENTERED, in home reel.
+Stat bands CENTERED on all work pages. Turnstile: verbatim Concept/Design/Deliver word
+switcher (Kit ELEMENT 22) + clean white 3-wide product grid + vertical MIC CHECK gutter text.
+⚠️ NEW RULE: masonry galleries MUST ship intrinsic width/height on every img/video or the
+PageFooter packer collapses rows (the Flow State squish). ⚠️ VERIFY-with-DJ items in TODO.
+
+## Active work (2026-07-12 early, historical): Kit = FULL style library (21 elements + pattern index)
 /template now specs every work-page element family: film poster+snip, contact sheet,
 stat beat, social wall, ledger rows, NextFile, page chrome, pattern index (14-21) on
 top of 01-13. Fix elements THERE first, then propagate. Theater testimonials baked

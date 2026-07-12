@@ -18,6 +18,30 @@ lives in Testimonials.astro). Reach out to:
 When a quote lands: paste into `q` for that person in Testimonials.astro (serif can
 return to the quote face then - sans is the interim per DJ).
 
+## 🚀 SESSION 2026-07-12 (part 2 · Turnstile + Flow State batch) SHIPPED
+Commits 063fad4 (Flow State) + c0e1996 (Turnstile/Kit). All verified 1440+390, motioncheck ALL PASS.
+- **Flow State fixed hard:** BTS un-squished (root cause = missing width/height attrs
+  starved the masonry packer; injected real dims on all 24 tags). Added the MISSED intro
+  copy verbatim ("Sony partnered with AOV...trusting the process...moments of pause").
+  IG social proof bumped to the TOP: 3 real @sonyelectronics posts (fs-20/13/19) w/ real
+  likes (31,767/39,061/61,372) as receipt cards on ink → breaks the "one big white section."
+  Credit paragraph = DJ's EXACT wording ("...showcased in their best light"), CENTERED.
+  Added to home reel ("Built to find your flow").
+- **Stat bands CENTERED across all 17 work pages** + hire page Emmy/Rockys/4x band.
+- **Turnstile:** Concept/Design/Deliver is now an auto-cycling word switcher with the
+  brand-deck copy VERBATIM (was paraphrased + missing Design/Deliver + Neumann/Shure).
+  Product gallery rebuilt to the clean white 3-wide reference look (contact-sheet chrome +
+  "Check check" stamp gone); vertical "MIC CHECK · ONE TWO" in the left gutter.
+  Kit gains ELEMENT 22 · WORD SWITCHER (reusable pattern).
+
+## ⛔ NEEDS DJ / VERIFY (2026-07-12)
+- **VERIFY the Flow State credit copy** is right (DJ asked to confirm): it's on the page
+  verbatim + centered now. His exact text is live.
+- **MIC CHECK text:** built as VERTICAL gutter text (matches what's visible in the ref).
+  DJ said "spinning" — confirm if he wants it literally rotating/animated vs. vertical.
+- **Turnstile deck copy:** answer to "did you get all this info on there?" was NO before
+  (paraphrased, no Design/Deliver, no Neumann/Shure); now YES, verbatim in the switcher.
+
 ## ⛔ BLOCKED ON DJ (2026-07-12 drop)
 - MSI cutdowns: the link was dropbox.com/home/... (DJ's private view, not shareable).
   Need an /scl/fo/ SHARE link to: Art Of Visuals/MSI/Creative By Design/FINALS/Cutdowns
