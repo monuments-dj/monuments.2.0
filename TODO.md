@@ -21,8 +21,13 @@ return to the quote face then - sans is the interim per DJ).
 ## 🏗️ NEW CASE WORK TO ADD (DJ 2026-07-11)
 - [ ] Boise Public Schools project (with Stoltz Marketing Group) - needs CASE-INTAKE.md sheet
 - [ ] Lumira Healthcare - needs CASE-INTAKE.md sheet
-- [ ] Refine /work/art-of-visuals further (first rework pass DONE 2026-07-11 late:
-      the page now pulls all AOV-era campaigns in; DJ reviews + feeds stats/assets)
+- [ ] Refine /work/art-of-visuals further (rework pass 1 = book of business; pass 2
+      2026-07-12 = DJ's content drop LANDED: header loop (:04-:20 of QZEZIVB5AOE,
+      self-hosted + parallax), AOV: To the Point trio (3 of 10 verticals, reelbox),
+      MSI LA BTS sheet (13 of 47 selects - rest in the Dropbox if more wanted),
+      /snips/art-of-visuals.mp4 on home card + /work row + grid card)
+      STILL OPEN: the other 7 To the Point episodes if DJ wants the full season;
+      remaining 34 MSI frames on his word
 
 ## 🚀 THIS SESSION part 3 (2026-07-11 night · DJ's 7-item batch, all pushed + live)
 Commits da6df23→3382fb2, each verified individually (build + resting-offset shots):
