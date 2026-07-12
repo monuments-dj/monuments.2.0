@@ -8,16 +8,17 @@ import path from 'node:path';
 const SITE = 'https://monuments-2-0.vercel.app';
 const IMG = `${SITE}/og/card.jpg`;
 
+// adopted from the pages' original hand-written meta where it existed
 const DESCS = {
   '/':             'The creative portfolio of DJ Ramirez. Creative Director. Integrated campaigns, film, stills, experiential. LA / Boise.',
-  '/work':         'Selected work. Campaigns across film, stills, and experiential.',
-  '/about':        'Less agency, more rock and roll. The story, the crew, and the receipts.',
-  '/capabilities': 'What I do, what I refuse to fake, and the crew behind it.',
-  '/contact':      'Tell me what you’re building. LA / Boise.',
-  '/photography':  'The photo archive. A decade of frames from sets and streets.',
+  '/work':         'Selected work by DJ Ramirez, creative director. Campaigns, films, and stills for Sony, Adorama, Intel, and more.',
+  '/about':        'DJ Ramirez, creative director. I run Monuments with a small crew and a long list of friends. Integrated campaigns, film, stills, and experiential, built to be remembered.',
+  '/capabilities': 'What I do and how I work. Creative direction, brand building, integrated campaigns, film, stills, experiential, and AI systems. Less agency, more rock and roll.',
+  '/contact':      "Tell me what you're building. One conversation, no deck required. DJ Ramirez / Monuments, based in LA and Boise.",
+  '/photography':  'Photography by DJ Ramirez. Stills from campaigns, sets, and the road. One output of directed work, never the whole story.',
   '/ai':           'AI is a tool, not a solution. Tools don’t buy taste.',
   '/giving':       'Some stories are not for sale.',
-  '/hire':         'DJ Ramirez. Creative Director. Open to senior creative roles.',
+  '/hire':         'DJ Ramirez, Creative Director. Open to senior creative roles inside an agency. Emmy-winning work, 4x agency revenue, integrated campaigns from concept to delivery.',
   '/template':     'The Kit. The element library behind the site.',
 };
 const CASE_DESC = 'Case study from the creative portfolio of DJ Ramirez, Creative Director.';

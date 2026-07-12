@@ -2,10 +2,11 @@ import { chromium } from 'playwright';
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 const page = await ctx.newPage();
-const routes = ['ac-boise','adorama-music','cwi-lets-get-started','donut-zumiez','sony-flow-state','sony-this-moment','waffle-me-up','on-camera','buck-the-quo','know-vape'];
+const BASE = process.argv[2] || 'http://localhost:4321';
+const routes = ['/work/ac-boise','/work/adorama-music','/work/cwi-lets-get-started','/work/donut-zumiez','/work/sony-flow-state','/work/sony-this-moment','/work/waffle-me-up','/work/on-camera','/work/buck-the-quo','/work/know-vape','/capabilities'];
 let fails = 0;
 for (const r of routes) {
-  await page.goto('http://localhost:4321/work/' + r, { waitUntil: 'domcontentloaded' }).catch(() => null);
+  await page.goto(BASE + r, { waitUntil: 'domcontentloaded' }).catch(() => null);
   await page.waitForTimeout(1200);
   const res = await page.evaluate(async () => {
     const vids = [...document.querySelectorAll('video.pvid')];
