@@ -3,7 +3,7 @@ const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 const page = await ctx.newPage();
 const BASE = process.argv[2] || 'http://localhost:4321';
-const routes = ['/work/ac-boise','/work/adorama-music','/work/art-of-visuals','/work/cwi-lets-get-started','/work/donut-zumiez','/work/sony-flow-state','/work/sony-this-moment','/work/waffle-me-up','/work/on-camera','/work/buck-the-quo','/work/know-vape','/capabilities'];
+const routes = ['/work/ac-boise','/work/adorama-music','/work/art-of-visuals','/work/cwi-lets-get-started','/work/donut-zumiez','/work/sony-flow-state','/work/sony-this-moment','/work/sony-xperia-summer','/work/waffle-me-up','/work/on-camera','/work/buck-the-quo','/work/know-vape','/capabilities'];
 let fails = 0;
 for (const r of routes) {
   await page.goto(BASE + r, { waitUntil: 'domcontentloaded' }).catch(() => null);
