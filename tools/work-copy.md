@@ -13,7 +13,8 @@ The named summary text is the **logline**.
 | Brand | 22 | header (the product/campaign name) |
 | Title | 34 | the big hero headline (keep it punchy) |
 | What I did (role) | 44 | mono line under the title |
-| Logline | 150 | hover cards, slider, work-index preview, home "built to be" |
+| Logline | 210 | hover cards (3 lines), slider, work-index preview, home "built to be" |
+| Insight | ~90 | the one idea the campaign is built on (Kit #el-insight) — one per page |
 
 ## The 19 projects (in recruiter order)
 
@@ -23,7 +24,8 @@ The named summary text is the **logline**.
 - **Logo:** art-of-visuals
 - **Title:** I grew the agency 4x.  	(21/34)
 - **What I did:** creative director  	(17/44)
-- **Logline:** At Art of Visuals I led creative as the agency scaled its revenue four times over in four years, across the work that made it repeatable: Sony, Intel, MSI, Adorama, and more.  	(174/150  ⚠ OVER)
+- **Logline:** At Art of Visuals I led creative as the agency scaled its revenue four times over in four years, across the work that made it repeatable: Sony, Intel, MSI, Adorama, and more.  	(174/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 02. sony-flow-state
 - **Client:** Sony  	(4/28)
@@ -31,7 +33,8 @@ The named summary text is the **logline**.
 - **Logo:** sony
 - **Title:** Find your flow.  	(15/34)
 - **What I did:** director + creative director  	(28/44)
-- **Logline:** Sony put the WH-1000XM3 at the center of the creative process. I pitched Flow State: five creatives, each stuck in the noise until the headphones bring the flow.  	(161/150  ⚠ OVER)
+- **Logline:** Sony put the WH-1000XM3 at the center of the creative process. I pitched Flow State: five creatives, each stuck in the noise until the headphones bring the flow.  	(161/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 03. adorama-music
 - **Client:** Adorama  	(7/28)
@@ -39,7 +42,8 @@ The named summary text is the **logline**.
 - **Logo:** adorama
 - **Title:** Wherever you're from.  	(21/34)
 - **What I did:** director + creative direction  	(29/44)
-- **Logline:** The film that launched Adorama Music, part of the #CreateNoMatterWhat campaign, on one idea: gear is only as good as the stories it helps you tell.  	(147/150)
+- **Logline:** The film that launched Adorama Music, part of the #CreateNoMatterWhat campaign, on one idea: gear is only as good as the stories it helps you tell.  	(147/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 04. cwi-lets-get-started
 - **Client:** College of Western Idaho  	(24/28)
@@ -47,7 +51,8 @@ The named summary text is the **logline**.
 - **Logo:** cwi
 - **Title:** Let's get started.  	(18/34)
 - **What I did:** writer · casting  	(16/44)
-- **Logline:** College of Western Idaho's enrollment campaign with Against. I write and cast the program spots, cut for every screen, for a college on nine straight semesters of growth.  	(170/150  ⚠ OVER)
+- **Logline:** College of Western Idaho's enrollment campaign with Against. I write and cast the program spots, cut for every screen, for a college on nine straight semesters of growth.  	(170/210)
+- **Insight** (the idea the campaign is built on): The hardest part of college isn't the classes. It's deciding to start.
 
 ### 05. msi-creative-by-design
 - **Client:** MSI  	(3/28)
@@ -55,7 +60,8 @@ The named summary text is the **logline**.
 - **Logo:** msi
 - **Title:** Creative by design.  	(19/34)
 - **What I did:** creative direction  	(18/44)
-- **Logline:** MSI built a laptop for creators, and we launched it on Times Square digital boards, cut into 60, 30, 15, and 6-second ads.  	(122/150)
+- **Logline:** MSI built a laptop for creators, and we launched it on Times Square digital boards, cut into 60, 30, 15, and 6-second ads.  	(122/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 06. blue-cross
 - **Client:** Blue Cross of Idaho  	(19/28)
@@ -63,7 +69,8 @@ The named summary text is the **logline**.
 - **Logo:** blue-cross
 - **Title:** Real people.  	(12/34)
 - **What I did:** creative direction · talent direction  	(37/44)
-- **Logline:** A campaign that authentically represented Blue Cross's customers, the diversity and individuality of real Idahoans, in a human way. It ran from 2020 through 2024.  	(162/150  ⚠ OVER)
+- **Logline:** A campaign that authentically represented Blue Cross's customers, the diversity and individuality of real Idahoans, in a human way. It ran from 2020 through 2024.  	(162/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 07. sony-xperia
 - **Client:** Sony  	(4/28)
@@ -71,7 +78,8 @@ The named summary text is the **logline**.
 - **Logo:** sony
 - **Title:** Sony Xperia  	(11/34)
 - **What I did:** directing, photo + strategy  	(27/44)
-- **Logline:** Sony kept coming back to Art of Visuals for its Xperia launches, and I creative directed the run: the PRO-I, the 1 III, and a summer with the 5 IV.  	(147/150)
+- **Logline:** Sony kept coming back to Art of Visuals for its Xperia launches, and I creative directed the run: the PRO-I, the 1 III, and a summer with the 5 IV.  	(147/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 08. know-vape
 - **Client:** Idaho Public Television  	(23/28)
@@ -79,7 +87,8 @@ The named summary text is the **logline**.
 - **Logo:** — (none on file)
 - **Title:** Be smart. Don't start.  	(22/34)
 - **What I did:** directed the films  	(18/44)
-- **Logline:** A statewide anti-vaping campaign for Idaho Public Television that tells the truth about Big Tobacco instead of wagging a finger. It won a 2024 Northwest Regional Emmy.  	(167/150  ⚠ OVER)
+- **Logline:** A statewide anti-vaping campaign for Idaho Public Television that tells the truth about Big Tobacco instead of wagging a finger. It won a 2024 Northwest Regional Emmy.  	(167/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 09. sony-xm5
 - **Client:** Sony  	(4/28)
@@ -87,7 +96,8 @@ The named summary text is the **logline**.
 - **Logo:** sony
 - **Title:** Creativity starts with inspiration.  	(35/34  ⚠ OVER)
 - **What I did:** creative director · casting + scripts  	(37/44)
-- **Logline:** Sony WH-1000XM5 national influencer campaign. Three artists, one arc, 1.3M impressions, giving LatinX creators a voice.  	(119/150)
+- **Logline:** Sony WH-1000XM5 national influencer campaign. Three artists, one arc, 1.3M impressions, giving LatinX creators a voice.  	(119/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 10. buck-the-quo
 - **Client:** Albertson Family Foundation  	(27/28)
@@ -95,7 +105,8 @@ The named summary text is the **logline**.
 - **Logo:** — (none on file)
 - **Title:** Buck the Quo.  	(13/34)
 - **What I did:** shooter · editor · field mentor  	(31/44)
-- **Logline:** A statewide campaign to lift Idaho's college-going rate by talking with teens, not at them. I shot it, then became a field mentor to 18,000 teens in one summer.  	(160/150  ⚠ OVER)
+- **Logline:** A statewide campaign to lift Idaho's college-going rate by talking with teens, not at them. I shot it, then became a field mentor to 18,000 teens in one summer.  	(160/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 11. sony-this-moment
 - **Client:** Sony  	(4/28)
@@ -103,7 +114,8 @@ The named summary text is the **logline**.
 - **Logo:** sony
 - **Title:** This moment.  	(12/34)
 - **What I did:** creative direction  	(18/44)
-- **Logline:** Sony's WH-1000XM4 aren't just headphones, they're a way to build a moment of calm anywhere. I teamed with Sony to capture that at Art of Visuals.  	(145/150)
+- **Logline:** Sony's WH-1000XM4 aren't just headphones, they're a way to build a moment of calm anywhere. I teamed with Sony to capture that at Art of Visuals.  	(145/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 12. flashpoint
 - **Client:** Adorama  	(7/28)
@@ -111,7 +123,8 @@ The named summary text is the **logline**.
 - **Logo:** adorama
 - **Title:** Imagine. Illuminate. Create.  	(28/34)
 - **What I did:** rebrand · website · socials  	(27/44)
-- **Logline:** Adorama's private-label lighting and photo gear: strong reputation, dated look. I rebuilt the brand.  	(100/150)
+- **Logline:** Adorama's private-label lighting and photo gear: strong reputation, dated look. I rebuilt the brand.  	(100/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 13. turnstile
 - **Client:** Turnstile Audio  	(15/28)
@@ -119,7 +132,8 @@ The named summary text is the **logline**.
 - **Logo:** — (none on file)
 - **Title:** Built to be heard.  	(18/34)
 - **What I did:** brand identity + launch  	(23/44)
-- **Logline:** Turnstile Audio wanted a brand that felt clean and simple, inspired by the legendary audio brands, but fresh enough to stand out today.  	(135/150)
+- **Logline:** Turnstile Audio wanted a brand that felt clean and simple, inspired by the legendary audio brands, but fresh enough to stand out today.  	(135/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 14. dw-drums
 - **Client:** DW Drums  	(8/28)
@@ -127,7 +141,8 @@ The named summary text is the **logline**.
 - **Logo:** dw-drums
 - **Title:** Engineer approved. Drummer tested.  	(34/34)
 - **What I did:** creative direction + design  	(27/44)
-- **Logline:** DW built a kit that refuses to choose: a real acoustic set that's also a full electronic rig. So every layout tears down the middle and lets both sides share the page.  	(167/150  ⚠ OVER)
+- **Logline:** DW built a kit that refuses to choose: a real acoustic set that's also a full electronic rig. So every layout tears down the middle and lets both sides share the page.  	(167/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 15. donut-zumiez
 - **Client:** Donut Media  	(11/28)
@@ -135,7 +150,8 @@ The named summary text is the **logline**.
 - **Logo:** donut-media
 - **Title:** Donut x Zumiez  	(14/34)
 - **What I did:** animation + video edit  	(22/44)
-- **Logline:** Launch films for the Donut x Zumiez drop, a car-culture media brand meeting a streetwear retailer, built to live natively in feeds.  	(131/150)
+- **Logline:** Launch films for the Donut x Zumiez drop, a car-culture media brand meeting a streetwear retailer, built to live natively in feeds.  	(131/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 16. on-camera
 - **Client:** Art of Visuals  	(14/28)
@@ -143,23 +159,26 @@ The named summary text is the **logline**.
 - **Logo:** art-of-visuals
 - **Title:** On camera.  	(10/34)
 - **What I did:** host + presenter  	(16/44)
-- **Logline:** I direct, but I'm just as comfortable in front of the camera. I've fronted Art of Visuals' audience: 1.9M on Instagram and YouTube, plus a weekly podcast.  	(154/150  ⚠ OVER)
+- **Logline:** I direct, but I'm just as comfortable in front of the camera. I've fronted Art of Visuals' audience: 1.9M on Instagram and YouTube, plus a weekly podcast.  	(154/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 17. ac-boise
 - **Client:** AC Boise  	(8/28)
 - **Brand:** —  	(0/22)
-- **Logo:** — (none on file)
+- **Logo:** ac-boise
 - **Title:** This kit is Boise.  	(18/34)
 - **What I did:** directed the launch film  	(24/44)
-- **Logline:** I directed the kit-reveal campaign for AC Boise, a USL League One club, with Hummel on the kits and Against on the brand. Don't reveal a jersey, reveal the city.  	(161/150  ⚠ OVER)
+- **Logline:** I directed the kit-reveal campaign for AC Boise, a USL League One club, with Hummel on the kits and Against on the brand. Don't reveal a jersey, reveal the city.  	(161/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 18. waffle-me-up
 - **Client:** Waffle Me Up  	(12/28)
 - **Brand:** —  	(0/22)
-- **Logo:** — (none on file)
+- **Logo:** waffle-me-up
 - **Title:** Waffle me up.  	(13/34)
 - **What I did:** creative director · brand + photo + web  	(39/44)
-- **Logline:** Waffle Me Up makes some of the best waffles anywhere, and wanted a brand that captured the passion, quality, and joy they bring to every bite.  	(142/150)
+- **Logline:** Waffle Me Up makes some of the best waffles anywhere, and wanted a brand that captured the passion, quality, and joy they bring to every bite.  	(142/210)
+- **Insight** (the idea the campaign is built on): — (needs one)
 
 ### 19. clothing-merch
 - **Client:** Various  	(7/28)
@@ -167,4 +186,5 @@ The named summary text is the **logline**.
 - **Logo:** — (none on file)
 - **Title:** Clothing design and marketing.  	(30/34)
 - **What I did:** creative director · concept to production  	(41/44)
-- **Logline:** For a range of clients, I've designed clothing and merch that connects with their brand story and feels genuinely wearable, from concept to production.  	(151/150  ⚠ OVER)
+- **Logline:** For a range of clients, I've designed clothing and merch that connects with their brand story and feels genuinely wearable, from concept to production.  	(151/210)
+- **Insight** (the idea the campaign is built on): — (needs one)

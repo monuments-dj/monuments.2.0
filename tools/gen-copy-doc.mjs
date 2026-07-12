@@ -1,5 +1,5 @@
 import { work } from '../src/data/work.js';
-const LIM = { client:28, brand:22, title:34, role:44, logline:150 };
+const LIM = { client:28, brand:22, title:34, role:44, logline:210 };
 const flag = (s='', lim) => { const n=(s||'').length; return `${n}/${lim}${n>lim?'  ⚠ OVER':''}`; };
 let md = `# Work header copy pass — the single source of truth
 
@@ -16,7 +16,8 @@ The named summary text is the **logline**.
 | Brand | 22 | header (the product/campaign name) |
 | Title | 34 | the big hero headline (keep it punchy) |
 | What I did (role) | 44 | mono line under the title |
-| Logline | 150 | hover cards, slider, work-index preview, home "built to be" |
+| Logline | 210 | hover cards (3 lines), slider, work-index preview, home "built to be" |
+| Insight | ~90 | the one idea the campaign is built on (Kit #el-insight) — one per page |
 
 ## The 19 projects (in recruiter order)
 `;
@@ -28,6 +29,8 @@ work.forEach((w, i) => {
   md += `- **Title:** ${w.title}  \t(${flag(w.title, LIM.title)})\n`;
   md += `- **What I did:** ${w.role}  \t(${flag(w.role, LIM.role)})\n`;
   md += `- **Logline:** ${w.logline}  \t(${flag(w.logline, LIM.logline)})\n`;
+  const ins = [w.insight, w.insightEm].filter(Boolean).join(' ');
+  md += `- **Insight** (the idea the campaign is built on): ${ins || '— (needs one)'}\n`;
 });
 import { writeFileSync } from 'fs';
 writeFileSync('tools/work-copy.md', md);
