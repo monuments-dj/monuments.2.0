@@ -85,8 +85,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* cobalt at-a-glance band */
 .statrow{background:var(--struct);color:rgb(var(--on-rgb));border-bottom:1px solid rgba(var(--on-rgb),.18)}
-.statrow>.in{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;padding:16px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66)}
-.statrow b{color:rgb(var(--on-rgb));font-weight:400}
+.statrow>.in{display:flex;justify-content:center;align-items:flex-end;gap:clamp(30px,4.6vw,64px);flex-wrap:wrap;padding:20px var(--pad) 18px}
+.statrow .stat b{display:block;font-weight:var(--dispw);font-size:clamp(24px,2.5vw,40px);letter-spacing:-.03em;line-height:.92;color:rgb(var(--on-rgb))}
+.statrow .stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66);display:block;margin-top:8px;max-width:26ch}
 
 /* story on paper */
 .paper{background:var(--paper);color:var(--ink)}
@@ -120,18 +121,23 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;object-position:50% 50%;will-change:transform}
 .break .cap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.92);background:rgba(22,21,20,.42);padding:6px 12px;backdrop-filter:blur(2px)}
 
-/* gallery: contact-sheet frames */
+/* gallery: clean masonry (contact-sheet vibe killed, DJ 2026-07-12) */
 .gal{padding:9vh 0}
-.gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:16px}
+.gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:26px}
 .gal .bar .mono b{color:var(--red)}
-.frames{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;grid-auto-flow:dense}
-.fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;opacity:0;transform:translateY(16px) rotate(-.6deg)}
-.frames.show .fr{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
-.fr img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.96)}
-.fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
-.frames.show .fr:hover{transform:rotate(-1deg) scale(1.03);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
-.fr.wide{grid-column:span 2}
-.fr.wide img{aspect-ratio:8/4.6}
+.bcmasonry{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;grid-auto-flow:dense;grid-auto-rows:1fr}
+.bcm{position:relative;grid-column:span 2;aspect-ratio:3/2;overflow:hidden;border-radius:6px;opacity:0;transform:translateY(18px)}
+.bcmasonry.show .bcm{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);transition-delay:var(--d,0ms)}
+.bcm img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.bcm:hover img{transform:scale(1.05)}
+/* popouts: DJ's picks + a few, span wider/taller */
+.bcm.pop{grid-column:span 3;aspect-ratio:3/2}
+.bcm.tall{grid-row:span 2;aspect-ratio:3/4}
+.bcm.hero-wide{grid-column:span 4;aspect-ratio:2/1}
+.bcm .pcap{position:absolute;left:12px;bottom:10px;z-index:2;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(22,21,20,.5);padding:4px 9px;backdrop-filter:blur(3px);opacity:0;transition:opacity .3s}
+.bcm.pop .pcap{opacity:1}
+@media (max-width:900px){.bcmasonry{grid-template-columns:repeat(4,1fr)}.bcm.hero-wide{grid-column:span 4}}
+@media (max-width:560px){.bcmasonry{grid-template-columns:1fr 1fr}.bcm,.bcm.pop,.bcm.hero-wide{grid-column:span 2}.bcm.tall{grid-row:span 1;aspect-ratio:3/2}}
 
 /* quote on rose */
 .quote{background:var(--spark);color:var(--ink);padding:15vh 0}
@@ -195,38 +201,38 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="corners">
   <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
   <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/about">About</a><a href="/capabilities">Capabilities</a><a href="/contact">Contact</a></span>
-  <span class="c3">MC-2023-04 · Blue Cross of Idaho · with OMEK</span>
+  <span class="c3">MC-2020-04 · Blue Cross of Idaho · with OMEK</span>
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
 <div class="over">
 <header class="hero">
-  <img loading="lazy" decoding="async" src="/case-studies/blue-cross/bc-2.jpg" alt="Blue Cross of Idaho campaign still">
+  <img src="/case-studies/blue-cross/bc-hero.jpg" alt="Blue Cross of Idaho campaign: a Boise firefighter in front of Engine 2" fetchpriority="high" width="2200" height="1467">
   <div class="t">
     <span class="ln"><span>Real</span></span>
     <span class="ln"><span><span class="serif">people</span><span class="spark">.</span></span></span>
-    <RoleTag text="creative direction" />
+    <RoleTag text="creative direction · talent direction" />
   </div>
   <div class="kck">
     <b>\ Case file</b><br>
     Blue Cross of Idaho × OMEK<br>
-    Stills campaign · 2023
+    Launched 2020 · still running in 2024
   </div>
   <div class="nfo">
     <span class="h">NFO</span><br>
     Client · Blue Cross of Idaho<br>
     Role · Creative Direction<br>
     Agency · OMEK<br>
-    Frame · MC-2023-04
+    Frame · MC-2020-04
   </div>
 </header>
 
 <div class="statrow">
   <div class="wrap in">
-    <span><b>Client</b> · Blue Cross of Idaho</span>
-    <span><b>Role</b> · Creative Direction</span>
-    <span><b>Deliverables</b> · Campaign stills</span>
-    <span><b>Year</b> · 2023</span>
+    <div class="stat rv"><b>4 years</b><span>of usage · licensing extended for success</span></div>
+    <div class="stat rv"><b>2020&ndash;24</b><span>launched, still in market</span></div>
+    <div class="stat rv"><b>OMEK</b><span>agency partner</span></div>
+    <div class="stat rv"><b>Real Idahoans</b><span>cast, not stock</span></div>
   </div>
 </div>
 
@@ -237,33 +243,34 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <h2>Make a health brand feel like the <span class="serif">people it serves.</span></h2>
     </div>
     <div class="body rv">
-      <p>Blue Cross needed a campaign that authentically represented their most valued asset: their customers. The brief was to highlight the diversity and individuality of their customer base in a relatable, human way, with visuals that resonate emotionally by capturing everyday moments in a variety of settings.</p>
+      <p>Blue Cross needed to develop a campaign that authentically represented their most valued asset, their customers. They wanted to highlight the diversity and individuality of their customer base in a relatable, human way while reinforcing their brand's commitment to serving real people. The challenge was to create visuals that would resonate emotionally with audiences, capturing everyday moments in a variety of settings.</p>
+      <p>It landed. The campaign launched in 2020 and has kept evolving through 2024, with the licensing extended because it kept working, four years of a brand still showing up as the people it serves.</p>
     </div>
   </div>
 </section>
 
 <div class="break">
-  <img loading="lazy" decoding="async" class="plx" src="/case-studies/blue-cross/bc-28.jpg" alt="Blue Cross campaign photography">
+  <img loading="lazy" decoding="async" class="plx" src="/case-studies/blue-cross/gallery/bci-05.jpg" alt="Blue Cross campaign: sparks on the job" width="1800" height="1200">
   <span class="cap">✳ Blue Cross of Idaho · everyday moments, real settings</span>
 </div>
 
 <section class="paper">
   <div class="wrap story">
     <div class="side rv">
-      <span class="k mono">\ The job</span>
-      <h2>A week on location, person by <span class="serif">person.</span></h2>
+      <span class="k mono">\ My part</span>
+      <h2>Direction, casting, and the <span class="serif">final cut.</span></h2>
     </div>
     <div class="body rv">
-      <p>In partnership with OMEK agency, I helped with creative direction and assisted in execution of the campaign, from initial concept through final image selection. Over the course of a week, we captured authentic moments in a variety of locations: local shops, homes, and outdoor areas, highlighting the personal connection Blue Cross has with its customers.</p>
+      <p>In partnership with OMEK agency, I did creative direction on the campaign: image selection, casting, and a hand on the edits, and I directed the talent on set. Over about a week we captured authentic moments across a variety of locations, local shops, homes, and outdoor areas, so the personal connection Blue Cross has with its customers came through in every frame.</p>
     </div>
   </div>
 
   <div class="wrap gal">
     <div class="bar">
-      <span class="mono"><b>Contact sheet</b> · selects from the campaign</span>
-      <span class="mono" style="color:#8f8d88">23 frames · hover to inspect</span>
+      <span class="mono"><b>\ The campaign</b> · everyday people, real settings</span>
+      <span class="mono" style="color:#8f8d88">28 selects · four years in market</span>
     </div>
-    <div class="frames" id="frames"></div>
+    <div class="bcmasonry" id="frames"></div>
   </div>
 </section>
 
@@ -277,15 +284,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <section class="paper">
   <div class="wrap credits rv">
     <CallSheet
-      code="MC-2023-04"
+      code="MC-2020-04"
       sub="Blue Cross of Idaho · Real people · Stills campaign"
-      filed="MMXXIII"
+      filed="MMXX"
       tone="light"
       rows={[
         { k: 'Client', v: 'Blue Cross of Idaho' },
         { k: 'Agency', v: 'OMEK' },
-        { k: 'Creative Direction', v: 'DJ Ramirez', select: true },
-        { k: 'Format', v: 'Campaign stills · a week on location' },
+        { k: 'Creative Direction · Talent Direction', v: 'DJ Ramirez', select: true },
+        { k: 'Also', v: 'Casting · image selection · edit support' },
+        { k: 'Run', v: 'Launched 2020 · licensing extended through 2024' },
       ]}
     />
   </div>
@@ -303,15 +311,27 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/underfoot-->
 
 <script is:inline>
-// gallery: 9 real frames, wide frame every 4th
+// gallery: masonry of the real 28 (DJ 2026-07-12). bci-02 is the hero. Popouts
+// = DJ's picks (13 checkers, 24 grandpa) + the welder (06, his grid replacement).
 (function(){
-  const imgs=['bci-02', 'bci-03', 'bci-07', 'bci-08', 'bci-09', 'bci-10', 'bci-11', 'bci-12', 'bci-13', 'bci-14', 'bci-16', 'bci-17', 'bci-18', 'bci-19', 'bci-20', 'bci-21', 'bci-22', 'bci-23', 'bci-24', 'bci-25', 'bci-26', 'bci-27', 'bci-28'].map(n=>`/case-studies/blue-cross/gallery/${n}.jpg`);
+  const items=[
+    ['bci-11','hero-wide','The site at last light'],
+    ['bci-01','',''],['bci-13','pop','The checkers game'],['bci-10','',''],
+    ['bci-06','pop','Sparks on the rail'],['bci-07','tall',''],['bci-16','',''],
+    ['bci-24','pop','The bedtime story'],['bci-09','',''],['bci-18','',''],
+    ['bci-19','',''],['bci-03','',''],['bci-04','',''],['bci-05','',''],
+    ['bci-08','',''],['bci-12','',''],['bci-14','',''],['bci-15','',''],
+    ['bci-17','',''],['bci-20','',''],['bci-21','',''],['bci-22','',''],
+    ['bci-23','',''],['bci-25','',''],['bci-26','',''],['bci-27','',''],['bci-28','',''],
+  ];
   const el=document.getElementById('frames');
-  el.innerHTML=imgs.map((src,i)=>`
-    <figure class="fr${i%4===0?' wide':''}" style="--d:${i*45}ms">
-      <img src="${src}" alt="Blue Cross frame ${i+1}" loading="lazy">
-      <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · BCI ARCHIVE</figcaption>
-    </figure>`).join('');
+  el.innerHTML=items.map(([n,cls,cap],i)=>{
+    const dims = n==='bci-07' ? 'width="1200" height="1800"' : 'width="1800" height="1200"';
+    return `<figure class="bcm${cls?' '+cls:''}" style="--d:${i*35}ms">
+      <img src="/case-studies/blue-cross/gallery/${n}.jpg" ${dims} alt="Blue Cross of Idaho campaign${cap?': '+cap:''}" loading="lazy" decoding="async">
+      ${cap?`<figcaption class="pcap">${cap}</figcaption>`:''}
+    </figure>`;
+  }).join('');
   new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
 })();
 
