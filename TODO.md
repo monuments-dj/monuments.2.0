@@ -1,3 +1,35 @@
+# TODO - current state (2026-07-12 · Buck the Quo + CWI rebuild SHIPPED)
+
+## 🚀 SESSION 2026-07-12 (part 6 · BTQ + CWI real assets) SHIPPED
+Commit 1db81cc, pushed live. Downloaded DJ's Dropbox assets, transcoded with ffmpeg-static,
+verified in-browser. Research workflow (47 agents, adversarially verified) sourced the CWI stats.
+- **Buck the Quo:** header = his keep-pushing video · above-fold clip strip (5 clips he shot/cut) ·
+  outdated Drake Cooper imagery replaced with his own photos · poster-wall = full-screen brand break ·
+  killed the ugly I AM/I CAN/I WILL triad · rewrote 'My part' as maker-to-FIELD-MENTOR (his no-college
+  path, 18k teens in a summer, camera handoffs, ambassadors) · four-year run.
+- **CWI:** REMOVED all director/directed claims (he's writer + casting, with Tess) · replaced the
+  miscredited YouTube films with 6 self-hosted program spots (Fire/Public Safety/Arts+Humanities/
+  Technology/Business Admin/Mining) · added 'cut for every screen' demo (16:9/1:1/9:16) + a catalog ·
+  editing guide shown early · killed the giant hero asterisk + the contact sheet · swapped Against's
+  self-reported 4.4/5.0/98 for CWI's OWN cited numbers (9 straight semesters, +6.8%, 31,000+; Idaho
+  State Board 2025) + Idaho's 43.6% go-on rate. Verified stats: tools/cwi-stats-verified.md.
+
+## 🔴 NEEDS YOU — from the BTQ/CWI rebuild (confirm these)
+1. **CWI credit** is now **Writer + Casting** (with Tess), all directing removed. Confirm the exact
+   wording ("Writer · the program spots" / "Casting · DJ Ramirez + Tess").
+2. **CWI stats**: I pulled Against's 4.4/5.0/98 (those are the agency's self-reported claims, not
+   yours/CWI-official) and used CWI's real cited growth instead. OK to keep that framing?
+3. **CWI program spots**: I featured 6. The 5.3GB folder has more (BTS, SCOUT, other rounds). Tell me
+   the "best ones to run with" and I'll swap/add. RD 1-4 + Superbowl cuts can go in the catalog.
+4. **CWI hero** uses your FIRE spot (has baked-in program text, dimmed). Want a clean b-roll clip with
+   no text instead? I can pull from the BTS/SCOUT footage.
+5. **BTQ captions**: I captioned your new photos honestly from the images (helmet, backpack, hat, socks,
+   games, portrait). Fix any that are off. Old Drake Cooper images remain in the repo, unreferenced.
+6. **Real-browser check**: both pages are video-heavy now (hero loops, clip strip, program spots) — give
+   them a pass on your machine + the live deploy.
+
+---
+
 # TODO - current state (2026-07-12 · Kit batch 5 SHIPPED)
 
 ## 🚀 SESSION 2026-07-12 (part 5 · Kit build-out + adorama fix) SHIPPED
