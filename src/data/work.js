@@ -11,9 +11,9 @@
 // then paste back here.
 //
 // CHARACTER LIMITS (to fit what's built — soft guides so copy stays punchy):
-//   client   <= 24     brand <= 20     title <= 24
-//   role     <= 42     ("what I did" line, mono)
-//   logline  <= 210    (renders as up to 3 lines on the index cards)
+//   client   <= 28     brand <= 22     title <= 45
+//   role     <= 75     ("what I did" line, mono)
+//   logline  <= 300    (always-visible body copy on the 2-up index cards)
 //
 // order = recruiter priority (strongest first). size = work-index tile
 // (feat / band / wide / lg / tall / std). vid = "" falls back to img.

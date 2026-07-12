@@ -807,22 +807,21 @@ a{color:inherit;text-decoration:none}
 })();
 </script>
 
-<div class="spec" id="el-28"><div class="wrap"><span class="id">ELEMENT 28 · HOVER-BLURB CARD <b style="color:var(--red)">(#el-hovercard)</b></span><span class="use"><b>all 19 jobs</b> in a masonry grid · small client logo + title + role at rest, the <b>logline</b> slides up on hover (touch = always shown) · logo + logline both pull from the shared source of truth (src/data/work.js) · <b class="lives">lives on:</b> a possible work index / about page</span></div></div>
+<div class="spec" id="el-28"><div class="wrap"><span class="id">ELEMENT 28 · CASE-STUDY INDEX CARD <b style="color:var(--red)">(#el-hovercard)</b></span><span class="use"><b>all 19 jobs</b> as 2-up content cards (1-up on mobile) · image on top with the reel playing on hover, then <b>logo + title + what I did + the full logline</b> always visible below · everything pulls from the shared source of truth (src/data/work.js) · <b class="lives">lives on:</b> the /work index</span></div></div>
 <section class="paper hcwrap" id="el-hovercard">
   <div class="wrap">
     <div class="hcards">
       {workAll.map((w) => (
         <a class={`hcard${w.vid ? ' has-vid' : ''}`} href={w.href} data-vid={w.vid || ''}>
-          <img src={w.img} alt={w.title} loading="lazy" decoding="async">
-          {w.vid ? <video class="hc-vid" src={w.vid} muted loop playsinline preload="none" aria-hidden="true"></video> : null}
-          <div class="hc-meta">
-            {w.logo ? <img class={`hc-logo${w.logoColor ? ' is-color' : ''}`} src={`/logos/${w.logo}-${w.logoColor ? 'color' : 'white'}.png`} alt={w.client}> : null}
-            <b>{w.title}</b>
-            <span>{w.role}</span>
+          <div class="hc-media">
+            <img src={w.img} alt={w.title} loading="lazy" decoding="async">
+            {w.vid ? <video class="hc-vid" src={w.vid} muted loop playsinline preload="none" aria-hidden="true"></video> : null}
           </div>
-          <div class="hc-blurb">
-            {w.logo ? <img class={`hc-logo${w.logoColor ? ' is-color' : ''}`} src={`/logos/${w.logo}-${w.logoColor ? 'color' : 'white'}.png`} alt={w.client}> : null}
-            <p>{w.logline}</p>
+          <div class="hc-body">
+            {w.logo ? <img class={`hc-logo${w.logoColor ? ' is-color' : ''}`} src={`/logos/${w.logo}-${w.logoColor ? 'color' : 'black'}.png`} alt={w.client}> : null}
+            <b class="hc-title">{w.title}</b>
+            <span class="hc-role">{w.role}</span>
+            <p class="hc-log">{w.logline}</p>
           </div>
         </a>
       ))}
@@ -1109,37 +1108,30 @@ a{color:inherit;text-decoration:none}
 .tk-item::after{content:'✳';color:var(--red);margin:0 clamp(22px,3.4vw,48px);font-size:.66em}
 @keyframes tickScroll{to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.tick-track{animation:none}}
-/* 28 · HOVER-BLURB CARD (#el-hovercard) — masonry, all 19, logo + logline, hover video + iOS-popup */
+/* 28 · CASE-STUDY INDEX CARD (#el-hovercard) — 2-up content cards, image + always-visible copy */
 .hcwrap{padding:6vh 0 9vh}
-.hcards{columns:3;column-gap:16px}
-.hcard{position:relative;display:block;overflow:hidden;background:#000;border-radius:3px;break-inside:avoid;margin:0 0 16px;transition:opacity .35s ease,transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease,border-radius .4s ease}
-.hcard img{width:100%;height:auto;display:block;filter:brightness(.72);transition:transform .7s cubic-bezier(.22,1,.36,1),filter .4s}
-/* the real footage, revealed under the text on hover so we can judge formatting over video */
-.hc-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;filter:brightness(.72);transition:opacity .45s ease,filter .4s}
-.hcard:hover img{transform:scale(1.05);filter:brightness(.6)}
-.hcard.has-vid:hover img{opacity:0}
-.hcard:hover .hc-vid{opacity:1;filter:brightness(.6)}
-/* spotlight: hovering the grid dims every card, the focused one stays lit */
-.hcards:hover .hcard{opacity:.32}
-.hcards .hcard:hover,.hcards .hcard:focus-visible{opacity:1}
-/* iOS-style popup: focused card lifts, rounds, casts a soft shadow so it clearly pops forward */
-.hcard:hover,.hcard:focus-visible{transform:scale(1.035);border-radius:14px;box-shadow:0 26px 60px -12px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08);z-index:5}
-.hc-meta{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:20px;transition:opacity .3s ease}
-/* on hover the resting title yields so it can't collide with the blurb */
-.hcard:hover .hc-meta,.hcard:focus-visible .hc-meta{opacity:0}
-.hcard .hc-logo{height:18px;width:auto;max-width:120px;filter:none;opacity:.92;display:block;margin-bottom:10px}
-/* logos now ship real black/white/color files (public/logos/<slug>-{white,color}.png),
-   so no CSS knockout needed. color crests (AC Boise) render a touch bigger. */
+.hcards{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(22px,2.6vw,36px)}
+.hcard{display:flex;flex-direction:column;overflow:hidden;background:var(--paper);border:1px solid var(--lined,rgba(22,21,20,.13));border-radius:8px;color:var(--ink);text-decoration:none;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease,border-color .4s ease}
+.hcard:hover,.hcard:focus-visible{transform:translateY(-4px);box-shadow:0 22px 50px -18px rgba(10,10,10,.4);border-color:rgba(22,21,20,.28)}
+/* media: image with the hover video underneath (kept from the old cards) */
+.hc-media{position:relative;aspect-ratio:16/10;overflow:hidden;background:#000}
+.hc-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.hc-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;transition:opacity .45s ease}
+.hcard:hover .hc-media img{transform:scale(1.045)}
+.hcard.has-vid:hover .hc-media img{opacity:0}
+.hcard:hover .hc-vid{opacity:1}
+/* body: logo + title + role + full logline, all in-flow so they set card height */
+.hc-body{display:flex;flex-direction:column;flex:1;padding:clamp(18px,1.8vw,26px)}
+.hcard .hc-logo{height:20px;width:auto;max-width:130px;opacity:.9;display:block;margin-bottom:14px}
 .hcard .hc-logo.is-color,.wvp-logo.is-color{opacity:1}
-.hcard .hc-logo.is-color{height:34px}
-.hc-meta b{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(19px,1.7vw,26px);letter-spacing:-.02em;text-transform:uppercase;line-height:1.05;color:#fff}
-.hc-meta span{display:block;margin-top:6px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.75)}
-.hc-blurb{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:20px;background:linear-gradient(to top,rgba(10,10,10,.96),rgba(10,10,10,.82) 60%,rgba(10,10,10,.5) 88%,transparent);transform:translateY(101%);opacity:0;transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .4s}
-.hcard:hover .hc-blurb,.hcard:focus-visible .hc-blurb{transform:translateY(0);opacity:1}
-.hc-blurb p{color:#fff;font-size:13px;line-height:1.45;margin:0;max-width:none;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
-@media(hover:none){.hc-meta{display:none}.hc-blurb{position:static;transform:none;opacity:1;background:var(--ink)}.hc-vid{display:none}}
-@media(max-width:760px){.hcards{columns:2}}
-@media(max-width:460px){.hcards{columns:1}}
+.hcard .hc-logo.is-color{height:30px}
+.hc-title{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(20px,1.9vw,29px);letter-spacing:-.02em;text-transform:uppercase;line-height:1.04;color:var(--ink)}
+.hc-role{display:block;margin-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;line-height:1.5;color:var(--insRed,var(--red))}
+.hc-log{margin:14px 0 0;font-size:14px;line-height:1.5;color:rgba(22,21,20,.72);max-width:60ch}
+@media(max-width:720px){
+  .hcards{grid-template-columns:1fr;gap:20px}
+  .hc-title{font-size:clamp(21px,6vw,26px)}
+}
 /* 29 · WORK INDEX · VARIED SIZES + HOVER PREVIEW (#el-workview) */
 .wvwrap{padding:6vh 0 9vh}
 .wgrid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:180px;gap:14px;grid-auto-flow:dense}
