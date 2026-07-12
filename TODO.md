@@ -53,10 +53,8 @@ Commits bf9f98e → 32f021b. All verified, pushed live.
 - Dropped the colliding trailing-slash Xperia redirect (no-slash still works).
 
 ## 🔴 NEEDS YOU — DECISIONS (don't let these get buried)
-1. **Firefighter as a GLOBAL header?** You asked (with a "?") to make BC-02 the header
-   "across the homepage and work pages." It's the Blue Cross hero now. Making it the
-   HOME hero would replace your sight/sound/emotion lockup (your positioning centerpiece)
-   and the WORK reel header. → ASKED via decision prompt; holding until you answer.
+1. ✅ RESOLVED 2026-07-12: firefighter stays BLUE CROSS ONLY. Home lockup + Work reel
+   header untouched (DJ chose 'Blue Cross only' via decision prompt).
 2. **Kit header 01B:** pick A (with blurb) vs B (no blurb) · oval vs double-underline ·
    approve/remap ELEMENT 01C service colors → then I roll 01B to every work page.
 3. Type pick / B-W confirm / testimonial quotes still open.
