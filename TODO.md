@@ -1,3 +1,43 @@
+# TODO - current state (2026-07-12 · Kit batch 5 SHIPPED)
+
+## 🚀 SESSION 2026-07-12 (part 5 · Kit build-out + adorama fix) SHIPPED
+Commit ecf0fd6, pushed live. All verified with Playwright at desktop widths.
+- **Adorama overlap FIXED for real** → the poster+two-stills split is now a shared,
+  edit-once `src/styles/filmsplit.css` (`.filmsplit`/`.filmstack`, `#el-filmsplit`).
+  Root cause was the CSS-grid min-height:auto blowout; guarded now. Verified NO overlap
+  1024→1440 (clean 14px gap). Imported by adorama + the Kit (ELEMENT 23).
+- **01B annotations** now look hand-drawn (loose overshoot oval + wavy double-underline,
+  thicker strokes) and **draw-on → hold → reset on a 4s infinite loop.**
+- **New Kit elements, each with a unique `#el-` id:** 24 header slider (uniform logo +
+  what-I-did + blurb, auto-advance, inline **Edit** + JSON **Export**, real seeded copy) ·
+  25 count-up numbers + 3 callout treatments · 26 gallery B (masonry → lightbox) ·
+  27 kickers + CTA (3 variations) · 28 hover-blurb card · 29 varied-size recruiter-ordered
+  work index. Every existing element also got an `id="el-NN"` anchor.
+- **Instagram logo** on SocialWall (source badge + per-comment mark, `source` prop).
+
+## 🔴 NEEDS YOU — full sweep (2026-07-12, flagged loudly per your ask)
+DECISIONS (your call):
+1. **Headers:** on the Kit, pick the header direction — A (with blurb) / B (no blurb),
+   oval vs double-underline, AND whether work headers become the SLIDER (ELEMENT 24) or
+   stay static per page. Approve/remap the 01C service colors. Then I roll it sitewide.
+2. **Gallery per page:** contact sheet (15) vs masonry+lightbox (26) — you pick per page.
+3. **Work index:** keep the grid/index, or switch to the new varied-size view (29)?
+   You said the index feels off.
+4. **Kickers + CTA (27):** pick/edit the final variations to roll sitewide.
+5. **Count-up numbers (25):** which REAL stats to wire into each page (specimen now).
+6. Type/font pick · B/W confirm (→ bake + delete switcher) · 10 testimonial quotes.
+7. **VERIFY the "3.4M+ views" Adorama ledger stat** (same unverified class as the killed
+   160M+ and the 3.6M question). Reconcile Est. MMXXII vs 2016.
+8. Grain louder or leave · Photography OS9 page (reskin/leave/retire) · rolodex geography
+   copy + map pin photo fixes · podcast 30K vs 100K · MSI which-3-careers.
+BLOCKED (need a link/asset from you): AOV merch folder · crew photo original · remaining
+34 MSI BTS frames · other 7 To-the-Point episodes · fresh IG links (sony-this-moment +
+clothing-merch).
+REAL-BROWSER CHECK: the looping hand-drawn 01B annotations + the adorama overlap fix on
+the live deploy at your widths.
+
+---
+
 # TODO - current state (2026-07-11, LATE NIGHT · autonomous batch SHIPPED)
 
 ## 📞 DJ'S OUTREACH LIST (2026-07-11) - get the real quotes
