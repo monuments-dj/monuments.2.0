@@ -98,11 +98,31 @@ a{color:inherit;text-decoration:none}
 .herob>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.02) brightness(.38)}
 .herob .hb-in{position:relative;z-index:2;width:100%}
 .herob h1{color:#fff;font-family:var(--disp);font-weight:var(--dispw2,600);font-size:clamp(54px,8.6vw,132px);line-height:1.02;letter-spacing:-.01em;text-transform:uppercase}
+.herob .hb-ver{position:absolute;top:22px;left:0;color:#fff;letter-spacing:.14em;background:rgba(10,10,10,.5);padding:5px 10px;backdrop-filter:blur(3px);z-index:3}
 .herob .hb-role{display:flex;align-items:center;gap:26px;margin-top:30px}
-.herob .hb-logo{color:#fff;font-size:15px;letter-spacing:.34em;font-weight:700}
-.herob .hb-scrib{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:10px 26px;color:var(--spark)}
-.herob .hb-scrib svg{position:absolute;inset:0;width:100%;height:100%}
-.herob .hb-scrib i{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:19px;color:#fff;white-space:nowrap}
+.herob .hb-logoimg{height:26px;width:auto;filter:brightness(0) invert(1);opacity:.95}
+.herob .hb-scrib{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:10px 28px}
+.herob .hb-scrib i{position:relative;z-index:1;font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:19px;color:#fff;white-space:nowrap}
+/* oval annotation: draws on when the header enters */
+.herob .hb-oval{position:absolute;inset:-4px -6px;width:calc(100% + 12px);height:calc(100% + 8px);overflow:visible;pointer-events:none}
+.herob .hb-oval path{stroke-dasharray:660;stroke-dashoffset:660}
+.herob.drawn .hb-oval path{animation:hbOval 1s cubic-bezier(.6,0,.3,1) .3s forwards}
+@keyframes hbOval{to{stroke-dashoffset:0}}
+/* double-underline annotation */
+.herob .hb-uline{padding:0 6px 12px}
+.herob .hb-uline::before,.herob .hb-uline::after{content:'';position:absolute;left:0;right:0;height:2px;background:var(--annot);border-radius:2px;transform:scaleX(0);transform-origin:left}
+.herob .hb-uline::before{bottom:2px}
+.herob .hb-uline::after{bottom:-4px}
+.herob.drawn .hb-uline::before{animation:hbUline .5s ease .3s forwards}
+.herob.drawn .hb-uline::after{animation:hbUline .5s ease .46s forwards}
+@keyframes hbUline{to{transform:scaleX(1)}}
+.herob .hb-blurb{margin-top:26px;max-width:52ch;color:rgba(245,243,239,.82);font-size:clamp(14px,1.1vw,16px);line-height:1.6}
+@media (prefers-reduced-motion:reduce){.herob .hb-oval path{stroke-dashoffset:0}.herob .hb-uline::before,.herob .hb-uline::after{transform:scaleX(1)}}
+/* service color legend */
+.svcsec{padding:9vh 0}
+.svcgrid{display:flex;flex-wrap:wrap;gap:14px 26px}
+.svc{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.svc i{width:16px;height:16px;border-radius:50%;background:var(--c);flex:none;box-shadow:0 2px 8px color-mix(in srgb,var(--c) 55%,transparent)}
 @media (max-width:680px){.herob h1{font-size:clamp(40px,11vw,64px)}.herob .hb-role{flex-wrap:wrap;gap:14px}}
 
 /* ELEMENT 02 · statrow + rolerow (accent-proof: text rides --on-rgb) */
@@ -228,20 +248,56 @@ a{color:inherit;text-decoration:none}
   <div class="nfo"><span class="h">NFO</span><br>Client · Name<br>Role · Creative Director<br>Frame · MC-20XX-XX</div>
 </header>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 01B · CASE HERO · THE OLD-SITE CUT</span><span class="use">DJ's preferred grammar (2026-07-12): giant left-aligned sans stack, plain weight, tight leading · client logo + the hand-scribbled oval around the role · dim full-bleed image · compare against 01 above, pick one</span></div></div>
-<header class="herob">
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 01B · CASE HERO · THE OLD-SITE CUT</span><span class="use">DJ's preferred header (2026-07-12) · giant left sans + REAL client logo + a hand-drawn annotation that DRAWS ON and carries a service COLOR · A = with the blurb, B = without · A shows the oval, B shows the double-underline · service→color map in 01C below · this rolls to every work page once DJ picks</span></div></div>
+<!-- A · with blurb · oval annotation -->
+<header class="herob" data-annot="oval">
   <img loading="lazy" decoding="async" src="/case-studies/sony-xperia-summer/gallery/xp-02.jpg" alt="Specimen hero image">
   <div class="hb-in wrap">
+    <span class="hb-ver mono">A · with blurb · circled</span>
     <h1>Summer<br>with<br>Xperia</h1>
     <div class="hb-role">
-      <span class="hb-logo mono">SONY</span>
-      <span class="hb-scrib">
-        <svg viewBox="0 0 240 74" aria-hidden="true" preserveAspectRatio="none"><path d="M14,37 C10,16 52,7 120,7 C192,7 232,16 230,36 C228,58 186,68 116,67 C50,66 8,58 14,34" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <img class="hb-logoimg" src="/logos/sony.png" alt="Sony">
+      <span class="hb-scrib" style="--annot:#E0311A">
+        <svg class="hb-oval" viewBox="0 0 264 78" aria-hidden="true" preserveAspectRatio="none"><path d="M16,40 C10,16 60,8 132,7 C210,6 254,17 251,38 C248,60 200,71 128,70 C52,69 8,60 15,35" fill="none" stroke="var(--annot)" stroke-width="2.4" stroke-linecap="round"/></svg>
         <i class="serif">directing, photo + strategy</i>
+      </span>
+    </div>
+    <p class="hb-blurb">Three summers of Sony Xperia launches. I led directing, stills, and strategy across every drop, from the Porsche film to the boardwalk cut.</p>
+  </div>
+</header>
+<!-- B · no blurb · double-underline annotation -->
+<header class="herob" data-annot="uline">
+  <img loading="lazy" decoding="async" src="/case-studies/sony-flow-state/gallery/fs-05.jpg" alt="Specimen hero image">
+  <div class="hb-in wrap">
+    <span class="hb-ver mono">B · no blurb · double-underlined</span>
+    <h1>Flow<br>State</h1>
+    <div class="hb-role">
+      <img class="hb-logoimg" src="/logos/sony.png" alt="Sony">
+      <span class="hb-scrib hb-uline" style="--annot:#2FB8A0">
+        <i class="serif">strategy, creative direction</i>
       </span>
     </div>
   </div>
 </header>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 01C · SERVICE COLORS</span><span class="use">the annotation color = the service I provided · this is my PROPOSED map, you decide · swap any swatch and it drives the 01B annotation sitewide</span></div></div>
+<section class="paper svcsec">
+  <div class="wrap">
+    <div class="svcgrid">
+      <span class="svc" style="--c:#E0311A"><i></i>Creative Direction</span>
+      <span class="svc" style="--c:#FF6A1A"><i></i>Commercial Directing</span>
+      <span class="svc" style="--c:#2438E8"><i></i>Photography</span>
+      <span class="svc" style="--c:#7B3FE4"><i></i>Campaign Development</span>
+      <span class="svc" style="--c:#E0A21A"><i></i>Experiential</span>
+      <span class="svc" style="--c:#17B8A2"><i></i>Editing + Animation</span>
+      <span class="svc" style="--c:#2FB8A0"><i></i>Brand Development</span>
+      <span class="svc" style="--c:#EFA1AD"><i></i>Design</span>
+      <span class="svc" style="--c:#3E6E94"><i></i>Strategy</span>
+      <span class="svc" style="--c:#D6217A"><i></i>On-camera</span>
+      <span class="svc" style="--c:#8f8d88"><i></i>Consulting</span>
+    </div>
+  </div>
+</section>
 
 <div class="spec"><div class="wrap"><span class="id">ELEMENT 02 · STATROW + ROLEROW</span><span class="use">Scoreboard on the accent: text rides --on-rgb so every accent reads · note right-aligned · rolerow flows left, never space-between</span></div></div>
 <div class="statrow">
@@ -491,6 +547,12 @@ a{color:inherit;text-decoration:none}
 @media (prefers-reduced-motion:reduce){.cdd-word .cdd-bar{transition:none}}
 </style>
 <script is:inline>
+// 01B header annotations draw on when each header enters view
+(function(){
+  var heads=[].slice.call(document.querySelectorAll('.herob'));if(!heads.length)return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('drawn');io.unobserve(e.target);}});},{threshold:.35});
+  heads.forEach(function(h){io.observe(h);});
+})();
 // Kit controls callout: clicking "type switcher" scrolls to + pulses the pill
 (function(){
   var btn=document.getElementById('kc-type');if(!btn)return;
