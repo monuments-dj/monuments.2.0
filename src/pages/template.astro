@@ -710,8 +710,18 @@ a{color:inherit;text-decoration:none}
   <!-- Ears to the streets: kicker + two-line statement -->
   <div class="kset kset-dark">
     <div class="wrap">
-      <span class="kset-tag mono">\ Ears to the streets</span>
+      <span class="kset-tag mono">\ Ears to the streets · centered</span>
       <p class="k-stmt">Culture is talking.<br>Most brands aren't <span class="k-em">listening.</span></p>
+    </div>
+  </div>
+  <!-- Ears to the streets: left-aligned statement, circled CTA off to the right -->
+  <div class="kset kset-dark">
+    <div class="wrap">
+      <span class="kset-tag mono">\ Ears to the streets · left + CTA right</span>
+      <div class="kick-split">
+        <p class="k-stmt ks-left">Culture is talking.<br>Most brands aren't <span class="k-em">listening.</span></p>
+        <a class="k-circled" href="/contact" style="--annot:var(--red)"><span>Let's talk</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
+      </div>
     </div>
   </div>
   <!-- buttons + the circled Let's talk (draws on, holds 4s, re-animates) -->
@@ -974,6 +984,11 @@ a{color:inherit;text-decoration:none}
 .k-big{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(26px,4vw,54px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;max-width:20ch;margin:0 auto 26px}
 .k-stmt{text-align:center;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(30px,4.6vw,64px);letter-spacing:-.035em;line-height:1.02;text-transform:uppercase;max-width:18ch;margin:0 auto}
 .k-stmt .k-em{color:var(--spark)}
+/* left-aligned statement + circled CTA off to the right */
+.kick-split{display:flex;align-items:center;justify-content:space-between;gap:clamp(30px,5vw,80px);flex-wrap:wrap}
+.kick-split .k-stmt.ks-left{text-align:left;margin:0;max-width:16ch}
+.kick-split .k-circled{flex:none}
+@media(max-width:680px){.kick-split{justify-content:flex-start}}
 .k-btn{display:inline-flex;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:var(--ink);border-radius:99px;padding:15px 28px;transition:background .3s,color .3s}
 .k-btn:hover{background:var(--red);color:#fff}
 .k-btn.light{background:var(--paper);color:var(--ink)}
