@@ -10,6 +10,16 @@ import { work as workAll } from '../data/work.js';
 // specimen for the insight block (ELEMENT 31) — proves the per-page data wiring
 const cwiIns = workAll.find((w) => w.slug === 'cwi-lets-get-started') || {};
 
+// header-slider title shrinks as the title gets longer, so the longer v4 titles
+// don't blow up to 3 lines. clamp() keeps each tier responsive down to mobile.
+const hsTitleSize = (t = '') => {
+  const n = t.length;
+  if (n <= 16) return 'clamp(42px, 7vw, 104px)';
+  if (n <= 24) return 'clamp(36px, 5.4vw, 78px)';
+  if (n <= 34) return 'clamp(32px, 4.4vw, 60px)';
+  return 'clamp(27px, 3.5vw, 48px)';
+};
+
 // === THE KIT · case-page element library ===
 // The single source of truth for case-page elements. When an element needs a fix
 // or a new page needs building, pull the markup + CSS from HERE, not from another
@@ -615,7 +625,7 @@ a{color:inherit;text-decoration:none}
       <div class={`hs-slide${i === 0 ? ' on' : ''}`} data-i={i}>
         <img loading="lazy" decoding="async" src={w.img} alt={w.title}>
         <div class="hs-in wrap">
-          <h2>{w.title}</h2>
+          <h2 style={`font-size:${hsTitleSize(w.title)}`}>{w.title}</h2>
           <p class="hs-blurb" data-rm>{w.logline}</p>
           <span class="hs-did">{w.role}</span>
           {w.logo ? <span class="hs-logochip"><img class="hs-logo" src={`/logos/${w.logo}-color.png`} alt={w.slug}></span> : null}
@@ -722,7 +732,7 @@ a{color:inherit;text-decoration:none}
     <div class="wrap ks-centered">
       <span class="kset-tag mono">\ Ears to the streets · centered + circled CTA · dark</span>
       <p class="k-stmt">Culture is talking.<br>Most brands aren't <span class="k-em">listening.</span></p>
-      <a class="k-circled k-accent-red ks-cta" href="/contact"><span>Let's talk</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
+      <a class="k-circled k-accent-red ks-cta" href="/contact"><span class="k-lbl">Let's talk</span><span class="k-arr" aria-hidden="true">↗</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
     </div>
   </div>
   <!-- Ears to the streets: centered + circled CTA · light -->
@@ -730,7 +740,7 @@ a{color:inherit;text-decoration:none}
     <div class="wrap ks-centered">
       <span class="kset-tag mono">\ Ears to the streets · centered + circled CTA · light</span>
       <p class="k-stmt">Culture is talking.<br>Most brands aren't <span class="k-em">listening.</span></p>
-      <a class="k-circled k-accent-red ks-cta" href="/contact"><span>Let's talk</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
+      <a class="k-circled k-accent-red ks-cta" href="/contact"><span class="k-lbl">Let's talk</span><span class="k-arr" aria-hidden="true">↗</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
     </div>
   </div>
   <!-- Ears to the streets: left-aligned statement, circled CTA off to the right -->
@@ -739,7 +749,7 @@ a{color:inherit;text-decoration:none}
       <span class="kset-tag mono">\ Ears to the streets · left + CTA right</span>
       <div class="kick-split">
         <p class="k-stmt ks-left">Culture is talking.<br>Most brands aren't <span class="k-em">listening.</span></p>
-        <a class="k-circled k-accent-red" href="/contact"><span>Let's talk</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
+        <a class="k-circled k-accent-red" href="/contact"><span class="k-lbl">Let's talk</span><span class="k-arr" aria-hidden="true">↗</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
       </div>
     </div>
   </div>
@@ -750,7 +760,7 @@ a{color:inherit;text-decoration:none}
       <div class="cta-row">
         <a class="k-btn" href="/contact">Let's talk ↗</a>
         <a class="k-btn ghost" href="/contact">Reach Out ↗</a>
-        <a class="k-circled k-accent-red" href="/contact"><span>Let's talk</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
+        <a class="k-circled k-accent-red" href="/contact"><span class="k-lbl">Let's talk</span><span class="k-arr" aria-hidden="true">↗</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
       </div>
     </div>
   </div>
@@ -1119,6 +1129,8 @@ a{color:inherit;text-decoration:none}
 .k-arrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:inherit;border-bottom:2px solid var(--red);padding-bottom:5px;transition:color .3s}
 .k-arrow:hover{color:var(--red)}
 .k-circled{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:12px 30px;font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:inherit}
+.k-circled .k-lbl{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+.k-circled .k-arr{margin-left:7px}
 .k-circled .k-oval{position:absolute;inset:-7px -12px;width:calc(100% + 24px);height:calc(100% + 14px);overflow:visible;pointer-events:none;transform:rotate(-1.6deg)}
 .k-circled{--annot:var(--red-accent)}          /* default; override with .k-accent-* */
 .k-accent-red{--annot:var(--red-accent)}       /* themeable red accent · change --red-accent to retheme */
@@ -1149,9 +1161,9 @@ a{color:inherit;text-decoration:none}
 .hcard:hover .hc-vid{opacity:1}
 /* body: logo + title + role + full logline, all in-flow so they set card height */
 .hc-body{display:flex;flex-direction:column;flex:1;padding:clamp(18px,1.8vw,26px)}
-.hcard .hc-logo{height:20px;width:auto;max-width:150px;object-fit:contain;align-self:flex-start;opacity:.9;display:block;margin-bottom:14px}
+.hcard .hc-logo{height:auto;max-height:26px;width:auto;max-width:150px;object-fit:contain;object-position:left center;align-self:flex-start;opacity:.9;display:block;margin-bottom:14px}
 .hcard .hc-logo.is-color,.wvp-logo.is-color{opacity:1}
-.hcard .hc-logo.is-color{height:42px}
+.hcard .hc-logo.is-color{max-height:48px}
 .hc-title{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(20px,1.9vw,29px);letter-spacing:-.02em;text-transform:uppercase;line-height:1.04;color:var(--ink)}
 .hc-role{display:block;margin-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;line-height:1.5;color:var(--insRed,var(--red))}
 .hc-log{margin:14px 0 0;font-size:14px;line-height:1.5;color:rgba(22,21,20,.72);max-width:60ch;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
