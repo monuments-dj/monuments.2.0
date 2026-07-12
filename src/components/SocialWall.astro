@@ -3,20 +3,32 @@
 // AOV ran on its case pages. Real community comments as social proof; the metric
 // a campaign can't chart. Pass {title, intro, comments:[{u,t,l}]}.
 interface Comment { u: string; t: string; l?: number; }
-interface Props { title?: string; intro?: string; comments: Comment[]; }
-const { title = 'A look beyond the numbers', intro, comments } = Astro.props;
+interface Props { title?: string; intro?: string; comments: Comment[]; source?: string | null; }
+// source: 'instagram' (default) stamps the simple IG mark on the wall + each comment.
+// Pass source={null} for a platform-neutral wall.
+const { title = 'A look beyond the numbers', intro, comments, source = 'instagram' } = Astro.props;
+const isIG = source === 'instagram';
 ---
 <section class="swall">
   <div class="wrap">
     <div class="swall-head rv">
       <span class="mono k">\ Beyond the numbers</span>
       <h2>{title}</h2>
+      {isIG && (
+        <span class="swall-src" aria-label="From Instagram">
+          <svg class="iglogo" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.35" fill="currentColor"/></svg>
+          From Instagram
+        </span>
+      )}
       {intro && <p class="swall-intro">{intro}</p>}
     </div>
     <div class="swall-grid">
       {comments.map((c) => (
         <figure class="scomment rv">
-          <span class="su"><span class="sa" aria-hidden="true">{c.u.charAt(0).toUpperCase()}</span>{c.u}</span>
+          <span class="su">
+            <span class="sa" aria-hidden="true">{c.u.charAt(0).toUpperCase()}</span>{c.u}
+            {isIG && <svg class="iglogo ig-c" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>}
+          </span>
           <p>{c.t}</p>
           {c.l ? <span class="sl"><b>&#9829;</b> {c.l}</span> : null}
         </figure>
@@ -29,6 +41,9 @@ const { title = 'A look beyond the numbers', intro, comments } = Astro.props;
   .swall-head{max-width:62ch;margin-bottom:5vh}
   .swall .k{color:var(--spark);display:block;margin-bottom:14px}
   .swall h2{font-weight:var(--dispw);font-size:clamp(30px,4.6vw,66px);letter-spacing:-.035em;line-height:.98;text-transform:uppercase}
+  .swall-src{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.62)}
+  .iglogo{width:15px;height:15px;color:rgba(245,243,239,.72);flex:none}
+  .scomment .su .ig-c{width:13px;height:13px;margin-left:auto;color:rgba(245,243,239,.42)}
   .swall-intro{margin-top:20px;color:rgba(245,243,239,.74);font-size:clamp(16px,1.5vw,19px);line-height:1.6;max-width:58ch}
   .swall-grid{columns:4;column-gap:16px}
   .scomment{break-inside:avoid;margin:0 0 16px;background:rgba(245,243,239,.05);border:1px solid rgba(245,243,239,.1);border-radius:11px;padding:15px 16px 13px}

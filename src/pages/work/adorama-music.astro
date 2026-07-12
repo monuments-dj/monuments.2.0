@@ -3,6 +3,7 @@ import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+import '../../styles/filmsplit.css';
 ---
 <!doctype html>
 <html lang="en">
@@ -204,14 +205,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .bts .bar .mono b{color:var(--spark)}
 .bts .btslead{max-width:60ch;color:rgba(245,243,239,.74);font-size:clamp(16px,1.5vw,19px);line-height:1.6;margin:0 0 26px}
 .bts .btslead b{color:var(--paper);font-weight:var(--dispw2)}
-.btsrow{display:grid;grid-template-columns:1.66fr 1fr;gap:14px;align-items:stretch}
-.btsrow .poster16 .play{width:96px;height:96px;font-size:9.5px}
-.btsthumbs{display:grid;grid-template-rows:1fr 1fr;gap:14px}
-.btsthumbs figure{position:relative;margin:0;overflow:hidden;background:#000}
-.btsthumbs img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85) saturate(.96);transition:transform .8s cubic-bezier(.22,1,.36,1)}
-.btsthumbs figure:hover img{transform:scale(1.04)}
-.btsthumbs .cap{position:absolute;left:12px;bottom:10px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.85)}
-@media (max-width:900px){.btsrow{grid-template-columns:1fr}.btsthumbs{grid-template-rows:auto;grid-template-columns:1fr 1fr}.btsthumbs img{aspect-ratio:16/9}}
+/* .filmsplit / .filmstack (the poster + two-still split) now live in the shared,
+   edit-once src/styles/filmsplit.css — imported above. The old .btsrow/.btsthumbs
+   copy lived here and overlapped at desktop widths; the shared version fixes it. */
 
 /* quote on rose */
 .quote{background:var(--spark);color:var(--ink);padding:15vh 0}
@@ -480,14 +476,14 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <span class="mono" style="color:#8f8d88">Click to play</span>
     </div>
     <p class="btslead rv">The hero film was built to travel. We cut it into shorter spots for the individual products across the campaign, <b>each brand getting its own version.</b> This is the Beat Machine ad.</p>
-    <div class="btsrow">
+    <div class="filmsplit">
       <div class="poster16" data-film data-video="i_hGj3rKH7k" data-title="Adorama Music · Beat Machine spot" id="btsPoster">
         <img src="/case-studies/adorama-music/gallery/am-37.jpg" alt="Adorama Music, the Beat Machine spot" width="1024" height="683" loading="lazy">
         <video class="pvid" src="/snips/adorama-beat-machine.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
         <span class="play">Play · Beat Machine spot</span>
         <span class="fcap">✳ Beat Machine · a product cut from the campaign film</span>
       </div>
-      <div class="btsthumbs">
+      <div class="filmstack">
         <figure>
           <img src="/case-studies/adorama-music/gallery/am-36.jpg" alt="Adorama Music campaign still" width="800" height="534" loading="lazy">
         </figure>

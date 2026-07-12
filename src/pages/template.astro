@@ -4,6 +4,7 @@ import PageFooter from '../components/PageFooter.astro';
 import RoleTag from '../components/RoleTag.astro';
 import SocialWall from '../components/SocialWall.astro';
 import NextFile from '../components/NextFile.astro';
+import '../styles/filmsplit.css';
 
 // === THE KIT · case-page element library ===
 // The single source of truth for case-page elements. When an element needs a fix
@@ -103,21 +104,21 @@ a{color:inherit;text-decoration:none}
 .herob .hb-logoimg{height:26px;width:auto;filter:brightness(0) invert(1);opacity:.95}
 .herob .hb-scrib{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:10px 28px}
 .herob .hb-scrib i{position:relative;z-index:1;font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:19px;color:#fff;white-space:nowrap}
-/* oval annotation: draws on when the header enters */
-.herob .hb-oval{position:absolute;inset:-4px -6px;width:calc(100% + 12px);height:calc(100% + 8px);overflow:visible;pointer-events:none}
-.herob .hb-oval path{stroke-dasharray:660;stroke-dashoffset:660}
-.herob.drawn .hb-oval path{animation:hbOval 1s cubic-bezier(.6,0,.3,1) .3s forwards}
-@keyframes hbOval{to{stroke-dashoffset:0}}
-/* double-underline annotation */
-.herob .hb-uline{padding:0 6px 12px}
-.herob .hb-uline::before,.herob .hb-uline::after{content:'';position:absolute;left:0;right:0;height:2px;background:var(--annot);border-radius:2px;transform:scaleX(0);transform-origin:left}
-.herob .hb-uline::before{bottom:2px}
-.herob .hb-uline::after{bottom:-4px}
-.herob.drawn .hb-uline::before{animation:hbUline .5s ease .3s forwards}
-.herob.drawn .hb-uline::after{animation:hbUline .5s ease .46s forwards}
-@keyframes hbUline{to{transform:scaleX(1)}}
+/* HAND-DRAWN ANNOTATIONS (#el-annot) · marker strokes that draw on, hold, then reset —
+   a 4s loop that starts when the header scrolls in (.drawn). pathLength=1 normalizes the
+   draw so it works at any path size. Slight rotation + loose overshoot paths = the drawn feel. */
+.herob .hb-oval{position:absolute;inset:-9px -15px;width:calc(100% + 30px);height:calc(100% + 18px);overflow:visible;pointer-events:none;transform:rotate(-1.4deg)}
+.herob .hb-oval path{fill:none;stroke:var(--annot);stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:0}
+.herob.drawn .hb-oval path{animation:hbDraw 4s ease-in-out infinite}
+/* double hand-drawn underline (two loose, slightly wavy strokes, staggered) */
+.herob .hb-uline{padding:0 10px 18px}
+.herob .hb-under{position:absolute;left:-3px;right:-3px;bottom:-1px;width:calc(100% + 6px);height:24px;overflow:visible;pointer-events:none}
+.herob .hb-under path{fill:none;stroke:var(--annot);stroke-width:3.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:0}
+.herob.drawn .hb-under .u1{animation:hbDraw 4s ease-in-out infinite}
+.herob.drawn .hb-under .u2{animation:hbDraw 4s ease-in-out .22s infinite}
+@keyframes hbDraw{0%{stroke-dashoffset:1;opacity:0}6%{opacity:1}30%{stroke-dashoffset:0;opacity:1}84%{stroke-dashoffset:0;opacity:1}94%{stroke-dashoffset:0;opacity:0}100%{stroke-dashoffset:1;opacity:0}}
 .herob .hb-blurb{margin-top:26px;max-width:52ch;color:rgba(245,243,239,.82);font-size:clamp(14px,1.1vw,16px);line-height:1.6}
-@media (prefers-reduced-motion:reduce){.herob .hb-oval path{stroke-dashoffset:0}.herob .hb-uline::before,.herob .hb-uline::after{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.herob .hb-oval path,.herob .hb-under path{stroke-dashoffset:0;opacity:1;animation:none}}
 /* service color legend */
 .svcsec{padding:9vh 0}
 .svcgrid{display:flex;flex-wrap:wrap;gap:14px 26px}
@@ -235,7 +236,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 01 · CASE HERO</span><span class="use">70svh image hero · 3-line title, serif accent line last · kck bottom-left, NFO bottom-right · RoleTag under title · VIDEO VARIANT: dim poster + hero loop that fades in only on the real PLAYING state (see on-camera / sony-xm5)</span></div></div>
+<div class="spec" id="el-01"><div class="wrap"><span class="id">ELEMENT 01 · CASE HERO</span><span class="use">70svh image hero · 3-line title, serif accent line last · kck bottom-left, NFO bottom-right · RoleTag under title · VIDEO VARIANT: dim poster + hero loop that fades in only on the real PLAYING state (see on-camera / sony-xm5)</span></div></div>
 <header class="hero">
   <img src="/case-studies/art-of-visuals/msi/msi-08.jpg" alt="Specimen hero image: the Camaro at golden hour, MSI shoot">
   <div class="scrim" aria-hidden="true"></div>
@@ -248,7 +249,7 @@ a{color:inherit;text-decoration:none}
   <div class="nfo"><span class="h">NFO</span><br>Client · Name<br>Role · Creative Director<br>Frame · MC-20XX-XX</div>
 </header>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 01B · CASE HERO · THE OLD-SITE CUT</span><span class="use">DJ's preferred header (2026-07-12) · giant left sans + REAL client logo + a hand-drawn annotation that DRAWS ON and carries a service COLOR · A = with the blurb, B = without · A shows the oval, B shows the double-underline · service→color map in 01C below · this rolls to every work page once DJ picks</span></div></div>
+<div class="spec" id="el-01b"><div class="wrap"><span class="id">ELEMENT 01B · CASE HERO · THE OLD-SITE CUT</span><span class="use">DJ's preferred header (2026-07-12) · giant left sans + REAL client logo + a hand-drawn annotation that DRAWS ON and carries a service COLOR · A = with the blurb, B = without · A shows the oval, B shows the double-underline · service→color map in 01C below · this rolls to every work page once DJ picks</span></div></div>
 <!-- A · with blurb · oval annotation -->
 <header class="herob" data-annot="oval">
   <img loading="lazy" decoding="async" src="/case-studies/sony-xperia-summer/gallery/xp-02.jpg" alt="Specimen hero image">
@@ -258,7 +259,7 @@ a{color:inherit;text-decoration:none}
     <div class="hb-role">
       <img class="hb-logoimg" src="/logos/sony.png" alt="Sony">
       <span class="hb-scrib" style="--annot:#E0311A">
-        <svg class="hb-oval" viewBox="0 0 264 78" aria-hidden="true" preserveAspectRatio="none"><path d="M16,40 C10,16 60,8 132,7 C210,6 254,17 251,38 C248,60 200,71 128,70 C52,69 8,60 15,35" fill="none" stroke="var(--annot)" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <svg class="hb-oval" viewBox="0 0 280 88" aria-hidden="true" preserveAspectRatio="none"><path pathLength="1" d="M30,54 C15,28 76,13 152,13 C230,13 270,28 259,52 C251,72 189,82 118,79 C56,77 20,66 21,45 C22,31 43,21 68,18" /></svg>
         <i class="serif">directing, photo + strategy</i>
       </span>
     </div>
@@ -275,12 +276,16 @@ a{color:inherit;text-decoration:none}
       <img class="hb-logoimg" src="/logos/sony.png" alt="Sony">
       <span class="hb-scrib hb-uline" style="--annot:#2FB8A0">
         <i class="serif">strategy, creative direction</i>
+        <svg class="hb-under" viewBox="0 0 260 24" aria-hidden="true" preserveAspectRatio="none">
+          <path class="u1" pathLength="1" d="M5,9 C58,4 118,13 176,7 C214,3 244,10 255,8"/>
+          <path class="u2" pathLength="1" d="M7,18 C66,14 128,21 188,15 C220,12 248,18 253,17"/>
+        </svg>
       </span>
     </div>
   </div>
 </header>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 01C · SERVICE COLORS</span><span class="use">the annotation color = the service I provided · this is my PROPOSED map, you decide · swap any swatch and it drives the 01B annotation sitewide</span></div></div>
+<div class="spec" id="el-01c"><div class="wrap"><span class="id">ELEMENT 01C · SERVICE COLORS</span><span class="use">the annotation color = the service I provided · this is my PROPOSED map, you decide · swap any swatch and it drives the 01B annotation sitewide</span></div></div>
 <section class="paper svcsec">
   <div class="wrap">
     <div class="svcgrid">
@@ -299,7 +304,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 02 · STATROW + ROLEROW</span><span class="use">Scoreboard on the accent: text rides --on-rgb so every accent reads · note right-aligned · rolerow flows left, never space-between</span></div></div>
+<div class="spec" id="el-02"><div class="wrap"><span class="id">ELEMENT 02 · STATROW + ROLEROW</span><span class="use">Scoreboard on the accent: text rides --on-rgb so every accent reads · note right-aligned · rolerow flows left, never space-between</span></div></div>
 <div class="statrow">
   <div class="wrap in">
     <div class="stat"><b>Big</b><span>What it counts</span></div>
@@ -317,7 +322,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 03 · THE BRIEF</span><span class="use">Paper ground · kicker + display h2 + services list left, body right · first paragraph is the lede size</span></div></div>
+<div class="spec" id="el-03"><div class="wrap"><span class="id">ELEMENT 03 · THE BRIEF</span><span class="use">Paper ground · kicker + display h2 + services list left, body right · first paragraph is the lede size</span></div></div>
 <section class="paper">
   <div class="wrap story">
     <div class="side">
@@ -332,7 +337,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 04 · CHAPTER HEAD</span><span class="use">White ground · numbered fhead on a 2px rule: mono number, display title, right tag, dek · numbers tie back to the brief's index</span></div></div>
+<div class="spec" id="el-04"><div class="wrap"><span class="id">ELEMENT 04 · CHAPTER HEAD</span><span class="use">White ground · numbered fhead on a 2px rule: mono number, display title, right tag, dek · numbers tie back to the brief's index</span></div></div>
 <section class="white front">
   <div class="wrap">
     <div class="fhead">
@@ -342,13 +347,13 @@ a{color:inherit;text-decoration:none}
       <p class="dek">One line on what this chapter shows and why it mattered.</p>
     </div>
 
-    <div class="spec" style="background:none;border:none;padding:0 0 12px"><span class="id">ELEMENT 05 · PLATES</span>&nbsp;&nbsp;<span class="use">duo grid · .off offset wide · .doc hairline for white documents · mono caption under-left</span></div>
+    <div class="spec" id="el-05" style="background:none;border:none;padding:0 0 12px"><span class="id">ELEMENT 05 · PLATES</span>&nbsp;&nbsp;<span class="use">duo grid · .off offset wide · .doc hairline for white documents · mono caption under-left</span></div>
     <div class="duo">
       <figure class="pl"><img loading="lazy" decoding="async" src="/case-studies/flashpoint/gallery/fp-01.jpg" alt="Placeholder plate"><figcaption class="cap"><b>COMP-01</b> · What this frame is</figcaption></figure>
       <figure class="pl"><img loading="lazy" decoding="async" src="/case-studies/flashpoint/gallery/fp-02.jpg" alt="Placeholder plate"><figcaption class="cap"><b>COMP-02</b> · What this frame is</figcaption></figure>
     </div>
 
-    <div class="spec" style="background:none;border:none;padding:26px 0 12px"><span class="id">ELEMENT 07 · BROWSER FRAME</span>&nbsp;&nbsp;<span class="use">for live sites and web work · url pill center · caption below like any plate</span></div>
+    <div class="spec" id="el-07" style="background:none;border:none;padding:26px 0 12px"><span class="id">ELEMENT 07 · BROWSER FRAME</span>&nbsp;&nbsp;<span class="use">for live sites and web work · url pill center · caption below like any plate</span></div>
     <figure class="pl">
       <div class="browser">
         <div class="bbar"><i></i><i></i><i></i><span class="burl">example.com</span></div>
@@ -359,13 +364,13 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 06 · FULL-BLEED BREAK</span><span class="use">between chapters · parallax on the real pages · centered mono caption chip</span></div></div>
+<div class="spec" id="el-06"><div class="wrap"><span class="id">ELEMENT 06 · FULL-BLEED BREAK</span><span class="use">between chapters · parallax on the real pages · centered mono caption chip</span></div></div>
 <div class="break">
   <img loading="lazy" decoding="async" src="/case-studies/flashpoint/gallery/fp-08.jpg" alt="Placeholder break image">
   <span class="cap">✳ The break caption · context in one line</span>
 </div>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 08 · QUOTE BAND</span><span class="use">the system in one line · spark ground (flips to ink automatically in B/W mode) · serif italic + display bold emphasis</span></div></div>
+<div class="spec" id="el-08"><div class="wrap"><span class="id">ELEMENT 08 · QUOTE BAND</span><span class="use">the system in one line · spark ground (flips to ink automatically in B/W mode) · serif italic + display bold emphasis</span></div></div>
 <section class="quote">
   <div class="wrap">
     <p class="q">"The whole project summed up in one serif line with <b>the bold bit</b> carrying the point."</p>
@@ -373,7 +378,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 09 · TESTIMONIAL CARD</span><span class="use">ink ground · serif quote, name + role, chip while the quote is pending · NEVER fabricate a quote under a real name</span></div></div>
+<div class="spec" id="el-09"><div class="wrap"><span class="id">ELEMENT 09 · TESTIMONIAL CARD</span><span class="use">ink ground · serif quote, name + role, chip while the quote is pending · NEVER fabricate a quote under a real name</span></div></div>
 <div class="tstwrap"><div class="wrap">
   <figure class="tst-card">
     <p class="tst-q"><span class="tst-ph">&ldquo;&nbsp;&hellip;&nbsp;&rdquo;</span></p>
@@ -381,13 +386,13 @@ a{color:inherit;text-decoration:none}
   </figure>
 </div></div>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 10 · PILLS</span><span class="use">mono uppercase, radius 99 · dark-on-light and light-on-dark variants · arrows for outbound</span></div></div>
+<div class="spec" id="el-10"><div class="wrap"><span class="id">ELEMENT 10 · PILLS</span><span class="use">mono uppercase, radius 99 · dark-on-light and light-on-dark variants · arrows for outbound</span></div></div>
 <section class="paper"><div class="wrap pillrow">
   <a class="pill-dark" href="#top">Pill on light ↗</a>
   <span style="background:var(--ink);border-radius:8px;padding:14px 18px;display:inline-flex"><a class="pill-light" href="#top">Pill on dark ↗</a></span>
 </div></section>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 12 · CALL SHEET</span><span class="use">credits slip · agency + client + collaborators + DJ's row marked select · keep roles truthful</span></div></div>
+<div class="spec" id="el-12"><div class="wrap"><span class="id">ELEMENT 12 · CALL SHEET</span><span class="use">credits slip · agency + client + collaborators + DJ's row marked select · keep roles truthful</span></div></div>
 <section class="paper"><div class="wrap credits">
   <CallSheet code="MC-20XX-XX" sub="Client · Project · Scope" filed="MMXX" tone="light"
     rows={[
@@ -397,7 +402,7 @@ a{color:inherit;text-decoration:none}
     ]} />
 </div></section>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 11 · CTA BAND</span><span class="use">the hand-off · accent ground, text rides --on-rgb · round talk button</span></div></div>
+<div class="spec" id="el-11"><div class="wrap"><span class="id">ELEMENT 11 · CTA BAND</span><span class="use">the hand-off · accent ground, text rides --on-rgb · round talk button</span></div></div>
 <section class="cta">
   <div class="wrap in">
     <div>
@@ -408,7 +413,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 14 · FILM POSTER</span><span class="use">the signature: poster still + muted snip loop (pvid, plays-when-visible) + round play chip + fcap · on case pages click opens the reelbox film lightbox · 92svh</span></div></div>
+<div class="spec" id="el-14"><div class="wrap"><span class="id">ELEMENT 14 · FILM POSTER</span><span class="use">the signature: poster still + muted snip loop (pvid, plays-when-visible) + round play chip + fcap · on case pages click opens the reelbox film lightbox · 92svh</span></div></div>
 <section class="film">
   <div class="poster">
     <img loading="lazy" decoding="async" src="/case-studies/sony-this-moment/gallery/tm-03.jpg" alt="Film poster specimen">
@@ -418,7 +423,24 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 15 · CONTACT SHEET</span><span class="use">the frames masonry · white mats, FR-numbered mono caps, slight rotation, hover lift · packed by the global masonry script (PageFooter) · reveal via .show</span></div></div>
+<div class="spec" id="el-23"><div class="wrap"><span class="id">ELEMENT 23 · FILM SPLIT <b style="color:var(--red)">(#el-filmsplit · FIXED)</b></span><span class="use">a 16:9 film poster beside a stack of two stills · the poster sets the row height, the stack mirrors it · <b>this is the element that overlapped on adorama</b> — the fix (min-height:0 grid guard) lives in the shared src/styles/filmsplit.css, so editing it once updates every page that imports it · never overlaps at any width</span></div></div>
+<section class="paper" style="padding:8vh 0">
+  <div class="wrap">
+    <div class="filmsplit" id="el-filmsplit">
+      <div class="poster16">
+        <img loading="lazy" decoding="async" src="/case-studies/adorama-music/gallery/am-37.jpg" alt="Film split poster specimen">
+        <span class="play">Play · the spot</span>
+        <span class="fcap">✳ the cut · what it is · who for</span>
+      </div>
+      <div class="filmstack">
+        <figure><img src="/case-studies/adorama-music/gallery/am-36.jpg" alt="Still specimen" width="800" height="534" loading="lazy"></figure>
+        <figure><img src="/case-studies/adorama-music/gallery/am-38.jpg" alt="Still specimen" width="800" height="534" loading="lazy"></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="spec" id="el-15"><div class="wrap"><span class="id">ELEMENT 15 · CONTACT SHEET</span><span class="use">the frames masonry · white mats, FR-numbered mono caps, slight rotation, hover lift · packed by the global masonry script (PageFooter) · reveal via .show</span></div></div>
 <section class="paper"><div class="wrap gal">
   <div class="bar">
     <span class="mono"><b>Contact sheet</b> · frames from the shoot</span>
@@ -434,14 +456,14 @@ a{color:inherit;text-decoration:none}
   </div>
 </div></section>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 16 · STAT BEAT</span><span class="use">one number between chapters · accent ground, rides --struct/--on-rgb like the statrow · use when a single stat IS the chapter break</span></div></div>
+<div class="spec" id="el-16"><div class="wrap"><span class="id">ELEMENT 16 · STAT BEAT</span><span class="use">one number between chapters · accent ground, rides --struct/--on-rgb like the statrow · use when a single stat IS the chapter break</span></div></div>
 <section class="statbeat">
   <div class="in">
     <div><b>50K+</b><span>posts tagged #CreateNoMatterWhat</span></div>
   </div>
 </section>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 17 · SOCIAL WALL</span><span class="use">the audience-reaction wall · REAL comments only, transcribed from the thread (these are Flow State's) · use when the response is the proof</span></div></div>
+<div class="spec" id="el-17"><div class="wrap"><span class="id">ELEMENT 17 · SOCIAL WALL</span><span class="use">the audience-reaction wall · REAL comments only, transcribed from the thread (these are Flow State's) · use when the response is the proof</span></div></div>
 <SocialWall
   title="The comments came in hot."
   intro="Specimen of the audience wall. Real transcribed comments only, never invented ones: the same rule as quotes."
@@ -453,7 +475,7 @@ a{color:inherit;text-decoration:none}
   ]}
 />
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 18 · LEDGER ROWS</span><span class="use">the book-of-business row: thumb + title + mono meta + red arrow · B/W at rest, color on hover · for bodies of work that need inventory, not story</span></div></div>
+<div class="spec" id="el-18"><div class="wrap"><span class="id">ELEMENT 18 · LEDGER ROWS</span><span class="use">the book-of-business row: thumb + title + mono meta + red arrow · B/W at rest, color on hover · for bodies of work that need inventory, not story</span></div></div>
 <section class="paper"><div class="wrap bob">
   <div class="bob-rows">
     <a class="bob-row" href="/work/sony-this-moment">
@@ -471,10 +493,10 @@ a{color:inherit;text-decoration:none}
   </div>
 </div></section>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 19 · NEXT FILE</span><span class="use">the case-page closer · giant next name + framed thumb + fill rail · overscroll arms ONLY at true page bottom (inert here by design), click always works · chain in /work index order</span></div></div>
+<div class="spec" id="el-19"><div class="wrap"><span class="id">ELEMENT 19 · NEXT FILE</span><span class="use">the case-page closer · giant next name + framed thumb + fill rail · overscroll arms ONLY at true page bottom (inert here by design), click always works · chain in /work index order</span></div></div>
 <NextFile href="/work" name="The Work Index" img="/case-studies/sony-this-moment/gallery/tm-05.jpg" code="MC-INDEX" />
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 20 · PAGE CHROME</span><span class="use">every case page's fixed furniture, shown here static at half scale · c1 wordmark · c2 nav · c3 case code · c4 LA clock · plus the drifting ✳ companion · mix-blend-mode:difference over everything</span></div></div>
+<div class="spec" id="el-20"><div class="wrap"><span class="id">ELEMENT 20 · PAGE CHROME</span><span class="use">every case page's fixed furniture, shown here static at half scale · c1 wordmark · c2 nav · c3 case code · c4 LA clock · plus the drifting ✳ companion · mix-blend-mode:difference over everything</span></div></div>
 <section class="paper"><div class="wrap chromedemo-wrap">
   <div class="chromedemo" aria-label="Page chrome demo (static)">
     <span class="cd1">M<i>✳</i>NUMENTS</span>
@@ -486,7 +508,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </div></section>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 21 · PATTERN INDEX</span><span class="use">the systems that are code, not markup · where each one lives · pull from the source, never re-implement</span></div></div>
+<div class="spec" id="el-21"><div class="wrap"><span class="id">ELEMENT 21 · PATTERN INDEX</span><span class="use">the systems that are code, not markup · where each one lives · pull from the source, never re-implement</span></div></div>
 <section class="paper"><div class="wrap pidx">
   <div class="pidx-rows">
     <div class="pidx-row"><b>Play-when-visible</b><span class="mono">every autoplay loop pauses off-screen · PageFooter.astro · verify: tools/motioncheck.mjs</span></div>
@@ -504,7 +526,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </div></section>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 22 · WORD SWITCHER</span><span class="use">auto-cycling tabbed narrative · giant words, active solid + timed bar / others ghosted · two-column body fades per tab · click to jump, pauses on hover · used on Turnstile (Concept/Design/Deliver)</span></div></div>
+<div class="spec" id="el-22"><div class="wrap"><span class="id">ELEMENT 22 · WORD SWITCHER</span><span class="use">auto-cycling tabbed narrative · giant words, active solid + timed bar / others ghosted · two-column body fades per tab · click to jump, pauses on hover · used on Turnstile (Concept/Design/Deliver)</span></div></div>
 <section class="cdd paper" id="cddkit" data-i="0">
   <div class="wrap">
     <div class="cdd-head" role="tablist" aria-label="Word switcher demo">
@@ -529,7 +551,324 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
+<!-- ══════════════ NEW ELEMENTS · 2026-07-12 batch (each has a unique #el- id) ══════════════ -->
+
+<div class="spec" id="el-24"><div class="wrap"><span class="id">ELEMENT 24 · HEADER SLIDER <b style="color:var(--red)">(#el-headerslider)</b></span><span class="use">the 01B header, as a slider · every slide is uniform: <b>brand logo · what I did · a one-two sentence setup blurb</b> · auto-advances, dots + arrows · <b>✎ Edit copy</b> makes the role + blurb editable inline, <b>⧉ Export</b> copies all slides as JSON so we lock the final wording · seeded with real on-site copy</span></div></div>
+<section class="hslider" id="el-headerslider" aria-roledescription="carousel">
+  <div class="hs-track">
+    <div class="hs-slide on" data-i="0">
+      <img loading="lazy" decoding="async" src="/case-studies/sony-xperia-summer/gallery/xp-02.jpg" alt="Sony Xperia">
+      <div class="hs-in wrap">
+        <h2>Summer<br>with Xperia</h2>
+        <div class="hs-role"><img class="hs-logo" src="/logos/sony.png" alt="Sony"><span class="hs-did">Directing · photo · strategy</span></div>
+        <p class="hs-blurb">Three summers of Sony Xperia launches. I led directing, stills, and strategy across every drop, from the Porsche film to the boardwalk cut.</p>
+      </div>
+    </div>
+    <div class="hs-slide" data-i="1">
+      <img loading="lazy" decoding="async" src="/case-studies/sony-flow-state/gallery/fs-05.jpg" alt="Sony Flow State">
+      <div class="hs-in wrap">
+        <h2>Flow<br>State</h2>
+        <div class="hs-role"><img class="hs-logo" src="/logos/sony.png" alt="Sony"><span class="hs-did">Strategy · creative direction</span></div>
+        <p class="hs-blurb">Sony put the WH-1000XM3 at the center of the creative process. I pitched Flow State: five creatives, each stuck in the noise until the headphones go on and the flow arrives.</p>
+      </div>
+    </div>
+    <div class="hs-slide" data-i="2">
+      <img loading="lazy" decoding="async" src="/case-studies/adorama-music/gallery/am-09.jpg" alt="Adorama Music">
+      <div class="hs-in wrap">
+        <h2>Adorama<br>Music</h2>
+        <div class="hs-role"><img class="hs-logo" src="/logos/sony.png" alt="Client" style="opacity:.25"><span class="hs-did">Creative direction · film</span></div>
+        <p class="hs-blurb">A brand film built to travel, then cut into its own spot for each product across the campaign.</p>
+      </div>
+    </div>
+    <div class="hs-slide" data-i="3">
+      <img loading="lazy" decoding="async" src="/case-studies/blue-cross/bc-hero.jpg" alt="Blue Cross of Idaho">
+      <div class="hs-in wrap">
+        <h2>Blue Cross<br>of Idaho</h2>
+        <div class="hs-role"><img class="hs-logo" src="/logos/sony.png" alt="Client" style="opacity:.25"><span class="hs-did">Creative direction · casting · image selection</span></div>
+        <p class="hs-blurb">Real people, real Idaho. A people-first brand campaign made with OMEK, still licensed and in use four years on.</p>
+      </div>
+    </div>
+  </div>
+  <div class="hs-tools">
+    <button type="button" class="hs-edit" id="hsEdit">✎ Edit copy</button>
+    <button type="button" class="hs-export" id="hsExport">⧉ Export copy</button>
+    <span class="hs-note" id="hsNote">edit the role + blurb inline, then export</span>
+  </div>
+  <div class="hs-nav">
+    <div class="hs-dots" id="hsDots"></div>
+    <div class="hs-arrows"><button type="button" class="hs-prev" aria-label="Previous">←</button><button type="button" class="hs-next" aria-label="Next">→</button></div>
+  </div>
+</section>
+
+<div class="spec" id="el-25"><div class="wrap"><span class="id">ELEMENT 25 · COUNT-UP + CALLOUTS <b style="color:var(--red)">(#el-countup · #el-callout)</b></span><span class="use">ways to pull numbers + facts out of long copy · numbers <b>count up</b> when they scroll in (set data-count) · plus three callout treatments to break up a wall of text · specimen numbers — wire the real value into data-count per page</span></div></div>
+<section class="paper cuwrap" id="el-countup">
+  <div class="wrap">
+    <div class="countrow">
+      <div class="cu"><b data-count="1200000" data-suffix="+">0</b><span>views, specimen</span></div>
+      <div class="cu"><b data-count="48">0</b><span>markets, specimen</span></div>
+      <div class="cu"><b data-count="3" data-suffix=" wks">0</b><span>concept to launch</span></div>
+      <div class="cu"><b data-count="4" data-suffix=" yrs">0</b><span>still in use</span></div>
+    </div>
+  </div>
+</section>
+<section class="paper calloutwrap" id="el-callout">
+  <div class="wrap">
+    <p class="co-body">A paragraph of setup runs here, the kind that carries one number or one line worth lifting out so a skimming reader still gets it. The callouts below are the tools for that lift.</p>
+    <div class="callout co-pull">
+      <span class="co-bar" aria-hidden="true"></span>
+      <p>Pull the one fact that would otherwise get buried in the paragraph, and give it room to breathe.</p>
+      <span class="co-src mono">the key line</span>
+    </div>
+    <div class="factchips">
+      <span class="chip"><b>3 weeks</b> concept to launch</span>
+      <span class="chip"><b>4</b> product cuts</span>
+      <span class="chip"><b>1</b> hero film</span>
+    </div>
+  </div>
+</section>
+
+<div class="spec" id="el-26"><div class="wrap"><span class="id">ELEMENT 26 · GALLERY B · MASONRY → LIGHTBOX <b style="color:var(--red)">(#el-masonry)</b></span><span class="use">the alternative to the contact sheet (ELEMENT 15) · a plain masonry grid, no mats or frame numbers · click any image to open the lightbox, arrows or ← → to move, esc or click-out to close · pick this OR the contact sheet per page</span></div></div>
+<section class="paper mwrap" id="el-masonry">
+  <div class="wrap">
+    <div class="bar"><span class="mono"><b>Gallery B</b> · masonry, opens to lightbox</span><span class="mono" style="color:#8f8d88">click to enlarge</span></div>
+    <div class="mgrid" id="kitMgrid">
+      {['/case-studies/adorama-music/gallery/am-01.jpg','/case-studies/flashpoint/gallery/fp-01.jpg','/case-studies/sony-this-moment/gallery/tm-05.jpg','/case-studies/adorama-music/gallery/am-09.jpg','/case-studies/flashpoint/gallery/fp-08.jpg','/case-studies/sony-flow-state/gallery/fs-05.jpg','/case-studies/flashpoint/gallery/fp-02.jpg','/case-studies/sony-this-moment/gallery/tm-03.jpg','/case-studies/flashpoint/gallery/fp-03.jpg'].map((src, i) => (
+        <button class="mcell" type="button" data-full={src} aria-label={`Open image ${i + 1}`}><img src={src} alt={`Gallery specimen ${i + 1}`} loading="lazy" decoding="async"></button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<div class="spec" id="el-27"><div class="wrap"><span class="id">ELEMENT 27 · KICKERS + CTA <b style="color:var(--red)">(#el-kicker)</b></span><span class="use">the closed kicker/CTA set to finalize sitewide · three variations · button copy stays in the locked set (Let's talk ↗ / See the work ↗ / Start a project ↗) · edit here, then it rolls out</span></div></div>
+<section class="paper kwrap" id="el-kicker">
+  <div class="wrap">
+    <div class="kick kick-a">
+      <span class="k-eyebrow mono">✳ A · centered hand-off</span>
+      <p class="k-big">Taste is the whole job. Let's put it to work.</p>
+      <a class="k-btn" href="/contact">Let's talk ↗</a>
+    </div>
+    <div class="kick kick-b">
+      <div><span class="k-eyebrow mono">✳ B · inline</span><p class="k-line">The work speaks first.</p></div>
+      <a class="k-arrow" href="/work">See the work ↗</a>
+    </div>
+    <div class="kick kick-c">
+      <p class="k-stmt">Have something you want made well?</p>
+      <a class="k-btn small" href="/contact">Start a project ↗</a>
+    </div>
+  </div>
+</section>
+
+<div class="spec" id="el-28"><div class="wrap"><span class="id">ELEMENT 28 · HOVER-BLURB CARD <b style="color:var(--red)">(#el-hovercard)</b></span><span class="use">work card that reveals a short blurb on hover (touch = always shown) · logo/title + role at rest, the one-line setup slides up on hover · the hover state for the work index</span></div></div>
+<section class="paper hcwrap" id="el-hovercard">
+  <div class="wrap">
+    <div class="hcards">
+      <a class="hcard" href="/work/adorama-music">
+        <img src="/case-studies/adorama-music/gallery/am-09.jpg" alt="Adorama Music" loading="lazy">
+        <div class="hc-meta"><b>Adorama Music</b><span>Creative direction · film</span></div>
+        <div class="hc-blurb"><p>A brand film built to travel, cut into a spot for each product.</p></div>
+      </a>
+      <a class="hcard" href="/work/sony-flow-state">
+        <img src="/case-studies/sony-flow-state/gallery/fs-05.jpg" alt="Sony Flow State" loading="lazy">
+        <div class="hc-meta"><b>Flow State</b><span>Strategy · creative direction</span></div>
+        <div class="hc-blurb"><p>Five creatives, stuck in the noise until the headphones bring the flow.</p></div>
+      </a>
+      <a class="hcard" href="/work/blue-cross">
+        <img src="/case-studies/blue-cross/bc-hero.jpg" alt="Blue Cross of Idaho" loading="lazy">
+        <div class="hc-meta"><b>Blue Cross of Idaho</b><span>Creative direction · casting</span></div>
+        <div class="hc-blurb"><p>Real people, real Idaho. A people-first campaign, in use four years on.</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="spec" id="el-29"><div class="wrap"><span class="id">ELEMENT 29 · WORK INDEX · VARIED SIZES <b style="color:var(--red)">(#el-workview)</b></span><span class="use">the alternative to the grid/contact-sheet index · jobs at different sizes, <b>ordered for a recruiter</b> (strongest first, featured big) · reuses the hover-blurb · simpler and more editorial than the index</span></div></div>
+<section class="paper wvwrap" id="el-workview">
+  <div class="wrap">
+    <div class="wgrid">
+      <a class="wtile feat" href="/work/sony-flow-state"><img src="/case-studies/sony-flow-state/gallery/fs-05.jpg" alt="Sony Flow State" loading="lazy"><div class="wt-meta"><b>Flow State</b><span>Sony · strategy + creative direction</span></div></a>
+      <a class="wtile lg" href="/work/adorama-music"><img src="/case-studies/adorama-music/gallery/am-09.jpg" alt="Adorama Music" loading="lazy"><div class="wt-meta"><b>Adorama Music</b><span>Creative direction · film</span></div></a>
+      <a class="wtile" href="/work/sony-xperia"><img src="/case-studies/sony-xperia-summer/gallery/xp-02.jpg" alt="Sony Xperia" loading="lazy"><div class="wt-meta"><b>Sony Xperia</b><span>Directing · photo</span></div></a>
+      <a class="wtile" href="/work/blue-cross"><img src="/case-studies/blue-cross/bc-hero.jpg" alt="Blue Cross of Idaho" loading="lazy"><div class="wt-meta"><b>Blue Cross</b><span>Casting · image selection</span></div></a>
+      <a class="wtile lg" href="/work/sony-this-moment"><img src="/case-studies/sony-this-moment/gallery/tm-03.jpg" alt="Sony This Moment" loading="lazy"><div class="wt-meta"><b>This Moment</b><span>Photoshoot direction</span></div></a>
+      <a class="wtile" href="/work/flashpoint"><img src="/case-studies/flashpoint/gallery/fp-01.jpg" alt="Flashpoint" loading="lazy"><div class="wt-meta"><b>Flashpoint</b><span>Creative direction</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- shared lightbox overlay for ELEMENT 26 (masonry gallery B) -->
+<div class="lbox" id="kitLbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button type="button" class="lb-close" aria-label="Close">✕</button>
+  <button type="button" class="lb-prev" aria-label="Previous">‹</button>
+  <img id="kitLboxImg" src="" alt="">
+  <button type="button" class="lb-next" aria-label="Next">›</button>
+</div>
+
+<script is:inline>
+(function(){
+  // ELEMENT 24 · header slider (auto-advance, dots, arrows, inline edit + JSON export)
+  var hs=document.getElementById('el-headerslider');
+  if(hs){
+    var slides=[].slice.call(hs.querySelectorAll('.hs-slide'));
+    var dotsWrap=hs.querySelector('#hsDots'),i=0,timer=null,DUR=5200;
+    slides.forEach(function(_,n){
+      var d=document.createElement('button');d.className='hs-dot'+(n===0?' on':'');d.type='button';
+      d.setAttribute('aria-label','Slide '+(n+1));
+      d.addEventListener('click',function(){go(n);reset();});
+      dotsWrap.appendChild(d);
+    });
+    var dots=[].slice.call(dotsWrap.children);
+    function go(n){i=(n+slides.length)%slides.length;slides.forEach(function(s,k){s.classList.toggle('on',k===i);});dots.forEach(function(d,k){d.classList.toggle('on',k===i);});}
+    function next(){go(i+1);} function prev(){go(i-1);}
+    function reset(){if(timer)clearInterval(timer);timer=setInterval(next,DUR);}
+    hs.querySelector('.hs-next').addEventListener('click',function(){next();reset();});
+    hs.querySelector('.hs-prev').addEventListener('click',function(){prev();reset();});
+    hs.addEventListener('mouseenter',function(){if(timer)clearInterval(timer);});
+    hs.addEventListener('mouseleave',function(){if(!editing)reset();});
+    var editBtn=document.getElementById('hsEdit'),exportBtn=document.getElementById('hsExport'),note=document.getElementById('hsNote'),editing=false;
+    editBtn.addEventListener('click',function(){
+      editing=!editing;editBtn.classList.toggle('on',editing);
+      slides.forEach(function(s){s.querySelector('.hs-did').contentEditable=editing;s.querySelector('.hs-blurb').contentEditable=editing;});
+      note.textContent=editing?'editing — change any role or blurb, then Export':'edit the role + blurb inline, then export';
+      if(editing){if(timer)clearInterval(timer);}else{reset();}
+    });
+    exportBtn.addEventListener('click',function(){
+      var data=slides.map(function(s){return{title:s.querySelector('h2').innerText.replace(/\s+/g,' ').trim(),did:s.querySelector('.hs-did').innerText.trim(),blurb:s.querySelector('.hs-blurb').innerText.trim()};});
+      var json=JSON.stringify(data,null,2);
+      var done=function(){note.textContent='copied '+data.length+' slides ✓';setTimeout(function(){note.textContent='edit the role + blurb inline, then export';},2600);};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(json).then(done,function(){window.prompt('Copy slider copy:',json);});}
+      else{window.prompt('Copy slider copy:',json);}
+    });
+    reset();
+  }
+  // ELEMENT 25 · numbers count up when they scroll in
+  var cues=[].slice.call(document.querySelectorAll('[data-count]'));
+  if(cues.length){
+    var run=function(el){
+      var target=parseFloat(el.getAttribute('data-count'))||0,suf=el.getAttribute('data-suffix')||'',dur=1400,t0=null;
+      var step=function(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(target*e).toLocaleString('en-US')+suf;if(p<1)requestAnimationFrame(step);};
+      requestAnimationFrame(step);
+    };
+    var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){run(e.target);cio.unobserve(e.target);}});},{threshold:.6});
+    cues.forEach(function(c){cio.observe(c);});
+  }
+  // ELEMENT 26 · masonry lightbox
+  var grid=document.getElementById('kitMgrid'),lb=document.getElementById('kitLbox');
+  if(grid&&lb){
+    var lbImg=document.getElementById('kitLboxImg'),cells=[].slice.call(grid.querySelectorAll('.mcell'));
+    var srcs=cells.map(function(c){return c.getAttribute('data-full');}),idx=0;
+    function openL(n){idx=(n+srcs.length)%srcs.length;lbImg.src=srcs[idx];lb.classList.add('on');}
+    function closeL(){lb.classList.remove('on');lbImg.src='';}
+    cells.forEach(function(c,n){c.addEventListener('click',function(){openL(n);});});
+    lb.querySelector('.lb-close').addEventListener('click',closeL);
+    lb.querySelector('.lb-next').addEventListener('click',function(){openL(idx+1);});
+    lb.querySelector('.lb-prev').addEventListener('click',function(){openL(idx-1);});
+    lb.addEventListener('click',function(e){if(e.target===lb)closeL();});
+    document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;if(e.key==='Escape')closeL();else if(e.key==='ArrowRight')openL(idx+1);else if(e.key==='ArrowLeft')openL(idx-1);});
+  }
+})();
+</script>
+
 <style is:global>
+/* ══════════ NEW ELEMENTS · 2026-07-12 batch ══════════ */
+/* 24 · HEADER SLIDER (#el-headerslider) */
+.hslider{position:relative;height:78svh;min-height:560px;overflow:hidden;background:var(--ink)}
+.hs-track{position:absolute;inset:0}
+.hs-slide{position:absolute;inset:0;display:flex;align-items:center;opacity:0;transition:opacity .7s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.hs-slide.on{opacity:1;pointer-events:auto}
+.hs-slide>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.02) brightness(.34)}
+.hs-in{position:relative;z-index:2;width:100%}
+.hs-slide h2{color:#fff;margin:0;font-family:var(--disp);font-weight:var(--dispw2,600);font-size:clamp(48px,7.4vw,112px);line-height:1.02;letter-spacing:-.01em;text-transform:uppercase}
+.hs-role{display:flex;align-items:center;gap:22px;margin-top:26px;flex-wrap:wrap}
+.hs-logo{height:24px;width:auto;filter:brightness(0) invert(1);opacity:.95}
+.hs-did{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--spark)}
+.hs-blurb{margin-top:22px;max-width:52ch;color:rgba(245,243,239,.82);font-size:clamp(14px,1.1vw,16px);line-height:1.6}
+.hs-did[contenteditable="true"],.hs-blurb[contenteditable="true"]{outline:1px dashed rgba(239,161,173,.85);outline-offset:5px;cursor:text;border-radius:2px}
+.hs-tools{position:absolute;top:20px;right:var(--pad);z-index:6;display:flex;align-items:center;gap:10px}
+.hs-tools button{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(10,10,10,.5);border:1px solid rgba(245,243,239,.3);border-radius:99px;padding:8px 14px;cursor:pointer;backdrop-filter:blur(4px);transition:background .3s,color .3s}
+.hs-tools button:hover{background:#fff;color:var(--ink)}
+.hs-tools .hs-edit.on{background:var(--spark);color:var(--ink);border-color:var(--spark)}
+.hs-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(245,243,239,.55)}
+.hs-nav{position:absolute;left:0;right:0;bottom:24px;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad)}
+.hs-dots{display:flex;gap:10px}
+.hs-dot{width:9px;height:9px;border-radius:50%;border:1px solid rgba(245,243,239,.6);background:none;cursor:pointer;padding:0;transition:background .3s,border-color .3s}
+.hs-dot.on{background:var(--spark);border-color:var(--spark)}
+.hs-arrows{display:flex;gap:8px}
+.hs-arrows button{width:38px;height:38px;border-radius:50%;border:1px solid rgba(245,243,239,.4);background:rgba(10,10,10,.4);color:#fff;font-size:15px;cursor:pointer;backdrop-filter:blur(4px);transition:background .3s,color .3s}
+.hs-arrows button:hover{background:#fff;color:var(--ink)}
+@media(max-width:680px){.hs-slide h2{font-size:clamp(38px,10vw,60px)}.hs-note{display:none}}
+/* 25 · COUNT-UP + CALLOUTS (#el-countup / #el-callout) */
+.cuwrap{padding:8vh 0 2vh}
+.countrow{display:flex;justify-content:center;gap:clamp(30px,6vw,90px);flex-wrap:wrap;text-align:center}
+.cu b{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(40px,6vw,90px);letter-spacing:-.04em;line-height:.85;color:var(--ink);font-variant-numeric:tabular-nums}
+.cu span{display:block;margin-top:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.calloutwrap{padding:4vh 0 9vh}
+.co-body{max-width:60ch;color:var(--ink);font-size:clamp(16px,1.4vw,19px);line-height:1.65;opacity:.85}
+.callout.co-pull{position:relative;display:flex;flex-direction:column;gap:10px;margin:34px 0;padding:4px 0 4px 26px}
+.co-pull .co-bar{position:absolute;left:0;top:2px;bottom:2px;width:4px;border-radius:4px;background:var(--red)}
+.co-pull p{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:clamp(24px,3.2vw,40px);line-height:1.18;color:var(--ink);max-width:24ch;margin:0}
+.co-pull .co-src{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.factchips{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:9px 15px;display:inline-flex;align-items:center}
+.chip b{font-family:var(--disp);font-weight:var(--dispw);font-size:15px;margin-right:7px;letter-spacing:-.02em}
+/* 26 · MASONRY + LIGHTBOX (#el-masonry) */
+.mwrap{padding:6vh 0 9vh}
+.mwrap .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.mgrid{columns:3;column-gap:14px}
+.mcell{display:block;width:100%;padding:0;margin:0 0 14px;border:0;background:none;cursor:zoom-in;break-inside:avoid;overflow:hidden;border-radius:2px}
+.mcell img{width:100%;height:auto;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1),filter .4s;filter:saturate(.97)}
+.mcell:hover img{transform:scale(1.04);filter:saturate(1.05)}
+@media(max-width:820px){.mgrid{columns:2}}
+@media(max-width:480px){.mgrid{columns:1}}
+.lbox{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:rgba(8,8,8,.93);opacity:0;pointer-events:none;transition:opacity .32s}
+.lbox.on{opacity:1;pointer-events:auto}
+.lbox img{max-width:92vw;max-height:86vh;object-fit:contain;box-shadow:0 20px 70px rgba(0,0,0,.6)}
+.lbox button{position:absolute;background:none;border:0;color:#fff;cursor:pointer;font-family:var(--mono)}
+.lbox .lb-close{top:20px;right:26px;font-size:24px}
+.lbox .lb-prev{left:18px;top:50%;transform:translateY(-50%);font-size:44px;padding:12px}
+.lbox .lb-next{right:18px;top:50%;transform:translateY(-50%);font-size:44px;padding:12px}
+/* 27 · KICKERS + CTA (#el-kicker) */
+.kwrap{padding:8vh 0}
+.kwrap .wrap{display:flex;flex-direction:column;gap:40px}
+.k-eyebrow{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
+.kick-a{text-align:center;padding:5vh 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.k-big{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(28px,4.4vw,60px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;max-width:20ch;margin:0 auto 26px}
+.k-btn{display:inline-flex;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:var(--ink);border-radius:99px;padding:16px 30px;transition:background .3s,color .3s}
+.k-btn:hover{background:var(--red);color:#fff}
+.k-btn.small{padding:13px 24px}
+.kick-b{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:3vh 0;border-bottom:1px solid var(--line)}
+.k-line{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(24px,3.4vw,44px);letter-spacing:-.03em;text-transform:uppercase;margin:0}
+.k-arrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);border-bottom:2px solid var(--red);padding-bottom:5px;transition:color .3s}
+.k-arrow:hover{color:var(--red)}
+.kick-c{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.k-stmt{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:clamp(22px,3vw,38px);color:var(--ink);margin:0}
+/* 28 · HOVER-BLURB CARD (#el-hovercard) */
+.hcwrap{padding:6vh 0 9vh}
+.hcards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.hcard{position:relative;display:block;overflow:hidden;aspect-ratio:4/5;background:#000;border-radius:2px}
+.hcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72);transition:transform .7s cubic-bezier(.22,1,.36,1),filter .4s}
+.hcard:hover img{transform:scale(1.05);filter:brightness(.5)}
+.hc-meta{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:20px}
+.hc-meta b{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(20px,1.8vw,28px);letter-spacing:-.02em;text-transform:uppercase;line-height:1.05;color:#fff}
+.hc-meta span{display:block;margin-top:6px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.75)}
+.hc-blurb{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:20px;background:linear-gradient(to top,rgba(10,10,10,.94),rgba(10,10,10,.55) 72%,transparent);transform:translateY(101%);opacity:0;transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .4s}
+.hcard:hover .hc-blurb,.hcard:focus-visible .hc-blurb{transform:translateY(0);opacity:1}
+.hc-blurb p{color:#fff;font-size:14px;line-height:1.5;margin:0;max-width:36ch}
+@media(hover:none){.hc-blurb{position:static;transform:none;opacity:1;background:var(--ink)}.hcard{aspect-ratio:auto}.hcard img{position:relative;height:230px}}
+@media(max-width:760px){.hcards{grid-template-columns:1fr 1fr}}
+@media(max-width:460px){.hcards{grid-template-columns:1fr}}
+/* 29 · WORK INDEX · VARIED SIZES (#el-workview) */
+.wvwrap{padding:6vh 0 9vh}
+.wgrid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px}
+.wtile{position:relative;overflow:hidden;background:#000;border-radius:2px}
+.wtile.feat{grid-column:span 2;grid-row:span 2}
+.wtile.lg{grid-column:span 2}
+.wtile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72);transition:transform .7s cubic-bezier(.22,1,.36,1),filter .4s}
+.wtile:hover img{transform:scale(1.04);filter:brightness(.55)}
+.wt-meta{position:absolute;left:0;bottom:0;z-index:2;padding:16px 18px}
+.wt-meta b{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(17px,1.5vw,24px);letter-spacing:-.02em;text-transform:uppercase;line-height:1.04;color:#fff}
+.wt-meta span{display:block;margin-top:5px;font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:rgba(245,243,239,.72)}
+@media(max-width:820px){.wgrid{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}.wtile.feat{grid-column:span 2;grid-row:span 2}.wtile.lg{grid-column:span 2}}
+
 /* ELEMENT 22 · word switcher (shared grammar with Turnstile's Concept/Design/Deliver) */
 .cdd{padding:11vh 0}
 .cdd-head{display:flex;gap:clamp(20px,3.4vw,54px);flex-wrap:wrap;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:18px}
@@ -590,6 +929,14 @@ a{color:inherit;text-decoration:none}
 .film .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.7;padding:0 12px;color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s;z-index:2}
 .film .poster:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
 .film .fcap{position:absolute;left:var(--pad);bottom:24px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85);z-index:2}
+/* 23 FILM SPLIT · poster16 base (matches the work pages; the split layout itself is
+   in the shared src/styles/filmsplit.css). */
+.poster16{position:relative;aspect-ratio:16/9;overflow:hidden;cursor:pointer;background:#000}
+.poster16 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.78);transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.poster16:hover img{transform:scale(1.03)}
+.poster16 .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:96px;height:96px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.6;padding:0 12px;color:var(--paper);font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s}
+.poster16:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
+.poster16 .fcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
 /* 15 CONTACT SHEET (source: sony-this-moment; packed by the global script) */
 .gal{padding:6vh 0 8vh}
 .gal .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:26px}
@@ -646,7 +993,7 @@ a{color:inherit;text-decoration:none}
 })();
 </script>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 13 · MOTION LAB</span><span class="use">DJ picked 06 BLEND (drift + lock) — it is the default ✦ · six languages on the same homepage elements, switcher + replay below · the pick becomes the sitewide grammar · lives on the Kit only</span></div></div>
+<div class="spec" id="el-13"><div class="wrap"><span class="id">ELEMENT 13 · MOTION LAB</span><span class="use">DJ picked 06 BLEND (drift + lock) — it is the default ✦ · six languages on the same homepage elements, switcher + replay below · the pick becomes the sitewide grammar · lives on the Kit only</span></div></div>
 <section class="mlab" id="mlab" data-motion="blend">
   <div class="mlab-bar">
     <div class="wrap mlab-bar-in">
