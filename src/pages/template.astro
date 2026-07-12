@@ -646,13 +646,14 @@ a{color:inherit;text-decoration:none}
 })();
 </script>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 13 · MOTION LAB</span><span class="use">five motion languages on the same homepage elements · pick ONE, it becomes the sitewide grammar · switcher + replay below · lives on the Kit only</span></div></div>
-<section class="mlab" id="mlab" data-motion="settle">
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 13 · MOTION LAB</span><span class="use">DJ picked 06 BLEND (drift + lock) — it is the default ✦ · six languages on the same homepage elements, switcher + replay below · the pick becomes the sitewide grammar · lives on the Kit only</span></div></div>
+<section class="mlab" id="mlab" data-motion="blend">
   <div class="mlab-bar">
     <div class="wrap mlab-bar-in">
       <span class="mono mlab-k">\ Motion lab</span>
       <div class="mlab-btns" role="tablist" aria-label="Motion language">
-        <button data-mo="settle" class="on">01 Settle</button>
+        <button data-mo="blend" class="on rec">06 Blend ✦</button>
+        <button data-mo="settle">01 Settle</button>
         <button data-mo="rise">02 Rise</button>
         <button data-mo="drift">03 Drift</button>
         <button data-mo="lock">04 Lock</button>
@@ -660,7 +661,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <button class="mlab-replay mono" id="mlabReplay" type="button">↺ Replay</button>
     </div>
-    <div class="wrap"><p class="mono mlab-desc" id="mlabDesc">01 · Everything settles in: soft fade, small lift, blur clears. Calm, fast, invisible.</p></div>
+    <div class="wrap"><p class="mono mlab-desc" id="mlabDesc">06 · The blend (your pick): the thesis LOCKS and assembles as you scroll, then everything after DRIFTS up and keeps floating. Lock's moment, drift's life.</p></div>
   </div>
 
   <!-- M-A · the title block (the entrance DJ hates is THIS moment, fixed 5 ways) -->
@@ -781,6 +782,23 @@ a{color:inherit;text-decoration:none}
 [data-motion="lock"] .mlab-stats .m-el,[data-motion="lock"] .mlab-duo .m-el,[data-motion="lock"] .mlab-cta .m-el{opacity:0;transition:opacity .8s cubic-bezier(.19,1,.22,1) var(--d,0s),transform .8s cubic-bezier(.19,1,.22,1) var(--d,0s);transform:translateY(22px)}
 [data-motion="lock"] .mlab-stats .m-el.in,[data-motion="lock"] .mlab-duo .m-el.in,[data-motion="lock"] .mlab-cta .m-el.in{opacity:1;transform:none}
 
+/* 06 BLEND · DJ's pick: LOCK the thesis (pins + assembles), DRIFT everything after */
+[data-motion="blend"] .m-el{opacity:1}
+[data-motion="blend"] .mlab-lockseg{height:240svh}
+[data-motion="blend"] .mlab-stage{position:sticky;top:0;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+[data-motion="blend"] .mlab-title{padding:0}
+[data-motion="blend"] .mimg img{aspect-ratio:auto;height:min(30svh,340px);width:100%;object-fit:cover}
+[data-motion="blend"] .mh .mline:nth-child(1) .mi{transform:translateX(calc((1 - var(--p,0)) * -26%));opacity:calc(var(--p,0) * 2)}
+[data-motion="blend"] .mh .mline:nth-child(2) .mi{transform:translateX(calc((1 - var(--p,0)) * 26%));opacity:calc(var(--p,0) * 2)}
+[data-motion="blend"] .mk{opacity:calc(var(--p,0) * 3 - .2)}
+[data-motion="blend"] .mlede{opacity:calc(var(--p,0) * 2.4 - 1);transform:translateY(calc((1 - var(--p,0)) * 30px))}
+[data-motion="blend"] .mimg{opacity:calc(var(--p,0) * 2.6 - 1.3);transform:scale(calc(.86 + var(--p,0) * .14));transform-origin:50% 80%}
+/* post-pin = the drift entrance (bigger float + scale), + ambient parallax in JS */
+[data-motion="blend"] .mlab-stats .m-el,[data-motion="blend"] .mlab-duo .m-el,[data-motion="blend"] .mlab-cta .m-el{opacity:0;transform:translateY(56px) scale(.985);transition:opacity 1.15s cubic-bezier(.22,1,.36,1) var(--d,0s),transform 1.15s cubic-bezier(.22,1,.36,1) var(--d,0s)}
+[data-motion="blend"] .mlab-stats .m-el.in,[data-motion="blend"] .mlab-duo .m-el.in,[data-motion="blend"] .mlab-cta .m-el.in{opacity:1;transform:none}
+.mlab-btns button.rec{border-color:var(--spark);color:var(--spark)}
+.mlab-btns button.rec.on{background:var(--spark);color:var(--ink);border-color:var(--spark)}
+
 /* 05 SNAP · hard word flips, images stamp with an outline flash, no soft tweens */
 [data-motion="snap"] .m-el{opacity:0}
 [data-motion="snap"] .m-el.in{opacity:1}
@@ -807,7 +825,8 @@ a{color:inherit;text-decoration:none}
     rise:"02 · The masked line rise, re-timed: expo ease, short travel, honest stagger. The current grammar done right.",
     drift:"03 · Ambient parallax: elements float up on entry, media counter-drifts as you scroll. Never stops moving, never shouts.",
     lock:"04 · The screen locks and scroll assembles the thesis: lines slide in from the wings, the frame scales up, then the page lets go.",
-    snap:"05 · No tweens. Words flip on like a slate board, frames stamp with a flash, everything lands with attitude."
+    snap:"05 · No tweens. Words flip on like a slate board, frames stamp with a flash, everything lands with attitude.",
+    blend:"06 · The blend (your pick): the thesis LOCKS and assembles as you scroll, then everything after DRIFTS up and keeps floating. Lock's moment, drift's life."
   };
   var desc=document.getElementById('mlabDesc'),btns=[].slice.call(lab.querySelectorAll('.mlab-btns button'));
   var els=[].slice.call(lab.querySelectorAll('.m-el'));
@@ -882,30 +901,29 @@ a{color:inherit;text-decoration:none}
   var ticking=false;
   function frame(){
     ticking=false;
-    var m=mode();
     if(reduced)return;
+    var m=mode(), driftish=(m==='drift'||m==='blend');
+    var img=lab.querySelector('.mimg img'), mh=lab.querySelector('.mh'),
+        fa=lab.querySelector('.mfloat-a'), fb=lab.querySelector('.mfloat-b');
+    // clear the JS-driven inline transforms where the mode no longer owns them.
+    // In blend/lock the thesis image + headline are driven by CSS (--p), so their
+    // inline drift transform must be cleared or a stale scale would fight the lock.
+    if(img && m!=='drift') img.style.transform='';
+    if(mh && m!=='drift') mh.style.transform='';
+    if(!driftish){ if(fa)fa.style.transform=''; if(fb)fb.style.transform=''; }
+    // DRIFT-only: thesis image + headline counter-drift (in blend they're locked)
     if(m==='drift'){
-      var img=lab.querySelector('.mimg img');
-      if(img){var r=img.parentElement.getBoundingClientRect();
-        var t=(r.top+r.height/2-innerHeight/2)/innerHeight; // -0.5..0.5-ish
-        img.style.transform='scale(1.12) translateY('+(t*7)+'%)';}
-      var fa=lab.querySelector('.mfloat-a'),fb=lab.querySelector('.mfloat-b');
-      [[fa,-4.5],[fb,4.5]].forEach(function(p){if(!p[0])return;var r=p[0].getBoundingClientRect();
-        var t=(r.top+r.height/2-innerHeight/2)/innerHeight;
-        p[0].style.setProperty('transform','translateY('+(t*p[1]*10)+'px)');});
-      var mh=lab.querySelector('.mh');
-      if(mh){var r2=mh.getBoundingClientRect();var t2=(r2.top-innerHeight*.3)/innerHeight;
-        if(mh.parentElement.querySelector('.mk'))mh.style.transform='translateY('+(Math.max(-1,Math.min(1,t2))*-14)+'px)';}
-    } else {
-      var img2=lab.querySelector('.mimg img');if(img2)img2.style.transform='';
-      ['.mfloat-a','.mfloat-b','.mh'].forEach(function(s){var el=lab.querySelector(s);if(el)el.style.transform='';});
+      if(img){var r=img.parentElement.getBoundingClientRect();var t=(r.top+r.height/2-innerHeight/2)/innerHeight;img.style.transform='scale(1.12) translateY('+(t*7)+'%)';}
+      if(mh){var r2=mh.getBoundingClientRect();var t2=(r2.top-innerHeight*.3)/innerHeight;mh.style.transform='translateY('+(Math.max(-1,Math.min(1,t2))*-14)+'px)';}
     }
-    if(m==='lock'&&lockseg){
+    // duo floats DRIFT in both drift + blend
+    if(driftish){[[fa,-4.5],[fb,4.5]].forEach(function(p){if(!p[0])return;var r=p[0].getBoundingClientRect();var t=(r.top+r.height/2-innerHeight/2)/innerHeight;p[0].style.transform='translateY('+(t*p[1]*10)+'px)';});}
+    // LOCK scrub in both lock + blend
+    if((m==='lock'||m==='blend')&&lockseg){
       var r3=lockseg.getBoundingClientRect();
       var total=lockseg.offsetHeight-innerHeight;
       var p=total>0?Math.max(0,Math.min(1,-r3.top/total)):1;
       lockseg.style.setProperty('--p',p.toFixed(4));
-      [].slice.call(lab.querySelectorAll('.mlab-stats .stat b[data-n]')).forEach(function(b){/* stats flow post-pin normally */});
     }
   }
   function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(frame);}}
