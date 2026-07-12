@@ -171,15 +171,18 @@ const { tag } = Astro.props;
   // the switcher lives on THE KIT only (DJ 2026-07-11: it's a typography
   // SYSTEM workbench, not a sitewide toy) - picks still apply everywhere
   // via localStorage, set them on /template and browse.
+  // On the Kit the switcher ALWAYS shows (DJ 2026-07-12: he'd dismissed it once
+  // and could never get it back - the ✕ now only hides for the session, never
+  // persists, so a reload of /template always restores it).
   if(location.pathname.replace(/\/+$/,'')!=='/template'){tool.style.display='none';}
-  else if(localStorage.getItem('mnmt-acctool')==='off'){tool.style.display='none';}
+  else{try{localStorage.removeItem('mnmt-acctool');}catch(e){}tool.style.display='';}
   tool.querySelectorAll('[data-acc]').forEach(function(b){
     b.addEventListener('click',function(){applyAcc(b.dataset.acc);localStorage.setItem('mnmt-accent',b.dataset.acc);});
   });
   tool.querySelectorAll('[data-font]').forEach(function(b){
     b.addEventListener('click',function(){applyFont(b.dataset.font);localStorage.setItem('mnmt-font',b.dataset.font);});
   });
-  tool.querySelector('.acctool-x').addEventListener('click',function(){tool.style.display='none';localStorage.setItem('mnmt-acctool','off');});
+  tool.querySelector('.acctool-x').addEventListener('click',function(){tool.style.display='none';/* session-only; reload restores */});
   // drag grip: DJ's dock was covering the pill; grab ⠿ and park it anywhere.
   // Position persists for the session so it stays put across pages.
   var grip=document.getElementById('accgrip');
