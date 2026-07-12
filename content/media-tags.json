@@ -1,0 +1,1330 @@
+{
+ "_readme": "Media tags, seeded by a Claude vision pass 2026-07-11. Tags with '?' are LOCATION GUESSES - correct freely, nothing downstream assumes them. tools/tag-media.mjs merges camera+date metadata and lists untagged files. Buckets for the photography page are views over these tags.",
+ "gallery": {
+  "p-001": {
+   "tags": [
+    "editorial",
+    "fashion",
+    "cars",
+    "detail"
+   ]
+  },
+  "p-002": {
+   "tags": [
+    "portrait",
+    "bts",
+    "bw"
+   ]
+  },
+  "p-003": {
+   "tags": [
+    "fashion",
+    "portrait",
+    "kids"
+   ]
+  },
+  "p-004": {
+   "tags": [
+    "western",
+    "editorial",
+    "bw"
+   ]
+  },
+  "p-005": {
+   "tags": [
+    "travel",
+    "documentary",
+    "uganda?",
+    "kids"
+   ]
+  },
+  "p-006": {
+   "tags": [
+    "editorial",
+    "fashion",
+    "diner"
+   ]
+  },
+  "p-007": {
+   "tags": [
+    "sports",
+    "football"
+   ]
+  },
+  "p-008": {
+   "tags": [
+    "cars",
+    "street",
+    "la?",
+    "golden-hour"
+   ]
+  },
+  "p-009": {
+   "tags": [
+    "craft",
+    "portrait",
+    "pottery"
+   ]
+  },
+  "p-010": {
+   "tags": [
+    "western",
+    "kids",
+    "ranch",
+    "idaho?"
+   ]
+  },
+  "p-011": {
+   "tags": [
+    "portrait",
+    "mountains",
+    "golden-hour"
+   ]
+  },
+  "p-012": {
+   "tags": [
+    "street",
+    "fall",
+    "lifestyle"
+   ]
+  },
+  "p-013": {
+   "tags": [
+    "western",
+    "moody",
+    "silhouette"
+   ]
+  },
+  "p-014": {
+   "tags": [
+    "city",
+    "portrait",
+    "nyc?"
+   ]
+  },
+  "p-015": {
+   "tags": [
+    "food",
+    "detail"
+   ]
+  },
+  "p-016": {
+   "tags": [
+    "editorial",
+    "studio",
+    "print"
+   ]
+  },
+  "p-017": {
+   "tags": [
+    "bts",
+    "set",
+    "cars",
+    "editorial"
+   ]
+  },
+  "p-018": {
+   "tags": [
+    "editorial",
+    "resort",
+    "pool"
+   ]
+  },
+  "p-019": {
+   "tags": [
+    "fashion",
+    "editorial",
+    "hotel"
+   ]
+  },
+  "p-020": {
+   "tags": [
+    "editorial",
+    "resort",
+    "pool"
+   ]
+  },
+  "p-021": {
+   "tags": [
+    "portrait",
+    "pool"
+   ]
+  },
+  "p-022": {
+   "tags": [
+    "street",
+    "market",
+    "la?"
+   ]
+  },
+  "p-023": {
+   "tags": [
+    "editorial",
+    "cars",
+    "mountains",
+    "utah?"
+   ]
+  },
+  "p-024": {
+   "tags": [
+    "portrait",
+    "bts",
+    "night"
+   ]
+  },
+  "p-025": {
+   "tags": [
+    "editorial",
+    "night",
+    "dance"
+   ]
+  },
+  "p-026": {
+   "tags": [
+    "portrait",
+    "bar",
+    "bw"
+   ]
+  },
+  "p-027": {
+   "tags": [
+    "portrait",
+    "fashion"
+   ]
+  },
+  "p-028": {
+   "tags": [
+    "western",
+    "editorial",
+    "mountains"
+   ]
+  },
+  "p-029": {
+   "tags": [
+    "portrait",
+    "night"
+   ]
+  },
+  "p-030": {
+   "tags": [
+    "western",
+    "detail",
+    "idaho?",
+    "boots"
+   ]
+  },
+  "p-031": {
+   "tags": [
+    "lifestyle",
+    "bar"
+   ]
+  },
+  "p-032": {
+   "tags": [
+    "fashion",
+    "hotel"
+   ]
+  },
+  "p-033": {
+   "tags": [
+    "lifestyle",
+    "quirky",
+    "laundromat"
+   ]
+  },
+  "p-034": {
+   "tags": [
+    "bts",
+    "sports",
+    "crew"
+   ]
+  },
+  "p-035": {
+   "tags": [
+    "editorial",
+    "pool"
+   ]
+  },
+  "p-036": {
+   "tags": [
+    "portrait",
+    "garden"
+   ]
+  },
+  "p-037": {
+   "tags": [
+    "lifestyle",
+    "portrait",
+    "coffee"
+   ]
+  },
+  "p-038": {
+   "tags": [
+    "sports",
+    "football",
+    "boise?"
+   ]
+  },
+  "p-039": {
+   "tags": [
+    "sports",
+    "football",
+    "portrait"
+   ]
+  },
+  "p-040": {
+   "tags": [
+    "cars",
+    "bts",
+    "street"
+   ]
+  },
+  "p-041": {
+   "tags": [
+    "craft",
+    "detail",
+    "pottery",
+    "bw"
+   ]
+  },
+  "p-042": {
+   "tags": [
+    "craft",
+    "portrait",
+    "pottery"
+   ]
+  },
+  "p-043": {
+   "tags": [
+    "street",
+    "documentary",
+    "la?",
+    "signs"
+   ]
+  },
+  "p-044": {
+   "tags": [
+    "portrait",
+    "experimental",
+    "dusk"
+   ]
+  },
+  "p-045": {
+   "tags": [
+    "fashion",
+    "night",
+    "hotel"
+   ]
+  },
+  "p-046": {
+   "tags": [
+    "lifestyle",
+    "night",
+    "rooftop",
+    "la?"
+   ]
+  },
+  "p-047": {
+   "tags": [
+    "experimental",
+    "editorial",
+    "flash"
+   ]
+  },
+  "p-048": {
+   "tags": [
+    "portrait",
+    "alpine",
+    "golden-hour"
+   ]
+  },
+  "p-049": {
+   "tags": [
+    "portrait",
+    "studio",
+    "shadow"
+   ]
+  },
+  "p-050": {
+   "tags": [
+    "portrait",
+    "moody",
+    "silhouette"
+   ]
+  },
+  "p-051": {
+   "tags": [
+    "portrait",
+    "studio",
+    "duo"
+   ]
+  },
+  "p-052": {
+   "tags": [
+    "portrait",
+    "studio",
+    "duo",
+    "moody"
+   ]
+  },
+  "p-053": {
+   "tags": [
+    "cars",
+    "event",
+    "crowd",
+    "la?"
+   ]
+  },
+  "p-054": {
+   "tags": [
+    "portrait",
+    "studio",
+    "duo",
+    "flash"
+   ]
+  },
+  "p-055": {
+   "tags": [
+    "fashion",
+    "cars",
+    "la?"
+   ]
+  },
+  "p-056": {
+   "tags": [
+    "fashion",
+    "portrait",
+    "la?"
+   ]
+  },
+  "p-057": {
+   "tags": [
+    "fashion",
+    "cars",
+    "palms",
+    "la?"
+   ]
+  },
+  "p-058": {
+   "tags": [
+    "experimental",
+    "silhouette",
+    "field"
+   ]
+  },
+  "p-059": {
+   "tags": [
+    "fashion",
+    "hotel",
+    "elevator"
+   ]
+  },
+  "p-060": {
+   "tags": [
+    "fashion",
+    "hotel",
+    "elevator"
+   ]
+  },
+  "p-061": {
+   "tags": [
+    "cars",
+    "dusk",
+    "headlights"
+   ]
+  },
+  "p-062": {
+   "tags": [
+    "bts",
+    "set",
+    "retro-hotel"
+   ]
+  },
+  "p-063": {
+   "tags": [
+    "editorial",
+    "set",
+    "retro-hotel"
+   ]
+  },
+  "p-064": {
+   "tags": [
+    "editorial",
+    "retro-hotel",
+    "kitchen"
+   ]
+  },
+  "p-065": {
+   "tags": [
+    "wildlife",
+    "travel",
+    "ocean",
+    "ecuador?"
+   ]
+  },
+  "p-066": {
+   "tags": [
+    "beach",
+    "sunset",
+    "la?"
+   ]
+  },
+  "p-067": {
+   "tags": [
+    "editorial",
+    "studio",
+    "sky"
+   ]
+  },
+  "p-068": {
+   "tags": [
+    "motorcycle",
+    "editorial",
+    "rural"
+   ]
+  },
+  "p-069": {
+   "tags": [
+    "motorcycle",
+    "editorial",
+    "rural"
+   ]
+  },
+  "p-070": {
+   "tags": [
+    "motorcycle",
+    "rural",
+    "wide"
+   ]
+  },
+  "p-071": {
+   "tags": [
+    "motorcycle",
+    "editorial"
+   ]
+  },
+  "p-072": {
+   "tags": [
+    "motorcycle",
+    "editorial"
+   ]
+  },
+  "p-073": {
+   "tags": [
+    "motorcycle",
+    "rural"
+   ]
+  },
+  "p-074": {
+   "tags": [
+    "motorcycle",
+    "editorial"
+   ]
+  },
+  "p-075": {
+   "tags": [
+    "motorcycle",
+    "duo",
+    "rural"
+   ]
+  },
+  "p-076": {
+   "tags": [
+    "motorcycle",
+    "portrait",
+    "tattoos"
+   ]
+  },
+  "p-077": {
+   "tags": [
+    "motorcycle",
+    "rural",
+    "car-wash",
+    "modesto?"
+   ]
+  },
+  "p-078": {
+   "tags": [
+    "portrait",
+    "studio",
+    "statement-tee"
+   ]
+  },
+  "p-079": {
+   "tags": [
+    "portrait",
+    "casual",
+    "field"
+   ]
+  },
+  "p-080": {
+   "tags": [
+    "group",
+    "fashion",
+    "field"
+   ]
+  },
+  "p-081": {
+   "tags": [
+    "travel",
+    "documentary",
+    "bw",
+    "nepal?"
+   ]
+  },
+  "p-082": {
+   "tags": [
+    "street",
+    "fashion",
+    "jersey",
+    "city"
+   ]
+  },
+  "p-083": {
+   "tags": [
+    "lifestyle",
+    "editorial",
+    "hotel",
+    "champagne"
+   ]
+  },
+  "p-084": {
+   "tags": [
+    "travel",
+    "detail",
+    "hands",
+    "uganda?"
+   ]
+  },
+  "p-085": {
+   "tags": [
+    "street",
+    "fashion",
+    "jersey",
+    "city"
+   ]
+  },
+  "p-086": {
+   "tags": [
+    "street",
+    "fashion",
+    "headscarf"
+   ]
+  },
+  "p-087": {
+   "tags": [
+    "street",
+    "fashion",
+    "city"
+   ]
+  },
+  "p-088": {
+   "tags": [
+    "portrait",
+    "fun"
+   ]
+  },
+  "p-089": {
+   "tags": [
+    "event",
+    "night",
+    "warehouse"
+   ]
+  },
+  "p-090": {
+   "tags": [
+    "street",
+    "graffiti",
+    "berlin?"
+   ]
+  },
+  "p-091": {
+   "tags": [
+    "portrait",
+    "city",
+    "waterfront",
+    "florida?"
+   ]
+  },
+  "p-092": {
+   "tags": [
+    "portrait",
+    "hills"
+   ]
+  },
+  "p-093": {
+   "tags": [
+    "editorial",
+    "hotel",
+    "mirror"
+   ]
+  },
+  "p-094": {
+   "tags": [
+    "experimental",
+    "flash",
+    "rug"
+   ]
+  },
+  "p-095": {
+   "tags": [
+    "portrait",
+    "western",
+    "dusk"
+   ]
+  },
+  "p-096": {
+   "tags": [
+    "travel",
+    "documentary",
+    "scooter",
+    "nepal?"
+   ]
+  },
+  "p-097": {
+   "tags": [
+    "cars",
+    "cadillac",
+    "california"
+   ]
+  },
+  "p-098": {
+   "tags": [
+    "editorial",
+    "sunset",
+    "hills",
+    "red-dress"
+   ]
+  },
+  "p-099": {
+   "tags": [
+    "street",
+    "night",
+    "bw"
+   ]
+  },
+  "p-100": {
+   "tags": [
+    "fashion",
+    "night",
+    "hallway"
+   ]
+  }
+ },
+ "giving": {
+  "gv-01": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-02": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-03": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-04": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-05": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-06": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-07": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-08": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-09": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-10": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-11": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-12": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-13": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-14": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary"
+   ]
+  },
+  "gv-break": {
+   "tags": [
+    "giving",
+    "uganda",
+    "bush-plane"
+   ]
+  },
+  "gv-hero": {
+   "tags": [
+    "giving",
+    "uganda",
+    "documentary",
+    "kids"
+   ]
+  }
+ },
+ "meta": {
+  "p-001": {
+   "file": "public/gallery/full/p-001.jpg",
+   "shot": "2022-11-03 05:52:14 +0000",
+   "camera": "SONY ILCE-7RM5"
+  },
+  "p-002": {
+   "file": "public/gallery/full/p-002.jpg",
+   "shot": "2024-06-08 19:07:39 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-003": {
+   "file": "public/gallery/full/p-003.jpg",
+   "shot": "2023-08-29 19:41:01 +0000",
+   "camera": "SONY ILCE-7CR"
+  },
+  "p-004": {
+   "file": "public/gallery/full/p-004.jpg",
+   "shot": "2023-08-30 01:33:30 +0000",
+   "camera": "SONY ILCE-7CR"
+  },
+  "p-005": {
+   "file": "public/gallery/full/p-005.jpg",
+   "shot": "2026-04-16 01:13:34 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-006": {
+   "file": "public/gallery/full/p-006.jpg",
+   "shot": "2023-09-22 20:31:04 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-007": {
+   "file": "public/gallery/full/p-007.jpg",
+   "shot": "2023-10-02 15:18:05 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-008": {
+   "file": "public/gallery/full/p-008.jpg",
+   "shot": "2025-08-03 19:19:20 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-009": {
+   "file": "public/gallery/full/p-009.jpg",
+   "shot": "2023-10-12 17:49:46 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-010": {
+   "file": "public/gallery/full/p-010.jpg",
+   "shot": "2019-08-31 00:27:46 +0000",
+   "camera": "SONY ILCE-7M3"
+  },
+  "p-011": {
+   "file": "public/gallery/full/p-011.jpg",
+   "shot": "2022-11-01 06:31:45 +0000",
+   "camera": "SONY ILCE-7RM5"
+  },
+  "p-012": {
+   "file": "public/gallery/full/p-012.jpg",
+   "shot": "2021-02-22 06:29:15 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-013": {
+   "file": "public/gallery/full/p-013.jpg",
+   "shot": "2021-09-08 13:43:27 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-014": {
+   "file": "public/gallery/full/p-014.jpg",
+   "shot": "2021-11-06 08:12:38 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-015": {
+   "file": "public/gallery/full/p-015.jpg",
+   "shot": "2022-03-26 11:16:03 +0000",
+   "camera": "SONY ILCE-7SM3"
+  },
+  "p-016": {
+   "file": "public/gallery/full/p-016.jpg",
+   "shot": "2026-03-27 18:04:31 +0000",
+   "camera": "SONY ILCE-7M4"
+  },
+  "p-017": {
+   "file": "public/gallery/full/p-017.jpg",
+   "shot": "2022-09-01 02:18:50 +0000",
+   "camera": "SONY ILCE-7SM3"
+  },
+  "p-018": {
+   "file": "public/gallery/full/p-018.jpg",
+   "shot": "2022-11-01 20:43:43 +0000",
+   "camera": "SONY ILCE-7RM5"
+  },
+  "p-019": {
+   "file": "public/gallery/full/p-019.jpg",
+   "shot": "2026-03-27 19:15:52 +0000",
+   "camera": "SONY ILCE-7M4"
+  },
+  "p-020": {
+   "file": "public/gallery/full/p-020.jpg",
+   "shot": "2022-11-01 20:53:07 +0000",
+   "camera": "SONY ILCE-7RM5"
+  },
+  "p-021": {
+   "file": "public/gallery/full/p-021.jpg",
+   "shot": "2022-11-01 20:54:22 +0000",
+   "camera": "SONY ILCE-7RM5"
+  },
+  "p-022": {
+   "file": "public/gallery/full/p-022.jpg",
+   "shot": "2025-08-03 19:35:10 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-023": {
+   "file": "public/gallery/full/p-023.jpg",
+   "shot": "2022-11-03 05:45:41 +0000",
+   "camera": "SONY ILCE-7RM5"
+  },
+  "p-024": {
+   "file": "public/gallery/full/p-024.jpg",
+   "shot": "2023-03-03 14:25:22 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-025": {
+   "file": "public/gallery/full/p-025.jpg",
+   "shot": "2020-11-13 00:06:37 +0000",
+   "camera": "SONY ILCE-7M3"
+  },
+  "p-026": {
+   "file": "public/gallery/full/p-026.jpg",
+   "shot": "2023-08-29 19:51:53 +0000",
+   "camera": "SONY ILCE-7CR"
+  },
+  "p-027": {
+   "file": "public/gallery/full/p-027.jpg",
+   "shot": "2023-08-29 20:02:30 +0000",
+   "camera": "SONY ILCE-7CR"
+  },
+  "p-028": {
+   "file": "public/gallery/full/p-028.jpg",
+   "shot": "2023-08-30 01:33:30 +0000",
+   "camera": "SONY ILCE-7CR"
+  },
+  "p-029": {
+   "file": "public/gallery/full/p-029.jpg",
+   "shot": "2023-09-22 19:50:06 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-030": {
+   "file": "public/gallery/full/p-030.jpg",
+   "shot": "2026-05-02 01:21:31 +0000",
+   "camera": "SONY ILCE-7M4"
+  },
+  "p-031": {
+   "file": "public/gallery/full/p-031.jpg",
+   "shot": "2026-03-27 16:29:36 +0000",
+   "camera": "SONY ILCE-7M4"
+  },
+  "p-032": {
+   "file": "public/gallery/full/p-032.jpg",
+   "shot": "2026-03-27 18:25:12 +0000",
+   "camera": "SONY ILCE-7M4"
+  },
+  "p-033": {
+   "file": "public/gallery/full/p-033.jpg",
+   "shot": "2023-09-22 20:20:52 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-034": {
+   "file": "public/gallery/full/p-034.jpg",
+   "shot": "2023-10-02 14:58:23 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-035": {
+   "file": "public/gallery/full/p-035.jpg",
+   "shot": "2022-11-01 20:54:52 +0000",
+   "camera": "SONY ILCE-7RM5"
+  },
+  "p-036": {
+   "file": "public/gallery/full/p-036.jpg",
+   "shot": "2023-10-10 09:39:53 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-037": {
+   "file": "public/gallery/full/p-037.jpg",
+   "shot": "2023-10-10 12:19:57 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-038": {
+   "file": "public/gallery/full/p-038.jpg",
+   "shot": "2023-10-10 15:48:40 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-039": {
+   "file": "public/gallery/full/p-039.jpg",
+   "shot": "2023-10-10 18:06:07 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-040": {
+   "file": "public/gallery/full/p-040.jpg",
+   "shot": "2025-08-03 19:42:43 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-041": {
+   "file": "public/gallery/full/p-041.jpg",
+   "shot": "2023-10-12 17:49:25 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-042": {
+   "file": "public/gallery/full/p-042.jpg",
+   "shot": "2023-10-12 17:50:01 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-043": {
+   "file": "public/gallery/full/p-043.jpg",
+   "shot": "2023-10-28 17:00:14 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-044": {
+   "file": "public/gallery/full/p-044.jpg",
+   "shot": "2023-10-29 00:38:56 +0000",
+   "camera": "SONY ILCE-7SM3"
+  },
+  "p-045": {
+   "file": "public/gallery/full/p-045.jpg",
+   "shot": "2026-03-27 19:13:26 +0000",
+   "camera": "SONY ILCE-7M4"
+  },
+  "p-046": {
+   "file": "public/gallery/full/p-046.jpg",
+   "shot": "2023-10-29 00:41:59 +0000",
+   "camera": "SONY ILCE-7SM3"
+  },
+  "p-047": {
+   "file": "public/gallery/full/p-047.jpg",
+   "shot": "2024-05-20 18:40:18 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-048": {
+   "file": "public/gallery/full/p-048.jpg",
+   "shot": "2022-11-01 06:31:36 +0000",
+   "camera": "SONY ILCE-7RM5"
+  },
+  "p-049": {
+   "file": "public/gallery/full/p-049.jpg",
+   "shot": "2024-05-20 19:12:31 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-050": {
+   "file": "public/gallery/full/p-050.jpg",
+   "shot": "2024-05-20 19:15:37 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-051": {
+   "file": "public/gallery/full/p-051.jpg",
+   "shot": "2024-05-20 19:20:29 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-052": {
+   "file": "public/gallery/full/p-052.jpg",
+   "shot": "2024-05-20 20:01:27 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-053": {
+   "file": "public/gallery/full/p-053.jpg",
+   "shot": "2025-08-03 19:45:01 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-054": {
+   "file": "public/gallery/full/p-054.jpg",
+   "shot": "2024-05-21 01:14:14 +0000",
+   "camera": "SONY ILCE-7SM3"
+  },
+  "p-055": {
+   "file": "public/gallery/full/p-055.jpg",
+   "shot": "2024-06-10 21:31:40 +0000",
+   "camera": "SONY ILCE-7SM3"
+  },
+  "p-056": {
+   "file": "public/gallery/full/p-056.jpg",
+   "shot": "2024-06-10 21:34:14 +0000",
+   "camera": "SONY ILCE-7SM3"
+  },
+  "p-057": {
+   "file": "public/gallery/full/p-057.jpg",
+   "shot": "2024-06-10 21:38:56 +0000",
+   "camera": "SONY ILCE-7SM3"
+  },
+  "p-058": {
+   "file": "public/gallery/full/p-058.jpg",
+   "shot": "2026-05-02 00:54:05 +0000",
+   "camera": "SONY ILCE-7M4"
+  },
+  "p-059": {
+   "file": "public/gallery/full/p-059.jpg",
+   "shot": "2026-03-27 18:25:52 +0000",
+   "camera": "SONY ILCE-7M4"
+  },
+  "p-060": {
+   "file": "public/gallery/full/p-060.jpg",
+   "shot": "2026-03-27 18:26:11 +0000",
+   "camera": "SONY ILCE-7M4"
+  },
+  "p-061": {
+   "file": "public/gallery/full/p-061.jpg",
+   "shot": "2024-07-12 20:24:27 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-062": {
+   "file": "public/gallery/full/p-062.jpg",
+   "shot": "2024-07-19 14:14:27 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-063": {
+   "file": "public/gallery/full/p-063.jpg",
+   "shot": "2024-07-19 19:13:26 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-064": {
+   "file": "public/gallery/full/p-064.jpg",
+   "shot": "2024-08-29 02:36:26 +0000",
+   "camera": "SONY ILCE-7M4"
+  },
+  "p-065": {
+   "file": "public/gallery/full/p-065.jpg",
+   "shot": "2024-08-30 18:53:06 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-066": {
+   "file": "public/gallery/full/p-066.jpg",
+   "shot": "2024-08-30 19:37:47 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-067": {
+   "file": "public/gallery/full/p-067.jpg",
+   "shot": "2019-08-12 17:54:17 +0000",
+   "camera": "SONY ILCE-7RM4"
+  },
+  "p-068": {
+   "file": "public/gallery/full/p-068.jpg",
+   "shot": "2025-01-07 17:58:42 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-069": {
+   "file": "public/gallery/full/p-069.jpg",
+   "shot": "2025-01-07 18:00:23 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-070": {
+   "file": "public/gallery/full/p-070.jpg",
+   "shot": "2025-01-07 18:07:06 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-071": {
+   "file": "public/gallery/full/p-071.jpg",
+   "shot": "2025-01-07 18:09:54 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-072": {
+   "file": "public/gallery/full/p-072.jpg",
+   "shot": "2025-01-07 18:15:01 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-073": {
+   "file": "public/gallery/full/p-073.jpg",
+   "shot": "2025-01-07 18:26:52 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-074": {
+   "file": "public/gallery/full/p-074.jpg",
+   "shot": "2025-01-07 18:27:14 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-075": {
+   "file": "public/gallery/full/p-075.jpg",
+   "shot": "2025-01-07 18:31:18 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-076": {
+   "file": "public/gallery/full/p-076.jpg",
+   "shot": "2025-01-07 18:37:15 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-077": {
+   "file": "public/gallery/full/p-077.jpg",
+   "shot": "2025-01-07 18:37:58 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-078": {
+   "file": "public/gallery/full/p-078.jpg",
+   "shot": "2018-06-10 16:42:04 +0000",
+   "camera": "NIKON CORPORATION NIKON D800"
+  },
+  "p-079": {
+   "file": "public/gallery/full/p-079.jpg",
+   "shot": "2025-02-15 18:10:01 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-080": {
+   "file": "public/gallery/full/p-080.jpg",
+   "shot": "2025-02-15 18:13:00 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-081": {
+   "file": "public/gallery/full/p-081.jpg",
+   "shot": "2025-03-06 23:30:27 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-082": {
+   "file": "public/gallery/full/p-082.jpg",
+   "shot": "2025-03-26 14:15:32 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-083": {
+   "file": "public/gallery/full/p-083.jpg",
+   "shot": "2026-03-27 11:19:04 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-084": {
+   "file": "public/gallery/full/p-084.jpg",
+   "shot": "2026-04-16 06:02:34 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-085": {
+   "file": "public/gallery/full/p-085.jpg",
+   "shot": "2025-03-26 14:18:54 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-086": {
+   "file": "public/gallery/full/p-086.jpg",
+   "shot": "2025-03-26 14:42:11 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-087": {
+   "file": "public/gallery/full/p-087.jpg",
+   "shot": "2025-03-26 14:49:02 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-088": {
+   "file": "public/gallery/full/p-088.jpg",
+   "shot": "2025-04-09 19:56:32 +0000",
+   "camera": "SONY ILCE-7M3"
+  },
+  "p-089": {
+   "file": "public/gallery/full/p-089.jpg",
+   "shot": "2025-04-09 20:23:36 +0000",
+   "camera": "SONY ILCE-7M3"
+  },
+  "p-090": {
+   "file": "public/gallery/full/p-090.jpg",
+   "shot": "2025-04-09 20:44:02 +0000",
+   "camera": "SONY ILCE-7M3"
+  },
+  "p-091": {
+   "file": "public/gallery/full/p-091.jpg",
+   "shot": "2021-07-28 10:26:50 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-092": {
+   "file": "public/gallery/full/p-092.jpg",
+   "shot": "2026-05-02 01:14:30 +0000",
+   "camera": "SONY ILCE-7M4"
+  },
+  "p-093": {
+   "file": "public/gallery/full/p-093.jpg",
+   "shot": "2026-03-27 11:01:48 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-094": {
+   "file": "public/gallery/full/p-094.jpg",
+   "shot": "2024-05-20 18:40:18 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-095": {
+   "file": "public/gallery/full/p-095.jpg",
+   "shot": "2021-09-08 13:13:39 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-096": {
+   "file": "public/gallery/full/p-096.jpg",
+   "shot": "2026-04-15 04:34:06 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-097": {
+   "file": "public/gallery/full/p-097.jpg",
+   "shot": "2025-08-03 18:46:32 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-098": {
+   "file": "public/gallery/full/p-098.jpg",
+   "shot": "2021-10-18 12:00:40 +0000",
+   "camera": "Leica Camera AG LEICA M (Typ 240)"
+  },
+  "p-099": {
+   "file": "public/gallery/full/p-099.jpg",
+   "shot": "2021-11-09 01:25:12 +0000"
+  },
+  "p-100": {
+   "file": "public/gallery/full/p-100.jpg",
+   "shot": "2026-03-27 19:13:26 +0000",
+   "camera": "SONY ILCE-7M4"
+  }
+ }
+}

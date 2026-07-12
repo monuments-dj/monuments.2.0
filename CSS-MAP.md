@@ -80,3 +80,20 @@ Don't reintroduce a bare `overflow:hidden` mask with `translateY(112%)`.
 Verify VISUALLY — this is ink overflow, so getBoundingClientRect shows 0px
 (rect == mask); only a screenshot reveals the clip. Sweep tooling:
 tools/verify-heads.mjs + tools/build-montage.mjs → tools/snaps/verify/.
+
+## ⚠️ Cross-page gotcha: html{overflow-x:clip} kills position:sticky (added 2026-07-11)
+Most cut pages carry `body{overflow-x:hidden}` + `html{overflow-x:clip}`. With
+html's overflow set, body's overflow STOPS propagating to the viewport, so body
+itself becomes the scroll container - and every `position:sticky` inside it
+silently never sticks (blank pinned stages, bars that scroll away). Home works
+because it never sets html's overflow. The Kit had the combo and its motion lab
+pin rendered blank until the html rule was removed there (commit d0310ae).
+RULE: a page that pins ANYTHING must not set html{overflow-x:clip}. When the
+picked motion language bakes sitewide, normalize all 25 pages that still carry
+the combo (they have zero sticky today, so they're dormant, not broken).
+
+## GRAIN v2 (2026-07-11, lives in PageFooter.astro)
+Texture is per-surface and ALWAYS below text: light bands get ::before z:-1
+inside isolation:isolate; media frames get ::after z:1 with captions lifted z:2.
+Tune ONLY --grain-paper / --grain-media in PageFooter. The old fixed .grain
+overlay divs are retired via display:none (elements still in 9 pages' HTML).
