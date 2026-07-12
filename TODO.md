@@ -14,6 +14,7 @@ lives in Testimonials.astro). Reach out to:
 7. Mitch Khun · Creative Director, Stoltz Marketing Group · link TBD
 8. Tommy Lundberg · Photographer + Art Director, collaborator · link TBD
 9. Andrea Cenon · Creative Director, Day One Agency · link TBD
+10. Tess · Project Manager, Monuments (internal - back on the roster per DJ 2026-07-11)
 When a quote lands: paste into `q` for that person in Testimonials.astro (serif can
 return to the quote face then - sans is the interim per DJ).
 
