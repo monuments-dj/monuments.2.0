@@ -5,6 +5,7 @@ import RoleTag from '../components/RoleTag.astro';
 import SocialWall from '../components/SocialWall.astro';
 import NextFile from '../components/NextFile.astro';
 import '../styles/filmsplit.css';
+import { work as workAll } from '../data/work.js';
 
 // === THE KIT · case-page element library ===
 // The single source of truth for case-page elements. When an element needs a fix
@@ -14,31 +15,9 @@ import '../styles/filmsplit.css';
 // switcher previews the whole system live on this one page.
 // Not linked from nav. noindex. Placeholder media borrowed from existing assets.
 
-// workAll: every /work page's real header data (extracted 2026-07-12), recruiter-ordered
-// (strongest first, featured big). Feeds ELEMENT 24 (header slider) + ELEMENT 29 (work
-// index). logo = base filename in /public/logos (empty = no client mark). size drives the
-// work-index tile (feat = big, lg = wide, '' = standard). Flashpoint's client is Adorama.
-const workAll = [
-  { slug:"art-of-visuals", href:"/work/art-of-visuals", title:"I grew the agency 4x.", logo:"art-of-visuals", role:"creative director", size:"feat", img:"/case-studies/art-of-visuals/hero-poster.jpg", vid:"/snips/art-of-visuals.mp4", blurb:"At Art of Visuals I led creative as the agency scaled its revenue four times over in four years, across the work that made it repeatable: Sony, Intel, MSI, Adorama, and more." },
-  { slug:"sony-flow-state", href:"/work/sony-flow-state", title:"Find your flow.", logo:"sony", role:"director + creative director", size:"feat", img:"/case-studies/sony-flow-state/gallery/fs-02.jpg", vid:"/snips/sony-flow-state.mp4", blurb:"Sony put the WH-1000XM3 at the center of the creative process. I pitched Flow State: five creatives, each stuck in the noise until the headphones bring the flow." },
-  { slug:"adorama-music", href:"/work/adorama-music", title:"Wherever you're from.", logo:"adorama", role:"director + creative direction", size:"lg", img:"/case-studies/adorama-music/gallery/am-09.jpg", vid:"/snips/adorama-music.mp4", blurb:"The film that launched Adorama Music, part of the #CreateNoMatterWhat campaign, on one idea: gear is only as good as the stories it helps you tell." },
-  { slug:"cwi-lets-get-started", href:"/work/cwi-lets-get-started", title:"Let's get started.", logo:"", role:"writer · casting", size:"band", img:"/case-studies/cwi/hero-poster.jpg", vid:"/snips/cwi.mp4", blurb:"College of Western Idaho's enrollment campaign with Against. I write and cast the program spots, cut for every screen, for a college on nine straight semesters of growth." },
-  { slug:"msi-creative-by-design", href:"/work/msi-creative-by-design", title:"Creative by design.", logo:"msi", role:"creative direction", size:"lg", img:"/case-studies/art-of-visuals/msi/msi-06.jpg", vid:"", blurb:"MSI built a laptop for creators, and we launched it on Times Square digital boards, cut into 60, 30, 15, and 6-second ads." },
-  { slug:"blue-cross", href:"/work/blue-cross", title:"Real people.", logo:"blue-cross", role:"creative direction · talent direction", size:"lg", img:"/case-studies/blue-cross/bc-hero.jpg", vid:"", blurb:"A campaign that authentically represented Blue Cross's customers, the diversity and individuality of real Idahoans, in a human way. It ran from 2020 through 2024." },
-  { slug:"sony-xperia", href:"/work/sony-xperia", title:"Sony Xperia", logo:"sony", role:"directing, photo + strategy", size:"wide", img:"/case-studies/sony-xperia-summer/gallery/xp-01.jpg", vid:"/snips/sony-xperia-summer.mp4", blurb:"Sony kept coming back to Art of Visuals for its Xperia launches, and I creative directed the run: the PRO-I, the 1 III, and a summer with the 5 IV." },
-  { slug:"know-vape", href:"/work/know-vape", title:"Be smart. Don't start.", logo:"", role:"directed the films", size:"std", img:"/case-studies/know-vape/gallery/hero.jpg", vid:"/snips/know-vape.mp4", blurb:"A statewide anti-vaping campaign for Idaho Public Television that tells the truth about Big Tobacco instead of wagging a finger. It won a 2024 Northwest Regional Emmy." },
-  { slug:"sony-xm5", href:"/work/sony-xm5", title:"Creativity starts with inspiration.", logo:"sony", role:"creative director · casting + scripts", size:"wide", img:"/case-studies/sony-xm5/gallery/xm5-03.jpg", vid:"/snips/sony-xm5.mp4", blurb:"Sony WH-1000XM5 national influencer campaign. Three artists, one arc, 1.3M impressions, giving LatinX creators a voice." },
-  { slug:"buck-the-quo", href:"/work/buck-the-quo", title:"Buck the Quo.", logo:"", role:"shooter · editor · field mentor", size:"tall", img:"/case-studies/buck-the-quo/gallery/keep-pushing-poster.jpg", vid:"/snips/buck-the-quo.mp4", blurb:"A statewide campaign to lift Idaho's college-going rate by talking with teens, not at them. I shot it, then became a field mentor to 18,000 teens in one summer." },
-  { slug:"sony-this-moment", href:"/work/sony-this-moment", title:"This moment.", logo:"sony", role:"creative direction", size:"std", img:"/case-studies/sony-this-moment/gallery/tm-09.jpg", vid:"/snips/sony-this-moment.mp4", blurb:"Sony's WH-1000XM4 aren't just headphones, they're a way to build a moment of calm anywhere. I teamed with Sony to capture that at Art of Visuals." },
-  { slug:"flashpoint", href:"/work/flashpoint", title:"Imagine. Illuminate. Create.", logo:"adorama", role:"rebrand · website · socials", size:"std", img:"/case-studies/flashpoint/gallery/fp-03.jpg", vid:"", blurb:"Flashpoint is Adorama's private label: lighting and photo gear built to punch above its price. Strong reputation, dated look, so I rebuilt it." },
-  { slug:"turnstile", href:"/work/turnstile", title:"Built to be heard.", logo:"", role:"brand identity + launch", size:"lg", img:"/case-studies/turnstile/bts/bts-02.jpg", vid:"/snips/turnstile.mp4", blurb:"Turnstile Audio wanted a brand that felt clean and simple, inspired by the legendary audio brands, but fresh enough to stand out today." },
-  { slug:"dw-drums", href:"/work/dw-drums", title:"Engineer approved. Drummer tested.", logo:"dw-drums", role:"creative direction + design", size:"lg", img:"/case-studies/dw-drums/gallery/face-off.jpg", vid:"", blurb:"DW built a kit that refuses to choose: a real acoustic set that's also a full electronic rig. So every layout tears down the middle and lets both sides share the page." },
-  { slug:"donut-zumiez", href:"/work/donut-zumiez", title:"Donut x Zumiez", logo:"donut-media", role:"animation + video edit", size:"std", img:"/case-studies/donut-zumiez/gallery/film-01.jpg", vid:"/snips/donut-zumiez.mp4", blurb:"Launch films for the Donut x Zumiez drop, a car-culture media brand meeting a streetwear retailer, built to live natively in feeds." },
-  { slug:"on-camera", href:"/work/on-camera", title:"On camera.", logo:"art-of-visuals", role:"host + presenter", size:"std", img:"/case-studies/on-camera/posters/nk-_UwGuRlE.jpg", vid:"/snips/on-camera.mp4", blurb:"I direct, but I'm just as comfortable in front of the camera. I've fronted Art of Visuals' audience: 1.9M on Instagram and YouTube, plus a weekly podcast." },
-  { slug:"ac-boise", href:"/work/ac-boise", title:"This kit is Boise.", logo:"", role:"directed the launch film", size:"std", img:"/case-studies/ac-boise/gallery/home-02.jpg", vid:"/snips/ac-boise.mp4", blurb:"I directed the kit-reveal campaign for AC Boise, a USL League One club, with Hummel on the kits and Against on the brand. Don't reveal a jersey, reveal the city." },
-  { slug:"waffle-me-up", href:"/work/waffle-me-up", title:"Waffle me up.", logo:"", role:"creative director · brand + photo + web", size:"lg", img:"/case-studies/waffle-me-up/gallery/wmu-03.jpg", vid:"/snips/waffle-me-up.mp4", blurb:"Waffle Me Up makes some of the best waffles anywhere, and wanted a brand that captured the passion, quality, and joy they bring to every bite." },
-  { slug:"clothing-merch", href:"/work/clothing-merch", title:"Clothing design and marketing.", logo:"", role:"creative director · concept to production", size:"lg", img:"/case-studies/clothing-merch/new-noise-poster.jpg", vid:"/snips/clothing-merch.mp4", blurb:"For a range of clients, I've designed clothing and merch that connects with their brand story and feels genuinely wearable, from concept to production." },
-];
+// workAll now comes from the shared source of truth: src/data/work.js (imported above).
+// Edit copy there and it updates the slider (24), the work index (29), and the hover
+// cards (28) at once. The `logline` field is the named summary text.
 
 // kPairs: DJ's worked-out closed set (ELEMENT 27). kicker + CTA heading, paired. DO NOT
 // invent new ones; this is the locked set.
@@ -636,7 +615,7 @@ a{color:inherit;text-decoration:none}
             {w.logo ? <img class="hs-logo" src={`/logos/${w.logo}.${w.logo === 'donut-media' ? 'svg' : 'png'}`} alt={w.slug}> : null}
             <span class="hs-did">{w.role}</span>
           </div>
-          <p class="hs-blurb">{w.blurb}</p>
+          <p class="hs-blurb">{w.logline}</p>
         </div>
       </div>
     ))}
@@ -749,25 +728,21 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<div class="spec" id="el-28"><div class="wrap"><span class="id">ELEMENT 28 · HOVER-BLURB CARD <b style="color:var(--red)">(#el-hovercard)</b></span><span class="use">work card that reveals a short blurb on hover (touch = always shown) · logo/title + role at rest, the one-line setup slides up on hover · the hover state for the work index · <b class="lives">lives on:</b> the work index</span></div></div>
+<div class="spec" id="el-28"><div class="wrap"><span class="id">ELEMENT 28 · HOVER-BLURB CARD <b style="color:var(--red)">(#el-hovercard)</b></span><span class="use"><b>all 19 jobs</b> in a masonry grid · small client logo + title + role at rest, the <b>logline</b> slides up on hover (touch = always shown) · logo + logline both pull from the shared source of truth (src/data/work.js) · <b class="lives">lives on:</b> a possible work index / about page</span></div></div>
 <section class="paper hcwrap" id="el-hovercard">
   <div class="wrap">
     <div class="hcards">
-      <a class="hcard" href="/work/adorama-music">
-        <img src="/case-studies/adorama-music/gallery/am-09.jpg" alt="Adorama Music" loading="lazy">
-        <div class="hc-meta"><b>Adorama Music</b><span>Creative direction · film</span></div>
-        <div class="hc-blurb"><p>A brand film built to travel, cut into a spot for each product.</p></div>
-      </a>
-      <a class="hcard" href="/work/sony-flow-state">
-        <img src="/case-studies/sony-flow-state/gallery/fs-05.jpg" alt="Sony Flow State" loading="lazy">
-        <div class="hc-meta"><b>Flow State</b><span>Strategy · creative direction</span></div>
-        <div class="hc-blurb"><p>Five creatives, stuck in the noise until the headphones bring the flow.</p></div>
-      </a>
-      <a class="hcard" href="/work/blue-cross">
-        <img src="/case-studies/blue-cross/bc-hero.jpg" alt="Blue Cross of Idaho" loading="lazy">
-        <div class="hc-meta"><b>Blue Cross of Idaho</b><span>Creative direction · casting</span></div>
-        <div class="hc-blurb"><p>Real people, real Idaho. A people-first campaign, in use four years on.</p></div>
-      </a>
+      {workAll.map((w) => (
+        <a class="hcard" href={w.href}>
+          <img src={w.img} alt={w.title} loading="lazy" decoding="async">
+          <div class="hc-meta">
+            {w.logo ? <img class="hc-logo" src={`/logos/${w.logo}.${w.logo === 'donut-media' ? 'svg' : 'png'}`} alt={w.client}> : null}
+            <b>{w.title}</b>
+            <span>{w.role}</span>
+          </div>
+          <div class="hc-blurb"><p>{w.logline}</p></div>
+        </a>
+      ))}
     </div>
   </div>
 </section>
@@ -780,7 +755,7 @@ a{color:inherit;text-decoration:none}
         <a class={`wtile ${w.size}`} href={w.href}
            data-vid={w.vid} data-img={w.img}
            data-logo={w.logo ? `/logos/${w.logo}.${w.logo === 'donut-media' ? 'svg' : 'png'}` : ''}
-           data-title={w.title} data-role={w.role} data-blurb={w.blurb}>
+           data-title={w.title} data-role={w.role} data-blurb={w.logline}>
           <img src={w.img} alt={w.title} loading="lazy" decoding="async">
           <div class="wt-meta"><b>{w.title}</b><span>{w.role}</span></div>
         </a>
@@ -1007,21 +982,22 @@ a{color:inherit;text-decoration:none}
 .tk-item::after{content:'✳';color:var(--red);margin:0 clamp(22px,3.4vw,48px);font-size:.66em}
 @keyframes tickScroll{to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.tick-track{animation:none}}
-/* 28 · HOVER-BLURB CARD (#el-hovercard) */
+/* 28 · HOVER-BLURB CARD (#el-hovercard) — masonry, all 19, logo + logline */
 .hcwrap{padding:6vh 0 9vh}
-.hcards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.hcard{position:relative;display:block;overflow:hidden;aspect-ratio:4/5;background:#000;border-radius:2px}
-.hcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72);transition:transform .7s cubic-bezier(.22,1,.36,1),filter .4s}
+.hcards{columns:3;column-gap:16px}
+.hcard{position:relative;display:block;overflow:hidden;background:#000;border-radius:2px;break-inside:avoid;margin:0 0 16px}
+.hcard img{width:100%;height:auto;display:block;filter:brightness(.72);transition:transform .7s cubic-bezier(.22,1,.36,1),filter .4s}
 .hcard:hover img{transform:scale(1.05);filter:brightness(.5)}
 .hc-meta{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:20px}
-.hc-meta b{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(20px,1.8vw,28px);letter-spacing:-.02em;text-transform:uppercase;line-height:1.05;color:#fff}
+.hc-logo{height:18px;width:auto;max-width:120px;filter:brightness(0) invert(1);opacity:.92;display:block;margin-bottom:10px}
+.hc-meta b{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(19px,1.7vw,26px);letter-spacing:-.02em;text-transform:uppercase;line-height:1.05;color:#fff}
 .hc-meta span{display:block;margin-top:6px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.75)}
-.hc-blurb{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:20px;background:linear-gradient(to top,rgba(10,10,10,.94),rgba(10,10,10,.55) 72%,transparent);transform:translateY(101%);opacity:0;transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .4s}
+.hc-blurb{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:20px;background:linear-gradient(to top,rgba(10,10,10,.95),rgba(10,10,10,.6) 74%,transparent);transform:translateY(101%);opacity:0;transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .4s}
 .hcard:hover .hc-blurb,.hcard:focus-visible .hc-blurb{transform:translateY(0);opacity:1}
-.hc-blurb p{color:#fff;font-size:14px;line-height:1.5;margin:0;max-width:36ch}
-@media(hover:none){.hc-blurb{position:static;transform:none;opacity:1;background:var(--ink)}.hcard{aspect-ratio:auto}.hcard img{position:relative;height:230px}}
-@media(max-width:760px){.hcards{grid-template-columns:1fr 1fr}}
-@media(max-width:460px){.hcards{grid-template-columns:1fr}}
+.hc-blurb p{color:#fff;font-size:14px;line-height:1.5;margin:0;max-width:38ch}
+@media(hover:none){.hc-blurb{position:static;transform:none;opacity:1;background:var(--ink)}}
+@media(max-width:760px){.hcards{columns:2}}
+@media(max-width:460px){.hcards{columns:1}}
 /* 29 · WORK INDEX · VARIED SIZES + HOVER PREVIEW (#el-workview) */
 .wvwrap{padding:6vh 0 9vh}
 .wgrid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:180px;gap:14px;grid-auto-flow:dense}
