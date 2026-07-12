@@ -60,6 +60,7 @@ const tickerItems = [
 <style is:global>
 :root{
   --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --red-accent:var(--red); /* the hand-drawn CTA circle + accent marks; retheme HERE */
   --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
   --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
   --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
@@ -714,13 +715,29 @@ a{color:inherit;text-decoration:none}
       <p class="k-stmt">Culture is talking.<br>Most brands aren't <span class="k-em">listening.</span></p>
     </div>
   </div>
+  <!-- Ears to the streets: centered + circled CTA · dark -->
+  <div class="kset kset-dark">
+    <div class="wrap ks-centered">
+      <span class="kset-tag mono">\ Ears to the streets · centered + circled CTA · dark</span>
+      <p class="k-stmt">Culture is talking.<br>Most brands aren't <span class="k-em">listening.</span></p>
+      <a class="k-circled k-accent-red ks-cta" href="/contact"><span>Let's talk</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
+    </div>
+  </div>
+  <!-- Ears to the streets: centered + circled CTA · light -->
+  <div class="kset kset-light">
+    <div class="wrap ks-centered">
+      <span class="kset-tag mono">\ Ears to the streets · centered + circled CTA · light</span>
+      <p class="k-stmt">Culture is talking.<br>Most brands aren't <span class="k-em">listening.</span></p>
+      <a class="k-circled k-accent-red ks-cta" href="/contact"><span>Let's talk</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
+    </div>
+  </div>
   <!-- Ears to the streets: left-aligned statement, circled CTA off to the right -->
   <div class="kset kset-dark">
     <div class="wrap">
       <span class="kset-tag mono">\ Ears to the streets · left + CTA right</span>
       <div class="kick-split">
         <p class="k-stmt ks-left">Culture is talking.<br>Most brands aren't <span class="k-em">listening.</span></p>
-        <a class="k-circled" href="/contact" style="--annot:var(--red)"><span>Let's talk</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
+        <a class="k-circled k-accent-red" href="/contact"><span>Let's talk</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
       </div>
     </div>
   </div>
@@ -731,7 +748,7 @@ a{color:inherit;text-decoration:none}
       <div class="cta-row">
         <a class="k-btn" href="/contact">Let's talk ↗</a>
         <a class="k-btn ghost" href="/contact">Reach Out ↗</a>
-        <a class="k-circled" href="/contact" style="--annot:var(--red)"><span>Let's talk</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
+        <a class="k-circled k-accent-red" href="/contact"><span>Let's talk</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
       </div>
     </div>
   </div>
@@ -753,14 +770,18 @@ a{color:inherit;text-decoration:none}
   <div class="wrap">
     <div class="hcards">
       {workAll.map((w) => (
-        <a class="hcard" href={w.href}>
+        <a class={`hcard${w.vid ? ' has-vid' : ''}`} href={w.href} data-vid={w.vid || ''}>
           <img src={w.img} alt={w.title} loading="lazy" decoding="async">
+          {w.vid ? <video class="hc-vid" src={w.vid} muted loop playsinline preload="none" aria-hidden="true"></video> : null}
           <div class="hc-meta">
             {w.logo ? <img class="hc-logo" src={`/logos/${w.logo}.${w.logo === 'donut-media' ? 'svg' : 'png'}`} alt={w.client}> : null}
             <b>{w.title}</b>
             <span>{w.role}</span>
           </div>
-          <div class="hc-blurb"><p>{w.logline}</p></div>
+          <div class="hc-blurb">
+            {w.logo ? <img class="hc-logo" src={`/logos/${w.logo}.${w.logo === 'donut-media' ? 'svg' : 'png'}`} alt={w.client}> : null}
+            <p>{w.logline}</p>
+          </div>
         </a>
       ))}
     </div>
@@ -828,6 +849,21 @@ a{color:inherit;text-decoration:none}
   });
   grid.addEventListener('mouseleave', hide);
   window.addEventListener('scroll', function(){ if(panel.classList.contains('on')) hide(); }, {passive:true});
+})();
+</script>
+
+<script is:inline>
+// ELEMENT 28 hover cards: play the real footage under the card on hover so text-over-video is legible
+(function(){
+  if(window.matchMedia && matchMedia('(hover:none)').matches) return;
+  [].slice.call(document.querySelectorAll('.hcard.has-vid')).forEach(function(card){
+    var v=card.querySelector('.hc-vid'); if(!v) return;
+    card.addEventListener('mouseenter', function(){
+      if(!v.getAttribute('src') && v.dataset.src){ v.setAttribute('src', v.dataset.src); }
+      var pr=v.play(); if(pr&&pr.catch)pr.catch(function(){});
+    });
+    card.addEventListener('mouseleave', function(){ try{v.pause();}catch(e){} });
+  });
 })();
 </script>
 
@@ -985,6 +1021,10 @@ a{color:inherit;text-decoration:none}
 .k-big{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(26px,4vw,54px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;max-width:20ch;margin:0 auto 26px}
 .k-stmt{text-align:center;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(30px,4.6vw,64px);letter-spacing:-.035em;line-height:1.02;text-transform:uppercase;max-width:18ch;margin:0 auto}
 .k-stmt .k-em{color:var(--spark)}
+.kset-light .k-stmt .k-em{color:var(--red-accent)}   /* pink washes out on paper; use the accent */
+.ks-centered{text-align:center}
+.ks-centered .k-stmt{margin:0 auto}
+.ks-cta{margin-top:clamp(28px,4.5vh,48px)}
 /* left-aligned statement + circled CTA off to the right */
 .kick-split{display:flex;align-items:center;justify-content:space-between;gap:clamp(30px,5vw,80px);flex-wrap:wrap}
 .kick-split .k-stmt.ks-left{text-align:left;margin:0;max-width:16ch}
@@ -1003,6 +1043,8 @@ a{color:inherit;text-decoration:none}
 .k-arrow:hover{color:var(--red)}
 .k-circled{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:12px 30px;font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:inherit}
 .k-circled .k-oval{position:absolute;inset:-7px -12px;width:calc(100% + 24px);height:calc(100% + 14px);overflow:visible;pointer-events:none;transform:rotate(-1.6deg)}
+.k-circled{--annot:var(--red-accent)}          /* default; override with .k-accent-* */
+.k-accent-red{--annot:var(--red-accent)}       /* themeable red accent · change --red-accent to retheme */
 .k-circled .k-oval path{fill:none;stroke:var(--annot);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0;animation:kOval 5s ease-in-out infinite}
 /* draws on in ~1s, holds 4s, then re-animates */
 @keyframes kOval{0%{stroke-dashoffset:1}20%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}
@@ -1016,20 +1058,31 @@ a{color:inherit;text-decoration:none}
 .tk-item::after{content:'✳';color:var(--red);margin:0 clamp(22px,3.4vw,48px);font-size:.66em}
 @keyframes tickScroll{to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.tick-track{animation:none}}
-/* 28 · HOVER-BLURB CARD (#el-hovercard) — masonry, all 19, logo + logline */
+/* 28 · HOVER-BLURB CARD (#el-hovercard) — masonry, all 19, logo + logline, hover video + iOS-popup */
 .hcwrap{padding:6vh 0 9vh}
 .hcards{columns:3;column-gap:16px}
-.hcard{position:relative;display:block;overflow:hidden;background:#000;border-radius:2px;break-inside:avoid;margin:0 0 16px}
+.hcard{position:relative;display:block;overflow:hidden;background:#000;border-radius:3px;break-inside:avoid;margin:0 0 16px;transition:opacity .35s ease,transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease,border-radius .4s ease}
 .hcard img{width:100%;height:auto;display:block;filter:brightness(.72);transition:transform .7s cubic-bezier(.22,1,.36,1),filter .4s}
-.hcard:hover img{transform:scale(1.05);filter:brightness(.5)}
-.hc-meta{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:20px}
+/* the real footage, revealed under the text on hover so we can judge formatting over video */
+.hc-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;filter:brightness(.72);transition:opacity .45s ease,filter .4s}
+.hcard:hover img{transform:scale(1.05);filter:brightness(.6)}
+.hcard.has-vid:hover img{opacity:0}
+.hcard:hover .hc-vid{opacity:1;filter:brightness(.6)}
+/* spotlight: hovering the grid dims every card, the focused one stays lit */
+.hcards:hover .hcard{opacity:.32}
+.hcards .hcard:hover,.hcards .hcard:focus-visible{opacity:1}
+/* iOS-style popup: focused card lifts, rounds, casts a soft shadow so it clearly pops forward */
+.hcard:hover,.hcard:focus-visible{transform:scale(1.035);border-radius:14px;box-shadow:0 26px 60px -12px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08);z-index:5}
+.hc-meta{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:20px;transition:opacity .3s ease}
+/* on hover the resting title yields so it can't collide with the blurb */
+.hcard:hover .hc-meta,.hcard:focus-visible .hc-meta{opacity:0}
 .hcard .hc-logo{height:18px;width:auto;max-width:120px;filter:brightness(0) invert(1);opacity:.92;display:block;margin-bottom:10px}
 .hc-meta b{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(19px,1.7vw,26px);letter-spacing:-.02em;text-transform:uppercase;line-height:1.05;color:#fff}
 .hc-meta span{display:block;margin-top:6px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.75)}
-.hc-blurb{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:20px;background:linear-gradient(to top,rgba(10,10,10,.95),rgba(10,10,10,.6) 74%,transparent);transform:translateY(101%);opacity:0;transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .4s}
+.hc-blurb{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:20px;background:linear-gradient(to top,rgba(10,10,10,.96),rgba(10,10,10,.82) 60%,rgba(10,10,10,.5) 88%,transparent);transform:translateY(101%);opacity:0;transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .4s}
 .hcard:hover .hc-blurb,.hcard:focus-visible .hc-blurb{transform:translateY(0);opacity:1}
-.hc-blurb p{color:#fff;font-size:14px;line-height:1.5;margin:0;max-width:38ch}
-@media(hover:none){.hc-blurb{position:static;transform:none;opacity:1;background:var(--ink)}}
+.hc-blurb p{color:#fff;font-size:14px;line-height:1.5;margin:0;max-width:38ch;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+@media(hover:none){.hc-meta{display:none}.hc-blurb{position:static;transform:none;opacity:1;background:var(--ink)}.hc-vid{display:none}}
 @media(max-width:760px){.hcards{columns:2}}
 @media(max-width:460px){.hcards{columns:1}}
 /* 29 · WORK INDEX · VARIED SIZES + HOVER PREVIEW (#el-workview) */

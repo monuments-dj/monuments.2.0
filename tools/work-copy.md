@@ -44,7 +44,7 @@ The named summary text is the **logline**.
 ### 04. cwi-lets-get-started
 - **Client:** College of Western Idaho  	(24/28)
 - **Brand:** Let's Get Started  	(17/22)
-- **Logo:** — (none on file)
+- **Logo:** cwi
 - **Title:** Let's get started.  	(18/34)
 - **What I did:** writer · casting  	(16/44)
 - **Logline:** College of Western Idaho's enrollment campaign with Against. I write and cast the program spots, cut for every screen, for a college on nine straight semesters of growth.  	(170/150  ⚠ OVER)
@@ -111,7 +111,7 @@ The named summary text is the **logline**.
 - **Logo:** adorama
 - **Title:** Imagine. Illuminate. Create.  	(28/34)
 - **What I did:** rebrand · website · socials  	(27/44)
-- **Logline:** Flashpoint is Adorama's private label: lighting and photo gear built to punch above its price. Strong reputation, dated look, so I rebuilt it.  	(142/150)
+- **Logline:** Adorama's private-label lighting and photo gear: strong reputation, dated look. I rebuilt the brand.  	(100/150)
 
 ### 13. turnstile
 - **Client:** Turnstile Audio  	(15/28)
