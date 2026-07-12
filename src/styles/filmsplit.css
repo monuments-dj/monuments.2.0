@@ -1,32 +1,36 @@
 /* ==========================================================================
-   FILM SPLIT  (#el-filmsplit)  — canonical, shared, edit-once source of truth
+   FILM SPLIT  (#el-filmsplit)  - canonical, shared, edit-once source of truth
    --------------------------------------------------------------------------
-   A film poster (16:9) beside a vertical stack of two stills. The 16:9 poster
-   sets the row height; the stack mirrors it exactly.
+   A film poster (16:9) beside a vertical stack of two stills. The POSTER is
+   authoritative: its 16:9 aspect-ratio sets the row height, and the two stills
+   split that exact height between them. Same balanced shape at every width.
 
-   THE OVERLAP BUG THIS FIXES (was .btsrow on adorama): CSS grid items default to
-   min-height:auto / min-width:auto, so a tall image REFUSES to shrink below its
-   intrinsic size and overflows its track — the two stacked stills then collide.
-   `.filmsplit > * { min-width:0; min-height:0 }` plus the same on the stack + its
-   figures removes that floor, so every cell is bounded by its track and can never
-   overlap, at ANY viewport width.
+   Two things make that true and keep it stable:
+   1. min-width:0 / min-height:0 on every grid child kills the classic CSS-grid
+      blowout (grid items default to min-*:auto, so a tall image would overflow
+      its track and the stacked stills would collide).
+   2. The stack images are position:absolute, so they never contribute intrinsic
+      height. Without this, two 3:2 stills stack TALLER than the poster's 16:9 and
+      stretch the poster into a too-tall crop (the bug DJ caught on wide screens).
+      Absolute images let the poster's aspect-ratio win, so it stays a clean 16:9.
 
-   Imported by every page that uses it (adorama-music, the Kit /template). Edit here
-   once and it updates everywhere it's imported.
+   Imported by every page that uses it (adorama-music, the Kit /template). Edit
+   here once and it updates everywhere it is imported.
    ========================================================================== */
 .filmsplit{display:grid;grid-template-columns:1.66fr 1fr;gap:14px;align-items:stretch}
 .filmsplit>*{min-width:0;min-height:0}                 /* grid-blowout guard */
+.filmsplit .poster16{aspect-ratio:16/9}                /* poster is authoritative */
 .filmsplit .poster16 .play{width:96px;height:96px;font-size:9.5px}
 
 .filmstack{display:grid;grid-template-rows:1fr 1fr;gap:14px;min-height:0}
 .filmstack figure{position:relative;margin:0;overflow:hidden;background:#000;min-height:0}
-.filmstack img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85) saturate(.96);transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.filmstack img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85) saturate(.96);transition:transform .8s cubic-bezier(.22,1,.36,1)}
 .filmstack figure:hover img{transform:scale(1.04)}
-.filmstack .cap{position:absolute;left:12px;bottom:10px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.85)}
+.filmstack .cap{position:absolute;left:12px;bottom:10px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.85);z-index:2}
 
 /* stack on top of poster below 900px; stills go side-by-side, each locked to 16:9 */
 @media (max-width:900px){
   .filmsplit{grid-template-columns:1fr}
   .filmstack{grid-template-rows:auto;grid-template-columns:1fr 1fr}
-  .filmstack img{aspect-ratio:16/9}
+  .filmstack figure{aspect-ratio:16/9}
 }

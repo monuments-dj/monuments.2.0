@@ -491,7 +491,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<div class="spec" id="el-23"><div class="wrap"><span class="id">ELEMENT 23 · FILM SPLIT <b style="color:var(--red)">(#el-filmsplit · FIXED)</b></span><span class="use">a 16:9 film poster beside a stack of two stills · the poster sets the row height, the stack mirrors it · <b>this is the element that overlapped on adorama</b> · the fix (min-height:0 grid guard) lives in the shared src/styles/filmsplit.css, so editing it once updates every page that imports it · never overlaps at any width · <b class="lives">lives on:</b> adorama-music (shared filmsplit.css)</span></div></div>
+<div class="spec" id="el-23"><div class="wrap"><span class="id">ELEMENT 23 · FILM SPLIT <b style="color:var(--red)">(#el-filmsplit · FIXED)</b></span><span class="use">a 16:9 film poster beside a stack of two stills · <b>the poster's 16:9 is authoritative, so it never stretches</b>, and the two stills split its exact height · balanced at every width (no overlap, no tall crop) · shared, edit-once src/styles/filmsplit.css updates every page that imports it · <b class="lives">lives on:</b> adorama-music (shared filmsplit.css)</span></div></div>
 <section class="paper" style="padding:8vh 0">
   <div class="wrap">
     <div class="filmsplit" id="el-filmsplit">
