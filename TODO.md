@@ -18,6 +18,29 @@ lives in Testimonials.astro). Reach out to:
 When a quote lands: paste into `q` for that person in Testimonials.astro (serif can
 return to the quote face then - sans is the interim per DJ).
 
+## 🚀 SESSION 2026-07-12 (part 3 · MSI/Xperia/header/centering batch) SHIPPED
+Commits 0164e54 → 008ba5a. Verified, motioncheck-adjacent, pushed live.
+- **Stat-band centering MISS fixed:** last sweep only globbed work/*. The Kit's
+  ELEMENT 02 band + dead home/about statrow CSS were missed. Swept ALL pages now.
+  (MSI + 17 work bands were already centered live in 063fad4 — DJ was viewing a
+  STALE dev server / cached tab; confirmed center in the deployed HTML.)
+- **Switcher visibility fixed:** DJ had dismissed the type/accent pill once and
+  its ✕ persisted 'off' in localStorage forever. On /template it now ALWAYS shows
+  (clears the flag on load; ✕ is session-only). Added a '\ The controls' callout
+  under the Kit intro pointing to the pill (click = pulse) + motion lab (Element 13).
+- **MSI cutdowns** built from DJ's share link: ultra-wide 1928x558 Times Square
+  boards (the 'weird sizing') + standard 16:9 cuts, self-hosted, tap for sound.
+- **Kit header 01B upgraded:** real client logo, annotation DRAWS ON + carries a
+  service COLOR; A=with blurb+oval, B=no blurb+double-underline; ELEMENT 01C =
+  proposed service→color legend (11 swatches). Rolls to work pages once DJ picks.
+- **Xperia → one account page:** /work/sony-xperia (old slug 301s). 'Sony Xperia',
+  3-year account, Summer is a chapter, 3 films kept.
+
+## 🟡 DECIDE (Kit, 2026-07-12)
+- Header 01B: pick A (with blurb) or B (no blurb) · pick oval vs double-underline ·
+  approve/remap the ELEMENT 01C service colors → then I roll 01B to every work page.
+- Type pick / B-W / testimonial treatment / motion language 01-05 still open (see below).
+
 ## 🚀 SESSION 2026-07-12 (part 2 · Turnstile + Flow State batch) SHIPPED
 Commits 063fad4 (Flow State) + c0e1996 (Turnstile/Kit). All verified 1440+390, motioncheck ALL PASS.
 - **Flow State fixed hard:** BTS un-squished (root cause = missing width/height attrs

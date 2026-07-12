@@ -80,7 +80,16 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
-## Active work (2026-07-12 mid): Turnstile + Flow State batch shipped
+## Active work (2026-07-12 late): MSI/Xperia/header/centering batch shipped
+Stat bands: centering sweep must glob ALL pages (last one missed Kit/home/about -
+DJ was also viewing a stale dev server). Type switcher: always shows on /template
+now (was stuck 'off' in localStorage). MSI cutdowns live (1928x558 Times Square
+boards). Kit header 01B upgraded (logo + drawn colored annotation + A/B blurb +
+service-color legend 01C) - DJ picks, then it rolls to work pages. Xperia = one
+account page at /work/sony-xperia (old slug 301s). ⚠️ when sweeping CSS across pages,
+glob src/pages/**/*.astro, not just work/*.
+
+## Active work (2026-07-12 mid, historical): Turnstile + Flow State batch shipped
 Flow State: BTS un-squished (needs intrinsic width/height for the packer), missed intro +
 IG proof (real @sonyelectronics posts) at top, exact credit copy CENTERED, in home reel.
 Stat bands CENTERED on all work pages. Turnstile: verbatim Concept/Design/Deliver word
