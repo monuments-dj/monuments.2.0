@@ -40,14 +40,17 @@ const workAll = [
   { slug:"clothing-merch", href:"/work/clothing-merch", title:"Clothing design and marketing.", logo:"", role:"creative director · concept to production", size:"lg", img:"/case-studies/clothing-merch/new-noise-poster.jpg", vid:"/snips/clothing-merch.mp4", blurb:"For a range of clients, I've designed clothing and merch that connects with their brand story and feels genuinely wearable, from concept to production." },
 ];
 
-// kHeadlines: hand-off headline options in the centered CTA style (ELEMENT 27).
-const kHeadlines = [
-  "Taste is the whole job. Let's put it to work.",
-  "The tools are everywhere. Taste isn't.",
-  "Let's make something worth remembering.",
-  "You bring the brief. I'll bring the taste.",
-  "Bring me the hard one.",
-  "Great work starts with a conversation.",
+// kPairs: DJ's worked-out closed set (ELEMENT 27). kicker + CTA heading, paired. DO NOT
+// invent new ones; this is the locked set.
+const kPairs = [
+  { kicker: "Being forgettable is expensive", cta: "Let's build something worth remembering.", btn: "Let's talk" },
+  { kicker: "Good work starts with good questions", cta: "Tell me what you're building.", btn: "Reach Out" },
+];
+// tickerItems: the looping work-page ticker (ELEMENT 30). DJ's real one-liners.
+const tickerItems = [
+  "A problem defined is a problem half solved.",
+  "Being forgettable is expensive.",
+  "Good work starts with good questions.",
 ];
 ---
 <!doctype html>
@@ -688,51 +691,61 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<div class="spec" id="el-27"><div class="wrap"><span class="id">ELEMENT 27 · KICKERS + CTA <b style="color:var(--red)">(#el-kicker)</b></span><span class="use">the hand-off, to finalize sitewide · <b>headline options</b> in the centered style, shown <b>light + dark</b> · plus the CTA styles: pill, outline, underline, and the <b>circled Let's talk</b> (hand-drawn, animates on hover) · pick a headline + a CTA style and it rolls out · lives on: every page footer + case-page closers</span></div></div>
+<div class="spec" id="el-27"><div class="wrap"><span class="id">ELEMENT 27 · KICKERS + CTA <b style="color:var(--red)">(#el-kicker)</b></span><span class="use">DJ's <b>closed set</b>: two locked pairings (kicker ✳ + CTA heading), shown light + dark · plus the "Ears to the streets" statement · buttons: <b>Let's talk ↗</b> / <b>Reach Out ↗</b> · and the <b>circled Let's talk</b> (hand-drawn, draws on and holds 4s, then re-animates) · <b class="lives">lives on:</b> every page footer + case-page closers</span></div></div>
 <section id="el-kicker">
+  <!-- the closed set: two locked pairings (kicker + CTA heading), shown light then dark -->
   <div class="kset kset-light">
     <div class="wrap">
-      <span class="kset-tag mono">\ Centered hand-off · light · headline options</span>
-      {kHeadlines.map((h) => (
-        <div class="krow">
-          <p class="k-big">{h}</p>
-          <a class="k-btn" href="/contact">Let's talk ↗</a>
+      <span class="kset-tag mono">\ The closed set · kicker + CTA · light</span>
+      {kPairs.map((pr) => (
+        <div class="kpair">
+          <span class="kick-eyebrow mono">✳ {pr.kicker}</span>
+          <p class="k-big">{pr.cta}</p>
+          <a class="k-btn" href="/contact">{pr.btn} ↗</a>
         </div>
       ))}
     </div>
   </div>
   <div class="kset kset-dark">
     <div class="wrap">
-      <span class="kset-tag mono">\ Centered hand-off · dark · headline options</span>
-      {kHeadlines.map((h) => (
-        <div class="krow">
-          <p class="k-big">{h}</p>
-          <a class="k-btn light" href="/contact">Let's talk ↗</a>
+      <span class="kset-tag mono">\ The closed set · dark</span>
+      {kPairs.map((pr) => (
+        <div class="kpair">
+          <span class="kick-eyebrow mono">✳ {pr.kicker}</span>
+          <p class="k-big">{pr.cta}</p>
+          <a class="k-btn light" href="/contact">{pr.btn} ↗</a>
         </div>
       ))}
     </div>
   </div>
+  <!-- Ears to the streets: kicker + two-line statement -->
+  <div class="kset kset-dark">
+    <div class="wrap">
+      <span class="kset-tag mono">\ Ears to the streets</span>
+      <p class="k-stmt">Culture is talking.<br>Most brands aren't <span class="k-em">listening.</span></p>
+    </div>
+  </div>
+  <!-- buttons + the circled Let's talk (draws on, holds 4s, re-animates) -->
   <div class="kset kset-light">
     <div class="wrap">
-      <span class="kset-tag mono">\ CTA styles · light · pick one to lock</span>
+      <span class="kset-tag mono">\ Buttons + the circled CTA</span>
       <div class="cta-row">
         <a class="k-btn" href="/contact">Let's talk ↗</a>
-        <a class="k-btn ghost" href="/contact">Let's talk ↗</a>
-        <a class="k-arrow" href="/contact">Let's talk ↗</a>
+        <a class="k-btn ghost" href="/contact">Reach Out ↗</a>
         <a class="k-circled" href="/contact" style="--annot:var(--red)"><span>Let's talk</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
       </div>
     </div>
   </div>
-  <div class="kset kset-dark">
-    <div class="wrap">
-      <span class="kset-tag mono">\ CTA styles · dark</span>
-      <div class="cta-row">
-        <a class="k-btn light" href="/contact">Let's talk ↗</a>
-        <a class="k-btn ghost light" href="/contact">Let's talk ↗</a>
-        <a class="k-arrow light" href="/contact">Let's talk ↗</a>
-        <a class="k-circled" href="/contact" style="--annot:var(--spark)"><span>Let's talk</span><svg class="k-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15"/></svg></a>
+</section>
+
+<div class="spec" id="el-30"><div class="wrap"><span class="id">ELEMENT 30 · WORK TICKER <b style="color:var(--red)">(#el-ticker)</b></span><span class="use">a looping one-liner ticker for work pages · scrolls continuously, pauses on hover · DJ's real aphorisms (edit the tickerItems list) · <b class="lives">lives on:</b> proposed for work pages</span></div></div>
+<section class="ticker" id="el-ticker" aria-label="Work ticker">
+  <div class="tick-track" aria-hidden="true">
+    {[0, 1].map(() => (
+      <div class="tick-group">
+        {tickerItems.map((t) => (<span class="tk-item">{t}</span>))}
       </div>
-    </div>
+    ))}
   </div>
 </section>
 
@@ -960,10 +973,14 @@ a{color:inherit;text-decoration:none}
 .kset-dark{background:var(--ink);color:var(--paper)}
 .kset-tag{display:block;text-align:center;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:5vh;font-size:10.5px}
 .kset-dark .kset-tag{color:rgba(245,243,239,.5)}
-.krow{text-align:center;padding:4vh 0;border-top:1px solid var(--line)}
-.kset-dark .krow{border-top-color:var(--lined)}
-.krow:first-of-type{border-top:0}
-.k-big{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(26px,4vw,54px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;max-width:20ch;margin:0 auto 24px}
+.kpair{text-align:center;padding:5vh 0;border-top:1px solid var(--line)}
+.kset-dark .kpair{border-top-color:var(--lined)}
+.kpair:first-of-type{border-top:0}
+.kick-eyebrow{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:20px}
+.kset-dark .kick-eyebrow{color:var(--spark)}
+.k-big{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(26px,4vw,54px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;max-width:20ch;margin:0 auto 26px}
+.k-stmt{text-align:center;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(30px,4.6vw,64px);letter-spacing:-.035em;line-height:1.02;text-transform:uppercase;max-width:18ch;margin:0 auto}
+.k-stmt .k-em{color:var(--spark)}
 .k-btn{display:inline-flex;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:var(--ink);border-radius:99px;padding:15px 28px;transition:background .3s,color .3s}
 .k-btn:hover{background:var(--red);color:#fff}
 .k-btn.light{background:var(--paper);color:var(--ink)}
@@ -977,8 +994,19 @@ a{color:inherit;text-decoration:none}
 .k-arrow:hover{color:var(--red)}
 .k-circled{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:12px 30px;font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:inherit}
 .k-circled .k-oval{position:absolute;inset:-7px -12px;width:calc(100% + 24px);height:calc(100% + 14px);overflow:visible;pointer-events:none;transform:rotate(-1.6deg)}
-.k-circled .k-oval path{fill:none;stroke:var(--annot);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}
-.k-circled:hover .k-oval path{animation:hbDraw 3s ease-in-out infinite}
+.k-circled .k-oval path{fill:none;stroke:var(--annot);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0;animation:kOval 5s ease-in-out infinite}
+/* draws on in ~1s, holds 4s, then re-animates */
+@keyframes kOval{0%{stroke-dashoffset:1}20%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.k-circled .k-oval path{animation:none;stroke-dashoffset:0}}
+/* 30 · WORK TICKER (#el-ticker) */
+.ticker{background:var(--ink);color:var(--paper);overflow:hidden;border-top:1px solid var(--lined);border-bottom:1px solid var(--lined);padding:20px 0}
+.tick-track{display:flex;width:max-content;animation:tickScroll 26s linear infinite}
+.ticker:hover .tick-track{animation-play-state:paused}
+.tick-group{display:flex;flex:none}
+.tk-item{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(18px,2.2vw,32px);letter-spacing:-.02em;text-transform:uppercase;line-height:1;white-space:nowrap;display:inline-flex;align-items:center;color:var(--paper)}
+.tk-item::after{content:'✳';color:var(--red);margin:0 clamp(22px,3.4vw,48px);font-size:.66em}
+@keyframes tickScroll{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.tick-track{animation:none}}
 /* 28 · HOVER-BLURB CARD (#el-hovercard) */
 .hcwrap{padding:6vh 0 9vh}
 .hcards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
