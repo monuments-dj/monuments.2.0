@@ -2,6 +2,8 @@
 import CallSheet from '../components/CallSheet.astro';
 import PageFooter from '../components/PageFooter.astro';
 import RoleTag from '../components/RoleTag.astro';
+import SocialWall from '../components/SocialWall.astro';
+import NextFile from '../components/NextFile.astro';
 
 // === THE KIT · case-page element library ===
 // The single source of truth for case-page elements. When an element needs a fix
@@ -188,7 +190,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
-<div class="spec"><div class="wrap"><span class="id">ELEMENT 01 · CASE HERO</span><span class="use">70svh image hero · 3-line title, serif accent line last · kck bottom-left, NFO bottom-right · RoleTag under title</span></div></div>
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 01 · CASE HERO</span><span class="use">70svh image hero · 3-line title, serif accent line last · kck bottom-left, NFO bottom-right · RoleTag under title · VIDEO VARIANT: dim poster + hero loop that fades in only on the real PLAYING state (see on-camera / sony-xm5)</span></div></div>
 <header class="hero">
   <img src="/case-studies/flashpoint/gallery/fp-03.jpg" alt="Placeholder hero image">
   <div class="scrim" aria-hidden="true"></div>
@@ -309,6 +311,169 @@ a{color:inherit;text-decoration:none}
     <a class="talk" href="/contact">Let's talk ↗</a>
   </div>
 </section>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 14 · FILM POSTER</span><span class="use">the signature: poster still + muted snip loop (pvid, plays-when-visible) + round play chip + fcap · on case pages click opens the reelbox film lightbox · 92svh</span></div></div>
+<section class="film">
+  <div class="poster">
+    <img loading="lazy" decoding="async" src="/case-studies/sony-this-moment/gallery/tm-03.jpg" alt="Film poster specimen">
+    <video class="pvid" src="/snips/sony-this-moment.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
+    <span class="play">Play · The Spot</span>
+    <span class="fcap">✳ The film caption · what this spot is · who for</span>
+  </div>
+</section>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 15 · CONTACT SHEET</span><span class="use">the frames masonry · white mats, FR-numbered mono caps, slight rotation, hover lift · packed by the global masonry script (PageFooter) · reveal via .show</span></div></div>
+<section class="paper"><div class="wrap gal">
+  <div class="bar">
+    <span class="mono"><b>Contact sheet</b> · frames from the shoot</span>
+    <span class="mono" style="color:#8f8d88">06 frames · hover to inspect</span>
+  </div>
+  <div class="frames" id="kitFrames">
+    {['/case-studies/flashpoint/gallery/fp-01.jpg','/case-studies/sony-this-moment/gallery/tm-05.jpg','/case-studies/flashpoint/gallery/fp-02.jpg','/case-studies/adorama-music/gallery/am-01.jpg','/case-studies/flashpoint/gallery/fp-08.jpg','/case-studies/flashpoint/gallery/fp-03.jpg'].map((src, i) => (
+      <figure class="fr" style={`--d:${i * 45}ms`}>
+        <img src={src} alt={`Contact sheet frame ${i + 1}`} loading="lazy" decoding="async">
+        <figcaption class="cap">FR-{String(i + 1).padStart(2, '0')} · SHEET SPECIMEN</figcaption>
+      </figure>
+    ))}
+  </div>
+</div></section>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 16 · STAT BEAT</span><span class="use">one number between chapters · accent ground, rides --struct/--on-rgb like the statrow · use when a single stat IS the chapter break</span></div></div>
+<section class="statbeat">
+  <div class="in">
+    <div><b>50K+</b><span>posts tagged #CreateNoMatterWhat</span></div>
+  </div>
+</section>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 17 · SOCIAL WALL</span><span class="use">the audience-reaction wall · REAL comments only, transcribed from the thread (these are Flow State's) · use when the response is the proof</span></div></div>
+<SocialWall
+  title="The comments came in hot."
+  intro="Specimen of the audience wall. Real transcribed comments only, never invented ones: the same rule as quotes."
+  comments={[
+    { u: 'kennyjenkinz', t: 'Turned out unreal.' },
+    { u: 'morgylove', t: 'The sheer amount of talent on the AOV team is insane. Killer work!' },
+    { u: 'tommylundberg', t: 'The sound design is so rad.', l: 5 },
+    { u: 'learnfilmmaking', t: 'Wow, amazing job guys!! @artofvisuals @sony', l: 5 },
+  ]}
+/>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 18 · LEDGER ROWS</span><span class="use">the book-of-business row: thumb + title + mono meta + red arrow · B/W at rest, color on hover · for bodies of work that need inventory, not story</span></div></div>
+<section class="paper"><div class="wrap bob">
+  <div class="bob-rows">
+    <a class="bob-row" href="/work/sony-this-moment">
+      <img loading="lazy" decoding="async" src="/case-studies/sony-this-moment/gallery/tm-05.jpg" alt="Sony This Moment">
+      <span class="bt">Sony · This Moment</span>
+      <span class="bm mono">XM4 · national campaign film · director + CD</span>
+      <span class="ba mono">↗</span>
+    </a>
+    <a class="bob-row" href="/work/adorama-music">
+      <img loading="lazy" decoding="async" src="/case-studies/adorama-music/gallery/am-01.jpg" alt="Adorama Music">
+      <span class="bt">Adorama · Create No Matter What</span>
+      <span class="bm mono">3.4M+ views · content series · Shorty finalist</span>
+      <span class="ba mono">↗</span>
+    </a>
+  </div>
+</div></section>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 19 · NEXT FILE</span><span class="use">the case-page closer · giant next name + framed thumb + fill rail · overscroll arms ONLY at true page bottom (inert here by design), click always works · chain in /work index order</span></div></div>
+<NextFile href="/work" name="The Work Index" img="/case-studies/sony-this-moment/gallery/tm-05.jpg" code="MC-INDEX" />
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 20 · PAGE CHROME</span><span class="use">every case page's fixed furniture, shown here static at half scale · c1 wordmark · c2 nav · c3 case code · c4 LA clock · plus the drifting ✳ companion · mix-blend-mode:difference over everything</span></div></div>
+<section class="paper"><div class="wrap chromedemo-wrap">
+  <div class="chromedemo" aria-label="Page chrome demo (static)">
+    <span class="cd1">M<i>✳</i>NUMENTS</span>
+    <span class="cd2">Work&nbsp;&nbsp;Photo&nbsp;&nbsp;About&nbsp;&nbsp;Capabilities&nbsp;&nbsp;Contact</span>
+    <span class="cd3">MC-20XX-XX · Client · The project</span>
+    <span class="cd4">LA 00:00 PM</span>
+    <span class="cdstar">✳</span>
+    <span class="cdnote mono">fixed · mix-blend difference · rides above everything except menus</span>
+  </div>
+</div></section>
+
+<div class="spec"><div class="wrap"><span class="id">ELEMENT 21 · PATTERN INDEX</span><span class="use">the systems that are code, not markup · where each one lives · pull from the source, never re-implement</span></div></div>
+<section class="paper"><div class="wrap pidx">
+  <div class="pidx-rows">
+    <div class="pidx-row"><b>Play-when-visible</b><span class="mono">every autoplay loop pauses off-screen · PageFooter.astro · verify: tools/motioncheck.mjs</span></div>
+    <div class="pidx-row"><b>Masonry packer</b><span class="mono">packs every .frames sheet · PageFooter.astro · verify: tools/packcheck.mjs</span></div>
+    <div class="pidx-row"><b>Grain v2</b><span class="mono">living texture, ALWAYS below text · PageFooter.astro · tune --grain-paper / --grain-media only</span></div>
+    <div class="pidx-row"><b>Accent + type switcher</b><span class="mono">identity preview, UI on the Kit only, picks persist sitewide · PageFooter.astro</span></div>
+    <div class="pidx-row"><b>Motion lab engine</b><span class="mono">five languages, element 13 below · template.astro · DJ picks one, then it bakes sitewide</span></div>
+    <div class="pidx-row"><b>Reveal observer (.rv)</b><span class="mono">enter-once fade/rise · per page, 3 lines · threshold .01, rootMargin 300px</span></div>
+    <div class="pidx-row"><b>Hero parallax trio</b><span class="mono">img down .22x · type up -.1x + fade · nfo/kck drift · per case page script</span></div>
+    <div class="pidx-row"><b>Reelbox lightbox</b><span class="mono">film modal, YT IFrame API, reveals only on PLAYING state 1 · per case page w/ films</span></div>
+    <div class="pidx-row"><b>NextFile overscroll</b><span class="mono">gated fill rail, arms at page bottom only · NextFile.astro component</span></div>
+    <div class="pidx-row"><b>Under-reveal footer</b><span class="mono">.over rides above .underfoot, margin-bottom = underfoot height · per case page</span></div>
+    <div class="pidx-row"><b>Call sheet · role tag · social wall</b><span class="mono">shared components · CallSheet.astro / RoleTag.astro / SocialWall.astro</span></div>
+    <div class="pidx-row"><b>Elsewhere</b><span class="mono">IG embed grid (clothing-merch) · typewriter (work hub) · world map (About) · OS9 desktop (photography)</span></div>
+  </div>
+</div></section>
+
+<style is:global>
+/* ── ELEMENTS 14-21 · ported verbatim from the case-page grammar ── */
+/* 14 FILM POSTER (source: sony-this-moment) */
+.film{position:relative;background:var(--ink);padding:0}
+.film .poster{position:relative;height:92svh;overflow:hidden;cursor:pointer}
+.film .poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72);transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.film .poster:hover img{transform:scale(1.03)}
+.film .poster .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.film .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.7;padding:0 12px;color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s;z-index:2}
+.film .poster:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
+.film .fcap{position:absolute;left:var(--pad);bottom:24px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85);z-index:2}
+/* 15 CONTACT SHEET (source: sony-this-moment; packed by the global script) */
+.gal{padding:6vh 0 8vh}
+.gal .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:26px}
+.frames{columns:3;column-gap:14px}
+.fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;opacity:0;transform:translateY(16px) rotate(-.6deg);break-inside:avoid;margin:0 0 14px}
+.frames.show .fr{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
+.fr img{width:100%;height:auto;display:block;filter:saturate(.96)}
+.fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
+.frames.show .fr:hover{transform:rotate(-1deg) scale(1.03);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
+@media (max-width:900px){.frames{columns:2}}
+@media (max-width:560px){.frames{columns:1}}
+/* 16 STAT BEAT (source: adorama-music) */
+.statbeat{background:var(--struct);color:rgb(var(--on-rgb))}
+.statbeat .in{display:flex;justify-content:center;gap:clamp(34px,7vw,100px);flex-wrap:wrap;text-align:center;padding:10vh var(--pad)}
+.statbeat b{display:block;font-weight:var(--dispw);font-size:clamp(40px,5.6vw,86px);letter-spacing:-.04em;line-height:.85}
+.statbeat span{display:block;margin-top:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:rgba(var(--on-rgb),.72);max-width:22ch}
+/* 18 LEDGER ROWS (source: art-of-visuals book of business) */
+.bob{padding:2vh 0 6vh}
+.bob-rows{border-top:2px solid var(--ink)}
+.bob-row{display:grid;grid-template-columns:118px 1fr auto 28px;align-items:center;gap:18px 26px;padding:14px 2px;border-bottom:1px solid var(--line);transition:background .3s}
+.bob-row img{width:118px;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:5px;filter:grayscale(1) contrast(1.04);transition:filter .35s}
+.bob-row .bt{font-weight:var(--dispw2);font-size:clamp(17px,1.7vw,23px);letter-spacing:-.015em;line-height:1.05;text-transform:uppercase}
+.bob-row .bm{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88;text-align:right}
+.bob-row .ba{font-size:14px;color:var(--red);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.bob-row:hover{background:rgba(22,21,20,.035)}
+.bob-row:hover img{filter:none}
+.bob-row:hover .ba{transform:translate(4px,-3px)}
+@media (max-width:680px){.bob-row{grid-template-columns:86px 1fr 20px}.bob-row .bm{display:none}.bob-row img{width:86px}}
+/* 20 PAGE CHROME demo (static, half scale; the real thing is fixed + blend-difference) */
+.chromedemo-wrap{padding:4vh 0 8vh}
+.chromedemo{position:relative;aspect-ratio:16/7;background:var(--ink);border-radius:10px;overflow:hidden;color:var(--paper)}
+.chromedemo span{position:absolute;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.chromedemo .cd1{top:14px;left:20px;font-family:var(--disp);font-weight:var(--dispw);font-size:19px;letter-spacing:-.01em;text-transform:none}
+.chromedemo .cd1 i{font-style:normal}
+.chromedemo .cd2{top:20px;right:16px}
+.chromedemo .cd3{bottom:14px;left:16px}
+.chromedemo .cd4{bottom:14px;right:16px}
+.chromedemo .cdstar{top:46%;right:9%;font-size:15px;opacity:.85}
+.chromedemo .cdnote{left:50%;top:50%;transform:translate(-50%,-50%);color:#8f8d88;font-size:9.5px;text-align:center}
+/* 21 PATTERN INDEX */
+.pidx{padding:2vh 0 9vh}
+.pidx-rows{border-top:2px solid var(--ink)}
+.pidx-row{display:flex;justify-content:space-between;align-items:baseline;gap:14px 30px;padding:13px 2px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.pidx-row b{font-weight:var(--dispw2);font-size:clamp(15px,1.35vw,19px);letter-spacing:-.01em;text-transform:uppercase}
+.pidx-row .mono{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#8f8d88;text-align:right;max-width:72ch}
+@media (max-width:680px){.pidx-row{flex-direction:column;gap:4px}.pidx-row .mono{text-align:left}}
+</style>
+
+<script is:inline>
+// ELEMENT 15 demo reveal: same 3-line .show observer every case page carries
+(function(){
+  var el=document.getElementById('kitFrames');if(!el)return;
+  new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){el.classList.add('show');o.disconnect();}});},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
+})();
+</script>
 
 <div class="spec"><div class="wrap"><span class="id">ELEMENT 13 · MOTION LAB</span><span class="use">five motion languages on the same homepage elements · pick ONE, it becomes the sitewide grammar · switcher + replay below · lives on the Kit only</span></div></div>
 <section class="mlab" id="mlab" data-motion="settle">
