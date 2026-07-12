@@ -80,7 +80,13 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
-## Active work (2026-07-11 LATE): night batch SHIPPED · see TODO.md top block
+## Active work (2026-07-12 early): Kit = FULL style library (21 elements + pattern index)
+/template now specs every work-page element family: film poster+snip, contact sheet,
+stat beat, social wall, ledger rows, NextFile, page chrome, pattern index (14-21) on
+top of 01-13. Fix elements THERE first, then propagate. Theater testimonials baked
+(10 people, lorem BANNED - ⛔ rule 4). AOV has the book-of-business ledger.
+
+## Active work (2026-07-11 LATE, historical): night batch SHIPPED · see TODO.md top block
 OG card+meta sitewide (re-run tools/add-og.mjs at domain swap) · 66 imgs lazy · map v2
 (grey-on-paper, pin photos, Paris/Berlin) · proof cards play snips · MOTION LAB on
 /template (5 languages, DJ PICKS ONE → then bake sitewide) · GRAIN v2 (below-text,
