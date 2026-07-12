@@ -17,6 +17,12 @@
 //
 // order = recruiter priority (strongest first). size = work-index tile
 // (feat / band / wide / lg / tall / std). vid = "" falls back to img.
+//
+// LOGOS: every brand ships three files — public/logos/<logo>-{black,white,color}.png.
+// Dark slots use -white, light slots use -black, brand moments use -color. Set
+// logoColor:true to render the full-color crest instead of the white knockout
+// (e.g. AC Boise, whose silhouette is just a blob). The old flat <logo>.png files
+// stay for legacy references. Know Vape has -color only (no isolated mark exists).
 // ============================================================================
 export const work = [
   { slug: "art-of-visuals", href: "/work/art-of-visuals", client: "Art of Visuals", brand: "", logo: "art-of-visuals", title: "I grew the agency 4x.", role: "creative director", size: "feat", img: "/case-studies/art-of-visuals/hero-poster.jpg", vid: "/snips/art-of-visuals.mp4", logline: "At Art of Visuals I led creative as the agency scaled its revenue four times over in four years, across the work that made it repeatable: Sony, Intel, MSI, Adorama, and more." },

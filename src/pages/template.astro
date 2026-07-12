@@ -615,7 +615,7 @@ a{color:inherit;text-decoration:none}
           <h2>{w.title}</h2>
           <p class="hs-blurb">{w.logline}</p>
           <div class="hs-role">
-            {w.logo ? <img class={`hs-logo${w.logoColor ? ' is-color' : ''}`} src={`/logos/${w.logo}.${w.logo === 'donut-media' ? 'svg' : 'png'}`} alt={w.slug}> : null}
+            {w.logo ? <img class={`hs-logo${w.logoColor ? ' is-color' : ''}`} src={`/logos/${w.logo}-${w.logoColor ? 'color' : 'white'}.png`} alt={w.slug}> : null}
             <span class="hs-did">{w.role}</span>
           </div>
         </div>
@@ -832,12 +832,12 @@ a{color:inherit;text-decoration:none}
           <img src={w.img} alt={w.title} loading="lazy" decoding="async">
           {w.vid ? <video class="hc-vid" src={w.vid} muted loop playsinline preload="none" aria-hidden="true"></video> : null}
           <div class="hc-meta">
-            {w.logo ? <img class={`hc-logo${w.logoColor ? ' is-color' : ''}`} src={`/logos/${w.logo}.${w.logo === 'donut-media' ? 'svg' : 'png'}`} alt={w.client}> : null}
+            {w.logo ? <img class={`hc-logo${w.logoColor ? ' is-color' : ''}`} src={`/logos/${w.logo}-${w.logoColor ? 'color' : 'white'}.png`} alt={w.client}> : null}
             <b>{w.title}</b>
             <span>{w.role}</span>
           </div>
           <div class="hc-blurb">
-            {w.logo ? <img class={`hc-logo${w.logoColor ? ' is-color' : ''}`} src={`/logos/${w.logo}.${w.logo === 'donut-media' ? 'svg' : 'png'}`} alt={w.client}> : null}
+            {w.logo ? <img class={`hc-logo${w.logoColor ? ' is-color' : ''}`} src={`/logos/${w.logo}-${w.logoColor ? 'color' : 'white'}.png`} alt={w.client}> : null}
             <p>{w.logline}</p>
           </div>
         </a>
@@ -853,7 +853,7 @@ a{color:inherit;text-decoration:none}
       {workAll.map((w) => (
         <a class={`wtile ${w.size}`} href={w.href}
            data-vid={w.vid} data-img={w.img} data-logocolor={w.logoColor ? '1' : ''}
-           data-logo={w.logo ? `/logos/${w.logo}.${w.logo === 'donut-media' ? 'svg' : 'png'}` : ''}
+           data-logo={w.logo ? `/logos/${w.logo}-${w.logoColor ? 'color' : 'white'}.png` : ''}
            data-title={w.title} data-role={w.role} data-blurb={w.logline}>
           <img src={w.img} alt={w.title} loading="lazy" decoding="async">
           <div class="wt-meta"><b>{w.title}</b><span>{w.role}</span></div>
@@ -1016,7 +1016,7 @@ a{color:inherit;text-decoration:none}
 .hs-in{position:relative;z-index:2;width:100%;display:flex;flex-direction:column;justify-content:center;padding-top:6vh;padding-bottom:6vh}
 .hs-slide h2{color:#fff;margin:0;font-family:var(--disp);font-weight:var(--dispw2,600);font-size:clamp(48px,7.4vw,112px);line-height:1.02;letter-spacing:-.01em;text-transform:uppercase}
 .hs-role{display:flex;align-items:center;gap:22px;margin-top:28px;flex-wrap:wrap}
-.hs-logo{height:24px;width:auto;filter:brightness(0) invert(1);opacity:.95}
+.hs-logo{height:24px;width:auto;opacity:.95}
 .hs-did{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--spark)}
 .hs-blurb{margin-top:22px;max-width:52ch;color:rgba(245,243,239,.82);font-size:clamp(14px,1.1vw,16px);line-height:1.6}
 .hs-did[contenteditable="true"],.hs-blurb[contenteditable="true"]{outline:1px dashed rgba(239,161,173,.85);outline-offset:5px;cursor:text;border-radius:2px}
@@ -1142,9 +1142,10 @@ a{color:inherit;text-decoration:none}
 .hc-meta{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:20px;transition:opacity .3s ease}
 /* on hover the resting title yields so it can't collide with the blurb */
 .hcard:hover .hc-meta,.hcard:focus-visible .hc-meta{opacity:0}
-.hcard .hc-logo{height:18px;width:auto;max-width:120px;filter:brightness(0) invert(1);opacity:.92;display:block;margin-bottom:10px}
-/* full-color logos (e.g. AC Boise crest) opt out of the white-knockout so they read as-is */
-.hs-logo.is-color,.hcard .hc-logo.is-color,.wvp-logo.is-color{filter:none;opacity:1}
+.hcard .hc-logo{height:18px;width:auto;max-width:120px;filter:none;opacity:.92;display:block;margin-bottom:10px}
+/* logos now ship real black/white/color files (public/logos/<slug>-{white,color}.png),
+   so no CSS knockout needed. color crests (AC Boise) render a touch bigger. */
+.hs-logo.is-color,.hcard .hc-logo.is-color,.wvp-logo.is-color{opacity:1}
 .hcard .hc-logo.is-color{height:34px}
 .hs-logo.is-color{height:40px}
 .hc-meta b{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(19px,1.7vw,26px);letter-spacing:-.02em;text-transform:uppercase;line-height:1.05;color:#fff}
@@ -1186,7 +1187,7 @@ a{color:inherit;text-decoration:none}
 .wvp-vid{opacity:0;transition:opacity .45s}
 .wv-preview.playing .wvp-vid{opacity:1}
 .wvp-body{padding:18px 20px 20px}
-.wvp-logo{height:20px;width:auto;max-width:130px;filter:brightness(0) invert(1);opacity:.92;margin-bottom:12px}
+.wvp-logo{height:20px;width:auto;max-width:130px;opacity:.92;margin-bottom:12px}
 .wvp-title{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:22px;letter-spacing:-.02em;text-transform:uppercase;line-height:1.05;color:#fff}
 .wvp-role{display:block;margin-top:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--spark)}
 .wvp-blurb{margin-top:12px;font-size:14px;line-height:1.5;color:rgba(245,243,239,.8)}
