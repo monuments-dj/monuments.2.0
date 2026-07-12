@@ -18,6 +18,22 @@ lives in Testimonials.astro). Reach out to:
 When a quote lands: paste into `q` for that person in Testimonials.astro (serif can
 return to the quote face then - sans is the interim per DJ).
 
+## ⛔ BLOCKED ON DJ (2026-07-12 drop)
+- MSI cutdowns: the link was dropbox.com/home/... (DJ's private view, not shareable).
+  Need an /scl/fo/ SHARE link to: Art Of Visuals/MSI/Creative By Design/FINALS/Cutdowns
+  → then the 60s hero + the weird Times Square sizings get their formats section on
+  /work/msi-creative-by-design (slot reserved, see page comment).
+- AOV merch: DJ asked for a merch slideshow ("rename them to AOV merch") but NO merch
+  files/link arrived in the message. Not in the capabilities PDF, not in the Xperia zip.
+  Need the folder link.
+- MSI page: which THREE creative careers were highlighted? (band holds problem/solve/
+  multiplier until then - careers deliberately not invented)
+- Xperia: DECISION - one "Sony Xperia" account page (3 yrs of launches, Summer becomes
+  a chapter) vs a second page. Recommendation on file: ONE page. On DJ's word the route
+  renames + copy recuts.
+- Podcast listeners: DJ's card says 30K monthly, the outbound capabilities doc says 100K.
+  Site uses 30K (his own card). Upgrade on his word.
+
 ## 🏗️ NEW CASE WORK TO ADD (DJ 2026-07-11)
 - [ ] Boise Public Schools project (with Stoltz Marketing Group) - needs CASE-INTAKE.md sheet
 - [ ] Lumira Healthcare - needs CASE-INTAKE.md sheet
