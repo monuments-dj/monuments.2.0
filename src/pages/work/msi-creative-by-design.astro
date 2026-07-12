@@ -4,9 +4,8 @@ import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 // MSI · Creative by Design (intake/msi-creative-by-design.md, DJ 2026-07-12).
-// ⛔ Cutdowns section NOT built yet: DJ's link was a dropbox.com/home path (his
-// private view). When the /scl/fo/ share link lands: the 60s hero + the weird
-// Times Square sizings become a formats section here.
+// Cutdowns section BUILT 2026-07-12 from DJ's share link: the ultra-wide 1928x558
+// Times Square boards + standard 16:9 cuts, self-hosted, tap for sound.
 ---
 <!doctype html>
 <html lang="en">
@@ -102,6 +101,25 @@ a{color:inherit;text-decoration:none}
 .wcell b{display:block;margin-top:10px;font-weight:var(--dispw);font-size:clamp(22px,2.4vw,36px);letter-spacing:-.025em;line-height:1;text-transform:uppercase}
 .wcell p{margin-top:12px;font-size:15px;line-height:1.6;color:#b5b2ac;max-width:36ch}
 @media (max-width:860px){.wgrid{grid-template-columns:1fr}}
+
+/* the cutdowns: ultra-wide Times Square boards + standard cuts */
+.cuts{background:var(--ink);color:var(--paper);padding:2vh 0 10vh}
+.cuts .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--lined);margin-bottom:26px}
+.cuts .bar .mono b{color:var(--spark)}
+.cuts .cutsdim{color:#8f8d88}
+.cutslead{color:#b5b2ac;font-size:clamp(15px,1.3vw,18px);line-height:1.6;max-width:66ch;margin-bottom:5vh}
+.tsboards{display:flex;flex-direction:column;gap:20px;margin-bottom:26px}
+.tsb{margin:0;position:relative;border:1px solid var(--lined);background:#000}
+.tsb video{width:100%;aspect-ratio:1928/558;object-fit:cover;display:block}
+.tsb figcaption{position:absolute;left:14px;bottom:12px;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.9);background:rgba(22,21,20,.5);padding:5px 10px;backdrop-filter:blur(3px)}
+.cutrow{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cutcard{position:relative;border:0;padding:0;background:#000;cursor:pointer;display:block;width:100%;overflow:hidden;border-radius:8px}
+.cutcard video{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.cutcard::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(22,21,20,.5),transparent 40%);pointer-events:none}
+.cutcard .cut-chip{position:absolute;top:12px;right:12px;z-index:2;color:var(--paper);font-size:9px;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(245,243,239,.55);border-radius:99px;padding:5px 11px;background:rgba(22,21,20,.4);backdrop-filter:blur(4px);transition:background .3s,color .3s}
+.cutcard:hover .cut-chip,.cutcard.loud .cut-chip{background:var(--paper);color:var(--ink)}
+.cutcard .cut-cap{position:absolute;left:12px;bottom:10px;z-index:2;color:var(--paper);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase}
+@media (max-width:760px){.cutrow{grid-template-columns:1fr;max-width:440px;margin:0 auto}}
 
 .gal{padding:6vh 0 8vh}
 .gal .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:26px}
@@ -208,6 +226,46 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
+<!-- The cutdowns (DJ 2026-07-12): the real MSI films. Lead with the ultra-wide
+     1928x558 Times Square billboard sizing (the "weird" OOH format), then the
+     standard cuts. Billboards loop muted (OOH = silent); cuts tap for sound. -->
+<section class="cuts">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>\ The cutdowns</b> · one film, every format</span>
+      <span class="mono cutsdim">60 / 30 / 15 / 6s · Times Square boards + social</span>
+    </div>
+    <p class="cutslead">The same film, cut for wherever it ran. Up top: the Times Square boards, a 1928&times;558 sliver you have to design for on purpose. Below: the standard cuts that carried it to the AOV feed.</p>
+    <div class="tsboards">
+      <figure class="tsb">
+        <video src="/case-studies/art-of-visuals/msi/cutdowns/ts-male-desk.mp4" poster="/case-studies/art-of-visuals/msi/cutdowns/ts-male-desk.jpg" autoplay muted loop playsinline preload="none" aria-label="MSI Times Square billboard cut, 1928x558"></video>
+        <figcaption class="mono">TS-01 · 1928&times;558 · Times Square board</figcaption>
+      </figure>
+      <figure class="tsb">
+        <video src="/case-studies/art-of-visuals/msi/cutdowns/ts-female-car.mp4" poster="/case-studies/art-of-visuals/msi/cutdowns/ts-female-car.jpg" autoplay muted loop playsinline preload="none" aria-label="MSI Times Square billboard cut, 1928x558"></video>
+        <figcaption class="mono">TS-02 · 1928&times;558 · Times Square board</figcaption>
+      </figure>
+    </div>
+    <div class="cutrow">
+      <button class="cutcard" type="button" aria-label="Play with sound: MSI product cut">
+        <video src="/case-studies/art-of-visuals/msi/cutdowns/cut-product-10.mp4" poster="/case-studies/art-of-visuals/msi/cutdowns/cut-product-10.jpg" autoplay muted loop playsinline preload="none"></video>
+        <span class="cut-chip mono">Sound ↗</span>
+        <span class="cut-cap mono">10s · Product</span>
+      </button>
+      <button class="cutcard" type="button" aria-label="Play with sound: MSI car cut">
+        <video src="/case-studies/art-of-visuals/msi/cutdowns/cut-car-10.mp4" poster="/case-studies/art-of-visuals/msi/cutdowns/cut-car-10.jpg" autoplay muted loop playsinline preload="none"></video>
+        <span class="cut-chip mono">Sound ↗</span>
+        <span class="cut-cap mono">10s · The drive</span>
+      </button>
+      <button class="cutcard" type="button" aria-label="Play with sound: MSI couch cut">
+        <video src="/case-studies/art-of-visuals/msi/cutdowns/cut-couch-15.mp4" poster="/case-studies/art-of-visuals/msi/cutdowns/cut-couch-15.jpg" autoplay muted loop playsinline preload="none"></video>
+        <span class="cut-chip mono">Sound ↗</span>
+        <span class="cut-cap mono">15s · At home</span>
+      </button>
+    </div>
+  </div>
+</section>
+
 <section class="paper">
   <div class="wrap gal">
     <div class="bar">
@@ -301,6 +359,19 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 })();
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
+
+// cutdowns: tap a standard cut for sound, one loud at a time
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('.cutcard'));
+  function quiet(c){var v=c.querySelector('video');v.muted=true;c.classList.remove('loud');c.querySelector('.cut-chip').textContent='Sound ↗';}
+  cards.forEach(function(c){
+    c.addEventListener('click',function(){
+      var v=c.querySelector('video'),wasMuted=v.muted;
+      cards.forEach(quiet);
+      if(wasMuted){v.muted=false;v.play().catch(function(){});c.classList.add('loud');c.querySelector('.cut-chip').textContent='Mute ✕';}
+    });
+  });
+})();
 </script>
 </body>
 </html>
