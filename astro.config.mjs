@@ -22,6 +22,6 @@ export default defineConfig({
   },
   integrations: [react(), keystatic()],
   // /services renamed to /capabilities (DJ, 2026-07-07); keep old links alive
-  redirects: { '/services': '/capabilities', '/work/sony-xperia-summer': '/work/sony-xperia' },
+  redirects: { '/services': '/capabilities', '/work/sony-xperia-summer': '/work/sony-xperia', '/work/sony-xperia-summer/': '/work/sony-xperia' },
   adapter: vercel(),
 });
