@@ -4,12 +4,12 @@ import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 
-// Rebuilt 2026-07-12 per DJ: he is NOT the director of these films (no individual is
-// publicly credited; Against presents the work as agency-authored). His real, claimable
-// role is WRITER + CASTING (with Tess) on the ongoing Let's Get Started program spots,
-// which he writes per program, shoots quarterly with a 5-20 person crew, and cuts for
-// every screen size. Directing claims removed sitewide. Self-hosted spots replace the
-// YouTube films that were miscredited. CWI enrollment stats below are CWI's own official
+// Updated 2026-07-12 per DJ's final v4 copy doc: his role on the ongoing Let's Get
+// Started program spots is director · editor · shooter · on-set lead · production. He
+// directs, shoots, and cuts each program spot, runs the set on shoot days, and handles
+// production alongside producer Tess Rizvi (Against is the agency, Vision Kit on stills).
+// Shot quarterly with a 5-20 person crew, cut for every screen. Self-hosted spots replace
+// the old YouTube films. CWI enrollment stats below are CWI's own official
 // numbers (Idaho State Board of Education / Idaho Ed News, 2025), used as context for the
 // college the work supports, NOT presented as results of these films. See
 // tools/cwi-stats-verified.md for the sourced figures.
@@ -274,7 +274,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <div class="t">
     <span class="ln"><span>Let's get</span></span>
     <span class="ln"><span><span class="serif">started</span><span class="spark">.</span></span></span>
-    <RoleTag text="writer · casting" />
+    <RoleTag text="director · editor · shooter · on-set lead · production" />
   </div>
   <div class="kck">
     <b>\ Case file</b><br>
@@ -284,7 +284,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <div class="nfo">
     <span class="h">NFO</span><br>
     Client · College of Western Idaho<br>
-    Role · Writer + casting · the program spots<br>
+    Role · Director · editor · shooter · on-set lead · production<br>
     Agency · Against<br>
     Frame · MC-2023-05
   </div>
@@ -305,7 +305,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="rolerow">
   <div class="wrap in">
     <span><b>Client</b> · College of Western Idaho</span>
-    <span><b>My part</b> · Writer · casting</span>
+    <span><b>My part</b> · Director · editor · shooter · on-set lead · production</span>
     <span><b>Agency</b> · Against</span>
     <span><b>Campaign</b> · Let's Get Started</span>
     <span><b>Filed</b> · a four-year run, ongoing</span>
@@ -348,7 +348,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <span class="mono" style="color:#8f8d88">click to play, with sound</span>
     </div>
     <h2 class="rv in">A spot for every <span class="serif">program.</span></h2>
-    <p class="flead rv in">I write and cast a film for each program, one at a time, built around what that path actually gives a student. Real students play the leads. <b>Same voice across all of them, a different world each time.</b></p>
+    <p class="flead rv in">I direct, shoot, and cut a film for each program, one at a time, built around what that path actually gives a student. Real students play the leads. <b>Same voice across all of them, a different world each time.</b></p>
     <div class="spotgrid">
       {programs.map((p) => (
         <div class="filmframe" data-src={`/case-studies/cwi/films/${p.k}.mp4`} data-title={`Let's Get Started · ${p.t}`}>
@@ -380,11 +380,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <div class="wrap story">
     <div class="side rv">
       <span class="k mono">\ My part</span>
-      <h2>I write it and <span class="serif">cast it.</span></h2>
+      <h2>I direct it, shoot it, and <span class="serif">cut it.</span></h2>
     </div>
     <div class="body rv">
-      <p>I write and cast the Let's Get Started program spots with the agency Against and producer Tess Rizvi, with Vision Kit on stills. Every quarter we shoot four to six new films with a crew of five to twenty, and I write each one around the specific program, digging into what that path actually gives a student.</p>
-      <p>Then we cast it. Real students play the leads. On set I get as hands-on as it takes, framing them as the heroes and putting the real tools and payoff of the program on screen.</p>
+      <p>I direct, shoot, and cut the Let's Get Started program spots, working alongside the agency Against and producer Tess Rizvi, with Vision Kit on stills. Every quarter we make four to six new films with a crew of five to twenty, and I build each one around the specific program, digging into what that path actually gives a student.</p>
+      <p>Real students play the leads. On shoot days I run the set: directing the talent, shooting it, and keeping the crew moving with Tess on production, then I take it into the edit and cut it for every screen. I frame the students as the heroes and put the real tools and payoff of the program on screen.</p>
       <p>I've worked in Idaho education for more than ten years, and I bring that to every round. This one is homegrown, made with hometown friends and a client as fired up about it as I am. Together we're putting Idaho opportunities in front of the students who benefit most, and shifting the culture a little each quarter.</p>
     </div>
   </div>
@@ -393,7 +393,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="cat-head rv">
       <span class="k mono">\ The scale</span>
       <h2>A quarterly machine, four years <span class="serif">deep.</span></h2>
-      <p>Four to six new films every quarter, each program written and cast from scratch, then cut down into every aspect ratio and run on TV and across social. Rounds one through six and counting.</p>
+      <p>Four to six new films every quarter, each one directed and shot from scratch, then cut down into every aspect ratio and run on TV and across social. Rounds one through six and counting.</p>
     </div>
     <div class="cat-grid rv">
       {programs.map((p) => (<span class="cat-chip">{p.t}</span>))}
@@ -438,8 +438,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         { k: 'Agency', v: 'Against' },
         { k: 'Producer', v: 'Tess Rizvi' },
         { k: 'Stills', v: 'Vision Kit' },
-        { k: 'Writer · the program spots', v: 'DJ Ramirez', select: true },
-        { k: 'Casting', v: 'DJ Ramirez + Tess Rizvi' },
+        { k: 'Director · shooter · editor', v: 'DJ Ramirez', select: true },
+        { k: 'On-set lead · production', v: 'DJ Ramirez + Tess Rizvi' },
       ]}
     />
   </div>

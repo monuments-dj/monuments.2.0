@@ -1,5 +1,5 @@
 import { work } from '../src/data/work.js';
-const LIM = { client:28, brand:22, title:45, role:75, logline:300 };
+const LIM = { client:28, brand:22, title:50, role:75, logline:300 };
 const flag = (s='', lim) => { const n=(s||'').length; return `${n}/${lim}${n>lim?'  ⚠ OVER':''}`; };
 let md = `# Work header copy pass — the single source of truth
 
@@ -14,7 +14,7 @@ The named summary text is the **logline**.
 |---|---|---|
 | Client | 28 | header NFO, hover-card logo alt |
 | Brand | 22 | header (the product/campaign name) |
-| Title | 45 | the big hero headline |
+| Title | 50 | the big hero headline |
 | What I did (role) | 75 | mono line under the title |
 | Logline | 300 | index cards (always-visible body copy), slider, home "built to be" |
 | Insight | ~90 | the one idea the campaign is built on (Kit #el-insight) — one per page |
