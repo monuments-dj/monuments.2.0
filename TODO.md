@@ -1,5 +1,28 @@
 # TODO - current state (2026-07-11, LATE NIGHT · autonomous batch SHIPPED)
 
+## 📞 DJ'S OUTREACH LIST (2026-07-11) - get the real quotes
+Theater is the picked treatment; every slide holds a "quote incoming" chip under the
+real name until DJ collects the words. NO placeholder copy ever again (guard comment
+lives in Testimonials.astro). Reach out to:
+1. Prince McClinton · CEO, Art of Visuals · IG linked: instagram.com/artofvisuals
+   (his personal handle unverified - swap in when DJ confirms; LinkedIn: /in/princemcclinton)
+2. Krizia Vega · Director, Native Saints · IG linked: instagram.com/kriziavega
+3. Jennie MYERS (site spells Myers, not Meyers) · CEO, Against · linked: goagainst.com
+4. Nathan Zanders · CEO, MOX · link TBD
+5. Jake Goble · CEO, Rad Animal + Creative Hotline · collaborator · link TBD
+6. Alex Stevens · CEO, Bluepixel · link TBD
+7. Mitch Khun · Creative Director, Stoltz Marketing Group · link TBD
+8. Tommy Lundberg · Photographer + Art Director, collaborator · link TBD
+9. Andrea Cenon · Creative Director, Day One Agency · link TBD
+When a quote lands: paste into `q` for that person in Testimonials.astro (serif can
+return to the quote face then - sans is the interim per DJ).
+
+## 🏗️ NEW CASE WORK TO ADD (DJ 2026-07-11)
+- [ ] Boise Public Schools project (with Stoltz Marketing Group) - needs CASE-INTAKE.md sheet
+- [ ] Lumira Healthcare - needs CASE-INTAKE.md sheet
+- [ ] Refine /work/art-of-visuals further (first rework pass DONE 2026-07-11 late:
+      the page now pulls all AOV-era campaigns in; DJ reviews + feeds stats/assets)
+
 ## 🚀 THIS SESSION part 3 (2026-07-11 night · DJ's 7-item batch, all pushed + live)
 Commits da6df23→3382fb2, each verified individually (build + resting-offset shots):
 - **OG share card + social meta.** public/og/card.jpg (lockup on ink, NFO line);
@@ -82,8 +105,10 @@ WAITING ON DJ (the decision stack):
 1. TYPE pick 01-08 on /template (the switcher actually switches now - GRIT=Anton is the
    loud test) - or call for the paid-font round (PP Neue Montreal / Söhne / Suisse).
 2. B/W confirm → bake tokens, delete switcher + Kit menu line.
-3. Testimonial treatment: wall / theater / roster / crawl (picker on the section).
-4. Real quotes for the 7 names (everything holds honest lorem + "quote incoming" chips).
+3. ✅ DECIDED 2026-07-11: THEATER. Baked; picker + wall/roster/crawl deleted. Quotes
+   render SANS until copy locks (serif returns then). Lorem KILLED sitewide - see the
+   ⛔ block rule 4: zero placeholder copy, ever.
+4. Real quotes for the NINE names → see "DJ'S OUTREACH LIST" block at the top.
 5. Crew photo ORIGINAL → drop into ~/Monuments-Social/bts-library/ (web copy is 1400px, soft).
 6. Photography OS9 page: re-skin to the cut / leave as wildcard / retire (analysis given).
 7. Grain: louder or leave.

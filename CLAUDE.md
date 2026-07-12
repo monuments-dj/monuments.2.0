@@ -52,6 +52,11 @@ The three repeat classes and the rule that kills each:
 3. **His words are the scope.** Execute exactly what the note says; anything adjacent
    goes in the reply as a list, NOT into the commit. "It comes in weird" meant fix the
    timing, not replace the ride (that revert cost him a day of vibe).
+4. **ZERO placeholder copy on the site. Not lorem, not "sample text", nothing.** (2026-07-11,
+   his words: "kill it and kill yourself if I find it on the site again.") Pending content
+   shows an honest empty state (dimmed marks + an "incoming" chip) under the real name/label.
+   Fabricated quotes were already banned; this extends it to ALL stand-in words. Grep
+   lorem/ipsum/consectetur before any ship that adds copy.
 
 ## 🔍 VISUAL TRUTH FIRST — never clone or judge a page from its HTML
 DJ's rule (2026-06-12): before cloning/judging ANY page, capture what's actually

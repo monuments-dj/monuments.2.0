@@ -150,6 +150,19 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 .rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
 .rv.in{opacity:1;transform:none}
+
+/* the book of business: ledger rows, thumb + title + meta + arrow */
+.bob{padding:2vh 0 6vh}
+.bob-rows{border-top:2px solid var(--ink)}
+.bob-row{display:grid;grid-template-columns:118px 1fr auto 28px;align-items:center;gap:18px 26px;padding:14px 2px;border-bottom:1px solid var(--line);transition:background .3s,transform .45s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i,0)*30ms),0s}
+.bob-row img{width:118px;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:5px;filter:grayscale(1) contrast(1.04);transition:filter .35s}
+.bob-row .bt{font-weight:var(--dispw2);font-size:clamp(17px,1.7vw,23px);letter-spacing:-.015em;line-height:1.05;text-transform:uppercase}
+.bob-row .bm{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88;text-align:right}
+.bob-row .ba{font-size:14px;color:var(--red);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.bob-row:hover{background:rgba(22,21,20,.035)}
+.bob-row:hover img{filter:none}
+.bob-row:hover .ba{transform:translate(4px,-3px)}
+@media (max-width:680px){.bob-row{grid-template-columns:86px 1fr 20px}.bob-row .bm{display:none}.bob-row img{width:86px}}
 @media (max-width:900px){
   .story{grid-template-columns:1fr}.story .side{position:static}
   .frames{grid-template-columns:1fr 1fr}.fr.wide{grid-column:span 2}
@@ -274,6 +287,59 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <p>The offer: I shaped what the agency actually sold, strategy plus production a brand could trust, and made it something a marketing lead could say yes to fast.</p>
       <p>The wins: Sony, Intel, MSI, Adorama, and others. I led the pitches and directed the work, so the reel got stronger every quarter and the pipeline compounded.</p>
       <p>The retention: being the client's point of contact meant one project became three. That retention, not any single hit, is what multiplied the revenue.</p>
+    </div>
+  </div>
+
+  <!-- The book of business: every campaign delivered under the AOV roof, pulled
+       onto this page per DJ 2026-07-11 - each row is proof, each links out. -->
+  <div class="wrap bob">
+    <div class="bar">
+      <span class="mono"><b>The book of business</b> · campaigns delivered under this roof</span>
+      <span class="mono" style="color:#8f8d88">Every row is a case file ↗</span>
+    </div>
+    <div class="bob-rows">
+      <a class="bob-row rv" href="/work/sony-this-moment" style="--i:0">
+        <img loading="lazy" decoding="async" src="/case-studies/sony-this-moment/gallery/tm-05.jpg" alt="Sony This Moment">
+        <span class="bt">Sony · This Moment</span>
+        <span class="bm mono">XM4 · national campaign film · director + CD</span>
+        <span class="ba mono">↗</span>
+      </a>
+      <a class="bob-row rv" href="/work/sony-flow-state" style="--i:1">
+        <img loading="lazy" decoding="async" src="/case-studies/sony-flow-state/gallery/fs-05.jpg" alt="Sony Flow State">
+        <span class="bt">Sony · Flow State</span>
+        <span class="bm mono">XM3 · campaign film · 1.6M views</span>
+        <span class="ba mono">↗</span>
+      </a>
+      <a class="bob-row rv" href="/work/sony-xm5" style="--i:2">
+        <img loading="lazy" decoding="async" src="/case-studies/sony-xm5/gallery/xm5-03.jpg" alt="Sony XM5">
+        <span class="bt">Sony · XM5</span>
+        <span class="bm mono">influencer activation · 1.3M reach</span>
+        <span class="ba mono">↗</span>
+      </a>
+      <a class="bob-row rv" href="/work/sony-xperia-summer" style="--i:3">
+        <img loading="lazy" decoding="async" src="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" alt="Summer with Xperia">
+        <span class="bt">Sony · Summer w/ Xperia</span>
+        <span class="bm mono">launch content · stills + film</span>
+        <span class="ba mono">↗</span>
+      </a>
+      <a class="bob-row rv" href="/work/adorama-music" style="--i:4">
+        <img loading="lazy" decoding="async" src="/case-studies/adorama-music/gallery/am-01.jpg" alt="Adorama Music">
+        <span class="bt">Adorama · Create No Matter What</span>
+        <span class="bm mono">3.4M+ views · content series · Shorty finalist</span>
+        <span class="ba mono">↗</span>
+      </a>
+      <a class="bob-row rv" href="/work/dw-drums" style="--i:5">
+        <img loading="lazy" decoding="async" src="/case-studies/dw-drums/gallery/face-off.jpg" alt="DW Drums">
+        <span class="bt">DW Drums</span>
+        <span class="bm mono">one kit, two worlds · print campaign</span>
+        <span class="ba mono">↗</span>
+      </a>
+      <a class="bob-row rv" href="/work/on-camera" style="--i:6">
+        <img loading="lazy" decoding="async" src="/case-studies/on-camera/posters/nk-_UwGuRlE.jpg" alt="On Camera">
+        <span class="bt">Creator Clubhouse · On Camera</span>
+        <span class="bm mono">the agency podcast + hosting tapes</span>
+        <span class="ba mono">↗</span>
+      </a>
     </div>
   </div>
 
