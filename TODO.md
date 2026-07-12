@@ -36,7 +36,32 @@ Commits 0164e54 → 008ba5a. Verified, motioncheck-adjacent, pushed live.
 - **Xperia → one account page:** /work/sony-xperia (old slug 301s). 'Sony Xperia',
   3-year account, Summer is a chapter, 3 films kept.
 
-## 🟡 DECIDE (Kit, 2026-07-12)
+## 🚀 SESSION 2026-07-12 (part 4 · Blue Cross + Sony credits + blend + centering) SHIPPED
+Commits bf9f98e → 32f021b. All verified, pushed live.
+- **Blue Cross overhaul:** firefighter (BC-02) = hero; contact-sheet KILLED → clean
+  masonry (27 of 28 real images); popouts bigger (BC-13 checkers, BC-24 grandpa,
+  BC-06 welder = the 'garbage photo' replacement); exact brief copy verbatim; the
+  4-YEARS-OF-USAGE story highlighted in a real stat band (2020→2024, licensing
+  extended, 'cast, not stock'); role corrected (CD + talent direction + casting +
+  image selection + edit support); MC-2020-04.
+- **Sony This Moment credits:** DJ directed the photoshoot (briefs, on-set), Claire
+  shot the stills; Daniel Malikyar removed from body + caption, CREDITS-ONLY as
+  'Film Director'.
+- **06 BLEND motion** (drift + lock) = DJ's pick, now the motion-lab default ✦.
+- **Centering miss fixed** (Kit ELEMENT 02 + dead home/about) — sweep now hits all pages.
+- **Switcher restored** on the Kit (was stuck 'off' in localStorage) + controls callout.
+- Dropped the colliding trailing-slash Xperia redirect (no-slash still works).
+
+## 🔴 NEEDS YOU — DECISIONS (don't let these get buried)
+1. **Firefighter as a GLOBAL header?** You asked (with a "?") to make BC-02 the header
+   "across the homepage and work pages." It's the Blue Cross hero now. Making it the
+   HOME hero would replace your sight/sound/emotion lockup (your positioning centerpiece)
+   and the WORK reel header. → ASKED via decision prompt; holding until you answer.
+2. **Kit header 01B:** pick A (with blurb) vs B (no blurb) · oval vs double-underline ·
+   approve/remap ELEMENT 01C service colors → then I roll 01B to every work page.
+3. Type pick / B-W confirm / testimonial quotes still open.
+
+## 🟡 DECIDE (Kit, 2026-07-12, earlier)
 - Header 01B: pick A (with blurb) or B (no blurb) · pick oval vs double-underline ·
   approve/remap the ELEMENT 01C service colors → then I roll 01B to every work page.
 - Type pick / B-W / testimonial treatment / motion language 01-05 still open (see below).
