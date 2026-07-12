@@ -11,45 +11,44 @@ import NextFile from '../../components/NextFile.astro';
 // source page, so no film block; the activation scenes on ink carry the middle.
 
 const G = '/case-studies/buck-the-quo/gallery';
+// Imagery refreshed 2026-07-12 with DJ's own campaign photos (the Drake Cooper pulls
+// were outdated). Clips + stills he shot and cut in the field.
 const scenes = [
-  { img: `${G}/container-front.jpg`, n: '01', k: 'The space', t: 'A shipping container that pulled up like a', last: 'store', d: 'It traveled the state and parked where teens already were: fairs, events, the places adults usually skip. From the outside it read like a drop, not a lecture.' },
-  { img: `${G}/future-sign.jpg`,     n: '02', k: 'The hook',  t: 'A room built around one',                     last: 'word',  d: 'FUTURE in neon, merch worth wearing, a saddle that said I AM, I CAN, I WILL. The space earned a few minutes of attention, then used them well.' },
-  { img: `${G}/chop-board.jpg`,      n: '03', k: 'The turn',  t: 'The merch was the doorway, the conversation was the', last: 'point', d: 'Teens only, no parents, no teachers. A simple writing exercise opened a real talk about what they actually wanted their life to look like, with a near-peer who listened instead of advised.' },
+  { img: `${G}/bq-shot1.jpg`, w: 2200, h: 1466, n: '01', k: 'The space', t: 'A traveling space teens actually walked', last: 'into', d: 'More In Store parked where teens already were, at the fairs and events adults tend to skip. From the outside it read like a drop, not a lecture.' },
+  { img: `${G}/bq-canyon.jpg`, w: 2200, h: 1466, n: '02', k: 'The hook',  t: 'Merch worth', last: 'wearing', d: 'Boards, hats, bags, and shades good enough to carry home. The gear earned a few minutes of attention, and the room used them well.' },
+  { img: `${G}/bq-shot2.jpg`, w: 2200, h: 1237, n: '03', k: 'The turn',  t: 'The merch was the doorway, the talk was the', last: 'point', d: 'Teens only, no parents, no teachers. A simple exercise opened a real conversation about the future, with a near-peer who listened instead of advised.' },
 ];
 const frames = [
-  { f: 'container-coaster.jpg',   c: 'The container · Parked at the fair', w: 2048, h: 1138 },
-  { f: 'merch-shirt.jpg',         c: 'The tee · Script back print',        w: 2048, h: 1138 },
-  { f: 'merch-glasses.jpg',       c: 'The shades',                         w: 2048, h: 1138 },
-  { f: 'web-iphone.jpg',          c: 'buckthequo.com · Full scroll',       w: 780,  h: 6017, web: true },
-  { f: 'merch-backpack.jpg',      c: 'The backpack',                       w: 2048, h: 1138 },
-  { f: 'merch-beanie.jpg',        c: 'The beanie',                         w: 2048, h: 1138 },
-  { f: 'merch-dadhat.jpg',        c: 'The dad hat',                        w: 2048, h: 1138 },
-  { f: 'merch-flag.jpg',          c: 'The flag · Carried home',            w: 2048, h: 1138 },
-  { f: 'merch-sticker.jpg',       c: 'The sticker · In the wild',          w: 2048, h: 1138 },
-  { f: 'merch-drawstring.jpg',    c: 'The drawstring · Games row',         w: 2048, h: 1138 },
-  { f: 'merch-sunglass-boxes.jpg',c: 'The wall of shades · In store',      w: 2048, h: 1138 },
+  { f: 'bq-skate.jpg',   c: 'In the helmet · On the street',  w: 2200, h: 1466 },
+  { f: 'bq-shot4.jpg',   c: 'The pack · Merch that traveled', w: 2200, h: 1464 },
+  { f: 'bq-canyon2.jpg', c: 'The hat · Worn in the wild',     w: 2200, h: 1466 },
+  { f: 'bq-talent.jpg',  c: 'The socks · Fair day',           w: 2200, h: 1466 },
+  { f: 'bq-shot3.jpg',   c: 'On the ground · The games',      w: 2200, h: 1650 },
+  { f: 'bq-graphic.jpg', c: 'On location · The summer tour',  w: 2200, h: 1473 },
 ];
 const did = [
-  { k: 'Photo + Video',      v: 'Shot the majority of the campaign’s stills and motion.' },
-  { k: 'The activation',     v: 'Worked the More In Store retail experience on the ground.' },
+  { k: 'Photo + Video',      v: 'Shot and cut the bulk of the campaign’s stills and motion.' },
+  { k: 'Social Lead',        v: 'Led the social team and answered in the brand’s voice.' },
+  { k: 'YouTube Show',       v: 'Directed the weekly series.' },
+  { k: 'Field Mentor',       v: 'Went to the floor of More In Store to talk with teens about their future.' },
+  { k: 'Ambassadors',        v: 'Handed off cameras and built teen ambassadors who made their own content.' },
   { k: 'Games + Giveaways',  v: 'Hosted the games and giveaways that pulled teens in.' },
-  { k: 'Social',             v: 'Responded in the brand’s voice across the channels.' },
   { k: 'Focus Groups',       v: 'Ran focus groups to keep the work true to its audience.' },
   { k: 'Influencer Program', v: 'Helped build and run the teen influencer program.' },
-  { k: 'YouTube Show',       v: 'Directed the weekly series.' },
 ];
 const awards = [
   { img: '/case-studies/buck-the-quo/emmy/emmy-gold.png',   k: 'Gold' },
   { img: '/case-studies/buck-the-quo/emmy/emmy-silver.png', k: 'Silver' },
   { img: '/case-studies/buck-the-quo/emmy/emmy-bos.png',    k: 'Best of Show' },
 ];
-// Crew data confirmed by DJ (2026-07-03). Do not change.
+// Credits updated 2026-07-12 per DJ: added the field-mentor role (he moved from
+// maker to boots-on-the-ground mentor when the campaign went experiential).
 const credits = [
   { k: 'Client', v: 'Albertson Family Foundation' },
   { k: 'Agency', v: 'Drake Cooper' },
   { k: 'Shooter + editor', v: 'DJ Ramirez', select: true },
+  { k: 'Social lead · Field mentor', v: 'DJ Ramirez' },
   { k: 'Agency-side creative · Consultant', v: 'DJ Ramirez' },
-  { k: 'Socials + field experiential', v: 'DJ Ramirez' },
 ];
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
@@ -203,10 +202,27 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .scene h3 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
 .scene .d{margin-top:16px;max-width:48ch;font-size:16.5px;color:rgba(245,243,239,.7)}
 
-/* full-bleed parallax break: the saddle */
+/* full-bleed parallax break: the poster wall */
 .break{position:relative;height:52svh;overflow:hidden}
 .break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;object-position:50% 50%;will-change:transform}
 .break .cap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.92);background:rgba(22,21,20,.42);padding:6px 12px;backdrop-filter:blur(2px)}
+/* video hero loop (keep-pushing) */
+.hero .heroloop{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) brightness(.5)}
+/* above-the-fold clip strip: DJ's own footage, muted loops */
+.reelstrip{background:var(--ink);padding:6vh 0 8vh;border-bottom:1px solid var(--lined)}
+.reelstrip .rs-bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:16px}
+.reelstrip .rs-bar .mono b{color:var(--spark)}
+.rs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rs-v{width:100%;aspect-ratio:16/9;object-fit:cover;background:#000;display:block;border:1px solid var(--lined)}
+@media(max-width:760px){.rs-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:460px){.rs-grid{grid-template-columns:1fr}}
+/* full-screen poster wall + text overlay */
+.posterbreak{height:84svh;min-height:520px}
+.posterbreak::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(22,21,20,.72),rgba(22,21,20,.04) 52%);z-index:1}
+.pb-overlay{position:absolute;left:0;right:0;bottom:0;z-index:2;max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 8vh}
+.pb-overlay .pb-k{color:var(--spark);display:block;margin-bottom:14px}
+.pb-overlay h2{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(30px,5.4vw,80px);letter-spacing:-.035em;line-height:.96;text-transform:uppercase;color:#fff;max-width:16ch}
+.pb-overlay h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
 
 /* the triad: the message that carried it */
 .triad{background:var(--paper);color:var(--ink);padding:14vh 0 13vh;text-align:center}
@@ -320,23 +336,22 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <div class="over">
 <header class="hero">
-  <img src={`${G}/hero.jpg`} alt="A teen waving a giant yellow Buck the Quo flag outside the More In Store container at the fair">
+  <video class="heroloop" src="/case-studies/buck-the-quo/films/keep-pushing.mp4" poster="/case-studies/buck-the-quo/gallery/keep-pushing-poster.jpg" muted loop playsinline autoplay aria-hidden="true"></video>
   <div class="scrim" aria-hidden="true"></div>
   <div class="t">
     <span class="ln"><span>Buck</span></span>
     <span class="ln"><span>the <span class="serif">Quo</span><span class="spark">.</span></span></span>
-    <span class="ln tag"><span>I am. I can. <span class="em">I will.</span></span></span>
-    <RoleTag text="shooter + field experiential" />
+    <RoleTag text="shooter · editor · field mentor" />
   </div>
   <div class="kck">
     <b>\ Case file</b><br>
-    Buck the Quo · Statewide experiential campaign<br>
-    More In Store · 18,000+ conversations
+    Buck the Quo · A four-year statewide campaign<br>
+    More In Store · 18,000 teens in one summer
   </div>
   <div class="nfo">
     <span class="h">NFO</span><br>
     Client · Albertson Family Foundation<br>
-    Role · Shooter + editor · Agency-side creative · Consultant<br>
+    Role · Shooter + editor · Social lead · Field mentor<br>
     Agency · Drake Cooper<br>
     Frame · MC-2021-03
   </div>
@@ -354,12 +369,26 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="rolerow">
   <div class="wrap in">
     <span><b>Client</b> · Albertson Family Foundation</span>
-    <span><b>My part</b> · Shooter + editor · agency-side creative · consultant · socials + field experiential</span>
+    <span><b>My part</b> · Shooter + editor · social lead · field mentor · agency-side creative</span>
     <span><b>Agency</b> · Drake Cooper</span>
     <span><b>Activation</b> · More In Store</span>
-    <span><b>Filed</b> · MMXV to MMXVIII</span>
+    <span><b>Filed</b> · a four-year run</span>
   </div>
 </div>
+
+<section class="reelstrip">
+  <div class="wrap">
+    <div class="rs-bar">
+      <span class="mono"><b>\ Shot + cut by me</b> · the summer in motion</span>
+      <span class="mono" style="color:#8f8d88">muted loops</span>
+    </div>
+    <div class="rs-grid">
+      {['north-idaho','urban-summer','coffee-shop','feels-right','watts-fire'].map((v) => (
+        <video class="rs-v" src={`/case-studies/buck-the-quo/films/${v}.mp4`} muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
+      ))}
+    </div>
+  </div>
+</section>
 
 <section class="paper">
   <div class="wrap story">
@@ -408,7 +437,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       {scenes.map((s, i) => (
         <div class={`scene rv ${i % 2 ? 'rev' : ''}`}>
           <figure class="shot">
-            <img src={s.img} alt={`${s.t} ${s.last}`} width="2048" height="1138" loading="lazy" decoding="async">
+            <img src={s.img} alt={`${s.t} ${s.last}`} width={s.w} height={s.h} loading="lazy" decoding="async">
             <span class="cap">SC-{s.n} · {s.k}</span>
           </figure>
           <div class="txt">
@@ -422,38 +451,31 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
-<div class="break">
-  <img loading="lazy" decoding="async" class="plx" src={`${G}/saddle.jpg`} alt="A worn leather saddle painted with I AM, I CAN, I WILL and a Made in Idaho plate">
-  <span class="cap">✳ I am, I can, I will · The saddle inside More In Store</span>
-</div>
-
-<section class="triad">
-  <div class="wrap">
-    <span class="k mono rv">\ The message that carried it</span>
-    <h2 class="words" data-triad>
-      <span class="tw">I am</span>
-      <span class="tw">I can</span>
-      <span class="tw">I will</span>
-    </h2>
-    <p class="sub rv">Not a slogan pointed at teens. A line they could say back. Confidence first, instructions never.</p>
+<div class="break posterbreak">
+  <img loading="lazy" decoding="async" class="plx" src={`${G}/bq-poster-wall.jpg`} alt="The Buck the Quo poster system wheatpasted on a wall: Crush It, Raw Potential, Guts and Grit, No Fear No Doubt No Limits">
+  <div class="pb-overlay">
+    <span class="pb-k mono">\ The brand world</span>
+    <h2>Loud enough for teens to <span class="serif">claim.</span></h2>
   </div>
-</section>
+</div>
 
 <section class="paper">
   <div class="wrap story">
     <div class="side rv">
       <span class="k mono">\ My part</span>
-      <h2>From the agency floor to the <span class="serif">director's seat.</span></h2>
+      <h2>From the agency floor to the <span class="serif">field.</span></h2>
     </div>
     <div class="body rv">
-      <p>I started on Buck the Quo as part of Drake Cooper, then stayed with the campaign as a consultant as it grew. Over its run I worked nearly every side of it: behind the camera for the bulk of the photo and video, on the floor of the More In Store activation, in the room for the focus groups that kept it honest, and in the brand's replies across social. I directed the campaign's YouTube show.</p>
+      <p>I came onto Buck the Quo as an in-house creative at Drake Cooper, right at the start of it. I shot and cut the bulk of the photo and video and led the social team.</p>
+      <p>When the campaign moved into the More In Store retail experience, my job changed. They put me in the field as a mentor to the teens, because of how I got here. I didn't go to college. I did an advertising internship that put me inside an agency in my early twenties, and they wanted me there to show teens that a future exists no matter what path they take.</p>
+      <p>So I went from the main shooter, editor, and social lead to boots on the ground. Over one summer we talked with 18,000 kids. I mentored the ones chasing a media path: real conversations, connecting them to resources, and handing off the camera so they could shoot for the campaign themselves. The best of them became ambassadors who went out and made the work.</p>
     </div>
   </div>
 
   <div class="wrap did rv">
     <div class="bar">
-      <span class="mono"><b>The ledger</b> · seven jobs on one campaign</span>
-      <span class="mono" style="color:#8f8d88">07 entries</span>
+      <span class="mono"><b>The ledger</b> · one campaign, every side of it</span>
+      <span class="mono" style="color:#8f8d88">08 entries</span>
     </div>
     {did.map((d) => (
       <div class="row">
@@ -465,12 +487,12 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
   <div class="wrap gal">
     <div class="ghead rv">
-      <span class="k mono">\ What they took home</span>
-      <h2>A brand teens actually <span class="serif">wanted to wear.</span></h2>
+      <span class="k mono">\ From the field</span>
+      <h2>A brand teens actually <span class="serif">claimed.</span></h2>
     </div>
     <div class="bar">
-      <span class="mono"><b>Contact sheet</b> · the merch + the container</span>
-      <span class="mono" style="color:#8f8d88">11 frames · hover to inspect</span>
+      <span class="mono"><b>Contact sheet</b> · shot across the summer</span>
+      <span class="mono" style="color:#8f8d88">06 frames · hover to inspect</span>
     </div>
     <div class="frames" id="frames">
       {frames.map((s, i) => (
@@ -545,7 +567,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
 // hero layers + break parallax + companion
 (function(){
-  const hImg=document.querySelector('.hero>img'),hT=document.querySelector('.hero .t'),
+  const hImg=document.querySelector('.hero>.heroloop,.hero>img'),hT=document.querySelector('.hero .t'),
         nfo=document.querySelector('.hero .nfo'),kck=document.querySelector('.hero .kck'),
         brk=document.querySelectorAll('.break img'),c=document.querySelector('.companion');
   if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;

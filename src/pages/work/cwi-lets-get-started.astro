@@ -3,6 +3,24 @@ import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+
+// Rebuilt 2026-07-12 per DJ: he is NOT the director of these films (no individual is
+// publicly credited; Against presents the work as agency-authored). His real, claimable
+// role is WRITER + CASTING (with Tess) on the ongoing Let's Get Started program spots,
+// which he writes per program, shoots quarterly with a 5-20 person crew, and cuts for
+// every screen size. Directing claims removed sitewide. Self-hosted spots replace the
+// YouTube films that were miscredited. CWI enrollment stats below are CWI's own official
+// numbers (Idaho State Board of Education / Idaho Ed News, 2025), used as context for the
+// college the work supports, NOT presented as results of these films. See
+// tools/cwi-stats-verified.md for the sourced figures.
+const programs = [
+  { k: 'fire',          t: 'Fire Service' },
+  { k: 'public-safety', t: 'Public Safety' },
+  { k: 'humanities',    t: 'Arts + Humanities' },
+  { k: 'tech',          t: 'Technology' },
+  { k: 'business',      t: 'Business Admin' },
+  { k: 'mining',        t: 'Mining Technology' },
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -25,7 +43,7 @@ import RoleTag from '../../components/RoleTag.astro';
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://monuments-2-0.vercel.app/og/card.jpg">
   <!-- og:end -->
-<meta name="description" content="Let's Get Started, College of Western Idaho's enrollment campaign with Against. DJ Ramirez directed the campaign films, which helped grow enrollment 4.4% against a 37% national decline.">
+<meta name="description" content="Let's Get Started, College of Western Idaho's enrollment campaign with Against. DJ Ramirez writes and casts the program spots, cut for every screen, for a college on nine straight semesters of enrollment growth.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
@@ -68,7 +86,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* hero: the campaign film runs muted under the type; the cobalt spark rides on top */
 .hero{position:relative;height:78svh;min-height:560px;overflow:hidden;background:var(--ink)}
-.hero .heroloop{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.02) brightness(.42) saturate(.92)}
+.hero .heroloop{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.02) brightness(.3) saturate(.9)}
 .hero .mark{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:71;font-size:clamp(340px,52vw,760px);line-height:1;color:var(--struct);opacity:.28;mix-blend-mode:screen;pointer-events:none;user-select:none;will-change:transform}
 .hero .t{z-index:72;position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(44px,8.5vw,113px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase}
 .hero .t .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
@@ -133,6 +151,44 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .spotgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .spotgrid .filmframe .chip{padding:9px 15px;font-size:9.5px}
 @media (max-width:860px){.filmgrid,.spotgrid{grid-template-columns:1fr}}
+/* self-hosted program-spot playback */
+.filmframe.playing{cursor:default}
+.filmframe.playing .pvid,.filmframe.playing .chip{display:none}
+.filmframe video.play-full{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:4;background:#000;object-fit:contain}
+/* stat note (source attribution) */
+.stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66);line-height:1.9;max-width:26ch}
+.stat .note b{font-family:var(--mono);font-size:11px;font-weight:400;color:rgb(var(--on-rgb));display:inline;letter-spacing:.08em}
+/* editing guide (the system) */
+.eg{padding:4vh 0 11vh}
+.eg-head{max-width:70ch;margin-bottom:5vh}
+.eg-head .k{color:var(--red)}
+.eg-head h2{font-weight:var(--dispw);font-size:clamp(26px,3.6vw,52px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
+.eg-head h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
+.eg-sub{margin-top:20px;color:#4c4a45;font-size:clamp(16px,1.4vw,19px);line-height:1.6;max-width:62ch}
+.eg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.eg-shot{margin:0;border:1px solid var(--line);background:#fff;overflow:hidden;box-shadow:0 12px 34px rgba(20,20,20,.08)}
+.eg-shot img{width:100%;height:auto;display:block}
+@media(max-width:820px){.eg-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.eg-grid{grid-template-columns:1fr}}
+/* cut for every size */
+.sizes .sz-grid{display:grid;grid-template-columns:1.62fr 1fr .62fr;gap:16px;align-items:end;margin-top:8px}
+.sizes .sz{margin:0}
+.sizes .sz video{width:100%;display:block;background:#000;border:1px solid var(--lined)}
+.sizes .sz figcaption{margin-top:10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.6)}
+@media(max-width:760px){.sizes .sz-grid{grid-template-columns:1fr 1fr;align-items:start}.sizes .sz-9{grid-column:span 2;justify-self:center;max-width:320px}}
+/* catalog (scale) */
+.catalog{padding:3vh 0 2vh}
+.cat-head{max-width:64ch}
+.cat-head .k{color:var(--red)}
+.cat-head h2{font-weight:var(--dispw);font-size:clamp(26px,3.4vw,48px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
+.cat-head h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
+.cat-head p{margin-top:16px;color:#4c4a45;font-size:17px;line-height:1.6;max-width:60ch}
+.cat-grid{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0 20px}
+.cat-chip{font-family:var(--disp);font-weight:var(--dispw2);font-size:clamp(15px,1.5vw,20px);letter-spacing:-.01em;text-transform:uppercase;color:var(--ink);border:1px solid var(--ink);border-radius:99px;padding:11px 20px}
+.cat-chip.cat-more{color:var(--red);border-color:var(--red)}
+.cat-note{color:var(--dim);letter-spacing:.06em}
+/* results source line */
+.src{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-top:8px}
 
 /* gallery: contact-sheet frames, masonry columns - placeholder cards until stills land */
 .gal{padding:9vh 0}
@@ -215,42 +271,44 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="over">
 <header class="hero">
   <video class="heroloop" src="/case-studies/cwi/hero-loop.mp4" poster="/case-studies/cwi/hero-poster.jpg" muted loop playsinline autoplay aria-hidden="true"></video>
-  <span class="mark" aria-hidden="true">✳</span>
   <div class="t">
     <span class="ln"><span>Let's get</span></span>
     <span class="ln"><span><span class="serif">started</span><span class="spark">.</span></span></span>
-    <RoleTag text="directed the campaign films" />
+    <RoleTag text="writer · casting" />
   </div>
   <div class="kck">
     <b>\ Case file</b><br>
     College of Western Idaho · Enrollment campaign<br>
-    The Let's Get Started films · with Against
+    The Let's Get Started program spots · with Against
   </div>
   <div class="nfo">
     <span class="h">NFO</span><br>
     Client · College of Western Idaho<br>
-    Role · Director · Let's Get Started films<br>
+    Role · Writer + casting · the program spots<br>
     Agency · Against<br>
     Frame · MC-2023-05
   </div>
 </header>
 
+<!-- CWI's own official enrollment figures (Idaho State Board of Education / Idaho Ed News,
+     2025). Context for the college the work supports, not presented as a result of these
+     films. Sourced + adversarially verified: tools/cwi-stats-verified.md -->
 <div class="statrow">
   <div class="wrap in">
-    <div class="stat rv"><b>4.4%</b><span>enrollment growth, against a 37% national decline</span></div>
-    <div class="stat rv"><b>5.0%</b><span>brand-awareness lift in a four-month run</span></div>
-    <div class="stat rv"><b>98%</b><span>of CWI students are Idahoans</span></div>
-    <div class="stat rv"><b>Statewide</b><span>the films ran on TV, social, and program spots</span></div>
+    <div class="stat rv"><b>9 semesters</b><span>of consecutive enrollment growth at CWI</span></div>
+    <div class="stat rv"><b>+6.8%</b><span>headcount, fall 2024 to fall 2025</span></div>
+    <div class="stat rv"><b>31,000+</b><span>students served · Idaho's largest community college</span></div>
+    <div class="stat rv"><p class="note">CWI enrollment · <b>Idaho State Board of Education, 2025</b></p></div>
   </div>
 </div>
 
 <div class="rolerow">
   <div class="wrap in">
     <span><b>Client</b> · College of Western Idaho</span>
-    <span><b>My part</b> · Director · the Let's Get Started films</span>
+    <span><b>My part</b> · Writer · casting</span>
     <span><b>Agency</b> · Against</span>
     <span><b>Campaign</b> · Let's Get Started</span>
-    <span><b>Filed</b> · MMXXIII</span>
+    <span><b>Filed</b> · a four-year run, ongoing</span>
   </div>
 </div>
 
@@ -261,8 +319,23 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <h2>The hardest part of college is deciding to <span class="serif">go.</span></h2>
     </div>
     <div class="body rv">
-      <p>College of Western Idaho needed enrollment, not applause.</p>
-      <p>The research said the barrier wasn't tuition or schedules. It was the decision itself. So the campaign talks to people at the exact moment of deciding: starting out, starting over, or starting something big.</p>
+      <p>Idaho has one of the lowest go-on rates in the country. In 2024 just 43.6% of high-school graduates enrolled the next fall, well under the state's 60% goal.</p>
+      <p>CWI is a real answer to that: hands-on training for in-demand careers, at a price that makes a living possible without the debt. The barrier was never tuition or schedules. It was the decision itself. So the work meets people at the exact moment of deciding, starting out, starting over, or starting something big.</p>
+    </div>
+  </div>
+</section>
+
+<section class="paper eg">
+  <div class="wrap">
+    <div class="eg-head rv">
+      <span class="k mono">\ The system</span>
+      <h2>I built the guide the whole campaign edits <span class="serif">to.</span></h2>
+      <p class="eg-sub">Before a single spot got cut, I wrote the video style guide: the type, the color, the pacing, the export specs. Every editor on every round works from it, so the campaign reads as one thing across every program and every screen.</p>
+    </div>
+    <div class="eg-grid rv">
+      {[1,2,3,4,5,6].map((n) => (
+        <figure class="eg-shot"><img src={`/case-studies/cwi/editguide/eg-${n}.png`} alt={`CWI video style guide, page ${n}`} loading="lazy" decoding="async"></figure>
+      ))}
     </div>
   </div>
 </section>
@@ -270,44 +343,34 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <section class="film">
   <div class="wrap">
     <div class="bar">
-      <span class="mono"><b>The films</b> · Let's Get Started</span>
-      <span class="mono" style="color:#8f8d88">All directed by me</span>
+      <span class="mono"><b>The program spots</b> · Let's Get Started</span>
+      <span class="mono" style="color:#8f8d88">click to play, with sound</span>
     </div>
-    <h2 class="rv in">Play them <span class="serif">here</span></h2>
-    <!-- All five are DJ's direction (confirmed via YouTube titles: "CWI - Let's Get Started | Hype /
-         College of Western Idaho / Engineering / Artificial Intelligence / Nursing"). The palindrome
-         "I am not good enough" hero spot is Against's, a separate film, and is not shown here. -->
-    <p class="flead rv in">The brief: reach people at the exact moment of deciding, starting out, starting over, or starting something big. I directed the Let's Get Started films across the campaign, from the hype cut to the program spots, each one meeting a different student where they are.</p>
-    <div class="filmgrid">
-      <div class="filmframe" data-yt="2tms4kQWevk">
-        <img src="/case-studies/cwi/poster-anthem.jpg" alt="Let's Get Started hype film" loading="lazy">
-        <video class="pvid" src="/snips/cwi.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
-        <span class="chip"><span class="dot"></span>Play · The hype film</span>
-        <span class="fcap">✳ Let's Get Started · Directed by me · MMXXIII</span>
-      </div>
-      <div class="filmframe" data-yt="34tvLtSKidw">
-        <img src="/case-studies/cwi/poster-20.jpg" alt="Let's Get Started main spot" loading="lazy">
-        <video class="pvid" src="/snips/cwi-main.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
-        <span class="chip"><span class="dot"></span>The main spot</span>
-        <span class="fcap">✳ Let's Get Started · Directed by me</span>
-      </div>
-    </div>
+    <h2 class="rv in">A spot for every <span class="serif">program.</span></h2>
+    <p class="flead rv in">I write and cast a film for each program, one at a time, built around what that path actually gives a student. Real students play the leads. <b>Same voice across all of them, a different world each time.</b></p>
     <div class="spotgrid">
-      <div class="filmframe" data-yt="v_1ZuNOXfJs">
-        <img src="https://i.ytimg.com/vi/v_1ZuNOXfJs/hqdefault.jpg" alt="Engineering program spot" loading="lazy">
-        <video class="pvid" src="/snips/cwi-engineering.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
-        <span class="chip"><span class="dot"></span>Engineering :30</span>
-      </div>
-      <div class="filmframe" data-yt="Qu0zXNco6Zc">
-        <img src="https://i.ytimg.com/vi/Qu0zXNco6Zc/hqdefault.jpg" alt="Artificial Intelligence program spot" loading="lazy">
-        <video class="pvid" src="/snips/cwi-ai.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
-        <span class="chip"><span class="dot"></span>Artificial Intelligence</span>
-      </div>
-      <div class="filmframe" data-yt="c0owTMu9Mo0">
-        <img src="https://i.ytimg.com/vi/c0owTMu9Mo0/hqdefault.jpg" alt="Nursing program spot" loading="lazy">
-        <video class="pvid" src="/snips/cwi-nursing.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
-        <span class="chip"><span class="dot"></span>Nursing</span>
-      </div>
+      {programs.map((p) => (
+        <div class="filmframe" data-src={`/case-studies/cwi/films/${p.k}.mp4`} data-title={`Let's Get Started · ${p.t}`}>
+          <img src={`/case-studies/cwi/films/poster-${p.k}.jpg`} alt={`${p.t} program spot`} loading="lazy" decoding="async">
+          <video class="pvid" src={`/case-studies/cwi/films/snip-${p.k}.mp4`} autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
+          <span class="chip"><span class="dot"></span>{p.t}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="film sizes">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>\ Cut for every screen</b> · one spot, three ratios</span>
+      <span class="mono" style="color:#8f8d88">same film, recut</span>
+    </div>
+    <p class="flead rv in">Every film ships in every ratio the media plan needs. Broadcast and web at 16:9, the feed at 1:1, stories and reels at 9:16. Same story, recut for where it lands.</p>
+    <div class="sz-grid rv">
+      <figure class="sz sz-16"><video src="/case-studies/cwi/films/size-16x9.mp4" muted loop autoplay playsinline aria-hidden="true"></video><figcaption class="mono">16:9 · broadcast + web</figcaption></figure>
+      <figure class="sz sz-1"><video src="/case-studies/cwi/films/size-1x1.mp4" muted loop autoplay playsinline aria-hidden="true"></video><figcaption class="mono">1:1 · the feed</figcaption></figure>
+      <figure class="sz sz-9"><video src="/case-studies/cwi/films/size-9x16.mp4" muted loop autoplay playsinline aria-hidden="true"></video><figcaption class="mono">9:16 · stories + reels</figcaption></figure>
     </div>
   </div>
 </section>
@@ -315,45 +378,40 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <section class="paper">
   <div class="wrap story">
     <div class="side rv">
-      <span class="k mono">\ The results</span>
-      <h2>Against the grain. Against the <span class="serif">trend.</span></h2>
+      <span class="k mono">\ My part</span>
+      <h2>I write it and <span class="serif">cast it.</span></h2>
     </div>
     <div class="body rv">
-      <p>The real competitor wasn't other colleges. It was self-doubt.</p>
-      <p>So the campaign broke the college-ad playbook: no campus tours, no smiling students, no logo-first branding. Just the decision to start. I directed the films that carried that idea across the run.</p>
-      <!-- Results sourced from Against's public case study (goagainst.com/college-of-western-idaho-campaign):
-           4.4% enrollment growth vs a 37% national decline, 5.0% brand-awareness lift (4-month run),
-           98% of students Idahoan. Campaign results (context for the film work). -->
-      <p>It worked. CWI's enrollment grew <b>4.4%</b> while community-college enrollment fell <b>37%</b> nationally, and brand awareness lifted <b>5.0%</b> in a four-month run.</p>
+      <p>I write and cast the Let's Get Started program spots with the agency Against. Every quarter we shoot a new round with a crew of five to twenty, and I write each film around the specific program we're shooting, digging into what that path actually gives a student.</p>
+      <p>Then Tess and I cast it. Real students play the leads. On set I get as hands-on as it takes, framing the students as the heroes and putting the real tools and payoff of the program on screen.</p>
     </div>
+  </div>
+
+  <div class="wrap catalog">
+    <div class="cat-head rv">
+      <span class="k mono">\ The catalog</span>
+      <h2>A quarterly machine, four years <span class="serif">deep.</span></h2>
+      <p>Every quarter, a new shoot and a new set of program films. Rounds one through six and counting, each program written and cast from scratch and delivered for every screen.</p>
+    </div>
+    <div class="cat-grid rv">
+      {programs.map((p) => (<span class="cat-chip">{p.t}</span>))}
+      <span class="cat-chip cat-more">+ more each quarter</span>
+    </div>
+    <p class="cat-note mono rv">Delivered for broadcast, the feed, and vertical &nbsp;·&nbsp; :15 and :30 &nbsp;·&nbsp; rounds 1 through 6 and counting</p>
   </div>
 
   <div class="wrap story">
     <div class="side rv">
-      <span class="k mono">\ My part</span>
-      <h2>I directed the <span class="serif">films.</span></h2>
+      <span class="k mono">\ The results</span>
+      <h2>The college keeps <span class="serif">climbing.</span></h2>
     </div>
     <div class="body rv">
-      <p>I directed the Let's Get Started films for CWI with Against: the hype cut, the main spot, and the program films that ran by discipline, engineering, nursing, artificial intelligence, and more.</p>
-      <p>The palindrome hero spot was Against's. My films carried the campaign across broadcast, social, and program breaks.</p>
-    </div>
-  </div>
-
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>Contact sheet</b> · frames from the films</span>
-      <span class="mono" style="color:#8f8d88">Pulled from the films</span>
-    </div>
-    <div class="frames" id="frames">
-      <figure class="fr" style="--d:0ms"><img src="/case-studies/cwi/frames/cw-01.jpg" alt="Let's Get Started campaign frame" loading="lazy"><figcaption class="cap">FR-01 · The decision</figcaption></figure>
-      <figure class="fr" style="--d:45ms"><img src="/case-studies/cwi/frames/cw-02.jpg" alt="Dental assisting program frame" loading="lazy"><figcaption class="cap">FR-02 · Dental assisting</figcaption></figure>
-      <figure class="fr" style="--d:90ms"><img src="/case-studies/cwi/frames/cw-03.jpg" alt="Nursing program frame" loading="lazy"><figcaption class="cap">FR-03 · Nursing</figcaption></figure>
-      <figure class="fr" style="--d:135ms"><img src="/case-studies/cwi/frames/cw-04.jpg" alt="Engineering program frame" loading="lazy"><figcaption class="cap">FR-04 · Engineering</figcaption></figure>
-      <figure class="fr" style="--d:180ms"><img src="/case-studies/cwi/frames/cw-05.jpg" alt="You've got this frame" loading="lazy"><figcaption class="cap">FR-05 · You've got this</figcaption></figure>
-      <figure class="fr" style="--d:225ms"><img src="/case-studies/cwi/frames/cw-06.jpg" alt="Student portrait frame" loading="lazy"><figcaption class="cap">FR-06 · The lift</figcaption></figure>
-      <figure class="fr" style="--d:270ms"><img src="/case-studies/cwi/frames/cw-07.jpg" alt="Lets Get Started 2.0 frame" loading="lazy"><figcaption class="cap">FR-07 · Phase two</figcaption></figure>
-      <figure class="fr" style="--d:315ms"><img src="/case-studies/cwi/frames/cw-08.jpg" alt="Lets Get Started 2.0 story frame" loading="lazy"><figcaption class="cap">FR-08 · Student stories</figcaption></figure>
-      <figure class="fr" style="--d:360ms"><img src="/case-studies/cwi/frames/cw-09.jpg" alt="Lets Get Started 2.0 closing frame" loading="lazy"><figcaption class="cap">FR-09 · Still running</figcaption></figure>
+      <p>The real competitor was never other colleges. It was self-doubt. So the work skips the college-ad playbook, no campus tours, no logo-first branding, just the decision to start.</p>
+      <!-- CWI's OWN enrollment figures (Idaho State Board of Education / Idaho Ed News, 2025).
+           Context for the college the work serves, not claimed as a result of these films.
+           Verified sources: tools/cwi-stats-verified.md -->
+      <p>And the college it serves keeps growing. CWI has now posted <b>nine straight semesters</b> of enrollment growth, up <b>6.8%</b> last fall to more than <b>31,000</b> students, the largest community college in Idaho.</p>
+      <p class="src mono">Idaho State Board of Education · Idaho Education News, 2025</p>
     </div>
   </div>
 </section>
@@ -375,7 +433,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       rows={[
         { k: 'Client', v: 'College of Western Idaho' },
         { k: 'Agency', v: 'Against' },
-        { k: 'Director · the films', v: 'DJ Ramirez', select: true },
+        { k: 'Writer · the program spots', v: 'DJ Ramirez', select: true },
+        { k: 'Casting', v: 'DJ Ramirez + Tess' },
       ]}
     />
   </div>
@@ -393,30 +452,22 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/underfoot-->
 
 <script is:inline>
-// contact sheet: placeholder frames until DJ supplies stills, same show-on-scroll beat
-(function(){
-  const el=document.getElementById('frames');
-  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
-})();
-
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
-// films: click swaps the poster for the YouTube embed, one playing at a time
+// program spots: click the poster to play the self-hosted film with native controls
+// (no YouTube chrome). The muted snip loop shows until the click.
 (function(){
-  var playing=null;
-  document.querySelectorAll('.filmframe[data-yt]').forEach(function(f){
+  document.querySelectorAll('.filmframe[data-src]').forEach(function(f){
     f.addEventListener('click',function(){
-      if(f.querySelector('iframe'))return;
-      if(playing){var old=playing.querySelector('iframe');if(old)old.remove();playing.classList.remove('live');}
-      var id=f.getAttribute('data-yt');
-      var ifr=document.createElement('iframe');
-      ifr.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';
-      ifr.allow='autoplay; encrypted-media; fullscreen';
-      ifr.setAttribute('allowfullscreen','');
-      ifr.title='Let’s Get Started film';
-      f.appendChild(ifr);
-      playing=f;
+      if(f.classList.contains('playing'))return;
+      var v=document.createElement('video');
+      v.className='play-full';
+      v.src=f.dataset.src;v.controls=true;v.autoplay=true;v.playsInline=true;
+      v.setAttribute('playsinline','');v.setAttribute('controlsList','nodownload');
+      v.title=f.dataset.title||'Program spot';
+      f.appendChild(v);f.classList.add('playing');
+      v.play().catch(function(){});
     });
   });
 })();
