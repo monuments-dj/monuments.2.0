@@ -19,14 +19,14 @@ const hasGallery = project.sections.some((s) => s.type === 'gallery');
 
   {/* WORK HEADER (.wh) — full-bleed image, big title, client logo + circled role */}
   <header class="wh" style={`--wh-circle:${h.circleColor ?? '#e0322d'}`}>
-    {h.image && <img class="wh-img" src={h.image} alt={`${project.header.titleHtml.replace(/<br>/g, ' ')} campaign`} />}
+    {h.image && <img loading="lazy" decoding="async" class="wh-img" src={h.image} alt={`${project.header.titleHtml.replace(/<br>/g, ' ')} campaign`} />}
     <div class="wh-scrim"></div>
     <div class="wh-inner">
       <h1 class="wh-title" set:html={h.titleHtml}></h1>
       <div class="wh-foot">
         <div class="wh-foot-main">
           <div class="wh-brandrow">
-            {h.logo && <img class="wh-logo" src={h.logo} alt="" />}
+            {h.logo && <img loading="lazy" decoding="async" class="wh-logo" src={h.logo} alt="" />}
             {h.role && (
               <span class="wh-role">
                 {h.role}

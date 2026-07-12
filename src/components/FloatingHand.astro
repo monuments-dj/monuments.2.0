@@ -18,7 +18,7 @@ const uid = "fh-" + Math.random().toString(36).slice(2, 9);
   style={`--fh-top:${top}; --fh-z:${z};`}
   aria-hidden="true"
 >
-  <img class="fh-img" src="/hand.png" alt="" />
+  <img loading="lazy" decoding="async" class="fh-img" src="/hand.png" alt="" />
 </div>
 
 <style>
