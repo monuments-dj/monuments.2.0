@@ -1,4 +1,29 @@
-# TODO - current state (2026-07-12 · Buck the Quo + CWI rebuild SHIPPED)
+# TODO - current state (2026-07-12 EOD · CHAT ROTATED, context full)
+
+## 🔄 HANDOFF 2026-07-12 EOD (the 07-11 marathon chat hit its context limit)
+State verified before rotating, all three sweeps GREEN on a live server:
+- **motioncheck ALL PASS** (13 routes incl. /capabilities), packcheck 0 overflows,
+  bw-sweep baseline. ⚠️ A run earlier today showed "13 FAILURES loops:0" on every
+  route — that was a DEAD dev server returning connection refusals, not a regression.
+  If motioncheck ever reports loops:0 EVERYWHERE, curl a page first (`curl -s -o
+  /dev/null -w "%{http_code}" http://localhost:PORT/`) before diagnosing the site.
+- **Dev-server ports:** one chat owns 4321 (name `monuments`); a second chat uses
+  `monuments-b` on 4322 (defined in ~/.claude/launch.json, NOT the repo's). The
+  verify scripts hardcode 4321 — sed a temp copy for 4322 and delete it after.
+- **Show-it-to-someone board** (if DJ wants to send the link before the next batch):
+  🟢 lorem is fully gone (theater testimonials, honest chips) · credits zero-mismatch
+  (CWI = director·editor·shooter per DJ's v4, deliberate) · OG cards · mobile QA.
+  🔴 still true: home reel MODAL plays the stand-in YT id `VMubUUZ2tdU`
+  (src/pages/index.astro ~line 719) — the scrub video is fine, the click-to-play is
+  the wrong reel · Kit line still in the takeover menu (DJ's call, tied to the
+  bake-the-switcher decision). 🟡 3.4M/3.6M stats unverified · photography folder
+  tabs are fake buckets · crew photo soft · /lab + /redesign still build (unlinked).
+- DJ's open decision stack: see the "NEEDS YOU" lists in the part 5 + 6 blocks below
+  (headers A/B, gallery per page, work index 29, kickers 27, count-ups 25, type/font
+  pick, B/W bake, testimonial quotes, stat verifies, OS9 page, AOV reel + merch,
+  crew photo original, MSI frames, IG links).
+
+---
 
 ## 🚀 SESSION 2026-07-12 (part 6 · BTQ + CWI real assets) SHIPPED
 Commit 1db81cc, pushed live. Downloaded DJ's Dropbox assets, transcoded with ffmpeg-static,

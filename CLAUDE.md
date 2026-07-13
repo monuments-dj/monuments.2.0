@@ -80,6 +80,14 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
+## Active work (2026-07-12 EOD): chat rotated (context full) - read TODO.md 🔄 HANDOFF block
+All sweeps GREEN at rotation (motioncheck 13 routes ALL PASS / packcheck / bw-sweep).
+Gotcha for the next chat: motioncheck "loops:0 everywhere" = dead dev server, curl a page
+before diagnosing the site. Ports: 4321 belongs to one chat (`monuments`), 4322 = `monuments-b`
+(defined in ~/.claude/launch.json, not the repo's). Remaining show-stoppers if DJ sends the
+link: home reel modal plays stand-in YT id VMubUUZ2tdU (index.astro ~719); Kit line still in
+the takeover menu. DJ's decision stack: TODO.md part 5+6 NEEDS-YOU lists.
+
 ## Active work (2026-07-12 late): MSI/Xperia/header/centering batch shipped
 Stat bands: centering sweep must glob ALL pages (last one missed Kit/home/about -
 DJ was also viewing a stale dev server). Type switcher: always shows on /template
