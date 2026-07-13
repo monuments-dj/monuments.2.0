@@ -1,0 +1,724 @@
+---
+// page-template.astro - THE ELEMENT LIBRARY. Every case-page element, named, in one
+// place, filled with real copy so you can see it working and pull it into any page.
+// Each element is preceded by a ◆ name tag saying what it is and which class to pull.
+// Fix an element here, then propagate. Not linked in nav + noindexed.
+import CallSheet from '../components/CallSheet.astro';
+import NextFile from '../components/NextFile.astro';
+import PageFooter from '../components/PageFooter.astro';
+import RoleTag from '../components/RoleTag.astro';
+import SocialWall from '../components/SocialWall.astro';
+import '../styles/filmsplit.css';
+const AOV = '/case-studies/art-of-visuals';
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Element index · Monuments</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style is:global>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A; --red-accent:var(--red);
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --serif:'Instrument Serif',serif; --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--rose); --on-rgb:22,21,20; --marker:#e7e4dc; --marker-dark:#9a978f;
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}html{overflow-x:clip}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+a{color:inherit;text-decoration:none}
+
+/* chrome */
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:20px;left:38px;pointer-events:auto}
+.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
+.corners .c1 i{font-style:normal;display:inline-block;animation:spin 7s linear infinite}
+.corners .c2{top:26px;right:22px;pointer-events:auto}
+.corners .c2 a{font-size:15px;letter-spacing:.06em;margin-left:22px}
+.corners .c3{bottom:20px;left:22px}
+.corners .c4{bottom:20px;right:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
+@media (max-width:900px){.companion{display:none}}
+
+/* library header + the ◆ name tag above every element */
+.libhead{padding:16vh 0 5vh}
+.libhead .k{color:var(--spark);display:block;margin-bottom:18px}
+.libhead h1{font-weight:var(--dispw);font-size:clamp(40px,6.4vw,92px);line-height:.92;letter-spacing:-.035em;text-transform:uppercase}
+.libhead h1 .serif{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none}
+.libhead p{margin-top:20px;color:var(--dim);max-width:64ch}
+.ename{background:var(--ink);border-top:1px dashed var(--lined);padding:30px 0 12px}
+.ename .wrap{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;align-items:baseline}
+.ename .en{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--spark)}
+.ename .eu{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);max-width:66ch}
+
+/* HERO */
+.hero{position:relative;height:74svh;min-height:540px;overflow:hidden;background:var(--ink)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.02) brightness(0.56)}
+.hero .t{z-index:72;position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(52px,10vw,132px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;mix-blend-mode:screen}
+.hero .t .serif{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero .t .spark{color:var(--spark);mix-blend-mode:normal}
+.hero .t .ln{display:block;overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em}
+.hero .t .ln>span{display:block;transform:translateY(125%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero .t .ln:nth-child(2)>span{animation-delay:.12s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .nfo{z-index:72;position:absolute;right:var(--pad);bottom:10vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
+.hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
+.hero .kck{z-index:72;position:absolute;left:var(--pad);bottom:10vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);opacity:0;animation:fade 1s .7s forwards;line-height:1.9}
+.hero .kck b{color:var(--spark);font-weight:400}
+@keyframes fade{to{opacity:1}}
+
+/* STAT ROW + ROLE ROW */
+.statrow{background:var(--struct);color:rgb(var(--on-rgb));border-bottom:1px solid rgba(var(--on-rgb),.18)}
+.statrow>.in{display:flex;justify-content:center;align-items:flex-end;gap:clamp(30px,4.6vw,64px);flex-wrap:wrap;padding:20px var(--pad) 18px}
+.stat b{display:block;font-weight:var(--dispw);font-size:clamp(26px,2.7vw,42px);letter-spacing:-.03em;line-height:.92}
+.stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66);display:block;margin-top:8px}
+.stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66);line-height:1.9;max-width:30ch;text-align:right}
+.stat .note b{font-weight:400;color:rgb(var(--on-rgb));display:inline}
+.rolerow{background:var(--ink);border-bottom:1px solid var(--lined)}
+.rolerow>.in{display:flex;gap:12px 44px;flex-wrap:wrap;padding:22px var(--pad);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.rolerow b{color:var(--paper);font-weight:400}
+
+/* PAPER + THE BRIEF / SIMPLE PARAGRAPH */
+.paper{background:var(--paper);color:var(--ink)}
+.story{display:grid;grid-template-columns:.62fr 1.38fr;gap:56px 64px;padding-top:9vh;padding-bottom:9vh;align-items:start}
+.story .side .k{color:var(--red)}
+.story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
+.story h2 .serif{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none}
+.story .svc{list-style:none;margin:26px 0 0;padding:0}
+.story .svc li{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#6d6a64;padding:9px 0;border-top:1px solid var(--line)}
+.story .svc li i{font-style:normal;color:var(--red);margin-right:10px}
+.story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
+.story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
+
+/* TWO-COLUMN */
+.block{padding-top:9vh;padding-bottom:9vh}
+.block .k{color:var(--red);display:block;margin-bottom:12px}
+.block h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;max-width:24ch;margin:0}
+.block h2 .serif{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none}
+.block .cols{columns:2;column-gap:64px;margin-top:40px}
+.block .cols p{color:#4c4a45;font-size:16.5px;line-height:1.62;margin:0 0 1.25em;break-inside:avoid}
+.block .cols p b{color:var(--ink);font-weight:600}
+.block-dark{background:var(--ink);color:var(--paper)}
+.block-dark .k{color:var(--spark)}
+.block-dark h2{color:var(--paper)}
+.block-dark .cols p{color:rgba(245,243,239,.74)}
+.block-dark .cols p b{color:var(--paper)}
+@media(max-width:820px){.block .cols{columns:1}}
+
+/* CHAPTER HEAD */
+.white{background:#fff;color:var(--ink)}
+.front{padding:8vh 0}
+.fhead{display:grid;grid-template-columns:auto 1fr auto;gap:6px 28px;align-items:baseline;border-top:2px solid var(--ink);padding-top:20px}
+.fhead .fn{grid-column:1;grid-row:1/3;font-family:var(--mono);font-size:clamp(34px,3.6vw,54px);line-height:.9;color:var(--red)}
+.fhead h3{grid-column:2;grid-row:1;font-weight:var(--dispw);font-size:clamp(24px,2.9vw,40px);letter-spacing:-.03em;line-height:1;text-transform:uppercase}
+.fhead h3 .serif{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none}
+.fhead .dek{grid-column:2/4;grid-row:2;color:#6d6a64;font-size:16px;max-width:62ch}
+.fhead .tag{grid-column:3;grid-row:1;justify-self:end;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+@media(max-width:900px){.fhead{grid-template-columns:1fr}.fhead .fn,.fhead h3,.fhead .dek{grid-column:1;grid-row:auto}.fhead .tag{display:none}}
+
+/* PLATES + BROWSER */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.2vw,26px);padding:2vh 0 8vh}
+.pl{position:relative}
+.pl img{width:100%;height:auto;display:block}
+.pl .cap{display:block;padding:9px 0 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.pl .cap b{color:var(--red);font-weight:400}
+.browserwrap{padding:2vh 0 9vh}
+.browser{border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 26px 70px rgba(22,21,20,.12);background:#fff;max-width:980px;margin:0 auto}
+.browser .bbar{display:flex;align-items:center;gap:6px;padding:11px 16px;background:#faf9f6;border-bottom:1px solid var(--line)}
+.browser .bbar i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.browser .burl{margin:0 auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:#6d6a64;background:#fff;border:1px solid var(--line);border-radius:99px;padding:3px 22px}
+.browser img{width:100%;height:auto;display:block}
+.browsercap{max-width:980px;margin:9px auto 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.browsercap b{color:var(--red);font-weight:400}
+
+/* INSIGHT */
+.insB{position:relative;overflow:hidden;background:var(--paper);color:var(--ink);padding:clamp(60px,12vh,120px) 0}
+.insB-mark{position:absolute;top:-.34em;right:2vw;font-family:var(--serif);font-size:clamp(220px,40vw,600px);line-height:1;color:var(--red);opacity:.12;pointer-events:none}
+.insB-in{position:relative;z-index:2}
+.insB-kick{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin:0 0 20px}
+.insB-q{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(27px,4.6vw,60px);line-height:1.08;letter-spacing:-.02em;text-transform:uppercase;max-width:20ch;margin:0}
+.insB-em{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;color:var(--red)}
+.insB-src{margin-top:26px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.insB .ins-line{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.insB.in .ins-line{opacity:1;transform:none}
+.insB.in .insB-q{transition-delay:.12s}
+.insB.in .insB-src{transition-delay:.22s}
+
+/* STAT BEAT */
+.statbeat{background:var(--struct);color:rgb(var(--on-rgb))}
+.statbeat .in{display:flex;justify-content:center;gap:clamp(34px,7vw,100px);flex-wrap:wrap;text-align:center;padding:10vh var(--pad)}
+.statbeat b{display:block;font-weight:var(--dispw);font-size:clamp(40px,5.6vw,86px);letter-spacing:-.04em;line-height:.85}
+.statbeat span{display:block;margin-top:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:rgba(var(--on-rgb),.72);max-width:22ch}
+
+/* COUNT-UP + CALLOUTS */
+.cuwrap{padding:9vh 0 3vh}
+.countrow{display:flex;justify-content:center;gap:clamp(30px,6vw,90px);flex-wrap:wrap;text-align:center}
+.cu b{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(40px,6vw,90px);letter-spacing:-.04em;line-height:.85;color:var(--ink);font-variant-numeric:tabular-nums}
+.cu span{display:block;margin-top:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.calloutwrap{padding:3vh 0 9vh}
+.co-body{max-width:60ch;color:var(--ink);font-size:clamp(16px,1.4vw,19px);line-height:1.65;opacity:.85}
+.callout.co-pull{position:relative;display:flex;flex-direction:column;gap:10px;margin:34px 0;padding:4px 0 4px 26px}
+.co-pull .co-bar{position:absolute;left:0;top:2px;bottom:2px;width:4px;border-radius:4px;background:var(--red)}
+.co-pull p{font-family:var(--serif);font-style:italic;font-size:clamp(24px,3.2vw,40px);line-height:1.18;color:var(--ink);max-width:24ch;margin:0}
+.co-pull .co-src{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.factchips{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:9px 15px;display:inline-flex;align-items:center}
+.chip b{font-family:var(--disp);font-weight:var(--dispw);font-size:15px;margin-right:7px;letter-spacing:-.02em}
+
+/* FULL-BLEED BREAK */
+.break{position:relative;height:52svh;overflow:hidden}
+.break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;object-position:50% 50%;will-change:transform}
+.break .cap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.92);background:rgba(22,21,20,.42);padding:6px 12px;backdrop-filter:blur(2px)}
+
+/* FILM POSTER */
+.film{position:relative;background:var(--ink)}
+.film .poster{position:relative;height:86svh;overflow:hidden;cursor:pointer;display:block}
+.film .poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72);transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.film .poster:hover img{transform:scale(1.03)}
+.film .poster .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.film .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.7;padding:0 12px;color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s;z-index:2}
+.film .poster:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
+.film .fcap{position:absolute;left:var(--pad);bottom:24px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85);z-index:2}
+
+/* CONTACT SHEET */
+.gal{padding:9vh 0}
+.gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:16px}
+.gal .bar .mono b{color:var(--red)}
+.frames{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;grid-auto-flow:dense}
+.fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;opacity:0;transform:translateY(16px) rotate(-.6deg)}
+.frames.show .fr{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
+.fr img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.96)}
+.fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
+.frames.show .fr:hover{transform:rotate(-1deg) scale(1.03);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
+.fr.wide{grid-column:span 2}
+.fr.wide img{aspect-ratio:8/4.6}
+@media (max-width:900px){.frames{grid-template-columns:1fr 1fr}}
+
+/* MASONRY + LIGHTBOX */
+.mwrap{padding:6vh 0 9vh}
+.mwrap .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.mgrid{columns:3;column-gap:14px}
+.mcell{display:block;width:100%;padding:0;margin:0 0 14px;border:0;background:none;cursor:zoom-in;break-inside:avoid;overflow:hidden;border-radius:2px}
+.mcell img{width:100%;height:auto;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1),filter .4s;filter:saturate(.97)}
+.mcell:hover img{transform:scale(1.04);filter:saturate(1.05)}
+@media(max-width:820px){.mgrid{columns:2}}@media(max-width:480px){.mgrid{columns:1}}
+.lbox{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:rgba(8,8,8,.93);opacity:0;pointer-events:none;transition:opacity .32s}
+.lbox.on{opacity:1;pointer-events:auto}
+.lbox .lb-fig{margin:0;display:inline-flex;flex-direction:column;max-width:92vw;max-height:88vh}
+.lbox img{max-width:92vw;max-height:80vh;width:auto;object-fit:contain;box-shadow:0 20px 70px rgba(0,0,0,.6)}
+.lbox .lb-cap{width:100%;margin-top:13px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap}
+.lb-cap .lb-camp{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.lb-cap .lb-camp:empty{display:none}
+.lb-cap .lb-cam{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:rgba(245,243,239,.4);margin-left:auto}
+.lb-cap .lb-cam:empty{display:none}
+.lbox button{position:absolute;background:none;border:0;color:#fff;cursor:pointer;font-family:var(--mono)}
+.lbox .lb-close{top:20px;right:26px;font-size:24px}
+.lbox .lb-prev{left:18px;top:50%;transform:translateY(-50%);font-size:44px;padding:12px}
+.lbox .lb-next{right:18px;top:50%;transform:translateY(-50%);font-size:44px;padding:12px}
+
+/* LEDGER */
+.bob{padding:2vh 0 8vh}
+.bob .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;margin-bottom:4px}
+.bob .bar .mono b{color:var(--red)}
+.bob-rows{border-top:2px solid var(--ink)}
+.bob-row{display:grid;grid-template-columns:118px 1fr auto 28px;align-items:center;gap:18px 26px;padding:14px 2px;border-bottom:1px solid var(--line);transition:background .3s}
+.bob-row img{width:118px;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:5px;filter:grayscale(1) contrast(1.04);transition:filter .35s}
+.bob-row .bt{font-weight:var(--dispw2);font-size:clamp(17px,1.7vw,23px);letter-spacing:-.015em;line-height:1.05;text-transform:uppercase}
+.bob-row .bm{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88;text-align:right}
+.bob-row .ba{font-size:14px;color:var(--red);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.bob-row:hover{background:rgba(22,21,20,.035)}.bob-row:hover img{filter:none}.bob-row:hover .ba{transform:translate(4px,-3px)}
+@media (max-width:680px){.bob-row{grid-template-columns:86px 1fr 20px}.bob-row .bm{display:none}.bob-row img{width:86px}}
+
+/* QUOTE BAND */
+.quote{background:var(--spark);color:var(--ink);padding:13vh 0}
+.quote p.q{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(28px,4vw,58px);line-height:1.14;max-width:26ch}
+.quote p.q b{font-style:normal;font-family:var(--disp);font-weight:var(--dispw);text-transform:uppercase;font-size:.86em;letter-spacing:-.02em}
+.quote .who{margin-top:28px;color:rgba(22,21,20,.6)}
+
+/* WORD SWITCHER */
+.cdd{padding:11vh 0}
+.cdd-head{display:flex;gap:clamp(20px,3.4vw,54px);flex-wrap:wrap;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:18px}
+.cdd-word{position:relative;background:none;border:0;padding:0 0 6px;cursor:pointer;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(30px,5.2vw,74px);letter-spacing:-.035em;line-height:1;text-transform:uppercase;color:rgba(22,21,20,.15);transition:color .5s cubic-bezier(.22,1,.36,1)}
+.cdd-word.on{color:var(--ink)}
+.cdd-word .cdd-bar{position:absolute;left:0;bottom:-19px;height:2px;width:0;background:var(--red)}
+.cdd-word.on .cdd-bar{width:100%;transition:width 4.6s linear}
+.cdd-stage{margin-top:6vh;display:grid}
+.cdd-panel{grid-area:1/1;display:grid;grid-template-columns:1fr 1fr;gap:44px 64px;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.cdd-panel.on{opacity:1;transform:none;pointer-events:auto}
+.cdd-col p{color:#4c4a45;font-size:clamp(15px,1.15vw,17px);line-height:1.62;margin-bottom:1em}
+.cdd-col p b{color:var(--ink);font-weight:600}
+@media(max-width:820px){.cdd-panel{grid-template-columns:1fr;gap:20px}}
+
+/* PILLS */
+.pillrow{display:flex;gap:16px;flex-wrap:wrap;align-items:center;padding:8vh 0}
+.pill-dark{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid var(--ink);border-radius:99px;padding:11px 20px;transition:background .3s,color .3s;color:var(--ink)}
+.pill-dark:hover{background:var(--ink);color:var(--paper)}
+.pill-light{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid rgba(245,243,239,.6);border-radius:99px;padding:11px 20px;transition:background .3s,color .3s;color:var(--paper)}
+.pill-light:hover{background:var(--paper);color:var(--ink)}
+
+/* KICKERS */
+.kset{padding:7vh 0}
+.kset-light{background:var(--paper);color:var(--ink)}
+.kset-dark{background:var(--ink);color:var(--paper)}
+.kset-tag{display:block;text-align:center;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:5vh;font-size:10.5px}
+.kset-dark .kset-tag{color:rgba(245,243,239,.5)}
+.kpair{text-align:center;padding:4vh 0}
+.kick-eyebrow{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:20px}
+.kset-dark .kick-eyebrow{color:var(--spark)}
+.k-big{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(26px,4vw,54px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;max-width:20ch;margin:0 auto 26px}
+.k-big .serif{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none}
+.k-stmt{text-align:center;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(30px,4.6vw,64px);letter-spacing:-.035em;line-height:1.02;text-transform:uppercase;max-width:18ch;margin:0 auto}
+.k-stmt .k-em{color:var(--spark)}
+.kset-light .k-stmt .k-em{color:var(--red)}
+.k-btn{display:inline-flex;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:var(--ink);border-radius:99px;padding:15px 28px;transition:background .3s,color .3s}
+.k-btn:hover{background:var(--red);color:#fff}
+.k-btn.light{background:var(--paper);color:var(--ink)}
+
+/* CTA BAND */
+.cta{background:var(--struct);color:rgb(var(--on-rgb));padding:11vh 0}
+.cta .in{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.cta .big{font-weight:var(--dispw);font-size:clamp(28px,4.2vw,60px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;max-width:16ch}
+.cta .ck{display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:rgba(var(--on-rgb),.7);margin-bottom:14px}
+.cta .big .serif{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none}
+.cta a.talk{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1.5px solid rgba(var(--on-rgb),.75);padding:16px 26px;border-radius:50%;transition:background .3s,color .3s,transform .3s;display:inline-block}
+.cta a.talk:hover{background:rgb(var(--on-rgb));color:var(--struct);transform:scale(1.05)}
+
+/* CREDITS */
+.credits{padding:9vh 0}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){.story{grid-template-columns:1fr}.hero .kck{display:none}}
+@media (max-width:680px){.corners .c2,.corners .c3,.corners .c4{display:none}.corners .c1 b{font-size:23px}.hero .t{width:100%!important;font-size:clamp(32px,8.8vw,48px)!important;padding:0 16px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.hero .t .ln>span{transform:none}.hero .nfo,.hero .kck{opacity:1}.rv,.ins-line{opacity:1;transform:none}.frames .fr{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="companion" aria-hidden="true">✳</div>
+<div class="corners">
+  <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="/work">Work</a><a href="/about">About</a><a href="/contact">Contact</a></span>
+  <span class="c3">MC-KIT · Element index · Pull from here</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<section class="libhead"><div class="wrap">
+  <span class="k mono">\ The element library · internal · not linked</span>
+  <h1>Every element, <span class="serif">named.</span></h1>
+  <p>One page with every case-page element, filled with real copy so you can see it working. Each is tagged with a ◆ name and the class to pull. Build a new page by lifting the blocks you need; fix an element here first, then propagate.</p>
+</div></section>
+
+<!-- ◆ HERO -->
+<div class="ename"><div class="wrap"><span class="en">◆ HERO</span><span class="eu">74svh image hero · title with serif accent + RoleTag · kicker bottom-left, NFO bottom-right · pull .hero</span></div></div>
+<header class="hero">
+  <img src={`${AOV}/hero-poster.jpg`} alt="Art of Visuals campaign work">
+  <div class="t">
+    <span class="ln"><span>From community</span></span>
+    <span class="ln"><span>to <span class="serif">agency</span><span class="spark">.</span></span></span>
+    <RoleTag text="creative director" />
+  </div>
+  <div class="kck"><b>\ Case file</b><br>Art of Visuals · Agency growth<br>Not one campaign. A book of business.</div>
+  <div class="nfo"><span class="h">NFO</span><br>Agency · Art of Visuals<br>Role · Creative Director<br>Roster · Sony, Adorama, MSI, Intel +<br>Frame · MC-2024-01</div>
+</header>
+
+<!-- ◆ STAT ROW -->
+<div class="ename"><div class="wrap"><span class="en">◆ STAT ROW</span><span class="eu">the at-a-glance scoreboard on the accent · big numbers + one right-aligned note · pull .statrow</span></div></div>
+<div class="statrow"><div class="wrap in">
+  <div class="stat"><b>4x</b><span>agency revenue growth</span></div>
+  <div class="stat"><b>2M+</b><span>the community behind it</span></div>
+  <div class="stat"><b>$200K+</b><span>commercial budgets</span></div>
+  <div class="stat"><p class="note">Roster · <b>Sony · Adorama · MSI · Intel · Lexar · Peak Design · WANDRD</b></p></div>
+</div></div>
+
+<!-- ◆ ROLE ROW -->
+<div class="ename"><div class="wrap"><span class="en">◆ ROLE ROW</span><span class="eu">the credits line under the scoreboard · client / my part / agency / year · pull .rolerow</span></div></div>
+<div class="rolerow"><div class="wrap in">
+  <span><b>Client</b> · Art of Visuals</span>
+  <span><b>My part</b> · Creative Director</span>
+  <span><b>Roster</b> · Sony · Adorama · MSI · Intel</span>
+  <span><b>Years</b> · 2021 to 2024</span>
+</div></div>
+
+<!-- ◆ THE BRIEF -->
+<div class="ename"><div class="wrap"><span class="en">◆ THE BRIEF</span><span class="eu">the opener on paper · kicker + display heading + services list left, lede right · pull .paper .story</span></div></div>
+<section class="paper"><div class="wrap story">
+  <div class="side">
+    <span class="k mono">\ The brief</span>
+    <h2>Make a health brand feel like the people it <span class="serif">serves.</span></h2>
+    <ul class="svc"><li><i>✳</i>Pitch strategy</li><li><i>✳</i>Casting + concept</li><li><i>✳</i>Creative direction</li><li><i>✳</i>Edit</li></ul>
+  </div>
+  <div class="body">
+    <p>When OMEK went after Blue Cross of Idaho, they brought me in to help structure the pitch. We won it. The ask: a campaign that looked like Blue Cross's actual customers.</p>
+    <p>Real people, everyday moments, in the places Idahoans actually live. The whole job was keeping it from looking like a health-insurance ad.</p>
+  </div>
+</div></section>
+
+<!-- ◆ CHAPTER HEAD -->
+<div class="ename"><div class="wrap"><span class="en">◆ CHAPTER HEAD</span><span class="eu">numbered section divider on white · mono number + display title + right tag + one-line dek · pull .white .front .fhead</span></div></div>
+<section class="white front"><div class="wrap">
+  <div class="fhead">
+    <span class="fn">02</span>
+    <h3>The <span class="serif">mark.</span></h3>
+    <span class="tag">Chapter 02 · The identity</span>
+    <p class="dek">Type-first, because it has to survive the factory. The wordmark stays fixed and color does the sorting.</p>
+  </div>
+</div></section>
+
+<!-- ◆ PLATES -->
+<div class="ename"><div class="wrap"><span class="en">◆ PLATES · duo</span><span class="eu">two frames side by side, borderless, mono caption under-left · pull .duo .pl</span></div></div>
+<section class="paper"><div class="wrap"><div class="duo">
+  <figure class="pl"><img loading="lazy" decoding="async" src="/case-studies/flashpoint/gallery/fp-01.jpg" alt="Flashpoint product frame"><figcaption class="cap"><b>COMP-01</b> · Flashpoint · lighting on the blue disc</figcaption></figure>
+  <figure class="pl"><img loading="lazy" decoding="async" src="/case-studies/flashpoint/gallery/fp-02.jpg" alt="Flashpoint product frame"><figcaption class="cap"><b>COMP-02</b> · Flashpoint · studio gear on yellow</figcaption></figure>
+</div></div></section>
+
+<!-- ◆ BROWSER FRAME -->
+<div class="ename"><div class="wrap"><span class="en">◆ BROWSER FRAME</span><span class="eu">for live sites + web work · url pill in the bar, caption below like any plate · pull .browser</span></div></div>
+<section class="paper"><div class="wrap browserwrap">
+  <figure class="browser">
+    <div class="bbar"><i></i><i></i><i></i><span class="burl">flashpoint.com</span></div>
+    <img loading="lazy" decoding="async" src="/case-studies/flashpoint/site/web-hero.jpg" alt="Flashpoint website after the rebrand">
+  </figure>
+  <figcaption class="browsercap"><b>WEB-01</b> · Flashpoint's site, after · not a flash brand anymore</figcaption>
+</div></section>
+
+<!-- ◆ SIMPLE PARAGRAPH -->
+<div class="ename"><div class="wrap"><span class="en">◆ SIMPLE PARAGRAPH</span><span class="eu">the workhorse text block · short headline left, body prose right, first line is the lede size · pull .paper .story</span></div></div>
+<section class="paper"><div class="wrap story">
+  <div class="side rv">
+    <span class="k mono">\ The number</span>
+    <h2>A community, turned into a <span class="serif">creative business.</span></h2>
+  </div>
+  <div class="body rv">
+    <p>When I joined Art of Visuals, it was a community page with a massive audience, pushing two million, sharing inspiration, reposting, and running giveaways. Every piece of work lived on AOV's own channels.</p>
+    <p>Four years later it was a working agency: commercials with budgets north of $200K, influencer campaigns with the biggest voices in tech, an MSI campaign that launched in Times Square, and a global client roster. Revenue was 4x.</p>
+    <p>The audience was mostly there before me. Some of the brands were too. What changed was how we engaged them. The agency is what we built, and the creative was my lane.</p>
+  </div>
+</div></section>
+
+<!-- ◆ TWO-COLUMN · light + dark -->
+<div class="ename"><div class="wrap"><span class="en">◆ TWO-COLUMN · light + dark</span><span class="eu">a simple text block, body in two columns · works on paper or ink · pull .block .cols (add .block-dark on a dark ground)</span></div></div>
+<section class="paper"><div class="wrap block">
+  <span class="k mono">\ How it happened · on light</span>
+  <h2>Everything culture <span class="serif">touches.</span></h2>
+  <div class="cols rv">
+    <p><b>The offer:</b> retainers, campaigns, one-off ads, distribution on AOV's channels, strategy and consulting. Weekly content that lived on brands' channels and in their ad accounts, focused on the outdoor space and consumer electronics.</p>
+    <p><b>The wins:</b> Sony, Adorama, MSI, Intel, Lexar, Peak Design, WANDRD. Clients from LA and New York to Japan and China. By the end: $200K+ commercials, and an MSI campaign launching in Times Square.</p>
+    <p><b>The team:</b> direct reports across the video team, scaled with crew and designers per production. I ran all creative on the agency side and carried the pitches, the sales, and the client relationships.</p>
+    <p><b>The community:</b> it never stopped being one. Workshops, meetups, a weekly podcast at 30K monthly listeners. That is exactly what made the agency credible.</p>
+  </div>
+</div></section>
+<section class="block-dark"><div class="wrap block">
+  <span class="k mono">\ The system · on dark</span>
+  <h2>One brand, the whole <span class="serif">studio.</span></h2>
+  <div class="cols rv">
+    <p>Flashpoint was a flash brand. Good gear, better than its price suggested, but the brand was pointed at one shelf. Adorama's own sales data told a bigger story: people were buying Flashpoint for everything.</p>
+    <p>So the rebrand's job wasn't a fresh coat of paint. It was permission to expand: an identity that could live on a flash, a light stand, and a shipping box.</p>
+    <p>Identity, packaging, product, messaging, web, and out-of-home. Six disciplines, one voice. We built the brand book and the standards, then designed hundreds of packages against them.</p>
+    <p>Then we handed it over. Templates, standards, and a line Adorama could run themselves. The point was to build something that kept working after we left.</p>
+  </div>
+</div></section>
+
+<!-- ◆ INSIGHT -->
+<div class="ename"><div class="wrap"><span class="en">◆ INSIGHT</span><span class="eu">the single idea a campaign is built on · editorial band, red serif punch, lines reveal on scroll · pull .insB</span></div></div>
+<section class="insB" data-ins>
+  <span class="insB-mark" aria-hidden="true">&ldquo;</span>
+  <div class="insB-in wrap">
+    <p class="insB-kick mono ins-line">\ The insight</p>
+    <p class="insB-q ins-line">A band's gear isn't a product line. <span class="insB-em">It's the sound it makes before anyone plays a note.</span></p>
+    <p class="insB-src mono ins-line">Turnstile Audio · the identity</p>
+  </div>
+</section>
+
+<!-- ◆ STAT BEAT -->
+<div class="ename"><div class="wrap"><span class="en">◆ STAT BEAT</span><span class="eu">one number IS the chapter break · accent ground · pull .statbeat</span></div></div>
+<section class="statbeat"><div class="in">
+  <div><b>1.3M</b><span>impressions from one XM5 shoot, influencers cast as talent</span></div>
+  <div><b>9%</b><span>engagement, against a 2x branded-social benchmark</span></div>
+</div></section>
+
+<!-- ◆ COUNT-UP -->
+<div class="ename"><div class="wrap"><span class="en">◆ COUNT-UP</span><span class="eu">numbers animate up when they scroll in · set data-count per figure · pull .cuwrap .cu</span></div></div>
+<section class="paper cuwrap"><div class="wrap"><div class="countrow">
+  <div class="cu"><b data-count="1700000">0</b><span>Instagram community</span></div>
+  <div class="cu"><b data-count="40000000">0</b><span>monthly impressions</span></div>
+  <div class="cu"><b data-count="120">0</b><span>countries reached monthly</span></div>
+  <div class="cu"><b data-count="30000">0</b><span>monthly podcast listeners</span></div>
+</div></div></section>
+
+<!-- ◆ CALLOUT + CHIPS -->
+<div class="ename"><div class="wrap"><span class="en">◆ CALLOUT + CHIPS</span><span class="eu">pull the one line worth lifting out of a wall of copy, plus fact chips · pull .callout .factchips</span></div></div>
+<section class="paper calloutwrap"><div class="wrap">
+  <p class="co-body">The smart money was making one shoot do the job of two. When Sony's XM4 headphones lined up with the a7S III, we built the schedule so a single day on set delivered two campaigns.</p>
+  <div class="callout co-pull">
+    <span class="co-bar" aria-hidden="true"></span>
+    <p>We shot the headphone commercial on the a7S III, then turned the behind-the-scenes into a second film selling the camera.</p>
+    <span class="co-src mono">the smart money</span>
+  </div>
+  <div class="factchips">
+    <span class="chip"><b>1</b> shoot, two products</span>
+    <span class="chip"><b>2</b> finished films</span>
+    <span class="chip"><b>1</b> filmed the other</span>
+  </div>
+</div></section>
+
+<!-- ◆ FULL-BLEED BREAK -->
+<div class="ename"><div class="wrap"><span class="en">◆ FULL-BLEED BREAK</span><span class="eu">a parallax image between chapters, centered caption chip · pull .break</span></div></div>
+<div class="break">
+  <img loading="lazy" decoding="async" src={`${AOV}/gallery/xm4-01.jpg`} alt="Sony XM4 campaign still">
+  <span class="cap">✳ Sony × Art of Visuals · the reel that sold the room</span>
+</div>
+
+<!-- ◆ FILM POSTER -->
+<div class="ename"><div class="wrap"><span class="en">◆ FILM POSTER</span><span class="eu">poster still + muted snip loop + play chip · on a real page it opens the film · pull .film</span></div></div>
+<section class="film"><a class="poster" href="/work/sony-this-moment" aria-label="Sony · This Moment">
+  <img loading="lazy" decoding="async" src="/case-studies/sony-this-moment/gallery/tm-03.jpg" alt="Sony This Moment film poster">
+  <video class="pvid" src="/snips/sony-this-moment.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
+  <span class="play">Play · The Spot</span>
+  <span class="fcap">✳ Sony · This Moment · XM4 national film · director + CD</span>
+</a></section>
+
+<!-- ◆ FILM SPLIT -->
+<div class="ename"><div class="wrap"><span class="en">◆ FILM SPLIT</span><span class="eu">a 16:9 poster beside a stack of two stills, never stretches at any width · pull .filmsplit (src/styles/filmsplit.css)</span></div></div>
+<section class="paper" style="padding:2vh 0 9vh"><div class="wrap"><div class="filmsplit">
+  <div class="poster16">
+    <img loading="lazy" decoding="async" src="/case-studies/adorama-music/gallery/am-37.jpg" alt="Adorama Music film poster">
+    <span class="play">Play · the cut</span>
+    <span class="fcap">✳ Adorama · Create No Matter What</span>
+  </div>
+  <div class="filmstack">
+    <figure><img src="/case-studies/adorama-music/gallery/am-36.jpg" alt="Adorama Music still" width="800" height="534" loading="lazy"></figure>
+    <figure><img src="/case-studies/adorama-music/gallery/am-38.jpg" alt="Adorama Music still" width="800" height="534" loading="lazy"></figure>
+  </div>
+</div></div></section>
+
+<!-- ◆ CONTACT SHEET -->
+<div class="ename"><div class="wrap"><span class="en">◆ CONTACT SHEET</span><span class="eu">frames on white mats, FR-numbered, reveal on scroll · pull .gal .frames</span></div></div>
+<section class="paper"><div class="wrap gal">
+  <div class="bar"><span class="mono"><b>Contact sheet</b> · frames from the 4x era</span><span class="mono" style="color:#8f8d88">07 frames · hover to inspect</span></div>
+  <div class="frames" id="frames"></div>
+</div></section>
+
+<!-- ◆ MASONRY + LIGHTBOX -->
+<div class="ename"><div class="wrap"><span class="en">◆ MASONRY + LIGHTBOX</span><span class="eu">plain masonry grid, click to enlarge (arrows / esc) · pulls camera EXIF into the caption · pull .mgrid + .lbox</span></div></div>
+<section class="paper mwrap"><div class="wrap">
+  <div class="bar"><span class="mono"><b>Gallery B</b> · masonry, opens to lightbox</span><span class="mono" style="color:#8f8d88">click to enlarge</span></div>
+  <div class="mgrid" id="kitMgrid">
+    {[
+      { src:"/case-studies/adorama-music/gallery/am-01.jpg", cap:"Adorama Music", cam:"" },
+      { src:"/case-studies/flashpoint/gallery/fp-01.jpg", cap:"Flashpoint", cam:"" },
+      { src:"/case-studies/sony-this-moment/gallery/tm-05.jpg", cap:"Sony · This Moment", cam:"Sony A7R III · 70mm · f/2.8 · 1/800s · ISO 100" },
+      { src:"/case-studies/adorama-music/gallery/am-09.jpg", cap:"Adorama Music", cam:"" },
+      { src:"/case-studies/flashpoint/gallery/fp-08.jpg", cap:"Flashpoint", cam:"Sony A7R III · 24mm · f/2.8 · 1/320s · ISO 200" },
+      { src:"/case-studies/sony-flow-state/gallery/fs-05.jpg", cap:"Sony · Flow State", cam:"Sony A7R III · 35mm · f/1.4 · 1/250s · ISO 200" },
+      { src:"/case-studies/flashpoint/gallery/fp-02.jpg", cap:"Flashpoint", cam:"" },
+      { src:"/case-studies/sony-this-moment/gallery/tm-03.jpg", cap:"Sony · This Moment", cam:"Sony A7R III · 29mm · f/2.8 · 1/160s · ISO 640" },
+      { src:"/case-studies/flashpoint/gallery/fp-03.jpg", cap:"Flashpoint", cam:"" },
+    ].map((m, i) => (
+      <button class="mcell" type="button" data-full={m.src} data-cap={m.cap} data-cam={m.cam} aria-label={`Open ${m.cap}`}><img src={m.src} alt={`${m.cap} still`} loading="lazy" decoding="async"></button>
+    ))}
+  </div>
+</div></section>
+
+<!-- ◆ LEDGER -->
+<div class="ename"><div class="wrap"><span class="en">◆ LEDGER</span><span class="eu">the book of business · thumb + title + meta + arrow, each row links out · pull .bob</span></div></div>
+<section class="paper"><div class="wrap bob">
+  <div class="bar"><span class="mono"><b>The book of business</b> · campaigns delivered under this roof</span><span class="mono" style="color:#8f8d88">every row is a case file ↗</span></div>
+  <div class="bob-rows">
+    <a class="bob-row" href="/work/sony-this-moment"><img loading="lazy" decoding="async" src="/case-studies/sony-this-moment/gallery/tm-05.jpg" alt="Sony This Moment"><span class="bt">Sony · This Moment</span><span class="bm mono">XM4 · national campaign film · director + CD</span><span class="ba mono">↗</span></a>
+    <a class="bob-row" href="/work/sony-xm5"><img loading="lazy" decoding="async" src={`${AOV}/gallery/xm5-01.jpg`} alt="Sony XM5"><span class="bt">Sony · XM5</span><span class="bm mono">influencer activation · 1.3M impressions · 9% engagement</span><span class="ba mono">↗</span></a>
+    <a class="bob-row" href="/work/adorama-music"><img loading="lazy" decoding="async" src="/case-studies/adorama-music/gallery/am-01.jpg" alt="Adorama Music"><span class="bt">Adorama · Create No Matter What</span><span class="bm mono">content series · Shorty finalist</span><span class="ba mono">↗</span></a>
+    <a class="bob-row" href="/work/on-camera"><img loading="lazy" decoding="async" src={`${AOV}/gallery/podcast-cover.jpg`} alt="On Camera"><span class="bt">Creator Clubhouse · On Camera</span><span class="bm mono">the agency podcast · 30K monthly · 12 tapes</span><span class="ba mono">↗</span></a>
+  </div>
+</div></section>
+
+<!-- ◆ SOCIAL WALL -->
+<div class="ename"><div class="wrap"><span class="en">◆ SOCIAL WALL</span><span class="eu">the audience-reaction wall · REAL transcribed comments only, never invented · pull SocialWall.astro</span></div></div>
+<SocialWall
+  title="The comments came in hot."
+  intro="When the response is the proof. Real transcribed comments from the thread, never invented ones: the same rule as quotes."
+  comments={[
+    { u: 'kennyjenkinz', t: 'Turned out unreal.' },
+    { u: 'morgylove', t: 'The sheer amount of talent on the AOV team is insane. Killer work!' },
+    { u: 'tommylundberg', t: 'The sound design is so rad.', l: 5 },
+    { u: 'learnfilmmaking', t: 'Wow, amazing job guys!! @artofvisuals @sony', l: 5 },
+  ]}
+/>
+
+<!-- ◆ QUOTE BAND -->
+<div class="ename"><div class="wrap"><span class="en">◆ QUOTE BAND</span><span class="eu">the project in one serif line, with a display-bold emphasis · pull .quote</span></div></div>
+<section class="quote"><div class="wrap">
+  <p class="q">"Growth like that is not a lucky project. It is an offer brands keep buying, and creative good enough that <b>the first job turns into the next one.</b>"</p>
+  <p class="who mono">The agency era, in one sentence</p>
+</div></section>
+
+<!-- ◆ WORD SWITCHER -->
+<div class="ename"><div class="wrap"><span class="en">◆ WORD SWITCHER</span><span class="eu">auto-cycling tabbed narrative · giant words, active solid + timing bar, two-column body per tab · pull .cdd</span></div></div>
+<section class="cdd paper" id="cddkit" data-i="0"><div class="wrap">
+  <div class="cdd-head" role="tablist" aria-label="Concept, Design, Deliver">
+    <button class="cdd-word on" data-i="0" role="tab">Concept<i class="cdd-bar" aria-hidden="true"></i></button>
+    <button class="cdd-word" data-i="1" role="tab">Design<i class="cdd-bar" aria-hidden="true"></i></button>
+    <button class="cdd-word" data-i="2" role="tab">Deliver<i class="cdd-bar" aria-hidden="true"></i></button>
+  </div>
+  <div class="cdd-stage">
+    <div class="cdd-panel on" data-i="0">
+      <div class="cdd-col"><p>Adorama came in with a mic line, a few rough names, and a short list of brands they wanted to beat. No identity, no direction, and two weeks on the clock.</p></div>
+      <div class="cdd-col"><p><b>Objectives.</b> Precision, quality, affordability. Understated, a nod to the classics. The gear is the star; the brand amplifies quietly.</p></div>
+    </div>
+    <div class="cdd-panel" data-i="1">
+      <div class="cdd-col"><p>A deep dive into vintage audio brands, what made them iconic and enduring, then something modern with the right amount of nostalgia, built without trying too hard.</p></div>
+      <div class="cdd-col"><p><b>The build.</b> One wordmark, three weights. A sound mark that reads across a loud room. A palette of modernized precision.</p></div>
+    </div>
+    <div class="cdd-panel" data-i="2">
+      <div class="cdd-col"><p>Name, identity, content, and campaign, shipped in two weeks. Product photography shot so the metal and the message hit at the same time.</p></div>
+      <div class="cdd-col"><p><b>Since launch.</b> Adorama has put hundreds of products under the Turnstile name, to glowing reviews.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ◆ PILLS -->
+<div class="ename"><div class="wrap"><span class="en">◆ PILLS</span><span class="eu">mono uppercase, radius 99 · dark-on-light and light-on-dark · pull .pill-dark / .pill-light</span></div></div>
+<section class="paper"><div class="wrap pillrow">
+  <a class="pill-dark" href="#top">Pill on light ↗</a>
+  <span style="background:var(--ink);border-radius:8px;padding:14px 18px;display:inline-flex"><a class="pill-light" href="#top">Pill on dark ↗</a></span>
+</div></section>
+
+<!-- ◆ KICKERS -->
+<div class="ename"><div class="wrap"><span class="en">◆ KICKERS</span><span class="eu">the closed set of kicker + CTA pairings, and the statement · light or dark · pull .kset</span></div></div>
+<div class="kset kset-light"><div class="wrap">
+  <span class="kset-tag mono">\ The closed pairing · light</span>
+  <div class="kpair">
+    <span class="kick-eyebrow mono">✳ Being forgettable is expensive</span>
+    <p class="k-big">Let's build something <span class="serif">worth remembering.</span></p>
+    <a class="k-btn" href="/contact">Let's talk ↗</a>
+  </div>
+</div></div>
+<div class="kset kset-dark"><div class="wrap">
+  <span class="kset-tag mono">\ Ears to the streets · statement · dark</span>
+  <p class="k-stmt">Culture is talking.<br>Most brands aren't <span class="k-em">listening.</span></p>
+</div></div>
+
+<!-- ◆ CTA BAND -->
+<div class="ename"><div class="wrap"><span class="en">◆ CTA BAND</span><span class="eu">the hand-off · accent ground, round talk button · pull .cta</span></div></div>
+<section class="cta"><div class="wrap in">
+  <div>
+    <span class="ck mono">✳ Being forgettable is expensive</span>
+    <p class="big">Let's build something<br><span class="serif">worth remembering.</span></p>
+  </div>
+  <a class="talk" href="/contact">Let's talk ↗</a>
+</div></section>
+
+<!-- ◆ CALL SHEET -->
+<div class="ename"><div class="wrap"><span class="en">◆ CALL SHEET</span><span class="eu">the credits slip · agency + client + collaborators, my row marked select · pull CallSheet.astro</span></div></div>
+<section class="paper"><div class="wrap credits">
+  <CallSheet code="MC-2024-01" sub="Art of Visuals · The 4x era" filed="MMXXI-MMXXIV" tone="light"
+    rows={[
+      { k: 'Strategy', v: 'Shaped what the agency sold, then packaged it into an offer brands actually bought', select: true },
+      { k: 'Creative direction', v: 'Owned all creative on the agency side, first pitch to final delivery' },
+      { k: 'Team', v: 'Ran a core crew of five, scaling with crew and designers per production' },
+      { k: 'Client lead', v: 'The point of contact brands trusted, the reason they kept us as their AOR' },
+    ]} />
+</div></section>
+
+<!-- ◆ NEXT FILE -->
+<div class="ename"><div class="wrap"><span class="en">◆ NEXT FILE</span><span class="eu">the case-page closer · giant next name + framed thumb, chains in /work order · pull NextFile.astro</span></div></div>
+<NextFile href="/work" name="The Work Index" img="/case-studies/sony-this-moment/gallery/tm-05.jpg" code="MC-INDEX" />
+<PageFooter tag="Element library" />
+
+<div class="lbox" id="kitLbox" role="dialog" aria-label="Image viewer">
+  <button class="lb-close" type="button" aria-label="Close">✕</button>
+  <button class="lb-prev" type="button" aria-label="Previous">←</button>
+  <button class="lb-next" type="button" aria-label="Next">→</button>
+  <figure class="lb-fig"><img id="kitLboxImg" alt=""><figcaption class="lb-cap" id="kitLboxCap"><span class="lb-camp"></span><span class="lb-cam"></span></figcaption></figure>
+</div>
+
+<script is:inline>
+// contact sheet: 7 real frames, wide every 4th, reveal on scroll
+(function(){
+  var imgs=['xperia-01','xm4-01','xperia-02','xm3-bts','yt-thismoment','stansport-01','podcast-cover'].map(function(n){return '/case-studies/art-of-visuals/gallery/'+n+'.jpg';});
+  var el=document.getElementById('frames');if(!el)return;
+  el.innerHTML=imgs.map(function(src,i){return '<figure class="fr'+(i%4===0?' wide':'')+'" style="--d:'+(i*45)+'ms"><img src="'+src+'" alt="Contact sheet frame '+(i+1)+'" loading="lazy" decoding="async"><figcaption class="cap">FR-'+String(i+1).padStart(2,'0')+' · ARCHIVE</figcaption></figure>';}).join('');
+  new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){el.classList.add('show');o.disconnect();}});},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
+})();
+
+// reveal-on-scroll for .rv and the insight band
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.01,rootMargin:'0px 0px 200px 0px'});
+  document.querySelectorAll('.rv,[data-ins]').forEach(function(el){io.observe(el);});
+})();
+
+// count-up
+(function(){
+  var cues=[].slice.call(document.querySelectorAll('[data-count]'));if(!cues.length)return;
+  var run=function(el){var target=parseFloat(el.getAttribute('data-count'))||0,suf=el.getAttribute('data-suffix')||'',dur=1400,t0=null;
+    var step=function(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(target*e).toLocaleString('en-US')+suf;if(p<1)requestAnimationFrame(step);};requestAnimationFrame(step);};
+  var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){run(e.target);cio.unobserve(e.target);}});},{threshold:.6});
+  cues.forEach(function(c){cio.observe(c);});
+})();
+
+// word switcher: auto-cycle, click to jump, pause on hover
+(function(){
+  var sec=document.getElementById('cddkit');if(!sec)return;
+  var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var words=[].slice.call(sec.querySelectorAll('.cdd-word')),panels=[].slice.call(sec.querySelectorAll('.cdd-panel')),cur=0,timer=null,vis=false,paused=false;
+  function show(i){cur=(i+panels.length)%panels.length;words.forEach(function(w,j){w.classList.toggle('on',j===cur);});panels.forEach(function(p,j){p.classList.toggle('on',j===cur);});sec.setAttribute('data-i',cur);}
+  function arm(){if(timer||reduced)return;timer=setInterval(function(){if(vis&&!paused)show(cur+1);},4600);}
+  function disarm(){clearInterval(timer);timer=null;}
+  words.forEach(function(w,i){w.addEventListener('click',function(){disarm();show(i);arm();});});
+  sec.addEventListener('mouseenter',function(){paused=true;});sec.addEventListener('mouseleave',function(){paused=false;});
+  new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;vis?arm():disarm();});},{threshold:.2}).observe(sec);
+})();
+
+// masonry lightbox
+(function(){
+  var grid=document.getElementById('kitMgrid'),lb=document.getElementById('kitLbox');if(!grid||!lb)return;
+  var lbImg=document.getElementById('kitLboxImg'),cells=[].slice.call(grid.querySelectorAll('.mcell'));
+  var capEl=document.getElementById('kitLboxCap'),campEl=capEl.querySelector('.lb-camp'),camEl=capEl.querySelector('.lb-cam'),idx=0;
+  function openL(n){idx=(n+cells.length)%cells.length;var c=cells[idx];lbImg.src=c.getAttribute('data-full');campEl.textContent=c.getAttribute('data-cap')||'';camEl.textContent=c.getAttribute('data-cam')||'';lb.classList.add('on');}
+  function closeL(){lb.classList.remove('on');lbImg.src='';}
+  cells.forEach(function(c,n){c.addEventListener('click',function(){openL(n);});});
+  lb.querySelector('.lb-close').addEventListener('click',closeL);
+  lb.querySelector('.lb-next').addEventListener('click',function(){openL(idx+1);});
+  lb.querySelector('.lb-prev').addEventListener('click',function(){openL(idx-1);});
+  lb.addEventListener('click',function(e){if(e.target===lb)closeL();});
+  document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;if(e.key==='Escape')closeL();else if(e.key==='ArrowRight')openL(idx+1);else if(e.key==='ArrowLeft')openL(idx-1);});
+})();
+
+// play film snips only while on-screen
+(function(){
+  var vids=[].slice.call(document.querySelectorAll('.pvid'));if(!vids.length)return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){});}else{try{v.pause();}catch(x){}}});},{threshold:.25});
+  vids.forEach(function(v){io.observe(v);});
+})();
+
+// hero + break parallax + companion drift
+(function(){
+  var hImg=document.querySelector('.hero>img'),hT=document.querySelector('.hero .t'),nfo=document.querySelector('.hero .nfo'),kck=document.querySelector('.hero .kck'),brk=document.querySelectorAll('.break img'),c=document.querySelector('.companion');
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var k=false;
+  addEventListener('scroll',function(){if(k)return;k=true;requestAnimationFrame(function(){
+    var y=scrollY,vh=innerHeight;
+    if(y<vh&&hImg){hImg.style.transform='translateY('+(y*.22)+'px) scale(1.02)';if(hT){hT.style.transform='translate(-50%,-50%) translateY('+(y*-.1)+'px)';hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));}if(nfo)nfo.style.transform='translateY('+(y*-.16)+'px)';if(kck)kck.style.transform='translateY('+(y*-.06)+'px)';}
+    brk.forEach(function(b){var r=b.parentElement.getBoundingClientRect();if(r.bottom>0&&r.top<vh){var p=(r.top+r.height/2-vh/2)/vh;b.style.transform='translateY('+(p*-56)+'px)';}});
+    if(c)c.style.transform='translateY('+(Math.sin(y/420)*34).toFixed(1)+'px) rotate('+(y*0.22).toFixed(1)+'deg)';
+    k=false;
+  });},{passive:true});
+})();
+
+// LA clock
+function clock(){var el=document.getElementById('clock');if(!el)return;el.textContent='LA '+new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});}
+clock();setInterval(clock,30000);
+</script>
+</body>
+</html>
