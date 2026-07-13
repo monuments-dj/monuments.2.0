@@ -4,6 +4,8 @@ import PageFooter from '../components/PageFooter.astro';
 import RoleTag from '../components/RoleTag.astro';
 import SocialWall from '../components/SocialWall.astro';
 import NextFile from '../components/NextFile.astro';
+import TextBlock from '../components/TextBlock.astro';
+import MediaBlock from '../components/MediaBlock.astro';
 import '../styles/filmsplit.css';
 import { work as workAll } from '../data/work.js';
 
@@ -294,6 +296,21 @@ a{color:inherit;text-decoration:none}
     </ol>
   </div>
 </section>
+
+<div class="spec" id="el-blocks"><div class="wrap"><span class="id">ELEMENT 00 · LAYOUT BLOCKS · TextBlock + MediaBlock</span><span class="use">the composable primitives — build any page section from these, no bespoke markup, nothing to break. <b>TextBlock</b>: kicker + heading + copy, <u>default</u> or big <u>statement</u>. <b>MediaBlock</b>: images that are always visible — <u>full</u> (edge-to-edge) / <u>duo</u> / <u>trio</u> / <u>stack</u>. Alternate text and media for rhythm. <b class="lives">lives on:</b> flashpoint, rolling to every work page</span></div></div>
+
+<TextBlock variant="statement" kicker="\ TextBlock · statement" heading={`Big and punchy, for openers and <span class="tb-serif">closers.</span>`}>
+  <p>The statement variant carries a large headline and a short lede. Use it to open or close a page, or to land a single idea hard.</p>
+</TextBlock>
+<MediaBlock layout="duo" images={[
+  { src: "/case-studies/flashpoint/gallery/fp-01.jpg", alt: "MediaBlock duo demo, left", caption: "MediaBlock · duo · 2-up" },
+  { src: "/case-studies/flashpoint/gallery/fp-02.jpg", alt: "MediaBlock duo demo, right", caption: "MediaBlock · duo · 2-up" }
+]} />
+<TextBlock kicker="\ TextBlock · default" heading={`Kicker, heading, and copy at a <span class="tb-serif">readable measure.</span>`}>
+  <p>The default variant is the workhorse for body copy. Drop in one paragraph or five and it stays clean, never stranding a headline or blowing out the layout.</p>
+  <p>Put a MediaBlock above or below it and you have a section with rhythm.</p>
+</TextBlock>
+<MediaBlock layout="full" images={[{ src: "/case-studies/flashpoint/gallery/fp-03.jpg", alt: "MediaBlock full-bleed demo", caption: "✳ MediaBlock · full · edge-to-edge banner" }]} />
 
 <div class="spec" id="el-01"><div class="wrap"><span class="id">ELEMENT 01 · CASE HERO</span><span class="use">70svh image hero · 3-line title, serif accent line last · kck bottom-left, NFO bottom-right · RoleTag under title · VIDEO VARIANT: dim poster + hero loop that fades in only on the real PLAYING state (see on-camera / sony-xm5) · <b class="lives">lives on:</b> most work pages</span></div></div>
 <header class="hero">
