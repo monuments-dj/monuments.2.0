@@ -10,7 +10,12 @@ the shared memory. Read before touching copy:
   (only PRO-I has metrics) · Know Vape credits April Frame by name · On Camera
   audience always attributed, no "2M+ followers" · Buck the Quo + AC Boise never
   claim "directed the build/experiential."
-- `docs/MONUMENTS-VOICE.md` — voice guide. ⏳ PENDING: DJ to drop it in.
+- `docs/MONUMENTS-VOICE.md` — voice guide: "I" voice throughout · Donald Miller
+  clarity (reader is the hero, studio is the guide) · case-study bodies are
+  narrative prose in full sentences (fragments only in heroes/stats/tiles) · end
+  a beat EARLY, drop the observation · no em dashes, no pun/gag headers, no
+  agency-speak/buzzwords · credit collaborators by name · never shrink a partner
+  to elevate DJ · the colon-list beat style (The offer:/The wins:) is AOV-only.
 Workflow: read the voice doc → apply copy one page at a time → grep the build for
 em dashes (— –) after each page.
 
