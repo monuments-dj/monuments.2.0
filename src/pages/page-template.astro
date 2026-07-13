@@ -9,6 +9,7 @@ import CallSheet from '../components/CallSheet.astro';
 import NextFile from '../components/NextFile.astro';
 import PageFooter from '../components/PageFooter.astro';
 import RoleTag from '../components/RoleTag.astro';
+import MasonryGallery from '../components/MasonryGallery.astro';
 const AOV = '/case-studies/art-of-visuals';
 // the section rhythm, top to bottom: D=dark A=accent L=light
 // HERO(D) · STATROW(A) · NUMBER(L) · BREAK(D) · HOW(L) · BEAT(A) · INSIGHT(D) · SHEET(L) · QUOTE(A) · LEDGER(L) · BREAK(D) · CTA(A) · NEXT(D)
@@ -228,11 +229,16 @@ a{color:inherit;text-decoration:none}
   <div><b>9%</b><span>engagement, against a 2x branded-social benchmark</span></div>
 </div></section>
 
-<!-- 7 · CONTACT SHEET · light -->
-<section class="paper"><div class="wrap gal">
-  <div class="bar"><span class="mono"><b>Contact sheet</b> · frames from the 4x era</span><span class="mono" style="color:#8f8d88">07 frames · hover to inspect</span></div>
-  <div class="frames" id="frames"></div>
-</div></section>
+<!-- 7 · GALLERY · light (masonry + lightbox) -->
+<MasonryGallery title="Frames from the 4x era" note="07 frames · click to enlarge" images={[
+  { src: `${AOV}/gallery/xperia-01.jpg`, cap: 'Sony Xperia' },
+  { src: `${AOV}/gallery/xm4-01.jpg`, cap: 'Sony XM4' },
+  { src: `${AOV}/gallery/xperia-02.jpg`, cap: 'Sony Xperia' },
+  { src: `${AOV}/gallery/xm3-bts.jpg`, cap: 'XM3 · behind the scenes' },
+  { src: `${AOV}/gallery/yt-thismoment.jpg`, cap: 'Sony · This Moment' },
+  { src: `${AOV}/gallery/stansport-01.jpg`, cap: 'Stansport' },
+  { src: `${AOV}/gallery/podcast-cover.jpg`, cap: 'Creator Clubhouse' },
+]} />
 
 <!-- 8 · THE INSIGHT · dark -->
 <section class="block-dark"><div class="wrap block">
@@ -292,13 +298,6 @@ a{color:inherit;text-decoration:none}
 <PageFooter tag="Case: Art of Visuals" />
 
 <script is:inline>
-// contact sheet: 7 real frames, wide every 4th, reveal on scroll
-(function(){
-  var imgs=['xperia-01','xm4-01','xperia-02','xm3-bts','yt-thismoment','stansport-01','podcast-cover'].map(function(n){return '/case-studies/art-of-visuals/gallery/'+n+'.jpg';});
-  var el=document.getElementById('frames');if(!el)return;
-  el.innerHTML=imgs.map(function(src,i){return '<figure class="fr'+(i%4===0?' wide':'')+'" style="--d:'+(i*45)+'ms"><img src="'+src+'" alt="Contact sheet frame '+(i+1)+'" loading="lazy" decoding="async"><figcaption class="cap">FR-'+String(i+1).padStart(2,'0')+' · ARCHIVE</figcaption></figure>';}).join('');
-  new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){el.classList.add('show');o.disconnect();}});},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
-})();
 // reveal-on-scroll
 (function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.01,rootMargin:'0px 0px 220px 0px'});document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});})();
 // hero + break parallax + companion drift
