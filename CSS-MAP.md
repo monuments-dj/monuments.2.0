@@ -97,3 +97,12 @@ Texture is per-surface and ALWAYS below text: light bands get ::before z:-1
 inside isolation:isolate; media frames get ::after z:1 with captions lifted z:2.
 Tune ONLY --grain-paper / --grain-media in PageFooter. The old fixed .grain
 overlay divs are retired via display:none (elements still in 9 pages' HTML).
+
+## ⚠️ Cross-page gotcha: padding SHORTHAND on .wrap co-classed elements (fixed 2026-07-12)
+Work pages put .story ON the .wrap element (`class="wrap story"`). `.story{padding:12vh 0}`
+came later in the sheet, so the shorthand's `0` nuked .wrap's horizontal gutter on 20 pages:
+story kickers/h2s sat at x=0 at viewports ≤ ~1470px (invisible on DJ's wide display, where
+.wrap's auto margins still gave ~100px+; glued to the glass on a recruiter's 13" laptop).
+Fixed sitewide: any rule on a .wrap element pads VERTICALLY ONLY via longhands
+(`padding-top:12vh;padding-bottom:12vh`). Never use the padding shorthand on an element
+that shares a class with .wrap - it silently zeroes the gutter var(--pad) owns.
