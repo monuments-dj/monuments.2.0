@@ -21,11 +21,12 @@ interface Props {
   heading?: string;
   tone?: 'light' | 'dark';
   align?: 'left' | 'center';
+  variant?: 'default' | 'statement';
   flush?: boolean;
 }
-const { kicker, heading, tone = 'light', align = 'left', flush = false } = Astro.props;
+const { kicker, heading, tone = 'light', align = 'left', variant = 'default', flush = false } = Astro.props;
 ---
-<section class:list={["tb", `tb-${tone}`, `tb-${align}`, { 'tb-flush': flush }]}>
+<section class:list={["tb", `tb-${tone}`, `tb-${align}`, `tb-${variant}`, { 'tb-flush': flush }]}>
   <div class="tb-in">
     {kicker && <span class="tb-k">{kicker}</span>}
     {heading && <h2 class="tb-h" set:html={heading} />}
@@ -70,6 +71,12 @@ const { kicker, heading, tone = 'light', align = 'left', flush = false } = Astro
   font-size: clamp(16px, 1.15vw, 18px);
   line-height: 1.62;
 }
+.tb-statement .tb-h {
+  font-size: clamp(34px, 5.2vw, 74px);
+  line-height: .98; max-width: 15ch; margin-bottom: 30px;
+}
+.tb-statement .tb-body { max-width: 70ch; font-size: clamp(17px, 1.35vw, 21px); }
+.tb-center .tb-body { text-align: center; }
 .tb-body :global(p) { margin: 0 0 1.1em; }
 .tb-body :global(p:last-child) { margin-bottom: 0; }
 .tb-body :global(a) { color: inherit; text-decoration: underline; text-underline-offset: 3px; }

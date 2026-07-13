@@ -1,6 +1,7 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
 import TextBlock from '../../components/TextBlock.astro';
+import MediaBlock from '../../components/MediaBlock.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
@@ -369,82 +370,34 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </div>
 
-<section class="paper">
-  <div class="wrap story">
-    <div class="side rv">
-      <span class="k mono">\ The insight</span>
-      <h2>Stop selling flashes. Start <span class="serif">owning the studio.</span></h2>
-      <ul class="svc">
-        {services.map((s) => <li><i>✳</i>{s}</li>)}
-      </ul>
-    </div>
-    <div class="body rv">
-      <p>Flashpoint was a flash brand. Good gear, better than its price suggested, but the brand was pointed at one shelf. Adorama's own sales data told a bigger story: people were buying Flashpoint for everything. Stands. Sandbags. Modifiers. The pieces nobody photographs but everybody owns.</p>
-      <p>So the rebrand's job wasn't a fresh coat of paint. It was permission to expand. Build an identity that could live on a flash, a light stand, and a shipping box, and Flashpoint stops being a product line and starts being the brand your whole studio is made of.</p>
-    </div>
-  </div>
-  <div class="wrap">
-    <figure class="pl">
-      <div class="browser">
-        <div class="bbar"><i></i><i></i><i></i><span class="burl">flashpointlighting.com</span></div>
-        <img src={`${S}/web-hero.jpg`} alt="flashpointlighting.com homepage after the rebrand" width="1440" height="722" loading="lazy">
-      </div>
-      <figcaption class="cap"><b>WEB-01</b> · Flashpoint's own site, after: a studio brand, not a flash brand</figcaption>
-    </figure>
-  </div>
-</section>
+<TextBlock variant="statement" kicker="\ The insight" heading={`Stop selling flashes. <span class="tb-serif">Start owning the studio.</span>`}>
+  <p>Flashpoint was a flash brand. Good gear, better than its price suggested, but the brand was pointed at one shelf. Adorama's own sales data told a bigger story: people were buying Flashpoint for everything. Stands. Sandbags. Modifiers. The pieces nobody photographs but everybody owns.</p>
+  <p>So the rebrand's job wasn't a fresh coat of paint. It was permission to expand. Build an identity that could live on a flash, a light stand, and a shipping box, and Flashpoint stops being a product line and starts being the brand your whole studio is made of.</p>
+</TextBlock>
+<MediaBlock layout="stack" images={[{ src: `${S}/web-hero.jpg`, alt: "flashpointlighting.com homepage after the rebrand", caption: "Flashpoint's own site, after: a studio brand, not a flash brand" }]} />
 
-<section class="paper">
-  <div class="wrap story">
-    <div class="side rv">
-      <span class="k mono">\ The mark</span>
-      <h2>Type-first, because it has to <span class="serif">survive the factory.</span></h2>
-    </div>
-    <div class="body rv">
-      <p>We pitched a mark where the O swapped by category, a Phillips head here, a set screw there. The client liked it, but the system that shipped is more durable: the wordmark stays fixed and color does the sorting.</p>
-      <p>Blue is lighting. Yellow is studio gear. Red is accessories. Every product sits on a colored disc, so a shelf of Flashpoint reads as one brand from across the room and still tells you what you're holding when you pick it up.</p>
-      <p>The wordmark is typographic on purpose. Simple enough that a manufacturer can stamp it, mold it, or print it at any size without the system breaking. The O never becomes a gimmick. It just becomes the circle everything else lives inside.</p>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="duo">
-      <figure class="pl"><img src={`${G}/fp-01.jpg`} alt="Flashpoint magazine trade ad comp, teal colorway" width="1800" height="1199" loading="lazy"><figcaption class="cap"><b>COMP-01</b> · Print · Trade ad, teal</figcaption></figure>
-      <figure class="pl" style="transition-delay:80ms"><img src={`${G}/fp-02.jpg`} alt="Flashpoint magazine trade ad comp, orange colorway" width="1800" height="1199" loading="lazy"><figcaption class="cap"><b>COMP-02</b> · Print · Trade ad, orange</figcaption></figure>
-    </div>
-    <div class="stack" style="margin-top:clamp(20px,3vh,32px)">
-      <figure class="pl"><img src={`${G}/fp-05.jpg`} alt="Flashpoint FV150 product one-sheet comp" width="1800" height="1199" loading="lazy"><figcaption class="cap"><b>COMP-05</b> · Print · Product one-sheet</figcaption></figure>
-    </div>
-  </div>
-</section>
+<TextBlock kicker="\ The mark" heading={`Type-first, because it has to <span class="tb-serif">survive the factory.</span>`}>
+  <p>We pitched a mark where the O swapped by category, a Phillips head here, a set screw there. The client liked it, but the system that shipped is more durable: the wordmark stays fixed and color does the sorting.</p>
+  <p>Blue is lighting. Yellow is studio gear. Red is accessories. Every product sits on a colored disc, so a shelf of Flashpoint reads as one brand from across the room and still tells you what you're holding when you pick it up.</p>
+  <p>The wordmark is typographic on purpose. Simple enough that a manufacturer can stamp it, mold it, or print it at any size without the system breaking. The O never becomes a gimmick. It just becomes the circle everything else lives inside.</p>
+</TextBlock>
+<MediaBlock layout="duo" images={[
+  { src: `${G}/fp-01.jpg`, alt: "Flashpoint trade ad comp, teal colorway", caption: "Print · Trade ad, teal" },
+  { src: `${G}/fp-02.jpg`, alt: "Flashpoint trade ad comp, orange colorway", caption: "Print · Trade ad, orange" }
+]} />
 
-<section class="paper">
-  <div class="wrap story">
-    <div class="side rv">
-      <span class="k mono">\ The system</span>
-      <h2>From the box on the shelf to the <span class="serif">billboard on the street.</span></h2>
-    </div>
-    <div class="body rv">
-      <p>Identity, packaging, product, messaging, web, OOH. Six disciplines, one voice. We built the brand book and the standards, then designed hundreds of packages against them, enough to seed the system and prove it held.</p>
-      <p>Then we handed it over. Templates, standards, and a line Adorama could run themselves. The point was never to design every box forever. It was to build something that kept working after we left.</p>
-      <p style="margin-top:8px"><a class="pill" href="https://www.flashpointlighting.com/" target="_blank" rel="noopener">Visit the live site ↗</a></p>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="stack">
-      <figure class="pl"><img src={`${G}/fp-04.jpg`} alt="Flashpoint shipper box packaging comp in teal and white" width="1800" height="1414" loading="lazy"><figcaption class="cap"><b>COMP-04</b> · Packaging · The shipper box</figcaption></figure>
-    </div>
-    <div class="duo" style="margin-top:clamp(20px,3vh,32px)">
-      <figure class="pl"><img src={`${G}/fp-06.jpg`} alt="Flashpoint Xplor Power 2400 Pro power pack box" width="1800" height="1800" loading="lazy"><figcaption class="cap"><b>COMP-06</b> · Packaging · Xplor Power 2400 Pro</figcaption></figure>
-      <figure class="pl" style="transition-delay:80ms"><img src={`${G}/fp-07.jpg`} alt="Flashpoint R2 Nano Remote box, orange colorway" width="1800" height="1800" loading="lazy"><figcaption class="cap"><b>COMP-07</b> · Packaging · R2 Nano Remote</figcaption></figure>
-    </div>
-  </div>
-</section>
-<div class="break">
-  <img loading="lazy" decoding="async" class="plx" src={`${G}/fp-03.jpg`} alt="Flashpoint billboard comp on a city building: We got you.">
-  <span class="cap">✳ OOH · We got you · The new face at city scale</span>
-</div>
+<TextBlock kicker="\ The system" heading={`From the box on the shelf to the <span class="tb-serif">billboard on the street.</span>`}>
+  <p>Identity, packaging, product, messaging, web, OOH. Six disciplines, one voice. We built the brand book and the standards, then designed hundreds of packages against them, enough to seed the system and prove it held.</p>
+  <p>Then we handed it over. Templates, standards, and a line Adorama could run themselves. The point was never to design every box forever. It was to build something that kept working after we left.</p>
+</TextBlock>
+<MediaBlock layout="trio" images={[
+  { src: `${G}/fp-04.jpg`, alt: "Flashpoint shipper box packaging", caption: "Packaging · The shipper box" },
+  { src: `${G}/fp-06.jpg`, alt: "Flashpoint Xplor Power 2400 Pro box", caption: "Packaging · Xplor Power 2400 Pro" },
+  { src: `${G}/fp-07.jpg`, alt: "Flashpoint R2 Nano Remote box", caption: "Packaging · R2 Nano Remote" }
+]} />
+<MediaBlock layout="full" images={[{ src: `${G}/fp-03.jpg`, alt: "Flashpoint billboard comp on a city building", caption: "✳ OOH · We got you · the new face at city scale" }]} />
 
-<TextBlock kicker="\ The outcome" heading={`A powerhouse in the <span class="tb-serif">studio world.</span>`}>
+<TextBlock variant="statement" kicker="\ The outcome" heading={`A powerhouse in the <span class="tb-serif">studio world.</span>`}>
   <p>Adorama read the sales data, saw what Flashpoint could become, and kept building.</p>
 </TextBlock>
 

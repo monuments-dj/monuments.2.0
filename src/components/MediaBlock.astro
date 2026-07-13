@@ -1,0 +1,78 @@
+---
+// MediaBlock.astro — the safe image element. Pairs with TextBlock to build a
+// page out of alternating text + media so it has rhythm instead of one layout
+// repeated. Images are visible by default (no scroll-reveal that can leave a
+// section looking empty). No fragile grid, no packer.
+//
+//   import MediaBlock from '../../components/MediaBlock.astro';
+//   <MediaBlock layout="full" images={[{ src: '/x.jpg', alt: '…', caption: '✳ …' }]} />
+//   <MediaBlock layout="duo"  images={[{...}, {...}]} />
+//   <MediaBlock layout="trio" images={[{...}, {...}, {...}]} />
+//
+// layout: 'full' (edge-to-edge banner) | 'duo' (2-up) | 'trio' (3-up) | 'stack' (1 column)
+interface ImageItem { src: string; alt?: string; caption?: string; }
+interface Props {
+  images: ImageItem[];
+  layout?: 'full' | 'duo' | 'trio' | 'stack';
+  tone?: 'light' | 'dark';
+}
+const { images = [], layout = 'duo', tone = 'light' } = Astro.props;
+const first = images[0];
+---
+{layout === 'full' && first && (
+  <figure class:list={["mb-full", `mb-${tone}`]}>
+    <img src={first.src} alt={first.alt || ''} loading="lazy" decoding="async" />
+    {first.caption && <figcaption class="mb-cap mb-cap-over">{first.caption}</figcaption>}
+  </figure>
+)}
+{layout !== 'full' && images.length > 0 && (
+  <section class:list={["mb", `mb-${tone}`]}>
+    <div class:list={["mb-grid", `mb-${layout}`]}>
+      {images.map((im) => (
+        <figure class="mb-fig">
+          <img src={im.src} alt={im.alt || ''} loading="lazy" decoding="async" />
+          {im.caption && <figcaption class="mb-cap">{im.caption}</figcaption>}
+        </figure>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+.mb { padding: 0 0 clamp(40px, 8vh, 90px); }
+.mb-light { background: var(--paper, #F5F3EF); }
+.mb-dark  { background: var(--ink, #161514); }
+.mb-grid {
+  max-width: var(--wrap, 1300px);
+  margin: 0 auto;
+  padding: 0 var(--pad, clamp(22px, 5vw, 40px));
+  display: grid;
+  gap: clamp(14px, 2vw, 26px);
+  align-items: start;
+}
+.mb-duo  { grid-template-columns: 1fr 1fr; }
+.mb-trio { grid-template-columns: repeat(3, 1fr); }
+.mb-stack { grid-template-columns: 1fr; }
+@media (max-width: 760px) { .mb-duo, .mb-trio { grid-template-columns: 1fr; } }
+
+.mb-fig { margin: 0; }
+.mb-fig img {
+  width: 100%; height: auto; display: block; border-radius: 4px;
+  transition: transform .5s cubic-bezier(.22,1,.36,1);
+}
+.mb-fig:hover img { transform: scale(1.015); }
+.mb-cap {
+  display: block; padding: 9px 0 0;
+  font-family: var(--mono, monospace);
+  font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--dim, #8f8d88);
+}
+
+.mb-full { margin: 0; position: relative; overflow: hidden; }
+.mb-full img { width: 100%; height: clamp(340px, 62vh, 660px); object-fit: cover; display: block; }
+.mb-cap-over {
+  position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+  background: rgba(22, 21, 20, .55); color: var(--paper, #F5F3EF);
+  padding: 6px 13px; margin: 0; backdrop-filter: blur(2px);
+}
+</style>
