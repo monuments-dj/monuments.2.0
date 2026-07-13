@@ -1,5 +1,19 @@
 # Monuments Site — working agreement
 
+## 📄 SOURCE OF TRUTH — shared docs in the repo (read BEFORE writing copy)
+DJ's handoff docs live in `docs/` so every chat + Code reads the same file — no
+Dropbox/Google fetching, no auth walls, always current on `git pull`. The repo IS
+the shared memory. Read before touching copy:
+- `docs/WORK-PAGES-COPY-HANDOFF.md` — running copy doc: every work page, every fix.
+  LOCKED FACTS: no em dashes · podcast = 30K (never 300K) · Flashpoint colors
+  (blue lighting / yellow studio / red accessories) · Xperia numbers never blended
+  (only PRO-I has metrics) · Know Vape credits April Frame by name · On Camera
+  audience always attributed, no "2M+ followers" · Buck the Quo + AC Boise never
+  claim "directed the build/experiential."
+- `docs/MONUMENTS-VOICE.md` — voice guide. ⏳ PENDING: DJ to drop it in.
+Workflow: read the voice doc → apply copy one page at a time → grep the build for
+em dashes (— –) after each page.
+
 ## ⛔ STOP — DO THIS FIRST, EVERY SESSION, BEFORE ANY EDIT
 **This repo is edited from MULTIPLE places (this CLI + Cowork + maybe GitHub web).**
 **Your local copy is probably STALE. Before touching ANY file, run:**
