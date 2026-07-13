@@ -10,15 +10,8 @@ import { work as workAll } from '../data/work.js';
 // specimen for the insight block (ELEMENT 31) — proves the per-page data wiring
 const cwiIns = workAll.find((w) => w.slug === 'cwi-lets-get-started') || {};
 
-// header-slider title shrinks as the title gets longer, so the longer v4 titles
-// don't blow up to 3 lines. clamp() keeps each tier responsive down to mobile.
-const hsTitleSize = (t = '') => {
-  const n = t.length;
-  if (n <= 16) return 'clamp(42px, 7vw, 104px)';
-  if (n <= 24) return 'clamp(36px, 5.4vw, 78px)';
-  if (n <= 34) return 'clamp(32px, 4.4vw, 60px)';
-  return 'clamp(27px, 3.5vw, 48px)';
-};
+// (header title is now a two-line client:/campaign lockup — sizing lives in CSS,
+//  fluid vw so it scales with the viewport)
 
 // === THE KIT · case-page element library ===
 // The single source of truth for case-page elements. When an element needs a fix
@@ -626,7 +619,7 @@ a{color:inherit;text-decoration:none}
       <div class={`hs-slide${i === 0 ? ' on' : ''}`} data-i={i}>
         <img loading="lazy" decoding="async" src={w.img} alt={w.title}>
         <div class="hs-in wrap">
-          <h2 style={`font-size:${hsTitleSize(w.title)}`}>{w.title}</h2>
+          <h2><span class="hs-lead">{w.hLead}:</span><span class="hs-name">{w.hName}</span></h2>
           <p class="hs-blurb">{w.logline}</p>
           <span class="hs-did">{w.role}</span>
           {(w.logo && !w.logoText) ? <span class="hs-logochip"><img class="hs-logo" src={`/logos/${w.logo}-color.png`} alt={w.slug}></span> : null}
@@ -1033,7 +1026,10 @@ a{color:inherit;text-decoration:none}
 .hs-slide::after{content:'';position:absolute;inset:-20%;z-index:1;pointer-events:none;opacity:.18;mix-blend-mode:overlay;background-size:300px 300px;animation:grainShift 1.05s steps(6) infinite;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 @media (prefers-reduced-motion:reduce){.hs-slide::after{animation:none}}
 .hs-in{position:relative;z-index:2;width:100%;display:flex;flex-direction:column;justify-content:center;padding-top:6vh;padding-bottom:6vh}
-.hs-slide h2{color:#fff;margin:0;font-family:var(--disp);font-weight:var(--dispw2,600);font-size:clamp(48px,7.4vw,112px);line-height:1.02;letter-spacing:-.01em;text-transform:uppercase}
+/* two-line header lockup: client label (:) on top, campaign big below. fluid vw so it scales. */
+.hs-slide h2{margin:0;font-family:var(--disp);font-weight:var(--dispw2,600);text-transform:uppercase;letter-spacing:-.02em}
+.hs-lead{display:block;font-size:clamp(20px,3vw,46px);line-height:1;color:rgba(245,243,239,.62);margin-bottom:.12em}
+.hs-name{display:block;font-size:clamp(46px,9.2vw,150px);line-height:.94;color:#fff}
 /* header order: title -> logline -> what I did -> logo (color) on a light chip so it reads on any header */
 .hs-did{display:block;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--spark)}
 .hs-logochip{display:inline-flex;align-self:flex-start;margin-top:20px;background:var(--paper);padding:9px 15px;border-radius:5px;box-shadow:0 6px 20px rgba(0,0,0,.28)}
@@ -1056,7 +1052,7 @@ a{color:inherit;text-decoration:none}
 .hs-arrows{display:flex;gap:8px}
 .hs-arrows button{width:38px;height:38px;border-radius:50%;border:1px solid rgba(245,243,239,.4);background:rgba(10,10,10,.4);color:#fff;font-size:15px;cursor:pointer;backdrop-filter:blur(4px);transition:background .3s,color .3s}
 .hs-arrows button:hover{background:#fff;color:var(--ink)}
-@media(max-width:680px){.hs-slide h2{font-size:clamp(38px,10vw,60px)}.hs-note{display:none}}
+@media(max-width:680px){.hs-lead{font-size:clamp(16px,4.5vw,26px)}.hs-name{font-size:clamp(40px,12vw,64px)}.hs-note{display:none}}
 /* 25 · COUNT-UP + CALLOUTS (#el-countup / #el-callout) */
 .cuwrap{padding:8vh 0 2vh}
 .countrow{display:flex;justify-content:center;gap:clamp(30px,6vw,90px);flex-wrap:wrap;text-align:center}
