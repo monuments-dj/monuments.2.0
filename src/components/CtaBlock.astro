@@ -1,0 +1,34 @@
+---
+// CtaBlock.astro — the closing call-to-action band. Kicker + big heading + a
+// button. Defaults to the locked "Let's talk" CTA. Self-contained.
+//
+//   <CtaBlock heading={`Let's build something <span class="serif">worth remembering.</span>`} />
+interface Props {
+  kicker?: string;
+  heading: string;        // may include <span class="serif">…</span>
+  href?: string;
+  label?: string;
+}
+const {
+  kicker = '✳ Being forgettable is expensive',
+  heading,
+  href = 'mailto:monuments.cc@gmail.com',
+  label = "Let's talk ↗",
+} = Astro.props;
+---
+<section class="ctab">
+  <div class="ctab-in">
+    {kicker && <span class="ctab-k">{kicker}</span>}
+    <h2 class="ctab-h" set:html={heading} />
+    <a class="ctab-btn" href={href}>{label}</a>
+  </div>
+</section>
+<style>
+.ctab { background: var(--ink, #161514); color: var(--paper, #F5F3EF); padding: clamp(70px, 15vh, 160px) 0; }
+.ctab-in { max-width: var(--wrap, 1300px); margin: 0 auto; padding: 0 var(--pad, clamp(22px,5vw,40px)); }
+.ctab-k { display: block; font-family: var(--mono, monospace); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--spark, #EFA1AD); margin-bottom: 22px; }
+.ctab-h { margin: 0 0 34px; font-family: var(--disp, sans-serif); font-weight: var(--dispw, 800); font-size: clamp(32px, 5vw, 70px); line-height: 1; letter-spacing: -.03em; text-transform: uppercase; max-width: 16ch; }
+.ctab-h :global(.serif) { font-family: var(--serif, 'Instrument Serif', serif); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: -.01em; }
+.ctab-btn { display: inline-block; font-family: var(--mono, monospace); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink, #161514); background: var(--paper, #F5F3EF); padding: 15px 30px; border-radius: 99px; transition: background .3s, color .3s; }
+.ctab-btn:hover { background: var(--red, #E0311A); color: var(--paper, #F5F3EF); }
+</style>

@@ -1,0 +1,75 @@
+---
+// PageHero.astro — the page-top hero. Background image, dark scrim, big title,
+// a case-file kicker (bottom-left) and an NFO block (bottom-right), with an
+// optional RoleTag under the title. Self-contained, no fragile JS.
+//
+//   <PageHero
+//     image="/case-studies/xxx/hero.jpg"
+//     title={`Page title, <span class="serif">two lines.</span>`}
+//     kicker={`<b>\\ Case file</b><br>Client · Project<br>Discipline · Year`}
+//     role="creative direction · your role"
+//     nfoHead="NFO"
+//     nfo={["Client · Name", "Role · Your role", "Frame · MC-0000-00"]}
+//   />
+import RoleTag from './RoleTag.astro';
+interface Props {
+  image: string;
+  title: string;          // may include <br> and <span class="serif">…</span>
+  kicker?: string;        // bottom-left; may include <b> and <br>
+  role?: string;          // RoleTag text under the title
+  nfo?: string[];         // bottom-right lines; each may include markup
+  nfoHead?: string;       // small highlighted badge above the NFO lines
+  height?: string;        // default '78svh'
+}
+const { image, title, kicker, role, nfo = [], nfoHead, height = '78svh' } = Astro.props;
+---
+<header class="ph" style={`--ph-h:${height}`}>
+  <img class="ph-bg" src={image} alt="" />
+  <div class="ph-scrim"></div>
+  <div class="ph-t">
+    <h1 class="ph-title" set:html={title} />
+    {role && <RoleTag text={role} />}
+  </div>
+  {kicker && <div class="ph-kck" set:html={kicker} />}
+  {(nfo.length > 0 || nfoHead) && (
+    <div class="ph-nfo">
+      {nfoHead && <span class="ph-nfo-h">{nfoHead}</span>}
+      {nfo.map((l) => <span set:html={l} />)}
+    </div>
+  )}
+</header>
+<style>
+.ph { position: relative; height: var(--ph-h, 78svh); min-height: 540px; overflow: hidden; background: var(--ink, #161514); }
+.ph-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(1.03) brightness(.5); }
+.ph-scrim { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 44%, rgba(22,21,20,.5), rgba(22,21,20,.18) 58%, rgba(22,21,20,.46)); }
+.ph-t { position: absolute; left: 50%; top: 45%; transform: translate(-50%, -50%); width: min(94%, var(--wrap, 1300px)); text-align: center; z-index: 2; color: var(--paper, #F5F3EF); }
+.ph-title {
+  margin: 0; font-family: var(--disp, sans-serif); font-weight: var(--dispw, 800);
+  font-size: clamp(46px, 8.1vw, 113px); line-height: .92; letter-spacing: -.035em; text-transform: uppercase;
+  opacity: 0; animation: phRise 1s .15s cubic-bezier(.22,1,.36,1) forwards;
+}
+.ph-title :global(.serif) { font-family: var(--serif, 'Instrument Serif', serif); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: -.01em; }
+@keyframes phRise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.ph-kck {
+  position: absolute; left: var(--pad, clamp(22px,5vw,40px)); bottom: 11vh; z-index: 2;
+  font-family: var(--mono, monospace); font-size: 11px; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--paper, #F5F3EF); line-height: 1.9; opacity: 0; animation: phFade 1s .6s forwards;
+}
+.ph-kck :global(b) { color: var(--spark, #EFA1AD); font-weight: 400; }
+.ph-nfo {
+  position: absolute; right: var(--pad, clamp(22px,5vw,40px)); bottom: 11vh; z-index: 2; text-align: left;
+  font-family: var(--mono, monospace); font-size: 11px; letter-spacing: .09em; text-transform: uppercase;
+  line-height: 1.9; color: var(--paper, #F5F3EF); opacity: 0; animation: phFade 1s .8s forwards;
+}
+.ph-nfo-h { color: var(--struct, #EFA1AD); background: var(--paper, #F5F3EF); padding: 1px 7px; display: inline-block; margin-bottom: 8px; }
+.ph-nfo span { display: block; }
+@keyframes phFade { to { opacity: 1; } }
+@media (max-width: 680px) {
+  .ph-kck, .ph-nfo { bottom: 6vh; }
+  .ph-title { font-size: clamp(34px, 10vw, 52px); }
+  .ph-nfo { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ph-title, .ph-kck, .ph-nfo { animation: none; opacity: 1; }
+}
+</style>

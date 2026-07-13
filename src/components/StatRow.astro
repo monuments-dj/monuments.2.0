@@ -1,0 +1,28 @@
+---
+// StatRow.astro — the at-a-glance stat band on the accent color. Text rides the
+// --on-rgb ink so it reads on any accent. Self-contained.
+//
+//   <StatRow
+//     stats={[{ value: '4x', label: 'a number' }, { value: '2M+', label: 'another' }]}
+//     note="One supporting line, right-aligned."
+//   />
+interface Stat { value: string; label: string; }
+interface Props { stats: Stat[]; note?: string; }
+const { stats = [], note } = Astro.props;
+---
+<div class="sr">
+  <div class="sr-in">
+    {stats.map((s) => (
+      <div class="sr-stat"><b>{s.value}</b><span>{s.label}</span></div>
+    ))}
+    {note && <p class="sr-note">{note}</p>}
+  </div>
+</div>
+<style>
+.sr { background: var(--struct, #EFA1AD); color: rgb(var(--on-rgb, 22 21 20)); border-bottom: 1px solid rgba(var(--on-rgb, 22 21 20), .18); }
+.sr-in { max-width: var(--wrap, 1300px); margin: 0 auto; padding: 22px var(--pad, clamp(22px,5vw,40px)); display: flex; flex-wrap: wrap; gap: 22px 44px; align-items: baseline; }
+.sr-stat b { display: block; font-family: var(--disp, sans-serif); font-weight: var(--dispw2, 600); font-size: clamp(24px, 3vw, 40px); line-height: 1; letter-spacing: -.02em; }
+.sr-stat span { display: block; margin-top: 6px; font-family: var(--mono, monospace); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; opacity: .72; }
+.sr-note { margin: 0 0 0 auto; max-width: 34ch; font-family: var(--mono, monospace); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; opacity: .72; line-height: 1.7; align-self: center; }
+@media (max-width: 680px) { .sr-note { margin-left: 0; } }
+</style>
