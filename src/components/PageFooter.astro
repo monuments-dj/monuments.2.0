@@ -165,8 +165,8 @@ const { tag } = Astro.props;
     root.setAttribute('data-font',f);
     if(tool)tool.querySelectorAll('[data-font]').forEach(function(b){b.classList.toggle('on',b.dataset.font===f);});
   }
-  applyAcc(localStorage.getItem('mnmt-accent')||'bw');
-  applyFont(localStorage.getItem('mnmt-font')||'cut');
+  applyAcc(localStorage.getItem('mnmt-accent')||'bw');   // BAKED default: black + white (DJ 2026-07-13)
+  applyFont(localStorage.getItem('mnmt-font')||'tiny');  // BAKED default: 02 TINY — Inter + Fraunces (DJ 2026-07-13)
   if(!tool)return;
   // the switcher lives on THE KIT only (DJ 2026-07-11: it's a typography
   // SYSTEM workbench, not a sitewide toy) - picks still apply everywhere
