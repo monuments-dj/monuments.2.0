@@ -1,22 +1,19 @@
 ---
-// page-template.astro — a WORKED EXAMPLE, built from the block system with real
-// copy (Art of Visuals). Copy this file, rename it under src/pages/work/, and
-// swap the copy + images in each block. Every section is a named, self-contained
-// block (src/components/): PageHero · StatRow · TextBlock · MediaBlock ·
-// LedgerBlock · QuoteBlock · CallSheet · CtaBlock · NextFile · PageFooter.
-// Compose in any order; alternate light and dark for rhythm. Nothing is bespoke,
-// so swapping copy or images can't break the layout.
+// page-template.astro — the WORKED-EXAMPLE page template. Real Kit elements, real
+// copy (Art of Visuals). Copy this file, rename it under src/pages/work/, and swap
+// the copy + images inside each named block. Every block below is a real element
+// pulled straight from the work pages / Kit — nothing bespoke, nothing to break.
+//
+// BLOCKS IN HERE (each is labelled with an HTML comment where it's used):
+//   HERO .hero  ·  STATS 3 ways (.statrow band / .statbeat one-number / .cu count-up)
+//   TEXT 3 ways (.story simple paragraph / .block two-column / .callout pull-quote + chips)
+//   PHOTOS 3 ways (.break full-bleed / .frames contact sheet / .bob ledger)
+//   QUOTE .quote  ·  CREDITS CallSheet  ·  NextFile  ·  PageFooter
 // Not linked in nav + noindexed — reference only.
-import PageHero from '../components/PageHero.astro';
-import StatRow from '../components/StatRow.astro';
-import TextBlock from '../components/TextBlock.astro';
-import MediaBlock from '../components/MediaBlock.astro';
-import LedgerBlock from '../components/LedgerBlock.astro';
-import QuoteBlock from '../components/QuoteBlock.astro';
 import CallSheet from '../components/CallSheet.astro';
-import CtaBlock from '../components/CtaBlock.astro';
 import NextFile from '../components/NextFile.astro';
 import PageFooter from '../components/PageFooter.astro';
+import RoleTag from '../components/RoleTag.astro';
 const AOV = '/case-studies/art-of-visuals';
 ---
 <!doctype html>
@@ -25,112 +22,340 @@ const AOV = '/case-studies/art-of-visuals';
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<title>Page template · Art of Visuals · Monuments</title>
+<title>Page template · Monuments</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style is:global>
 :root{
-  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --red:#E0311A;
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
   --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
   --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
   --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
-  --serif:'Instrument Serif',serif;
-  --mono:'Fragment Mono',monospace;
+  --serif:'Instrument Serif',serif; --mono:'Fragment Mono',monospace;
   --spark:var(--rose); --struct:var(--rose); --on-rgb:22,21,20;
 }
 *{margin:0;box-sizing:border-box}
-body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}html{overflow-x:clip}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}html{overflow-x:clip}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 a{color:inherit;text-decoration:none}
+
 .corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
 .corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
 .corners .c1{top:20px;left:38px;pointer-events:auto}
 .corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
-.corners .c1 i{font-style:normal;color:#fff;display:inline-block;animation:tplspin 7s linear infinite}
+.corners .c1 i{font-style:normal;color:#fff;display:inline-block;animation:spin 7s linear infinite}
 .corners .c2{top:26px;right:22px;pointer-events:auto}
-.corners .c2 a{font-size:15px;letter-spacing:.06em;margin-left:22px}
+.corners .c2 a{font-size:15px;letter-spacing:.06em;margin-left:22px;position:relative;padding-bottom:3px;transition:opacity .3s}
+.corners .c2 a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .42s cubic-bezier(.22,1,.36,1)}
+.corners .c2 a:hover::after{transform:scaleX(1);transform-origin:left}
 .corners .c3{bottom:20px;left:22px}
 .corners .c4{bottom:20px;right:22px}
-@keyframes tplspin{to{transform:rotate(360deg)}}
-.tpl-credits{background:var(--paper);color:var(--ink)}
-.tpl-credits .in{max-width:var(--wrap);margin:0 auto;padding:clamp(48px,9vh,90px) var(--pad)}
-@media (max-width:680px){.corners .c2,.corners .c3{display:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
+
+/* HERO — title in the campaign photograph */
+.hero{position:relative;height:78svh;min-height:560px;overflow:hidden;background:var(--ink)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.02) brightness(0.59)}
+.hero .t{z-index:72;position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(60px,11.2vw,149px);line-height:.86;letter-spacing:-.035em;text-transform:uppercase;mix-blend-mode:screen}
+.hero .t .serif{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.hero .t .spark{color:var(--spark);mix-blend-mode:normal}
+.hero .t .ln{display:block;overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em}
+.hero .t .ln>span{display:block;transform:translateY(125%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero .t .ln:nth-child(2)>span{animation-delay:.12s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .nfo{z-index:72;position:absolute;right:var(--pad);bottom:11vh;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
+.hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
+.hero .kck{z-index:72;position:absolute;left:var(--pad);bottom:11vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--paper);opacity:0;animation:fade 1s .7s forwards;line-height:1.9}
+.hero .kck b{color:var(--spark);font-weight:400}
+@keyframes fade{to{opacity:1}}
+
+/* STATS · way 1 — the at-a-glance band */
+.statrow{background:var(--struct);color:rgb(var(--on-rgb));border-bottom:1px solid rgba(var(--on-rgb),.18)}
+.statrow>.in{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;padding:16px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66)}
+.statrow b{color:rgb(var(--on-rgb));font-weight:400}
+
+/* STATS · way 2 — one number as the chapter break */
+.statbeat{background:var(--struct);color:rgb(var(--on-rgb))}
+.statbeat .in{display:flex;justify-content:center;gap:clamp(34px,7vw,100px);flex-wrap:wrap;text-align:center;padding:10vh var(--pad)}
+.statbeat b{display:block;font-weight:var(--dispw);font-size:clamp(40px,5.6vw,86px);letter-spacing:-.04em;line-height:.85}
+.statbeat span{display:block;margin-top:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:rgba(var(--on-rgb),.72);max-width:22ch}
+
+/* STATS · way 3 — numbers that count up when they scroll in */
+.paper{background:var(--paper);color:var(--ink)}
+.cuwrap{padding:8vh 0 2vh}
+.countrow{display:flex;justify-content:center;gap:clamp(30px,6vw,90px);flex-wrap:wrap;text-align:center}
+.cu b{display:block;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(40px,6vw,90px);letter-spacing:-.04em;line-height:.85;color:var(--ink);font-variant-numeric:tabular-nums}
+.cu span{display:block;margin-top:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+
+/* TEXT · way 1 — simple paragraph (headline + body prose) */
+.story{display:grid;grid-template-columns:.62fr 1.38fr;gap:56px 64px;padding-top:8vh;padding-bottom:8vh;align-items:start}
+.story .side .k{color:var(--red)}
+.story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
+.story h2 .serif{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none}
+.story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
+.story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
+
+/* TEXT · way 2 — headline on top, two-column body */
+.block{padding-top:8vh;padding-bottom:8vh}
+.block .k{color:var(--red);display:block;margin-bottom:12px}
+.block h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;max-width:24ch;margin:0}
+.block h2 .serif{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none}
+.block .cols{columns:2;column-gap:64px;margin-top:40px}
+.block .cols p{color:#4c4a45;font-size:16.5px;line-height:1.62;margin:0 0 1.25em;break-inside:avoid}
+.block .cols p b{color:var(--ink);font-weight:600}
+@media(max-width:820px){.block .cols{columns:1}}
+
+/* TEXT · way 3 — pull-quote + fact chips to break up a wall of copy */
+.calloutwrap{padding:4vh 0 9vh}
+.co-body{max-width:60ch;color:var(--ink);font-size:clamp(16px,1.4vw,19px);line-height:1.65;opacity:.85}
+.callout.co-pull{position:relative;display:flex;flex-direction:column;gap:10px;margin:34px 0;padding:4px 0 4px 26px}
+.co-pull .co-bar{position:absolute;left:0;top:2px;bottom:2px;width:4px;border-radius:4px;background:var(--red)}
+.co-pull p{font-family:var(--serif);font-style:italic;font-size:clamp(24px,3.2vw,40px);line-height:1.18;color:var(--ink);max-width:24ch;margin:0}
+.co-pull .co-src{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.factchips{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:9px 15px;display:inline-flex;align-items:center}
+.chip b{font-family:var(--disp);font-weight:var(--dispw);font-size:15px;margin-right:7px;letter-spacing:-.02em}
+
+/* PHOTOS · way 1 — full-bleed parallax break */
+.break{position:relative;height:52svh;overflow:hidden}
+.break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;object-position:50% 50%;will-change:transform}
+.break .cap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.92);background:rgba(22,21,20,.42);padding:6px 12px;backdrop-filter:blur(2px)}
+
+/* PHOTOS · way 2 — contact-sheet frames */
+.gal{padding:9vh 0}
+.gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:16px}
+.gal .bar .mono b{color:var(--red)}
+.frames{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;grid-auto-flow:dense}
+.fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;opacity:0;transform:translateY(16px) rotate(-.6deg)}
+.frames.show .fr{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
+.fr img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.96)}
+.fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
+.frames.show .fr:hover{transform:rotate(-1deg) scale(1.03);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
+.fr.wide{grid-column:span 2}
+.fr.wide img{aspect-ratio:8/4.6}
+
+/* PHOTOS · way 3 — the book-of-business ledger: thumb + title + meta + arrow */
+.bob{padding:2vh 0 6vh}
+.bob .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;margin-bottom:4px}
+.bob .bar .mono b{color:var(--red)}
+.bob-rows{border-top:2px solid var(--ink)}
+.bob-row{display:grid;grid-template-columns:118px 1fr auto 28px;align-items:center;gap:18px 26px;padding:14px 2px;border-bottom:1px solid var(--line);transition:background .3s}
+.bob-row img{width:118px;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:5px;filter:grayscale(1) contrast(1.04);transition:filter .35s}
+.bob-row .bt{font-weight:var(--dispw2);font-size:clamp(17px,1.7vw,23px);letter-spacing:-.015em;line-height:1.05;text-transform:uppercase}
+.bob-row .bm{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#8f8d88;text-align:right}
+.bob-row .ba{font-size:14px;color:var(--red);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.bob-row:hover{background:rgba(22,21,20,.035)}
+.bob-row:hover img{filter:none}
+.bob-row:hover .ba{transform:translate(4px,-3px)}
+@media (max-width:680px){.bob-row{grid-template-columns:86px 1fr 20px}.bob-row .bm{display:none}.bob-row img{width:86px}}
+
+/* QUOTE on the accent */
+.quote{background:var(--spark);color:var(--ink);padding:15vh 0}
+.quote p.q{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(28px,4vw,58px);line-height:1.14;max-width:24ch}
+.quote p.q b{font-family:var(--disp);font-style:normal;font-weight:var(--dispw);text-transform:uppercase;font-size:.86em;letter-spacing:-.02em}
+.quote .who{margin-top:28px;color:rgba(22,21,20,.6)}
+
+/* CREDITS — the call-sheet slip (CallSheet.astro) */
+.credits{padding:10vh 0}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .story{grid-template-columns:1fr}
+  .frames{grid-template-columns:1fr 1fr}.fr.wide{grid-column:span 2}
+  .hero .kck{display:none}
+}
+@media (max-width:680px){
+  .corners .c2,.corners .c3,.corners .c4{display:none}
+  .corners .c1 b{font-size:23px}
+  .hero .t{width:100%!important;font-size:clamp(32px,8.8vw,48px)!important;padding:0 16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero .t .ln>span{transform:none}.hero .nfo,.hero .kck{opacity:1}.rv{opacity:1;transform:none}.frames .fr{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
+<div class="companion" aria-hidden="true">✳</div>
 <div class="corners">
   <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
   <span class="c2"><a href="/work">Work</a><a href="/about">About</a><a href="/contact">Contact</a></span>
-  <span class="c3">MC-AOV-01 · Art of Visuals · Worked example</span>
+  <span class="c3">MC-2024-01 · Art of Visuals · Worked example</span>
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
-<PageHero
-  image={`${AOV}/hero-poster.jpg`}
-  title={`From community, <span class="serif">to agency.</span>`}
-  kicker={`<b>\\ Case file</b><br>Art of Visuals<br>Creative direction · Four years`}
-  role="creative director · art of visuals"
-  nfoHead="NFO"
-  nfo={["Client · Art of Visuals", "Role · Creative Director", "Scope · The agency build", "Frame · MC-AOV-01"]}
-/>
+<!-- HERO · .hero — background photo + title (serif accent), kicker + NFO corners -->
+<header class="hero">
+  <img src={`${AOV}/hero-poster.jpg`} alt="Art of Visuals campaign work">
+  <div class="t">
+    <span class="ln"><span>From community</span></span>
+    <span class="ln"><span>to <span class="serif">agency</span><span class="spark">.</span></span></span>
+    <RoleTag text="creative director" />
+  </div>
+  <div class="kck">
+    <b>\ Case file</b><br>
+    Art of Visuals · Agency growth<br>
+    Not one campaign. A book of business.
+  </div>
+  <div class="nfo">
+    <span class="h">NFO</span><br>
+    Agency · Art of Visuals<br>
+    Role · Creative Director<br>
+    Roster · Sony, Adorama, MSI, Intel +<br>
+    Frame · MC-2024-01
+  </div>
+</header>
 
-<StatRow
-  stats={[
-    { value: "4x", label: "agency revenue growth" },
-    { value: "2M+", label: "the community behind the agency" },
-    { value: "$200K+", label: "commercial budgets by the end" },
-  ]}
-  note="Roster · Sony · Adorama · MSI · Intel · Lexar · Peak Design · WANDRD"
-/>
+<!-- STATS · way 1 · .statrow — the at-a-glance band under the hero -->
+<div class="statrow">
+  <div class="wrap in">
+    <span><b>4x</b> · agency revenue growth</span>
+    <span><b>2M+</b> · the community behind the agency</span>
+    <span><b>$200K+</b> · commercial budgets by the end</span>
+    <span><b>Roster</b> · Sony · Adorama · MSI · Intel · Lexar · Peak Design · WANDRD</span>
+  </div>
+</div>
 
-<TextBlock tone="light" variant="statement" kicker="\ The insight" heading={`Brands don't know <span class="tb-serif">how to be cool.</span>`}>
-  <p>That's not an insult. It's a market.</p>
-  <p>Sony and MSI would show up with a product built for creators and the same questions every time: how do we talk to them, what reads as real, which voices actually matter? AOV had the audience, the data, and years of making the content, so we weren't guessing. We were a voice of authority, and we knew the others. We sold strategy and consulting on culture, made the introductions, and managed the influencers.</p>
-  <p>That's why the work compounded. We weren't a vendor renting out a camera crew. We were the translator between brands and the creator world.</p>
-</TextBlock>
+<!-- TEXT · way 1 · .story — simple paragraph: headline on the left, body prose on the right -->
+<section class="paper">
+  <div class="wrap story">
+    <div class="side rv">
+      <span class="k mono">\ The number</span>
+      <h2>A community, turned into a <span class="serif">creative business.</span></h2>
+    </div>
+    <div class="body rv">
+      <p>When I joined Art of Visuals, it was a community page with a massive audience, pushing two million, sharing inspiration, reposting, and running giveaways. Every piece of work lived on AOV's own channels.</p>
+      <p>Four years later it was a working agency: commercials with budgets north of $200K, influencer campaigns with the biggest voices in tech, an MSI campaign that launched in Times Square, and a global client roster. Revenue was 4x.</p>
+      <p>The audience was mostly there before me. Some of the brands were too. What changed was how we engaged them: bigger pitches, more multi-platform work. The agency is what we built, and the creative was my lane.</p>
+    </div>
+  </div>
+</section>
 
-<MediaBlock layout="trio" images={[
-  { src: `${AOV}/msi/msi-02.jpg`, alt: "MSI campaign still", caption: "MSI · a campaign that launched in Times Square" },
-  { src: `${AOV}/msi/msi-04.jpg`, alt: "MSI campaign still", caption: "MSI · on the shoot" },
-  { src: `${AOV}/msi/msi-08.jpg`, alt: "MSI campaign still", caption: "MSI · the boards" },
-]} />
-
-<TextBlock tone="dark" kicker="\ The number" heading={`A community, turned into a <span class="tb-serif">creative business.</span>`}>
-  <p>When I joined Art of Visuals, it was a community page with a massive audience, pushing two million, sharing inspiration, reposting, and running giveaways. Every piece of work lived on AOV's own channels.</p>
-  <p>Four years later it was a working agency: commercials with budgets north of $200K, influencer campaigns with the biggest voices in tech, an MSI campaign that launched in Times Square, and a global client roster. Revenue was 4x.</p>
-  <p>The audience was mostly there before me. Some of the brands were too. What changed was how we engaged them: bigger pitches, more multi-platform work. The agency is what we built, and the creative was my lane.</p>
-</TextBlock>
-
-<LedgerBlock
-  kicker="\ The book of business"
-  heading={`Not one campaign. <span class="lb-serif">A book of business.</span>`}
-  rows={[
-    { href: "/work/sony-this-moment", img: `/case-studies/sony-this-moment/gallery/tm-05.jpg`, title: "Sony · This Moment", meta: "XM4 · national campaign film · director + CD" },
-    { href: "/work/sony-xm5", img: `${AOV}/gallery/xm5-01.jpg`, title: "Sony · XM5", meta: "Headphone launch · cast as talent · 1.3M impressions" },
-    { href: "/work/sony-xperia", img: `${AOV}/gallery/xperia-01.jpg`, title: "Sony · Xperia", meta: "Five launches, four years · films + stills" },
-    { href: "/work/adorama-music", img: `/case-studies/adorama-music/gallery/am-01.jpg`, title: "Adorama · Create No Matter What", meta: "Content series · Shorty finalist" },
-    { href: "/work/on-camera", img: `${AOV}/gallery/podcast-cover.jpg`, title: "On Camera · Creator Clubhouse", meta: "Weekly podcast · 30K monthly listeners" },
-  ]}
-/>
-
-<MediaBlock layout="duo" images={[
-  { src: `${AOV}/gallery/xm4-01.jpg`, alt: "Sony XM4 campaign film still", caption: "The XM4 film, shot on the a7S III" },
-  { src: `${AOV}/gallery/xm5-01.jpg`, alt: "Sony XM5 launch still", caption: "The XM5 launch, influencers cast as talent" },
-]} />
-
-<QuoteBlock
-  tone="ink"
-  quote={`Growth like that is not a lucky project. It is <b>an offer brands keep buying</b>, and creative good enough that the first job turns into the next one.`}
-  who="The agency era, in one sentence"
-/>
-
-<section class="tpl-credits">
+<!-- STATS · way 2 · .statbeat — one number IS the chapter break -->
+<section class="statbeat">
   <div class="in">
+    <div><b>1.3M</b><span>impressions from one XM5 shoot, influencers cast as talent</span></div>
+    <div><b>9%</b><span>engagement, against a 2x branded-social benchmark</span></div>
+  </div>
+</section>
+
+<!-- PHOTOS · way 1 · .break — full-bleed parallax image between chapters -->
+<div class="break">
+  <img loading="lazy" decoding="async" src={`${AOV}/gallery/xm4-01.jpg`} alt="Sony XM4 campaign still">
+  <span class="cap">✳ Sony × Art of Visuals · the reel that sold the room</span>
+</div>
+
+<!-- TEXT · way 2 · .block — headline on top, two-column body for a long section -->
+<section class="paper">
+  <div class="wrap block">
+    <span class="k mono">\ How it happened</span>
+    <h2>Everything culture <span class="serif">touches.</span></h2>
+    <div class="cols rv">
+      <p><b>The offer:</b> retainers, campaigns, one-off ads, distribution on AOV's channels, strategy and consulting. Weekly content that lived on brands' channels and in their ad accounts, focused on the outdoor space and consumer electronics.</p>
+      <p><b>The wins:</b> Sony, Adorama, MSI, Intel, Lexar, Peak Design, WANDRD. Clients from LA and New York to Japan and China. By the end: $200K+ commercials, and an MSI campaign launching in Times Square.</p>
+      <p><b>The team:</b> direct reports across the video team, scaled with crew and designers per production. I ran all creative on the agency side, sat in every design and strategy decision, and carried the pitches, the sales, and the client relationships.</p>
+      <p><b>The community:</b> it never stopped being one. Workshops, meetups, a weekly podcast at 30K monthly listeners. That is exactly what made the agency credible.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS · way 3 · .cu — the owned engine, numbers count up as they scroll in -->
+<section class="paper cuwrap">
+  <div class="wrap">
+    <div class="countrow">
+      <div class="cu"><b data-count="1700000" data-suffix="">0</b><span>Instagram community</span></div>
+      <div class="cu"><b data-count="40000000" data-suffix="">0</b><span>monthly impressions</span></div>
+      <div class="cu"><b data-count="120" data-suffix="">0</b><span>countries reached monthly</span></div>
+      <div class="cu"><b data-count="30000" data-suffix="">0</b><span>monthly podcast listeners</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEXT · way 3 · .callout — pull the one line worth lifting, plus fact chips -->
+<section class="paper calloutwrap">
+  <div class="wrap">
+    <p class="co-body">The smart money was making one shoot do the job of two. When Sony's XM4 headphones lined up with the a7S III, we built the schedule so a single day on set delivered two campaigns.</p>
+    <div class="callout co-pull">
+      <span class="co-bar" aria-hidden="true"></span>
+      <p>We shot the headphone commercial on the a7S III, then turned the behind-the-scenes into a second film selling the camera.</p>
+      <span class="co-src mono">the smart money</span>
+    </div>
+    <div class="factchips">
+      <span class="chip"><b>1</b> shoot, two products</span>
+      <span class="chip"><b>2</b> finished films</span>
+      <span class="chip"><b>1</b> filmed the other</span>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTOS · way 2 · .frames — the contact sheet, real frames, reveal on scroll -->
+<section class="paper">
+  <div class="wrap gal">
+    <div class="bar">
+      <span class="mono"><b>Contact sheet</b> · frames from the 4x era</span>
+      <span class="mono" style="color:#8f8d88">07 frames · hover to inspect</span>
+    </div>
+    <div class="frames" id="frames"></div>
+  </div>
+</section>
+
+<!-- PHOTOS · way 3 · .bob — the book of business: thumb + title + meta + arrow, each links out -->
+<section class="paper">
+  <div class="wrap bob">
+    <div class="bar">
+      <span class="mono"><b>The book of business</b> · campaigns delivered under this roof</span>
+      <span class="mono" style="color:#8f8d88">Every row is a case file ↗</span>
+    </div>
+    <div class="bob-rows">
+      <a class="bob-row" href="/work/sony-this-moment">
+        <img loading="lazy" decoding="async" src="/case-studies/sony-this-moment/gallery/tm-05.jpg" alt="Sony This Moment">
+        <span class="bt">Sony · This Moment</span>
+        <span class="bm mono">XM4 · national campaign film · director + CD</span>
+        <span class="ba mono">↗</span>
+      </a>
+      <a class="bob-row" href="/work/sony-xm5">
+        <img loading="lazy" decoding="async" src={`${AOV}/gallery/xm5-01.jpg`} alt="Sony XM5">
+        <span class="bt">Sony · XM5</span>
+        <span class="bm mono">influencer activation · 1.3M impressions · 9% engagement</span>
+        <span class="ba mono">↗</span>
+      </a>
+      <a class="bob-row" href="/work/adorama-music">
+        <img loading="lazy" decoding="async" src="/case-studies/adorama-music/gallery/am-01.jpg" alt="Adorama Music">
+        <span class="bt">Adorama · Create No Matter What</span>
+        <span class="bm mono">content series · Shorty finalist</span>
+        <span class="ba mono">↗</span>
+      </a>
+      <a class="bob-row" href="/work/on-camera">
+        <img loading="lazy" decoding="async" src={`${AOV}/gallery/podcast-cover.jpg`} alt="On Camera">
+        <span class="bt">Creator Clubhouse · On Camera</span>
+        <span class="bm mono">the agency podcast · 30K monthly · 12 tapes</span>
+        <span class="ba mono">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE · .quote — pull quote on the accent, with a display-type emphasis -->
+<section class="quote">
+  <div class="wrap">
+    <p class="q rv">"Growth like that is not a lucky project. It is an offer brands keep buying, and creative good enough that <b>the first job turns into the next one.</b>"</p>
+    <p class="who mono rv">The agency era, in one sentence</p>
+  </div>
+</section>
+
+<!-- CREDITS · CallSheet — the call-sheet slip -->
+<section class="paper">
+  <div class="wrap credits">
     <CallSheet
-      code="MC-AOV-01"
-      sub="Art of Visuals · credits"
-      filed="MMXXV"
+      code="MC-2024-01"
+      sub="Art of Visuals · The 4x era"
+      filed="MMXXI-MMXXIV"
       tone="light"
       rows={[
         { k: 'Strategy', v: 'Shaped what the agency sold, then packaged it into an offer brands actually bought', select: true },
@@ -143,13 +368,68 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<CtaBlock heading={`Let's build something <span class="serif">worth remembering.</span>`} />
-
-<NextFile href="/work/sony-this-moment" name="Sony · This Moment" img={`/case-studies/sony-this-moment/gallery/tm-05.jpg`} code="MC-AOV-01" />
-<PageFooter tag="Art of Visuals" />
+<!-- CLOSER · NextFile + PageFooter -->
+<NextFile href="/work" name="The Work Index" img="/case-studies/sony-this-moment/gallery/tm-05.jpg" code="MC-INDEX" />
+<PageFooter tag="Page template" />
 
 <script is:inline>
-(function(){var c=document.getElementById('clock');function t(){if(!c)return;c.textContent='LA '+new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});}t();setInterval(t,30000);})();
+// contact sheet: 7 real frames, wide frame every 4th, reveal on scroll
+(function(){
+  const imgs=['xperia-01','xm4-01','xperia-02','xm3-bts','yt-thismoment','stansport-01','podcast-cover'].map(n=>`/case-studies/art-of-visuals/gallery/${n}.jpg`);
+  const el=document.getElementById('frames');if(!el)return;
+  el.innerHTML=imgs.map((src,i)=>`
+    <figure class="fr${i%4===0?' wide':''}" style="--d:${i*45}ms">
+      <img src="${src}" alt="Contact sheet frame ${i+1}" loading="lazy" decoding="async">
+      <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · ARCHIVE</figcaption>
+    </figure>`).join('');
+  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
+})();
+
+// reveal-on-scroll for .rv
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// count-up: numbers animate to their data-count when they scroll in
+(function(){
+  var cues=[].slice.call(document.querySelectorAll('[data-count]'));
+  if(!cues.length)return;
+  var run=function(el){
+    var target=parseFloat(el.getAttribute('data-count'))||0,suf=el.getAttribute('data-suffix')||'',dur=1400,t0=null;
+    var step=function(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(target*e).toLocaleString('en-US')+suf;if(p<1)requestAnimationFrame(step);};
+    requestAnimationFrame(step);
+  };
+  var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){run(e.target);cio.unobserve(e.target);}});},{threshold:.6});
+  cues.forEach(function(c){cio.observe(c);});
+})();
+
+// hero + break parallax + companion float
+(function(){
+  const hImg=document.querySelector('.hero>img'),hT=document.querySelector('.hero .t'),
+        nfo=document.querySelector('.hero .nfo'),kck=document.querySelector('.hero .kck'),
+        brk=document.querySelectorAll('.break img'),c=document.querySelector('.companion');
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  let k=false;
+  addEventListener('scroll',()=>{
+    if(k)return;k=true;
+    requestAnimationFrame(()=>{
+      const y=scrollY,vh=innerHeight;
+      if(y<vh){
+        hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
+        hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
+        hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));
+        if(nfo)nfo.style.transform=`translateY(${y*-.16}px)`;
+        if(kck)kck.style.transform=`translateY(${y*-.06}px)`;
+      }
+      brk.forEach(b=>{const r=b.parentElement.getBoundingClientRect();if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;b.style.transform=`translateY(${p*-56}px)`}});
+      if(c)c.style.transform=`translateY(${(Math.sin(y/420)*34).toFixed(1)}px) rotate(${(y*0.22).toFixed(1)}deg)`;
+      k=false;
+    });
+  },{passive:true});
+})();
+
+// LA clock
+function clock(){var el=document.getElementById('clock');if(!el)return;el.textContent='LA '+new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});}
+clock();setInterval(clock,30000);
 </script>
 </body>
 </html>
