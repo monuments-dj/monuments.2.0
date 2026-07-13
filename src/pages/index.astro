@@ -552,6 +552,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   let raf=null;
   function upd(){
     raf=null;
+    if(sec.classList.contains('rr-live'))return;
     const r=sec.getBoundingClientRect();
     const total=r.height-innerHeight; if(total<=0)return;
     const ih=innerHeight;
@@ -700,6 +701,8 @@ clock();setInterval(clock,30000);
     rp.addEventListener('click',()=>{
       if(!rv||live)return;
       live=true;
+      rp.closest('.rr').classList.add('rr-live');
+      rp.style.transform='translate(-50%,-50%) scale(1)';
       rv.muted=false;rv.loop=false;rv.controls=true;rv.removeAttribute('aria-hidden');
       try{rv.currentTime=0;}catch(e){}
       rv.play();
