@@ -6,6 +6,10 @@ import SocialWall from '../components/SocialWall.astro';
 import NextFile from '../components/NextFile.astro';
 import TextBlock from '../components/TextBlock.astro';
 import MediaBlock from '../components/MediaBlock.astro';
+import PageHero from '../components/PageHero.astro';
+import StatRow from '../components/StatRow.astro';
+import QuoteBlock from '../components/QuoteBlock.astro';
+import CtaBlock from '../components/CtaBlock.astro';
 import '../styles/filmsplit.css';
 import { work as workAll } from '../data/work.js';
 
@@ -297,7 +301,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<div class="spec" id="el-blocks"><div class="wrap"><span class="id">ELEMENT 00 · LAYOUT BLOCKS · TextBlock + MediaBlock</span><span class="use">the composable primitives — build any page section from these, no bespoke markup, nothing to break. <b>TextBlock</b>: kicker + heading + copy, <u>default</u> or big <u>statement</u>. <b>MediaBlock</b>: images that are always visible — <u>full</u> (edge-to-edge) / <u>duo</u> / <u>trio</u> / <u>stack</u>. Alternate text and media for rhythm. <b class="lives">lives on:</b> flashpoint, rolling to every work page</span></div></div>
+<div class="spec" id="el-blocks"><div class="wrap"><span class="id">ELEMENT 00 · LAYOUT BLOCKS · the pull-from set</span><span class="use">the composable primitives — build any page section by stacking these, no bespoke markup, nothing to break. Six named blocks: <b>PageHero</b> (page-top) · <b>StatRow</b> (number band) · <b>TextBlock</b> (copy, <u>default</u>/<u>statement</u>) · <b>MediaBlock</b> (images, <u>full</u>/<u>duo</u>/<u>trio</u>/<u>stack</u>) · <b>QuoteBlock</b> (pull quote) · <b>CtaBlock</b> (closer). Each is demoed below. Alternate text and media for rhythm. <b class="lives">full page assembled from them:</b> /page-template · <b class="lives">shipping on:</b> flashpoint, rolling to every work page</span></div></div>
 
 <TextBlock variant="statement" kicker="\ TextBlock · statement" heading={`Big and punchy, for openers and <span class="tb-serif">closers.</span>`}>
   <p>The statement variant carries a large headline and a short lede. Use it to open or close a page, or to land a single idea hard.</p>
@@ -311,6 +315,29 @@ a{color:inherit;text-decoration:none}
   <p>Put a MediaBlock above or below it and you have a section with rhythm.</p>
 </TextBlock>
 <MediaBlock layout="full" images={[{ src: "/case-studies/flashpoint/gallery/fp-03.jpg", alt: "MediaBlock full-bleed demo", caption: "✳ MediaBlock · full · edge-to-edge banner" }]} />
+
+<div class="spec" id="el-hero"><div class="wrap"><span class="id">ELEMENT 00 · BLOCK · PageHero</span><span class="use">the page-top hero: background image + dark scrim + big title (serif accent line) + RoleTag + a case-file kicker bottom-left and an NFO block bottom-right. Props: <b>image, title, kicker, role, nfo[], nfoHead, height</b>. No fragile JS. <b class="lives">pull from:</b> PageHero.astro · assembled on /page-template</span></div></div>
+<PageHero
+  image="/case-studies/flashpoint/gallery/fp-03.jpg"
+  title={`PageHero block, <span class="serif">named + safe.</span>`}
+  kicker={`<b>\\ Case file</b><br>Client · Project name<br>Discipline · Year`}
+  role="creative direction · your role"
+  nfoHead="NFO"
+  nfo={["Client · Name", "Role · Your role", "Frame · MC-0000-00"]}
+  height="60svh"
+/>
+
+<div class="spec" id="el-statrow"><div class="wrap"><span class="id">ELEMENT 00 · BLOCK · StatRow</span><span class="use">the at-a-glance number band on the accent color; text rides <code>--on-rgb</code> so it reads on any accent. Props: <b>stats</b> (a value + label each) and <b>note</b>. <b class="lives">pull from:</b> StatRow.astro</span></div></div>
+<StatRow
+  stats={[{ value: "4x", label: "a headline number" }, { value: "2M+", label: "another number" }, { value: "$200K+", label: "a third number" }]}
+  note="One supporting line, right-aligned. Nothing you wouldn't say in an interview."
+/>
+
+<div class="spec" id="el-quoteblock"><div class="wrap"><span class="id">ELEMENT 00 · BLOCK · QuoteBlock</span><span class="use">a pull quote + attribution, serif italic with an optional <code>&lt;b&gt;</code> display emphasis. Props: <b>quote, who, tone</b> (accent / paper / ink). <b class="lives">pull from:</b> QuoteBlock.astro</span></div></div>
+<QuoteBlock quote={`The line that <b>sums it up</b>, in one sentence.`} who="What the quote is" tone="paper" />
+
+<div class="spec" id="el-ctablock"><div class="wrap"><span class="id">ELEMENT 00 · BLOCK · CtaBlock</span><span class="use">the closing call-to-action band: kicker + big heading + a pill button that hovers to red. Defaults to the locked "Let's talk" CTA. Props: <b>kicker, heading, href, label</b>. <b class="lives">pull from:</b> CtaBlock.astro</span></div></div>
+<CtaBlock heading={`Let's build something <span class="serif">worth remembering.</span>`} />
 
 <div class="spec" id="el-01"><div class="wrap"><span class="id">ELEMENT 01 · CASE HERO</span><span class="use">70svh image hero · 3-line title, serif accent line last · kck bottom-left, NFO bottom-right · RoleTag under title · VIDEO VARIANT: dim poster + hero loop that fades in only on the real PLAYING state (see on-camera / sony-xm5) · <b class="lives">lives on:</b> most work pages</span></div></div>
 <header class="hero">
