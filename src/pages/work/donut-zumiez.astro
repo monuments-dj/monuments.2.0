@@ -287,44 +287,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <h2>Car culture, cut for the <span class="serif">skate shop.</span></h2>
     </div>
     <div class="body rv">
-      <p>I shot and edited the launch films for the Donut x Zumiez drop, a collaboration between a car-culture media brand and a streetwear retailer. The films and the merch shipped as one release, built to live natively in feeds.</p>
+      <p>I animated and edited the launch films for the Donut x Zumiez drop, a collaboration between a car-culture media brand and a streetwear retailer. The films and the merch shipped as one release, built to live natively in feeds.</p>
     </div>
   </div>
 </section>
 
-<section class="film">
-  <div class="wrap">
-    <div class="bar">
-      <span class="mono"><b>The films</b> · Loud, fast, and funny</span>
-      <span class="mono" style="color:#8f8d88">3 cuts · click to play</span>
-    </div>
-    <div class="poster16" data-film="2eUYg_P5rfc" data-film-title="Donut x Zumiez launch film">
-      <img loading="lazy" decoding="async" src="/case-studies/donut-zumiez/gallery/yt-launch.jpg" alt="Donut x Zumiez launch film poster">
-      <video class="pvid" src="/snips/donut-zumiez.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
-      <span class="play">Play · Launch film</span>
-      <span class="fcap">✳ Launch film · Donut × Zumiez · 2023</span>
-    </div>
-    <div class="duo">
-      <div class="poster16" data-film="HEx3bUYCwdk" data-film-title="Donut x Zumiez · Croy collab">
-        <img loading="lazy" decoding="async" src="/case-studies/donut-zumiez/gallery/yt-ptcruiser.jpg" alt="Croy collab film poster">
-        <video class="pvid" src="/snips/donut-croy.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
-        <span class="play">Play · Croy collab</span>
-        <span class="fcap">✳ Croy collab</span>
-      </div>
-      <div class="poster16" data-film="UwM3_jGjz6Q" data-film-title="Donut x Zumiez · The cut">
-        <img loading="lazy" decoding="async" src="/case-studies/donut-zumiez/gallery/dz-03.jpg" alt="The cut film poster">
-        <video class="pvid" src="/snips/donut-cut.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
-        <span class="play">Play · The cut</span>
-        <span class="fcap">✳ The cut</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="break">
-  <img loading="lazy" decoding="async" class="plx" src="/case-studies/donut-zumiez/gallery/dz-02.jpg" alt="Donut x Zumiez drop still">
-  <span class="cap">✳ Donut × Zumiez · The drop · 2023</span>
-</div>
 
 <section class="paper">
   <div class="wrap story">
@@ -371,14 +338,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </section>
 
 <section class="paper">
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>The drop</b> · Films and merch, one release</span>
-      <span class="mono" style="color:#8f8d88">7 frames · hover to inspect</span>
-    </div>
-    <div class="frames" id="frames"></div>
-  </div>
-
   <div class="wrap credits rv">
     <CallSheet
       code="MC-2023-08"
@@ -407,26 +366,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/underfoot-->
 
 <script is:inline>
-// gallery: 7 real frames, masonry columns, archival captions
-(function(){
-  const shots=[
-    ['dz-01.jpg',2560,1437],
-    ['dz-02.jpg',2560,1707],
-    ['dz-03.jpg',2560,1437],
-    ['dz-04.jpg',2048,1365],
-    ['product-shirt.jpg',650,770],
-    ['merch.jpg',1920,1131],
-    ['yt-ptcruiser.jpg',1280,720]
-  ];
-  const el=document.getElementById('frames');
-  el.innerHTML=shots.map((s,i)=>`
-    <figure class="fr" style="--d:${i*45}ms">
-      <img src="/case-studies/donut-zumiez/gallery/${s[0]}" alt="Donut x Zumiez drop: frame ${i+1}" width="${s[1]}" height="${s[2]}" loading="lazy">
-      <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · Donut × Zumiez · MMXXIII</figcaption>
-    </figure>`).join('');
-  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
-})();
-
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
