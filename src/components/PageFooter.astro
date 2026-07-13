@@ -327,7 +327,13 @@ const { tag } = Astro.props;
       stronger overlay film grain above the footage, captions/chips lifted
       to z:2 so type stays clean.
    Tune ONLY the two vars. Reduced motion keeps the texture, stops the walk. */
-:root{--grain-paper:.10;--grain-media:.13}
+:root{--grain-paper:.10;--grain-media:.13;
+  /* TYPE SCALE · the copy rules, shared to every page (DJ 2026-07-13). Section
+     headers cap at --fs-h2; only the hero goes big. Defined here so pages pull
+     var(--fs-*) instead of hard-coding sizes. Specimen lives on the Kit. */
+  --fs-display:clamp(46px,8vw,100px); --fs-statement:clamp(28px,3.6vw,46px);
+  --fs-h2:clamp(22px,2.3vw,31px); --fs-h3:clamp(17px,1.4vw,20px);
+  --fs-lead:clamp(18px,1.4vw,21px); --fs-body:16.5px; --fs-cap:12.5px; --fs-mono:11px}
 .grain{display:none!important}
 
 .paper,.white,.quote,.statrow,.wmap,.tstwrap{position:relative;isolation:isolate}
