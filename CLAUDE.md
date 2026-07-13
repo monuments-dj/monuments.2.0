@@ -99,6 +99,16 @@ Every section fits ONE centered content column unless deliberately full-width:
 (hero images, dark quote bands) = simply omit the wrap. When building any new section,
 use these tokens so it aligns automatically. Don't reintroduce hardcoded `100px` gutters.
 
+## ⛔ FLOW RULE (DJ's rule 2026-07-13) — sections MUST alternate light/dark
+A page must never sit flat: **no two LIGHT bands adjacent** (never a light section
+butted against another light section — no 3 lights in a row). Light content bands
+alternate with dark bands / breaks / accent beats so the page MOVES top to bottom.
+Watch the quote band: on `--spark` it renders LIGHT in B/W, so `gallery → quote →
+credits` becomes 3 lights — insert a dark beat or flip a ground. ENFORCE with
+`node tools/flowcheck.mjs <url>` — it reads every band's ground top-to-bottom and
+FAILS on adjacent lights. Run it on any page you touch. Reference flow that passes:
+`/page-template`.
+
 ## Active work (2026-07-12 EOD): chat rotated (context full) - read TODO.md 🔄 HANDOFF block
 All sweeps GREEN at rotation (motioncheck 13 routes ALL PASS / packcheck / bw-sweep).
 Gotcha for the next chat: motioncheck "loops:0 everywhere" = dead dev server, curl a page
