@@ -1,0 +1,38 @@
+---
+// TextColumns.astro — a SIMPLE two-column text block. Just body copy in two
+// columns, on light or dark. Optional small kicker + heading. Nothing else.
+//
+//   <TextColumns tone="light" kicker="\ How it happened" heading="Optional short heading">
+//     <p>First paragraph…</p>
+//     <p>Second paragraph…</p>
+//   </TextColumns>
+//
+// tone: 'light' (paper) | 'dark' (ink)
+interface Props { tone?: 'light' | 'dark'; kicker?: string; heading?: string; }
+const { tone = 'light', kicker, heading } = Astro.props;
+---
+<section class:list={["tc", `tc-${tone}`]}>
+  <div class="tc-in">
+    {kicker && <span class="tc-k">{kicker}</span>}
+    {heading && <h3 class="tc-h" set:html={heading} />}
+    <div class="tc-cols"><slot /></div>
+  </div>
+</section>
+<style>
+.tc { padding: clamp(48px, 9vh, 96px) 0; }
+.tc-light { background: var(--paper, #F5F3EF); color: var(--ink, #161514); }
+.tc-dark  { background: var(--ink, #161514); color: var(--paper, #F5F3EF); }
+.tc-in { max-width: var(--wrap, 1380px); margin: 0 auto; padding: 0 var(--pad, clamp(22px,5vw,40px)); }
+.tc-k { display: block; font-family: var(--mono, monospace); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--red, #E0311A); margin-bottom: 16px; }
+.tc-dark .tc-k { color: var(--spark, #EFA1AD); }
+.tc-h { margin: 0 0 30px; font-family: var(--disp, sans-serif); font-weight: var(--dispw2, 600); font-size: clamp(20px, 2.3vw, 32px); letter-spacing: -.02em; line-height: 1.08; }
+.tc-cols { columns: 2; column-gap: 56px; }
+.tc-cols :global(p) { margin: 0 0 1.15em; font-size: 16.5px; line-height: 1.62; break-inside: avoid; }
+.tc-cols :global(p:last-child) { margin-bottom: 0; }
+.tc-cols :global(b), .tc-cols :global(strong) { font-weight: 600; }
+.tc-light .tc-cols :global(p) { color: #4c4a45; }
+.tc-light .tc-cols :global(b), .tc-light .tc-cols :global(strong) { color: var(--ink, #161514); }
+.tc-dark .tc-cols :global(p) { color: rgba(245,243,239,.76); }
+.tc-dark .tc-cols :global(b), .tc-dark .tc-cols :global(strong) { color: var(--paper, #F5F3EF); }
+@media (max-width: 760px) { .tc-cols { columns: 1; } }
+</style>

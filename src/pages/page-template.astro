@@ -10,6 +10,7 @@ import NextFile from '../components/NextFile.astro';
 import PageFooter from '../components/PageFooter.astro';
 import RoleTag from '../components/RoleTag.astro';
 import MasonryGallery from '../components/MasonryGallery.astro';
+import TextColumns from '../components/TextColumns.astro';
 const AOV = '/case-studies/art-of-visuals';
 // the section rhythm, top to bottom: D=dark A=accent L=light
 // HERO(D) · STATROW(A) · NUMBER(L) · BREAK(D) · HOW(L) · BEAT(A) · INSIGHT(D) · SHEET(L) · QUOTE(A) · LEDGER(L) · BREAK(D) · CTA(A) · NEXT(D)
@@ -76,7 +77,7 @@ a{color:inherit;text-decoration:none}
 .stat b{display:block;font-weight:var(--dispw);font-size:clamp(26px,2.7vw,42px);letter-spacing:-.03em;line-height:.92}
 .stat span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66);display:block;margin-top:8px}
 .stat .note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66);line-height:1.9;max-width:30ch;text-align:right}
-.stat .note b{font-weight:400;color:rgb(var(--on-rgb));display:inline}
+.stat .note b{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.08em;color:rgb(var(--on-rgb));display:inline}
 
 /* STORY · light */
 .paper{background:var(--paper);color:var(--ink)}
@@ -211,17 +212,13 @@ a{color:inherit;text-decoration:none}
   <span class="cap">✳ Sony × Art of Visuals · the reel that sold the room</span>
 </div>
 
-<!-- 5 · HOW IT HAPPENED · light -->
-<section class="paper"><div class="wrap block">
-  <span class="k mono">\ How it happened</span>
-  <h2>Everything culture <span class="serif">touches.</span></h2>
-  <div class="cols rv">
-    <p><b>The offer:</b> retainers, campaigns, one-off ads, distribution on AOV's channels, strategy and consulting. Weekly content that lived on brands' channels and in their ad accounts, focused on the outdoor space and consumer electronics.</p>
-    <p><b>The wins:</b> Sony, Adorama, MSI, Intel, Lexar, Peak Design, WANDRD. Clients from LA and New York to Japan and China. By the end: $200K+ commercials, and an MSI campaign launching in Times Square.</p>
-    <p><b>The team:</b> direct reports across the video team, scaled with crew and designers per production. I ran all creative on the agency side and carried the pitches, the sales, and the client relationships.</p>
-    <p><b>The community:</b> it never stopped being one. Workshops, meetups, a weekly podcast at 30K monthly listeners. That is exactly what made the agency credible.</p>
-  </div>
-</div></section>
+<!-- 5 · HOW IT HAPPENED · simple two-column text block · LIGHT (TextColumns.astro) -->
+<TextColumns tone="light" kicker="\ How it happened" heading="Everything culture touches.">
+  <p><b>The offer:</b> retainers, campaigns, one-off ads, distribution on AOV's channels, strategy and consulting. Weekly content that lived on brands' channels and in their ad accounts, focused on the outdoor space and consumer electronics.</p>
+  <p><b>The wins:</b> Sony, Adorama, MSI, Intel, Lexar, Peak Design, WANDRD. Clients from LA and New York to Japan and China. By the end: $200K+ commercials, and an MSI campaign launching in Times Square.</p>
+  <p><b>The team:</b> direct reports across the video team, scaled with crew and designers per production. I ran all creative on the agency side and carried the pitches, the sales, and the client relationships.</p>
+  <p><b>The community:</b> it never stopped being one. Workshops, meetups, a weekly podcast at 30K monthly listeners. That is exactly what made the agency credible.</p>
+</TextColumns>
 
 <!-- 6 · STAT BEAT · accent -->
 <section class="statbeat"><div class="in">
@@ -240,15 +237,11 @@ a{color:inherit;text-decoration:none}
   { src: `${AOV}/gallery/podcast-cover.jpg`, cap: 'Creator Clubhouse' },
 ]} />
 
-<!-- 8 · THE INSIGHT · dark -->
-<section class="block-dark"><div class="wrap block">
-  <span class="k mono">\ The insight</span>
-  <h2>Brands don't know how to be <span class="serif">cool.</span></h2>
-  <div class="cols rv">
-    <p>That's not an insult. It's a market. Sony and MSI would show up with a product built for creators and the same questions every time: how do we talk to them, what reads as real, which voices actually matter?</p>
-    <p>AOV had the audience, the data, and years of making the content, so we weren't guessing. We sold strategy and consulting on culture, made the introductions, and managed the influencers. We weren't renting out a camera crew. We were the translator between brands and the creator world.</p>
-  </div>
-</div></section>
+<!-- 8 · THE INSIGHT · simple two-column text block · DARK (TextColumns.astro) -->
+<TextColumns tone="dark" kicker="\ The insight" heading="Brands don't know how to be cool.">
+  <p>That's not an insult. It's a market. Sony and MSI would show up with a product built for creators and the same questions every time: how do we talk to them, what reads as real, which voices actually matter?</p>
+  <p>AOV had the audience, the data, and years of making the content, so we weren't guessing. We sold strategy and consulting on culture, made the introductions, and managed the influencers. We weren't renting out a camera crew. We were the translator between brands and the creator world.</p>
+</TextColumns>
 
 <!-- 9 · QUOTE · accent -->
 <section class="quote"><div class="wrap">
