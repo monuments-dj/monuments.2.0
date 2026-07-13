@@ -3,6 +3,7 @@ import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+import '../../styles/work.css';
 ---
 <!doctype html>
 <html lang="en">
@@ -41,8 +42,6 @@ import RoleTag from '../../components/RoleTag.astro';
 }
 *{margin:0;box-sizing:border-box}
 body{background:var(--ink);color:var(--paper);font-family:var(--body,var(--disp));font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}html{overflow-x:clip}
-.mono{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400}
-.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 a{color:inherit;text-decoration:none}
 
 .grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
@@ -50,21 +49,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
 
-.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
-.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
-.corners .c1{top:20px;left:38px;pointer-events:auto}
-.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:34px;letter-spacing:-.01em}
-.corners .c1 i{font-style:normal;color:#fff;display:inline-block;animation:spin 7s linear infinite}
-.corners .c2{top:26px;right:22px;pointer-events:auto}
-.corners .c2 a{font-size:15px;letter-spacing:.06em}
-.corners .c2 a{margin-left:22px}
-.corners .c3{bottom:20px;left:22px}
-.corners .c4{bottom:20px;right:22px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.corners .c2 a{position:relative;padding-bottom:3px;transition:opacity .3s}
-.corners .c2 a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .42s cubic-bezier(.22,1,.36,1)}
-.corners .c2 a:hover::after{transform:scaleX(1);transform-origin:left}
-.companion{position:fixed;right:24px;top:50%;z-index:58;font-size:20px;color:#fff;mix-blend-mode:difference;pointer-events:none;will-change:transform;line-height:1}
 @media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
 
 /* hero: title IN the campaign photograph (work stays in color) */
@@ -88,30 +73,15 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @keyframes fade{to{opacity:1}}
 
 /* cobalt at-a-glance band */
-.statrow{background:var(--struct);color:rgb(var(--on-rgb));border-bottom:1px solid rgba(var(--on-rgb),.18)}
-.statrow>.in{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;padding:16px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.66)}
 .statrow b{color:rgb(var(--on-rgb));font-weight:400}
 
 /* story on paper */
-.paper{background:var(--paper);color:var(--ink)}
-.story{display:grid;grid-template-columns:.62fr 1.38fr;gap:56px 64px;padding-top:8vh;padding-bottom:8vh;align-items:start}
 .story .side{position:static}
 /* .block: headline on top, body below (no side-quote) - condenses the long
    sections that stranded a short headline next to a tall body (DJ 2026-07-12) */
-.block{padding-top:8vh;padding-bottom:8vh}
-.block .k{color:var(--red);display:block;margin-bottom:12px}
-.block h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;max-width:24ch;margin:0}
-.block h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
-.block .cols{columns:2;column-gap:64px;margin-top:40px}
-.block .cols p{color:#4c4a45;font-size:16.5px;line-height:1.62;margin:0 0 1.25em;break-inside:avoid}
 .block .cols p b,.block .cols p strong{color:var(--ink);font-weight:600}
 @media(max-width:820px){.block .cols{columns:1}}
 .story .body.rv{transition-delay:.12s}
-.story .side .k{color:var(--red)}
-.story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
-.story h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
-.story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
-.story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
 
 /* film block */
 .film{position:relative;background:var(--ink);padding:0}
@@ -130,31 +100,14 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 #reelbox .cap{position:absolute;bottom:-34px;left:0;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8f8d88}
 
 /* full-bleed parallax break */
-.break{position:relative;height:52svh;overflow:hidden}
-.break img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;object-position:50% 50%;will-change:transform}
-.break .cap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.92);background:rgba(22,21,20,.42);padding:6px 12px;backdrop-filter:blur(2px)}
 
 /* gallery: contact-sheet frames */
-.gal{padding:9vh 0}
-.gal .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:16px}
-.gal .bar .mono b{color:var(--red)}
-.frames{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;grid-auto-flow:dense}
-.fr{position:relative;background:#fff;border:1px solid var(--line);padding:8px 8px 26px;opacity:0;transform:translateY(16px) rotate(-.6deg)}
-.frames.show .fr{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s;transition-delay:var(--d,0ms)}
-.fr img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.96)}
-.fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
-.frames.show .fr:hover{transform:rotate(-1deg) scale(1.03);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
 .fr.wide{grid-column:span 2}
 .fr.wide img{aspect-ratio:8/4.6}
 
 /* quote on rose */
-.quote{background:var(--spark);color:var(--ink);padding:15vh 0}
-.quote p.q{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;font-size:clamp(28px,4vw,58px);line-height:1.14;max-width:24ch}
-.quote p.q b{font-weight:400;font-style:normal;font-family:var(--disp);font-weight:var(--dispw);text-transform:uppercase;font-size:.86em;letter-spacing:-.02em}
-.quote .who{margin-top:28px;color:rgba(22,21,20,.6)}
 
 /* credits: the call sheet slip (CallSheet.astro) */
-.credits{padding:10vh 0}
 
 /* next case file closer: NextFile.astro (under-reveal target) */
 
@@ -162,8 +115,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
 @media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
 
-.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
-.rv.in{opacity:1;transform:none}
 
 /* AOV: To the Point · vertical episode trio (IGTV-native 9:16, no crop) */
 .ttp-sec{padding-bottom:4vh}
