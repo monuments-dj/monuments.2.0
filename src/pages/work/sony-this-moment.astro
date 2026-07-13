@@ -3,6 +3,11 @@ import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+import MasonryGallery from '../../components/MasonryGallery.astro';
+// gallery: 9 campaign stills (Claire LeJune) + 10 frames from the spot, interleaved
+const tmStills = Array.from({ length: 9 }, (_, i) => ({ src: `/case-studies/sony-this-moment/gallery/tm-${String(i+1).padStart(2,'0')}.jpg`, cap: `TM-${String(i+1).padStart(2,'0')} · STILL · CLAIRE LEJUNE`, alt: `This Moment campaign still ${i+1}` }));
+const tmFrames = Array.from({ length: 10 }, (_, i) => ({ src: `/case-studies/sony-this-moment/frames/tmf-${String(i+1).padStart(2,'0')}.jpg`, cap: `FS-${String(i+1).padStart(2,'0')} · FRAME · FROM THE SPOT`, alt: `Frame from the This Moment spot ${i+1}` }));
+const tmGallery = [tmStills[0],tmFrames[0],tmStills[1],tmFrames[1],tmFrames[2],tmStills[2],tmFrames[3],tmStills[3],tmFrames[4],tmStills[4],tmFrames[5],tmStills[5],tmFrames[6],tmStills[6],tmFrames[7],tmStills[7],tmFrames[8],tmStills[8],tmFrames[9]];
 ---
 <!doctype html>
 <html lang="en">
@@ -310,13 +315,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </div>
 
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>Contact sheet</b> · selects from the campaign</span>
-      <span class="mono" style="color:#8f8d88">19 frames · stills + the spot</span>
-    </div>
-    <div class="frames" id="frames"></div>
-  </div>
+  <MasonryGallery title="Selects from the campaign" note="19 frames · stills + the spot" images={tmGallery} />
 </section>
 
 <section class="quote">
@@ -353,19 +352,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <script is:inline>
 // gallery: 9 campaign stills (Claire LeJune) + 10 frames pulled from the spot,
-// interleaved so the sheet reads shuffled; masonry columns keep natural aspects
-(function(){
-  const stills=Array.from({length:9},(_,i)=>({src:`/case-studies/sony-this-moment/gallery/tm-${String(i+1).padStart(2,'0')}.jpg`,cap:`TM-${String(i+1).padStart(2,'0')} · STILL · CLAIRE LEJUNE`,alt:`This Moment campaign still ${i+1}`}));
-  const frames=Array.from({length:10},(_,i)=>({src:`/case-studies/sony-this-moment/frames/tmf-${String(i+1).padStart(2,'0')}.jpg`,cap:`FS-${String(i+1).padStart(2,'0')} · FRAME · FROM THE SPOT`,alt:`Frame from the This Moment spot ${i+1}`}));
-  const order=[stills[0],frames[0],stills[1],frames[1],frames[2],stills[2],frames[3],stills[3],frames[4],stills[4],frames[5],stills[5],frames[6],stills[6],frames[7],stills[7],frames[8],stills[8],frames[9]];
-  const el=document.getElementById('frames');
-  el.innerHTML=order.map((it,i)=>`
-    <figure class="fr" style="--d:${i*40}ms">
-      <img src="${it.src}" alt="${it.alt}" loading="lazy">
-      <figcaption class="cap">${it.cap}</figcaption>
-    </figure>`).join('');
-  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
-})();
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
