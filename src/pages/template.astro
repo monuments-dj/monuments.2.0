@@ -622,7 +622,6 @@ a{color:inherit;text-decoration:none}
           <h2><span class="hs-lead">{w.hLead}:</span><span class="hs-name">{w.hName}</span></h2>
           <p class="hs-blurb">{w.logline}</p>
           <span class="hs-did">{w.role}</span>
-          {(w.logo && !w.logoText) ? <span class="hs-logochip"><img class="hs-logo" src={`/logos/${w.logo}-color.png`} alt={w.slug}></span> : null}
         </div>
       </div>
     ))}
@@ -1032,8 +1031,6 @@ a{color:inherit;text-decoration:none}
 .hs-name{display:block;font-size:clamp(46px,9.2vw,150px);line-height:.94;color:#fff}
 /* header order: title -> logline -> what I did -> logo (color) on a light chip so it reads on any header */
 .hs-did{display:block;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--spark)}
-.hs-logochip{display:inline-flex;align-self:flex-start;margin-top:20px;background:var(--paper);padding:9px 15px;border-radius:5px;box-shadow:0 6px 20px rgba(0,0,0,.28)}
-.hs-logo{height:22px;width:auto;display:block}
 .hs-blurb{margin-top:20px;max-width:52ch;color:rgba(245,243,239,.82);font-size:clamp(14px,1.1vw,16px);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .hs-blurb.rm-open{-webkit-line-clamp:unset;overflow:visible}
 .hs-in .rm-btn{color:var(--paper);margin-top:12px}
