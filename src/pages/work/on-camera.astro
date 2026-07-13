@@ -227,6 +227,32 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 /* footer dock: the floating descriptor + LA clock settle into the footer at page end */
 .foot-dock{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 18px}
 .foot-dock .fd-clock{color:var(--dim)}
+
+/* ON AIR tally light in the hero */
+.hero .onair{position:absolute;z-index:73;top:calc(var(--pad) + 46px);left:var(--pad);display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--paper);opacity:0;animation:fade 1s .4s forwards}
+.hero .onair .oa-dot{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(224,49,26,.7);animation:oaPulse 1.4s ease-out infinite}
+@keyframes oaPulse{0%{box-shadow:0 0 0 0 rgba(224,49,26,.6);opacity:1}70%{box-shadow:0 0 0 9px rgba(224,49,26,0);opacity:.85}100%{box-shadow:0 0 0 0 rgba(224,49,26,0);opacity:1}}
+@media(prefers-reduced-motion:reduce){.hero .onair .oa-dot{animation:none}}
+
+/* the wall lead + ELEMENT 22 word switcher (HOST/PRESENT/INTERVIEW) */
+.octa-lead{max-width:var(--wrap);margin:0 auto;padding:12vh 0 0}
+.octa-lead .k{display:block;color:var(--dim);margin-bottom:16px}
+.octa-lead h2{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(30px,4.6vw,64px);line-height:1.02;letter-spacing:-.02em;text-transform:uppercase;color:var(--ink);margin:0}
+.octa-lead h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
+.octa .cdd{padding:5vh 0 11vh}
+.cdd-head{display:flex;gap:clamp(20px,3.4vw,54px);flex-wrap:wrap;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:18px}
+.cdd-word{position:relative;background:none;border:0;padding:0 0 6px;cursor:pointer;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(30px,5.2vw,74px);letter-spacing:-.035em;line-height:1;text-transform:uppercase;color:rgba(22,21,20,.15);transition:color .5s cubic-bezier(.22,1,.36,1)}
+.cdd-word.on{color:var(--ink)}
+.cdd-word .cdd-bar{position:absolute;left:0;bottom:-19px;height:2px;width:0;background:var(--red);transition:none}
+.cdd-word.on .cdd-bar{width:100%;transition:width 4.6s linear}
+.cdd-stage{margin-top:6vh;display:grid}
+.cdd-panel{grid-area:1/1;display:grid;grid-template-columns:1fr 1fr;gap:44px 64px;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.cdd-panel.on{opacity:1;transform:none;pointer-events:auto}
+.cdd-col p{color:#4c4a45;font-size:clamp(15px,1.15vw,17px);line-height:1.62;margin-bottom:1em}
+.cdd-col p b{color:var(--ink);font-weight:var(--dispw2)}
+.cdd-col p:first-child{font-size:clamp(16px,1.3vw,19px);color:var(--ink)}
+@media (max-width:820px){.octa-lead{padding-top:9vh}.cdd-panel{position:relative;grid-template-columns:1fr;gap:20px;opacity:1;transform:none;pointer-events:auto;display:none}.cdd-panel.on{display:grid}.cdd-stage{min-height:0}}
+@media (prefers-reduced-motion:reduce){.cdd-word .cdd-bar{transition:none}}
 </style>
 </head>
 <body>
@@ -258,6 +284,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </div>
   <div class="hero-grad" aria-hidden="true"></div>
+  <div class="onair" aria-label="On air"><span class="oa-dot" aria-hidden="true"></span>On Air</div>
   <div class="wrap" style="width:100%">
     <div class="kck"><b>\ Case file</b> · Hosting · Presenting · DJ Ramirez</div>
     <h1>
@@ -265,7 +292,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <span class="ln"><span><span class="serif">camera</span><span class="spark">.</span></span></span>
     </h1>
     <RoleTag text="host + presenter" />
-    <p class="intro">I direct, but I'm just as comfortable in front of the camera. Live, on video, and on podcasts, I've fronted Art of Visuals' audience: 1.9M across Instagram and YouTube, a 200K second channel, and a weekly podcast at 30K a month. Hosting gear breakdowns for Sony, presenting campaign films, talking craft with other filmmakers. Representing a brand comes naturally. <b>I carry its voice when the red light is on.</b></p>
+    <p class="intro">Most creative directors stay behind the monitor. I'm also the one they hand the mic. Hosting, presenting, interviewing: gear breakdowns for Sony, campaign films, panels, workshops, and a weekly podcast. Art of Visuals ran my work to 1.7 million followers, and Sony Electronics featured me on their own page. When a brand that size hands you the mic, <b>brand-safe isn't a claim, it's a track record.</b></p>
   </div>
   <div class="nfo">
     <span class="h">NFO</span><br>
@@ -279,21 +306,39 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="statrow">
   <div class="wrap in">
     <span><b>On camera</b> · DJ Ramirez</span>
-    <span><b>Formats</b> · Gear films · Podcast · Recaps</span>
-    <span><b>Channel</b> · Art of Visuals</span>
+    <span><b>Audience</b> · AOV 1.7M · featured by Sony Electronics</span>
+    <span><b>Podcast</b> · Creator Clubhouse · 30K monthly</span>
     <span><b>Tapes</b> · 12</span>
   </div>
 </div>
 
-<section class="paper">
-  <div class="wrap story">
-    <div class="side rv">
+<section class="paper octa">
+  <div class="wrap">
+    <div class="octa-lead rv">
       <span class="k mono">\ The wall</span>
       <h2>Press play. I show up <span class="serif">right on cue.</span></h2>
     </div>
-    <div class="body rv">
-      <p>Hit play on any of them and you get me doing the job: hosting, explaining, interviewing, presenting, teaching and experiential activation.</p>
-      <p>My range runs from technical gear breakdowns for Sony, to sit-down podcast episodes with working photographers and filmmakers, to event recaps where I carried the story on camera. Same voice that shapes campaigns, just in front of the glass this time.</p>
+    <!-- ELEMENT 22 word switcher (same component as Turnstile): HOST / PRESENT / INTERVIEW -->
+    <div class="cdd" id="cdd" data-i="0">
+      <div class="cdd-head" role="tablist" aria-label="Host, Present, Interview">
+        <button class="cdd-word on" data-i="0" role="tab">Host<i class="cdd-bar" aria-hidden="true"></i></button>
+        <button class="cdd-word" data-i="1" role="tab">Present<i class="cdd-bar" aria-hidden="true"></i></button>
+        <button class="cdd-word" data-i="2" role="tab">Interview<i class="cdd-bar" aria-hidden="true"></i></button>
+      </div>
+      <div class="cdd-stage">
+        <div class="cdd-panel on" data-i="0">
+          <div class="cdd-col"><p>The formats: gear breakdowns for Sony, event recaps, workshops, live activations. Somebody has to carry the show and keep the brand safe while doing it.</p></div>
+          <div class="cdd-col"><p><b>The proof.</b> Twelve tapes below. Press play on any of them.</p></div>
+        </div>
+        <div class="cdd-panel" data-i="1">
+          <div class="cdd-col"><p>Campaign films and panels. Presenting work I directed, which is the trick: the pitch voice and the camera voice are the same voice.</p></div>
+          <div class="cdd-col"><p><b>The range.</b> From a scripted spot to an unscripted stage.</p></div>
+        </div>
+        <div class="cdd-panel" data-i="2">
+          <div class="cdd-col"><p>Creator Clubhouse, weekly. CMOs and working creatives on the parts that never make the highlight reel: mental health, consistency, relationships.</p></div>
+          <div class="cdd-col"><p><b>The show.</b> 30K monthly listeners, co-hosted.</p></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -443,6 +488,27 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <script is:inline>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// ELEMENT 22 word switcher (HOST/PRESENT/INTERVIEW): auto-cycle bar-timed, click to jump, pause on hover
+(function(){
+  var sec=document.getElementById('cdd');if(!sec)return;
+  var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var words=[].slice.call(sec.querySelectorAll('.cdd-word')),
+      panels=[].slice.call(sec.querySelectorAll('.cdd-panel')),
+      cur=0,timer=null,vis=false,paused=false;
+  function show(i){
+    cur=(i+panels.length)%panels.length;
+    words.forEach(function(w,j){w.classList.toggle('on',j===cur);});
+    panels.forEach(function(p,j){p.classList.toggle('on',j===cur);});
+    sec.setAttribute('data-i',cur);
+  }
+  function arm(){if(timer||reduced)return;timer=setInterval(function(){if(vis&&!paused)show(cur+1);},4600);}
+  function disarm(){clearInterval(timer);timer=null;}
+  words.forEach(function(w,i){w.addEventListener('click',function(){disarm();show(i);arm();});});
+  sec.addEventListener('mouseenter',function(){paused=true;});
+  sec.addEventListener('mouseleave',function(){paused=false;});
+  new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;vis?arm():disarm();});},{threshold:.2}).observe(sec);
+})();
 
 // the wall: click a tape, poster swaps for a nocookie embed, playing from the top.
 // one deck at a time: starting a new tape puts the previous one back on its poster.
