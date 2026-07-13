@@ -62,14 +62,16 @@ a{color:inherit;text-decoration:none}
 
 /* hero: type IN the footage */
 .hero-media{position:absolute;inset:0;will-change:transform}
-.hero-media iframe{position:absolute;top:50%;left:50%;width:max(100vw,178svh);height:max(100svh,56.25vw);transform:translate(-50%,-50%);pointer-events:none;border:0;filter:grayscale(1) contrast(1.05) brightness(.8);opacity:0;transition:opacity 1.2s}
+.hero-media iframe{position:absolute;top:50%;left:50%;width:max(100vw,178svh);height:max(100svh,56.25vw);transform:translate(-50%,-50%);pointer-events:none;border:0;filter:contrast(1.06) brightness(.58) saturate(.95);opacity:0;transition:opacity 1.2s}
 .hero-media.live iframe{opacity:1}
-.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05) brightness(.8);transition:opacity 1.2s}
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.06) brightness(.58) saturate(.95);transition:opacity 1.2s}
 .hero-media.live img{opacity:0}
-.playreel{position:absolute;left:50%;bottom:12vh;transform:translateX(-50%);z-index:2;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);border:1px solid rgba(245,243,239,.55);border-radius:99px;padding:13px 22px;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);cursor:pointer;transition:background .3s,color .3s}
-.playreel:hover{background:var(--paper);color:var(--ink)}
-.playreel .dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:blink 1.6s infinite}
-@keyframes blink{50%{opacity:.25}}
+/* grain rides over the video but under the lockup + bottom text (both z:2).
+   normal blend (not the sitewide overlay) so it still shows over the YT iframe,
+   which won't composite a blend-mode layer; own finer/denser noise so it reads
+   as film grain, not a veil. DJ 2026-07-12. */
+.hero .hero-media::after{mix-blend-mode:normal;opacity:.24;background-size:200px 200px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 /* reel lightbox */
 #reelbox{position:fixed;inset:0;z-index:96;background:rgba(12,11,10,.96);display:none;align-items:center;justify-content:center;padding:4vmin}
 #reelbox.on{display:flex}
@@ -126,8 +128,6 @@ a{color:inherit;text-decoration:none}
 .hb-cta{display:inline-block;margin-top:18px;color:var(--paper);border-bottom:1px solid rgba(245,243,239,.6);padding-bottom:3px;font-size:12px;letter-spacing:.12em;transition:color .3s,border-color .3s}
 .hb-see{color:var(--paper);border-bottom:1px solid rgba(245,243,239,.6);padding-bottom:3px;font-size:12px;letter-spacing:.12em;transition:color .3s,border-color .3s}
 .hb-cta:hover,.hb-see:hover{color:var(--spark);border-color:var(--spark)}
-.hb-mid{display:flex;gap:12px}
-.hb-mid .playreel{position:static;transform:none}
 @keyframes fade{to{opacity:1}}
 
 /* plain stat row (tinywins move) */
@@ -313,7 +313,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   .frames{grid-template-columns:repeat(3,1fr)}
   .rowp{grid-template-columns:1fr auto}.rowp .id,.rowp .th{display:none}
   .hero-bottom{flex-direction:column;align-items:flex-start;gap:20px;padding-bottom:28px}
-  .hb-mid{order:3}
   .hero-lock{left:6%;top:18%;width:88%}
 }
 @media (prefers-reduced-motion:reduce){
@@ -381,10 +380,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <span class="hb-kick mono">Creative Direction · Integrated Campaigns</span>
       <p class="hb-desc">AI gave everyone the tools. It didn't give everyone taste. I direct integrated campaigns and films, from the first idea to the final frame.</p>
       <a class="hb-cta mono" href="mailto:monuments.cc@gmail.com">Let's talk ↗</a>
-    </div>
-    <div class="hb-mid">
-      <button class="playreel" id="playReel" type="button"><span class="dot"></span>Play the reel</button>
-      <button class="playreel" id="soundTog" type="button"><span class="dot"></span>Sound off</button>
     </div>
     <a class="hb-see mono" href="/work">See the work ↗</a>
   </div>
@@ -701,19 +696,6 @@ clock();setInterval(clock,30000);
     raf=live?requestAnimationFrame(step):null;if(!live)raf=null;
   })}
 })();
-// sound toggle on the hero reel (unseen verb)
-(function(){
-  const hm=document.getElementById('heroMedia');if(!hm)return;
-  const btn=document.getElementById('soundTog');if(!btn)return;
-  let on=false;
-  btn.addEventListener('click',()=>{
-    const f=hm.querySelector('iframe');if(!f)return;
-    on=!on;
-    f.contentWindow.postMessage(JSON.stringify({event:'command',func:on?'unMute':'mute',args:[]}),'*');
-    if(on)f.contentWindow.postMessage(JSON.stringify({event:'command',func:'setVolume',args:[80]}),'*');
-    btn.innerHTML=on?'<span class="dot" style="background:#3ddc84"></span>Sound on':'<span class="dot"></span>Sound off';
-  });
-})();
 // reel: background video header (desktop, motion-ok) + sound-on lightbox
 (function(){
   const REEL='VMubUUZ2tdU';
@@ -737,8 +719,6 @@ clock();setInterval(clock,30000);
   }
   function close(){box.classList.remove('on');mount.innerHTML='';document.body.style.overflow=''}
   window.__openReel=open;
-  const pr=document.getElementById('playReel');
-  if(pr)pr.addEventListener('click',open);
   const rp=document.getElementById('rrPanel');
   if(rp)rp.addEventListener('click',open);
   document.getElementById('reelClose').addEventListener('click',close);
