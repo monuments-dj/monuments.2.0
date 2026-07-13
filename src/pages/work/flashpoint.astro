@@ -1,5 +1,6 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
+import TextBlock from '../../components/TextBlock.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
@@ -443,17 +444,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <span class="cap">✳ OOH · We got you · The new face at city scale</span>
 </div>
 
-<section class="paper">
-  <div class="wrap story">
-    <div class="side rv">
-      <span class="k mono">\ The outcome</span>
-      <h2>A powerhouse in the <span class="serif">studio world.</span></h2>
-    </div>
-    <div class="body rv">
-      <p>Adorama read the sales data, saw what Flashpoint could become, and kept building.</p>
-    </div>
-  </div>
-</section>
+<TextBlock kicker="\ The outcome" heading={`A powerhouse in the <span class="tb-serif">studio world.</span>`}>
+  <p>Adorama read the sales data, saw what Flashpoint could become, and kept building.</p>
+</TextBlock>
 
 <section class="prodsec">
   <div class="wrap gal">

@@ -1,0 +1,80 @@
+---
+// TextBlock.astro — the safe "just add copy" element.
+// Self-contained: own spacing + styles, uses the page's design tokens so it
+// matches any page. No JS, no images, no fragile layout. Drop it anywhere and
+// put paragraphs in the slot. Never strands a headline or leaves an empty column.
+//
+//   import TextBlock from '../../components/TextBlock.astro';
+//   <TextBlock kicker="\ The mark" heading={`Type-first, because it has to <span class="tb-serif">survive the factory.</span>`}>
+//     <p>First paragraph…</p>
+//     <p>Second paragraph…</p>
+//   </TextBlock>
+//
+// Props (all optional):
+//   kicker   — the small mono eyebrow (e.g. "\ The insight")
+//   heading  — the headline; may include <span class="tb-serif">…</span> for the italic accent
+//   tone     — 'light' (default, paper bg) | 'dark' (ink bg)
+//   align    — 'left' (default) | 'center'
+//   flush    — true to remove the top/bottom padding (butt it against a neighbour)
+interface Props {
+  kicker?: string;
+  heading?: string;
+  tone?: 'light' | 'dark';
+  align?: 'left' | 'center';
+  flush?: boolean;
+}
+const { kicker, heading, tone = 'light', align = 'left', flush = false } = Astro.props;
+---
+<section class:list={["tb", `tb-${tone}`, `tb-${align}`, { 'tb-flush': flush }]}>
+  <div class="tb-in">
+    {kicker && <span class="tb-k">{kicker}</span>}
+    {heading && <h2 class="tb-h" set:html={heading} />}
+    <div class="tb-body"><slot /></div>
+  </div>
+</section>
+
+<style>
+.tb { padding: clamp(48px, 9vh, 104px) 0; }
+.tb-flush { padding: 0; }
+.tb-light { background: var(--paper, #F5F3EF); color: var(--ink, #161514); }
+.tb-dark  { background: var(--ink, #161514); color: var(--paper, #F5F3EF); }
+.tb-in {
+  max-width: var(--wrap, 1300px);
+  margin: 0 auto;
+  padding: 0 var(--pad, clamp(22px, 5vw, 40px));
+}
+.tb-center { text-align: center; }
+.tb-center .tb-body { margin-left: auto; margin-right: auto; }
+
+.tb-k {
+  display: block;
+  font-family: var(--mono, monospace);
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--red, #E0311A);
+  margin: 0 0 14px;
+}
+.tb-h {
+  font-family: var(--disp, sans-serif);
+  font-weight: var(--dispw, 800);
+  font-size: clamp(26px, 3.3vw, 46px);
+  line-height: 1.03; letter-spacing: -.02em; text-transform: uppercase;
+  margin: 0 0 26px; max-width: 22ch;
+}
+.tb-center .tb-h { max-width: none; }
+.tb-h :global(.tb-serif) {
+  font-family: var(--serif, 'Instrument Serif', serif);
+  font-style: italic; font-weight: 400; text-transform: none; letter-spacing: -.01em;
+}
+.tb-body {
+  max-width: 64ch;
+  font-size: clamp(16px, 1.15vw, 18px);
+  line-height: 1.62;
+}
+.tb-body :global(p) { margin: 0 0 1.1em; }
+.tb-body :global(p:last-child) { margin-bottom: 0; }
+.tb-body :global(a) { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 700px) {
+  .tb-h { font-size: clamp(24px, 8vw, 34px); }
+}
+</style>
