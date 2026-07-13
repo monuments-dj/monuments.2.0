@@ -558,7 +558,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     const raw=(ih-r.top)/ih;                       // approach travel: 1 = docked
     const p=Math.min(1,Math.max(0,-r.top/total));  // pin-ride progress
     const wp=Math.min(1,Math.max(0,(raw-0.28)/0.30));
-    const wo=Math.max(0,1-Math.max(0,(raw-1.6)/0.28)); // hold solid well into the fill, then fade (DJ: stay on even longer)
+    const wo=Math.max(0,1-Math.max(0,(raw-1.78)/0.24)); // hold solid nearly the whole fill, fade at the very end (DJ)
     const wx=(1-wp)*260;
     wl.style.transform=`translate(${-wx}%,-50%)`;
     wr.style.transform=`translate(${wx}%,-50%)`;
