@@ -78,6 +78,17 @@ const tickerItems = [
   --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
   --mono:'Fragment Mono',monospace;
   --spark:var(--rose); --struct:var(--rose); --on-rgb:22,21,20;
+  /* ── TYPE SCALE · THE COPY RULES (DJ 2026-07-13) ─────────────────────────
+     One small, modern scale for the whole site. Pull these tokens; never
+     hard-code a size. This is what kills "every header is a different size." */
+  --fs-display: clamp(46px,8vw,100px);    /* hero title ONLY */
+  --fs-statement: clamp(28px,3.6vw,46px); /* one big opening/closing line, sparingly */
+  --fs-h2: clamp(22px,2.3vw,31px);        /* section header — the workhorse, this is the ceiling */
+  --fs-h3: clamp(17px,1.4vw,20px);        /* sub-head */
+  --fs-lead: clamp(18px,1.4vw,21px);      /* lead paragraph (first line of a section) */
+  --fs-body: 16.5px;                      /* body copy */
+  --fs-cap: 12.5px;                       /* captions / small print */
+  --fs-mono: 11px;                        /* mono kickers, labels, meta */
 }
 *{margin:0;box-sizing:border-box}
 /* NOTE: html{overflow-x:clip} would block body's overflow from propagating to
@@ -125,6 +136,16 @@ a{color:inherit;text-decoration:none}
 .kitctrl .kc-p b{color:var(--spark);font-weight:400}
 .acctool.pulse{animation:acctoolPulse 1.4s ease 2}
 @keyframes acctoolPulse{0%,100%{box-shadow:0 0 0 0 rgba(224,49,26,0)}50%{box-shadow:0 0 0 6px rgba(224,49,26,.55)}}
+
+/* TYPE SCALE specimen (the copy rules, shown) */
+.tsc{padding:2vh 0 8vh;display:grid;gap:0}
+.tsc-row{display:grid;grid-template-columns:210px 1fr;gap:18px 34px;align-items:baseline;border-top:1px solid var(--line);padding:20px 0}
+.tsc-lbl{color:var(--dim);letter-spacing:.08em;text-transform:uppercase;font-size:10px;line-height:1.6}
+.tsc-ex{font-family:var(--disp);font-weight:var(--dispw);letter-spacing:-.02em;line-height:1.02;text-transform:uppercase;color:var(--ink);margin:0;min-width:0;overflow-wrap:break-word}
+.tsc-row{min-width:0}
+.tsc-ex.tsc-body{font-weight:400;text-transform:none;letter-spacing:0;line-height:1.5;color:#4c4a45;max-width:62ch}
+.tsc-ex.mono{font-family:var(--mono);font-weight:400;letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:680px){.tsc-row{grid-template-columns:1fr;gap:6px}}
 
 /* ELEMENT 01 · case hero */
 .hero{position:relative;height:70svh;min-height:520px;overflow:hidden;background:var(--ink)}
@@ -283,6 +304,18 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 </div>
+
+<div class="spec" id="el-type"><div class="wrap"><span class="id">ELEMENT · TYPE SCALE · the copy rules</span><span class="use">one small, modern scale for the whole site. every header + paragraph pulls a token below — no page hard-codes its own size (that is what made every header a different size). section headers top out at <b>--fs-h2 · 31px</b>; only the hero goes big. <b class="lives">pull:</b> var(--fs-h2) / var(--fs-body) / etc. · defined in :root</span></div></div>
+<section class="paper"><div class="wrap tsc">
+  <div class="tsc-row"><span class="tsc-lbl mono">Display<br>--fs-display<br>hero title only</span><p class="tsc-ex" style="font-size:var(--fs-display)">Let's get started.</p></div>
+  <div class="tsc-row"><span class="tsc-lbl mono">Statement<br>--fs-statement<br>one big line, rarely</span><p class="tsc-ex" style="font-size:var(--fs-statement)">The one big idea, stated plainly.</p></div>
+  <div class="tsc-row"><span class="tsc-lbl mono">Section header<br>--fs-h2<br>the workhorse · ceiling</span><p class="tsc-ex" style="font-size:var(--fs-h2)">A section header at the workhorse size.</p></div>
+  <div class="tsc-row"><span class="tsc-lbl mono">Sub-head<br>--fs-h3</span><p class="tsc-ex" style="font-size:var(--fs-h3)">A smaller sub-head.</p></div>
+  <div class="tsc-row"><span class="tsc-lbl mono">Lead<br>--fs-lead<br>first line of a section</span><p class="tsc-ex tsc-body" style="font-size:var(--fs-lead)">The lead paragraph sits a touch larger than body, to open a section.</p></div>
+  <div class="tsc-row"><span class="tsc-lbl mono">Body<br>--fs-body</span><p class="tsc-ex tsc-body" style="font-size:var(--fs-body)">Body copy at a readable measure. This is the default for every paragraph across the site, and it does not change from page to page.</p></div>
+  <div class="tsc-row"><span class="tsc-lbl mono">Caption<br>--fs-cap</span><p class="tsc-ex tsc-body" style="font-size:var(--fs-cap)">Captions, footnotes, and small print.</p></div>
+  <div class="tsc-row"><span class="tsc-lbl mono">Mono<br>--fs-mono</span><p class="tsc-ex mono" style="font-size:var(--fs-mono)">Kickers · meta · labels</p></div>
+</div></section>
 
 <section class="decide" id="decide-first">
   <div class="wrap">
