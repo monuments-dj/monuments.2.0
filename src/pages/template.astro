@@ -615,16 +615,27 @@ a{color:inherit;text-decoration:none}
 <div class="spec" id="el-24"><div class="wrap"><span class="id">ELEMENT 24 · HEADER SLIDER <b style="color:var(--red)">(#el-headerslider)</b></span><span class="use"><b>all 19 work headers</b>, as a slider · uniform: brand logo (Sony, MSI, Adorama...) · what I did · a blurb pulled from each page · auto-advances, dots + arrows · <b>✎ Edit copy</b> makes role + blurb editable, <b>⧉ Export</b> dumps JSON to lock the wording · use it to decide what each header should say · <b class="lives">lives on:</b> proposed for work headers</span></div></div>
 <section class="hslider" id="el-headerslider" aria-roledescription="carousel">
   <div class="hs-track">
-    {workAll.map((w, i) => (
+    {workAll.map((w, i) => {
+      const rp = (w.role || '').split(' · ');
+      const first = rp.shift();
+      const rest = rp.length ? ' · ' + rp.join(' · ') : '';
+      const logoSrc = (w.logo && !w.logoText) ? `/logos/${w.logo}-${w.logoColor ? 'color' : 'white'}.png` : '';
+      return (
       <div class={`hs-slide${i === 0 ? ' on' : ''}`} data-i={i}>
         <img loading="lazy" decoding="async" src={w.img} alt={w.title}>
         <div class="hs-in wrap">
           <h2><span class="hs-lead">{w.hLead}:</span><span class="hs-name">{w.hName}</span></h2>
           <p class="hs-blurb">{w.logline}</p>
-          <span class="hs-did">{w.role}</span>
+          <div class="hs-role">
+            {logoSrc
+              ? <img class="hs-logo" src={logoSrc} alt={w.client} loading="lazy" decoding="async" />
+              : <span class="hs-logotext mono">{w.brand || w.client}</span>}
+            <span class="hs-did"><span class="hs-circ"><svg class="hs-oval" viewBox="0 0 280 88" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M30,54 C15,28 76,13 152,13 C230,13 270,28 259,52 C251,72 189,82 118,79 C56,77 20,66 21,45 C22,31 43,21 68,18"/></svg>{first}</span>{rest}</span>
+          </div>
         </div>
       </div>
-    ))}
+      );
+    })}
   </div>
   <div class="hs-tools">
     <button type="button" class="hs-edit" id="hsEdit">✎ Edit copy</button>
@@ -1030,7 +1041,15 @@ a{color:inherit;text-decoration:none}
 .hs-lead{display:block;font-size:clamp(20px,3vw,46px);line-height:1;color:rgba(245,243,239,.62);margin-bottom:.12em}
 .hs-name{display:block;font-size:clamp(46px,9.2vw,150px);line-height:.94;color:#fff}
 /* header order: title -> logline -> what I did -> logo (color) on a light chip so it reads on any header */
-.hs-did{display:block;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--spark)}
+.hs-role{display:flex;align-items:center;gap:20px;margin-top:20px;flex-wrap:wrap}
+.hs-logo{height:24px;width:auto;opacity:.95}
+.hs-logotext{font-size:14px;letter-spacing:.03em;color:#fff;text-transform:none}
+.hs-did{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--spark)}
+.hs-circ{position:relative;display:inline-block;padding:5px 15px}
+.hs-oval{position:absolute;inset:-6px -9px;width:calc(100% + 18px);height:calc(100% + 12px);overflow:visible;pointer-events:none;transform:rotate(-1.6deg)}
+.hs-oval path{fill:none;stroke:var(--marker,#e7e4dc);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:0}
+.hs-slide.on .hs-oval path{animation:hbDraw 4s ease-in-out .35s infinite}
+@media (prefers-reduced-motion:reduce){.hs-oval path{stroke-dashoffset:0;opacity:1;animation:none}}
 .hs-blurb{margin-top:20px;max-width:52ch;color:rgba(245,243,239,.82);font-size:clamp(14px,1.1vw,16px);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .hs-blurb.rm-open{-webkit-line-clamp:unset;overflow:visible}
 .hs-in .rm-btn{color:var(--paper);margin-top:12px}
