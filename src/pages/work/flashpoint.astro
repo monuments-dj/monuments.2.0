@@ -384,106 +384,30 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
-<section class="white">
-  <div class="wrap triad" data-triad>
-    <span class="k mono">\ The idea</span>
-    <h2 class="triadhead" aria-label="Imagine Illuminate Create">
-      <span class="tw">Imagine</span>
-      <span class="tw">Illuminate</span>
-      <span class="tw">Create</span>
-    </h2>
-    <div class="cdd">
-      <div class="colA rv">
-        <p>The objective: revitalize Flashpoint's market presence and make the name synonymous with innovation, quality, and value in the world of photography.</p>
-        <p>This was a top-to-bottom effort: a fresh brand image, sharper messaging, and a visual identity that could carry across every surface, from the box on the shelf to the billboard on the street. The four fronts below are how it shipped, and they are the chapters of this file.</p>
-      </div>
-      <div class="colB rv">
-        <span class="objh">The four fronts</span>
-        <ol>
-          {fronts.map((f) => (
-            <li><span class="n">{f.n}</span><span>{f.t}</span></li>
-          ))}
-        </ol>
-        <p class="plus"><b>+</b> And one more that stuck: I set up the social channels alongside the launch.</p>
-      </div>
+<section class="paper">
+  <div class="wrap story">
+    <div class="side rv">
+      <span class="k mono">\ The mark</span>
+      <h2>Type-first, because it has to <span class="serif">survive the factory.</span></h2>
+    </div>
+    <div class="body rv">
+      <p>We pitched a mark where the O swapped by category, a Phillips head here, a set screw there. The client liked it, but the system that shipped is more durable: the wordmark stays fixed and color does the sorting.</p>
+      <p>Blue is lighting. Yellow is studio gear. Red is accessories. Every product sits on a colored disc, so a shelf of Flashpoint reads as one brand from across the room and still tells you what you're holding when you pick it up.</p>
+      <p>The wordmark is typographic on purpose. Simple enough that a manufacturer can stamp it, mold it, or print it at any size without the system breaking. The O never becomes a gimmick. It just becomes the circle everything else lives inside.</p>
     </div>
   </div>
 </section>
 
-<section class="white front">
-  <div class="wrap">
-    <div class="fhead rv">
-      <span class="fn">01</span>
-      <h3>The look + <span class="serif">the message.</span></h3>
-      <span class="tag">Front 01 · Brand image + messaging</span>
-      <p class="dek">One voice on every surface: the ads read like the box, the box reads like the billboard.</p>
+<section class="paper">
+  <div class="wrap story">
+    <div class="side rv">
+      <span class="k mono">\ The system</span>
+      <h2>From the box on the shelf to the <span class="serif">billboard on the street.</span></h2>
     </div>
-    <div class="duo">
-      <figure class="pl"><img src={`${G}/fp-01.jpg`} alt="Flashpoint magazine trade ad comp, teal colorway" width="1800" height="1199" loading="lazy"><figcaption class="cap"><b>COMP-01</b> · Print · Trade ad, teal</figcaption></figure>
-      <figure class="pl" style="transition-delay:80ms"><img src={`${G}/fp-02.jpg`} alt="Flashpoint magazine trade ad comp, orange colorway" width="1800" height="1199" loading="lazy"><figcaption class="cap"><b>COMP-02</b> · Print · Trade ad, orange</figcaption></figure>
-    </div>
-    <div class="stack" style="margin-top:clamp(20px,3vh,32px)">
-      <figure class="pl doc off"><img src={`${G}/fp-05.jpg`} alt="Flashpoint FV150 product one-sheet comp" width="1800" height="1199" loading="lazy"><figcaption class="cap"><b>COMP-05</b> · Print · Product one-sheet</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-
-<section class="white front">
-  <div class="wrap">
-    <div class="fhead rv">
-      <span class="fn">02</span>
-      <h3>The <span class="serif">website.</span></h3>
-      <span class="tag">Front 02 · Design + build · by me</span>
-      <p class="dek">I designed and built the new flashpointlighting.com. Six years on, it is still the site they run.</p>
-    </div>
-    <figure class="pl">
-      <div class="browser">
-        <div class="bbar"><i></i><i></i><i></i><span class="burl">flashpointlighting.com</span></div>
-        <img src={`${S}/web-hero.jpg`} alt="flashpointlighting.com homepage: Imagine, Illuminate, Create over a tiled pool photograph" width="1440" height="722" loading="lazy">
-      </div>
-      <figcaption class="cap"><b>WEB-01</b> · The live site · Captured July 2026</figcaption>
-    </figure>
-    <div class="tiles3">
-      {tiles.map((t, i) => (
-        <figure class="pl tile" style={`transition-delay:${i * 90}ms`}>
-          <img src={`${S}/${t.img}`} alt={t.alt} width="900" height="900" loading="lazy">
-          <span class="tl">{t.l}</span>
-        </figure>
-      ))}
-    </div>
-    <div class="sitelinkrow rv">
-      <a class="pill" href="https://www.flashpointlighting.com/" target="_blank" rel="noopener">Visit the live site ↗</a>
-      <span class="note">Category system · product on the circle · the mark at work</span>
-    </div>
-  </div>
-</section>
-
-<section class="white front">
-  <div class="wrap">
-    <div class="fhead rv">
-      <span class="fn">03</span>
-      <h3>The <span class="serif">packaging.</span></h3>
-      <span class="tag">Front 03 · The box on the shelf</span>
-      <p class="dek">The shelf got the same voice as the street: revamped boxes that carry the identity into your hands.</p>
-    </div>
-    <div class="stack">
-      <figure class="pl"><img src={`${G}/fp-04.jpg`} alt="Flashpoint shipper box packaging comp in teal and white" width="1800" height="1414" loading="lazy"><figcaption class="cap"><b>COMP-04</b> · Packaging · The shipper box</figcaption></figure>
-    </div>
-    <div class="duo" style="margin-top:clamp(20px,3vh,32px)">
-      <figure class="pl"><img src={`${G}/fp-06.jpg`} alt="Flashpoint Xplor Power 2400 Pro power pack box" width="1800" height="1800" loading="lazy"><figcaption class="cap"><b>COMP-06</b> · Packaging · Xplor Power 2400 Pro</figcaption></figure>
-      <figure class="pl" style="transition-delay:80ms"><img src={`${G}/fp-07.jpg`} alt="Flashpoint R2 Nano Remote box, orange colorway" width="1800" height="1800" loading="lazy"><figcaption class="cap"><b>COMP-07</b> · Packaging · R2 Nano Remote</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<section class="white front" style="padding-bottom:0">
-  <div class="wrap">
-    <div class="fhead rv" style="margin-bottom:clamp(20px,3vh,30px)">
-      <span class="fn">04</span>
-      <h3>The <span class="serif">street.</span></h3>
-      <span class="tag">Front 04 · Out-of-home</span>
-      <p class="dek">OOH with real reach: the new face, up at city scale.</p>
+    <div class="body rv">
+      <p>Identity, packaging, product, messaging, web, OOH. Six disciplines, one voice. We built the brand book and the standards, then designed hundreds of packages against them, enough to seed the system and prove it held.</p>
+      <p>Then we handed it over. Templates, standards, and a line Adorama could run themselves. The point was never to design every box forever. It was to build something that kept working after we left.</p>
+      <p style="margin-top:8px"><a class="pill" href="https://www.flashpointlighting.com/" target="_blank" rel="noopener">Visit the live site ↗</a></p>
     </div>
   </div>
 </section>
@@ -492,36 +416,14 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <span class="cap">✳ OOH · We got you · The new face at city scale</span>
 </div>
 
-<section class="white chan">
-  <div class="wrap">
-    <div class="grid">
-      <div class="rv">
-        <span class="k mono" style="color:var(--fp-orange)">\ And the channels</span>
-        <h3 style="font-weight:var(--dispw);font-size:clamp(24px,2.9vw,40px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;margin-top:12px">Set up, launched, <span class="serif" style="font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none">still growing.</span></h3>
-        <p class="body">Alongside the launch I set up Flashpoint's social channels and gave them the system to grow with. Today the account is past 20,000 followers, and the story highlights still wear the circle marks from this identity.</p>
-        <div class="igstats">
-          <div><b>625</b><span>Posts</span></div>
-          <div><b>20.2K</b><span>Followers today</span></div>
-          <div><b>MMXX</b><span>Set up + launched</span></div>
-        </div>
-        <a class="pill" href="https://www.instagram.com/flashpointlighting/" target="_blank" rel="noopener">@flashpointlighting ↗</a>
-      </div>
-      <div class="rv" style="transition-delay:.12s">
-        <div class="chiprow">
-          {chips.map((c, i) => (
-            <figure class="chip">
-              <svg viewBox="0 0 100 100" role="img" aria-label={`Flashpoint story highlight mark, ${c.l}`}>
-                <circle cx="50" cy="50" r="47" fill={c.c} />
-                <circle cx="50" cy="50" r="20" fill="#fff" />
-                <rect x="-10" y="42.5" width="120" height="15" rx="7.5" fill="#fff" transform={`rotate(-38 50 50)`} />
-                <circle cx="50" cy="50" r="11.5" fill={c.c} />
-              </svg>
-              <span class="cl">{c.l}</span>
-            </figure>
-          ))}
-        </div>
-        <p class="chapcap">The story-highlight covers · the mark in the four system colors</p>
-      </div>
+<section class="paper">
+  <div class="wrap story">
+    <div class="side rv">
+      <span class="k mono">\ The outcome</span>
+      <h2>A powerhouse in the <span class="serif">studio world.</span></h2>
+    </div>
+    <div class="body rv">
+      <p>Adorama read the sales data, saw what Flashpoint could become, and kept building.</p>
     </div>
   </div>
 </section>
