@@ -4,6 +4,15 @@ import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import SocialWall from '../../components/SocialWall.astro';
+import MasonryGallery from '../../components/MasonryGallery.astro';
+const acGallery = [
+  ['home-02.jpg','The home kit · On the trail'],
+  ['away-01.jpg','The away kit · Lookbook'],
+  ['keeper-01.jpg','Portrait · With the ball'],
+  ['away-02.jpg','Basque pride · Red and green'],
+  ['yt-keeper.jpg','Basque keeper kit · Film still'],
+  ['crest.jpg','The crest · Anatomy'],
+].map(([f, label], i) => ({ src: `/case-studies/ac-boise/gallery/${f}`, cap: `FR-${String(i+1).padStart(2,'0')} · ${label}`, alt: `AC Boise kit reveal: ${label}` }));
 
 // Fan reaction to the kit-reveal drop on Instagram (@acboise). The reveal ran
 // hardest on IG, so the reaction lives here as social proof.
@@ -322,13 +331,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </div>
 
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>The kits</b> · Home, away, keeper</span>
-      <span class="mono" style="color:#8f8d88">6 frames · hover to inspect</span>
-    </div>
-    <div class="frames" id="frames"></div>
-  </div>
+  <MasonryGallery title="The kits · Home, away, keeper" note="6 frames · click to enlarge" images={acGallery} />
 </section>
 
 <section class="quote">
@@ -365,25 +368,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/underfoot-->
 
 <script is:inline>
-// gallery: 6 real frames, masonry columns, kit captions
-(function(){
-  const shots=[
-    ['home-02.jpg','The home kit · On the trail',2400,2400],
-    ['away-01.jpg','The away kit · Lookbook',1080,1351],
-    ['keeper-01.jpg','Portrait · With the ball',1080,1350],
-    ['away-02.jpg','Basque pride · Red and green',1366,2048],
-    ['yt-keeper.jpg','Basque keeper kit · Film still',1280,720],
-    ['crest.jpg','The crest · Anatomy',2048,1152]
-  ];
-  const el=document.getElementById('frames');
-  el.innerHTML=shots.map((s,i)=>`
-    <figure class="fr" style="--d:${i*45}ms">
-      <img src="/case-studies/ac-boise/gallery/${s[0]}" alt="AC Boise kit reveal: ${s[1]}" width="${s[2]}" height="${s[3]}" loading="lazy">
-      <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · ${s[1]}</figcaption>
-    </figure>`).join('');
-  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
-})();
-
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
