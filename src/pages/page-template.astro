@@ -1,21 +1,23 @@
 ---
-// page-template.astro — the STARTING POINT for any case / content page.
-// Copy this file, rename it under src/pages/work/, and swap the content in each
-// block. Every section is a named, self-contained block (see src/components/):
-//   PageHero · StatRow · TextBlock · MediaBlock · QuoteBlock · CallSheet · CtaBlock · NextFile · PageFooter
-// Compose them in any order. Alternate TextBlock and MediaBlock for rhythm.
-// Nothing here is bespoke, so adding copy or images can't break the layout.
-// Not linked in nav + noindexed — it's a reference, not a shipped page.
+// page-template.astro — a WORKED EXAMPLE, built from the block system with real
+// copy (Art of Visuals). Copy this file, rename it under src/pages/work/, and
+// swap the copy + images in each block. Every section is a named, self-contained
+// block (src/components/): PageHero · StatRow · TextBlock · MediaBlock ·
+// LedgerBlock · QuoteBlock · CallSheet · CtaBlock · NextFile · PageFooter.
+// Compose in any order; alternate light and dark for rhythm. Nothing is bespoke,
+// so swapping copy or images can't break the layout.
+// Not linked in nav + noindexed — reference only.
 import PageHero from '../components/PageHero.astro';
 import StatRow from '../components/StatRow.astro';
 import TextBlock from '../components/TextBlock.astro';
 import MediaBlock from '../components/MediaBlock.astro';
+import LedgerBlock from '../components/LedgerBlock.astro';
 import QuoteBlock from '../components/QuoteBlock.astro';
 import CallSheet from '../components/CallSheet.astro';
 import CtaBlock from '../components/CtaBlock.astro';
 import NextFile from '../components/NextFile.astro';
 import PageFooter from '../components/PageFooter.astro';
-const G = '/case-studies/flashpoint/gallery'; // demo images only — swap per page
+const AOV = '/case-studies/art-of-visuals';
 ---
 <!doctype html>
 <html lang="en">
@@ -23,7 +25,7 @@ const G = '/case-studies/flashpoint/gallery'; // demo images only — swap per p
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<title>Page template · Monuments</title>
+<title>Page template · Art of Visuals · Monuments</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,62 +62,82 @@ a{color:inherit;text-decoration:none}
 <div class="corners">
   <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
   <span class="c2"><a href="/work">Work</a><a href="/about">About</a><a href="/contact">Contact</a></span>
-  <span class="c3">MC-0000-00 · Page template · Basic structure</span>
+  <span class="c3">MC-AOV-01 · Art of Visuals · Worked example</span>
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
 <PageHero
-  image={`${G}/fp-03.jpg`}
-  title={`Page title, <span class="serif">two lines.</span>`}
-  kicker={`<b>\\ Case file</b><br>Client · Project name<br>Discipline · Discipline · Year`}
-  role="creative direction · your role"
+  image={`${AOV}/hero-poster.jpg`}
+  title={`From community, <span class="serif">to agency.</span>`}
+  kicker={`<b>\\ Case file</b><br>Art of Visuals<br>Creative direction · Four years`}
+  role="creative director · art of visuals"
   nfoHead="NFO"
-  nfo={["Client · Name", "Role · Your role", "Agency · If any", "Frame · MC-0000-00"]}
+  nfo={["Client · Art of Visuals", "Role · Creative Director", "Scope · The agency build", "Frame · MC-AOV-01"]}
 />
 
 <StatRow
   stats={[
-    { value: "4x", label: "a headline number" },
-    { value: "2M+", label: "another number" },
-    { value: "$200K+", label: "a third number" },
+    { value: "4x", label: "agency revenue growth" },
+    { value: "2M+", label: "the community behind the agency" },
+    { value: "$200K+", label: "commercial budgets by the end" },
   ]}
-  note="One supporting line, right-aligned. Nothing goes here you wouldn't say in an interview."
+  note="Roster · Sony · Adorama · MSI · Intel · Lexar · Peak Design · WANDRD"
 />
 
-<TextBlock variant="statement" kicker="\ The insight" heading={`The one big idea, <span class="tb-serif">stated plainly.</span>`}>
-  <p>Open on the insight. One or two short paragraphs. This is the statement variant: a large headline and a tight lede, for openers and closers.</p>
-</TextBlock>
-
-<MediaBlock layout="duo" images={[
-  { src: `${G}/fp-01.jpg`, alt: "Demo image", caption: "A two-up caption" },
-  { src: `${G}/fp-02.jpg`, alt: "Demo image", caption: "A two-up caption" },
-]} />
-
-<TextBlock kicker="\ The work" heading={`A section heading at a <span class="tb-serif">readable size.</span>`}>
-  <p>Body copy in complete sentences. This is the default variant, the workhorse for explanation. Drop in as many paragraphs as the section needs and it stays clean.</p>
-  <p>Follow it with a MediaBlock for rhythm, or another TextBlock for a second beat.</p>
+<TextBlock tone="light" variant="statement" kicker="\ The insight" heading={`Brands don't know <span class="tb-serif">how to be cool.</span>`}>
+  <p>That's not an insult. It's a market.</p>
+  <p>Sony and MSI would show up with a product built for creators and the same questions every time: how do we talk to them, what reads as real, which voices actually matter? AOV had the audience, the data, and years of making the content, so we weren't guessing. We were a voice of authority, and we knew the others. We sold strategy and consulting on culture, made the introductions, and managed the influencers.</p>
+  <p>That's why the work compounded. We weren't a vendor renting out a camera crew. We were the translator between brands and the creator world.</p>
 </TextBlock>
 
 <MediaBlock layout="trio" images={[
-  { src: `${G}/fp-04.jpg`, alt: "Demo image", caption: "One" },
-  { src: `${G}/fp-06.jpg`, alt: "Demo image", caption: "Two" },
-  { src: `${G}/fp-07.jpg`, alt: "Demo image", caption: "Three" },
+  { src: `${AOV}/msi/msi-02.jpg`, alt: "MSI campaign still", caption: "MSI · a campaign that launched in Times Square" },
+  { src: `${AOV}/msi/msi-04.jpg`, alt: "MSI campaign still", caption: "MSI · on the shoot" },
+  { src: `${AOV}/msi/msi-08.jpg`, alt: "MSI campaign still", caption: "MSI · the boards" },
 ]} />
 
-<MediaBlock layout="full" images={[{ src: `${G}/fp-03.jpg`, alt: "Demo image", caption: "✳ A full-bleed banner between sections" }]} />
+<TextBlock tone="dark" kicker="\ The number" heading={`A community, turned into a <span class="tb-serif">creative business.</span>`}>
+  <p>When I joined Art of Visuals, it was a community page with a massive audience, pushing two million, sharing inspiration, reposting, and running giveaways. Every piece of work lived on AOV's own channels.</p>
+  <p>Four years later it was a working agency: commercials with budgets north of $200K, influencer campaigns with the biggest voices in tech, an MSI campaign that launched in Times Square, and a global client roster. Revenue was 4x.</p>
+  <p>The audience was mostly there before me. Some of the brands were too. What changed was how we engaged them: bigger pitches, more multi-platform work. The agency is what we built, and the creative was my lane.</p>
+</TextBlock>
 
-<QuoteBlock quote={`The line that <b>sums it up</b>, in one sentence.`} who="What the quote is" />
+<LedgerBlock
+  kicker="\ The book of business"
+  heading={`Not one campaign. <span class="lb-serif">A book of business.</span>`}
+  rows={[
+    { href: "/work/sony-this-moment", img: `/case-studies/sony-this-moment/gallery/tm-05.jpg`, title: "Sony · This Moment", meta: "XM4 · national campaign film · director + CD" },
+    { href: "/work/sony-xm5", img: `${AOV}/gallery/xm5-01.jpg`, title: "Sony · XM5", meta: "Headphone launch · cast as talent · 1.3M impressions" },
+    { href: "/work/sony-xperia", img: `${AOV}/gallery/xperia-01.jpg`, title: "Sony · Xperia", meta: "Five launches, four years · films + stills" },
+    { href: "/work/adorama-music", img: `/case-studies/adorama-music/gallery/am-01.jpg`, title: "Adorama · Create No Matter What", meta: "Content series · Shorty finalist" },
+    { href: "/work/on-camera", img: `${AOV}/gallery/podcast-cover.jpg`, title: "On Camera · Creator Clubhouse", meta: "Weekly podcast · 30K monthly listeners" },
+  ]}
+/>
+
+<MediaBlock layout="duo" images={[
+  { src: `${AOV}/gallery/xm4-01.jpg`, alt: "Sony XM4 campaign film still", caption: "The XM4 film, shot on the a7S III" },
+  { src: `${AOV}/gallery/xm5-01.jpg`, alt: "Sony XM5 launch still", caption: "The XM5 launch, influencers cast as talent" },
+]} />
+
+<QuoteBlock
+  tone="ink"
+  quote={`Growth like that is not a lucky project. It is <b>an offer brands keep buying</b>, and creative good enough that the first job turns into the next one.`}
+  who="The agency era, in one sentence"
+/>
 
 <section class="tpl-credits">
   <div class="in">
     <CallSheet
-      code="MC-0000-00"
-      sub="Page template · credits"
+      code="MC-AOV-01"
+      sub="Art of Visuals · credits"
       filed="MMXXV"
       tone="light"
       rows={[
-        { k: 'Role', v: 'DJ Ramirez', select: true },
-        { k: 'Another role', v: 'DJ Ramirez' },
+        { k: 'Strategy', v: 'Shaped what the agency sold, then packaged it into an offer brands actually bought', select: true },
+        { k: 'Creative direction', v: 'Owned all creative on the agency side, first pitch to final delivery' },
+        { k: 'Team', v: 'Ran a core crew of five, scaling with crew and designers per production' },
+        { k: 'New business', v: 'Turned the community and the reel into a pipeline, the engine behind the 4x' },
+        { k: 'Client lead', v: 'The point of contact brands trusted, the reason they kept us as their AOR' },
       ]}
     />
   </div>
@@ -123,8 +145,8 @@ a{color:inherit;text-decoration:none}
 
 <CtaBlock heading={`Let's build something <span class="serif">worth remembering.</span>`} />
 
-<NextFile href="/work" name="All Work" img={`${G}/fp-01.jpg`} code="MC-0000-00" />
-<PageFooter tag="Page template" />
+<NextFile href="/work/sony-this-moment" name="Sony · This Moment" img={`/case-studies/sony-this-moment/gallery/tm-05.jpg`} code="MC-AOV-01" />
+<PageFooter tag="Art of Visuals" />
 
 <script is:inline>
 (function(){var c=document.getElementById('clock');function t(){if(!c)return;c.textContent='LA '+new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});}t();setInterval(t,30000);})();

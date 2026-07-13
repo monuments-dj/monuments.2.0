@@ -1,0 +1,63 @@
+---
+// LedgerBlock.astro — the "book of business" row list: thumb + title + mono meta
+// + arrow. B/W at rest, color on hover. For a roster / inventory of linked work,
+// when a body of work needs an index, not a story. Self-contained. (Kit ELEMENT 18.)
+//
+//   <LedgerBlock
+//     kicker="\ The book of business"
+//     heading="A roster brands kept coming back to."
+//     rows={[
+//       { href: "/work/sony-this-moment", img: "/…/tm-05.jpg", title: "Sony · This Moment", meta: "XM4 · national film · director + CD" },
+//     ]}
+//   />
+interface Row { href?: string; img: string; title: string; meta?: string; }
+interface Props { rows: Row[]; kicker?: string; heading?: string; }
+const { rows = [], kicker, heading } = Astro.props;
+---
+<section class="lb">
+  <div class="lb-in">
+    {(kicker || heading) && (
+      <div class="lb-head">
+        {kicker && <span class="lb-k">{kicker}</span>}
+        {heading && <h2 class="lb-h" set:html={heading} />}
+      </div>
+    )}
+    <div class="lb-rows">
+      {rows.map((r) => (
+        r.href ? (
+          <a class="lb-row" href={r.href}>
+            <img loading="lazy" decoding="async" src={r.img} alt={r.title} />
+            <span class="bt">{r.title}</span>
+            {r.meta && <span class="bm" set:html={r.meta} />}
+            <span class="ba">↗</span>
+          </a>
+        ) : (
+          <div class="lb-row">
+            <img loading="lazy" decoding="async" src={r.img} alt={r.title} />
+            <span class="bt">{r.title}</span>
+            {r.meta && <span class="bm" set:html={r.meta} />}
+            <span class="ba">·</span>
+          </div>
+        )
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+.lb { background: var(--paper, #F5F3EF); color: var(--ink, #161514); padding: clamp(48px,9vh,96px) 0; }
+.lb-in { max-width: var(--wrap, 1300px); margin: 0 auto; padding: 0 var(--pad, clamp(22px,5vw,40px)); }
+.lb-head { margin-bottom: 26px; }
+.lb-k { display:block; font-family: var(--mono, monospace); font-size: 11px; letter-spacing:.12em; text-transform:uppercase; color: var(--red, #E0311A); margin-bottom: 14px; }
+.lb-h { margin:0; font-family: var(--disp, sans-serif); font-weight: var(--dispw, 800); font-size: clamp(28px,4vw,52px); line-height:1; letter-spacing:-.02em; text-transform:uppercase; max-width: 20ch; }
+.lb-h :global(.lb-serif) { font-family: var(--serif, 'Instrument Serif', serif); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: -.01em; }
+.lb-rows { border-top: 2px solid var(--ink, #161514); }
+.lb-row { display:grid; grid-template-columns:118px 1fr auto 28px; align-items:center; gap:18px 26px; padding:14px 2px; border-bottom:1px solid var(--line,#dcd9d2); transition:background .3s; color:inherit; }
+.lb-row img { width:118px; aspect-ratio:16/9; object-fit:cover; display:block; border-radius:5px; filter:grayscale(1) contrast(1.04); transition:filter .35s; }
+.lb-row .bt { font-family: var(--disp,sans-serif); font-weight: var(--dispw2, 600); font-size:clamp(17px,1.7vw,23px); letter-spacing:-.015em; line-height:1.05; text-transform:uppercase; }
+.lb-row .bm { font-family: var(--mono,monospace); font-size:10px; letter-spacing:.09em; text-transform:uppercase; color: var(--dim,#8f8d88); text-align:right; }
+.lb-row .ba { font-family: var(--mono,monospace); font-size:14px; color: var(--red,#E0311A); transition:transform .35s cubic-bezier(.22,1,.36,1); }
+a.lb-row:hover { background:rgba(22,21,20,.035); }
+a.lb-row:hover img { filter:none; }
+a.lb-row:hover .ba { transform:translate(4px,-3px); }
+@media (max-width:680px){ .lb-row{grid-template-columns:86px 1fr 20px} .lb-row .bm{display:none} .lb-row img{width:86px} }
+</style>
