@@ -1,0 +1,26 @@
+/* grounds.css — the band ground switch.
+
+   Put data-ground on any full-width band to flip it light <-> dark, one word:
+     data-ground="ink"     dark band  (ink bg · paper text + marks)
+     data-ground="paper"   light band (paper bg · ink text)
+
+   Inner headings, body, mono labels, kickers and borders invert automatically,
+   so switching a band is a single attribute edit — no CSS hunting. Use it to
+   hold the FLOW rhythm (no two light bands adjacent).
+
+   ON NOW:  work .strip · capabilities .refuse · capabilities .rolo
+
+   NOTE: a light CARD that sits inside an ink band (e.g. the rolodex cards) must
+   re-assert its own dark text — see the .rcard rule in that page's style. */
+
+[data-ground="ink"]   { background: var(--ink) !important;   color: var(--paper); }
+[data-ground="paper"] { background: var(--paper) !important; color: var(--ink); }
+
+/* inner roles invert on an ink ground. !important so the switch wins over each
+   section's bespoke colors regardless of stylesheet order. */
+[data-ground="ink"] :is(h1, h2, h3, h4, .big, li) { color: var(--paper) !important; }
+[data-ground="ink"] :is(.big, h2, h3) .serif       { color: var(--paper) !important; }
+[data-ground="ink"] p      { color: rgba(245, 243, 239, .74) !important; }
+[data-ground="ink"] .mono  { color: rgba(245, 243, 239, .58) !important; }
+[data-ground="ink"] .kick  { color: var(--spark) !important; }
+[data-ground="ink"] :is(ul, ol, .bar) { border-color: rgba(245, 243, 239, .22) !important; }

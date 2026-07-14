@@ -1,6 +1,7 @@
 ---
 import CircledCTA from '../components/CircledCTA.astro';
 import PageFooter from '../components/PageFooter.astro';
+import '../styles/grounds.css';
 ---
 <!doctype html>
 <html lang="en">
@@ -67,10 +68,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero>.herobg{position:absolute;top:0;height:100%;left:50%;width:100vw;transform:translateX(-50%);object-fit:cover;object-position:60% 50%;filter:contrast(1.05) brightness(.44);z-index:0}
 .hero>.scrim{position:absolute;top:0;height:100%;left:50%;width:100vw;transform:translateX(-50%);background:linear-gradient(100deg,rgba(22,21,20,.82),rgba(22,21,20,.42) 52%,rgba(22,21,20,.5)),linear-gradient(0deg,rgba(22,21,20,.68),rgba(22,21,20,0) 44%);z-index:1;pointer-events:none}
 .hero>*:not(.herobg):not(.scrim){position:relative;z-index:2}
-.hero .sunwm{display:none}
 .hero h1{color:var(--paper)}
-.hero .sunwm{position:absolute;right:-8%;top:50%;width:min(46vw,560px);aspect-ratio:1;transform:translateY(-50%);opacity:.08;animation:spin 90s linear infinite}
-.hero .sunwm g{fill:var(--ink)}
 .hero .inner{position:relative;z-index:1;padding-top:8vh}
 .hero .kick{color:var(--red)}
 .hero h1{font-weight:var(--dispw);font-size:clamp(40px,6.2vw,92px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:18px}
@@ -127,14 +125,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .capcard .pf{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-top:4px}
 @media (max-width:960px){.capgrid{grid-template-columns:1fr 1fr}}
 @media (max-width:600px){.capgrid{grid-template-columns:1fr}}
-.svc .note{padding-top:26px;color:var(--dim);line-height:1.9}
-
 
 /* scroll-lit rows (monolog grammar): dim until they cross viewport center */
 .litrow{opacity:.32;transition:opacity .5s cubic-bezier(.22,1,.36,1)}
 .litrow.lit{opacity:1}
 @media (prefers-reduced-motion:reduce){.litrow{opacity:1}}
-.srow.litrow{transition:background .3s,padding-left .4s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1)}
 
 /* process band on ink */
 .proc{background:var(--struct);color:rgb(var(--on-rgb));padding:11vh 0}
@@ -173,6 +168,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .rcard::after{left:calc(50% + 54px)}
 .rcard b{font-weight:var(--dispw2);font-size:clamp(22px,2vw,30px);letter-spacing:-.02em;line-height:1.05;text-align:center;padding:0 22px;max-width:100%}
 .rcard .mono{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8f8d88}
+/* rolodex cards stay light even when the .rolo band is flipped to ink (see grounds.css) */
+[data-ground="ink"] .rcard,[data-ground="ink"] .rcard b{color:#161514!important}
+[data-ground="ink"] .rcard .mono{color:#8f8d88!important}
 @media (max-width:860px){.rologrid{grid-template-columns:1fr;gap:22px}.rolodex{height:236px}}
 @media (prefers-reduced-motion:reduce){.rcard{transition:none}}
 .pstep .n{font-family:var(--mono);font-size:11px;color:var(--ink);background:var(--paper);display:inline-block;padding:2px 8px}
@@ -192,8 +190,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .cta .kick{color:var(--spark)}
 .cta .big{font-weight:var(--dispw);font-size:clamp(38px,5.8vw,82px);letter-spacing:-.035em;line-height:.92;text-transform:uppercase;margin-top:14px}
 .cta .big .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
-.cta .pill{display:inline-flex;margin-top:26px;padding:15px 30px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
-.cta .pill:hover{background:var(--spark)}
 
 
 /* footer under-reveal (tinywins) */
@@ -213,10 +209,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
 .rv.in{opacity:1;transform:none}
 @media (max-width:900px){
-  .srow{grid-template-columns:1fr}.srow .d{text-align:left;max-width:none}
   .pgrid{grid-template-columns:1fr 1fr}
-  #preview{display:none}
-  .hero .sunwm{display:none}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -332,7 +325,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <span class="cb">
         <span class="t">Commercial <span class="serif">Directing</span></span>
         <span class="d">Directing motion and stills is my bread and butter. Performance, pacing, and the moment that makes the cut.</span>
-        <span class="pf mono">CAP-02 · Proof: 16+ films for CWI</span>
+        <span class="pf mono">CAP-02 · Proof: 30+ films for CWI</span>
       </span>
     </a>
     <a class="capcard rv" href="/work/know-vape" style="--i:2">
@@ -508,7 +501,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
     <div class="rolotxt rv">
       <h3>I've got a guy <span class="serif">for that.</span></h3>
-      <p>I pride myself on having a guy, a girl, a person for it. Fifteen-plus years between Boise, LA, New York, Europe, Japan, and China builds a deep bench of creative talent. However weird the job gets, I've usually got someone who has done it, and done it well.</p>
+      <p>I pride myself on having a guy, a girl, a person for it. Fifteen years between Boise, LA, New York, Europe, Japan, and China builds a deep bench of creative talent. However weird the job gets, I've usually got someone who has done it, and done it well.</p>
     </div>
   </div>
 </section>
@@ -539,29 +532,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
-const mag=document.querySelector('.magnetic');
-if(mag&&matchMedia('(pointer:fine)').matches){
-  let raf;const st={x:0,y:0,tx:0,ty:0};
-  mag.addEventListener('mousemove',e=>{const r=mag.getBoundingClientRect();st.tx=(e.clientX-r.left-r.width/2)*.32;st.ty=(e.clientY-r.top-r.height/2)*.32;loop()});
-  mag.addEventListener('mouseleave',()=>{st.tx=0;st.ty=0;loop()});
-  function loop(){cancelAnimationFrame(raf);(function step(){st.x+=(st.tx-st.x)*.16;st.y+=(st.ty-st.y)*.16;mag.style.transform=`translate(${st.x}px,${st.y}px)`;if(Math.abs(st.tx-st.x)>.2||Math.abs(st.ty-st.y)>.2)raf=requestAnimationFrame(step)})()}
-}
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
-// sun watermark rides the scroll
-(function(){
-  const s=document.querySelector('.sunwm');
-  if(!s||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-  s.style.animation='none';
-  let k=false;
-  addEventListener('scroll',()=>{
-    if(k)return;k=true;
-    requestAnimationFrame(()=>{
-      s.style.transform=`translateY(calc(-50% + ${(scrollY*.12).toFixed(1)}px)) rotate(${(scrollY*.05).toFixed(2)}deg)`;
-      k=false;
-    });
-  },{passive:true});
-})();
 // velocity marquee with decay back to base
 (function(){
   let ly=scrollY,decaying=false;

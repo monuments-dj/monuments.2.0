@@ -44,6 +44,15 @@ const tickerItems = [
   "Being forgettable is expensive.",
   "Good work starts with good questions.",
 ];
+// statrowDemo: real data, not a placeholder — the LOCKED Art of Visuals stat
+// row, verbatim from docs/WORK-PAGES-COPY-HANDOFF.md ("Stat row — REVISED (v2)").
+// Used to demo StatRow's tone prop (accent/paper/ink) with real content.
+const srStats = [
+  { value: '4x', label: 'agency revenue growth' },
+  { value: '2M+', label: 'the community behind the agency' },
+  { value: '$200K+', label: 'commercial budgets by the end' },
+];
+const srNote = 'Roster · Sony · Adorama · MSI · Intel · Lexar · Peak Design · WANDRD';
 ---
 <!doctype html>
 <html lang="en">
@@ -194,7 +203,7 @@ a{color:inherit;text-decoration:none}
 .svc i{width:16px;height:16px;border-radius:50%;background:var(--c);flex:none;box-shadow:0 2px 8px color-mix(in srgb,var(--c) 55%,transparent)}
 @media (max-width:680px){.herob h1{font-size:clamp(40px,11vw,64px)}.herob .hb-role{flex-wrap:wrap;gap:14px}}
 
-/* ELEMENT 02 · statrow + rolerow (accent-proof: text rides --on-rgb) */
+/* ELEMENT 02 · statrow (accent-proof: text rides --on-rgb) */
 @media(max-width:900px){.statrow .stat:has(.note){margin-left:0}.statrow .stat .note{text-align:left}}
 
 /* ELEMENT 03 · the brief on paper */
@@ -278,6 +287,14 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
+<div class="spec" id="el-statrow"><div class="wrap"><span class="id">ELEMENT 00 · BLOCK · StatRow</span><span class="use">the at-a-glance number band. Numbers count up EVERY time the band scrolls into view (resets when it scrolls back out, so scrolling past it again re-counts). Props: <b>stats</b> (a value + label each), <b>note</b>, <b>tone</b> (<code>accent</code>/<code>paper</code>/<code>ink</code> — pick per section to satisfy the sitewide light/dark alternation rule). Data below is real: the locked Art of Visuals stat row from docs/WORK-PAGES-COPY-HANDOFF.md, shown on all three grounds. <b class="lives">pull from:</b> StatRow.astro</span></div></div>
+<p style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;max-width:var(--wrap);margin:0 auto;padding:20px var(--pad) 0">tone="accent" · default</p>
+<StatRow tone="accent" stats={srStats} note={srNote} />
+<p style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;max-width:var(--wrap);margin:0 auto;padding:20px var(--pad) 0">tone="paper" · light</p>
+<StatRow tone="paper" stats={srStats} note={srNote} />
+<p style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;max-width:var(--wrap);margin:0 auto;padding:20px var(--pad) 0">tone="ink" · dark</p>
+<StatRow tone="ink" stats={srStats} note={srNote} />
+
 <div class="spec" id="el-type"><div class="wrap"><span class="id">ELEMENT · TYPE SCALE · the copy rules</span><span class="use">one small, modern scale for the whole site. every header + paragraph pulls a token below — no page hard-codes its own size (that is what made every header a different size). section headers top out at <b>--fs-h2 · 31px</b>; only the hero goes big. <b class="lives">pull:</b> var(--fs-h2) / var(--fs-body) / etc. · defined in :root</span></div></div>
 <section class="paper"><div class="wrap tsc">
   <div class="tsc-row"><span class="tsc-lbl mono">Display<br>--fs-display<br>hero title only</span><p class="tsc-ex" style="font-size:var(--fs-display)">Let's get started.</p></div>
@@ -331,12 +348,6 @@ a{color:inherit;text-decoration:none}
   nfoHead="NFO"
   nfo={["Client · Name", "Role · Your role", "Frame · MC-0000-00"]}
   height="60svh"
-/>
-
-<div class="spec" id="el-statrow"><div class="wrap"><span class="id">ELEMENT 00 · BLOCK · StatRow</span><span class="use">the at-a-glance number band on the accent color; text rides <code>--on-rgb</code> so it reads on any accent. Props: <b>stats</b> (a value + label each) and <b>note</b>. <b class="lives">pull from:</b> StatRow.astro</span></div></div>
-<StatRow
-  stats={[{ value: "4x", label: "a headline number" }, { value: "2M+", label: "another number" }, { value: "$200K+", label: "a third number" }]}
-  note="One supporting line, right-aligned. Nothing you wouldn't say in an interview."
 />
 
 <div class="spec" id="el-quoteblock"><div class="wrap"><span class="id">ELEMENT 00 · BLOCK · QuoteBlock</span><span class="use">a pull quote + attribution, serif italic with an optional <code>&lt;b&gt;</code> display emphasis. Props: <b>quote, who, tone</b> (accent / paper / ink). <b class="lives">pull from:</b> QuoteBlock.astro</span></div></div>
@@ -413,7 +424,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<div class="spec" id="el-02"><div class="wrap"><span class="id">ELEMENT 02 · STATROW + ROLEROW</span><span class="use">Scoreboard on the accent: text rides --on-rgb so every accent reads · note right-aligned · rolerow flows left, never space-between · <b class="lives">lives on:</b> every work page</span></div></div>
+<div class="spec" id="el-02"><div class="wrap"><span class="id">ELEMENT 02 · STATROW</span><span class="use">Scoreboard on the accent: text rides --on-rgb so every accent reads · note right-aligned · <b class="lives">lives on:</b> work pages (the role/credits bar was killed 2026-07-14 — credits live in the Call Sheet)</span></div></div>
 <div class="statrow">
   <div class="wrap in">
     <div class="stat"><b>Big</b><span>What it counts</span></div>
@@ -422,15 +433,6 @@ a{color:inherit;text-decoration:none}
     <div class="stat"><p class="note">One supporting line with <b>the emphasis</b> inline</p></div>
   </div>
 </div>
-<div class="rolerow">
-  <div class="wrap in">
-    <span><b>Client</b> · Name</span>
-    <span><b>My part</b> · Creative Director</span>
-    <span><b>Agency</b> · If through one</span>
-    <span><b>Year</b> · 20XX</span>
-  </div>
-</div>
-
 <div class="spec" id="el-03"><div class="wrap"><span class="id">ELEMENT 03 · THE BRIEF</span><span class="use">Paper ground · kicker + display h2 + services list left, body right · first paragraph is the lede size · <b class="lives">lives on:</b> every work page</span></div></div>
 <section class="paper">
   <div class="wrap story">
@@ -1451,15 +1453,14 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 
-  <!-- M-B · stat row on the accent -->
-  <div class="statrow mlab-stats">
-    <div class="in">
-      <div class="stat m-el" style="--d:.05s"><b data-n="1" data-fmt="emmy">Emmy</b><span>Know Vape campaign</span></div>
-      <div class="stat m-el" style="--d:.15s"><b data-n="18000" data-fmt="k">18K+</b><span>conversations · Buck the Quo</span></div>
-      <div class="stat m-el" style="--d:.25s"><b data-n="30" data-fmt="range">2→30+</b><span>creatives led per team</span></div>
-      <div class="stat m-el" style="--d:.35s"><b data-n="4" data-fmt="x">4×</b><span>agency revenue as CD</span></div>
-    </div>
-  </div>
+  <!-- M-B · stat row — reconciled to the real <StatRow> component (one stat system);
+       it self-animates its count-up (incl. the 5→30+ range) on scroll-in. -->
+  <StatRow tone="ink" stats={[
+    { value: 'Emmy', label: 'Know Vape campaign' },
+    { value: '18K+', label: 'conversations · Buck the Quo' },
+    { value: '5→30+', label: 'creatives led per team' },
+    { value: '4×', label: 'agency revenue as CD' },
+  ]} />
 
   <!-- M-C · duo strip (floats at split speeds) -->
   <section class="paper mlab-duo">
@@ -1606,23 +1607,8 @@ a{color:inherit;text-decoration:none}
     [].slice.call(el.querySelectorAll('.w')).forEach(function(w,i){w.style.setProperty('--wd',(i*0.07+((i%3)*0.02))+'s');});
   });
 
-  // stat count-up on entry (all modes but lock-scrub; lock counts by progress)
-  function countStat(b,t){ // t: 0..1
-    var n=+b.getAttribute('data-n'),fmt=b.getAttribute('data-fmt');
-    var v=Math.round(n*t);
-    if(fmt==='k')b.textContent=(v>=1000?(Math.round(v/100)/10)+'K':v)+(t>=1?'+':'');
-    else if(fmt==='x')b.textContent=v+'×';
-    else if(fmt==='range')b.textContent='2→'+v+(t>=1?'+':'');
-    else if(fmt==='emmy')b.textContent=t>=1?'Emmy':['E','Em','Emm','Emmy'][Math.min(3,Math.floor(t*4))];
-  }
-  function animateStats(){
-    if(reduced)return;
-    [].slice.call(lab.querySelectorAll('.stat b[data-n]')).forEach(function(b){
-      var st=null;
-      function step(ts){if(!st)st=ts;var t=Math.min(1,(ts-st)/900);countStat(b,t);if(t<1)requestAnimationFrame(step);}
-      requestAnimationFrame(step);
-    });
-  }
+  // (stat count-up now lives in the <StatRow> component; the motion lab only
+  //  drives the entrance of the thesis, plates and CTA below.)
 
   // entrance observer
   var io;
@@ -1631,7 +1617,6 @@ a{color:inherit;text-decoration:none}
     io=new IntersectionObserver(function(es){es.forEach(function(e){
       if(e.isIntersecting){
         e.target.classList.add('in');
-        if(e.target.classList.contains('stat'))animateStats._once||(animateStats(),animateStats._once=true);
         io.unobserve(e.target);
       }
     });},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
@@ -1640,7 +1625,6 @@ a{color:inherit;text-decoration:none}
 
   function mode(){return lab.getAttribute('data-motion');}
   function reset(){
-    animateStats._once=false;
     els.forEach(function(el){el.classList.remove('in');});
     // force reflow so re-added .in re-runs transitions/animations
     void lab.offsetHeight;

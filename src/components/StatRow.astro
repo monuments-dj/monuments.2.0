@@ -1,25 +1,112 @@
 ---
-// StatRow.astro — the at-a-glance stat band on the accent color. Text rides the
-// --on-rgb ink so it reads on any accent. Self-contained.
+// StatRow.astro — the at-a-glance stat band. Self-contained; numbers count up
+// EVERY time the band scrolls into view (resets when it scrolls back out, so
+// scrolling past it again re-triggers the count — not a once-per-page reveal).
 //
 //   <StatRow
 //     stats={[{ value: '4x', label: 'a number' }, { value: '2M+', label: 'another' }]}
 //     note="One supporting line, right-aligned."
+//     tone="accent"
 //   />
+//
+// tone: 'accent' (default, --struct ground, text rides --on-rgb so it reads on
+// any accent) | 'paper' (light ground, dark text) | 'ink' (dark ground, light
+// text) — pick paper/ink to satisfy the sitewide light/dark alternation rule
+// when the accent ground would otherwise sit next to another light section.
 interface Stat { value: string; label: string; }
-interface Props { stats: Stat[]; note?: string; }
-const { stats = [], note } = Astro.props;
+interface Props { stats: Stat[]; note?: string; tone?: 'accent' | 'paper' | 'ink'; }
+const { stats = [], note, tone = 'accent' } = Astro.props;
 ---
-<div class="sr">
+<div class:list={['sr', `sr-${tone}`]}>
   <div class="sr-in">
     {stats.map((s) => (
-      <div class="sr-stat"><b>{s.value}</b><span>{s.label}</span></div>
+      <div class="sr-stat"><b data-count>{s.value}</b><span>{s.label}</span></div>
     ))}
-    {note && <p class="sr-note">{note}</p>}
+    {note && <p class="sr-note" set:html={note} />}
   </div>
 </div>
+
+<script>
+  // Count the numeric part of each stat up from zero, every time the band
+  // scrolls into view. Values carry prefixes/suffixes ($, K+, M+, %, x) and
+  // some are pure words (MMXIX, Full) — those are left exactly as authored.
+  // Decimals, leading zeros and thousands separators in the source string are
+  // preserved on the way up.
+  //
+  // Trigger is a continuous rAF poll of each element's live rect (not
+  // IntersectionObserver) so it stays correct under Lenis smooth-scroll. A
+  // stat resets to zero the instant it scrolls fully out of view (in either
+  // direction) so the next time it scrolls back into view it counts up again.
+  type Job = {
+    el: HTMLElement;
+    final: string;
+    prefix: string; suffix: string; target: number;
+    decimals: number; intLen: number; comma: boolean; pad: boolean;
+    visible: boolean; start: number | null;
+  };
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+  const DUR = 1300;
+
+  function fmt(val: number, j: Job) {
+    let [i, d] = val.toFixed(j.decimals).split('.');
+    if (j.pad) i = i.padStart(j.intLen, '0');
+    if (j.comma) i = i.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return j.prefix + (d ? i + '.' + d : i) + j.suffix;
+  }
+
+  const jobs: Job[] = [];
+  document.querySelectorAll<HTMLElement>('.sr-stat b[data-count]').forEach((el) => {
+    const final = (el.textContent || '').trim();
+    if (reduce) return; // reduced-motion → leave the final string, never touch it
+    // A range value ("5→30+") animates the END number, keeping "5→" fixed.
+    // Otherwise animate the first number found. A word value (no digits) is left as-is.
+    const m = final.match(/^(.*→\s*)([\d,]*\.?\d+)(.*)$/s) || final.match(/^(\D*?)([\d,]*\.?\d+)(.*)$/s);
+    if (!m) return;
+    const raw = m[2];
+    const clean = raw.replace(/,/g, '');
+    jobs.push({
+      el, final,
+      prefix: m[1], suffix: m[3], target: parseFloat(clean),
+      decimals: clean.includes('.') ? clean.split('.')[1].length : 0,
+      intLen: clean.split('.')[0].length,
+      comma: raw.includes(','), pad: /^0\d/.test(clean),
+      visible: false, start: null,
+    });
+    el.textContent = fmt(0, jobs[jobs.length - 1]);
+  });
+
+  if (jobs.length) {
+    const inView = (el: HTMLElement) => {
+      const r = el.getBoundingClientRect();
+      return r.top < window.innerHeight && r.bottom > 0;
+    };
+    const tick = (ts: number) => {
+      for (const j of jobs) {
+        const nowVisible = inView(j.el);
+        if (nowVisible && !j.visible) {
+          j.visible = true;
+          j.start = ts; // entering view: start (or restart) the count
+        } else if (!nowVisible && j.visible) {
+          j.visible = false;
+          j.start = null;
+          j.el.textContent = fmt(0, j); // fully left the viewport: reset for next pass
+        }
+        if (j.visible && j.start !== null) {
+          const t = Math.min((ts - j.start) / DUR, 1);
+          j.el.textContent = t < 1 ? fmt(j.target * easeOut(t), j) : j.final;
+        }
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+</script>
 <style>
-.sr { background: var(--struct, #EFA1AD); color: rgb(var(--on-rgb, 22 21 20)); border-bottom: 1px solid rgba(var(--on-rgb, 22 21 20), .18); }
+.sr-accent { background: var(--struct, #EFA1AD); color: rgb(var(--on-rgb, 22 21 20)); border-bottom: 1px solid rgba(var(--on-rgb, 22 21 20), .18); }
+.sr-paper  { background: var(--paper, #F5F3EF); color: var(--ink, #161514); border-bottom: 1px solid rgba(0, 0, 0, .1); }
+.sr-ink    { background: var(--ink, #161514); color: var(--paper, #F5F3EF); border-bottom: 1px solid rgba(255, 255, 255, .12); }
 .sr-in { max-width: var(--wrap, 1300px); margin: 0 auto; padding: 22px var(--pad, clamp(22px,5vw,40px)); display: flex; flex-wrap: wrap; gap: 22px 44px; align-items: baseline; }
 .sr-stat b { display: block; font-family: var(--disp, sans-serif); font-weight: var(--dispw2, 600); font-size: clamp(24px, 3vw, 40px); line-height: 1; letter-spacing: -.02em; }
 .sr-stat span { display: block; margin-top: 6px; font-family: var(--mono, monospace); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; opacity: .72; }

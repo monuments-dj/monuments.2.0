@@ -2,6 +2,7 @@
 import CircledCTA from '../components/CircledCTA.astro';
 import AchievementsTicker from '../components/AchievementsTicker.astro';
 import PageFooter from '../components/PageFooter.astro';
+import '../styles/grounds.css';
 ---
 <!doctype html>
 <html lang="en">
@@ -91,20 +92,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .tcrt.off{display:none}
 @keyframes tblink{50%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.hero .sub .l1{display:none}.hero .sub .l2{opacity:1}.tcrt{display:none}}
-.hero .count{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:rgba(245,243,239,.58);text-align:right;line-height:2}
-.hero .count b{color:var(--paper);font-weight:400}
 @media (prefers-reduced-motion:reduce){.hero-vid{display:none}}
-
-/* stat band */
-.statrow{background:var(--struct);color:rgb(var(--on-rgb));border-bottom:1px solid rgba(var(--on-rgb),.18)}
-.statrow .in{display:grid;grid-template-columns:repeat(4,1fr);padding:24px var(--pad);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.72)}
-.statrow span{padding-left:30px;border-left:1px solid rgba(var(--on-rgb),.2);line-height:1.45}
-.statrow span:first-child{padding-left:0;border-left:0}
-@media(max-width:860px){.statrow .in{grid-template-columns:1fr 1fr;row-gap:18px}.statrow span:nth-child(2n+1){padding-left:0;border-left:0}}
-@media(max-width:480px){.statrow .in{grid-template-columns:1fr;row-gap:13px}.statrow span{padding-left:0;border-left:0}}
-.statrow b{color:rgb(var(--on-rgb));font-weight:400}
-.statrow i{font-style:normal;color:rgb(var(--on-rgb))}
-
 
 /* brands scroller (lab BrandTicker, ported) */
 
@@ -191,17 +179,14 @@ body.gridview .arch{padding-bottom:0}
 .strip .lgi{flex:none;display:inline-flex;align-items:center;height:clamp(24px,2.6vw,38px);margin-right:clamp(48px,6vw,96px)}
 .strip .lgi img{height:100%;width:auto;max-width:200px;object-fit:contain;display:block;filter:brightness(0);opacity:.85;transition:opacity .25s}
 .strip .lgi:hover img{opacity:1}
+/* on an ink ground the black logos invert to paper (see grounds.css) */
+[data-ground="ink"].strip .lgi img{filter:brightness(0) invert(1)}
 
 /* cta on ink */
 .cta{position:relative;background:var(--ink);color:var(--paper);padding:7vh 0 8vh;text-align:center;overflow:hidden}
-.cta .emblem{position:absolute;right:clamp(28px,4vw,64px);top:50%;width:88px;aspect-ratio:1;margin-top:-44px;display:block;animation:spin 70s linear infinite}
-.cta .emblem g{fill:var(--paper)}
-@media (max-width:1200px){.cta .emblem{display:none}}
 .cta .kick{color:var(--spark)}
 .cta .big{font-weight:var(--dispw);font-size:clamp(40px,6.4vw,94px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:14px}
 .cta .big .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
-.cta .pill{display:inline-flex;margin-top:26px;padding:17px 34px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
-.cta .pill:hover{background:var(--spark)}
 
 .over{position:relative;z-index:1;background:inherit}
 .underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
@@ -408,37 +393,6 @@ body.gridview .arch{padding-bottom:0}
 
 <script is:inline>
 
-// hero contact-sheet spill: frames pulled from the archive rows themselves
-(function(){
-  const spill=document.getElementById('spill');if(!spill)return;
-  const imgs=[...document.querySelectorAll('.rowp')].map(r=>r.dataset.img).filter(Boolean);
-  if(!imgs.length)return;
-  // slot: [left%, top%, width px, rotate deg, drift speed]
-  const SLOTS=[
-    [-2,4,225,-7,-.10],[13,-6,185,4,.07],[29,9,165,-3,-.05],[45,-7,210,6,.09],
-    [61,7,180,-5,-.08],[79,-4,225,3,.06],[87,32,205,-6,-.11],[68,46,230,5,.08],
-    [38,44,170,-4,-.06],[4,38,150,8,.10]
-  ];
-  const pick=[0,1,2,3,4,6,7,10,12,14]; // spread across the roll
-  const frames=SLOTS.map((s,i)=>{
-    const el=document.createElement('span');el.className='frm';
-    el.style.cssText=`--l:${s[0]}%;--t:${s[1]}%;--w:${s[2]}px;--r:${s[3]}deg`;
-    el.dataset.sp=s[4];
-    el.innerHTML=`<img src="${imgs[pick[i]%imgs.length]}" alt="" loading="lazy" decoding="async">`;
-    spill.appendChild(el);return el;
-  });
-  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-  const hero=document.querySelector('.hero');let tick=false;
-  function drift(){
-    const y=scrollY;
-    if(y<hero.offsetHeight+240)frames.forEach(f=>{
-      f.style.transform=`translate3d(0,${(y*f.dataset.sp).toFixed(1)}px,0) rotate(${f.style.getPropertyValue('--r')})`;
-    });
-    tick=false;
-  }
-  addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(drift)}},{passive:true});
-})();
-
 // rose logo slider: every brand on file
 (function(){
   const LOGOS=[['Sony','/logos/sony.png'],['Intel','/logos/intel.png'],['Adorama','/logos/adorama.png'],['MSI','/logos/msi.png'],['Lexar','/logos/lexar.png'],['Flashpoint','/logos/flashpoint.png'],['Art of Visuals','/logos/art-of-visuals.png'],['Blue Cross of Idaho','/logos/blue-cross.png'],['Donut Media','/logos/donut-media.png'],['DW Drums','/logos/dw-drums.png'],['Against','/logos/against.png']];
@@ -480,11 +434,15 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     title:r.querySelector('.t').textContent.trim(),
     fmt:(r.querySelector('.fmt')?.textContent||'').replace(/\\/,'').trim(),
     yr:parseInt(r.querySelector('.yr')?.textContent||'0',10),id:r.querySelector('.id')?.textContent.trim()||'' ,idx:i}));
+  // intrinsic image dimensions (read from the source files) so grid cards reserve
+  // the right aspect-ratio before load — kills layout shift without cropping.
+  const IMG_DIMS={"/case-studies/ac-boise/gallery/home-01.jpg":[2002,2002],"/case-studies/adorama-music/gallery/am-01.jpg":[2048,1366],"/case-studies/art-of-visuals/gallery/xm3-bts.jpg":[2048,1367],"/case-studies/art-of-visuals/msi/msi-06.jpg":[1069,1600],"/case-studies/blue-cross/bc-2.jpg":[1600,1066],"/case-studies/buck-the-quo/gallery/container-front.jpg":[2048,1138],"/case-studies/clothing-merch/gallery/cm-01.jpg":[1228,1600],"/case-studies/cwi/frames/cw-01.jpg":[1400,788],"/case-studies/donut-zumiez/gallery/film-01.jpg":[2048,1500],"/case-studies/dw-drums/gallery/face-off.jpg":[1800,1213],"/case-studies/flashpoint/gallery/fp-01.jpg":[1800,1199],"/case-studies/know-vape/campaign/cam-01.jpg":[1680,1122],"/case-studies/on-camera/posters/nk-_UwGuRlE.jpg":[1280,720],"/case-studies/sony-flow-state/gallery/fs-05.jpg":[1800,1201],"/case-studies/sony-this-moment/gallery/tm-05.jpg":[1800,1239],"/case-studies/sony-xm5/gallery/xm5-03.jpg":[2000,1333],"/case-studies/sony-xperia-summer/gallery/xp-01.jpg":[1800,1202],"/case-studies/turnstile/products/prod-01.jpg":[640,640],"/case-studies/waffle-me-up/cover.jpg":[1536,1026]};
   function el(it){const a=document.createElement('a');a.className='gcard'+((it.snip||it.video)?' vcard':'');a.href=it.href;a.dataset.key=it.idx;a.dataset.disc=it.disc.join(',');
     if(it.video){a.dataset.video=it.video;if(it.vstart)a.dataset.vstart=it.vstart}
     if(it.snip)a.dataset.snip=it.snip;
     const cats=it.disc.map(d=>DISC_LABEL[d]).filter(Boolean).join(' · ');
-    a.innerHTML=`<span class="iw"><img class="cv" src="${it.img}" alt="${it.title}" loading="lazy"></span><div class="band"><span class="lft"><span class="t">${it.title}</span><span class="cats">${cats}</span></span>${it.logo?`<img loading="lazy" decoding="async" class="lg" src="${it.logo}" alt="">`:''}</div>`;return a}
+    const dm=IMG_DIMS[it.img]||[16,9];
+    a.innerHTML=`<span class="iw"><img class="cv" src="${it.img}" alt="${it.title}" width="${dm[0]}" height="${dm[1]}" loading="lazy"></span><div class="band"><span class="lft"><span class="t">${it.title}</span><span class="cats">${cats}</span></span>${it.logo?`<img loading="lazy" decoding="async" class="lg" src="${it.logo}" alt="">`:''}</div>`;return a}
   items.forEach(it=>grid.appendChild(el(it)));
   let sort='new';
   function currentFilter(){const on=document.querySelector('#lens button.on');return on?on.dataset.d:'all'}

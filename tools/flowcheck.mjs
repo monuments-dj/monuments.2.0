@@ -10,7 +10,10 @@ await pg.setViewportSize({ width: 1280, height: 900 });
 await pg.goto(url, { waitUntil: 'networkidle' });
 await pg.waitForTimeout(300);
 const bands = await pg.evaluate(() => {
-  const SEL = 'header.hero,.herob,.statrow,.rolerow,.break,.statbeat,.quote,.cta,.cuwrap,.insB,.film,.filmsplit,.ttp-sec,section.paper,section.white,section.tc,section.mzn,section.block-dark,.tstwrap,.cdd';
+  // NOTE (DJ 2026-07-14): stat bars (.statrow/.rolerow/.statbeat/.sr) are EXEMPT from the
+  // flow — they're neutral beats that can carry an accent color, so they never count as a
+  // light or dark band for adjacency. The header (header.hero/.herob) always counts as DARK.
+  const SEL = 'header.hero,.herob,.break,.quote,.cta,.cuwrap,.insB,.film,.filmsplit,.ttp-sec,section.paper,section.white,section.tc,section.mzn,section.block-dark,.tstwrap,.cdd';
   let els = [...document.querySelectorAll(SEL)].filter(e => e.offsetHeight >= 140 && e.offsetWidth >= innerWidth * 0.9);
   // keep only outermost (drop any band nested inside another matched band)
   els = els.filter(e => !els.some(o => o !== e && o.contains(e)));

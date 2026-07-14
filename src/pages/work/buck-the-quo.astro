@@ -53,6 +53,7 @@ const credits = [
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
+import StatRow from '../../components/StatRow.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'buck-the-quo');
@@ -289,24 +290,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/buck-the-quo/gallery/keep-pushing-poster.jpg" vid="/case-studies/buck-the-quo/films/keep-pushing.mp4" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
-<div class="statrow">
-  <div class="wrap in">
-    <div class="stat rv"><b>18,000+</b><span>one-on-one conversations with Idaho teens · Drake Cooper campaign research</span></div>
-    <div class="stat rv"><b>1 in 2</b><span>teens knew Buck the Quo</span></div>
-    <div class="stat rv"><b>88%</b><span>favorability among teens who knew it</span></div>
-    <div class="stat rv"><p class="note">Rocky Advertising Awards · <b>every category won · Best of Show</b></p></div>
-  </div>
-</div>
+<StatRow
+  stats={[{ value: '18,000+', label: 'one-on-one conversations with Idaho teens · Drake Cooper campaign research' }, { value: '1 in 2', label: 'teens knew Buck the Quo' }, { value: '88%', label: 'favorability among teens who knew it' }]}
+  note="Rocky Advertising Awards · <b>every category won · Best of Show</b>"
+/>
 
-<div class="rolerow">
-  <div class="wrap in">
-    <span><b>Client</b> · Albertson Family Foundation</span>
-    <span><b>My part</b> · Shooter · editor · social lead · field mentor · agency-side creative</span>
-    <span><b>Agency</b> · Drake Cooper</span>
-    <span><b>Activation</b> · More In Store</span>
-    <span><b>Filed</b> · a four-year run</span>
-  </div>
-</div>
 
 <section class="reelstrip">
   <div class="wrap">

@@ -81,11 +81,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
 @keyframes fade{to{opacity:1}}
 
-.statrow{background:var(--struct);color:rgb(var(--on-rgb));border-bottom:1px solid rgba(var(--on-rgb),.18)}
-.statrow .in{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;padding:26px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(var(--on-rgb),.72)}
-.statrow b{color:rgb(var(--on-rgb));font-weight:400}
-.statrow i{font-style:normal;color:rgb(var(--on-rgb))}
-
 /* subject file on paper */
 .paper{background:var(--paper);color:var(--ink)}
 .file{display:grid;grid-template-columns:.58fr 1.42fr;gap:64px;padding:11vh 0;align-items:center}
@@ -114,28 +109,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .lstory .lclose{font-weight:var(--dispw);font-size:clamp(22px,2.4vw,34px);letter-spacing:-.025em;line-height:1.2;text-transform:uppercase;color:var(--ink)!important;margin-top:34px}
 .lstory .lclose .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
 
-/* the roll: career eras as film strips */
-.roll{padding:2vh 0 10vh}
-.roll .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:13px;border-bottom:2px solid var(--ink)}
-.roll .bar .mono b{color:var(--red)}
-.era{display:grid;grid-template-columns:150px 236px 1fr;gap:34px;align-items:center;padding:36px 0;border-bottom:1px solid var(--line);transition:background .3s,padding-left .35s cubic-bezier(.22,1,.36,1)}
-.era:hover{background:#fff;padding-left:14px}
-.era .id{font-family:var(--mono);font-size:10.5px;color:var(--dim);text-transform:uppercase;line-height:1.8}
-.era .strip{display:flex;gap:5px;background:var(--ink);padding:7px 6px;transform:rotate(-.8deg);transition:transform .4s}
-.era:nth-child(odd) .strip{transform:rotate(.7deg)}
-.era:hover .strip{transform:rotate(0deg) scale(1.03)}
-.era .strip img{width:68px;height:50px;object-fit:cover;display:block;filter:grayscale(.3) saturate(.85)}
-.era h3{font-weight:var(--dispw);font-size:clamp(22px,2.5vw,36px);letter-spacing:-.02em;text-transform:uppercase}
-.era h3 .co{color:var(--struct)}
-.era p{color:#4c4a45;max-width:56ch;margin-top:6px}
-.era .here{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--red);border:2px solid var(--red);border-radius:6px;padding:4px 10px;transform:rotate(-2deg);text-transform:uppercase}
-
-
 /* scroll-lit rows (monolog grammar): dim until they cross viewport center */
 .litrow{opacity:.32;transition:opacity .5s cubic-bezier(.22,1,.36,1)}
 .litrow.lit{opacity:1}
 @media (prefers-reduced-motion:reduce){.litrow{opacity:1}}
-.era.litrow{transition:background .3s,padding-left .35s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1)}
 .step.litrow{transition:background .3s,padding-left .35s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1)}
 
 /* crew: full-bleed with parallax */
@@ -177,13 +154,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* cta */
 .cta{position:relative;background:var(--ink);color:var(--paper);padding:10vh 0 11vh;text-align:center;overflow:hidden}
-.cta .emblem{width:112px;aspect-ratio:1;margin:0 auto 30px;display:block;animation:spin 70s linear infinite}
-.cta .emblem g{fill:var(--paper)}
 .cta .kick{color:var(--spark)}
 .cta .big{font-weight:var(--dispw);font-size:clamp(44px,7.6vw,112px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:20px}
 .cta .big .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
-.cta .pill{display:inline-flex;margin-top:42px;padding:20px 38px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
-.cta .pill:hover{background:var(--spark)}
 
 
 /* footer under-reveal (tinywins) */
@@ -247,7 +220,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .rv.in{opacity:1;transform:none}
 @media (max-width:900px){
   .file{grid-template-columns:1fr}
-  .era{grid-template-columns:1fr;gap:14px}
   .step{grid-template-columns:1fr;gap:8px}
   .hero .nfo{right:auto;left:var(--pad)}
 }
@@ -255,10 +227,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .hero .t .ln>span{transform:none}.hero .nfo{opacity:1}.rv{opacity:1;transform:none}.grain{animation:none}
 }
-
-/* footer dock: the floating descriptor + LA clock settle into the footer at page end */
-.foot-dock{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 18px}
-.foot-dock .fd-clock{color:var(--dim)}
 
 /* mobile nav · CSS-only hamburger -> fullscreen menu */
 .navburger,.mnav{display:none}
@@ -451,7 +419,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </section>
 
 <section class="paper">
-  <div class="wrap" style="display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;padding:11vh 0;align-items:center">
+  <div class="wrap" style="display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;padding:11vh var(--pad);align-items:center">
     <div class="rv" style="background:#fff;border:1px solid var(--line);padding:10px 10px 30px;transform:rotate(-1.2deg);box-shadow:0 24px 60px rgba(20,20,20,.12)">
       <img src="/case-studies/giving/gv-01.jpg" alt="Schoolkids in Uganda, documentary trip" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.9)">
       <span style="position:absolute;margin-top:6px;font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em">NEPAL · UGANDA · EUROPE · THE GIVING SIDE</span>
@@ -521,10 +489,6 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
       }
       const r=crew.parentElement.getBoundingClientRect();
       if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;crew.style.transform=`translateY(${p*-52}px)`}
-      document.querySelectorAll('.era .strip').forEach((s,i)=>{
-        const er=s.getBoundingClientRect();
-        if(er.bottom>0&&er.top<vh){const ep=(er.top+er.height/2-vh/2)/vh;s.style.translate=`${(ep*(i%2?36:-36)).toFixed(1)}px 0`}
-      });
       tick=false;
     });
   },{passive:true});

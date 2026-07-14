@@ -4,6 +4,7 @@ import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
+import StatRow from '../../components/StatRow.astro';
 import '../../styles/work.css';
 import { work } from '../../data/work.js';
 const hh = work.find(w => w.slug === 'sony-xperia');
@@ -247,25 +248,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" vid={hh.vid} logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
-<div class="statrow">
-  <div class="wrap in">
-    <div class="stat rv"><b>3.6M</b><span>Impressions</span></div>
-    <div class="stat rv"><b>569K</b><span>Actions taken</span></div>
-    <div class="stat rv"><b>15.54%</b><span>Engagement rate</span></div>
-    <div class="stat rv"><p class="note">Measured on the Xperia PRO-I launch, the same partnership · industry calls 3.5 to 6% high · AOV channels + amplification</p></div>
-  </div>
-</div>
+<StatRow
+  stats={[{ value: '3.6M', label: 'Impressions' }, { value: '569K', label: 'Actions taken' }, { value: '15.54%', label: 'Engagement rate' }]}
+  note="Measured on the Xperia PRO-I launch, the same partnership · industry calls 3.5 to 6% high · AOV channels + amplification"
+/>
 
-<div class="rolerow">
-  <div class="wrap in">
-    <span><b>Client</b> · Sony Xperia</span>
-    <span><b>My part</b> · Director / Creative Director</span>
-    <span><b>Agency</b> · Art of Visuals</span>
-    <span><b>DP</b> · Casey Levins</span>
-    <span><b>Editor</b> · Komin Kovatonic</span>
-    <span><b>Year</b> · 2022</span>
-  </div>
-</div>
 
 <section class="paper">
   <div class="wrap story">

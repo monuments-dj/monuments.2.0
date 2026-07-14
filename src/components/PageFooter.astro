@@ -119,11 +119,11 @@ const { tag } = Astro.props;
       'html[data-accent="bw"] .quote .who{color:rgba(22,21,20,.55)!important}'+
       'html[data-accent="bw"] .statrow{border-top:1px solid rgba(245,243,239,.14)}'+
       'html[data-accent="bw"] .cta[class]{border-top:1px solid rgba(245,243,239,.1)}'+
-      // the scoreboard: on case pages (statrow + rolerow pair) the band inverts to paper
-      'html[data-accent="bw"] .statrow:has(+ .rolerow){background:var(--paper)!important;color:#161514!important;border-top:none!important;border-bottom:none!important}'+
-      'html[data-accent="bw"] .statrow:has(+ .rolerow) .stat b{color:#161514!important}'+
-      'html[data-accent="bw"] .statrow:has(+ .rolerow) .stat span,html[data-accent="bw"] .statrow:has(+ .rolerow) .stat .note{color:rgba(22,21,20,.62)!important}'+
-      'html[data-accent="bw"] .statrow:has(+ .rolerow) .stat .note b{color:#161514!important}';
+      // the scoreboard: case-page stat bands marked .inv invert to paper in B/W
+      'html[data-accent="bw"] .statrow.inv{background:var(--paper)!important;color:#161514!important;border-top:none!important;border-bottom:none!important}'+
+      'html[data-accent="bw"] .statrow.inv .stat b{color:#161514!important}'+
+      'html[data-accent="bw"] .statrow.inv .stat span,html[data-accent="bw"] .statrow.inv .stat .note{color:rgba(22,21,20,.62)!important}'+
+      'html[data-accent="bw"] .statrow.inv .stat .note b{color:#161514!important}';
     document.head.appendChild(g);
   }
   // type guard: nearly every headline on the site declares only a WEIGHT and

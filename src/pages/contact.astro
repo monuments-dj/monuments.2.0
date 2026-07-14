@@ -87,8 +87,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .doors a:hover{padding-left:10px}
 .doors a:hover .arr{transform:translateX(6px)}
 .journey h1{font-weight:var(--dispw);font-size:clamp(38px,5.8vw,84px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:22px;color:var(--ink)}
-.pill{display:inline-flex;margin:44px 0 0;padding:22px 42px;background:var(--ink);color:var(--paper);border-radius:99px;font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s,color .3s;will-change:transform}
-.pill:hover{background:var(--spark);color:var(--ink)}
 .avail{margin-top:24px;color:#8f8d88;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase}
 .avail b{color:#1eb96f;font-weight:400}
 .jside{display:flex;flex-direction:column;align-items:flex-start}
@@ -105,10 +103,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .jside .socials a b{font-weight:400}
 .jside .socials a:hover{color:var(--red)}
 
-
-/* footer dock: the floating descriptor + LA clock settle into the footer at page end */
-.foot-dock{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 18px}
-.foot-dock .fd-clock{color:var(--dim)}
 
 /* mobile nav — CSS-only hamburger -> fullscreen menu */
 .navburger,.mnav{display:none}
@@ -206,7 +200,6 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
 
-(function(){const g=document.getElementById('rays');if(!g)return;let s='';for(let i=0;i<20;i++){s+=`<path d="M0,-34 L-8,-92 L8,-92 Z" transform="rotate(${i*18})"/>`}g.innerHTML=s})();
 // 3-up band: each column cycles its photos with a fade (like the live page's slideshow),
 // staggered per column so no two columns swap at once. Reduced motion: static firsts.
 (function(){
@@ -218,14 +211,6 @@ clock();setInterval(clock,30000);
       imgs[i].classList.remove('on'); i=(i+1)%imgs.length; imgs[i].classList.add('on');
     },4200)},ci*1400);
   });
-})();
-(function(){
-  const mag=document.querySelector('.magnetic');
-  if(!mag||!matchMedia('(pointer:fine)').matches)return;
-  let raf;const st={x:0,y:0,tx:0,ty:0};
-  mag.addEventListener('mousemove',e=>{const r=mag.getBoundingClientRect();st.tx=(e.clientX-r.left-r.width/2)*.32;st.ty=(e.clientY-r.top-r.height/2)*.32;loop()});
-  mag.addEventListener('mouseleave',()=>{st.tx=0;st.ty=0;loop()});
-  function loop(){cancelAnimationFrame(raf);(function step(){st.x+=(st.tx-st.x)*.16;st.y+=(st.ty-st.y)*.16;mag.style.transform=`translate(${st.x}px,${st.y}px)`;if(Math.abs(st.tx-st.x)>.2||Math.abs(st.ty-st.y)>.2)raf=requestAnimationFrame(step)})()}
 })();
 
 </script>
