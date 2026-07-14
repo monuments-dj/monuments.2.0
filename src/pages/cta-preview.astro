@@ -1,0 +1,79 @@
+---
+// cta-preview.astro — TEMP A/B page for the new closer. Not linked, noindex.
+// Every ClosingCTA variant on one short page so DJ can judge layout + copy + size
+// without scrolling 25,000px down the Kit. DELETE this route once he picks and the
+// winner is baked into the 11 pages.
+import ClosingCTA from '../components/ClosingCTA.astro';
+
+const LAYOUTS = [
+  { tone: 'ink',   layout: 'centered', label: 'A · centered · ink' },
+  { tone: 'paper', layout: 'centered', label: 'B · centered · paper' },
+  { tone: 'ink',   layout: 'left',     label: 'C · left + CTA right · ink' },
+];
+const COPY = [
+  { kicker: 'Being forgettable is expensive', statement: `Culture is talking.<br>Most brands aren't <em>listening.</em>`, label: "Let's talk", name: '1 · Ears to the streets (new)' },
+  { kicker: 'Being forgettable is expensive', statement: `Let's build something<br><em>worth remembering.</em>`,        label: "Let's talk", name: '2 · The current closer' },
+  { kicker: 'Good work starts with good questions', statement: `Tell me what<br>you're <em>building.</em>`,             label: 'Reach Out',  name: '3 · The second locked pair' },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Closer A/B · Monuments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style is:global>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --red:#E0311A; --red-accent:var(--red);
+  --dim:#8f8d88; --line:#dcd9d2;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --mono:'Fragment Mono',monospace; --serif:'Instrument Serif',serif;
+  --spark:var(--paper); --struct:var(--paper); --on-rgb:22,21,20;
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.head{max-width:var(--wrap);margin:0 auto;padding:56px var(--pad) 26px}
+.head h1{font-size:34px;letter-spacing:-.02em}
+.head p{margin-top:10px;color:var(--dim);font-size:14px;max-width:70ch;line-height:1.6}
+.tag{display:block;max-width:var(--wrap);margin:0 auto;padding:34px var(--pad) 10px;
+     font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.sub{display:block;max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 12px;
+     font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+hr{border:0;border-top:1px solid rgba(245,243,239,.14);margin:44px 0 0}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <h1>The closer · A/B</h1>
+  <p>Same component (ClosingCTA), every option. Pick a <b>layout</b> (A/B/C) and a <b>copy pair</b> (1/2/3).
+     Downsized per your note: statement 48px (was 64), band ~421px (was ~550). The accent word now punches on
+     both grounds. Whatever you pick replaces the hand-rolled closer on all 11 pages, and after that it is a
+     one-file edit.</p>
+</div>
+
+<span class="tag">The 3 layouts &middot; same copy</span>
+{LAYOUTS.map((l) => (
+  <>
+    <span class="sub">{l.label}</span>
+    <ClosingCTA tone={l.tone} layout={l.layout} />
+  </>
+))}
+
+<hr>
+<span class="tag">The 3 copy pairs &middot; same layout (centered &middot; ink)</span>
+{COPY.map((c) => (
+  <>
+    <span class="sub">{c.name}</span>
+    <ClosingCTA tone="ink" layout="centered" kicker={c.kicker} statement={c.statement} label={c.label} />
+  </>
+))}
+
+</body>
+</html>

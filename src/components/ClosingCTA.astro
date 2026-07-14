@@ -48,18 +48,22 @@ const {
 .clc-ink   { background: var(--ink, #161514);   color: var(--paper, #F5F3EF); }
 .clc-paper { background: var(--paper, #F5F3EF); color: var(--ink, #161514); }
 
+/* ── SIZE KNOBS (DJ 2026-07-14: "downsize the font and the height a bit") ──
+   Band height lives in --clc-pad, statement size in --clc-size. Tune here. */
+.clc { --clc-pad: clamp(48px, 9vh, 96px); --clc-size: clamp(26px, 3.4vw, 48px); }
+
 .clc-in {
   max-width: var(--wrap, 1300px); margin: 0 auto;
-  padding: clamp(70px, 15vh, 160px) var(--pad, clamp(22px,5vw,40px));
+  padding: var(--clc-pad) var(--pad, clamp(22px,5vw,40px));
 }
 
 .clc-k {
-  display: block; font-family: var(--mono, monospace); font-size: 11px;
-  letter-spacing: .12em; text-transform: uppercase; opacity: .62; margin-bottom: 22px;
+  display: block; font-family: var(--mono, monospace); font-size: 10.5px;
+  letter-spacing: .12em; text-transform: uppercase; opacity: .62; margin-bottom: 16px;
 }
 .clc-stmt {
   margin: 0; font-family: var(--disp, sans-serif); font-weight: var(--dispw, 800);
-  font-size: clamp(30px, 4.6vw, 64px); line-height: 1.02; letter-spacing: -.035em;
+  font-size: var(--clc-size); line-height: 1.05; letter-spacing: -.03em;
   text-transform: uppercase; max-width: 18ch;
 }
 /* the accent word — red on BOTH grounds (see note above) */
@@ -68,7 +72,7 @@ const {
 /* centered: statement centered, circled CTA beneath it */
 .clc-centered .clc-in  { text-align: center; }
 .clc-centered .clc-stmt { margin: 0 auto; }
-.clc-centered :global(.clc-cta) { margin-top: 40px; }
+.clc-centered :global(.clc-cta) { margin-top: 30px; }
 
 /* left: statement left, circled CTA off to the right */
 .clc-left .clc-in {
