@@ -1,0 +1,44 @@
+---
+// FooterWordmark.astro — the giant M✳NUMENTS that the page reveals as you scroll to
+// the bottom. The asterisk does a pressure-release spin the moment you arrive.
+//
+// Place it INSIDE .underfoot, directly above <PageFooter />:
+//
+//   <div class="underfoot">
+//     <FooterWordmark />
+//     <PageFooter tag="…" />
+//   </div>
+//
+// It needs the under-reveal mechanism to actually "reveal": .over (the page content)
+// slides over a fixed .underfoot. Without .over/.underfoot it still renders, just
+// statically. Self-contained: ships its own CSS + the at-foot script (guarded, so it
+// cannot double-bind on pages that already run one).
+---
+<div class="gwm" aria-hidden="true">M<span>✳</span>NUMENTS</div>
+
+<script is:inline>
+  // body.at-foot — true once the visitor reaches the very bottom. Drives the spark spin.
+  // Guarded: several pages already bind this inline; binding twice would double-toggle.
+  (function(){
+    if (window.__mnmtAtFoot) return;
+    window.__mnmtAtFoot = true;
+    function atBottom(){ return window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4; }
+    function upd(){ document.body.classList.toggle('at-foot', atBottom()); }
+    addEventListener('scroll', upd, { passive: true });
+    addEventListener('resize', upd, { passive: true });
+    setTimeout(upd, 500);
+  })();
+</script>
+
+<style is:global>
+.gwm{
+  background: var(--ink, #161514); color: var(--paper, #F5F3EF);
+  font-family: var(--disp, sans-serif); font-weight: var(--dispw, 800);
+  font-size: 15.5vw; letter-spacing: -.04em; line-height: .62;
+  text-align: center; overflow: hidden; padding-top: 2vw;
+}
+.gwm span{ color: var(--spark, #F5F3EF); display: inline-block; transform-origin: 50% 54%; }
+body.at-foot .gwm span{ animation: sparkRelease 1.2s cubic-bezier(.12,.9,.25,1); }
+@keyframes sparkRelease{ from{ transform: rotate(0); } to{ transform: rotate(720deg); } }
+@media (prefers-reduced-motion: reduce){ body.at-foot .gwm span{ animation: none; } }
+</style>

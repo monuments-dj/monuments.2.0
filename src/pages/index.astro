@@ -1,5 +1,6 @@
 ---
 import CircledCTA from '../components/CircledCTA.astro';
+import FooterWordmark from '../components/FooterWordmark.astro';
 import ClosingCTA from '../components/ClosingCTA.astro';
 import AchievementsTicker from '../components/AchievementsTicker.astro';
 import PageFooter from '../components/PageFooter.astro';
@@ -249,11 +250,6 @@ a.bt-item:hover .bt-logo{filter:none!important;opacity:1}
 .banner .big{font-weight:var(--dispw);font-family:var(--dispcond);font-stretch:var(--condstretch);font-size:clamp(60px,10.6vw,158px);line-height:.9;letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;width:max-content;display:flex;gap:56px;animation:drift 30s linear infinite}
 .banner .big i{font-style:normal;color:transparent;-webkit-text-stroke:1.5px var(--paper)}
 
-.gwm{background:var(--ink);color:var(--paper);font-weight:var(--dispw);font-size:15.5vw;letter-spacing:-.04em;line-height:.62;text-align:center;overflow:hidden;padding-top:2vw}
-.gwm span{color:var(--spark);display:inline-block;transform-origin:50% 54%}
-body.at-foot .gwm span{animation:sparkRelease 1.2s cubic-bezier(.12,.9,.25,1)}
-@keyframes sparkRelease{from{transform:rotate(0)}to{transform:rotate(720deg)}}
-@media (prefers-reduced-motion:reduce){body.at-foot .gwm span{animation:none}}
 
 
 /* film grain: the texture layer */
@@ -493,7 +489,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 </div><!--/over-->
 <div class="underfoot">
-<div class="gwm" aria-hidden="true">M<span>✳</span>NUMENTS</div>
+<FooterWordmark />
 
 <PageFooter tag="The studio" />
 </div><!--/underfoot-->
