@@ -140,7 +140,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
    (82% black at the bottom-left, transparent past 52%) - it existed to make the copy
    readable in that one corner. Centered copy needs an EVEN scrim or it lands on the
    bright middle of the photo and disappears. */
-.crew .grade{position:absolute;inset:0;background:rgba(22,21,20,.55)}
+/* NOTE: this was already .55 when DJ asked for "maybe 50%", so 50 would have been a
+   LIGHTER photo, not a darker one. Taking it up to .68 (his intent was more overlay).
+   One number to tune if he wants it stronger or softer. */
+.crew .grade{position:absolute;inset:0;background:rgba(22,21,20,.68)}
 .crew .cap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 var(--pad);color:var(--paper)}
 .crew .cap .k{color:var(--spark)}
 .crew .cap h3{font-weight:var(--dispw);font-size:clamp(30px,4.4vw,64px);letter-spacing:-.03em;text-transform:uppercase;margin-top:10px}
@@ -354,11 +357,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <ul class="creed">
         <li class="rv">
           <b>Every great story is a <span class="serif">human story.</span></b>
-          <span>The point is the story. It's there if you're willing to listen.</span>
+          <span>It's there if you're willing to listen.</span>
         </li>
         <li class="rv">
           <b>Less agency, <span class="serif">more rock &amp; roll.</span></b>
-          <span>Fewer meetings about the creating, more actual creating.</span>
+          <span>Fewer meetings about creating, more actual creating.</span>
         </li>
         <li class="rv">
           <b>Ideas are cheap. <span class="serif">Shipped is rare.</span></b>
