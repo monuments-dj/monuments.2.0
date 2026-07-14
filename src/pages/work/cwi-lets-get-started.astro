@@ -22,13 +22,17 @@ const hh = work.find(w => w.slug === 'cwi-lets-get-started');
 // HUMANITIES, TECH and BUSINESS ADMIN - those already map onto the existing
 // "Arts + Humanities", "Technology" and "Business Admin" chips, so they are not
 // duplicated here.
+// ⚠️ `film: true` = we actually HOLD a self-hosted spot for that program
+// (/case-studies/cwi/films/<k>.mp4 + poster + snip). The Scale chips list ALL
+// programs; the spot grid may ONLY render the ones with assets, or it renders
+// frames pointing at files that do not exist.
 const programs = [
-  { k: 'fire',          t: 'Fire Service' },
-  { k: 'public-safety', t: 'Public Safety' },
-  { k: 'humanities',    t: 'Arts + Humanities' },
-  { k: 'tech',          t: 'Technology' },
-  { k: 'business',      t: 'Business Admin' },
-  { k: 'mining',        t: 'Mining Technology' },
+  { k: 'fire',          t: 'Fire Service',       film: true },
+  { k: 'public-safety', t: 'Public Safety',      film: true },
+  { k: 'humanities',    t: 'Arts + Humanities',  film: true },
+  { k: 'tech',          t: 'Technology',         film: true },
+  { k: 'business',      t: 'Business Admin',     film: true },
+  { k: 'mining',        t: 'Mining Technology',  film: true },
   { k: 'engineering',   t: 'Engineering' },
   { k: 'biology',       t: 'Biology' },
   { k: 'dental',        t: 'Dental' },
@@ -37,6 +41,20 @@ const programs = [
   { k: 'agriculture',   t: 'Agriculture' },
   { k: 'horticulture',  t: 'Horticulture' },
   { k: 'transfer',      t: 'Transfer' },
+];
+const spotFilms = programs.filter((p) => p.film);
+
+// DJ's CWI films on the college's own YouTube channel (2026-07-14). Titles are the
+// REAL YouTube titles, pulled from oEmbed - not invented. He said "lead with this one",
+// so the Industrial/Technology/Trades pathway film runs first and full width.
+const ytFilms = [
+  { id: 'o8zvmSRvGig', t: 'Industrial, Technology + Trades Pathway', lead: true },
+  { id: 'AD3Z_QQ9ZTU', t: "Let's Get Started · Engineering" },
+  { id: 'o39hbxI0Zzk', t: "Let's Get Started · Art Program" },
+  { id: 'v_1ZuNOXfJs', t: "Let's Get Started · Engineering" },
+  { id: 'UPvmJ4gO5XQ', t: "Let's Get Started · Biology" },
+  { id: '2vbU2Ke7EaI', t: 'Education Pathway' },
+  { id: 'vgpM-7PrlSI', t: "Let's Get Started · Occupational Therapy Assistant" },
 ];
 ---
 <!doctype html>
@@ -165,6 +183,22 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .sizes .sz figcaption{margin-top:10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.6)}
 @media(max-width:760px){.sizes .sz-grid{grid-template-columns:1fr 1fr;align-items:start}.sizes .sz-9{grid-column:span 2;justify-self:center;max-width:320px}}
 /* catalog (scale) */
+/* the films on CWI's channel: lead film full width, the rest 3-up. Click to play. */
+.ytfilms .yt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.ytf{position:relative;display:block;width:100%;padding:0;border:0;background:#000;cursor:pointer;overflow:hidden;border-radius:8px}
+.ytf img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1),filter .4s;filter:brightness(.82)}
+.ytf:hover img{transform:scale(1.03);filter:brightness(1)}
+.ytf::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(22,21,20,.72),transparent 46%);pointer-events:none}
+.ytf .ytplay{position:absolute;top:14px;left:14px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);border:1px solid rgba(245,243,239,.6);border-radius:99px;padding:6px 12px;background:rgba(22,21,20,.4);backdrop-filter:blur(3px);transition:background .3s,color .3s}
+.ytf:hover .ytplay{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.ytf .ytcap{position:absolute;left:14px;right:14px;bottom:12px;z-index:2;text-align:left;font-size:10.5px;letter-spacing:.09em;color:var(--paper)}
+.ytf-lead{margin-top:26px}
+.ytf-lead .ytplay{font-size:11px;padding:8px 15px}
+.ytf-lead .ytcap{font-size:12px;bottom:16px}
+.ytf iframe{width:100%;aspect-ratio:16/9;display:block;border:0}
+@media (max-width:900px){.ytfilms .yt-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.ytfilms .yt-grid{grid-template-columns:1fr}}
+
 /* THE SCALE, inverted to INK (DJ 2026-07-14: "make background black"). Styled directly
    rather than via data-ground: this page does NOT import grounds.css, so the ground
    attribute would have done nothing. Every colour in here was dark-on-light and had to
@@ -306,12 +340,40 @@ html[data-accent="bw"] section.quote .who{color:rgba(245,243,239,.55)!important}
     <h2 class="rv in">A spot for every <span class="serif">program.</span></h2>
     <p class="flead rv in">I direct, shoot, and cut a film for each program, one at a time, built around what that path actually gives a student. Real students play the leads. <b>Same voice across all of them, a different world each time.</b></p>
     <div class="spotgrid">
-      {programs.map((p) => (
+      {spotFilms.map((p) => (
         <div class="filmframe" data-src={`/case-studies/cwi/films/${p.k}.mp4`} data-title={`Let's Get Started · ${p.t}`}>
           <img src={`/case-studies/cwi/films/poster-${p.k}.jpg`} alt={`${p.t} program spot`} loading="lazy" decoding="async">
           <video class="pvid" src={`/case-studies/cwi/films/snip-${p.k}.mp4`} autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
           <span class="chip"><span class="dot"></span>{p.t}</span>
         </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- The films on CWI's own channel (DJ 2026-07-14). Posters are pulled LOCAL rather than
+     hotlinked from ytimg, matching the site's convention. Click-to-play: the iframe is
+     only injected on click, so nothing loads from YouTube on page load. -->
+<section class="film ytfilms">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>On CWI's channel</b> · the films in the wild</span>
+      <span class="mono" style="color:#8f8d88">click to play</span>
+    </div>
+    {ytFilms.filter((f) => f.lead).map((f) => (
+      <button class="ytf ytf-lead rv" type="button" data-yt={f.id} aria-label={`Play: ${f.t}`}>
+        <img src={`/case-studies/cwi/yt/${f.id}.jpg`} width="1280" height="720" alt={f.t} loading="lazy" decoding="async">
+        <span class="ytplay">Play · the film</span>
+        <span class="ytcap mono">{f.t}</span>
+      </button>
+    ))}
+    <div class="yt-grid">
+      {ytFilms.filter((f) => !f.lead).map((f) => (
+        <button class="ytf rv" type="button" data-yt={f.id} aria-label={`Play: ${f.t}`}>
+          <img src={`/case-studies/cwi/yt/${f.id}.jpg`} width="1280" height="720" alt={f.t} loading="lazy" decoding="async">
+          <span class="ytplay">Play</span>
+          <span class="ytcap mono">{f.t}</span>
+        </button>
       ))}
     </div>
   </div>
@@ -424,6 +486,24 @@ html[data-accent="bw"] section.quote .who{color:rgba(245,243,239,.55)!important}
 <script is:inline>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// CWI's channel films: click-to-play facade. The iframe is injected ONLY on click, so
+// the page makes zero requests to YouTube until the visitor asks for one.
+(function(){
+  document.querySelectorAll('.ytf[data-yt]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      if(btn.dataset.playing)return;
+      btn.dataset.playing='1';
+      var f=document.createElement('iframe');
+      f.src='https://www.youtube-nocookie.com/embed/'+btn.dataset.yt+'?autoplay=1&rel=0';
+      f.title=btn.getAttribute('aria-label')||'CWI film';
+      f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      f.setAttribute('allowfullscreen','');
+      btn.innerHTML='';
+      btn.appendChild(f);
+    });
+  });
+})();
 
 // program spots: click the poster to play the self-hosted film with native controls
 // (no YouTube chrome). The muted snip loop shows until the click.
