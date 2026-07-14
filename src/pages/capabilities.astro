@@ -82,7 +82,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero>.scrim{position:absolute;top:0;height:100%;left:50%;width:100vw;transform:translateX(-50%);background:linear-gradient(100deg,rgba(22,21,20,.82),rgba(22,21,20,.42) 52%,rgba(22,21,20,.5)),linear-gradient(0deg,rgba(22,21,20,.68),rgba(22,21,20,0) 44%);z-index:1;pointer-events:none}
 .hero>*:not(.herobg):not(.scrim){position:relative;z-index:2}
 .hero h1{color:var(--paper)}
-.hero .inner{position:relative;z-index:1;padding-top:8vh}
+/* width:100% is REQUIRED: .hero is display:flex, so the .wrap child SHRINKS TO ITS
+   CONTENT instead of filling to --wrap, and the whole hero drifted ~129px right of
+   every other section on the page. (Same bug that hit the work hero, see TODO.) */
+.hero .inner{position:relative;z-index:1;width:100%;padding-top:8vh}
 .hero .kick{color:var(--red)}
 .hero h1{font-weight:var(--dispw);font-size:clamp(40px,6.2vw,92px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:18px}
 .hero h1 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
@@ -130,7 +133,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 [data-ground="ink"] .capcard .pf{color:var(--red)!important}
 /* the refusals: the negative definition opens the page (W+K shape, DJ's words).
    Set as a numbered ledger: rule-separated manifesto rows, not scattered mono. */
-.refuse{padding:9vh 0 2vh}
+/* padding-block only: a `padding` SHORTHAND here resets .wrap's left/right gutter to 0,
+   which is why the refusals sat 44px left of every other section. */
+.refuse{padding-top:9vh;padding-bottom:2vh}
 .refuse .big{font-weight:var(--dispw);font-size:clamp(30px,4.4vw,64px);letter-spacing:-.03em;line-height:1;text-transform:uppercase}
 .refuse .big .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;color:var(--ink)}
 .refuse ul{list-style:none;margin:38px 0 0;padding:0;border-top:2px solid var(--ink)}
@@ -153,7 +158,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .svc .bar .mono b{color:var(--red)}
 /* the proof cards: nine crafts as a visual grid (DJ 2026-07-11 - the giant
    rows were "sooooo big"; images always visible, whole card = the proof link) */
-.capgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+/* 10 crafts in a 3-up left an orphan row of one (DJ). 5-up = TWO CLEAN ROWS OF 5. */
+.capgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:34px}
+@media (max-width:1200px){.capgrid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:820px){.capgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.capgrid{grid-template-columns:1fr}}
 /* position:relative is REQUIRED - the .capstamp is absolute, and without a positioned
    ancestor here it escapes the card and pins to the top-right of the PAGE. */
 .capcard{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:11px;overflow:hidden;box-shadow:0 10px 28px rgba(20,20,20,.07);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
@@ -248,13 +257,38 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @media (max-width:900px){.prow{grid-template-columns:1fr;gap:6px;padding:20px 0}}
 
 /* THE BAR (Change 6) — the light beat between two ink bands */
-.thebar{background:var(--paper);color:var(--ink);padding:11vh 0}
-.thebar .bk{display:block;color:var(--red);letter-spacing:.12em;margin-bottom:24px}
-.thebar .bq{font-weight:var(--dispw);font-size:clamp(30px,4.6vw,68px);letter-spacing:-.035em;line-height:1.02;text-transform:uppercase;max-width:20ch}
+/* THE BAR - full width + CENTERED (DJ 2026-07-14), with a red scribble that draws
+   itself under "great" every 4 seconds. */
+.thebar{background:var(--paper);color:var(--ink);padding:13vh 0}
+.thebar .wrap{text-align:center}
+.thebar .bk{display:block;color:var(--red);letter-spacing:.12em;margin-bottom:26px}
+.thebar .bq{font-weight:var(--dispw);font-size:clamp(30px,4.6vw,68px);letter-spacing:-.035em;line-height:1.06;text-transform:uppercase;max-width:26ch;margin:0 auto;
+  /* ease in on arrival */
+  opacity:0;translate:0 18px;transition:opacity .9s cubic-bezier(.22,1,.36,1),translate .9s cubic-bezier(.22,1,.36,1)}
+.thebar .bq.in{opacity:1;translate:0 0}
 .thebar .bq .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+/* the scribble sits UNDER the word without affecting layout */
+.thebar .gr{position:relative;display:inline-block}
+.thebar .scrib{position:absolute;left:-6%;bottom:-.16em;width:112%;height:.34em;overflow:visible;pointer-events:none}
+.thebar .scrib path{fill:none;stroke:var(--accent,var(--red));stroke-width:3;stroke-linecap:round;vector-effect:non-scaling-stroke;
+  stroke-dasharray:1;stroke-dashoffset:1}
+/* only run once the band is on screen (.in), so it isn't looping off-screen */
+.thebar .bq.in .scrib path{animation:scrib 4s cubic-bezier(.5,0,.5,1) infinite}
+.thebar .bq.in .scrib .s2{animation-delay:.18s}
+@keyframes scrib{
+  0%   {stroke-dashoffset:1; opacity:1}
+  18%  {stroke-dashoffset:0; opacity:1}   /* drawn */
+  80%  {stroke-dashoffset:0; opacity:1}   /* hold */
+  92%  {stroke-dashoffset:0; opacity:0}   /* fade out */
+  100% {stroke-dashoffset:1; opacity:0}   /* reset, ready to redraw */
+}
+@media (prefers-reduced-motion:reduce){
+  .thebar .bq{opacity:1;translate:none;transition:none}
+  .thebar .scrib path{animation:none!important;stroke-dashoffset:0}
+}
 
 /* the kit: fluency manifest, mono rows under a thin bar */
-.kit{padding:9vh 0 4vh}
+.kit{padding-top:9vh;padding-bottom:4vh}  /* padding-block only - see .refuse note */
 .kit .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:13px;border-bottom:2px solid var(--ink)}
 .kit .bar .mono b{color:var(--red)}
 /* tightened 2026-07-14: rows were wrapping to 2-3 lines (name + note competed for
@@ -655,7 +689,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <section class="thebar">
   <div class="wrap">
     <span class="mono bk rv">✳ The bar</span>
-    <p class="bq rv">Is this good, or could it <span class="serif">be great?</span></p>
+    <p class="bq rv">Is this good, or could it <span class="serif">be <span class="gr">great<svg class="scrib" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 15 C 36 6, 74 20, 108 11 C 134 4, 168 18, 196 9"/><path pathLength="1" class="s2" d="M8 20 C 44 13, 80 24, 116 16 C 148 9, 174 21, 194 15"/></svg></span>?</span></p>
   </div>
 </section>
 
