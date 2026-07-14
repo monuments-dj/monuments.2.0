@@ -1,4 +1,5 @@
 ---
+import CircledCTA from '../../components/CircledCTA.astro';
 import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
@@ -349,10 +350,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="rule" aria-hidden="true"></div>
     <span class="k mono">✳ Being forgettable is expensive</span>
     <p class="big">Let's build something<br><span class="serif">worth remembering.</span></p>
-    <div class="links">
-      <a class="pill solid" href="/contact">Let's talk ↗</a>
-      <a class="pill ghost" href="/work">All Work ↗</a>
-    </div>
+    <CircledCTA tone="dark" class="rv" />
   </div>
 </section>
 </div><!--/over-->
