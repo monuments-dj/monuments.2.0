@@ -4,17 +4,18 @@
 // meta footer. Rides on every page via PageFooter. Replaces the per-page corner
 // links + CSS hamburger (hidden globally below) — the IA outgrew a listed nav.
 // Ordered for the hiring path: proof first (Work), then the person (About),
-// then scope (Capabilities), differentiator (AI), craft depth (Photography),
-// values (Giving), action last (Contact). Home so nobody is stranded.
+// then scope (Capabilities), craft depth (Photography), values (Giving back),
+// action last (Contact). Home so nobody is stranded.
+// AI PULLED FROM THE MENU (DJ 2026-07-14). The /ai PAGE still exists and is still
+// linked from the Capabilities craft grid (CAP-10) - only the nav row is gone.
 const links = [
   { n: '01', t: 'Home',         href: '/',             sub: 'the front door',           img: '/gallery/full/p-013.jpg' },
   { n: '02', t: 'Work',         href: '/work',         sub: '18 case files',            img: '/reel/work-reel-poster.jpg' },
   { n: '03', t: 'About',        href: '/about',        sub: 'the subject file',         img: '/about/hero-set.jpg' },
   { n: '04', t: 'Capabilities', href: '/capabilities', sub: 'what I do',                img: '/about/dj-film.jpg' },
-  { n: '05', t: 'AI',           href: '/ai',           sub: 'a tool, not a solution',   img: '/about/studio-console.jpg' },
-  { n: '06', t: 'Photography',  href: '/photography',  sub: 'the stills archive',       img: '/gallery/full/p-044.jpg' },
-  { n: '07', t: 'Giving',       href: '/giving',       sub: 'work that gives back',     img: '/case-studies/giving/gv-01.jpg' },
-  { n: '08', t: 'Contact',      href: '/contact',      sub: 'our journey starts here',  img: '/contact/ct-01.jpg' },
+  { n: '05', t: 'Photography',  href: '/photography',  sub: 'the stills archive',       img: '/gallery/full/p-044.jpg' },
+  { n: '06', t: 'Giving back',  href: '/giving',       sub: 'work that gives back',     img: '/case-studies/giving/gv-01.jpg' },
+  { n: '07', t: 'Contact',      href: '/contact',      sub: 'our journey starts here',  img: '/contact/ct-01.jpg' },
 ];
 ---
 <button class="mt-trig" id="mtTrig" type="button" aria-expanded="false" aria-controls="mtOv" aria-label="Open menu">
