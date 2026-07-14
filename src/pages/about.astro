@@ -69,16 +69,23 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* hero: type in the photograph */
 .hero{position:relative;height:74svh;min-height:540px;overflow:hidden;background:var(--ink)}
-.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.06) brightness(.55)}
-.hero .t{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(42px,7.8vw,112px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;mix-blend-mode:screen}
+/* DJ 2026-07-14: "why did you make this black and white? keep it color. 50% black
+   overlay." The grayscale(1) was ALREADY on this hero (it predates the photo swap) - it
+   only became visible when the crew shot moved up here. Colour restored; the darkening
+   now comes from a real 50% scrim instead of brightness(.55), so the photo keeps its
+   colour instead of being washed out. */
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.04)}
+.hero .scrim{position:absolute;inset:0;z-index:1;background:rgba(22,21,20,.50);pointer-events:none}
+.hero .t,.hero .nfo{z-index:2}
+.hero .t{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);width:104%;text-align:center;color:var(--paper);font-weight:var(--dispw);font-size:clamp(42px,7.8vw,112px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;;text-shadow:0 2px 30px rgba(22,21,20,.45)}
 @media(max-width:640px){.hero .t{width:100%}}
 .hero .t .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
-.hero .t .spark{color:var(--spark);mix-blend-mode:normal}
+.hero .t .spark{color:var(--spark)}
 .hero .t .ln{display:block;overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em}
 .hero .t .ln>span{display:block;transform:translateY(125%);animation:rise 1s cubic-bezier(.22,1,.36,1) forwards}
 .hero .t .ln:nth-child(2)>span{animation-delay:.12s}
 @keyframes rise{to{transform:translateY(0)}}
-.hero .nfo{position:absolute;right:var(--pad);bottom:12vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
+.hero .nfo{position:absolute;right:var(--pad);bottom:12vh;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;line-height:1.9;color:var(--paper);opacity:0;animation:fade 1s .8s forwards;text-shadow:0 1px 14px rgba(22,21,20,.6)}
 .hero .nfo .h{color:var(--struct);background:var(--paper);padding:1px 7px;display:inline-block;margin-bottom:8px}
 @keyframes fade{to{opacity:1}}
 
@@ -224,16 +231,18 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @media (max-width:820px){#cdd .cdd-panel{position:relative;grid-template-columns:1fr;gap:20px;opacity:1;transform:none;pointer-events:auto;display:none}#cdd .cdd-panel.on{display:grid}#cdd .cdd-stage{min-height:0}}
 @media (prefers-reduced-motion:reduce){#cdd .cdd-word .cdd-bar{transition:none}}
 
-.receipts{background:var(--struct);color:rgb(var(--on-rgb));padding:13vh 0}
+/* DJ 2026-07-14: "this section is still way too big." Headline was running to 84px and
+   the band carried 13vh top AND bottom. */
+.receipts{background:var(--struct);color:rgb(var(--on-rgb));padding:9vh 0}
 .receipts .rk{color:rgba(var(--on-rgb),.7);display:block}
-.receipts h2{font-weight:var(--dispw);font-size:clamp(34px,5.4vw,84px);letter-spacing:-.035em;line-height:.96;text-transform:uppercase;margin:14px 0 20px}
+.receipts h2{font-weight:var(--dispw);font-size:clamp(28px,3.4vw,52px);letter-spacing:-.032em;line-height:1;text-transform:uppercase;margin:12px 0 16px}
 .receipts h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
 .receipts .rsub{color:rgba(var(--on-rgb),.8);max-width:58ch;font-size:clamp(16px,1.5vw,19px);line-height:1.6}
 /* tier 1: the hard numbers, as a hairline-ruled grid */
-.rec-nums{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:7vh;background:rgba(var(--on-rgb),.18)}
-.rec-num{background:var(--struct);padding:clamp(24px,2.4vw,36px) clamp(20px,1.8vw,28px)}
-.rec-num b{display:block;font-weight:var(--dispw);font-size:clamp(38px,5vw,72px);letter-spacing:-.04em;line-height:.88}
-.rec-num span{display:block;margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:rgba(var(--on-rgb),.72);line-height:1.55}
+.rec-nums{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:5vh;background:rgba(var(--on-rgb),.18)}
+.rec-num{background:var(--struct);padding:clamp(18px,1.8vw,26px) clamp(16px,1.5vw,22px)}
+.rec-num b{display:block;font-weight:var(--dispw);font-size:clamp(30px,3.4vw,48px);letter-spacing:-.04em;line-height:.9}
+.rec-num span{display:block;margin-top:11px;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(var(--on-rgb),.72);line-height:1.55}
 /* tier 2: the record */
 .rec-list{margin-top:1px;display:grid;gap:1px;background:rgba(var(--on-rgb),.18)}
 .rec-row{background:var(--struct);display:grid;grid-template-columns:minmax(150px,.7fr) 2fr;gap:10px 44px;align-items:baseline;padding:clamp(20px,2vw,28px) clamp(20px,1.8vw,28px)}
@@ -325,6 +334,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <header class="hero">
   <!-- DJ 2026-07-14: the team shot moves up here to be the About header. -->
   <img src="/about/team.jpg" alt="The Monuments crew" fetchpriority="high">
+  <!-- a REAL scrim div, not a ::after pseudo. The pseudo refused to paint over the img
+       (measured: the rendered wall came out BRIGHTER than the source photo), same as the
+       .grade div the crew band already uses. -->
+  <div class="scrim" aria-hidden="true"></div>
   <div class="t">
     <span class="ln"><span>I build monuments</span></span>
     <span class="ln"><span>with <span class="serif">my friends</span><span class="spark">.</span></span></span>
@@ -446,7 +459,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="wrap">
       <span class="mono lk rv">\ The long version</span>
       <div class="lbody">
-        <p class="llead rv">People ask me what I do, and fifteen years in, it's somehow gotten harder to answer. The short version: I sell big ideas, then do whatever it takes to make them real. The honest version: I love telling stories. That's it. That's the whole secret.</p>
+        <p class="llead rv">People ask me what I do, and fifteen years in, it's somehow gotten harder to answer. The short version: I sell big ideas, then do whatever it takes to make them real. The honest version: I love telling stories, working with a great team and building things... that's it.</p>
         <div class="lcols">
         <p class="rv">We're all handed different tools. Mine was a camera. Photo and video came naturally, but I'm not technical at all, and I never cared to be. What hooked me was what the camera unlocked. It was a key to the world: access to people, places, and stories I had no business being close to. So when people ask if I'm a photographer, I say kinda. I'm a storyteller who knows how to use a camera.</p>
         <p class="rv">Where it all comes together is the marriage of two crafts: storytelling and building. Building brands, building campaigns, building experiences people actually show up for. That intersection is genuinely magical to me, and it's where I've lived for fifteen years. Honestly, I'm not good at much else. Luckily, it keeps me busy: one month it's a nonprofit in Uganda, the next it's directing commercials shaping the future of education in Idaho, sometimes it's on camera on location in New York.</p>
