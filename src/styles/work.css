@@ -69,8 +69,17 @@
 .fr .cap{position:absolute;left:9px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--dim);text-transform:uppercase}
 .frames.show .fr:hover{transform:rotate(-1deg) scale(1.03);box-shadow:0 16px 40px rgba(20,20,20,.18);z-index:2;transition-delay:0ms}
 
-/* quote band (B/W override in PageFooter flips it dark) */
-.quote{background:var(--spark);color:var(--ink);padding:13vh 0}
+/* THE WORK-PAGE BOTTOM (DJ 2026-07-14: "this is a trend. Just repeat what you do for
+   all work pages that have a bottom like this"). Every case page ends the same way:
+   quote band -> a lonely call sheet -> NextFile. The quote carried 13vh top AND bottom
+   and the call-sheet band added its own air, so the run read as a white desert with a
+   slip marooned in it. Tightened HERE so it lands on all 17 pages at once. */
+.quote{background:var(--spark);color:var(--ink);padding:9vh 0}
+/* The call-sheet band is `<section class="paper">` on 17 pages, with no shared class to
+   hook, so target it by what it CONTAINS. It already carried its air INTERNALLY (the
+   .callsheet wrapper), so this trims rather than adds - measured, not guessed. */
+section.paper:has(.callsheet){padding:0 0 2vh}
+section.paper:has(.callsheet) .callsheet{padding:2vh 0 0}
 .quote p.q{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;font-size:clamp(28px,4vw,52px);line-height:1.14;max-width:26ch}
 .quote p.q b{font-style:normal;font-family:var(--disp);font-weight:var(--dispw);text-transform:uppercase;font-size:.86em;letter-spacing:-.02em}
 .quote .who{margin-top:26px;color:rgba(22,21,20,.6)}

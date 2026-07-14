@@ -1,5 +1,6 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
+import ClosingCTA from '../../components/ClosingCTA.astro';
 import TextBlock from '../../components/TextBlock.astro';
 import MediaBlock from '../../components/MediaBlock.astro';
 import NextFile from '../../components/NextFile.astro';
@@ -353,15 +354,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
-<section class="cta">
-  <div class="wrap in rv">
-    <div>
-      <span class="ck mono">✳ Being forgettable is expensive</span>
-      <p class="big">Let's build something<br><span class="serif">worth remembering.</span></p>
-    </div>
-    <a class="talk" href="/contact">Let's talk ↗</a>
-  </div>
-</section>
+<!-- DJ 2026-07-14 "wrong CTA on flashpoint" + "can we center this?": this was a
+     HAND-ROLLED closer (the only one on any work page), left-aligned with the button
+     floating off to the right. Replaced with the canonical ClosingCTA component,
+     centered - same locked pair, one source of truth, no drift. -->
+<ClosingCTA tone="ink" layout="centered" />
 </div><!--/over-->
 
 <div class="underfoot">

@@ -1,6 +1,7 @@
 ---
 import CircledCTA from '../../components/CircledCTA.astro';
 import CallSheet from '../../components/CallSheet.astro';
+import ClosingCTA from '../../components/ClosingCTA.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
@@ -334,13 +335,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       ]}
     />
   </div>
-  <div class="wrap outro rv">
-    <div class="rule" aria-hidden="true"></div>
-    <span class="k mono">✳ Being forgettable is expensive</span>
-    <p class="big">Let's build something<br><span class="serif">worth remembering.</span></p>
-    <CircledCTA tone="dark" class="rv" />
-  </div>
 </section>
+<!-- DJ 2026-07-14: was a HAND-ROLLED .outro closer stuffed inside the call-sheet band,
+     which is what left ~460px of dead white under the slip. Now the canonical
+     ClosingCTA, centered - same as flashpoint + turnstile. -->
+<ClosingCTA tone="ink" layout="centered" />
 </div><!--/over-->
 
 <div class="underfoot">
