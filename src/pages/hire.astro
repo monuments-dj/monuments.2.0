@@ -1,5 +1,6 @@
 ---
 import PageFooter from '../components/PageFooter.astro';
+import FooterWordmark from '../components/FooterWordmark.astro';
 // brand slider: same roster as the homepage ticker, ink logos on paper here.
 const brands = [
   { l: 'Sony', img: 'sony.png', href: 'https://www.sony.com' },
@@ -204,6 +205,10 @@ a.bt-item:hover .bt-logo{opacity:1}
   .rv{opacity:1!important;transform:none!important}
   a{color:#000}.wrap{max-width:none;padding-left:0;padding-right:0}
 }
+/* footer under-reveal: .over slides over a fixed .underfoot as you hit the bottom */
+.over{position:relative;z-index:1;background:inherit}
+.underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
 </style>
 </head>
 <body>
@@ -220,6 +225,7 @@ a.bt-item:hover .bt-logo{opacity:1}
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
+<div class="over">
 <section class="hero wrap">
   <div>
     <div class="printhead"><b>DJ Ramirez · Creative Director</b><span>monuments.cc@gmail.com · LA / Boise</span></div>
@@ -307,7 +313,12 @@ a.bt-item:hover .bt-logo{opacity:1}
     </div>
   </div>
 </section>
+</div><!--/over-->
+
+<div class="underfoot">
+<FooterWordmark />
 <PageFooter tag="Hire · open to work" />
+</div><!--/underfoot-->
 
 <script is:inline>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 240px 0px'});
@@ -323,6 +334,19 @@ if(mag&&matchMedia('(pointer:fine)').matches){
   mag.addEventListener('mouseleave',()=>{st.tx=0;st.ty=0;loop()});
   function loop(){cancelAnimationFrame(raf);(function step(){st.x+=(st.tx-st.x)*.16;st.y+=(st.ty-st.y)*.16;mag.style.transform=`translate(${st.x}px,${st.y}px)`;if(Math.abs(st.tx-st.x)>.2||Math.abs(st.ty-st.y)>.2)raf=requestAnimationFrame(step)})()}
 }
+</script>
+
+<script is:inline>
+// footer under-reveal sizing: reserve the underfoot's height under .over
+(function(){
+  const uf=document.querySelector('.underfoot'),over=document.querySelector('.over');
+  if(!uf||!over)return;
+  function size(){
+    if(matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)').matches){over.style.marginBottom='0px';return}
+    over.style.marginBottom=uf.offsetHeight+'px';
+  }
+  size();addEventListener('resize',size);setTimeout(size,600);
+})();
 </script>
 </body>
 </html>
