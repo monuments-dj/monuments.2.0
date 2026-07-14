@@ -1,30 +1,91 @@
-# TODO - current state (2026-07-12 EOD · CHAT ROTATED, context full)
+# TODO - current state (2026-07-14 · CHAT ROTATED · everything below is LIVE on main)
 
-## 🔄 HANDOFF 2026-07-12 EOD (the 07-11 marathon chat hit its context limit)
-State verified before rotating, all three sweeps GREEN on a live server:
-- **motioncheck ALL PASS** (13 routes incl. /capabilities), packcheck 0 overflows,
-  bw-sweep baseline. ⚠️ A run earlier today showed "13 FAILURES loops:0" on every
-  route — that was a DEAD dev server returning connection refusals, not a regression.
-  If motioncheck ever reports loops:0 EVERYWHERE, curl a page first (`curl -s -o
-  /dev/null -w "%{http_code}" http://localhost:PORT/`) before diagnosing the site.
-- **Dev-server ports:** one chat owns 4321 (name `monuments`); a second chat uses
-  `monuments-b` on 4322 (defined in ~/.claude/launch.json, NOT the repo's). The
-  verify scripts hardcode 4321 — sed a temp copy for 4322 and delete it after.
-- **Show-it-to-someone board** (if DJ wants to send the link before the next batch):
-  🟢 lorem is fully gone (theater testimonials, honest chips) · credits zero-mismatch
-  (CWI = director·editor·shooter per DJ's v4, deliberate) · OG cards · mobile QA.
-  🔴 still true: home reel MODAL plays the stand-in YT id `VMubUUZ2tdU`
-  (src/pages/index.astro ~line 719) — the scrub video is fine, the click-to-play is
-  the wrong reel · Kit line still in the takeover menu (DJ's call, tied to the
-  bake-the-switcher decision). 🟡 3.4M/3.6M stats unverified · photography folder
-  tabs are fake buckets · crew photo soft · /lab + /redesign still build (unlinked).
-- DJ's open decision stack: see the "NEEDS YOU" lists in the part 5 + 6 blocks below
-  (headers A/B, gallery per page, work index 29, kickers 27, count-ups 25, type/font
-  pick, B/W bake, testimonial quotes, stat verifies, OS9 page, AOV reel + merch,
-  crew photo original, MSI frames, IG links).
+## 🔄 HANDOFF 2026-07-14 (the StatRow/CTA session hit its context limit)
+Pushed to main + verified live on https://monuments-2-0.vercel.app. 15 commits,
+05e6e3d..66b45c6. Working tree clean.
+
+### SHIPPED THIS SESSION (all live + verified on the deployed site)
+**One bar, one stat system.** Every one of the 19 work pages now has exactly ONE bar
+under the header: the `<StatRow>` component, `tone="paper"` (light, per CLAUDE.md's
+"case-page scoreboards invert to PAPER in B/W"). It animates: numbers count up on
+scroll-in, RE-trigger every time you scroll past, and it supports range values
+("5→30+" counts the END number). Light/dark tones + accent.
+- The Kit's old bespoke motion-lab stat bar was RECONCILED into the same component.
+- The ROLE/CREDITS BAR IS DEAD (DJ killed it). `.rolerow` removed from 13 pages, plus
+  the 2 pages that stuffed credits into `.statrow` (donut-zumiez, sony-this-moment)
+  and rendered wrong. Credits live in the Call Sheet now. Do NOT reintroduce a role bar.
+- ac-boise's brief board and dw-drums' teal band: KILLED (DJ: bolted-on restatement).
+
+**The closer.** New `ClosingCTA.astro` component (wraps CircledCTA, does not redraw it),
+rolled onto the 7 main pages, mapped to content:
+  pair 1 (Let's build something worth remembering / Let's talk) -> index, work, photography, giving
+  pair 2 (Tell me what you're building / Reach Out)             -> capabilities, ai
+  pair 3 (Ear to the street / Culture is talking)               -> about
+index keeps pair 1 on purpose: its BODY already says "Culture is talking...".
+The 16 work case pages have NO closer — they end on NextFile. That is intended.
+
+**Accent is now a TOKEN.** `--accent` (currently red #E0311A) is seeded + swapped at
+runtime by PageFooter's accent system on EVERY page. Change `var ACCENT` in
+PageFooter.astro and it swaps sitewide, live. Consumers must read `var(--accent)`,
+never a literal. `--red-accent` now derives from it.
+
+**Wordmark reveal** (`FooterWordmark.astro`) on all 9 NON-work pages. contact,
+photography, hire and ai had no `.over`/`.underfoot` at all — the under-reveal
+mechanism was BUILT for them. Work case pages deliberately excluded.
+
+**Content truth fixes** (from the locked doc, which had never been applied):
+- know-vape: Emmy was claimed 4x in visible copy; the doc says EXACTLY TWICE (stat row
+  + Recognition). Killed the opener the doc marks "KILLED". April Frame is now credited
+  BY NAME (the doc calls that non-negotiable) — only her company was listed before.
+- ac-boise: role was "Director · Producer" in work.js. DJ never produced it. Now
+  "Director · Editor" + the Call Sheet credits the edit. Mark Garcia credited for the
+  photography (on the gallery AND in the credits) — the stills are his, not DJ's.
+- CWI 30+ (was 40+/16+ conflicting), tenure "fifteen years", team stat 5→30+ (was 2→30+).
+
+**Dead code:** 19 items swept from index/work/capabilities/about/contact (~154 lines).
+**New tool:** `node tools/pagecheck.mjs <paths...>` — catches structural breakage
+(content escaping .over, dead voids, empty sections, duplicate headings). A plain
+`npm run build` passes straight through that class of bug. RUN IT after any structural edit.
+
+### ⚠️ SCAR TISSUE — read before you touch markup
+I broke 10 work pages with a regex that matched a block's inner `</div>`s but left the
+wrapper's closing tag, which silently closed `.over` early and dumped the page content
+out of it. waffle-me-up showed a ~520px black void. The BUILD PASSED. Always check
+div balance + run pagecheck.mjs after a structural edit.
+
+### 🔴 NEEDS DJ (blocked on him, do not guess)
+- **Pull quotes.** 6 pages have quotes that verbatim restate their own prose. DJ wants
+  to KEEP the bands (structure). His doc LOCKS 2 of them (ac-boise "Pull quote stays",
+  flashpoint "Quote — FINAL"), and the other 4 (adorama-music, clothing-merch, dw-drums,
+  sony-this-moment) have NO doc section at all — so there is no approved copy to source
+  and fabricated quotes are BANNED. Offer on the table: promote the strongest line
+  already in each page's prose to the quote and CUT it from the body, so it appears once.
+- **Mark Garcia's jersey photos.** DJ has a Dropbox of them. Dropbox CANNOT be fetched
+  (auth wall — his own note). He must drop files into `public/case-studies/ac-boise/gallery/`.
+  Open question: do they REPLACE the current 6 frames or get added?
+- **ac-boise crew credits.** The doc lists DP · Nathan Zanders / Gaffer · Dawson Gutierrez
+  / Props · DJ, but flags BOTH names "verify spellings". Not added on a guess.
+- **know-vape line 407** still says "without the finger wagging" (Buck the Quo owns that
+  line). The doc only named the one line I fixed; this is a 2nd instance.
+- **CTA layout.** All 3 layouts exist (centered/ink, centered/paper, left+CTA-right).
+  Shipped as centered/ink. `/cta-preview` is a TEMP route to A/B them — DELETE it once
+  he locks a layout.
+
+### 🟡 READY TO GO (audited + verified, just needs DJ's word)
+4 junk bands confirmed as restating what is already on the page (the same pattern DJ
+killed twice). Say the word and they are gone:
+  - msi: the 3-column band (The problem / The solve / The multiplier) — IDENTICAL pattern
+    to the ac-boise brief board DJ killed
+  - adorama-music: the `.statbeat` band (50K+ posts) — verbatim dupe of its own stat bar
+  - capabilities: orphan headline "What I do." — 7 lines under a bar that already says it
+  - sony-xm5: the film intro — re-explains the 3 creators said in the prose above it
+(know-vape's Recognition band was flagged too but is a FALSE POSITIVE — DJ's doc
+explicitly sanctions it. Leave it.)
+
 
 ---
 
+# OLDER CONTEXT (below this line is from previous sessions)
 ## 🚀 SESSION 2026-07-12 (part 6 · BTQ + CWI real assets) SHIPPED
 Commit 1db81cc, pushed live. Downloaded DJ's Dropbox assets, transcoded with ffmpeg-static,
 verified in-browser. Research workflow (47 agents, adversarially verified) sourced the CWI stats.

@@ -109,7 +109,23 @@ credits` becomes 3 lights — insert a dark beat or flip a ground. ENFORCE with
 FAILS on adjacent lights. Run it on any page you touch. Reference flow that passes:
 `/page-template`.
 
-## Active work (2026-07-12 EOD): chat rotated (context full) - read TODO.md 🔄 HANDOFF block
+## Active work (2026-07-14): chat rotated - read TODO.md 🔄 HANDOFF 2026-07-14 block FIRST
+All of it is LIVE on main (05e6e3d..66b45c6) and verified on the deployed site.
+**The three things that will bite you if you skip the TODO:**
+1. **The role/credits bar is DEAD.** DJ killed it. Credits live in the Call Sheet.
+   Never reintroduce a `.rolerow`, and never put credits in a `.statrow`.
+2. **One bar per work page**, and it is the `<StatRow>` component (`tone="paper"`).
+   The closer is the `<ClosingCTA>` component. Both are single-source-of-truth now -
+   fix them THERE, never on a page. Kicker+CTA pairs are a LOCKED closed set of 3;
+   do not re-pair them or invent a 4th.
+3. **`npm run build` does NOT catch structural breakage.** I shipped a regex that left
+   an orphaned `</div>`, which closed `.over` early and dumped page content out of it
+   on 10 pages (waffle-me-up rendered a ~520px black void). The build passed.
+   After ANY structural edit: check div balance + `node tools/pagecheck.mjs <paths>`.
+Accent is now a token: `--accent` (red), seeded + swapped live by PageFooter on every
+page. Read `var(--accent)`, never a literal.
+
+## Active work (2026-07-12 EOD, historical): chat rotated (context full) - read TODO.md 🔄 HANDOFF block
 All sweeps GREEN at rotation (motioncheck 13 routes ALL PASS / packcheck / bw-sweep).
 Gotcha for the next chat: motioncheck "loops:0 everywhere" = dead dev server, curl a page
 before diagnosing the site. Ports: 4321 belongs to one chat (`monuments`), 4322 = `monuments-b`
