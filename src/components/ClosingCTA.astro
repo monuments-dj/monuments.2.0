@@ -23,9 +23,15 @@ interface Props {
   layout?: 'centered' | 'left';
   class?: string;
 }
+// Defaults = DJ's LOCKED pair #1. kicker + statement are PAIRED in his closed set;
+// never re-pair them and never invent a new kicker.
+//   pair 1: "Being forgettable is expensive"      -> "Let's build something worth remembering."  (Let's talk)
+//   pair 2: "Good work starts with good questions" -> "Tell me what you're building."             (Reach Out)
+// "Culture is talking. Most brands aren't listening." has NO kicker in the locked set
+// (it is currently the homepage thesis under "\ What I do"), so pass kicker="" to run it bare.
 const {
   kicker = 'Being forgettable is expensive',
-  statement = `Culture is talking.<br>Most brands aren't <em>listening.</em>`,
+  statement = `Let's build something<br><em>worth remembering.</em>`,
   href = '/contact',
   label = "Let's talk",
   tone = 'ink',
@@ -79,7 +85,9 @@ const {
   display: flex; align-items: center; justify-content: space-between;
   gap: clamp(30px, 5vw, 80px);
 }
-.clc-left .clc-stmt { max-width: 16ch; }
+/* wide enough that the statement honours its own <br> instead of wrapping again
+   ("Let's build something" alone is 20ch, so 16ch shattered it into 4 lines) */
+.clc-left .clc-stmt { max-width: 24ch; }
 .clc-left :global(.clc-cta) { flex: none; }
 
 @media (max-width: 820px) {

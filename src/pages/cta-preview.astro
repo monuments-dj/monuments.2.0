@@ -10,10 +10,11 @@ const LAYOUTS = [
   { tone: 'paper', layout: 'centered', label: 'B · centered · paper' },
   { tone: 'ink',   layout: 'left',     label: 'C · left + CTA right · ink' },
 ];
+// DJ's LOCKED closed set — kicker + CTA are PAIRED. Do not re-pair them, do not invent.
 const COPY = [
-  { kicker: 'Being forgettable is expensive', statement: `Culture is talking.<br>Most brands aren't <em>listening.</em>`, label: "Let's talk", name: '1 · Ears to the streets (new)' },
-  { kicker: 'Being forgettable is expensive', statement: `Let's build something<br><em>worth remembering.</em>`,        label: "Let's talk", name: '2 · The current closer' },
-  { kicker: 'Good work starts with good questions', statement: `Tell me what<br>you're <em>building.</em>`,             label: 'Reach Out',  name: '3 · The second locked pair' },
+  { kicker: 'Being forgettable is expensive',      statement: `Let's build something<br><em>worth remembering.</em>`, label: "Let's talk", name: '1 · LOCKED PAIR — the current closer' },
+  { kicker: 'Good work starts with good questions', statement: `Tell me what<br>you're <em>building.</em>`,            label: 'Reach Out',  name: '2 · LOCKED PAIR' },
+  { kicker: '',                                     statement: `Culture is talking.<br>Most brands aren't <em>listening.</em>`, label: "Let's talk", name: "3 · 'Ears to the streets' — NO KICKER IN THE LOCKED SET (shown bare; DJ owes the kicker, or it runs kicker-less)" },
 ];
 ---
 <!doctype html>
@@ -62,7 +63,12 @@ hr{border:0;border-top:1px solid rgba(245,243,239,.14);margin:44px 0 0}
 {LAYOUTS.map((l) => (
   <>
     <span class="sub">{l.label}</span>
-    <ClosingCTA tone={l.tone} layout={l.layout} />
+    <ClosingCTA
+      tone={l.tone}
+      layout={l.layout}
+      kicker="Being forgettable is expensive"
+      statement={`Let's build something<br><em>worth remembering.</em>`}
+    />
   </>
 ))}
 
