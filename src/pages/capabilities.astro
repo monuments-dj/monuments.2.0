@@ -143,7 +143,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
    Was clamp(16-24px) with a bare 14px nudge. Smaller now, and the hover is a real
    move: an accent rule wipes in from the left, the row slides off it, the number
    goes ink, and the rule under the row darkens. */
-.refuse li{position:relative;display:flex;align-items:baseline;gap:16px;padding:11px 2px 11px 0;border-bottom:1px solid var(--line);font-family:var(--disp);font-weight:500;font-size:clamp(14px,1.1vw,16px);letter-spacing:-.008em;line-height:1.4;color:var(--ink);
+.refuse li{position:relative;display:flex;align-items:baseline;gap:16px;padding:11px 2px 11px 0;border-bottom:1px solid var(--line);font-family:var(--body,var(--disp));font-weight:400;font-size:16px;letter-spacing:0;line-height:1.6;color:#4c4a45;
   transition:padding-left .42s cubic-bezier(.22,1,.36,1),border-color .42s ease,color .42s ease}
 .refuse li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:0;height:2px;background:var(--accent,var(--red));transition:width .42s cubic-bezier(.22,1,.36,1)}
 .refuse li:hover{padding-left:34px;border-color:var(--ink)}
