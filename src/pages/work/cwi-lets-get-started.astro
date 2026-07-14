@@ -9,10 +9,10 @@ import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'cwi-lets-get-started');
 
-// Updated 2026-07-12 per DJ's final v4 copy doc: his role on the ongoing Let's Get
-// Started program spots is director · editor · shooter · on-set lead · production. He
-// directs, shoots, and cuts each program spot, runs the set on shoot days, and handles
-// production alongside producer Tess Rizvi (Against is the agency, Vision Kit on stills).
+// CREDITS CORRECTED 2026-07-14 (DJ: "I direct (I dont shoot these) I just do on set").
+// His role is director · editor · on-set lead · production. He does NOT shoot these:
+// the DPs are Jake Rapp, Nathan Zanders and Kova Kovatonic, Vision Kit shoots the stills,
+// Steph Norrell is EP and Tess Rizvi produces (Against is the agency).
 // Shot quarterly with a 5-20 person crew, cut for every screen. Self-hosted spots replace
 // the old YouTube films. CWI enrollment stats below are CWI's own official
 // numbers (Idaho State Board of Education / Idaho Ed News, 2025), used as context for the
@@ -32,7 +32,10 @@ const programs = [
   { k: 'humanities',    t: 'Arts + Humanities',  film: true },
   { k: 'tech',          t: 'Technology',         film: true },
   { k: 'business',      t: 'Business Admin',     film: true },
-  { k: 'mining',        t: 'Mining Technology',  film: true },
+  // DJ 2026-07-14: "cut this mining video from the page, I didnt do it." The spot is
+  // gone (no `film` flag). The PROGRAM chip stays under The Scale, since that lists the
+  // campaign's programs, not the films he personally made - flag to DJ if it should go too.
+  { k: 'mining',        t: 'Mining Technology' },
   { k: 'engineering',   t: 'Engineering' },
   { k: 'biology',       t: 'Biology' },
   { k: 'dental',        t: 'Dental' },
@@ -297,7 +300,6 @@ html[data-accent="bw"] section.quote .who{color:rgba(245,243,239,.55)!important}
   note="CWI enrollment · <b>Idaho State Board of Education, 2025</b>"
 />
 
-
 <section class="paper">
   <div class="wrap story">
     <div class="side rv">
@@ -338,7 +340,7 @@ html[data-accent="bw"] section.quote .who{color:rgba(245,243,239,.55)!important}
       <span class="mono" style="color:#8f8d88">click to play, with sound</span>
     </div>
     <h2 class="rv in">A spot for every <span class="serif">program.</span></h2>
-    <p class="flead rv in">I direct, shoot, and cut a film for each program, one at a time, built around what that path actually gives a student. Real students play the leads. <b>Same voice across all of them, a different world each time.</b></p>
+    <p class="flead rv in">I direct and cut a film for each program, one at a time, built around what that path actually gives a student. Real students play the leads. <b>Same voice across all of them, a different world each time.</b></p>
     <div class="spotgrid">
       {spotFilms.map((p) => (
         <div class="filmframe" data-src={`/case-studies/cwi/films/${p.k}.mp4`} data-title={`Let's Get Started · ${p.t}`}>
@@ -346,34 +348,6 @@ html[data-accent="bw"] section.quote .who{color:rgba(245,243,239,.55)!important}
           <video class="pvid" src={`/case-studies/cwi/films/snip-${p.k}.mp4`} autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
           <span class="chip"><span class="dot"></span>{p.t}</span>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-<!-- The films on CWI's own channel (DJ 2026-07-14). Posters are pulled LOCAL rather than
-     hotlinked from ytimg, matching the site's convention. Click-to-play: the iframe is
-     only injected on click, so nothing loads from YouTube on page load. -->
-<section class="film ytfilms">
-  <div class="wrap">
-    <div class="bar">
-      <span class="mono"><b>On CWI's channel</b> · the films in the wild</span>
-      <span class="mono" style="color:#8f8d88">click to play</span>
-    </div>
-    {ytFilms.filter((f) => f.lead).map((f) => (
-      <button class="ytf ytf-lead rv" type="button" data-yt={f.id} aria-label={`Play: ${f.t}`}>
-        <img src={`/case-studies/cwi/yt/${f.id}.jpg`} width="1280" height="720" alt={f.t} loading="lazy" decoding="async">
-        <span class="ytplay">Play · the film</span>
-        <span class="ytcap mono">{f.t}</span>
-      </button>
-    ))}
-    <div class="yt-grid">
-      {ytFilms.filter((f) => !f.lead).map((f) => (
-        <button class="ytf rv" type="button" data-yt={f.id} aria-label={`Play: ${f.t}`}>
-          <img src={`/case-studies/cwi/yt/${f.id}.jpg`} width="1280" height="720" alt={f.t} loading="lazy" decoding="async">
-          <span class="ytplay">Play</span>
-          <span class="ytcap mono">{f.t}</span>
-        </button>
       ))}
     </div>
   </div>
@@ -398,11 +372,14 @@ html[data-accent="bw"] section.quote .who{color:rgba(245,243,239,.55)!important}
   <div class="wrap story">
     <div class="side rv">
       <span class="k mono">\ My part</span>
-      <h2>I direct it, shoot it, and <span class="serif">cut it.</span></h2>
+      <h2>I direct it, run the set, and <span class="serif">cut it.</span></h2>
     </div>
     <div class="body rv">
-      <p>I direct, shoot, and cut the Let's Get Started program spots, working alongside the agency Against and producer Tess Rizvi, with Vision Kit on stills. Every quarter we make four to six new films with a crew of five to twenty, and I build each one around the specific program, digging into what that path actually gives a student.</p>
-      <p>Real students play the leads. On shoot days I run the set: directing the talent, shooting it, and keeping the crew moving with Tess on production, then I take it into the edit and cut it for every screen. I frame the students as the heroes and put the real tools and payoff of the program on screen.</p>
+      <!-- DJ 2026-07-14: "I direct (I dont shoot these) I just do on set." Every claim that
+           he shoots these spots is gone: the DPs are Jake Rapp, Nathan Zanders and Kova
+           Kovatonic, and Vision Kit shoots the stills. He directs, runs the set, and cuts. -->
+      <p>I direct and cut the Let's Get Started program spots, working alongside the agency Against, executive producer Steph Norrell and producer Tess Rizvi, with Jake Rapp, Nathan Zanders and Kova Kovatonic on camera and Vision Kit on stills. Every quarter we make four to six new films with a crew of five to twenty, and I build each one around the specific program, digging into what that path actually gives a student.</p>
+      <p>Real students play the leads. On shoot days I run the set: directing the talent, working with the DP on how it gets shot, and keeping the crew moving with Tess on production, then I take it into the edit and cut it for every screen. I frame the students as the heroes and put the real tools and payoff of the program on screen.</p>
       <p>I've worked in Idaho education for more than ten years, and I bring that to every round. This one is homegrown, made with hometown friends and a client as fired up about it as I am. Together we're putting Idaho opportunities in front of the students who benefit most, and shifting the culture a little each quarter.</p>
     </div>
   </div>
@@ -453,6 +430,34 @@ html[data-accent="bw"] section.quote .who{color:rgba(245,243,239,.55)!important}
   </div>
 </section>
 
+<!-- The films on CWI's own channel (DJ 2026-07-14). Posters are pulled LOCAL rather than
+     hotlinked from ytimg, matching the site's convention. Click-to-play: the iframe is
+     only injected on click, so nothing loads from YouTube on page load. -->
+<section class="film ytfilms">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>On CWI's channel</b> · the films in the wild</span>
+      <span class="mono" style="color:#8f8d88">click to play</span>
+    </div>
+    {ytFilms.filter((f) => f.lead).map((f) => (
+      <button class="ytf ytf-lead rv" type="button" data-yt={f.id} aria-label={`Play: ${f.t}`}>
+        <img src={`/case-studies/cwi/yt/${f.id}.jpg`} width="1280" height="720" alt={f.t} loading="lazy" decoding="async">
+        <span class="ytplay">Play · the film</span>
+        <span class="ytcap mono">{f.t}</span>
+      </button>
+    ))}
+    <div class="yt-grid">
+      {ytFilms.filter((f) => !f.lead).map((f) => (
+        <button class="ytf rv" type="button" data-yt={f.id} aria-label={`Play: ${f.t}`}>
+          <img src={`/case-studies/cwi/yt/${f.id}.jpg`} width="1280" height="720" alt={f.t} loading="lazy" decoding="async">
+          <span class="ytplay">Play</span>
+          <span class="ytcap mono">{f.t}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
 <section class="paper">
   <div class="wrap credits rv">
     <CallSheet
@@ -463,9 +468,11 @@ html[data-accent="bw"] section.quote .who{color:rgba(245,243,239,.55)!important}
       rows={[
         { k: 'Client', v: 'College of Western Idaho' },
         { k: 'Agency', v: 'Against' },
+        { k: 'Executive producer', v: 'Steph Norrell' },
         { k: 'Producer', v: 'Tess Rizvi' },
+        { k: 'Directors of photography', v: 'Jake Rapp · Nathan Zanders · Kova Kovatonic' },
         { k: 'Stills', v: 'Vision Kit' },
-        { k: 'Director · shooter · editor', v: 'DJ Ramirez', select: true },
+        { k: 'Director · editor', v: 'DJ Ramirez', select: true },
         { k: 'On-set lead · production', v: 'DJ Ramirez + Tess Rizvi' },
       ]}
     />
