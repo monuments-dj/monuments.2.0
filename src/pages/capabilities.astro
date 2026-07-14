@@ -124,8 +124,18 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .refuse .big{font-weight:var(--dispw);font-size:clamp(30px,4.4vw,64px);letter-spacing:-.03em;line-height:1;text-transform:uppercase}
 .refuse .big .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;color:var(--ink)}
 .refuse ul{list-style:none;margin:38px 0 0;padding:0;border-top:2px solid var(--ink)}
-.refuse li{display:flex;align-items:baseline;gap:20px;padding:14px 2px;border-bottom:1px solid var(--line);font-family:var(--disp);font-weight:var(--dispw2,600);font-size:clamp(16px,1.7vw,24px);letter-spacing:-.015em;line-height:1.3;color:var(--ink);transition:padding-left .35s cubic-bezier(.22,1,.36,1)}
-.refuse li:hover{padding-left:14px}
+/* DJ 2026-07-14: "ugly and big, needs text resizing and a lil more movement on hover."
+   Was clamp(16-24px) with a bare 14px nudge. Smaller now, and the hover is a real
+   move: an accent rule wipes in from the left, the row slides off it, the number
+   goes ink, and the rule under the row darkens. */
+.refuse li{position:relative;display:flex;align-items:baseline;gap:18px;padding:13px 2px 13px 0;border-bottom:1px solid var(--line);font-family:var(--disp);font-weight:var(--dispw2,600);font-size:clamp(15px,1.35vw,19px);letter-spacing:-.012em;line-height:1.35;color:var(--ink);
+  transition:padding-left .42s cubic-bezier(.22,1,.36,1),border-color .42s ease,color .42s ease}
+.refuse li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:0;height:2px;background:var(--accent,var(--red));transition:width .42s cubic-bezier(.22,1,.36,1)}
+.refuse li:hover{padding-left:34px;border-color:var(--ink)}
+.refuse li:hover::before{width:22px}
+.refuse li i{transition:color .42s ease,transform .42s cubic-bezier(.22,1,.36,1)}
+.refuse li:hover i{color:var(--ink);transform:translateY(-2px) translateX(2px)}
+@media (prefers-reduced-motion:reduce){.refuse li,.refuse li::before,.refuse li i{transition:none}}
 .refuse li i{font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--red);flex:none;transform:translateY(-2px)}
 
 /* door heads: three belief-led buckets over the rows */
@@ -167,11 +177,24 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .ways .bar .mono b,.probs .bar .mono b{color:var(--red)}
 .wh,.ph{font-weight:var(--dispw);font-size:clamp(26px,3vw,44px);letter-spacing:-.03em;line-height:1.04;text-transform:uppercase;margin:26px 0 0}
 .wh .serif,.ph .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
-.waygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,52px);margin-top:5vh}
+/* STRUCTURE (DJ 2026-07-14: "too much black butted up against itself, one of these
+   could use some structure love"). The ways are now CARDS - hairline boxes that lift
+   on hover - so they read as distinct objects against the ledger rows of .probs
+   below, instead of the two ink bands melting into one slab. */
+.waygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.6vw,24px);margin-top:5vh}
+.way{position:relative;border:1px solid rgba(245,243,239,.18);padding:clamp(22px,2vw,30px);background:rgba(245,243,239,.02);overflow:hidden;
+  transition:translate .5s cubic-bezier(.22,1,.36,1),border-color .5s ease,background .5s ease}
+.way::before{content:'';position:absolute;left:0;top:0;height:2px;width:0;background:var(--accent,var(--red));transition:width .55s cubic-bezier(.22,1,.36,1)}
+/* the LIFT rides `translate`, not `transform`: the .rv reveal system already owns
+   transform on this element (.rv -> translateY(28px), .in -> none) and silently
+   overwrote the hover lift. `translate` is its own property and composes with it. */
+.way:hover{translate:0 -6px;border-color:rgba(245,243,239,.42);background:rgba(245,243,239,.05)}
+.way:hover::before{width:100%}
 .way .wn{display:block;color:var(--red);letter-spacing:.12em;margin-bottom:12px}
-.way h3{font-weight:var(--dispw);font-size:clamp(19px,1.8vw,26px);letter-spacing:-.022em;line-height:1.05;text-transform:uppercase;margin-bottom:10px}
-.way p{color:rgba(245,243,239,.72);font-size:15px;line-height:1.62}
-@media (max-width:860px){.waygrid{grid-template-columns:1fr;gap:26px}}
+.way h3{font-weight:var(--dispw);font-size:clamp(18px,1.6vw,23px);letter-spacing:-.022em;line-height:1.05;text-transform:uppercase;margin-bottom:10px}
+.way p{color:rgba(245,243,239,.72);font-size:14.5px;line-height:1.6}
+@media (max-width:860px){.waygrid{grid-template-columns:1fr;gap:14px}}
+@media (prefers-reduced-motion:reduce){.way,.way::before{transition:none}}
 
 /* THE PROBLEMS I GET HIRED FOR (Change 4) — ledger rows on ink */
 .probs{padding:2vh 0 10vh}
