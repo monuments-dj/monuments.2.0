@@ -86,7 +86,7 @@ const srNote = 'Roster · Sony · Adorama · MSI · Intel · Lexar · Peak Desig
 <style is:global>
 :root{
   --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
-  --red-accent:var(--red); /* the hand-drawn CTA circle + accent marks; retheme HERE */
+  --red-accent:var(--accent, var(--red)); /* the hand-drawn CTA circle + accent marks; retheme HERE */
   --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
   --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
   --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;

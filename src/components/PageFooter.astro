@@ -73,11 +73,17 @@ const { tag } = Astro.props;
 (function(){
   // accents: [struct, on-rgb, spark]. B/W is the working default: pink dies, the
   // accent bands go ink with paper type, the quote bands flip via the injected guard.
+  // --accent = THE accent / emphasis colour (the pop on the closer's key word, the
+  // hand-drawn CTA circle, accent marks). Red for now, but it is a TOKEN, not a
+  // hardcode: change ACCENT here (or per-preset below) and it swaps everywhere,
+  // live, on every page. Consumers must read var(--accent), never a literal.
+  var ACCENT='#E0311A';
+  //        [ --struct , --on-rgb      , --spark  , --accent ]
   var ACC={
-    bw:['#201e1d','245,243,239','#F5F3EF'],
-    rose:['#EFA1AD','22,21,20','#EFA1AD'],
-    cobalt:['#2438E8','245,243,239','#EFA1AD'],
-    red:['#E0311A','245,243,239','#EFA1AD']
+    bw:    ['#201e1d','245,243,239','#F5F3EF',ACCENT],
+    rose:  ['#EFA1AD','22,21,20'   ,'#EFA1AD',ACCENT],
+    cobalt:['#2438E8','245,243,239','#EFA1AD',ACCENT],
+    red:   ['#E0311A','245,243,239','#EFA1AD',ACCENT]
   };
   // type PAIRINGS, grounded in the 2026-07-09 recon of DJ's target agencies +
   // taste refs. Each is a full three-font system: disp (headers/titles),
@@ -139,6 +145,7 @@ const { tag } = Astro.props;
     root.style.setProperty('--struct',v[0]);
     root.style.setProperty('--on-rgb',v[1]);
     root.style.setProperty('--spark',v[2]);
+    root.style.setProperty('--accent',v[3]);   // the emphasis/pop colour — swappable on the fly
     root.setAttribute('data-accent',a);
     if(tool)tool.querySelectorAll('[data-acc]').forEach(function(b){b.classList.toggle('on',b.dataset.acc===a);});
   }

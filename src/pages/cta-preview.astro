@@ -29,7 +29,10 @@ const COPY = [
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style is:global>
 :root{
-  --ink:#161514; --paper:#F5F3EF; --red:#E0311A; --red-accent:var(--red);
+  /* --accent = the emphasis/pop colour. On real pages PageFooter seeds + swaps this
+     live; this preview has no PageFooter, so it declares the token itself. */
+  --accent:#E0311A;
+  --ink:#161514; --paper:#F5F3EF; --red:#E0311A; --red-accent:var(--accent, var(--red));
   --dim:#8f8d88; --line:#dcd9d2;
   --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
   --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;

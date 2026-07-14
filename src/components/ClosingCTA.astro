@@ -72,8 +72,10 @@ const {
   font-size: var(--clc-size); line-height: 1.05; letter-spacing: -.03em;
   text-transform: uppercase; max-width: 18ch;
 }
-/* the accent word — red on BOTH grounds (see note above) */
-.clc-stmt :global(em) { font-style: normal; color: var(--red-accent, var(--red, #E0311A)); }
+/* The accent word. Reads the --accent TOKEN (seeded + swapped live by PageFooter's
+   accent system), so the pop colour can change on the fly sitewide. Red is only the
+   current value, never a hardcode. Fallback exists for pages without PageFooter. */
+.clc-stmt :global(em) { font-style: normal; color: var(--accent, #E0311A); }
 
 /* centered: statement centered, circled CTA beneath it */
 .clc-centered .clc-in  { text-align: center; }
