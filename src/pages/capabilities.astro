@@ -117,7 +117,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero .sub .lead b{color:var(--paper)}
 
 /* services index: giant rows + cursor-trailing preview */
-.svc{padding:8vh 0 4vh}
+.svc{padding:9vh 0 10vh}
+/* the proof cards stay WHITE on the ink band, so their text must re-assert INK - on an
+   ink ground they would otherwise inherit paper type onto a white card (invisible).
+   Same trap the rolodex cards have (see .rcard). */
+[data-ground="ink"] .capcard{color:var(--ink)}
+[data-ground="ink"] .capcard .t{color:var(--ink)}
+[data-ground="ink"] .capcard .d{color:#55524c}
 /* the refusals: the negative definition opens the page (W+K shape, DJ's words).
    Set as a numbered ledger: rule-separated manifesto rows, not scattered mono. */
 .refuse{padding:9vh 0 2vh}
@@ -173,7 +179,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:44px}
 /* THREE WAYS IN (Change 3) — three-up on ink */
 .ways{padding:9vh 0}
-.ways .bar,.probs .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:13px;border-bottom:2px solid var(--paper)}
+.ways .bar,.probs .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:13px}
+.ways .bar{border-bottom:2px solid var(--paper)}   /* ink ground */
+.probs .bar{border-bottom:2px solid var(--ink)}    /* paper ground */
 .ways .bar .mono b,.probs .bar .mono b{color:var(--red)}
 .wh,.ph{font-weight:var(--dispw);font-size:clamp(26px,3vw,44px);letter-spacing:-.03em;line-height:1.04;text-transform:uppercase;margin:26px 0 0}
 .wh .serif,.ph .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
@@ -197,13 +205,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @media (prefers-reduced-motion:reduce){.way,.way::before{transition:none}}
 
 /* THE PROBLEMS I GET HIRED FOR (Change 4) — ledger rows on ink */
-.probs{padding:2vh 0 10vh}
-.pintro{color:rgba(245,243,239,.8);font-size:clamp(16px,1.4vw,19px);line-height:1.6;max-width:56ch;margin:18px 0 5vh}
-.prow{display:grid;grid-template-columns:64px minmax(200px,.85fr) 1.4fr;gap:10px 34px;align-items:baseline;padding:22px 0;border-top:1px solid rgba(245,243,239,.22)}
-.prow:last-child{border-bottom:1px solid rgba(245,243,239,.22)}
+/* DJ 2026-07-14: this band flips to PAPER (and .svc goes ink). Its colors were all
+   light-on-dark - the ground switch only auto-inverts INTO ink, so every one of them
+   had to be re-set for a light ground or they would have gone invisible. */
+.probs{padding:9vh 0 10vh}
+.pintro{color:#4c4a45;font-size:clamp(16px,1.4vw,19px);line-height:1.6;max-width:56ch;margin:18px 0 5vh}
+.prow{display:grid;grid-template-columns:64px minmax(200px,.85fr) 1.4fr;gap:10px 34px;align-items:baseline;padding:22px 0;border-top:1px solid var(--line)}
+.prow:last-child{border-bottom:1px solid var(--line)}
 .prow .pn{color:var(--red);letter-spacing:.1em}
-.prow h3{font-weight:var(--dispw);font-size:clamp(17px,1.6vw,23px);letter-spacing:-.02em;line-height:1.1;text-transform:uppercase}
-.prow p{color:rgba(245,243,239,.72);font-size:15px;line-height:1.62}
+.prow h3{font-weight:var(--dispw);font-size:clamp(17px,1.6vw,23px);letter-spacing:-.02em;line-height:1.1;text-transform:uppercase;color:var(--ink)}
+.prow p{color:#4c4a45;font-size:15px;line-height:1.62}
 @media (max-width:900px){.prow{grid-template-columns:1fr;gap:6px;padding:20px 0}}
 
 /* THE BAR (Change 6) — the light beat between two ink bands */
@@ -409,7 +420,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
-<section class="probs" data-ground="ink">
+<section class="probs" data-ground="paper">
   <div class="wrap">
     <div class="bar">
       <span class="mono"><b>\ Sound familiar</b></span>
@@ -439,7 +450,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
-<section class="svc wrap" id="services">
+<!-- DJ 2026-07-14: this band goes INK. The wrap moved OFF the section and INSIDE it -
+     with the wrap on the section, a background only paints the 1380px column instead
+     of bleeding the full width (same fix the rolodex needed). -->
+<section class="svc" id="services" data-ground="ink">
+ <div class="wrap">
   <div class="bar">
     <span class="mono"><b>What I do</b> · ten crafts</span>
     <span class="mono" style="color:#8f8d88">Every card is proof · click through</span>
@@ -548,6 +563,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       </span>
     </a>
   </div>
+ </div>
 </section>
 
 <!-- The rolodex: DJ 2026-07-11. The cards are ILLUSTRATIVE craft+city pairs
