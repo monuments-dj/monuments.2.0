@@ -84,7 +84,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* subject file on paper */
 .paper{background:var(--paper);color:var(--ink)}
-.file{display:grid;grid-template-columns:.58fr 1.42fr;gap:64px;padding:11vh 0;align-items:center}
+.file{display:grid;grid-template-columns:.58fr 1.42fr;gap:clamp(36px,4vw,56px);padding:8vh 0;align-items:center}
 .file .photo{background:#fff;border:1px solid var(--line);padding:10px 10px 34px;transform:rotate(-1.4deg);position:relative;box-shadow:0 24px 60px rgba(20,20,20,.12)}
 .file .photo img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:grayscale(.2) saturate(.9)}
 .file .photo video{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:grayscale(.22) saturate(.92);background:#111}
@@ -95,13 +95,20 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .file p{color:#4c4a45;max-width:58ch;margin-bottom:1.15em;font-size:18px}
 /* THE CREED: DJ's four locked beliefs, stacked. Belief big with the serif turn;
    one supporting line under each, all in his own locked words. */
-.creed-intro{color:#4c4a45;max-width:52ch;font-size:17px;margin:10px 0 2px}
-.creed{list-style:none;margin:0;padding:0}
-.creed li{padding:17px 0;border-bottom:1px solid var(--line)}
+/* tightened 2026-07-14 (DJ: "too big, formatting is weird, text can be smaller").
+   The beliefs were running at display-headline scale (up to 31px) with a 17px intro
+   and 17px row padding, so the block read louder than the sections under it. */
+/* NOTE: must out-specify `.file p` (0,1,1), which was silently winning and holding
+   this paragraph at 18px - .creed-intro alone (0,1,0) never controlled its size. */
+.file .creed-intro{color:#4c4a45;max-width:640px;font-size:15.5px;line-height:1.62;margin:10px 0 6px}
+/* one measure for the whole block: the intro was wrapping at ~575px while the belief
+   rules ran to ~940px, which is what made the formatting read ragged. */
+.creed{list-style:none;margin:0;padding:0;max-width:640px}
+.creed li{padding:12px 0;border-bottom:1px solid var(--line)}
 .creed li:last-child{border-bottom:none}
-.creed b{display:block;font-weight:var(--dispw);font-size:clamp(20px,2.2vw,31px);letter-spacing:-.028em;line-height:1.04;text-transform:uppercase;color:var(--ink)}
+.creed b{display:block;font-weight:var(--dispw);font-size:clamp(17px,1.55vw,23px);letter-spacing:-.024em;line-height:1.06;text-transform:uppercase;color:var(--ink)}
 .creed b .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;color:var(--ink)}
-.creed li>span{display:block;margin-top:5px;color:#4c4a45;font-size:15.5px;max-width:52ch}
+.creed li>span{display:block;margin-top:4px;color:#4c4a45;font-size:14.5px;line-height:1.55;max-width:56ch}
 /* the long version: DJ's locked piece, set as a quiet read */
 .lstory{background:var(--paper);padding:10vh 0 9vh}
 .lstory .lk{display:block;color:var(--red);letter-spacing:.12em;margin-bottom:26px}
