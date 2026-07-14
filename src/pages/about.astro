@@ -187,6 +187,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .cta .big{font-weight:var(--dispw);font-size:clamp(44px,7.6vw,112px);letter-spacing:-.035em;line-height:.9;text-transform:uppercase;margin-top:20px}
 .cta .big .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
 
+
 /* footer under-reveal (tinywins) */
 .over{position:relative;z-index:1;background:inherit}
 .underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
@@ -201,8 +202,32 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 [data-split].in .sl>span{transform:none}
 @media (prefers-reduced-motion:reduce){[data-split] .sl>span{transform:none}}
 
+
 /* THE RECEIPTS: numbers first, no gimmick. Proof on the accent band, editorial
    restraint per the reference class (Ogilvy/Belief/W+K): big figures, tidy record. */
+/* HOW I THINK · Element 22 word switcher (ported from Turnstile's CDD, 2026-07-14) */
+/* tightened 2026-07-14 (DJ: "ugly, the text is weird, way too big"). The tab words
+   were running to 64px in near-invisible 15% grey, the heading to 64px, and the two
+   panel columns were set at DIFFERENT sizes (a :first-child bump hit both columns),
+   which is what read as weird. One size for both columns now, everything smaller. */
+#cdd{padding:8vh 0}
+#cdd .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:13px;border-bottom:2px solid var(--ink)}
+#cdd .bar .mono b{color:var(--red)}
+#cdd .cdd-head{display:flex;margin-top:34px;gap:clamp(18px,2.6vw,40px);flex-wrap:wrap;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:14px}
+#cdd .cdd-word{position:relative;background:none;border:0;padding:0 0 5px;cursor:pointer;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(19px,2vw,29px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;color:rgba(22,21,20,.32);transition:color .5s cubic-bezier(.22,1,.36,1)}
+#cdd .cdd-word:hover{color:rgba(22,21,20,.6)}
+#cdd .cdd-word.on{color:var(--ink)}
+#cdd .cdd-word .cdd-bar{position:absolute;left:0;bottom:-15px;height:2px;width:0;background:var(--red);transition:none}
+#cdd .cdd-word.on .cdd-bar{width:100%;transition:width 4.6s linear}
+#cdd .cdd-stage{margin-top:38px;display:grid}
+#cdd .cdd-panel{grid-area:1/1;display:grid;grid-template-columns:1fr 1fr;gap:30px clamp(36px,4.4vw,72px);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+#cdd .cdd-panel.on{opacity:1;transform:none;pointer-events:auto}
+/* both columns read at ONE size - the old :first-child rule bumped the top paragraph
+   of EVERY column, so the two halves never matched. */
+#cdd .cdd-col p{color:#4c4a45;font-size:15.5px;line-height:1.66;margin-bottom:1em;max-width:56ch}
+#cdd .cdd-col p b{color:var(--ink);font-weight:var(--dispw2)}
+@media (max-width:820px){#cdd .cdd-panel{position:relative;grid-template-columns:1fr;gap:20px;opacity:1;transform:none;pointer-events:auto;display:none}#cdd .cdd-panel.on{display:grid}#cdd .cdd-stage{min-height:0}}
+@media (prefers-reduced-motion:reduce){#cdd .cdd-word .cdd-bar{transition:none}}
 
 /* DJ 2026-07-14: "this section is still way too big." Headline was running to 84px and
    the band carried 13vh top AND bottom. */
@@ -362,6 +387,47 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </div>
 
+  <!-- HOW I THINK (DJ's About rework v2, 2026-07-14). Element 22 word switcher,
+       same build as Turnstile's CONCEPT/DESIGN/DELIVER: auto-cycles, click a word
+       to jump, pauses on hover. Copy VERBATIM from the doc. -->
+  <section class="cdd wrap" id="cdd" data-i="0">
+    <div class="bar">
+      <span class="mono"><b>\ The thinking</b> · before anything gets made</span>
+    </div>
+    <div class="cdd-head" role="tablist" aria-label="Strategy, Culture, Community">
+      <button class="cdd-word on" data-i="0" role="tab">Strategy<i class="cdd-bar" aria-hidden="true"></i></button>
+      <button class="cdd-word" data-i="1" role="tab">Culture<i class="cdd-bar" aria-hidden="true"></i></button>
+      <button class="cdd-word" data-i="2" role="tab">Community<i class="cdd-bar" aria-hidden="true"></i></button>
+    </div>
+    <div class="cdd-stage">
+      <!-- Copy replaced VERBATIM from DJ 2026-07-14. Strategy / Culture / Community. -->
+      <div class="cdd-panel on" data-i="0">
+        <div class="cdd-col">
+          <p>Every great campaign is built on an insight: something true that nobody's using yet. That's what I'm digging for in the mountain, the data, the research, the stuff that's true before anyone has an opinion. The brief rarely contains it, because most briefs ask for a deliverable and the insight lives a level up. So I keep asking questions until I find the one the work should actually answer.</p>
+        </div>
+        <div class="cdd-col">
+          <p><b>The test.</b> A real insight makes everything after it easy. The audience, the idea, the work: they all fall out of it. If the idea needs a media budget to make sense, it's not an insight yet. When it's right, you can say it in a sentence and everyone in the room stops arguing.</p>
+        </div>
+      </div>
+      <div class="cdd-panel" data-i="1">
+        <div class="cdd-col">
+          <p>I listen before I write. What the conversation values, who it already trusts, what it would actually welcome. A brand can't buy its way into culture, and faking the accent reads instantly. So I look for the overlap that's real, the place the brand honestly belongs, and build from there.</p>
+        </div>
+        <div class="cdd-col">
+          <p><b>The line.</b> There's a difference between joining a conversation and interrupting one. The audience decides which one you did, and they decide fast. My job is making sure the work earns the room it walks into.</p>
+        </div>
+      </div>
+      <div class="cdd-panel" data-i="2">
+        <div class="cdd-col">
+          <p>Every campaign has three parties: the brand, the talent, the audience. The brand needs relevance. The talent needs a real platform. The audience needs something worth their time. I don't consider an idea finished until all three come out ahead.</p>
+        </div>
+        <div class="cdd-col">
+          <p><b>The math.</b> Most bad campaigns solved for one party and hoped the other two wouldn't notice. They always notice. When all three win, the work distributes itself, because everyone involved has a reason to carry it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="receipts">
     <div class="wrap">
       <span class="mono rk rv">\ The receipts</span>
@@ -480,6 +546,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
+
 <!-- IN THEIR WORDS unmounted 2026-07-14 (DJ's About rework v2): all ten testimonials
      were still placeholders. The component stays in the codebase - remount it here the
      moment real quotes land. Outreach list is in TODO.md. -->
@@ -513,6 +580,27 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/underfoot-->
 
 <script is:inline>
+// HOW I THINK switcher: auto-cycle (bar-timed), click to jump, pause on hover.
+// Ported from Turnstile's CDD (Element 22) so the two stay in sync.
+(function(){
+  var sec=document.getElementById('cdd');if(!sec)return;
+  var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var words=[].slice.call(sec.querySelectorAll('.cdd-word')),
+      panels=[].slice.call(sec.querySelectorAll('.cdd-panel')),
+      cur=0,timer=null,vis=false,paused=false;
+  function show(i){
+    cur=(i+panels.length)%panels.length;
+    words.forEach(function(w,j){w.classList.toggle('on',j===cur);});
+    panels.forEach(function(p,j){p.classList.toggle('on',j===cur);});
+    sec.setAttribute('data-i',cur);
+  }
+  function arm(){if(timer||reduced)return;timer=setInterval(function(){if(vis&&!paused)show(cur+1);},4600);}
+  function disarm(){clearInterval(timer);timer=null;}
+  words.forEach(function(w,i){w.addEventListener('click',function(){disarm();show(i);arm();});});
+  sec.addEventListener('mouseenter',function(){paused=true;});
+  sec.addEventListener('mouseleave',function(){paused=false;});
+  new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;vis?arm():disarm();});},{threshold:.2}).observe(sec);
+})();
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
@@ -577,6 +665,7 @@ clock();setInterval(clock,30000);
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.2});
   els.forEach(el=>io.observe(el));
 })();
+
 
 // scroll-lit rows: light up as they cross the center band
 (function(){
