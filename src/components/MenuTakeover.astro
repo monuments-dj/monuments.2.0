@@ -67,8 +67,11 @@ const links = [
 .navburger,.mnav,.navtog-in{display:none!important}
 
 /* trigger */
-.mt-trig{position:fixed;top:22px;right:22px;z-index:92;display:flex;align-items:center;gap:10px;background:none;border:0;cursor:pointer;padding:8px 4px;mix-blend-mode:difference;color:#fff}
-.mt-trig .mt-lb{font-family:var(--mono,'Fragment Mono',monospace);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#fff}
+/* DJ 2026-07-14: "menu and logo need to come off the edges a bit. menu text can be 10%
+   bigger." Trigger 22px -> 32px off both edges (the logo moved to 30/48 in the .corners
+   chrome to match). Label 12px -> 13.2px, exactly 10%. */
+.mt-trig{position:fixed;top:32px;right:32px;z-index:92;display:flex;align-items:center;gap:10px;background:none;border:0;cursor:pointer;padding:8px 4px;mix-blend-mode:difference;color:#fff}
+.mt-trig .mt-lb{font-family:var(--mono,'Fragment Mono',monospace);font-size:13.2px;letter-spacing:.14em;text-transform:uppercase;color:#fff}
 .mt-ic{display:flex;flex-direction:column;justify-content:center;gap:5px;width:26px}
 .mt-ic i{display:block;height:2px;width:100%;background:#fff;border-radius:2px;transition:transform .34s cubic-bezier(.76,0,.24,1),opacity .2s}
 body.mt-open .mt-ic i:nth-child(1){transform:translateY(7px) rotate(45deg)}
