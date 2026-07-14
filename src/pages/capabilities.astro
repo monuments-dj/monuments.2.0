@@ -147,7 +147,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @media (max-width:560px){.kitgrid{grid-template-columns:1fr;gap:18px}}
 
 /* the rolodex: index cards flipping over an axle (the one non-text moment) */
-.rolo{padding:4vh 0 6vh}
+.rolo{padding:10vh 0}
 .rolo .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:13px;border-bottom:2px solid var(--ink)}
 .rolo .bar .mono b{color:var(--red)}
 .rologrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,4vw,64px);align-items:center;margin-top:34px}
@@ -168,6 +168,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 /* rolodex cards stay light even when the .rolo band is flipped to ink (see grounds.css) */
 [data-ground="ink"] .rcard,[data-ground="ink"] .rcard b{color:#161514!important}
 [data-ground="ink"] .rcard .mono{color:#8f8d88!important}
+/* the axle is ink by default — it would vanish on the ink band. Flip it to paper. */
+[data-ground="ink"] .raxle{background:var(--paper)}
 @media (max-width:860px){.rologrid{grid-template-columns:1fr;gap:22px}.rolodex{height:236px}}
 @media (prefers-reduced-motion:reduce){.rcard{transition:none}}
 .pstep .n{font-family:var(--mono);font-size:11px;color:var(--ink);background:var(--paper);display:inline-block;padding:2px 8px}
@@ -187,7 +189,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .cta .kick{color:var(--spark)}
 .cta .big{font-weight:var(--dispw);font-size:clamp(38px,5.8vw,82px);letter-spacing:-.035em;line-height:.92;text-transform:uppercase;margin-top:14px}
 .cta .big .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
-
 
 /* footer under-reveal (tinywins) */
 .over{position:relative;z-index:1;background:inherit}
@@ -389,6 +390,58 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
+<!-- The rolodex: DJ 2026-07-11. The cards are ILLUSTRATIVE craft+city pairs
+     (edit the list freely) - the claim is the network, not the named individuals.
+     DJ 2026-07-14: moved directly under the capabilities grid, flipped FULL-BLEED
+     + inverted (data-ground="ink"). The light .rcard rules in this page's style
+     were built for exactly this - the cards stay white on the dark band. -->
+<section class="rolo" data-ground="ink">
+ <div class="wrap">
+  <div class="bar">
+    <span class="mono"><b>The rolodex</b> · a person for that</span>
+    <span class="mono" style="color:#8f8d88">Boise · LA · NY · Europe · Japan · China</span>
+  </div>
+  <div class="rologrid">
+    <div class="rolodex rv" id="rolodex" aria-label="A rotating index of the network">
+      <div class="raxle" aria-hidden="true"></div>
+      <div class="rcards">
+        <div class="rcard live"><b>Colorist</b><span class="mono">Tokyo</span></div>
+        <div class="rcard"><b>Pet wrangler</b><span class="mono">Los Angeles</span></div>
+        <div class="rcard"><b>Gaffer</b><span class="mono">Boise</span></div>
+        <div class="rcard"><b>Cinema lens architect</b><span class="mono">Tokyo</span></div>
+        <div class="rcard"><b>Set builder</b><span class="mono">Los Angeles</span></div>
+        <div class="rcard"><b>On-camera gang consultant</b><span class="mono">Los Angeles</span></div>
+        <div class="rcard"><b>3D animator</b><span class="mono">New York</span></div>
+        <div class="rcard"><b>Pilot</b><span class="mono">Boise</span></div>
+        <div class="rcard"><b>Stylist</b><span class="mono">Milan</span></div>
+        <div class="rcard"><b>Custom 3D bling</b><span class="mono">New York</span></div>
+        <div class="rcard"><b>Producer</b><span class="mono">Shanghai</span></div>
+        <div class="rcard"><b>Baby wrangler</b><span class="mono">Boise</span></div>
+        <div class="rcard"><b>Composer</b><span class="mono">Berlin</span></div>
+        <div class="rcard"><b>Precision driver</b><span class="mono">Los Angeles</span></div>
+        <div class="rcard"><b>Food stylist</b><span class="mono">Paris</span></div>
+        <div class="rcard"><b>Rain tower operator</b><span class="mono">Shanghai</span></div>
+        <div class="rcard"><b>Drone pilot</b><span class="mono">Idaho</span></div>
+        <div class="rcard"><b>Pyrotechnician</b><span class="mono">Idaho</span></div>
+        <div class="rcard"><b>Underwater DP</b><span class="mono">Los Angeles</span></div>
+        <div class="rcard"><b>High-rise graffiti artist</b><span class="mono">Los Angeles</span></div>
+        <div class="rcard"><b>Hand model</b><span class="mono">New York</span></div>
+        <div class="rcard"><b>Motorcycle builder</b><span class="mono">Portugal</span></div>
+        <div class="rcard"><b>Sandboarding instructor</b><span class="mono">Jordan</span></div>
+        <div class="rcard"><b>Goat shepherd</b><span class="mono">Dubai</span></div>
+        <div class="rcard"><b>Fire dancers</b><span class="mono">Los Angeles</span></div>
+        <div class="rcard"><b>Big game tracker</b><span class="mono">Idaho</span></div>
+        <div class="rcard"><b>Custom grill maker</b><span class="mono">San Diego</span></div>
+      </div>
+    </div>
+    <div class="rolotxt rv">
+      <h3>I've got a guy <span class="serif">for that.</span></h3>
+      <p>I pride myself on having a guy, a girl, a person for it. Fifteen years between Boise, LA, New York, Europe, Japan, and China builds a deep bench of creative talent. However weird the job gets, I've usually got someone who has done it, and done it well.</p>
+    </div>
+  </div>
+ </div>
+</section>
+
 <section class="proc">
   <div class="wrap">
     <div class="bar">
@@ -448,53 +501,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <li>Codex + OpenClaw <span class="kn">the automation bench</span></li>
         <li>Airtable + automation <span class="kn">pipelines and trackers</span></li>
       </ul>
-    </div>
-  </div>
-</section>
-
-<!-- The rolodex: DJ 2026-07-11. The cards are ILLUSTRATIVE craft+city pairs
-     (edit the list freely) - the claim is the network, not the named individuals. -->
-<section class="rolo wrap">
-  <div class="bar">
-    <span class="mono"><b>The rolodex</b> · a person for that</span>
-    <span class="mono" style="color:#8f8d88">Boise · LA · NY · Europe · Japan · China</span>
-  </div>
-  <div class="rologrid">
-    <div class="rolodex rv" id="rolodex" aria-label="A rotating index of the network">
-      <div class="raxle" aria-hidden="true"></div>
-      <div class="rcards">
-        <div class="rcard live"><b>Colorist</b><span class="mono">Tokyo</span></div>
-        <div class="rcard"><b>Pet wrangler</b><span class="mono">Los Angeles</span></div>
-        <div class="rcard"><b>Gaffer</b><span class="mono">Boise</span></div>
-        <div class="rcard"><b>Cinema lens architect</b><span class="mono">Tokyo</span></div>
-        <div class="rcard"><b>Set builder</b><span class="mono">Los Angeles</span></div>
-        <div class="rcard"><b>On-camera gang consultant</b><span class="mono">Los Angeles</span></div>
-        <div class="rcard"><b>3D animator</b><span class="mono">New York</span></div>
-        <div class="rcard"><b>Pilot</b><span class="mono">Boise</span></div>
-        <div class="rcard"><b>Stylist</b><span class="mono">Milan</span></div>
-        <div class="rcard"><b>Custom 3D bling</b><span class="mono">New York</span></div>
-        <div class="rcard"><b>Producer</b><span class="mono">Shanghai</span></div>
-        <div class="rcard"><b>Baby wrangler</b><span class="mono">Boise</span></div>
-        <div class="rcard"><b>Composer</b><span class="mono">Berlin</span></div>
-        <div class="rcard"><b>Precision driver</b><span class="mono">Los Angeles</span></div>
-        <div class="rcard"><b>Food stylist</b><span class="mono">Paris</span></div>
-        <div class="rcard"><b>Rain tower operator</b><span class="mono">Shanghai</span></div>
-        <div class="rcard"><b>Drone pilot</b><span class="mono">Idaho</span></div>
-        <div class="rcard"><b>Pyrotechnician</b><span class="mono">Idaho</span></div>
-        <div class="rcard"><b>Underwater DP</b><span class="mono">Los Angeles</span></div>
-        <div class="rcard"><b>High-rise graffiti artist</b><span class="mono">Los Angeles</span></div>
-        <div class="rcard"><b>Hand model</b><span class="mono">New York</span></div>
-        <div class="rcard"><b>Motorcycle builder</b><span class="mono">Portugal</span></div>
-        <div class="rcard"><b>Sandboarding instructor</b><span class="mono">Jordan</span></div>
-        <div class="rcard"><b>Goat shepherd</b><span class="mono">Dubai</span></div>
-        <div class="rcard"><b>Fire dancers</b><span class="mono">Los Angeles</span></div>
-        <div class="rcard"><b>Big game tracker</b><span class="mono">Idaho</span></div>
-        <div class="rcard"><b>Custom grill maker</b><span class="mono">San Diego</span></div>
-      </div>
-    </div>
-    <div class="rolotxt rv">
-      <h3>I've got a guy <span class="serif">for that.</span></h3>
-      <p>I pride myself on having a guy, a girl, a person for it. Fifteen years between Boise, LA, New York, Europe, Japan, and China builds a deep bench of creative talent. However weird the job gets, I've usually got someone who has done it, and done it well.</p>
     </div>
   </div>
 </section>
@@ -573,7 +579,6 @@ clock();setInterval(clock,30000);
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.2});
   els.forEach(el=>io.observe(el));
 })();
-
 
 // scroll-lit rows: light up as they cross the center band
 (function(){
