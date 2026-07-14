@@ -161,6 +161,34 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .proc .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:13px;border-bottom:1px solid rgba(245,243,239,.35)}
 .proc .bar .mono b{color:rgb(var(--on-rgb))}
 .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:44px}
+/* THREE WAYS IN (Change 3) — three-up on ink */
+.ways{padding:9vh 0}
+.ways .bar,.probs .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:13px;border-bottom:2px solid var(--paper)}
+.ways .bar .mono b,.probs .bar .mono b{color:var(--red)}
+.wh,.ph{font-weight:var(--dispw);font-size:clamp(26px,3vw,44px);letter-spacing:-.03em;line-height:1.04;text-transform:uppercase;margin:26px 0 0}
+.wh .serif,.ph .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.waygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,52px);margin-top:5vh}
+.way .wn{display:block;color:var(--red);letter-spacing:.12em;margin-bottom:12px}
+.way h3{font-weight:var(--dispw);font-size:clamp(19px,1.8vw,26px);letter-spacing:-.022em;line-height:1.05;text-transform:uppercase;margin-bottom:10px}
+.way p{color:rgba(245,243,239,.72);font-size:15px;line-height:1.62}
+@media (max-width:860px){.waygrid{grid-template-columns:1fr;gap:26px}}
+
+/* THE PROBLEMS I GET HIRED FOR (Change 4) — ledger rows on ink */
+.probs{padding:2vh 0 10vh}
+.pintro{color:rgba(245,243,239,.8);font-size:clamp(16px,1.4vw,19px);line-height:1.6;max-width:56ch;margin:18px 0 5vh}
+.prow{display:grid;grid-template-columns:64px minmax(200px,.85fr) 1.4fr;gap:10px 34px;align-items:baseline;padding:22px 0;border-top:1px solid rgba(245,243,239,.22)}
+.prow:last-child{border-bottom:1px solid rgba(245,243,239,.22)}
+.prow .pn{color:var(--red);letter-spacing:.1em}
+.prow h3{font-weight:var(--dispw);font-size:clamp(17px,1.6vw,23px);letter-spacing:-.02em;line-height:1.1;text-transform:uppercase}
+.prow p{color:rgba(245,243,239,.72);font-size:15px;line-height:1.62}
+@media (max-width:900px){.prow{grid-template-columns:1fr;gap:6px;padding:20px 0}}
+
+/* THE BAR (Change 6) — the light beat between two ink bands */
+.thebar{background:var(--paper);color:var(--ink);padding:11vh 0}
+.thebar .bk{display:block;color:var(--red);letter-spacing:.12em;margin-bottom:24px}
+.thebar .bq{font-weight:var(--dispw);font-size:clamp(30px,4.6vw,68px);letter-spacing:-.035em;line-height:1.02;text-transform:uppercase;max-width:20ch}
+.thebar .bq .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+
 /* the kit: fluency manifest, mono rows under a thin bar */
 .kit{padding:9vh 0 4vh}
 .kit .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:13px;border-bottom:2px solid var(--ink)}
@@ -294,7 +322,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <div class="wrap inner">
     <span class="kick mono">Capabilities · DJ Ramirez · Monuments</span>
     <h1>
-      <span class="ln"><span>In to serve the work,</span></span>
+      <span class="ln"><span>Here to serve the work,</span></span>
       <span class="ln"><span><span class="serif">not steal the show</span>.</span></span>
     </h1>
     <div class="sub">
@@ -316,17 +344,78 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <ul class="rv">
     <li><i>01</i>Scrappy by nature: I don't need the biggest budget in the room to make the best thing in it.</li>
     <li><i>02</i>I don't hide behind process. There is no man behind the curtain. The secret recipe is collaborating early and often.</li>
-    <li><i>03</i>I don't do gear talk. Stories and ideas will always trump the gear used to tell them.</li>
-    <li><i>04</i>I don't chase trends. I study why they happen.</li>
-    <li><i>05</i>I don't automate the human parts.</li>
-    <li><i>06</i>I don't pitch work I wouldn't ship.</li>
-    <li><i>07</i>I don't speak in acronyms.</li>
+    <li><i>03</i>I don't throw notes over the fence.</li>
+    <li><i>04</i>I don't do gear talk. Stories and ideas will always trump the gear used to tell them.</li>
+    <li><i>05</i>I don't start with deliverables. I start with the problem.</li>
+    <li><i>06</i>I don't chase trends. I study why they happen.</li>
+    <li><i>07</i>I don't automate the human parts.</li>
+    <li><i>08</i>I don't pitch work I wouldn't ship.</li>
+    <li><i>09</i>I don't speak in acronyms.</li>
   </ul>
+</section>
+
+<!-- THREE WAYS IN + THE PROBLEMS (DJ's Capabilities rework v2, Changes 3+4, 2026-07-14).
+     Copy verbatim. Both sit on INK: they land between .refuse (light) and the card
+     grid (light), and the FLOW RULE forbids adjacent light bands. -->
+<section class="ways" data-ground="ink">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>\ Who this is for</b></span>
+    </div>
+    <h2 class="wh rv">Three <span class="serif">ways in.</span></h2>
+    <div class="waygrid">
+      <div class="way rv" style="--i:0">
+        <span class="wn mono">01</span>
+        <h3>Brands</h3>
+        <p>You have a launch, a rebrand, or a problem, and no agency attached. I bring the strategy and the crew, and take it from first call to final delivery.</p>
+      </div>
+      <div class="way rv" style="--i:1">
+        <span class="wn mono">02</span>
+        <h3>Agencies</h3>
+        <p>You need a senior creative who can pitch, lead the room, and direct the work without a handler. I plug in, serve the work, and make your team look good.</p>
+      </div>
+      <div class="way rv" style="--i:2">
+        <span class="wn mono">03</span>
+        <h3>In-house teams</h3>
+        <p>You have the team and the tools, and the work still isn't landing. I plug in as a senior creative lead, for a sprint or a season, lead the team you have, and get it moving.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="probs" data-ground="ink">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>\ Sound familiar</b></span>
+    </div>
+    <h2 class="ph rv">The problems I <span class="serif">get hired for.</span></h2>
+    <p class="pintro rv">The brief is usually the wrong question. Finding the right one is most of the job.</p>
+    <div class="prow rv">
+      <span class="pn mono">01</span>
+      <h3>Launching into a market that doesn't believe you</h3>
+      <p>Every phone claims a cinema camera, so Sony's Xperia was a losing fight on spec. We found the audience that already trusted them: people who own Sony cameras. Five launches over four years.</p>
+    </div>
+    <div class="prow rv">
+      <span class="pn mono">02</span>
+      <h3>A brand your product outgrew</h3>
+      <p>Adorama's sales data showed customers buying Flashpoint for the whole studio while the brand still said flash. The rebrand caught the name up to the business. Hundreds of products, one system.</p>
+    </div>
+    <div class="prow rv">
+      <span class="pn mono">03</span>
+      <h3>An audience that won't listen</h3>
+      <p>CWI's students freeze at the choice, and ads alone weren't moving Idaho's go-on rate. We made starting the point. Four years, 40+ videos, still running.</p>
+    </div>
+    <div class="prow rv">
+      <span class="pn mono">04</span>
+      <h3>Talent everywhere, direction nowhere</h3>
+      <p>Art of Visuals had creators across the world and no system holding them. I built the team, the standard, and the pipeline, and led it through a 4x run.</p>
+    </div>
+  </div>
 </section>
 
 <section class="svc wrap" id="services">
   <div class="bar">
-    <span class="mono"><b>What I do</b> · nine crafts</span>
+    <span class="mono"><b>What I do</b> · ten crafts</span>
     <span class="mono" style="color:#8f8d88">Every card is proof · click through</span>
   </div>
 
@@ -334,7 +423,26 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
        it"): the nine giant rows become proof CARDS - each craft's case image
        is always visible (touch included), whole card links to the work. -->
   <div class="capgrid">
-    <a class="capcard rv" href="/work/sony-this-moment" style="--i:0">
+    <a class="capcard rv" href="/work/adorama-music" style="--i:0">
+      <span class="cm">
+        <img src="/case-studies/adorama-music/gallery/am-01.jpg" alt="Adorama Flashpoint studio campaign frame" loading="lazy">
+        <video class="pvid" src="/snips/adorama-music.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
+      </span>
+      <span class="cb">
+        <span class="t"><span class="serif">Strategy</span></span>
+        <span class="d">Positioning, audience, and where to aim before the money gets spent.</span>
+        <span class="pf mono">CAP-01 · Proof: Adorama · Flashpoint</span>
+      </span>
+    </a>
+<a class="capcard rv" href="/about" style="--i:1">
+      <img src="/about/team.jpg" alt="The Monuments crew" loading="lazy">
+      <span class="cb">
+        <span class="t">Creative <span class="serif">Leadership</span></span>
+        <span class="d">Teams of 5 to 30, led by example. Projects that stretch people, and help carrying the weight of shipping them.</span>
+        <span class="pf mono">CAP-02 · Proof: the crew</span>
+      </span>
+    </a>
+<a class="capcard rv" href="/work/sony-this-moment" style="--i:2">
       <span class="cm">
         <img src="/case-studies/sony-this-moment/gallery/tm-05.jpg" alt="Sony This Moment campaign frame" loading="lazy">
         <video class="pvid" src="/snips/sony-this-moment.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
@@ -342,51 +450,21 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <span class="cb">
         <span class="t">Creative <span class="serif">Direction</span></span>
         <span class="d">Strategy, concept, and the call in the room.</span>
-        <span class="pf mono">CAP-01 · Proof: Sony · This Moment</span>
+        <span class="pf mono">CAP-03 · Proof: Sony · This Moment</span>
       </span>
     </a>
-    <a class="capcard rv" href="/work/cwi-lets-get-started" style="--i:1">
+<a class="capcard rv" href="/work/cwi-lets-get-started" style="--i:3">
       <span class="cm">
         <img src="/case-studies/cwi/frames/cw-01.jpg" alt="CWI Let's Get Started film frame" loading="lazy">
         <video class="pvid" src="/snips/cwi-main.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
       </span>
       <span class="cb">
-        <span class="t">Commercial <span class="serif">Directing</span></span>
+        <span class="t"><span class="serif">Direction</span></span>
         <span class="d">Directing motion and stills is my bread and butter. Performance, pacing, and the moment that makes the cut.</span>
-        <span class="pf mono">CAP-02 · Proof: 30+ films for CWI</span>
+        <span class="pf mono">CAP-04 · Proof: 30+ films for CWI</span>
       </span>
     </a>
-    <a class="capcard rv" href="/work/know-vape" style="--i:2">
-      <span class="cm">
-        <img src="/case-studies/know-vape/campaign/cam-01.jpg" alt="Know Vape campaign portrait" loading="lazy">
-        <video class="pvid" src="/snips/know-vape.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
-      </span>
-      <span class="cb">
-        <span class="t">Campaign <span class="serif">Development</span></span>
-        <span class="d">Stills, motion, UX, experiential, merch, community. Every touchpoint working in harmony.</span>
-        <span class="pf mono">CAP-03 · Proof: Know Vape</span>
-      </span>
-    </a>
-    <a class="capcard rv" href="/work/buck-the-quo" style="--i:3">
-      <span class="cm">
-        <img src="/case-studies/buck-the-quo/gallery/container-front.jpg" alt="Buck the Quo container activation" loading="lazy">
-        <video class="pvid" src="/snips/buck-the-quo.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
-      </span>
-      <span class="cb">
-        <span class="t">Experiential</span>
-        <span class="d">Work people walk into. Containers, kit reveals, rooms built to earn a real conversation.</span>
-        <span class="pf mono">CAP-04 · Proof: Buck the Quo</span>
-      </span>
-    </a>
-    <a class="capcard rv" href="/photography" style="--i:4">
-      <img src="/gallery/full/p-044.jpg" alt="From the stills archive" loading="lazy">
-      <span class="cb">
-        <span class="t">Photography</span>
-        <span class="d">Campaign stills, editorial, and the frames between takes. Shot like the film, not alongside it.</span>
-        <span class="pf mono">CAP-05 · Proof: 100 frames</span>
-      </span>
-    </a>
-    <a class="capcard rv" href="/work/turnstile" style="--i:5">
+<a class="capcard rv" href="/work/turnstile" style="--i:4">
       <span class="cm">
         <img src="/case-studies/turnstile/products/prod-01.jpg" alt="Turnstile Audio product" loading="lazy">
         <video class="pvid" src="/snips/turnstile.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
@@ -394,31 +472,53 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <span class="cb">
         <span class="t">Brand <span class="serif">Building</span></span>
         <span class="d">Naming to packaging. Identity systems that hold up long after launch day.</span>
-        <span class="pf mono">CAP-06 · Proof: Turnstile Audio</span>
+        <span class="pf mono">CAP-05 · Proof: Turnstile Audio</span>
       </span>
     </a>
-    <a class="capcard rv" href="/contact" style="--i:6">
+<a class="capcard rv" href="/contact" style="--i:5">
       <img src="/gallery/full/p-041.jpg" alt="On set" loading="lazy">
       <span class="cb">
         <span class="t">Creative <span class="serif">Consulting</span></span>
         <span class="d">An outside perspective, non-profit and for-profit. Media and marketing plans, systems thinking, process, and order.</span>
-        <span class="pf mono">CAP-07 · Start a conversation</span>
+        <span class="pf mono">CAP-06 · Start a conversation</span>
       </span>
     </a>
-    <a class="capcard rv" href="/ai" style="--i:7">
+<a class="capcard rv" href="/work/know-vape" style="--i:6">
+      <span class="cm">
+        <img src="/case-studies/know-vape/campaign/cam-01.jpg" alt="Know Vape campaign portrait" loading="lazy">
+        <video class="pvid" src="/snips/know-vape.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
+      </span>
+      <span class="cb">
+        <span class="t">Integrated <span class="serif">Campaigns</span></span>
+        <span class="d">Stills, motion, UX, experiential, merch, community. Every touchpoint working in harmony.</span>
+        <span class="pf mono">CAP-07 · Proof: Know Vape</span>
+      </span>
+    </a>
+<a class="capcard rv" href="/work/buck-the-quo" style="--i:7">
+      <span class="cm">
+        <img src="/case-studies/buck-the-quo/gallery/container-front.jpg" alt="Buck the Quo container activation" loading="lazy">
+        <video class="pvid" src="/snips/buck-the-quo.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
+      </span>
+      <span class="cb">
+        <span class="t">Experiential</span>
+        <span class="d">Work people walk into. Containers, kit reveals, rooms built to earn a real conversation.</span>
+        <span class="pf mono">CAP-08 · Proof: Buck the Quo</span>
+      </span>
+    </a>
+<a class="capcard rv" href="/photography" style="--i:8">
+      <img src="/gallery/full/p-044.jpg" alt="From the stills archive" loading="lazy">
+      <span class="cb">
+        <span class="t">Photography</span>
+        <span class="d">Campaign stills, editorial, and the frames between takes. Shot like the film, not alongside it.</span>
+        <span class="pf mono">CAP-09 · Proof: 100 frames</span>
+      </span>
+    </a>
+<a class="capcard rv" href="/ai" style="--i:9">
       <img src="/about/studio-console.jpg" alt="The studio console" loading="lazy">
       <span class="cb">
         <span class="t">AI <span class="serif">Systems</span></span>
         <span class="d">AI built into creative and business workflows without losing the plot. The taste stays human.</span>
-        <span class="pf mono">CAP-08 · Proof: the AI page</span>
-      </span>
-    </a>
-    <a class="capcard rv" href="/about" style="--i:8">
-      <img src="/about/team.jpg" alt="The Monuments crew" loading="lazy">
-      <span class="cb">
-        <span class="t">Mentoring <span class="serif">&amp; Leadership</span></span>
-        <span class="d">Managing creatives is like wrangling cats. I see potential, call it out, and help shape the team.</span>
-        <span class="pf mono">CAP-09 · Proof: the crew</span>
+        <span class="pf mono">CAP-10 · Proof: the AI page</span>
       </span>
     </a>
   </div>
@@ -474,6 +574,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </div>
  </div>
+</section>
+
+<!-- THE BAR (DJ's Capabilities rework v2, Change 6): standalone pull-quote band
+     between the doors and The method. Light on purpose: it sits between the ink
+     rolodex and the ink method band, so it IS the light beat that keeps the flow. -->
+<section class="thebar">
+  <div class="wrap">
+    <span class="mono bk rv">✳ The bar</span>
+    <p class="bq rv">Is this good, or could it <span class="serif">be great?</span></p>
+  </div>
 </section>
 
 <section class="proc">
@@ -552,13 +662,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </div>
 
-<ClosingCTA
-  tone="ink"
-  layout="centered"
-  kicker="Good work starts with good questions"
-  statement={`Tell me what<br>you're <em>building.</em>`}
-  label="Reach Out"
-/>
+<!-- Capabilities moves to LOCKED pair 1 (DJ's Capabilities rework v2, Change 7).
+     These are the component defaults, so no kicker/statement/label props: the pairs
+     are a closed set and must never be re-paired. -->
+<ClosingCTA tone="ink" layout="centered" />
 
 </div><!--/over-->
 <div class="underfoot">
