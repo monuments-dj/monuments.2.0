@@ -125,6 +125,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 [data-ground="ink"] .capcard{color:var(--ink)}
 [data-ground="ink"] .capcard .t{color:var(--ink)}
 [data-ground="ink"] .capcard .d{color:#55524c}
+/* .pf carries .mono -> grounds forced it to PAPER !important, washing the
+   "CAP-10 · PROOF:" line out to near-white on the white card. */
+[data-ground="ink"] .capcard .pf{color:var(--red)!important}
 /* the refusals: the negative definition opens the page (W+K shape, DJ's words).
    Set as a numbered ledger: rule-separated manifesto rows, not scattered mono. */
 .refuse{padding:9vh 0 2vh}
@@ -151,7 +154,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 /* the proof cards: nine crafts as a visual grid (DJ 2026-07-11 - the giant
    rows were "sooooo big"; images always visible, whole card = the proof link) */
 .capgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
-.capcard{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:11px;overflow:hidden;box-shadow:0 10px 28px rgba(20,20,20,.07);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+/* position:relative is REQUIRED - the .capstamp is absolute, and without a positioned
+   ancestor here it escapes the card and pins to the top-right of the PAGE. */
+.capcard{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:11px;overflow:hidden;box-shadow:0 10px 28px rgba(20,20,20,.07);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
 .capcard:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(20,20,20,.13)}
 .capcard img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;filter:grayscale(1) contrast(1.04);transition:filter .4s}
 .capcard:hover img{filter:none}
@@ -165,6 +170,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .capcard .t .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
 .capcard .d{font-size:13.5px;line-height:1.55;color:#55524c;flex:1}
 .capcard .pf{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-top:4px}
+/* the NEW stamp (DJ 2026-07-14) - same treatment as the "Rolling" tag on About's photo.
+   It sits INSIDE the card: .capcard is overflow:hidden (that clip is what rounds the
+   image), so a stamp hung off the edge would be sliced in half. */
+.capcard .capstamp{position:absolute;z-index:3;top:14px;right:14px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--red);border:2px solid var(--red);border-radius:6px;padding:5px 10px;background:var(--paper);
+  transform:rotate(6deg);transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.capcard.is-new:hover .capstamp{transform:rotate(-3deg) scale(1.06)}
 @media (max-width:960px){.capgrid{grid-template-columns:1fr 1fr}}
 @media (max-width:600px){.capgrid{grid-template-columns:1fr}}
 
@@ -191,17 +203,34 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
    on hover - so they read as distinct objects against the ledger rows of .probs
    below, instead of the two ink bands melting into one slab. */
 .waygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.6vw,24px);margin-top:5vh}
-.way{position:relative;border:1px solid rgba(245,243,239,.18);padding:clamp(22px,2vw,30px);background:rgba(245,243,239,.02);overflow:hidden;
-  transition:translate .5s cubic-bezier(.22,1,.36,1),border-color .5s ease,background .5s ease}
-.way::before{content:'';position:absolute;left:0;top:0;height:2px;width:0;background:var(--accent,var(--red));transition:width .55s cubic-bezier(.22,1,.36,1)}
+/* DJ 2026-07-14: "could these cards be white? these need to stand out." WHITE cards on
+   the ink band, same family as the proof cards. Their text must re-assert INK - on an
+   ink ground it would otherwise inherit paper type onto a white card (invisible). */
+.way{position:relative;border:1px solid var(--line);border-radius:11px;padding:clamp(22px,2vw,30px);background:#fff;color:var(--ink);overflow:hidden;
+  box-shadow:0 10px 28px rgba(0,0,0,.22);
+  transition:translate .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease}
+.way::before{content:'';position:absolute;left:0;top:0;height:3px;width:0;background:var(--accent,var(--red));transition:width .55s cubic-bezier(.22,1,.36,1)}
 /* the LIFT rides `translate`, not `transform`: the .rv reveal system already owns
    transform on this element (.rv -> translateY(28px), .in -> none) and silently
    overwrote the hover lift. `translate` is its own property and composes with it. */
-.way:hover{translate:0 -6px;border-color:rgba(245,243,239,.42);background:rgba(245,243,239,.05)}
+.way:hover{translate:0 -8px;box-shadow:0 22px 50px rgba(0,0,0,.34)}
 .way:hover::before{width:100%}
 .way .wn{display:block;color:var(--red);letter-spacing:.12em;margin-bottom:12px}
-.way h3{font-weight:var(--dispw);font-size:clamp(18px,1.6vw,23px);letter-spacing:-.022em;line-height:1.05;text-transform:uppercase;margin-bottom:10px}
-.way p{color:rgba(245,243,239,.72);font-size:14.5px;line-height:1.6}
+.way h3{font-weight:var(--dispw);font-size:clamp(18px,1.6vw,23px);letter-spacing:-.022em;line-height:1.05;text-transform:uppercase;margin-bottom:10px;color:var(--ink);
+  transition:translate .45s cubic-bezier(.22,1,.36,1)}
+.way:hover h3{translate:4px 0}
+.way p{color:#55524c;font-size:14.5px;line-height:1.6}
+/* White cards sit on the ink band, so their type must re-assert INK - otherwise it
+   inherits paper type onto a white card and goes INVISIBLE. !important is REQUIRED:
+   grounds.css sets `[data-ground="ink"] :is(h1,h2,h3,h4) {color:paper !important}` and
+   `p {color:rgba(paper) !important}`, so a plain rule here silently loses. Same trap
+   as .rcard on the rolodex. */
+[data-ground="ink"] .way{color:var(--ink)}
+[data-ground="ink"] .way h3{color:var(--ink)!important}
+[data-ground="ink"] .way p{color:#55524c!important}
+/* .wn also carries .mono, and grounds forces `.mono` to PAPER !important - which made
+   the 01/02/03 numbers near-invisible on the white card. */
+[data-ground="ink"] .way .wn{color:var(--red)!important}
 @media (max-width:860px){.waygrid{grid-template-columns:1fr;gap:14px}}
 @media (prefers-reduced-motion:reduce){.way,.way::before{transition:none}}
 
@@ -555,7 +584,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <span class="pf mono">CAP-09 · Proof: 100 frames</span>
       </span>
     </a>
-<a class="capcard rv" href="/ai" style="--i:9">
+<a class="capcard rv is-new" href="/ai" style="--i:9">
+      <span class="capstamp">New</span>
       <img src="/about/studio-console.jpg" alt="The studio console" loading="lazy">
       <span class="cb">
         <span class="t">AI <span class="serif">Systems</span></span>
