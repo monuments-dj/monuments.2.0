@@ -4,7 +4,6 @@ import FooterWordmark from '../components/FooterWordmark.astro';
 import ClosingCTA from '../components/ClosingCTA.astro';
 import AchievementsTicker from '../components/AchievementsTicker.astro';
 import PageFooter from '../components/PageFooter.astro';
-import Testimonials from '../components/Testimonials.astro';
 import WorldMap from '../components/WorldMap.astro';
 const bts = Array.from({ length: 18 }, (_, i) => `/about-bts/abts-${String(i + 1).padStart(2, '0')}.mp4`);
 ---
@@ -178,6 +177,26 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* THE RECEIPTS: numbers first, no gimmick. Proof on the accent band, editorial
    restraint per the reference class (Ogilvy/Belief/W+K): big figures, tidy record. */
+/* HOW I THINK · Element 22 word switcher (ported from Turnstile's CDD, 2026-07-14) */
+.cdd{padding:10vh 0 11vh}
+.cdd .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:13px;border-bottom:2px solid var(--ink)}
+.cdd .bar .mono b{color:var(--red)}
+.cdd-h{font-weight:var(--dispw);font-size:clamp(30px,4.4vw,64px);letter-spacing:-.03em;line-height:1;text-transform:uppercase;margin:34px 0 6vh}
+.cdd-h .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.cdd-head{display:flex;gap:clamp(20px,3.4vw,54px);flex-wrap:wrap;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:18px}
+.cdd-word{position:relative;background:none;border:0;padding:0 0 6px;cursor:pointer;font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(28px,4.6vw,64px);letter-spacing:-.035em;line-height:1;text-transform:uppercase;color:rgba(22,21,20,.15);transition:color .5s cubic-bezier(.22,1,.36,1)}
+.cdd-word.on{color:var(--ink)}
+.cdd-word .cdd-bar{position:absolute;left:0;bottom:-19px;height:2px;width:0;background:var(--red);transition:none}
+.cdd-word.on .cdd-bar{width:100%;transition:width 4.6s linear}
+.cdd-stage{margin-top:6vh;display:grid}
+.cdd-panel{grid-area:1/1;display:grid;grid-template-columns:1fr 1fr;gap:44px 64px;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.cdd-panel.on{opacity:1;transform:none;pointer-events:auto}
+.cdd-col p{color:#4c4a45;font-size:clamp(15px,1.15vw,17px);line-height:1.62;margin-bottom:1em}
+.cdd-col p b{color:var(--ink);font-weight:var(--dispw2)}
+.cdd-col p:first-child{font-size:clamp(16px,1.3vw,19px);color:var(--ink)}
+@media (max-width:820px){.cdd-panel{position:relative;grid-template-columns:1fr;gap:20px;opacity:1;transform:none;pointer-events:auto;display:none}.cdd-panel.on{display:grid}.cdd-stage{min-height:0}}
+@media (prefers-reduced-motion:reduce){.cdd-word .cdd-bar{transition:none}}
+
 .receipts{background:var(--struct);color:rgb(var(--on-rgb));padding:13vh 0}
 .receipts .rk{color:rgba(var(--on-rgb),.7);display:block}
 .receipts h2{font-weight:var(--dispw);font-size:clamp(34px,5.4vw,84px);letter-spacing:-.035em;line-height:.96;text-transform:uppercase;margin:14px 0 20px}
@@ -302,27 +321,72 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
     <div class="rv">
       <span class="mono" style="color:var(--red)">✳ The creed</span>
-      <p class="creed-intro">I'm DJ Ramirez, a creative director. I run Monuments with a small crew and a long list of friends. Four things I believe:</p>
+      <!-- Creed copy VERBATIM from DJ's About rework v2 (2026-07-14). Belief order
+           is FINAL. "The tools are everywhere. Taste isn't." was CUT from the creed
+           here on purpose - it stays the Home hero. The monuments line below is a
+           deliberate bookend with the long version's closing line; both stay. -->
+      <p class="creed-intro">I'm DJ Ramirez. Creative director first, director second. I tell stories, I make things, and I like being part of things bigger than myself. Give me a mountain of data and a big problem, and I'll create my way out of it. I call my work monuments, because they are a sign that something mattered enough to be remembered. Four things I believe:</p>
       <ul class="creed">
         <li class="rv">
-          <b>The tools are everywhere. <span class="serif">Taste isn't.</span></b>
-          <span>Half my tools are AI now. The taste is still mine.</span>
+          <b>Every great story is a <span class="serif">human story.</span></b>
+          <span>The point is the story. It's there if you're willing to listen.</span>
+        </li>
+        <li class="rv">
+          <b>Less agency, <span class="serif">more rock &amp; roll.</span></b>
+          <span>Fewer meetings about the creating, more actual creating.</span>
+        </li>
+        <li class="rv">
+          <b>Ideas are cheap. <span class="serif">Shipped is rare.</span></b>
+          <span>You're only as good as what you can ship.</span>
         </li>
         <li class="rv">
           <b>AI is a tool, <span class="serif">not a solution.</span></b>
           <span>I directed people before I directed AI.</span>
         </li>
-        <li class="rv">
-          <b>Every great story is a <span class="serif">human story.</span></b>
-          <span>The point is the story. The moment. Always has been.</span>
-        </li>
-        <li class="rv">
-          <b>Less agency, <span class="serif">more rock &amp; roll.</span></b>
-          <span>I show up to serve the work, not the other way around.</span>
-        </li>
       </ul>
     </div>
   </div>
+
+  <!-- HOW I THINK (DJ's About rework v2, 2026-07-14). Element 22 word switcher,
+       same build as Turnstile's CONCEPT/DESIGN/DELIVER: auto-cycles, click a word
+       to jump, pauses on hover. Copy VERBATIM from the doc. -->
+  <section class="cdd wrap" id="cdd" data-i="0">
+    <div class="bar">
+      <span class="mono"><b>\ The thinking</b> · before anything gets made</span>
+    </div>
+    <h2 class="cdd-h rv">How <span class="serif">I think.</span></h2>
+    <div class="cdd-head" role="tablist" aria-label="Strategy, Culture, Community">
+      <button class="cdd-word on" data-i="0" role="tab">Strategy<i class="cdd-bar" aria-hidden="true"></i></button>
+      <button class="cdd-word" data-i="1" role="tab">Culture<i class="cdd-bar" aria-hidden="true"></i></button>
+      <button class="cdd-word" data-i="2" role="tab">Community<i class="cdd-bar" aria-hidden="true"></i></button>
+    </div>
+    <div class="cdd-stage">
+      <div class="cdd-panel on" data-i="0">
+        <div class="cdd-col">
+          <p>The brief is usually the wrong question. Sony wanted the Xperia to beat the iPhone on camera. Nobody believes phone camera claims, so that was a fight we'd lose. But Sony wasn't really building a phone. They'd built a companion camera: color-matched to an A7S III, shoots RAW and log, takes a removable SD card. So we stopped talking to switchers and started talking to the people who already own the rest of the kit.</p>
+        </div>
+        <div class="cdd-col">
+          <p><b>The same move, other clients.</b> Adorama's own sales data showed customers buying Flashpoint for their whole studio, so a flash brand became a studio brand. CWI's students freeze at the choice, so we made starting the point instead of deciding. A year into the Xperia run, Sony had me in focus groups with their product team, and our notes showed up as features on the next device.</p>
+        </div>
+      </div>
+      <div class="cdd-panel" data-i="1">
+        <div class="cdd-col">
+          <p>Most brands want into a conversation they weren't invited to. Big companies, good products, no natural place in the culture they're trying to reach. Finding the way in is the part I like.</p>
+        </div>
+        <div class="cdd-col">
+          <p><b>The work.</b> Sony, Intel, MSI, Adorama. On the XM5 launch I pushed to put Latin creators at the front of it. They deserved the platform. Sony ran with it.</p>
+        </div>
+      </div>
+      <div class="cdd-panel" data-i="2">
+        <div class="cdd-col">
+          <p>Art of Visuals had two million creators paying attention. The job was making that worth something to everyone involved. The brand needs relevance. The creator needs a real platform. The audience needs something worth their time.</p>
+        </div>
+        <div class="cdd-col">
+          <p><b>The math.</b> Line all three up and everyone leaves better than they came. I cast creators as talent instead of buying their reach, and built Sony Kando's programming around what creators actually needed from it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="receipts">
     <div class="wrap">
@@ -356,6 +420,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <p class="rv">We're all handed different tools. Mine was a camera. Photo and video came naturally, but I'm not technical at all, and I never cared to be. What hooked me was what the camera unlocked. It was a key to the world: access to people, places, and stories I had no business being close to. So when people ask if I'm a photographer, I say kinda. I'm a storyteller who knows how to use a camera.</p>
         <p class="rv">Where it all comes together is the marriage of two crafts: storytelling and building. Building brands, building campaigns, building experiences people actually show up for. That intersection is genuinely magical to me, and it's where I've lived for fifteen years. Honestly, I'm not good at much else. Luckily, it keeps me busy: one month it's a nonprofit in Uganda, the next it's directing commercials shaping the future of education in Idaho, sometimes it's on camera on location in New York.</p>
         <p class="rv">But here's my problem with advertising: it evaporates. Here one day, gone the next. If you make an ad about a tree falling in the forest and nobody likes it, did anyone care? I refuse to spend a career making things designed to be forgotten. What I obsess over is the other kind: shaping culture, helping people make complicated decisions about their future, giving a voice to people who can't speak up for themselves. Work that stands the test of time. Things worth remembering. That's the legacy I'm after.</p>
+        <p class="rv">Somewhere along the way I noticed a pattern. On Buck the Quo I started on the agency floor and ended up a consultant. At Art of Visuals I went from making the work, to leading a team and writing strategy for clients. With Sony I started out making ads, and a year in they had me in focus groups with their product team. I've been lucky enough to be invited early to important rooms. I don't take that lightly.</p>
         <p class="lclose rv">Monuments. <span class="serif">A sign that something mattered enough to be remembered.</span></p>
       </div>
     </div>
@@ -383,8 +448,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
     <div class="roomrow rv">
       <span class="no"><i>\</i> 04</span>
-      <h4>The camera</h4>
-      <p>Whether on camera or behind it directing, I'm comfortable representing a brand when the red light comes on.</p>
+      <h4>The problem</h4>
+      <p>Most briefs are a fight you can't win. Sony wanted to out-camera the iPhone. We sold a companion camera to people who already shoot Sony instead.</p>
     </div>
     <div class="roomrow rv">
       <span class="no"><i>\</i> 05</span>
@@ -437,7 +502,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </section>
 
 
-<Testimonials />
+<!-- IN THEIR WORDS unmounted 2026-07-14 (DJ's About rework v2): all ten testimonials
+     were still placeholders. The component stays in the codebase - remount it here the
+     moment real quotes land. Outreach list is in TODO.md. -->
 
 <section class="btssec">
   <div class="bar">
@@ -468,6 +535,28 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/underfoot-->
 
 <script is:inline>
+// HOW I THINK switcher: auto-cycle (bar-timed), click to jump, pause on hover.
+// Ported from Turnstile's CDD (Element 22) so the two stay in sync.
+(function(){
+  var sec=document.getElementById('cdd');if(!sec)return;
+  var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var words=[].slice.call(sec.querySelectorAll('.cdd-word')),
+      panels=[].slice.call(sec.querySelectorAll('.cdd-panel')),
+      cur=0,timer=null,vis=false,paused=false;
+  function show(i){
+    cur=(i+panels.length)%panels.length;
+    words.forEach(function(w,j){w.classList.toggle('on',j===cur);});
+    panels.forEach(function(p,j){p.classList.toggle('on',j===cur);});
+    sec.setAttribute('data-i',cur);
+  }
+  function arm(){if(timer||reduced)return;timer=setInterval(function(){if(vis&&!paused)show(cur+1);},4600);}
+  function disarm(){clearInterval(timer);timer=null;}
+  words.forEach(function(w,i){w.addEventListener('click',function(){disarm();show(i);arm();});});
+  sec.addEventListener('mouseenter',function(){paused=true;});
+  sec.addEventListener('mouseleave',function(){paused=false;});
+  new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;vis?arm():disarm();});},{threshold:.2}).observe(sec);
+})();
+
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
