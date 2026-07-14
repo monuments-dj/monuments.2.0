@@ -1,5 +1,72 @@
 # TODO - current state (2026-07-14 · CHAT ROTATED · everything below is LIVE on main)
 
+## 🔄 HANDOFF 2026-07-14 EVENING (the live-feedback marathon · 61 commits)
+All pushed to main, working tree clean. 27/27 pages pass pagecheck, build clean.
+Session was DJ sending screenshots + notes, me fixing and shipping each one.
+
+### 🔴 BLOCKED ON DJ (do not guess)
+- **MSI "is broken"** — he said so, I can't reproduce it. Passes pagecheck, no page
+  errors, no empty sections, no 404s. The big black area in his shot is the NextFile
+  under-reveal, which is a scroll-gated rail and is SUPPOSED to be a tall dark band.
+  ASK HIM what he's actually seeing.
+- **"Ripped paper textures if we break it out of the box"** — never identified which
+  element, or where the texture asset lives.
+- **"Merch page needs a color fix"** — no target given. clothing-merch runs standard
+  ink/paper. Don't guess a colour.
+- **CWI: the "Mining Technology" chip.** He cut the mining VIDEO ("I didnt do it").
+  The program CHIP is still in The Scale. If he touched no mining work at all, the
+  chip is a false claim too. One word and it goes.
+- **CWI: two films share a title.** AD3Z_QQ9ZTU and v_1ZuNOXfJs are both "Let's Get
+  Started | Engineering" on CWI's channel. The grid shows "Engineering" twice.
+- **Copy I DRAFTED, he has not approved** (flag these, they are my words on his site):
+  the in-house call-sheet slip on /capabilities ("The seat I'm looking for"), the
+  Adobe kit notes, and CWI's "The system" rewrite.
+
+### ⚠️ TRAPS THIS SESSION TAUGHT (they will bite again)
+1. **`.cdd` global-CSS leak, now fixed — but the DISEASE is the pattern.** `<style
+   is:global>` on 5 pages all declared `.cdd*`, and Astro bundles those globals into
+   chunks OTHER pages load. Worse: flashpoint used `.cdd` for a totally different
+   component, and its rule was wrecking Turnstile's layout. All switcher pages are now
+   scoped under their own id (#cdd / #cddkit). ANY duplicated global class name across
+   pages is a live landmine.
+2. **Local dev lies about CSS order.** The on-camera fix looked right locally and was
+   NOT applied in production, because bundle order differs. Verify CSS fixes on the
+   DEPLOYED page.
+3. **`height:auto` is load-bearing.** An <img> with width/height ATTRIBUTES gets a
+   presentational-hint height. Set width:100% + aspect-ratio without height:auto and
+   the attribute silently wins, aspect-ratio is ignored, object-fit crops it into a
+   portrait. (Cost us the CWI film grid.)
+4. **grounds.css needs THREE overrides for a white card on an ink band** — headings,
+   `.mono`, AND `:is(h2,h3) .serif` are each set with !important.
+5. **A `padding` SHORTHAND on a section that carries `.wrap` kills its gutter.** Use
+   padding-top/padding-bottom. (Was throwing whole sections 44px out of alignment.)
+6. **A `.wrap` inside a `display:flex` hero shrinks to its content** — needs width:100%,
+   or the hero drifts off the page's left edge (was 129px out on /capabilities).
+7. **`transform` on a `.rv` element is owned by the reveal system.** Hover lifts must
+   use the standalone `translate` / `rotate` properties or they are silently overwritten.
+8. **Pseudo-element scrims can refuse to paint.** A `.hero::after` overlay measured as
+   NO overlay (rendered wall came out brighter than the source photo). Use a real div.
+
+### SHIPPED (headlines only, all live)
+- **Capabilities, rebuilt to DJ's v2 doc**: Here-to-serve hero, 9-line "I don't" list,
+  Three ways in (call-sheet slips, in-house one stamped OPEN TO OFFERS), The problems
+  I get hired for, 10 crafts in a 5x2 grid, The bar (red scribble draws under "great"
+  every 4s), locked CTA pair 1.
+- **About**: new creed + How I think switcher (his copy) + In the room = the 5 hiring
+  situations + long version broken into a dark 2-col spread. Header is now the team
+  shot (COLOUR, 50% scrim). "Less agency" band = the pizza shot. New giving photo.
+- **CWI**: The Scale inverted to ink + 14 programs, 7 channel films (click-to-play
+  facade, zero YouTube requests until clicked), credit truth pass (he does NOT shoot
+  these — DPs are Jake Rapp / Nathan Zanders / Kova Kovatonic, EP Steph Norrell).
+- **Work pages, class-level**: killed 3 hand-rolled closers, tightened the shared
+  bottom in work.css (dead air under the call sheet: 458px -> 66px on EVERY page).
+- **Fixed for real**: Blue Cross rendered a literal `&ndash;`; Blue Cross + Adorama
+  galleries (rigid grid / my own statbeat regression); the sitewide .cdd leak.
+- **Menu**: AI row pulled, Giving -> Giving back, logo + trigger off the edges
+  (the logo was hardcoded in FOURTEEN files), menu text +10%.
+- **Images**: crew original (was upscaled 2x), pizza, giving — all recompressed
+  (14MB/5.5MB/5.1MB -> under 900KB each) at full resolution.
+
 ## 🔄 HANDOFF 2026-07-14 (the StatRow/CTA session hit its context limit)
 Pushed to main + verified live on https://monuments-2-0.vercel.app. 15 commits,
 05e6e3d..66b45c6. Working tree clean.
