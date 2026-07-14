@@ -1,5 +1,6 @@
 ---
 import CircledCTA from '../components/CircledCTA.astro';
+import ClosingCTA from '../components/ClosingCTA.astro';
 import AchievementsTicker from '../components/AchievementsTicker.astro';
 import PageFooter from '../components/PageFooter.astro';
 import '../styles/grounds.css';
@@ -378,13 +379,13 @@ body.gridview .arch{padding-bottom:0}
   <div class="track" id="stripTrack"></div>
 </div>
 
-<section class="cta">
-  <div class="wrap">
-    <span class="kick mono rv">✳ Being forgettable is expensive</span>
-    <div class="big" data-split>Let's build something<br><span class="serif">worth remembering.</span></div>
-    <CircledCTA tone="dark" class="rv" />
-  </div>
-</section>
+<ClosingCTA
+  tone="ink"
+  layout="centered"
+  kicker="Being forgettable is expensive"
+  statement={`Let's build something<br><em>worth remembering.</em>`}
+  label="Let's talk"
+/>
 </div><!--/over-->
 
 <div class="underfoot">

@@ -1,5 +1,6 @@
 ---
 import CircledCTA from '../components/CircledCTA.astro';
+import ClosingCTA from '../components/ClosingCTA.astro';
 import PageFooter from '../components/PageFooter.astro';
 import '../styles/grounds.css';
 ---
@@ -513,15 +514,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </div>
 
-<section class="cta">
-  <div class="wrap inner">
-    <div class="cta-txt">
-      <span class="kick mono rv">✳ Come with the problem, we'll find the idea</span>
-      <div class="big" data-split>Let's build something<br><span class="serif">worth remembering.</span></div>
-      <CircledCTA tone="dark" class="rv" />
-    </div>
-  </div>
-</section>
+<ClosingCTA
+  tone="ink"
+  layout="centered"
+  kicker="Good work starts with good questions"
+  statement={`Tell me what<br>you're <em>building.</em>`}
+  label="Reach Out"
+/>
 
 </div><!--/over-->
 <div class="underfoot">

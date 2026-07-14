@@ -1,5 +1,6 @@
 ---
 import CircledCTA from '../components/CircledCTA.astro';
+import ClosingCTA from '../components/ClosingCTA.astro';
 import PageFooter from '../components/PageFooter.astro';
 ---
 <!doctype html>
@@ -233,13 +234,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
-<section class="cta">
-  <div class="wrap">
-    <span class="kick mono">✳ Being forgettable is expensive</span>
-    <div class="big rv">Let's build something<br><span class="serif">worth remembering.</span></div>
-    <CircledCTA tone="dark" />
-  </div>
-</section>
+<ClosingCTA
+  tone="ink"
+  layout="centered"
+  kicker="Good work starts with good questions"
+  statement={`Tell me what<br>you're <em>building.</em>`}
+  label="Reach Out"
+/>
 
 <PageFooter tag="Human + machine" />
 

@@ -1,5 +1,6 @@
 ---
 import CircledCTA from '../components/CircledCTA.astro';
+import ClosingCTA from '../components/ClosingCTA.astro';
 import AchievementsTicker from '../components/AchievementsTicker.astro';
 import PageFooter from '../components/PageFooter.astro';
 import Testimonials from '../components/Testimonials.astro';
@@ -458,13 +459,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
-<section class="cta">
-  <div class="wrap">
-    <span class="kick mono rv">✳ One conversation, no deck required</span>
-    <div class="big" data-split>Tell me what<br>you're <span class="serif">building.</span></div>
-    <CircledCTA tone="dark" class="rv" />
-  </div>
-</section>
+<ClosingCTA
+  tone="ink"
+  layout="centered"
+  kicker="Ear to the street"
+  statement={`Culture is talking.<br>Most brands aren't <em>listening.</em>`}
+  label="Let's talk"
+/>
 
 </div><!--/over-->
 <div class="underfoot">
