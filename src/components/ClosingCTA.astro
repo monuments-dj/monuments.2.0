@@ -1,0 +1,85 @@
+---
+// ClosingCTA.astro — THE closing statement band, sitewide. Kicker + statement +
+// the circled CTA. Reuses CircledCTA (the one button) rather than redrawing it,
+// so the button stays identical everywhere. Change the closer HERE once and every
+// page follows — the old closer was hand-rolled on 11 pages, which is why it drifted.
+//
+//   <ClosingCTA />                          // centered, ink  (default)
+//   <ClosingCTA tone="paper" />             // centered, paper
+//   <ClosingCTA layout="left" />            // statement left, CTA right
+//
+// The KICKER comes from DJ's LOCKED closed set. Do not invent new ones.
+// The accent word is wrapped in <em> and carries the red on BOTH grounds — it used
+// to ride --spark, which resolved to paper after the B/W bake, so on ink the
+// emphasis went invisible.
+import CircledCTA from './CircledCTA.astro';
+
+interface Props {
+  kicker?: string;
+  statement?: string;          // may contain <br> and <em> for the accent word
+  href?: string;
+  label?: string;
+  tone?: 'ink' | 'paper';
+  layout?: 'centered' | 'left';
+  class?: string;
+}
+const {
+  kicker = 'Being forgettable is expensive',
+  statement = `Culture is talking.<br>Most brands aren't <em>listening.</em>`,
+  href = '/contact',
+  label = "Let's talk",
+  tone = 'ink',
+  layout = 'centered',
+  class: extra = '',
+} = Astro.props;
+---
+<section class:list={['clc', `clc-${tone}`, `clc-${layout}`, extra]}>
+  <div class="clc-in">
+    <div class="clc-txt">
+      {kicker && <span class="clc-k">✳ {kicker}</span>}
+      <p class="clc-stmt" set:html={statement} />
+    </div>
+    <CircledCTA href={href} label={label} tone={tone === 'ink' ? 'dark' : 'light'} class="clc-cta" />
+  </div>
+</section>
+
+<style>
+.clc { position: relative; }
+.clc-ink   { background: var(--ink, #161514);   color: var(--paper, #F5F3EF); }
+.clc-paper { background: var(--paper, #F5F3EF); color: var(--ink, #161514); }
+
+.clc-in {
+  max-width: var(--wrap, 1300px); margin: 0 auto;
+  padding: clamp(70px, 15vh, 160px) var(--pad, clamp(22px,5vw,40px));
+}
+
+.clc-k {
+  display: block; font-family: var(--mono, monospace); font-size: 11px;
+  letter-spacing: .12em; text-transform: uppercase; opacity: .62; margin-bottom: 22px;
+}
+.clc-stmt {
+  margin: 0; font-family: var(--disp, sans-serif); font-weight: var(--dispw, 800);
+  font-size: clamp(30px, 4.6vw, 64px); line-height: 1.02; letter-spacing: -.035em;
+  text-transform: uppercase; max-width: 18ch;
+}
+/* the accent word — red on BOTH grounds (see note above) */
+.clc-stmt :global(em) { font-style: normal; color: var(--red-accent, var(--red, #E0311A)); }
+
+/* centered: statement centered, circled CTA beneath it */
+.clc-centered .clc-in  { text-align: center; }
+.clc-centered .clc-stmt { margin: 0 auto; }
+.clc-centered :global(.clc-cta) { margin-top: 40px; }
+
+/* left: statement left, circled CTA off to the right */
+.clc-left .clc-in {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: clamp(30px, 5vw, 80px);
+}
+.clc-left .clc-stmt { max-width: 16ch; }
+.clc-left :global(.clc-cta) { flex: none; }
+
+@media (max-width: 820px) {
+  .clc-left .clc-in { flex-direction: column; align-items: flex-start; }
+  .clc-left :global(.clc-cta) { margin-top: 34px; }
+}
+</style>
