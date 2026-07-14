@@ -148,6 +148,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .sizes .sz figcaption{margin-top:10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.6)}
 @media(max-width:760px){.sizes .sz-grid{grid-template-columns:1fr 1fr;align-items:start}.sizes .sz-9{grid-column:span 2;justify-self:center;max-width:320px}}
 /* catalog (scale) */
+/* THE SCALE, inverted to INK (DJ 2026-07-14: "make background black"). Styled directly
+   rather than via data-ground: this page does NOT import grounds.css, so the ground
+   attribute would have done nothing. Every colour in here was dark-on-light and had to
+   be flipped by hand, or the chips and copy would have gone invisible on the black. */
+.scale{background:var(--ink);color:var(--paper);padding:9vh 0}
+.scale .cat-head h2{color:var(--paper)}
+.scale .cat-head p{color:rgba(245,243,239,.74)}
+.scale .cat-chip{color:var(--paper);border-color:rgba(245,243,239,.45)}
+.scale .cat-chip.cat-more{color:var(--red);border-color:var(--red)}
+.scale .cat-note{color:rgba(245,243,239,.55)}
 .catalog{padding:3vh 0 2vh}
 .cat-head{max-width:64ch}
 .cat-head .k{color:var(--red)}
@@ -314,6 +324,12 @@ html[data-accent="bw"] section.quote .who{color:rgba(245,243,239,.55)!important}
     </div>
   </div>
 
+</section>
+
+<!-- THE SCALE inverted to INK (DJ 2026-07-14). It was a .wrap div sharing the paper
+     section with the story blocks, so it could not carry its own ground - it had to be
+     lifted OUT into its own full-bleed section. -->
+<section class="scale block-dark">
   <div class="wrap catalog">
     <div class="cat-head rv">
       <span class="k mono">\ The scale</span>
@@ -326,6 +342,9 @@ html[data-accent="bw"] section.quote .who{color:rgba(245,243,239,.55)!important}
     </div>
     <p class="cat-note mono rv">On TV and social &nbsp;·&nbsp; every aspect ratio &nbsp;·&nbsp; :15 and :30 &nbsp;·&nbsp; four years and counting</p>
   </div>
+</section>
+
+<section class="paper">
 
   <div class="wrap story">
     <div class="side rv">
