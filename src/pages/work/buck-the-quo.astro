@@ -185,11 +185,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @media(max-width:760px){.rs-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:460px){.rs-grid{grid-template-columns:1fr}}
 /* full-screen poster wall + text overlay */
-.posterbreak{height:84svh;min-height:520px}
-.posterbreak::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(22,21,20,.72),rgba(22,21,20,.04) 52%);z-index:1}
-.pb-overlay{position:absolute;left:0;right:0;bottom:0;z-index:2;max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 8vh}
+/* DJ 2026-07-14: half the height, a flat 40% black overlay (was a bottom-up gradient
+   that left the top of the wall bare), and the copy CENTERED in the band. */
+.posterbreak{height:42svh;min-height:300px}
+.posterbreak::after{content:'';position:absolute;inset:0;background:rgba(22,21,20,.40);z-index:1}
+.pb-overlay{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 var(--pad)}
 .pb-overlay .pb-k{color:var(--spark);display:block;margin-bottom:14px}
-.pb-overlay h2{font-family:var(--disp);font-weight:var(--dispw);font-size:var(--fs-statement);letter-spacing:-.035em;line-height:.96;text-transform:uppercase;color:#fff;max-width:16ch}
+.pb-overlay h2{font-family:var(--disp);font-weight:var(--dispw);font-size:var(--fs-statement);letter-spacing:-.035em;line-height:.96;text-transform:uppercase;color:#fff;max-width:20ch;margin:0 auto}
 .pb-overlay h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
 
 /* the triad: the message that carried it */
