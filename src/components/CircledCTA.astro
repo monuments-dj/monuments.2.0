@@ -1,0 +1,69 @@
+---
+// CircledCTA.astro — THE one closing call-to-action button, sitewide.
+// Hand-drawn oval that draws on and loops around "Let's talk". Self-contained:
+// using it anywhere ships its own CSS, so it looks identical on every page.
+// tone="light" => black (ink) oval on a light band · tone="dark" => paper oval on a dark band.
+// Change the look HERE once and every page's closer follows.
+interface Props {
+  href?: string;
+  label?: string;
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+const {
+  href = 'mailto:monuments.cc@gmail.com',
+  label = "Let's talk",
+  tone = 'dark',
+  class: extra = '',
+} = Astro.props;
+---
+<a class={`ccta ccta-${tone} ${extra}`} href={href}>
+  <span class="ccta-lbl">{label}</span>
+  <span class="ccta-arr" aria-hidden="true">↗</span>
+  <svg class="ccta-oval" viewBox="0 0 240 76" preserveAspectRatio="none" aria-hidden="true">
+    <path pathLength="1" d="M26,44 C14,22 66,11 128,11 C196,11 232,24 224,44 C217,62 160,70 98,68 C44,66 16,56 18,38 C19,26 40,17 62,15" />
+  </svg>
+</a>
+<style>
+  .ccta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 30px;
+    font-family: var(--mono, monospace);
+    font-size: 13px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    transition: color .3s;
+  }
+  .ccta-lbl { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+  .ccta-arr { margin-left: 7px; transition: transform .3s; }
+  .ccta:hover .ccta-arr { transform: translate(2px, -2px); }
+  .ccta-oval {
+    position: absolute;
+    inset: -7px -12px;
+    width: calc(100% + 24px);
+    height: calc(100% + 14px);
+    overflow: visible;
+    pointer-events: none;
+    transform: rotate(-1.6deg);
+  }
+  .ccta-oval path {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    animation: ccOval 5s ease-in-out infinite;
+  }
+  /* dark band: paper text + paper oval */
+  .ccta-dark { color: var(--paper, #F5F3EF); }
+  .ccta-dark .ccta-oval path { stroke: var(--paper, #F5F3EF); }
+  /* light band: ink text + BLACK oval (DJ 2026-07-13) */
+  .ccta-light { color: var(--ink, #201e1d); }
+  .ccta-light .ccta-oval path { stroke: var(--ink, #201e1d); }
+  @keyframes ccOval { 0% { stroke-dashoffset: 1; } 20% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { .ccta-oval path { animation: none; stroke-dashoffset: 0; } }
+</style>
