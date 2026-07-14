@@ -71,10 +71,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   /* the plate settles instead of snapping in. NOTE: the base transform carries a
      translateX(-50%) centering offset - every keyframe must preserve it or the
      image jumps half a viewport left. */
-  animation:heroSettle 1.9s cubic-bezier(.22,1,.36,1) forwards}
+  animation:heroSettle 1.4s ease-out forwards}
+/* DJ 2026-07-14: "animation here is weird, we could just fade in or something."
+   The scale-settle is gone - the plate just fades up. NOTE: the base transform
+   carries translateX(-50%) centering; keep it in every keyframe or the image jumps. */
 @keyframes heroSettle{
-  from{transform:translateX(-50%) scale(1.06);opacity:0}
-  to{transform:translateX(-50%) scale(1);opacity:1}
+  from{transform:translateX(-50%);opacity:0}
+  to{transform:translateX(-50%);opacity:1}
 }
 .hero>.scrim{position:absolute;top:0;height:100%;left:50%;width:100vw;transform:translateX(-50%);background:linear-gradient(100deg,rgba(22,21,20,.82),rgba(22,21,20,.42) 52%,rgba(22,21,20,.5)),linear-gradient(0deg,rgba(22,21,20,.68),rgba(22,21,20,0) 44%);z-index:1;pointer-events:none}
 .hero>*:not(.herobg):not(.scrim){position:relative;z-index:2}
@@ -83,29 +86,27 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero .kick{color:var(--red)}
 .hero h1{font-weight:var(--dispw);font-size:clamp(40px,6.2vw,92px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-top:18px}
 .hero h1 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
-/* THE HERO EASE (DJ 2026-07-14: "this should ease in").
-   Before: only the h1 did a hard masked rise - the kicker, body copy, lead column
-   and the photo all snapped in on frame 1, which is what read as un-eased. Now the
-   whole hero arrives as ONE staggered entrance on a single easing curve.
-   The .ln mask keeps padding-bottom:.18em + the 125% offset - that is the standing
-   descender rule in CLAUDE.md/CSS-MAP. Do not shorten it. */
-.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em}
-.hero h1 .ln>span{display:block;transform:translateY(125%);animation:rise 1.25s cubic-bezier(.16,1,.3,1) forwards}
-.hero h1 .ln:nth-child(1)>span{animation-delay:.26s}
-.hero h1 .ln:nth-child(2)>span{animation-delay:.40s}
-@keyframes rise{to{transform:translateY(0)}}
-/* everything that isn't masked fades + lifts on the same curve */
-@keyframes easeUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
-.hero .kick{opacity:0;animation:easeUp 1s .12s cubic-bezier(.16,1,.3,1) forwards}
-.hero .sub p{opacity:0;animation:easeUp 1.1s .72s cubic-bezier(.16,1,.3,1) forwards}
-.hero .sub .lead{opacity:0;animation:easeUp 1.1s .86s cubic-bezier(.16,1,.3,1) forwards}
+/* THE HERO: A PLAIN FADE (DJ 2026-07-14: "animation here is weird, we could just fade
+   in or something. Ion like it"). The masked rise + the lift are GONE. Nothing moves
+   now - every part just fades up, barely staggered so it doesn't arrive as one flat
+   block. No translate, no scale.
+   The .ln mask keeps padding-bottom:.18em - that is the standing descender rule in
+   CLAUDE.md/CSS-MAP (the italic serif descenders in "not steal the show." get sheared
+   off without it). It no longer hides a rise, but it must stay. */
+.hero h1 .ln{display:block;padding-bottom:.18em;margin-bottom:-.18em}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.hero h1 .ln>span{display:block;opacity:0;animation:fadeIn .9s ease-out forwards}
+.hero h1 .ln:nth-child(1)>span{animation-delay:.18s}
+.hero h1 .ln:nth-child(2)>span{animation-delay:.30s}
+.hero .kick{opacity:0;animation:fadeIn .8s .08s ease-out forwards}
+.hero .sub p{opacity:0;animation:fadeIn .9s .46s ease-out forwards}
+.hero .sub .lead{opacity:0;animation:fadeIn .9s .56s ease-out forwards}
 /* MUST come after the rules above: they start at opacity:0, and a reduced-motion
    guard placed EARLIER loses on source order (equal specificity) - which would
    suppress the animation and leave those users staring at a BLANK hero forever. */
 @media (prefers-reduced-motion:reduce){
-  .hero>.herobg{animation:none;opacity:1;transform:translateX(-50%) scale(1)}
-  .hero h1 .ln>span{animation:none;transform:none}
-  .hero .kick,.hero .sub p,.hero .sub .lead{animation:none;opacity:1;transform:none}
+  .hero>.herobg{animation:none;opacity:1;transform:translateX(-50%)}
+  .hero h1 .ln>span,.hero .kick,.hero .sub p,.hero .sub .lead{animation:none;opacity:1}
 }
 .hero .sub{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-top:5vh}
 .hero .sub p{max-width:46ch;color:#4c4a45;font-size:17px}
