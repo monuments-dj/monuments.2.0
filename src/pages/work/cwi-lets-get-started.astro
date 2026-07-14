@@ -18,6 +18,10 @@ const hh = work.find(w => w.slug === 'cwi-lets-get-started');
 // numbers (Idaho State Board of Education / Idaho Ed News, 2025), used as context for the
 // college the work supports, NOT presented as results of these films. See
 // tools/cwi-stats-verified.md for the sourced figures.
+// Programs from DJ's own CWI folders (2026-07-14). His folders also list ART,
+// HUMANITIES, TECH and BUSINESS ADMIN - those already map onto the existing
+// "Arts + Humanities", "Technology" and "Business Admin" chips, so they are not
+// duplicated here.
 const programs = [
   { k: 'fire',          t: 'Fire Service' },
   { k: 'public-safety', t: 'Public Safety' },
@@ -25,6 +29,14 @@ const programs = [
   { k: 'tech',          t: 'Technology' },
   { k: 'business',      t: 'Business Admin' },
   { k: 'mining',        t: 'Mining Technology' },
+  { k: 'engineering',   t: 'Engineering' },
+  { k: 'biology',       t: 'Biology' },
+  { k: 'dental',        t: 'Dental' },
+  { k: 'mechatronics',  t: 'Mechatronics' },
+  { k: 'cisco',         t: 'Cisco Networking' },
+  { k: 'agriculture',   t: 'Agriculture' },
+  { k: 'horticulture',  t: 'Horticulture' },
+  { k: 'transfer',      t: 'Transfer' },
 ];
 ---
 <!doctype html>
@@ -271,7 +283,11 @@ html[data-accent="bw"] section.quote .who{color:rgba(245,243,239,.55)!important}
     <div class="eg-head rv">
       <span class="k mono">\ The system</span>
       <h2>I built the guide the whole campaign edits <span class="serif">to.</span></h2>
-      <p class="eg-sub">Before a single spot got cut, I wrote the video style guide: the type, the color, the pacing, the export specs. Every editor on every round works from it, so the campaign reads as one thing across every program and every screen.</p>
+      <!-- DJ 2026-07-14: "i built this along the way, not before it got cut. show
+           developing with the campaign." The old line claimed the guide was written
+           BEFORE the first spot, which is backwards. COPY BELOW IS CLAUDE'S DRAFT - DJ
+           to approve or rewrite in his own words. -->
+      <p class="eg-sub">The guide came out of the work, not ahead of it. Round by round I wrote down what was working: the type, the color, the pacing, the export specs. It grew as the campaign grew, and every editor on every round cuts to the current version, so four years of films still read as one thing across every program and every screen.</p>
     </div>
     <div class="eg-grid rv">
       {[1,2,3,4,5,6].map((n) => (
