@@ -74,16 +74,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @keyframes fade{to{opacity:1}}
 
 /* the torn seam: a white ripped strip between bands, echoing the campaign device */
-.seam{height:32px;background:#FCFBF7;position:relative;z-index:2;
-clip-path:polygon(0 18%,4% 4%,8% 26%,13% 8%,18% 30%,23% 6%,28% 24%,33% 10%,38% 32%,43% 2%,48% 22%,53% 8%,58% 28%,63% 6%,68% 26%,73% 12%,78% 30%,83% 4%,88% 24%,93% 10%,100% 20%,100% 78%,95% 96%,90% 72%,85% 94%,80% 70%,75% 92%,70% 74%,65% 98%,60% 72%,55% 92%,50% 70%,45% 94%,40% 76%,35% 96%,30% 70%,25% 90%,20% 72%,15% 96%,10% 74%,5% 90%,0 76%)}
 
 /* concept first: the three worlds on the teal band, where the scoreboard usually sits */
-.splitrow{background:var(--teal);color:var(--ink)}
-.splitrow .band{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.4vw,54px);padding:56px 0 52px}
-.world .n{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(22,21,20,.62)}
-.world b{display:block;margin-top:10px;font-weight:var(--dispw);font-size:clamp(24px,2.7vw,42px);letter-spacing:-.025em;line-height:1;text-transform:uppercase}
-.world b i{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;color:var(--paper);padding:0 .1em;text-transform:none}
-.world p{margin-top:12px;font-size:15px;line-height:1.55;font-weight:var(--dispw2);color:rgba(22,21,20,.78);max-width:34ch}
 
 
 /* story on paper */
@@ -105,7 +97,6 @@ clip-path:polygon(0 18%,4% 4%,8% 26%,13% 8%,18% 30%,23% 6%,28% 24%,33% 10%,38% 3
 
 @media (max-width:900px){
   .story{grid-template-columns:1fr}.story .side{position:static}
-  .splitrow .band{grid-template-columns:1fr;gap:30px}
   .hero .kck{display:none}
 }
 @media (max-width:560px){.frames{columns:1}}
@@ -160,27 +151,7 @@ clip-path:polygon(0 18%,4% 4%,8% 26%,13% 8%,18% 30%,23% 6%,28% 24%,33% 10%,38% 3
   note="Every spread <b>tears down the middle</b>"
 />
 
-<div class="seam" aria-hidden="true"></div>
 
-<div class="splitrow">
-  <div class="wrap band">
-    <div class="world rv">
-      <span class="n">01</span>
-      <b>Engineer<i>/</i>Drummer</b>
-      <p>Approved and tested. The person who dials the sound in, and the person who beats it up on stage.</p>
-    </div>
-    <div class="world rv">
-      <span class="n">02</span>
-      <b>Plug In<i>/</i>Rock Out</b>
-      <p>The quiet studio kit and the loud live one, the same DWe rig playing both roles.</p>
-    </div>
-    <div class="world rv">
-      <span class="n">03</span>
-      <b>Acoustic<i>/</i>Electric</b>
-      <p>A hybrid kit that refuses to pick a side, so the campaign refused to as well.</p>
-    </div>
-  </div>
-</div>
 
 
 <section class="paper">

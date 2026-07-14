@@ -102,14 +102,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .hero .kck b{color:var(--spark);font-weight:400}
 @keyframes fade{to{opacity:1}}
 
-/* the brief board: no invented numbers, the three calls that shaped the drop.
-   NB: container class is .bgrid, NOT .in - the reveal observer adds .in to the
-   .brief.rv cells themselves, and a .briefrow .in rule would re-grid each cell. */
-.briefrow{background:var(--struct);color:var(--paper)}
-.briefrow .bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.4vw,54px);padding:52px 0 48px}
-.brief span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.72);display:block;margin-bottom:12px}
-.brief span::before{content:'\\ ';color:var(--paper)}
-.brief p{font-weight:var(--dispw2);font-size:clamp(17px,1.55vw,23px);line-height:1.4;letter-spacing:-.01em}
 
 /* story on paper */
 .story .side{position:static}
@@ -150,7 +142,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 @media (max-width:900px){
   .story{grid-template-columns:1fr}.story .side{position:static}
-  .briefrow .bgrid{grid-template-columns:1fr;gap:30px}
   .frames{columns:2}
   .hero .kck{display:none}
 }
@@ -205,13 +196,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   stats={[{ value: '40', label: 'Talent · one nimble crew' }, { value: '6', label: 'Iconic Boise locations' }, { value: 'Packed', label: 'Theater on launch night' }]}
 />
 
-<div class="briefrow">
-  <div class="wrap bgrid">
-    <div class="brief rv"><span>Direction</span><p>Directed the reveal: how each kit was shot, cut, and dropped.</p></div>
-    <div class="brief rv"><span>Concept</span><p>"This kit is Boise": the kit as a piece of the city, not just a jersey.</p></div>
-    <div class="brief rv"><span>Partners</span><p>Worked alongside Hummel on the kits and Against on the brand.</p></div>
-  </div>
-</div>
 
 
 <section class="paper">
