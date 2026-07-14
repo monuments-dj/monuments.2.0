@@ -29,6 +29,7 @@ const flowComments = [
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
+import StatRow from '../../components/StatRow.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'sony-flow-state');
@@ -290,13 +291,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/sony-flow-state/gallery/fs-02.jpg" vid={hh.vid} logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
-<div class="statrow inv">
-  <div class="wrap in">
-    <div class="stat rv"><b>1.6M</b><span>Impressions</span></div>
-    <div class="stat rv"><b>204K</b><span>Actions taken</span></div>
-    <div class="stat rv"><b>12.61%</b><span>Engagement rate · industry calls 3.5 to 6 high</span></div>
-    <div class="stat rv"><p class="note">Instagram, YouTube + Facebook<br>Reposted by <b>@sony</b></p></div>
-  </div>
+<StatRow tone="paper"
+  stats={[{ value: '1.6M', label: 'Impressions' }, { value: '204K', label: 'Actions taken' }, { value: '12.61%', label: 'Engagement rate · industry calls 3.5 to 6 high' }]}
+  note="Instagram, YouTube + Facebook<br>Reposted by <b>@sony</b>"
+/>
 </div>
 
 

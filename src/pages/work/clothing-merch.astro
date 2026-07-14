@@ -10,6 +10,7 @@ import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
+import StatRow from '../../components/StatRow.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'clothing-merch');
@@ -183,13 +184,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/clothing-merch/new-noise-poster.jpg" vid="/case-studies/clothing-merch/new-noise.mp4" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
-<div class="statrow inv">
-  <div class="wrap in">
-    <div class="stat rv"><b>Design</b><span>01 · The concept</span></div>
-    <div class="stat rv"><b>Print</b><span>02 · The production</span></div>
-    <div class="stat rv"><b>Market</b><span>03 · The reach</span></div>
-    <div class="stat rv"><p class="note">One line, <b>concept to market</b>, for a range of clients</p></div>
-  </div>
+<StatRow tone="paper"
+  stats={[{ value: 'Design', label: '01 · The concept' }, { value: 'Print', label: '02 · The production' }, { value: 'Market', label: '03 · The reach' }]}
+  note="One line, <b>concept to market</b>, for a range of clients"
+/>
 </div>
 
 

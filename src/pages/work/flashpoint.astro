@@ -6,6 +6,7 @@ import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
+import StatRow from '../../components/StatRow.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 
@@ -284,13 +285,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/flashpoint/gallery/fp-03.jpg" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
-<div class="statrow inv">
-  <div class="wrap in">
-    <div class="stat rv"><b>Full</b><span>Top-to-bottom rebrand</span></div>
-    <div class="stat rv"><b>04</b><span>Fronts at once</span></div>
-    <div class="stat rv"><b>20K+</b><span>Followers on the channels I set up</span></div>
-    <div class="stat rv"><p class="note">The site I built in 2020 is <b>still live</b> at <b>flashpointlighting.com</b></p></div>
-  </div>
+<StatRow tone="paper"
+  stats={[{ value: 'Full', label: 'Top-to-bottom rebrand' }, { value: '04', label: 'Fronts at once' }, { value: '20K+', label: 'Followers on the channels I set up' }]}
+  note="The site I built in 2020 is <b>still live</b> at <b>flashpointlighting.com</b>"
+/>
 </div>
 
 

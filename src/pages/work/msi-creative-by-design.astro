@@ -1,6 +1,7 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
+import StatRow from '../../components/StatRow.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
@@ -134,14 +135,9 @@ a{color:inherit;text-decoration:none}
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/art-of-visuals/msi/msi-06.jpg" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
-<div class="statrow">
-  <div class="in">
-    <div class="stat"><b>3 weeks</b><span>concept to launch</span></div>
-    <div class="stat"><b>Times Square</b><span>digital boards + bus stations</span></div>
-    <div class="stat"><b>60/30/15/6</b><span>second cutdowns</span></div>
-    <div class="stat"><b>3</b><span>creative careers, one film</span></div>
-  </div>
-</div>
+<StatRow tone="paper"
+  stats={[{ value: '3 weeks', label: 'concept to launch' }, { value: 'Times Square', label: 'digital boards + bus stations' }, { value: '60/30/15/6', label: 'second cutdowns' }, { value: '3', label: 'creative careers, one film' }]}
+/>
 
 <section class="paper">
   <div class="wrap story">

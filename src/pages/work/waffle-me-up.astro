@@ -5,6 +5,7 @@ import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
+import StatRow from '../../components/StatRow.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'waffle-me-up');
@@ -215,13 +216,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/waffle-me-up/gallery/wmu-03.jpg" vid={hh.vid} logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
-<div class="statrow inv">
-  <div class="wrap in">
-    <div class="stat rv"><b>2x</b><span>A returning client</span></div>
-    <div class="stat rv"><b>5</b><span>Disciplines, one brand</span></div>
-    <div class="stat rv"><b>MMXIX</b><span>Refresh filed</span></div>
-    <div class="stat rv"><p class="note">From the first storefront <b>logo</b> to waffles shipped <b>nationwide</b></p></div>
-  </div>
+<StatRow tone="paper"
+  stats={[{ value: '2x', label: 'A returning client' }, { value: '5', label: 'Disciplines, one brand' }, { value: 'MMXIX', label: 'Refresh filed' }]}
+  note="From the first storefront <b>logo</b> to waffles shipped <b>nationwide</b>"
+/>
 </div>
 
 

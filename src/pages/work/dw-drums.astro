@@ -1,5 +1,6 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
+import StatRow from '../../components/StatRow.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
@@ -154,6 +155,10 @@ clip-path:polygon(0 18%,4% 4%,8% 26%,13% 8%,18% 30%,23% 6%,28% 24%,33% 10%,38% 3
 
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/dw-drums/gallery/face-off.jpg" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
+<StatRow tone="paper"
+  stats={[{ value: 'Two worlds', label: 'One kit · acoustic + electric' }, { value: 'Hybrid', label: 'A real DW kit that plugs in' }]}
+  note="Every spread <b>tears down the middle</b>"
+/>
 
 <div class="seam" aria-hidden="true"></div>
 

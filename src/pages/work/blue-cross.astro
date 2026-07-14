@@ -4,6 +4,7 @@ import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
+import StatRow from '../../components/StatRow.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'blue-cross');
@@ -174,13 +175,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/blue-cross/bc-hero.jpg" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
-<div class="statrow">
-  <div class="wrap in">
-    <div class="stat rv"><b>4 years</b><span>of usage · licensing extended for success</span></div>
-    <div class="stat rv"><b>2020&ndash;24</b><span>launched, still in market</span></div>
-    <div class="stat rv"><b>OMEK</b><span>agency partner</span></div>
-    <div class="stat rv"><b>Real Idahoans</b><span>cast, not stock</span></div>
-  </div>
+<StatRow tone="paper"
+  stats={[{ value: '4 years', label: 'of usage · licensing extended for success' }, { value: '2020&ndash;24', label: 'launched, still in market' }, { value: 'OMEK', label: 'agency partner' }, { value: 'Real Idahoans', label: 'cast, not stock' }]}
+/>
 </div>
 
 <section class="paper">

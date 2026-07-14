@@ -5,6 +5,7 @@ import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
+import StatRow from '../../components/StatRow.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'turnstile');
@@ -254,13 +255,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/turnstile/header.jpg" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
-<div class="statrow inv">
-  <div class="wrap in">
-    <div class="stat rv"><b>2 wks</b><span>Concept to launch</span></div>
-    <div class="stat rv"><b>1 mark</b><span>Three weights, one voice</span></div>
-    <div class="stat rv"><b>Full kit</b><span>Identity, content, campaign</span></div>
-    <div class="stat rv"><p class="note">They didn't want flashy. They wanted <b>timeless.</b></p></div>
-  </div>
+<StatRow tone="paper"
+  stats={[{ value: '2 wks', label: 'Concept to launch' }, { value: '1 mark', label: 'Three weights, one voice' }, { value: 'Full kit', label: 'Identity, content, campaign' }]}
+  note="They didn't want flashy. They wanted <b>timeless.</b>"
+/>
 </div>
 
 

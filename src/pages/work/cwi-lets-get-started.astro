@@ -4,6 +4,7 @@ import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
+import StatRow from '../../components/StatRow.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'cwi-lets-get-started');
@@ -230,13 +231,10 @@ html[data-accent="bw"] section.quote .who{color:rgba(245,243,239,.55)!important}
 <!-- CWI's own official enrollment figures (Idaho State Board of Education / Idaho Ed News,
      2025). Context for the college the work supports, not presented as a result of these
      films. Sourced + adversarially verified: tools/cwi-stats-verified.md -->
-<div class="statrow inv">
-  <div class="wrap in">
-    <div class="stat rv"><b>9 semesters</b><span>of consecutive enrollment growth at CWI</span></div>
-    <div class="stat rv"><b>+6.8%</b><span>headcount, fall 2024 to fall 2025</span></div>
-    <div class="stat rv"><b>31,000+</b><span>students served · Idaho's largest community college</span></div>
-    <div class="stat rv"><p class="note">CWI enrollment · <b>Idaho State Board of Education, 2025</b></p></div>
-  </div>
+<StatRow tone="paper"
+  stats={[{ value: '9 semesters', label: 'of consecutive enrollment growth at CWI' }, { value: '+6.8%', label: 'headcount, fall 2024 to fall 2025' }, { value: '31,000+', label: 'students served · Idaho\'s largest community college' }]}
+  note="CWI enrollment · <b>Idaho State Board of Education, 2025</b>"
+/>
 </div>
 
 

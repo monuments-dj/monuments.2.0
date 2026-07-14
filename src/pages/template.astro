@@ -424,15 +424,11 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<div class="spec" id="el-02"><div class="wrap"><span class="id">ELEMENT 02 · STATROW</span><span class="use">Scoreboard on the accent: text rides --on-rgb so every accent reads · note right-aligned · <b class="lives">lives on:</b> work pages (the role/credits bar was killed 2026-07-14 — credits live in the Call Sheet)</span></div></div>
-<div class="statrow">
-  <div class="wrap in">
-    <div class="stat"><b>Big</b><span>What it counts</span></div>
-    <div class="stat"><b>04</b><span>Another count</span></div>
-    <div class="stat"><b>20K+</b><span>A third count</span></div>
-    <div class="stat"><p class="note">One supporting line with <b>the emphasis</b> inline</p></div>
-  </div>
-</div>
+<div class="spec" id="el-02"><div class="wrap"><span class="id">ELEMENT 02 · STATROW · the one bar</span><span class="use">The single bar at the top of every work page (19/19). Pull the <b>StatRow</b> component — value + label cells, optional right-aligned note, numbers count up on scroll-in. Default tone <b>paper</b> so it reads light under the dark header. <b class="lives">lives on:</b> all 19 work pages · the role/credits bar was killed 2026-07-14, credits live in the Call Sheet</span></div></div>
+<StatRow tone="paper"
+  stats={[{ value: 'Big', label: 'What it counts' }, { value: '04', label: 'Another count' }, { value: '20K+', label: 'A third count' }]}
+  note="One supporting line with <b>the emphasis</b> inline"
+/>
 <div class="spec" id="el-03"><div class="wrap"><span class="id">ELEMENT 03 · THE BRIEF</span><span class="use">Paper ground · kicker + display h2 + services list left, body right · first paragraph is the lede size · <b class="lives">lives on:</b> every work page</span></div></div>
 <section class="paper">
   <div class="wrap story">

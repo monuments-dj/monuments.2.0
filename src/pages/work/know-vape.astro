@@ -5,6 +5,7 @@ import ScreenRoom from '../../components/ScreenRoom.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
+import StatRow from '../../components/StatRow.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'know-vape');
@@ -283,13 +284,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/know-vape/spots/nicotine-poster.jpg" vid="/case-studies/know-vape/spots/nicotine.mp4" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
-<div class="statrow inv">
-  <div class="wrap in">
-    <div class="stat rv"><b>6</b><span>Myth vs Fact spots directed</span></div>
-    <div class="stat rv"><b>0</b><span>Lectures · the truth instead</span></div>
-    <div class="stat rv"><b>2024</b><span>Northwest Regional Emmy · won by the campaign</span></div>
-    <div class="stat rv"><p class="note">Community Outreach, Small Market · from the <b>NATAS Northwest</b> chapter</p></div>
-  </div>
+<StatRow tone="paper"
+  stats={[{ value: '6', label: 'Myth vs Fact spots directed' }, { value: '0', label: 'Lectures · the truth instead' }, { value: '2024', label: 'Northwest Regional Emmy · won by the campaign' }]}
+  note="Community Outreach, Small Market · from the <b>NATAS Northwest</b> chapter"
+/>
 </div>
 
 

@@ -1,6 +1,7 @@
 ---
 // ON CAMERA · hosting + presenting reel wall
 import CallSheet from '../../components/CallSheet.astro';
+import StatRow from '../../components/StatRow.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
@@ -250,14 +251,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/on-camera/posters/nk-_UwGuRlE.jpg" vid={hh.vid} logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
-<div class="statrow">
-  <div class="wrap in">
-    <span><b>On camera</b> · DJ Ramirez</span>
-    <span><b>Audience</b> · AOV 1.7M · featured by Sony Electronics</span>
-    <span><b>Podcast</b> · Creator Clubhouse · 30K monthly</span>
-    <span><b>Tapes</b> · 12</span>
-  </div>
-</div>
+<StatRow tone="paper"
+  stats={[{ value: '1.7M', label: 'AOV audience' }, { value: 'Featured', label: "On Sony Electronics' page" }, { value: '30K', label: 'Creator Clubhouse monthly listeners' }, { value: '12', label: 'Tapes on the wall' }]}
+/>
 
 <section class="wall">
   <div class="wrap">

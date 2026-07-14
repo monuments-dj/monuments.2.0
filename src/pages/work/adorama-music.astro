@@ -4,6 +4,7 @@ import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
+import StatRow from '../../components/StatRow.astro';
 import { work } from '../../data/work.js';
 import '../../styles/filmsplit.css';
 import '../../styles/work.css';
@@ -234,12 +235,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/adorama-music/gallery/am-09.jpg" vid={hh.vid} logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
-<div class="statrow inv">
-  <div class="wrap in">
-    <div class="stat rv"><b>3.4M+</b><span>Engagements</span></div>
-    <div class="stat rv"><b>113K+</b><span>Film views</span></div>
-    <div class="stat rv"><b>50K+</b><span>Posts tagged #CreateNoMatterWhat</span></div>
-  </div>
+<StatRow tone="paper"
+  stats={[{ value: '3.4M+', label: 'Engagements' }, { value: '113K+', label: 'Film views' }, { value: '50K+', label: 'Posts tagged #CreateNoMatterWhat' }]}
+/>
 </div>
 
 

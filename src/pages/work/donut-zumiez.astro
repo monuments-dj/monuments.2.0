@@ -1,5 +1,6 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
+import StatRow from '../../components/StatRow.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
@@ -200,6 +201,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <div class="over">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/donut-zumiez/gallery/film-01.jpg" vid={hh.vid} logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
+<StatRow tone="paper"
+  stats={[{ value: '3', label: 'Launch films cut' }, { value: '4', label: 'Products in the drop' }, { value: 'Nationwide', label: 'Zumiez retail drop' }]}
+  note="Donut Media · <b>one of the biggest car communities on the planet</b>"
+/>
 
 
 <section class="paper">
