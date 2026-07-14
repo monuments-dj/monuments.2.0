@@ -188,15 +188,12 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* cta on ink */
 .cta{position:relative;background:var(--ink);color:var(--paper);padding:7vh 0 8vh;overflow:hidden;border-top:1px solid var(--lined)}
-.cta .inner{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:clamp(28px,5vw,72px)}
-.cta .emblem{width:90px;flex:0 0 90px;aspect-ratio:1;display:block;animation:spin 70s linear infinite}
-.cta .emblem g{fill:var(--paper)}
+.cta .inner{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;text-align:center;gap:clamp(28px,5vw,72px)}
 .cta .kick{color:var(--spark)}
 .cta .big{font-weight:var(--dispw);font-size:clamp(38px,5.8vw,82px);letter-spacing:-.035em;line-height:.92;text-transform:uppercase;margin-top:14px}
 .cta .big .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
 .cta .pill{display:inline-flex;margin-top:26px;padding:15px 30px;background:var(--paper);color:var(--ink);border-radius:99px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s;will-change:transform}
 .cta .pill:hover{background:var(--spark)}
-@media (max-width:760px){.cta .emblem{display:none}}
 
 
 /* footer under-reveal (tinywins) */
