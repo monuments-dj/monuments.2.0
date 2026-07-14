@@ -130,16 +130,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .triadhead .tw.lit:nth-child(1){color:var(--fp-orange)}
 .triadhead .tw.lit:nth-child(2){color:var(--fp-teal)}
 .triadhead .tw.lit:nth-child(3){color:var(--ink)}
-.cdd{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,5vw,80px);text-align:left;max-width:1080px;margin:0 auto;padding-top:2vh}
-.cdd .colA p{color:#4c4a45;max-width:56ch;margin-bottom:1.2em;font-size:18px}
-.cdd .colA p:first-child{font-size:clamp(19px,1.7vw,23px);line-height:1.5;color:var(--ink)}
-.cdd .objh{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--fp-orange)}
-.cdd ol{list-style:none;margin:10px 0 0;padding:0}
-.cdd ol li{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:baseline;padding:16px 0 14px;border-top:1px solid var(--line);font-size:16.5px;line-height:1.45;color:var(--ink)}
-.cdd ol li:last-child{border-bottom:1px solid var(--line)}
-.cdd ol li .n{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--fp-teal)}
-.cdd .plus{margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6d6a64;line-height:1.9}
-.cdd .plus b{color:var(--fp-orange);font-weight:400}
 
 /* the fronts: numbered chapters, one header device for the whole page */
 .front{padding:7vh 0 8vh}
@@ -222,7 +212,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @media (max-width:900px){
   .story{grid-template-columns:1fr}.story .side{position:static}
   .statrow>.in{justify-content:center;gap:28px 44px}
-  .cdd{grid-template-columns:1fr}
   .duo{grid-template-columns:1fr}
   .pl.off{width:100%}
   .prodgrid{grid-template-columns:repeat(2,1fr)}
