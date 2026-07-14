@@ -308,6 +308,21 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   .mnav a:active{color:var(--spark)}
   .mnav .mnav-foot{margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
 }
+
+/* HERO EASE (DJ 2026-07-14: "fade works. ship"). The masked RISE is replaced by a plain
+   fade sitewide. !important is deliberate: each page declares its own
+   `.hero .t .ln>span` / `.hero h1 .ln>span` rule at HIGHER specificity than any
+   override I can append here, so this is the only way it lands without rewriting seven
+   separate hero blocks. The .ln mask keeps its descender padding - that is the standing
+   rule and it must survive even though it no longer hides a rise. */
+@keyframes heroFade{from{opacity:0}to{opacity:1}}
+/* home has no masked .ln lines - its hero IS DJ's PNG lockup. Fade the lockup itself. */
+.hero .hero-tilt{opacity:0;animation:heroFade 1s .1s ease-out forwards}
+@media (prefers-reduced-motion:reduce){.hero .hero-tilt{animation:none;opacity:1}}
+.hero .ln>span{transform:none!important;opacity:0;animation:heroFade .9s ease-out forwards!important}
+.hero .ln:nth-child(1)>span{animation-delay:.08s!important}
+.hero .ln:nth-child(2)>span{animation-delay:.20s!important}
+@media (prefers-reduced-motion:reduce){.hero .ln>span{animation:none!important;opacity:1!important}}
 </style>
 </head>
 <body>

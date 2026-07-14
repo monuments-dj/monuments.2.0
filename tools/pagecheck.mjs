@@ -6,7 +6,7 @@ const PAGES = process.argv.slice(2);
 const b = await chromium.launch(); const pg = await b.newPage();
 await pg.setViewportSize({ width: 1440, height: 900 });
 for (const path of PAGES) {
-  const url = 'http://localhost:4321' + path;
+  const url = (process.env.BASE || 'http://localhost:4321') + path;
   let res;
   try {
     await pg.goto(url, { waitUntil: 'load', timeout: 20000 });

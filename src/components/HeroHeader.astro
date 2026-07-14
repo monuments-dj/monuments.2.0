@@ -43,6 +43,23 @@ const logoSrc = (logo && !logoText) ? `/logos/${logo}-${logoColor ? 'color' : 'w
 <style>
 .hh{position:relative;height:82svh;min-height:560px;overflow:hidden;background:var(--ink,#161514);display:flex;align-items:stretch}
 .hh-bg{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) brightness(.3)}
+
+/* HERO EASE (DJ 2026-07-14: "fade works. ship"). This component IS the header on all 19
+   work case pages, and it had NO entrance animation at all - the whole thing just
+   appeared. Now every part fades up, barely staggered, on the same curve as the
+   Capabilities hero. Nothing moves: no translate, no scale. Doing it here means one
+   edit covers all 19 pages instead of 19 copies drifting apart.
+   NOTE: the pages' own `.hero` rules (with the old masked rise) are DEAD CODE - they
+   render <HeroHeader/> only, there is no .hero element. Left alone, not my scope. */
+@keyframes hhFade{from{opacity:0}to{opacity:1}}
+.hh-bg{opacity:0;animation:hhFade 1.2s ease-out forwards}
+.hh-h{opacity:0;animation:hhFade .9s .18s ease-out forwards}
+.hh-blurb{opacity:0;animation:hhFade .9s .42s ease-out forwards}
+.hh-role{opacity:0;animation:hhFade .9s .56s ease-out forwards}
+/* these start at opacity:0 - without this, reduced-motion users get a BLANK header */
+@media (prefers-reduced-motion:reduce){
+  .hh-bg,.hh-h,.hh-blurb,.hh-role{animation:none;opacity:1}
+}
 .hh-in{position:relative;z-index:2;width:100%;max-width:var(--wrap,1380px);margin:0 auto;padding-left:var(--pad,clamp(22px,5vw,40px));padding-right:var(--pad,clamp(22px,5vw,40px));display:flex;flex-direction:column;justify-content:center}
 .hh-h{margin:0;font-family:var(--disp,sans-serif);font-weight:var(--dispw2,600);text-transform:uppercase;letter-spacing:-.02em;color:#fff}
 .hh-lead{display:block;font-size:clamp(18px,2.4vw,34px);line-height:1;color:rgba(245,243,239,.6);margin-bottom:.16em;letter-spacing:-.01em}

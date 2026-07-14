@@ -145,6 +145,18 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .over{position:relative;z-index:1;background:inherit}
 .underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
 @media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
+
+/* HERO EASE (DJ 2026-07-14: "fade works. ship"). The masked RISE is replaced by a plain
+   fade sitewide. !important is deliberate: each page declares its own
+   `.hero .t .ln>span` / `.hero h1 .ln>span` rule at HIGHER specificity than any
+   override I can append here, so this is the only way it lands without rewriting seven
+   separate hero blocks. The .ln mask keeps its descender padding - that is the standing
+   rule and it must survive even though it no longer hides a rise. */
+@keyframes heroFade{from{opacity:0}to{opacity:1}}
+.hero .ln>span{transform:none!important;opacity:0;animation:heroFade .9s ease-out forwards!important}
+.hero .ln:nth-child(1)>span{animation-delay:.08s!important}
+.hero .ln:nth-child(2)>span{animation-delay:.20s!important}
+@media (prefers-reduced-motion:reduce){.hero .ln>span{animation:none!important;opacity:1!important}}
 </style>
 </head>
 <body>
