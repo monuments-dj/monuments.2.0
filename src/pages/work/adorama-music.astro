@@ -3,8 +3,11 @@ import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+import HeroHeader from '../../components/HeroHeader.astro';
+import { work } from '../../data/work.js';
 import '../../styles/filmsplit.css';
 import '../../styles/work.css';
+const hh = work.find(w => w.slug === 'adorama-music');
 ---
 <!doctype html>
 <html lang="en">
@@ -229,36 +232,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 <div class="over">
-<header class="hero">
-  <img loading="lazy" decoding="async" src="/case-studies/adorama-music/gallery/am-09.jpg" alt="A drummer from behind, facing the stage lights, in Adorama Music: The Journey">
-  <!-- Header loop: the muted brand film under the type. The am-09 still above is the
-       poster; the video fades in only once it's actually PLAYING (YT IFrame API state 1,
-       no blind timers), so the hero never flashes the black YouTube loading state. The
-       radial scrim below stays on top of the video. -->
-  <div class="vwrap" data-hero-video aria-hidden="true">
-    <iframe id="amHeaderVideo" title="Adorama Music header loop"
-      src="https://www.youtube-nocookie.com/embed/l1RBdpQ8vi8?autoplay=1&mute=1&loop=1&playlist=l1RBdpQ8vi8&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
-      frameborder="0" allow="autoplay; encrypted-media; picture-in-picture"></iframe>
-  </div>
-  <div class="scrim" aria-hidden="true"></div>
-  <div class="t">
-    <span class="ln"><span>Wherever you're from.</span></span>
-    <span class="ln"><span>Wherever <span class="serif">you'll go</span><span class="spark">.</span></span></span>
-    <RoleTag text="director · creative direction" />
-  </div>
-  <div class="kck">
-    <b>\ Case file</b><br>
-    Adorama Music: The Journey · Brand film<br>
-    #CreateNoMatterWhat · 2020
-  </div>
-  <div class="nfo">
-    <span class="h">NFO</span><br>
-    Client · Adorama<br>
-    Role · Director · Creative Direction<br>
-    Agency · Art of Visuals<br>
-    Frame · MC-2022-07
-  </div>
-</header>
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/adorama-music/gallery/am-09.jpg" vid={hh.vid} logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <div class="statrow">
   <div class="wrap in">
@@ -513,7 +487,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(k)return;k=true;
     requestAnimationFrame(()=>{
       const y=scrollY,vh=innerHeight;
-      if(y<vh){
+      if(y<vh&&hImg&&hT){
         hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
         hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
         hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));

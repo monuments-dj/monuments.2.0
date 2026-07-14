@@ -9,7 +9,10 @@ import NextFile from '../../components/NextFile.astro';
 // The two Instagram reels are embedded inline (IG /embed/ iframes, play without leaving).
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+import HeroHeader from '../../components/HeroHeader.astro';
+import { work } from '../../data/work.js';
 import '../../styles/work.css';
+const hh = work.find(w => w.slug === 'clothing-merch');
 ---
 <!doctype html>
 <html lang="en">
@@ -178,29 +181,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 <div class="over">
-<header class="hero">
-  <video autoplay muted loop playsinline preload="auto" poster="/case-studies/clothing-merch/new-noise-poster.jpg" aria-hidden="true">
-    <source src="/case-studies/clothing-merch/new-noise.mp4" type="video/mp4">
-  </video>
-  <div class="scrim" aria-hidden="true"></div>
-  <div class="t">
-    <span class="ln"><span>Clothing design and</span></span>
-    <span class="ln"><span><span class="serif">marketing</span><span class="spark">.</span></span></span>
-    <RoleTag text="directed the shoot" />
-  </div>
-  <div class="kck">
-    <b>\ Creative Direction / Design</b><br>
-    Merch worth wearing: a meaningful<br>
-    extension of the brand.
-  </div>
-  <div class="nfo">
-    <span class="h">NFO</span><br>
-    Client · Mixed<br>
-    Role · Creative Director<br>
-    Services · Design · Print · Market<br>
-    Frame · MC-2020-08
-  </div>
-</header>
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/clothing-merch/new-noise-poster.jpg" vid="/case-studies/clothing-merch/new-noise.mp4" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <div class="statrow">
   <div class="wrap in">
@@ -381,7 +362,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(k)return;k=true;
     requestAnimationFrame(()=>{
       const y=scrollY,vh=innerHeight;
-      if(y<vh){
+      if(y<vh&&hImg&&hT){
         if(hImg)hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
         if(hT){hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
         hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));}

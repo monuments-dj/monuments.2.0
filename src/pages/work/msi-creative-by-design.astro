@@ -3,10 +3,13 @@ import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+import HeroHeader from '../../components/HeroHeader.astro';
 import '../../styles/work.css';
+import { work } from '../../data/work.js';
 // MSI · Creative by Design (intake/msi-creative-by-design.md, DJ 2026-07-12).
 // Cutdowns section BUILT 2026-07-12 from DJ's share link: the ultra-wide 1928x558
 // Times Square boards + standard 16:9 cuts, self-hosted, tap for sound.
+const hh = work.find(w => w.slug === 'msi-creative-by-design');
 ---
 <!doctype html>
 <html lang="en">
@@ -129,27 +132,7 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <div class="over">
-<header class="hero">
-  <img src="/case-studies/art-of-visuals/msi/msi-06.jpg" alt="On set for MSI Creative by Design: fitting the rig over the laptop" fetchpriority="high">
-  <div class="scrim" aria-hidden="true"></div>
-  <div class="t">
-    <span class="ln"><span>Creative</span></span>
-    <span class="ln"><span><span class="serif">by design</span><span class="spark">.</span></span></span>
-    <RoleTag text="creative direction" />
-  </div>
-  <div class="kck">
-    <b>\ Case file</b><br>
-    MSI · A laptop made for creators<br>
-    Times Square · Oct–Nov '22
-  </div>
-  <div class="nfo">
-    <span class="h">NFO</span><br>
-    Client · MSI<br>
-    Agency · Art of Visuals<br>
-    Role · Creative Director<br>
-    Frame · MC-2022-10
-  </div>
-</header>
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/art-of-visuals/msi/msi-06.jpg" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <div class="statrow">
   <div class="in">
@@ -301,7 +284,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(k)return;k=true;
     requestAnimationFrame(()=>{
       const y=scrollY,vh=innerHeight;
-      if(y<vh){
+      if(y<vh&&hImg&&hT){
         hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
         hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
         hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));

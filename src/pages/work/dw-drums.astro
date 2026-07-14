@@ -3,7 +3,10 @@ import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+import HeroHeader from '../../components/HeroHeader.astro';
+import { work } from '../../data/work.js';
 import '../../styles/work.css';
+const hh = work.find(w => w.slug === 'dw-drums');
 ---
 <!doctype html>
 <html lang="en">
@@ -150,27 +153,7 @@ clip-path:polygon(0 18%,4% 4%,8% 26%,13% 8%,18% 30%,23% 6%,28% 24%,33% 10%,38% 3
 </div>
 
 <div class="over">
-<header class="hero">
-  <img src="/case-studies/dw-drums/gallery/face-off.jpg" alt="DWe face-off spread: a studio engineer at the console and a drummer mid-hit, torn down the middle">
-  <div class="scrim" aria-hidden="true"></div>
-  <div class="t">
-    <span class="ln"><span>Engineer approved.</span></span>
-    <span class="ln"><span>Drummer <span class="serif">tested</span><span class="spark">.</span></span></span>
-    <RoleTag text="creative direction · design" />
-  </div>
-  <div class="kck">
-    <b>\ Case file</b><br>
-    DW Drums · DWe · Split-screen campaign<br>
-    Two worlds, one seam
-  </div>
-  <div class="nfo">
-    <span class="h">NFO</span><br>
-    Client · DW Drums<br>
-    Role · Creative direction · design<br>
-    Agency · Art of Visuals<br>
-    Frame · MC-2022-04
-  </div>
-</header>
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/dw-drums/gallery/face-off.jpg" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <div class="seam" aria-hidden="true"></div>
 
@@ -315,7 +298,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(k)return;k=true;
     requestAnimationFrame(()=>{
       const y=scrollY,vh=innerHeight;
-      if(y<vh){
+      if(y<vh&&hImg&&hT){
         hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
         hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
         hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));

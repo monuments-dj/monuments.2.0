@@ -5,7 +5,10 @@ import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import SocialWall from '../../components/SocialWall.astro';
 import MasonryGallery from '../../components/MasonryGallery.astro';
+import HeroHeader from '../../components/HeroHeader.astro';
+import { work } from '../../data/work.js';
 import '../../styles/work.css';
+const hh = work.find(w => w.slug === 'ac-boise');
 const acGallery = [
   ['home-02.jpg','The home kit · On the trail'],
   ['away-01.jpg','The away kit · Lookbook'],
@@ -196,27 +199,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 <div class="over">
-<header class="hero">
-  <img src="/case-studies/ac-boise/gallery/home-02.jpg" alt="A mountain biker wearing the AC Boise home kit under an open Idaho sky">
-  <div class="scrim" aria-hidden="true"></div>
-  <div class="t">
-    <span class="ln"><span>This kit</span></span>
-    <span class="ln"><span>is <span class="serif">Boise</span><span class="spark">.</span></span></span>
-    <RoleTag text="directed the launch film" />
-  </div>
-  <div class="kck">
-    <b>\ Case file</b><br>
-    AC Boise · USL League One · Kit reveal<br>
-    Hummel on the kits · Against on the brand · 2024
-  </div>
-  <div class="nfo">
-    <span class="h">NFO</span><br>
-    Client · Against<br>
-    Role · Director · the launch film<br>
-    League · USL League One<br>
-    Frame · MC-2024-05
-  </div>
-</header>
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/ac-boise/gallery/home-02.jpg" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <div class="briefrow">
   <div class="wrap bgrid">
@@ -338,7 +321,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(k)return;k=true;
     requestAnimationFrame(()=>{
       const y=scrollY,vh=innerHeight;
-      if(y<vh){
+      if(y<vh&&hImg&&hT){
         hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
         hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
         hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));

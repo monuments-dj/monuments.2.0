@@ -3,7 +3,10 @@ import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+import HeroHeader from '../../components/HeroHeader.astro';
+import { work } from '../../data/work.js';
 import '../../styles/work.css';
+const hh = work.find(w => w.slug === 'cwi-lets-get-started');
 
 // Updated 2026-07-12 per DJ's final v4 copy doc: his role on the ongoing Let's Get
 // Started program spots is director · editor · shooter · on-set lead · production. He
@@ -222,26 +225,7 @@ html[data-accent="bw"] section.quote .who{color:rgba(245,243,239,.55)!important}
 </div>
 
 <div class="over">
-<header class="hero">
-  <video class="heroloop" src="/case-studies/cwi/hero-loop.mp4" poster="/case-studies/cwi/hero-poster.jpg" muted loop playsinline autoplay aria-hidden="true"></video>
-  <div class="t">
-    <span class="ln"><span>Let's get</span></span>
-    <span class="ln"><span><span class="serif">started</span><span class="spark">.</span></span></span>
-    <RoleTag text="director · editor · shooter · on-set lead · production" />
-  </div>
-  <div class="kck">
-    <b>\ Case file</b><br>
-    College of Western Idaho · Enrollment campaign<br>
-    The Let's Get Started program spots · with Against
-  </div>
-  <div class="nfo">
-    <span class="h">NFO</span><br>
-    Client · College of Western Idaho<br>
-    Role · Director · editor · shooter · on-set lead · production<br>
-    Agency · Against<br>
-    Frame · MC-2023-05
-  </div>
-</header>
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/cwi/hero-poster.jpg" vid="/case-studies/cwi/hero-loop.mp4" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <!-- CWI's own official enrollment figures (Idaho State Board of Education / Idaho Ed News,
      2025). Context for the college the work supports, not presented as a result of these
@@ -441,7 +425,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(k)return;k=true;
     requestAnimationFrame(()=>{
       const y=scrollY,vh=innerHeight;
-      if(y<vh){
+      if(y<vh&&hImg&&hT){
         if(hMk)hMk.style.transform=`translate(-50%,-50%) translateY(${y*.22}px)`;
         hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
         hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));

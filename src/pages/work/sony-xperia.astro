@@ -3,7 +3,10 @@ import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+import HeroHeader from '../../components/HeroHeader.astro';
 import '../../styles/work.css';
+import { work } from '../../data/work.js';
+const hh = work.find(w => w.slug === 'sony-xperia');
 
 // === Sony Xperia - THE ACCOUNT case page (was Summer w/ Xperia; DJ 2026-07-12:
 // one page for the 3-year account, every product launch; Summer is a chapter) ===
@@ -242,34 +245,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 <div class="over">
-<header class="hero">
-  <img src={`${G}/xp-01.jpg`} alt="Sony Summer with Xperia campaign">
-  <!-- Header loop: the muted launch film under the type (see .vwrap CSS note on the
-       cinemascope oversize). Poster-until-PLAYING, no blind timers. -->
-  <div class="vwrap" data-hero-video aria-hidden="true">
-    <iframe id="xpHeaderVideo" title="Summer with Xperia header loop"
-      src="https://www.youtube-nocookie.com/embed/_RGvpwyYLTI?autoplay=1&mute=1&loop=1&playlist=_RGvpwyYLTI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
-      frameborder="0" allow="autoplay; encrypted-media; picture-in-picture"></iframe>
-  </div>
-  <div class="scrim" aria-hidden="true"></div>
-  <div class="t">
-    <span class="ln"><span>Sony</span></span>
-    <span class="ln"><span><span class="serif">Xperia</span></span></span>
-    <RoleTag text="the account · directing, photo · strategy" />
-  </div>
-  <div class="kck">
-    <b>\ Case file</b><br>
-    Sony Xperia · three years of launches<br>
-    Every drop, from the PRO-I to the summer 5 IV.
-  </div>
-  <div class="nfo">
-    <span class="h">NFO</span><br>
-    Client · Sony Xperia<br>
-    Role · Director / Creative Director<br>
-    Agency · Art of Visuals<br>
-    Frame · MC-2022-02
-  </div>
-</header>
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/sony-xperia-summer/gallery/xp-01.jpg" vid={hh.vid} logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <div class="statrow">
   <div class="wrap in">
@@ -530,7 +506,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(k)return;k=true;
     requestAnimationFrame(()=>{
       const y=scrollY,vh=innerHeight;
-      if(y<vh){
+      if(y<vh&&hImg&&hT){
         if(hImg)hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
         if(hT){hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));}
         if(nfo)nfo.style.transform=`translateY(${y*-.16}px)`;

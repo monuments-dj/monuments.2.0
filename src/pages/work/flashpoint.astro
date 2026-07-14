@@ -5,6 +5,8 @@ import MediaBlock from '../../components/MediaBlock.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+import HeroHeader from '../../components/HeroHeader.astro';
+import { work } from '../../data/work.js';
 import '../../styles/work.css';
 
 // === Flashpoint · THE CUT case page ===
@@ -38,6 +40,7 @@ const chips = [
   { c: '#f2a516', l: 'Stands' },
 ];
 const prods = Array.from({ length: 16 }, (_, i) => i + 9); // fp-09..fp-24
+const hh = work.find(w => w.slug === 'flashpoint');
 ---
 <!doctype html>
 <html lang="en">
@@ -279,28 +282,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 <div class="over">
-<header class="hero">
-  <img src={`${G}/fp-03.jpg`} alt="Flashpoint billboard comp on a city building: We got you." fetchpriority="high">
-  <div class="scrim" aria-hidden="true"></div>
-  <div class="t">
-    <span class="ln"><span>Imagine.</span></span>
-    <span class="ln"><span>Illuminate.</span></span>
-    <span class="ln"><span><span class="serif">Create</span><span class="spark">.</span></span></span>
-    <RoleTag text="rebrand · website · socials" />
-  </div>
-  <div class="kck">
-    <b>\ Case file</b><br>
-    Flashpoint · Full rebrand for Adorama<br>
-    Identity · Packaging · Web · Social · OOH · 2020
-  </div>
-  <div class="nfo">
-    <span class="h">NFO</span><br>
-    Client · Adorama<br>
-    Role · Creative Director<br>
-    Agency · Art of Visuals<br>
-    Frame · MC-2020-02
-  </div>
-</header>
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/flashpoint/gallery/fp-03.jpg" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <div class="statrow">
   <div class="wrap in">
@@ -430,7 +412,7 @@ document.querySelectorAll('.rv,.pl,.fr').forEach(el=>io.observe(el));
     if(k)return;k=true;
     requestAnimationFrame(()=>{
       const y=scrollY,vh=innerHeight;
-      if(y<vh){
+      if(y<vh&&hImg&&hT){
         hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
         hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
         hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));

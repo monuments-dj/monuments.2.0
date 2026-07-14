@@ -4,7 +4,10 @@ import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import MasonryGallery from '../../components/MasonryGallery.astro';
+import HeroHeader from '../../components/HeroHeader.astro';
+import { work } from '../../data/work.js';
 import '../../styles/work.css';
+const hh = work.find(w => w.slug === 'sony-this-moment');
 // gallery: 9 campaign stills (Claire LeJune) + 10 frames from the spot, interleaved
 const tmStills = Array.from({ length: 9 }, (_, i) => ({ src: `/case-studies/sony-this-moment/gallery/tm-${String(i+1).padStart(2,'0')}.jpg`, cap: `TM-${String(i+1).padStart(2,'0')} · STILL · CLAIRE LEJUNE`, alt: `This Moment campaign still ${i+1}` }));
 const tmFrames = Array.from({ length: 10 }, (_, i) => ({ src: `/case-studies/sony-this-moment/frames/tmf-${String(i+1).padStart(2,'0')}.jpg`, cap: `FS-${String(i+1).padStart(2,'0')} · FRAME · FROM THE SPOT`, alt: `Frame from the This Moment spot ${i+1}` }));
@@ -186,35 +189,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 <div class="over">
-<header class="hero">
-  <img src="/case-studies/sony-this-moment/gallery/tm-09.jpg" alt="Sony This Moment campaign still">
-  <!-- Header loop: the muted campaign film under the type. The still above is the poster;
-       the video fades in only once it's actually PLAYING (YT IFrame API state 1, no blind
-       timers), so the hero never flashes the black YouTube loading state. -->
-  <div class="vwrap" data-hero-video aria-hidden="true">
-    <iframe id="tmHeaderVideo" title="This Moment header loop"
-      src="https://www.youtube-nocookie.com/embed/KIi8cBOlU50?autoplay=1&mute=1&loop=1&playlist=KIi8cBOlU50&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&fs=0&disablekb=1"
-      frameborder="0" allow="autoplay; encrypted-media; picture-in-picture"></iframe>
-  </div>
-  <div class="t">
-    <span class="ln"><span>This</span></span>
-    <span class="ln"><span><span class="serif">moment</span><span class="spark">.</span></span></span>
-    <RoleTag text="creative direction" />
-  </div>
-  <div class="kck">
-    <b>\ Case file</b><br>
-    Sony Audio × Art of Visuals<br>
-    Immerse yourself in silence<br>
-    Campaign film + stills · 2023
-  </div>
-  <div class="nfo">
-    <span class="h">NFO</span><br>
-    Client · Sony Audio<br>
-    Role · Creative Direction<br>
-    Agency · Art of Visuals<br>
-    Frame · MC-2023-06
-  </div>
-</header>
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/sony-this-moment/gallery/tm-09.jpg" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <div class="statrow">
   <div class="wrap in">
@@ -324,7 +299,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(k)return;k=true;
     requestAnimationFrame(()=>{
       const y=scrollY,vh=innerHeight;
-      if(y<vh){
+      if(y<vh&&hImg&&hT){
         hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
         hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
         hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));

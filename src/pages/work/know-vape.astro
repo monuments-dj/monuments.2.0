@@ -4,7 +4,10 @@ import NextFile from '../../components/NextFile.astro';
 import ScreenRoom from '../../components/ScreenRoom.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+import HeroHeader from '../../components/HeroHeader.astro';
+import { work } from '../../data/work.js';
 import '../../styles/work.css';
+const hh = work.find(w => w.slug === 'know-vape');
 
 // === /work/know-vape · THE CUT case page ===
 // Emmy-winning case study for KNOW VAPE, Idaho Public Television's statewide youth
@@ -278,30 +281,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 <div class="over">
-<header class="hero">
-  <video class="hvid" id="heroVid" autoplay muted playsinline preload="auto" poster={`${SPOTS}/nicotine-poster.jpg`}>
-    <source src={`${SPOTS}/nicotine.mp4`} type="video/mp4">
-  </video>
-  <div class="hgrain" aria-hidden="true"></div>
-  <div class="scrim" aria-hidden="true"></div>
-  <div class="t">
-    <span class="ln"><span>Be smart.</span></span>
-    <span class="ln"><span>Don't <span class="serif">start</span><span class="spark">.</span></span></span>
-    <RoleTag text="directed the films" />
-  </div>
-  <div class="kck">
-    <b>\ Case file</b><br>
-    Know Vape · Case study · Emmy-winning campaign<br>
-    Six spots · One truth at a time · 2023
-  </div>
-  <div class="nfo">
-    <span class="h">NFO</span><br>
-    Client · Idaho Public Television<br>
-    Role · Director<br>
-    Production · Frame by Frame<br>
-    Frame · MC-2021-06
-  </div>
-</header>
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/know-vape/spots/nicotine-poster.jpg" vid="/case-studies/know-vape/spots/nicotine.mp4" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <div class="statrow">
   <div class="wrap in">
@@ -515,7 +495,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(k)return;k=true;
     requestAnimationFrame(()=>{
       const y=scrollY,vh=innerHeight;
-      if(y<vh){
+      if(y<vh&&hImg&&hT){
         if(hImg)hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
         hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
         hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));

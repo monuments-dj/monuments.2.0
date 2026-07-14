@@ -3,7 +3,10 @@ import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+import HeroHeader from '../../components/HeroHeader.astro';
+import { work } from '../../data/work.js';
 import '../../styles/work.css';
+const hh = work.find(w => w.slug === 'turnstile');
 
 // === TURNSTILE AUDIO · cut case page ===
 // Rebuilt in place on the sony-xm5 model: full-document cut page, ink/paper/cobalt/rose,
@@ -248,27 +251,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 <div class="over">
-<header class="hero">
-  <img loading="lazy" decoding="async" class="bg" src="/case-studies/turnstile/header.jpg" alt="A hand resting on Turnstile Audio studio headphones over a glowing Ableton Push in a home studio">
-  <div class="scrim" aria-hidden="true"></div>
-  <div class="t">
-    <span class="ln"><span>Built to be</span></span>
-    <span class="ln"><span><span class="serif">heard</span><span class="spark">.</span></span></span>
-    <RoleTag text="brand identity · launch" />
-  </div>
-  <div class="kck">
-    <b>\ Case file</b><br>
-    Turnstile Audio · Brand identity + product launch<br>
-    Brand, identity, content, campaign · 2023
-  </div>
-  <div class="nfo">
-    <span class="h">NFO</span><br>
-    Client · Adorama<br>
-    Role · Creative Director<br>
-    Agency · Art of Visuals<br>
-    Frame · MC-2023-02
-  </div>
-</header>
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/turnstile/header.jpg" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <div class="statrow">
   <div class="wrap in">
@@ -506,7 +489,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(k)return;k=true;
     requestAnimationFrame(()=>{
       const y=scrollY,vh=innerHeight;
-      if(y<vh){
+      if(y<vh&&hImg&&hT){
         hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
         hT.style.transform=`translate(-50%,-50%) translateY(${y*-.1}px)`;
         hT.style.opacity=String(Math.max(0,1-y/(vh*.9)));

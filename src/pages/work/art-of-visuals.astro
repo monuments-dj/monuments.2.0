@@ -3,7 +3,10 @@ import CallSheet from '../../components/CallSheet.astro';
 import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
+import HeroHeader from '../../components/HeroHeader.astro';
+import { work } from '../../data/work.js';
 import '../../styles/work.css';
+const hh = work.find(w => w.slug === 'art-of-visuals');
 ---
 <!doctype html>
 <html lang="en">
@@ -202,27 +205,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 <div class="over">
-<header class="hero">
-  <img src="/case-studies/art-of-visuals/hero-poster.jpg" alt="Art of Visuals campaign work">
-  <video class="hero-loop" src="/case-studies/art-of-visuals/hero-loop.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
-  <div class="t">
-    <span class="ln"><span>From community</span></span>
-    <span class="ln"><span>to <span class="serif">agency</span><span class="spark">.</span></span></span>
-    <RoleTag text="creative director" />
-  </div>
-  <div class="kck">
-    <b>\ Case file</b><br>
-    Art of Visuals · Agency growth<br>
-    Not one campaign. A book of business.
-  </div>
-  <div class="nfo">
-    <span class="h">NFO</span><br>
-    Agency · Art of Visuals<br>
-    Role · Creative Director<br>
-    Roster · Sony, Adorama, MSI, Intel +<br>
-    Frame · MC-2024-01
-  </div>
-</header>
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/art-of-visuals/hero-poster.jpg" vid="/case-studies/art-of-visuals/hero-loop.mp4" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <div class="statrow">
   <div class="wrap in">
@@ -508,7 +491,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(k)return;k=true;
     requestAnimationFrame(()=>{
       const y=scrollY,vh=innerHeight;
-      if(y<vh){
+      if(y<vh&&hImg&&hT){
         hImg.style.transform=`translateY(${y*.22}px) scale(1.02)`;
         const hVid=document.querySelector('.hero-loop');
         if(hVid)hVid.style.transform=`translateY(${y*.22}px) scale(1.02)`;
