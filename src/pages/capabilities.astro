@@ -143,7 +143,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
    Was clamp(16-24px) with a bare 14px nudge. Smaller now, and the hover is a real
    move: an accent rule wipes in from the left, the row slides off it, the number
    goes ink, and the rule under the row darkens. */
-.refuse li{position:relative;display:flex;align-items:baseline;gap:18px;padding:13px 2px 13px 0;border-bottom:1px solid var(--line);font-family:var(--disp);font-weight:var(--dispw2,600);font-size:clamp(15px,1.35vw,19px);letter-spacing:-.012em;line-height:1.35;color:var(--ink);
+.refuse li{position:relative;display:flex;align-items:baseline;gap:16px;padding:11px 2px 11px 0;border-bottom:1px solid var(--line);font-family:var(--disp);font-weight:500;font-size:clamp(14px,1.1vw,16px);letter-spacing:-.008em;line-height:1.4;color:var(--ink);
   transition:padding-left .42s cubic-bezier(.22,1,.36,1),border-color .42s ease,color .42s ease}
 .refuse li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:0;height:2px;background:var(--accent,var(--red));transition:width .42s cubic-bezier(.22,1,.36,1)}
 .refuse li:hover{padding-left:34px;border-color:var(--ink)}
@@ -263,12 +263,12 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
    light-on-dark - the ground switch only auto-inverts INTO ink, so every one of them
    had to be re-set for a light ground or they would have gone invisible. */
 .probs{padding:9vh 0 10vh}
-.pintro{color:#4c4a45;font-size:clamp(16px,1.4vw,19px);line-height:1.6;max-width:56ch;margin:18px 0 5vh}
+.pintro{color:#4c4a45;font-size:clamp(15px,1.2vw,17px);line-height:1.6;max-width:56ch;margin:18px 0 5vh}
 .prow{display:grid;grid-template-columns:64px minmax(200px,.85fr) 1.4fr;gap:10px 34px;align-items:baseline;padding:22px 0;border-top:1px solid var(--line)}
 .prow:last-child{border-bottom:1px solid var(--line)}
 .prow .pn{color:var(--red);letter-spacing:.1em}
-.prow h3{font-weight:var(--dispw);font-size:clamp(17px,1.6vw,23px);letter-spacing:-.02em;line-height:1.1;text-transform:uppercase;color:var(--ink)}
-.prow p{color:#4c4a45;font-size:15px;line-height:1.62}
+.prow h3{font-weight:var(--dispw);font-size:clamp(15px,1.25vw,19px);letter-spacing:-.02em;line-height:1.1;text-transform:uppercase;color:var(--ink)}
+.prow p{color:#4c4a45;font-size:14px;line-height:1.6}
 @media (max-width:900px){.prow{grid-template-columns:1fr;gap:6px;padding:20px 0}}
 
 /* THE BAR (Change 6) — the light beat between two ink bands */

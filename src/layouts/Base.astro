@@ -15,6 +15,10 @@ const ogImg = new URL('/og/card.jpg', Astro.site ?? 'https://monuments-2-0.verce
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {/* NOINDEX (DJ 2026-07-14). This layout is used ONLY by /lab/* (the draft graveyard,
+      26 pages) and /work-preview/* — both internal. Neither should ever be indexed or
+      found by a hiring manager. If a PUBLIC page ever adopts this layout, remove this. */}
+  <meta name="robots" content="noindex, nofollow" />
   <title>{title}</title>
   <meta name="description" content={ogDesc} />
   <link rel="canonical" href={ogUrl} />

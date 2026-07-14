@@ -122,6 +122,17 @@ a{color:inherit;text-decoration:none}
 .white .spec .id{color:var(--struct)}
 .white .spec .use{color:#8f8d88}
 .libhead{padding:16vh 0 6vh;text-align:left}
+/* THE PRIVATE INDEX: everything pulled out of the public nav, reachable only from here */
+.privindex{margin-top:34px;padding-top:22px;border-top:2px solid var(--ink)}
+.privindex .pi-t{display:block;color:var(--red);margin-bottom:16px}
+.pi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pi-l{display:block;border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:#fff;
+  transition:translate .35s cubic-bezier(.22,1,.36,1),border-color .35s ease}
+.pi-l:hover{translate:0 -3px;border-color:var(--ink)}
+.pi-l b{display:block;font-weight:var(--dispw2);font-size:15px;letter-spacing:-.01em;color:var(--ink)}
+.pi-l span{display:block;margin-top:3px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+@media (max-width:900px){.pi-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.pi-grid{grid-template-columns:1fr}}
 /* decide-first: DJ's open calls, surfaced at the top, each linked to its element */
 .decide{background:var(--paper);color:var(--ink);padding:6vh 0 7vh;margin-bottom:2vh}
 .decide .dec-k{display:block;color:var(--red);letter-spacing:.12em;margin-bottom:14px}
@@ -287,6 +298,21 @@ a{color:inherit;text-decoration:none}
       <span class="kc-t">\ The controls</span>
       <button type="button" class="kc-p" id="kc-type">Type + accent switcher · <b>bottom-center pill ↓</b></button>
       <a href="#mlab" class="kc-p">Parallax / motion languages · <b>Element 13 ↓</b></a>
+    </div>
+
+    <!-- THE PRIVATE INDEX (DJ 2026-07-14). Everything pulled OUT of the public nav lives
+         here, so he can still reach it from the menu (Menu -> The Kit) without a hiring
+         manager stumbling into it. Pages are noindex'd; this is the only way in. -->
+    <div class="privindex">
+      <span class="pi-t mono">\ Off the nav · reachable only from here</span>
+      <div class="pi-grid">
+        <a class="pi-l" href="/photography"><b>Photography</b><span>the stills archive · pulled from nav</span></a>
+        <a class="pi-l" href="/hire"><b>Hire · the one-page brief</b><span>the recruiter route</span></a>
+        <a class="pi-l" href="/page-elements"><b>Page elements</b><span>the element library</span></a>
+        <a class="pi-l" href="/page-template"><b>Page template</b><span>the reference flow</span></a>
+        <a class="pi-l" href="/cta-preview"><b>CTA preview</b><span>TEMP · delete once a layout is locked</span></a>
+        <a class="pi-l" href="/lab"><b>The lab · 26 pages</b><span>the draft graveyard</span></a>
+      </div>
     </div>
   </div>
 </div>

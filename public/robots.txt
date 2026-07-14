@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Internal / off-nav. Reachable only from the Kit's private index (Menu -> The Kit).
+# These also carry <meta name="robots" content="noindex, nofollow">; this is the belt
+# to that braces.
+Disallow: /lab
+Disallow: /lab/
+Disallow: /work-preview
+Disallow: /work-preview/
+Disallow: /template
+Disallow: /page-elements
+Disallow: /page-template
+Disallow: /cta-preview
+Disallow: /hire
+Disallow: /photography
+Disallow: /keystatic
