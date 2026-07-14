@@ -189,7 +189,12 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 /* the films on CWI's channel: lead film full width, the rest 3-up. Click to play. */
 .ytfilms .yt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
 .ytf{position:relative;display:block;width:100%;padding:0;border:0;background:#000;cursor:pointer;overflow:hidden;border-radius:8px}
-.ytf img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1),filter .4s;filter:brightness(.82)}
+/* height:auto is LOAD-BEARING. The <img> carries height="720" (needed by the masonry
+   packer / to reserve space), and that attribute is a PRESENTATIONAL HINT - i.e. a
+   low-priority CSS `height`. Setting width:100% overrode the width hint but left the
+   height hint standing, so the box was 420x720: both dimensions definite, aspect-ratio
+   IGNORED, and object-fit:cover cropped the 16:9 frame into a portrait. */
+.ytf img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1),filter .4s;filter:brightness(.82)}
 .ytf:hover img{transform:scale(1.03);filter:brightness(1)}
 .ytf::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(22,21,20,.72),transparent 46%);pointer-events:none}
 .ytf .ytplay{position:absolute;top:14px;left:14px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);border:1px solid rgba(245,243,239,.6);border-radius:99px;padding:6px 12px;background:rgba(22,21,20,.4);backdrop-filter:blur(3px);transition:background .3s,color .3s}
