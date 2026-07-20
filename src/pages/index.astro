@@ -551,7 +551,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     const raw=(ih-r.top)/ih;                       // approach travel: 1 = docked
     const p=Math.min(1,Math.max(0,-r.top/total));  // pin-ride progress
     const wp=Math.min(1,Math.max(0,(raw-0.28)/0.30));
-    const wo=Math.max(0,1-Math.max(0,(raw-1.78)/0.24)); // hold solid nearly the whole fill, fade at the very end (DJ)
+    const wo=Math.max(0,1-Math.max(0,(raw-1.25)/0.35)); // words OUT before the panel goes full-bleed (DJ 2026-07-20, overrides the 07-14 hold-solid spec)
     const wx=(1-wp)*260;
     wl.style.transform=`translate(${-wx}%,-50%)`;
     wr.style.transform=`translate(${wx}%,-50%)`;
@@ -612,8 +612,10 @@ const TILES=[
 ];
 document.getElementById('tiles').innerHTML=TILES.join('')+TILES.join('');
 
-// reveals
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+// reveals — SCROLL-DRIVEN BOTH WAYS (DJ 2026-07-20: "scroll is the trigger,
+// going back up runs it in reverse"). No unobserve: leaving the viewport
+// un-reveals, re-entering replays. Homepage only - other pages keep one-shot.
+const io=new IntersectionObserver(es=>es.forEach(e=>{e.target.classList.toggle('in',e.isIntersecting)}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
 // magnetic pill
@@ -708,6 +710,11 @@ clock();setInterval(clock,30000);
       rv.muted=false;rv.loop=false;rv.controls=true;rv.preload='auto';
       rv.removeAttribute('aria-hidden');
       rv.play();
+      // scroll away from the playing reel = pause the sound, panel STAYS
+      // full-bleed (DJ 2026-07-20). Viewer resumes via native controls.
+      new IntersectionObserver(es=>es.forEach(e=>{
+        if(!e.isIntersecting&&!rv.paused)rv.pause();
+      }),{threshold:.2}).observe(rp.closest('.rr'));
     });
   }
 })();
