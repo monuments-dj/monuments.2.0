@@ -233,6 +233,7 @@ h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;fo
 .tb-cell:nth-last-child(-n+3){border-bottom:0}
 .tb-flap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:transform .55s cubic-bezier(.6,0,.2,1)}
 .tb-flap img{height:clamp(24px,2.6vw,36px);width:auto;max-width:62%;object-fit:contain;opacity:.85;transition:opacity .25s}
+.tb-flap img.tall{height:clamp(56px,6.2vw,86px)} /* portrait crests (AC Boise) read as stamps at wordmark height */
 .tb-cell:hover .tb-flap img{opacity:1}
 .tb-flap.out{transform:translateY(-105%)}
 .tb-flap.in{transform:translateY(105%)}
@@ -895,6 +896,7 @@ if(framesEl){
     var nf=document.createElement('span'); nf.className='tb-flap in';
     var img=document.createElement('img');
     img.src='/logos/'+b[0]+'-black.png'; img.alt=b[1]; img.decoding='async';
+    if(b[0]==='ac-boise')img.className='tall';
     nf.appendChild(img); cell.appendChild(nf);
     cell.setAttribute('aria-label',b[1]+' · tap for the next brand');
     rolling[ci]=true;
