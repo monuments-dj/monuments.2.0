@@ -129,12 +129,6 @@ a{color:inherit;text-decoration:none}
 /* contact sheet (the locked element) on paper */
 .paper{background:var(--paper);color:var(--ink)}
 /* the offer: what I do, in one breath */
-.say{padding:12vh 0 4vh}
-.say .kick{color:var(--red);display:block;margin-bottom:20px}
-.say .big{font-weight:var(--dispw2);font-size:clamp(26px,3.6vw,50px);line-height:1.12;letter-spacing:-.02em;max-width:24ch}
-.say .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
-.say .big .serif{color:var(--ink)}
-.say .rest b{font-weight:var(--dispw2);color:var(--ink)}
 .sheet{padding:9vh 0 6vh}
 .sheet .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:13px;border-bottom:2px solid var(--ink);margin-bottom:16px}
 .sheet .bar .mono b{color:var(--red)}
@@ -224,16 +218,17 @@ h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;fo
 
 
 /* Trusted By The Best — Solari-board brand grid (replaced both tickers 2026-07-20).
-   Ink ground on purpose: this is the page's dark slot (hero DARK -> this -> say LIGHT). */
-.trusted{background:var(--ink);color:var(--paper);border-top:1px solid var(--lined);padding-top:clamp(54px,8vh,96px);padding-bottom:clamp(54px,8vh,96px)}
+   PAPER ground (DJ 2026-07-20, matching the old site) — works because the
+   "What I do" band was cut the same day: hero DARK -> this LIGHT -> showreel DARK. */
+.trusted{background:var(--paper);color:var(--ink);padding-top:clamp(54px,8vh,96px);padding-bottom:clamp(54px,8vh,96px)}
 .tb-head{display:flex;justify-content:space-between;align-items:flex-start;gap:34px;margin-bottom:clamp(30px,4.5vh,52px)}
 .tb-copy h2{font-size:var(--fs-h2,clamp(22px,2.3vw,31px));letter-spacing:-.01em;margin:0 0 14px}
-.tb-copy p{color:#c9c6c0;font-size:15.5px;line-height:1.65;max-width:56ch;margin:0}
-.tb-cta{display:inline-block;margin-top:20px;color:var(--paper);border-bottom:1px solid rgba(245,243,239,.6);padding-bottom:3px;font-size:12px;letter-spacing:.12em;transition:color .3s,border-color .3s}
+.tb-copy p{color:#4c4a45;font-size:15.5px;line-height:1.65;max-width:56ch;margin:0}
+.tb-cta{display:inline-block;margin-top:20px;color:var(--ink);border-bottom:1px solid rgba(22,21,20,.5);padding-bottom:3px;font-size:12px;letter-spacing:.12em;transition:color .3s,border-color .3s}
 .tb-cta:hover{color:var(--spark);border-color:var(--spark)}
-.tb-mark{height:clamp(64px,7.5vw,104px);width:auto;filter:brightness(0) invert(1);opacity:.92;flex:0 0 auto}
-.tb-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(245,243,239,.22)}
-.tb-cell{position:relative;overflow:hidden;height:clamp(120px,15vw,190px);display:flex;align-items:center;justify-content:center;background:none;border:0;border-right:1px solid rgba(245,243,239,.22);border-bottom:1px solid rgba(245,243,239,.22);cursor:pointer;padding:0}
+.tb-mark{height:clamp(64px,7.5vw,104px);width:auto;opacity:.92;flex:0 0 auto}
+.tb-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(22,21,20,.24)}
+.tb-cell{position:relative;overflow:hidden;height:clamp(120px,15vw,190px);display:flex;align-items:center;justify-content:center;background:none;border:0;border-right:1px solid rgba(22,21,20,.24);border-bottom:1px solid rgba(22,21,20,.24);cursor:pointer;padding:0}
 .tb-cell:nth-child(3n){border-right:0}
 .tb-cell:nth-last-child(-n+3){border-bottom:0}
 .tb-flap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:transform .55s cubic-bezier(.6,0,.2,1)}
@@ -242,15 +237,15 @@ h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;fo
 .tb-flap.out{transform:translateY(-105%)}
 .tb-flap.in{transform:translateY(105%)}
 .tb-flap.in.go{transform:translateY(0)}
-.tb-note{margin-top:14px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.45)}
+.tb-note{margin-top:14px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(22,21,20,.45)}
 @media(max-width:720px){
   .tb-head{flex-direction:column}
   .tb-mark{height:56px}
   .tb-grid{grid-template-columns:repeat(2,1fr)}
   .tb-cell{height:clamp(96px,24vw,130px)}
-  .tb-cell:nth-child(3n){border-right:1px solid rgba(245,243,239,.22)}
+  .tb-cell:nth-child(3n){border-right:1px solid rgba(22,21,20,.24)}
   .tb-cell:nth-child(2n){border-right:0}
-  .tb-cell:nth-last-child(-n+3){border-bottom:1px solid rgba(245,243,239,.22)}
+  .tb-cell:nth-last-child(-n+3){border-bottom:1px solid rgba(22,21,20,.24)}
   .tb-cell:nth-last-child(-n+2){border-bottom:0}
 }
 @media (prefers-reduced-motion:reduce){.tb-flap{transition:none}}
@@ -384,8 +379,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <!-- Trusted By The Best: the old-site brand grid, back by DJ's call (2026-07-20),
      replacing the two tickers. Solari-board rotator: 6 cells, 13 brands, one cell
-     rolls at a time on a staggered clock. Sits in the tickers' DARK slot so the
-     light/dark flow of the page is unchanged (hero DARK -> this DARK -> say LIGHT). -->
+     rolls at a time on a staggered clock. PAPER ground (DJ's pick 2026-07-20) -
+     the flow holds because the What-I-do band was cut the same day:
+     hero DARK -> this LIGHT -> showreel DARK. -->
 <section class="trusted" id="trusted" aria-label="Brands I've worked with">
   <div class="wrap tb-head">
     <div class="tb-copy">
@@ -397,12 +393,12 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
   <div class="wrap">
     <div class="tb-grid" id="tbGrid">
-      <button class="tb-cell" type="button" aria-label="Sony · tap for the next brand"><span class="tb-flap"><img src="/logos/sony-white.png" alt="Sony" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="Adorama · tap for the next brand"><span class="tb-flap"><img src="/logos/adorama-white.png" alt="Adorama" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="Intel · tap for the next brand"><span class="tb-flap"><img src="/logos/intel-white.png" alt="Intel" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="Art of Visuals · tap for the next brand"><span class="tb-flap"><img src="/logos/art-of-visuals-white.png" alt="Art of Visuals" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="Flashpoint · tap for the next brand"><span class="tb-flap"><img src="/logos/flashpoint-white.png" alt="Flashpoint" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="MSI · tap for the next brand"><span class="tb-flap"><img src="/logos/msi-white.png" alt="MSI" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Sony · tap for the next brand"><span class="tb-flap"><img src="/logos/sony-black.png" alt="Sony" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Adorama · tap for the next brand"><span class="tb-flap"><img src="/logos/adorama-black.png" alt="Adorama" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Intel · tap for the next brand"><span class="tb-flap"><img src="/logos/intel-black.png" alt="Intel" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Art of Visuals · tap for the next brand"><span class="tb-flap"><img src="/logos/art-of-visuals-black.png" alt="Art of Visuals" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Flashpoint · tap for the next brand"><span class="tb-flap"><img src="/logos/flashpoint-black.png" alt="Flashpoint" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="MSI · tap for the next brand"><span class="tb-flap"><img src="/logos/msi-black.png" alt="MSI" loading="lazy" decoding="async"></span></button>
     </div>
     <p class="tb-note mono">13 brands · repeat clients · tap a cell to flip it</p>
   </div>
@@ -412,15 +408,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
      kept asking for): the stage pins while scroll scrubs the words in from the sides
      and the film panel scales up to take the viewport. Vanilla sticky-scrub port of
      the original GSAP timeline (same beats: words 0-.45, panel .45-1, words out .62). -->
-<section class="paper">
-  <div class="wrap say">
-    <span class="kick mono rv">\ What I do</span>
-    <p class="big rv">Culture is talking. Most brands <span class="serif">aren't listening.</span></p>
-    <!-- the "shout into the void" paragraph moved UP into the hero (DJ QC 2026-07-20);
-         keeping it here too would say the same thing twice one screen apart -->
-  </div>
-</section>
-
+<!-- "What I do / Culture is talking" band CUT (DJ QC 2026-07-20: "lose this
+     section or move it down" - lost). Its paragraph already lives in the hero,
+     and About's closer carries the Culture-is-talking line. Trusted (paper)
+     hands straight to the dark showreel, so the light/dark flow holds. -->
 <section class="rr" id="reel" aria-label="Showreel">
   <div class="rr-pin">
     <button class="rr-panel" id="rrPanel" type="button" aria-label="Play the showreel with sound">
@@ -896,7 +887,7 @@ if(framesEl){
     var old=cell.querySelector('.tb-flap');
     var nf=document.createElement('span'); nf.className='tb-flap in';
     var img=document.createElement('img');
-    img.src='/logos/'+b[0]+'-white.png'; img.alt=b[1]; img.decoding='async';
+    img.src='/logos/'+b[0]+'-black.png'; img.alt=b[1]; img.decoding='async';
     nf.appendChild(img); cell.appendChild(nf);
     cell.setAttribute('aria-label',b[1]+' · tap for the next brand');
     rolling[ci]=true;
