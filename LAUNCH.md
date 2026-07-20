@@ -1,5 +1,73 @@
 # LAUNCH.md · the road to pointing monuments.cc at this site
 
+---
+
+## ✅ VERIFIED SWEEP 2026-07-20 · the running ship list
+
+Full check of all 28 public routes. **This block supersedes any older entry it contradicts.**
+Everything here was verified by running it, not by reading a doc.
+
+### 🟢 GREEN, verified clean (stop worrying about these)
+- **Structure: 28/28 routes PASS** `pagecheck`. No orphaned divs, no dead voids, no escaped `.over`.
+- **Build clean.** Working tree clean, in sync with origin/main.
+- **Zero em dashes in visible copy** across all 29 public pages. (Source has 123, but every one
+  is in a code/CSS comment. Only `/template`, your private Kit, has them in visible text.)
+- **Zero placeholder copy in visible text.** Rule 4 is holding.
+- **og:image is DONE** (31 pages). The old "no page has an og:image" line below is STALE.
+  It only needs `tools/add-og.mjs` re-run at domain swap for absolute URLs.
+- **Accent switcher is NOT visible sitewide.** Old line below says it is. Accent + font are
+  already baked (`bw` + `tiny`, 2026-07-13); the pill is JS-hidden off `/template`.
+- **`/lab` is contained**: noindex + robots.txt Disallow. `/redesign` + `/brand-lab` 404 on live.
+- **The 4 redundant bands are already dead** (commit `c6582f0`, verified on the deployed site).
+
+### 🔴 BLOCKED ON DJ (I cannot guess these)
+1. **Home reel plays a stand-in YouTube id.** `index.astro:674` → `const REEL='VMubUUZ2tdU'`.
+   This is Rule 4 in video form, sitting on the homepage. **Needs the real reel id/file.**
+2. **AOV flagship film** is still the stand-in. Needs the real AOV reel.
+3. **"3.6M+ impressions on a single launch"** unverified, renders on 3 pages
+   (`about.astro`, `work/art-of-visuals.astro`, `work/sony-xperia.astro`).
+   Same class as the 160M+ that turned out wrong. Confirm the number + which launch, or cut it.
+4. **Photography taxonomy is fake.** `photography.astro:562` maps frames by id, not by real
+   category, and the tabs claim Brand/Editorial/Food/Motion/Non-Profit. Needs your buckets.
+5. **CD claim unsubstantiated on 5 pages** (from `credits-audit`): the `/work` index tags these
+   as creative direction but the page body never says it. This is the exact Know Vape pattern.
+   → `flashpoint` · `msi-creative-by-design` · `sony-xm5` · `sony-xperia` · `waffle-me-up`
+   For a portfolio aimed at hiring managers, an unbacked CD claim is the first thing that gets caught.
+6. **The About date label.** You confirmed 2026-07-20: you did not "open" anything, you are just
+   you, and you started creative directing in agencies at 22. Pick a replacement (see below).
+
+### 🟡 CLAIMED BUT UNCONFIRMED (needs eyes, not a decision)
+- **`/giving` fails the FLOW RULE for real**: `DARK LIGHT LIGHT LIGHT DARK LIGHT`. Three lights
+  in a row. flowcheck had full coverage on this page (6 of 6 bands), so this one is trustworthy.
+- **⚠️ `tools/flowcheck.mjs` IS UNRELIABLE and should not be trusted as a gate.** It only reads
+  bands carrying an explicit ground class. Measured coverage: `/capabilities` 1 band seen of 9
+  sections, `/about` 3 of 10, `/giving` 6 of 6. So its `/` and `/about` FAILs are on partial data,
+  and its `/capabilities` PASS is meaningless. **It also crashes outright on `/work`.**
+  Fix the tool before relying on it again.
+
+### 🔵 I CAN DO THESE NOW (no input needed)
+- [ ] `work.astro:259` "roll 2016-2026" → **2015**-2026. Buck the Quo is 2015 in your own logline.
+- [ ] `about.astro:339` kill "opened 2016". Recommend `Subject file · still active` (drops the
+      competing date; `Est. MMXXII` seven lines down already carries the only year).
+- [ ] Fix or retire `tools/flowcheck.mjs` (make it read every band; fix the `/work` crash).
+- [ ] `/giving` flow fix once flowcheck is trustworthy.
+- [ ] Dead selector `.doorhead h3` in `PageFooter.astro:139`, ships on every page.
+- [ ] Lazy-load the 31 remaining eager `<img>`.
+- [ ] Lighthouse pass (perf + a11y) on Home / Work / About / one case.
+- [ ] Add `/redesign` + `/brand-lab` to robots.txt as belt-and-braces (they 404 now, but a
+      future build could ship them).
+
+### ❎ NOT A CONFLICT (checked, closed, stop re-flagging)
+- **"a decade" vs "fifteen years" is fine.** The three "fifteen years" lines are career claims;
+  the three "decade" lines are scoped to the recent-work section ("The last decade: Sony, Intel,
+  Adorama, an Emmy"), which is accurate. Starting at 22 → fifteen years → 2011, which sits four
+  years before your earliest published work (Buck the Quo, 2015). Consistent. Nothing to change.
+- **`Est. MMXXII` vs your career length is fine** once "opened 2016" is gone. The studio has a
+  founding year; you have a career length. They only looked like a fight because a third date
+  sat between them implying a founding.
+
+---
+
 Graded 2026-07-07 against the dual mandate (DJ's words, locked):
 **1) get me hired inside of agencies. 2) help sell clients on my work, taste and thinking.**
 Every item below traces to one or both. The domain swap is the finish line and happens only on DJ's explicit go.
