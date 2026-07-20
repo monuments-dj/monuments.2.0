@@ -383,7 +383,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </header>
 
 <!-- Trusted By The Best: the old-site brand grid, back by DJ's call (2026-07-20),
-     replacing the two tickers. Solari-board rotator: 6 cells, 12 brands, one cell
+     replacing the two tickers. Solari-board rotator: 6 cells, 13 brands, one cell
      rolls at a time on a staggered clock. Sits in the tickers' DARK slot so the
      light/dark flow of the page is unchanged (hero DARK -> this DARK -> say LIGHT). -->
 <section class="trusted" id="trusted" aria-label="Brands I've worked with">
@@ -404,7 +404,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <button class="tb-cell" type="button" aria-label="Flashpoint · tap for the next brand"><span class="tb-flap"><img src="/logos/flashpoint-white.png" alt="Flashpoint" loading="lazy" decoding="async"></span></button>
       <button class="tb-cell" type="button" aria-label="MSI · tap for the next brand"><span class="tb-flap"><img src="/logos/msi-white.png" alt="MSI" loading="lazy" decoding="async"></span></button>
     </div>
-    <p class="tb-note mono">12 brands · repeat clients · tap a cell to flip it</p>
+    <p class="tb-note mono">13 brands · repeat clients · tap a cell to flip it</p>
   </div>
 </section>
 
@@ -871,7 +871,7 @@ if(framesEl){
 </script>
 
 <script is:inline>
-// Trusted By The Best — Solari-board rotator. 6 cells, 12 brands, ONE cell rolls
+// Trusted By The Best — Solari-board rotator. 6 cells, 13 brands, ONE cell rolls
 // at a time on a staggered clock (round-robin), so the grid reads as a quietly
 // working departures board. Pointer math guarantees no brand shows twice: each
 // roll takes the next ring index, and the 6 visible are always the 6 most recent.
@@ -883,7 +883,8 @@ if(framesEl){
     ['sony','Sony'],['adorama','Adorama'],['intel','Intel'],
     ['art-of-visuals','Art of Visuals'],['flashpoint','Flashpoint'],['msi','MSI'],
     ['lexar','Lexar'],['donut-media','Donut Media'],['blue-cross','Blue Cross of Idaho'],
-    ['ac-boise','AC Boise'],['against','Against'],['cwi','College of Western Idaho']
+    ['ac-boise','AC Boise'],['against','Against'],['cwi','College of Western Idaho'],
+    ['dw-drums','DW Drums']
   ];
   var grid=document.getElementById('tbGrid'); if(!grid) return;
   var cells=[].slice.call(grid.querySelectorAll('.tb-cell'));
