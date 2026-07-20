@@ -21,8 +21,9 @@ Everything here was verified by running it, not by reading a doc.
 - **The 4 redundant bands are already dead** (commit `c6582f0`, verified on the deployed site).
 
 ### 🔴 BLOCKED ON DJ (I cannot guess these)
-1. **Home reel plays a stand-in YouTube id.** `index.astro:674` → `const REEL='VMubUUZ2tdU'`.
-   This is Rule 4 in video form, sitting on the homepage. **Needs the real reel id/file.**
+1. ~~Home reel stand-in~~ **FIXED 2026-07-20** (`f50e4d1`): the real reel found on DJ's Vimeo
+   ("website-reel", 94s 4K w/ audio), self-hosted at /reel/full-reel.mp4. Hero bg = the
+   silent-header cut, click = full reel with sound. Zero YouTube on the homepage.
 2. **AOV flagship film** is still the stand-in. Needs the real AOV reel.
 3. **"3.6M+ impressions on a single launch"** unverified, renders on 3 pages
    (`about.astro`, `work/art-of-visuals.astro`, `work/sony-xperia.astro`).
