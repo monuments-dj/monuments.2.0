@@ -37,22 +37,24 @@ Everything here was verified by running it, not by reading a doc.
    you, and you started creative directing in agencies at 22. Pick a replacement (see below).
 
 ### 🟡 CLAIMED BUT UNCONFIRMED (needs eyes, not a decision)
-- **`/giving` fails the FLOW RULE for real**: `DARK LIGHT LIGHT LIGHT DARK LIGHT`. Three lights
-  in a row. flowcheck had full coverage on this page (6 of 6 bands), so this one is trustworthy.
-- **⚠️ `tools/flowcheck.mjs` IS UNRELIABLE and should not be trusted as a gate.** It only reads
-  bands carrying an explicit ground class. Measured coverage: `/capabilities` 1 band seen of 9
-  sections, `/about` 3 of 10, `/giving` 6 of 6. So its `/` and `/about` FAILs are on partial data,
-  and its `/capabilities` PASS is meaningless. **It also crashes outright on `/work`.**
-  Fix the tool before relying on it again.
+- ~~`/giving` fails the FLOW RULE~~ **FALSE ALARM — closed 2026-07-20.** The old flowcheck's
+  partial coverage manufactured it. Under the rebuilt tool, `/giving` PASSES (as do all 29 pages).
+- ~~flowcheck.mjs is unreliable~~ **FIXED 2026-07-20 — flowcheck v2.** No more selector
+  allow-list: it samples the painted ground down the left gutter and merges runs into bands, so
+  it can't go stale when a new band class appears. Also fixed: the `/work` hang (autoplay video
+  vs `networkidle`), scroll-desync vs `scroll-behavior:smooth`, content-vs-ground confusion
+  (narrow elements like reel-cards/film-frames no longer masquerade as a band's ground), and
+  exempt stat bars now act as PUNCTUATION (they separate bands, never count as one).
+  **Full-site result: 29/29 pages PASS the flow rule, including the /page-template reference.**
 
 ### 🔵 I CAN DO THESE NOW (no input needed)
-- [ ] `work.astro:259` "roll 2016-2026" → **2015**-2026. Buck the Quo is 2015 in your own logline.
-- [ ] `about.astro:339` kill "opened 2016". Recommend `Subject file · still active` (drops the
-      competing date; `Est. MMXXII` seven lines down already carries the only year).
-- [ ] Fix or retire `tools/flowcheck.mjs` (make it read every band; fix the `/work` crash).
-- [ ] `/giving` flow fix once flowcheck is trustworthy.
-- [ ] Dead selector `.doorhead h3` in `PageFooter.astro:139`, ships on every page.
-- [ ] Lazy-load the 31 remaining eager `<img>`.
+- [x] ~~work roll date~~ **SHIPPED 2026-07-20** (`c08458d`): roll 2015-2026, verified live.
+- [x] ~~About "opened 2016"~~ **SHIPPED 2026-07-20** (`c08458d`): now `Subject file · still
+      active`; Est. MMXXII is the page's only year. Verified live.
+- [x] ~~flowcheck rebuild~~ **SHIPPED 2026-07-20**: v2 ground-sampler, 29/29 pages PASS.
+- [x] ~~/giving flow fix~~ — not needed, the FAIL was the old tool lying (see 🟡).
+- [x] ~~dead .doorhead selector~~ **SHIPPED 2026-07-20** (`c08458d`), verified gone from output.
+- [ ] Lazy-load the 31 remaining eager `<img>` (audit first: heroes/above-fold must STAY eager).
 - [ ] Lighthouse pass (perf + a11y) on Home / Work / About / one case.
 - [ ] Add `/redesign` + `/brand-lab` to robots.txt as belt-and-braces (they 404 now, but a
       future build could ship them).
