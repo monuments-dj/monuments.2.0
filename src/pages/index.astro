@@ -232,8 +232,19 @@ h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;fo
 .tb-cell:nth-child(3n){border-right:0}
 .tb-cell:nth-last-child(-n+3){border-bottom:0}
 .tb-flap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:transform .55s cubic-bezier(.6,0,.2,1)}
-.tb-flap img{height:clamp(24px,2.6vw,36px);width:auto;max-width:62%;object-fit:contain;opacity:.85;transition:opacity .25s}
-.tb-flap img.tall{height:clamp(56px,6.2vw,86px)} /* portrait crests (AC Boise) read as stamps at wordmark height */
+/* uniform optical box: every logo fits the same w x h stage (object-fit:contain),
+   then per-brand scale corrections below even out visual mass - a wide wordmark
+   at wordmark height dwarfs a compact shield (DJ QC 2026-07-20). */
+.tb-flap img{width:min(56%,220px);height:clamp(36px,4.2vw,58px);object-fit:contain;opacity:.85;transition:opacity .25s}
+.tb-flap img.tall{height:clamp(64px,7vw,96px)} /* portrait crests (AC Boise) */
+.tb-flap img.b-art-of-visuals{scale:.82}
+.tb-flap img.b-adorama{scale:.92}
+.tb-flap img.b-flashpoint{scale:1}
+.tb-flap img.b-lexar{scale:.88}
+.tb-flap img.b-msi{scale:.96}
+.tb-flap img.b-donut-media{scale:1.12}
+.tb-flap img.b-blue-cross{scale:1.05}
+.tb-flap img.b-cwi{scale:1}
 .tb-cell:hover .tb-flap img{opacity:1}
 .tb-flap.out{transform:translateY(-105%)}
 .tb-flap.in{transform:translateY(105%)}
@@ -394,12 +405,12 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
   <div class="wrap">
     <div class="tb-grid" id="tbGrid">
-      <button class="tb-cell" type="button" aria-label="Sony · tap for the next brand"><span class="tb-flap"><img src="/logos/sony-black.png" alt="Sony" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="Adorama · tap for the next brand"><span class="tb-flap"><img src="/logos/adorama-black.png" alt="Adorama" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="Intel · tap for the next brand"><span class="tb-flap"><img src="/logos/intel-black.png" alt="Intel" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="Art of Visuals · tap for the next brand"><span class="tb-flap"><img src="/logos/art-of-visuals-black.png" alt="Art of Visuals" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="Flashpoint · tap for the next brand"><span class="tb-flap"><img src="/logos/flashpoint-black.png" alt="Flashpoint" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="MSI · tap for the next brand"><span class="tb-flap"><img src="/logos/msi-black.png" alt="MSI" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Sony · tap for the next brand"><span class="tb-flap"><img class="b-sony" src="/logos/sony-black.png" alt="Sony" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Adorama · tap for the next brand"><span class="tb-flap"><img class="b-adorama" src="/logos/adorama-black.png" alt="Adorama" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Intel · tap for the next brand"><span class="tb-flap"><img class="b-intel" src="/logos/intel-black.png" alt="Intel" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Art of Visuals · tap for the next brand"><span class="tb-flap"><img class="b-art-of-visuals" src="/logos/art-of-visuals-black.png" alt="Art of Visuals" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Flashpoint · tap for the next brand"><span class="tb-flap"><img class="b-flashpoint" src="/logos/flashpoint-black.png" alt="Flashpoint" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="MSI · tap for the next brand"><span class="tb-flap"><img class="b-msi" src="/logos/msi-black.png" alt="MSI" loading="lazy" decoding="async"></span></button>
     </div>
     <p class="tb-note mono">13 brands · repeat clients · tap a cell to flip it</p>
   </div>
@@ -896,7 +907,7 @@ if(framesEl){
     var nf=document.createElement('span'); nf.className='tb-flap in';
     var img=document.createElement('img');
     img.src='/logos/'+b[0]+'-black.png'; img.alt=b[1]; img.decoding='async';
-    if(b[0]==='ac-boise')img.className='tall';
+    img.className='b-'+b[0]+(b[0]==='ac-boise'?' tall':'');
     nf.appendChild(img); cell.appendChild(nf);
     cell.setAttribute('aria-label',b[1]+' · tap for the next brand');
     rolling[ci]=true;
