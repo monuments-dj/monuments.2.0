@@ -64,8 +64,8 @@ a{color:inherit;text-decoration:none}
 
 /* hero: type IN the footage */
 .hero-media{position:absolute;inset:0;will-change:transform}
-.hero-media iframe{position:absolute;top:50%;left:50%;width:max(100vw,178svh);height:max(100svh,56.25vw);transform:translate(-50%,-50%);pointer-events:none;border:0;filter:contrast(1.04) brightness(.82) saturate(.98);opacity:0;transition:opacity 1.2s}
-.hero-media.live iframe{opacity:1}
+.hero-media iframe,.hero-media video{position:absolute;top:50%;left:50%;width:max(100vw,178svh);height:max(100svh,56.25vw);transform:translate(-50%,-50%);pointer-events:none;border:0;object-fit:cover;filter:contrast(1.04) brightness(.82) saturate(.98);opacity:0;transition:opacity 1.2s}
+.hero-media.live iframe,.hero-media.live video{opacity:1}
 .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.04) brightness(.82) saturate(.98);transition:opacity 1.2s}
 .hero-media.live img{opacity:0}
 /* ~40% dark scrim over the video, above the media but under the lockup + bottom
@@ -682,19 +682,27 @@ clock();setInterval(clock,30000);
     raf=live?requestAnimationFrame(step):null;if(!live)raf=null;
   })}
 })();
-// reel: background video header (desktop, motion-ok) + sound-on lightbox
+// reel: background video header (desktop, motion-ok) + sound-on showreel.
+// Self-hosted since 2026-07-20: the silent-header reel (the same cut the old
+// monuments.cc used as its header bg, Vimeo "REEL-silent-header"). The YouTube
+// stand-in id is dead. Full reel with sound = /reel/full-reel.mp4 (Vimeo
+// "website-reel", 94s), loaded only when the showreel panel is clicked.
 (function(){
-  const REEL='VMubUUZ2tdU';
   const hm=document.getElementById('heroMedia');
   if(hm && matchMedia('(pointer:fine)').matches && innerWidth>900 && !matchMedia('(prefers-reduced-motion:reduce)').matches){
-    const f=document.createElement('iframe');
-    f.src=`https://www.youtube.com/embed/${REEL}?autoplay=1&mute=1&loop=1&playlist=${REEL}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&start=6&iv_load_policy=3&fs=0&disablekb=1&enablejsapi=1`;
-    f.allow='autoplay; encrypted-media';f.title='Showreel background';
-    hm.appendChild(f);
-    setTimeout(()=>hm.classList.add('live'),1400);
+    const v=document.createElement('video');
+    v.src='/reel/work-reel.mp4';v.muted=true;v.loop=true;v.autoplay=true;
+    v.playsInline=true;v.setAttribute('playsinline','');v.setAttribute('aria-hidden','true');
+    hm.appendChild(v);
+    const go=()=>hm.classList.add('live');
+    v.addEventListener('playing',go,{once:true});
+    v.play().catch(()=>{});
+    setTimeout(go,1800); // belt to the braces: fade in even if 'playing' never fires
   }
-  // click the reel panel = play inline with sound + native controls, in place
-  // (no modal box). DJ 2026-07-12. First click activates; native controls take over.
+  // click the reel panel = the FULL reel with sound + native controls, in place
+  // (no modal box). DJ 2026-07-12/07-20. The resting loop is the SILENT header
+  // cut, so unmuting it played nothing - the click now swaps in full-reel.mp4
+  // (the real website-reel, with audio). First click activates; controls take over.
   const rp=document.getElementById('rrPanel');
   if(rp){
     const rv=rp.querySelector('video');
@@ -704,8 +712,10 @@ clock();setInterval(clock,30000);
       live=true;
       rp.closest('.rr').classList.add('rr-live');
       rp.style.transform='translate(-50%,-50%) scale(1)';
-      rv.muted=false;rv.loop=false;rv.controls=true;rv.removeAttribute('aria-hidden');
-      try{rv.currentTime=0;}catch(e){}
+      rv.pause();
+      rv.src='/reel/full-reel.mp4';
+      rv.muted=false;rv.loop=false;rv.controls=true;rv.preload='auto';
+      rv.removeAttribute('aria-hidden');
       rv.play();
     });
   }
