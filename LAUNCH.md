@@ -54,7 +54,13 @@ Everything here was verified by running it, not by reading a doc.
 - [x] ~~flowcheck rebuild~~ **SHIPPED 2026-07-20**: v2 ground-sampler, 29/29 pages PASS.
 - [x] ~~/giving flow fix~~ — not needed, the FAIL was the old tool lying (see 🟡).
 - [x] ~~dead .doorhead selector~~ **SHIPPED 2026-07-20** (`c08458d`), verified gone from output.
-- [ ] Lazy-load the 31 remaining eager `<img>` (audit first: heroes/above-fold must STAY eager).
+- [x] ~~Lazy-load the 31 remaining eager imgs~~ **AUDITED 2026-07-20 — zero changes needed.**
+      Every real eager `<img>` is one of: a page hero already marked `fetchpriority="high"`
+      (index ×2, about, giving, ai, capabilities, hire, contact ×3), a JS-populated viewer
+      shell that loads nothing at parse time (work #preview, photography #pvImg, MasonryGallery
+      lightbox), or the internal Kit. 5 of the 31 "hits" were comment lines, not tags. The
+      07-08 "71 imgs still eager" line predates the 07-11 66-img lazy pass; this is the
+      correct residue. Any NEW below-fold img still needs `loading="lazy"` + width/height.
 - [ ] Lighthouse pass (perf + a11y) on Home / Work / About / one case.
 - [ ] Add `/redesign` + `/brand-lab` to robots.txt as belt-and-braces (they 404 now, but a
       future build could ship them).
