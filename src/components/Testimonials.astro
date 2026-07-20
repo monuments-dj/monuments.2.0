@@ -29,6 +29,12 @@ const people: Person[] = [
   { name: 'Andrea Cenon',     role: 'Creative Director · Day One Agency' },
   { name: 'Tess',             role: 'Project Manager · Monuments' },
 ];
+// DJ 2026-07-20: "kill this for now" - the QUOTE-INCOMING placeholder slides are
+// OFF. Only people with a real quote render; the roster above stays as the
+// outreach list, and each name re-enters the theater the moment its q lands.
+const quoted = people.filter((p) => p.q);
+// long testimonials read, short ones ARE display type - the threshold picks the size
+const LONG = 160;
 ---
 <section class="tst" id="tst">
   <div class="wrap">
@@ -40,26 +46,25 @@ const people: Person[] = [
     <!-- THEATER · one voice at a time, center stage -->
     <div class="tst-thr">
       <div class="tst-stage" id="thrStage" aria-live="polite">
-        {people.map((p, i) => (
+        {quoted.map((p, i) => (
           <figure class={`tst-slide ${i === 0 ? 'live' : ''}`} data-i={i}>
-            <p class={`tst-big ${p.q ? '' : 'ph'}`}><span class="tst-ln"><span>{p.q ? `“${p.q}”` : '“ … ”'}</span></span></p>
+            <p class={`tst-big ${p.q.length > LONG ? 'long' : ''}`}><span class="tst-ln"><span>{`“${p.q}”`}</span></span></p>
             <figcaption>
               {p.link
                 ? <a class="tst-n tst-link" href={p.link} target="_blank" rel="noopener">{p.name} ↗</a>
                 : <span class="tst-n">{p.name}</span>}
               <span class="tst-r mono">{p.role}</span>
-              {!p.q && <span class="tst-chip mono">quote incoming</span>}
             </figcaption>
           </figure>
         ))}
       </div>
-      <div class="tst-thr-nav">
+      {quoted.length > 1 && <div class="tst-thr-nav">
         <button class="tst-arrow mono" id="thrPrev" aria-label="Previous quote">←</button>
         <span class="tst-ticks" id="thrTicks" aria-hidden="true">
-          {people.map((_, i) => <i class={i === 0 ? 'on' : ''}></i>)}
+          {quoted.map((_, i) => <i class={i === 0 ? 'on' : ''}></i>)}
         </span>
         <button class="tst-arrow mono" id="thrNext" aria-label="Next quote">→</button>
-      </div>
+      </div>}
     </div>
   </div>
 </section>
@@ -82,7 +87,9 @@ const people: Person[] = [
 .tst-slide{position:absolute;inset:0;margin:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:22px;visibility:hidden}
 .tst-slide.live{visibility:visible}
 .tst-big{font-family:var(--disp,'Bricolage Grotesque',sans-serif);font-weight:var(--dispw2,600);font-style:normal;font-size:clamp(24px,3.2vw,42px);line-height:1.22;letter-spacing:-.02em;max-width:30ch;margin:0}
-.tst-big.ph{color:rgba(245,243,239,.34)}
+/* long testimonials drop to READING size (DJ 2026-07-20: the display scale is
+   for one-line pull quotes; a full testimonial at 42px is a wall) */
+.tst-big.long{font-weight:400;font-size:clamp(16.5px,1.5vw,21px);line-height:1.62;letter-spacing:0;max-width:64ch;color:#dedbd5}
 .tst-ln{display:block;overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em}
 .tst-ln>span{display:block;transform:translateY(115%)}
 .tst-slide.live .tst-ln>span{animation:tstRise .8s cubic-bezier(.22,1,.36,1) forwards}
@@ -107,6 +114,13 @@ const people: Person[] = [
   var sec=document.getElementById('tst'); if(!sec)return;
   var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
   var slides=[...sec.querySelectorAll('.tst-slide')],ticks=[...sec.querySelectorAll('.tst-ticks i')],ti=0,timer=null;
+  // absolute slides don't grow the stage - size it to the tallest slide so a
+  // long testimonial never spills over the section bar (the Jake overflow)
+  var stage=sec.querySelector('.tst-stage');
+  function fit(){ if(!stage)return;
+    var h=0; slides.forEach(function(s){h=Math.max(h,s.scrollHeight);});
+    if(h)stage.style.minHeight=h+'px'; }
+  fit(); addEventListener('resize',fit,{passive:true}); setTimeout(fit,600);
   function show(i){
     ti=(i+slides.length)%slides.length;
     slides.forEach(function(s,j){
@@ -116,7 +130,7 @@ const people: Person[] = [
     });
     ticks.forEach(function(t,j){t.classList.toggle('on',j===ti);});
   }
-  function arm(){if(timer||reduced)return;timer=setInterval(function(){show(ti+1);},6200);}
+  function arm(){if(timer||reduced||slides.length<2)return;timer=setInterval(function(){show(ti+1);},6200);}
   function disarm(){clearInterval(timer);timer=null;}
   var prev=document.getElementById('thrPrev'),next=document.getElementById('thrNext');
   if(prev)prev.addEventListener('click',function(){disarm();show(ti-1);});
