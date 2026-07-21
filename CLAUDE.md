@@ -66,8 +66,11 @@ The three repeat classes and the rule that kills each:
 2. **Fix the CLASS, not the instance.** When he corrects something (type too big, label
    off, spacing dead), grep for the same pattern SITEWIDE and list every other instance
    in the reply - he decides once. He had to flag oversized display type page by page
-   (capabilities, contact, work) because each fix stayed local. There is no shared display
-   scale; until one is baked, any new hero type ≤ ~7.6vw / 112px max.
+   FOUR times (capabilities, contact, work, then giving 2026-07-20) because each fix
+   stayed local. **The shared display scale is now BAKED: `--fs-hero` in
+   PageFooter.astro's is:global block (NOT global.css - no page loads it). Every page
+   hero uses `var(--fs-hero)`. NEVER hardcode a hero font-size; tune the token.**
+   (photography's OS9 hero is the one deliberate exception.)
 3. **His words are the scope.** Execute exactly what the note says; anything adjacent
    goes in the reply as a list, NOT into the commit. "It comes in weird" meant fix the
    timing, not replace the ride (that revert cost him a day of vibe).

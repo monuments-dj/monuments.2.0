@@ -319,6 +319,14 @@ const { tag } = Astro.props;
 </script>
 
 <style is:global>
+/* ═ THE SHARED HERO SCALE (baked 2026-07-20, DJ flagged oversized hero type
+   for the FOURTH time) ═══════════════════════════════════════════════════
+   PageFooter ships on every page, so this is THE single source. Every page
+   hero uses var(--fs-hero) - never hardcode a hero font-size again. Tune the
+   whole site here. (Pages are self-contained docs; global.css is NOT loaded
+   anywhere, don't put tokens there.) */
+:root{--fs-hero:clamp(36px,5vw,76px)}
+
 /* ═ GRAIN v2 · living texture, ALWAYS below the text (DJ 2026-07-11) ═══════
    The old fixed .grain overlay painted OVER type (z70, blend) - retired here
    (display:none). Two surface-scoped layers replace it:
