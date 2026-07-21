@@ -357,7 +357,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
         if(nfo)nfo.style.transform=`translateY(${y*-.16}px)`;
         if(kck)kck.style.transform=`translateY(${y*-.06}px)`;
       }
-      brk.forEach(b=>{const r=b.parentElement.getBoundingClientRect();if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;b.style.transform=`translateY(${p*-56}px)`}});
+      // break parallax retired 2026-07-20 - PageFooter's shared band engine owns it
       if(c)c.style.transform=`translateY(${(Math.sin(y/420)*34).toFixed(1)}px) rotate(${(y*0.22).toFixed(1)}deg)`;
       k=false;
     });

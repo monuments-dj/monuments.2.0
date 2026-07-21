@@ -138,7 +138,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .step.litrow{transition:background .3s,padding-left .35s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1)}
 
 /* crew: full-bleed with parallax */
-.crew{position:relative;height:86svh;overflow:hidden}
+.crew{position:relative;height:var(--band-h,56svh);overflow:hidden}
 /* overscan trimmed 124%->108%: the only copy of team.jpg is 1400px wide and the
    old parallax inset was blowing it ~1.8x soft (DJ flagged). Sharper until the
    original lands in the BTS pool, then swap the file and restore travel. */

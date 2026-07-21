@@ -245,6 +245,36 @@ const { tag } = Astro.props;
 </script>
 
 <script is:inline>
+// ═ THE BAND PARALLAX ENGINE (2026-07-20) ═══════════════════════════════════
+// Sitewide parallax for full-bleed photo bands: every img inside .break or
+// .crew drifts against scroll (the clothing-merch math, promoted here as THE
+// single engine - its and giving's page-local copies are retired so nothing
+// double-drives a transform). The .plx tags scattered across 16 files finally
+// mean something. Reduced-motion = static. Pure function of scroll position,
+// so it reverses on the way up like everything else.
+(function(){
+  if(window.__bandPlx)return; window.__bandPlx=1;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var imgs=[].slice.call(document.querySelectorAll('.break img,.crew img'));
+  if(!imgs.length)return;
+  var tick=false;
+  function upd(){
+    tick=false;
+    var vh=innerHeight;
+    imgs.forEach(function(b){
+      var r=b.parentElement.getBoundingClientRect();
+      if(r.bottom>0&&r.top<vh){
+        var p=(r.top+r.height/2-vh/2)/vh;
+        b.style.transform='translateY('+(p*-56).toFixed(1)+'px)';
+      }
+    });
+  }
+  addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});
+  addEventListener('resize',function(){if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});
+  upd();
+})();
+</script>
+<script is:inline>
 // masonry packer: the .frames contact sheets use CSS columns as the no-JS
 // fallback; this converts each sheet to a dense row-span grid so no column
 // ends early. Spans are ESTIMATED from width/height attributes before media
@@ -326,6 +356,14 @@ const { tag } = Astro.props;
    whole site here. (Pages are self-contained docs; global.css is NOT loaded
    anywhere, don't put tokens there.) */
 :root{--fs-hero:clamp(36px,5vw,76px)}
+
+/* ═ THE SHARED BAND HEIGHT (baked 2026-07-20, same session as --fs-hero) ═══
+   Full-bleed photo bands (.break sitewide, about's .crew) were 52/56/86/88svh
+   depending on the page - DJ: "somewhat consistent height, all parallax."
+   One token, tuned to the Kit's reference band. The parallax engine for these
+   lives in this file's script (the .plx class was applied in 16 files with NO
+   engine anywhere - the class was a dangling promise until today). */
+:root{--band-h:clamp(360px,56svh,640px)}
 
 /* ═ GRAIN v2 · living texture, ALWAYS below the text (DJ 2026-07-11) ═══════
    The old fixed .grain overlay painted OVER type (z70, blend) - retired here
