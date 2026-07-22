@@ -92,7 +92,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* stories on paper */
 .paper{background:var(--paper);color:var(--ink)}
-.story{display:grid;grid-template-columns:.62fr 1.38fr;gap:56px 64px;padding:11vh 0;align-items:center}
+.story{display:grid;grid-template-columns:.62fr 1.38fr;gap:56px 64px;padding:11vh 0;align-items:start}
+/* body first line sits ON the headline first line, not the kicker (DJ 2026-07-22) */
+.story .body{padding-top:44px}
+@media (max-width:860px){.story .body{padding-top:0}}
 .story+.story{border-top:1px solid var(--line)}
 .story .k{color:var(--red)}
 .story h2{font-weight:var(--dispw);font-size:clamp(32px,4.4vw,62px);letter-spacing:-.032em;line-height:.98;text-transform:uppercase;margin-top:16px}
