@@ -95,7 +95,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .story{display:grid;grid-template-columns:.62fr 1.38fr;gap:56px 64px;padding:11vh 0;align-items:center}
 .story+.story{border-top:1px solid var(--line)}
 .story .k{color:var(--red)}
-.story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.04;text-transform:uppercase;margin-top:14px}
+.story h2{font-weight:var(--dispw);font-size:clamp(32px,4.4vw,62px);letter-spacing:-.032em;line-height:.98;text-transform:uppercase;margin-top:16px}
 .story h2 .serif{text-transform:none}
 .story .body p{color:#4c4a45;max-width:58ch;font-size:18px;margin-bottom:1.1em}
 .story .body p:last-child{margin-bottom:0}
@@ -103,8 +103,27 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .story .body .rule{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--red);margin-top:18px}
 @media (max-width:860px){.story{grid-template-columns:1fr;gap:18px;padding:8vh 0}}
 
+/* the set, in three frames: Katie Hunter row, B/W, bracket captions */
+.setrow{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.8vw,26px);padding:4vh 0 11vh}
+.setrow img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(1) contrast(1.06)}
+.setrow figcaption{margin-top:11px;font-size:10px;letter-spacing:.13em;color:var(--dim)}
+@media (max-width:800px){.setrow{grid-template-columns:1fr;gap:26px;padding:2vh 0 8vh}}
+
+/* the card band: white call-sheet card over the set (PuntoMedio ref) */
+.break{position:relative;height:var(--band-h,56svh);overflow:hidden;background:var(--ink)}
+.break img.plx{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;object-position:50% 42%;filter:grayscale(1) contrast(1.06) brightness(.72);will-change:transform}
+.aicard{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;background:var(--paper);color:var(--ink);width:min(88%,540px);padding:34px 36px 26px;text-align:center;box-shadow:0 30px 70px rgba(10,10,10,.45)}
+.aicard.rv{transform:translate(-50%,-50%) translateY(26px)}
+.aicard.rv.in{transform:translate(-50%,-50%)}
+.ac-top{display:block;font-size:10px;letter-spacing:.16em;color:#6f6d68;margin-bottom:16px}
+.ac-big{font-weight:var(--dispw);font-size:clamp(22px,2.5vw,34px);letter-spacing:-.025em;line-height:1.08;text-transform:uppercase}
+.ac-big .serif{color:var(--red);text-transform:none}
+.ac-foot{display:flex;justify-content:space-between;gap:14px;margin-top:22px;padding-top:14px;border-top:1px solid var(--line);font-size:10px;letter-spacing:.1em;color:#6f6d68}
+@media (max-width:560px){.ac-foot{flex-direction:column;gap:4px;align-items:center}}
+
 /* the two doors: agencies / clients (the site's two jobs, made explicit) */
-.doors{padding:2vh 0 12vh}
+.dkick{display:block;color:var(--red);margin-bottom:18px}
+.doors{padding:10vh 0 12vh}
 .doors .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .door{display:block;border:1px solid var(--line);background:#fff;padding:30px 28px 34px;transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s}
 .door:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(20,20,20,.12)}
@@ -188,9 +207,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <section class="stances">
   <div class="wrap in3">
-    <div class="st rv"><b>A tool</b> not an identity</div>
-    <div class="st rv"><b>Automate the minutiae</b> keep the human parts</div>
-    <div class="st rv"><b>Experience</b> the part money can't buy</div>
+    <div class="st rv"><b>[ A tool ]</b> not an identity</div>
+    <div class="st rv"><b>[ Automate the minutiae ]</b> keep the human parts</div>
+    <div class="st rv"><b>[ Experience ]</b> the part money can't buy</div>
   </div>
 </section>
 
@@ -199,7 +218,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
     <div class="story">
       <div class="side rv">
-        <span class="mono k">\ The stance</span>
+        <span class="mono k">[ The stance ]</span>
         <h2>A tool, <span class="serif">not an identity.</span></h2>
       </div>
       <div class="body rv">
@@ -210,7 +229,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
     <div class="story">
       <div class="side rv">
-        <span class="mono k">\ The system</span>
+        <span class="mono k">[ The system ]</span>
         <h2>Automate the minutiae. <span class="serif">Keep the human parts.</span></h2>
       </div>
       <div class="body rv">
@@ -222,17 +241,42 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
     <div class="story">
       <div class="side rv">
-        <span class="mono k">\ The catch</span>
+        <span class="mono k">[ The catch ]</span>
         <h2>Tools don't <span class="serif">buy taste.</span></h2>
       </div>
       <div class="body rv">
         <p>You can spend every dollar you have on AI agents and it still won't buy you taste. That's where experience matters.</p>
         <p><b>I directed people before I directed AI.</b> The instincts transfer: clear direction, high standards, and knowing the difference between done and right.</p>
-        <span class="rule">✳ The tools are everywhere. Taste isn't.</span>
       </div>
     </div>
 
+    <!-- the set, in three frames (Katie Hunter row, DJ's ref 2026-07-20) -
+         all three images visually verified before captioning -->
+    <div class="setrow">
+      <figure class="rv"><img loading="lazy" decoding="async" src="/about/dj-film.jpg" alt="DJ on set, arms crossed, watching the frame while the crew films behind him" width="2000" height="1331"><figcaption class="mono">[ On set ]</figcaption></figure>
+      <figure class="rv" style="transition-delay:90ms"><img loading="lazy" decoding="async" src="/about/set-cameras.jpg" alt="Three people in director chairs on camera, boom mic overhead" width="2000" height="1333"><figcaption class="mono">[ Rolling ]</figcaption></figure>
+      <figure class="rv" style="transition-delay:180ms"><img loading="lazy" decoding="async" src="/about/crew-film.jpg" alt="DJ briefing the crew around the prop table before the shoot" width="2000" height="1331"><figcaption class="mono">[ The crew ]</figcaption></figure>
+    </div>
+
+  </div>
+</section>
+
+<!-- the card band (PuntoMedio ref, DJ 2026-07-20): the site thesis as a white
+     call-sheet card over the set, B/W. .break = shared --band-h + the PageFooter
+     parallax engine picks the img up automatically. -->
+<section class="break aiband">
+  <img class="plx" src="/about/hero-set.jpg" alt="The set: talent in director chairs, crew and cameras, backlit warehouse windows" loading="lazy" decoding="async">
+  <div class="aicard rv">
+    <span class="mono ac-top">Studio · Monuments</span>
+    <p class="ac-big">The tools are everywhere. <span class="serif">Taste isn't.</span></p>
+    <div class="ac-foot mono"><span>LA / Boise</span><span>monuments.cc@gmail.com</span></div>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap">
     <div class="doors">
+      <span class="mono dkick rv">[ Two ways in ]</span>
       <div class="grid">
         <a class="door rv" href="/work">
           <span class="dk">For agencies</span>
@@ -248,7 +292,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         </a>
       </div>
     </div>
-
   </div>
 </section>
 
