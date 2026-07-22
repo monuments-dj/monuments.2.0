@@ -96,7 +96,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .story{display:grid;grid-template-columns:.62fr 1.38fr;gap:64px;padding-top:11vh;padding-bottom:7vh;align-items:start}
 .story .side{position:sticky;top:14vh}
 .story .side .k{color:var(--red)}
-.story h2{font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin-top:14px}
+.story h2{font-weight:var(--dispw);font-size:clamp(32px,4.4vw,62px);letter-spacing:-.032em;line-height:.98;text-transform:uppercase;margin-top:16px}
 .story h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
 .story .body p{color:#4c4a45;max-width:60ch;margin-bottom:1.2em;font-size:18px}
 .story .body p:first-child{font-size:clamp(19px,1.8vw,24px);line-height:1.5;color:var(--ink)}
@@ -116,10 +116,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .way p{color:#4c4a45;max-width:56ch;margin-top:12px}
 
 /* quote on rose */
-.quote{background:var(--spark);color:var(--ink);padding:15vh 0}
-.quote p.q{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;font-size:clamp(28px,4vw,58px);line-height:1.14;max-width:24ch}
-.quote p.q b{font-weight:400;font-style:normal;font-family:var(--disp);font-weight:var(--dispw);text-transform:uppercase;font-size:.86em;letter-spacing:-.02em}
-.quote .who{margin-top:28px;color:rgba(22,21,20,.6)}
+/* the card band: the quote as a white call-sheet card over the field
+   (PuntoMedio ref, DJ 2026-07-20 - replaced the flat spark quote band) */
+.gvcard{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;background:var(--paper);color:var(--ink);width:min(88%,560px);padding:34px 36px 26px;text-align:center;box-shadow:0 30px 70px rgba(10,10,10,.45)}
+.gvcard.rv{transform:translate(-50%,-50%) translateY(26px)}
+.gvcard.rv.in{transform:translate(-50%,-50%)}
+.gc-top{display:block;font-size:10px;letter-spacing:.16em;color:#6f6d68;margin-bottom:16px}
+.gc-big{font-weight:var(--dispw);font-size:clamp(21px,2.4vw,32px);letter-spacing:-.025em;line-height:1.1;text-transform:uppercase}
+.gc-big .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;color:var(--red);text-transform:none}
+.gc-foot{display:flex;justify-content:space-between;gap:14px;margin-top:22px;padding-top:14px;border-top:1px solid var(--line);font-size:10px;letter-spacing:.1em;color:#6f6d68}
+@media (max-width:560px){.gc-foot{flex-direction:column;gap:4px;align-items:center}}
 
 /* full-bleed parallax break */
 .break{position:relative;height:var(--band-h,56svh);overflow:hidden}
@@ -264,7 +270,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <section class="paper">
   <div class="wrap story">
     <div class="side rv">
-      <span class="k mono">\ Why we do it</span>
+      <span class="k mono">[ Why we do it ]</span>
       <h2>A camera is just a tool. <span class="serif">What you point it at</span> is the whole decision.</h2>
     </div>
     <div class="body rv">
@@ -281,7 +287,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="way rv">
       <div class="ph"><img src="/case-studies/giving/gv-10.jpg" alt="The crew and pilots at the bush plane on a grass airstrip" loading="lazy"><span class="cap">GV-01 · Same crew, same standard</span></div>
       <div>
-        <span class="n">\ 01</span>
+        <span class="n">[ 01 ]</span>
         <h3>Pro-bono creative</h3>
         <p>Some of the best stories belong to people who can't afford a campaign. So a few times a year we hand our full toolkit to a cause that has earned it: the strategy, the shoot, the edit, the rollout. Same crew, same standard as the paid work. The only difference is the invoice.</p>
       </div>
@@ -289,7 +295,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="way rv">
       <div class="ph"><img src="/case-studies/giving/gv-06.jpg" alt="Handing the camera to a student at the chalkboard" loading="lazy"><span class="cap">GV-02 · Passing the camera</span></div>
       <div>
-        <span class="n">\ 02</span>
+        <span class="n">[ 02 ]</span>
         <h3>Mentorship</h3>
         <p>Nobody walks onto a set knowing how it works. We did not. So we keep a door open for young makers who have the eye but not the network: time on real projects, honest notes, and the kind of access that usually costs a connection you don't have yet. Talent is everywhere. The room is not.</p>
       </div>
@@ -297,7 +303,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="way rv">
       <div class="ph"><img src="/case-studies/giving/gv-12.jpg" alt="A child at the window of the school mid-build, Uganda" loading="lazy"><span class="cap">GV-03 · The true story</span></div>
       <div>
-        <span class="n">\ 03</span>
+        <span class="n">[ 03 ]</span>
         <h3>Documentary &amp; mission work</h3>
         <p>We have carried cameras through Nepal, Uganda, and across Europe for work that was never about selling anything. Those trips taught us patience, respect for the subject, and how to disappear so a true story can show up. We still take that work when it matters, and we bring everything that pressure taught us to it.</p>
       </div>
@@ -305,17 +311,22 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
-<section class="quote">
-  <div class="wrap">
-    <p class="q rv">The work that doesn't pay is usually the work we are <b>proudest of.</b></p>
-    <p class="who mono rv">That's the part nobody invoices for</p>
+<!-- the quote, restaged as the card band (PuntoMedio ref, DJ 2026-07-20):
+     white call-sheet card over gv-14 (visually verified: two kids, hands up,
+     B/W). Rides the shared .break system - --band-h + parallax for free. -->
+<section class="break gvband">
+  <img loading="lazy" decoding="async" class="plx" src="/case-studies/giving/gv-14.jpg" alt="Two kids on the school lawn, hands in the air">
+  <div class="gvcard rv">
+    <span class="mono gc-top">Studio · Monuments</span>
+    <p class="gc-big">The work that doesn't pay is usually the work we're <span class="serif">proudest of.</span></p>
+    <div class="gc-foot mono"><span>Nobody invoices for this part</span><span>Nepal · Uganda · Europe</span></div>
   </div>
 </section>
 
 <section class="paper">
   <div class="wrap story">
     <div class="side rv">
-      <span class="k mono">\ Close to home</span>
+      <span class="k mono">[ Close to home ]</span>
       <h2>Boise raised us. <span class="serif">Los Angeles</span> made us. We answer to both.</h2>
     </div>
     <div class="body rv">
@@ -332,7 +343,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <section class="range">
   <div class="wrap">
-    <span class="k mono rv">\ Further afield</span>
+    <span class="k mono rv">[ Further afield ]</span>
     <h2 class="rv">When the story is bigger than us, we go to it. Documentary and mission work in <span class="serif">Nepal, Uganda, and Europe.</span></h2>
     <p class="b rv">We are careful with this kind of work. We go in to listen, not to take. The footage belongs to the people in it as much as it belongs to us, and the goal is never a highlight reel. It's the truth, told with enough care that it lands.</p>
   </div>
