@@ -1,4 +1,16 @@
-# TODO - current state (2026-07-14 · CHAT ROTATED · everything below is LIVE on main)
+# TODO - current state
+
+## 🧭 STANDING DIRECTION (2026-07-22, keep top of mind every session)
+**djthecd.com is coming.** DJ, after advice from another creative director: in-house
+hiring wants a PERSON, not a studio. At some point this site gets mirrored on
+djthecd.com and shifted to a solo mission (I/DJ-centered, studio framing out).
+NOT NOW - but every choice should keep the fork cheap: tokens over hardcodes,
+components over page markup, copy in data files. When a decision diverges
+studio-voice vs solo-voice, FLAG it to DJ in the reply. The "we" pockets
+(giving, crew framing) are the future fork points. Full plan: memory
+`djthecd-personal-site`.
+
+(2026-07-14 · CHAT ROTATED · everything below is LIVE on main)
 
 ## 🔄 HANDOFF 2026-07-14 EVENING (the live-feedback marathon · 61 commits)
 All pushed to main, working tree clean. 27/27 pages pass pagecheck, build clean.
