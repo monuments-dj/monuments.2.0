@@ -11,9 +11,46 @@ import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
 import StatRow from '../../components/StatRow.astro';
+import MasonryGallery from '../../components/MasonryGallery.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'clothing-merch');
+const gallery = [
+  { src: '/case-studies/clothing-merch/gallery/cm-01.jpg', cap: 'Creative Space · Hoodie back', alt: 'Apparel design: Creative Space · Hoodie back' },
+  { src: '/case-studies/clothing-merch/gallery/cm-02.jpg', cap: 'Line sheet · Hats', alt: 'Apparel design: Line sheet · Hats' },
+  { src: '/case-studies/clothing-merch/gallery/cm-03.jpg', cap: 'Creative Space · Hoodie', alt: 'Apparel design: Creative Space · Hoodie' },
+  { src: '/case-studies/clothing-merch/gallery/cm-04.jpg', cap: 'NYC cap · Corduroy', alt: 'Apparel design: NYC cap · Corduroy' },
+  { src: '/case-studies/clothing-merch/gallery/cm-05.jpg', cap: 'Creative Space · Crewneck', alt: 'Apparel design: Creative Space · Crewneck' },
+  { src: '/case-studies/clothing-merch/gallery/cm-06.jpg', cap: 'Patches · The set', alt: 'Apparel design: Patches · The set' },
+  { src: '/case-studies/clothing-merch/gallery/cm-07.jpg', cap: 'Patches · New here', alt: 'Apparel design: Patches · New here' },
+  { src: '/case-studies/clothing-merch/gallery/cm-08.jpg', cap: 'Creative Space · Tee front', alt: 'Apparel design: Creative Space · Tee front' },
+  { src: '/case-studies/clothing-merch/gallery/cm-09.jpg', cap: 'Creative Space · Tee back', alt: 'Apparel design: Creative Space · Tee back' },
+  { src: '/case-studies/clothing-merch/gallery/cm-10.jpg', cap: 'Patch · Creator', alt: 'Apparel design: Patch · Creator' },
+  { src: '/case-studies/clothing-merch/gallery/cm-11.jpg', cap: 'Patch · Storyteller', alt: 'Apparel design: Patch · Storyteller' },
+  { src: '/case-studies/clothing-merch/gallery/cm-12.jpg', cap: 'Patch · Human', alt: 'Apparel design: Patch · Human' },
+  { src: '/case-studies/clothing-merch/gallery/cm-13.jpg', cap: 'Line sheet · The marks', alt: 'Apparel design: Line sheet · The marks' },
+  { src: '/case-studies/clothing-merch/gallery/cm-14.jpg', cap: 'Line sheet · Hoodies', alt: 'Apparel design: Line sheet · Hoodies' },
+  { src: '/case-studies/clothing-merch/gallery/cm-15.jpg', cap: 'Line sheet · Tees', alt: 'Apparel design: Line sheet · Tees' },
+  { src: '/case-studies/clothing-merch/gallery/cm-16.jpg', cap: 'Line sheet · Tote', alt: 'Apparel design: Line sheet · Tote' },
+  { src: '/case-studies/clothing-merch/gallery/cm-17.jpg', cap: 'Line sheet · Patches', alt: 'Apparel design: Line sheet · Patches' },
+  { src: '/case-studies/clothing-merch/gallery/cm-18.jpg', cap: 'Creative Space · On model', alt: 'Apparel design: Creative Space · On model' },
+  { src: '/case-studies/clothing-merch/gallery/cm-19.jpg', cap: 'NYC tee · On model', alt: 'Apparel design: NYC tee · On model' },
+  { src: '/case-studies/clothing-merch/gallery/cm-20.jpg', cap: 'NYC cap · In hand', alt: 'Apparel design: NYC cap · In hand' },
+  { src: '/case-studies/clothing-merch/gallery/cm-21.jpg', cap: 'NYC cap · Back', alt: 'Apparel design: NYC cap · Back' },
+  { src: '/case-studies/clothing-merch/gallery/cm-22.jpg', cap: 'Line sheet · Crewneck', alt: 'Apparel design: Line sheet · Crewneck' },
+  { src: '/case-studies/clothing-merch/gallery/cm-23.jpg', cap: 'Line sheet · Crewneck back', alt: 'Apparel design: Line sheet · Crewneck back' },
+  { src: '/case-studies/clothing-merch/gallery/cm-24.jpg', cap: 'DW Drums · Tee', alt: 'Apparel design: DW Drums · Tee' },
+  { src: '/case-studies/clothing-merch/gallery/cm-25.jpg', cap: 'DW Drums · Snapback', alt: 'Apparel design: DW Drums · Snapback' },
+  { src: '/case-studies/clothing-merch/gallery/cm-26.jpg', cap: 'DW Drums · Tote', alt: 'Apparel design: DW Drums · Tote' },
+  { src: '/case-studies/clothing-merch/gallery/cm-27.jpg', cap: 'Art of Visuals · Crew windbreaker', alt: 'Apparel design: Art of Visuals · Crew windbreaker' },
+  { src: '/case-studies/clothing-merch/gallery/cm-28.jpg', cap: 'Art of Visuals · Anorak', alt: 'Apparel design: Art of Visuals · Anorak' },
+  { src: '/case-studies/clothing-merch/gallery/cm-29.jpg', cap: 'Art of Visuals · Crop long sleeve', alt: 'Apparel design: Art of Visuals · Crop long sleeve' },
+  { src: '/case-studies/clothing-merch/gallery/cm-30.jpg', cap: 'Art of Visuals · Crew crop, back', alt: 'Apparel design: Art of Visuals · Crew crop, back' },
+  { src: '/case-studies/clothing-merch/gallery/cm-31.jpg', cap: 'Art of Visuals · Tote, tan', alt: 'Apparel design: Art of Visuals · Tote, tan' },
+  { src: '/case-studies/clothing-merch/gallery/cm-32.jpg', cap: 'Art of Visuals · Tote, black mark', alt: 'Apparel design: Art of Visuals · Tote, black mark' },
+  { src: '/case-studies/clothing-merch/gallery/cm-33.jpg', cap: 'Art of Visuals · Tote, yellow', alt: 'Apparel design: Art of Visuals · Tote, yellow' },
+  { src: '/case-studies/clothing-merch/gallery/cm-34.jpg', cap: 'Creative Space · Mug', alt: 'Apparel design: Creative Space · Mug' }
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -231,13 +268,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </div>
 
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>Wear the work</b> · selects from every line</span>
-      <span class="mono" style="color:#8f8d88">34 frames · hover to inspect</span>
-    </div>
-    <div class="frames" id="frames"></div>
-  </div>
+  <MasonryGallery title="Wear the work · selects from every line" note="34 frames · click to enlarge" images={gallery} />
 </section>
 
 <section class="sparrow">
@@ -289,53 +320,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/underfoot-->
 
 <script is:inline>
-// gallery: all 26 frames from the v1 page, masonry columns, line captions
-(function(){
-  const shots=[
-    ['cm-01.jpg','Creative Space · Hoodie back',1228,1600],
-    ['cm-02.jpg','Line sheet · Hats',1600,903],
-    ['cm-03.jpg','Creative Space · Hoodie',1411,1600],
-    ['cm-04.jpg','NYC cap · Corduroy',1225,1600],
-    ['cm-05.jpg','Creative Space · Crewneck',1004,1600],
-    ['cm-06.jpg','Patches · The set',1134,1600],
-    ['cm-07.jpg','Patches · New here',1121,1600],
-    ['cm-08.jpg','Creative Space · Tee front',1171,1600],
-    ['cm-09.jpg','Creative Space · Tee back',1146,1600],
-    ['cm-10.jpg','Patch · Creator',1600,566],
-    ['cm-11.jpg','Patch · Storyteller',1600,571],
-    ['cm-12.jpg','Patch · Human',1600,603],
-    ['cm-13.jpg','Line sheet · The marks',1600,875],
-    ['cm-14.jpg','Line sheet · Hoodies',1600,905],
-    ['cm-15.jpg','Line sheet · Tees',1600,897],
-    ['cm-16.jpg','Line sheet · Tote',1600,881],
-    ['cm-17.jpg','Line sheet · Patches',1600,873],
-    ['cm-18.jpg','Creative Space · On model',1208,1600],
-    ['cm-19.jpg','NYC tee · On model',1114,1600],
-    ['cm-20.jpg','NYC cap · In hand',1131,1600],
-    ['cm-21.jpg','NYC cap · Back',498,509],
-    ['cm-22.jpg','Line sheet · Crewneck',2000,1124],
-    ['cm-23.jpg','Line sheet · Crewneck back',2000,1121],
-    ['cm-24.jpg','DW Drums · Tee',2000,1245],
-    ['cm-25.jpg','DW Drums · Snapback',2000,1162],
-    ['cm-26.jpg','DW Drums · Tote',2000,1802],
-    ['cm-27.jpg','Art of Visuals · Crew windbreaker',1528,1600],
-    ['cm-28.jpg','Art of Visuals · Anorak',1562,1600],
-    ['cm-29.jpg','Art of Visuals · Crop long sleeve',1588,1600],
-    ['cm-30.jpg','Art of Visuals · Crew crop, back',1580,1600],
-    ['cm-31.jpg','Art of Visuals · Tote, tan',1565,1600],
-    ['cm-32.jpg','Art of Visuals · Tote, black mark',1588,1600],
-    ['cm-33.jpg','Art of Visuals · Tote, yellow',1600,1493],
-    ['cm-34.jpg','Creative Space · Mug',1568,1600]
-  ];
-  const el=document.getElementById('frames');
-  el.innerHTML=shots.map((s,i)=>`
-    <figure class="fr" style="--d:${i*45}ms">
-      <img src="/case-studies/clothing-merch/gallery/${s[0]}" alt="Apparel design: ${s[1]}" width="${s[2]}" height="${s[3]}" loading="lazy">
-      <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · ${s[1]}</figcaption>
-    </figure>`).join('');
-  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
-})();
-
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 

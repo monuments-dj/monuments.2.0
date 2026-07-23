@@ -5,9 +5,23 @@ import NextFile from '../../components/NextFile.astro';
 import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
+import MasonryGallery from '../../components/MasonryGallery.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'dw-drums');
+const gallery = [
+  { src: '/case-studies/dw-drums/gallery/face-off.jpg', cap: 'Engineer Approved / Drummer Tested', alt: 'DWe campaign spread: Engineer Approved / Drummer Tested' },
+  { src: '/case-studies/dw-drums/gallery/spread-01.jpg', cap: 'Beauty, Brains And A Whole Lotta Fun', alt: 'DWe campaign spread: Beauty, Brains And A Whole Lotta Fun' },
+  { src: '/case-studies/dw-drums/gallery/spread-02.jpg', cap: 'Plug In / Rock Out · The zipper', alt: 'DWe campaign spread: Plug In / Rock Out · The zipper' },
+  { src: '/case-studies/dw-drums/gallery/spread-03.jpg', cap: 'Plug In / Rock Out · The zipper', alt: 'DWe campaign spread: Plug In / Rock Out · The zipper' },
+  { src: '/case-studies/dw-drums/gallery/spread-04.jpg', cap: 'Free-Range Organic Tone', alt: 'DWe campaign spread: Free-Range Organic Tone' },
+  { src: '/case-studies/dw-drums/gallery/spread-05.jpg', cap: 'Plug In / Rock Out', alt: 'DWe campaign spread: Plug In / Rock Out' },
+  { src: '/case-studies/dw-drums/gallery/spread-06.jpg', cap: 'Plug In / Rock Out · The tear', alt: 'DWe campaign spread: Plug In / Rock Out · The tear' },
+  { src: '/case-studies/dw-drums/gallery/spread-07.jpg', cap: 'Plug In / Rock Out · The tear', alt: 'DWe campaign spread: Plug In / Rock Out · The tear' },
+  { src: '/case-studies/dw-drums/gallery/spread-08.jpg', cap: 'Trust The Process', alt: 'DWe campaign spread: Trust The Process' },
+  { src: '/case-studies/dw-drums/gallery/spread-09.jpg', cap: 'More Than Just Drums', alt: 'DWe campaign spread: More Than Just Drums' },
+  { src: '/case-studies/dw-drums/gallery/spread-10.jpg', cap: 'Built For Wherever The Road Takes You', alt: 'DWe campaign spread: Built For Wherever The Road Takes You' }
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -183,13 +197,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </div>
 
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>The spreads</b> · the campaign, uncropped</span>
-      <span class="mono" style="color:#8f8d88">11 spreads · hover to inspect</span>
-    </div>
-    <div class="frames" id="frames"></div>
-  </div>
+  <MasonryGallery title="The spreads · the campaign, uncropped" note="11 spreads · click to enlarge" images={gallery} />
 </section>
 
 <section class="quote">
@@ -228,28 +236,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <script is:inline>
 // gallery: all 11 spreads, masonry columns, uncropped; captions quote each spread's headline
-(function(){
-  const shots=[
-    ['face-off.jpg','Engineer Approved / Drummer Tested',1800,1213],
-    ['spread-01.jpg','Beauty, Brains And A Whole Lotta Fun',1800,1203],
-    ['spread-02.jpg','Plug In / Rock Out · The zipper',1800,1212],
-    ['spread-03.jpg','Plug In / Rock Out · The zipper',1800,1207],
-    ['spread-04.jpg','Free-Range Organic Tone',1138,1800],
-    ['spread-05.jpg','Plug In / Rock Out',1800,1200],
-    ['spread-06.jpg','Plug In / Rock Out · The tear',1800,1206],
-    ['spread-07.jpg','Plug In / Rock Out · The tear',1800,1203],
-    ['spread-08.jpg','Trust The Process',1800,1196],
-    ['spread-09.jpg','More Than Just Drums',1128,1800],
-    ['spread-10.jpg','Built For Wherever The Road Takes You',1130,1800]
-  ];
-  const el=document.getElementById('frames');
-  el.innerHTML=shots.map((s,i)=>`
-    <figure class="fr" style="--d:${i*45}ms">
-      <img src="/case-studies/dw-drums/gallery/${s[0]}" alt="DWe campaign spread: ${s[1]}" width="${s[2]}" height="${s[3]}" loading="lazy">
-      <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · ${s[1]}</figcaption>
-    </figure>`).join('');
-  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
-})();
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));

@@ -5,6 +5,7 @@ import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
 import StatRow from '../../components/StatRow.astro';
+import MasonryGallery from '../../components/MasonryGallery.astro';
 import '../../styles/work.css';
 import { work } from '../../data/work.js';
 const hh = work.find(w => w.slug === 'sony-xperia');
@@ -26,6 +27,12 @@ const selects = [
 
 // behind the series: 13 frames from the archive
 const bts = Array.from({ length: 13 }, (_, i) => `xp-${String(i + 15).padStart(2, '0')}.jpg`);
+
+const gallery = selects.map(([file, cap]) => ({
+  src: `${G}/${file}`,
+  cap,
+  alt: 'Summer with Xperia'
+}));
 
 const credits = [
   { k: 'Client', v: 'Sony Xperia' },
@@ -389,20 +396,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </div>
 
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>Campaign frames</b> · selects from the summer</span>
-      <span class="mono" style="color:#8f8d88">05 frames · hover to inspect</span>
-    </div>
-    <div class="frames" data-frames>
-      {selects.map(([file, cap, w, h], i) => (
-        <figure class="fr" style={`--d:${i * 45}ms`}>
-          <img src={`${G}/${file}`} alt="Summer with Xperia" width={w} height={h} loading="lazy">
-          <figcaption class="cap">{`FR-${String(i + 5).padStart(2, '0')} · ${cap}`}</figcaption>
-        </figure>
-      ))}
-    </div>
-  </div>
+  <MasonryGallery title="Campaign frames · selects from the summer" note="5 frames · click to enlarge" images={gallery} />
 
   <div class="wrap btssec">
     <div class="btsbar">

@@ -5,9 +5,19 @@ import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
 import StatRow from '../../components/StatRow.astro';
+import MasonryGallery from '../../components/MasonryGallery.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'art-of-visuals');
+const gallery = [
+  { src: '/case-studies/art-of-visuals/gallery/xperia-01.jpg', cap: 'AOV ARCHIVE', alt: 'Art of Visuals frame 1' },
+  { src: '/case-studies/art-of-visuals/gallery/xm4-01.jpg', cap: 'AOV ARCHIVE', alt: 'Art of Visuals frame 2' },
+  { src: '/case-studies/art-of-visuals/gallery/xperia-02.jpg', cap: 'AOV ARCHIVE', alt: 'Art of Visuals frame 3' },
+  { src: '/case-studies/art-of-visuals/gallery/xm3-bts.jpg', cap: 'AOV ARCHIVE', alt: 'Art of Visuals frame 4' },
+  { src: '/case-studies/art-of-visuals/gallery/yt-thismoment.jpg', cap: 'AOV ARCHIVE', alt: 'Art of Visuals frame 5' },
+  { src: '/case-studies/art-of-visuals/gallery/stansport-01.jpg', cap: 'AOV ARCHIVE', alt: 'Art of Visuals frame 6' },
+  { src: '/case-studies/art-of-visuals/gallery/podcast-cover.jpg', cap: 'AOV ARCHIVE', alt: 'Art of Visuals frame 7' }
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -400,13 +410,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </div>
 
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>Contact sheet</b> · frames from the 4x era</span>
-      <span class="mono" style="color:#8f8d88">07 frames · hover to inspect</span>
-    </div>
-    <div class="frames" id="frames"></div>
-  </div>
+  <MasonryGallery title="Contact sheet · frames from the 4x era" note="07 frames · click to enlarge" images={gallery} />
 </section>
 
 <section class="quote">
@@ -446,18 +450,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/underfoot-->
 
 <script is:inline>
-// gallery: 9 real frames, wide frame every 4th
-(function(){
-  const imgs=['xperia-01','xm4-01','xperia-02','xm3-bts','yt-thismoment','stansport-01','podcast-cover'].map(n=>`/case-studies/art-of-visuals/gallery/${n}.jpg`);
-  const el=document.getElementById('frames');
-  el.innerHTML=imgs.map((src,i)=>`
-    <figure class="fr${i%4===0?' wide':''}" style="--d:${i*45}ms">
-      <img src="${src}" alt="Art of Visuals frame ${i+1}" loading="lazy">
-      <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · AOV ARCHIVE</figcaption>
-    </figure>`).join('');
-  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
-})();
-
 // MSI BTS sheet: same .show reveal, static markup
 (function(){
   const el=document.getElementById('msiFrames');if(!el)return;

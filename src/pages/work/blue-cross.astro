@@ -5,9 +5,39 @@ import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
 import StatRow from '../../components/StatRow.astro';
+import MasonryGallery from '../../components/MasonryGallery.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'blue-cross');
+const gallery = [
+  { src: '/case-studies/blue-cross/gallery/bci-11.jpg', cap: 'The site at last light', alt: 'Blue Cross of Idaho campaign: The site at last light' },
+  { src: '/case-studies/blue-cross/gallery/bci-01.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-13.jpg', cap: 'The checkers game', alt: 'Blue Cross of Idaho campaign: The checkers game' },
+  { src: '/case-studies/blue-cross/gallery/bci-10.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-06.jpg', cap: 'Sparks on the rail', alt: 'Blue Cross of Idaho campaign: Sparks on the rail' },
+  { src: '/case-studies/blue-cross/gallery/bci-07.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-16.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-24.jpg', cap: 'The bedtime story', alt: 'Blue Cross of Idaho campaign: The bedtime story' },
+  { src: '/case-studies/blue-cross/gallery/bci-09.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-18.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-19.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-03.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-04.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-05.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-08.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-12.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-14.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-15.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-17.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-20.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-21.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-22.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-23.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-25.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-26.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-27.jpg', alt: 'Blue Cross of Idaho campaign' },
+  { src: '/case-studies/blue-cross/gallery/bci-28.jpg', alt: 'Blue Cross of Idaho campaign' }
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -214,13 +244,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </div>
 
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>\ The campaign</b> · everyday people, real settings</span>
-      <span class="mono" style="color:#8f8d88">28 selects · four years in market</span>
-    </div>
-    <div class="bcmasonry" id="frames"></div>
-  </div>
+  <MasonryGallery title="\ The campaign · everyday people, real settings" note="27 selects · click to enlarge" images={gallery} />
 </section>
 
 <section class="quote">
@@ -260,30 +284,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/underfoot-->
 
 <script is:inline>
-// gallery: masonry of the real 28 (DJ 2026-07-12). bci-02 is the hero. Popouts
-// = DJ's picks (13 checkers, 24 grandpa) + the welder (06, his grid replacement).
-(function(){
-  const items=[
-    ['bci-11','hero-wide','The site at last light'],
-    ['bci-01','',''],['bci-13','pop','The checkers game'],['bci-10','',''],
-    ['bci-06','pop','Sparks on the rail'],['bci-07','tall',''],['bci-16','',''],
-    ['bci-24','pop','The bedtime story'],['bci-09','',''],['bci-18','',''],
-    ['bci-19','',''],['bci-03','',''],['bci-04','',''],['bci-05','',''],
-    ['bci-08','',''],['bci-12','',''],['bci-14','',''],['bci-15','',''],
-    ['bci-17','',''],['bci-20','',''],['bci-21','',''],['bci-22','',''],
-    ['bci-23','',''],['bci-25','',''],['bci-26','',''],['bci-27','',''],['bci-28','',''],
-  ];
-  const el=document.getElementById('frames');
-  el.innerHTML=items.map(([n,cls,cap],i)=>{
-    const dims = n==='bci-07' ? 'width="1200" height="1800"' : 'width="1800" height="1200"';
-    return `<figure class="bcm${cls?' '+cls:''}" style="--d:${i*35}ms">
-      <img src="/case-studies/blue-cross/gallery/${n}.jpg" ${dims} alt="Blue Cross of Idaho campaign${cap?': '+cap:''}" loading="lazy" decoding="async">
-      ${cap?`<figcaption class="pcap">${cap}</figcaption>`:''}
-    </figure>`;
-  }).join('');
-  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
-})();
-
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 

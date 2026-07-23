@@ -7,9 +7,20 @@ import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
 import StatRow from '../../components/StatRow.astro';
+import MasonryGallery from '../../components/MasonryGallery.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'waffle-me-up');
+const gallery = [
+  { src: '/case-studies/waffle-me-up/gallery/wmu-01.jpg', cap: 'Into the mixer · by hand', alt: 'Waffle Me Up brand shoot: Into the mixer · by hand' },
+  { src: '/case-studies/waffle-me-up/gallery/wmu-02.jpg', cap: 'The savory build · egg + bacon', alt: 'Waffle Me Up brand shoot: The savory build · egg + bacon' },
+  { src: '/case-studies/waffle-me-up/gallery/wmu-03.jpg', cap: 'Almond butter + berry · plated', alt: 'Waffle Me Up brand shoot: Almond butter + berry · plated' },
+  { src: '/case-studies/waffle-me-up/gallery/wmu-04.jpg', cap: 'The crew · in the kitchen', alt: 'Waffle Me Up brand shoot: The crew · in the kitchen' },
+  { src: '/case-studies/waffle-me-up/gallery/wmu-05.jpg', cap: 'The batter · every batch', alt: 'Waffle Me Up brand shoot: The batter · every batch' },
+  { src: '/case-studies/waffle-me-up/gallery/wmu-06.jpg', cap: 'The line · between orders', alt: 'Waffle Me Up brand shoot: The line · between orders' },
+  { src: '/case-studies/waffle-me-up/gallery/wmu-07.jpg', cap: 'Working the dough', alt: 'Waffle Me Up brand shoot: Working the dough' },
+  { src: '/case-studies/waffle-me-up/gallery/wmu-08.jpg', cap: 'The makers · portrait', alt: 'Waffle Me Up brand shoot: The makers · portrait' }
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -136,7 +147,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .break .stampfresh{position:absolute;top:32px;right:var(--pad);transform:rotate(6deg);border:2px solid var(--red);border-radius:4px;color:var(--red);font-family:var(--mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;padding:9px 16px 8px;background:rgba(22,21,20,.35);opacity:.92}
 
 /* gallery: contact-sheet frames + the spinning bakery badge */
-.badge{position:absolute;top:-58px;right:calc(var(--pad) - 10px);width:128px;height:128px;pointer-events:none;z-index:3}
+.wmugal{position:relative}
+.badge{position:absolute;top:26px;right:calc(var(--pad) - 10px);width:128px;height:128px;pointer-events:none;z-index:3}
 .badge svg{width:100%;height:100%;overflow:visible;animation:spin 18s linear infinite}
 .badge text{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;fill:var(--red)}
 .badge .dot{fill:var(--red)}
@@ -298,20 +310,15 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <span class="cap">✳ The crew behind the batch · Waffle Me Up</span>
 </div>
 
-<section class="paper">
-  <div class="wrap gal">
-    <div class="badge" aria-hidden="true">
-      <svg viewBox="0 0 100 100"><defs><path id="wmuBadge" d="M50,50 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"/></defs>
-        <text><textPath href="#wmuBadge" startOffset="0%">EDITORIAL · MADE FRESH · LOVINGLY CRAFTED · </textPath></text>
-        <circle class="dot" cx="50" cy="50" r="2.6"/>
-      </svg>
-    </div>
-    <div class="bar">
-      <span class="mono"><b>Contact sheet</b> · editorial selects from the shoot</span>
-      <span class="mono" style="color:#8f8d88">8 frames · hover to inspect</span>
-    </div>
-    <div class="frames" id="frames"></div>
+<section class="paper wmugal">
+  <!-- the spinning bakery badge, rehomed when the gallery went masonry (2026-07-22) -->
+  <div class="badge" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><defs><path id="wmuBadge" d="M50,50 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"/></defs>
+      <text><textPath href="#wmuBadge" startOffset="0%">EDITORIAL · MADE FRESH · LOVINGLY CRAFTED · </textPath></text>
+      <circle class="dot" cx="50" cy="50" r="2.6"/>
+    </svg>
   </div>
+  <MasonryGallery title="Contact sheet · editorial selects from the shoot" note="8 frames · click to enlarge" images={gallery} />
 </section>
 
 <section class="quote">
@@ -353,27 +360,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div><!--/underfoot-->
 
 <script is:inline>
-// gallery: 8 real frames, contact-sheet columns, kitchen captions
-(function(){
-  const shots=[
-    ['wmu-01.jpg','Into the mixer · by hand',1600,1068],
-    ['wmu-02.jpg','The savory build · egg + bacon',1600,1068],
-    ['wmu-03.jpg','Almond butter + berry · plated',1600,1068],
-    ['wmu-04.jpg','The crew · in the kitchen',1600,1068],
-    ['wmu-05.jpg','The batter · every batch',1600,1068],
-    ['wmu-06.jpg','The line · between orders',1600,1068],
-    ['wmu-07.jpg','Working the dough',1600,1068],
-    ['wmu-08.jpg','The makers · portrait',1600,1068]
-  ];
-  const el=document.getElementById('frames');
-  el.innerHTML=shots.map((s,i)=>`
-    <figure class="fr" style="--d:${i*45}ms">
-      <img src="/case-studies/waffle-me-up/gallery/${s[0]}" alt="Waffle Me Up brand shoot: ${s[1]}" width="${s[2]}" height="${s[3]}" loading="lazy">
-      <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · ${s[1]}</figcaption>
-    </figure>`).join('');
-  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
-})();
-
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 

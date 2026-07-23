@@ -7,6 +7,7 @@ import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
 import StatRow from '../../components/StatRow.astro';
+import MasonryGallery from '../../components/MasonryGallery.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'turnstile');
@@ -17,17 +18,17 @@ const hh = work.find(w => w.slug === 'turnstile');
 // /work/turnstile page + the stronger beats of /lab/turnstile. No film exists for this
 // case, so the media story is carried by the brand plates + two galleries (kit + BTS).
 
-const bts = [
-  ['bts-01.jpg', 'Sideline rig · shotgun on the long lens', 768, 512],
-  ['bts-02.jpg', 'Field test · dusk', 768, 960],
-  ['bts-03.jpg', 'Hands on · in the studio', 768, 512],
-  ['bts-04.jpg', 'Creator session', 768, 512],
-  ['bts-05.jpg', 'Fit check · studio headphones', 768, 960],
-  ['bts-06.jpg', 'At the DAW', 768, 512],
-  ['bts-07.jpg', 'Take one · full volume', 768, 960],
-  ['bts-08.jpg', 'Gain check', 768, 512],
-  ['bts-09.jpg', 'On the boom arm', 768, 512],
-  ['bts-10.jpg', 'The stream setup', 768, 1152],
+const gallery = [
+  { src: '/case-studies/turnstile/bts/bts-01.jpg', cap: 'Sideline rig · shotgun on the long lens', alt: 'Turnstile Audio in action: Sideline rig · shotgun on the long lens' },
+  { src: '/case-studies/turnstile/bts/bts-02.jpg', cap: 'Field test · dusk', alt: 'Turnstile Audio in action: Field test · dusk' },
+  { src: '/case-studies/turnstile/bts/bts-03.jpg', cap: 'Hands on · in the studio', alt: 'Turnstile Audio in action: Hands on · in the studio' },
+  { src: '/case-studies/turnstile/bts/bts-04.jpg', cap: 'Creator session', alt: 'Turnstile Audio in action: Creator session' },
+  { src: '/case-studies/turnstile/bts/bts-05.jpg', cap: 'Fit check · studio headphones', alt: 'Turnstile Audio in action: Fit check · studio headphones' },
+  { src: '/case-studies/turnstile/bts/bts-06.jpg', cap: 'At the DAW', alt: 'Turnstile Audio in action: At the DAW' },
+  { src: '/case-studies/turnstile/bts/bts-07.jpg', cap: 'Take one · full volume', alt: 'Turnstile Audio in action: Take one · full volume' },
+  { src: '/case-studies/turnstile/bts/bts-08.jpg', cap: 'Gain check', alt: 'Turnstile Audio in action: Gain check' },
+  { src: '/case-studies/turnstile/bts/bts-09.jpg', cap: 'On the boom arm', alt: 'Turnstile Audio in action: On the boom arm' },
+  { src: '/case-studies/turnstile/bts/bts-10.jpg', cap: 'The stream setup', alt: 'Turnstile Audio in action: The stream setup' },
 ];
 
 const kit = [
@@ -176,7 +177,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 /* full-bleed parallax break */
 
 /* BTS gallery: contact-sheet frames, masonry columns, spinning set badge */
-.badge{position:absolute;right:var(--pad);top:-59px;width:118px;height:118px;z-index:3;animation:spin 18s linear infinite;pointer-events:none}
+.tsgal{position:relative}
+.badge{position:absolute;right:var(--pad);top:24px;width:118px;height:118px;z-index:3;animation:spin 18s linear infinite;pointer-events:none}
 .badge text{font-family:var(--mono);font-size:10px;letter-spacing:.13em;fill:var(--red);text-transform:uppercase}
 
 /* quote on rose */
@@ -371,27 +373,15 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <span class="cap">✳ Take one · Turnstile Audio · In the studio</span>
 </div>
 
-<section class="paper">
-  <div class="wrap gal">
-    <div class="badge" aria-hidden="true">
-      <svg viewBox="0 0 100 100">
-        <defs><path id="tsBadge" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/></defs>
-        <text><textPath href="#tsBadge">In action · Behind the build ·</textPath></text>
-      </svg>
-    </div>
-    <div class="bar">
-      <span class="mono"><b>In action</b> · behind the build</span>
-      <span class="mono" style="color:#8f8d88">10 frames · hover to inspect</span>
-    </div>
-    <div class="frames" id="frames">
-      {bts.map(([file, cap, w, h], i) => (
-        <figure class="fr" style={`--d:${i * 45}ms`}>
-          <img src={`/case-studies/turnstile/bts/${file}`} alt={`Turnstile Audio in action: ${cap}`} width={w} height={h} loading="lazy">
-          <figcaption class="cap">FR-{String(i + 1).padStart(2, '0')} · {cap}</figcaption>
-        </figure>
-      ))}
-    </div>
+<section class="paper tsgal">
+  <!-- the circular badge, rehomed when the gallery went masonry (2026-07-22) -->
+  <div class="badge" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <defs><path id="tsBadge" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/></defs>
+      <text><textPath href="#tsBadge">In action · Behind the build ·</textPath></text>
+    </svg>
   </div>
+  <MasonryGallery title="In action · behind the build" note="10 frames · click to enlarge" images={gallery} />
 </section>
 
 <section class="quote">

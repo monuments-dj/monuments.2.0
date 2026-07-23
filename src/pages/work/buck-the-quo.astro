@@ -18,13 +18,13 @@ const scenes = [
   { img: `${G}/bq-canyon.jpg`, w: 2200, h: 1466, n: '02', k: 'The hook',  t: 'Merch worth', last: 'wearing', d: 'Boards, hats, bags, and shades good enough to carry home. The gear earned a few minutes of attention, and the room used them well.' },
   { img: `${G}/bq-shot2.jpg`, w: 2200, h: 1237, n: '03', k: 'The turn',  t: 'The merch was the doorway, the talk was the', last: 'point', d: 'Teens only, no parents, no teachers. A simple exercise opened a real conversation about the future, with a near-peer who listened instead of advised.' },
 ];
-const frames = [
-  { f: 'bq-skate.jpg',   c: 'In the helmet · On the street',  w: 2200, h: 1466 },
-  { f: 'bq-shot4.jpg',   c: 'The pack · Merch that traveled', w: 2200, h: 1464 },
-  { f: 'bq-canyon2.jpg', c: 'The hat · Worn in the wild',     w: 2200, h: 1466 },
-  { f: 'bq-talent.jpg',  c: 'The socks · Fair day',           w: 2200, h: 1466 },
-  { f: 'bq-shot3.jpg',   c: 'On the ground · The games',      w: 2200, h: 1650 },
-  { f: 'bq-graphic.jpg', c: 'On location · The summer tour',  w: 2200, h: 1473 },
+const gallery = [
+  { src: `${G}/bq-skate.jpg`,   cap: 'In the helmet · On the street',  alt: 'Buck the Quo: In the helmet · On the street' },
+  { src: `${G}/bq-shot4.jpg`,   cap: 'The pack · Merch that traveled', alt: 'Buck the Quo: The pack · Merch that traveled' },
+  { src: `${G}/bq-canyon2.jpg`, cap: 'The hat · Worn in the wild',     alt: 'Buck the Quo: The hat · Worn in the wild' },
+  { src: `${G}/bq-talent.jpg`,  cap: 'The socks · Fair day',           alt: 'Buck the Quo: The socks · Fair day' },
+  { src: `${G}/bq-shot3.jpg`,   cap: 'On the ground · The games',      alt: 'Buck the Quo: On the ground · The games' },
+  { src: `${G}/bq-graphic.jpg`, cap: 'On location · The summer tour',  alt: 'Buck the Quo: On location · The summer tour' },
 ];
 const did = [
   { k: 'Photo + Video',      v: 'Shot and cut the bulk of the campaign’s stills and motion.' },
@@ -54,6 +54,7 @@ import PageFooter from '../../components/PageFooter.astro';
 import RoleTag from '../../components/RoleTag.astro';
 import HeroHeader from '../../components/HeroHeader.astro';
 import StatRow from '../../components/StatRow.astro';
+import MasonryGallery from '../../components/MasonryGallery.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'buck-the-quo');
@@ -412,19 +413,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <span class="k mono">\ From the field</span>
       <h2>A brand teens actually <span class="serif">claimed.</span></h2>
     </div>
-    <div class="bar">
-      <span class="mono"><b>Contact sheet</b> · shot across the summer</span>
-      <span class="mono" style="color:#8f8d88">06 frames · hover to inspect</span>
-    </div>
-    <div class="frames" id="frames">
-      {frames.map((s, i) => (
-        <figure class={`fr ${s.web ? 'web' : ''}`} style={`--d:${i * 45}ms`}>
-          <img src={`${G}/${s.f}`} alt={`Buck the Quo: ${s.c}`} width={s.w} height={s.h} loading="lazy">
-          <figcaption class="cap">FR-{String(i + 1).padStart(2, '0')} · {s.c}</figcaption>
-        </figure>
-      ))}
-    </div>
   </div>
+  <MasonryGallery title="Contact sheet · shot across the summer" note="06 frames · click to enlarge" images={gallery} />
 </section>
 
 <section class="aw">
@@ -469,12 +459,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 // reveals
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
-
-// contact sheet: staggered frame drop-in once the sheet scrolls into view
-(function(){
-  const el=document.getElementById('frames');
-  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
-})();
 
 // triad: each line slides up + lights in its colour, staggered
 (function(){
