@@ -4,14 +4,12 @@
 **The two-domain strategy is now explicit (both halves from DJ, 2026-07-22):**
 - **monuments.cc leans MORE AGENCY** for pitching bigger projects. The team is
   named: **Kova, Tessanie, and DJ**. Studio "we" gets real faces.
-  ROSTER LEDGER (DJ's words, latest wins):
-  · Kova - role: **DP + Editor** (DJ 2026-07-22; supersedes his earlier
-    "Post production specialist" same day). Full public name spelling still
-    UNCONFIRMED (CWI credits say "Kova Kovatonic" - do not use without DJ's OK).
-  · Tessanie - name + role line still OWED (DJ's message cut off; site
-    currently says "Tess · Project Manager · Monuments").
-  · DJ - team-context title still unconfirmed (default: Creative Director).
-  Nothing ships to the site until all three lines are confirmed.
+  ROSTER LEDGER (DJ's words, latest wins - roles CONFIRMED 2026-07-22):
+  · Tessanie - **Lead Producer**
+  · Kova - **Post Production Specialist · DP** (supersedes "DP + Editor")
+  · DJ - Creative Director (default, unobjected)
+  Still owed before faces/credits ship: SURNAME + spelling for Tessanie and
+  Kova (CWI credits say "Kova Kovatonic" - unconfirmed), and photos.
 - **djthecd.com is coming.** DJ, after advice from another creative director: in-house
 hiring wants a PERSON, not a studio. At some point this site gets mirrored on
 djthecd.com and shifted to a solo mission (I/DJ-centered, studio framing out).
