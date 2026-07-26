@@ -23,3 +23,16 @@ site and leads on djthecd when it exists. Markup verbatim as removed:
 ```
 Note: card carried the OPEN-TO-OFFERS stamp + `is-open` styling; the
 .wstamp/.is-open CSS remains in capabilities.astro (harmless, reusable).
+
+
+## THE SHARED-LANGUAGE LOGIC (locked 2026-07-22, DJ asked)
+Work case pages live on BOTH sites. The dialect rules:
+1. Case BODIES are shared + identical: personal craft claims in third
+   person ("DJ directed"), collaborative claims as We, collaborators named.
+   True and professional under either brand = edit once, render twice.
+2. VOICE lives in each site's CHROME (hero/about/intros/CTAs): We on
+   monuments, I on djthecd. About is already I = djthecd-shaped.
+3. Escape hatch: "DJ directed" -> "I directed" is a DETERMINISTIC build-time
+   transform if djthecd ever wants I-voice case bodies (same source, two
+   outputs). This is why the sweep chose DJ over We for personal claims:
+   We would have destroyed the attribution information forever.
