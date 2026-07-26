@@ -15,3 +15,5 @@ Disallow: /cta-preview
 Disallow: /hire
 Disallow: /photography
 Disallow: /keystatic
+
+Sitemap: https://monuments-2-0.vercel.app/sitemap-index.xml

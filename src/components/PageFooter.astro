@@ -348,6 +348,45 @@ const { tag } = Astro.props;
 })();
 </script>
 
+<!-- ═ STRUCTURED DATA (SEO, 2026-07-22) ═ one place, every page. Target queries
+     per DJ: LA/Boise creative director, LA/Boise production company, Highland
+     Park agency. areaServed carries the geography; claims stay honest.
+     ⚠ Highland Park as the studio's neighborhood is DJ's claim - flagged for
+     his confirm; remove from areaServed if wrong. -->
+<script type="application/ld+json" is:inline set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://monuments-2-0.vercel.app/#org",
+      "name": "Monuments",
+      "url": "https://monuments-2-0.vercel.app/",
+      "email": "monuments.cc@gmail.com",
+      "description": "Independent creative studio and production company led by creative director DJ Ramirez. Integrated campaigns, film, stills, and experiential, made in Los Angeles and Boise.",
+      "areaServed": [
+        { "@type": "Place", "name": "Los Angeles, CA" },
+        { "@type": "Place", "name": "Highland Park, Los Angeles" },
+        { "@type": "Place", "name": "Boise, ID" }
+      ],
+      "knowsAbout": ["creative direction", "film production", "brand campaigns", "photography", "experiential marketing"],
+      "founder": { "@id": "https://monuments-2-0.vercel.app/#dj" },
+      "foundingDate": "2022"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://monuments-2-0.vercel.app/#dj",
+      "name": "DJ Ramirez",
+      "jobTitle": "Creative Director",
+      "worksFor": { "@id": "https://monuments-2-0.vercel.app/#org" },
+      "homeLocation": [
+        { "@type": "Place", "name": "Los Angeles, CA" },
+        { "@type": "Place", "name": "Boise, ID" }
+      ],
+      "url": "https://monuments-2-0.vercel.app/about"
+    }
+  ]
+})} />
+
 <style is:global>
 /* ═ THE SHARED HERO SCALE (baked 2026-07-20, DJ flagged oversized hero type
    for the FOURTH time) ═══════════════════════════════════════════════════

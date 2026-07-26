@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 import vercel from '@astrojs/vercel';
+import sitemap from '@astrojs/sitemap';
 
 // The Keystatic admin (/keystatic) now ships in production so you can log in from
 // any browser (GitHub mode). PUBLIC PAGES STAY PRERENDERED/STATIC — only the admin
@@ -20,7 +21,10 @@ export default defineConfig({
   security: {
     allowedDomains: [{ hostname: 'monuments-2-0.vercel.app' }],
   },
-  integrations: [react(), keystatic()],
+  integrations: [react(), keystatic(), sitemap({
+    // keep internal surfaces out of the index (belt to robots.txt's braces)
+    filter: (page) => !/\/(lab|template|page-template|page-elements|cta-preview|work-preview|keystatic)(\/|$)/.test(page),
+  })],
   // /services renamed to /capabilities (DJ, 2026-07-07); keep old links alive
   redirects: { '/services': '/capabilities', '/work/sony-xperia-summer': '/work/sony-xperia' },
   adapter: vercel(),
