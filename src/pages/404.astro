@@ -1,0 +1,47 @@
+---
+// 404 · on-brand dead end. Self-contained like every page; ink ground, mono
+// file-language, no placeholder words (rule 4). Vercel serves this for any
+// unknown route on the static build.
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>404 · Monuments</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="File not found. The rest of the archive is intact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#161514;--paper:#F5F3EF;--red:#E0311A;--mono:'Fragment Mono',monospace;--disp:'Bricolage Grotesque',sans-serif}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--disp);min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px;-webkit-font-smoothing:antialiased}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase}
+.k{color:var(--red)}
+h1{font-weight:800;font-size:clamp(64px,16vw,190px);line-height:.9;letter-spacing:-.04em;margin:18px 0 10px}
+.s{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(20px,3vw,32px);color:#cbc8c2}
+.row{margin-top:44px;display:flex;gap:28px;flex-wrap:wrap;justify-content:center}
+a{color:var(--paper);text-decoration:none;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid rgba(245,243,239,.5);padding-bottom:3px;transition:color .3s,border-color .3s}
+a:hover{color:var(--red);border-color:var(--red)}
+.wm{position:fixed;top:26px;left:26px;font-weight:800;font-size:22px;letter-spacing:-.01em}
+.wm i{font-style:normal;color:var(--red)}
+.nfo{position:fixed;bottom:22px;left:22px}
+</style>
+</head>
+<body>
+<span class="wm">M<i>✳</i>NUMENTS</span>
+<span class="mono k">File · not in the archive</span>
+<h1>404</h1>
+<p class="s">This frame never made the cut.</p>
+<div class="row">
+  <a href="/">The front door</a>
+  <a href="/work">The work</a>
+  <a href="/contact">Tell us what you're building</a>
+</div>
+<span class="mono nfo">ERR-404 · the rest of the archive is intact</span>
+</body>
+</html>
