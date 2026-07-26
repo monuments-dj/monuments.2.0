@@ -1,7 +1,13 @@
 # TODO - current state
 
 ## 🧭 STANDING DIRECTION (2026-07-22, keep top of mind every session)
-**djthecd.com is coming.** DJ, after advice from another creative director: in-house
+**The two-domain strategy is now explicit (both halves from DJ, 2026-07-22):**
+- **monuments.cc leans MORE AGENCY** for pitching bigger projects. The team is
+  named: **Kova, Tessanie, and DJ**. Studio "we" gets real faces. (Spelling of
+  names, roles, and title lines must be CONFIRMED with DJ before any on-site
+  credit - Kova appears in CWI credits as DP "Kova Kovatonic"; Tessanie = the
+  "Tess" already in the testimonial roster + about copy. Do not guess.)
+- **djthecd.com is coming.** DJ, after advice from another creative director: in-house
 hiring wants a PERSON, not a studio. At some point this site gets mirrored on
 djthecd.com and shifted to a solo mission (I/DJ-centered, studio framing out).
 NOT NOW - but every choice should keep the fork cheap: tokens over hardcodes,
