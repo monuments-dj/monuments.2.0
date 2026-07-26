@@ -112,7 +112,18 @@ credits` becomes 3 lights — insert a dark beat or flip a ground. ENFORCE with
 FAILS on adjacent lights. Run it on any page you touch. Reference flow that passes:
 `/page-template`.
 
-## Active work (2026-07-14): chat rotated - read TODO.md 🔄 HANDOFF 2026-07-14 block FIRST
+## Active work (2026-07-26): FINAL QC CAMPAIGN - read docs/FINAL-QC-2026-07-22.md FIRST
+Voice sweep DONE (26 pages: studio=We, personal craft="DJ directed", About stays I,
+quotes/credits untouched). Battery GREEN except Lighthouse (deferred). Switcher DELETED
+(bw+tiny baked). --fs-hero + --band-h + band parallax + JSON-LD/sitemap live. Galleries
+= MasonryGallery except sony-xm5/flow-state (need video cells). TWO-DOMAIN STRATEGY:
+monuments=agency-We w/ team (Tessanie Lead Producer, Kova Post Production Specialist·DP,
+surnames owed), djthecd.com=solo-I fork later - shared-language logic in
+docs/DJTHECD-HOLDINGS.md. EFFICIENCY MODE (DJ demanded): batch commits, ONE live-verify
+per batch, risk-tiered checks, parallel agents for sweeps. DJ owes: photography
+direction, AOV reel, 3.6M+ verdict, Against logo, surnames, real-browser pass.
+
+## Active work (2026-07-14, historical): chat rotated - read TODO.md 🔄 HANDOFF 2026-07-14 block FIRST
 All of it is LIVE on main (05e6e3d..66b45c6) and verified on the deployed site.
 **The three things that will bite you if you skip the TODO:**
 1. **The role/credits bar is DEAD.** DJ killed it. Credits live in the Call Sheet.
