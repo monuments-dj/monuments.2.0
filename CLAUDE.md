@@ -112,16 +112,20 @@ credits` becomes 3 lights — insert a dark beat or flip a ground. ENFORCE with
 FAILS on adjacent lights. Run it on any page you touch. Reference flow that passes:
 `/page-template`.
 
-## Active work (2026-07-26): FINAL QC CAMPAIGN - read docs/FINAL-QC-2026-07-22.md FIRST
-Voice sweep DONE (26 pages: studio=We, personal craft="DJ directed", About stays I,
-quotes/credits untouched). Battery GREEN except Lighthouse (deferred). Switcher DELETED
-(bw+tiny baked). --fs-hero + --band-h + band parallax + JSON-LD/sitemap live. Galleries
-= MasonryGallery except sony-xm5/flow-state (need video cells). TWO-DOMAIN STRATEGY:
-monuments=agency-We w/ team (Tessanie Lead Producer, Kova Post Production Specialist·DP,
-surnames owed), djthecd.com=solo-I fork later - shared-language logic in
-docs/DJTHECD-HOLDINGS.md. EFFICIENCY MODE (DJ demanded): batch commits, ONE live-verify
-per batch, risk-tiered checks, parallel agents for sweeps. DJ owes: photography
-direction, AOV reel, 3.6M+ verdict, Against logo, surnames, real-browser pass.
+## Active work (2026-07-27): FINAL QC CAMPAIGN - read docs/FINAL-QC-2026-07-22.md FIRST
+Voice sweep DONE. Battery FULLY GREEN incl Lighthouse (07-27: xperia 90/100/100/100 was
+56/90/77, work 92, home 88, capabilities 86, about 68=hero-weight-bound; details+flags in
+the QC doc). Galleries = MasonryGallery on ALL 19 pages (v2: video cells, lightbox sound,
+tone=dark, build-time dims via src/lib/imgdims.mjs - cwd-anchored, import.meta.url breaks
+under the bundler). 3 mobile overhangs KILLED at class level (biggest: work.css
+.credits{padding:9vh 0} zeroed the CallSheet gutter SITEWIDE; also IG's absolute measuring
+phase escapes grids - position:static!important in the page CSS beats it). IG embed.js =
+lazy on xperia/clothing-merch. ffmpeg for JPG compression, NEVER sips (it inflates).
+TWO-DOMAIN STRATEGY: monuments=agency-We w/ team (Tessanie Lead Producer, Kova Post
+Production Specialist·DP, surnames owed), djthecd.com=solo-I fork later - logic in
+docs/DJTHECD-HOLDINGS.md. EFFICIENCY MODE: batch commits, ONE live-verify per batch. DJ
+owes: photography direction, AOV reel, 3.6M+ verdict, Against logo, surnames, real-browser
+pass (+ xm5/flow-state sound moved to lightbox), xperia last-3-reels call (QC doc item 8).
 
 ## Active work (2026-07-14, historical): chat rotated - read TODO.md 🔄 HANDOFF 2026-07-14 block FIRST
 All of it is LIVE on main (05e6e3d..66b45c6) and verified on the deployed site.
