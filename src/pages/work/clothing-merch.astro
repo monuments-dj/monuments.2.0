@@ -130,7 +130,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .film .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:16px}
 .film .bar .mono b{color:var(--spark)}
 .reelgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.reelgrid .instagram-media{margin:0 auto!important}
+.reelgrid .instagram-media{margin:0 auto!important;max-width:100%!important;min-width:0!important;position:static!important} /* see sony-xperia: IG's absolute measuring phase escapes the grid */
 @media (max-width:700px){.reelgrid{grid-template-columns:1fr}}
 .posterreel{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:#000;cursor:pointer}
 .posterreel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.82);transition:transform .8s cubic-bezier(.22,1,.36,1)}
@@ -218,7 +218,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
-<div class="over">
+<div class="over" role="main">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/clothing-merch/new-noise-poster.jpg" vid="/case-studies/clothing-merch/new-noise.mp4" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <StatRow tone="paper"
@@ -358,7 +358,31 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
 </script>
-<script is:inline async src="https://www.instagram.com/embed.js"></script>
+<script is:inline>
+// IG embeds: lazy-load embed.js near-viewport + clamp rendered iframes (same
+// pattern as sony-xperia - IG's inline !important widths overflow 390 phones).
+(function(){
+  var grid=document.querySelector('.reelgrid');
+  if(!grid||!document.querySelector('.instagram-media'))return;
+  var loaded=false;
+  function clamp(){
+    document.querySelectorAll('iframe.instagram-media').forEach(function(f){
+      f.style.setProperty('width','100%','important');
+      f.style.setProperty('min-width','0','important');
+      f.style.setProperty('max-width','100%','important');
+    });
+  }
+  function load(){
+    if(loaded)return;loaded=true;
+    var s=document.createElement('script');s.async=true;s.src='https://www.instagram.com/embed.js';
+    document.body.appendChild(s);
+    var n=0,t=setInterval(function(){clamp();if(++n>40)clearInterval(t);},500);
+  }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){o.disconnect();load();}});},{rootMargin:'900px 0px'}).observe(grid);
+  }else load();
+})();
+</script>
 <script is:inline>
 // at-foot: mark when the visitor reaches the very bottom (the pinned descriptor + clock
 // stay put; the rest of the footer meta settles into one centered line beneath them).

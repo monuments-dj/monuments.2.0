@@ -1,5 +1,6 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
+import MasonryGallery from '../../components/MasonryGallery.astro';
 import NextFile from '../../components/NextFile.astro';
 import ScreenRoom from '../../components/ScreenRoom.astro';
 import PageFooter from '../../components/PageFooter.astro';
@@ -9,6 +10,37 @@ import StatRow from '../../components/StatRow.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'sony-xm5');
+
+// contact sheet: 10 real frames + the launch reel as a living cell (sound in the lightbox)
+const G = '/case-studies/sony-xm5/gallery';
+const sheet = [
+  { src: `${G}/xm5-01.jpg`, w: 2000, h: 1500, cap: 'FR-01 · Gawx Art · The spark' },
+  { src: `${G}/xm5-02.jpg`, w: 2000, h: 1500, cap: 'FR-02 · Gawx Art · The messy middle' },
+  { src: `${G}/xm5-03.jpg`, w: 2000, h: 1333, cap: 'FR-03 · Gawx Art · Locked in' },
+  { src: `${G}/xm5-04.jpg`, w: 2000, h: 1500, cap: 'FR-04 · Mr B Baby · Before the wall' },
+  { src: `${G}/xm5-05.jpg`, w: 2000, h: 1333, cap: 'FR-05 · WH-1000XM5 · Studio still' },
+  { src: `${G}/xm5-06.jpg`, w: 2000, h: 1500, cap: 'FR-06 · XM5 + Xperia · Studio still' },
+  { src: `${G}/xm5-07.jpg`, w: 2000, h: 1333, cap: 'FR-07 · In the edit' },
+  { src: `${G}/xm5-08.jpg`, w: 1336, h: 2000, cap: 'FR-08 · Mr B Baby · Portrait' },
+  { src: `${G}/xm5-09.jpg`, w: 1500, h: 2000, cap: 'FR-09 · Mr B Baby · At the cart' },
+  { src: `${G}/xm5-10.jpg`, w: 2000, h: 1500, cap: 'FR-10 · The setup · Process still' },
+  { video: '/reels/ig/Chp1T5bPNwd.mp4', w: 540, h: 520, cap: 'FR-11 · The launch reel', href: 'https://www.instagram.com/reel/Chp1T5bPNwd/' },
+];
+// on set: the BTS band (dims filled at build by the component)
+const B = '/case-studies/sony-xm5/bts';
+const onset = [
+  { video: `${B}/bts-clip.mp4`, w: 540, h: 960, cap: 'On set · in motion', alt: 'Behind the scenes: filming on the street corner' },
+  { src: `${B}/bts-01.jpg`, cap: 'On set · Gawx at the wall', alt: 'Gawx Art facing his wall of artwork on set' },
+  { src: `${B}/bts-03.jpg`, cap: 'On set · the product', alt: 'The WH-1000XM5 held up on set under the lights' },
+  { src: `${B}/bts-04.jpg`, cap: 'On set · the crew', alt: 'Full camera crew and gear on the outdoor shoot' },
+  { src: `${B}/bts-06.jpg`, cap: 'On set · the setup', alt: 'Gawx Art seated at a table in front of his art wall' },
+  { src: `${B}/bts-05.jpg`, cap: 'On set · before the take', alt: 'Glam session before the shoot, black and white' },
+  { src: `${B}/bts-09.jpg`, cap: 'On set · the tools', alt: 'The XM5 with paint markers and a sketchbook, flat lay' },
+  { src: `${B}/bts-07.jpg`, cap: 'On set · rolling', alt: 'Crew filming Gawx against the art wall' },
+  { src: `${B}/bts-08.jpg`, cap: 'On set · the studio', alt: 'Wide studio setup with softbox and seated subject' },
+  { src: `${B}/bts-10.jpg`, cap: 'On set · in the zone', alt: 'Portrait of a creator wearing the XM5, black and white' },
+  { src: `${B}/bts-02.jpg`, cap: 'On set · the details', alt: 'Paint-flecked shoes on set' },
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -114,13 +146,6 @@ a{color:inherit;text-decoration:none}
 .poster16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
 
 /* the cutdowns: three creators, sound on click, one at a time */
-.igwrap{max-width:720px;margin:0 auto}
-.igtile{position:relative;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 26px 70px rgba(0,0,0,.45);cursor:pointer}
-.igtile video{width:100%;height:auto;display:block}
-.igsnd{position:absolute;left:12px;top:12px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:rgba(22,21,20,.6);padding:5px 10px;border-radius:99px;backdrop-filter:blur(2px)}
-.igtile.sound .igsnd{background:rgba(22,21,20,.85)}
-.igout{position:absolute;right:12px;bottom:12px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:rgba(22,21,20,.6);padding:6px 11px;border-radius:99px;backdrop-filter:blur(2px);transition:background .3s}
-.igout:hover{background:rgba(22,21,20,.9)}
 .cutgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .cut{position:relative;cursor:pointer}
 .cut video{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#000}
@@ -131,15 +156,7 @@ a{color:inherit;text-decoration:none}
 
 /* full-bleed parallax break */
 
-/* gallery: contact-sheet frames, masonry columns for mixed portrait + landscape */
-/* on-set: behind-the-activation BTS, dark band */
-.onset{background:var(--ink);color:var(--paper);padding:11vh 0}
-.onset .gal{padding:0}
-.onset .gal .bar{border-bottom:2px solid var(--paper)}
-.onset .gal .bar .mono{color:var(--paper)}
-.onset .gal .bar .mono b{color:var(--spark)}
-.fr video{width:100%;height:auto;display:block;cursor:pointer}
-.fr video{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+/* galleries: MasonryGallery component (contact sheet light + on-set dark) */
 
 /* quote on rose */
 
@@ -153,14 +170,11 @@ a{color:inherit;text-decoration:none}
 @media (max-width:900px){
   .story{grid-template-columns:1fr}.story .side{position:static}
   .statrow>.in{justify-content:center;gap:28px 44px}
-  .frames{columns:2}
   .hero .kck{display:none}
 }
-@media (max-width:560px){.frames{columns:1}}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .hero .t .ln>span{transform:none}.hero .nfo,.hero .kck{opacity:1}.rv{opacity:1;transform:none}
-  .frames .fr{opacity:1;transform:none}
   .hero .vwrap{display:none}
 }
 
@@ -202,7 +216,7 @@ a{color:inherit;text-decoration:none}
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
-<div class="over">
+<div class="over" role="main">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/sony-xm5/gallery/xm5-03.jpg" vid={hh.vid} logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <StatRow tone="paper"
@@ -299,36 +313,10 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>Contact sheet</b> · selects from the campaign</span>
-      <span class="mono" style="color:#8f8d88">11 frames · the launch reel plays in the sheet</span>
-    </div>
-    <div class="frames" id="frames"></div>
-  </div>
+  <MasonryGallery title="Contact sheet · selects from the campaign" note="11 frames · the launch reel plays in the sheet" images={sheet} />
 </section>
 
-<section class="onset">
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>On set</b> · behind the activation</span>
-      <span class="mono" style="color:#8f8d88">11 frames · the shoot in motion</span>
-    </div>
-    <div class="frames show">
-      <figure class="fr vidfr"><video src="/case-studies/sony-xm5/bts/bts-clip.mp4" autoplay muted loop playsinline aria-label="Behind the scenes: filming on the street corner"></video><figcaption class="cap">On set · in motion</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-xm5/bts/bts-01.jpg" alt="Gawx Art facing his wall of artwork on set" loading="lazy"><figcaption class="cap">On set · Gawx at the wall</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-xm5/bts/bts-03.jpg" alt="The WH-1000XM5 held up on set under the lights" loading="lazy"><figcaption class="cap">On set · the product</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-xm5/bts/bts-04.jpg" alt="Full camera crew and gear on the outdoor shoot" loading="lazy"><figcaption class="cap">On set · the crew</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-xm5/bts/bts-06.jpg" alt="Gawx Art seated at a table in front of his art wall" loading="lazy"><figcaption class="cap">On set · the setup</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-xm5/bts/bts-05.jpg" alt="Glam session before the shoot, black and white" loading="lazy"><figcaption class="cap">On set · before the take</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-xm5/bts/bts-09.jpg" alt="The XM5 with paint markers and a sketchbook, flat lay" loading="lazy"><figcaption class="cap">On set · the tools</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-xm5/bts/bts-07.jpg" alt="Crew filming Gawx against the art wall" loading="lazy"><figcaption class="cap">On set · rolling</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-xm5/bts/bts-08.jpg" alt="Wide studio setup with softbox and seated subject" loading="lazy"><figcaption class="cap">On set · the studio</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-xm5/bts/bts-10.jpg" alt="Portrait of a creator wearing the XM5, black and white" loading="lazy"><figcaption class="cap">On set · in the zone</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-xm5/bts/bts-02.jpg" alt="Paint-flecked shoes on set" loading="lazy"><figcaption class="cap">On set · the details</figcaption></figure>
-    </div>
-  </div>
-</section>
+<MasonryGallery tone="dark" title="On set · behind the activation" note="11 frames · the shoot in motion" images={onset} />
 
 <section class="quote">
   <div class="wrap">
@@ -373,34 +361,6 @@ a{color:inherit;text-decoration:none}
 </div><!--/underfoot-->
 
 <script is:inline>
-// gallery: 10 real frames, masonry columns, artist captions
-(function(){
-  const shots=[
-    ['xm5-01.jpg','Gawx Art · The spark',2000,1500],
-    ['xm5-02.jpg','Gawx Art · The messy middle',2000,1500],
-    ['xm5-03.jpg','Gawx Art · Locked in',2000,1333],
-    ['xm5-04.jpg','Mr B Baby · Before the wall',2000,1500],
-    ['xm5-05.jpg','WH-1000XM5 · Studio still',2000,1333],
-    ['xm5-06.jpg','XM5 + Xperia · Studio still',2000,1500],
-    ['xm5-07.jpg','In the edit',2000,1333],
-    ['xm5-08.jpg','Mr B Baby · Portrait',1336,2000],
-    ['xm5-09.jpg','Mr B Baby · At the cart',1500,2000],
-    ['xm5-10.jpg','The setup · Process still',2000,1500]
-  ];
-  const el=document.getElementById('frames');
-  // the launch reel lives in the sheet as a living tile (sound on tap)
-  const reel=document.createElement('figure');
-  reel.className='fr igtile';
-  reel.innerHTML='<video src="/reels/ig/Chp1T5bPNwd.mp4" width="540" height="520" autoplay muted loop playsinline preload="none"></video><figcaption class="cap">FR-11 · THE LAUNCH REEL · TAP FOR SOUND · <a href="https://www.instagram.com/reel/Chp1T5bPNwd/" target="_blank" rel="noopener" style="text-decoration:underline">IG ↗</a></figcaption>';
-  el.innerHTML=shots.map((s,i)=>`
-    <figure class="fr" style="--d:${i*45}ms">
-      <img src="/case-studies/sony-xm5/gallery/${s[0]}" alt="Sony XM5 campaign: ${s[1]}" width="${s[2]}" height="${s[3]}" loading="lazy">
-      <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · ${s[1]}</figcaption>
-    </figure>`).join('');
-  el.appendChild(reel);
-  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
-})();
-
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
@@ -441,21 +401,12 @@ document.querySelectorAll('.cut').forEach(function(c){
   var v=c.querySelector('video');
   function toggle(){
     if(v.muted){
-      document.querySelectorAll('.cut video, .igtile video').forEach(function(o){if(o!==v){o.muted=true;o.closest('.cut,.igtile').classList.remove('playing','sound');}});
+      document.querySelectorAll('.cut video').forEach(function(o){if(o!==v){o.muted=true;o.closest('.cut').classList.remove('playing');}});
       v.muted=false;v.currentTime=0;v.play();c.classList.add('playing');
     }else{v.muted=true;c.classList.remove('playing');}
   }
   c.addEventListener('click',toggle);
   c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
-});
-// the reel tile: same deal
-document.querySelectorAll('.igtile').forEach(function(t){
-  var v=t.querySelector('video');
-  t.addEventListener('click',function(e){
-    if(e.target.closest('.igout'))return;
-    if(v.muted){document.querySelectorAll('.cut video').forEach(function(o){o.muted=true;o.closest('.cut').classList.remove('playing');});v.muted=false;v.currentTime=0;v.play();t.classList.add('sound');}
-    else{v.muted=true;t.classList.remove('sound');}
-  });
 });
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);

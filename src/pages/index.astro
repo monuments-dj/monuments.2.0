@@ -249,7 +249,7 @@ h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;fo
 .tb-flap.out{transform:translateY(-105%)}
 .tb-flap.in{transform:translateY(105%)}
 .tb-flap.in.go{transform:translateY(0)}
-.tb-note{margin-top:14px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(22,21,20,.45)}
+.tb-note{margin-top:14px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(22,21,20,.66)} /* .45 was 2.9:1 at 10.5px */
 @media(max-width:720px){
   .tb-head{flex-direction:column}
   .tb-mark{height:56px}
@@ -367,10 +367,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 
-<div class="over">
+<div class="over" role="main">
 <header class="hero">
   <div class="hero-media" id="heroMedia">
-    <img src="/gallery/full/p-013.jpg" alt="">
+    <img src="/gallery/full/p-013.jpg" alt="" fetchpriority="high" width="1600" height="1069">
   </div>
   <div class="t">
     <div class="hero-tilt" id="hero-tilt">
@@ -401,16 +401,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <p class="rv">We've worked with global brands to craft campaigns that drive results. Satisfying clients, uncovering insights, moving product, and winning awards along the way.</p>
       <a class="tb-cta mono rv" href="mailto:monuments.cc@gmail.com">Let's talk ↗</a>
     </div>
-    <img class="tb-mark rv" src="/brand/m-mono.png" alt="" loading="lazy" decoding="async">
+    <img class="tb-mark rv" src="/brand/m-mono.png" alt="" width="750" height="751" loading="lazy" decoding="async">
   </div>
   <div class="wrap">
     <div class="tb-grid" id="tbGrid">
-      <button class="tb-cell" type="button" aria-label="Sony · tap for the next brand"><span class="tb-flap"><img class="b-sony" src="/logos/sony-black.png" alt="Sony" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="Adorama · tap for the next brand"><span class="tb-flap"><img class="b-adorama" src="/logos/adorama-black.png" alt="Adorama" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="Intel · tap for the next brand"><span class="tb-flap"><img class="b-intel" src="/logos/intel-black.png" alt="Intel" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="Art of Visuals · tap for the next brand"><span class="tb-flap"><img class="b-art-of-visuals" src="/logos/art-of-visuals-black.png" alt="Art of Visuals" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="Flashpoint · tap for the next brand"><span class="tb-flap"><img class="b-flashpoint" src="/logos/flashpoint-black.png" alt="Flashpoint" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="MSI · tap for the next brand"><span class="tb-flap"><img class="b-msi" src="/logos/msi-black.png" alt="MSI" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Sony · tap for the next brand"><span class="tb-flap"><img class="b-sony" src="/logos/sony-black.png" width="532" height="94" alt="Sony" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Adorama · tap for the next brand"><span class="tb-flap"><img class="b-adorama" src="/logos/adorama-black.png" width="576" height="94" alt="Adorama" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Intel · tap for the next brand"><span class="tb-flap"><img class="b-intel" src="/logos/intel-black.png" width="551" height="214" alt="Intel" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Art of Visuals · tap for the next brand"><span class="tb-flap"><img class="b-art-of-visuals" src="/logos/art-of-visuals-black.png" width="707" height="99" alt="Art of Visuals" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Flashpoint · tap for the next brand"><span class="tb-flap"><img class="b-flashpoint" src="/logos/flashpoint-black.png" width="591" height="52" alt="Flashpoint" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="MSI · tap for the next brand"><span class="tb-flap"><img class="b-msi" src="/logos/msi-black.png" width="549" height="184" alt="MSI" loading="lazy" decoding="async"></span></button>
     </div>
     <p class="tb-note mono">13 brands · repeat clients · tap a cell to flip it</p>
   </div>
@@ -448,35 +448,35 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <span class="reel-card spacer" aria-hidden="true"></span>
         <a class="reel-card" href="/work/art-of-visuals" data-role="Previous role · Creative Director" data-stats="4x agency revenue|Roster · Sony · Intel · MSI · Adorama +|Daily + weekly content engine" data-snip="/snips/art-of-visuals.mp4" data-lead="" data-word="scale.">
           <span class="imgs"><img class="a" src="/case-studies/art-of-visuals/gallery/xm3-bts.jpg" alt="Art of Visuals" loading="lazy"><img class="b" src="/case-studies/art-of-visuals/gallery/podcast-cover.jpg" alt="" loading="lazy"></span>
-          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/logos/art-of-visuals.png" alt="">Art of Visuals</span><span class="mono">MC-2024-01 · Brand campaign · 4x</span></div>
+          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/logos/art-of-visuals.png" width="707" height="99" alt="">Art of Visuals</span><span class="mono">MC-2024-01 · Brand campaign · 4x</span></div>
         </a>
         <a class="reel-card" href="/work/sony-this-moment" data-role="Creative Direction" data-stats="Sony Audio campaign|Film + stills|with Art of Visuals" data-snip="/snips/sony-this-moment.mp4" data-word="felt.">
           <span class="imgs"><img class="a" src="/case-studies/sony-this-moment/gallery/tm-05.jpg" alt="Sony · This Moment" loading="lazy"><img class="b" src="/case-studies/sony-this-moment/gallery/tm-04.jpg" alt="" loading="lazy"></span>
-          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/logos/sony.png" alt="">Sony · This Moment</span><span class="mono">MC-2023-06 · Campaign film + stills</span></div>
+          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/logos/sony.png" width="532" height="94" alt="">Sony · This Moment</span><span class="mono">MC-2023-06 · Campaign film + stills</span></div>
         </a>
         <a class="reel-card" href="/work/sony-flow-state" data-role="Director + Creative Direction" data-stats="1.6M impressions · 12.61% engagement|Hero film for the WH-1000XM3|with Art of Visuals" data-snip="/snips/sony-flow-state.mp4" data-lead="find your" data-word="flow.">
           <span class="imgs"><img class="a" src="/case-studies/sony-flow-state/gallery/fs-05.jpg" alt="Sony · Flow State" loading="lazy"><img class="b" src="/case-studies/sony-flow-state/gallery/fs-20.jpg" alt="" loading="lazy"></span>
-          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/logos/sony.png" alt="">Sony · Flow State</span><span class="mono">MC-2023-07 · Hero film · WH-1000XM3</span></div>
+          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/logos/sony.png" width="532" height="94" alt="">Sony · Flow State</span><span class="mono">MC-2023-07 · Hero film · WH-1000XM3</span></div>
         </a>
         <a class="reel-card" href="/work/blue-cross" data-role="Creative Direction" data-stats="Real people, real Idaho|Documentary campaign|with OMEK" data-word="human.">
           <span class="imgs"><img class="a" src="/case-studies/blue-cross/bc-2.jpg" alt="Blue Cross of Idaho" loading="lazy"><img class="b" src="/case-studies/blue-cross/gallery/bci-09.jpg" alt="" loading="lazy"></span>
-          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/logos/blue-cross.png" alt="">Blue Cross of Idaho</span><span class="mono">MC-2023-04 · Documentary campaign</span></div>
+          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/logos/blue-cross.png" width="761" height="147" alt="">Blue Cross of Idaho</span><span class="mono">MC-2023-04 · Documentary campaign</span></div>
         </a>
         <a class="reel-card" href="/work/donut-zumiez" data-role="Editor" data-stats="Edited the collab video|Animation + video edit|Retail + merch" data-snip="/snips/donut-zumiez.mp4" data-word="fast.">
           <span class="imgs"><img class="a" src="/case-studies/donut-zumiez/gallery/film-01.jpg" alt="Donut × Zumiez" loading="lazy"><img class="b" src="/case-studies/donut-zumiez/gallery/merch.jpg" alt="" loading="lazy"></span>
-          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/logos/donut-media.png" alt="">Donut × Zumiez</span><span class="mono">MC-2023-08 · Retail collab · Edit + animation</span></div>
+          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/logos/donut-media.png" width="1200" height="561" alt="">Donut × Zumiez</span><span class="mono">MC-2023-08 · Retail collab · Edit + animation</span></div>
         </a>
         <a class="reel-card" href="/work/turnstile" data-role="Creative Direction" data-stats="Full brand system|Product launch|Naming to packaging" data-snip="/snips/turnstile.mp4" data-word="heard.">
           <span class="imgs"><img class="a" src="/case-studies/turnstile/products/prod-01.jpg" alt="Turnstile Audio" loading="lazy"><img class="b" src="/case-studies/turnstile/bts/bts-02.jpg" alt="" loading="lazy"></span>
-          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/case-studies/turnstile/logo.png" alt="">Turnstile Audio</span><span class="mono">MC-2023-02 · Brand + product launch</span></div>
+          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/case-studies/turnstile/logo.png" width="974" height="178" alt="">Turnstile Audio</span><span class="mono">MC-2023-02 · Brand + product launch</span></div>
         </a>
         <a class="reel-card" href="/work/ac-boise" data-role="Director · the launch film" data-stats="Directed the launch film|Social + in-person launch|with Against" data-snip="/snips/ac-boise.mp4" data-word="worn.">
           <span class="imgs"><img class="a" src="/case-studies/ac-boise/gallery/home-01.jpg" alt="AC Boise" loading="lazy"><img class="b" src="/case-studies/ac-boise/gallery/home-02.jpg" alt="" loading="lazy"></span>
-          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/case-studies/ac-boise/gallery/logo.png" alt="">AC Boise</span><span class="mono">MC-2024-05 · Kit reveal film · with Against</span></div>
+          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/case-studies/ac-boise/gallery/logo.png" width="2402" height="3000" alt="">AC Boise</span><span class="mono">MC-2024-05 · Kit reveal film · with Against</span></div>
         </a>
         <a class="reel-card" href="/work/adorama-music" data-role="Director + Creative Direction" data-stats="Shorty Awards finalist|Launched Adorama Music|Inside the #CreateNoMatterWhat campaign" data-snip="/snips/adorama-music.mp4" data-word="loud.">
           <span class="imgs"><img class="a" src="/case-studies/adorama-music/gallery/am-01.jpg" alt="Adorama Music" loading="lazy"><img class="b" src="/case-studies/adorama-music/gallery/am-18.jpg" alt="" loading="lazy"></span>
-          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/logos/adorama.png" alt="">Adorama Music</span><span class="mono">MC-2022-07 · Content series</span></div>
+          <div class="rc-meta"><span class="t"><img loading="lazy" decoding="async" class="lg" src="/logos/adorama.png" width="576" height="94" alt="">Adorama Music</span><span class="mono">MC-2022-07 · Content series</span></div>
         </a>
         <a class="reel-card" href="/work/clothing-merch" data-role="Creative Direction · Design" data-stats="Design · print · market|Lines for Creative Space · NYC · DW|Directed the shoot" data-snip="/snips/clothing-merch.mp4" data-word="lived in.">
           <span class="imgs"><img class="a" src="/case-studies/clothing-merch/gallery/cm-01.jpg" alt="Clothing and merch" loading="lazy"><img class="b" src="/case-studies/clothing-merch/sparrow/sparrow-hero.jpg" alt="" loading="lazy"></span>
@@ -890,11 +890,11 @@ if(framesEl){
 // minus the animation, via the CSS media query).
 (function(){
   var TB=[
-    ['sony','Sony'],['adorama','Adorama'],['intel','Intel'],
-    ['art-of-visuals','Art of Visuals'],['flashpoint','Flashpoint'],['msi','MSI'],
-    ['lexar','Lexar'],['donut-media','Donut Media'],['blue-cross','Blue Cross of Idaho'],
-    ['ac-boise','AC Boise'],['against','Against'],['cwi','College of Western Idaho'],
-    ['dw-drums','DW Drums']
+    ['sony','Sony',532,94],['adorama','Adorama',576,94],['intel','Intel',551,214],
+    ['art-of-visuals','Art of Visuals',707,99],['flashpoint','Flashpoint',591,52],['msi','MSI',549,184],
+    ['lexar','Lexar',535,142],['donut-media','Donut Media',1200,561],['blue-cross','Blue Cross of Idaho',761,147],
+    ['ac-boise','AC Boise',989,1200],['against','Against',560,163],['cwi','College of Western Idaho',174,72],
+    ['dw-drums','DW Drums',400,214]
   ];
   var grid=document.getElementById('tbGrid'); if(!grid) return;
   var cells=[].slice.call(grid.querySelectorAll('.tb-cell'));
@@ -907,6 +907,7 @@ if(framesEl){
     var nf=document.createElement('span'); nf.className='tb-flap in';
     var img=document.createElement('img');
     img.src='/logos/'+b[0]+'-black.png'; img.alt=b[1]; img.decoding='async';
+    img.width=b[2]; img.height=b[3];
     img.className='b-'+b[0]+(b[0]==='ac-boise'?' tall':'');
     nf.appendChild(img); cell.appendChild(nf);
     cell.setAttribute('aria-label',b[1]+' · tap for the next brand');

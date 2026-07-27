@@ -16,12 +16,17 @@ const { hLead, hName, logline, role = '', img, vid, logo, logoColor, logoText, b
 const parts = role.split(' · ').filter(Boolean);
 const first = parts.shift() || '';
 const rest = parts.length ? ' · ' + parts.join(' · ') : '';
+import { imgDims } from '../lib/imgdims.mjs';
 const logoSrc = (logo && !logoText) ? `/logos/${logo}-${logoColor ? 'color' : 'white'}.png` : '';
+const logoDim = logoSrc ? imgDims(logoSrc) : null;
 ---
 <header class="hh">
+  {/* the header IS the LCP on every work page: hint the browser hard (img branch),
+      and preload the poster for the video branch (poster attrs can't carry priority) */}
+  {vid && <link rel="preload" as="image" href={img} fetchpriority="high" />}
   {vid
     ? <video class="hh-bg" src={vid} poster={img} autoplay muted loop playsinline aria-hidden="true"></video>
-    : <img class="hh-bg" src={img} alt={hName} />}
+    : <img class="hh-bg" src={img} alt={hName} fetchpriority="high" decoding="async" />}
   <div class="hh-in wrap">
     <h2 class="hh-h">
       {hLead && <span class="hh-lead">{hLead}:</span>}
@@ -31,7 +36,7 @@ const logoSrc = (logo && !logoText) ? `/logos/${logo}-${logoColor ? 'color' : 'w
     {(first || logoSrc || brand || client) && (
       <div class="hh-role">
         {logoSrc
-          ? <img class="hh-logo" src={logoSrc} alt={brand || client} loading="lazy" decoding="async" />
+          ? <img class="hh-logo" src={logoSrc} alt={brand || client} width={logoDim?.w} height={logoDim?.h} loading="lazy" decoding="async" />
           : <span class="hh-logotext mono">{brand || client}</span>}
         {first && (
           <span class="hh-did mono"><span class="hh-circ"><svg class="hh-oval" viewBox="0 0 280 88" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M30,54 C15,28 76,13 152,13 C230,13 270,28 259,52 C251,72 189,82 118,79 C56,77 20,66 21,45 C22,31 43,21 68,18"/></svg>{first}</span>{rest}</span>

@@ -149,7 +149,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 /* gallery: contact-sheet frames + the spinning bakery badge */
 .wmugal{position:relative}
 .badge{position:absolute;top:26px;right:calc(var(--pad) - 10px);width:128px;height:128px;pointer-events:none;z-index:3}
-.badge svg{width:100%;height:100%;overflow:visible;animation:spin 18s linear infinite}
+.badge svg{width:100%;height:100%;overflow:visible}
+/* spin the inner g, not the box: a rotating square's AABB swings ~20px past the
+   section edge and trips the mobile sweep; the disc's AABB is rotation-constant */
+.badge .bspin{animation:spin 18s linear infinite;transform-origin:50% 50%;transform-box:view-box}
 .badge text{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;fill:var(--red)}
 .badge .dot{fill:var(--red)}
 
@@ -226,7 +229,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
-<div class="over">
+<div class="over" role="main">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/waffle-me-up/gallery/wmu-03.jpg" vid={hh.vid} logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <StatRow tone="paper"
@@ -314,8 +317,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <!-- the spinning bakery badge, rehomed when the gallery went masonry (2026-07-22) -->
   <div class="badge" aria-hidden="true">
     <svg viewBox="0 0 100 100"><defs><path id="wmuBadge" d="M50,50 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"/></defs>
-      <text><textPath href="#wmuBadge" startOffset="0%">EDITORIAL · MADE FRESH · LOVINGLY CRAFTED · </textPath></text>
-      <circle class="dot" cx="50" cy="50" r="2.6"/>
+      <g class="bspin">
+        <text><textPath href="#wmuBadge" startOffset="0%">EDITORIAL · MADE FRESH · LOVINGLY CRAFTED · </textPath></text>
+        <circle class="dot" cx="50" cy="50" r="2.6"/>
+      </g>
     </svg>
   </div>
   <MasonryGallery title="Contact sheet · editorial selects from the shoot" note="8 frames · click to enlarge" images={gallery} />

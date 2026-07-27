@@ -1,5 +1,6 @@
 ---
 import CallSheet from '../../components/CallSheet.astro';
+import MasonryGallery from '../../components/MasonryGallery.astro';
 import NextFile from '../../components/NextFile.astro';
 import SocialWall from '../../components/SocialWall.astro';
 // Real community response to Flow State, carried over from artofvisuals.com/sonyxm3flowstate
@@ -75,6 +76,39 @@ const frames = [
   ['fs-22.jpg', 1400, 2052],
   ['fs-24.jpg', 1400, 2100],
   ['fs-25.jpg', 1400, 934],
+];
+// masonry cells: the contact sheet from the frames array, the BTS band inline
+const sheet = frames.map((s, i) => ({
+  src: `/case-studies/sony-flow-state/gallery/${s[0]}`, w: s[1], h: s[2],
+  cap: `FR-${String(i + 1).padStart(2, '0')} · ${String(s[0]).replace('.jpg', '').toUpperCase()} · SONY AUDIO`,
+  alt: `Sony Flow State campaign still, frame ${i + 1}`,
+}));
+const FB = '/case-studies/sony-flow-state/bts';
+const bts = [
+  { src: `${FB}/fsb-01.jpg`, w: 1400, h: 2098, cap: 'BTS-01 · Between takes', alt: 'Talent in headphones between takes' },
+  { video: `${FB}/fsb-clip-01.mp4`, w: 960, h: 540, cap: 'BTS-02 · The rooftop track · motion', alt: 'Tracking the dancer on the rooftop at golden hour' },
+  { src: `${FB}/fsb-02.jpg`, w: 1400, h: 934, cap: 'BTS-03 · The night set', alt: 'Neon tubes on the night set' },
+  { src: `${FB}/fsb-03.jpg`, w: 1400, h: 934, cap: 'BTS-04 · Video village', alt: 'Directors chairs at video village' },
+  { src: `${FB}/fsb-04.jpg`, w: 1400, h: 934, cap: 'BTS-05 · Rigging the tubes', alt: 'Light tubes rigged for the drummer story' },
+  { src: `${FB}/fsb-05.jpg`, w: 1400, h: 934, cap: 'BTS-06 · Playback', alt: 'The crew watching playback in the warehouse sun' },
+  { src: `${FB}/fsb-06.jpg`, w: 1400, h: 934, cap: 'BTS-07 · The drummer', alt: 'The drummer under amber light' },
+  { src: `${FB}/fsb-07.jpg`, w: 1400, h: 934, cap: 'BTS-08 · Shaping light', alt: 'Bounce board silhouette, black and white' },
+  { video: `${FB}/fsb-clip-02.mp4`, w: 960, h: 540, cap: 'BTS-09 · The painter pass · motion', alt: 'Dolly past the painters in the warehouse' },
+  { src: `${FB}/fsb-08.jpg`, w: 1400, h: 934, cap: 'BTS-10 · The red room', alt: 'The red room doorway' },
+  { src: `${FB}/fsb-09.jpg`, w: 1400, h: 2098, cap: 'BTS-11 · The check', alt: 'Checking the frame before the take' },
+  { src: `${FB}/fsb-10.jpg`, w: 1400, h: 934, cap: 'BTS-12 · The crew', alt: 'Crew on the warehouse floor' },
+  { src: `${FB}/fsb-11.jpg`, w: 1400, h: 934, cap: 'BTS-13 · Moving company', alt: 'The team crossing the warehouse' },
+  { src: `${FB}/fsb-12.jpg`, w: 1400, h: 934, cap: 'BTS-14 · The bench', alt: 'Crew on the bench, black and white' },
+  { src: `${FB}/fsb-13.jpg`, w: 892, h: 1114, cap: 'BTS-15 · The product, worked in', alt: 'Paint-splattered headphones macro' },
+  { src: `${FB}/fsb-14.jpg`, w: 1400, h: 932, cap: 'BTS-16 · Art department', alt: 'Camera operator carrying the painted portrait' },
+  { src: `${FB}/fsb-15.jpg`, w: 972, h: 1252, cap: 'BTS-17 · Red room, wide', alt: 'The drummer story set in red' },
+  { src: `${FB}/fsb-16.jpg`, w: 1400, h: 926, cap: 'BTS-18 · The rooftop', alt: 'The rooftop crew at dusk' },
+  { src: `${FB}/fsb-17.jpg`, w: 1400, h: 1866, cap: 'BTS-19 · Rehearsal, in the rays', alt: 'Dancers rehearsing in the warehouse light shafts' },
+  { src: `${FB}/fsb-18.jpg`, w: 1400, h: 1866, cap: 'BTS-20 · Blocking the dancers', alt: 'Blocking the dancers with the camera in the foreground' },
+  { src: `${FB}/fsb-19.jpg`, w: 1400, h: 2098, cap: 'BTS-21 · At the monitor', alt: 'Reviewing the take at the monitor' },
+  { src: `${FB}/fsb-20.jpg`, w: 1400, h: 2098, cap: 'BTS-22 · Calling the moves', alt: 'Calling the moves from behind the line' },
+  { video: `${FB}/fsb-clip-03.mp4`, w: 960, h: 540, cap: 'BTS-23 · The painter set · motion', alt: 'Walking onto the painter set, canvases up' },
+  { src: `${FB}/fsb-21.jpg`, w: 1400, h: 1050, cap: 'BTS-24 · The op, painter set', alt: 'The camera operator on the painter set' },
 ];
 // the wall: real comments from the Art of Visuals x Sony post, DJ's screenshot 2026-07-09
 const fsComments = [
@@ -224,8 +258,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 /* full-bleed parallax break */
 
-/* gallery: contact-sheet frames, masonry columns for mixed portrait + landscape */
-.fr video{width:100%;height:auto;display:block}
+/* galleries: MasonryGallery component (contact sheet + on-set BTS) */
 
 /* quote on rose: DJ's pull quote runs long, so it sits a step smaller and wider than xm5 */
 
@@ -239,14 +272,12 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 @media (max-width:900px){
   .story{grid-template-columns:1fr}.story .side{position:static}
   .statrow>.in{justify-content:center;gap:28px 44px}
-  .frames{columns:2}
   .hero .kck{display:none}
 }
-@media (max-width:560px){.frames{columns:1}}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .hero .t .ln>span{transform:none}.hero .nfo,.hero .kck{opacity:1}.rv{opacity:1;transform:none}
-  .grain{animation:none}.frames .fr{opacity:1;transform:none}
+  .grain{animation:none}
   .hero .vwrap{display:none}
 }
 
@@ -288,7 +319,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
-<div class="over">
+<div class="over" role="main">
 <HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/sony-flow-state/gallery/fs-02.jpg" vid={hh.vid} logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 
 <StatRow tone="paper"
@@ -379,56 +410,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <p class="rs-body rv">The full package was a hero film, hero imagery, and a gear highlight video, pushed everywhere AOV lives: Instagram, YouTube, Facebook, the newsletter, and the podcast. Sony published the film on its own channel and reposted the work on the @sony feed. It pulled 1.6 million impressions and 204 thousand actions, with an engagement rate more than double what the industry considers high.</p>
   </div>
 
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>Contact sheet</b> · selects from the campaign</span>
-      <span class="mono" style="color:#8f8d88">22 frames · hover to inspect</span>
-    </div>
-    <div class="frames" id="frames">
-      {frames.map((s, i) => (
-        <figure class="fr" style={`--d:${i * 45}ms`}>
-          <img src={`/case-studies/sony-flow-state/gallery/${s[0]}`} alt={`Sony Flow State campaign still, frame ${i + 1}`} width={s[1]} height={s[2]} loading="lazy">
-          <figcaption class="cap">FR-{String(i + 1).padStart(2, '0')} · {String(s[0]).replace('.jpg', '').toUpperCase()} · SONY AUDIO</figcaption>
-        </figure>
-      ))}
-    </div>
-  </div>
+  <MasonryGallery title="Contact sheet · selects from the campaign" note="22 frames · click to enlarge" images={sheet} />
 </section>
 
-<section class="paper onset">
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>On set</b> · the shoot in motion</span>
-      <span class="mono" style="color:#8f8d88">24 frames · official BTS</span>
-    </div>
-    <div class="frames show">
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-01.jpg" width="1400" height="2098" alt="Talent in headphones between takes" loading="lazy"><figcaption class="cap">BTS-01 · Between takes</figcaption></figure>
-      <figure class="fr vidfr"><video src="/case-studies/sony-flow-state/bts/fsb-clip-01.mp4" width="960" height="540" autoplay muted loop playsinline aria-label="Tracking the dancer on the rooftop at golden hour"></video><figcaption class="cap">BTS-02 · The rooftop track · motion</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-02.jpg" width="1400" height="934" alt="Neon tubes on the night set" loading="lazy"><figcaption class="cap">BTS-03 · The night set</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-03.jpg" width="1400" height="934" alt="Directors chairs at video village" loading="lazy"><figcaption class="cap">BTS-04 · Video village</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-04.jpg" width="1400" height="934" alt="Light tubes rigged for the drummer story" loading="lazy"><figcaption class="cap">BTS-05 · Rigging the tubes</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-05.jpg" width="1400" height="934" alt="The crew watching playback in the warehouse sun" loading="lazy"><figcaption class="cap">BTS-06 · Playback</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-06.jpg" width="1400" height="934" alt="The drummer under amber light" loading="lazy"><figcaption class="cap">BTS-07 · The drummer</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-07.jpg" width="1400" height="934" alt="Bounce board silhouette, black and white" loading="lazy"><figcaption class="cap">BTS-08 · Shaping light</figcaption></figure>
-      <figure class="fr vidfr"><video src="/case-studies/sony-flow-state/bts/fsb-clip-02.mp4" width="960" height="540" autoplay muted loop playsinline aria-label="Dolly past the painters in the warehouse"></video><figcaption class="cap">BTS-09 · The painter pass · motion</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-08.jpg" width="1400" height="934" alt="The red room doorway" loading="lazy"><figcaption class="cap">BTS-10 · The red room</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-09.jpg" width="1400" height="2098" alt="Checking the frame before the take" loading="lazy"><figcaption class="cap">BTS-11 · The check</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-10.jpg" width="1400" height="934" alt="Crew on the warehouse floor" loading="lazy"><figcaption class="cap">BTS-12 · The crew</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-11.jpg" width="1400" height="934" alt="The team crossing the warehouse" loading="lazy"><figcaption class="cap">BTS-13 · Moving company</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-12.jpg" width="1400" height="934" alt="Crew on the bench, black and white" loading="lazy"><figcaption class="cap">BTS-14 · The bench</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-13.jpg" width="892" height="1114" alt="Paint-splattered headphones macro" loading="lazy"><figcaption class="cap">BTS-15 · The product, worked in</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-14.jpg" width="1400" height="932" alt="Camera operator carrying the painted portrait" loading="lazy"><figcaption class="cap">BTS-16 · Art department</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-15.jpg" width="972" height="1252" alt="The drummer story set in red" loading="lazy"><figcaption class="cap">BTS-17 · Red room, wide</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-16.jpg" width="1400" height="926" alt="The rooftop crew at dusk" loading="lazy"><figcaption class="cap">BTS-18 · The rooftop</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-17.jpg" width="1400" height="1866" alt="Dancers rehearsing in the warehouse light shafts" loading="lazy"><figcaption class="cap">BTS-19 · Rehearsal, in the rays</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-18.jpg" width="1400" height="1866" alt="Blocking the dancers with the camera in the foreground" loading="lazy"><figcaption class="cap">BTS-20 · Blocking the dancers</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-19.jpg" width="1400" height="2098" alt="Reviewing the take at the monitor" loading="lazy"><figcaption class="cap">BTS-21 · At the monitor</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-20.jpg" width="1400" height="2098" alt="Calling the moves from behind the line" loading="lazy"><figcaption class="cap">BTS-22 · Calling the moves</figcaption></figure>
-      <figure class="fr vidfr"><video src="/case-studies/sony-flow-state/bts/fsb-clip-03.mp4" width="960" height="540" autoplay muted loop playsinline aria-label="Walking onto the painter set, canvases up"></video><figcaption class="cap">BTS-23 · The painter set · motion</figcaption></figure>
-      <figure class="fr"><img src="/case-studies/sony-flow-state/bts/fsb-21.jpg" width="1400" height="1050" alt="The camera operator on the painter set" loading="lazy"><figcaption class="cap">BTS-24 · The op, painter set</figcaption></figure>
-    </div>
-  </div>
-</section>
+<MasonryGallery title="On set · the shoot in motion" note="24 frames · official BTS" images={bts} />
 
 <SocialWall
   title="The comments came in hot."

@@ -85,7 +85,7 @@ section.paper:has(.callsheet) .callsheet{padding:2vh 0 0}
 .quote .who{margin-top:26px;color:rgba(22,21,20,.6)}
 
 /* credits slip wrapper */
-.credits{padding:9vh 0}
+.credits{padding:9vh var(--pad)} /* shorthand was zeroing .wrap's gutter: the slip hit 390+ wide on phones, sitewide */
 
 /* reveal-on-scroll */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}

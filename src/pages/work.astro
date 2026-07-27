@@ -102,7 +102,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 /* discipline lens: highlight, don't hide */
 .lens{border-bottom:1px solid var(--line);background:var(--paper)}
 .lens .in{display:flex;align-items:center;gap:10px 12px;flex-wrap:wrap;padding:18px var(--pad)}
-.lens .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-right:8px}
+.lens .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#6c6a64;margin-right:8px} /* --dim was 3.2:1 on paper */
 .lens button{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:99px;padding:8px 14px;color:#55524c;cursor:pointer;transition:border-color .25s,color .25s,background .25s}
 .lens button:hover{border-color:var(--ink);color:var(--ink)}
 .lens button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
@@ -261,7 +261,7 @@ body.gridview .arch{padding-bottom:0}
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
-<div class="over">
+<div class="over" role="main">
 <header class="hero">
   <video class="hero-vid" autoplay muted loop playsinline preload="auto" poster="/reel/work-reel-poster.jpg" aria-hidden="true">
     <source src="/reel/work-reel.mp4" type="video/mp4">
@@ -413,8 +413,8 @@ body.gridview .arch{padding-bottom:0}
 
 // rose logo slider: every brand on file
 (function(){
-  const LOGOS=[['Sony','/logos/sony.png'],['Intel','/logos/intel.png'],['Adorama','/logos/adorama.png'],['MSI','/logos/msi.png'],['Lexar','/logos/lexar.png'],['Flashpoint','/logos/flashpoint.png'],['Art of Visuals','/logos/art-of-visuals.png'],['Blue Cross of Idaho','/logos/blue-cross.png'],['Donut Media','/logos/donut-media.png'],['DW Drums','/logos/dw-drums.png'],['Against','/logos/against.png']];
-  const t=LOGOS.map(([n,s])=>`<span class="lgi"><img src="${s}" alt="${n}" loading="lazy"></span>`).join('');
+  const LOGOS=[['Sony','/logos/sony.png',532,94],['Intel','/logos/intel.png',551,214],['Adorama','/logos/adorama.png',576,94],['MSI','/logos/msi.png',549,184],['Lexar','/logos/lexar.png',535,142],['Flashpoint','/logos/flashpoint.png',591,52],['Art of Visuals','/logos/art-of-visuals.png',707,99],['Blue Cross of Idaho','/logos/blue-cross.png',761,147],['Donut Media','/logos/donut-media.png',1200,561],['DW Drums','/logos/dw-drums.png',400,214],['Against','/logos/against.png',560,163]];
+  const t=LOGOS.map(([n,s,w,h])=>`<span class="lgi"><img src="${s}" alt="${n}" width="${w}" height="${h}" loading="lazy"></span>`).join('');
   document.getElementById('stripTrack').innerHTML=t+t;
 })();
 
@@ -460,7 +460,9 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(it.snip)a.dataset.snip=it.snip;
     const cats=it.disc.map(d=>DISC_LABEL[d]).filter(Boolean).join(' · ');
     const dm=IMG_DIMS[it.img]||[16,9];
-    a.innerHTML=`<span class="iw"><img class="cv" src="${it.img}" alt="${it.title}" width="${dm[0]}" height="${dm[1]}" loading="lazy"></span><div class="band"><span class="lft"><span class="t">${it.title}</span><span class="cats">${cats}</span></span>${it.logo?`<img loading="lazy" decoding="async" class="lg" src="${it.logo}" alt="">`:''}</div>`;return a}
+    const LOGO_DIMS={"/logos/sony.png":[532,94],"/logos/adorama.png":[576,94],"/logos/art-of-visuals.png":[707,99],"/logos/blue-cross.png":[761,147],"/logos/donut-media.png":[1200,561],"/logos/dw-drums.png":[400,214],"/logos/flashpoint.png":[591,52],"/logos/msi.png":[549,184],"/case-studies/ac-boise/gallery/logo.png":[2402,3000],"/case-studies/turnstile/brand/wordmark.png":[974,178],"/case-studies/waffle-me-up/logo.png":[226,300]};
+    const lm=LOGO_DIMS[it.logo];
+    a.innerHTML=`<span class="iw"><img class="cv" src="${it.img}" alt="${it.title}" width="${dm[0]}" height="${dm[1]}" loading="lazy"></span><div class="band"><span class="lft"><span class="t">${it.title}</span><span class="cats">${cats}</span></span>${it.logo?`<img loading="lazy" decoding="async" class="lg" src="${it.logo}" alt=""${lm?` width="${lm[0]}" height="${lm[1]}"`:''}>`:''}</div>`;return a}
   items.forEach(it=>grid.appendChild(el(it)));
   let sort='new';
   function currentFilter(){const on=document.querySelector('#lens button.on');return on?on.dataset.d:'all'}
