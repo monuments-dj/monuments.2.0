@@ -237,13 +237,14 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
-<section class="film" data-video="QZEZIVB5AOE">
-  <div class="poster" id="filmPoster">
-    <img loading="lazy" decoding="async" src="/case-studies/art-of-visuals/gallery/yt-flowstate.jpg" alt="Art of Visuals film era poster">
-    <span class="play">Play film</span>
-    <span class="fcap">✳ The agency era · Sony, Intel, MSI, Adorama + branded content</span>
-  </div>
-</section>
+<!-- flagship-reel film block REMOVED per DJ 2026-07-29 ("ship without it") - the id
+     here was a stand-in, and no placeholder ships. Break keeps the dark beat so the
+     flow rule holds (story paper -> break -> ttp paper). Reinstate the film block
+     when the real AOV reel exists. -->
+<div class="break">
+  <img loading="lazy" decoding="async" class="plx" src="/case-studies/art-of-visuals/gallery/xm5-01.jpg" alt="Sony WH-1000XM5 campaign for Art of Visuals">
+  <span class="cap">✳ The agency era · Sony, Intel, MSI, Adorama + branded content</span>
+</div>
 
 <!-- AOV: To the Point · the 10-episode interview series (DJ 2026-07-12).
      IGTV-native verticals stay 9:16, no cropping: three of the best,
@@ -502,19 +503,15 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 })();
 function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});document.getElementById('clock').textContent='LA '+t}
 clock();setInterval(clock,30000);
-// film lightbox: generalized - the film block AND the To the Point episodes
-// each open their own id in the same reelbox
+// reelbox lightbox: To the Point episodes (film block removed 2026-07-29 - the
+// flagship reel was a stand-in; reinstate a filmPoster opener when the real cut lands)
 (function(){
-  const REEL='VMubUUZ2tdU';
-  const sec=document.querySelector('.film');
-  const filmVid=(sec&&sec.dataset.video)||REEL;
   const box=document.getElementById('reelbox'),mount=document.getElementById('reelMount');
   function open(vid){
     mount.innerHTML=`<iframe src="https://www.youtube.com/embed/${vid}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Campaign film"></iframe>`;
     box.classList.add('on');document.body.style.overflow='hidden';
   }
   function close(){box.classList.remove('on');mount.innerHTML='';document.body.style.overflow=''}
-  document.getElementById('filmPoster').addEventListener('click',()=>open(filmVid));
   document.querySelectorAll('.ttp-ep[data-yt]').forEach(ep=>{
     ep.addEventListener('click',()=>open(ep.dataset.yt));
   });
