@@ -64,13 +64,13 @@ a{color:inherit;text-decoration:none}
 
 /* hero: type IN the footage */
 .hero-media{position:absolute;inset:0;will-change:transform}
-.hero-media iframe,.hero-media video{position:absolute;top:50%;left:50%;width:max(100vw,178svh);height:max(100svh,56.25vw);transform:translate(-50%,-50%);pointer-events:none;border:0;object-fit:cover;filter:contrast(1.04) brightness(.82) saturate(.98);opacity:0;transition:opacity 1.2s}
+.hero-media iframe,.hero-media video{position:absolute;top:50%;left:50%;width:max(100vw,178svh);height:max(100svh,56.25vw);transform:translate(-50%,-50%);pointer-events:none;border:0;object-fit:cover;filter:contrast(1.04) brightness(.92) saturate(.98);opacity:0;transition:opacity 1.2s}
 .hero-media.live iframe,.hero-media.live video{opacity:1}
-.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.04) brightness(.82) saturate(.98);transition:opacity 1.2s}
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.04) brightness(.92) saturate(.98);transition:opacity 1.2s}
 .hero-media.live img{opacity:0}
 /* ~40% dark scrim over the video, above the media but under the lockup + bottom
    text (both z:2); grain (::after, z:1) paints on top of it. DJ 2026-07-12. */
-.hero .hero-media::before{content:'';position:absolute;inset:0;z-index:1;background:rgba(0,0,0,.55);pointer-events:none}
+.hero .hero-media::before{content:'';position:absolute;inset:0;z-index:1;background:rgba(0,0,0,.36);pointer-events:none}
 /* grain rides over the video but under the lockup + bottom text (both z:2).
    normal blend (not the sitewide overlay) so it still shows over the YT iframe,
    which won't composite a blend-mode layer; own finer/denser noise so it reads
@@ -102,7 +102,7 @@ a{color:inherit;text-decoration:none}
 /* hero: type IN the photograph */
 /* full-viewport per the reference (monuments.cc is the homepage) - the one
    sanctioned exception to the 78svh hero rule */
-.hero{position:relative;height:84svh;min-height:600px;overflow:hidden;background:var(--ink)}
+.hero{position:relative;height:100svh;min-height:640px;overflow:hidden;background:var(--ink)} /* was 84svh - DJ's 1440 mock 2026-07-29 is full-frame */
 /* the old-site hero, matched by measurement (monuments.cc @1440: lockup at
    x305 y213 w848 over a full-bleed muted video). The lockup is DJ's artwork. */
 .hero .t{position:absolute;inset:0;z-index:2;perspective:1100px}
@@ -117,11 +117,12 @@ a{color:inherit;text-decoration:none}
 .hero .t .ln:nth-child(2)>span{animation-delay:.12s}
 .hero .t .ln:nth-child(3)>span{animation-delay:.24s}
 @keyframes rise{to{transform:translateY(0)}}
-.hero-bottom{position:absolute;left:0;right:0;top:57%;bottom:auto;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:26px;max-width:var(--wrap);margin:0 auto;padding:0 var(--pad);color:var(--paper);opacity:0;animation:fade 1s .8s forwards}
-.hb-left{max-width:480px}
-.hb-kick{display:block;color:var(--paper);font-size:13px;letter-spacing:.11em;margin-bottom:16px}
-.hb-desc{color:#d9d6d0;font-size:16.5px;line-height:1.6;margin:0}
-.hb-cta{display:inline-block;margin-top:26px;color:var(--paper);border-bottom:1px solid rgba(245,243,239,.6);padding-bottom:3px;font-size:12px;letter-spacing:.12em;transition:color .3s,border-color .3s}
+.hero-bottom{position:absolute;left:0;right:0;top:auto;bottom:calc(var(--pad) + 10px);z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:26px;max-width:var(--wrap);margin:0 auto;padding:0 var(--pad);color:var(--paper);opacity:0;animation:fade 1s .8s forwards} /* was top:57% - mock pins the block to the hero foot */
+/* compact bottom unit per DJ's 1440 mock 2026-07-29 (~145px tall at 1440) */
+.hb-left{max-width:420px}
+.hb-kick{display:block;color:var(--paper);font-size:12px;letter-spacing:.11em;margin-bottom:11px}
+.hb-desc{color:#d9d6d0;font-size:15px;line-height:1.5;margin:0}
+.hb-cta{display:inline-block;margin-top:18px;color:var(--paper);border-bottom:1px solid rgba(245,243,239,.6);padding-bottom:3px;font-size:12px;letter-spacing:.12em;transition:color .3s,border-color .3s}
 .hb-see{color:var(--paper);border-bottom:1px solid rgba(245,243,239,.6);padding-bottom:3px;font-size:12px;letter-spacing:.12em;transition:color .3s,border-color .3s}
 .hb-cta:hover,.hb-see:hover{color:var(--spark);border-color:var(--spark)}
 @keyframes fade{to{opacity:1}}
