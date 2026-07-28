@@ -402,6 +402,7 @@ document.querySelectorAll('.cut').forEach(function(c){
   function toggle(){
     if(v.muted){
       document.querySelectorAll('.cut video').forEach(function(o){if(o!==v){o.muted=true;o.closest('.cut').classList.remove('playing');}});
+      if(window.__mznMuteAll)window.__mznMuteAll(); // one voice: silence any sounding gallery clip
       v.muted=false;v.currentTime=0;v.play();c.classList.add('playing');
     }else{v.muted=true;c.classList.remove('playing');}
   }
