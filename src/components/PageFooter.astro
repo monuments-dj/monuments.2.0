@@ -17,7 +17,8 @@ const { tag } = Astro.props;
 </footer>
 
 <!-- accent + type switcher DELETED 2026-07-22 (LAUNCH item): accent BAKED bw,
-     font BAKED tiny. History: LAUNCH.md D2. -->
+     font BAKED cut (01, Bricolage + Instrument Serif - DJ's pick 2026-07-28;
+     the 2026-07-22 tiny bake was wrong). History: LAUNCH.md D2. -->
 
 <style>
 .pfoot{background:var(--ink,#161514);color:var(--dim,#8f8d88);border-top:1px solid var(--lined,#2c2b29);padding:34px 0 18px;position:relative;z-index:3}
@@ -93,7 +94,7 @@ const { tag } = Astro.props;
   // their own family (higher specificity + own declaration).
   if(!document.getElementById('mnmt-type-guard')){
     var tg=document.createElement('style');tg.id='mnmt-type-guard';
-    tg.textContent='h1,h2,h3,h4,.big,.rowp .t,.rc-meta .t,.capcard .t,.gcard .band .t,'+
+    tg.textContent='h1,h2,h3,h4,.big,.hero .t,.rowp .t,.rc-meta .t,.capcard .t,.gcard .band .t,'+
       '.rcard b,.tst-big,.tst-name .tst-nm,.tst-n,.rr-word,.reel-head h2,.refuse li,'+
       '.lclose,.rec-row .v{font-family:var(--disp,\'Bricolage Grotesque\',sans-serif)}';
     document.head.appendChild(tg);
@@ -125,7 +126,8 @@ const { tag } = Astro.props;
     root.setAttribute('data-font',f);
   }
   applyAcc('bw');   // BAKED (DJ 2026-07-13); switcher deleted 2026-07-22, localStorage picks retired
-  applyFont('tiny'); // BAKED: 02 TINY, Inter + Fraunces
+  applyFont('cut'); // BAKED: 01 CUT, Bricolage + Instrument Serif (DJ 2026-07-28 - the 07-22
+                    // tiny bake did not match his Kit pick; re-picked from the full visual menu)
 })();
 </script>
 

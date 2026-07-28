@@ -16,7 +16,10 @@ Everything here was verified by running it, not by reading a doc.
 - **og:image is DONE** (31 pages). The old "no page has an og:image" line below is STALE.
   It only needs `tools/add-og.mjs` re-run at domain swap for absolute URLs.
 - **Accent switcher is NOT visible sitewide.** Old line below says it is. Accent + font are
-  already baked (`bw` + `tiny`, 2026-07-13); the pill is JS-hidden off `/template`.
+  already baked (`bw` + `cut`); the pill is JS-hidden off `/template`.
+  FONT CORRECTION 2026-07-28: the 07-22 bake shipped `tiny` (Inter + Fraunces), which was
+  NOT DJ's Kit pick. DJ re-picked from a full 8-pairing visual menu: **01 CUT, Bricolage
+  Grotesque + Instrument Serif, across the board.** Baked in PageFooter applyFont('cut').
 - **`/lab` is contained**: noindex + robots.txt Disallow. `/redesign` + `/brand-lab` 404 on live.
 - **The 4 redundant bands are already dead** (commit `c6582f0`, verified on the deployed site).
 
