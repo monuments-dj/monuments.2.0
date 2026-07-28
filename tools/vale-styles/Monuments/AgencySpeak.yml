@@ -1,0 +1,15 @@
+extends: existence
+message: "Banned agency-speak (MONUMENTS-VOICE.md): '%s'"
+level: error
+ignorecase: true
+tokens:
+  - 'drive results'
+  - 'move the needle'
+  - 'moved the needle'
+  - 'was tasked with'
+  - 'leverage'
+  - 'synergy'
+  - 'best-in-class'
+  - 'thought leadership'
+  - 'cutting-edge'
+  - 'resonate'

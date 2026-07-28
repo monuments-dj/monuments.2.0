@@ -1,0 +1,10 @@
+extends: existence
+message: "Placeholder text on the live site (banned, CLAUDE.md rule 4): '%s'"
+level: error
+ignorecase: true
+tokens:
+  - 'lorem'
+  - 'ipsum'
+  - 'consectetur'
+  - 'TKTK'
+  - 'sample text'

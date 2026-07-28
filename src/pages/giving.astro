@@ -2,7 +2,31 @@
 import CircledCTA from '../components/CircledCTA.astro';
 import FooterWordmark from '../components/FooterWordmark.astro';
 import ClosingCTA from '../components/ClosingCTA.astro';
+import MasonryGallery from '../components/MasonryGallery.astro';
 import PageFooter from '../components/PageFooter.astro';
+
+// field notes: the Uganda selects (was a JS-built .frames sheet - migrated to
+// MasonryGallery per DJ 2026-07-29 "same as on the work pages")
+const gvSheet = [
+  ['gv-01.jpg', 'The welcome committee', 2000, 1336],
+  ['gv-03.jpg', 'Mother and daughter', 1336, 2000],
+  ['gv-02.jpg', 'Recess', 2000, 1336],
+  ['gv-04.jpg', 'The classroom', 1336, 2000],
+  ['gv-05.jpg', 'Chalk and light', 1336, 2000],
+  ['gv-06.jpg', 'Passing the camera', 2000, 1336],
+  ['gv-07.jpg', 'Portrait · The school', 1336, 2000],
+  ['gv-13.jpg', 'Shoes at the door', 2000, 1336],
+  ['gv-08.jpg', 'Portrait · On site', 1336, 2000],
+  ['gv-10.jpg', 'The airstrip crew', 2000, 1336],
+  ['gv-09.jpg', 'Portrait · The school', 1336, 2000],
+  ['gv-12.jpg', 'The school, mid-build', 2000, 1336],
+  ['gv-11.jpg', 'The walk home', 1336, 2000],
+  ['gv-14.jpg', 'Hands up', 2000, 1336],
+].map(([f, cap, w, h], i) => ({
+  src: `/case-studies/giving/${f}`, w, h,
+  cap: `FR-${String(i + 1).padStart(2, '0')} · Uganda · ${cap}`,
+  alt: `Giving side, Uganda: ${cap}`,
+}));
 ---
 <!doctype html>
 <html lang="en">
@@ -330,7 +354,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <div class="wrap story">
     <div class="side rv">
       <span class="k mono">[ Close to home ]</span>
-      <h2>Boise raised us. <span class="serif">Los Angeles</span> made us. We answer to both.</h2>
+      <h2>Raised in Boise. <span class="serif">Made in Los Angeles.</span> We answer to both.</h2>
     </div>
     <div class="body rv">
       <p>Most of what we give happens within driving distance of the two places we call home.</p>
@@ -352,15 +376,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
-<section class="paper">
-  <div class="wrap gal">
-    <div class="bar">
-      <span class="mono"><b>Field notes</b> · selects from the giving side</span>
-      <span class="mono" style="color:#8f8d88">14 frames · hover to inspect</span>
-    </div>
-    <div class="frames" id="frames"></div>
-  </div>
-</section>
+<MasonryGallery title="Field notes · selects from the giving side" note="14 frames · click to enlarge" images={gvSheet} />
 
 <ClosingCTA
   tone="ink"
@@ -380,29 +396,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 // gallery: 14 real frames from the Uganda trip, masonry columns
 (function(){
-  const shots=[
-    ['gv-01.jpg','The welcome committee',2000,1336],
-    ['gv-03.jpg','Mother and daughter',1336,2000],
-    ['gv-02.jpg','Recess',2000,1336],
-    ['gv-04.jpg','The classroom',1336,2000],
-    ['gv-05.jpg','Chalk and light',1336,2000],
-    ['gv-06.jpg','Passing the camera',2000,1336],
-    ['gv-07.jpg','Portrait · The school',1336,2000],
-    ['gv-13.jpg','Shoes at the door',2000,1336],
-    ['gv-08.jpg','Portrait · On site',1336,2000],
-    ['gv-10.jpg','The airstrip crew',2000,1336],
-    ['gv-09.jpg','Portrait · The school',1336,2000],
-    ['gv-12.jpg','The school, mid-build',2000,1336],
-    ['gv-11.jpg','The walk home',1336,2000],
-    ['gv-14.jpg','Hands up',2000,1336]
-  ];
-  const el=document.getElementById('frames');
-  el.innerHTML=shots.map((s,i)=>`
-    <figure class="fr" style="--d:${i*45}ms">
-      <img src="/case-studies/giving/${s[0]}" alt="Giving side, Uganda: ${s[1]}" width="${s[2]}" height="${s[3]}" loading="lazy">
-      <figcaption class="cap">FR-${String(i+1).padStart(2,'0')} · Uganda · ${s[1]}</figcaption>
-    </figure>`).join('');
-  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){el.classList.add('show');o.disconnect()}})},{threshold:.05,rootMargin:'0px 0px 100px 0px'}).observe(el);
+  // field-notes sheet now rendered by MasonryGallery (2026-07-29)
 })();
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});

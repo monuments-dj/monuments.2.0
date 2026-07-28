@@ -1,0 +1,8 @@
+extends: existence
+message: "Em/en dash in copy - DJ bans them everywhere: '%s'"
+level: error
+nonword: true
+scope: raw
+tokens:
+  - '—'
+  - '–'

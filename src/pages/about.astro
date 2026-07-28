@@ -163,6 +163,20 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .how-band .bar{border-bottom-color:rgb(var(--on-rgb))!important}
 .how-band .bar .mono{color:rgba(var(--on-rgb),.72)}
 .how-band .bar .mono b{color:rgb(var(--on-rgb))}
+
+/* the people: team files on ink - paper slips, call-sheet dialect */
+.team{background:var(--ink);color:var(--paper);padding:10vh 0 11vh}
+.team .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:30px}
+.team .bar .mono b{color:var(--spark)}
+.team .team-dim{color:#8f8d88}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:880px;margin:0 auto}
+.tcard{position:relative;background:#FCFBF7;color:var(--ink);padding:22px 26px 52px;transform:rotate(var(--rot,-1deg));box-shadow:0 2px 4px rgba(0,0,0,.4),0 18px 44px rgba(0,0,0,.45)}
+.trole{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.tname{margin-top:10px;font-weight:var(--dispw);font-size:clamp(24px,2.4vw,34px);letter-spacing:-.02em;text-transform:uppercase;line-height:1}
+.tname .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none}
+.tbio{margin-top:12px;font-size:14.5px;line-height:1.6;color:#4c4a45}
+.tfoot{position:absolute;left:26px;bottom:16px;font-size:7.5px;letter-spacing:.16em;text-transform:uppercase;color:#6d6b65}
+@media (max-width:760px){.tgrid{grid-template-columns:1fr;max-width:430px}}
 .how-band .step{border-bottom-color:rgba(245,243,239,.28)}
 .how-band .step:hover{background:rgba(245,243,239,.08)}
 .how-band .step .n{color:rgb(var(--on-rgb))}
@@ -525,6 +539,32 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </section>
 
 <WorldMap />
+
+<!-- the people: team files (DJ 2026-07-29 "dark team section... tess and kova for now").
+     Writeups are evidence-based DRAFTS from the site's own credits (no lorem - his
+     2026-07-11 rule bans placeholder copy; the copy gate would block the deploy). -->
+<section class="team">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>The people</b> · some of the crew we hire</span>
+      <span class="mono team-dim">Files 001-002 · more incoming</span>
+    </div>
+    <div class="tgrid">
+      <article class="tcard rv" style="--rot:-1deg">
+        <span class="trole mono">Lead Producer</span>
+        <h3 class="tname">Tessanie <span class="serif">Rizvi</span></h3>
+        <p class="tbio">Tess keeps the whole operation on the rails: lead producer on the CWI program with Against, holding crews of five to twenty together, quarter after quarter.</p>
+        <span class="tfoot mono">File 001 · On the rails</span>
+      </article>
+      <article class="tcard rv" style="--rot:.8deg">
+        <span class="trole mono">Post Production Specialist · DP</span>
+        <h3 class="tname">Kova <span class="serif">Kovatonic</span></h3>
+        <p class="tbio">Kova cuts and shoots: editor on the Sony Xperia films, camera on the CWI program, and the whole post pipeline besides.</p>
+        <span class="tfoot mono">File 002 · In the edit</span>
+      </article>
+    </div>
+  </div>
+</section>
 
 <section class="how-band">
   <div class="wrap how">

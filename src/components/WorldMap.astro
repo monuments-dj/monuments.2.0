@@ -64,7 +64,7 @@
 .wm-tip[hidden]{display:none} /* author display:flex beats the UA [hidden] rule without this */
 .wm-tip-imgs{display:flex;gap:4px}
 /* imgs are injected by JS so they miss Astro's scope attr - must be :global */
-.wm-tip-imgs :global(img){width:118px;height:84px;object-fit:cover;border-radius:4px;display:block;background:#222}
+.wm-tip-imgs :global(img){width:200px;height:142px;object-fit:cover;border-radius:5px;display:block;background:#222} /* was 118x84 - DJ 2026-07-29: "you cant really see the images"; thumbs are 720w so this stays crisp */
 .wm-tip-label{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;padding:0 4px 3px}
 @media (prefers-reduced-motion:reduce){.pin .ring{animation:none;opacity:0}}
 </style>

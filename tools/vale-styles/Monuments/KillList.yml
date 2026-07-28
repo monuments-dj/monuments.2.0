@@ -1,0 +1,6 @@
+extends: existence
+message: "Locked-fact violation (CLAUDE.md kill-list): '%s'"
+level: error
+ignorecase: true
+raw:
+  - '(300K listeners|300,000 listeners|2M\+ followers|160M\+?|grew the agency 4x|a decade in the hard rooms)'
