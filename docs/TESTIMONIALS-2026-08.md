@@ -7,7 +7,7 @@ never edit their words; ellipsis cuts only, DJ-approved).
 STATUS 2026-08-02 PM: DJ said "hit harder" -> 3-lens judge panel (ECD /
 head of production / recruiter) ran over all six letters. FINAL CUTS
 below: 4 unanimous, 2 tie-breaks awaiting DJ (L1 Tess, L4 Casey).
-Casey spelling RULED: Plevins (Xperia credit fixed, commit 14cd807).
+Casey spelling RULED by DJ 2026-08-02: LEVINS ("his name is casey Levins") - the Xperia call sheet was right all along; the 14cd807 "fix" to Plevins was wrong (inferred from his email handle caseyplevins@gmail.com - handles are not names) and is REVERTED. If in doubt, the permission ping to Casey is a natural moment to confirm.
 STILL AWAITING: DJ approval-by-number + tie-breaks · permission pings
 (Tess, Lauryn, Mike, Casey) · optional Jennie Myers nudge.
 
@@ -35,7 +35,7 @@ TIE-BREAKS (DJ picks):
   perspective that allows a project to thrive." · (b) ECD pick (v2,
   listening/exceeds-brief, has em dash) · (c) production pick (v2,
   delegation/prioritization)
-- L4 Casey: (a) RECOMMENDED, 2/3 components: "I have seen him shoot,
+- L4 Casey Levins: (a) RECOMMENDED, 2/3 components: "I have seen him shoot,
   edit, produce, direct, design, PA, and be in charge of the food
   and/or the music on set. [...] He has a very special gift of bringing
   the best out of everyone on the team and he elevates every project to
@@ -47,7 +47,7 @@ TIE-BREAKS (DJ picks):
 | 1 | Tess Rizvi · Producer / Casting Director (also team band) | /about In Their Words | ASK (job ref) |
 | 2 | Lauryn Hodge · Photographer, mentee, hired by DJ for a shoot (DJ 2026-08-02) | /about In Their Words | ASK (job ref) |
 | 3 | Mike Sutton · Turnstile Audio / Adorama, client | /work/turnstile quote band | ASK (job ref) |
-| 4 | Casey Plevins(?) · collaborator 7 yrs · ⚠️ Xperia call sheet says "Levins", his email says Plevins - DJ rules, credit fix follows | /about or home | ASK (job ref) + spelling |
+| 4 | Casey Levins · collaborator 7 yrs (spelling = DJ's word 2026-08-02) | /about or home | ASK (job ref) |
 | 5 | Jakke · Composer, direct report on set (DJ 2026-08-02; surname unknown) | / home testimonials | CLEARED (wrote it for the site, 07-20 note) |
 | 6 | Tommy Lundberg · Photographer DJ directed (DJ 2026-08-02) | / home testimonials or flow-state | CLEARED (sent for the site, 07-25) |
 
