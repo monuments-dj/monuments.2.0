@@ -143,6 +143,17 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .poster16 .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;border:1.5px solid rgba(245,243,239,.8);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.7;padding:0 12px;color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(22,21,20,.35);backdrop-filter:blur(6px);transition:background .3s,color .3s,transform .3s}
 .poster16:hover .play{background:var(--paper);color:var(--ink);transform:translate(-50%,-50%) scale(1.06)}
 .poster16 .fcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,243,239,.85)}
+/* the 1 III run: four click-to-play films + two case stills, dark band */
+.films13{background:var(--ink);color:var(--paper);padding:9vh 0 10vh}
+.films13 .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:22px;gap:20px;flex-wrap:wrap}
+.films13 .bar .mono b{color:var(--spark)}
+.f13grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f13grid .poster16{aspect-ratio:16/9}
+.f13duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.f13duo .fr img{width:100%;height:auto;display:block}
+.f13duo .cap{display:block;padding:8px 0 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#8f8d88}
+@media (max-width:820px){.f13grid,.f13duo{grid-template-columns:1fr}}
+
 .reels{background:var(--ink);color:var(--paper);padding:9vh 0 10vh}
 .reels .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--lined);margin-bottom:22px;gap:20px;flex-wrap:wrap}
 .reels .bar .mono b{color:var(--spark)}
@@ -289,6 +300,45 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <video class="pvid" src="/snips/sony-xperia-summer.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
       <span class="play">Play · The Spot</span>
       <span class="fcap">✳ The launch film · Sony's Xperia PRO-I: A Cinematographer's Dream</span>
+    </div>
+  </div>
+</section>
+
+<!-- The 1 III run (DJ 2026-08-02 "add in the full media"): the four films from
+     AOV's Xperia 1 III case page (artofvisuals.com/sonyxperia-2) + the two case
+     stills. Same click-to-play facade as the film block above. NO metrics here:
+     only the PRO-I carries numbers (locked fact). -->
+<section class="films13">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>The 1 III run</b> · four months on the road</span>
+      <span class="mono" style="color:#8f8d88">4 films · click to play</span>
+    </div>
+    <div class="f13grid">
+      <div class="poster16 f13 rv" data-yt13="YjMTc7g1JJA" role="button" tabindex="0" aria-label="Play: Xperia 1 III first look">
+        <img loading="lazy" decoding="async" src="/case-studies/sony-xperia-summer/films13/first-look.jpg" alt="Xperia 1 III first look film" width="1280" height="720">
+        <span class="play">Play</span>
+        <span class="fcap">✳ First look · A phone made for content creators</span>
+      </div>
+      <div class="poster16 f13 rv" data-yt13="_7bLpljID0A" role="button" tabindex="0" aria-label="Play: Sedona Takeover">
+        <img loading="lazy" decoding="async" src="/case-studies/sony-xperia-summer/films13/sedona.jpg" alt="Sedona Takeover film" width="1280" height="720">
+        <span class="play">Play</span>
+        <span class="fcap">✳ Sedona Takeover</span>
+      </div>
+      <div class="poster16 f13 rv" data-yt13="GVQ9wecwBXw" role="button" tabindex="0" aria-label="Play: 24 Hours in NYC">
+        <img loading="lazy" decoding="async" src="/case-studies/sony-xperia-summer/films13/nyc24.jpg" alt="24 Hours in NYC film" width="1280" height="720">
+        <span class="play">Play</span>
+        <span class="fcap">✳ 24 Hours in NYC</span>
+      </div>
+      <div class="poster16 f13 rv" data-yt13="myiVRhFIxoY" role="button" tabindex="0" aria-label="Play: The Hound">
+        <img loading="lazy" decoding="async" src="/case-studies/sony-xperia-summer/films13/the-hound.jpg" alt="The Hound, shot on the Xperia 1 III" width="1280" height="720">
+        <span class="play">Play</span>
+        <span class="fcap">✳ The Hound · shot on the 1 III</span>
+      </div>
+    </div>
+    <div class="f13duo">
+      <figure class="fr rv"><img loading="lazy" decoding="async" src="/case-studies/sony-xperia-summer/films13/still-1iii.jpg" alt="Xperia 1 III on the road, from the AOV case files" width="1536" height="1152"><figcaption class="cap">FR-A · The 1 III on the road · AOV case files</figcaption></figure>
+      <figure class="fr rv"><img loading="lazy" decoding="async" src="/case-studies/sony-xperia-summer/films13/still-proi.jpg" alt="Xperia PRO-I in New York, from the AOV case files" width="1536" height="1152"><figcaption class="cap">FR-B · The PRO-I in New York · AOV case files</figcaption></figure>
     </div>
   </div>
 </section>
@@ -553,6 +603,25 @@ clock();setInterval(clock,30000);
     f.title="Sony's Xperia PRO-I: A Cinematographer's Dream, the launch film";
     poster.innerHTML='';
     poster.appendChild(f);
+  });
+})();
+
+// the 1 III run: same click-to-play facade, one per film
+(function(){
+  document.querySelectorAll('[data-yt13]').forEach(function(p){
+    function play(){
+      if(p.classList.contains('playing'))return;
+      p.classList.add('playing');
+      var f=document.createElement('iframe');
+      f.src='https://www.youtube-nocookie.com/embed/'+p.dataset.yt13+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      f.allow='autoplay; encrypted-media; fullscreen';
+      f.allowFullscreen=true;
+      f.title=p.getAttribute('aria-label')||'Xperia 1 III film';
+      p.innerHTML='';
+      p.appendChild(f);
+    }
+    p.addEventListener('click',play);
+    p.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();play();}});
   });
 })();
 
