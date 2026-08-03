@@ -276,6 +276,22 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 }
 @media (max-width:520px){.rec-nums{grid-template-columns:1fr}}
 
+/* the references: work-under-DJ ledger rows, native details (DJ 2026-08-02) */
+.refs{padding:10vh 0 12vh}
+.refs .bar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:4px}
+.refs .bar .mono b{color:var(--red)}
+.refs-dim{color:#6c6a64}
+.ref{border-bottom:1px solid var(--line)}
+.ref summary{display:flex;align-items:baseline;gap:26px;padding:20px 0;cursor:pointer;list-style:none}
+.ref summary::-webkit-details-marker{display:none}
+.rno{font-size:10px;letter-spacing:.14em;color:#6c6a64;flex:0 0 64px}
+.rwho{font-weight:var(--dispw2,600);font-size:clamp(17px,1.6vw,22px);letter-spacing:-.01em;text-transform:uppercase}
+.rrole{font-size:10.5px;letter-spacing:.1em;color:#6c6a64;margin-left:auto}
+.rtick{font-style:normal;font-size:18px;color:var(--red);transition:transform .3s}
+.ref[open] .rtick{transform:rotate(45deg)}
+.ref blockquote{margin:0 0 24px 90px;max-width:62ch;font-size:16.5px;line-height:1.6;color:#4c4a45}
+@media (max-width:700px){.ref summary{flex-wrap:wrap;gap:8px 14px}.rrole{margin-left:0;flex-basis:100%}.ref blockquote{margin-left:0}}
+
 /* in the room: four ruled ledger rows (the services-index pattern, minus hover).
    Number · bold seat · proof, one baseline; stacks cleanly on mobile. */
 .room{padding:11vh 0 12vh}
@@ -579,6 +595,39 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <span class="tfoot mono">File 003 · In the edit</span>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- THE REFERENCES · DJ 2026-08-02: "on the about page I can have employee
+     references? maybe some kind of drop down... if people want to know what
+     its like to work under me." Ledger rows, native details. Quotes VERBATIM
+     from the letters (docs/TESTIMONIALS-2026-08.md); roles are DJ's words. -->
+<section class="paper refs">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mono"><b>The references</b> · what it's like to work under DJ</span>
+      <span class="mono refs-dim">Verbatim · full letters on request</span>
+    </div>
+    <details class="ref rv">
+      <summary><span class="rno mono">REF-01</span><span class="rwho">Tommy Lundberg</span><span class="rrole mono">Photographer · directed by DJ</span><i class="rtick" aria-hidden="true">+</i></summary>
+      <blockquote>He was clear about what he needed and always made me feel empowered to explore my creative impulses while staying true to his creative direction. Can't wait to work with him again!</blockquote>
+    </details>
+    <details class="ref rv">
+      <summary><span class="rno mono">REF-02</span><span class="rwho">Jake Goble</span><span class="rrole mono">Composer · direct report on set</span><i class="rtick" aria-hidden="true">+</i></summary>
+      <blockquote>DJ is a true artist who isn't afraid to get dirty (or lose sleep) to get the job done right and on time. He's been a team captain on multiple projects over the years that always ended in a W. Most of all, he's a pure-hearted human who always looks out for others first and puts as much empathy into his relations as he does intention into his craft.</blockquote>
+    </details>
+    <details class="ref rv">
+      <summary><span class="rno mono">REF-03</span><span class="rwho">Lauryn Hodge</span><span class="rrole mono">Photographer · mentored + hired by DJ</span><i class="rtick" aria-hidden="true">+</i></summary>
+      <blockquote>On set, DJ's fun personality allows him to connect well with both the talent and the crew, creating an environment where everyone feels comfortable and supported. If things don't go as planned, DJ handles it with a calm and collected demeanor, quickly pivoting to a new direction that's just as strong.</blockquote>
+    </details>
+    <details class="ref rv">
+      <summary><span class="rno mono">REF-04</span><span class="rwho">Casey Levins</span><span class="rrole mono">Collaborator · 7 years</span><i class="rtick" aria-hidden="true">+</i></summary>
+      <blockquote>I have seen him shoot, edit, produce, direct, design, PA, and be in charge of the food and/or the music on set. He brings the vibes. He embodies every role with a spirit of excellence. He has a very special gift of bringing the best out of everyone on the team and he elevates every project to its highest potential.</blockquote>
+    </details>
+    <details class="ref rv">
+      <summary><span class="rno mono">REF-05</span><span class="rwho">Tess Rizvi</span><span class="rrole mono">Lead Producer · Casting Director</span><i class="rtick" aria-hidden="true">+</i></summary>
+      <blockquote>When it comes to creative strategy, I've never questioned that DJ would produce work our team would be proud of. He brings life and joy but also a grounded demeanor that allows everyone else to follow suit. As a leader, he knows how to encourage other people to be their best selves.</blockquote>
+    </details>
   </div>
 </section>
 
