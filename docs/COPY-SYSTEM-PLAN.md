@@ -121,13 +121,13 @@ Those become ordinary review cards, not silent edits.
 | msi-creative-by-design | crew via AOV | Agency: AOV | high |
 | on-camera | solo (talent) | DJ as on-screen talent | high |
 | donut-zumiez | solo | Client+Agency both Donut (direct hire) | med |
-| cwi-lets-get-started | crew via Against | Agency: Against, DJ writer+casting+cut | med |
+| cwi-lets-get-started | studio | DJ 2026-07-29: "I direct and run production. Against is their agency but Monuments is their production company" | CONFIRMED |
 | ac-boise | crew via Against | Client: "Against · AC Boise" | med |
 | buck-the-quo | inhouse | DJ'S ANSWER 2026-07-29 ("In-house") | CONFIRMED |
-| blue-cross | crew via OMEK | Agency: OMEK | LOW - DJ |
-| know-vape | solo w/ Frame by Frame | Prod: Frame by Frame, IPTV client | LOW - DJ |
-| waffle-me-up | solo -> studio? | direct client since first storefront | LOW - DJ |
-| clothing-merch | mixed | Client: "Mixed"/Various | LOW - DJ |
+| blue-cross | crew via OMEK | DJ 2026-07-29: "I collaborated with OMEK" | CONFIRMED |
+| know-vape | crew w/ Frame by Frame | DJ 2026-07-29: "I collaborated with April Frame at Frame by Frame" | CONFIRMED |
+| waffle-me-up | solo | DJ 2026-07-29: "Waffle me up hired me directly" | CONFIRMED |
+| clothing-merch | mixed | DJ 2026-07-29: "its mixed. Sony, DW, adorama, Art of visuals" | CONFIRMED |
 
 Consequence worth naming: under this lens the "clients hiring Monuments"
 audience is currently being sold mostly on work delivered under other

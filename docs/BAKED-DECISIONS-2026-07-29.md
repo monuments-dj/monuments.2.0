@@ -12,10 +12,12 @@ RESOLVED CONTRADICTIONS (for the record):
 - The 07-22 bake recorded 02 TINY as DJ's pick with no quote: FALSE,
   reverted 07-28. The B/W accent from the same commit IS corroborated
   (DJ 2026-07-13, memory + live QC). STANDS.
-- CWI role: DJ's 07-14 quote says "I direct (I dont shoot these)" but
-  the standing correction record says writer + casting, NOT director.
-  OPEN - needs DJ's one definitive line. (Capabilities no longer cites
-  CWI as Direction proof either way.)
+- CWI role: SETTLED, DJ 2026-07-29: "For CWI I direct and run
+  production. Against is their agency but Monuments is their production
+  company." The "writer+casting" line was a stale memory-index hook
+  contradicting its own file body (the 07-12 v4 doc already restored
+  director scope). CWI = studio engagement; direction proof is fair
+  game again (CAP-02 currently cites Flow State, both are true).
 
 
 ## G1 · HIS WORDS ON RECORD (keep, obviously) · 41
