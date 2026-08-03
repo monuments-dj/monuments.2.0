@@ -4,9 +4,43 @@ Source: DJ's Google Doc (letters recovered from Gmail/Notes/Dropbox, compiled
 2026-08-02). Raw text archived this session; quotes below are VERBATIM (R4:
 never edit their words; ellipsis cuts only, DJ-approved).
 
-STATUS: menu presented, attributions from DJ 2026-08-02. AWAITING: DJ's
-approval-by-number · Casey spelling ruling · permission pings (4) ·
-optional Jennie Myers nudge. NOTHING SHIPS until approved + cleared.
+STATUS 2026-08-02 PM: DJ said "hit harder" -> 3-lens judge panel (ECD /
+head of production / recruiter) ran over all six letters. FINAL CUTS
+below: 4 unanimous, 2 tie-breaks awaiting DJ (L1 Tess, L4 Casey).
+Casey spelling RULED: Plevins (Xperia credit fixed, commit 14cd807).
+STILL AWAITING: DJ approval-by-number + tie-breaks · permission pings
+(Tess, Lauryn, Mike, Casey) · optional Jennie Myers nudge.
+
+PANEL-LOCKED CUTS (unanimous 3/3):
+- L2 Lauryn: "If things don't go as planned, DJ handles it with a calm
+  and collected demeanor, quickly pivoting to a new direction that's
+  just as strong."
+- L5 Jakke: "DJ is a true artist who isn't afraid to get dirty (or lose
+  sleep) to get the job done right and on time. He's been a team captain
+  on multiple projects over the years that always ended in a W."
+- L6 Tommy: "He was clear about what he needed and always made me feel
+  empowered to explore my creative impulses while staying true to his
+  creative direction."
+- L3 Mike (2/3 took both sentences): "Well, DJ nailed it, it is
+  timeless, clean, and best of all recognizable. I would highly
+  recommend DJ for design work as he will present you with options from
+  safe to pushing the boundaries which is exactly what you want to make
+  informed decisions."
+
+TIE-BREAKS (DJ picks):
+- L1 Tess: (a) RECOMMENDED, recruiter pick, v1, no em dashes: "When it
+  comes to creative strategy, I've never questioned that DJ would
+  produce work our team would be proud of. He knows his own strengths
+  but also knows when to delegate to others, providing a well-rounded
+  perspective that allows a project to thrive." · (b) ECD pick (v2,
+  listening/exceeds-brief, has em dash) · (c) production pick (v2,
+  delegation/prioritization)
+- L4 Casey: (a) RECOMMENDED, 2/3 components: "I have seen him shoot,
+  edit, produce, direct, design, PA, and be in charge of the food
+  and/or the music on set. [...] He has a very special gift of bringing
+  the best out of everyone on the team and he elevates every project to
+  its highest potential." · (b) recruiter variant ends "He embodies
+  every role with a spirit of excellence." 
 
 | # | who (DJ's attribution) | cut goes to | permission |
 |---|---|---|---|
