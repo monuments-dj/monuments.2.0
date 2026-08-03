@@ -8,8 +8,9 @@ STATUS 2026-08-02 PM: DJ said "hit harder" -> 3-lens judge panel (ECD /
 head of production / recruiter) ran over all six letters. FINAL CUTS
 below: 4 unanimous, 2 tie-breaks awaiting DJ (L1 Tess, L4 Casey).
 Casey spelling RULED by DJ 2026-08-02: LEVINS ("his name is casey Levins") - the Xperia call sheet was right all along; the 14cd807 "fix" to Plevins was wrong (inferred from his email handle caseyplevins@gmail.com - handles are not names) and is REVERTED. If in doubt, the permission ping to Casey is a natural moment to confirm.
-STILL AWAITING: DJ approval-by-number + tie-breaks · permission pings
-(Tess, Lauryn, Mike, Casey) · optional Jennie Myers nudge.
+RESOLVED 2026-08-02: cuts shipped (panel picks, DJ 'whatever hits hardest');
+PERMISSIONS CLEARED by DJ: 'im good on permission they gave me free use'.
+Optional: Jennie Myers nudge still open. Photography: DJ says HOLD.
 
 PANEL-LOCKED CUTS (unanimous 3/3):
 - L2 Lauryn: "If things don't go as planned, DJ handles it with a calm
