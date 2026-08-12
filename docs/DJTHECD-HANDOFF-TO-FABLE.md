@@ -14,7 +14,60 @@ or a sentence that is factually wrong about who did what. Nothing on the page
 claims credit that belongs to someone else, and nothing hides credit that is
 his. The design is quiet and confident and does not call attention to itself.
 
-That is the outcome. How you get there is yours.
+That is the outcome. How you get there is yours, EXCEPT the homepage structure,
+where DJ gave a direct instruction on 2026-08-12:
+
+> "I still want the homepage to feel somewhat similar. think of this like
+> taking the structure from the site and reskinning it to make it for DJ
+> the CD."
+
+## The homepage: reskin, don't redesign
+The current `src/dj/` homepage (hero-left/photo-right, switcher on top) is
+Opus's layout, NOT what DJ asked for. Treat it as scaffolding to replace.
+
+The structure to preserve is the monuments homepage. Measured from the built
+page (not from memory), its skeleton in order, with grounds:
+
+| # | band | ground | what it is |
+|---|------|--------|------------|
+| 1 | `.hero` | ink | Full-frame hero, DJ's real PNG lockup "SIGHT SOUND AND EMOTION · the creative portfolio of DJ Ramirez", intro para lower-left, "Let's talk" + "See the work" at the feet |
+| 2 | `.trusted` | paper | "Trusted by the best." + brand logo grid |
+| 3 | `.rr` | ink | The PLAY reel reveal (ReelReveal.astro), pinned scroll |
+| 4 | `.paper > .reel` | paper | "Built to scale." + the case-study reel/cards (RecentProjects) |
+| 5 | `.paper > .caps` | paper | capabilities strip |
+| 6 | `.paper > .tiles` | paper | tile row |
+| 7 | `.tst` | ink | testimonials theater |
+| 8 | `.clc-ink` | ink | ClosingCTA: "Being forgettable is expensive" kicker |
+
+Note the hero already says "the creative portfolio of DJ Ramirez". The
+monuments homepage is closer to a personal site than the fork assumed. The
+reskin is: same bands, same order, same motion systems (the reveal, the reel,
+the pinned scroll all live in shared components and PageFooter and come along
+for free), with studio identity swapped for DJ's and We-copy swapped for I.
+
+Reskin decisions per band (chrome comes from `src/data/site.js`):
+- 1: keep the hero structure and the lockup discussion is DJ's call. The intro
+  para under it is We-voice studio copy and needs the I rewrite.
+- 2: keep. "Trusted by the best." works unchanged for a person.
+- 3: keep the reel as-is. It is DJ's reel.
+- 4: keep the case reel; it reads from work.js which both sites share.
+- 5: capabilities strip is studio-scoped ("what we do"). Either reframe as
+  "what I bring" (the approved /hire list exists in `src/data/dj-variants.js`)
+  or drop the band; keep the page's light/dark rhythm either way (no two
+  adjacent light bands, DJ's flow rule, checked by tools/flowcheck.mjs).
+- 6-8: keep; ClosingCTA kicker set is LOCKED (one of the 3 approved pairs).
+- The audience switcher (/production /direction /strategy) is DJ's own idea
+  and stays, but as a quiet element inside the existing structure, not a
+  band of its own.
+
+Salvage from `src/dj/_blocks/`: the Refs (three letters), Stats, Archive, and
+Contact blocks contain verified copy and can slot into this structure where
+they fit; the variant routes should re-lead the same monuments-shaped page,
+not a different layout.
+
+Verify against the real thing side by side: monuments serves at :4326
+(`monuments-built` in launch.json), the dj build at :4325 (`djthecd`).
+Screenshot both at 1440 and 390 and compare band by band.
 
 ## Non-negotiable invariants
 1. **Other people's words are never altered.** Seven recommendation letters and
