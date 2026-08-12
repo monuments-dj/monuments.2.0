@@ -1,0 +1,12 @@
+---
+// STATS · the ink band. Four receipts, one line each. Dark ground, so it always
+// sits between two light blocks (the FLOW RULE).
+import { stats } from '../../data/dj-variants.js';
+---
+<section class="dband">
+  <div class="wrap grid">
+    {stats.map((s) => (
+      <div class="st rv"><b set:html={s.b} /><span>{s.s}</span></div>
+    ))}
+  </div>
+</section>

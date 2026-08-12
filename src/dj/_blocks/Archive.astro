@@ -1,0 +1,24 @@
+---
+// ARCHIVE · everything the featured five left out, as a compact list. The
+// hiring-manager research: five heroes, the rest scannable in one screen.
+import { work } from '../../data/work.js';
+const { v } = Astro.props;
+const rest = work.filter((w) => !v.featured.includes(w.slug));
+---
+<section class="darch wrap">
+  <header class="dhead rv">
+    <span class="k mono">\ The rest of the file</span>
+    <h2>{rest.length} more <span class="serif">case files.</span></h2>
+  </header>
+  <div class="darch-list">
+    {rest.map((w) => (
+      <a class="row rv" href={w.href}>
+        <span class="cl">{w.client}{w.brand ? ` · ${w.brand}` : ''}</span>
+        <span class="t">{w.hName}</span>
+        <span class="r mono">{w.role}</span>
+        <span class="ar" aria-hidden="true">&rarr;</span>
+      </a>
+    ))}
+  </div>
+  <a class="darch-all rv" href="/work">Open the full index &rarr;</a>
+</section>

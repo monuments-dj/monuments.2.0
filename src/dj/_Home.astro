@@ -1,0 +1,254 @@
+---
+// ============================================================================
+// THE DJTHECD HOMEPAGE · one document, RE-STACKABLE BLOCKS.
+// ----------------------------------------------------------------------------
+// The four routes (/ /production /direction /strategy) are the SAME blocks in a
+// different order with a different lead. That was a session-one architecture
+// directive, not a retrofit: DJ sends the matching link per application.
+//
+// DESIGN: simple. Katie Hunter whitespace (DJ's call 2026-08-02), /ai and
+// /giving as the seed. Paper ground, hairlines, one accent, type doing the work,
+// and a lot of air. The flow rule still holds: no two light bands adjacent.
+// ============================================================================
+import PageFooter from '../components/PageFooter.astro';
+import FooterWordmark from '../components/FooterWordmark.astro';
+import Switcher from './_blocks/Switcher.astro';
+import Hero from './_blocks/Hero.astro';
+import Stats from './_blocks/Stats.astro';
+import Featured from './_blocks/Featured.astro';
+import Strip from './_blocks/Strip.astro';
+import Bring from './_blocks/Bring.astro';
+import Refs from './_blocks/Refs.astro';
+import Archive from './_blocks/Archive.astro';
+import Roster from './_blocks/Roster.astro';
+import Contact from './_blocks/Contact.astro';
+import { variants } from '../data/dj-variants.js';
+import { site } from '../data/site.js';
+
+const { variant = 'neutral' } = Astro.props;
+const v = variants[variant];
+const BLOCKS = { hero: Hero, stats: Stats, featured: Featured, strip: Strip, bring: Bring, refs: Refs, archive: Archive, roster: Roster, contact: Contact };
+const canonical = `${site.origin}${v.path}`;
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>{v.title}</title>
+<meta name="description" content={v.desc}>
+<link rel="canonical" href={canonical}>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content={site.ogSiteName}>
+<meta property="og:title" content={v.title}>
+<meta property="og:description" content={v.desc}>
+<meta property="og:url" content={canonical}>
+<meta property="og:image" content={`${site.origin}/og/card.jpg`}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content={`${site.origin}/og/card.jpg`}>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style is:global>
+:root{
+  --ink:#161514; --paper:#F5F3EF; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1180px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --mono:'Fragment Mono',monospace;
+  --spark:#F5F3EF; --struct:#201e1d; --on-rgb:245,243,239;
+  /* the simple pass: air is the design. one knob for the vertical rhythm. */
+  --air:clamp(90px,13vh,190px);
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body,var(--disp));font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{overflow-x:clip;scroll-behavior:smooth}
+a{color:inherit;text-decoration:none}
+img,video{max-width:100%;display:block}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:400}
+.serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* corner chrome: wordmark left, status lines at the feet. The takeover Menu
+   (PageFooter -> MenuTakeover) is the nav, same as monuments. */
+.corners{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:difference}
+.corners span{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.corners .c1{top:30px;left:var(--pad);pointer-events:auto}
+.corners .c1 b{font-family:var(--disp);font-weight:var(--dispw);font-size:30px;letter-spacing:-.02em}
+.corners .c1 i{font-style:normal;display:inline-block;animation:spin 7s linear infinite}
+.corners .c3{bottom:20px;left:var(--pad)}
+.corners .c4{bottom:20px;right:var(--pad)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:820px){.corners .c1 b{font-size:22px}.corners .c3{display:none}}
+
+/* ── the audience switcher ─────────────────────────────────────────────── */
+.dsw{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 18px;max-width:var(--wrap);margin:0 auto;
+  padding:96px var(--pad) 0}
+.dsw span{color:var(--dim)}
+.dsw .sw{font-size:14px;letter-spacing:-.01em;padding-bottom:3px;border-bottom:1.5px solid transparent;color:#6b6862;transition:color .3s,border-color .3s}
+.dsw .sw:hover{color:var(--ink);border-color:var(--line)}
+.dsw .sw.on{color:var(--ink);border-color:var(--red)}
+@media (max-width:820px){.dsw{padding-top:74px}}
+
+/* ── hero ──────────────────────────────────────────────────────────────── */
+.dhero{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(30px,6vw,90px);align-items:center;
+  padding:clamp(50px,9vh,110px) var(--pad) var(--air)}
+.dhero .kick{color:var(--red);display:block;margin-bottom:30px}
+.dhero h1{font-weight:var(--dispw);font-size:var(--fs-hero);line-height:.9;letter-spacing:-.04em;text-transform:uppercase}
+.dhero h1 .serif{text-transform:none;color:var(--ink)}
+.dhero .lede{margin-top:36px;max-width:54ch;color:#4c4a45;font-size:clamp(17px,1.7vw,21px);line-height:1.55}
+.dhero .lede b{color:var(--ink);font-weight:var(--dispw2)}
+.dhero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px;margin-top:40px}
+.pill{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12px;letter-spacing:.08em;
+  text-transform:uppercase;padding:15px 26px;border-radius:999px;transition:transform .3s cubic-bezier(.22,1,.36,1),opacity .3s}
+.pill:hover{transform:translateY(-2px);opacity:.9}
+.plain{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6b6862;
+  border-bottom:1px solid var(--line);padding-bottom:3px;transition:color .3s,border-color .3s}
+.plain:hover{color:var(--ink);border-color:var(--ink)}
+.shot{background:#fff;padding:12px 12px 42px;box-shadow:0 22px 60px rgba(22,21,20,.14);transform:rotate(1.2deg);justify-self:end;width:min(100%,420px)}
+.shot img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+.shot figcaption{position:relative;margin:14px 2px -30px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+@media (max-width:860px){.dhero{grid-template-columns:1fr;padding-top:34px}.shot{justify-self:start;transform:rotate(-1deg);width:min(100%,340px)}}
+
+/* ── shared section header ─────────────────────────────────────────────── */
+.dhead{margin-bottom:clamp(36px,5vh,64px)}
+.dhead .k{color:var(--red);display:block;margin-bottom:16px}
+.dhead h2{font-weight:var(--dispw);font-size:clamp(30px,4.2vw,58px);line-height:.98;letter-spacing:-.035em;text-transform:uppercase}
+.dhead h2 .serif{text-transform:none}
+
+/* ── stats band (ink) ──────────────────────────────────────────────────── */
+.dband{background:var(--struct);color:rgb(var(--on-rgb))}
+.dband .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,44px);padding:clamp(40px,6vh,68px) var(--pad)}
+.dband .st b{display:block;font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1}
+.dband .st span{display:block;margin-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;line-height:1.7;color:rgba(var(--on-rgb),.66)}
+@media (max-width:820px){.dband .grid{grid-template-columns:1fr 1fr;gap:26px}}
+
+/* ── featured five (paper) ─────────────────────────────────────────────── */
+.dfeat{padding:var(--air) var(--pad)}
+.dfeat-list{display:flex;flex-direction:column;gap:clamp(56px,8vh,110px)}
+.dcase{display:grid;grid-template-columns:56px 1.25fr .75fr;gap:clamp(20px,3vw,44px);align-items:center}
+.dcase .no{color:var(--dim);align-self:start;padding-top:6px}
+.dcase figure{overflow:hidden;background:#e9e6e0}
+.dcase figure img,.dcase figure video{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;transition:transform 1.1s cubic-bezier(.22,1,.36,1)}
+.dcase:hover figure img,.dcase:hover figure video{transform:scale(1.03)}
+.dcase .cl{color:var(--red);display:block}
+.dcase h3{font-weight:var(--dispw2);font-size:clamp(21px,2.2vw,30px);line-height:1.05;letter-spacing:-.028em;margin:14px 0 12px}
+.dcase p{color:#55524d;font-size:15.5px;line-height:1.65}
+.dcase .role{display:block;margin-top:16px;color:var(--dim)}
+@media (max-width:900px){.dcase{grid-template-columns:1fr;gap:18px}.dcase .no{padding-top:0}}
+
+/* ── on-set strip (ink) ────────────────────────────────────────────────── */
+.dstrip{background:var(--ink);color:var(--paper);padding:clamp(46px,7vh,86px) 0;overflow:hidden}
+.dstrip .k{color:var(--red);display:block;margin-bottom:28px}
+.mqtrack{display:flex;gap:16px;width:max-content;animation:mq 64s linear infinite}
+.mqtrack figure{width:clamp(210px,24vw,330px);flex:0 0 auto}
+.mqtrack img{width:100%;height:clamp(150px,17vw,230px);object-fit:cover}
+.mqtrack figcaption{margin-top:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:#8f8d88}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.mqtrack{animation:none}}
+
+/* ── what I bring (paper) ──────────────────────────────────────────────── */
+.dbring{padding:var(--air) var(--pad)}
+.dbring ul{list-style:none;border-top:1px solid var(--line)}
+.dbring li{border-bottom:1px solid var(--line);padding:clamp(20px,2.6vh,30px) 0;font-size:clamp(17px,1.6vw,20px);line-height:1.5;max-width:78ch}
+.dbring li b{font-weight:var(--dispw2)}
+.dbring li span{color:#5d5a55}
+
+/* ── references (ink) ──────────────────────────────────────────────────── */
+.drefs{background:var(--ink);color:var(--paper);padding:var(--air) 0}
+.drefs .dhead .k{color:var(--red)}
+.drefs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,48px)}
+.drefs .quote blockquote{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-size:clamp(18px,1.8vw,23px);line-height:1.42;letter-spacing:-.01em}
+.drefs .quote figcaption{margin-top:22px;border-top:1px solid var(--lined);padding-top:14px}
+.drefs .quote figcaption b{display:block;font-weight:var(--dispw2);font-size:14px;letter-spacing:.01em}
+.drefs .quote figcaption span{display:block;margin-top:5px;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
+.drefs-foot{margin-top:clamp(34px,5vh,60px);color:var(--dim)}
+@media (max-width:900px){.drefs-grid{grid-template-columns:1fr;gap:40px}}
+
+/* ── archive (paper) ───────────────────────────────────────────────────── */
+.darch{padding:var(--air) var(--pad)}
+.darch-list{border-top:1px solid var(--line)}
+.darch .row{display:grid;grid-template-columns:.85fr 1.1fr 1fr 24px;gap:18px;align-items:baseline;
+  border-bottom:1px solid var(--line);padding:19px 0;transition:padding-left .4s cubic-bezier(.22,1,.36,1),background .4s}
+.darch .row:hover{padding-left:12px;background:rgba(22,21,20,.035)}
+.darch .row .cl{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
+.darch .row .t{font-weight:var(--dispw2);font-size:clamp(17px,1.7vw,21px);letter-spacing:-.02em}
+.darch .row .r{color:#6b6862;font-size:10.5px}
+.darch .row .ar{color:var(--red);opacity:0;transition:opacity .35s,transform .35s;justify-self:end}
+.darch .row:hover .ar{opacity:1;transform:translateX(3px)}
+.darch-all{display:inline-block;margin-top:34px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;
+  text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:4px}
+.darch-all:hover{border-color:var(--ink)}
+@media (max-width:820px){.darch .row{grid-template-columns:1fr 24px;gap:6px}.darch .row .r{grid-column:1/2}}
+
+/* ── roster (ink) ──────────────────────────────────────────────────────── */
+.dros{background:var(--struct);color:rgb(var(--on-rgb));padding:clamp(40px,6vh,72px) 0;overflow:hidden}
+.dros .k{color:var(--red);display:block;margin-bottom:26px}
+.dros .bt-track{display:flex;align-items:center;gap:clamp(34px,5vw,72px);width:max-content;animation:mq 52s linear infinite}
+.dros .bt-logo{height:clamp(20px,2.2vw,30px);width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.72}
+.dros .names{margin-top:30px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(var(--on-rgb),.55);line-height:1.9}
+@media (prefers-reduced-motion:reduce){.dros .bt-track{animation:none;flex-wrap:wrap;width:auto}}
+
+/* ── closer (ink) ──────────────────────────────────────────────────────── */
+.dclose{background:var(--ink);color:var(--paper);padding:var(--air) 0 clamp(60px,9vh,120px)}
+.dclose .avail{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--red);margin-bottom:26px}
+.dclose h2{font-weight:var(--dispw);font-size:clamp(34px,5.4vw,74px);line-height:.94;letter-spacing:-.04em;text-transform:uppercase}
+.dclose h2 .serif{text-transform:none;color:var(--paper)}
+.dclose .row{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px;margin-top:38px}
+.dclose .pill{background:var(--paper);color:var(--ink)}
+.dclose .plain{color:#a9a6a0;border-color:var(--lined)}
+.dclose .plain:hover{color:var(--paper);border-color:var(--paper)}
+.dclose .links{display:flex;flex-wrap:wrap;gap:10px 30px;margin-top:44px;border-top:1px solid var(--lined);padding-top:24px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.dclose .links b{color:var(--paper);font-weight:400}
+
+/* footer under-reveal (same mechanism as every monuments page) */
+.over{position:relative;z-index:1;background:var(--paper)}
+.underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
+</style>
+</head>
+<body>
+<div class="corners">
+  <span class="c1"><a href="/"><b>{site.markLead}<i>✳</i>{site.markTail}</b></a></span>
+  <span class="c3">Creative Director · open to work</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<div class="over" role="main">
+  <Switcher active={v.key} />
+  {v.blocks.map((k) => {
+    const B = BLOCKS[k];
+    return B ? <B v={v} /> : null;
+  })}
+</div>
+
+<div class="underfoot">
+  <FooterWordmark />
+  <PageFooter tag={v.tag} />
+</div>
+
+<script is:inline>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 200px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});const c=document.getElementById('clock');if(c)c.textContent='LA '+t}
+clock();setInterval(clock,30000);
+(function(){
+  const uf=document.querySelector('.underfoot'),over=document.querySelector('.over');
+  if(!uf||!over)return;
+  function size(){
+    if(matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)').matches){over.style.marginBottom='0px';return}
+    over.style.marginBottom=uf.offsetHeight+'px';
+  }
+  size();addEventListener('resize',size);setTimeout(size,600);
+})();
+</script>
+</body>
+</html>

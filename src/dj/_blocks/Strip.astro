@@ -1,0 +1,16 @@
+---
+// STRIP · eight different rooms, slow marquee, dark ground. Proof that the sets
+// are real without asking anybody to click.
+import { shots } from '../../data/dj-variants.js';
+---
+<section class="dstrip">
+  <div class="wrap"><span class="k mono rv">\ On set · behind it and on it</span></div>
+  <div class="mqtrack">
+    {[...shots, ...shots].map((s) => (
+      <figure>
+        <img src={s.img} alt={s.alt} loading="lazy" decoding="async">
+        <figcaption>{s.cap}</figcaption>
+      </figure>
+    ))}
+  </div>
+</section>

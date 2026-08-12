@@ -13,8 +13,12 @@
 // slides over a fixed .underfoot. Without .over/.underfoot it still renders, just
 // statically. Self-contained: ships its own CSS + the at-foot script (guarded, so it
 // cannot double-bind on pages that already run one).
+//
+// The word itself comes from src/data/site.js (M✳NUMENTS / DJ✳RAMIREZ), so the
+// two sites share one component and one behaviour.
+import { site } from '../data/site.js';
 ---
-<div class="gwm" aria-hidden="true">M<span>✳</span>NUMENTS</div>
+<div class="gwm" aria-hidden="true">{site.markLead}<span>✳</span>{site.markTail}</div>
 
 <script is:inline>
   // body.at-foot — true once the visitor reaches the very bottom. Drives the spark spin.

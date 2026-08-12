@@ -10,17 +10,13 @@
 // AI RESTORED to the menu 2026-07-14 (DJ: "bring ai tools back into the menu"),
 // back in its original 05 slot. Labelled "AI Tools" per his wording - it was just
 // "AI" before. Still also reachable from the Capabilities craft grid (CAP-10).
-const links = [
-  { n: '01', t: 'Home',         href: '/',             sub: 'the front door',           img: '/gallery/full/p-013.jpg' },
-  { n: '02', t: 'Work',         href: '/work',         sub: '18 case files',            img: '/reel/work-reel-poster.jpg' },
-  { n: '03', t: 'About',        href: '/about',        sub: 'the subject file',         img: '/about/hero-set.jpg' },
-  { n: '04', t: 'Capabilities', href: '/capabilities', sub: 'what we do',                img: '/about/dj-film.jpg' },
-  { n: '05', t: 'AI Tools',     href: '/ai',           sub: 'a tool, not a solution',   img: '/about/studio-console.jpg' },
-  // PHOTOGRAPHY PULLED FROM THE NAV 2026-07-14 (DJ). The page still exists and still
-  // works - it is reachable from the Kit's private index (Menu -> The Kit). noindex'd.
-  { n: '06', t: 'Giving back',  href: '/giving',       sub: 'work that gives back',     img: '/case-studies/giving/gv-01.jpg' },
-  { n: '07', t: 'Contact',      href: '/contact',      sub: 'our journey starts here',  img: '/gallery/full/p-044.jpg' },
-];
+// PHOTOGRAPHY PULLED FROM THE NAV 2026-07-14 (DJ). The page still exists and still
+// works - it is reachable from the Kit's private index (Menu -> The Kit). noindex'd.
+// THE LIST ITSELF now lives in src/data/site.js: monuments runs the full seven,
+// djthecd runs the four that survive the fork (no Kit line, no hire card - the
+// hire pitch IS the djthecd homepage).
+import { site } from '../data/site.js';
+const links = site.nav;
 ---
 <button class="mt-trig" id="mtTrig" type="button" aria-expanded="false" aria-controls="mtOv" aria-label="Open menu">
   <span class="mt-ic" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -39,13 +35,17 @@ const links = [
           </span>
         </a>
       ))}
-      <a class="mt-hire" href="/hire" style={`--i:${links.length}`}>
-        <span class="mt-line"><span class="mt-dot" aria-hidden="true"></span>Hiring? The one-page brief &rarr;</span>
-      </a>
-      <!-- TEMP while the identity decisions are open: quick way into the element library -->
-      <a class="mt-hire mt-kit" href="/template" style={`--i:${links.length + 1}`}>
-        <span class="mt-line">The Kit &middot; element library &rarr;</span>
-      </a>
+      {site.navHire && (
+        <a class="mt-hire" href={site.navHire.href} style={`--i:${links.length}`}>
+          <span class="mt-line"><span class="mt-dot" aria-hidden="true"></span><Fragment set:html={site.navHire.label} /></span>
+        </a>
+      )}
+      {/* TEMP while the identity decisions are open: quick way into the element library */}
+      {site.navKit && (
+        <a class="mt-hire mt-kit" href="/template" style={`--i:${links.length + 1}`}>
+          <span class="mt-line">The Kit &middot; element library &rarr;</span>
+        </a>
+      )}
     </nav>
     <div class="mt-prev" aria-hidden="true">
       <img loading="lazy" decoding="async" id="mtPrev" src={links[0].img} alt="">
@@ -53,7 +53,7 @@ const links = [
     </div>
   </div>
   <div class="mt-meta">
-    <a class="mt-pill" href="mailto:monuments.cc@gmail.com">monuments.cc@gmail.com</a>
+    <a class="mt-pill" href={`mailto:${site.email}`}>{site.email}</a>
     <div class="mt-soc">
       <a href="https://www.instagram.com/djthecd" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.tiktok.com/@djthecd" target="_blank" rel="noopener">TikTok</a>

@@ -1,0 +1,32 @@
+---
+// FEATURED · the five that lead for this reader. Same 19 case files as
+// monuments.cc, re-ordered by audience. Big frames, one line of copy, nothing
+// competing with the picture.
+import { workBySlug } from '../../data/work.js';
+const { v } = Astro.props;
+const picks = v.featured.map((s) => workBySlug[s]).filter(Boolean);
+---
+<section class="dfeat wrap">
+  <header class="dhead rv">
+    <span class="k mono">\ Selected work</span>
+    <h2>Five that <span class="serif">say the most.</span></h2>
+  </header>
+  <div class="dfeat-list">
+    {picks.map((w, i) => (
+      <a class="dcase rv" href={w.href}>
+        <span class="no mono">{String(i + 1).padStart(2, '0')}</span>
+        <figure>
+          {w.vid
+            ? <video class="pvid" src={w.vid} poster={w.img} autoplay muted loop playsinline preload="none" width="1200" height="750"></video>
+            : <img src={w.img} alt={w.title} loading="lazy" decoding="async" width="1200" height="750">}
+        </figure>
+        <div class="meta">
+          <span class="cl mono">{w.client}{w.brand ? ` · ${w.brand}` : ''}</span>
+          <h3>{w.title}</h3>
+          <p>{w.logline}</p>
+          <span class="role mono">{w.role}</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

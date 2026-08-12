@@ -1,0 +1,21 @@
+---
+// CONTACT · the closer. One address, one status line, the links a hiring manager
+// actually clicks. Subject line carries the variant so DJ knows which link landed.
+const { v } = Astro.props;
+---
+<section class="dclose">
+  <div class="wrap">
+    <span class="avail rv">&#9679; Open to senior creative and experiential lead roles</span>
+    <h2 class="rv">Booking Q3 + Q4. <span class="serif">Let's talk.</span></h2>
+    <div class="row rv">
+      <a class="pill" href={`mailto:dj@djthecd.com?subject=${encodeURIComponent(v.label + ' role')}`}>dj@djthecd.com</a>
+      <a class="plain" href="/about">The long version &rarr;</a>
+    </div>
+    <div class="links rv">
+      <span>LA / Boise · will travel</span>
+      <a href="https://www.linkedin.com/in/djthecd/" target="_blank" rel="noopener"><b>LinkedIn</b> · in/djthecd</a>
+      <a href="https://www.instagram.com/djthecd" target="_blank" rel="noopener"><b>Instagram</b> · @djthecd</a>
+      <a href="/work"><b>Work</b> · the case files</a>
+    </div>
+  </div>
+</section>

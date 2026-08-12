@@ -1,0 +1,20 @@
+---
+// HERO · the block that changes most between variants. Big quiet type on paper,
+// the portrait held in a print frame, everything else pushed down the page.
+const { v } = Astro.props;
+---
+<section class="dhero wrap">
+  <div class="dhero-txt">
+    <span class="kick mono rv">{v.kicker}</span>
+    <h1 class="rv">{v.h1}<br><span class="serif">{v.h1serif}</span></h1>
+    <p class="lede rv" set:html={v.lede} />
+    <div class="dhero-cta rv">
+      <a class="pill" href={`mailto:dj@djthecd.com?subject=${encodeURIComponent(v.label + ' role')}`}>dj@djthecd.com</a>
+      <a class="plain" href="/work">See the work &rarr;</a>
+    </div>
+  </div>
+  <figure class="shot rv">
+    <img src="/about/dj-film.jpg" alt="DJ Ramirez on set, directing behind the camera" width="880" height="1100" fetchpriority="high">
+    <figcaption>DJ Ramirez · on set · Los Angeles</figcaption>
+  </figure>
+</section>

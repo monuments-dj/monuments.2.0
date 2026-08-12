@@ -1,0 +1,13 @@
+---
+// SWITCHER · the organic visitor self-selects; the link DJ sends pre-answers it.
+// Four static routes, no cookies, no sniffing, no cloaking.
+import { variants } from '../../data/dj-variants.js';
+const { active } = Astro.props;
+const order = ['neutral', 'production', 'direction', 'strategy'];
+---
+<nav class="dsw" aria-label="What are you hiring for">
+  <span class="mono">I'm looking for</span>
+  {order.map((k) => (
+    <a class={`sw ${k === active ? 'on' : ''}`} href={variants[k].path} aria-current={k === active ? 'page' : undefined}>{variants[k].label}</a>
+  ))}
+</nav>

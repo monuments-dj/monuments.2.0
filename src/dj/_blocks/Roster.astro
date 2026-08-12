@@ -1,0 +1,14 @@
+---
+// ROSTER · the logos, on ink. Recognition without a claim: these are rooms DJ
+// has been in, named in full underneath.
+import { brands } from '../../data/dj-variants.js';
+---
+<section class="dros">
+  <div class="wrap"><span class="k mono rv">\ In the room with</span></div>
+  <div class="bt-track">
+    {[...brands, ...brands].map((b) => (
+      <span class="bt-item" aria-label={b.l}><img class="bt-logo" src={`/logos/${b.img}`} alt={b.l} loading="lazy" decoding="async"></span>
+    ))}
+  </div>
+  <p class="names wrap">Sony &middot; Intel &middot; Adorama &middot; MSI &middot; Lexar &middot; Flashpoint &middot; Blue Cross of Idaho &middot; College of Western Idaho &middot; Donut Media &middot; DW Drums &middot; Art of Visuals</p>
+</section>

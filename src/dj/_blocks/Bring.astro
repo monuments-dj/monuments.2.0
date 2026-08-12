@@ -1,0 +1,18 @@
+---
+// BRING · what I bring. DJ-approved copy from /hire, re-ordered per audience so
+// the first line is the one this reader came for.
+import { bring, bringOrder } from '../../data/dj-variants.js';
+const { v } = Astro.props;
+const rows = (bringOrder[v.key] || bringOrder.neutral).map((k) => bring[k]);
+---
+<section class="dbring wrap">
+  <header class="dhead rv">
+    <span class="k mono">\ What I bring</span>
+    <h2>The short <span class="serif">version.</span></h2>
+  </header>
+  <ul>
+    {rows.map((r) => (
+      <li class="rv"><b>{r.t}</b> <span>{r.d}</span></li>
+    ))}
+  </ul>
+</section>

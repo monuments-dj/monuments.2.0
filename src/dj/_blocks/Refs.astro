@@ -1,0 +1,26 @@
+---
+// REFS · three people, in their own words. VERBATIM from the recommendation
+// letters (docs/TESTIMONIALS-2026-08.md), permissions cleared by DJ 2026-08-02.
+// class="quote" marks these as protected: the build-time voice transform is
+// forbidden from touching somebody else's sentence.
+import { quotes } from '../../data/dj-variants.js';
+const { v } = Astro.props;
+const cuts = (v.quotes || []).map((k) => quotes[k]).filter(Boolean);
+---
+<section class="drefs">
+  <div class="wrap">
+    <header class="dhead rv">
+      <span class="k mono">\ References</span>
+      <h2>In their <span class="serif">words.</span></h2>
+    </header>
+    <div class="drefs-grid">
+      {cuts.map((c) => (
+        <figure class="quote rv">
+          <blockquote>{c.q}</blockquote>
+          <figcaption><b>{c.who}</b><span>{c.role}</span></figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="drefs-foot mono rv">Full letters on request</p>
+  </div>
+</section>

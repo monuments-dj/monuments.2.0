@@ -4,13 +4,14 @@
 // "Photography", "About", "Case file MC-2023-05"...). Styling lives HERE so
 // pages can never drift apart again. Self-contained: no reliance on page .wrap.
 import MenuTakeover from './MenuTakeover.astro';
+import { site } from '../data/site.js';
 interface Props { tag: string; }
 const { tag } = Astro.props;
 ---
 <MenuTakeover />
 <footer class="pfoot">
   <div class="row">
-    <span>Monuments &copy; MMXXVI &middot; ELMT.NO.004259</span>
+    <span set:html={site.footerLine} />
     <span class="blk">built to be remembered</span>
     <span>{tag}</span>
   </div>
@@ -275,13 +276,35 @@ const { tag } = Astro.props;
      his confirm; remove from areaServed if wrong. -->
 <script type="application/ld+json" is:inline set:html={JSON.stringify({
   "@context": "https://schema.org",
-  "@graph": [
+  // djthecd is a PERSON looking for a seat; monuments is a STUDIO with a founder.
+  // Same component, one field in src/data/site.js decides which graph ships.
+  "@graph": site.isDJ ? [
+    {
+      "@type": "Person",
+      "@id": `${site.origin}/#dj`,
+      "name": "DJ Ramirez",
+      "jobTitle": "Creative Director",
+      "email": site.email,
+      "url": `${site.origin}/`,
+      "description": "Creative Director. Integrated campaigns, film, stills, and experiential, concept through delivery. Emmy winner, based in Los Angeles and Boise.",
+      "knowsAbout": ["creative direction", "campaign development", "film direction", "photography", "experiential marketing"],
+      "homeLocation": [
+        { "@type": "Place", "name": "Los Angeles, CA" },
+        { "@type": "Place", "name": "Boise, ID" }
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/djthecd/",
+        "https://www.instagram.com/djthecd",
+        "https://monuments.cc"
+      ]
+    }
+  ] : [
     {
       "@type": "ProfessionalService",
-      "@id": "https://monuments-2-0.vercel.app/#org",
+      "@id": `${site.origin}/#org`,
       "name": "Monuments",
-      "url": "https://monuments-2-0.vercel.app/",
-      "email": "monuments.cc@gmail.com",
+      "url": `${site.origin}/`,
+      "email": site.email,
       "description": "Independent creative studio and production company led by creative director DJ Ramirez. Integrated campaigns, film, stills, and experiential, made in Los Angeles and Boise.",
       "areaServed": [
         { "@type": "Place", "name": "Los Angeles, CA" },
@@ -289,20 +312,20 @@ const { tag } = Astro.props;
         { "@type": "Place", "name": "Boise, ID" }
       ],
       "knowsAbout": ["creative direction", "film production", "brand campaigns", "photography", "experiential marketing"],
-      "founder": { "@id": "https://monuments-2-0.vercel.app/#dj" },
+      "founder": { "@id": `${site.origin}/#dj` },
       "foundingDate": "2022"
     },
     {
       "@type": "Person",
-      "@id": "https://monuments-2-0.vercel.app/#dj",
+      "@id": `${site.origin}/#dj`,
       "name": "DJ Ramirez",
       "jobTitle": "Creative Director",
-      "worksFor": { "@id": "https://monuments-2-0.vercel.app/#org" },
+      "worksFor": { "@id": `${site.origin}/#org` },
       "homeLocation": [
         { "@type": "Place", "name": "Los Angeles, CA" },
         { "@type": "Place", "name": "Boise, ID" }
       ],
-      "url": "https://monuments-2-0.vercel.app/about"
+      "url": `${site.origin}/about`
     }
   ]
 })} />
