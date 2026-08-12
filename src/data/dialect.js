@@ -10,16 +10,15 @@
 //    Partners, agencies, collborators all need to remain from monumnets, just
 //    language can change."
 //
-// THE TEAM RULE (Claude's default, 2026-08-12, NOT yet DJ's word - he said
-// "leaning on your recommendation... we might need to case by case it", so
-// every line below is a review card for him):
-//   · Art of Visuals era  -> "my team at Art of Visuals" / "my team and I"
-//     (he was the Creative Director there; it was his team to lead)
-//   · CWI / Monuments era -> "my team and I"
-//   · Against, OMEK, Frame by Frame, MGX -> NAME THE PARTNER, never "my team"
-//     (someone else's shop; "my team" is the claim a hiring manager can check)
-//   · in-house pre-AOV (Buck the Quo, Drake Cooper) -> "the team and I"
-//   · solo hires (Waffle Me Up, Donut, On Camera) -> plain "I"
+// THE TEAM RULE IS DEAD. DJ'S RULING 2026-08-12 (reviewing the voice cards),
+// his words: "On DJ at the CD, there should be no team. It's just me."
+//   · every "my team and I" / "the team and I" / "my team at X" -> plain I
+//   · partners, agencies, collaborators STAY NAMED (his earlier ruling above):
+//     Art of Visuals, Against, OMEK, April Frame, Tess, Claire LeJune remain
+//     as facts; only the possessive team VOICE is gone
+//   · crew-scale facts stay ("a crew of five to twenty", "creatives led"):
+//     they are production reality and part of the approved pitch, not voice
+//   · other people's words keep their "team" (letters, client quotes)
 // ============================================================================
 
 // --- chrome: applied to the whole document, attributes included --------------
@@ -35,25 +34,25 @@ export const chromeSwaps = [
 export const globalCopy = [
   // adorama-music
   ['Adorama brought us in to launch a whole new category: Adorama Music.',
-   'Adorama brought my team at Art of Visuals in to launch a whole new category: Adorama Music.'],
+   'Adorama brought me in to launch a whole new category: Adorama Music.'],
   // cwi
   ['so we made starting the whole point. DJ directs and cuts the campaign, and runs the set:',
-   'so my team and I made starting the whole point. I direct and cut the campaign, and run the set:'],
+   'so I made starting the whole point. I direct and cut the campaign, and run the set:'],
   // msi
   ['MSI built a laptop for creators, and we launched it on Times Square digital boards',
-   'MSI built a laptop for creators, and I launched it with my team at Art of Visuals on Times Square digital boards'],
+   'MSI built a laptop for creators, and I launched it on Times Square digital boards'],
   // buck the quo
   ['Disguised as a retail popup, we challenged teens',
-   'Disguised as a retail popup, the team and I challenged teens'],
+   'Disguised as a retail popup, I challenged teens'],
   // sony this moment
   ['We cast three creators who filmed their own BTS',
-   'My team and I cast three creators who filmed their own BTS'],
+   'I cast three creators who filmed their own BTS'],
   // turnstile
   ['What we built took it from a group of products to a brand.',
-   'What my team and I built took it from a group of products to a brand.'],
+   'What I built took it from a group of products to a brand.'],
   // ac boise (Against is someone else's shop: name it, do not absorb it)
   ['so we shot the kit across six iconic locations around town',
-   'so I shot the kit with the team at Against across six iconic locations around town'],
+   'so I shot the kit with Against across six iconic locations around town'],
   // clothing + merch
   ['Most merch is a logo on a blank. We design things people still wear',
    'Most merch is a logo on a blank. I design things people still wear'],
@@ -67,10 +66,9 @@ export const globalCopy = [
 // --- per-page, keyed by a substring of the route ----------------------------
 // THE VOICE PASS (2026-08-12). Every entry is a full-sentence rewrite, never a
 // word-swap: the regex transform is dead because pronouns downstream of a match
-// stay third person and produce broken English. Each pair below is a judgment
-// call under the team rule (AOV era = "my team and I" / partners NAMED, never
-// absorbed / in-house = "the team and I" / solo = plain I) and every one is a
-// review card for DJ - revert any pair by deleting it.
+// stay third person and produce broken English. Voice is plain I everywhere
+// (DJ's no-team ruling above); partners stay named; every pair is a review
+// card for DJ - revert any pair by deleting it.
 // Real people's words are never in this file. The djcheck gate proves that per
 // build against the letters themselves.
 export const perPage = {
@@ -96,14 +94,14 @@ export const perPage = {
   ],
   'adorama-music': [
     ["DJ led Adorama Music: The Journey as creative director. He set the strategy, directed the photo and video, shot a chunk of the stills himself, and was Adorama's main point of contact", "I led Adorama Music: The Journey as creative director. I set the strategy, directed the photo and video, shot a chunk of the stills myself, and was Adorama's main point of contact"],
-    ["The hero film was built to travel. We cut it into shorter spots", "The hero film was built to travel. My team and I cut it into shorter spots"],
+    ["The hero film was built to travel. We cut it into shorter spots", "The hero film was built to travel. I cut it into shorter spots"],
   ],
   'art-of-visuals': [
     ["how do we talk to them, what reads as real", "how do you talk to them, what reads as real"],
-    ["so we weren't guessing. We were a voice of authority, and we knew the others. We sold strategy and consulting on culture, made the introductions, and managed the influencers", "so my team and I weren't guessing. AOV was a voice of authority that knew the others. I sold strategy and consulting on culture, made the introductions, and managed the influencers"],
+    ["so we weren't guessing. We were a voice of authority, and we knew the others. We sold strategy and consulting on culture, made the introductions, and managed the influencers", "so I wasn't guessing. AOV was a voice of authority that knew the others. I sold strategy and consulting on culture, made the introductions, and managed the influencers"],
     ["We weren't a vendor renting out a camera crew. We were the translator between brands and the creator world", "I wasn't a vendor renting out a camera crew. I was the translator between brands and the creator world"],
     ["not just a post on ours, focused on", "not just a post on AOV's own, focused on"],
-    ["lined up with the a7S III, we shot the headphone commercial on the a7S III", "lined up with the a7S III, my team and I shot the headphone commercial on the a7S III"],
+    ["lined up with the a7S III, we shot the headphone commercial on the a7S III", "lined up with the a7S III, I shot the headphone commercial on the a7S III"],
     ["for the XM5 launch we cast influencers as the talent", "for the XM5 launch I cast influencers as the talent"],
     ["came back campaign after campaign and kept us as their AOR", "came back campaign after campaign and kept AOV as their AOR"],
     ["the reason they kept us as their AOR", "the reason they kept AOV as their AOR"],
@@ -123,8 +121,8 @@ export const perPage = {
   'cwi-lets-get-started': [
     ["DJ directs and cuts the Let's Get Started program spots", "I direct and cut the Let's Get Started program spots"],
     ["On shoot days DJ runs the set: directing the talent, working with the DP on how it gets shot, and keeping the crew moving with Tess on production, then he takes it into the edit and cuts it for every screen. He frames the students as the heroes and puts the real tools", "On shoot days I run the set: directing the talent, working with the DP on how it gets shot, and keeping the crew moving with Tess on production, then I take it into the edit and cut it for every screen. I frame the students as the heroes and put the real tools"],
-    ["Every quarter we make four to six new films with a crew of five to twenty, and DJ builds each one", "Every quarter my team and I make four to six new films with a crew of five to twenty, and I build each one"],
-    ["DJ has worked in Idaho education for more than ten years, and he brings that to every round. This one is homegrown, made with hometown friends and a client as fired up about it as he is. Together we're putting Idaho opportunities", "I have worked in Idaho education for more than ten years, and I bring that to every round. This one is homegrown, made with hometown friends and a client as fired up about it as I am. Together, my team and I are putting Idaho opportunities"],
+    ["Every quarter we make four to six new films with a crew of five to twenty, and DJ builds each one", "Every quarter I make four to six new films with a crew of five to twenty, and I build each one"],
+    ["DJ has worked in Idaho education for more than ten years, and he brings that to every round. This one is homegrown, made with hometown friends and a client as fired up about it as he is. Together we're putting Idaho opportunities", "I have worked in Idaho education for more than ten years, and I bring that to every round. This one is homegrown, made with hometown friends and a client as fired up about it as I am. Together with them, I am putting Idaho opportunities"],
     ["which is exactly why this work matters to us", "which is exactly why this work matters to me"],
   ],
   'dw-drums': [
@@ -135,7 +133,7 @@ export const perPage = {
   ],
   'flashpoint': [
     ["We pitched a mark where the O swapped by category", "I pitched a mark where the O swapped by category"],
-    ["Six disciplines, one voice. We built the brand book and the standards", "Six disciplines, one voice. My team and I built the brand book and the standards"],
+    ["Six disciplines, one voice. We built the brand book and the standards", "Six disciplines, one voice. I built the brand book and the standards"],
     ["Then we handed it over. Templates, standards", "Then I handed it over. Templates, standards"],
     ["something that kept working after we left", "something that kept working after I left"],
     ["Followers on the channels DJ set up", "Followers on the channels I set up"],
@@ -148,7 +146,7 @@ export const perPage = {
     ["He photographed them like they mattered", "I photographed them like they mattered"],
   ],
   'msi-creative-by-design': [
-    ["MSI built a laptop specifically for creators. We launched it on Times Square digital boards", "MSI built a laptop specifically for creators. My team and I launched it on Times Square digital boards"],
+    ["MSI built a laptop specifically for creators. We launched it on Times Square digital boards", "MSI built a laptop specifically for creators. I launched it on Times Square digital boards"],
   ],
   'on-camera': [
     ["the Art of Visuals podcast, and DJ co-hosted it every week", "the Art of Visuals podcast, and I co-hosted it every week"],
@@ -159,20 +157,20 @@ export const perPage = {
   ],
   'sony-this-moment': [
     ["but it's a feeling we can all relate to", "but it's a feeling anyone can relate to"],
-    ["The film follows three creators we cast because they fit the story naturally", "The film follows three creators my team and I cast because they fit the story naturally"],
+    ["The film follows three creators we cast because they fit the story naturally", "The film follows three creators I cast because they fit the story naturally"],
     ["DJ directed the photoshoot, the briefs and the calls on set, and Claire LeJune shot the stills. He creative-directed the system", "I directed the photoshoot, the briefs and the calls on set, and Claire LeJune shot the stills. I creative-directed the system"],
     ["As the creative director on this project, DJ helped shape the story, wrote the briefs, directed the stills, and made sure everything on set matched Sony's brand guides. He also worked closely with the production team", "As the creative director on this project, I helped shape the story, wrote the briefs, directed the stills, and made sure everything on set matched Sony's brand guides. I also worked closely with the production team"],
   ],
   'sony-xm5': [
     ["Setting up the commercials was part of DJ's job, but the main thing he helped with here was the direction", "Setting up the commercials was part of my job, but the main thing I helped with here was the direction"],
-    ["His role, along with his AOV team, was to identify influencers", "My role, along with my AOV team, was to identify influencers"],
+    ["His role, along with his AOV team, was to identify influencers", "My role was to identify influencers"],
     ["As Creative Director, DJ wanted to make sure", "As Creative Director, I wanted to make sure"],
   ],
   'sony-xperia': [
-    ["For the Xperia PRO-I we opened with a first look film", "For the Xperia PRO-I, my team and I opened with a first look film"],
+    ["For the Xperia PRO-I we opened with a first look film", "For the Xperia PRO-I, I opened with a first look film"],
     ["built on everything the launches taught us", "built on everything the launches taught me"],
     ["We developed a strategy focused on positioning the Xperia 5 IV as a phone that could keep up with any journey. From the start, our goal was to showcase", "I developed a strategy focused on positioning the Xperia 5 IV as a phone that could keep up with any journey. From the start, my goal was to showcase"],
-    ["In collaboration with Art of Visuals, we launched Summer with Xperia", "With the Art of Visuals team, I launched Summer with Xperia"],
+    ["In collaboration with Art of Visuals, we launched Summer with Xperia", "With Art of Visuals, I launched Summer with Xperia"],
     ["While directing the campaign, DJ kept his camera close", "While directing the campaign, I kept my camera close"],
     ["He snapped everything, from the phone handling to those perfect golden-hour shots to candid moments. For him, it was about capturing the vibe of the season", "I snapped everything, from the phone handling to those perfect golden-hour shots to candid moments. For me, it was about capturing the vibe of the season"],
     ["giving DJ time to test the camera, work out any bugs, and understand its strengths so we could maximize its potential", "giving me time to test the camera, work out any bugs, and understand its strengths so I could maximize its potential"],

@@ -19,6 +19,11 @@ entity-escapes apostrophes so exact-string replacements need both forms (the
 layer handles it; dead-rule gate catches misses) · one Vercel webhook push
 silently produced NO deployment (99574c4) - if a push doesn't deploy, empty
 commit re-fires it.
+**NO-TEAM RULING EXECUTED (later 2026-08-12):** DJ, reviewing the cards: "On DJ
+at the CD, there should be no team. It's just me." All 18 team constructions
+(my team and I / the team and I / my team at X) rewritten to plain I in
+src/data/dialect.js; partners stay NAMED (his earlier ruling); crew-scale facts
+and other people's words untouched. Strict build + djcheck 22/22 green.
 **DJ OWES:** review voice cards (veto by phrase) · test dj@ email · Vercel 2FA ·
 interiors "open and typographic" design pass is DEFERRED (skin only re-fonts
 them) · monuments untouched + verified 94 pages, still awaits its own launch
