@@ -88,7 +88,20 @@ export default function djsite() {
         fs.rmSync(path.join(root, '_djhome'), { recursive: true, force: true });
         logger.info(`djthecd: pruned ${pruned.length} monuments-only surfaces · dj homepage promoted to /`);
 
-        // 2 · the voice transform
+        // 2 · THE SKIN (DJ 2026-08-12: "simpler. creative director, helvetica
+        // and simple braun / apple design approch while keeping the structure
+        // pretty similar"). Injected last in <head> so it wins the cascade on
+        // every dj page - interiors included - while monuments source stays
+        // byte-identical. Fonts only + grain kill + serif-italic neutralized;
+        // interior color worlds are left alone (their art direction is page
+        // work, not a token swap).
+        const SKIN = `<style id="dj-skin">
+:root{--disp:'Helvetica Neue',Helvetica,Arial,sans-serif;--body:'Helvetica Neue',Helvetica,Arial,sans-serif;--serif:'Helvetica Neue',Helvetica,Arial,sans-serif;--mono:'Helvetica Neue',Helvetica,Arial,sans-serif;--dispw:600;--dispw2:500}
+.serif{font-style:normal!important;font-weight:300}
+.grain{display:none!important}
+</style>`;
+
+        // 3 · the voice transform
         const files = walkHtml(root);
         const changes = [];
         const unhandled = [];
@@ -100,6 +113,7 @@ export default function djsite() {
           const reps = replacementsFor(page);
           reps.forEach(([from]) => declared.add(from));
           const res = toSoloVoice(html, { replacements: reps, page });
+          if (!res.html.includes('id="dj-skin"')) res.html = res.html.replace('</head>', SKIN + '</head>');
           if (res.html !== html) fs.writeFileSync(file, res.html);
           changes.push(...res.changes);
           unhandled.push(...res.unhandled);
