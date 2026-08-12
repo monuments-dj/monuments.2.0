@@ -1,5 +1,29 @@
 # TODO - current state
 
+## 🔄 HANDOFF 2026-08-12 (the overnight djthecd one-shot) - READ FIRST
+**DJTHECD.COM IS LIVE.** https://djthecd.com - real domain, HTTPS, apex primary,
+www 308->apex, email dj@djthecd.com FORWARDS to monuments.cc@gmail.com (Namecheap
+Redirect Email; allow ~1h to fully activate, send a test).
+**SHIPPED tonight (all verified live):** one repo two Vercel projects (SITE=dj,
+project "djthecd" on DJ's team) · homepage = monuments flow reskinned (his word:
+"very similar"; switcher strip KILLED on his order - never resurface it) ·
+BRAUN/RAMS SKIN sitewide (his words: "helvetica and simple braun / apple design
+approch") via dj-skin injection, !important REQUIRED because PageFooter's
+applyFont sets tokens inline · VOICE PASS: 181 rewrites, 0 We-leaks, 0 dead
+rules, letters byte-identical (djcheck 22/22, gate exits 1 on any leak, Vercel
+env has NO warn flag so leaks cannot deploy) · voice cards: tools/dj-report/
+changes.md · Namecheap: BasicDNS + A @ 216.198.79.1 + CNAME www.
+**GOTCHAS BURNED TONIGHT:** embedded browser pane emits BLACK FRAMES at scrolled
+positions (use tools/snap.mjs; headless video frames also unreliable) · Astro
+entity-escapes apostrophes so exact-string replacements need both forms (the
+layer handles it; dead-rule gate catches misses) · one Vercel webhook push
+silently produced NO deployment (99574c4) - if a push doesn't deploy, empty
+commit re-fires it.
+**DJ OWES:** review voice cards (veto by phrase) · test dj@ email · Vercel 2FA ·
+interiors "open and typographic" design pass is DEFERRED (skin only re-fonts
+them) · monuments untouched + verified 94 pages, still awaits its own launch
+items.
+
 ## 🔄 HANDOFF 2026-08-02 (Web 14 -> Web 15) - READ THIS FIRST
 **SHIPPED this session (all live + verified on main):** Lighthouse pass
 (xperia 56->90, bp+a11y 100s, LCPs halved) · 3 mobile overhangs killed at
