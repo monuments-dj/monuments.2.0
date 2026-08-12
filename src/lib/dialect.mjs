@@ -146,47 +146,55 @@ export function toSoloVoice(html, { replacements = [], page = '' } = {}) {
   const unhandled = [];
   let out = html;
 
-  // A · explicit replacements first (they carry the judgment calls)
+  // A · explicit replacements first (they carry the judgment calls).
+  //
+  // Astro escapes apostrophes and quotes in text, so "he's" is emitted as
+  // "he&#39;s". A replacement written with a raw apostrophe therefore matched
+  // NOTHING and reported nothing, which is how the first pass shipped pages
+  // still reading "he's" while the change report looked clean. Every
+  // replacement is now tried in both forms, and a replacement that matches
+  // nowhere is surfaced (see `matched`) so the build can fail on it rather
+  // than silently skipping it.
+  const encEntities = (s) => s.replace(/&/g, '&amp;').replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+  const matched = new Set();
   for (const [from, to] of replacements) {
     if (!from) continue;
-    let hits = 0;
-    let idx = out.indexOf(from);
-    while (idx !== -1) { hits++; idx = out.indexOf(from, idx + from.length); }
-    if (hits) {
-      out = out.split(from).join(to);
-      changes.push({ page, rule: 'explicit', hits, from, to });
+    for (const [f, t] of [[from, to], [encEntities(from), encEntities(to)]]) {
+      if (!out.includes(f)) continue;
+      const hits = out.split(f).length - 1;
+      out = out.split(f).join(t);
+      matched.add(from);
+      changes.push({ page, rule: 'explicit', hits, from: f, to: t });
+      break; // raw and encoded are the same edit; apply once
     }
   }
 
-  // B · mechanical rules over unprotected text nodes
-  out = walkText(out, (text) => {
-    let t = text;
-    for (const rule of RULES) {
-      t = t.replace(rule.re, (...args) => {
-        const full = args[0];
-        if (rule.fn) {
-          const res = rule.fn(...args);
-          if (res === null) {
-            // only report an unhandled DJ when it is not a plain name mention
-            if (!/^DJ\s+(Ramirez|the|and|·)/.test(full)) unhandled.push({ page, text: full.trim() });
-            return full;
-          }
-          // keep whatever trailed the matched verb(s)
-          const consumed = res.split(' ').length;
-          const parts = full.trim().split(/\s+/);
-          const rest = parts.slice(consumed).join(' ');
-          const changed = rest ? `${res} ${rest}` : res;
-          changes.push({ page, rule: rule.id, from: full.trim(), to: changed.trim() });
-          return changed;
-        }
-        changes.push({ page, rule: rule.id, from: full, to: rule.to });
-        return rule.to;
-      });
+  // B · REPORT ONLY. The mechanical "DJ <verb> -> I <verb>" rewriting that used
+  // to run here is DELETED, deliberately.
+  //
+  // WHY (2026-08-12): a verb-map regex over narrative prose cannot see past the
+  // sentence it matches. It produced hybrids that read as broken English:
+  //   "I led Adorama Music: The Journey as creative director. He set the
+  //    strategy, directed the photo and video..."
+  // The rule fired correctly and the paragraph was still wrong, because the
+  // pronouns after the match stayed third person. There is no regex that fixes
+  // that; it needs a person rewriting the paragraph.
+  //
+  // So the mechanical layer now only REPORTS what a human (or a model doing the
+  // voice pass) still has to decide. Nothing is silently half-converted. A
+  // paragraph is either rewritten wholesale via an explicit replacement above,
+  // or it ships untouched and shows up in this report.
+  walkText(out, (text) => {
+    const re = /\bDJ(['’]s)?\b|\b(He|he|His|his|Him|him)\b/g;
+    let m;
+    while ((m = re.exec(text)) !== null) {
+      const start = Math.max(0, m.index - 60);
+      unhandled.push({ page, marker: m[0], context: text.slice(start, m.index + 90).replace(/\s+/g, ' ').trim() });
     }
-    return t;
+    return text;
   });
 
-  return { html: out, changes, unhandled };
+  return { html: out, changes, unhandled, matched };
 }
 
 /** Find We-markers left in unprotected prose (the leak hunt). */

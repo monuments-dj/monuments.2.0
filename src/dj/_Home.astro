@@ -86,7 +86,10 @@ img,video{max-width:100%;display:block}
 .corners .c3{bottom:20px;left:var(--pad)}
 .corners .c4{bottom:20px;right:var(--pad)}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media (max-width:820px){.corners .c1 b{font-size:22px}.corners .c3{display:none}}
+/* both foot corners are fixed + blend-difference; on narrow screens they land
+   on top of photos instead of margin. Hide them rather than let them overlap
+   content at arbitrary resting scroll positions. */
+@media (max-width:820px){.corners .c1 b{font-size:22px}.corners .c3,.corners .c4{display:none}}
 
 /* ── the audience switcher ─────────────────────────────────────────────── */
 .dsw{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 18px;max-width:var(--wrap);margin:0 auto;

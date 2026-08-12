@@ -25,6 +25,8 @@ import { replacementsFor } from '../src/data/dialect.js';
 const CUT = [
   'capabilities', 'giving', 'ai', 'lab', 'work-preview', 'template',
   'page-template', 'page-elements', 'cta-preview', 'hire', 'keystatic',
+  // stale draft trees living in public/ (old mockups, never linked)
+  'redesign', 'brand-lab',
   // photography is on HOLD for monuments (DJ). It does not ship on dj until he
   // says the page is ready.
   'photography',
@@ -52,7 +54,12 @@ export default function djsite() {
     name: 'djthecd',
     hooks: {
       'astro:config:setup': ({ injectRoute, logger }) => {
-        injectRoute({ pattern: '/',           entrypoint: './src/dj/index.astro' });
+        // NOT injected at '/': that collides with src/pages/index.astro (the
+        // monuments homepage) and Astro warns the collision becomes a hard
+        // error in a future version. Which file wins would depend on emit
+        // order, which is not a thing to bet a homepage on. Injected at a
+        // unique path and promoted to / in astro:build:done instead.
+        injectRoute({ pattern: '/_djhome',    entrypoint: './src/dj/index.astro' });
         injectRoute({ pattern: '/production', entrypoint: './src/dj/production.astro' });
         injectRoute({ pattern: '/direction',  entrypoint: './src/dj/direction.astro' });
         injectRoute({ pattern: '/strategy',   entrypoint: './src/dj/strategy.astro' });
@@ -70,22 +77,38 @@ export default function djsite() {
           const f = path.join(root, `${name}.html`);
           if (fs.existsSync(f)) { fs.rmSync(f); pruned.push(name); }
         }
-        // the injected "/" beats the monuments homepage; make sure nothing stale
-        // from the monuments index survives in the root html
-        logger.info(`djthecd: pruned ${pruned.length} monuments-only surfaces`);
+        // promote the dj homepage to / deterministically (see the injectRoute
+        // note above). The monuments index.html that Astro emitted at / is
+        // replaced here, so emit order never decides which homepage ships.
+        const djHome = path.join(root, '_djhome', 'index.html');
+        if (!fs.existsSync(djHome)) {
+          throw new Error('djthecd: /_djhome/index.html missing — the dj homepage did not build, refusing to ship the monuments homepage at /');
+        }
+        fs.copyFileSync(djHome, path.join(root, 'index.html'));
+        fs.rmSync(path.join(root, '_djhome'), { recursive: true, force: true });
+        logger.info(`djthecd: pruned ${pruned.length} monuments-only surfaces · dj homepage promoted to /`);
 
         // 2 · the voice transform
         const files = walkHtml(root);
         const changes = [];
         const unhandled = [];
+        const everMatched = new Set();
+        const declared = new Set();
         for (const file of files) {
           const page = '/' + path.relative(root, file).replace(/index\.html$/, '').replace(/\\/g, '/');
           const html = fs.readFileSync(file, 'utf8');
-          const res = toSoloVoice(html, { replacements: replacementsFor(page), page });
+          const reps = replacementsFor(page);
+          reps.forEach(([from]) => declared.add(from));
+          const res = toSoloVoice(html, { replacements: reps, page });
           if (res.html !== html) fs.writeFileSync(file, res.html);
           changes.push(...res.changes);
           unhandled.push(...res.unhandled);
+          res.matched.forEach((m) => everMatched.add(m));
         }
+        // A declared replacement that matched NOWHERE is a silent no-op: the
+        // copy it was meant to fix is still on the page. Treat it as a failure,
+        // not a shrug. (This is the bug class that shipped "he's" on /work/on-camera.)
+        const deadRules = [...declared].filter((d) => !everMatched.has(d));
 
         // 3 · the leak audit
         const leaks = [];
@@ -118,7 +141,18 @@ export default function djsite() {
           `# Leak audit · ${leaks.length} findings\n\n` +
           byPage(leaks).map(([p, ls]) => `## ${p}\n` + ls.map(l => `- [${l.kind}] ${l.hit}${l.context ? ` · "${l.context}"` : ''}`).join('\n')).join('\n\n') + '\n');
 
-        logger.info(`djthecd: ${changes.length} voice changes · ${unhandled.length} unhandled · ${leaks.length} leaks (tools/dj-report/)`);
+        fs.writeFileSync(path.join(reportDir, 'dead-rules.md'),
+          `# Replacements that matched nothing · ${deadRules.length}\n\n` +
+          (deadRules.length
+            ? 'Each of these was declared in src/data/dialect.js and never matched a single page.\n' +
+              'The copy it was meant to change is STILL ON THE SITE.\n\n' +
+              deadRules.map((d) => `- ${d}`).join('\n')
+            : 'None. Every declared replacement matched at least one page.') + '\n');
+
+        logger.info(`djthecd: ${changes.length} applied · ${deadRules.length} dead rules · ${unhandled.length} voice items open · ${leaks.length} leaks (tools/dj-report/)`);
+        if (deadRules.length) {
+          throw new Error(`djthecd: ${deadRules.length} replacement(s) matched NOTHING. See tools/dj-report/dead-rules.md`);
+        }
         if (leaks.length && process.env.DJ_AUDIT !== 'warn') {
           throw new Error(`djthecd leak audit FAILED: ${leaks.length} findings. See tools/dj-report/leaks.md`);
         }

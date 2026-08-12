@@ -16,6 +16,13 @@
       "autoPort": false
     },
     {
+      "name": "djthecd",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["astro", "preview", "--port", "4325"],
+      "port": 4325,
+      "autoPort": false
+    },
+    {
       "name": "dashboard",
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8741"],

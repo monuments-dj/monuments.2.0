@@ -27,8 +27,8 @@ export const chromeSwaps = [
   ['monuments.cc@gmail.com', 'dj@djthecd.com'],
   ['https://monuments-2-0.vercel.app', 'https://djthecd.com'],
   ['M<i>✳</i>NUMENTS', 'DJ<i>✳</i>RAMIREZ'],
+  // covers og:site_name and any other content="Monuments" meta
   ['content="Monuments"', 'content="DJ Ramirez"'],
-  ['og:site_name" content="Monuments"', 'og:site_name" content="DJ Ramirez"'],
 ];
 
 // --- loglines + prose that appears on more than one page ---------------------

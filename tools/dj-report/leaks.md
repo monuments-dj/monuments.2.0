@@ -1,4 +1,4 @@
-# Leak audit · 86 findings
+# Leak audit · 60 findings
 
 ## /404.html
 - [we] us · "Tell us what you're building"
@@ -16,64 +16,8 @@
 - [we] we · "We still take that work when it matters, and we bring everything that pressure taught us to it."
 - [we] us · "and we bring everything that pressure taught us to it."
 
-## /brand-lab/block-noise.html
-- [we] We · "We build things worth remembering. One signal. No clutt"
-
-## /brand-lab/sun-playground.html
-- [we] We · "We build things worth remembering"
-
-## /brand-lab/wordmark-hero.html
-- [we] We · "We build things worth remembering."
-
 ## /contact/
 - [we] us · "Tell us what"
-
-## /redesign/b-about.html
-- [we] We · "creative direction, set at the senior level. We decide what the work needs to say and how it should"
-- [we] us · "Around us: a trusted network of makers. Directors of photograp"
-
-## /redesign/c-about.html
-- [we] us · "Around us: a trusted network of makers who have done it at sca"
-
-## /redesign/d-about.html
-- [we] us · "nes hold and the work actually ships. Around us: a trusted network of makers who have done it at sca"
-
-## /redesign/e-about.html
-- [we] us · "Around us: a trusted network of makers who have done it at sca"
-
-## /redesign/f-about.html
-- [we] us · "Around us: a trusted network of makers. People I have shipped"
-
-## /redesign/m-about.html
-- [we] us · "nes hold and the work actually ships. Around us: a trusted network of makers who have done it at sca"
-- [we] We · "creative direction, set at the senior level. We decide what the work needs to say and how it should"
-- [we] We · "We have carried cameras through Nepal, Uganda, and acro"
-- [we] us · "r about selling anything. Those trips taught us patience, respect for the subject, and how to disapp"
-- [we] We · "We still take that work when it matters, and we bring e"
-- [we] we · "We still take that work when it matters, and we bring everything that pressure taught us to it."
-- [we] us · "and we bring everything that pressure taught us to it."
-
-## /redesign/m-home.html
-- [string] M<span>✳</span>NUMENTS
-
-## /redesign/m-lab.html
-- [we] we · "Where we test"
-- [we] We · "This is the open workbench. We build the studio's own pages here first, in public,"
-- [we] we · "in public, with the emerging web tech and AI we then bring to client work. If something is bleeding"
-
-## /redesign/m-services.html
-- [we] We · "We come in at the thinking layer"
-- [we] We · "creative direction set at the senior level. We lock the thinking before anything rolls."
-
-## /redesign/m-work-aov.html
-- [we] we · "is is the story under that number: the offer we built, the brands we won, and the work (Sony, Xperia"
-- [we] we · "that number: the offer we built, the brands we won, and the work (Sony, Xperia, and more) that made"
-
-## /redesign/m-work-bluecross.html
-- [we] we · "image selection. Over the course of a week, we captured authentic moments in a variety of locations"
-
-## /redesign/m-work-sony.html
-- [we] we · "ed shouldn't be the norm, but it's a feeling we can all relate to. When the world gets noisy, headph"
 
 ## /work/adorama-music/
 - [we] We · "The hero film was built to travel. We cut it into shorter spots for the individual product"
