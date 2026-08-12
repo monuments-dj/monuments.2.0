@@ -1,9 +1,4 @@
-# djthecd voice transform · 105 changes
-
-## /
-- [explicit]
-  - was: Disguised as a retail popup, we challenged teens
-  - now: Disguised as a retail popup, the team and I challenged teens
+# djthecd voice transform · 97 changes
 
 ## /about/
 - [explicit]
@@ -32,33 +27,6 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
-
-## /direction/
-- [explicit]
-  - was: Disguised as a retail popup, we challenged teens
-  - now: Disguised as a retail popup, the team and I challenged teens
-- [explicit]
-  - was: We cast three creators who filmed their own BTS
-  - now: My team and I cast three creators who filmed their own BTS
-
-## /production/
-- [explicit]
-  - was: Adorama brought us in to launch a whole new category: Adorama Music.
-  - now: Adorama brought my team at Art of Visuals in to launch a whole new category: Adorama Music.
-- [explicit]
-  - was: so we made starting the whole point. DJ directs and cuts the campaign, and runs the set:
-  - now: so my team and I made starting the whole point. I direct and cut the campaign, and run the set:
-- [explicit]
-  - was: Disguised as a retail popup, we challenged teens
-  - now: Disguised as a retail popup, the team and I challenged teens
-
-## /strategy/
-- [explicit]
-  - was: Disguised as a retail popup, we challenged teens
-  - now: Disguised as a retail popup, the team and I challenged teens
-- [explicit]
-  - was: What we built took it from a group of products to a brand.
-  - now: What my team and I built took it from a group of products to a brand.
 
 ## /work/
 - [explicit]

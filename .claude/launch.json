@@ -17,9 +17,16 @@
     },
     {
       "name": "djthecd",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["astro", "preview", "--port", "4325"],
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4325", "--directory", "dist"],
       "port": 4325,
+      "autoPort": false
+    },
+    {
+      "name": "monuments-built",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4326", "--directory", ".vercel/output/static"],
+      "port": 4326,
       "autoPort": false
     },
     {
