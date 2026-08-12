@@ -95,8 +95,13 @@ export default function djsite() {
         // byte-identical. Fonts only + grain kill + serif-italic neutralized;
         // interior color worlds are left alone (their art direction is page
         // work, not a token swap).
+        // !important is load-bearing here: PageFooter's runtime font engine
+        // (applyFont) sets --disp/--dispw etc INLINE on <html> via JS, and an
+        // inline style beats any normal stylesheet declaration. !important in
+        // a stylesheet is the one thing that outranks inline - verified live
+        // 2026-08-12 when the skin silently lost to the engine without it.
         const SKIN = `<style id="dj-skin">
-:root{--disp:'Helvetica Neue',Helvetica,Arial,sans-serif;--body:'Helvetica Neue',Helvetica,Arial,sans-serif;--serif:'Helvetica Neue',Helvetica,Arial,sans-serif;--mono:'Helvetica Neue',Helvetica,Arial,sans-serif;--dispw:600;--dispw2:500}
+:root{--disp:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--body:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--serif:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--mono:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--dispw:600!important;--dispw2:500!important}
 .serif{font-style:normal!important;font-weight:300}
 .grain{display:none!important}
 </style>`;
