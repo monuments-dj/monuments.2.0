@@ -1,5 +1,44 @@
 # TODO - current state
 
+## 🔄 HANDOFF 2026-08-02 (Web 14 -> Web 15) - READ THIS FIRST
+**SHIPPED this session (all live + verified on main):** Lighthouse pass
+(xperia 56->90, bp+a11y 100s, LCPs halved) · 3 mobile overhangs killed at
+class level (sitewide .credits gutter bug, badge AABB, IG absolute-phase) ·
+MasonryGallery v2 (video cells, lightbox sound, tone=dark, build-time dims)
++ last 2 galleries migrated · font MIS-BAKE caught by DJ + re-picked from a
+verified 8-pairing visual menu: 01 CUT baked (Bricolage + Instrument Serif)
+· gallery sound chips (hybrid, DJ picked) · copy system RESEARCHED
+(docs/COPY-SYSTEM-PLAN.md: Vale + hash ledger + facts registry + judged
+cards - awaiting build) · 154-decision provenance audit
+(docs/BAKED-DECISIONS-2026-07-29.md) · 45-flag copy inventory: 6 blockers +
+15 flags applied · engagement map ALL 19 CONFIRMED in DJ's words (in the
+plan doc) · home hero matched to DJ's mock (full-frame, bottom-pinned,
+lighter scrim) · team band on /about (DJ + Tessanie Rizvi + Kova Kovatonic,
+photo slots) · THE REFERENCES dropdown on /about + letters shipped
+(testimonial theater + Mike Sutton on turnstile,
+docs/TESTIMONIALS-2026-08.md) · Casey = LEVINS (DJ's word; never infer
+names from email handles) · 3.6M VERIFIED (AOV's published PRO-I page) ·
+CWI: DJ directs + runs production, Monuments = production co (call-sheet
+row live) · Xperia 1 III run band (4 films + 2 stills from AOV case pages)
+· AOV stand-in reel removed · /work-live deleted.
+
+**LAUNCH LIST (4 DJ items):** photography (DJ says HOLD) · Tess+Kova photos
+(slots live) · DJ's real-phone pass · domain swap on his explicit go.
+
+**NEXT: djthecd.com ONE-SHOT.** Research done (see docs/DJTHECD-PLAN.md;
+if absent, this session's workflow journal has it - the plan doc gets
+committed the moment the workflow lands). DJ's calls 2026-08-02: IA +
+content = the monuments framework as built · design flexes toward SIMPLE
+(Katie Hunter whitespace; /ai + /giving = the seed) · I-voice via the
+locked dialect transform (DJTHECD-HOLDINGS.md) · engagement frames per the
+confirmed 19-tag map · AUDIENCE VARIANTS (DJ's idea, his words: "depending
+on whos hiring Id love to show variants of the site / homepage leading with
+whats important to them... production, creative director, strategy"):
+build the homepage as re-stackable blocks so /production /direction
+/strategy re-lead the same blocks; DJ sends the matching link per
+application. Deferred copy work: 12 parked voice flags + copy-system build
+(steps in the plan doc).
+
 ## 🧭 STANDING DIRECTION (2026-07-22, keep top of mind every session)
 **The two-domain strategy is now explicit (both halves from DJ, 2026-07-22):**
 - **monuments.cc leans MORE AGENCY** for pitching bigger projects. The team is

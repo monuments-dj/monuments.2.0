@@ -112,7 +112,17 @@ credits` becomes 3 lights — insert a dark beat or flip a ground. ENFORCE with
 FAILS on adjacent lights. Run it on any page you touch. Reference flow that passes:
 `/page-template`.
 
-## Active work (2026-07-27): FINAL QC CAMPAIGN - read docs/FINAL-QC-2026-07-22.md FIRST
+## Active work (2026-08-02): DJTHECD ONE-SHOT NEXT - read TODO.md 🔄 HANDOFF 2026-08-02 FIRST
+Monuments = launch-ready minus 4 DJ items (photography HOLD · Tess+Kova photos ·
+his phone pass · domain-swap go). Letters/testimonials live on 3 surfaces; team band
+live; engagement map ALL 19 CONFIRMED; 3.6M verified; font = 01 CUT baked.
+NEXT BUILD: djthecd.com one-shot per docs/DJTHECD-PLAN.md (one repo, two Vercel
+projects, SITE flag, config-module-only conditionals, leak audit; hire.astro becomes
+the homepage; audience-variant routes /production /direction /strategy over
+re-stackable blocks - DJ's idea, sends the matching link per application). DJ owes
+plan §5 rulings. Copy-system build (COPY-SYSTEM-PLAN.md) still queued.
+
+## Active work (2026-07-27, historical): FINAL QC CAMPAIGN - read docs/FINAL-QC-2026-07-22.md FIRST
 Voice sweep DONE. Battery FULLY GREEN incl Lighthouse (07-27: xperia 90/100/100/100 was
 56/90/77, work 92, home 88, capabilities 86, about 68=hero-weight-bound; details+flags in
 the QC doc). Galleries = MasonryGallery on ALL 19 pages (v2: video cells, lightbox sound,
