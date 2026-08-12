@@ -1,0 +1,7 @@
+/* 03 AIR · Katie Hunter whitespace: warm white, light weights, small quiet type, maximum air */
+:root{--disp:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--body:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--serif:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--mono:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--dispw:400!important;--dispw2:400!important;
+--paper:#fbfaf8!important;--ink:#26241f!important;--line:#e9e6e0!important;--dim:#9b978f!important;
+--fs-hero:clamp(30px,3.6vw,54px)!important;--wrap:1080px!important;--pad:clamp(28px,6vw,64px)!important}
+.serif{font-style:normal!important;font-weight:300;color:var(--dim)}
+.grain{display:none!important}
+h1,h2{letter-spacing:-.015em!important;line-height:1.12!important}

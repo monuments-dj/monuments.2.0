@@ -99,12 +99,16 @@ export default function djsite() {
         // (applyFont) sets --disp/--dispw etc INLINE on <html> via JS, and an
         // inline style beats any normal stylesheet declaration. !important in
         // a stylesheet is the one thing that outranks inline - verified live
-        // 2026-08-12 when the skin silently lost to the engine without it.
-        const SKIN = `<style id="dj-skin">
-:root{--disp:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--body:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--serif:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--mono:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--dispw:600!important;--dispw2:500!important}
-.serif{font-style:normal!important;font-weight:300}
-.grain{display:none!important}
-</style>`;
+        // The skin is a FILE, not a constant: src/data/skins/<name>.css, selected by
+        // DJ_SKIN (default "rams"). One file = the whole dj look; add a skin by
+        // adding a file. The !important notes from the 2026-08-12 font-engine
+        // fight live in the skin files themselves.
+        const skinName = process.env.DJ_SKIN || 'rams';
+        const skinPath = path.join(process.cwd(), 'src', 'data', 'skins', `${skinName}.css`);
+        if (!fs.existsSync(skinPath)) throw new Error(`djthecd: unknown DJ_SKIN "${skinName}" - no src/data/skins/${skinName}.css`);
+        const skinCss = fs.readFileSync(skinPath, 'utf8').trim();
+        const SKIN = skinCss ? `<style id="dj-skin" data-skin="${skinName}">\n${skinCss}\n</style>` : '';
+
 
         // 3 · the voice transform
         const files = walkHtml(root);
@@ -118,7 +122,7 @@ export default function djsite() {
           const reps = replacementsFor(page);
           reps.forEach(([from]) => declared.add(from));
           const res = toSoloVoice(html, { replacements: reps, page });
-          if (!res.html.includes('id="dj-skin"')) res.html = res.html.replace('</head>', SKIN + '</head>');
+          if (SKIN && !res.html.includes('id="dj-skin"')) res.html = res.html.replace('</head>', SKIN + '</head>');
           if (res.html !== html) fs.writeFileSync(file, res.html);
           changes.push(...res.changes);
           unhandled.push(...res.unhandled);

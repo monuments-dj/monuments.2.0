@@ -1,0 +1,6 @@
+/* 02 SWISS · international style: pure white, hard black, tight Helvetica bold, red kept loud */
+:root{--disp:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--body:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--serif:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--mono:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--dispw:700!important;--dispw2:500!important;
+--paper:#ffffff!important;--ink:#000000!important;--line:#e5e5e5!important;--dim:#767676!important;--struct:#000000!important}
+.serif{font-style:normal!important;font-weight:400;color:var(--red,#E0311A)}
+.grain{display:none!important}
+h1,h2{letter-spacing:-.03em!important}

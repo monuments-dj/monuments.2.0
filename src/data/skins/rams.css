@@ -1,0 +1,4 @@
+/* 01 RAMS · current baseline: neutral Apple grays, Helvetica 600, red functional accent */
+:root{--disp:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--body:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--serif:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--mono:'Helvetica Neue',Helvetica,Arial,sans-serif!important;--dispw:600!important;--dispw2:500!important}
+.serif{font-style:normal!important;font-weight:300}
+.grain{display:none!important}

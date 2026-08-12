@@ -1,0 +1,7 @@
+/* 04 CUT · control: the monuments identity (Bricolage 800 + Instrument Serif italics,
+   warm film paper, grain alive). For judging how far the other skins stray. */
+:root{--disp:'Bricolage Grotesque',sans-serif!important;--body:'Bricolage Grotesque',sans-serif!important;--serif:'Instrument Serif',serif!important;--mono:'Fragment Mono',monospace!important;--dispw:800!important;--dispw2:600!important;
+--paper:#F5F3EF!important;--ink:#161514!important;--line:#dcd9d2!important;--dim:#8f8d88!important;--struct:#201e1d!important}
+.serif{font-style:italic!important;font-weight:400}
+.hero .hero-media::after{display:block!important}
+h2{text-transform:uppercase!important}
