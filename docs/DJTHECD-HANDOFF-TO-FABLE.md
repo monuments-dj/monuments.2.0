@@ -21,6 +21,33 @@ where DJ gave a direct instruction on 2026-08-12:
 > taking the structure from the site and reskinning it to make it for DJ
 > the CD."
 
+## DJ's rulings 2026-08-12 (later same day - these supersede anything below that conflicts)
+His words: "homepage can be very similar. rest of it can be open and
+typographic. but also you have lots of images to choose from."
+And, on the audience-switcher strip: "I hate this... kill this idea stat and
+stick to homepage flow from the other site."
+
+What that means in practice:
+1. **Homepage = the monuments flow.** DONE and verified end to end via
+   snap.mjs at 1440 (commit 2f57e50). Hero lockup, Trusted Solari board,
+   reel ride, case reel, caps bar, tile ring, testimonial theater, locked
+   closer. Do not re-architect it.
+2. **NO audience-switcher UI, ever.** Killed on his direct order. The
+   /production /direction /strategy routes stay link-addressable; he targets
+   audiences by which link he sends. Do not resurface a switcher.
+3. **Interior pages (about, contact, work hub, case pages) = open and
+   typographic**, with the image library doing the heavy lifting. The seed
+   for that register is /ai and /giving on monuments (his 2026-08-02 design
+   call). This is where the two sites are allowed to feel different.
+
+## Verification: the pane lies, snap.mjs is truth
+The embedded browser pane produces BLACK FRAMES at scrolled positions on this
+site (fixed-chrome displacement in its capture path). DOM inspection there is
+fine; its screenshots past scroll 0 are not. Verify visuals with DJ's tool:
+`node tools/snap.mjs http://localhost:4325 <name> 1440` (serve dist via the
+`djthecd` launch entry first). This is also DJ's standing memory rule:
+sandbox rendering has lied before; his real browser is the final word.
+
 ## The homepage: reskin, don't redesign
 The current `src/dj/` homepage (hero-left/photo-right, switcher on top) is
 Opus's layout, NOT what DJ asked for. Treat it as scaffolding to replace.
