@@ -24,8 +24,11 @@
 // 1 · protected regions
 // ---------------------------------------------------------------------------
 const RAW_TAGS = new Set(['script', 'style', 'noscript', 'svg']);
-// tags whose text is somebody else's words, or a factual credit
-const PROTECTED_TAGS = new Set(['blockquote', 'q']);
+// tags whose text is somebody else's words, or a factual credit.
+// figcaption included 2026-08-12: captions label artifacts (billboard lines
+// like Flashpoint's "We got you", photo credits) - a caption is never the
+// site speaking, so it is neither transformed nor leak-flagged.
+const PROTECTED_TAGS = new Set(['blockquote', 'q', 'figcaption']);
 // class tokens that mark a credit / quote / testimonial block
 const PROTECTED_CLASS = /(^|[\s"'])(cc|cc-list|cc-\S+|callsheet|shead|srow|qb|qb-\S+|tst|tst-\S+|quote|quotes|pull|pullquote|testimonial|testimonials|letter|letters|credit|credits|cs-credits|bt-item|bt-logo)([\s"']|$)/;
 const VOID_TAGS = new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr']);

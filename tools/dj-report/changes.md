@@ -1,4 +1,9 @@
-# djthecd voice transform · 97 changes
+# djthecd voice transform · 181 changes
+
+## /404.html
+- [explicit]
+  - was: Tell us what you're building
+  - now: Tell me what you're building
 
 ## /about/
 - [explicit]
@@ -13,6 +18,33 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: People ask me what we do
+  - now: People ask me what I do
+- [explicit]
+  - was: We're all handed different tools. Mine was a camera.
+  - now: Everyone gets handed different tools. Mine was a camera.
+- [explicit]
+  - was: and around us is a crew that's grown with me
+  - now: and around me is a crew that's grown with me
+- [explicit]
+  - was: Before a single deliverable, we find what you actually stand for
+  - now: Before a single deliverable, I find what you actually stand for
+- [explicit]
+  - was: set at the senior level. We decide what the work needs to say and how it should feel, then lock the thinking
+  - now: set at the senior level. I decide what the work needs to say and how it should feel, then lock the thinking
+- [explicit]
+  - was: Work that lasts past the launch. We hand you something worth remembering
+  - now: Work that lasts past the launch. I hand you something worth remembering
+- [explicit]
+  - was: We have carried cameras through Nepal, Uganda
+  - now: I have carried cameras through Nepal, Uganda
+- [explicit]
+  - was: Those trips taught us patience
+  - now: Those trips taught me patience
+- [explicit]
+  - was: We still take that work when it matters, and we bring everything that pressure taught us to it
+  - now: I still take that work when it matters, and I bring everything that pressure taught me to it
 
 ## /contact/
 - [explicit x5]
@@ -27,6 +59,9 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: Tell us what
+  - now: Tell me what
 
 ## /work/
 - [explicit]
@@ -58,6 +93,9 @@
 - [explicit]
   - was: so we shot the kit across six iconic locations around town
   - now: so I shot the kit with the team at Against across six iconic locations around town
+- [explicit]
+  - was: built out with Against. DJ's part was the launch film: he directed the official jersey video
+  - now: built out with Against. My part was the launch film: I directed the official jersey video
 
 ## /work/adorama-music/
 - [explicit]
@@ -75,6 +113,12 @@
 - [explicit]
   - was: Adorama brought us in to launch a whole new category: Adorama Music.
   - now: Adorama brought my team at Art of Visuals in to launch a whole new category: Adorama Music.
+- [explicit]
+  - was: DJ led Adorama Music: The Journey as creative director. He set the strategy, directed the photo and video, shot a chunk of the stills himself, and was Adorama's main point of contact
+  - now: I led Adorama Music: The Journey as creative director. I set the strategy, directed the photo and video, shot a chunk of the stills myself, and was Adorama's main point of contact
+- [explicit]
+  - was: The hero film was built to travel. We cut it into shorter spots
+  - now: The hero film was built to travel. My team and I cut it into shorter spots
 
 ## /work/art-of-visuals/
 - [explicit]
@@ -89,6 +133,39 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: how do we talk to them, what reads as real
+  - now: how do you talk to them, what reads as real
+- [explicit]
+  - was: so we weren't guessing. We were a voice of authority, and we knew the others. We sold strategy and consulting on culture, made the introductions, and managed the influencers
+  - now: so my team and I weren't guessing. AOV was a voice of authority that knew the others. I sold strategy and consulting on culture, made the introductions, and managed the influencers
+- [explicit]
+  - was: We weren't a vendor renting out a camera crew. We were the translator between brands and the creator world
+  - now: I wasn't a vendor renting out a camera crew. I was the translator between brands and the creator world
+- [explicit]
+  - was: not just a post on ours, focused on
+  - now: not just a post on AOV's own, focused on
+- [explicit]
+  - was: lined up with the a7S III, we shot the headphone commercial on the a7S III
+  - now: lined up with the a7S III, my team and I shot the headphone commercial on the a7S III
+- [explicit]
+  - was: for the XM5 launch we cast influencers as the talent
+  - now: for the XM5 launch I cast influencers as the talent
+- [explicit]
+  - was: came back campaign after campaign and kept us as their AOR
+  - now: came back campaign after campaign and kept AOV as their AOR
+- [explicit]
+  - was: the reason they kept us as their AOR
+  - now: the reason they kept AOV as their AOR
+- [explicit]
+  - was: The audience was mostly there before him.
+  - now: The audience was mostly there before me.
+- [explicit]
+  - was: interview series DJ wrote, produced, and shot. He traveled all over
+  - now: interview series I wrote, produced, and shot. I traveled all over
+- [explicit]
+  - was: DJ ran all creative on the agency side, sat in every design and strategy decision, and carried the pitches, the sales, and the client relationships. And he stayed on camera
+  - now: I ran all creative on the agency side, sat in every design and strategy decision, and carried the pitches, the sales, and the client relationships. And I stayed on camera
 
 ## /work/blue-cross/
 - [explicit]
@@ -103,6 +180,9 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: In partnership with OMEK agency, DJ did creative direction on the campaign: image selection, casting, and a hand on the edits, and he directed the talent on set
+  - now: In partnership with OMEK agency, I did creative direction on the campaign: image selection, casting, and a hand on the edits, and I directed the talent on set
 
 ## /work/buck-the-quo/
 - [explicit]
@@ -120,6 +200,18 @@
 - [explicit]
   - was: Disguised as a retail popup, we challenged teens
   - now: Disguised as a retail popup, the team and I challenged teens
+- [explicit]
+  - was: DJ came onto Buck the Quo as an in-house creative at Drake Cooper, right at the start of it. He shot and cut the bulk of the photo and video and led the social team
+  - now: I came onto Buck the Quo as an in-house creative at Drake Cooper, right at the start of it. I shot and cut the bulk of the photo and video and led the social team
+- [explicit]
+  - was: his job changed. They put him in the field as a mentor to the teens, because of how he got here. He didn't go to college. He did an advertising internship that put him inside an agency in his early twenties, and they wanted him there to show teens
+  - now: my job changed. They put me in the field as a mentor to the teens, because of how I got here. I didn't go to college. I did an advertising internship that put me inside an agency in my early twenties, and they wanted me there to show teens
+- [explicit]
+  - was: So he went from the main shooter, editor, and social lead to boots on the ground
+  - now: So I went from the main shooter, editor, and social lead to boots on the ground
+- [explicit]
+  - was: DJ mentored the ones chasing a media path
+  - now: I mentored the ones chasing a media path
 
 ## /work/clothing-merch/
 - [explicit]
@@ -137,6 +229,18 @@
 - [explicit]
   - was: Most merch is a logo on a blank. We design things people still wear
   - now: Most merch is a logo on a blank. I design things people still wear
+- [explicit]
+  - was: For a range of clients, DJ has designed clothing and merch that connects with their brand story
+  - now: For a range of clients, I have designed clothing and merch that connects with their brand story
+- [explicit]
+  - was: From concept to production, we make sure each piece reflects not just a logo or a message, but a meaningful extension of the brand itself. Whether we're designing it, printing it, or marketing it, we know what works in the space
+  - now: From concept to production, I make sure each piece reflects not just a logo or a message, but a meaningful extension of the brand itself. Whether I'm designing it, printing it, or marketing it, I know what works in the space
+- [explicit]
+  - was: We get to know each audience and what they'd actually wear
+  - now: I get to know each audience and what they'd actually wear
+- [explicit]
+  - was: By blending design with purpose, DJ has helped clients turn their merch lines into
+  - now: By blending design with purpose, I've helped clients turn their merch lines into
 
 ## /work/cwi-lets-get-started/
 - [explicit]
@@ -154,6 +258,21 @@
 - [explicit]
   - was: so we made starting the whole point. DJ directs and cuts the campaign, and runs the set:
   - now: so my team and I made starting the whole point. I direct and cut the campaign, and run the set:
+- [explicit]
+  - was: DJ directs and cuts the Let's Get Started program spots
+  - now: I direct and cut the Let's Get Started program spots
+- [explicit]
+  - was: On shoot days DJ runs the set: directing the talent, working with the DP on how it gets shot, and keeping the crew moving with Tess on production, then he takes it into the edit and cuts it for every screen. He frames the students as the heroes and puts the real tools
+  - now: On shoot days I run the set: directing the talent, working with the DP on how it gets shot, and keeping the crew moving with Tess on production, then I take it into the edit and cut it for every screen. I frame the students as the heroes and put the real tools
+- [explicit]
+  - was: Every quarter we make four to six new films with a crew of five to twenty, and DJ builds each one
+  - now: Every quarter my team and I make four to six new films with a crew of five to twenty, and I build each one
+- [explicit]
+  - was: DJ has worked in Idaho education for more than ten years, and he brings that to every round. This one is homegrown, made with hometown friends and a client as fired up about it as he is. Together we're putting Idaho opportunities
+  - now: I have worked in Idaho education for more than ten years, and I bring that to every round. This one is homegrown, made with hometown friends and a client as fired up about it as I am. Together, my team and I are putting Idaho opportunities
+- [explicit]
+  - was: which is exactly why this work matters to us
+  - now: which is exactly why this work matters to me
 
 ## /work/donut-zumiez/
 - [explicit]
@@ -182,6 +301,18 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: They brought DJ in to answer one question, how do you show a product that lives in two worlds? His answer was to stop choosing
+  - now: They brought me in to answer one question, how do you show a product that lives in two worlds? My answer was to stop choosing
+- [explicit]
+  - was: DW came to DJ with a product that was genuinely hard to explain: one kit that's both a real acoustic set and a full electronic rig. He led it as Creative Director and designer
+  - now: DW came to me with a product that was genuinely hard to explain: one kit that's both a real acoustic set and a full electronic rig. I led it as Creative Director and designer
+- [explicit]
+  - was: DJ landed on the split: tear every layout down the middle
+  - now: I landed on the split: tear every layout down the middle
+- [explicit]
+  - was: Then he designed it out, spread by spread
+  - now: Then I designed it out, spread by spread
 
 ## /work/flashpoint/
 - [explicit]
@@ -196,6 +327,24 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: We pitched a mark where the O swapped by category
+  - now: I pitched a mark where the O swapped by category
+- [explicit]
+  - was: Six disciplines, one voice. We built the brand book and the standards
+  - now: Six disciplines, one voice. My team and I built the brand book and the standards
+- [explicit]
+  - was: Then we handed it over. Templates, standards
+  - now: Then I handed it over. Templates, standards
+- [explicit]
+  - was: something that kept working after we left
+  - now: something that kept working after I left
+- [explicit]
+  - was: Followers on the channels DJ set up
+  - now: Followers on the channels I set up
+- [explicit]
+  - was: The site DJ built in 2020
+  - now: The site I built in 2020
 
 ## /work/know-vape/
 - [explicit]
@@ -210,6 +359,18 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: DJ was brought onto Know Vape for the thing he does on every campaign
+  - now: I was brought onto Know Vape for the thing I do on every campaign
+- [explicit]
+  - was: April Frame wrote and shot the spots. DJ directed all six
+  - now: April Frame wrote and shot the spots. I directed all six
+- [explicit]
+  - was: Directing the spots was only half of it. DJ also shot the campaign's stills
+  - now: Directing the spots was only half of it. I also shot the campaign's stills
+- [explicit]
+  - was: He photographed them like they mattered
+  - now: I photographed them like they mattered
 
 ## /work/msi-creative-by-design/
 - [explicit x4]
@@ -224,6 +385,9 @@
 - [explicit]
   - was: MSI built a laptop for creators, and we launched it on Times Square digital boards
   - now: MSI built a laptop for creators, and I launched it with my team at Art of Visuals on Times Square digital boards
+- [explicit]
+  - was: MSI built a laptop specifically for creators. We launched it on Times Square digital boards
+  - now: MSI built a laptop specifically for creators. My team and I launched it on Times Square digital boards
 
 ## /work/on-camera/
 - [explicit]
@@ -244,6 +408,9 @@
 - [explicit]
   - was: He&#39;s carried a brand&#39;s voice with the red light on
   - now: I&#39;ve carried a brand&#39;s voice with the red light on
+- [explicit]
+  - was: the Art of Visuals podcast, and DJ co-hosted it every week
+  - now: the Art of Visuals podcast, and I co-hosted it every week
 
 ## /work/sony-flow-state/
 - [explicit]
@@ -258,6 +425,12 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: DJ's responsibilities included developing the initial pitch
+  - now: My responsibilities included developing the initial pitch
+- [explicit]
+  - was: He ensured that every aspect of the production aligned with Sony's brand identity
+  - now: I made sure every aspect of the production aligned with Sony's brand identity
 
 ## /work/sony-this-moment/
 - [explicit]
@@ -275,6 +448,18 @@
 - [explicit]
   - was: We cast three creators who filmed their own BTS
   - now: My team and I cast three creators who filmed their own BTS
+- [explicit]
+  - was: but it's a feeling we can all relate to
+  - now: but it's a feeling anyone can relate to
+- [explicit]
+  - was: The film follows three creators we cast because they fit the story naturally
+  - now: The film follows three creators my team and I cast because they fit the story naturally
+- [explicit]
+  - was: DJ directed the photoshoot, the briefs and the calls on set, and Claire LeJune shot the stills. He creative-directed the system
+  - now: I directed the photoshoot, the briefs and the calls on set, and Claire LeJune shot the stills. I creative-directed the system
+- [explicit]
+  - was: As the creative director on this project, DJ helped shape the story, wrote the briefs, directed the stills, and made sure everything on set matched Sony's brand guides. He also worked closely with the production team
+  - now: As the creative director on this project, I helped shape the story, wrote the briefs, directed the stills, and made sure everything on set matched Sony's brand guides. I also worked closely with the production team
 
 ## /work/sony-xm5/
 - [explicit]
@@ -289,6 +474,15 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: Setting up the commercials was part of DJ's job, but the main thing he helped with here was the direction
+  - now: Setting up the commercials was part of my job, but the main thing I helped with here was the direction
+- [explicit]
+  - was: His role, along with his AOV team, was to identify influencers
+  - now: My role, along with my AOV team, was to identify influencers
+- [explicit]
+  - was: As Creative Director, DJ wanted to make sure
+  - now: As Creative Director, I wanted to make sure
 
 ## /work/sony-xperia/
 - [explicit]
@@ -303,6 +497,33 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: For the Xperia PRO-I we opened with a first look film
+  - now: For the Xperia PRO-I, my team and I opened with a first look film
+- [explicit]
+  - was: built on everything the launches taught us
+  - now: built on everything the launches taught me
+- [explicit]
+  - was: We developed a strategy focused on positioning the Xperia 5 IV as a phone that could keep up with any journey. From the start, our goal was to showcase
+  - now: I developed a strategy focused on positioning the Xperia 5 IV as a phone that could keep up with any journey. From the start, my goal was to showcase
+- [explicit]
+  - was: In collaboration with Art of Visuals, we launched Summer with Xperia
+  - now: With the Art of Visuals team, I launched Summer with Xperia
+- [explicit]
+  - was: While directing the campaign, DJ kept his camera close
+  - now: While directing the campaign, I kept my camera close
+- [explicit]
+  - was: He snapped everything, from the phone handling to those perfect golden-hour shots to candid moments. For him, it was about capturing the vibe of the season
+  - now: I snapped everything, from the phone handling to those perfect golden-hour shots to candid moments. For me, it was about capturing the vibe of the season
+- [explicit]
+  - was: giving DJ time to test the camera, work out any bugs, and understand its strengths so we could maximize its potential
+  - now: giving me time to test the camera, work out any bugs, and understand its strengths so I could maximize its potential
+- [explicit]
+  - was: We transformed the Xperia 5 IV from a smartphone into
+  - now: I turned the Xperia 5 IV from a smartphone into
+- [explicit]
+  - was: Before launch, Sony provided us with early access to the Xperia 5 IV to experience its functionality firsthand. This early look gave us valuable time to test the camera's full range: identifying its strengths, pinpointing areas to troubleshoot, and aligning our strategy
+  - now: Before launch, Sony provided early access to the Xperia 5 IV to experience its functionality firsthand. This early look gave me valuable time to test the camera's full range: identifying its strengths, pinpointing areas to troubleshoot, and aligning my strategy
 
 ## /work/turnstile/
 - [explicit]
@@ -320,6 +541,24 @@
 - [explicit]
   - was: What we built took it from a group of products to a brand.
   - now: What my team and I built took it from a group of products to a brand.
+- [explicit x2]
+  - was: When Turnstile Audio came to us, they wanted a brand identity that struck the perfect balance
+  - now: When Turnstile Audio came to Art of Visuals, they wanted a brand identity that struck the perfect balance
+- [explicit]
+  - was: We took a deep dive into the world of vintage audio brands, looking at what made them iconic and enduring. With that inspiration in mind, we set out to build a brand identity
+  - now: I took a deep dive into the world of vintage audio brands, looking at what made them iconic and enduring. With that inspiration in mind, I set out to build a brand identity
+- [explicit]
+  - was: We went for sleek, geometric shapes and clean typography
+  - now: I went for sleek, geometric shapes and clean typography
+- [explicit]
+  - was: We kept the fonts sharp and straightforward, opting for
+  - now: I kept the fonts sharp and straightforward, opting for
+- [explicit]
+  - was: As for colors, we went for neutral tones
+  - now: As for colors, I went for neutral tones
+- [explicit]
+  - was: By blending a nod to audio legends with a modern twist, we helped create a brand
+  - now: By blending a nod to audio legends with a modern twist, I helped create a brand
 
 ## /work/waffle-me-up/
 - [explicit]
@@ -334,3 +573,18 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: Working closely with the team, we took a deep dive into their brand story
+  - now: Working closely with their team, I took a deep dive into their brand story
+- [explicit]
+  - was: Then we tackled the digital space, building out a streamlined online store
+  - now: Then I tackled the digital space, building out a streamlined online store
+- [explicit]
+  - was: DJ initially designed their logo when they opened their first storefront
+  - now: I initially designed their logo when they opened their first storefront
+- [explicit]
+  - was: they came back to him to reimagine their identity
+  - now: they came back to me to reimagine their identity
+- [explicit]
+  - was: DJ directed and shot a series of editorial-style brand images
+  - now: I directed and shot a series of editorial-style brand images

@@ -136,7 +136,7 @@ export default function djsite() {
           ).join('\n\n') + '\n');
         fs.writeFileSync(path.join(reportDir, 'unhandled.md'),
           `# Unhandled DJ mentions · ${unhandled.length}\n\n` +
-          byPage(unhandled).map(([p, us]) => `## ${p}\n` + us.map(u => `- ${u.text}`).join('\n')).join('\n\n') + '\n');
+          byPage(unhandled).map(([p, us]) => `## ${p}\n` + us.map(u => `- [${u.marker}] "${u.context}"`).join('\n')).join('\n\n') + '\n');
         fs.writeFileSync(path.join(reportDir, 'leaks.md'),
           `# Leak audit · ${leaks.length} findings\n\n` +
           byPage(leaks).map(([p, ls]) => `## ${p}\n` + ls.map(l => `- [${l.kind}] ${l.hit}${l.context ? ` · "${l.context}"` : ''}`).join('\n')).join('\n\n') + '\n');
