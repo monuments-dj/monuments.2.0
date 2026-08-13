@@ -28,7 +28,9 @@ const PEOPLE = [
   { who: 'Lauryn Hodge',  q: "If things don't go as planned, DJ handles it with a calm and collected demeanor" },
   { who: 'Tess Rizvi',    q: "When it comes to creative strategy, I've never questioned that DJ would produce work our team would be proud of." },
   { who: 'Tommy Lundberg',q: 'He was clear about what he needed and always made me feel empowered to explore my creative impulses' },
-  { who: 'Casey Levins',  q: 'I have seen him shoot, edit, produce, direct, design, PA, and be in charge of the food' },
+  // Casey's cut re-picked by DJ 2026-08-13 ("remove the PA statement"): the mounted
+  // excerpt now opens at "He brings the vibes." Still his words, still verbatim.
+  { who: 'Casey Levins',  q: 'He has a very special gift of bringing the best out of everyone on the team' },
   { who: 'Mike Sutton',   q: 'Well, DJ nailed it, it is' },
   { who: 'on-set letter', q: "On set, DJ's fun personality allows him to connect well with both the talent and the crew" },
 ];
@@ -66,7 +68,8 @@ for (const s of LEAKS) {
 
 // ── CHECK 3 · monuments-only surfaces are not shipped ───────────────────────
 const CUT = ['capabilities', 'giving', 'ai', 'lab', 'work-preview', 'template', 'page-template',
-             'page-elements', 'cta-preview', 'hire', 'keystatic', 'photography', 'redesign', 'brand-lab'];
+             'page-elements', 'cta-preview', 'hire', 'keystatic', 'photography', 'redesign', 'brand-lab',
+             'mox'];
 for (const c of CUT) {
   if (fs.existsSync(path.join(DIST, c))) fail.push(`CUT PAGE SHIPPED · /${c}/ should not exist in the dj build`);
 }

@@ -106,14 +106,15 @@ a{color:inherit;text-decoration:none}
 .hero-media.live iframe,.hero-media.live video{opacity:1}
 .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.04) brightness(.92) saturate(.98);transition:opacity 1.2s}
 .hero-media.live img{opacity:0}
-.hero .hero-media::before{content:'';position:absolute;inset:0;z-index:1;background:rgba(0,0,0,.36);pointer-events:none}
+/* darker overlay on the hero reel, DJ 2026-08-13 (was .36) */
+.hero .hero-media::before{content:'';position:absolute;inset:0;z-index:1;background:rgba(0,0,0,.52);pointer-events:none}
 .hero .hero-media::after{display:none;mix-blend-mode:normal;opacity:.06;background-size:78px 78px;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.65 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
 /* Play/Reel scrub reveal (the exact monuments ride - do not retime) */
 .rr{position:relative;height:200svh;background:#0b0b0a;color:var(--paper)}
 .rr-pin{position:sticky;top:0;height:100svh;overflow:hidden}
-.rr-panel{position:absolute;left:50%;top:47%;width:min(96vw,1800px);aspect-ratio:16/9;max-height:90svh;padding:0;border:0;cursor:pointer;overflow:hidden;border-radius:8px;background:#000;transform:translate(-50%,-50%) scale(.573);transform-origin:center;will-change:transform;z-index:2;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.rr-panel{position:absolute;left:50%;top:47%;width:min(96vw,1800px);aspect-ratio:16/9;max-height:90svh;padding:0;border:0;cursor:pointer;overflow:hidden;border-radius:0;background:#000;transform:translate(-50%,-50%) scale(.573);transform-origin:center;will-change:transform;z-index:2;box-shadow:0 30px 70px rgba(0,0,0,.5)}
 .rr-panel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.03) saturate(.95)}
 .rr-word{position:absolute;top:50%;z-index:3;font-weight:var(--dispw);font-size:clamp(44px,10vw,150px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;white-space:nowrap;opacity:0;will-change:transform,opacity;color:var(--paper);transform:translateY(-50%)}
 .rr-word .serif{text-transform:none;letter-spacing:-.01em}
@@ -160,9 +161,11 @@ a{color:inherit;text-decoration:none}
 @media (max-width:1200px){.capgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:820px){.capgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.capgrid{grid-template-columns:1fr}}
-.capcard{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:11px;overflow:hidden;box-shadow:0 10px 28px rgba(20,20,20,.07);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;color:var(--ink)}
-.capcard:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(20,20,20,.13)}
-.capcard img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;display:block;filter:grayscale(1) contrast(1.04);transition:filter .4s}
+/* SQUARE + FLAT (DJ 2026-08-13: "make this more square. think apple level
+   simplicity"): square corners, hairline instead of shadow, 1:1 media. */
+.capcard{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:0;overflow:hidden;box-shadow:none;transition:border-color .3s;color:var(--ink)}
+.capcard:hover{border-color:#a1a1a6}
+.capcard img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;display:block;filter:grayscale(1) contrast(1.04);transition:filter .4s}
 .capcard:hover img{filter:none}
 .capcard .cm{position:relative;display:block;overflow:hidden}
 .capcard .cm .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;filter:grayscale(1) contrast(1.04);transition:filter .4s}
@@ -225,7 +228,7 @@ h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;fo
 .tiles .track{display:flex;width:max-content;animation:drift 36s linear infinite}
 .tiles:hover .track{animation-play-state:paused}
 @keyframes drift{to{transform:translateX(-50%)}}
-.tile{width:190px;height:190px;border-radius:22px;overflow:hidden;flex:none;display:flex;align-items:center;justify-content:center;background:#fff;border:none;box-shadow:0 14px 34px rgba(20,20,20,.14);margin-right:16px}
+.tile{width:190px;height:190px;border-radius:0;overflow:hidden;flex:none;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);box-shadow:none;margin-right:16px}
 .tile img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
 .tile.cob{background:var(--struct);color:rgb(var(--on-rgb));font-weight:var(--dispw);font-size:64px}
 .tile.ros{background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:center;padding:18px}
@@ -341,18 +344,18 @@ h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;fo
   <div class="wrap tb-head">
     <div class="tb-copy">
       <h2 class="rv">Trusted by <span class="serif">the best.</span></h2>
-      <p class="rv">I've worked with global brands on campaigns that did the job. Satisfying clients, uncovering insights, moving product, and winning awards along the way.</p>
+      <p class="rv">Sony came back four times. Adorama, three. An Emmy, a Rockies Best of Show, and an agency grown 4x while I led creative. Repeat clients are the stat I trust: it means the thinking held and the work moved product.</p>
       <a class="tb-cta mono rv" href={mail}>Let's talk ↗</a>
     </div>
   </div>
   <div class="wrap">
     <div class="tb-grid" id="tbGrid">
       <button class="tb-cell" type="button" aria-label="Sony · tap for the next brand"><span class="tb-flap"><img class="b-sony" src="/logos/sony-black.png" width="532" height="94" alt="Sony" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="Adorama · tap for the next brand"><span class="tb-flap"><img class="b-adorama" src="/logos/adorama-black.png" width="576" height="94" alt="Adorama" loading="lazy" decoding="async"></span></button>
       <button class="tb-cell" type="button" aria-label="Intel · tap for the next brand"><span class="tb-flap"><img class="b-intel" src="/logos/intel-black.png" width="551" height="214" alt="Intel" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Adorama · tap for the next brand"><span class="tb-flap"><img class="b-adorama" src="/logos/adorama-black.png" width="576" height="94" alt="Adorama" loading="lazy" decoding="async"></span></button>
       <button class="tb-cell" type="button" aria-label="Art of Visuals · tap for the next brand"><span class="tb-flap"><img class="b-art-of-visuals" src="/logos/art-of-visuals-black.png" width="707" height="99" alt="Art of Visuals" loading="lazy" decoding="async"></span></button>
       <button class="tb-cell" type="button" aria-label="Flashpoint · tap for the next brand"><span class="tb-flap"><img class="b-flashpoint" src="/logos/flashpoint-black.png" width="591" height="52" alt="Flashpoint" loading="lazy" decoding="async"></span></button>
-      <button class="tb-cell" type="button" aria-label="MSI · tap for the next brand"><span class="tb-flap"><img class="b-msi" src="/logos/msi-black.png" width="549" height="184" alt="MSI" loading="lazy" decoding="async"></span></button>
+      <button class="tb-cell" type="button" aria-label="Donut Media · tap for the next brand"><span class="tb-flap"><img class="b-donut-media" src="/logos/donut-media-black.png" width="1200" height="561" alt="Donut Media" loading="lazy" decoding="async"></span></button>
     </div>
     <p class="tb-note mono">13 brands · repeat clients · tap a cell to flip it</p>
   </div>
@@ -755,20 +758,39 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
 <script is:inline>
 // Trusted By The Best - Solari-board rotator (6 cells, 13 brands, one roll at a time)
 (function(){
-  var TB=[
-    ['sony','Sony',532,94],['adorama','Adorama',576,94],['intel','Intel',551,214],
-    ['art-of-visuals','Art of Visuals',707,99],['flashpoint','Flashpoint',591,52],['msi','MSI',549,184],
-    ['lexar','Lexar',535,142],['donut-media','Donut Media',1200,561],['blue-cross','Blue Cross of Idaho',761,147],
-    ['ac-boise','AC Boise',989,1200],['against','Against',560,163],['cwi','College of Western Idaho',174,72],
-    ['dw-drums','DW Drums',400,214]
+  // TWO POOLS (DJ 2026-08-13: "randomize, but keep the more impressive brands
+  // at the top"): the top row only ever shows the global names, the bottom row
+  // rotates the rest. Both pools shuffle per visit; hover also rolls a cell.
+  var TOP=[
+    ['sony','Sony',532,94],['intel','Intel',551,214],['adorama','Adorama',576,94],
+    ['msi','MSI',549,184],['lexar','Lexar',535,142],['dw-drums','DW Drums',400,214]
   ];
+  var REST=[
+    ['art-of-visuals','Art of Visuals',707,99],['flashpoint','Flashpoint',591,52],
+    ['donut-media','Donut Media',1200,561],['blue-cross','Blue Cross of Idaho',761,147],
+    ['ac-boise','AC Boise',989,1200],['against','Against',560,163],
+    ['cwi','College of Western Idaho',174,72]
+  ];
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+  shuffle(TOP); shuffle(REST);
   var grid=document.getElementById('tbGrid'); if(!grid) return;
   var cells=[].slice.call(grid.querySelectorAll('.tb-cell'));
   if(cells.length!==6) return;
-  var ptr=6, turn=0, timer=null, rolling={};
+  var ptrs={t:0,r:0}, timer=null, rolling={};
+  // what each cell shows now, so a roll never duplicates a visible brand
+  var current=cells.map(function(c){var im=c.querySelector('img');return im?im.alt:''});
+  function next(ci){
+    var P=ci<3?TOP:REST, k=ci<3?'t':'r', b;
+    for(var tries=0;tries<P.length;tries++){
+      b=P[ptrs[k]%P.length]; ptrs[k]++;
+      if(current.indexOf(b[1])===-1) return b;
+    }
+    return b;
+  }
   function roll(ci){
     if(rolling[ci]) return;
-    var cell=cells[ci], b=TB[ptr]; ptr=(ptr+1)%TB.length;
+    var cell=cells[ci], b=next(ci);
+    current[ci]=b[1];
     var old=cell.querySelector('.tb-flap');
     var nf=document.createElement('span'); nf.className='tb-flap in';
     var img=document.createElement('img');
@@ -786,10 +808,13 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
       nf.classList.remove('in','go'); rolling[ci]=false;
     },620);
   }
-  cells.forEach(function(c,i){c.addEventListener('click',function(){roll(i);});});
+  cells.forEach(function(c,i){
+    c.addEventListener('click',function(){roll(i);});
+    if(matchMedia('(pointer:fine)').matches)c.addEventListener('pointerenter',function(){roll(i);});
+  });
   var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   function start(){ if(timer||reduced) return;
-    timer=setInterval(function(){ if(document.hidden) return; roll(turn); turn=(turn+1)%6; },2600); }
+    timer=setInterval(function(){ if(document.hidden) return; roll(Math.floor(Math.random()*6)); },3000); }
   function stop(){ if(timer){clearInterval(timer); timer=null;} }
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(es){

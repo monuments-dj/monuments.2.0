@@ -80,7 +80,7 @@
 
 ## /work/buck-the-quo/
 - [DJ] "DJ"
-- [DJ] "nd I challenged teens&#39; limiting beliefs and self-doubt. DJ started agency side, shot the photos, directed the videos, and ended up a field mentor"
+- [DJ] "p, I challenged teens&#39; limiting beliefs and self-doubt. DJ started agency side, shot the photos, directed the videos, and ended up a field mentor"
 - [DJ] "\ Shot + cut by DJ"
 - [DJ] "ollege-going rate by talking with teens instead of at them. DJ shot the campaign and worked the experiential build that turned a hard conversation abo"
 - [DJ's] "\ DJ's part"
@@ -143,7 +143,7 @@
 
 ## /work/sony-this-moment/
 - [DJ] "DJ"
-- [DJ] "Sony brought Art of Visuals in on the XM4 launch. DJ shaped the story, wrote the briefs, and directed the stills. My team and I cast three c"
+- [DJ] "Sony brought Art of Visuals in on the XM4 launch. DJ shaped the story, wrote the briefs, and directed the stills. I cast three creators who"
 - [his] "anxious, frustrated, until the headphones go on. Eric finds his moment alone on a sailboat in the middle of the ocean at sunset. Audrie finds hers at"
 - [DJ] "DJ Ramirez &copy; MMXXVI &middot; Creative Director"
 

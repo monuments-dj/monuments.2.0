@@ -32,8 +32,8 @@ export const variants = {
     kicker: '✳ DJ Ramirez · Creative Director',
     h1: 'Creative Director.',
     h1serif: 'Open to the right room.',
-    // DJ-approved (the /hire lede, 2026-07-14)
-    lede: "I lead integrated campaigns, film, stills, and experiential from concept to delivery. I'm looking for a senior creative role inside an agency that wants <b>a point of view, not just a pair of hands.</b>",
+    // DJ's words verbatim, 2026-08-13 (the Foundway send: client lens, not job-hunt lens)
+    lede: "I lead integrated campaigns, film, stills, and experiential from concept to delivery. I work best with teams and agencies that want <b>a point of view, not just a pair of hands.</b>",
     // DJ's tap 2026-08-12: awards + scale
     featured: ['know-vape', 'buck-the-quo', 'sony-flow-state', 'art-of-visuals', 'flashpoint'],
     quotes: ['jakke', 'tommy', 'mike'],

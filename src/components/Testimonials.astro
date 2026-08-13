@@ -8,6 +8,7 @@
 // When a quote lands: fill `q` for that person. Links open the person's page.
 // TYPE NOTE: quotes render SANS (display face) until copy locks — DJ 2026-07-11
 // "the typography isnt working. make these sans serif for now till we lock copy."
+import { site } from '../data/site.js';
 interface Person { name: string; role: string; q?: string; link?: string; }
 interface Props { tag?: string; }
 const { tag = 'pull quotes · incoming' } = Astro.props;
@@ -32,13 +33,21 @@ const people: Person[] = [
   { name: 'Andrea Cenon',     role: 'Creative Director · Day One Agency' },
   { name: 'Tess Rizvi',       role: 'Lead Producer · Casting Director',
     q: `When it comes to creative strategy, I've never questioned that DJ would produce work our team would be proud of. He knows his own strengths but also knows when to delegate to others, providing a well-rounded perspective that allows a project to thrive.` },
+  // Casey's cut re-picked by DJ 2026-08-13 ("remove the PA statement, it doesn't
+  // sell"): excerpt now opens at "He brings the vibes." Verbatim contiguous cut.
   { name: 'Casey Levins',     role: 'Collaborator · 7 years',
-    q: `I have seen him shoot, edit, produce, direct, design, PA, and be in charge of the food and/or the music on set. He brings the vibes. He embodies every role with a spirit of excellence. He has a very special gift of bringing the best out of everyone on the team and he elevates every project to its highest potential.` },
+    q: `He brings the vibes. He embodies every role with a spirit of excellence. He has a very special gift of bringing the best out of everyone on the team and he elevates every project to its highest potential.` },
 ];
 // DJ 2026-07-20: "kill this for now" - the QUOTE-INCOMING placeholder slides are
 // OFF. Only people with a real quote render; the roster above stays as the
 // outreach list, and each name re-enters the theater the moment its q lands.
 const quoted = people.filter((p) => p.q);
+// djthecd leads with Tess's strategy note (DJ 2026-08-13, the strategy-client
+// lens); monuments keeps its original order. site.isDJ is the sanctioned field.
+if (site.isDJ) {
+  const ti = quoted.findIndex((p) => p.name === 'Tess Rizvi');
+  if (ti > 0) quoted.unshift(quoted.splice(ti, 1)[0]);
+}
 // long testimonials read, short ones ARE display type - the threshold picks the size
 const LONG = 160;
 ---
