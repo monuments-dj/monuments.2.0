@@ -1,4 +1,4 @@
-# djthecd voice transform · 366 changes
+# djthecd voice transform · 391 changes
 
 ## /
 - [explicit x2]
@@ -50,6 +50,9 @@
 - [explicit]
   - was: alt="The Monuments crew"
   - now: alt="The crew"
+- [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
 - [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
@@ -107,6 +110,9 @@
   - was: <img loading="lazy" decoding="async" class="mwire" src="/brand/m-wire.svg" alt="Monuments wireframe M" width="280" height="297">
   - now: 
 - [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
+- [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
 - [explicit]
@@ -152,6 +158,12 @@
 - [explicit]
   - was:  · Monuments</span>
   - now: </span>
+- [explicit x2]
+  - was: The giving side of Monuments.
+  - now: The giving side of DJ Ramirez.
+- [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
 - [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
@@ -230,6 +242,9 @@
   - was: Monuments HD : Archive
   - now: DJTHECD HD : Archive
 - [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
+- [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
 - [explicit]
@@ -284,6 +299,9 @@
   - was:  · Monuments</span>
   - now: </span>
 - [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
+- [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
 - [explicit]
@@ -315,6 +333,9 @@
 - [explicit]
   - was: >Monuments<small
   - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
 - [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
@@ -353,6 +374,9 @@
 - [explicit]
   - was: >Monuments<small
   - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
 - [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
@@ -394,6 +418,9 @@
 - [explicit]
   - was: >Monuments<small
   - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
 - [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
@@ -463,6 +490,9 @@
   - was: >Monuments<small
   - now: >DJ Ramirez<small
 - [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
+- [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
 - [explicit]
@@ -497,6 +527,9 @@
 - [explicit]
   - was: >Monuments<small
   - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
 - [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
@@ -545,6 +578,9 @@
   - was: >Monuments<small
   - now: >DJ Ramirez<small
 - [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
+- [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
 - [explicit]
@@ -591,6 +627,9 @@
 - [explicit]
   - was: >Monuments<small
   - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
 - [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
@@ -642,6 +681,9 @@
   - was: >Monuments<small
   - now: >DJ Ramirez<small
 - [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
+- [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
 - [explicit]
@@ -673,6 +715,9 @@
 - [explicit]
   - was: >Monuments<small
   - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
 - [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
@@ -717,6 +762,9 @@
 - [explicit]
   - was: >Monuments<small
   - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
 - [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
@@ -768,6 +816,9 @@
   - was: >Monuments<small
   - now: >DJ Ramirez<small
 - [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
+- [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
 - [explicit]
@@ -808,6 +859,9 @@
 - [explicit]
   - was: >Monuments<small
   - now: >DJ Ramirez<small
+- [explicit]
+  - was: href="/capabilities"
+  - now: href="/about"
 - [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
@@ -850,6 +904,9 @@
   - was: >Monuments<small
   - now: >DJ Ramirez<small
 - [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
+- [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
 - [explicit]
@@ -891,6 +948,9 @@
   - was: >Monuments<small
   - now: >DJ Ramirez<small
 - [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
+- [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
 - [explicit]
@@ -931,6 +991,9 @@
 - [explicit]
   - was: >Monuments<small
   - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
 - [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
@@ -979,6 +1042,9 @@
   - was: >Monuments<small
   - now: >DJ Ramirez<small
 - [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
+- [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
 - [explicit]
@@ -1019,6 +1085,9 @@
 - [explicit]
   - was: >Monuments<small
   - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
 - [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
@@ -1079,6 +1148,9 @@
   - was: >Monuments<small
   - now: >DJ Ramirez<small
 - [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
+- [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg
 - [explicit]
@@ -1131,6 +1203,9 @@
 - [explicit]
   - was: >Monuments<small
   - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
 - [explicit x2]
   - was: /og/card.jpg
   - now: /og/dj-card.jpg

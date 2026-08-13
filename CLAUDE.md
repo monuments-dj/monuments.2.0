@@ -112,7 +112,15 @@ credits` becomes 3 lights — insert a dark beat or flip a ground. ENFORCE with
 FAILS on adjacent lights. Run it on any page you touch. Reference flow that passes:
 `/page-template`.
 
-## Active work (2026-08-02): DJTHECD ONE-SHOT NEXT - read TODO.md 🔄 HANDOFF 2026-08-02 FIRST
+## Active work (2026-08-13): DJTHECD LIVE + CLIENT-READY - read TODO.md 🔄 HANDOFF 2026-08-13 EOD FIRST
+djthecd.com is DEPLOYED, identity-swept (D favicon, DJ og card), voice = plain I
+(no-team ruling), archive at 195 frames, giving/photography live. ONE WIP: the
+Boise Schools case page is written + parked at src/pages/work/_boise-schools.wip.astro
+with assets committed - finish steps are in the TODO handoff block (~30 min).
+⛔ NEVER `git add -A` here (peps.png + 250MB raw incidents); explicit paths only.
+DJ's open decisions live in the voice-cards artifact + TODO stack.
+
+## Active work (2026-08-02, historical): DJTHECD ONE-SHOT - read TODO.md 🔄 HANDOFF 2026-08-02
 Monuments = launch-ready minus 4 DJ items (photography HOLD · Tess+Kova photos ·
 his phone pass · domain-swap go). Letters/testimonials live on 3 surfaces; team band
 live; engagement map ALL 19 CONFIRMED; 3.6M verified; font = 01 CUT baked.

@@ -1,5 +1,91 @@
 # TODO - current state
 
+## 🔄 HANDOFF 2026-08-13 EOD (the client-prep + content marathon) - READ FIRST
+**DJTHECD.COM state: client-ready and LIVE.** Everything below is deployed and
+verified on the live site unless marked WIP.
+
+**SHIPPED today (all live, all gated, every claim verified per build):**
+- Homepage: DJ's new lede verbatim ("shout into the void of culture...
+  agency partner, brainstorm machine, creative mercenary"), darker hero
+  scrim (.52), receipts Trusted para (Sony x4/Adorama x3/Emmy/Rockies/4x),
+  two-pool randomized+hover brand board (global names hold the top row),
+  Apple-square caps/tiles/reel-panel, Mike Sutton in the theater (Client ·
+  Adorama · Flashpoint), Tess leads the theater on dj only, theater tag
+  now "verbatim · full letters on request", hiring pill in the menu (-> /).
+- About: creed rewrites (heist line, execution, AI = his words), community
+  reframe, strategy tab = strategic-thinker-dirty-hands (his 2 line swaps),
+  pattern paragraph killed, closer "I build monuments:", six seats (his
+  words), rolodex + kit mounted (I-voice, dj-only), team + method bands
+  gated OFF dj (refs band flips ink there for the flow rule).
+- Voice: no-team ruling executed everywhere; /giving BAKED in I-voice (17
+  pairs incl. 5 gate catches) + Non-Profit roll (now 8 frames); Casey PA
+  cut removed everywhere; letters byte-identical throughout (djcheck).
+- Photography: page ships on dj (title/kicker/window/robots site-aware),
+  corner logo off blend-difference (paper + pixel shadow), static hero
+  "Still frames. (the photography of DJ Ramirez)", REAL category sort
+  (viewed every frame), archive now 195: Brand 37 · Editorial 92 · Motion
+  17 · Non-Profit 49. The 52-frame PHOTOGRAPHY drop = p-101..150; the 45
+  giving-back drop (NEPAL/RUJA AFRICA) = p-151..195 ALL Non-Profit.
+- Work: flat text filters (1-2 lines), MSI campaign thumb (msi-08 + product
+  cutdown snip), DW commercial-directing tag killed, Donut launch film
+  restored (yt 2eUYg_P5rfc; other cuts HEx3bUYCwdk + UwM3_jGjz6Q).
+- AC Boise: full media swap to DJ's fair-game set (10-frame gallery, hero =
+  launch film w/ dark overlay, crowd band), credits Mark Garcia + Deanna
+  Scherrer; staff group photo EXCLUDED on his order.
+- Identity: it is ALL djtheCD now - D favicon, DJ apple icon, DJ✳RAMIREZ og
+  share card (/og/dj-card.jpg), titles/stamps/metas swept (19 chromeSwap
+  pairs), monuments artifacts down to: sameAs monuments.cc (intentional),
+  "I build monuments" (his copy), CWI production credit (factual).
+- QA: full link+asset check (47 hidden legacy /capabilities links -> /about),
+  giving meta fixed, typo sweep clean (dup-word hits were tag-strip
+  artifacts), djcheck 24/24 incl. photography + giving as REQUIRED routes.
+
+**⚠ WIP - BOISE SCHOOLS CASE PAGE (finish first, ~30 min):**
+Page is WRITTEN and parked at src/pages/work/_boise-schools.wip.astro
+(underscore = not routed, builds stay green). Assets are cut and committed:
+/snips/boise-schools.mp4 + /case-studies/boise-schools/bs-01..06.jpg.
+The film is PUBLIC: youtube id Ngs97t0FZ6Q ("Boise Schools Make Good
+Neighbors"). Facts source = BSD0084 ShootBook (Drive id
+1f4xOtKF2D4pdnPMIlpuo5yf8bPz1gg-drBCjtmJA6zs) + DIRECTORS COPY deck
+(1SD5jWQMMKbcQB2g5_DgyAO-TcADGuq3vFO1NvzmGxyE). Crew credits in the page
+call sheet are VERBATIM from the shoot book (Director DJ Ramirez; agency
+Stoltz; ECD Mitch Kuhn; Producer Tess; DP Nathan Zanders). TO FINISH:
+1. rename _boise-schools.wip.astro -> boise-schools.astro
+2. add work.js entry, slug "boise-schools" (hh lookup expects it; page uses
+   img /case-studies/boise-schools/bs-02.jpg, vid /snips/boise-schools.mp4;
+   logline drafted in the page og:description; write it neutral-DJ)
+3. add dialect perPage 'boise-schools' pairs for every DJ-third-person
+   sentence on the page (dead-rule gate will verify)
+4. add the hub row in work.astro (data-disc="commercial,cd", snip + bs-02,
+   IMG_DIMS entry) + consider the homepage reel card
+5. SITE=dj build + djcheck (case count goes 20) + monuments build + push +
+   live verify. NOTE: Mitch's "finals email" does NOT exist in gmail (he
+   left Stoltz end of June; only social cuts are in Drive) - the YouTube
+   publish is the hero source, already verified correct (end card reads
+   "Boise Schools make good neighbors.").
+
+**DJ's OPEN DECISION STACK (asked as prompts, he has the list):** variant
+ledes approve/revert · strategy closer F1/F2/F3 · sprinkle anchors (Lauryn
+shoot? Jakke scored Flow State? Tommy shoot?) · "scrub the history" (peps.png
++ 107MB raws still in git history) · photo sort flips (chopper series etc.).
+
+**GOTCHAS BURNED TODAY:**
+- NEVER `git add -A` in this repo. It shipped peps.png (a peptide price
+  list!) and 250MB of raw drops to PROD twice. Explicit paths only, always
+  eyeball `git status` first. (Originals safe: ~/Desktop/GIVING-originals,
+  ~/Desktop/PHOTOGRAPHY-originals, ~/Desktop/peps.png.)
+- This session's shell RESETS CWD to ~ between some commands: cd
+  /Users/djram/monuments-site at the start of EVERY Bash command, or astro
+  scaffolds junk into whatever dir you are in (it built into ~/dist once and
+  into public/case-studies/giving/ once - both cleaned).
+- monuments `npx astro build` CLOBBERS dist/ (writes dist/client). Always
+  rebuild SITE=dj before djcheck, never gate against a stale dist.
+- grep -c returns exit 1 on zero matches and kills && chains.
+- yt-dlp: brew absent; official standalone binary + --js-runtimes node +
+  --ffmpeg-location node_modules/ffmpeg-static WORKS (memory updated).
+- Voice cards artifact (all decisions + before/afters):
+  https://claude.ai/code/artifact/5fa57502-f174-4f2a-98bc-842c6686f193
+
 ## 🔄 HANDOFF 2026-08-12 (the overnight djthecd one-shot) - READ FIRST
 **DJTHECD.COM IS LIVE.** https://djthecd.com - real domain, HTTPS, apex primary,
 www 308->apex, email dj@djthecd.com FORWARDS to monuments.cc@gmail.com (Namecheap
