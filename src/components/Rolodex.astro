@@ -1,0 +1,102 @@
+---
+// Rolodex.astro · the index-card network band, extracted from capabilities.astro
+// so About (djthecd) can run it too (DJ 2026-08-13: "Add the rolodex section
+// from monuments to this page").
+// ⚠ capabilities.astro still carries its inline original; consolidate the two
+// onto this component after the send-off crunch (do not let them drift: the
+// card list is ILLUSTRATIVE craft+city pairs, the claim is the network).
+// Voice reads off site.isDJ: I on djthecd, We on monuments. Ink band,
+// self-contained styles under .rolo2 so nothing leaks across pages.
+import { site } from '../data/site.js';
+const cards = [
+  ['Colorist', 'Tokyo'], ['Pet wrangler', 'Los Angeles'], ['Gaffer', 'Boise'],
+  ['Cinema lens architect', 'Tokyo'], ['Set builder', 'Los Angeles'],
+  ['On-camera gang consultant', 'Los Angeles'], ['3D animator', 'New York'],
+  ['Pilot', 'Boise'], ['Stylist', 'Milan'], ['Custom 3D bling', 'New York'],
+  ['Producer', 'Shanghai'], ['Baby wrangler', 'Boise'], ['Composer', 'Berlin'],
+  ['Precision driver', 'Los Angeles'], ['Food stylist', 'Paris'],
+  ['Rain tower operator', 'Shanghai'], ['Drone pilot', 'Idaho'],
+  ['Pyrotechnician', 'Idaho'], ['Underwater DP', 'Los Angeles'],
+  ['High-rise graffiti artist', 'Los Angeles'], ['Hand model', 'New York'],
+  ['Motorcycle builder', 'Portugal'], ['Sandboarding instructor', 'Jordan'],
+  ['Goat shepherd', 'Dubai'], ['Fire dancers', 'Los Angeles'],
+  ['Big game tracker', 'Idaho'], ['Custom grill maker', 'San Diego'],
+];
+const head = site.isDJ ? "I've got a guy" : "We've got a guy";
+const body = site.isDJ
+  ? "I pride myself on having a guy, a girl, a person for it. Fifteen years between Boise, LA, New York, Europe, Japan, and China builds a deep bench of creative talent. However weird the job gets, I've usually got someone who has done it, and done it well."
+  : "We pride ourselves on having a guy, a girl, a person for it. Fifteen years between Boise, LA, New York, Europe, Japan, and China builds a deep bench of creative talent. However weird the job gets, we've usually got someone who has done it, and done it well.";
+---
+<section class="rolo2">
+ <div class="wrap">
+  <div class="bar">
+    <span class="mono"><b>The rolodex</b> · a person for that</span>
+    <span class="mono r2-cities">Boise · LA · NY · Europe · Japan · China</span>
+  </div>
+  <div class="rologrid">
+    <div class="rolodex rv" id="rolodex2" aria-label="A rotating index of the network">
+      <div class="raxle" aria-hidden="true"></div>
+      <div class="rcards">
+        {cards.map((c, i) => (
+          <div class={`rcard ${i === 0 ? 'live' : ''}`}><b>{c[0]}</b><span class="mono">{c[1]}</span></div>
+        ))}
+      </div>
+    </div>
+    <div class="rolotxt rv">
+      <h3>{head} <span class="serif">for that.</span></h3>
+      <p>{body}</p>
+    </div>
+  </div>
+ </div>
+</section>
+
+<style is:global>
+.rolo2{background:var(--ink,#161514);color:var(--paper,#F5F3EF);padding:10vh 0}
+.rolo2 .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:13px;border-bottom:2px solid var(--paper,#F5F3EF)}
+.rolo2 .bar .mono b{color:var(--accent,#E0311A)}
+.rolo2 .r2-cities{color:#8f8d88}
+.rolo2 .rologrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,4vw,64px);align-items:center;margin-top:34px}
+.rolo2 .rolotxt h3{font-weight:var(--dispw,800);font-size:clamp(24px,2.9vw,42px);letter-spacing:-.028em;line-height:1.04;text-transform:uppercase}
+.rolo2 .rolotxt h3 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
+.rolo2 .rolotxt p{margin-top:16px;color:rgba(245,243,239,.75);max-width:48ch}
+.rolo2 .rolodex{position:relative;height:262px;perspective:1000px}
+.rolo2 .raxle{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);width:min(360px,86%);height:10px;border-radius:6px;background:var(--paper,#F5F3EF)}
+.rolo2 .rcard{position:absolute;left:50%;bottom:30px;transform:translateX(-50%) rotateX(104deg);transform-origin:50% 100%;width:min(320px,78vw);height:192px;background:#fff;border:1px solid var(--line,#dcd9d2);border-radius:0;box-shadow:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;backface-visibility:hidden;opacity:0;transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .3s;will-change:transform;color:#161514}
+.rolo2 .rcard.live{transform:translateX(-50%) rotateX(0);opacity:1}
+.rolo2 .rcard.out{transform:translateX(-50%) rotateX(-104deg);opacity:0}
+.rolo2 .rcard::before,.rolo2 .rcard::after{content:'';position:absolute;bottom:9px;width:10px;height:10px;border-radius:50%;background:var(--paper,#F5F3EF);border:1px solid var(--line,#dcd9d2)}
+.rolo2 .rcard::before{left:calc(50% - 64px)}
+.rolo2 .rcard::after{left:calc(50% + 54px)}
+.rolo2 .rcard b{font-weight:var(--dispw2,600);font-size:clamp(22px,2vw,30px);letter-spacing:-.02em;line-height:1.05;text-align:center;padding:0 22px;max-width:100%;color:#161514}
+.rolo2 .rcard .mono{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8f8d88}
+@media (max-width:860px){
+  .rolo2 .rologrid{grid-template-columns:1fr;gap:22px}
+  .rolo2 .rolodex{height:236px;order:2}
+  .rolo2 .rolotxt{order:1}
+}
+</style>
+
+<script is:inline>
+// cards flip over the axle while on screen; hover holds; reduced motion = static
+(function(){
+  var box=document.getElementById('rolodex2'); if(!box)return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var cards=Array.prototype.slice.call(box.querySelectorAll('.rcard')),i=0,t=null,hov=false;
+  function step(){
+    if(hov)return;
+    var cur=cards[i],nx=cards[(i+1)%cards.length];
+    cur.classList.remove('live');cur.classList.add('out');
+    setTimeout(function(){cur.classList.remove('out');},560);
+    nx.classList.add('live');
+    i=(i+1)%cards.length;
+  }
+  box.addEventListener('mouseenter',function(){hov=true;});
+  box.addEventListener('mouseleave',function(){hov=false;});
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){if(!t)t=setInterval(step,2000);}
+      else{clearInterval(t);t=null;}
+    });
+  },{threshold:.3}).observe(box);
+})();
+</script>

@@ -5,6 +5,8 @@ import ClosingCTA from '../components/ClosingCTA.astro';
 import AchievementsTicker from '../components/AchievementsTicker.astro';
 import PageFooter from '../components/PageFooter.astro';
 import WorldMap from '../components/WorldMap.astro';
+import Rolodex from '../components/Rolodex.astro';
+import { site } from '../data/site.js';
 const bts = Array.from({ length: 18 }, (_, i) => `/about-bts/abts-${String(i + 1).padStart(2, '0')}.mp4`);
 ---
 <!doctype html>
@@ -421,15 +423,15 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         </li>
         <li class="rv">
           <b>Less agency, <span class="serif">more rock &amp; roll.</span></b>
-          <span>Fewer meetings about creating, more actual creating.</span>
+          <span>A creative team should feel like a band: tight enough to play together, loose enough to solo.</span>
         </li>
         <li class="rv">
-          <b>Ideas are cheap. <span class="serif">Shipped is rare.</span></b>
-          <span>You're only as good as what you can ship.</span>
+          <b>Ideas are cheap. <span class="serif">Execution is everything.</span></b>
+          <span>Nothing is real until it's shipped.</span>
         </li>
         <li class="rv">
-          <b>AI is a tool, <span class="serif">not a solution.</span></b>
-          <span>I directed people before I directed AI.</span>
+          <b>AI is a tool, <span class="serif">not a magical answer.</span></b>
+          <span>AI needs guidance, strategy, and experience to do its job well.</span>
         </li>
       </ul>
     </div>
@@ -467,10 +469,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       </div>
       <div class="cdd-panel" data-i="2">
         <div class="cdd-col">
-          <p>Every campaign has three parties: the brand, the talent, the audience. The brand needs relevance. The talent needs a real platform. The audience needs something worth their time. I don't consider an idea finished until all three come out ahead.</p>
+          <p>In this digital age, human interaction and experiences are becoming increasingly valuable. How brands show up in these spaces has never been more important. A comment answered, a room worth walking into, a launch people still talk about: that is where loyalty actually gets built.</p>
         </div>
         <div class="cdd-col">
-          <p><b>The math.</b> Most bad campaigns solved for one party and hoped the other two wouldn't notice. They always notice. When all three win, the work distributes itself, because everyone involved has a reason to carry it.</p>
+          <p><b>The bar.</b> Digital reach is cheap; belonging isn't. When a brand shows up with something real to offer, people don't just watch, they participate, and they bring their friends. That's the work I chase: experiences people carry with them.</p>
         </div>
       </div>
     </div>
@@ -509,9 +511,8 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         <p class="rv">We're all handed different tools. Mine was a camera. Photo and video came naturally, but I'm not technical at all, and I never cared to be. What hooked me was what the camera unlocked. It was a key to the world: access to people, places, and stories I had no business being close to. So when people ask if I'm a photographer, I say kinda. I'm a storyteller who knows how to use a camera.</p>
         <p class="rv">Where it all comes together is the marriage of two crafts: storytelling and building. Building brands, building campaigns, building experiences people actually show up for. That intersection is genuinely magical to me, and it's where I've lived for fifteen years. Honestly, I'm not good at much else. Luckily, it keeps me busy: one month it's a nonprofit in Uganda, the next it's directing commercials shaping the future of education in Idaho, sometimes it's on camera on location in New York.</p>
         <p class="rv">But here's my problem with advertising: it evaporates. Here one day, gone the next. If you make an ad about a tree falling in the forest and nobody likes it, did anyone care? I refuse to spend a career making things designed to be forgotten. What I obsess over is the other kind: shaping culture, helping people make complicated decisions about their future, giving a voice to people who can't speak up for themselves. Work that stands the test of time. Things worth remembering. That's the legacy I'm after.</p>
-        <p class="rv">Somewhere along the way I noticed a pattern. On Buck the Quo I started on the agency floor and ended up a consultant. At Art of Visuals I went from making the work, to leading a team and writing strategy for clients. With Sony I started out making ads, and a year in they had me in focus groups with their product team. I've been lucky enough to be invited early to important rooms. I don't take that lightly.</p>
         </div>
-        <p class="lclose rv">Monuments. <span class="serif">A sign that something mattered enough to be remembered.</span></p>
+        <p class="lclose rv">I build monuments: <span class="serif">signs that something mattered enough to be remembered.</span></p>
       </div>
     </div>
   </section>
@@ -519,35 +520,47 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <div class="wrap room">
     <div class="bar">
       <span class="mono"><b>\ In the room</b> · where I'm useful</span>
-      <span class="mono" style="color:var(--dim)">Five seats</span>
+      <span class="mono" style="color:var(--dim)">Six seats</span>
     </div>
+    <!-- Rebuilt to DJ's six 2026-08-13; brainstorm / on-set / team-lead / culture
+         copy is his words (cleaned), pitch carries over, pinch hitter keeps the
+         empty-seat bones under his new name. -->
     <div class="roomrow rv">
       <span class="no"><i>\</i> 01</span>
+      <h3>The brainstorm</h3>
+      <p>Big new ideas don&#39;t always have a script. Sometimes it&#39;s just getting the right people in the room and jamming. Some days it&#39;s scrappy and punk, others it&#39;s much more defined. I specialize in having a point of view, and range.</p>
+    </div>
+    <div class="roomrow rv">
+      <span class="no"><i>\</i> 02</span>
       <h3>The pitch</h3>
       <p>Your agency has a big one on the calendar and needs senior firepower in the room. I&#39;ve pitched and won work for Sony, Adorama, MSI, Intel, ViewSonic, DW Drums, and more.</p>
     </div>
     <div class="roomrow rv">
-      <span class="no"><i>\</i> 02</span>
-      <h3>The empty seat</h3>
-      <p>Your CD is out for a season, or the seat&#39;s open between hires. I hold the room: the standard, the notes, the client. And I hand it back better than I found it.</p>
-    </div>
-    <div class="roomrow rv">
       <span class="no"><i>\</i> 03</span>
-      <h3>The in-house team</h3>
-      <p>The team and tools are there, the work isn&#39;t landing. I plug in as a senior lead. Key info early, work in progress over polish, and notes never thrown over the fence. Giving a shit is contagious.</p>
+      <h3>The pinch hitter</h3>
+      <p>Stepping in to lead a team around an idea. I hold the room: the standard, the notes, the client. And I hand it back better than I found it.</p>
     </div>
     <div class="roomrow rv">
       <span class="no"><i>\</i> 04</span>
-      <h3>The launch with no agency</h3>
-      <p>A brand with a real problem and nobody attached. I bring the strategy and the crew, first call to final delivery.</p>
+      <h3>On set</h3>
+      <p>Directing and creative directing on set: making calls on the fly, carrying the brand and the strategy when decisions can&#39;t wait. The energy on set speaks to my soul. It&#39;s chaotic, crazy, and a rush like no other.</p>
     </div>
     <div class="roomrow rv">
       <span class="no"><i>\</i> 05</span>
-      <h3>The problem nobody&#39;s cracked</h3>
-      <p>The brief that&#39;s really a question. I dig for the insight in the data and keep asking until the work has something true to stand on.</p>
+      <h3>The team lead</h3>
+      <p>Managing creatives is like wrangling cats. I&#39;ve spent years hands-on across multiple disciplines, so I know how to mentor, lead, and give notes people can actually use.</p>
+    </div>
+    <div class="roomrow rv">
+      <span class="no"><i>\</i> 06</span>
+      <h3>The culture lens</h3>
+      <p>I have my finger on the pulse of culture. A modern brand needs to speak the culture of its customer. I speak Gen Z, I know TikTok trends, and I&#39;ve built a career across traditional and not-so-traditional advertising for a global client base. I am a point of view machine.</p>
     </div>
   </div>
 </section>
+
+{/* the network band, djthecd only (DJ 2026-08-13: "Add the rolodex section from
+    monuments to this page") - monuments keeps its copy on /capabilities */}
+{site.isDJ && <Rolodex />}
 
 <section class="crew">
   <!-- DJ 2026-07-14: the pizza shot is the "less agency, more rock and roll" photo. -->
@@ -655,7 +668,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       <h3 style="font-weight:var(--dispw);font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.02;text-transform:uppercase;margin:14px 0 18px">Some stories are not <span class="serif" style="font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none">for sale.</span></h3>
       <p style="color:#4c4a45;max-width:52ch;margin-bottom:1em">We have carried cameras through Nepal, Uganda, and across Europe for work that was never about selling anything. Those trips taught us patience, respect for the subject, and how to disappear so a true story can show up.</p>
       <p style="color:#4c4a45;max-width:52ch">We still take that work when it matters, and we bring everything that pressure taught us to it.</p>
-      <a class="giveBtn" href="/giving">Giving back <span aria-hidden="true">&rarr;</span></a>
+      {/* /giving is pruned on djthecd, so the button only ships where the page
+          exists (DJ 2026-08-13: "Giving back links to nothing") */}
+      {!site.isDJ && <a class="giveBtn" href="/giving">Giving back <span aria-hidden="true">&rarr;</span></a>}
     </div>
   </div>
 </section>
