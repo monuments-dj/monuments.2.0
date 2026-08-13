@@ -23,15 +23,19 @@ const cards = [
   ['Big game tracker', 'Idaho'], ['Custom grill maker', 'San Diego'],
 ];
 const head = site.isDJ ? "I've got a guy" : "We've got a guy";
+// dj copy = DJ's edit 2026-08-13 (Japan/China dropped from the claim, "odd" not
+// "weird"); the We version + capabilities' inline original still carry the old
+// wording pending his sitewide call.
 const body = site.isDJ
-  ? "I pride myself on having a guy, a girl, a person for it. Fifteen years between Boise, LA, New York, Europe, Japan, and China builds a deep bench of creative talent. However weird the job gets, I've usually got someone who has done it, and done it well."
+  ? "I pride myself on having a guy, a girl, a person for it. Fifteen years between Boise, LA, New York, and Europe builds a deep bench of creative talent. However odd the job gets, I've usually got someone who has done it, and done it well."
   : "We pride ourselves on having a guy, a girl, a person for it. Fifteen years between Boise, LA, New York, Europe, Japan, and China builds a deep bench of creative talent. However weird the job gets, we've usually got someone who has done it, and done it well.";
+const cities = site.isDJ ? 'Boise · LA · NY · Europe' : 'Boise · LA · NY · Europe · Japan · China';
 ---
 <section class="rolo2">
  <div class="wrap">
   <div class="bar">
     <span class="mono"><b>The rolodex</b> · a person for that</span>
-    <span class="mono r2-cities">Boise · LA · NY · Europe · Japan · China</span>
+    <span class="mono r2-cities">{cities}</span>
   </div>
   <div class="rologrid">
     <div class="rolodex rv" id="rolodex2" aria-label="A rotating index of the network">
