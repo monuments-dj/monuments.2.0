@@ -1,4 +1,4 @@
-# djthecd voice transform · 391 changes
+# djthecd voice transform · 404 changes
 
 ## /
 - [explicit x2]
@@ -504,6 +504,47 @@
 - [explicit]
   - was: In partnership with OMEK agency, DJ did creative direction on the campaign: image selection, casting, and a hand on the edits, and he directed the talent on set
   - now: In partnership with OMEK agency, I did creative direction on the campaign: image selection, casting, and a hand on the edits, and I directed the talent on set
+
+## /work/boise-schools/
+- [explicit]
+  - was: monuments.cc@gmail.com
+  - now: dj@djthecd.com
+- [explicit x4]
+  - was: https://monuments-2-0.vercel.app
+  - now: https://djthecd.com
+- [explicit]
+  - was: M<i>✳</i>NUMENTS
+  - now: DJ<i>✳</i>RAMIREZ
+- [explicit]
+  - was: content="Monuments"
+  - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: href="/capabilities"
+  - now: href="/about"
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
+- [explicit]
+  - was: Stoltz brought DJ in to direct the flagship film for Boise School District's Good Neighbors platform.
+  - now: Stoltz brought me in to direct the flagship film for Boise School District's Good Neighbors platform.
+- [explicit]
+  - was: DJ directed the film: two production days in March 2026
+  - now: I directed the film: two production days in March 2026
 
 ## /work/buck-the-quo/
 - [explicit]

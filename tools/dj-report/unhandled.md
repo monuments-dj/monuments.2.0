@@ -1,4 +1,4 @@
-# Unhandled DJ mentions · 152
+# Unhandled DJ mentions · 155
 
 ## /
 - [DJ] "DJ Ramirez · Creative Director"
@@ -100,6 +100,11 @@
 - [DJ] "Blue Cross of Idaho · DJ Ramirez"
 - [DJ] "DJ"
 - [DJ's] "\ DJ's part"
+- [DJ] "DJ Ramirez &copy; MMXXVI &middot; Creative Director"
+
+## /work/boise-schools/
+- [DJ] "Boise Schools · DJ Ramirez"
+- [DJ] "DJ"
 - [DJ] "DJ Ramirez &copy; MMXXVI &middot; Creative Director"
 
 ## /work/buck-the-quo/

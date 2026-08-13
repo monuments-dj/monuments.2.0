@@ -161,6 +161,13 @@ export const perPage = {
     ["interview series DJ wrote, produced, and shot. He traveled all over", "interview series I wrote, produced, and shot. I traveled all over"],
     ["DJ ran all creative on the agency side, sat in every design and strategy decision, and carried the pitches, the sales, and the client relationships. And he stayed on camera", "I ran all creative on the agency side, sat in every design and strategy decision, and carried the pitches, the sales, and the client relationships. And I stayed on camera"],
   ],
+  // boise-schools (added 2026-08-13 with the page). Only two sentences on the
+  // page speak about DJ in third person; the credits are a call sheet and are
+  // protected, and the logline is written neutral so it needs no pair.
+  'boise-schools': [
+    ["Stoltz brought DJ in to direct the flagship film for Boise School District's Good Neighbors platform.", "Stoltz brought me in to direct the flagship film for Boise School District's Good Neighbors platform."],
+    ["DJ directed the film: two production days in March 2026", "I directed the film: two production days in March 2026"],
+  ],
   'blue-cross': [
     ["In partnership with OMEK agency, DJ did creative direction on the campaign: image selection, casting, and a hand on the edits, and he directed the talent on set", "In partnership with OMEK agency, I did creative direction on the campaign: image selection, casting, and a hand on the edits, and I directed the talent on set"],
   ],

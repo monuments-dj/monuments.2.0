@@ -83,8 +83,10 @@ for (const r of REQUIRED) {
   else fail.push(`MISSING ROUTE · /${r.replace('index.html', '')}`);
 }
 const cases = fs.existsSync(path.join(DIST, 'work')) ? fs.readdirSync(path.join(DIST, 'work')).filter((d) => fs.existsSync(path.join(DIST, 'work', d, 'index.html'))).length : 0;
-if (cases >= 19) pass.push(`${cases} case pages present`);
-else fail.push(`ONLY ${cases} CASE PAGES · expected 19`);
+// floor raised 19 -> 20 when boise-schools landed (2026-08-13). The count also
+// includes the /work/sony-xperia-summer redirect dir, so actual is floor + 1.
+if (cases >= 20) pass.push(`${cases} case pages present`);
+else fail.push(`ONLY ${cases} CASE PAGES · expected 20`);
 
 // ── CHECK 5 · no em dashes anywhere (DJ's standing rule) ────────────────────
 const dashPages = files.filter((f) => /[—–]/.test(fs.readFileSync(f, 'utf8').replace(/<script[\s\S]*?<\/script>/g, '')));

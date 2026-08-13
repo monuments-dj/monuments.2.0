@@ -16,6 +16,13 @@
 // ============================================================================
 const id = process.env.SITE === 'dj' ? 'dj' : 'monuments';
 
+// The takeover nav's Work sub-line used to hardcode "19 case files" in BOTH nav
+// definitions, so adding the 20th case (boise-schools, 2026-08-13) silently made
+// the menu lie on every page of both sites. Derived from work.js now: add a case
+// file, the menu counts it. Never type this number again.
+import { work } from './work.js';
+const caseCount = work.length;
+
 const MONUMENTS = {
   id: 'monuments',
   isDJ: false,
@@ -34,7 +41,7 @@ const MONUMENTS = {
   // the takeover nav
   nav: [
     { n: '01', t: 'Home',         href: '/',             sub: 'the front door',         img: '/gallery/full/p-013.jpg' },
-    { n: '02', t: 'Work',         href: '/work',         sub: '19 case files',          img: '/reel/work-reel-poster.jpg' },
+    { n: '02', t: 'Work',         href: '/work',         sub: `${caseCount} case files`, img: '/reel/work-reel-poster.jpg' },
     { n: '03', t: 'About',        href: '/about',        sub: 'the subject file',       img: '/about/hero-set.jpg' },
     { n: '04', t: 'Capabilities', href: '/capabilities', sub: 'what we do',             img: '/about/dj-film.jpg' },
     { n: '05', t: 'AI Tools',     href: '/ai',           sub: 'a tool, not a solution', img: '/about/studio-console.jpg' },
@@ -59,7 +66,7 @@ const DJ = {
   voice: 'i',
   nav: [
     { n: '01', t: 'Home',    href: '/',        sub: 'the front door',   img: '/gallery/full/p-013.jpg' },
-    { n: '02', t: 'Work',    href: '/work',    sub: '19 case files',    img: '/reel/work-reel-poster.jpg' },
+    { n: '02', t: 'Work',    href: '/work',    sub: `${caseCount} case files`, img: '/reel/work-reel-poster.jpg' },
     { n: '03', t: 'About',   href: '/about',   sub: 'the subject file', img: '/about/hero-set.jpg' },
     { n: '04', t: 'Contact', href: '/contact', sub: 'start here',       img: '/gallery/full/p-044.jpg' },
   ],
