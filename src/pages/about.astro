@@ -293,6 +293,14 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .ref[open] .rtick{transform:rotate(45deg)}
 .ref blockquote{margin:0 0 24px 90px;max-width:62ch;font-size:16.5px;line-height:1.6;color:#4c4a45}
 @media (max-width:700px){.ref summary{flex-wrap:wrap;gap:8px 14px}.rrole{margin-left:0;flex-basis:100%}.ref blockquote{margin-left:0}}
+/* djthecd flips the references band to INK: with the team + method bands gated
+   off (DJ 2026-08-13 "I dont need these sections"), map -> refs -> giving would
+   sit three lights in a row, breaking the flow rule. */
+.refs.inkd{background:var(--ink);color:var(--paper)}
+.refs.inkd .bar{border-bottom-color:var(--paper)}
+.refs.inkd .refs-dim,.refs.inkd .rno,.refs.inkd .rrole{color:#8f8d88}
+.refs.inkd .ref{border-bottom-color:var(--lined)}
+.refs.inkd .ref blockquote{color:rgba(245,243,239,.72)}
 
 /* in the room: four ruled ledger rows (the services-index pattern, minus hover).
    Number · bold seat · proof, one baseline; stacks cleanly on mobile. */
@@ -423,7 +431,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
         </li>
         <li class="rv">
           <b>Less agency, <span class="serif">more rock &amp; roll.</span></b>
-          <span>A creative team should feel like a band: tight enough to play together, loose enough to solo.</span>
+          <span>A big creative project feels like a heist or a rock show: everyone plays their part, and the thrill is pulling it off together.</span>
         </li>
         <li class="rv">
           <b>Ideas are cheap. <span class="serif">Execution is everything.</span></b>
@@ -578,8 +586,9 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 
 <!-- the people: team files (DJ 2026-07-29 "dark team section... tess and kova for now").
      Writeups are evidence-based DRAFTS from the site's own credits (no lorem - his
-     2026-07-11 rule bans placeholder copy; the copy gate would block the deploy). -->
-<section class="team">
+     2026-07-11 rule bans placeholder copy; the copy gate would block the deploy).
+     MONUMENTS ONLY (DJ 2026-08-13: "I dont need these sections for djthecd.com"). -->
+{!site.isDJ && <section class="team">
   <div class="wrap">
     <div class="bar">
       <span class="mono"><b>The people</b> · who does the work</span>
@@ -609,13 +618,13 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       </article>
     </div>
   </div>
-</section>
+</section>}
 
 <!-- THE REFERENCES · DJ 2026-08-02: "on the about page I can have employee
      references? maybe some kind of drop down... if people want to know what
      its like to work under me." Ledger rows, native details. Quotes VERBATIM
      from the letters (docs/TESTIMONIALS-2026-08.md); roles are DJ's words. -->
-<section class="paper refs">
+<section class:list={['refs', site.isDJ ? 'inkd' : 'paper']}>
   <div class="wrap">
     <div class="bar">
       <span class="mono"><b>The references</b> · what it's like to work under DJ</span>
@@ -644,7 +653,10 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   </div>
 </section>
 
-<section class="how-band">
+{/* HOW I WORK: monuments only (DJ 2026-08-13: "I dont need these sections for
+    djthecd.com"). The three We-sentences here fed dialect rules; those pairs
+    are removed with it so the dead-rule gate stays clean. */}
+{!site.isDJ && <section class="how-band">
   <div class="wrap how">
     <div class="bar">
       <span class="mono"><b>How I work</b> · four steps, no mystery</span>
@@ -655,7 +667,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <div class="litrow step"><span class="n">\ 03</span><h4>Build</h4><p>Big campaign or a single shoot, the craft is the same. Integrated content, made with people who have done it at scale.</p></div>
     <div class="litrow step"><span class="n">\ 04</span><h4>Stand</h4><p>Work that lasts past the launch. We hand you something worth remembering, and the reasons it works.</p></div>
   </div>
-</section>
+</section>}
 
 <section class="paper">
   <div class="wrap" style="display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;padding:11vh var(--pad);align-items:center">

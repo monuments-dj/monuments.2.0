@@ -1,4 +1,4 @@
-# Unhandled DJ mentions · 119
+# Unhandled DJ mentions · 118
 
 ## /
 - [DJ] "DJ Ramirez · Creative Director"
@@ -12,7 +12,6 @@
 - [DJ] "Ramirez, DJ · Subject-001"
 - [DJ] "SUBJECT-001 · RAMIREZ, DJ · CREATIVE DIRECTOR"
 - [DJ] "I'm DJ Ramirez. Creative director first, director second. I tell stories, I make things, and I"
-- [DJ] "DJ"
 - [DJ] "· what it's like to work under DJ"
 - [DJ] "Photographer · directed by DJ"
 - [DJ] "Photographer · mentored + hired by DJ"

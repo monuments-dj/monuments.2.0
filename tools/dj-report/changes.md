@@ -1,4 +1,4 @@
-# djthecd voice transform · 181 changes
+# djthecd voice transform · 178 changes
 
 ## /404.html
 - [explicit]
@@ -27,15 +27,6 @@
 - [explicit]
   - was: and around us is a crew that's grown with me
   - now: and around me is a crew that's grown with me
-- [explicit]
-  - was: Before a single deliverable, we find what you actually stand for
-  - now: Before a single deliverable, I find what you actually stand for
-- [explicit]
-  - was: set at the senior level. We decide what the work needs to say and how it should feel, then lock the thinking
-  - now: set at the senior level. I decide what the work needs to say and how it should feel, then lock the thinking
-- [explicit]
-  - was: Work that lasts past the launch. We hand you something worth remembering
-  - now: Work that lasts past the launch. I hand you something worth remembering
 - [explicit]
   - was: We have carried cameras through Nepal, Uganda
   - now: I have carried cameras through Nepal, Uganda

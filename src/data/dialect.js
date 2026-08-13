@@ -82,9 +82,9 @@ export const perPage = {
     ["People ask me what we do", "People ask me what I do"],
     ["We're all handed different tools. Mine was a camera.", "Everyone gets handed different tools. Mine was a camera."],
     ["and around us is a crew that's grown with me", "and around me is a crew that's grown with me"],
-    ["Before a single deliverable, we find what you actually stand for", "Before a single deliverable, I find what you actually stand for"],
-    ["set at the senior level. We decide what the work needs to say and how it should feel, then lock the thinking", "set at the senior level. I decide what the work needs to say and how it should feel, then lock the thinking"],
-    ["Work that lasts past the launch. We hand you something worth remembering", "Work that lasts past the launch. I hand you something worth remembering"],
+    // the three method-band pairs are GONE with the band itself: How-I-work is
+    // monuments-only as of DJ's 2026-08-13 ruling, so the We-sentences never
+    // reach the dj output (dead-rule gate enforces this stays true)
     ["We have carried cameras through Nepal, Uganda", "I have carried cameras through Nepal, Uganda"],
     ["Those trips taught us patience", "Those trips taught me patience"],
     ["We still take that work when it matters, and we bring everything that pressure taught us to it", "I still take that work when it matters, and I bring everything that pressure taught me to it"],
