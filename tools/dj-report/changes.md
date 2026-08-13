@@ -1,4 +1,4 @@
-# djthecd voice transform · 178 changes
+# djthecd voice transform · 182 changes
 
 ## /404.html
 - [explicit]
@@ -53,6 +53,20 @@
 - [explicit]
   - was: Tell us what
   - now: Tell me what
+
+## /photography/
+- [explicit]
+  - was: monuments.cc@gmail.com
+  - now: dj@djthecd.com
+- [explicit x4]
+  - was: https://monuments-2-0.vercel.app
+  - now: https://djthecd.com
+- [explicit]
+  - was: M<i>✳</i>NUMENTS
+  - now: DJ<i>✳</i>RAMIREZ
+- [explicit]
+  - was: content="Monuments"
+  - now: content="DJ Ramirez"
 
 ## /work/
 - [explicit]

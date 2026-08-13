@@ -30,9 +30,8 @@ const CUT = [
   // client-deliverable drops in public/ (Mox booth recap + asset zips): studio
   // material, ships on monuments only - never on the portfolio
   'mox',
-  // photography is on HOLD for monuments (DJ). It does not ship on dj until he
-  // says the page is ready.
-  'photography',
+  // photography SHIPS on dj as of 2026-08-13 (DJ: "we can bring over the
+  // photos page from monuments, the one that was like a 90s mac")
 ];
 
 // strings that must never appear in the dj output
