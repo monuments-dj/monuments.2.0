@@ -392,7 +392,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <div class="corners">
   <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
   <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/about">About</a><a href="/capabilities">Capabilities</a><a href="/contact">Contact</a></span>
-  <span class="c3">Photo archive · 100 frames</span>
+  <span class="c3">Photo archive · 150 frames</span>
   <span class="c4" id="clock">LA --:--</span>
 </div>
 
@@ -570,11 +570,11 @@ clock();setInterval(clock,30000);
   // remainder so the archive always sums to 100. Food folded into Brand (the
   // archive holds one true food frame).
   const pad=n=>String(n).padStart(3,'0');
-  const BRAND=[1,7,15,16,18,19,20,21,29,30,31,32,33,35,38,39,45,59,60,64,78,82,83,85,93,100].map(pad);
-  const MOTION=[2,17,24,34,40,62,63,89,90].map(pad);
+  const BRAND=[1,7,15,16,18,19,20,21,29,30,31,32,33,35,38,39,45,59,60,64,78,82,83,85,93,100,105,109,111,112,113,116,121,130,133,137,145].map(pad);
+  const MOTION=[2,17,24,34,40,62,63,89,90,101,102,103,114,126,134,135,146].map(pad);
   const NONPROFIT=[5,81,84,96].map(pad);
   const usedIds=new Set([...BRAND,...MOTION,...NONPROFIT]);
-  const EDITORIAL=Array.from({length:100},(_,k)=>pad(k+1)).filter(id=>!usedIds.has(id));
+  const EDITORIAL=Array.from({length:150},(_,k)=>pad(k+1)).filter(id=>!usedIds.has(id));
   const CATS=[
     {name:'Brand',blurb:'Product, campaign, and launch frames. The photos brands hire for.',ids:BRAND},
     {name:'Editorial',blurb:'People and places, told straight. Portraits and stories on location.',ids:EDITORIAL},
@@ -584,8 +584,8 @@ clock();setInterval(clock,30000);
   const slug=n=>n.toLowerCase().replace(/[^a-z]+/g,'-');
   const FOLDERS=[{
     key:'all',name:'The full archive',tab:'Full archive',counter:'ARCHIVE',
-    num:'One hundred',word:'frames',roll:'ROLLS 01-05',
-    blurb:'Everything, newest first. Five rolls spliced into one long reel.',
+    num:'One fifty',word:'frames',roll:'ROLLS 01-15',
+    blurb:'Everything, newest first. Fifteen rolls spliced into one long reel.',
     ids:CATS.reduce((a,c)=>a.concat(c.ids),[])
   }].concat(CATS.map((c,i)=>({
     key:slug(c.name),name:c.name,tab:c.name,counter:c.name.toUpperCase(),
