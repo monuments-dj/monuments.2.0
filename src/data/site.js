@@ -63,7 +63,10 @@ const DJ = {
     { n: '03', t: 'About',   href: '/about',   sub: 'the subject file', img: '/about/hero-set.jpg' },
     { n: '04', t: 'Contact', href: '/contact', sub: 'start here',       img: '/gallery/full/p-044.jpg' },
   ],
-  navHire: null,
+  // the hiring pill from monuments (DJ 2026-08-13 "add this from monuments on
+  // the menu"). /hire is pruned here because the dj HOMEPAGE is the one-page
+  // brief, so the pill points home.
+  navHire: { href: '/', label: 'Hiring? The one-page brief &rarr;' },
   navKit: false,
 };
 
