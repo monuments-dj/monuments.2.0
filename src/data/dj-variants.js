@@ -32,8 +32,9 @@ export const variants = {
     kicker: '✳ DJ Ramirez · Creative Director',
     h1: 'Creative Director.',
     h1serif: 'Open to the right room.',
-    // DJ's words verbatim, 2026-08-13 (the Foundway send: client lens, not job-hunt lens)
-    lede: "I lead integrated campaigns, film, stills, and experiential from concept to delivery. I work best with teams and agencies that want <b>a point of view, not just a pair of hands.</b>",
+    // DJ's words verbatim, 2026-08-13 second pass ("make the homepage blurb say
+    // this"); only added the serial comma in the closing list
+    lede: "I help brands and agencies shout into the void of culture without losing their voice. Part agency partner, part brainstorm machine, part creative mercenary. From creative direction to directing on set, integrated content, and everything in between.",
     // DJ's tap 2026-08-12: awards + scale
     featured: ['know-vape', 'buck-the-quo', 'sony-flow-state', 'art-of-visuals', 'flashpoint'],
     quotes: ['jakke', 'tommy', 'mike'],
