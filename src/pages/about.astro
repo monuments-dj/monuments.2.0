@@ -6,6 +6,7 @@ import AchievementsTicker from '../components/AchievementsTicker.astro';
 import PageFooter from '../components/PageFooter.astro';
 import WorldMap from '../components/WorldMap.astro';
 import Rolodex from '../components/Rolodex.astro';
+import Kit from '../components/Kit.astro';
 import { site } from '../data/site.js';
 const bts = Array.from({ length: 18 }, (_, i) => `/about-bts/abts-${String(i + 1).padStart(2, '0')}.mp4`);
 ---
@@ -567,8 +568,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </section>
 
 {/* the network band, djthecd only (DJ 2026-08-13: "Add the rolodex section from
-    monuments to this page") - monuments keeps its copy on /capabilities */}
+    monuments to this page") - monuments keeps its copy on /capabilities.
+    The kit (light) follows the ink rolodex, keeping the flow alternating into
+    the dark crew band (DJ 2026-08-13: "I need gear to live on this about page"). */}
 {site.isDJ && <Rolodex />}
+{site.isDJ && <Kit />}
 
 <section class="crew">
   <!-- DJ 2026-07-14: the pizza shot is the "less agency, more rock and roll" photo. -->

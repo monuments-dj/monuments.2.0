@@ -1,0 +1,71 @@
+---
+// Kit.astro · the gear/fluency band, extracted from capabilities.astro so About
+// (djthecd) can run it (DJ 2026-08-13: "I need gear to live on this about page
+// from monuments"). Framed as fluency, not specs (the taste thesis holds).
+// ⚠ capabilities.astro still carries its inline original; consolidate both onto
+// this component after the crunch. List CONFIRMED by DJ 2026-07-09.
+// Voice reads off site.isDJ: my rotation / I'll learn it on djthecd.
+import { site } from '../data/site.js';
+const rotation = site.isDJ ? 'The tools are everywhere. This is my rotation.' : 'The tools are everywhere. This is our rotation.';
+const learn = site.isDJ ? "I'll learn it" : "We'll learn it";
+---
+<section class="kit2 wrap">
+  <div class="bar">
+    <span class="mono"><b>The kit</b> · fluent in</span>
+    <span class="mono k2-dim">{rotation}</span>
+  </div>
+  <div class="kitgrid">
+    <div class="kitcol rv">
+      <span class="kh mono">\ Direct + shoot</span>
+      <ul>
+        <li><span class="kt">Sony a7S III</span> <span class="kn">motion · low light</span></li>
+        <li><span class="kt">Leica M240</span> <span class="kn">rangefinder · stills</span></li>
+        <li><span class="kt">Zeiss primes</span> <span class="kn">the whole set</span></li>
+        <li><span class="kt">Gimbal</span> <span class="kn">movement, no crew</span></li>
+      </ul>
+    </div>
+    <div class="kitcol rv">
+      <span class="kh mono">\ Adobe Creative Cloud</span>
+      <ul>
+        <li><span class="kt">Photoshop</span> <span class="kn">comps, retouch, finish</span></li>
+        <li><span class="kt">Lightroom</span> <span class="kn">library and color</span></li>
+        <li><span class="kt">Illustrator</span> <span class="kn">marks, type, vector</span></li>
+        <li><span class="kt">Don't know</span> <span class="kn">{learn}</span></li>
+      </ul>
+    </div>
+    <div class="kitcol rv">
+      <span class="kh mono">\ Cut + finish</span>
+      <ul>
+        <li><span class="kt">DaVinci Resolve</span> <span class="kn">the edit and the grade</span></li>
+        <li><span class="kt">Capture One</span> <span class="kn">tethered capture</span></li>
+        <li><span class="kt">Darkroom</span> <span class="kn">stills, capture to color</span></li>
+        <li><span class="kt">Frame.io</span> <span class="kn">client review, versioned</span></li>
+      </ul>
+    </div>
+    <div class="kitcol rv">
+      <span class="kh mono">\ Design + build</span>
+      <ul>
+        <li><span class="kt">Figma</span> <span class="kn">decks, systems, UX</span></li>
+        <li><span class="kt">Claude Code</span> <span class="kn">sites, tools, agents</span></li>
+        <li><span class="kt">Codex + OpenClaw</span> <span class="kn">the automation bench</span></li>
+        <li><span class="kt">Airtable</span> <span class="kn">pipelines and trackers</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+.kit2{padding-top:9vh;padding-bottom:9vh}
+.kit2 .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:13px;border-bottom:2px solid var(--ink,#161514)}
+.kit2 .bar .mono b{color:var(--accent,#E0311A)}
+.kit2 .k2-dim{color:#6c6a64}
+.kit2 .kitgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,2.2vw,34px);margin-top:32px;align-items:start}
+.kit2 .kitcol .kh{display:block;color:var(--accent,#E0311A);font-size:12px;letter-spacing:.1em;margin-bottom:13px;white-space:nowrap}
+.kit2 .kitcol ul{list-style:none;margin:0;padding:0}
+.kit2 .kitcol li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:var(--mono);font-size:13px;letter-spacing:.045em;text-transform:uppercase;color:#55524c;padding:11px 0;border-bottom:1px solid var(--line,#dcd9d2);white-space:nowrap}
+.kit2 .kitcol li:first-child{border-top:1px solid var(--line,#dcd9d2)}
+.kit2 .kitcol .kt{flex:0 0 auto}
+.kit2 .kitcol .kn{font-size:11px;letter-spacing:.03em;text-transform:none;color:#8f8d88;text-align:right;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:1000px){.kit2 .kitgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.kit2 .kitgrid{grid-template-columns:1fr}}
+</style>
