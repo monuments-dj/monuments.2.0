@@ -67,8 +67,9 @@ for (const s of LEAKS) {
 }
 
 // ── CHECK 3 · monuments-only surfaces are not shipped ───────────────────────
+// 'hire' left this list 2026-08-13: it ships on dj now and is a REQUIRED route below.
 const CUT = ['capabilities', 'ai', 'lab', 'work-preview', 'template', 'page-template',
-             'page-elements', 'cta-preview', 'hire', 'keystatic', 'redesign', 'brand-lab',
+             'page-elements', 'cta-preview', 'keystatic', 'redesign', 'brand-lab',
              'mox'];
 for (const c of CUT) {
   if (fs.existsSync(path.join(DIST, c))) fail.push(`CUT PAGE SHIPPED · /${c}/ should not exist in the dj build`);
@@ -77,7 +78,9 @@ if (!fail.some((f) => f.startsWith('CUT PAGE'))) pass.push(`${CUT.length} monume
 
 // ── CHECK 4 · the routes that must exist ────────────────────────────────────
 const REQUIRED = ['index.html', 'production/index.html', 'direction/index.html', 'strategy/index.html',
-                  'work/index.html', 'about/index.html', 'contact/index.html', 'photography/index.html', 'giving/index.html'];
+                  'work/index.html', 'about/index.html', 'contact/index.html', 'photography/index.html', 'giving/index.html',
+                  // the menu's one-page-brief pill points here; if it stops building the pill goes dead again
+                  'hire/index.html'];
 for (const r of REQUIRED) {
   if (fs.existsSync(path.join(DIST, r))) pass.push(`route · /${r.replace('index.html', '')}`);
   else fail.push(`MISSING ROUTE · /${r.replace('index.html', '')}`);

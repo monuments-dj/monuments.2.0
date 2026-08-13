@@ -30,7 +30,9 @@ export default defineConfig({
   },
   integrations: DJ
     ? [react(), sitemap({
-        filter: (page) => !/\/(lab|template|page-template|page-elements|cta-preview|work-preview|keystatic|capabilities|ai|hire)(\/|$)/.test(page),
+        // NOTE: no `hire` here. On dj it is a real linked page (the menu's
+        // one-page-brief pill) and belongs in the sitemap.
+        filter: (page) => !/\/(lab|template|page-template|page-elements|cta-preview|work-preview|keystatic|capabilities|ai)(\/|$)/.test(page),
       }), djsite()]
     : [react(), keystatic(), sitemap({
         // keep internal surfaces out of the index (belt to robots.txt's braces)

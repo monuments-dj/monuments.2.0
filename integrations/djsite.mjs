@@ -25,8 +25,11 @@ import { replacementsFor } from '../src/data/dialect.js';
 const CUT = [
   // giving SHIPS on dj as of 2026-08-13 (his 'bake the giving page' - the
   // I-voice pairs live in dialect.js under 'giving')
+  // hire SHIPS on dj as of 2026-08-13 (DJ: the menu's one-page-brief pill was a
+  // dead link because it pointed at '/', the same target as menu row 01 Home).
+  // /hire IS the one-page brief, so the pill points at the real page now.
   'capabilities', 'ai', 'lab', 'work-preview', 'template',
-  'page-template', 'page-elements', 'cta-preview', 'hire', 'keystatic',
+  'page-template', 'page-elements', 'cta-preview', 'keystatic',
   // stale draft trees living in public/ (old mockups, never linked)
   'redesign', 'brand-lab',
   // client-deliverable drops in public/ (Mox booth recap + asset zips): studio
@@ -91,6 +94,20 @@ export default function djsite() {
         fs.copyFileSync(djHome, path.join(root, 'index.html'));
         fs.rmSync(path.join(root, '_djhome'), { recursive: true, force: true });
         logger.info(`djthecd: pruned ${pruned.length} monuments-only surfaces · dj homepage promoted to /`);
+
+        // 1b · THE DJ ROBOTS FILE. robots.txt is a static file in public/, so both
+        // sites were serving the MONUMENTS one - which disallowed /photography and
+        // /hire (both real linked pages here) and advertised the monuments sitemap
+        // URL on djthecd.com. That last one is a leak the audit below could never
+        // catch, because it only walks .html. djthecd has its own file now:
+        // src/data/robots-dj.txt, swapped in here. Edit that for dj, public/ for
+        // monuments.
+        const robotsSrc = path.join(process.cwd(), 'src', 'data', 'robots-dj.txt');
+        if (!fs.existsSync(robotsSrc)) {
+          throw new Error('djthecd: src/data/robots-dj.txt is missing — refusing to ship the monuments robots.txt on djthecd.com');
+        }
+        fs.writeFileSync(path.join(root, 'robots.txt'), fs.readFileSync(robotsSrc, 'utf8'));
+        logger.info('djthecd: robots.txt replaced with the dj file (src/data/robots-dj.txt)');
 
         // 2 · THE SKIN (DJ 2026-08-12: "simpler. creative director, helvetica
         // and simple braun / apple design approch while keeping the structure

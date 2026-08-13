@@ -71,9 +71,11 @@ const DJ = {
     { n: '04', t: 'Contact', href: '/contact', sub: 'start here',       img: '/gallery/full/p-044.jpg' },
   ],
   // the hiring pill from monuments (DJ 2026-08-13 "add this from monuments on
-  // the menu"). /hire is pruned here because the dj HOMEPAGE is the one-page
-  // brief, so the pill points home.
-  navHire: { href: '/', label: 'Hiring? The one-page brief &rarr;' },
+  // the menu"). It USED to point at '/', which is the same target as menu row
+  // 01 Home, so from the homepage it closed the menu and did nothing - DJ:
+  // "the one page brief doesnt work ... on the menu. its a broken link".
+  // /hire ships on dj now and IS the one-page brief. Never point this at '/'.
+  navHire: { href: '/hire', label: 'Hiring? The one-page brief &rarr;' },
   navKit: false,
 };
 

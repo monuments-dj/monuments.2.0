@@ -1,0 +1,18 @@
+# djthecd.com · DJ Ramirez, Creative Director
+# ----------------------------------------------------------------------------
+# THIS IS THE DJTHECD ROBOTS FILE. public/robots.txt is the MONUMENTS one and is
+# NOT served here - integrations/djsite.mjs overwrites the built robots.txt with
+# this file on every SITE=dj build. Edit this file for djthecd, that one for
+# monuments. They are separate on purpose: the two sites have different public
+# surfaces, and the shared file was disallowing /photography and /hire here and
+# advertising the monuments sitemap URL.
+#
+# Everything that ships on djthecd is linked from the menu and meant to be found.
+# The monuments-only surfaces (the Kit, the lab, /capabilities, /ai, work-preview,
+# keystatic, the client drops) are not BUILT into this site at all, so there is
+# nothing here to hide.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://djthecd.com/sitemap-index.xml

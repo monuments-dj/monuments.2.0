@@ -1,4 +1,4 @@
-# djthecd voice transform · 404 changes
+# djthecd voice transform · 412 changes
 
 ## /
 - [explicit x2]
@@ -224,6 +224,32 @@
 - [explicit]
   - was: We answer to both.
   - now: I answer to both.
+
+## /hire/
+- [explicit x4]
+  - was: monuments.cc@gmail.com
+  - now: dj@djthecd.com
+- [explicit x4]
+  - was: https://monuments-2-0.vercel.app
+  - now: https://djthecd.com
+- [explicit]
+  - was: M<i>✳</i>NUMENTS
+  - now: DJ<i>✳</i>RAMIREZ
+- [explicit]
+  - was: content="Monuments"
+  - now: content="DJ Ramirez"
+- [explicit x3]
+  - was: href="/capabilities"
+  - now: href="/about"
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 
 ## /photography/
 - [explicit]
