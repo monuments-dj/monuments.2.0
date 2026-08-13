@@ -10,14 +10,17 @@ import HeroHeader from '../../components/HeroHeader.astro';
 import { work } from '../../data/work.js';
 import '../../styles/work.css';
 const hh = work.find(w => w.slug === 'ac-boise');
+// Campaign + event set per DJ 2026-08-13: his three picked commercial frames
+// plus The Event photos from deannascherrer.com/athletic-club-boise (his
+// instruction; the four-person staff group shot is EXCLUDED on his order).
+// Photography: Mark Garcia + Deanna Scherrer, credited in the note + call sheet.
 const acGallery = [
-  ['home-02.jpg','The home kit · On the trail'],
-  ['away-01.jpg','The away kit · Lookbook'],
-  ['keeper-01.jpg','Portrait · With the ball'],
-  ['away-02.jpg','Basque pride · Red and green'],
-  ['yt-keeper.jpg','Basque keeper kit · Film still'],
-  ['crest.jpg','The crest · Anatomy'],
-].map(([f, label], i) => ({ src: `/case-studies/ac-boise/gallery/${f}`, cap: `FR-${String(i+1).padStart(2,'0')} · ${label}`, alt: `AC Boise kit reveal: ${label}` }));
+  ['campaign/cam-01.jpg','The home kit · Tattoo parlor portrait'],
+  ['campaign/cam-02.jpg','The kit · Boise river rock'],
+  ['campaign/cam-03.jpg','The faithful · Late night, full kit'],
+  ['campaign/ev-02.jpg','The reveal · Flag up at the Egyptian'],
+  ['campaign/ev-04.jpg','The reveal · First look, step and repeat'],
+].map(([f, label], i) => ({ src: `/case-studies/ac-boise/${f}`, cap: `FR-${String(i+1).padStart(2,'0')} · ${label}`, alt: `AC Boise kit reveal: ${label}` }));
 
 // Fan reaction to the kit-reveal drop on Instagram (@acboise). The reveal ran
 // hardest on IG, so the reaction lives here as social proof.
@@ -191,7 +194,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 </div>
 
 <div class="over" role="main">
-<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/ac-boise/gallery/home-02.jpg" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img="/case-studies/ac-boise/campaign/ev-03.jpg" logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
 <StatRow tone="paper"
   stats={[{ value: '40', label: 'Talent · one nimble crew' }, { value: '6', label: 'Iconic Boise locations' }, { value: 'Packed', label: 'Theater on launch night' }]}
 />
@@ -219,7 +222,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
     <h2 class="rv in">Shot like the city <span class="serif">wears it.</span></h2>
     <div class="posterreel" id="acbFilm" data-yt="dTzb_Ck8vJ4" role="button" tabindex="0" aria-label="Play the AC Boise home kit reveal video">
-      <img loading="lazy" decoding="async" src="/case-studies/ac-boise/gallery/home-01.jpg" alt="Kit reveal: the AC Boise home kit, shot in the city">
+      <img loading="lazy" decoding="async" src="/case-studies/ac-boise/campaign/ev-01.jpg" alt="The Egyptian Theatre marquee: AC Boise 2026 home kit reveal">
       <video class="pvid" src="/snips/ac-boise.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
       <span class="play">Play · The reveal</span>
       <span class="fcap">✳ This kit is Boise · Home kit reveal · AC Boise × Hummel</span>
@@ -249,7 +252,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </div>
 
-  <MasonryGallery title="The kits · Home, away, keeper" note="Photography · Mark Garcia · click to enlarge" images={acGallery} />
+  <MasonryGallery title="The campaign · Around town + the reveal" note="Photography · Mark Garcia + Deanna Scherrer · click to enlarge" images={acGallery} />
 </section>
 
 <section class="quote">
@@ -269,7 +272,7 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
       rows={[
         { k: 'Client', v: 'Against · AC Boise' },
         { k: 'Director + editor · launch film', v: 'DJ Ramirez', select: true },
-        { k: 'Photography', v: 'Mark Garcia' },
+        { k: 'Photography', v: 'Mark Garcia · Deanna Scherrer' },
       ]}
     />
   </div>
