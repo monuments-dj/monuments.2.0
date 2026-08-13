@@ -1,4 +1,4 @@
-# Unhandled DJ mentions · 124
+# Unhandled DJ mentions · 125
 
 ## /
 - [DJ] "DJ Ramirez · Creative Director"
@@ -35,6 +35,7 @@
 - [DJ] "Photography · DJ Ramirez"
 - [DJ] "DJ"
 - [DJ] "Photography · DJ Ramirez"
+- [DJ] "(the photography of DJ Ramirez)"
 - [DJ's] "DJ's Photos"
 - [DJ] "DJ"
 - [DJ] "DJ Ramirez &copy; MMXXVI &middot; Creative Director"
