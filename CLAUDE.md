@@ -114,9 +114,12 @@ FAILS on adjacent lights. Run it on any page you touch. Reference flow that pass
 
 ## Active work (2026-08-13): DJTHECD LIVE + CLIENT-READY - read TODO.md 🔄 HANDOFF 2026-08-13 EOD FIRST
 djthecd.com is DEPLOYED, identity-swept (D favicon, DJ og card), voice = plain I
-(no-team ruling), archive at 195 frames, giving/photography live. ONE WIP: the
-Boise Schools case page is written + parked at src/pages/work/_boise-schools.wip.astro
-with assets committed - finish steps are in the TODO handoff block (~30 min).
+(no-team ruling), archive at 195 frames, giving/photography live. The Boise Schools
+case page SHIPPED (d18f79d) and is the 20th case file, live on both sites; 4 open
+one-word calls on it are listed in the TODO handoff block.
+⚠️ CASE COUNT IS DERIVED NOW: the takeover nav's "N case files" reads work.length
+from src/data/work.js (it was hardcoded "19" in BOTH site.js navs and went stale the
+moment case 20 landed). Add a case file, the menu counts it. Never type that number.
 ⛔ NEVER `git add -A` here (peps.png + 250MB raw incidents); explicit paths only.
 DJ's open decisions live in the voice-cards artifact + TODO stack.
 

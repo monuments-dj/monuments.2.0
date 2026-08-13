@@ -40,29 +40,44 @@ verified on the live site unless marked WIP.
   giving meta fixed, typo sweep clean (dup-word hits were tag-strip
   artifacts), djcheck 24/24 incl. photography + giving as REQUIRED routes.
 
-**⚠ WIP - BOISE SCHOOLS CASE PAGE (finish first, ~30 min):**
-Page is WRITTEN and parked at src/pages/work/_boise-schools.wip.astro
-(underscore = not routed, builds stay green). Assets are cut and committed:
-/snips/boise-schools.mp4 + /case-studies/boise-schools/bs-01..06.jpg.
-The film is PUBLIC: youtube id Ngs97t0FZ6Q ("Boise Schools Make Good
-Neighbors"). Facts source = BSD0084 ShootBook (Drive id
+**✅ BOISE SCHOOLS CASE PAGE - SHIPPED 2026-08-13 (commit d18f79d).**
+Live at /work/boise-schools on BOTH sites. It is the 20th case file. All 5
+finish steps done: routed · work.js entry (logline written NEUTRAL so it
+reads the same in both voices, no dialect pair needed) · 2 dialect perPage
+pairs (the only DJ-third-person sentences; credits are a call sheet and stay
+one) · hub row in Films & series (data-disc commercial,cd, group ranges
+renumbered 12-16 / 17-20, IMG_DIMS bs-02) · both builds + gates green.
+Verified: monuments build clean · SITE=dj 0 dead rules / 0 leaks · djcheck
+24/24 · pagecheck + flowcheck PASS on the page and /work.
+CLASS-LEVEL BUG CAUGHT AND FIXED with it: the takeover nav hardcoded "19 case
+files" in BOTH src/data/site.js nav definitions, so the 20th case made the
+menu lie on every page of both sites. It derives from work.js now
+(`${caseCount} case files`) - never type that number again. djcheck's
+case-page floor raised 19 -> 20 so the new page is actually protected.
+
+**4 OPEN CALLS ON BOISE SCHOOLS (all one-word reverts, none are blockers):**
+1. CASE CODE. Page + hub row read `BSD-0084`, the real Stoltz job number off
+   the shoot book. Every other row in the index reads `MC-YYYY-NN`. Kept the
+   real one on purpose (it is sourced, the MC codes are invented). Say the
+   word and it renumbers to MC-2026-03.
+2. FLAT LIGHT RUN. The page goes hero (dark) -> ~1400px of unbroken light ->
+   footer (dark). flowcheck PASSES (it merges to one band, no adjacent
+   lights), but every other case page breaks that middle with a dark film
+   band, and `.film{background:var(--ink)}` is ALREADY in the page's CSS,
+   unused - the film poster currently sits inside the light story section.
+   One line moves it into a dark band and the page starts moving.
+3. HOMEPAGE REEL. Not added to either homepage reel - both are hand-curated
+   (monuments index.astro 14 cards, dj _Home.astro 10). Adding it means
+   bumping something, which is a curation call, not a wiring one.
+4. WORK.JS PLACEMENT. Sits 5th in the array, right after CWI (the other
+   Idaho-education directing piece). That order drives the /work grid's
+   "Newest" sort, where it is now the FIRST card. Move it with one line.
+NOTE for the record: Mitch's "finals email" does NOT exist in gmail (he left
+Stoltz end of June; only social cuts are in Drive) - the YouTube publish
+(Ngs97t0FZ6Q) is the hero source, verified correct (end card reads "Boise
+Schools make good neighbors."). Facts source = BSD0084 ShootBook (Drive id
 1f4xOtKF2D4pdnPMIlpuo5yf8bPz1gg-drBCjtmJA6zs) + DIRECTORS COPY deck
-(1SD5jWQMMKbcQB2g5_DgyAO-TcADGuq3vFO1NvzmGxyE). Crew credits in the page
-call sheet are VERBATIM from the shoot book (Director DJ Ramirez; agency
-Stoltz; ECD Mitch Kuhn; Producer Tess; DP Nathan Zanders). TO FINISH:
-1. rename _boise-schools.wip.astro -> boise-schools.astro
-2. add work.js entry, slug "boise-schools" (hh lookup expects it; page uses
-   img /case-studies/boise-schools/bs-02.jpg, vid /snips/boise-schools.mp4;
-   logline drafted in the page og:description; write it neutral-DJ)
-3. add dialect perPage 'boise-schools' pairs for every DJ-third-person
-   sentence on the page (dead-rule gate will verify)
-4. add the hub row in work.astro (data-disc="commercial,cd", snip + bs-02,
-   IMG_DIMS entry) + consider the homepage reel card
-5. SITE=dj build + djcheck (case count goes 20) + monuments build + push +
-   live verify. NOTE: Mitch's "finals email" does NOT exist in gmail (he
-   left Stoltz end of June; only social cuts are in Drive) - the YouTube
-   publish is the hero source, already verified correct (end card reads
-   "Boise Schools make good neighbors.").
+(1SD5jWQMMKbcQB2g5_DgyAO-TcADGuq3vFO1NvzmGxyE).
 
 **DJ's OPEN DECISION STACK (asked as prompts, he has the list):** variant
 ledes approve/revert · strategy closer F1/F2/F3 · sprinkle anchors (Lauryn
