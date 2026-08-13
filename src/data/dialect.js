@@ -52,6 +52,9 @@ export const chromeSwaps = [
   ['alt="The Monuments crew"', 'alt="The crew"'],
   // photography OS9 path bar
   ['Monuments HD : Archive', 'DJTHECD HD : Archive'],
+  // giving meta + the hidden legacy-nav links to the pruned /capabilities
+  ['The giving side of Monuments.', 'The giving side of DJ Ramirez.'],
+  ['href="/capabilities"', 'href="/about"'],
   // share card, favicon, apple icon: the DJ set
   ['/og/card.jpg', '/og/dj-card.jpg'],
   ['href="/favicon.svg"', 'href="/dj-favicon.svg"'],
