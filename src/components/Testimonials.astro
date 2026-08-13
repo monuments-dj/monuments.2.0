@@ -11,7 +11,9 @@
 import { site } from '../data/site.js';
 interface Person { name: string; role: string; q?: string; link?: string; }
 interface Props { tag?: string; }
-const { tag = 'pull quotes · incoming' } = Astro.props;
+// tag default updated 2026-08-13 (DJ: "these pull quotes on the homepage arent
+// incoming anymore") - five real voices are in, so the chip says what they are
+const { tag = 'verbatim · full letters on request' } = Astro.props;
 // DJ's outreach list 2026-07-11 (roles his words; links verified before adding —
 // unverified handles stay off the site, see TODO.md outreach block)
 const people: Person[] = [
