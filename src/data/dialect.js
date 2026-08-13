@@ -133,7 +133,10 @@ export const perPage = {
   'about': [
     ["People ask me what we do", "People ask me what I do"],
     ["We're all handed different tools. Mine was a camera.", "Everyone gets handed different tools. Mine was a camera."],
-    ["and around us is a crew that's grown with me", "and around me is a crew that's grown with me"],
+    // the "around us is a crew" pair is GONE with the crew paragraph itself: DJ killed
+    // that paragraph on dj 2026-08-13 ("the team section can die on this page"), so the
+    // sentence never reaches the dj output and the rule would be dead (gate throws).
+    // It still ships on monuments, where the crew is named on purpose.
     // the three method-band pairs are GONE with the band itself: How-I-work is
     // monuments-only as of DJ's 2026-08-13 ruling, so the We-sentences never
     // reach the dj output (dead-rule gate enforces this stays true)

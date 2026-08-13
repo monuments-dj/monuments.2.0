@@ -579,10 +579,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
   <img loading="lazy" decoding="async" class="plx" src="/about/pizza.jpg" alt="Pizza on the stove between takes">
   <div class="grade"></div>
   <div class="cap">
-    <span class="k mono">✳ The crew</span>
+    {/* DJ 2026-08-13: "we can kill one of these paragraphs. the team section can die
+        on this page. I like the encore bit." The crew paragraph is monuments-only now
+        (that site leans agency and names the team); dj keeps the encore paragraph.
+        "too" only makes sense after the crew para, so it goes with it. Kicker follows:
+        with no crew copy under it, "The crew" would be labelling a section about
+        clients coming back. */}
+    <span class="k mono">✳ {site.isDJ ? 'The encore' : 'The crew'}</span>
     <h3>Less agency, <span class="serif">more rock and roll.</span></h3>
-    <p>I've been lucky enough to rock with some amazing people along the way. Some of them for a decade now. Tess keeps the whole operation on the rails, and around us is a crew that's grown with me, gig after gig, from two-person shoots to thirty-deep productions. Same band, bigger rooms.</p>
-    <p>The clients stick around too. Sony came back four times. Adorama, three. One project becomes a run. That's the part I'm proudest of: anyone can book a gig, the encore is the review that matters.</p>
+    {!site.isDJ && <p>I've been lucky enough to rock with some amazing people along the way. Some of them for a decade now. Tess keeps the whole operation on the rails, and around us is a crew that's grown with me, gig after gig, from two-person shoots to thirty-deep productions. Same band, bigger rooms.</p>}
+    <p>The clients stick around{!site.isDJ && ' too'}. Sony came back four times. Adorama, three. One project becomes a run. That's the part I'm proudest of: anyone can book a gig, the encore is the review that matters.</p>
   </div>
 </section>
 

@@ -19,6 +19,25 @@ const bsGallery = [
   ['bs-05.jpg','After school · The long table'],
   ['bs-06.jpg','The end card · From the drone'],
 ].map(([f, label], i) => ({ src: `/case-studies/boise-schools/${f}`, cap: `FR-${String(i+1).padStart(2,'0')} · ${label}`, alt: `Boise Schools Good Neighbors film: ${label}` }));
+
+// The stills set from the shoot (DJ's drop 2026-08-13), ordered the way the film
+// reads a day: the morning bus, the ride in, the walk, the school day, after the
+// last bell, then Friday night. Captions describe only what is IN the frame - the
+// file names carry the location codes (BOISEHIGH / BORAH), nothing is inferred
+// beyond them. Credit sits on the gallery note AND in the call sheet, the same
+// way Mark Garcia's stills are handled on ac-boise.
+const bsStills = [
+  ['st-07.jpg','The morning bus'],
+  ['st-04.jpg','The ride in'],
+  ['st-01.jpg','The walk home · the North End'],
+  ['st-03.jpg','The locker bank'],
+  ['st-02.jpg','Passing period'],
+  ['st-06.jpg','Coffee after class'],
+  ['st-05.jpg','Sidewalk chalk'],
+  ['st-08.jpg','Borah · under the lights'],
+  ['st-10.jpg','Borah · at the gate'],
+  ['st-09.jpg','Borah · watching the field'],
+].map(([f, label], i) => ({ src: `/case-studies/boise-schools/stills/${f}`, cap: `ST-${String(i+1).padStart(2,'0')} · ${label}`, alt: `Boise Schools Good Neighbors stills: ${label}` }));
 ---
 <!doctype html>
 <html lang="en">
@@ -258,6 +277,11 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <section class="paper">
   <MasonryGallery title="The frames · From the film" note="Frames from the finished film · DP Nathan Zanders · click to enlarge" images={bsGallery} />
 </section>
+
+{/* tone="dark" on purpose: the page ran hero -> one long light stretch -> footer,
+    and CLAUDE.md's FLOW RULE says a page must never sit flat. The component's own
+    dark tone is the sanctioned way to break it (flowcheck verifies). */}
+<MasonryGallery tone="dark" title="The stills · From the shoot" note="Stills from the shoot · Dawson Gutierrez · click to enlarge" images={bsStills} />
 
 <section class="paper">
   <div class="wrap credits rv">

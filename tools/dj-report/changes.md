@@ -1,4 +1,4 @@
-# djthecd voice transform · 412 changes
+# djthecd voice transform · 411 changes
 
 ## /
 - [explicit x2]
@@ -68,9 +68,6 @@
 - [explicit]
   - was: We're all handed different tools. Mine was a camera.
   - now: Everyone gets handed different tools. Mine was a camera.
-- [explicit]
-  - was: and around us is a crew that's grown with me
-  - now: and around me is a crew that's grown with me
 - [explicit]
   - was: We have carried cameras through Nepal, Uganda
   - now: I have carried cameras through Nepal, Uganda
