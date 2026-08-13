@@ -165,6 +165,15 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 .range h2{font-weight:var(--dispw);font-size:clamp(28px,3.8vw,56px);letter-spacing:-.03em;line-height:1.04;text-transform:uppercase;margin-top:14px;max-width:22ch}
 .range h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;font-weight:400;text-transform:none;color:var(--spark)}
 .range p.b{margin-top:22px;max-width:54ch;color:rgba(245,243,239,.82)}
+/* the Non-Profit roll: four archive frames, square-cropped, into /photography */
+.np-roll{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+.np-fr{display:block}
+.np-fr img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;filter:saturate(.92);transition:filter .35s,transform .6s cubic-bezier(.22,1,.36,1)}
+.np-fr:hover img{filter:none;transform:scale(1.02)}
+.np-fr .mono{display:block;margin-top:8px;font-size:9.5px;letter-spacing:.12em;color:rgba(245,243,239,.55)}
+.np-more{display:inline-block;margin-top:26px;color:rgba(245,243,239,.8);border-bottom:1px solid rgba(245,243,239,.35);padding-bottom:3px;transition:color .3s,border-color .3s}
+.np-more:hover{color:var(--paper);border-color:var(--paper)}
+@media (max-width:700px){.np-roll{grid-template-columns:1fr 1fr;gap:10px}}
 
 /* gallery: contact-sheet frames, masonry columns for mixed portrait + landscape */
 .gal{padding:9vh 0}
@@ -373,6 +382,16 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     <span class="k mono rv">[ Further afield ]</span>
     <h2 class="rv">When the story is bigger than us, we go to it. Documentary and mission work in <span class="serif">Nepal, Uganda, and Europe.</span></h2>
     <p class="b rv">We are careful with this kind of work. We go in to listen, not to take. The footage belongs to the people in it as much as it belongs to us, and the goal is never a highlight reel. It's the truth, told with enough care that it lands.</p>
+    <!-- the archive's Non-Profit roll, surfaced here (DJ 2026-08-13: "those
+         photos can go in. non profit on photos and on the giving back page").
+         Same frames the photography page files under Non-Profit. -->
+    <div class="np-roll rv">
+      <a class="np-fr" href="/photography"><img src="/gallery/thumb/p-005.jpg" alt="Non-profit archive frame 005" loading="lazy" decoding="async" width="720" height="481"><span class="mono">FR-005</span></a>
+      <a class="np-fr" href="/photography"><img src="/gallery/thumb/p-081.jpg" alt="Non-profit archive frame 081" loading="lazy" decoding="async" width="720" height="481"><span class="mono">FR-081</span></a>
+      <a class="np-fr" href="/photography"><img src="/gallery/thumb/p-084.jpg" alt="Non-profit archive frame 084" loading="lazy" decoding="async" width="481" height="720"><span class="mono">FR-084</span></a>
+      <a class="np-fr" href="/photography"><img src="/gallery/thumb/p-096.jpg" alt="Non-profit archive frame 096" loading="lazy" decoding="async" width="720" height="481"><span class="mono">FR-096</span></a>
+    </div>
+    <a class="np-more mono rv" href="/photography">The Non-Profit roll · more in the archive &#8599;</a>
   </div>
 </section>
 
