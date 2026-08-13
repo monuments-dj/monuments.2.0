@@ -23,7 +23,9 @@ import { replacementsFor } from '../src/data/dialect.js';
 
 // monuments-only surfaces: not ported, not rewritten (DJTHECD-PLAN.md §2 "Cut")
 const CUT = [
-  'capabilities', 'giving', 'ai', 'lab', 'work-preview', 'template',
+  // giving SHIPS on dj as of 2026-08-13 (his 'bake the giving page' - the
+  // I-voice pairs live in dialect.js under 'giving')
+  'capabilities', 'ai', 'lab', 'work-preview', 'template',
   'page-template', 'page-elements', 'cta-preview', 'hire', 'keystatic',
   // stale draft trees living in public/ (old mockups, never linked)
   'redesign', 'brand-lab',

@@ -1,4 +1,4 @@
-# djthecd voice transform · 339 changes
+# djthecd voice transform · 366 changes
 
 ## /
 - [explicit x2]
@@ -129,6 +129,89 @@
 - [explicit]
   - was: href="/apple-touch-icon.png"
   - now: href="/dj-apple-touch.png"
+
+## /giving/
+- [explicit]
+  - was: monuments.cc@gmail.com
+  - now: dj@djthecd.com
+- [explicit x4]
+  - was: https://monuments-2-0.vercel.app
+  - now: https://djthecd.com
+- [explicit]
+  - was: M<i>✳</i>NUMENTS
+  - now: DJ<i>✳</i>RAMIREZ
+- [explicit]
+  - was: content="Monuments"
+  - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was:  · Monuments</span>
+  - now: </span>
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
+- [explicit]
+  - was: A few times a year, that is exactly where we point it.
+  - now: A few times a year, that is exactly where I point it.
+- [explicit]
+  - was: creative for causes we believe in
+  - now: creative for causes I believe in
+- [explicit]
+  - was: We are not a foundation and we are not pretending to save the world. We are a studio that happens to be good at making people feel something
+  - now: I'm not a foundation and I'm not pretending to save the world. I'm just good at making people feel something
+- [explicit]
+  - was: So we set aside real time for work that pays nothing
+  - now: So I set aside real time for work that pays nothing
+- [explicit]
+  - was: a few times a year we hand our full toolkit to a cause
+  - now: a few times a year I hand my full toolkit to a cause
+- [explicit]
+  - was: Nobody walks onto a set knowing how it works. We did not. So we keep a door open
+  - now: Nobody walks onto a set knowing how it works. I did not. So I keep a door open
+- [explicit]
+  - was: We have carried cameras through Nepal, Uganda, and across Europe for work that was never about selling anything. Those trips taught us patience
+  - now: I have carried cameras through Nepal, Uganda, and across Europe for work that was never about selling anything. Those trips taught me patience
+- [explicit]
+  - was: We still take that work when it matters, and we bring everything that pressure taught us to it
+  - now: I still take that work when it matters, and I bring everything that pressure taught me to it
+- [explicit]
+  - was: The work that doesn't pay is usually the work we're
+  - now: The work that doesn't pay is usually the work I'm
+- [explicit]
+  - was: Most of what we give happens within driving distance of the two places we call home.
+  - now: Most of what I give happens within driving distance of the two places I call home.
+- [explicit]
+  - was: When the story is bigger than us, we go to it.
+  - now: When the story is bigger than me, I go to it.
+- [explicit]
+  - was: We are careful with this kind of work. We go in to listen, not to take. The footage belongs to the people in it as much as it belongs to us
+  - now: I am careful with this kind of work. I go in to listen, not to take. The footage belongs to the people in it as much as it belongs to me
+- [explicit]
+  - was: We build monuments.
+  - now: I build monuments.
+- [explicit]
+  - was: home towns we show up for
+  - now: home towns I show up for
+- [explicit]
+  - was: [ Why we do it ]
+  - now: [ Why I do it ]
+- [explicit]
+  - was: three ways we put the craft to work
+  - now: three ways I put the craft to work
+- [explicit]
+  - was: We answer to both.
+  - now: I answer to both.
 
 ## /photography/
 - [explicit]
