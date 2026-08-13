@@ -28,6 +28,34 @@ export const chromeSwaps = [
   ['M<i>✳</i>NUMENTS', 'DJ<i>✳</i>RAMIREZ'],
   // covers og:site_name and any other content="Monuments" meta
   ['content="Monuments"', 'content="DJ Ramirez"'],
+  // ── the full identity sweep (DJ 2026-08-13: "scan for any other monuments
+  //    artifacts, make it all djtheCD, make the favicon a D") ────────────────
+  // titles on every page (case pages, work, about, contact, 404, xm5 lowercase)
+  ['· Monuments</title>', '· DJ Ramirez</title>'],
+  ['· monuments</title>', '· DJ Ramirez</title>'],
+  // og:title metas
+  ['· Monuments">', '· DJ Ramirez">'],
+  ['· monuments">', '· DJ Ramirez">'],
+  // case-page meta descriptions
+  ['A Monuments case study by DJ Ramirez.', 'A case study by DJ Ramirez.'],
+  ['DJ Ramirez for Monuments.', 'DJ Ramirez.'],
+  // page kickers ("Work · DJ Ramirez · Monuments" -> "Work · DJ Ramirez")
+  [' · Monuments</span>', '</span>'],
+  // the case-file archive stamp on all 19 work pages
+  ['>Monuments<small', '>DJ Ramirez<small'],
+  // contact: copy, aria, and the monuments wireframe M artwork comes off
+  ['with Monuments:', 'with DJ Ramirez:'],
+  ['On set with Monuments', 'On set with DJ Ramirez'],
+  ['<img loading="lazy" decoding="async" class="mwire" src="/brand/m-wire.svg" alt="Monuments wireframe M" width="280" height="297">', ''],
+  // about: meta description drops the studio name, crew alt neutralized
+  ['He runs Monuments, an independent studio', 'He runs an independent studio'],
+  ['alt="The Monuments crew"', 'alt="The crew"'],
+  // photography OS9 path bar
+  ['Monuments HD : Archive', 'DJTHECD HD : Archive'],
+  // share card, favicon, apple icon: the DJ set
+  ['/og/card.jpg', '/og/dj-card.jpg'],
+  ['href="/favicon.svg"', 'href="/dj-favicon.svg"'],
+  ['href="/apple-touch-icon.png"', 'href="/dj-apple-touch.png"'],
 ];
 
 // --- loglines + prose that appears on more than one page ---------------------

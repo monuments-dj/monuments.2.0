@@ -1,6 +1,26 @@
-# djthecd voice transform · 182 changes
+# djthecd voice transform · 339 changes
+
+## /
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 
 ## /404.html
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 - [explicit]
   - was: Tell us what you're building
   - now: Tell me what you're building
@@ -18,6 +38,27 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit x2]
+  - was: He runs Monuments, an independent studio
+  - now: He runs an independent studio
+- [explicit]
+  - was: alt="The Monuments crew"
+  - now: alt="The crew"
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 - [explicit]
   - was: People ask me what we do
   - now: People ask me what I do
@@ -51,8 +92,43 @@
   - was: content="Monuments"
   - now: content="DJ Ramirez"
 - [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit x2]
+  - was: with Monuments:
+  - now: with DJ Ramirez:
+- [explicit]
+  - was: On set with Monuments
+  - now: On set with DJ Ramirez
+- [explicit]
+  - was: <img loading="lazy" decoding="async" class="mwire" src="/brand/m-wire.svg" alt="Monuments wireframe M" width="280" height="297">
+  - now: 
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
+- [explicit]
   - was: Tell us what
   - now: Tell me what
+
+## /direction/
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 
 ## /photography/
 - [explicit]
@@ -67,6 +143,40 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: Monuments HD : Archive
+  - now: DJTHECD HD : Archive
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
+
+## /production/
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
+
+## /strategy/
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 
 ## /work/
 - [explicit]
@@ -81,6 +191,24 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was:  · Monuments</span>
+  - now: </span>
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 
 ## /work/ac-boise/
 - [explicit]
@@ -95,6 +223,24 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 - [explicit]
   - was: so we shot the kit across six iconic locations around town
   - now: so I shot the kit with Against across six iconic locations around town
@@ -115,6 +261,24 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 - [explicit]
   - was: Adorama brought us in to launch a whole new category: Adorama Music.
   - now: Adorama brought me in to launch a whole new category: Adorama Music.
@@ -138,6 +302,24 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 - [explicit]
   - was: how do we talk to them, what reads as real
   - now: how do you talk to them, what reads as real
@@ -186,6 +368,27 @@
   - was: content="Monuments"
   - now: content="DJ Ramirez"
 - [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit x2]
+  - was: A Monuments case study by DJ Ramirez.
+  - now: A case study by DJ Ramirez.
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
+- [explicit]
   - was: In partnership with OMEK agency, DJ did creative direction on the campaign: image selection, casting, and a hand on the edits, and he directed the talent on set
   - now: In partnership with OMEK agency, I did creative direction on the campaign: image selection, casting, and a hand on the edits, and I directed the talent on set
 
@@ -202,6 +405,24 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 - [explicit]
   - was: Disguised as a retail popup, we challenged teens
   - now: Disguised as a retail popup, I challenged teens
@@ -232,6 +453,24 @@
   - was: content="Monuments"
   - now: content="DJ Ramirez"
 - [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
+- [explicit]
   - was: Most merch is a logo on a blank. We design things people still wear
   - now: Most merch is a logo on a blank. I design things people still wear
 - [explicit]
@@ -260,6 +499,24 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 - [explicit]
   - was: so we made starting the whole point. DJ directs and cuts the campaign, and runs the set:
   - now: so I made starting the whole point. I direct and cut the campaign, and run the set:
@@ -292,6 +549,24 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 
 ## /work/dw-drums/
 - [explicit]
@@ -306,6 +581,24 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 - [explicit]
   - was: They brought DJ in to answer one question, how do you show a product that lives in two worlds? His answer was to stop choosing
   - now: They brought me in to answer one question, how do you show a product that lives in two worlds? My answer was to stop choosing
@@ -332,6 +625,24 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 - [explicit]
   - was: We pitched a mark where the O swapped by category
   - now: I pitched a mark where the O swapped by category
@@ -365,6 +676,24 @@
   - was: content="Monuments"
   - now: content="DJ Ramirez"
 - [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
+- [explicit]
   - was: DJ was brought onto Know Vape for the thing he does on every campaign
   - now: I was brought onto Know Vape for the thing I do on every campaign
 - [explicit]
@@ -388,6 +717,24 @@
   - was: content="Monuments"
   - now: content="DJ Ramirez"
 - [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
+- [explicit]
   - was: MSI built a laptop for creators, and we launched it on Times Square digital boards
   - now: MSI built a laptop for creators, and I launched it on Times Square digital boards
 - [explicit]
@@ -407,6 +754,27 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit x2]
+  - was: DJ Ramirez for Monuments.
+  - now: DJ Ramirez.
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 - [explicit]
   - was: DJ directs, but he&#39;s just as comfortable on the other side of the lens.
   - now: I direct, but I&#39;m just as comfortable on the other side of the lens.
@@ -431,6 +799,24 @@
   - was: content="Monuments"
   - now: content="DJ Ramirez"
 - [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
+- [explicit]
   - was: DJ's responsibilities included developing the initial pitch
   - now: My responsibilities included developing the initial pitch
 - [explicit]
@@ -450,6 +836,27 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit x2]
+  - was: A Monuments case study by DJ Ramirez.
+  - now: A case study by DJ Ramirez.
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 - [explicit]
   - was: We cast three creators who filmed their own BTS
   - now: I cast three creators who filmed their own BTS
@@ -480,6 +887,24 @@
   - was: content="Monuments"
   - now: content="DJ Ramirez"
 - [explicit]
+  - was: · monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
+- [explicit]
   - was: Setting up the commercials was part of DJ's job, but the main thing he helped with here was the direction
   - now: Setting up the commercials was part of my job, but the main thing I helped with here was the direction
 - [explicit]
@@ -502,6 +927,24 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 - [explicit]
   - was: For the Xperia PRO-I we opened with a first look film
   - now: For the Xperia PRO-I, I opened with a first look film
@@ -544,6 +987,24 @@
   - was: content="Monuments"
   - now: content="DJ Ramirez"
 - [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
+- [explicit]
   - was: What we built took it from a group of products to a brand.
   - now: What I built took it from a group of products to a brand.
 - [explicit x2]
@@ -578,6 +1039,24 @@
 - [explicit]
   - was: content="Monuments"
   - now: content="DJ Ramirez"
+- [explicit]
+  - was: · Monuments</title>
+  - now: · DJ Ramirez</title>
+- [explicit]
+  - was: · Monuments">
+  - now: · DJ Ramirez">
+- [explicit]
+  - was: >Monuments<small
+  - now: >DJ Ramirez<small
+- [explicit x2]
+  - was: /og/card.jpg
+  - now: /og/dj-card.jpg
+- [explicit]
+  - was: href="/favicon.svg"
+  - now: href="/dj-favicon.svg"
+- [explicit]
+  - was: href="/apple-touch-icon.png"
+  - now: href="/dj-apple-touch.png"
 - [explicit]
   - was: Working closely with the team, we took a deep dive into their brand story
   - now: Working closely with their team, I took a deep dive into their brand story
