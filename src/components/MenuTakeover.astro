@@ -27,7 +27,7 @@ const links = site.nav;
   <div class="mt-grid">
     <nav class="mt-nav" aria-label="Primary">
       {links.map((l, i) => (
-        <a class="mt-item" href={l.href} data-img={l.img} style={`--i:${i}`}>
+        <a class="mt-item" href={l.href} data-img={l.img} data-vid={l.vid || ''} style={`--i:${i}`}>
           <span class="mt-line">
             <span class="mt-no">{l.n}</span>
             <span class="mt-word">{l.t}</span>
@@ -49,6 +49,10 @@ const links = site.nav;
     </nav>
     <div class="mt-prev" aria-hidden="true">
       <img loading="lazy" decoding="async" id="mtPrev" src={links[0].img} alt="">
+      {/* a row may carry `vid` instead of a still (DJ 2026-08-13: "Work can play a
+          section from the reel"). One shared <video> that the hover swap points at,
+          rather than one per row, so nothing preloads until a row asks for it. */}
+      <video id="mtVid" muted loop playsinline preload="none" aria-hidden="true"></video>
       <span class="mt-cap" id="mtCap">\ The index</span>
     </div>
   </div>
@@ -111,6 +115,8 @@ body.mt-open .mt-hire .mt-line{transform:none}
 .mt-prev{position:relative;aspect-ratio:4/3;overflow:hidden;background:#1c1b1a;opacity:0;transform:scale(.97);transition:opacity .5s .3s,transform .6s .3s cubic-bezier(.22,1,.36,1)}
 body.mt-open .mt-prev{opacity:1;transform:none}
 .mt-prev img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.15) contrast(1.04) brightness(.88);transition:opacity .28s}
+  .mt-prev video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.15) contrast(1.04) brightness(.88);opacity:0;transition:opacity .28s;pointer-events:none}
+  .mt-prev video.on{opacity:1}
 .mt-prev img.sw{opacity:0}
 .mt-cap{position:absolute;left:12px;bottom:10px;font-family:var(--mono,'Fragment Mono',monospace);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.85);background:rgba(22,21,20,.6);padding:3px 8px}
 /* meta */
@@ -159,11 +165,28 @@ body.mt-open .mt-meta{opacity:1}
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('mt-open'))set(false)});
   ov.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
   // hover preview swap (fine pointers only)
-  var img=document.getElementById('mtPrev'),cap=document.getElementById('mtCap');
+  var img=document.getElementById('mtPrev'),cap=document.getElementById('mtCap'),vid=document.getElementById('mtVid');
   if(img&&matchMedia('(pointer:fine)').matches){
     ov.querySelectorAll('.mt-item').forEach(function(a){
       a.addEventListener('mouseenter',function(){
-        var s=a.getAttribute('data-img'); if(!s||img.getAttribute('src')===s)return;
+        var s=a.getAttribute('data-img'), v=a.getAttribute('data-vid');
+        if(v){
+          // swap the still FIRST: preload="none" means a cold hover takes a beat to
+          // load, and without this the panel sits on the PREVIOUS row's photo until
+          // the clip arrives. Now the poster frame is already the right shot.
+          if(s&&img.getAttribute('src')!==s){img.src=s;}
+          if(vid.getAttribute('src')!==v){vid.src=v;}
+          vid.classList.add('on'); img.classList.remove('sw');
+          // play() fired the instant src is set can land before any data exists, and
+          // it neither throws nor starts - the panel just sits on the poster. Retry
+          // once the element says it can play.
+          var go=function(){var pl=vid.play(); if(pl&&pl.catch)pl.catch(function(){});};
+          go(); vid.addEventListener('canplay',go,{once:true});
+          if(cap)cap.textContent='\\ '+a.querySelector('.mt-word').textContent;
+          return;
+        }
+        vid.classList.remove('on'); try{vid.pause();}catch(_){}
+        if(!s||img.getAttribute('src')===s)return;
         img.classList.add('sw');
         setTimeout(function(){img.src=s;img.onload=function(){img.classList.remove('sw')};},140);
         if(cap)cap.textContent='\\ '+a.querySelector('.mt-word').textContent;

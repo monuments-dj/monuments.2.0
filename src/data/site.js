@@ -66,9 +66,9 @@ const DJ = {
   voice: 'i',
   nav: [
     { n: '01', t: 'Home',    href: '/',        sub: 'the front door',   img: '/gallery/full/p-013.jpg' },
-    { n: '02', t: 'Work',    href: '/work',    sub: `${caseCount} case files`, img: '/reel/work-reel-poster.jpg' },
-    { n: '03', t: 'About',   href: '/about',   sub: 'the subject file', img: '/about/hero-set.jpg' },
-    { n: '04', t: 'Contact', href: '/contact', sub: 'start here',       img: '/menu/dj-contact.jpg' },
+    { n: '02', t: 'Work',    href: '/work',    sub: `${caseCount} case files`, img: '/menu/work-reel-cut.jpg', vid: '/menu/work-reel-cut.mp4' },
+    { n: '03', t: 'About',   href: '/about',   sub: 'the subject file', img: '/about/dj-film.jpg' },
+    { n: '04', t: 'Contact', href: '/contact', sub: 'start here',       img: '/contact/ct-07.jpg' },
   ],
   // the hiring pill from monuments (DJ 2026-08-13 "add this from monuments on
   // the menu"). It USED to point at '/', which is the same target as menu row
