@@ -9,7 +9,8 @@ import { site } from '../data/site.js';
 const rotation = site.isDJ ? 'The tools are everywhere. This is my rotation.' : 'The tools are everywhere. This is our rotation.';
 const learn = site.isDJ ? "I'll learn it" : "We'll learn it";
 ---
-<section class="kit2 wrap">
+<section class="kit2">
+  <div class="wrap">
   <div class="bar">
     <span class="mono"><b>The kit</b> · fluent in</span>
     <span class="mono k2-dim">{rotation}</span>
@@ -52,10 +53,15 @@ const learn = site.isDJ ? "I'll learn it" : "We'll learn it";
       </ul>
     </div>
   </div>
+  </div>
 </section>
 
 <style is:global>
-.kit2{padding-top:9vh;padding-bottom:9vh}
+/* DJ 2026-08-13 "make these section on white". This band was always styled for
+   a light ground (bar border is solid --ink, row borders use the light --line)
+   but it had no background of its own, so it inherited the ink body and its bar
+   rendered invisible. Now it carries the ground it was drawn for. */
+.kit2{background:var(--paper,#F5F3EF);color:var(--ink,#161514);padding:9vh 0}
 .kit2 .bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:13px;border-bottom:2px solid var(--ink,#161514)}
 .kit2 .bar .mono b{color:var(--accent,#E0311A)}
 .kit2 .k2-dim{color:#6c6a64}
