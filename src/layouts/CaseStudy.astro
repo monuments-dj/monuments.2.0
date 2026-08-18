@@ -1,0 +1,228 @@
+---
+// ============================================================================
+// CaseStudy.astro — THE case-page template. Every /work/* page renders through
+// this. It owns the whole document shell so a case page only contains the thing
+// that makes it that case: its sections.
+// ----------------------------------------------------------------------------
+// WHY THIS EXISTS (DJ, 2026-08-13, after the 20th page shipped): "you should be
+// consistent across the board instead of rewriting the script for new pages.
+// this should be templatized."
+//
+// He was right, and the numbers were ugly. Before this file: 20 case pages,
+// 9,414 lines, of which 3,063 were per-page <style is:global> blocks. The entire
+// <head>, the :root tokens, the reset, the grain, the corners, the mobile nav,
+// the .over/.underfoot pair and all four inline scripts were BYTE-IDENTICAL on
+// all 20 — even though src/styles/work.css already existed and all 20 imported
+// it. Pages also carried CSS for markup they did not have (boise-schools shipped
+// .merchband/.prods/.prod/.duo rules with zero matching elements) purely because
+// each new page was copied from the last one.
+//
+// THE RULE FROM NOW ON: a new case page adds NOTHING to this shell. If a change
+// belongs on every case page, it belongs HERE (or in work.css), never in a page.
+// If a page needs its own look, it goes in the "css" slot and styles only its
+// own sections.
+// ============================================================================
+import HeroHeader from '../components/HeroHeader.astro';
+import NextFile from '../components/NextFile.astro';
+import PageFooter from '../components/PageFooter.astro';
+import { work } from '../data/work.js';
+import '../styles/work.css';
+
+interface NextRef { href: string; name: string; img: string; code: string; }
+interface Props {
+  slug: string;              // must exist in src/data/work.js — header copy comes from there
+  code: string;              // case-file code, MC-YYYY-NN. Shown in the corners, call sheet + footer.
+  title: string;             // <title> and og:title, minus the " · Monuments" suffix
+  desc: string;              // meta description + og:description
+  chrome: string;            // corners bottom-left, after the code
+  heroImg: string;           // hero poster (the header video's poster, or the still if no vid)
+  next: NextRef;             // the NextFile under-reveal target
+}
+const { slug, code, title, desc, chrome, heroImg, next } = Astro.props;
+
+// Fail the BUILD, not the page. A case page whose slug is missing from work.js
+// used to render a blank header and still deploy (hh.hName on undefined).
+const hh = work.find((w) => w.slug === slug);
+if (!hh) throw new Error(`CaseStudy: no src/data/work.js entry for slug "${slug}" — add it before routing the page.`);
+
+const fullTitle = `${title} · Monuments`;
+// Emitted with the monuments origin + card on purpose: the dj build rewrites both
+// through chromeSwaps in src/data/dialect.js, the same as every other page.
+const ORIGIN = 'https://monuments-2-0.vercel.app';
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>{fullTitle}</title>
+<meta name="description" content={desc}>
+<link rel="canonical" href={`${ORIGIN}/work/${slug}`}>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Monuments">
+<meta property="og:title" content={fullTitle}>
+<meta property="og:description" content={desc}>
+<meta property="og:url" content={`${ORIGIN}/work/${slug}`}>
+<meta property="og:image" content={`${ORIGIN}/og/card.jpg`}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content={`${ORIGIN}/og/card.jpg`}>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<style is:global>
+/* THE SHARED CASE-PAGE SHELL. Was copy-pasted into all 20 pages. Edit once here.
+   Anything below this line lands on every case page — if it is not universal,
+   it belongs in the page's own "css" slot instead. */
+:root{
+  --ink:#161514; --paper:#F5F3EF; --rose:#EFA1AD; --cobalt:#2438E8; --red:#E0311A;
+  --dim:#8f8d88; --line:#dcd9d2; --lined:#2c2b29;
+  --wrap:1380px; --pad:clamp(22px,4.6vw,44px);
+  --disp:'Bricolage Grotesque',sans-serif; --dispw:800; --dispw2:600;
+  --mono:'Fragment Mono',monospace;
+  --spark:var(--rose); --struct:var(--rose); --on-rgb:22,21,20;
+}
+*{margin:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--body,var(--disp));font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}html{overflow-x:clip}
+a{color:inherit;text-decoration:none}
+
+.grain{position:fixed;inset:-100%;z-index:70;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}17%{transform:translate(-2%,1%)}33%{transform:translate(1%,-2%)}50%{transform:translate(-1%,2%)}67%{transform:translate(2%,1%)}83%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes rise{to{transform:translateY(0)}}
+@keyframes fade{to{opacity:1}}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.companion{display:none}}
+
+/* the under-reveal pair: .over rides above the fixed .underfoot */
+.over{position:relative;z-index:1;background:inherit}
+.underfoot{position:fixed;left:0;right:0;bottom:0;z-index:0}
+@media (max-width:900px),(prefers-reduced-motion:reduce){.underfoot{position:static}.over{margin-bottom:0!important}}
+
+/* footer dock: the floating descriptor + LA clock settle into the footer at page end */
+.foot-dock{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 18px}
+.foot-dock .fd-clock{color:var(--dim)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  .grain{animation:none}.frames .fr{opacity:1;transform:none}
+}
+
+/* mobile nav — CSS-only hamburger -> fullscreen menu */
+.navburger,.mnav{display:none}
+@media (max-width:900px){.frames{columns:2}}
+@media (max-width:560px){.frames{columns:1}}
+@media (max-width:680px){
+  .corners .c2{display:none}
+  .corners .c1 b{font-size:23px}
+  .corners .c3,.corners .c4{display:none}
+  .navburger{display:flex;position:fixed;top:19px;right:19px;z-index:81;flex-direction:column;justify-content:center;gap:5px;width:34px;height:34px;cursor:pointer;mix-blend-mode:difference}
+  .navburger span{display:block;height:2px;width:24px;background:#fff;border-radius:2px;transition:transform .3s cubic-bezier(.76,0,.24,1),opacity .2s}
+  #navtog:checked ~ .navburger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  #navtog:checked ~ .navburger span:nth-child(2){opacity:0}
+  #navtog:checked ~ .navburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mnav{display:flex;position:fixed;inset:0;z-index:80;background:var(--ink);flex-direction:column;justify-content:center;gap:2px;padding:0 var(--pad);transform:translateY(-100%);transition:transform .55s cubic-bezier(.76,0,.24,1)}
+  #navtog:checked ~ .mnav{transform:none}
+  .mnav a{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(34px,12vw,58px);line-height:1.05;text-transform:uppercase;letter-spacing:-.02em;color:var(--paper)}
+  .mnav a:active{color:var(--spark)}
+  .mnav .mnav-foot{margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+}
+</style>
+<slot name="css" />
+</head>
+<body>
+<input type="checkbox" id="navtog" class="navtog-in" hidden>
+<label for="navtog" class="navburger" aria-label="Menu"><span></span><span></span><span></span></label>
+<nav class="mnav" aria-label="Mobile menu"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/about">About</a><a href="/capabilities">Capabilities</a><a href="/contact">Contact</a><span class="mnav-foot">monuments.cc@gmail.com</span></nav>
+
+<div class="companion" aria-hidden="true">✳</div>
+
+<div class="corners">
+  <span class="c1"><a href="/"><b>M<i>✳</i>NUMENTS</b></a></span>
+  <span class="c2"><a href="/work">Work</a><a href="/photography">Photo</a><a href="/about">About</a><a href="/capabilities">Capabilities</a><a href="/contact">Contact</a></span>
+  <span class="c3">{code} · {chrome}</span>
+  <span class="c4" id="clock">LA --:--</span>
+</div>
+
+<div class="over" role="main">
+<HeroHeader hLead={hh.hLead} hName={hh.hName} logline={hh.logline} role={hh.role} img={heroImg} vid={hh.vid} logo={hh.logo} logoColor={hh.logoColor} logoText={hh.logoText} brand={hh.brand} client={hh.client} />
+<slot />
+</div><!--/over-->
+
+<div class="underfoot">
+<NextFile href={next.href} name={next.name} img={next.img} code={next.code} />
+<PageFooter tag={`Case file ${code}`} />
+</div><!--/underfoot-->
+
+<script is:inline>
+// reveal-on-scroll, shared by every .rv on every case page
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.01,rootMargin:'0px 0px 300px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// under-reveal sizing: reserve the underfoot's height beneath .over
+(function(){
+  const uf=document.querySelector('.underfoot'),over=document.querySelector('.over');
+  if(!uf||!over)return;
+  function size(){ if(matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)').matches){over.style.marginBottom='0px';return}
+    over.style.marginBottom=uf.offsetHeight+'px'; }
+  size();addEventListener('resize',size);setTimeout(size,600);
+})();
+
+// companion drift + full-bleed .break parallax. Both live here because both
+// targets are shared: .companion is rendered by this layout on every case page
+// (19 of the 20 old pages animated it, each with its own copy), and .break is the
+// full-bleed band 13 of them use. The dead half of the old per-page IIFE - the
+// .hero / [data-hero-video] parallax, which pointed at elements that stopped
+// existing when HeroHeader replaced .hero - is NOT carried over.
+(function(){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const brk=document.querySelectorAll('.break img'),c=document.querySelector('.companion');
+  if(!brk.length&&!c)return;
+  let k=false;
+  addEventListener('scroll',()=>{
+    if(k)return;k=true;
+    requestAnimationFrame(()=>{
+      const y=scrollY,vh=innerHeight;
+      brk.forEach(b=>{const r=b.parentElement.getBoundingClientRect();if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;b.style.transform=`translateY(${p*-56}px)`}});
+      if(c)c.style.transform=`translateY(${(Math.sin(y/420)*34).toFixed(1)}px) rotate(${(y*0.22).toFixed(1)}deg)`;
+      k=false;
+    });
+  },{passive:true});
+})();
+
+function clock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});const c=document.getElementById('clock');if(c)c.textContent='LA '+t}
+clock();setInterval(clock,30000);
+
+// at-foot: mark when the visitor reaches the very bottom
+(function(){
+  function atBottom(){return window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-4;}
+  function upd(){document.body.classList.toggle('at-foot',atBottom());}
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd,{passive:true});setTimeout(upd,400);
+})();
+
+// films: click-to-play, privacy-enhanced embeds injected in place. Any page can
+// drop a [data-film="<ytid>"] poster in and it just works.
+(function(){
+  document.querySelectorAll('[data-film]').forEach(poster=>{
+    poster.addEventListener('click',()=>{
+      if(poster.classList.contains('playing'))return;
+      poster.classList.add('playing');
+      const f=document.createElement('iframe');
+      f.src=`https://www.youtube-nocookie.com/embed/${poster.dataset.film}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+      f.allow='autoplay; encrypted-media; fullscreen';
+      f.allowFullscreen=true;
+      f.title=poster.dataset.filmTitle||'Campaign film';
+      poster.innerHTML='';
+      poster.appendChild(f);
+    });
+  });
+})();
+</script>
+<slot name="scripts" />
+</body>
+</html>
