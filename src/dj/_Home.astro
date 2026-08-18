@@ -223,13 +223,28 @@ h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;fo
   .reel-card{width:78vw}.reel-card .imgs img{height:40svh}
 }
 
+/* IN THE ROOM · the six seats, condensed to a grid for the homepage */
+.room6{background:var(--paper);color:var(--ink);padding:10vh 0 11vh}
+.r6-bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.r6-bar b{color:var(--red)}
+.r6-more{color:var(--dim);border-bottom:1px solid transparent;transition:color .25s,border-color .25s}
+.r6-more:hover{color:var(--ink);border-color:var(--ink)}
+.r6-grid{margin-top:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.r6{background:var(--paper);padding:26px 24px 30px;display:flex;flex-direction:column;gap:9px}
+.r6 .no{color:var(--red)}
+.r6 .no i{font-style:normal;opacity:.55}
+.r6 h3{font-family:var(--disp);font-weight:var(--dispw);font-size:clamp(17px,1.7vw,21px);letter-spacing:-.015em;text-transform:uppercase;line-height:1.05}
+.r6 p{color:var(--dim);font-size:14.5px;line-height:1.55;max-width:34ch}
+@media (max-width:900px){.r6-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.r6-grid{grid-template-columns:1fr}}
+
 /* tile ring strip */
 .tiles{padding:9vh 0;overflow:hidden;background:var(--spark)}
 .tiles .track{display:flex;width:max-content;animation:drift 36s linear infinite}
 .tiles:hover .track{animation-play-state:paused}
 @keyframes drift{to{transform:translateX(-50%)}}
 .tile{width:190px;height:190px;border-radius:0;overflow:hidden;flex:none;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);box-shadow:none;margin-right:16px}
-.tile img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.tile img{width:100%;height:100%;object-fit:cover}
 .tile.cob{background:var(--struct);color:rgb(var(--on-rgb));font-weight:var(--dispw);font-size:64px}
 .tile.ros{background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:center;padding:18px}
 .tile.ink{background:var(--ink);color:var(--paper);font-weight:var(--dispw);font-size:34px;letter-spacing:-.02em}
@@ -265,7 +280,6 @@ h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;fo
 .tb-flap.out{transform:translateY(-105%)}
 .tb-flap.in{transform:translateY(105%)}
 .tb-flap.in.go{transform:translateY(0)}
-.tb-note{margin-top:14px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(22,21,20,.66)}
 @media(max-width:720px){
   .tb-head{flex-direction:column}
   .tb-grid{grid-template-columns:repeat(2,1fr)}
@@ -357,7 +371,6 @@ h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;fo
       <button class="tb-cell" type="button" aria-label="Flashpoint · tap for the next brand"><span class="tb-flap"><img class="b-flashpoint" src="/logos/flashpoint-black.png" width="591" height="52" alt="Flashpoint" loading="lazy" decoding="async"></span></button>
       <button class="tb-cell" type="button" aria-label="Donut Media · tap for the next brand"><span class="tb-flap"><img class="b-donut-media" src="/logos/donut-media-black.png" width="1200" height="561" alt="Donut Media" loading="lazy" decoding="async"></span></button>
     </div>
-    <p class="tb-note mono">13 brands · repeat clients · tap a cell to flip it</p>
   </div>
 </section>
 
@@ -494,6 +507,29 @@ h2 .serif{font-family:var(--serif,'Instrument Serif',serif);font-style:italic;fo
 
   <div class="tiles" aria-hidden="true">
     <div class="track" id="tiles"></div>
+  </div>
+</section>
+
+{/* IN THE ROOM (DJ 2026-08-13: "this section is cool. it can be condensed
+    maybe into a grid and put on the homepage"). Condensed by SELECTING one of his
+    own sentences per seat, never by writing a new one - the full six live on
+    /about and this is the short read. It sits after the work and before the
+    letters on purpose: show the work, say what you are hired for, then let other
+    people vouch. */}
+<section class="room6">
+  <div class="wrap">
+    <div class="r6-bar">
+      <span class="mono"><b>\ In the room</b> · where I'm useful</span>
+      <a class="mono r6-more" href="/about">Six seats, the long read &#8599;</a>
+    </div>
+    <div class="r6-grid">
+      <div class="r6 rv"><span class="no mono"><i>\</i> 01</span><h3>The brainstorm</h3><p>Big new ideas don't always have a script.</p></div>
+      <div class="r6 rv"><span class="no mono"><i>\</i> 02</span><h3>The pitch</h3><p>Your agency has a big one on the calendar and needs senior firepower in the room.</p></div>
+      <div class="r6 rv"><span class="no mono"><i>\</i> 03</span><h3>The pinch hitter</h3><p>Stepping in to lead a team around an idea.</p></div>
+      <div class="r6 rv"><span class="no mono"><i>\</i> 04</span><h3>On set</h3><p>The energy on set speaks to my soul.</p></div>
+      <div class="r6 rv"><span class="no mono"><i>\</i> 05</span><h3>The team lead</h3><p>Managing creatives is like wrangling cats.</p></div>
+      <div class="r6 rv"><span class="no mono"><i>\</i> 06</span><h3>The culture lens</h3><p>I have my finger on the pulse of culture.</p></div>
+    </div>
   </div>
 </section>
 
