@@ -147,7 +147,7 @@ export const perPage = {
     // the three method-band pairs are GONE with the band itself: How-I-work is
     // monuments-only as of DJ's 2026-08-13 ruling, so the We-sentences never
     // reach the dj output (dead-rule gate enforces this stays true)
-    ["We have carried cameras through Nepal, Uganda", "I have carried cameras through Nepal, Uganda"],
+    ["We have carried cameras through Mexico, Nepal, and Uganda", "I have carried cameras through Mexico, Nepal, and Uganda"],
     ["Those trips taught us patience", "Those trips taught me patience"],
     ["We still take that work when it matters, and we bring everything that pressure taught us to it", "I still take that work when it matters, and I bring everything that pressure taught me to it"],
   ],

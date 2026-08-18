@@ -69,8 +69,8 @@
   - was: We're all handed different tools. Mine was a camera.
   - now: Everyone gets handed different tools. Mine was a camera.
 - [explicit]
-  - was: We have carried cameras through Nepal, Uganda
-  - now: I have carried cameras through Nepal, Uganda
+  - was: We have carried cameras through Mexico, Nepal, and Uganda
+  - now: I have carried cameras through Mexico, Nepal, and Uganda
 - [explicit]
   - was: Those trips taught us patience
   - now: Those trips taught me patience
