@@ -528,6 +528,25 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
     </div>
   </section>
 
+{/* BTS strip moved here 2026-08-13 (DJ: "lets bump this up on the about page.
+    its fun and adds some personality" ... "in between recipts and the long
+    version"). It used to sit at the very bottom, one band above the closer,
+    where almost nobody scrolled to it. Now it breaks the two heaviest text
+    blocks on the page apart. */}
+<section class="btssec">
+  <div class="bar">
+    <span class="mono"><b>Behind the scenes</b> // on set</span>
+    <span class="mono" style="color:#8f8d88">✳ the make</span>
+  </div>
+  <div class="btsreel">
+    <div class="btstrack">
+      {[...bts, ...bts].map((src) => (
+        <div class="btstile"><video src={src} autoplay muted loop playsinline preload="metadata"></video></div>
+      ))}
+    </div>
+  </div>
+</section>
+
   <!-- The long version: DJ's locked piece, verbatim (2026-07-11), with one cut he
        made himself 2026-08-13 ("kill this from the long version"): the "honest
        version" sentence is gone. Everything else here is still verbatim - do not
@@ -720,20 +739,6 @@ background-size:300px 300px;animation:grainShift 1.2s steps(6) infinite}
 <!-- IN THEIR WORDS unmounted 2026-07-14 (DJ's About rework v2): all ten testimonials
      were still placeholders. The component stays in the codebase - remount it here the
      moment real quotes land. Outreach list is in TODO.md. -->
-
-<section class="btssec">
-  <div class="bar">
-    <span class="mono"><b>Behind the scenes</b> // on set</span>
-    <span class="mono" style="color:#8f8d88">✳ the make</span>
-  </div>
-  <div class="btsreel">
-    <div class="btstrack">
-      {[...bts, ...bts].map((src) => (
-        <div class="btstile"><video src={src} autoplay muted loop playsinline preload="metadata"></video></div>
-      ))}
-    </div>
-  </div>
-</section>
 
 <!-- achievements ticker moved DOWN from under the hero (DJ QC 2026-07-20:
      "they relay a lot of information fast" but "break up beautiful sections") -
