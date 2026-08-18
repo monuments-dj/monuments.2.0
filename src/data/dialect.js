@@ -123,6 +123,11 @@ export const perPage = {
     ["[ Why we do it ]", "[ Why I do it ]"],
     ["three ways we put the craft to work", "three ways I put the craft to work"],
     ["We answer to both.", "I answer to both."],
+    // the organizations band (2026-08-13). The ethos blockquote is NOT here on
+    // purpose: quotes are a protected region, so DJ's own first person survives
+    // untouched on both sites.
+    ["The ones we keep", "The ones I keep"],
+    ["We help build the media plan and capture the content, and we volunteer the time.", "I help build the media plan and capture the content, and I volunteer the time."],
   ],
   '404': [
     ["Tell us what you're building", "Tell me what you're building"],

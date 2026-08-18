@@ -1,4 +1,4 @@
-# djthecd voice transform · 411 changes
+# djthecd voice transform · 413 changes
 
 ## /
 - [explicit x2]
@@ -221,6 +221,12 @@
 - [explicit]
   - was: We answer to both.
   - now: I answer to both.
+- [explicit]
+  - was: The ones we keep
+  - now: The ones I keep
+- [explicit]
+  - was: We help build the media plan and capture the content, and we volunteer the time.
+  - now: I help build the media plan and capture the content, and I volunteer the time.
 
 ## /hire/
 - [explicit x4]
