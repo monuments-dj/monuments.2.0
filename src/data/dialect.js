@@ -106,28 +106,30 @@ export const perPage = {
   // /giving · the approved Section G cards (DJ 2026-08-13 "bake the giving
   // page"). Crew-scale stays; the pull quote splits around its serif span.
   'giving': [
-    ["A few times a year, that is exactly where we point it.", "A few times a year, that is exactly where I point it."],
     ["creative for causes we believe in", "creative for causes I believe in"],
-    ["We are not a foundation and we are not pretending to save the world. We are a studio that happens to be good at making people feel something", "I'm not a foundation and I'm not pretending to save the world. I'm just good at making people feel something"],
-    ["So we set aside real time for work that pays nothing", "So I set aside real time for work that pays nothing"],
     ["a few times a year we hand our full toolkit to a cause", "a few times a year I hand my full toolkit to a cause"],
     ["Nobody walks onto a set knowing how it works. We did not. So we keep a door open", "Nobody walks onto a set knowing how it works. I did not. So I keep a door open"],
-    ["We have carried cameras through Nepal, Uganda, and across Europe for work that was never about selling anything. Those trips taught us patience", "I have carried cameras through Nepal, Uganda, and across Europe for work that was never about selling anything. Those trips taught me patience"],
     ["We still take that work when it matters, and we bring everything that pressure taught us to it", "I still take that work when it matters, and I bring everything that pressure taught me to it"],
     ["The work that doesn't pay is usually the work we're", "The work that doesn't pay is usually the work I'm"],
-    ["Most of what we give happens within driving distance of the two places we call home.", "Most of what I give happens within driving distance of the two places I call home."],
     ["When the story is bigger than us, we go to it.", "When the story is bigger than me, I go to it."],
     ["We are careful with this kind of work. We go in to listen, not to take. The footage belongs to the people in it as much as it belongs to us", "I am careful with this kind of work. I go in to listen, not to take. The footage belongs to the people in it as much as it belongs to me"],
     ["We build monuments.", "I build monuments."],
-    ["home towns we show up for", "home towns I show up for"],
+    // ── THE 2026-08-13 REWORK (DJ: "this copy ... Its bad and it doent reflect
+    // my ethos"). His facts: Mexico / Nepal / Uganda, about one month a year,
+    // pro bono; his ethos: no poverty porn, dignity, immerse before documenting.
+    ["About one month out of every year, that is exactly where we point it.", "About one month out of every year, that is exactly where I point it."],
+    ["These are the projects that fill our cup.", "These are the projects that fill my cup."],
+    ["We work in Mexico, Nepal, and Uganda, about one month out of every year, and all of it is pro bono.", "I work in Mexico, Nepal, and Uganda, about one month out of every year, and all of it is pro bono."],
+    ["We use the skills we pick up the rest of the year to tell stories that matter, ones that make a difference.", "I use the skills I pick up the rest of the year to tell stories that matter, ones that make a difference."],
+    ["We have carried cameras through Mexico, Nepal, and Uganda for work that was never about selling anything. Those trips taught us patience", "I have carried cameras through Mexico, Nepal, and Uganda for work that was never about selling anything. Those trips taught me patience"],
+    ["We celebrate the culture and immerse ourselves in it before we document it. Respect, dignity and ethical storytelling are at the forefront of the process for every non profit we work with.", "I celebrate the culture and immerse myself in it before I document it. Respect, dignity and ethical storytelling are at the forefront of my process for every non profit I work with."],
+    ["Our role is building the media plan and capturing the content. We volunteer the time, and we work hard to make sure what comes back is dignified.", "My role is building the media plan and capturing the content. I volunteer the time, and I work hard to make sure what comes back is dignified."],
     ["[ Why we do it ]", "[ Why I do it ]"],
     ["three ways we put the craft to work", "three ways I put the craft to work"],
-    ["We answer to both.", "I answer to both."],
     // the organizations band (2026-08-13). The ethos blockquote is NOT here on
     // purpose: quotes are a protected region, so DJ's own first person survives
     // untouched on both sites.
     ["The ones we keep", "The ones I keep"],
-    ["We help build the media plan and capture the content, and we volunteer the time.", "I help build the media plan and capture the content, and I volunteer the time."],
   ],
   '404': [
     ["Tell us what you're building", "Tell me what you're building"],

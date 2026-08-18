@@ -1,4 +1,4 @@
-# djthecd voice transform · 413 changes
+# djthecd voice transform · 412 changes
 
 ## /
 - [explicit x2]
@@ -171,17 +171,8 @@
   - was: href="/apple-touch-icon.png"
   - now: href="/dj-apple-touch.png"
 - [explicit]
-  - was: A few times a year, that is exactly where we point it.
-  - now: A few times a year, that is exactly where I point it.
-- [explicit]
   - was: creative for causes we believe in
   - now: creative for causes I believe in
-- [explicit]
-  - was: We are not a foundation and we are not pretending to save the world. We are a studio that happens to be good at making people feel something
-  - now: I'm not a foundation and I'm not pretending to save the world. I'm just good at making people feel something
-- [explicit]
-  - was: So we set aside real time for work that pays nothing
-  - now: So I set aside real time for work that pays nothing
 - [explicit]
   - was: a few times a year we hand our full toolkit to a cause
   - now: a few times a year I hand my full toolkit to a cause
@@ -189,17 +180,11 @@
   - was: Nobody walks onto a set knowing how it works. We did not. So we keep a door open
   - now: Nobody walks onto a set knowing how it works. I did not. So I keep a door open
 - [explicit]
-  - was: We have carried cameras through Nepal, Uganda, and across Europe for work that was never about selling anything. Those trips taught us patience
-  - now: I have carried cameras through Nepal, Uganda, and across Europe for work that was never about selling anything. Those trips taught me patience
-- [explicit]
   - was: We still take that work when it matters, and we bring everything that pressure taught us to it
   - now: I still take that work when it matters, and I bring everything that pressure taught me to it
 - [explicit]
   - was: The work that doesn't pay is usually the work we're
   - now: The work that doesn't pay is usually the work I'm
-- [explicit]
-  - was: Most of what we give happens within driving distance of the two places we call home.
-  - now: Most of what I give happens within driving distance of the two places I call home.
 - [explicit]
   - was: When the story is bigger than us, we go to it.
   - now: When the story is bigger than me, I go to it.
@@ -210,8 +195,26 @@
   - was: We build monuments.
   - now: I build monuments.
 - [explicit]
-  - was: home towns we show up for
-  - now: home towns I show up for
+  - was: About one month out of every year, that is exactly where we point it.
+  - now: About one month out of every year, that is exactly where I point it.
+- [explicit]
+  - was: These are the projects that fill our cup.
+  - now: These are the projects that fill my cup.
+- [explicit]
+  - was: We work in Mexico, Nepal, and Uganda, about one month out of every year, and all of it is pro bono.
+  - now: I work in Mexico, Nepal, and Uganda, about one month out of every year, and all of it is pro bono.
+- [explicit]
+  - was: We use the skills we pick up the rest of the year to tell stories that matter, ones that make a difference.
+  - now: I use the skills I pick up the rest of the year to tell stories that matter, ones that make a difference.
+- [explicit]
+  - was: We have carried cameras through Mexico, Nepal, and Uganda for work that was never about selling anything. Those trips taught us patience
+  - now: I have carried cameras through Mexico, Nepal, and Uganda for work that was never about selling anything. Those trips taught me patience
+- [explicit]
+  - was: We celebrate the culture and immerse ourselves in it before we document it. Respect, dignity and ethical storytelling are at the forefront of the process for every non profit we work with.
+  - now: I celebrate the culture and immerse myself in it before I document it. Respect, dignity and ethical storytelling are at the forefront of my process for every non profit I work with.
+- [explicit]
+  - was: Our role is building the media plan and capturing the content. We volunteer the time, and we work hard to make sure what comes back is dignified.
+  - now: My role is building the media plan and capturing the content. I volunteer the time, and I work hard to make sure what comes back is dignified.
 - [explicit]
   - was: [ Why we do it ]
   - now: [ Why I do it ]
@@ -219,14 +222,8 @@
   - was: three ways we put the craft to work
   - now: three ways I put the craft to work
 - [explicit]
-  - was: We answer to both.
-  - now: I answer to both.
-- [explicit]
   - was: The ones we keep
   - now: The ones I keep
-- [explicit]
-  - was: We help build the media plan and capture the content, and we volunteer the time.
-  - now: I help build the media plan and capture the content, and I volunteer the time.
 
 ## /hire/
 - [explicit x4]
