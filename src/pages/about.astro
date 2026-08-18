@@ -8,7 +8,12 @@ import WorldMap from '../components/WorldMap.astro';
 import Rolodex from '../components/Rolodex.astro';
 import Kit from '../components/Kit.astro';
 import { site } from '../data/site.js';
-const bts = Array.from({ length: 18 }, (_, i) => `/about-bts/abts-${String(i + 1).padStart(2, '0')}.mp4`);
+// DJ 2026-08-13: "this gif in the bts footage can go" - abts-15 (the Sony alpha
+// step-and-repeat) is out. Filtered rather than renumbered so every other clip
+// keeps its filename; the file itself is still on disk if it is ever wanted back.
+const BTS_CUT = ['abts-15'];
+const bts = Array.from({ length: 18 }, (_, i) => `/about-bts/abts-${String(i + 1).padStart(2, '0')}.mp4`)
+  .filter((src) => !BTS_CUT.some((c) => src.includes(c)));
 ---
 <!doctype html>
 <html lang="en">
